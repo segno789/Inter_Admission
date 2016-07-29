@@ -322,6 +322,17 @@
                                             else if ($grp_cd == 3){
                                                 echo "<option value='3' selected='selected'>HUMANITIES</option>";
                                             }
+                                            else if($grp_cd == 4){
+                                                echo "<option value='4'>GENERAL SCIENCE</option>";
+                                            }
+                                            else if($grp_cd == 5){
+                                                echo "<option value='5'>COMMERCE</option>";            
+                                            }
+                                        }
+                                        else if($exam_type == 2){
+                                            echo "<option value='0'>SELECT GROUP</option>";
+                                            echo "<option value='3'>HUMANITIES</option>";
+                                            echo "<option value='5'>COMMERCE</option>";    
                                         }
 
                                         $subarray = array(
@@ -675,6 +686,43 @@
                             }
 
                             function commerce_subjects(){
+                                $('#sub1').empty();$('#sub1p2').empty();
+                                $('#sub2').empty();$('#sub2p2').empty();
+                                $('#sub3').empty();$('#sub3p2').empty();
+                                $('#sub4').empty();$('#sub4p2').empty();
+                                $('#sub5').empty();$('#sub5p2').empty();
+                                $('#sub6').empty(); $('#sub6p2').empty();
+                                $('#sub7').empty();$('#sub7p2').empty();
+                                $('#sub8').empty(); $('#sub8p2').empty();
+
+                                $('#sub7').show();$('#sub7p2').show();
+                                $('#sub8').hide(); $('#sub8p2').hide();
+
+
+                                $("#sub1").append('<option value="1">ENGLISH</option>');
+                                $("#sub1p2").append('<option value="1">ENGLISH</option>');
+
+                                $("#sub2").append('<option value="2">URDU</option>');
+                                $("#sub2p2").append('<option value="2">URDU</option>');
+
+                                $("#sub3").append('<option value="92">ISLAMIC EDUCATION</option>');
+                                $("#sub3p2").append('<option value="91">PAKISTAN STUDIES</option>');
+
+                                $("#sub4").append('<option value="70">PRINCIPLES OF ACCOUNTING</option>');
+                                $("#sub4p2").append('<option value="70">PRINCIPLES OF ACCOUNTING</option>');
+
+                                $("#sub5").append('<option value="71">PRINCIPLES OF ECONOMICS</option>');
+                                
+                                $("#sub5p2").append('<option value="94">COMMERCIAL GEOGRAPHY</option>');
+
+                                $("#sub6").append('<option value="80">BUSINESS MATH</option>');
+                                
+                                $("#sub6p2").append('<option value="97">BUSINESS STATISTICS</option>');
+
+                                $("#sub7").append('<option value="39">PRINCIPLES OF COMMERCE</option>');
+
+                                $("#sub7p2").append('<option value="95">BANKING</option>');
+                                $("#sub7p2").append('<option value="98">COMPUTER STUDIES</option>');
                             }
 
                             function ValidateFileUpload() {                                                                                                        
@@ -1413,7 +1461,7 @@
 
                                 function sub_grp_load(){
 
-                                    debugger;
+                                    //debugger;
 
                                     if((sub1pf1 == "3") || (sub1st1 == "2"))
                                     {
@@ -1598,7 +1646,7 @@
 
                                 function sub_grp_load_exam_type1(){
 
-                                    debugger;
+                                    //debugger;
                                     $('#sub1').empty();$('#sub1p2').empty();
                                     $('#sub2').empty();$('#sub2p2').empty();
                                     $('#sub3').empty();$('#sub3p2').empty();
@@ -1626,14 +1674,21 @@
 
                                     $("#sub6").append('<option value="0">NONE</option>');
                                     $("#sub6p2").append(new Option('<?php  echo  array_search($data[0]['sub6'],$subarray); ?>',sub6));
-                                    
-                                    $("#sub7").hide();
-                                    $("#sub7p2").hide();
-                                    
-                                     $("#sub8").hide();
-                                    $("#sub8p2").hide();
 
-                                   
+                                    if(sub7 != '' || grp_cd == 5){
+                                        $("#sub7").append('<option value="0">NONE</option>');
+                                        $("#sub7p2").append(new Option('<?php  echo  array_search($data[0]['sub7'],$subarray); ?>',sub7));    
+                                    }
+                                    else{
+                                        $("#sub7").hide();
+                                        $("#sub7p2").hide();    
+                                    }
+                                    $("#sub8").hide();
+                                    $("#sub8p2").hide();
+                                }
+
+                                function sub_grp_load_exam_type2(){
+                                    ClearALLDropDowns();
                                 }
 
                                 function additional_sub_grp_load(){
@@ -1692,11 +1747,13 @@
                                 if($exam_type == 1){
                                     echo 'sub_grp_load_exam_type1();'; 
                                 }
+                                else if($exam_type == 2){
+                                    echo'sub_grp_load_exam_type2();';
+                                }
                                 else{
                                     echo'sub_grp_load();';
                                 }
                                 ?>
-
 
                                 function sub_grp_empty_PI(){
                                     $("#sub1").empty();
@@ -1942,9 +1999,6 @@
 
                                 }
                                 function sub_grp_load_MarksImp_FULL(){
-
-
-
                                     //  debugger;
                                     // check Pass Fail status first
                                     if((sub1pf1 == "1"))
@@ -2152,9 +2206,6 @@
 
                                 }
                                 function sub_grp_load_MarksImp_Subj_wise(){
-
-
-
                                     //  debugger;
                                     // check Pass Fail status first
                                     if((sub1pf1 == "2") )
@@ -2505,7 +2556,7 @@
                                 })     
 
                                 $('#std_group').change(function(){
-                                    debugger;                                
+                                    //debugger;                                
                                     var sel_group = $('#std_group').val();    
 
 
@@ -2529,6 +2580,9 @@
                                     }
                                     else if(sel_group == 4){
                                         general_science_subjects();
+                                    }
+                                    else if(sel_group == 5){
+                                        commerce_subjects();
                                     }
                                 })
                             })
