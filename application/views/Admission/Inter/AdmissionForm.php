@@ -322,10 +322,30 @@
                                                 echo "<option value='5'>COMMERCE</option>";            
                                             }
                                         }
+
                                         else if($exam_type == 2){
                                             echo "<option value='0'>SELECT GROUP</option>";
                                             echo "<option value='3'>HUMANITIES</option>";
                                             echo "<option value='5'>COMMERCE</option>";    
+                                        }
+
+                                        else if($exam_type == 3){
+                                            if($grp_cd == 1){
+                                                echo "<option value='1' selected='selected'>PRE-MEDICAL</option>";       
+                                            }
+                                            else if ($grp_cd == 2){
+                                                echo "<option value='2' selected='selected'>PRE-ENGINEERING</option>";
+                                            }
+
+                                            else if ($grp_cd == 3){
+                                                echo "<option value='3' selected='selected'>HUMANITIES</option>";
+                                            }
+                                            else if($grp_cd == 4){
+                                                echo "<option value='4'>GENERAL SCIENCE</option>";
+                                            }
+                                            else if($grp_cd == 5){
+                                                echo "<option value='5'>COMMERCE</option>";            
+                                            }
                                         }
 
                                         $subarray = array(
@@ -559,7 +579,7 @@
 
                             $(document).ready(function(){
 
-                                function ClearALLDropDowns() {
+                                function Empty_All_Dropdowns(){
                                     $('#sub1').empty();$('#sub1p2').empty();
                                     $('#sub2').empty();$('#sub2p2').empty();
                                     $('#sub3').empty();$('#sub3p2').empty();
@@ -568,6 +588,11 @@
                                     $('#sub6').empty(); $('#sub6p2').empty();
                                     $('#sub7').empty();$('#sub7p2').empty();
                                     $('#sub8').empty(); $('#sub8p2').empty();
+                                }
+
+                                function ClearALLDropDowns() {
+
+                                    Empty_All_Dropdowns();
 
                                     $("#sub1").append('<option value="0">NONE</option>');
                                     $("#sub1p2").append('<option value="0">NONE</option>');
@@ -595,14 +620,7 @@
                                 }
 
                                 function pre_medical_subjects() {
-                                    $('#sub1').empty();$('#sub1p2').empty();
-                                    $('#sub2').empty();$('#sub2p2').empty();
-                                    $('#sub3').empty();$('#sub3p2').empty();
-                                    $('#sub4').empty();$('#sub4p2').empty();
-                                    $('#sub5').empty();$('#sub5p2').empty();
-                                    $('#sub6').empty(); $('#sub6p2').empty();
-                                    $('#sub7').empty();$('#sub7p2').empty();
-                                    $('#sub8').empty(); $('#sub8p2').empty();
+                                    Empty_All_Dropdowns();
 
                                     $('#sub7').hide();$('#sub7p2').hide();
                                     $('#sub8').hide(); $('#sub8p2').hide();
@@ -628,14 +646,7 @@
                                 }
 
                                 function pre_engineering_subjects() {
-                                    $('#sub1').empty();$('#sub1p2').empty();
-                                    $('#sub2').empty();$('#sub2p2').empty();
-                                    $('#sub3').empty();$('#sub3p2').empty();
-                                    $('#sub4').empty();$('#sub4p2').empty();
-                                    $('#sub5').empty();$('#sub5p2').empty();
-                                    $('#sub6').empty(); $('#sub6p2').empty();
-                                    $('#sub7').empty();$('#sub7p2').empty();
-                                    $('#sub8').empty(); $('#sub8p2').empty();
+                                    Empty_All_Dropdowns();
 
                                     $('#sub7').hide();$('#sub7p2').hide();
                                     $('#sub8').hide(); $('#sub8p2').hide();
@@ -661,14 +672,7 @@
                                 }
 
                                 function general_science_subjects() {
-                                    $('#sub1').empty();$('#sub1p2').empty();
-                                    $('#sub2').empty();$('#sub2p2').empty();
-                                    $('#sub3').empty();$('#sub3p2').empty();
-                                    $('#sub4').empty();$('#sub4p2').empty();
-                                    $('#sub5').empty();$('#sub5p2').empty();
-                                    $('#sub6').empty(); $('#sub6p2').empty();
-                                    $('#sub7').empty();$('#sub7p2').empty();
-                                    $('#sub8').empty(); $('#sub8p2').empty();
+                                    Empty_All_Dropdowns();
 
                                     $('#sub7').hide();$('#sub7p2').hide();
                                     $('#sub8').hide(); $('#sub8p2').hide();
@@ -694,14 +698,7 @@
                                 }
 
                                 function commerce_subjects(){
-                                    $('#sub1').empty();$('#sub1p2').empty();
-                                    $('#sub2').empty();$('#sub2p2').empty();
-                                    $('#sub3').empty();$('#sub3p2').empty();
-                                    $('#sub4').empty();$('#sub4p2').empty();
-                                    $('#sub5').empty();$('#sub5p2').empty();
-                                    $('#sub6').empty(); $('#sub6p2').empty();
-                                    $('#sub7').empty();$('#sub7p2').empty();
-                                    $('#sub8').empty(); $('#sub8p2').empty();
+                                    Empty_All_Dropdowns();
 
                                     $('#sub7').show();$('#sub7p2').show();
                                     $('#sub8').hide(); $('#sub8p2').hide();
@@ -800,14 +797,7 @@
 
                                 function humanities_subjects(){
 
-                                    $('#sub1').empty();$('#sub1p2').empty();
-                                    $('#sub2').empty();$('#sub2p2').empty();
-                                    $('#sub3').empty();$('#sub3p2').empty();
-                                    $('#sub4').empty();$('#sub4p2').empty();
-                                    $('#sub5').empty();$('#sub5p2').empty();
-                                    $('#sub6').empty(); $('#sub6p2').empty();
-                                    $('#sub7').empty();$('#sub7p2').empty();
-                                    $('#sub8').empty(); $('#sub8p2').empty();
+                                    Empty_All_Dropdowns();
 
                                     $("#sub1").append('<option value="1">ENGLISH</option>');
                                     $("#sub1p2").append('<option value="1">ENGLISH</option>');
@@ -1074,16 +1064,7 @@
 
                                 function sub_grp_load_exam_type1(){
 
-                                    //debugger;
-                                    $('#sub1').empty();$('#sub1p2').empty();
-                                    $('#sub2').empty();$('#sub2p2').empty();
-                                    $('#sub3').empty();$('#sub3p2').empty();
-                                    $('#sub4').empty();$('#sub4p2').empty();
-                                    $('#sub5').empty();$('#sub5p2').empty();
-                                    $('#sub6').empty(); $('#sub6p2').empty();
-                                    $('#sub7').empty();$('#sub7p2').empty();
-                                    $('#sub8').empty(); $('#sub8p2').empty();
-
+                                    Empty_All_Dropdowns();
 
                                     $("#sub1").append('<option value="0">NONE</option>');
                                     $("#sub1p2").append(new Option('<?php  echo  array_search($data[0]['sub1'],$subarray); ?>',sub1));
@@ -1119,6 +1100,132 @@
                                     ClearALLDropDowns();
                                 }
 
+                                function sub_grp_load_exam_type3(){
+
+                                    Empty_All_Dropdowns();
+
+                                    $('#sub7').hide();$('#sub7p2').hide();
+                                    $('#sub8').hide(); $('#sub8p2').hide();
+
+                                    if((sub1pf1 == "3") || (sub1st1 == "2"))
+                                    {
+                                        $("#sub1").append(new Option('<?php  echo  array_search($data[0]['sub1'],$subarray); ?>',sub1));
+                                    }
+                                    else
+                                    {   
+                                        $("#sub1").append('<option value="0">NONE</option>');
+                                    }
+                                    if((sub1pf2 == "3") || (sub1st2 == "2"))
+                                    {
+                                        $("#sub1p2").append(new Option('<?php  echo  array_search($data[0]['sub1'],$subarray); ?>',sub1));
+                                    }
+                                    else
+                                    {  
+                                        $("#sub1p2").append('<option value="0">NONE</option>');
+                                    }
+                                    // Subject 2 
+                                    if((sub2pf1 == "3") || (sub2st1 == "2"))
+                                    {
+                                        $("#sub2").append(new Option('<?php  echo  array_search($data[0]['sub2'],$subarray); ?>',sub2));
+                                    }
+                                    else
+                                    {
+                                        $("#sub2").append('<option value="0">NONE</option>');
+                                    }
+                                    if((sub2pf2 == "3") || (sub2st2 == "2"))
+                                    {
+                                        $("#sub2p2").append(new Option('<?php  echo  array_search($data[0]['sub2'],$subarray); ?>',sub2));
+                                    }
+                                    else
+                                    {
+                                        $("#sub2p2").empty();
+                                        $("#sub2p2").append('<option value="0">NONE</option>');
+                                    }
+                                    if((sub3pf1 == "3") || (sub3st1 == "2"))
+                                    {
+                                        $("#sub3").append(new Option('<?php  echo  array_search($data[0]['sub3'],$subarray); ?>',sub3));
+                                    }
+                                    else
+                                    {
+                                        $("#sub3").append('<option value="0">NONE</option>');
+                                    }
+                                    if((sub8pf2 == "3") || (sub8st2 == "2"))
+                                    {
+                                        $("#sub3p2").append(new Option('<?php  echo  array_search($data[0]['sub8'],$subarray); ?>',sub8));
+                                    }
+                                    else
+                                    {
+                                        $("#sub3p2").append('<option value="0">NONE</option>');
+                                    }
+                                    if((sub4pf1 == "3") || (sub4st1 == "2"))
+                                    {
+                                        $("#sub4").append(new Option('<?php  echo  array_search($data[0]['sub4'],$subarray); ?>',sub4));
+                                    }
+                                    else
+                                    {
+                                        $("#sub4").append('<option value="0">NONE</option>');
+                                    }
+                                    if((sub4pf2 == "3") || (sub4st2 == "2"))
+                                    {
+                                        $("#sub4p2").append(new Option('<?php  echo  array_search($data[0]['sub4'],$subarray); ?>',sub4));
+
+                                    }
+                                    else
+                                    {
+                                        $("#sub4p2").append('<option value="0">NONE</option>');
+                                    }
+                                    if((sub5pf1 == "3") || (sub5st1 == "2"))
+                                    {
+                                        $("#sub5").append(new Option('<?php  echo  array_search($data[0]['sub5'],$subarray); ?>',sub5));
+                                    }
+                                    else
+                                    {
+                                        $("#sub5").append('<option value="0">NONE</option>');
+                                    }
+                                    if((sub5pf2 == "3") || (sub5st2 == "2"))
+                                    {
+                                        $("#sub5p2").append(new Option('<?php  echo  array_search($data[0]['sub5'],$subarray); ?>',sub5));
+                                    }
+                                    else
+                                    {
+                                        $("#sub5p2").append('<option value="0">NONE</option>');
+                                    }
+                                    if((sub6pf1 == "3") || (sub6st1 == "2"))
+                                    {
+                                        $("#sub6").append(new Option('<?php  echo  array_search($data[0]['sub6'],$subarray); ?>',sub6));
+                                    }
+                                    else
+                                    {
+                                        $("#sub6").append('<option value="0">NONE</option>');
+                                    }
+                                    if((sub6pf2 == "3") || (sub6st2 == "2"))
+                                    {
+                                        $("#sub6p2").append(new Option('<?php  echo  array_search($data[0]['sub6'],$subarray); ?>',sub6));
+                                    }
+                                    else
+                                    {
+                                        $("#sub6p2").append('<option value="0">NONE</option>');
+                                    }
+
+                                    if(sub7 != ''){
+                                        if((sub7pf1 == "3") || (sub7st1 == "2"))
+                                        {
+                                            $("#sub7").append(new Option('<?php  echo  array_search($data[0]['sub7'],$subarray); ?>',sub7));
+                                        }
+                                        else
+                                        {
+                                            $("#sub7").append('<option value="0">NONE</option>');
+                                        }
+                                        if((sub7pf2 == "3") || (sub7st2 == "2"))
+                                        {
+                                            $("#sub7p2").append(new Option('<?php  echo  array_search($data[0]['sub7'],$subarray); ?>',sub7));
+                                        }
+                                        else
+                                        {
+                                            $("#sub7p2").append('<option value="0">NONE</option>');
+                                        }   
+                                    }
+                                }
 
                                 <?php
                                 //DebugBreak();
@@ -1128,17 +1235,15 @@
                                 else if($exam_type == 2){
                                     echo'sub_grp_load_exam_type2();';
                                 }
+                                else if($exam_type == 3){
+                                    echo'sub_grp_load_exam_type3();';
+                                }
                                 else{
                                     echo'sub_grp_load();';
                                 }
                                 ?>
 
                                 /*CHNAGE FUNCTIONS*/
-
-
-                                var sub4 = $("#sub4").val();
-                                var sub5 = $("#sub5").val();
-                                var sub6 = $("#sub6").val();
 
                                 $('#std_group').change(function(){
                                     //debugger;                                
@@ -1169,36 +1274,148 @@
                                     else if(sel_group == 5){
                                         commerce_subjects();
                                     }
-                                })
+                                });
+
                                 // sub 4 change event 
                                 $("#sub4").change(function(){
-                                    $("#sub4p2").val(sub4);   
+                                    debugger;
+                                    var id4 =$("#sub4").val();
+                                    var id4p2 =$("#sub4p2").val();
+                                    var id5 =$("#sub5").val();
+                                    var id5p2 =$("#sub5p2").val();
+                                    var id6 =$("#sub6").val();
+                                    var id6p2 =$("#sub6p2").val();
+                                    $("#sub4p2").val(id4);
 
+                                    if((id4 != 0) && (id5 == id4)){
+                                        alertify.error('Please Choose Different Subject');
+                                        $("#sub4").val('0');
+                                        $("#sub4p2").val('0'); 
+                                    }
+                                    else if((id4 != 0) && (id6 == id4)){
+                                        alertify.error('Please Choose Different Subject');
+                                        $("#sub4").val('0');
+                                        $("#sub4p2").val('0'); 
+                                    }
 
+                                    else if ( (id4 != 0) && ( (id4 == 24 && id5 == 24) || (id4 == 27 && id5 == 27) || (id4 == 32 && id5 == 32)
+                                        || (id4 == 34 && id5 == 34) || (id4 == 37 && id5 == 37) ) )
+                                        {
+                                            alertify.error('Please Choose Different Language');
+                                            $("#sub4").val('0');
+                                            $("#sub4p2").val('0'); 
+                                        }
+
+                                        else if ( (id4 != 0) && ( (id4 == 24 && id6 == 24) || (id4 == 27 && id6 == 27) || (id4 == 32 && id6 == 32)
+                                            || (id4 == 34 && id6 == 34) || (id4 == 37 && id6 == 37) ) )
+                                            {
+                                                alertify.error('Please Choose Different Language');
+                                                $("#sub4").val('0');
+                                                $("#sub4p2").val('0'); 
+                                            }
 
                                 });
                                 $("#sub4p2").change(function(){
-                                    var sel_sub =$("#sub4p2").val();
-                                    $("#sub4").val(sel_sub);
+                                    var id4 =$("#sub4").val();
+                                    var id4p2 =$("#sub4p2").val();
+                                    var id5 =$("#sub5").val();
+                                    var id5p2 =$("#sub5p2").val();
+                                    var id6 =$("#sub6").val();
+                                    var id6p2 =$("#sub6p2").val();
+                                    $("#sub4").val(id4p2);
+                                    if((id4p2 != 0) && (id5p2 == id4p2)){
+                                        alertify.error('Please Choose Different Subject');
+                                        $("#sub4").val('0');
+                                        $("#sub4p2").val('0'); 
+                                    }
+                                    else if((id4p2 != 0) && (id6p2 == id4p2)){
+                                        alertify.error('Please Choose Different Subject');
+                                        $("#sub4").val('0');
+                                        $("#sub4p2").val('0'); 
+                                    }
                                 });
                                 // sub 5 change event 
                                 $("#sub5").change(function(){
-                                    var sel_sub =$("#sub5").val();
-                                    $("#sub5p2").val(sel_sub);
+                                    debugger;
+                                    var id4 =$("#sub4").val();
+                                    var id4p2 =$("#sub4p2").val();
+                                    var id5 =$("#sub5").val();
+                                    var id5p2 =$("#sub5p2").val();
+                                    var id6 =$("#sub6").val();
+                                    var id6p2 =$("#sub6p2").val();
+                                    $("#sub5p2").val(id5);
 
+                                    if((id5 !=0) && (id4 == id5)){
+                                        alertify.error('Please Choose Different Subject');
+                                        $("#sub5").val('0');
+                                        $("#sub5p2").val('0');
+                                    }
+                                    else if((id5 !=0) && (id6 == id5)){
+                                        alertify.error('Please Choose Different Subject');
+                                        $("#sub5").val('0');
+                                        $("#sub5p2").val('0');
+                                    }
                                 });
                                 $("#sub5p2").change(function(){
-                                    var sel_sub =$("#sub5p2").val();
-                                    $("#sub5").val(sel_sub);
+                                    var id4 =$("#sub4").val();
+                                    var id4p2 =$("#sub4p2").val();
+                                    var id5 =$("#sub5").val();
+                                    var id5p2 =$("#sub5p2").val();
+                                    var id6 =$("#sub6").val();
+                                    var id6p2 =$("#sub6p2").val();
+                                    $("#sub5").val(id5p2);
+
+                                    if((id5p2 !=0) && (id4p2 == id5p2)){
+                                        alertify.error('Please Choose Different Subject');
+                                        $("#sub5").val('0');
+                                        $("#sub5p2").val('0');
+                                    }
+                                    else if((id5p2 !=0) && (id6p2 == id5p2)){
+                                        alertify.error('Please Choose Different Subject');
+                                        $("#sub5").val('0');
+                                        $("#sub5p2").val('0');
+                                    }
                                 });
-                                // sub 6 change event 
+                                // sub 6 change event
                                 $("#sub6").change(function(){
-                                    var sel_sub =$("#sub6").val();
-                                    $("#sub6p2").val(sel_sub);
+                                    var id4 =$("#sub4").val();
+                                    var id4p2 =$("#sub4p2").val();
+                                    var id5 =$("#sub5").val();
+                                    var id5p2 =$("#sub5p2").val();
+                                    var id6 =$("#sub6").val();
+                                    var id6p2 =$("#sub6p2").val();
+                                    $("#sub6p2").val(id6);
+
+                                    if((id6 !=0) && (id4 == id6)){
+                                        alertify.error('Please Choose Different Subject');
+                                        $("#sub6").val('0');
+                                        $("#sub6p2").val('0');
+                                    }
+                                    else if((id6 !=0) && (id5 == id6)){
+                                        alertify.error('Please Choose Different Subject');
+                                        $("#sub6").val('0');
+                                        $("#sub6p2").val('0');
+                                    }
                                 });
                                 $("#sub6p2").change(function(){
-                                    var sel_sub =$("#sub6p2").val();
-                                    $("#sub6").val(sel_sub);
+                                    var id4 =$("#sub4").val();
+                                    var id4p2 =$("#sub4p2").val();
+                                    var id5 =$("#sub5").val();
+                                    var id5p2 =$("#sub5p2").val();
+                                    var id6 =$("#sub6").val();
+                                    var id6p2 =$("#sub6p2").val();
+                                    $("#sub6").val(id6p2);
+
+                                    if((id6p2 !=0) && (id4p2 == id6p2)){
+                                        alertify.error('Please Choose Different Subject');
+                                        $("#sub6").val('0');
+                                        $("#sub6p2").val('0');
+                                    }
+                                    else if((id6p2 !=0) && (id5p2 == id6p2)){
+                                        alertify.error('Please Choose Different Subject');
+                                        $("#sub6").val('0');
+                                        $("#sub6p2").val('0');
+                                    }
                                 });
                             });
 
