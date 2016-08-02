@@ -304,7 +304,7 @@
                                         echo "<option value='6'>ISLAMIC STUDIES</option>";    
                                         echo "<option value='7'>HOME ECONOMICS</option>";   */
 
-                                        if($exam_type == 1){
+                                        if($exam_type == 1 || $exam_type == 3){
                                             if($grp_cd == 1){
                                                 echo "<option value='1' selected='selected'>PRE-MEDICAL</option>";       
                                             }
@@ -329,22 +329,29 @@
                                             echo "<option value='5'>COMMERCE</option>";    
                                         }
 
-                                        else if($exam_type == 3){
+                                        if($exam_type == 4 || $exam_type == 5 || $exam_type == 6){
                                             if($grp_cd == 1){
-                                                echo "<option value='1' selected='selected'>PRE-MEDICAL</option>";       
+                                                echo "<option value='1' selected='selected'>PRE-MEDICAL</option>";      
+                                                echo "<option value='3'>HUMANITIES</option>";
+                                                echo "<option value='5'>COMMERCE</option>";    
                                             }
                                             else if ($grp_cd == 2){
                                                 echo "<option value='2' selected='selected'>PRE-ENGINEERING</option>";
+                                                echo "<option value='3'>HUMANITIES</option>";
+                                                echo "<option value='5'>COMMERCE</option>";  
                                             }
-
                                             else if ($grp_cd == 3){
                                                 echo "<option value='3' selected='selected'>HUMANITIES</option>";
+                                                echo "<option value='5'>COMMERCE</option>";  
                                             }
                                             else if($grp_cd == 4){
-                                                echo "<option value='4'>GENERAL SCIENCE</option>";
+                                                echo "<option value='4' selected='selected'>GENERAL SCIENCE</option>";
+                                                echo "<option value='3'>HUMANITIES</option>";
+                                                echo "<option value='5'>COMMERCE</option>";  
                                             }
                                             else if($grp_cd == 5){
-                                                echo "<option value='5'>COMMERCE</option>";            
+                                                echo "<option value='5' selected='selected'>COMMERCE</option>";       
+                                                echo "<option value='3'>HUMANITIES</option>";  
                                             }
                                         }
 
@@ -426,6 +433,7 @@
                                             'COMPUTER STUDIES' => '98',
                                             'BOOK KEEPING & ACCOUNTANCY' => '99'
                                         );
+
                                         $result =  array_search($data[0]['sub4'],$subarray);
 
                                         $hum_sub_pr_array = array(
@@ -577,7 +585,9 @@
                         <script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
                         <script type="text/javascript">
 
+
                             $(document).ready(function(){
+
 
                                 function Empty_All_Dropdowns(){
                                     $('#sub1').empty();$('#sub1p2').empty();
@@ -727,7 +737,7 @@
                                     $("#sub7").append('<option value="39">PRINCIPLES OF COMMERCE</option>');
 
                                     $("#sub7p2").append('<option value="95">BANKING</option>');
-                                    $("#sub7p2").append('<option value="98">COMPUTER STUDIES</option>');
+                                    /*$("#sub7p2").append('<option value="98">COMPUTER STUDIES</option>');*/
                                 }
 
                                 var huminities_sub_practical = {
@@ -878,6 +888,7 @@
                                 var sub6st2 = "<?php echo @$data[0]['sub6st2']; ?>";
                                 var sub7st2 ="<?php echo @$data[0]['sub7st2']; ?>";
                                 var sub8st2 ="<?php  echo @$data[0]['sub8st2']; ?>";   
+                                var exam_type = "<?php echo @$data[0]['exam_type']?>";
 
 
 
@@ -1246,34 +1257,41 @@
                                 /*CHNAGE FUNCTIONS*/
 
                                 $('#std_group').change(function(){
-                                    //debugger;                                
+                                    debugger;                                
 
                                     var sel_group = $('#std_group').val();    
 
-                                    /* if(sel_group == grp_cd) 
-                                    {
-                                    sub_grp_load();    
-                                    }       */
-
-                                    if(sel_group == 0){
-                                        ClearALLDropDowns();
+                                    if(exam_type == 4 || exam_type == 5 || exam_type == 6){
+                                        if(sel_group == grp_cd) 
+                                        {
+                                            sub_grp_load();    
+                                        }     
                                     }
 
-                                    else if (sel_group == 1){
-                                        pre_medical_subjects();
-                                    }
-                                    else if(sel_group == 2){
-                                        pre_engineering_subjects();
-                                    }
-                                    else if(sel_group == 3){
-                                        humanities_subjects();
-                                    }
-                                    else if(sel_group == 4){
-                                        general_science_subjects();
-                                    }
-                                    else if(sel_group == 5){
-                                        commerce_subjects();
-                                    }
+
+                                    else{
+                                        if(sel_group == 0){
+                                            ClearALLDropDowns();
+                                        }
+
+                                        else if (sel_group == 1){
+                                            pre_medical_subjects();
+                                        }
+                                        else if(sel_group == 2){
+                                            pre_engineering_subjects();
+                                        }
+                                        else if(sel_group == 3){
+                                            humanities_subjects();
+                                        }
+                                        else if(sel_group == 4){
+                                            general_science_subjects();
+                                        }
+                                        else if(sel_group == 5){
+                                            commerce_subjects();
+                                        } 
+                                    }    
+
+
                                 });
 
                                 // sub 4 change event 
@@ -1298,21 +1316,28 @@
                                         $("#sub4p2").val('0'); 
                                     }
 
-                                    else if ( (id4 != 0) && ( (id4 == 24 && id5 == 24) || (id4 == 27 && id5 == 27) || (id4 == 32 && id5 == 32)
-                                        || (id4 == 34 && id5 == 34) || (id4 == 37 && id5 == 37) ) )
-                                        {
-                                            alertify.error('Please Choose Different Language');
-                                            $("#sub4").val('0');
-                                            $("#sub4p2").val('0'); 
-                                        }
+                                    // Double history and language //
+                                    else if( (id5 == '55' || id5 == '56' || id5 == '57' || id5 == '58') && (id4 == '55' || id4 == '56' || id4 == '57' || id4 == '58') ){
+                                        alertify.error('Please Choose Different Subject. You Are NOT Allowed to Choose the Double History');
+                                        $("#sub4").val('0');
+                                        $("#sub4p2").val('0'); 
+                                    }
+                                    else if( (id6 == '55' || id6 == '56' || id6 == '57' || id6 == '58') && (id4 == '55' || id4 == '56' || id4 == '57' || id4 == '58') ){
+                                        alertify.error('Please Choose Different Subject. You Are NOT Allowed to Choose the Double History');
+                                        $("#sub4").val('0');
+                                        $("#sub4p2").val('0'); 
+                                    }
 
-                                        else if ( (id4 != 0) && ( (id4 == 24 && id6 == 24) || (id4 == 27 && id6 == 27) || (id4 == 32 && id6 == 32)
-                                            || (id4 == 34 && id6 == 34) || (id4 == 37 && id6 == 37) ) )
-                                            {
-                                                alertify.error('Please Choose Different Language');
-                                                $("#sub4").val('0');
-                                                $("#sub4p2").val('0'); 
-                                            }
+                                    else if( (id4 == '24' || id4 == '27' || id4 == '32' || id4 == '34' || id4 == '37') && (id4 == '24' || id4 == '27' || id4 == '32' || id4 == '34' || id4 == '37') ){
+                                        alertify.error('Please Choose Different Subject. You Are NOT Allowed to Choose the Double Language');
+                                        $("#sub4").val('0');
+                                        $("#sub4p2").val('0'); 
+                                    }
+                                    else if( (id4 == '24' || id4 == '27' || id4 == '32' || id4 == '34' || id4 == '37') && (id4 == '24' || id4 == '27' || id4 == '32' || id4 == '34' || id4 == '37') ){
+                                        alertify.error('Please Choose Different Subject. You Are NOT Allowed to Choose the Double Language');
+                                        $("#sub4").val('0');
+                                        $("#sub4p2").val('0'); 
+                                    }
 
                                 });
                                 $("#sub4p2").change(function(){
@@ -1330,6 +1355,28 @@
                                     }
                                     else if((id4p2 != 0) && (id6p2 == id4p2)){
                                         alertify.error('Please Choose Different Subject');
+                                        $("#sub4").val('0');
+                                        $("#sub4p2").val('0'); 
+                                    }
+                                    // Double history and language //
+                                    else if( (id5p2 == '55' || id5p2 == '56' || id5p2 == '57' || id5p2 == '58') && (id4p2 == '55' || id4p2 == '56' || id4p2 == '57' || id4p2 == '58') ){
+                                        alertify.error('Please Choose Different Subject. You Are NOT Allowed to Choose the Double History');
+                                        $("#sub4").val('0');
+                                        $("#sub4p2").val('0'); 
+                                    }
+                                    else if( (id6p2 == '55' || id6p2 == '56' || id6p2 == '57' || id6p2 == '58') && (id4p2 == '55' || id4p2 == '56' || id4p2 == '57' || id4p2 == '58') ){
+                                        alertify.error('Please Choose Different Subject. You Are NOT Allowed to Choose the Double History');
+                                        $("#sub4").val('0');
+                                        $("#sub4p2").val('0'); 
+                                    }
+
+                                    else if( (id4p2 == '24' || id4p2 == '27' || id4p2 == '32' || id4p2 == '34' || id4p2 == '37') && (id4p2 == '24' || id4p2 == '27' || id4p2 == '32' || id4p2 == '34' || id4p2 == '37') ){
+                                        alertify.error('Please Choose Different Subject. You Are NOT Allowed to Choose the Double Language');
+                                        $("#sub4").val('0');
+                                        $("#sub4p2").val('0'); 
+                                    }
+                                    else if( (id4p2 == '24' || id4p2 == '27' || id4p2 == '32' || id4p2 == '34' || id4p2 == '37') && (id4p2 == '24' || id4p2 == '27' || id4p2 == '32' || id4p2 == '34' || id4p2 == '37') ){
+                                        alertify.error('Please Choose Different Subject. You Are NOT Allowed to Choose the Double Language');
                                         $("#sub4").val('0');
                                         $("#sub4p2").val('0'); 
                                     }
@@ -1354,8 +1401,35 @@
                                         alertify.error('Please Choose Different Subject');
                                         $("#sub5").val('0');
                                         $("#sub5p2").val('0');
+                                    } 
+                                    // Double language //
+                                    else if( (id4 == '24' || id4 == '27' || id4 == '32' || id4 == '34' || id4 == '37') && (id5 == '24' || id5 == '27' || id5 == '32' || id5 == '34' || id5 == '37') ){
+                                        alertify.error('Please Choose Different Subject');
+                                        $("#sub5").val('0');
+                                        $("#sub5p2").val('0');
                                     }
+
+                                    else if( (id6 == '24' || id6 == '27' || id6 == '32' || id6 == '34' || id6 == '37') && (id5 == '24' || id5 == '27' || id5 == '32' || id5 == '34' || id5 == '37') ){
+                                        alertify.error('Please Choose Different Subject. You Are NOT Allowed to Choose the Double History');
+                                        $("#sub5").val('0');
+                                        $("#sub5p2").val('0');
+                                    }
+
+                                    // Double History //
+                                    else if( (id4 == '55' || id4 == '56' || id4 == '57' || id4 == '58') && (id5 == '55' || id5 == '56' || id5 == '57' || id5 == '58') ){
+                                        alertify.error('Please Choose Different Subject');
+                                        $("#sub5").val('0');
+                                        $("#sub5p2").val('0');
+                                    }
+
+                                    else if( (id6 == '55' || id6 == '56' || id6 == '57' || id6 == '58')&& (id5 == '55' || id5 == '56' || id5 == '57' || id5 == '58') ){
+                                        alertify.error('Please Choose Different Subject. You Are NOT Allowed to Choose the Double Language');
+                                        $("#sub5").val('0');
+                                        $("#sub5p2").val('0');
+                                    }
+
                                 });
+
                                 $("#sub5p2").change(function(){
                                     var id4 =$("#sub4").val();
                                     var id4p2 =$("#sub4p2").val();
@@ -1375,6 +1449,31 @@
                                         $("#sub5").val('0');
                                         $("#sub5p2").val('0');
                                     }
+                                    // Double language //
+                                    else if( (id4p2 == '24' || id4p2 == '27' || id4p2 == '32' || id4p2 == '34' || id4p2 == '37') && (id5p2 == '24' || id5p2 == '27' || id5p2 == '32' || id5p2 == '34' || id5p2 == '37') ){
+                                        alertify.error('Please Choose Different Subject');
+                                        $("#sub5").val('0');
+                                        $("#sub5p2").val('0');
+                                    }
+                                    else if( (id6p2 == '24' || id6p2 == '27' || id6p2 == '32' || id6p2 == '34' || id6p2 == '37') && (id5p2 == '24' || id5p2 == '27' || id5p2 == '32' || id5p2 == '34' || id5p2 == '37') ){
+                                        alertify.error('Please Choose Different Subject');
+                                        $("#sub5").val('0');
+                                        $("#sub5p2").val('0');
+                                    }
+
+                                    // Double History //
+                                    else if( (id4p2 == '55' || id4p2 == '56' || id4p2 == '57' || id4p2 == '58') && (id5p2 == '55' || id5p2 == '56' || id5p2 == '57' || id5p2 == '58') ){
+                                        alertify.error('Please Choose Different Subject. You Are NOT Allowed to Choose the Double History');
+                                        $("#sub5").val('0');
+                                        $("#sub5p2").val('0');
+                                    }
+
+                                    else if( (id6p2 == '55' || id6p2 == '56' || id6p2 == '57' || id6p2 == '58')&& (id5p2 == '55' || id5p2 == '56' || id5p2 == '57' || id5p2 == '58') ){
+                                        alertify.error('Please Choose Different Subject. You Are NOT Allowed to Choose the Double Language');
+                                        $("#sub5").val('0');
+                                        $("#sub5p2").val('0');
+                                    }
+
                                 });
                                 // sub 6 change event
                                 $("#sub6").change(function(){
@@ -1396,6 +1495,33 @@
                                         $("#sub6").val('0');
                                         $("#sub6p2").val('0');
                                     }
+                                    // Double language //
+                                    else if( (id4 == '24' || id4 == '27' || id4 == '32' || id4 == '34' || id4 == '37') && (id6 == '24' || id6 == '27' || id6 == '32' || id6 == '34' || id6 == '37') ){
+                                        alertify.error('Please Choose Different Subject. You Are NOT Allowed to Choose the Double Language');
+                                        $("#sub6").val('0');
+                                        $("#sub6p2").val('0');
+                                    }
+
+                                    else if( (id5 == '24' || id5 == '27' || id5 == '32' || id5 == '34' || id5 == '37') && (id6 == '24' || id6 == '27' || id6 == '32' || id6 == '34' || id6 == '37') ){
+                                        alertify.error('Please Choose Different Subject. You Are NOT Allowed to Choose the Double Language');
+                                        $("#sub6").val('0');
+                                        $("#sub6p2").val('0');
+                                    }
+
+
+                                    // Double History //
+                                    else if( (id4 == '55' || id4 == '56' || id4 == '57' || id4 == '58') && (id6 == '55' || id6 == '56' || id6 == '57' || id6 == '58') ){
+                                        alertify.error('Please Choose Different Subject. You Are NOT Allowed to Choose the Double History');
+                                        $("#sub6").val('0');
+                                        $("#sub6p2").val('0');
+                                    }
+
+                                    else if( (id5 == '55' || id5 == '56' || id5 == '57' || id5 == '58') && (id6 == '55' || id6 == '56' || id6 == '57' || id6 == '58') ){
+                                        alertify.error('Please Choose Different Subject. You Are NOT Allowed to Choose the Double History');
+                                        $("#sub6").val('0');
+                                        $("#sub6p2").val('0');
+                                    }
+
                                 });
                                 $("#sub6p2").change(function(){
                                     var id4 =$("#sub4").val();
@@ -1416,6 +1542,34 @@
                                         $("#sub6").val('0');
                                         $("#sub6p2").val('0');
                                     }
+
+                                    // Double language //
+                                    else if( (id4p2 == '24' || id4p2 == '27' || id4p2 == '32' || id4p2 == '34' || id4p2 == '37') && (id6p2 == '24' || id6p2 == '27' || id6p2 == '32' || id6p2 == '34' || id6p2 == '37') ){
+                                        alertify.error('Please Choose Different Subject. You Are NOT Allowed to Choose the Double Language');
+                                        $("#sub6").val('0');
+                                        $("#sub6p2").val('0');
+                                    }
+
+                                    else if( (id5p2 == '24' || id5p2 == '27' || id5p2 == '32' || id5p2 == '34' || id5p2 == '37') && (id6p2 == '24' || id6p2 == '27' || id6p2 == '32' || id6p2 == '34' || id6p2 == '37') ){
+                                        alertify.error('Please Choose Different Subject. You Are NOT Allowed to Choose the Double Language');
+                                        $("#sub6").val('0');
+                                        $("#sub6p2").val('0');
+                                    }
+
+                                    // Double History //
+                                    else if( (id4p2 == '55' || id4p2 == '56' || id4p2 == '57' || id4p2 == '58') && (id6p2 == '55' || id6p2 == '56' || id6p2 == '57' || id6p2 == '58') ){
+                                        alertify.error('Please Choose Different Subject. You Are NOT Allowed to Choose the Double History');
+                                        $("#sub6").val('0');
+                                        $("#sub6p2").val('0');
+                                    }
+
+                                    else if( (id5p2 == '55' || id5p2 == '56' || id5p2 == '57' || id5p2 == '58') && (id6p2 == '55' || id6p2 == '56' || id6p2 == '57' || id6p2 == '58') ){
+                                        alertify.error('Please Choose Different Subject. You Are NOT Allowed to Choose the Double History');
+                                        $("#sub6").val('0');
+                                        $("#sub6p2").val('0');
+                                    } 
+
+
                                 });
                             });
 
