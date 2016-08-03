@@ -1257,41 +1257,34 @@
                                 /*CHNAGE FUNCTIONS*/
 
                                 $('#std_group').change(function(){
+
                                     debugger;                                
-
                                     var sel_group = $('#std_group').val();    
+                                
+                                    if(sel_group == grp_cd  && exam_type != 2) 
+                                    {
+                                        sub_grp_load();    
+                                    }     
 
-                                    if(exam_type == 4 || exam_type == 5 || exam_type == 6){
-                                        if(sel_group == grp_cd) 
-                                        {
-                                            sub_grp_load();    
-                                        }     
+                                    else if(sel_group == 0){
+                                        ClearALLDropDowns();
                                     }
 
-
-                                    else{
-                                        if(sel_group == 0){
-                                            ClearALLDropDowns();
-                                        }
-
-                                        else if (sel_group == 1){
-                                            pre_medical_subjects();
-                                        }
-                                        else if(sel_group == 2){
-                                            pre_engineering_subjects();
-                                        }
-                                        else if(sel_group == 3){
-                                            humanities_subjects();
-                                        }
-                                        else if(sel_group == 4){
-                                            general_science_subjects();
-                                        }
-                                        else if(sel_group == 5){
-                                            commerce_subjects();
-                                        } 
-                                    }    
-
-
+                                    else if (sel_group == 1){
+                                        pre_medical_subjects();
+                                    }
+                                    else if(sel_group == 2){
+                                        pre_engineering_subjects();
+                                    }
+                                    else if(sel_group == 3){
+                                        humanities_subjects();
+                                    }
+                                    else if(sel_group == 4){
+                                        general_science_subjects();
+                                    }
+                                    else if(sel_group == 5){
+                                        commerce_subjects();
+                                    } 
                                 });
 
                                 // sub 4 change event 
