@@ -8,7 +8,7 @@
                             Personal Information<a id="redgForm" data-original-title=""></a>
                         </div>
                     </div>
-                    <div class="widget-body">
+                    <div class="widget-body" style="margin-left:300px;">
                         <form class="form-horizontal no-margin" action="<?php  echo base_url(); ?>/index.php/Admission/NewEnrolment_insert" method="post" enctype="multipart/form-data" name="myform" id="myform">
                             <div class="control-group">
                                 <div class="controls controls-row">
@@ -294,7 +294,7 @@
                                         $IsRegular = $data[0]['IsRegular'];
                                         $coll_cd = $data[0]['coll_cd']; 
 
-                                        if($exam_type == 1 || $exam_type == 3 || $exam_type == 9 || $exam_type == 14){
+                                        if($exam_type == 1 || $exam_type == 3 || $exam_type == 9 || $exam_type == 11 || $exam_type == 14){
                                             if($grp_cd == 1){
                                                 echo "<option value='1' selected='selected'>PRE-MEDICAL</option>";       
                                             }
@@ -1502,6 +1502,14 @@
                                     }
                                 }
 
+                                function sub_grp_load_additional(){
+
+                                    humanities_subjects();
+                                    $('#sub1').hide();$('#sub1p2').hide();
+                                    $('#sub2').hide(); $('#sub2p2').hide(); 
+                                    $('#sub3').hide();$('#sub3p2').hide();
+                                }
+
 
                                 <?php
                                 //DebugBreak();
@@ -1513,6 +1521,9 @@
                                 }
                                 else if($exam_type == 3){
                                     echo'sub_grp_load_exam_type3();';
+                                }
+                                else if($exam_type == 11){
+                                    echo'sub_grp_load_additional();';
                                 }
                                 else if($exam_type == 14){
                                     echo'ClearALLDropDowns();';
