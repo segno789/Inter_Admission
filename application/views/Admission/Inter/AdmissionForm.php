@@ -39,11 +39,11 @@
                                     Bay Form No :
                                 </label>
                                 <div class="controls controls-row">
-                                    <input class="span3" type="text" id="bay_form" name="bay_form"  placeholder="Bay Form No." value="<?php echo  $data['0']['BForm'];?>" required="required" >
+                                    <input class="span3" type="text" id="bay_form" name="bay_form"  placeholder="34101-1111111-1" value="<?php echo  $data['0']['BForm'];?>" readonly="readonly" required="required" >
                                     <label class="control-label span2" for="father_cnic">
                                         Father's CNIC :
                                     </label> 
-                                    <input class="span3" id="father_cnic" name="father_cnic" type="text" placeholder="34101-1111111-1"  value="<?php echo  $data['0']['FNIC'];?>" required="required">
+                                    <input class="span3" id="father_cnic" name="father_cnic" type="text" placeholder="34101-1111111-1"  value="<?php echo  $data['0']['FNIC'];?>" readonly="readonly" required="required">
                                 </div>
                             </div>
                             <div class="control-group">
@@ -89,6 +89,11 @@
                                 </label>
                                 <div class="controls controls-row">
                                     <input class="span3" type="text" id="MarkOfIden" style="text-transform: uppercase;" name="MarkOfIden" value="<?php echo  $data['0']['markOfIden']; ?>" required="required" maxlength="60" >
+
+                                    <label class="control-label span2" >
+                                        Mobile Number :
+                                    </label> 
+                                    <input class="span3" id="mob_number" name="mob_number" type="text" placeholder="0300-123456789" value="<?php echo  $data['0']['MobNo']; ?> " required="required">
                                 </div>
                             </div>
                             <div class="control-group">
@@ -1888,41 +1893,11 @@
                                 });
                             }
 
-                            function ValidateFileUpload() {                                                                                                        
-                                var fuData = document.getElementById('inputFile');
-                                var FileUploadPath = fuData.value;
-                                if (FileUploadPath == '') {
-                                    alert("Please upload an image");
-                                    jQuery('#image_upload_preview').removeAttr('src');
-                                } 
-                                else {
-                                    var Extension = FileUploadPath.substring(
-                                        FileUploadPath.lastIndexOf('.') + 1).toLowerCase();
-
-                                    if (Extension == "jpeg" || Extension == "jpg") {
-                                        if (fuData.files && fuData.files[0]) {
-                                            var reader = new FileReader();
-                                            reader.onload = function(e) {
-                                                $('#image_upload_preview').attr('src', e.target.result);
-                                            }
-                                            reader.readAsDataURL(fuData.files[0]);
-                                        }
-                                    } 
-                                    else {
-                                        $('#inputFile').removeAttr('value');
-                                        jQuery('#image_upload_preview').removeAttr('src');
-                                        alert("Image only allows file types of JPEG. ");
-                                        return false;
-                                    }
-                                }
-                                var file_size = $('#inputFile')[0].files[0].size;
-                                if(file_size>20480) {                                    
-                                    $('#inputFile').removeAttr('value');
-                                    jQuery('#image_upload_preview').removeAttr('src');
-                                    alert("File size can be between 20KB"); 
-                                    return false;
-                                } 
-                            }
+                            jQuery(document).ready(function () {
+                                $(document.getElementById("bay_form")).mask("99999-9999999-9", { placeholder: "_" });
+                                $(document.getElementById("father_cnic")).mask("99999-9999999-9", { placeholder: "_" });
+                                $(document.getElementById("mob_number")).mask("9999-9999999", { placeholder: "_" });
+                            });
 
                         </script>
                     </div>  

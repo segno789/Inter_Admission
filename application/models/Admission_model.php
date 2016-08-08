@@ -33,10 +33,9 @@ class Admission_model extends CI_Model
 
     public function GetFormNo()
     {
-        // //DebugBreak();
         $this->db->select('formno');
         $this->db->order_by("formno", "DESC");
-        $formno =$this->db->get_where('Admission_online..MSAdm2016',array('regpvt'=>2));
+        $formno =$this->db->get_where('Admission_online..ISAdm2016',array('regpvt'=>2));
         $rowcount = $formno->num_rows();
 
         if($rowcount == 0 )
@@ -148,6 +147,7 @@ class Admission_model extends CI_Model
 
         $TotalAdmFee =  $AdmFee + $AdmProcFee;
 
+        DebugBreak();
 
         $query = $this->db->query(Insert_sp." '$formno',10,2016,2,'$name','$fname','$BForm','$FNIC','$Dob','$CellNo',$medium,'".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$sub8,$sub8ap1,1,$oldrno,$oldyear,$oldsess,$old_class,$IsHafiz,$Inst_cd,$UrbanRural,$RegGrp,$cat09,$cat10,$sub1ap2,$sub2ap2,$sub3ap2,$sub4ap2,$sub5ap2,$sub6ap2,$sub7ap2,$sub8ap2,$dist_cd,$teh_cd,$zone_cd,$Brd_cd,$AdmProcFee,$AdmFee,$TotalAdmFee");
         return true;

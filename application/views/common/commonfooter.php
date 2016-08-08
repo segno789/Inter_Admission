@@ -30,6 +30,7 @@
 <script type="text/javascript">
 
     $(document).ready(function(){
+
         $("#pvtinfo_dist").change(function(){
             var distId =  $("#pvtinfo_dist").val();
             $('#pvtinfo_teh').empty();
@@ -125,10 +126,7 @@
                     complete: function() { $('.mPageloader').hide();},
                     success: function(json) {
                         var listitems='';
-                        //$('#instruction').empty();
                         $.each(json.center, function (key, data) {
-
-                            console.log(data);
                             listitems +='<label style="text-align: left; margin-top: -23px;">'+data.CENT_CD + '-' + data.CENT_NAME+'</label><br>';
                         })
                         $('#instruction').html('<h1 style="    margin-bottom: 28px;">Selected Zone Centre List </h1>'+listitems); 
@@ -142,7 +140,7 @@
             }
 
         })
-    })
+    });
 
     function  check_NewEnrol_validation(){
 
@@ -186,11 +184,9 @@
 
         if(src == '') {
             $img.addClass("highlight");
-            // or
             $img.css("border", "3px solid yellow");
             $('#ErrMsg').show();  
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-            // $('#ErrMsg').html("<b>Please Enter your  Name </b>");    
             alertify.error("Please upload your Picture First.")
             $img.focus(); 
             return status;
@@ -198,7 +194,6 @@
         else if(name == "" ||  name == undefined){
             $('#ErrMsg').show();  
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-
             alertify.error("Please Enter your  Name")
             $('#cand_name').focus(); 
             return status;
@@ -206,7 +201,6 @@
         else if(fName == "" || fName == undefined){
             $('#ErrMsg').show(); 
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-            // $('#ErrMsg').html("<b>Please Enter your Father's Name  </b>");   
             alertify.error("Please Enter your Father's Name  ") 
             $('#father_name').focus(); 
             return status;
@@ -225,13 +219,10 @@
         {
             $('#ErrMsg').show(); 
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-            // $('#ErrMsg').html("<b>Please Enter your Father's CNIC</b>"); 
             alertify.error("Please Enter your Father's CNIC") 
             $('#father_cnic').focus();  
             return status; 
         }
-
-
 
         else if(mobNo == "" || mobNo == 0 || mobNo == undefined)
         {
@@ -277,7 +268,6 @@
         }
         else if (zone_cd < 1) 
         {
-
             alertify.error('Please select Zone. ');                          
             $("#pvtZone").focus();
             return status;  
@@ -291,69 +281,10 @@
             $("#std_group").focus();
             return status;  
         }
-        else if ((sub6p1 == 19 || sub6p2 == 19) && (sub7p1 == 20 || sub7p2== 20))
-        {
-            $('#ErrMsg').show(); 
-            alertify.error('Please select One Subject from ADVANCED ISLAMIC STUDIES / ISLAMIC HISTORY / MUSLIM HISTORY ');                   
-            $("#sub6").focus();
-            return status;  
-        }
-        else if (selected_group_conversion != grppre || exam_type == 2) 
-        {
-            if (sub6p1 == 0 )
-            {
-                $('#ErrMsg').show(); 
-                alertify.error('Please select Subject ');                   
-                $("#sub6").focus();
-                return status;  
-            }
-
-            else if (sub6p2 == 0)
-            {
-                $('#ErrMsg').show(); 
-                $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-                alertify.error('Please select Subject ');                          
-                $("#sub6p2").focus();
-                return status;  
-            }
-
-            else   if (sub7p1 == 0)
-            {
-                $('#ErrMsg').show(); 
-                $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-                alertify.error('Please select Subject ');
-                $("#sub7").focus();
-                return status;  
-            }
-            else   if (sub7p2 == 0)
-            {
-                $('#ErrMsg').show(); 
-                $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-                alertify.error('Please select Subject ');
-                $("#sub7p2").focus();
-                return status;  
-            }
-            else if (sub8p1 == 0 )
-            {
-                $('#ErrMsg').show(); 
-                $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-                alertify.error('Please select Subject '); 
-                $("#sub8").focus();
-                return status;  
-            }
-            else if (sub8p2== 0 )
-            {
-                $('#ErrMsg').show(); 
-                $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-                alertify.error('Please select Subject '); 
-                $("#sub8p2").focus();
-                return status;  
-            }
-        }
+        
         status = 1;
         return status;
     }
-
     function gotodefaultpage(){
         var msg = "Are you sure you want to cancel ?"
         alertify.confirm(msg, function (e) {
