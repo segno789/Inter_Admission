@@ -157,8 +157,8 @@ class Admission_model extends CI_Model
     public function getzone($tehcd)
     {
 
-        $query = $this->db->get_where('matric_new..tblZones', array('mYear' => 2015,'Class' => 12,'Sess'=>2, 'teh_cd' => $tehcd));
-        // //DebugBreak();
+        $query = $this->db->get_where('matric_new..tblZones', array('mYear' => 2015,'Class' => 12,'Sess'=>1, 'teh_cd' => $tehcd));
+        
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
@@ -172,17 +172,12 @@ class Admission_model extends CI_Model
 
     public function getcenter($data)
     {
-
-
-
         $zone = $data['zoneCode'];
         $gend = $data['gen'];
 
-        $where = " mYear = 2016  AND class = 10 AND  sess = 2 AND Zone_cd =  $zone  AND  (cent_Gen = $gend OR cent_Gen = 3) ";      
+        $where = " mYear = 2015  AND class = 12 AND  sess = 1 AND Zone_cd =  $zone  AND  (cent_Gen = $gend OR cent_Gen = 3) ";      
         $query = $this->db->query("SELECT * FROM matric_new..tblcentre WHERE $where");
 
-        //$query = $this->db->get_where('matric_new..tblcentre', array('mYear' => 2016,'class' => 10,'sess'=>2, 'Zone_cd' => $zone, 'cent_Gen' => $gend)); 
-        //DebugBreak();
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {

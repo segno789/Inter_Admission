@@ -470,11 +470,11 @@
                             <?php
                             if($exam_type == 14){
                                 echo"  <div class='control-group'>
-                                <label class='control-label' style='margin-left: -35px;'>
+                                <label class='control-label'>
                                 Select Category:  
                                 </label> 
                                 <div class='controls controls-row'>
-                                <select id='ddlMarksImproveoptions' class='dropdown' name='ddlMarksImproveoptions' style='margin-left: -1441px;'>
+                                <select id='ddlMarksImproveoptions' class='dropdown' name='ddlMarksImproveoptions'>
                                 <option value='0' selected='selected'>Select Any One </option>
                                 <option value='1'>PART-1 FULL </option>
                                 <option value='2'>PART-2 FULL</option>                                
