@@ -1075,175 +1075,66 @@ class Admission extends CI_Controller {
                     else return -1;
     }
 
-    public function makefee($cat,$Speciality,$sub7,$sub8,$grp_cd,$per_grp)
-    {
-
-        $AdmFee = '';
-        $cat09 = $cat['cat09'];
-        $cat10 = $cat['cat10'];
-        $sub7isprac =  $this->practicalsubjects($sub7);
-        $sub7isprac2 =  $this->practicalsubjects($sub7p2);
-        $sub8isprac =  $this->practicalsubjects($sub8);
-        $sub8isprac2 =  $this->practicalsubjects($sub8p2);
-
-        if($Speciality != 0 || $Speciality == 1 || $Speciality == 2)
-        {
-            $AdmFee = 0;
-        }
-
-        if($Speciality == 0 && ($grp_cd == 1 || $per_grp) && ($cat09 !=0 &&  $cat10 == 0))
-        {
-            $AdmFee = 700;    
-        }
-        if($Speciality == 0 && $grp_cd == 1 && ($sub1ap2 == 1 || $sub2ap2 == 1 || $sub3ap2 == 1 || $sub4ap2 == 1 || $sub5ap2 == 1 || $sub6ap2 == 1 || $sub7ap2 == 1 || $sub8ap2 == 1)){
-            $AdmFee = 700;    
-        }
-        if($Speciality == 0 && $grp_cd == 1 && ($sub1ap2 == 1 || $sub2ap2 == 1 || $sub3ap2 == 1 || $sub4ap2 == 1 || $sub5ap2 == 1 || $sub6ap2 == 1 || $sub7ap2 == 1 || $sub8ap2 == 1) 
-            &&($sub1ap1 == 1 || $sub2ap1 == 1 || $sub3ap1 == 1 || $sub4ap1 == 1 || $sub5ap1 == 1 || $sub6ap1 == 1 || $sub7ap1 == 1 || $sub8ap1 == 1)){
-            $AdmFee = 1300;    
-        }
-        if(
-            $Speciality == 0 && $grp_cd == 2 && ($sub7isprac == 1)
-            &&($sub1ap1 == 1 || $sub2ap1 == 1 || $sub3ap1 == 1 || $sub4ap1 == 1 || $sub5ap1 == 1 || $sub6ap1 == 1 || $sub7ap1 == 1 || $sub8ap1 == 1)){
-            $AdmFee = 700;    
-        }
-
-        if(
-            $Speciality == 0 && $grp_cd == 2 && ($sub7ap2 == 1)
-            &&($sub1ap2 == 1 || $sub2ap2 == 1 || $sub3ap2 == 1 || $sub4ap2 == 1 || $sub5ap2 == 1 || $sub6ap2 == 1 || $sub7ap2 == 1 || $sub8ap2 == 1)){
-            $AdmFee = 700;    
-        }
-
-        if(
-            $Speciality == 0 && $grp_cd == 2 && ($sub8isprac == 1)
-            &&($sub1ap1 == 1 || $sub2ap1 == 1 || $sub3ap1 == 1 || $sub4ap1 == 1 || $sub5ap1 == 1 || $sub6ap1 == 1 || $sub7ap1 == 1 || $sub8ap1 == 1)
-        ){
-            $AdmFee = 700;    
-        }
-
-        if(
-            $Speciality == 0 && $grp_cd == 2 && ($sub8isprac2 == 1)
-            &&($sub1ap2 == 1 || $sub2ap2 == 1 || $sub3ap2 == 1 || $sub4ap2 == 1 || $sub5ap2 == 1 || $sub6ap2 == 1 || $sub7ap2 == 1 || $sub8ap2 == 1)
-        ){
-            $AdmFee = 700;    
-        }
-
-        if(
-            $Speciality == 0 && $grp_cd == 2 && ($sub7isprac == 0)
-            &&($sub1ap1 == 1 || $sub2ap1 == 1 || $sub3ap1 == 1 || $sub4ap1 == 1 || $sub5ap1 == 1 || $sub6ap1 == 1 || $sub7ap1 == 1 || $sub8ap1 == 1)
-        ){
-            $AdmFee = 650;    
-        }  
-
-        if(
-            $Speciality == 0 && $grp_cd == 2 
-            && ($sub7isprac2 == 0)
-            &&($sub1ap2 == 1 || $sub2ap2 == 1 || $sub3ap2 == 1 || $sub4ap2 == 1 || $sub5ap2 == 1 || $sub6ap2 == 1 || $sub7ap2 == 1 || $sub8ap2 == 1)){
-            $AdmFee = 650;    
-        }
-
-        if(
-            $Speciality == 0 && $grp_cd == 2 
-            && ($sub8isprac == 0)
-            &&($sub1ap1 == 1 || $sub2ap1 == 1 || $sub3ap1 == 1 || $sub4ap1 == 1 || $sub5ap1 == 1 || $sub6ap1 == 1 || $sub7ap1 == 1 || $sub8ap1 == 1)
-        ){
-            $AdmFee = 650;    
-        }
-
-        if(
-            $Speciality == 0 && $grp_cd == 2 
-            && ($sub8isprac2 == 0)
-            &&($sub1ap2 == 1 || $sub2ap2 == 1 || $sub3ap2 == 1 || $sub4ap2 == 1 || $sub5ap2 == 1 || $sub6ap2 == 1 || $sub7ap2 == 1 || $sub8ap2 == 1)
-        ){
-            $AdmFee = 650;    
-        }
-
-        if($Speciality == 0 && $grp_cd == 2 
-            &&($sub7isprac == 0)
-            && ($sub8isprac == 0)
-            && ($sub7isprac2 == 0)
-            && ($sub8isprac2 == 0)
-            &&($sub1ap1 == 1 || $sub2ap1 == 1 || $sub3ap1 == 1 || $sub4ap1 == 1 || $sub5ap1 == 1 || $sub6ap1 == 1 || $sub7ap1 == 1 || $sub8ap1 == 1)
-            &&($sub1ap2 == 1 || $sub2ap2 == 1 || $sub3ap2 == 1 || $sub4ap2 == 1 || $sub5ap2 == 1 || $sub6ap2 == 1 || $sub7ap2 == 1 || $sub8ap2 == 1)){
-            $AdmFee = 1200;    
-        }
-
-        if($Speciality == 0 && $grp_cd == 2 
-            &&($sub7isprac == 1)
-            && ($sub8isprac == 1)
-            && ($sub7isprac2 == 1)
-            && ($sub8isprac2 == 1)
-            &&($sub1ap1 == 1 || $sub2ap1 == 1 || $sub3ap1 == 1 || $sub4ap1 == 1 || $sub5ap1 == 1 || $sub6ap1 == 1 || $sub7ap1 == 1 || $sub8ap1 == 1)
-            &&($sub1ap2 == 1 || $sub2ap2 == 1 || $sub3ap2 == 1 || $sub4ap2 == 1 || $sub5ap2 == 1 || $sub6ap2 == 1 || $sub7ap2 == 1 || $sub8ap2 == 1)){
-            $AdmFee = 1300;    
-        }
-        if($grp_cd == 5){
-            $AdmFee = 0;    
-        }
-
-        return $AdmFee;
-    }
-
-    private function makecat($cattype, $exam_type,$marksImp,$is9th)
+    private function makecat($exam_type,$marksImp,$is11th)
     {
         $cate =  array();
 
         if($exam_type == 2)
 
         {
-            $cate['cat09'] = 1;
-            $cate['cat10'] = 1;
+            $cate['cat11'] = 1;
+            $cate['cat12'] = 1;
         }
         else  if($exam_type == 1)
 
         {
-            $cate['cat09'] = 0;
-            $cate['cat10'] = 1;
+            $cate['cat11'] = 0;
+            $cate['cat12'] = 1;
         }
         else
             if($exam_type == 3)
             {
-                if($is9th==1)
+                if($is11th==1)
                 {
-                    $cate['cat09'] = 2;     
+                    $cate['cat11'] = 2;     
                 }
                 else{
-                    $cate['cat09'] = 0;          
+                    $cate['cat11'] = 0;          
                 }
-                $cate['cat10'] = 1;
+                $cate['cat12'] = 1;
             }
             else if($exam_type == 4){
-                $cate['cat09'] = 0;
-                $cate['cat10'] = 2;
+                $cate['cat11'] = 0;
+                $cate['cat12'] = 2;
             }
             else if($exam_type == 5){
-                $cate['cat09'] = 2;
-                $cate['cat10'] = 0;
+                $cate['cat11'] = 2;
+                $cate['cat12'] = 0;
             }
             else if($exam_type == 6){
-                $cate['cat09'] = 2;
-                $cate['cat10'] = 2;
+                $cate['cat11'] = 2;
+                $cate['cat12'] = 2;
             }
             else if(($exam_type == 14 || ($exam_type == 16 && $cattype == 1)) && $marksImp == 2){
-                $cate['cat09'] = 0;
-                $cate['cat10'] = 3;
+                $cate['cat11'] = 0;
+                $cate['cat12'] = 3;
             }
             else if(($exam_type == 14 || ($exam_type == 16 && $cattype == 1))  && $marksImp == 1){
-                $cate['cat09'] = 3;
-                $cate['cat10'] = 0;
+                $cate['cat11'] = 3;
+                $cate['cat12'] = 0;
             }
             else if(($exam_type == 14 || ($exam_type == 16 && $cattype == 1))  && $marksImp == 3){
-                $cate['cat09'] = 3;
-                $cate['cat10'] = 3;
+                $cate['cat11'] = 3;
+                $cate['cat12'] = 3;
             }
             else if(($exam_type == 14 || ($exam_type == 16 && $cattype == 1))  && $marksImp ==4){
-                $cate['cat09'] = 7;
-                $cate['cat10'] = 7;
+                $cate['cat11'] = 7;
+                $cate['cat12'] = 7;
             }
 
             else if($exam_type == 15 || ($exam_type == 16 && $cattype == 2)){
-                $cate['cat09'] =  5;
-                $cate['cat10'] = 5;
+                $cate['cat11'] =  5;
+                $cate['cat12'] = 5;
             }        
             return $cate;
     }
@@ -1311,63 +1202,26 @@ class Admission extends CI_Controller {
         }
         else
         {
+            $brd_name=$this->Admission_model->Brd_Name($board);
+            $data[0]['brd_name']=$brd_name[0]['Brd_Abr'] ;
             $this->load->view('common/commonheader.php');        
             $this->load->view('Admission/Inter/AdmissionForm.php',  array('data'=>$data));
             $this->load->view('common/commonfooter.php');
         }
     }
 
-    public function practicalsubjects($_sub_cd)
-    {        
-        if($_sub_cd == 6)  $ret_val = "1";
-        else if($_sub_cd == 7)  $ret_val = "1";
-            else if($_sub_cd == 8)  $ret_val = "1";
-                else if($_sub_cd == 18)  $ret_val = "1";
-                    else if($_sub_cd == 27)  $ret_val = "1";
-                        else if($_sub_cd == 28)  $ret_val = "1";
-                            else if($_sub_cd == 30)  $ret_val = "1";
-                                else if($_sub_cd == 40)  $ret_val = "1";
-                                    else if($_sub_cd == 43)  $ret_val = "1";
-                                        else if($_sub_cd == 45)  $ret_val = "1";
-                                            else if($_sub_cd == 46)  $ret_val = "1";
-                                                else if($_sub_cd == 48)  $ret_val = "1";
-                                                    else if($_sub_cd == 68)  $ret_val = "1";
-                                                        else if($_sub_cd == 69)  $ret_val = "1";
-                                                            else if($_sub_cd == 70)  $ret_val = "1";
-                                                                else if($_sub_cd == 72)  $ret_val = "1";
-                                                                    else if($_sub_cd == 73)  $ret_val = "1";
-                                                                        else if($_sub_cd == 78)  $ret_val = "1";
-                                                                            else if($_sub_cd == 79)  $ret_val = "1";
-                                                                                else if($_sub_cd == 89)  $ret_val = "1";
-                                                                                    else if($_sub_cd == 88)  $ret_val = "1";
-                                                                                        else if($_sub_cd == 89)  $ret_val = "1";
-                                                                                            else if($_sub_cd == 90)  $ret_val = "1";
-                                                                                                else if($_sub_cd == 93)  $ret_val = "1";
-                                                                                                    else if($_sub_cd == 94)  $ret_val = "1";
-                                                                                                        else $ret_val = 0;
-        return $ret_val;
-    }
-
     public function NewEnrolment_insert()
     {
 
+        DebugBreak();
         $this->load->model('Admission_model');
-        $this->load->library('session');
-
-        $userinfo = '';
-        $userinfo['isselected'] = 2;
         $Inst_Id = 999999;
-        $this->commonheader($userinfo);
-        $error = array();
-
         $formno = $this->Admission_model->GetFormNo();
-        $dob = @$_POST['dob'];
-
         $allinputdata = array('cand_name'=>@$_POST['cand_name'],
             'father_name'=>@$_POST['father_name'],
             'bay_form'=>@$_POST['bay_form'],
             'father_cnic'=>@$_POST['father_cnic'],
-            'Dob'=>@$_POST['dob'],
+          
             'mob_number'=>@$_POST['mob_number'],
             'medium'=>@$_POST['medium'],
             'speciality'=>@$_POST['speciality'],
@@ -1388,7 +1242,7 @@ class Admission extends CI_Controller {
             'oldyear'=>@$_POST['oldyear'],
             'oldboard'=>@$_POST['oldboard'],
             'oldClass'=>@$_POST['oldClass'],
-            'cattype' => @$_POST['category'],
+         
             'sub1'=>@$_POST['sub1'],
             'sub2'=>@$_POST['sub2'],
             'sub3'=>@$_POST['sub3'],
@@ -1396,7 +1250,7 @@ class Admission extends CI_Controller {
             'sub5'=>@$_POST['sub5'],
             'sub6'=>@$_POST['sub6'],
             'sub7'=>@$_POST['sub7'],
-            'sub8'=>@$_POST['sub8'],
+        
             'sub1p2'=>@$_POST['sub1p2'],
             'sub2p2'=>@$_POST['sub2p2'],
             'sub3p2'=>@$_POST['sub3p2'],
@@ -1404,9 +1258,8 @@ class Admission extends CI_Controller {
             'sub5p2'=>@$_POST['sub5p2'],
             'sub6p2'=>@$_POST['sub6p2'],
             'sub7p2'=>@$_POST['sub7p2'],
-            'sub8p2'=>@$_POST['sub8p2'],
+        
         );
-
 
         $sub1 = 0;
         $sub2 = 0;
@@ -1433,55 +1286,51 @@ class Admission extends CI_Controller {
         $sub7ap2 = 0;
         $sub8ap2 = 0;
 
-        $is9th = 0;
+        $is11th = 0;
+        
         if(@$_POST['sub1'] != 0)
         {
             $sub1ap1 = 1; 
             $sub1 =  $_POST['sub1'];   
-            $is9th = 1;
+            $is11th = 1;
         }
         if(@$_POST['sub2'] != 0)
         {
             $sub2ap1 = 1;    
             $sub2 =  $_POST['sub2'];
-            $is9th = 1;
+            $is11th = 1;
         }
         if(@$_POST['sub3'] != 0)
         {
             $sub3ap1 = 1;   
             $sub3 =  $_POST['sub3'];
-            $is9th = 1;
+            $is11th = 1;
         }
         if(@$_POST['sub4'] != 0)
         {
             $sub4ap1 = 1;    
             $sub4 =  $_POST['sub4'];
-            $is9th = 1;
+            $is11th = 1;
         }
         if(@$_POST['sub5'] != 0)
         {
             $sub5ap1 = 1;    
             $sub5 =  $_POST['sub5'];
-            $is9th = 1;
+            $is11th = 1;
         }
         if(@$_POST['sub6'] != 0)
         {
             $sub6ap1 = 1;    
             $sub6 =  $_POST['sub6'];
-            $is9th = 1;
+            $is11th = 1;
         }
         if(@$_POST['sub7'] != 0)
         {
             $sub7ap1 = 1;    
             $sub7 =  $_POST['sub7'];
-            $is9th = 1;
+            $is11th = 1;
         }
-        if(@$_POST['sub8'] != 0)
-        {
-            $sub8ap1 = 1;    
-            $sub8 =  $_POST['sub8'];
-            $is9th = 1;
-        }
+       
 
         if(@$_POST['sub1p2'] != 0)
         {
@@ -1518,54 +1367,17 @@ class Admission extends CI_Controller {
             $sub7ap2 = 1;    
             $sub7 =  $_POST['sub7p2'];  
         }
-        if(@$_POST['sub8p2'] != 0)
-        {
-            $sub8ap2 = 1;    
-            $sub8 =  $_POST['sub8p2'];  
-        }
+       
 
-        $cattype = @$_POST['category'];
         $examtype = @$_POST['exam_type'];
-        $marksImp = @$_POST['ddlMarksImproveoptions'];
+        $marksImp = 2;//@$_POST['ddlMarksImproveoptions'];
 
-        $cat = $this->makecat($cattype, $examtype,$marksImp,$is9th);
-        $cat09 = @$cat['cat09'];
-        $cat10 = @$cat['cat10'];
-
-        if($examtype == 15 || ($examtype == 16 && $cattype == 2))
-        {
-            $sub1 = 0;
-            $sub1ap1 =0;
-            $sub1ap2 = 0;
-            $sub2 = 0;
-            $sub2ap1 =0;
-            $sub2ap2 = 0;
-            $sub3 = 0;
-            $sub3ap1 =0;
-            $sub3ap2 = 0;
-            $sub4 = 0;
-            $sub4ap1 =0;
-            $sub4ap2 = 0;
-            $sub5 = 0;
-            $sub5ap1 =0;
-            $sub5ap2 = 0;
-        }
+        $cat = $this->makecat($examtype,$marksImp,$is11th);
+        $cat11 = @$cat['cat11'];
+        $cat12 = @$cat['cat12'];
 
         $Speciality = $this->input->post('speciality');
         $grp_cd = $this->input->post('std_group');
-        $per_grp = $this->input->post('pergrp');
-
-        if($grp_cd == '1' || $grp_cd == '7' || $grp_cd == '8'){
-            $grp_cd = '1';
-        }
-        else if($grp_cd == '2' )
-        {
-            $grp_cd = '2';        
-        }
-        else if($grp_cd == '5')
-        {
-            $grp_cd = '5';        
-        }
 
         $practical_Sub = array(
             'PHY'=>'6',
@@ -1607,16 +1419,17 @@ class Admission extends CI_Controller {
         }
 
         $AdmFee = $this->Admission_model->getrulefee($ispractical);
+
         $AdmFeeCatWise = '1300';
-        if($cat09 != 0 && $cat10 != 0)
+        if($cat11 != 0 && $cat12 != 0)
         {
             $AdmFeeCatWise = $AdmFee[0]['Comp_Pvt_Amount'];
         }
-        else if(($cat09 == 0 && $cat10 != 0) || ($cat09 != 0 && $cat10 == 0))
+        else if(($cat11 == 0 && $cat12 != 0) || ($cat11 != 0 && $cat12 == 0))
         {
             $AdmFeeCatWise = $AdmFee[0]['PVT_Amount'];
         }
-        else if($cat09 == 0 && $cat10 == 0)
+        else if($cat11 == 0 && $cat12 == 0)
         {
             return;
         }
@@ -1624,6 +1437,7 @@ class Admission extends CI_Controller {
         $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;
 
         $oldsess = @$_POST['oldsess'];
+
         if($oldsess == 'Annual'){
             $oldsess =  1;    
         }
@@ -1730,7 +1544,7 @@ class Admission extends CI_Controller {
             'brd_name'=>@$_POST['oldboard']
 
         );     
-        //  DebugBreak();
+
         $target_path = PRIVATE_IMAGE_PATH;
         if (!file_exists($target_path)){
 
@@ -1740,17 +1554,12 @@ class Admission extends CI_Controller {
         $base_path = GET_PRIVATE_IMAGE_PATH_COPY.@$_POST['pic'];
         $copyimg = $target_path.$formno.'.jpg';
 
-
-
         if (!(copy($base_path, $copyimg))) 
         {
             $data['excep'] = 'The file you are attempting to upload size is between 4 to 20 Kb.';
             $this->session->set_flashdata('NewEnrolment_error',$data);
-            //  echo '<pre>'; print_r($allinputdata['excep']);exit();
             redirect('Admission/Pre_Matric_data/');
         }
-
-
 
         if (!(copy($base_path, $copyimg))) 
         {

@@ -35,7 +35,7 @@ class Admission_model extends CI_Model
     {
         $this->db->select('formno');
         $this->db->order_by("formno", "DESC");
-        $formno =$this->db->get_where('Admission_online..ISAdm2016',array('regpvt'=>2));
+        $formno =$this->db->get_where('admission_online..ISAdm2016',array('regpvt'=>2));
         $rowcount = $formno->num_rows();
 
         if($rowcount == 0 )
@@ -59,7 +59,7 @@ class Admission_model extends CI_Model
         $fname =strtoupper($data['Fname']);
         $BForm = $data['BForm'];
         $FNIC = $data['FNIC'];
-        $Dob = $data['Dob'];
+        //$Dob = $data['Dob'];
         $CellNo = $data['MobNo'];
         $medium = $data['medium'];
         $Inst_Rno = strtoupper($data['Inst_Rno']);
@@ -71,18 +71,7 @@ class Admission_model extends CI_Model
         $rel = $data['rel'];        
         $addr =strtoupper($data['addr']) ;
 
-        if(($data['grp_cd'] == 1) || ($data['grp_cd'] == 7) || ($data['grp_cd'] == 8) )
-        {
-            $grp_cd = 1;    
-        }
-        else if($data['grp_cd'] == 2 )
-        {
-            $grp_cd = 2;        
-        }
-        else if($data['grp_cd'] == 5 )
-        {
-            $grp_cd = 5;        
-        }
+        $grp_cd = $data['grp_cd'];
 
         $sub1= $data['sub1'];
         $sub2 = $data['sub2'];
@@ -153,12 +142,11 @@ class Admission_model extends CI_Model
         return true;
     }
 
-
     public function getzone($tehcd)
     {
 
         $query = $this->db->get_where('matric_new..tblZones', array('mYear' => 2015,'Class' => 12,'Sess'=>1, 'teh_cd' => $tehcd));
-        
+
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
@@ -178,6 +166,20 @@ class Admission_model extends CI_Model
         $where = " mYear = 2015  AND class = 12 AND  sess = 1 AND Zone_cd =  $zone  AND  (cent_Gen = $gend OR cent_Gen = 3) ";      
         $query = $this->db->query("SELECT * FROM matric_new..tblcentre WHERE $where");
 
+        $rowcount = $query->num_rows();
+        if($rowcount > 0)
+        {
+            return $query->result_array();
+        }
+        else
+        {
+            return  false;
+        }
+    }
+
+    public function getrulefee($isPrSub){
+        $date =  date('Y-m-d') ;
+        $query = $this->db->get_where('admission_Online..RuleFeeAdm', array('class' => 10,'sess' => 2, 'isPrSub' => $isPrSub, 'Start_Date <='=>$date,'End_Date >='=>$date));
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {

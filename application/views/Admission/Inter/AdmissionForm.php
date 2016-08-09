@@ -196,26 +196,18 @@
                             </div>
                             <hr>
                             <div class="control-group">
-                                <h4 class="span3" style="margin-left: -53px;">Old Exam Information :</h4>
-                                <div class="controls controls-row">
-                                    <input type="hidden" class="span2 hidden" id="isReAdm" name="isReAdm" value="0">
-                                    <label class="control-label span2">
-                                    </label> 
-                                </div>
+                                <h4 class="span4">Old Exam Information :</h4>
                             </div>
                             <div class="control-group">
                                 <label class="control-label span1" >
-                                    Roll No:
+                                    Rno :
                                 </label>
                                 <div class="controls controls-row">
-                                    <input class="span3" type="text" readonly="readonly" id="oldrno" style="text-transform: uppercase;" name="oldrno" value="<?php  echo  $data['0']['rno']; 
-                                        ?>" required="required" maxlength="60" >
+                                    <input class="span3" type="text" readonly="readonly" id="oldrno" style="text-transform: uppercase;" name="oldrno" value="<?php  echo  $data['0']['rno']; ?>" required="required" maxlength="60" >
                                     <label class="control-label span2" >
                                         Year:
                                     </label> 
-                                    <select id="oldyear"  class="span3" name="oldyear" disabled="disabled" >
-                                        <?php   echo "<option value='".$data['0']['Iyear']."' selected='selected'>".$data['0']['Iyear']."</option>"; ?>
-                                    </select>
+                                    <input type="text" class="span3" name="oldyear" id = "oldyear" readonly="readonly" value="<?php  echo $data['0']['Iyear']; ?>"/> 
                                 </div>
                             </div>
                             <div class="control-group">
@@ -223,22 +215,18 @@
                                     Session :
                                 </label>
                                 <div class="controls controls-row">
-                                    <select id="oldsess"  class="span3" name="oldsess"  disabled="disabled">
-                                        <option value="<?php echo $data['0']['sess'] ?>" selected='selected'  > <?php echo $data['0']['sess'] == 1 ? "Annual" :"Supplementary"; ?> </option>
-                                    </select>
+                                    <input type="text" class="span3" id="oldsess" name="oldsess" readonly="readonly" value="<?php echo $data['0']['sess'] == 1 ? "Annual" :"Supplementary"; ?>"/> 
                                     <label class="control-label span2" >
                                         Board:
                                     </label> 
-                                    <select id="oldboard"  class="span3" name="oldboard"  disabled="disabled">
-                                        <?php echo "<option value='1' selected='selected'>Gujranwala</option>";  ?>
-                                    </select>
+                                    <input type="text" class="span3" id="oldboard" name="oldboard" readonly="readonly" value="<?php echo $data[0]['brd_name'];?>"/>     
+                                    <input type="hidden" class="span3" id="oldClass" name="oldClass"  value="<?php echo $data[0]['class'];?>"/>     
                                 </div>
                             </div>
                             <hr>
                             <div class="control-group">
                                 <h4 class="span3">Exam Proposed Center Information :</h4>
                                 <div class="controls controls-row">
-                                    <input type="hidden" class="span2 hidden" id="isReAdm" name="isReAdm" value="0">
                                     <label class="control-label span2">
                                     </label> 
                                 </div>
@@ -466,7 +454,6 @@
                                             'HISTORY OF INDO-PAK'=>'57',
                                             'HISTORY OF MODREN WORLD'=>'58'
                                         );
-
                                         ?>
                                     </select>                                            
                                 </div>
@@ -606,8 +593,9 @@
                                     </select> 
                                 </div> 
                             </div>
-                            <div class="form-actions no-margin">
-                                <button type="submit" onclick="return checks()" name="btnsubmitUpdateEnrol" class="btn btn-large btn-info offset2" style="margin-left: -807px;">
+                            <input type="hidden" name="exam_type" id="exam_type" value="<?php echo @$exam_type = $data[0]['exam_type']; ?>">
+                            <div class="span6">
+                                <button type="submit" onclick="return checks()" name="btnsubmitUpdateEnrol" class="btn btn-large btn-info offset2">
                                     Save Form
                                 </button>
                                 <a href="<?php echo base_url(); ?>assets/img/Instruction.jpg" download="FileName" class="btn btn-large btn-info" >Download Instruction</a>
@@ -618,7 +606,6 @@
                         </form>
                         <script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
                         <script type="text/javascript">
-
 
                             $(document).ready(function(){
 
@@ -704,7 +691,7 @@
 
                                     $("#sub2").append('<option value="2">URDU</option>');
                                     $("#sub2p2").append('<option value="2">URDU</option>');
-
+                                    
                                     $("#sub3").append('<option value="92">ISLAMIC EDUCATION</option>');
                                     $("#sub3p2").append('<option value="91">PAKISTAN STUDIES</option>');
 
@@ -952,8 +939,6 @@
                                 var sub7st2 ="<?php echo @$data[0]['sub7st2']; ?>";
                                 var sub8st2 ="<?php  echo @$data[0]['sub8st2']; ?>";   
                                 var exam_type = "<?php echo @$data[0]['exam_type']?>";
-
-
 
                                 function sub_grp_load(){
 
@@ -1517,7 +1502,7 @@
 
 
                                 <?php
-                                //DebugBreak();
+
                                 if($exam_type == 1){
                                     echo 'sub_grp_load_exam_type1();'; 
                                 }
@@ -1538,11 +1523,29 @@
                                 }
                                 ?>
 
-                                /*CHNAGE FUNCTIONS*/
+                                /*.CHNAGE WORKS*/
+
+                                $( "#religion" ).change(function() {
+                                    var rel = $( "#religion" ).val();
+                                    var sel_group = $('#std_group').val();    
+                                    if(rel == 1 && (sel_group != grp_cd)){
+                                        $('#sub3').empty();
+                                        $("#sub3").append('<option value="92">ISLAMIC EDUCATION</option>'); 
+                                    }
+                                });                
+
+                                $( "#religion1" ).change(function() {
+                                    var rel = $( "#religion1" ).val();
+                                    var sel_group = $('#std_group').val();    
+                                    if(rel == 2 && (sel_group != grp_cd)){
+                                        $('#sub3').empty();
+                                        $("#sub3").append('<option value="51">ETHICS</option>'); 
+                                        $("#sub3").append('<option value="92">ISLAMIC EDUCATION</option>'); 
+                                    }
+                                });
 
                                 $('#std_group').change(function(){
 
-                                    debugger;                                
                                     var sel_group = $('#std_group').val();    
 
                                     if(sel_group == grp_cd  && exam_type != 2) 

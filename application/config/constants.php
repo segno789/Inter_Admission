@@ -49,7 +49,7 @@ define('Insert_sp','Admission_online..MSAdm2016_sp_insert'); // for insertion ma
 define('Insert_sp_matric_annual','Admission_online..MA_P1_Reg_Adm2016_sp_insert'); // for insertion matric Annual
 define('formprint_sp','Admission_online..sp_form_data');    // for selection matric supply
 define('formprint_sp_matric_annual','Admission_online..sp_form_data');    // for selection matric Annual
-define('formnovalid','400000');
+define('formnovalid','600000');
 define('return_pdf_isPicture','1');
 define('CURRENT_SESS','2016-2018');
 
