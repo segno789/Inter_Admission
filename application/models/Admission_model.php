@@ -179,7 +179,7 @@ class Admission_model extends CI_Model
 
     public function getrulefee($isPrSub){
         $date =  date('Y-m-d') ;
-        $query = $this->db->get_where('admission_Online..RuleFeeAdm', array('class' => 10,'sess' => 2, 'isPrSub' => $isPrSub, 'Start_Date <='=>$date,'End_Date >='=>$date));
+        $query = $this->db->get_where('admission_Online..RuleFeeAdm_Inter_Supply', array('class' => 12,'sess' => 2, 'isPrSub' => $isPrSub,'Start_Date <='=>$date,'End_Date >='=>$date));
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {

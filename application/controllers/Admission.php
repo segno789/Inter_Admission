@@ -1212,8 +1212,6 @@ class Admission extends CI_Controller {
 
     public function NewEnrolment_insert()
     {
-
-        DebugBreak();
         $this->load->model('Admission_model');
         $Inst_Id = 999999;
         $formno = $this->Admission_model->GetFormNo();
@@ -1221,7 +1219,7 @@ class Admission extends CI_Controller {
             'father_name'=>@$_POST['father_name'],
             'bay_form'=>@$_POST['bay_form'],
             'father_cnic'=>@$_POST['father_cnic'],
-          
+
             'mob_number'=>@$_POST['mob_number'],
             'medium'=>@$_POST['medium'],
             'speciality'=>@$_POST['speciality'],
@@ -1242,7 +1240,7 @@ class Admission extends CI_Controller {
             'oldyear'=>@$_POST['oldyear'],
             'oldboard'=>@$_POST['oldboard'],
             'oldClass'=>@$_POST['oldClass'],
-         
+
             'sub1'=>@$_POST['sub1'],
             'sub2'=>@$_POST['sub2'],
             'sub3'=>@$_POST['sub3'],
@@ -1250,7 +1248,7 @@ class Admission extends CI_Controller {
             'sub5'=>@$_POST['sub5'],
             'sub6'=>@$_POST['sub6'],
             'sub7'=>@$_POST['sub7'],
-        
+
             'sub1p2'=>@$_POST['sub1p2'],
             'sub2p2'=>@$_POST['sub2p2'],
             'sub3p2'=>@$_POST['sub3p2'],
@@ -1258,36 +1256,16 @@ class Admission extends CI_Controller {
             'sub5p2'=>@$_POST['sub5p2'],
             'sub6p2'=>@$_POST['sub6p2'],
             'sub7p2'=>@$_POST['sub7p2'],
-        
+
         );
 
-        $sub1 = 0;
-        $sub2 = 0;
-        $sub3 = 0;
-        $sub4 = 0;
-        $sub5 = 0;
-        $sub6 = 0;
-        $sub7 = 0;
-        $sub8 = 0;
-        $sub1ap1 = 0;
-        $sub2ap1 = 0;
-        $sub3ap1 = 0;
-        $sub4ap1 = 0;
-        $sub5ap1 = 0;
-        $sub6ap1 = 0;
-        $sub7ap1 = 0;
-        $sub8ap1 = 0;
-        $sub1ap2 = 0;
-        $sub2ap2 = 0;
-        $sub3ap2 = 0;
-        $sub4ap2 = 0;
-        $sub5ap2 = 0;
-        $sub6ap2 = 0;
-        $sub7ap2 = 0;
-        $sub8ap2 = 0;
+        $sub1 = 0;        $sub2 = 0;        $sub3 = 0;        $sub4 = 0;        $sub5 = 0;        $sub6 = 0;        $sub7 = 0;      
+        $sub1ap1 = 0;        $sub2ap1 = 0;        $sub3ap1 = 0;        $sub4ap1 = 0;        $sub5ap1 = 0;        $sub6ap1 = 0;        $sub7ap1 = 0;     
+        $sub1ap2 = 0;        $sub2ap2 = 0;        $sub3ap2 = 0;        $sub4ap2 = 0;        $sub5ap2 = 0;        $sub6ap2 = 0;        $sub7ap2 = 0;
+
 
         $is11th = 0;
-        
+
         if(@$_POST['sub1'] != 0)
         {
             $sub1ap1 = 1; 
@@ -1330,7 +1308,7 @@ class Admission extends CI_Controller {
             $sub7 =  $_POST['sub7'];
             $is11th = 1;
         }
-       
+
 
         if(@$_POST['sub1p2'] != 0)
         {
@@ -1367,54 +1345,49 @@ class Admission extends CI_Controller {
             $sub7ap2 = 1;    
             $sub7 =  $_POST['sub7p2'];  
         }
-       
+
 
         $examtype = @$_POST['exam_type'];
-        $marksImp = 2;//@$_POST['ddlMarksImproveoptions'];
+        $marksImp = @$_POST['ddlMarksImproveoptions'];
 
         $cat = $this->makecat($examtype,$marksImp,$is11th);
         $cat11 = @$cat['cat11'];
         $cat12 = @$cat['cat12'];
-
         $Speciality = $this->input->post('speciality');
         $grp_cd = $this->input->post('std_group');
 
+        $per_grp = @$_POST['pregrp'];
+
         $practical_Sub = array(
-            'PHY'=>'6',
-            'CHM'=>'7',
-            'BIO'=>'8',
-            'ART&MD'=>'18',
-            'F&N'=>'27',
-            'AHE'=>'28',
-            'C&T'=>'30',
-            'HPD'=>'40',
-            'EW'=>'43',
-            'COM'=>'45',
-            'AGR'=>'46',
-            'WW(FM)'=>'48',
-            'CM'=>'68',
-            'DRAW'=>'69',
-            'EMB'=>'70',
-            'TAIL'=>'72',
-            'TYPE'=>'73',
-            'CSC'=>'78',
-            'WW(BM)'=>'79',
-            'POUL'=>'83',
-            'R/AC'=>'88',
-            'F/FRM'=>'89',
-            'CHW'=>'90',
-            'CSC/D'=>'93',
-            'HPD/D'=>'94'
+
+            'LIBRARY SCIENCE'=>'8',
+            'GEOGRAPHY'=>'12',
+            'PSYCHOLOGY'=>'16',
+            'STATISTICS'=>'18',
+            'OUTLINES OF HOME ECONOMICS'=>'21',
+            'FINE ARTS'=>'23',
+            'COMMERCIAL PRACTICE'=>'38',
+            'HEALTH & PHYSICAL EDUCATION'=>'42',
+            'BIOLOGY'=>'46',
+            'PHYSICS'=>'47',
+            'CHEMISTRY'=>'48',
+            'COMPUTER SCIENCE'=>'83',
+            'NURSING'=>'79',
+            'AGRICULTURE'=>'90',
+            'TYPING'=>'96',
+            'COMPUTER STUDIES'=>'98',
+            'CLOTHING & TEXTILE (Home-Economics Group)'=>'75',
+            'HOME MANAGEMNET (Home-Economics Group)'=>'76'
         );
 
         $ispractical = 0;
-        if($per_grp == 1)
+        if($per_grp == 1 || $pre_grp == 2 || $pre_grp == 4)
         {
             $ispractical =1;
         }
-        if(array_search(@$_POST['sub5'],$practical_Sub) || array_search(@$_POST['sub6'],$practical_Sub) || array_search(@$_POST['sub7'],$practical_Sub) ||
-            array_search(@$_POST['sub5p2'],$practical_Sub) || array_search(@$_POST['sub6p2'],$practical_Sub) || array_search(@$_POST['sub7p2'],$practical_Sub))
-        {
+        if(array_search(@$_POST['sub4'],$practical_Sub) || array_search(@$_POST['sub5'],$practical_Sub) || array_search(@$_POST['sub6'],$practical_Sub) ||
+            array_search(@$_POST['sub7'],$practical_Sub) || array_search(@$_POST['sub7p2'],$practical_Sub) ||
+            array_search(@$_POST['sub4p2'],$practical_Sub) || array_search(@$_POST['sub5p2'],$practical_Sub) || array_search(@$_POST['sub6p2'],$practical_Sub)){
             $ispractical =1;
         }
 
@@ -1444,12 +1417,13 @@ class Admission extends CI_Controller {
         else if($oldsess == 'Supplementary'){
             $oldsess =  2;    
         }
+        DebugBreak();
+
         $data = array(
             'name' =>$this->input->post('cand_name'),
             'Fname' =>$this->input->post('father_name'),
             'BForm' =>$this->input->post('bay_form'),
             'FNIC' =>$this->input->post('father_cnic'),
-            'Dob' =>$this->input->post('dob'),
             'MobNo' =>$this->input->post('mob_number'),
             'medium' =>$this->input->post('medium'),
             'Inst_Rno' =>$this->input->post('Inst_Rno'),
@@ -1468,7 +1442,6 @@ class Admission extends CI_Controller {
             'sub5' =>$sub5,
             'sub6' =>$sub6,
             'sub7' => $sub7,
-            'sub8' => $sub8,
             'sub1ap1' => ($sub1ap1),
             'sub2ap1' => ($sub2ap1),
             'sub3ap1' => ($sub3ap1),
@@ -1476,7 +1449,6 @@ class Admission extends CI_Controller {
             'sub5ap1' => ($sub5ap1),
             'sub6ap1' => ($sub6ap1),
             'sub7ap1' => ($sub7ap1),
-            'sub8ap1' => ($sub8ap1),
             'sub1ap2' => ($sub1ap2),
             'sub2ap2' => ($sub2ap2),
             'sub3ap2' => ($sub3ap2),
@@ -1484,44 +1456,11 @@ class Admission extends CI_Controller {
             'sub5ap2' => ($sub5ap2),
             'sub6ap2' => ($sub6ap2),
             'sub7ap2' => ($sub7ap2),
-            'sub8ap2' => ($sub8ap2),
-            /*'sub1pf1' => @$_POST['sub1pf1'],
-            'sub2pf1' => @$_POST['sub2pf1'],
-            'sub3pf1' => @$_POST['sub3pf1'],
-            'sub4pf1' => @$_POST['sub4pf1'],
-            'sub5pf1' => @$_POST['sub5pf1'],
-            'sub6pf1' => @$_POST['sub6pf1'],
-            'sub7pf1' => @$_POST['sub7pf1'],
-            'sub8pf1' => @$_POST['sub8pf1'],
-            'sub1Pf2' => @$_POST['sub1Pf2'],
-            'sub2pf2' => @$_POST['sub2pf2'],
-            'sub3pf2' => @$_POST['sub3pf2'],
-            'sub4pf2' => @$_POST['sub4pf2'],
-            'sub5pf2' => @$_POST['sub5pf2'],
-            'sub6pf2' => @$_POST['sub6pf2'],
-            'sub7pf2' => @$_POST['sub7pf2'],
-            'sub8pf2' => @$_POST['sub8pf2'],
-            'sub1st1' => @$_POST['sub1st1'],
-            'sub2st1' => @$_POST['sub2st1'],
-            'sub3st1' => @$_POST['sub3st1'],
-            'sub4st1' => @$_POST['sub4st1'],
-            'sub5st1' => @$_POST['sub5st1'],
-            'sub6st1' => @$_POST['sub6st1'],
-            'sub7st1' => @$_POST['sub7st1'],
-            'sub8st1' => @$_POST['sub8st1'],
-            'sub1St2' => @$_POST['sub1St2'],
-            'sub2st2' => @$_POST['sub2st2'],
-            'sub3st2' => @$_POST['sub3st2'],
-            'sub4st2' => @$_POST['sub4st2'],
-            'sub5st2' => @$_POST['sub5st2'],
-            'sub6st2' => @$_POST['sub6st2'],
-            'sub7st2' => @$_POST['sub7st2'],
-            'sub8st2' => @$_POST['sub8st2'],*/
             'RuralORUrban' =>$this->input->post('UrbanRural'),
             'Inst_cd' =>($Inst_Id),
             'FormNo' =>($formno),
-            'cat09' =>$cat09,
-            'cat10' =>$cat10,
+            'cat11' =>$cat11,
+            'cat12' =>$cat12,
             'dist'=>@$_POST['pvtinfo_dist'],
             'teh'=>@$_POST['pvtinfo_teh'],
             'zone'=>@$_POST['pvtZone'],
@@ -1535,14 +1474,9 @@ class Admission extends CI_Controller {
             'AdmProcessFee'=>$AdmFee[0]['Processing_Fee'],
             'AdmFee'=>$AdmFeeCatWise,
             'AdmTotalFee'=>$TotalAdmFee,
-            'category'=>@$_POST['category'],
             'exam_type'=>$_POST['exam_type'],
-            'spl_cd'=>$data[0]['spl_cd'],
-            'result2'=>$data[0]['result2'],
-            'NextRno_Sess_Year'=>$data[0]['NextRno_Sess_Year'],
             'picpath'=>@$_POST['pic'],
             'brd_name'=>@$_POST['oldboard']
-
         );     
 
         $target_path = PRIVATE_IMAGE_PATH;
@@ -1558,7 +1492,7 @@ class Admission extends CI_Controller {
         {
             $data['excep'] = 'The file you are attempting to upload size is between 4 to 20 Kb.';
             $this->session->set_flashdata('NewEnrolment_error',$data);
-            redirect('Admission/Pre_Matric_data/');
+            redirect('Admission/Pre_Inter_data/');
         }
 
         if (!(copy($base_path, $copyimg))) 

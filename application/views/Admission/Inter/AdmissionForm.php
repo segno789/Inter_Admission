@@ -14,14 +14,13 @@
                                 <div class="controls controls-row">
                                     <label class="control-label span2" >
                                     </label> 
-                                    <img id="image_upload_preview" style="width:140px; height: 140px;" src="<?php echo GET_PRIVATE_IMAGE_PATH. $data[0]['pic_path'];?>" alt="Candidate Image" />
+                                    <img id="image_upload_preview" style="width:140px; height: 140px;" src="<?php echo base_url().GET_PRIVATE_IMAGE_PATH.$data[0]['pic_path'];?>" alt="Candidate Image" />
+                                    <input type="hidden" id="pic" name="pic"  value="<?php echo $data[0]['pic_path'];?>"/>    
                                 </div>
                             </div>
                             <div class="controls controls-row">
-                                <!--<input type='file' id="inputFile" disabled="disabled"  onchange="return ValidateFileUpload(this);"/>-->
+                                <!--<input type='file' id="inputFile" disabled="disabled"onchange="return ValidateFileUpload(this);"/>-->
                             </div>
-
-
                             <div class="control-group">
                                 <label class="control-label span1" >
                                     Candidate Name:
@@ -89,7 +88,6 @@
                                 </label>
                                 <div class="controls controls-row">
                                     <input class="span3" type="text" id="MarkOfIden" style="text-transform: uppercase;" name="MarkOfIden" value="<?php echo  $data['0']['markOfIden']; ?>" required="required" maxlength="60" >
-
                                     <label class="control-label span2" >
                                         Mobile Number :
                                     </label> 
@@ -268,7 +266,6 @@
                             <div class="control-group">
                                 <h4 class="span3" style="margin-left: -73px;">Exam Information :</h4>
                                 <div class="controls controls-row">
-                                    <input type="hidden" class="span2 hidden" id="isReAdm" name="isReAdm" value="0">
                                     <label class="control-label span2"></label> 
                                 </div>
                             </div>
@@ -593,7 +590,11 @@
                                     </select> 
                                 </div> 
                             </div>
-                            <input type="hidden" name="exam_type" id="exam_type" value="<?php echo @$exam_type = $data[0]['exam_type']; ?>">
+                            <input type="hidden" name="oldclass"   id="oldclass" value="<?php echo @$oldcls = $data[0]['class']?>">
+                            <input type="hidden" name="exam_type"  id="exam_type"  value="<?php echo @$exam_type = $data[0]['exam_type']; ?>">
+                            <input type="hidden" name="pregrp"     id="pregrp"     value="<?php echo @$pregrp = $data[0]['grp_cd']; ?>">
+                            <input type="hidden" name="oldboardid" id="oldboardid" value="<?php  echo @$data[0]['Hssc_Board'];?>"/>
+
                             <div class="span6">
                                 <button type="submit" onclick="return checks()" name="btnsubmitUpdateEnrol" class="btn btn-large btn-info offset2">
                                     Save Form
@@ -605,10 +606,44 @@
                             </div> 
                         </form>
                         <script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
+
                         <script type="text/javascript">
+                            function ValidateFileUpload() {
+                                var fuData = document.getElementById('inputFile');
+                                var FileUploadPath = fuData.value;
+                                if (FileUploadPath == '') {
+                                    alert("Please upload an image");
+                                    jQuery('#image_upload_preview').removeAttr('src');
+                                } 
+                                else {
+                                    var Extension = FileUploadPath.substring(
+                                        FileUploadPath.lastIndexOf('.') + 1).toLowerCase();
+                                    if (Extension == "jpeg" || Extension == "jpg") {
+                                        if (fuData.files && fuData.files[0]) {
+                                            var reader = new FileReader();
+                                            reader.onload = function(e) {
+                                                $('#image_upload_preview').attr('src', e.target.result);
+                                            }
+                                            reader.readAsDataURL(fuData.files[0]);
+                                        }
+                                    } 
+                                    else {
+                                        $('#inputFile').removeAttr('value');
+                                        jQuery('#image_upload_preview').removeAttr('src');
+                                        alert("Image only allows file types of JPEG. ");
+                                        return false;
+                                    }
+                                }
+                                var file_size = $('#inputFile')[0].files[0].size;
+                                if(file_size>20480) {                                    
+                                    $('#inputFile').removeAttr('value');
+                                    jQuery('#image_upload_preview').removeAttr('src');
+                                    alert("File size can be between 20KB"); 
+                                    return false;
+                                } 
+                            }
 
                             $(document).ready(function(){
-
 
                                 function hide_sub7_sub8(){
 
@@ -691,7 +726,7 @@
 
                                     $("#sub2").append('<option value="2">URDU</option>');
                                     $("#sub2p2").append('<option value="2">URDU</option>');
-                                    
+
                                     $("#sub3").append('<option value="92">ISLAMIC EDUCATION</option>');
                                     $("#sub3p2").append('<option value="91">PAKISTAN STUDIES</option>');
 
