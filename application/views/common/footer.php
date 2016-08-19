@@ -780,6 +780,29 @@ if(isset($files)){
         var success_BatchRelease = "<?php  echo @$errors['BatchRelease_excep']; ?>";
         var BatchRelease_Op = "<?php  echo @$errors_RB_update; ?>";
         var BatchRestore_Op = "<?php  echo @$errors_RB_restore; ?>";
+       
+        var sel_app_cls ="<?php  echo @$spl_cd['data']['oldClass']; ?>";
+        var sel_app_year="<?php  echo @$spl_cd['data']['oldYear']; ?>";
+        var sel_app_sess ="<?php echo @$spl_cd['data']['oldSess']; ?>";
+        var sel_app_brd ="<?php  echo @$spl_cd['data']['oldBrd_cd']; ?>";
+      
+        if(sel_app_brd !="")
+        {
+            $("#sec_board").val(sel_app_brd);
+        }
+        if(sel_app_sess!= "")
+        {
+            $("#oldSess").val(sel_app_sess);
+        }
+        if(sel_app_year !="")
+        {
+            $("#oldYear").val(sel_app_year);
+        }
+        if(sel_app_cls != "")
+        {
+            $("#oldClass").val(sel_app_cls);
+        }
+      
         if(BatchRelease_Op != "")
         {
             if(BatchRelease_Op == "success")

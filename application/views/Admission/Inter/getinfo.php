@@ -18,9 +18,9 @@
                                         <tbody>
                                             <tr>
                                                 <td><label class=mytblmargin style="margin-right: 62px;"><b>Matric Roll No.</b><br /></label></td>
-                                                <td><input type="text" class="panjang required custom" onKeyPress="validatenumber(event);" maxlength="6" id="txtMatRno" required="required" name="txtMatRno" value="<?php  ?>"></td> 
+                                                <td><input type="text" class="panjang required custom" onKeyPress="validatenumber(event);" maxlength="6" id="txtMatRno" required="required" name="txtMatRno" value="<?php  echo @$spl_cd['data']['txtMatRno'];  ?>"></td> 
                                                 <td><label class=mytblmargin><b>Last Appear Intermediate Roll No.</b><br /></label></td>
-                                                <td><input type="text" class="panjang custom required" onKeyPress="validatenumber(event);" maxlength="6" id="oldRno" required="required" name="oldRno" value="" maxlength="6" /></td>
+                                                <td><input type="text" class="panjang custom required" onKeyPress="validatenumber(event);" maxlength="6" id="oldRno" required="required" name="oldRno"  maxlength="6" value="<?php echo @$spl_cd['data']['oldRno']; ?>" /></td>
                                             </tr>
                                             <tr>
                                                 <td><label class=mytblmargin style="margin-right: 17px;"><b>Last Appearing Class</b><br /></label></td>
@@ -105,8 +105,12 @@
                                             </tr>
                                         </tbody>
                                     </table>
-
-                                    <div align="center" id="option" style="display:none;" >
+                                    <?php
+                                   // DebugBreak();
+                                        if( @$spl_cd['exam_type']==14 ||@$spl_cd['exam_type']==15 || @$spl_cd['exam_type']==16 )
+                                        { 
+                                            ?>
+                                            <div align="center" id="option"  >
                                         <input type="radio" class="nationality_class" id="CatType1" value="1" checked="checked" name="CatType" style="width: 24px;height: 24px;">
                                         Marks Improvement 
                                         <input type="radio" class="nationality_class" id="CatType2" value="2" name="CatType" style="width: 24px;height: 24px;">
@@ -114,8 +118,12 @@
                                         <input type="hidden" value="" name="h_exam_type" id="h_exam_type" />
                                         <input type="hidden" value="" name="exam_type" id="exam_type" />      
                                     </div>
+                                   <?php     }
+                                    ?>
+
+                                    
                                     <div>
-                                        <?php echo @$error; ?>
+                                        <?php echo @$spl_cd['error_msg']; ?>
                                     </div>
                                     <div style="vertical-align:bottom;margin-top: 20px;">
                                         <input type="submit" value="Proceed" id="proceed" name="proceed" class="jbtn jmedium jblack">
@@ -125,7 +133,9 @@
                                     <?php $labelvalue = "INVALID INFORMATION PLEASE PROVIDE CORRECT INFORMATION";?>
                                     <div>
                                         <label name="lblerror" id="lblerror" class="hidden" style="color:red; font-weight: bolder; margin-top:30px;" ><?php echo $labelvalue; ?></label>
-
+                                        <?php
+                                           // echo @$spl_cd;
+                                        ?>
                                     </div>
                                 </form>
                             </div>
