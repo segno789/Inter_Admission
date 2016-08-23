@@ -1333,7 +1333,9 @@ class Admission extends CI_Controller {
             $error_msg.='<span style="font-size: 16pt; color:red;">' . '   Against Roll No  = ' . '</span>';
             $error_msg.='<span style="font-size: 16pt; color:red;">' . $nxtrno . '</span>';
         }
-        // DebugBreak();
+        
+        
+         //DebugBreak();
 
         if($error_msg !='')
         {
@@ -1587,7 +1589,7 @@ class Admission extends CI_Controller {
         }
 
         $AdmFee = $this->Admission_model->getrulefee($ispractical);
-        // debugBreak();
+         //debugBreak();
 
         $AdmFeeCatWise = '1300';
         if($cat11 != 0 && $cat12 != 0)
@@ -1602,8 +1604,16 @@ class Admission extends CI_Controller {
         {
             return;
         }
-
-        $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;
+        if($Speciality>0)
+        {
+        $AdmFeeCatWise = 0;    
+        }
+        else
+        {
+            $AdmFeeCatWise  =0;
+        }
+$TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;  
+        
 
         $oldsess = @$_POST['oldsess'];
 
@@ -2141,7 +2151,7 @@ class Admission extends CI_Controller {
                         return;
 
                     }
-                    else if(@$_POST['sub7p2'] == 0 && @$_POST['std_group'] != 5)
+                    else if(@$_POST['sub7p2'] == 0 && @$_POST['std_group'] == 5)
                     {
                         $allinputdata['excep'] = 'Please Select Part-II Subject 7';
                         $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
@@ -2270,7 +2280,7 @@ class Admission extends CI_Controller {
                 return;
 
             }
-            else if(@$_POST['sub7p2'] == 0 && @$_POST['std_group'] != 5)
+            else if(@$_POST['sub7p2'] == 0 && @$_POST['std_group'] == 5)
             {
                 $allinputdata['excep'] = 'Please Select Part-II Subject 7';
                 $this->session->set_flashdata('NewEnrolment_error',$allinputdata);

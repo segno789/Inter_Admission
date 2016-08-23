@@ -91,10 +91,20 @@
                     </li>
                     <?php }
                     
-                     else if($isselected == '9'){?>
+                     else if($isselected == '9' ){?>
 
                     <li>
-                        <a href="<?php echo base_url(); ?>Admission_matric" class="<?php if($isselected == '9') {echo 'selected';}?>" >
+                        <a href="<?php echo base_url(); ?>Admission_matric" class="<?php if($isselected == '9' ) {echo 'selected';}?>" >
+                            <div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>
+                            Admission
+                        </a>
+                    </li>
+                    <?php }
+                    
+                     else if($isselected == '11'){?>
+
+                    <li>
+                        <a href="<?php echo base_url(); ?>Admission_inter" class="<?php if( $isselected == '11') {echo 'selected';}?>" >
                             <div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>
                             Admission
                         </a>
@@ -442,14 +452,49 @@
                             </a>
                         </li>
 
-                        <?php }?>
+                        <?php }
+                        
+           //  Inter Admission
+           if($isselected == '11') { 
+                ?>
+                <ul >
+                    <li><a href="<?php echo base_url(); ?>Admission_inter"   data-original-title="" class="<?php if($isselected == '11') {echo 'heading';}?>">Admission</a></li>
+
+                   
+
+
+                        <li>
+                            <a href="<?php echo base_url(); ?>Admission_inter/StudentsData">
+                                Old Students 
+                            </a>
+                        </li>
+                        <!-- <li>
+                        <a href="<?php echo base_url(); ?>Admission_matric/ReAdmission">
+                        Re-Admissions
+                        </a>
+                        </li>-->
+
+                        <li>
+                            <a href="<?php echo base_url(); ?>Admission_inter/EditForms">
+                                Edit Forms
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?php echo base_url(); ?>Admission_inter/CreateBatch">
+                                Create Batch
+                            </a>
+                        </li>
+
+                        <?php }
+                        ?>
+                        
                     <li>
-                        <a href="<?php echo base_url(); ?>Admission_matric/batchlist">
+                        <a href="<?php echo base_url(); ?>Admission_inter/batchlist">
                             Batch List
                         </a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url(); ?>Admission_matric/FormPrinting">
+                        <a href="<?php echo base_url(); ?>Admission_inter/FormPrinting">
                            Proof Form Printing
                         </a>
                     </li>
