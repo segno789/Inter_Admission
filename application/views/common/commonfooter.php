@@ -140,6 +140,11 @@
             }
 
         })
+          var Insert_server_error= "<?php  echo @$data['Insert_server_error']; ?>";
+        if(Insert_server_error !='')
+        {
+             alertify.error(Insert_server_error);
+        }
     });
 
     function  check_NewEnrol_validation(){

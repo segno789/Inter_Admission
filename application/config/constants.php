@@ -36,18 +36,18 @@ define('FOPEN_READ_WRITE_CREATE',				'a+b');
 define('FOPEN_WRITE_CREATE_STRICT',				'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
-define('PRIVATE_IMAGE_PATH', 'uploads/2016/private/');
+define('PRIVATE_IMAGE_PATH', 'uploads/IS2016/private/');
 define('REGULAR_IMAGE_PATH', 'uploads/2016/regular/');
 define('Session','2');  // 1 for Annual and 2 for Supply
 define('Year','2016');  
 define('lastdate','20-08-2016');
-define('GET_PRIVATE_IMAGE_PATH', '../');
+define('GET_PRIVATE_IMAGE_PATH', 'assets/');
 define('GET_PRIVATE_IMAGE_PATH_COPY', '');
 
 
-define('Insert_sp','Admission_online..MSAdm2016_sp_insert'); // for insertion matric supply
+define('Insert_sp','Admission_online..ISAdm2016_sp_insert'); // for insertion Inter supply private
 define('Insert_sp_matric_annual','Admission_online..MA_P1_Reg_Adm2016_sp_insert'); // for insertion matric Annual
-define('formprint_sp','Admission_online..sp_form_data');    // for selection matric supply
+define('formprint_sp','Admission_online..sp_form_data_11th');    // for selection matric supply
 define('formprint_sp_matric_annual','Admission_online..sp_form_data');    // for selection matric Annual
 define('formnovalid','600000');
 define('return_pdf_isPicture','1');
@@ -73,7 +73,7 @@ define ('SingleDateFee','03-07-2016');
 define('DoubleDateFee', '20-07-2016');
 define('TripleDateFee', '30-07-2016');
                                 
-define('getinfo','admission_online..fl_dataforIa16');
+define('getinfo','admission_online..tblAdmissionDataForHSSC');
 
 
 //===============10TH Regular Admission Matric challan varaible

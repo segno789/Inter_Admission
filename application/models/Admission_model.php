@@ -9,7 +9,7 @@ class Admission_model extends CI_Model
 
     public function Pre_Inter_Data($data)
     {
-        $query = $this->db->get_where(getinfo, array('Ssc_Rno'=>$data['sscrno'],'rno' => $data['hsscrno'], 'class' => $data['hsscclass'], 'Iyear' => $data['iYear'], 'sess'=>$data['session'],'Hssc_Board'=>$data['board']));
+        $query = $this->db->get_where(getinfo, array('matRno'=>$data['sscrno'],'rno' => $data['hsscrno'], 'class' => $data['hsscclass'], 'Iyear' => $data['iYear'], 'sess'=>$data['session'],'IntBrd_cd'=>$data['board']));
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
@@ -33,9 +33,13 @@ class Admission_model extends CI_Model
 
     public function GetFormNo()
     {
-        $this->db->select('formno');
-        $this->db->order_by("formno", "DESC");
-        $formno =$this->db->get_where('admission_online..ISAdm2016',array('regpvt'=>2));
+        $this->db->select('formNo');
+       // $this->db->select_max('formNo');
+       
+        //$this->db->where('regPvt',2);
+        $this->db->order_by("formNo", "DESC");
+        $formno = $this->db->get('admission_online..ISAdm2016');
+        //$formno =$this->db->get_where('',array('regPvt'=>2));
         $rowcount = $formno->num_rows();
 
         if($rowcount == 0 )
@@ -46,7 +50,7 @@ class Admission_model extends CI_Model
         else
         {
             $row  = $formno->result_array();
-            $formno = $row[0]['formno']+1;
+            $formno = $row[0]['formNo']+1;
             return $formno;
         }
 
@@ -63,7 +67,7 @@ class Admission_model extends CI_Model
         $CellNo = $data['MobNo'];
         $medium = $data['medium'];
         $Inst_Rno = strtoupper($data['Inst_Rno']);
-        $MarkOfIden =strtoupper($data['MarkOfIden']);
+        $MarkOfIden =strtoupper(@$data['MarkOfIden']);
         $Speciality = $data['Speciality'];
         $nat = $data['nat'];
         $sex = $data['sex'];
@@ -81,6 +85,10 @@ class Admission_model extends CI_Model
         $sub6 = $data['sub6'];
         $sub7 = $data['sub7'];
         $sub8 = $data['sub8'];
+        $sub5a = $data['sub5a'];
+        $sub6a = $data['sub6a'];
+        $sub7a = $data['sub7a'];
+        
 
 
         $sub1ap1 = $data['sub1ap1'];
@@ -90,7 +98,7 @@ class Admission_model extends CI_Model
         $sub5ap1 = $data['sub5ap1'];
         $sub6ap1 = $data['sub6ap1'];
         $sub7ap1 = $data['sub7ap1'];
-        $sub8ap1 = $data['sub8ap1'];
+        $sub8ap1 = @$data['sub8ap2'];
 
         $UrbanRural = $data['RuralORUrban'];
         $Inst_cd = "999999";
@@ -106,8 +114,8 @@ class Admission_model extends CI_Model
         $sub8ap2 =  $data['sub8ap2'];
         // $exam_type = $data['examtype'];
         //$cattype = $data['cattype'];                                 
-        $cat09 = $data['cat09'];     
-        $cat10 = $data['cat10'];     
+        $cat09 = $data['cat11'];     
+        $cat10 = $data['cat12'];     
 
         //-------Marks Improve CAT --------\\
         $dist_cd =  $data['dist'];
@@ -136,12 +144,26 @@ class Admission_model extends CI_Model
 
         $TotalAdmFee =  $AdmFee + $AdmProcFee;
 
-        DebugBreak();
+       // DebugBreak();
 
-        $query = $this->db->query(Insert_sp." '$formno',10,2016,2,'$name','$fname','$BForm','$FNIC','$Dob','$CellNo',$medium,'".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$sub8,$sub8ap1,1,$oldrno,$oldyear,$oldsess,$old_class,$IsHafiz,$Inst_cd,$UrbanRural,$RegGrp,$cat09,$cat10,$sub1ap2,$sub2ap2,$sub3ap2,$sub4ap2,$sub5ap2,$sub6ap2,$sub7ap2,$sub8ap2,$dist_cd,$teh_cd,$zone_cd,$Brd_cd,$AdmProcFee,$AdmFee,$TotalAdmFee");
+        $query = $this->db->query(Insert_sp." '$formno',12,2016,2,'$name','$fname','$BForm','$FNIC','$CellNo',$medium,'".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$sub8,1,$oldrno,$oldyear,$oldsess,$old_class,$IsHafiz,$Inst_cd,$UrbanRural,$RegGrp,$cat09,$cat10,$sub1ap2,$sub2ap2,$sub4ap2,$sub5ap2,$sub6ap2,$sub7ap2,$sub8ap2,$dist_cd,$teh_cd,$zone_cd,$Brd_cd,$AdmProcFee,$AdmFee,$TotalAdmFee,$sub5a,$sub6a,$sub7a");
         return true;
     }
+    public function get_formno_data($formno)
+    {
 
+        ////DebugBreak();
+        $query = $this->db->query(formprint_sp."'$formno'");
+        $rowcount = $query->num_rows();
+        if($rowcount > 0)
+        {
+            return $query->result_array();
+        }
+        else
+        {
+            return  false;
+        }
+    }
     public function getzone($tehcd)
     {
 
@@ -179,7 +201,7 @@ class Admission_model extends CI_Model
 
     public function getrulefee($isPrSub){
         $date =  date('Y-m-d') ;
-        $query = $this->db->get_where('admission_Online..RuleFeeAdm', array('class' => 10,'sess' => 2, 'isPrSub' => $isPrSub, 'Start_Date <='=>$date,'End_Date >='=>$date));
+        $query = $this->db->get_where('admission_Online..RuleFeeAdm', array('class' => 12,'sess' => 2, 'isPrSub' => $isPrSub,'Start_Date <='=>$date,'End_Date >='=>$date));
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
