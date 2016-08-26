@@ -609,7 +609,7 @@
     }
     function ReturnForm(Batch_ID)
     {
-        window.location.href = '<?=base_url()?>Admission_inter/Print_Admission_matric_Form_Proofreading_Groupwise/'+Batch_ID + '/3'
+        window.location.href = '<?=base_url()?>Admission_inter/Print_Admission_inter_Form_Proofreading_Groupwise/'+Batch_ID + '/3'
     }
     function RevenueForm(Batch_ID)
     {
@@ -803,10 +803,10 @@
         window.location.href = '<?=base_url()?>Admission_inter/return_pdf/'+startformno + '/5' +'/'+endformno+'/';
     }
     function Print_Registration_Form_Proofreading_Groupwise(grp_cd){
-        window.location.href =  '<?=base_url()?>Admission_inter/Print_Admission_matric_Form_Proofreading_Groupwise/'+grp_cd + '/1'
+        window.location.href =  '<?=base_url()?>Admission_inter/Print_Admission_inter_Form_Proofreading_Groupwise/'+grp_cd + '/1'
     }
     function Print_Registration_Form_Proofreading_Formnowise(startformno,endformno){
-        window.location.href =  '<?=base_url()?>Admission_inter/Print_Admission_matric_Form_Proofreading_Groupwise/'+startformno + '/2' +'/'+endformno+'/';
+        window.location.href =  '<?=base_url()?>Admission_inter/Print_Admission_inter_Form_Proofreading_Groupwise/'+startformno + '/2' +'/'+endformno+'/';
     }
     function  check_NewEnrol_validation()
     {

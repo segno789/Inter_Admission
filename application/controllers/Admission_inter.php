@@ -2740,7 +2740,7 @@ class Admission_inter extends CI_Controller {
     public function Print_Admission_inter_Form_Proofreading_Groupwise()
     {
 
-       // DebugBreak();
+      // DebugBreak();
         $Condition = $this->uri->segment(4);
 
         $this->load->library('session');
@@ -2816,7 +2816,7 @@ class Admission_inter extends CI_Controller {
         {
 
             // //DebugBreak();
-            $form_No = $data["formNo"]; 
+            $form_No = $data["FormNo"]; 
             $fontSize = 8; 
             $marge    = .4;   // between barcode and hri in pixel
             $bx        = 4.2;  // barcode center
@@ -2851,7 +2851,7 @@ class Admission_inter extends CI_Controller {
             $pdf->SetXY( 0.75,0.2);
             $pdf->Cell(0, 0.2, "BOARD OF INTERMEDIATE AND SECONDARY EDUCATION, GUJRANWALA", 0.25, "C");
             $pdf->Image(base_url()."assets/img/logo2.png",0.05,0.2, 0.75,0.75, "PNG");
-            $pdf->Image(base_url()."assets/img/10th.png",7.49,0.39, 0.36,0.36, "PNG");    
+            $pdf->Image(base_url()."assets/img/12.jpg",7.49,0.39, 0.36,0.36, "JPG");    
 
             
             if(Session==1)
@@ -2861,11 +2861,11 @@ class Admission_inter extends CI_Controller {
             }
             else if(Session==2)
             {
-                $pdf->SetFont('Arial','',7);
-                $pdf->SetXY(1.2,0.4);    
+                $pdf->SetFont('Arial','',9);
+                $pdf->SetXY(1.2,0.35);    
             }
             
-            $pdf->Cell(0, 0.25, "ADMISSION FORM FOR SECONDARY SCHOOL ".$session_constant." (10TH) EXAMINATION, 2016", 0.25, "C");
+            $pdf->Cell(0, 0.25, "ADMISSION FORM FOR INTERMEDIATE (PART-II & COMPOSITE) ".$session_constant." EXAMINATION, 2016", 0.25, "C");
            // DebugBreak();
             //--------------- Proof Read    
             if($data['Batch_ID'] == 0 and $data['regPvt']==1)
@@ -2881,8 +2881,8 @@ class Admission_inter extends CI_Controller {
 
 
             $pdf->SetFont('Arial','B',10);
-            $pdf->SetXY(5.7,0.4);
-            $pdf->Cell(0, 0.25,"(Regular Admission Form)", 0.25, "C");
+            $pdf->SetXY(3.2,0.5);
+            $pdf->Cell(0, 0.25,"(REGULAR CANDIDATE)", 0.25, "C");
 
             //--------------------------- Form No & Rno
 
@@ -2892,7 +2892,7 @@ class Admission_inter extends CI_Controller {
 
             $pdf->SetXY(1.4,0.60+$Y);
             $pdf->SetFont('Arial','B',10);
-            $pdf->Cell( 0.5,0.5,$data['formNo'],0,'L');
+            $pdf->Cell( 0.5,0.5,$data['FormNo'],0,'L');
 
             $pdf->SetFont('Arial','B',12);
             $pdf->SetXY(5.8,0.65+$Y);
@@ -2904,17 +2904,25 @@ class Admission_inter extends CI_Controller {
             if($data["regPvt"]==1)
             {
                 $pdf->SetXY(0.4,0.95+$Y);
-                $pdf->SetFont('Arial','',10);
-                $pdf->Cell( 0.5,0.5,'('.$user['Inst_Id'].')'.'-'.$user['inst_Name'],0,'R');
+                $pdf->SetFont('Arial','B',10);
+                $pdf->Cell( 0.5,0.5,'Institute: '.$user['Inst_Id'].''.'-'.$user['inst_Name'],0,'R');
             }
 
 
            // DebugBreak();
             //------ Picture Box on Centre      
-            $pdf->SetXY(6.5, 1.55+$Y );
-            $pdf->Cell(1.25,1.4,'',1,0,'C',0);
-            $pdf->Image(base_url().REGULAR_IMAGE_PATH.$user['Inst_Id']."/".$data["PicPath"],6.5, 1.55+$Y, 1.25, 1.4, "JPG");
-          //  $pdf->Image( base_url().'uploads/100028.jpg',6.5, 1.55+$Y, 1.25, 1.4, "JPG");
+            $pdf->SetXY(6.6, 1.55+$Y );
+            $pdf->Cell(1.0,1.0,'',1,0,'C',0);
+           // $pdf->Image(base_url().REGULAR_IMAGE_PATH.$user['Inst_Id']."/".$data["picpath"],6.5, 1.55+$Y, 1.25, 1.4, "JPG");
+          if($data["sex"]==1)
+          {
+            $pdf->Image( base_url().'uploads/download.jpg',6.6, 1.55+$Y, 1.0, 1.0, "JPG");  
+          }
+          else
+          {
+              $pdf->Image( base_url().'uploads/130659.jpg',6.6, 1.55+$Y, 1.0, 1.0, "JPG");
+          }
+            
             $pdf->SetFont('Arial','',8);
 
             //------------- Personal Infor Box
@@ -2934,44 +2942,79 @@ class Admission_inter extends CI_Controller {
             $pdf->SetFont('Arial','B',8);
             $pdf->SetXY(1.5,1.6+$Y);
             $pdf->Cell(0.5,0.5,$data["name"],0,'L');
-            //--------------------------- FATHER NAME 
-            $pdf->SetXY(3.5+$x,1.6+$Y);
-            $pdf->SetFont('Arial','',8);
-            $pdf->Cell( 0.5,0.5,"Father's Name:.",0,'L');
+             //--------------------------- 
+              $pdf->SetXY(3.5+$x,1.6+$Y);
+            $pdf->SetFont('Arial','',7);
+            
+            $pdf->Cell( 0.5,0.5,"Bay Form/CNIC No:",0,'L');
             $pdf->SetFont('Arial','B',8);
             $pdf->SetXY(4.5+$x,1.6+$Y);
+            
+            $pdf->Cell(0.5,0.5,$data["BForm"],0,'L');
+            
+            //--------------------------- FATHER NAME 
+            
+          $pdf->SetXY(0.5, 1.85+$Y);
+            $pdf->SetFont('Arial','',8);
+            $pdf->Cell( 0.5,0.5,"Father's Name:",0,'L');
+            $pdf->SetFont('Arial','B',8);
+            $pdf->SetXY(1.5,1.85+$Y);
             $pdf->Cell(0.5,0.5,$data["Fname"],0,'L');
 
 
             //--------------------------- 3rd line 
-            $pdf->SetXY(0.5, 1.85+$Y);
+            
+            $pdf->SetXY(0.5,2.1+$Y);
+            $pdf->SetFont('Arial','',8);
+            $pdf->Cell( 0.5,0.5,"Nationality:",0,'L');
+            $pdf->SetFont('Arial','B',8);
+            $pdf->SetXY(1.5,2.1+$Y);
+            $pdf->Cell(0.5,0.5,$data["nat"]==1?"PAKISTANI":"NON-PAKISTANI",0,'R');  
+            /*$pdf->SetXY(0.5, 1.85+$Y);
             $pdf->SetFont('Arial','',8);
             $pdf->Cell( 0.5,0.5,"Date Of Birth:",0,'L');
             $pdf->SetFont('Arial','B',8);
-            $pdf->SetXY(1.5,1.85+$Y);
-            $pdf->Cell(0.5,0.5,$data["Dob"],0,'L');
+            $pdf->SetXY(1.5,1.85+$Y);*/
+            //$pdf->Cell(0.5,0.5,$data["Dob"],0,'L');
+
+             $pdf->SetXY(3.5+$x,2.35+$Y);
+            $pdf->SetFont('Arial','',8);
+            
+            $pdf->Cell( 0.5,0.5,"Registration No:",0,'L');
+             $pdf->SetFont('Arial','B',8);
+            $pdf->SetXY(4.5+$x,2.35+$Y);
+            
+            
+            $pdf->Cell(0.5,0.5,$data["strRegNo"],0,'L');
+            //--------------------------- BAY FORM NO line 
+            
 
             $pdf->SetXY(3.5+$x,1.85+$Y);
             $pdf->SetFont('Arial','',8);
-            $pdf->Cell( 0.5,0.5,"Registration No:",0,'L');
-            $pdf->SetFont('Arial','B',8);
-            $pdf->SetXY(4.5+$x,1.85+$Y);
-            $pdf->Cell(0.5,0.5,$data["strRegNo"],0,'L');
-            //--------------------------- BAY FORM NO line 
-            $pdf->SetXY(0.5, 2.10+$Y);
-            $pdf->SetFont('Arial','',8);
-            $pdf->Cell( 0.5,0.5,"Bay Form No:",0,'L');
-            $pdf->SetFont('Arial','B',8);
-            $pdf->SetXY(1.5,2.10+$Y);
-            $pdf->Cell(0.5,0.5,$data["BForm"],0,'L');
-
-
-            $pdf->SetXY(3.5+$x,2.10+$Y);
-            $pdf->SetFont('Arial','',8);
             $pdf->Cell(0.5,0.5,"Father's CNIC:",0,'R');
             $pdf->SetFont('Arial','B',8);
-            $pdf->SetXY(4.5+$x,2.10+$Y);
+            $pdf->SetXY(4.5+$x,1.85+$Y);
             $pdf->Cell(0.5,0.5,$data["FNIC"],0,'L');
+            
+               $spl_casename = 'NONE';
+            if($data["Spec"] == 0)
+            {
+                $spl_casename = 'NONE';
+            }
+            else  if($data["Spec"] == 1)
+            {
+                $spl_casename = 'Deaf & Dumb';  
+            }
+            else  if($data["Spec"] == 2)
+            {
+                $spl_casename = 'Board Employee';
+            }
+           $pdf->SetXY(3.5+$x,2.10+$Y);
+            $pdf->SetFont('Arial','',8);
+            $pdf->Cell( 0.5,0.5,"Speciality:",0,'L');
+            $pdf->SetFont('Arial','B',8);
+            $pdf->SetXY(4.5+$x,2.10+$Y);
+            $pdf->Cell(0.5,0.5,($spl_casename),0,'L');
 
 
             //--------------------------- RELEGION line 
@@ -2990,24 +3033,30 @@ class Admission_inter extends CI_Controller {
             $pdf->Cell(0.5,0.5,$data["nat"]==1?"PAKISTANI":"NON-PAKISTANI",0,'R');
 
             */
-            $pdf->SetXY(3.5+$x,2.35+$Y);
-            $pdf->SetFont('Arial','',8);
-            $pdf->Cell(0.5,0.5,"Locality:",0,'R');
-            $pdf->SetFont('Arial','B',8);
-            $pdf->SetXY(4.5+$x,2.35+$Y);
+            
+           /* $pdf->Cell(0.5,0.5,"Locality:",0,'R');
+           
 
 
             if($data['regPvt']==1)
             {
-                $pdf->Cell(0.5,0.5,$data["RuralORUrban"]==0?"URBAN":"RURAL",0,'L');
+                $pdf->Cell(0.5,0.5,$data["ruralOrurban"]==0?"URBAN":"RURAL",0,'L');
             }
             else if($data['regPvt']==2){
 
-                $pdf->Cell(0.5,0.5,$data["RuralORUrban"]==1?"URBAN":"RURAL",0,'L');
-            }
+                $pdf->Cell(0.5,0.5,$data["ruralOrurban"]==1?"URBAN":"RURAL",0,'L');
+            }*/
+            
+              //--------------------------- Speciality and Internal Grade 
+           $pdf->SetXY(0.5,2.60+$Y);
+            $pdf->SetFont('Arial','',8);
+            $pdf->Cell( 0.5,0.5,"Institute Grade:",0,'L');
+             $pdf->SetFont('Arial','B',8);
+            $pdf->SetXY(1.5,2.60+$Y);
+            $pdf->Cell(0.5,0.5,$data["CollGrade"],0,'L');
 
             //--------------------------- Gender Nationality 
-            $pdf->SetXY(0.5,2.60+$Y);
+           /* $pdf->SetXY(0.5,2.60+$Y);
             $pdf->SetFont('Arial','',8);
             $pdf->Cell( 0.5,0.5,"Gender:",0,'L');
             $pdf->SetFont('Arial','B',8);
@@ -3020,49 +3069,31 @@ class Admission_inter extends CI_Controller {
             $db->update("Admission_online..adm_reg_ma2016",$arr1,"sch_cd = ".trim($user->inst_cd));
             }*/
 
-
+            $pdf->SetXY(6.9,2.6+$Y);
             $pdf->Cell(0.5,0.5,$data['sex']==1?"MALE":"FEMALE",0,'L');
             // //DebugBreak();
-            $pdf->SetXY(3.5+$x,2.60+$Y);
+            /*$pdf->SetXY(3.5+$x,2.60+$Y);
             $pdf->SetFont('Arial','',8);
             $pdf->Cell( 0.5,0.5,"Nationality:",0,'L');
             $pdf->SetFont('Arial','B',8);
             $pdf->SetXY(4.5+$x,2.60+$Y);
-            $pdf->Cell(0.5,0.5,$data["nat"]==1?"PAKISTANI":"NON-PAKISTANI",0,'R');             
+            $pdf->Cell(0.5,0.5,$data["nat"]==1?"PAKISTANI":"NON-PAKISTANI",0,'R');  */           
             //--------------------------- id mark and Contact No. 
-            $spl_casename = 'NONE';
-            if($data["Spec"] == 0)
-            {
-                $spl_casename = 'NONE';
-            }
-            else  if($data["Spec"] == 1)
-            {
-                $spl_casename = 'Deaf & Dumb';  
-            }
-            else  if($data["Spec"] == 2)
-            {
-                $spl_casename = 'Board Employee';
-            }
-            $pdf->SetXY(0.5,2.85+$Y);
-            $pdf->SetFont('Arial','',8);
-            $pdf->Cell( 0.5,0.5,"Speciality:",0,'L');
-            $pdf->SetFont('Arial','B',8);
-            $pdf->SetXY(1.50,2.85+$Y);
-            $pdf->Cell(0.5,0.5,($spl_casename),0,'L');
+         
 
 
 
 
 
-            $pdf->SetFont('Arial','B',8);
+           // $pdf->SetFont('Arial','B',8);
             /* $pdf->SetXY(4.5+$x,3.35+$Y);
             $pdf->Cell(0.5,0.5, $data["mobNo"],0,'L');    */
-            $pdf->SetXY(3.5+$x,2.85+$Y);
+           /* $pdf->SetXY(3.5+$x,2.85+$Y);
             $pdf->SetFont('Arial','',8);
             $pdf->Cell( 0.5,0.5,"Contact No:",0,'L');
             $pdf->SetFont('Arial','B',8);
             $pdf->SetXY(4.5+$x,2.85+$Y);
-            $pdf->Cell(0.5,0.5, $data["MobNo"],0,'L');      
+            $pdf->Cell(0.5,0.5, $data["MobNo"],0,'L'); */     
 
             //         
             //    $pdf->SetXY(3.5+$x,2.85+$Y);
@@ -3073,33 +3104,60 @@ class Admission_inter extends CI_Controller {
             //             $pdf->Cell(0.5,0.5,$data["med"]==1?"URDU":"ENGLISH",0,'L');            
 
             //--------------------------- Speciality and Internal Grade 
-            $pdf->SetXY(0.5,3.1+$Y);
+           /* $pdf->SetXY(0.5,3.1+$Y);
             $pdf->SetFont('Arial','',8);
             $pdf->Cell( 0.5,0.5,"Identification:",0,'L');
             $pdf->SetFont('Arial','B',8);
             $pdf->SetXY(1.50,3.1+$Y);
-            $pdf->Cell(0.5,0.5,$data["markOfIden"],0,'L');
+            $pdf->Cell(0.5,0.5,$data["markOfIden"],0,'L');*/
 
 
 
-            $pdf->SetXY(3.5+$x,3.1+$Y);
+            $pdf->SetXY(3.5+$x,2.60+$Y);
             $pdf->SetFont('Arial','',8);
-            $pdf->Cell( 0.5,0.5,"Scheme:",0,'L');
+            $pdf->Cell( 0.5,0.5,"Institute Roll No:",0,'L');
             $pdf->SetFont('Arial','B',8);
-            $pdf->SetXY(4.5+$x,3.1+$Y);
-            $pdf->Cell(0.5,0.5, ($data["schm"]==1? "NEW": "OLD"),0,'L');            
+            $pdf->SetXY(4.5+$x,2.60+$Y);
+            $pdf->Cell(0.5,0.5, ($data["classRno"]),0,'L');            
 
 
 
             //====================================================================================================================            
-            //--------------------------- Speciality and Internal Grade 
-            $pdf->SetXY(0.5,3.35+$Y);
-            $pdf->SetFont('Arial','',8);
-            $pdf->Cell( 0.5,0.5,"Internal Grade:",0,'L');
+          //DebugBreak();
+            $Y = $Y-0.5;
+            //------------- Old Exam Infor if any Box
             $pdf->SetFont('Arial','B',8);
-            $pdf->SetXY(1.68,3.35+$Y);
-            $pdf->Cell(0.5,0.5,$data["SchGrade"],0,'L');
+            $pdf->SetXY(0.2,3.5+$Y);
+            $pdf->SetFillColor(240,240,240);
+            $pdf->Cell(8,0.2,'SSC EXAMINATION INFORMATION  ',1,0,'L',1);          
+            //--------------------------- 7th line    
+            $pdf->SetXY(0.5,3.6+$Y);
+            $pdf->SetFont('Arial','',8);
+            $pdf->Cell( 0.5,0.5,"Roll No:",0,'L');
+            $pdf->SetFont('Arial','B',8);
+            $pdf->SetXY(1.45,3.6+$Y);
+            $pdf->Cell(0.5,0.5,$data["matRno"],0,'L');
 
+            $pdf->SetXY(2.5,3.6+$Y);
+            $pdf->SetFont('Arial','',8);
+            $pdf->Cell( 0.5,0.5,"Year:",0,'L');
+            $pdf->SetFont('Arial','B',8);
+            $pdf->SetXY(3.25,3.6+$Y);
+            $pdf->Cell(0.5,0.5,$data["yearOfPass"],0,'L');
+
+            $pdf->SetXY(3.8,3.6+$Y);
+            $pdf->SetFont('Arial','',8);
+            $pdf->Cell( 0.5,0.5,"Session:",0,'L');
+            $pdf->SetFont('Arial','B',8);
+            $pdf->SetXY(4.3,3.6+$Y);
+            $pdf->Cell(0.5,0.5,$data["sessOfPass"]==1?"Annual":"Supplementary",0,'R');
+            // //DebugBreak();
+            $pdf->SetXY(5.3,3.6+$Y);
+            $pdf->SetFont('Arial','',8);
+            $pdf->Cell( 0.5,0.5,"Board:",0,'L');
+            $pdf->SetFont('Arial','B',8);
+            $pdf->SetXY(6,3.6+$Y);
+            $pdf->Cell(0.5,0.5,$data["brd_name"],0,'R');
 
 
             /*$pdf->SetXY(3.5+$x,3.35+$Y);
@@ -3109,13 +3167,13 @@ class Admission_inter extends CI_Controller {
             $pdf->SetXY(4.5+$x,3.35+$Y);
             $pdf->Cell(0.5,0.5, $data["mobNo"],0,'L');     */
 
-            $Y= $Y+0.30;            
+            $Y= $Y+0.45;            
 
             //------------- Old Exam Infor if any Box
             $pdf->SetFont('Arial','B',8);
             $pdf->SetXY(0.2,3.5+$Y);
             $pdf->SetFillColor(240,240,240);
-            $pdf->Cell(8,0.2,'OLD EXAMINATION INFORMATION  ',1,0,'L',1);          
+            $pdf->Cell(8,0.2,'PART-I EXAMINATION INFORMATION  ',1,0,'L',1);          
             //--------------------------- 7th line    
             $pdf->SetXY(0.5,3.6+$Y);
             $pdf->SetFont('Arial','',8);
@@ -3143,7 +3201,7 @@ class Admission_inter extends CI_Controller {
             $pdf->Cell( 0.5,0.5,"Board:",0,'L');
             $pdf->SetFont('Arial','B',8);
             $pdf->SetXY(6,3.6+$Y);
-            $pdf->Cell(0.5,0.5,$data["brd_name"],0,'R');
+            $pdf->Cell(0.5,0.5,$data["ibrd_name"],0,'R');
             //============================ Contact Detail ========================================================
             //------------- Contact Info Box
             $pdf->SetFont('Arial','B',8);
@@ -3157,22 +3215,30 @@ class Admission_inter extends CI_Controller {
             $pdf->SetFont('Arial','',8);
             $pdf->Cell(0.5,0.5,"District:",0,'L');
             $pdf->SetFont('Arial','B',8);
-            $pdf->SetXY(0.90,4.05+$Y);
+            $pdf->SetXY(1.0,4.05+$Y);
             $pdf->Cell( 0.5,0.5, $data['distName'],0,'L');
             //__TEHSIL
-            $pdf->SetXY(2.1,4.05+$Y);
+            $pdf->SetXY(3.5,4.05+$Y);
             $pdf->SetFont('Arial','',8);
             $pdf->Cell(0.5,0.5,"Tehsil:",0,'R');
             $pdf->SetFont('Arial','B',8);
-            $pdf->SetXY(2.5,4.05+$Y);
+            $pdf->SetXY(4.1,4.05+$Y);
             $pdf->Cell( 0.5,0.5, $data['tehName'],0,'L');
             //__Zone      
-            $pdf->SetXY(3.7,4.05+$Y);
+            $pdf->SetXY(0.5,4.25+$Y);
             $pdf->SetFont('Arial','',8);
             $pdf->Cell(0.5,0.5,"Zone:",0,'R');
             $pdf->SetFont('Arial','B',8);
-            $pdf->SetXY(4.0,4.05+$Y);
-            $pdf->Cell( 0.5,0.5,$data['Zone_cd']." - ".$data['ZoneName']."",0,'L');
+            $pdf->SetXY(1.0,4.25+$Y);
+            $pdf->Cell( 0.5,0.5,$data['zone_cd']." - ".$data['ZoneName']."GUJRANWALA",0,'L');
+            
+            $pdf->SetXY(3.5,4.25+$Y);
+            $pdf->SetFont('Arial','',8);
+            $pdf->Cell(0.5,0.5,"Mobile No:",0,'R');
+            $pdf->SetFont('Arial','B',8);
+            $pdf->SetXY(4.1,4.25+$Y);
+            $pdf->Cell( 0.5,0.5, $data['MobNo'],0,'L');
+            
             /*     //__Mobile    
             $pdf->SetXY(6.4,4.05+$Y);
             $pdf->SetFont('Arial','',8);
@@ -3192,15 +3258,15 @@ class Admission_inter extends CI_Controller {
 
 
             //__Address
-            $pdf->SetXY(0.5,4.25+$Y);
+            $pdf->SetXY(0.5,4.4+$Y);
             $pdf->SetFont('Arial','',8);
             $pdf->Cell( 0.5,0.5,"Address:",0,'L');
             $pdf->SetFont('Arial','b',8);
-            $pdf->SetXY(1.2,4.25+$Y);
+            $pdf->SetXY(1.2,4.4+$Y);
             $pdf->Cell(0.5,0.5,$data["addr"],0,'L');
 
             //__Address
-            $pdf->SetXY(0.5,4.470+$Y);
+            $pdf->SetXY(0.5,4.570+$Y);
             $pdf->SetFont('Arial','',8);
             $pdf->Cell( 0.5,0.5,"Address(In Urdu):",0,'L');
             $pdf->SetFont('Arial','b',8);
@@ -3267,29 +3333,29 @@ class Admission_inter extends CI_Controller {
             $pdf->SetFont('Arial','B',8);
             $pdf->SetXY(1.5,5.05+$Y);
             if ($data["grp_cd"]=='1')
-                $pdf->Cell(0.5,0.5,"SCIENCE",0,'L');
+                $pdf->Cell(0.5,0.5,"PRE-MEDICAL",0,'L');
             else      if ($data["grp_cd"]=='2')
-                $pdf->Cell(0.5,0.5,"GENERAL",0,'L');
+                $pdf->Cell(0.5,0.5,"PRE-ENGINEERING",0,'L');
                 else      if ($data["grp_cd"]=='3')
-                    $pdf->Cell(0.5,0.5,"TECHNICAL",0,'L');
+                    $pdf->Cell(0.5,0.5,"HUMANITIES",0,'L');
                     else      if ($data["grp_cd"]=='4')
-                        $pdf->Cell(0.5,0.5,"DARS E NAZAMI",0,'L');
+                        $pdf->Cell(0.5,0.5,"GENERAL SCIENCE",0,'L');
                         else      if ($data["grp_cd"]=='5')
-                            $pdf->Cell(0.5,0.5,"DEAF & DUMB",0,'L');             
+                            $pdf->Cell(0.5,0.5,"COMMERCE",0,'L');             
                             //-----catagories
-                            $pdf->SetFont('Arial','BU',8);
+                            $pdf->SetFont('Arial','UB',8);
             $pdf->SetXY(0.5,5.3+$Y);
-            $pdf->Cell( 0.5,0.5,"Exam Type",0,'L');
+            $pdf->Cell( 0.5,0.5,"Exam Type:",0,'L');
 
 
-            $bx = 7.02;
-            $by = 5.8;
+            $bx = 4.02;
+            $by = 10.8;
             $bardata = Barcode::fpdf($pdf, $black, $bx, $by, $angle, $type, array('code'=>$Barcode), $width, $height);
 
             $len = $pdf->GetStringWidth($bardata['hri']);
             Barcode::rotate(-$len / 2, ($bardata['height'] / 2) + $fontSize + $marge, $angle, $xt, $yt);
             ////DebugBreak();
-            $cat = $data['cat09'];
+            $cat = $data['cat11'];
             $cat_name ="";
             if ($cat==1) $cat_name= "Full Appear";
             else if ($cat ==2) $cat_name="Re-Appear";
@@ -3303,7 +3369,7 @@ class Admission_inter extends CI_Controller {
             else 
                 $catt09 = '';
 
-            $cat = $data['cat10'];
+            $cat = $data['cat12'];
             $cat_name ="";
             if ($cat==1) $cat_name= "Full Appear";
             else if ($cat ==2) $cat_name="Re-Appear";
@@ -3313,116 +3379,221 @@ class Admission_inter extends CI_Controller {
                 $catt10 =   $cat_name ;
             else 
                 $catt10 =  '';
-            $pdf->SetFont('Arial','BU',8);    
-            $pdf->SetXY(1.2,5.3+$Y);
-            $pdf->Cell( 0.5,0.5,$catt09 ,0,'L');
+            $pdf->SetFont('Arial','B',9);    
+            $pdf->SetXY(1.5,5.3+$Y);
+            if($catt09 != '')
+            {
+            $pdf->Cell( 0.5,0.5,$catt09.' in Part-I and '.$catt10.' in Part-II ' ,0,'L');    
+            }
+            else
+            {
+            $pdf->Cell( 0.5,0.5,$catt10.' in Part-II ' ,0,'L');
+            }
+            
 
-            $pdf->SetXY(4.7,5.3+$Y);
-            $pdf->Cell( 0.5,0.5,$catt10,0,'L');
+            //$pdf->SetXY(4.7,5.3+$Y);
+           // $pdf->Cell( 0.5,0.5,$catt10.' in Part-II ',0,'L');
             //--------------
             $pdf->SetFont('Arial','B',12);
-            $pdf->SetXY(1.5,5.55+$Y);
-            $pdf->Cell( 0.5,0.5,"9th",0,'L');
+            $pdf->SetXY(0.5,5.75+$Y);
+           // $pdf->Cell( 0.5,0.5,"9th",0,'L');
+            $boxWidth = 3.8;
+            $xx= 0.5;
+        $yy = $Y+2.2;
+         $pdf->SetFont('Arial','B',8);
+        $pdf->SetXY($xx,3.8+$yy);
+        $pdf->SetFillColor(240,240,240);
+        $pdf->Cell($boxWidth,0.2,'Part-I Subjects',1,0,'L',1);
+        $pdf->SetFillColor(255,255,255);
+        $pdf->SetFont('Arial','',7);
+        $pdf->SetXY($xx,4.0+$yy);
+        $pdf->Cell($boxWidth,0.2,$data['sub1Ap1'] != 1 ? '':   '    '.'1. '. $this->GetSubNameHere($data['sub1']),1,0,'L',1);
 
-            $pdf->SetXY(5.2,5.55+$Y);
-            $pdf->Cell( 0.5,0.5,"10th",0,'L');
+       /* $pdf->Image(base_url().'assets/img/crossed.jpg',6.2,5.35+$yy, 1.3,0.15, "jpeg");  
+        $pdf->SetXY(6.1,3.8+$yy);
+        $pdf->Cell(1.4,1.5,'',1,0,'C',0); 
+        $pdf->SetXY(6.3,3.8+$yy);
+        $pdf->MultiCell(1.1,0.2, 'Paste Recent Photograph & Must Be Cross Attested by the Head/Deputy Head of Institution',0,'C'); 
+
+        $pdf->SetXY(6.1,6.0+$yy);
+        $pdf->Cell(1.4,0.65,'',1,0,'C',0); 
+        $pdf->SetXY(6.2,6.48+$yy);
+        $pdf->MultiCell(1.1,0.2, 'Thumb Impression',0,'C'); */
+
+        //   DebugBreak();
+
+        $pdf->SetFillColor(255,255,255);
+        
+         $pdf->SetFont('Arial','',7);
+        $pdf->SetXY($xx,4.0+$yy);
+        $pdf->Cell($boxWidth,0.2,$data['sub1Ap1'] != 1 ? '':  '    '.'1. '.  $data['sub1_NAME'],1,0,'L',1);
+        
+        
+        $pdf->SetFont('Arial','',7);
+        $pdf->SetXY($xx,4.2+$yy);
+        $pdf->Cell($boxWidth,0.2,$data['sub2Ap1'] != 1 ? '':   '    '.'2. '.  $data['sub2_NAME'],1,0,'L',1);
+
+        $pdf->SetFont('Arial','',7);
+        $pdf->SetXY($xx,4.4+$yy);
+        $pdf->Cell($boxWidth,0.2,$data['sub3Ap1'] != 1 ? '':   '    '.'3. '.  $data['sub3_NAME'],1,0,'L',1);
+
+        $pdf->SetFont('Arial','',7);
+        $pdf->SetXY($xx,4.6+$yy);
+        $pdf->Cell($boxWidth,0.2,$data['sub4Ap1'] != 1 ? '':   '    '.'4. '. $data['sub4_NAME'],1,0,'L',1);
+
+        $pdf->SetFont('Arial','',7);
+        $pdf->SetXY($xx,4.8+$yy);
+        $pdf->Cell($boxWidth,0.2,$data['sub5Ap1'] != 1 ? '':   '    '.'5. '.  $data['sub5_NAME'],1,0,'L',1);
+
+        $pdf->SetFont('Arial','',7);
+        $pdf->SetXY($xx,5.0+$yy);
+        $pdf->Cell($boxWidth,0.2,$data['sub6Ap1'] != 1 ? '':   '    '.'6. '.  $data['sub6_NAME'],1,0,'L',1);
+
+        $pdf->SetFont('Arial','',7);                                                                     
+        $pdf->SetXY($xx,5.2+$yy);
+        $pdf->Cell($boxWidth,0.2,$data['sub7Ap1'] != 1 ? '':   '    '.'7. '.  $data['sub7_NAME'],1,0,'L',1);
+
+        /*$pdf->SetFont('Arial','',7);
+        $pdf->SetXY($xx,5.4+$yy);
+        $pdf->Cell($boxWidth,0.2,$data['sub8Ap2'] != 1 ? '':   '    '.'8. '. $this->GetSubNameHere($data['sub8']),1,0,'L',1);
+        */
+        $xangle = 4.0;
+
+        $pdf->SetFont('Arial','B',8);
+        $pdf->SetXY($xangle,3.8+$yy);
+        $pdf->SetFillColor(240,240,240);
+        $pdf->Cell($boxWidth,0.2,'Part-II Subjects',1,0,'L',1);    
+        $pdf->SetFillColor(255,255,255);
+        $pdf->SetFont('Arial','',7);
+        $pdf->SetXY($xangle,4.0+$yy);
+        $pdf->Cell($boxWidth,0.2,$data['sub1Ap2'] != 1 ? '':  '    '.'1. '.  $data['sub1_NAME'],1,0,'L',1);
+        $pdf->SetFont('Arial','',7);
+        $pdf->SetXY($xangle,4.2+$yy);
+        $pdf->Cell($boxWidth,0.2,$data['sub2Ap2'] != 1 ? '':  '    '.'2. '.  $data['sub2_NAME'],1,0,'L',1);
+
+        /* $pdf->SetFont('Arial','',7);
+        $pdf->SetXY($xangle,4.4+$yy);
+        $pdf->Cell($boxWidth,0.2,$data['sub3Ap1'] != 1 ? '':  '    '.'3. '.  $this->GetSubNameHere($data['sub3']),1,0,'L',1);*/
+
+        $pdf->SetFont('Arial','',7);
+        $pdf->SetXY($xangle,4.4+$yy);
+        $pdf->Cell($boxWidth,0.2,$data['sub8Ap2'] != 1 ? '':  '    '.'3. '.  $data['sub8_NAME'],1,0,'L',1);
+
+        $pdf->SetFont('Arial','',7);
+        $pdf->SetXY($xangle,4.6+$yy);
+        $pdf->Cell($boxWidth,0.2,$data['sub4Ap2'] != 1 ? '':  '    '.'4. '. $data['sub4_NAME'],1,0,'L',1);
+
+        $pdf->SetFont('Arial','',7);
+        $pdf->SetXY($xangle,4.8+$yy);
+        $pdf->Cell($boxWidth,0.2,$data['sub5Ap2'] != 1 ? '':  '    '.'5. '.  $data['sub5_NAME'],1,0,'L',1);
+
+        $pdf->SetFont('Arial','',7);
+        $pdf->SetXY($xangle,5.0+$yy);
+        $pdf->Cell($boxWidth,0.2,$data['sub6Ap2'] != 1 ? '':  '    '.'6. '. $data['sub6_NAME'],1,0,'L',1);
+
+        $pdf->SetFont('Arial','',7);
+        $pdf->SetXY($xangle,5.2+$yy);
+        $pdf->Cell($boxWidth,0.2,$data['sub7Ap2'] != 1 ? '':  '    '.'7. '. $data['sub7_NAME'],1,0,'L',1);
+      //  $pdf->Cell($boxWidth,0.2,$data['sub1Ap1'] != 1 ? '':   '    '.'1. '. $this->GetSubNameHere($data['sub1']),1,0,'L',1);
+           /* $pdf->SetXY(5.2,5.55+$Y);
+            $pdf->Cell( 0.5,0.5,"10th",0,'L');*/
             //-----------------------------
 
             $x = 1;
             //--------------------------- Subjects
-            $pdf->SetFont('Arial','',8);
+          /*  $pdf->SetFont('Arial','',8);
             $pdf->SetXY(1.1,5.85+$Y);
             $pdf->Cell(0.3,0.4,"1._______________________________",0,'L');             
             $pdf->SetXY(1.15,5.75+$Y);
-            $pdf->Cell(0.5,0.5, $data['sub1Ap1'] != 1 ? '':   '    '. $data['sub1_NAME'] ,0,'L');
+            $pdf->Cell(0.5,0.5, $data['sub1Ap1'] != 1 ? '':   '    '. $data['sub1_NAME'] ,1,'L');
 
             $pdf->SetXY(4.6,5.85+$Y);
             $pdf->Cell(0.3,0.4,"1._______________________________",0,'L');
             $pdf->SetXY(4.65,5.75+$Y);
-            $pdf->Cell(0.5,0.5,  $data['sub1Ap2'] != 1 ? '':  '    '.  $data['sub1_NAME'],0,'R');
+            $pdf->Cell(0.5,0.5,  $data['sub1Ap2'] != 1 ? '':  '    '.  $data['sub1_NAME'],1,'R');
             //------------------sub2
             $pdf->SetXY(1.1,6.1+$Y);
             $pdf->Cell(0.3,0.4,"2._______________________________",0,'L');    
             $pdf->SetXY(1.15,6.0+$Y);
-            $pdf->Cell(0.5,0.5,  $data['sub2Ap1'] != 1 ? '':  '    '.  $data['sub2_NAME'],0,'L');
+            $pdf->Cell(0.5,0.5,  $data['sub2Ap1'] != 1 ? '':  '    '.  $data['sub2_NAME'],1,'L');
 
             $pdf->SetXY(4.6,6.1+$Y);
             $pdf->Cell(0.3,0.4,"2._______________________________",0,'L');
             $pdf->SetXY(4.65,6.0+$Y);
-            $pdf->Cell(0.5,0.5,  $data['sub2Ap2'] != 1 ? '':   '    '. $data['sub2_NAME'],0,'R');
+            $pdf->Cell(0.5,0.5,  $data['sub2Ap2'] != 1 ? '':   '    '. $data['sub2_NAME'],1,'R');
             //------------------sub3
             $pdf->SetXY(1.1,6.35+$Y);
-            $pdf->Cell(0.3,0.4,"3._______________________________",0,'L');    
+            $pdf->Cell(0.3,0.4,"3._______________________________",1,'L');    
             $pdf->SetXY(1.15,6.25+$Y);
-            $pdf->Cell(0.5,0.5,  $data['sub3Ap1'] != 1 ? '':   '    '. $data['sub3_NAME'],0,'L');
+            $pdf->Cell(0.5,0.5,  $data['sub3Ap1'] != 1 ? '':   '    '. $data['sub3_NAME'],1,'L');
             ////DebugBreak();
             $pdf->SetXY(4.6,6.35+$Y);
-            $pdf->Cell(0.3,0.4,"3._______________________________",0,'L');
+            $pdf->Cell(0.3,0.4,"3._______________________________",1,'L');
             $pdf->SetXY(4.65,6.25+$Y);
-            $pdf->Cell(0.5,0.5,  $data['sub3ap2'] != 1 ? '':   '    '. $data['sub3_NAME'],0,'R');
+            //$pdf->Cell(0.5,0.5,  $data['sub3ap2'] != 1 ? '':   '    '. $data['sub3_NAME'],0,'R');
             //----------- sub4
             $pdf->SetXY(1.1,6.6+$Y);
-            $pdf->Cell(0.3,0.4,"4._______________________________",0,'L');    
+            $pdf->Cell(0.3,0.4,"4._______________________________",1,'L');    
             $pdf->SetXY(1.15,6.5+$Y);
-            $pdf->Cell(0.5,0.5,  $data['sub8ap1'] != 1 ? '':   '    '. $data['sub4_NAME'],0,'L');
+            //$pdf->Cell(0.5,0.5,  $data['sub8ap1'] != 1 ? '':   '    '. $data['sub4_NAME'],0,'L');
 
             $pdf->SetXY(4.6,6.6+$Y);
-            $pdf->Cell(0.3,0.4,"4._______________________________",0,'L');
+            $pdf->Cell(0.3,0.4,"4._______________________________",1,'L');
             $pdf->SetXY(4.65,6.5+$Y);
-            $pdf->Cell(0.5,0.5,  $data['sub8Ap2'] != 1 ? '':  '    '. $data['sub8_NAME'],0,'R');
+            $pdf->Cell(0.5,0.5,  $data['sub8Ap2'] != 1 ? '':  '    '. $data['sub8_NAME'],1,'R');
 
 
             //----------------sub5    
             $pdf->SetXY(1.1,6.85+$Y);
-            $pdf->Cell(0.3,0.4,"5._______________________________",0,'L');    
+            $pdf->Cell(0.3,0.4,"5._______________________________",1,'L');    
             $pdf->SetXY(1.15,6.75+$Y);
-            $pdf->Cell(0.5,0.5,  $data['sub4Ap1'] != 1 ? '':   '    '. $data['sub4_NAME'],0,'L');
+            $pdf->Cell(0.5,0.5,  $data['sub4Ap1'] != 1 ? '':   '    '. $data['sub4_NAME'],1,'L');
 
 
             $pdf->SetXY(4.6,6.85+$Y);
-            $pdf->Cell(0.3,0.4,"5._______________________________",0,'L');
+            $pdf->Cell(0.3,0.4,"5._______________________________",1,'L');
             $pdf->SetXY(4.65,6.75+$Y);
-            $pdf->Cell(0.5,0.5,  $data['sub4Ap2'] != 1 ? '':   '    '. $data['sub4_NAME'],0,'R');
+            $pdf->Cell(0.5,0.5,  $data['sub4Ap2'] != 1 ? '':   '    '. $data['sub4_NAME'],1,'R');
             //-----------------sub6
             $pdf->SetXY(1.1,7.1+$Y);
-            $pdf->Cell(0.3,0.4,"6._______________________________",0,'L');    
+            $pdf->Cell(0.3,0.4,"6._______________________________",1,'L');    
             $pdf->SetXY(1.20,7.0+$Y);
-            $pdf->Cell(0.5,0.5,  $data['sub5Ap1'] != 1 ? '': '  '. $data['sub5_NAME'],0,'L');
+            $pdf->Cell(0.5,0.5,  $data['sub5Ap1'] != 1 ? '': '  '. $data['sub5_NAME'],1,'L');
 
             $pdf->SetXY(4.6,7.1+$Y);
-            $pdf->Cell(0.3,0.4,"6._______________________________",0,'L');
+            $pdf->Cell(0.3,0.4,"6._______________________________",1,'L');
             $pdf->SetXY(4.65,7.0+$Y);
-            $pdf->Cell(0.5,0.5,  $data['sub5Ap2'] != 1 ? '':  '    '. $data['sub5_NAME'],0,'R');
+            $pdf->Cell(0.5,0.5,  $data['sub5Ap2'] != 1 ? '':  '    '. $data['sub5_NAME'],1,'R');
 
             //----------------sub7
             $pdf->SetXY(1.1,7.35+$Y);
-            $pdf->Cell(0.3,0.4,"7._______________________________",0,'L');        
+            $pdf->Cell(0.3,0.4,"7._______________________________",1,'L');        
             $pdf->SetXY(1.15,7.25+$Y);
-            $pdf->Cell(0.5,0.5,  $data['sub6Ap1'] != 1 ? '':   '    '. $data['sub6_NAME'],0,'L');
+            $pdf->Cell(0.5,0.5,  $data['sub6Ap1'] != 1 ? '':   '    '. $data['sub6_NAME'],1,'L');
 
             $pdf->SetXY(4.6,7.35+$Y);
-            $pdf->Cell(0.3,0.4,"7._______________________________",0,'L');
+            $pdf->Cell(0.3,0.4,"7._______________________________",1,'L');
             $pdf->SetXY(4.65,7.25+$Y);
-            $pdf->Cell(0.5,0.5,  $data['sub6Ap2'] != 1 ? '':   '    '. $data['sub6_NAME'],0,'R');
+            $pdf->Cell(0.5,0.5,  $data['sub6Ap2'] != 1 ? '':   '    '. $data['sub6_NAME'],1,'R');
             //-----------------sub8
 
             $pdf->SetXY(1.1,7.6+$Y);
-            $pdf->Cell(0.3,0.4,"8._______________________________",0,'L');        
+            $pdf->Cell(0.3,0.4,"8._______________________________",1,'L');        
             $pdf->SetXY(1.15,7.5+$Y);
-            $pdf->Cell(0.5,0.5,  $data['sub7Ap1'] != 1 ? '':   '    '. $data['sub7_NAME'],0,'L');
+            $pdf->Cell(0.5,0.5,  $data['sub7Ap1'] != 1 ? '':   '    '. $data['sub7_NAME'],1,'L');
 
             $pdf->SetXY(4.6,7.6+$Y);
-            $pdf->Cell(0.3,0.4,"8._______________________________",0,'L');
+            $pdf->Cell(0.3,0.4,"8._______________________________",1,'L');
             $pdf->SetXY(4.65,7.50+$Y);
-            $pdf->Cell(0.5,0.5,  $data['sub7Ap2'] != 1 ? '':   '    '. $data['sub7_NAME'],0,'R');
+            $pdf->Cell(0.5,0.5,  $data['sub7Ap2'] != 1 ? '':   '    '. $data['sub7_NAME'],1,'R');*/
             //-------------------     
-            $pdf->SetXY(0.5,7.85 +$Y);
-            $pdf->SetFont('Arial','UIB',8);
+            $pdf->SetXY(0.5,7.55 +$Y);
+            $pdf->SetFont('Arial','UIB',9);
             $pdf->Cell( 0.5,0.5,'Affidavit:',0,'L');
 
-            $pdf->SetXY(0.5,8.2+$Y);
-            $pdf->SetFont('Arial','',8);
-            $pdf->MultiCell( 7,0.1,"    I have read this form. The data/information on this form and in online system is same as last entered/modified/provided by me and its correctness is only my responsbility. I understand that only the information/data provided in the online system alongwith photograph and some other handwritten details on this form will be used for further processing. I accept all the terms and conditions in this  regard.",0);
+            $pdf->SetXY(0.5,7.9+$Y);
+            $pdf->SetFont('Arial','',9);
+            $pdf->MultiCell( 7.2,0.15,"    I have read this form. The data/information on this form and in online system is same as last entered/modified/provided by me and its correctness is only my responsbility. I understand that only the information/data provided in the online system alongwith photograph and some other handwritten details on this form will be used for further processing. I accept all the terms and conditions in this  regard.",0,'J');
             //------ Thumb Box on Centre      
 
             $pdf->SetFont('Arial','',8);
@@ -3433,7 +3604,7 @@ class Admission_inter extends CI_Controller {
             //---------------------------------------------------------------------------
 
             //---------------------------------------------------------------------------
-            $InstName = 'Head of Institution Name:';
+            $InstName = 'Head of Institute Name:';
             $CNICNO = 'CNIC No:';
             $EMISCode= 'EMIS CODE:';
             $MobileNo = 'Mobile No.';
@@ -3471,14 +3642,14 @@ class Admission_inter extends CI_Controller {
             //------------------------------------------------------------------------------
             $pdf->SetXY(0.2,9.98+$Y);
             $pdf->Cell(2,0.65,'',1,0,'C',0); 
-            $pdf->SetXY(0.2,9.7+$Y);
-            $pdf->Cell(4,1.09,'Thumb Impression','',0,'L',0); 
+            $pdf->SetXY(0.2,10.0+$Y);
+            $pdf->Cell(4,1.09,"Candidate's Thumb Impression",'',0,'L',0); 
 
             //------ Picture Box on right side on Top      
             $pdf->SetXY(6.2,8.9+$Y);
             $pdf->Cell(1.4,1.5,'',1,0,'C',0); 
-            $pdf->SetXY(6.3,9.15+$Y);
-            $pdf->MultiCell(1.1,0.2, 'Paste Recent Photograph & Must Be Cross Attested by the Head/Deputy Head of Institution',0,'C'); 
+            $pdf->SetXY(6.3,9.15+$Y); 
+            $pdf->MultiCell(1.1,0.2, 'Paste Recent Photograph & Must Be Cross Attested.',0,'C');  // by the Head/Deputy Head of Institution
 
             //------------------------- Image 
             $pdf->SetXY(6.2,10.4+$Y);
@@ -3491,7 +3662,7 @@ class Admission_inter extends CI_Controller {
             //======================================================================================
         }
 
-        $pdf->Output($data["Sch_cd"].'.pdf', 'I');
+        $pdf->Output($data["coll_cd"].'.pdf', 'I');
     }
     function convertImage($originalImage, $outputImage, $quality,$ext)
     {

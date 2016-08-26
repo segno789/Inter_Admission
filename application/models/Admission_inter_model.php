@@ -509,7 +509,7 @@ class Admission_inter_model extends CI_Model
         $Inst_cd = $fetch_data['Inst_cd'];
         $Grp_cd = $fetch_data['grp_cd'];
         $Batch_Id = $fetch_data['Batch_Id'];
-        $query = $this->db->query("Admission_online..sp_get_reg_Print_Form_Matric_II $Inst_cd,$Grp_cd,$Batch_Id");
+        $query = $this->db->query("Admission_online..sp_get_reg_Print_Form_Inter_II $Inst_cd,$Grp_cd,$Batch_Id");
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
@@ -527,7 +527,7 @@ class Admission_inter_model extends CI_Model
         $start_formno = $fetch_data['start_formno'];
         $end_formno = $fetch_data['end_formno'];
         $Batch_Id = $fetch_data['Batch_Id'];
-        $query = $this->db->query("Admission_online..sp_get_reg_Print_Form_formnowise_Matric_II $Inst_cd,'$start_formno','$end_formno',$Batch_Id");
+        $query = $this->db->query("Admission_online..sp_get_reg_Print_Form_formnowise_Inter_II $Inst_cd,'$start_formno','$end_formno',$Batch_Id");
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
@@ -543,7 +543,7 @@ class Admission_inter_model extends CI_Model
         //  //DebugBreak();
         $Inst_cd = $fetch_data['Inst_cd'];
         $Batch_Id = $fetch_data['Batch_Id'];
-        $query = $this->db->query("Admission_online..sp_get_reg_Print_Form_batchidwise_Matric_II $Inst_cd,$Batch_Id");
+        $query = $this->db->query("Admission_online..sp_get_reg_Print_Form_batchidwise_Inter_II $Inst_cd,$Batch_Id");
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
@@ -561,16 +561,16 @@ class Admission_inter_model extends CI_Model
         $Inst_cd = $fetch_data['Inst_cd'];
         $Batch_Id = $fetch_data['Batch_Id'];
 
-        $this->db->select('name, Fname, IsReAdm,regFee,RegProcessFee,RegFineFee,RegTotalFee');
-        $this->db->from('Admission_online..MSAdm2016');
-        $this->db->where(array('Sch_cd' => $Inst_cd,'Batch_ID'=>$Batch_Id));
+        $this->db->select('name, Fname, IsReAdm,AdmFee,AdmProcessFee,AdmFineFee,AdmTotalFee');
+        $this->db->from('Admission_online..ISAdm2016');
+        $this->db->where(array('coll_cd' => $Inst_cd,'Batch_ID'=>$Batch_Id));
         $result_1 = $this->db->get()->result();
         //$query = $this->db->get_where('Registration..MA_P1_Reg_Adm2016',  array('Sch_cd' => $Inst_cd,'Batch_ID'=>$Batch_Id));
         //$rowcount = $query->num_rows();
         //if($rowcount > 0)
         //{
         //$q = $query->result_array();
-        $query_1 = $this->db->get_where('Admission_online..fl_reg_batch_test',  array('Inst_Cd' => $Inst_cd,'Batch_ID'=>$Batch_Id));
+        $query_1 = $this->db->get_where('Admission_online..fl_reg_batch_test_inter',  array('Inst_Cd' => $Inst_cd,'Batch_ID'=>$Batch_Id));
         $rowcount = $query_1->num_rows();
         if($rowcount > 0){
             $query_1 = $query_1->result_array();
