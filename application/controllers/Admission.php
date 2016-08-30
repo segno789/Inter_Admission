@@ -9,6 +9,8 @@ class Admission extends CI_Controller {
 
     public function index()
     {
+        
+        
         $data = array(
             'isselected' => '3',
         );
@@ -1249,7 +1251,7 @@ class Admission extends CI_Controller {
     public function Pre_Inter_Data()
     {       
 
-        // DebugBreak();     
+         DebugBreak();     
          $this->load->library('session');
          $mrollno='';
          $hsscrno='';
@@ -1270,6 +1272,7 @@ class Admission extends CI_Controller {
         $board   = @$data['data']['oldboardid'];
         $CatType = @$data['data']['cattype_hidden'];
         $Insert_server_error=@$data['data']['excep'];
+        
         }
         else
         {
@@ -1587,6 +1590,10 @@ class Admission extends CI_Controller {
             array_search(@$_POST['sub4p2'],$practical_Sub) || array_search(@$_POST['sub5p2'],$practical_Sub) || array_search(@$_POST['sub6p2'],$practical_Sub)){
             $ispractical =1;
         }
+        if(@$_POST['cattype_hidden']==2)
+        {
+            $ispractical =0;
+        }
 
         $AdmFee = $this->Admission_model->getrulefee($ispractical);
          //debugBreak();
@@ -1606,11 +1613,20 @@ class Admission extends CI_Controller {
         }
         if($Speciality>0)
         {
-        $AdmFeeCatWise = 0;    
+             if($Speciality ==2 && Session ==2 )
+            {
+                $AdmFeeCatWise = $AdmFeeCatWise;    
+            }
+            else
+            {
+                $AdmFeeCatWise = 0;    
+            }
+        
         }
         else
         {
-            $AdmFeeCatWise  =0;
+            $AdmFeeCatWise = $AdmFeeCatWise;
+           // $AdmFeeCatWise  =0;
         }
 $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;  
         
@@ -1623,7 +1639,7 @@ $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;
         else if($oldsess == 'Supplementary'){
             $oldsess =  2;    
         }
-        //  DebugBreak();
+          DebugBreak();
 
         $data = array(
             'name' =>$this->input->post('cand_name'),
@@ -1688,10 +1704,67 @@ $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;
             'exam_type'=>$_POST['exam_type'],
             'picpath'=>@$_POST['pic'],
             'brd_name'=>@$_POST['oldboard']
-        );     
-
-        $target_path = PRIVATE_IMAGE_PATH;
-        /*if (!file_exists($target_path)){
+        );
+        
+        $data_error = array(
+        'matRno_hidden'=>$this->input->post('matRno_hidden'),
+        'oldrno'=>$this->input->post('InterRno_hidden'),
+        'InterYear_hidden'=>$this->input->post('InterYear_hidden'),
+        'InterSess_hidden'=>$this->input->post('InterSess_hidden'),
+        'oldboardid'=>$this->input->post('oldboardid'),
+        'cattype_hidden'=>$this->input->post('cattype_hidden'),
+        'oldClass'=>$this->input->post('oldClass'),
+        );
+        
+   /*              $mrollno =@$data['data']['matRno_hidden'];// $_POST["txtMatRno"];
+        $hsscrno = @$data['data']['oldrno'];
+        $oldClass= @$data['data']['oldClass'];
+        $iyear    = @$data['data']['InterYear_hidden'];
+        $session = @$data['data']['InterSess_hidden'];
+        $board   = @$data['data']['oldboardid'];
+        $CatType = @$data['data']['cattype_hidden'];
+        $Insert_server_error=@$data['data']['excep'];
+        $mrollno = $_POST["txtMatRno"];
+        $hsscrno = $_POST["oldRno"];
+        $oldClass= $_POST["oldClass"];
+        $iyear    = $_POST["oldYear"];
+        $session = $_POST["oldSess"];
+        $board   = $_POST["oldBrd_cd"];
+        $CatType = @$_POST["CatType"];
+        $data_forError = array(
+          
+            'rno'=>@$_POST['oldrno'],
+            'sess'=>$oldsess,
+            'Iyear'=>@$_POST['oldyear'],
+            'Brd_cd'=>@$_POST['oldboardid'],
+            'class'=>@$_POST['oldclass'],
+           'exam_type'=>$_POST['exam_type'],
+           'brd_name'=>@$_POST['oldboard']
+        );*/   
+      //debugBreak();
+        
+        
+        
+        
+        /*
+        
+        $temp_file_name = @$_POST['pic'] //'OldPics/Pic16-MA/MA11th16/123456.jpg';
+        $whatIWant = substr($temp_file_name, strpos($temp_file_name, ".") - 6);    
+      
+        $temp_db_rno = @$_POST['InterRno_hidden'];
+        $spreate_filename = explode(".",$whatIWant);
+        $temp_file_rno= $spreate_filename[0];
+        if($temp_file_rno != $temp_db_rno)
+        {
+            echo "Picture Error";
+        }
+        else
+        {
+            echo "Successfull";
+        }
+        
+          $target_path = PRIVATE_IMAGE_PATH;
+        if (!file_exists($target_path)){
 
         mkdir($target_path);
         }
@@ -1717,7 +1790,7 @@ $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;
 
         $this->load->view('common/footer.php');
         }*/
-        $this->frmvalidation('Pre_Inter_Data',@$_POST,0);
+        $this->frmvalidation('Pre_Inter_Data',$data_error,0);
         $logedIn = $this->Admission_model->Insert_NewEnorlement($data);
         if($logedIn != false)
         {
@@ -1835,7 +1908,7 @@ $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;
 
         
 
-        if(@$_POST['cand_name'] == '' )
+        if(@$_POST['cand_name'] != '' )
         {
             $allinputdata['excep'] = 'Please Enter Your Name';
             $this->session->set_flashdata('NewEnrolment_error',$allinputdata);

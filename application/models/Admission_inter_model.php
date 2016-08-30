@@ -328,6 +328,28 @@ class Admission_inter_model extends CI_Model
         }
 
     }
+    public function GetFormNo_pvt()
+    {
+        // //DebugBreak();
+        $this->db->select('formno');
+        $this->db->order_by("formno", "DESC");
+        $formno = $this->db->get_where('Admission_online..ISAdm2016', array('regPvt' => 2));
+        $rowcount = $formno->num_rows();
+
+        if($rowcount == 0 )
+        {
+            $formno =  (formnovalid );
+            return $formno;
+        }
+        else
+        {
+            $row  = $formno->result_array();
+            $formno = $row[0]['formno']+1;
+            return $formno;
+        }
+
+    }
+    
     public function user_info($User_info_data)
     {
         // //DebugBreak();

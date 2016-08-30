@@ -1066,9 +1066,9 @@ class Admission_inter extends CI_Controller {
         $Speciality = $this->input->post('speciality');
         $grp_cd = $this->input->post('std_group');
 
-        ////DebugBreak();
+        //DebugBreak();
       
-// DebugBreak();
+      // DebugBreak();
         $data = array(
             'name' =>$this->input->post('cand_name'),
             'Fname' =>$this->input->post('father_name'),
@@ -1165,7 +1165,12 @@ class Admission_inter extends CI_Controller {
             redirect('Admission_inter/NewEnrolment_NewForm_inter/');
         }*/
       
-      //  $this->frmvalidation('NewEnrolment_NewForm_inter',$data,0);
+      $data_error = array(
+      'formNo' =>$this->input->post('formNo'),
+      
+      );
+      debugBreak();
+        $this->frmvalidation('NewEnrolment_NewForm_inter',$data,$data_error,0);
         $data['isupdate']=0;
         $logedIn = $this->Admission_inter_model->Insert_NewEnorlement($data);//, $fname);//$_POST['username'],$_POST['password']);
         ////DebugBreak();
@@ -1255,7 +1260,7 @@ class Admission_inter extends CI_Controller {
     }
      public function NewEnrolment_NewForm_inter()
     {    
-   // DebugBreak();
+    DebugBreak();
    // $this->uri->segment(3);
     
         $this->load->library('session');
@@ -1269,12 +1274,16 @@ class Admission_inter extends CI_Controller {
             'isselected' => '11',
         );
         $this->load->model('Admission_inter_model');
+        
         if($this->session->flashdata('NewEnrolment_error')){
-            //  //DebugBreak();
-            $RegStdData['data'][0] = $this->session->flashdata('NewEnrolment_error');   
+           // DebugBreak();
+            //$formno
+            $RegStdata = $this->session->flashdata('NewEnrolment_error');   
             $isReAdm = 0;
             $RegStdData['isReAdm']=$isReAdm;
             $RegStdData['Oldrno']=0;
+            $formno = $RegStdata['formNo'];
+            $RegStdData = array('data'=>$this->Admission_inter_model->EditEnrolement_data($formno,$year,$Inst_Id),'isReAdm'=>$isReAdm,'Oldrno'=>0);
 
         }
         else{
@@ -3683,17 +3692,12 @@ class Admission_inter extends CI_Controller {
 
         return 1;
     }
-    function frmvalidation($viewName,$allinputdata,$isupdate)
+    function frmvalidation($viewName,$data,$allinputdata,$isupdate)
     {
 
-      // DebugBreak();
+       DebugBreak();
         $_POST['address']  = str_replace("'", "", $_POST['address'] );
 
-        if(@$_POST['dob_hidden'] != null)
-        {
-            $date = new DateTime(@$_POST['dob_hidden']);
-            $convert_dob = $date->format('Y-m-d');     
-        }
 
         if(@$_POST['cand_name'] != '' )
         {
