@@ -19,7 +19,7 @@
                                             <tr>
                                                 <td><label class=mytblmargin style="margin-right: 62px;"><b>Matric Roll No.</b><br /></label></td>
                                                 <td><input type="text" class="panjang required custom" onKeyPress="validatenumber(event);" maxlength="6" id="txtMatRno" required="required" name="txtMatRno" value="<?php  echo @$spl_cd['data']['txtMatRno'];  ?>"></td> 
-                                                <td><label class=mytblmargin><b>Last Appear Intermediate Roll No.</b><br /></label></td>
+                                                <td><label class=mytblmargin style="margin-right: 51px;"><b>Last Appear Inter Roll No.</b><br /></label></td>
                                                 <td><input type="text" class="panjang custom required" onKeyPress="validatenumber(event);" maxlength="6" id="oldRno" required="required" name="oldRno"  maxlength="6" value="<?php echo @$spl_cd['data']['oldRno']; ?>" /></td>
                                             </tr>
                                             <tr>

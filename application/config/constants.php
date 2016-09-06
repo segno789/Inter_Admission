@@ -36,12 +36,12 @@ define('FOPEN_READ_WRITE_CREATE',				'a+b');
 define('FOPEN_WRITE_CREATE_STRICT',				'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
-define('PRIVATE_IMAGE_PATH', 'uploads/IS2016/private/');
+define('PRIVATE_IMAGE_PATH', 'uploads/2016/private/');
 define('REGULAR_IMAGE_PATH', 'uploads/2016/regular/');
 define('Session','2');  // 1 for Annual and 2 for Supply
 define('Year','2016');  
 define('lastdate','20-08-2016');
-define('GET_PRIVATE_IMAGE_PATH', 'assets/');
+define('GET_PRIVATE_IMAGE_PATH', '');
 define('GET_PRIVATE_IMAGE_PATH_COPY', '');
 
 
@@ -53,20 +53,7 @@ define('formnovalid','600000');
 define('return_pdf_isPicture','1');
 define('CURRENT_SESS','2016-2018');
 
-////9th registration
-define('IMAGE_PATH', 'uploads/2016/');
-define('IMAGE_PATH2', 'uploads/2016_backup/');
-define('BARCODE_PATH', 'assets/pdfs/');
-define('SINGLE_LAST_DATE', '2016-06-07');
-define('DOUBLE_LAST_DATE', '2016-06-12');
 
-/////11th registration
-
-define('IMAGE_PATH11', 'uploads/2016/');
-define('IMAGE_PATH211', 'uploads/2016_backup/');
-define('BARCODE_PATH11', 'uploads/assets/pdfs/');
-define('SINGLE_LAST_DATE11', '2016-06-07');
-define('DOUBLE_LAST_DATE11', '2016-06-12');
 
 define('currdate','date("d-m-Y");');
 define ('SingleDateFee','03-07-2016');

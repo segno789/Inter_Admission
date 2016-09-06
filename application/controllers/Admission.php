@@ -1378,7 +1378,7 @@ class Admission extends CI_Controller {
         $this->load->model('Admission_model');
         $this->load->library('session');
         $Inst_Id = 999999;
-        // DebugBreak();
+         DebugBreak();
         $formno = $this->Admission_model->GetFormNo();
         $allinputdata = array('cand_name'=>@$_POST['cand_name'],
             'father_name'=>@$_POST['father_name'],
@@ -1691,9 +1691,9 @@ $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;
         );     
 
         $target_path = PRIVATE_IMAGE_PATH;
-        /*if (!file_exists($target_path)){
+        if (!file_exists($target_path)){
 
-        mkdir($target_path);
+            mkdir($target_path);
         }
 
         $base_path = GET_PRIVATE_IMAGE_PATH_COPY.@$_POST['pic'];
@@ -1701,22 +1701,22 @@ $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;
 
         if (!(copy($base_path, $copyimg))) 
         {
-        $data['excep'] = 'The file you are attempting to upload size is between 4 to 20 Kb.';
-        $this->session->set_flashdata('NewEnrolment_error',$data);
-        redirect('Admission/Pre_Inter_data/');
+            $data['excep'] = 'The file you are attempting to upload size is between 4 to 20 Kb.';
+            $this->session->set_flashdata('NewEnrolment_error',$data);
+            redirect('Admission/Pre_Inter_data/');
         }
 
         if (!(copy($base_path, $copyimg))) 
         {
-        $data['excep'] = 'The file you are attempting to upload size is between 4 to 20 Kb.';
-        $this->session->set_flashdata('NewEnrolment_error',$data);
+            $data['excep'] = 'The file you are attempting to upload size is between 4 to 20 Kb.';
+            $this->session->set_flashdata('NewEnrolment_error',$data);
 
-        redirect('Admission/Pre_Matric_data/');
-        $this->frmvalidation('Pre_Matric_data',$data,0);       
+            redirect('Admission/Pre_Inter_data/');
+            $this->frmvalidation('Pre_Matric_data',$data,0);       
 
 
-        $this->load->view('common/footer.php');
-        }*/
+           // $this->load->view('common/footer.php');
+        }
         $this->frmvalidation('Pre_Inter_Data',@$_POST,0);
         $logedIn = $this->Admission_model->Insert_NewEnorlement($data);
         if($logedIn != false)
