@@ -812,13 +812,7 @@ class Admission_inter extends CI_Controller {
             'Brd_cd'=>@$_POST['Oldbrd'],
             'schm'=>1,
             //'picpath'=>@$_POST['pic'],
-            'sub1pf1'=>@$_POST['sub1pf1_hidden'],
-            'sub2pf1'=>@$_POST['sub2pf1_hidden'],
-            'sub3pf1'=>@$_POST['sub3pf1_hidden'],
-            'sub4pf1'=>@$_POST['sub4pf1_hidden'],
-            'sub5pf1'=>@$_POST['sub5pf1_hidden'],
-            'sub6pf1'=>@$_POST['sub6pf1_hidden'],
-            'sub7pf1'=>@$_POST['sub7pf1_hidden']
+               'oldFormNo'=>@$_POST['formNo']
 
 
 
@@ -828,7 +822,7 @@ class Admission_inter extends CI_Controller {
         );
         
  
-
+                DebugBreak();
     /*  $target_path = REGULAR_IMAGE_PATH.$Inst_Id.'/';
         if (!file_exists($target_path)){
 
@@ -848,7 +842,7 @@ class Admission_inter extends CI_Controller {
             redirect('Admission_inter/NewEnrolment_NewForm_inter/');
         }*/
       
-      //  $this->frmvalidation('NewEnrolment_NewForm_inter',$data,0);
+        $this->frmvalidation('NewEnrolment_EditForm_inter',$data,0);
         $data['isupdate']=1;
         $logedIn = $this->Admission_inter_model->Insert_NewEnorlement($data);//, $fname);//$_POST['username'],$_POST['password']);
         ////DebugBreak();
@@ -1066,9 +1060,9 @@ class Admission_inter extends CI_Controller {
         $Speciality = $this->input->post('speciality');
         $grp_cd = $this->input->post('std_group');
 
-        ////DebugBreak();
+        //DebugBreak();
       
-// DebugBreak();
+      // DebugBreak();
         $data = array(
             'name' =>$this->input->post('cand_name'),
             'Fname' =>$this->input->post('father_name'),
@@ -1129,13 +1123,8 @@ class Admission_inter extends CI_Controller {
             'Brd_cd'=>@$_POST['Oldbrd'],
             'schm'=>1,
             //'picpath'=>@$_POST['pic'],
-            'sub1pf1'=>@$_POST['sub1pf1_hidden'],
-            'sub2pf1'=>@$_POST['sub2pf1_hidden'],
-            'sub3pf1'=>@$_POST['sub3pf1_hidden'],
-            'sub4pf1'=>@$_POST['sub4pf1_hidden'],
-            'sub5pf1'=>@$_POST['sub5pf1_hidden'],
-            'sub6pf1'=>@$_POST['sub6pf1_hidden'],
-            'sub7pf1'=>@$_POST['sub7pf1_hidden']
+            
+            'oldFormNo'=>@$_POST['formNo']
 
 
 
@@ -1165,7 +1154,12 @@ class Admission_inter extends CI_Controller {
             redirect('Admission_inter/NewEnrolment_NewForm_inter/');
         }*/
       
-      //  $this->frmvalidation('NewEnrolment_NewForm_inter',$data,0);
+      $data_error = array(
+      'formNo' =>$this->input->post('formNo'),
+      
+      );
+    //  debugBreak();
+        $this->frmvalidation('NewEnrolment_NewForm_inter',$data,0);
         $data['isupdate']=0;
         $logedIn = $this->Admission_inter_model->Insert_NewEnorlement($data);//, $fname);//$_POST['username'],$_POST['password']);
         ////DebugBreak();
@@ -1255,7 +1249,7 @@ class Admission_inter extends CI_Controller {
     }
      public function NewEnrolment_NewForm_inter()
     {    
-   // DebugBreak();
+//    DebugBreak();
    // $this->uri->segment(3);
     
         $this->load->library('session');
@@ -1269,12 +1263,18 @@ class Admission_inter extends CI_Controller {
             'isselected' => '11',
         );
         $this->load->model('Admission_inter_model');
+        
         if($this->session->flashdata('NewEnrolment_error')){
-            //  //DebugBreak();
-            $RegStdData['data'][0] = $this->session->flashdata('NewEnrolment_error');   
+           // DebugBreak();
+            //$formno
+            $RegStdata = $this->session->flashdata('NewEnrolment_error');   
             $isReAdm = 0;
             $RegStdData['isReAdm']=$isReAdm;
             $RegStdData['Oldrno']=0;
+            $formno = $RegStdata['oldFormNo'];
+            $year = 2015; 
+            $error_msg = $RegStdata['excep'];
+            $RegStdData = array('data'=>$this->Admission_inter_model->EditEnrolement_data($formno,$year,$Inst_Id),'isReAdm'=>$isReAdm,'Oldrno'=>0,'error_msg'=>$error_msg);
 
         }
         else{
@@ -1288,7 +1288,8 @@ class Admission_inter extends CI_Controller {
                 $year = 2015;    
             }
             $formno = $this->uri->segment(3);
-            $RegStdData = array('data'=>$this->Admission_inter_model->EditEnrolement_data($formno,$year,$Inst_Id),'isReAdm'=>$isReAdm,'Oldrno'=>0);
+            $error_msg = '';
+            $RegStdData = array('data'=>$this->Admission_inter_model->EditEnrolement_data($formno,$year,$Inst_Id),'isReAdm'=>$isReAdm,'Oldrno'=>0,'error_msg'=>$error_msg);
         }
         $this->load->view('common/menu.php',$data);
         $this->load->view('Admission/inter/New_Enrolement_form.php',$RegStdData);   
@@ -1297,7 +1298,7 @@ class Admission_inter extends CI_Controller {
     }
     public function NewEnrolment_EditForm_inter()
     {    
-  /// DebugBreak();
+   //DebugBreak();
         $this->load->library('session');
         $formno = $this->uri->segment(3);
         $Logged_In_Array = $this->session->all_userdata();
@@ -1322,7 +1323,10 @@ class Admission_inter extends CI_Controller {
             $isReAdm = 0;
             $RegStdData['isReAdm']=$isReAdm;
             $RegStdData['Oldrno']=0;
-            $msg = $RegStdData['data'][0]['formNo'];
+            $formno = $RegStdData['data'][0]['FormNo'];
+            $error_msg = $RegStdData['data'][0]['excep'];
+            $year = 2016; 
+            $RegStdData = array('data'=>$this->Admission_inter_model->EditEnrolement_singleForm($formno,$year,$Inst_Id),'isReAdm'=>$isReAdm,'Oldrno'=>0,'error_msg'=>$error_msg);
 
         }
         else{
@@ -1335,7 +1339,8 @@ class Admission_inter extends CI_Controller {
                 $isReAdm = 0;
                 $year = 2016;    
             }
-            $RegStdData = array('data'=>$this->Admission_inter_model->EditEnrolement_singleForm($formno,$year,$Inst_Id),'isReAdm'=>$isReAdm,'Oldrno'=>0);
+              $error_msg = '';
+            $RegStdData = array('data'=>$this->Admission_inter_model->EditEnrolement_singleForm($formno,$year,$Inst_Id),'isReAdm'=>$isReAdm,'Oldrno'=>0,'error_msg'=>$error_msg);
         }
         $this->load->view('common/menu.php',$data);
         $this->load->view('Admission/inter/Edit_Enrolement_form.php',$RegStdData);   
@@ -1667,7 +1672,7 @@ class Admission_inter extends CI_Controller {
 
 
         );
-        $this->frmvalidation('NewEnrolment_EditForm/',$data);
+        $this->frmvalidation('NewEnrolment_EditForm/',$data,1);
         $logedIn = $this->Admission_inter_model->Update_NewEnorlement($data);//, $fname);//$_POST['username'],$_POST['password']);
         if($logedIn != false)
         {  
@@ -3689,17 +3694,12 @@ class Admission_inter extends CI_Controller {
       // DebugBreak();
         $_POST['address']  = str_replace("'", "", $_POST['address'] );
 
-        if(@$_POST['dob_hidden'] != null)
-        {
-            $date = new DateTime(@$_POST['dob_hidden']);
-            $convert_dob = $date->format('Y-m-d');     
-        }
 
         if(@$_POST['cand_name'] != '' )
         {
             $allinputdata['excep'] = 'Please Enter Your Name';
             $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-            redirect('Admission_inter/'.$viewName);
+            redirect('Admission_inter/'.$viewName.'');
             return; //"NewEnrolment_EditForm_inter"
 
         }
@@ -3736,14 +3736,14 @@ class Admission_inter extends CI_Controller {
 
             }
            
-            else if (@$_POST['dob_hidden'] == '' )
+            /*else if (@$_POST['dob_hidden'] == '' )
             {
                 $allinputdata['excep'] = 'Please Enter Your  Date of Birth';
                 $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
                 redirect('Admission_inter/'.$viewName);
                 return;
 
-            }
+            } */
             else if(@$_POST['mob_number'] == '')
             {
                 $allinputdata['excep'] = 'Please Enter Your Mobile Number';
@@ -3845,7 +3845,7 @@ class Admission_inter extends CI_Controller {
                 return;
 
             }
-            else if((@$_POST['std_group_hidden'] == 1) && ((@$_POST['sub5p2']!=6) || (@$_POST['sub6p2']!=7)||(@$_POST['sub7p2']!=8)))
+            else if((@$_POST['std_group_hidden'] == 1) && ((@$_POST['sub4p2']!=47) || (@$_POST['sub5p2']!=48)||(@$_POST['sub6p2']!=46)))
             {
 
                 $allinputdata['excep'] = 'Subjects not according to Group';
@@ -3980,14 +3980,14 @@ class Admission_inter extends CI_Controller {
                             return;
 
                         }
-                        else if(@$_POST['sub7p2'] == @$_POST['sub8p2'])
+                       /* else if(@$_POST['sub7p2'] == @$_POST['sub8p2'])
                         {
                             $allinputdata['excep'] = 'Please Select Different Subjects';
                             $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
                             redirect('Admission_inter/'.$viewName);
                             return;
 
-                        }
+                        }  */
                         else if(@$_POST['sub1p2'] == 0)
                         {
                             $allinputdata['excep'] = 'Please Select Part-II Subject 1';
@@ -4035,7 +4035,7 @@ class Admission_inter extends CI_Controller {
                             return;
 
                         }
-                        else if(@$_POST['sub7p2'] == 0)
+                        else if(@$_POST['sub7p2']==0 && @$_POST['std_group_hidden']==7)
                         {
                             $allinputdata['excep'] = 'Please Select Part-II Subject 7';
                             $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
@@ -4043,14 +4043,14 @@ class Admission_inter extends CI_Controller {
                             return;
 
                         }
-                        else if(@$_POST['sub8p2'] == 0)
+                        /*else if(@$_POST['sub8p2'] == 0)
                         {
                             $allinputdata['excep'] = 'Please Select Part-II Subject 8';
                             $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
                             redirect('Admission_inter/'.$viewName);
                             return;
 
-                        }
+                        }     */
     }
 
 }

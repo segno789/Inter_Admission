@@ -1,3 +1,4 @@
+
 <div class="dashboard-wrapper class wysihtml5-supported">
     <div class="left-sidebar">
         <div class="row-fluid">
@@ -75,8 +76,12 @@
                                         {
                                             echo 
                                             "<option value='0' selected='selected'>None</option> 
-                                            <option value='1'>Deaf &amp; Dumb</option>
-                                            <option value='2'>Board Employee</option>";
+                                            <option value='1'>Deaf &amp; Dumb</option>";
+                                            if(Session != 2)
+                                            {
+                                            echo "<option value='2'>Board Employee</option>";    
+                                            }
+                                            
                                         }
                                         ?>
                                     </select>
@@ -599,10 +604,38 @@
                             <input type="hidden" name="pregrp"     id="pregrp"     value="<?php echo @$pregrp = $data[0]['grp_cd']; ?>">
                             <input type="hidden" name="oldboardid" id="oldboardid" value="<?php   echo @$data['board'];?>"/>
                             <input type="hidden" name="matRno_hidden" id="matRno_hidden" value="<?php   echo @$data[0]['matRno'];?>"/>
-                            <input type="hidden" name="InterRno_hidden" id="InterRno_hidden" value="<?php   echo @$data[0]['oldRno'];?>"/>
-                            <input type="hidden" name="InterYear_hidden" id="InterSess_hidden" value="<?php   echo @$data[0]['YearOfLastAp'];?>"/>
-                            <input type="hidden" name="InterSess_hidden" id="InterYear_hidden" value="<?php   echo @$data['0']['sess'];?>"/>
-                            <input type="hidden" name="cattype_hidden" id="InterYear_hidden" value="<?php   echo  @$cattype;?>"/>
+                            <input type="hidden" name="InterRno_hidden" id="InterRno_hidden" value="<?php   echo @$data[0]['rno'];?>"/>
+                            <input type="hidden" name="InterYear_hidden" id="InterYear_hidden" value="<?php   echo @$data[0]['YearOfLastAp'];?>"/>
+                            <input type="hidden" name="InterSess_hidden" id="InterSess_hidden" value="<?php   echo @$data['0']['sess'];?>"/>
+                            <input type="hidden" name="cattype_hidden" id="cattype_hidden" value="<?php   echo  @$cattype;?>"/>
+                            <input type="hidden" name="sub1pf1_hidden" id="sub1pf1_hidden" value="<?php   echo  @$data[0]['sub1pf1'];?>"/>
+                            <input type="hidden" name="sub2pf1_hidden" id="sub1pf1_hidden" value="<?php   echo  @$data[0]['sub2pf1'];?>"/>
+                            <input type="hidden" name="sub3pf1_hidden" id="sub1pf1_hidden" value="<?php   echo  @$data[0]['sub3pf1'];?>"/>
+                            <input type="hidden" name="sub4pf1_hidden" id="sub1pf1_hidden" value="<?php   echo  @$data[0]['sub4pf1'];?>"/>
+                            <input type="hidden" name="sub5pf1_hidden" id="sub1pf1_hidden" value="<?php   echo  @$data[0]['sub5pf1'];?>"/>
+                            <input type="hidden" name="sub6pf1_hidden" id="sub1pf1_hidden" value="<?php   echo  @$data[0]['sub6pf1'];?>"/>
+                            <input type="hidden" name="sub7pf1_hidden" id="sub1pf1_hidden" value="<?php   echo  @$data[0]['sub7pf1'];?>"/>
+                            <input type="hidden" name="sub1pf2_hidden" id="sub1pf1_hidden" value="<?php   echo  @$data[0]['sub1pf2'];?>"/>
+                            <input type="hidden" name="sub2pf2_hidden" id="sub1pf1_hidden" value="<?php   echo  @$data[0]['sub2pf2'];?>"/>
+                            <input type="hidden" name="sub8pf1_hidden" id="sub1pf1_hidden" value="<?php   echo  @$data[0]['sub8pf1'];?>"/>
+                            <input type="hidden" name="sub4pf2_hidden" id="sub1pf1_hidden" value="<?php   echo  @$data[0]['sub4pf2'];?>"/>
+                            <input type="hidden" name="sub5pf2_hidden" id="sub1pf1_hidden" value="<?php   echo  @$data[0]['sub5pf2'];?>"/>
+                            <input type="hidden" name="sub6pf2_hidden" id="sub1pf1_hidden" value="<?php   echo  @$data[0]['sub6pf2'];?>"/>
+                            <input type="hidden" name="sub7pf2_hidden" id="sub1pf1_hidden" value="<?php   echo  @$data[0]['sub7pf2'];?>"/>
+                            <input type="hidden" name="sub1st1_hidden" id="sub1st1_hidden" value="<?php   echo  @$data[0]['sub1st1'];?>"/>
+                            <input type="hidden" name="sub2st1_hidden" id="sub1st1_hidden" value="<?php   echo  @$data[0]['sub2st1'];?>"/>
+                            <input type="hidden" name="sub3st1_hidden" id="sub1st1_hidden" value="<?php   echo  @$data[0]['sub3st1'];?>"/>
+                            <input type="hidden" name="sub4st1_hidden" id="sub1st1_hidden" value="<?php   echo  @$data[0]['sub4st1'];?>"/>
+                            <input type="hidden" name="sub5st1_hidden" id="sub1st1_hidden" value="<?php   echo  @$data[0]['sub5st1'];?>"/>
+                            <input type="hidden" name="sub6st1_hidden" id="sub1st1_hidden" value="<?php   echo  @$data[0]['sub6st1'];?>"/>
+                            <input type="hidden" name="sub7st1_hidden" id="sub1st1_hidden" value="<?php   echo  @$data[0]['sub7st1'];?>"/>
+                            <input type="hidden" name="sub1st2_hidden" id="sub1st1_hidden" value="<?php   echo  @$data[0]['sub1st2'];?>"/>
+                            <input type="hidden" name="sub2st2_hidden" id="sub1st1_hidden" value="<?php   echo  @$data[0]['sub2st2'];?>"/>
+                            <input type="hidden" name="sub3st2_hidden" id="sub1st1_hidden" value="<?php   echo  @$data[0]['sub3st2'];?>"/>
+                            <input type="hidden" name="sub4st2_hidden" id="sub1st1_hidden" value="<?php   echo  @$data[0]['sub4st2'];?>"/>
+                            <input type="hidden" name="sub5st2_hidden" id="sub1st1_hidden" value="<?php   echo  @$data[0]['sub5st2'];?>"/>
+                            <input type="hidden" name="sub6st2_hidden" id="sub1st1_hidden" value="<?php   echo  @$data[0]['sub6st2'];?>"/>
+                            <input type="hidden" name="sub7st2_hidden" id="sub1st1_hidden" value="<?php   echo  @$data[0]['sub7st2'];?>"/>
                         
 
                             <div class="span6">

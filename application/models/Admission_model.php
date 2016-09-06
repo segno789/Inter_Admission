@@ -33,12 +33,12 @@ class Admission_model extends CI_Model
 
     public function GetFormNo()
     {
-        $this->db->select('formNo');
+        $this->db->select('FormNo');
        // $this->db->select_max('formNo');
        
         //$this->db->where('regPvt',2);
-        $this->db->order_by("formNo", "DESC");
-        $formno = $this->db->get('admission_online..ISAdm2016');
+        $this->db->order_by("FormNo", "DESC");
+        $formno = $this->db->get('admission_online..ISAdm2016',array('regPvt'=>2));
         //$formno =$this->db->get_where('',array('regPvt'=>2));
         $rowcount = $formno->num_rows();
 
@@ -50,7 +50,7 @@ class Admission_model extends CI_Model
         else
         {
             $row  = $formno->result_array();
-            $formno = $row[0]['formNo']+1;
+            $formno = $row[0]['FormNo']+1;
             return $formno;
         }
 
