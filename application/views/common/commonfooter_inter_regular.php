@@ -352,6 +352,47 @@
 
 
         });
+        var dist_cd = '<?php echo @$data[0]['dist_cd'];  ?>';
+        var teh_cd = '<?php  echo @$data[0]['teh_cd']; ?>';
+        var zone_cd = '<?php echo @$data[0]['zone_cd']; ?>';
+        var gender_d = '<?php echo  @$data[0]['sex']; ?>';
+        
+         var distId =dist_cd;  //$("#pvtinfo_dist").val();
+            $('#pvtinfo_teh').empty();
+            $('#pvtinfo_teh').append('<option value="0">SELECT TEHSIL</option>');
+            $('#pvtZone').empty();
+            $('#pvtZone').append('<option value="0">SELECT ZONE</option>');
+            if(distId == 1){
+                $("#pvtinfo_teh").append('<option value="1">KAMOKE</option>');
+                $("#pvtinfo_teh").append('<option value="2">GUJRANWALA</option>');
+                $("#pvtinfo_teh").append('<option value="3">WAZIRABAD</option>');
+                $("#pvtinfo_teh").append('<option value="4">NOWSHERA VIRKAN</option>'); 
+            }
+            else if(distId == 2){
+                $("#pvtinfo_teh").append('<option value="5">GUJRAT</option>');
+                $("#pvtinfo_teh").append('<option value="6">KHARIAN</option>');
+                $("#pvtinfo_teh").append('<option value="7">SARAI ALAMGIR</option>');
+            }
+            else if(distId == 3){
+                $("#pvtinfo_teh").append('<option value="8">HAFIZABAD</option>');
+                $("#pvtinfo_teh").append('<option value="9">PINDI BHATTIAN</option>');
+            }
+            else if(distId == 4){
+                $("#pvtinfo_teh").append('<option value="10">MANDI BAHA-UD-DIN</option>');
+                $("#pvtinfo_teh").append('<option value="11">PHALIA</option>');
+                $("#pvtinfo_teh").append('<option value="12">MALAKWAL</option>');
+            }
+            else if(distId == 5){
+                $("#pvtinfo_teh").append('<option value="13">NAROWAL</option>');
+                $("#pvtinfo_teh").append('<option value="14">SHAKARGARH</option>');
+                $("#pvtinfo_teh").append('<option value="19">ZAFARWAL</option>');
+            }
+            else if(distId == 6){
+                $("#pvtinfo_teh").append('<option value="15">SIALKOT</option>');
+                $("#pvtinfo_teh").append('<option value="16">PASRUR</option>');
+                $("#pvtinfo_teh").append('<option value="17">DASKA</option>');
+                $("#pvtinfo_teh").append('<option value="18">SAMBRIAL</option>');
+            }
         $("#pvtinfo_teh").change(function(){
 
             // alert("hello");
@@ -420,21 +461,85 @@
             }
 
         })
-        $("#pvtZone").change(function(){
+        var tehId = teh_cd;// $("#pvtinfo_teh").val();
+            //alert("hello "+tehId);
+            if(tehId == 0){
+                //alert("Select Tehsil First");
+            }
+            else{
 
+                jQuery.ajax({
+                    ////debugger;
+                    type: "POST",
+                    url: "<?php echo base_url(); ?>" + "Admission/getzone/",
+                    dataType: 'json',
+                    data: {tehCode: tehId},
+                    beforeSend: function() {  $('.mPageloader').show(); },
+                    complete: function() { $('.mPageloader').hide();},
+                    success: function(json) {
+                        var listitems;
+                        //alert('Hi i am success');
+                        // console.log("I am console");
+                        // console.log(url);
+                        $('#pvtZone').empty();
+                        $('#pvtZone').append('<option value="0">SELECT ZONE</option>');
+                        $.each(json, function (key, data) {
+
+                            //console.log(key)
+
+                            $.each(data, function (index, data) {
+
+                                // console.log('Zone Name :', data.zone_name , ' Zone Code : ' ,data.zone_cd)
+                                listitems +='<option value=' + data.zone_cd + '>' + data.zone_name + '</option>';
+                                //$('#pvtZone').append('<option value=' + data.zone_cd + '>' + data.zone_name + '</option>');
+                                //console.log('Zone Name :', data.zone_cd)
+                                //console.log('Zone Name :', data)
+                            })
+                        })
+                        $('#pvtZone').append(listitems);
+                        $("#pvtZone").val(zone_cd);
+                        /*console.log(data.length);
+                        for (var i = 0; i < data.length; i++) {
+
+                        console.log(" Thesil : "+ data[i].zone_name);
+                        // var checkBox = "<input type='checkbox' data-price='" + data[i].Price + "' name='" + data[i].Name + "' value='" + data[i].ID + "'/>" + data[i].Name + "<br/>";
+                        // $(checkBox).appendTo('#modifiersDiv');
+                        }*/
+                        //if (json)
+                        //{
+                        //var obj = jQuery.parseJSON(json);
+                        //  console.log(json.teh[0].zone_name);
+                        //alert( obj['teh']['Class']);
+                        //   alert(res.Sess);
+                        //   alert(res.Class);
+                        //   //debugger;
+                        //   Show Entered Value
+                        //   jQuery("div#result").show();
+                        //   jQuery("div#value").html(res.username);
+                        //   jQuery("div#value_pwd").html(res.pwd);
+                        //}
+
+                    },
+                    error: function(request, status, error){
+                        alert(request.responseText);
+                    }
+                });
+            }
+        $("#pvtZone").change(function(){
+                    //debugger;
             // alert("hello"); getcenter
             //  $.fancybox("#center");
             var tehId =  $("#pvtZone").val();
             var gend = $("#gen").val();
             //alert("hello "+tehId);
             if(tehId == 0){
-                alert("Select Zone First");
+               // alert("Select Zone First");
             }
             else{
                 jQuery.ajax({
 
                     type: "POST",
-                    url: "<?php echo base_url(); ?>Admission/getcenter/",
+                    url: "<?php echo base_url(); ?>Admission_inter/getcenter/",
                     dataType: 'json',
                     data: $("#myform").serialize(),
                     beforeSend: function() {  $('.mPageloader').show(); },
@@ -458,6 +563,16 @@
             }
 
         })
+        var tehId = zone_cd // $("#pvtZone").val();
+            var gend = gender_d ; //$("#gen").val();
+            //alert("hello "+tehId);
+            
+            debugger;
+            $("#pvtinfo_dist").val(dist_cd);
+           
+            $("#pvtinfo_teh").val(teh_cd);
+             $("#pvtZone").val(zone_cd);
+               
         $('input[type=radio][name=batch_opt]').change(function() {
             // //debugger;
             // alert(this.value + "  Transfer Thai Gayo");

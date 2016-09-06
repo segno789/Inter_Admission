@@ -11,7 +11,7 @@
                     </div>
                     <div class="widget-body">
 
-                        <form class="form-horizontal no-margin" action="<?php  echo base_url(); ?>/index.php/Admission_inter/NewEnrolment_update_inter" method="post" enctype="multipart/form-data">
+                        <form name="myform" id="myform" class="form-horizontal no-margin" action="<?php  echo base_url(); ?>/index.php/Admission_inter/NewEnrolment_update_inter" method="post" enctype="multipart/form-data">
                        
                             <div class="control-group">
                                 <h4 class="span4">Personal Information :</h4>
@@ -187,6 +187,7 @@
                                         }
                                     ?>
                                     <input type="hidden" name="gender" value="<?php echo $gender; ?>">
+                                     <input type="hidden" name="gend" value="<?php echo $gender; ?>">
                                 </div>
                             </div>
                             <div class="control-group">
@@ -267,6 +268,81 @@
                                                                                                                                              ?></textarea>
                                 </div>
                             </div>
+                              <hr>
+                               <div class="control-group">
+                                <h4 class="span3">Exam Proposed Center Information :</h4>
+                                <div class="controls controls-row">
+                                    <label class="control-label span2">
+                                    </label> 
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label span1" >
+                                    District :
+                                </label>
+                                <div class="controls controls-row">
+                                    <select class='span3' id='pvtinfo_dist' name='pvtinfo_dist' required='required'>
+                                        <option value='0'>SELECT DISTRICT</option>
+                                       <option value="<?php echo   $data[0]['dist_cd']; ?>">
+                                        <?php
+                                             // DebugBreak();
+                                              $dist =  $data[0]['dist_cd'];
+                                              switch($dist)
+                                              {
+                                                  case 1:
+                                                  echo "GUJRANWALA";
+                                                  break;
+                                                  
+                                                  case 2:
+                                                  echo "GUJRAT";
+                                                  break;
+                                                  
+                                                  case 3:
+                                                  echo "HAFIZABAD";
+                                                  break;
+                                                  
+                                                  case 4:
+                                                  echo "MANDI BAHA-UD-DIN";
+                                                  break;
+                                                  
+                                                  case 5:
+                                                  echo "NAROWAL";
+                                                  break;
+                                                  
+                                                  case 6:
+                                                  echo "SIALKOT";
+                                                  break;
+                                                  
+                                                  default:
+                                                  echo "NO DISTRICT SELECTED";
+                                                  break;
+                                                  
+                                                  
+                                              }
+                                              
+                                        ?>    </option>
+                                        
+                                    </select>
+                                    <label class="control-label span2" >
+                                        Tehsil:
+                                    </label> 
+                                    <select class='span3' id='pvtinfo_teh' name='pvtinfo_teh' required='required'>
+                                        <option value='0'>SELECT TEHSIL</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                            <label class="control-label span1" >
+                                Zone :
+                            </label>
+
+                            <div class="controls controls-row">
+                                <select id="pvtZone"  class="span3" name="pvtZone">
+                                    <option value='0'>SELECT ZONE</option>
+                                </select>
+                            </div>
+                            <div id="instruction" style="display:none; width:700px" ></div>
+                           
                             <hr>
                             <div class="control-group">
                                 <h4 class="span4">Exam Information :</h4>

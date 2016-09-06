@@ -186,13 +186,16 @@ class Admission_inter_model extends CI_Model
         $oldyear =  $data['Iyear'];
         $oldsess =  $data['sess'];
         $Brd_cd =  $data['Brd_cd'];
+        $pvtinfo_dist = $data['pvtinfo_dist'];
+        $pvtinfo_teh = $data['pvtinfo_teh'];
+        $pvtZone = $data['pvtZone'];
         $isupdate = $data['isupdate'];
         if($isupdate==1)
         {
           $oldrno =  $data['oldRno'];
         }
     //  DebugBreak();
-       $query = $this->db->query("Admission_online..ISAdm2016_regular_sp_insert '$formno',12,2016,2,'$name','$fname','$BForm','$FNIC','$CellNo',$medium,'$Inst_Rno','".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$sub8,1,$oldrno,$oldyear,$oldsess,$IsHafiz,$Inst_cd,$UrbanRural,$RegGrp,$cat09,$cat10,$sub1ap2,$sub2ap2,$sub4ap2,$sub5ap2,$sub6ap2,$sub7ap2,$sub8ap2,$Brd_cd,$sub5a,$sub6a,$sub7a,$isupdate");
+       $query = $this->db->query("Admission_online..ISAdm2016_regular_sp_insert '$formno',12,2016,2,'$name','$fname','$BForm','$FNIC','$CellNo',$medium,'$Inst_Rno','".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$sub8,1,$oldrno,$oldyear,$oldsess,$IsHafiz,$Inst_cd,$UrbanRural,$RegGrp,$cat09,$cat10,$sub1ap2,$sub2ap2,$sub4ap2,$sub5ap2,$sub6ap2,$sub7ap2,$sub8ap2,$Brd_cd,$sub5a,$sub6a,$sub7a,$pvtinfo_dist,$pvtinfo_teh,$pvtZone,$isupdate");
        // return true;
         
         //$query = $this->db->insert('msadmissions2015', $data);//,'Fname' => $father_name,'BForm'=>$bay_form,'FNIC'=>$father_cnic,'Dob'=>$dob,'CellNo'=>$mob_number));

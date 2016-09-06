@@ -184,7 +184,7 @@ class Admission_model extends CI_Model
     {
         $zone = $data['zoneCode'];
         $gend = $data['gen'];
-
+          // DebugBreak();
         $where = " mYear = 2015  AND class = 12 AND  sess = 1 AND Zone_cd =  $zone  AND  (cent_Gen = $gend OR cent_Gen = 3) ";      
         $query = $this->db->query("SELECT * FROM matric_new..tblcentre WHERE $where");
 

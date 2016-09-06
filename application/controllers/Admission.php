@@ -1863,6 +1863,7 @@ $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;
 
     public function getcenter()
     {
+        //DebugBreak();
         $data = array(
             'zoneCode' => $this->input->post('pvtZone'),
             'gen' => $this->input->post('gend'),
