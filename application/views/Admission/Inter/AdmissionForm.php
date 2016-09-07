@@ -266,7 +266,9 @@
                                     <option value='0'>SELECT ZONE</option>
                                 </select>
                             </div>
-                            <div id="instruction" style="display:none; width:700px" ></div>
+                            <div id="instruction" style="display:none; width:700px" >
+                                  <img src="<?php  echo base_url().'assets/img/Instruction.jpg'; ?>" border="0" width="950" height="773" alt="Instruction.jpg (152,412 bytes)">
+                            </div>
                             <hr>
                             <div class="control-group">
                                 <h4 class="span3" style="margin-left: -73px;">Exam Information :</h4>
@@ -687,7 +689,7 @@
                             }
 
                             $(document).ready(function(){
-
+                                        $.fancybox("#instruction");
                                 function hide_sub7_sub8(){
 
                                     $('#sub7').hide();$('#sub7p2').hide();

@@ -812,17 +812,20 @@ class Admission_inter extends CI_Controller {
             'Brd_cd'=>@$_POST['Oldbrd'],
             'schm'=>1,
             //'picpath'=>@$_POST['pic'],
-               'oldFormNo'=>@$_POST['formNo']
+               'oldFormNo'=>@$_POST['formNo'],
+               'pvtinfo_dist'=>@$_POST['pvtinfo_dist'],
+            'pvtinfo_teh'=>@$_POST['pvtinfo_teh'],
+            'pvtZone'=>@$_POST['pvtZone'],
 
 
 
 
 
-
-        );
-        
+                                         
+        );                  
+                        
  
-                DebugBreak();
+               // DebugBreak();
     /*  $target_path = REGULAR_IMAGE_PATH.$Inst_Id.'/';
         if (!file_exists($target_path)){
 
@@ -1124,7 +1127,11 @@ class Admission_inter extends CI_Controller {
             'schm'=>1,
             //'picpath'=>@$_POST['pic'],
             
-            'oldFormNo'=>@$_POST['formNo']
+            'oldFormNo'=>@$_POST['formNo'],
+            ////       pvtinfo_dist     pvtinfo_teh      pvtZone
+            'pvtinfo_dist'=>@$_POST['pvtinfo_dist'],
+            'pvtinfo_teh'=>@$_POST['pvtinfo_teh'],
+            'pvtZone'=>@$_POST['pvtZone'],
 
 
 
@@ -3688,6 +3695,19 @@ class Admission_inter extends CI_Controller {
 
         return 1;
     }
+     public function getcenter()
+    {
+       // DebugBreak();
+        $data = array(
+            'zoneCode' => $this->input->post('pvtZone'),
+            'gen' => $this->input->post('gend'),
+        );
+           
+        $this->load->model('Admission_model');
+        $value = array('center'=> $this->Admission_model->getcenter($data)) ;
+        echo json_encode($value);
+
+    }
     function frmvalidation($viewName,$allinputdata,$isupdate)
     {
 
@@ -3695,7 +3715,7 @@ class Admission_inter extends CI_Controller {
         $_POST['address']  = str_replace("'", "", $_POST['address'] );
 
 
-        if(@$_POST['cand_name'] != '' )
+        if(@$_POST['cand_name'] == '' )
         {
             $allinputdata['excep'] = 'Please Enter Your Name';
             $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
@@ -3837,6 +3857,30 @@ class Admission_inter extends CI_Controller {
                 return;
 
             }
+             else if(@$_POST['pvtinfo_dist'] =='')
+        {
+            $allinputdata['excep'] = 'Please Select Your District First!';        
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect('Admission_inter/'.$viewName);
+            return;
+
+        }
+        else if(@$_POST['pvtinfo_teh'] =='')
+        {
+            $allinputdata['excep'] = 'Please Select Your Tehsil First! ';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect('Admission_inter/'.$viewName);
+            return;
+
+        }
+        else if(@$_POST['pvtZone'] =='')
+        {
+            $allinputdata['excep'] = 'Please Select Your Zone First! ';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect('Admission_inter/'.$viewName);
+            return;
+
+        }
             else if(@$_POST['std_group_hidden'] == 0)
             {
                 $allinputdata['excep'] = 'Please Select Your Study Group';

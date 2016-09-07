@@ -109,6 +109,7 @@
         })
         $("#pvtZone").change(function(){
 
+            debugger;
             var tehId =  $("#pvtZone").val();
             var gend = $("#gen").val();
 
