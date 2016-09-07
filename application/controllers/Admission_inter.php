@@ -821,9 +821,9 @@ class Admission_inter extends CI_Controller {
 
 
 
-
-        );
-        
+                                         
+        );                  
+                        
  
                // DebugBreak();
     /*  $target_path = REGULAR_IMAGE_PATH.$Inst_Id.'/';

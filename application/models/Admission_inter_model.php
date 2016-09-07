@@ -51,7 +51,7 @@ class Admission_inter_model extends CI_Model
 
         //$this->db->select('zone_cd','zone_name');
         //$this->db->order_by("formno", "DESC"); myear = 2016 and class = 10 and sess = 1 
-        $query = $this->db->get_where('matric_new..tblZones', array('myear' => '2016','class'=>10,'sess'=>1));
+        $query = $this->db->get_where('matric_new..tblZones', array('myear' => '2016','class'=>12,'sess'=>1));
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {

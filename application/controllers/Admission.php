@@ -1251,7 +1251,7 @@ class Admission extends CI_Controller {
     public function Pre_Inter_Data()
     {       
 
-         DebugBreak();     
+//         DebugBreak();     
          $this->load->library('session');
          $mrollno='';
          $hsscrno='';
@@ -1352,6 +1352,15 @@ class Admission extends CI_Controller {
         else if(($exam_type == 14 || $exam_type == 15 || $exam_type == 16) && !isset($CatType))
         {
 
+            $this->load->library('session');
+            $mydata = array('data'=>$_POST,'error_msg'=>$error_msg,'exam_type'=>$exam_type);
+            $this->session->set_flashdata('matric_error',$mydata );
+            redirect('Admission/matric_default');
+        }
+        else if(($exam_type == 1 || $exam_type == 2))
+        {
+          
+            $error_msg.='<span style="font-size: 16pt; color:red;">' . 'You can not appear as a Private Candidate. Please send Addmission from Your Institute.</span>';
             $this->load->library('session');
             $mydata = array('data'=>$_POST,'error_msg'=>$error_msg,'exam_type'=>$exam_type);
             $this->session->set_flashdata('matric_error',$mydata );
@@ -1909,7 +1918,7 @@ $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;
 
         
 
-        if(@$_POST['cand_name'] != '' )
+        if(@$_POST['cand_name'] == '' )
         {
             $allinputdata['excep'] = 'Please Enter Your Name';
             $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
