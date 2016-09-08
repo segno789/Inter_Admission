@@ -81,7 +81,7 @@
                 jQuery.ajax({
 
                     type: "POST",
-                    url: "<?php echo base_url(); ?>" + "Admission/getzone/",
+                    url: "<?php echo base_url(); ?>" + "index.php/Admission/getzone/",
                     dataType: 'json',
                     data: {tehCode: tehId},
                     beforeSend: function() {  $('.mPageloader').show(); },
@@ -120,7 +120,7 @@
                 jQuery.ajax({
 
                     type: "POST",
-                    url: "<?php echo base_url(); ?>Admission/getcenter/",
+                    url: "<?php echo base_url(); ?>index.php/Admission/getcenter/",
                     dataType: 'json',
                     data: $("#myform").serialize(),
                     beforeSend: function() {  $('.mPageloader').show(); },
