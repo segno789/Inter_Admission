@@ -38,7 +38,7 @@ define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 define('BARCODE_PATH', 'assets/pdfs/');
 
 define('PRIVATE_IMAGE_PATH', 'uploads/IS2016/private/');
-define('REGULAR_IMAGE_PATH', 'uploads/2016/regular/');
+define('REGULAR_IMAGE_PATH', 'uploads/IS2016/regular/');
 define('Session','2');  // 1 for Annual and 2 for Supply
 define('Year','2016');  
 define('lastdate','20-08-2016');

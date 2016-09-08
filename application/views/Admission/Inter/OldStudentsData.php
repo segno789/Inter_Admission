@@ -52,6 +52,8 @@
                                 <tbody>
                                     <?php
                                // DebugBreak();
+                               $image_path_selected = '';
+                                if($data[0]['sex']==1){ $image_path_selected = base_url().'/Uploads/IS2016/Private/male.JPG';}else{$image_path_selected = base_url().'/Uploads/IS2016/Private/female.JPG';}
                                     if($data != false)
                                     {
                                     $n=0;  
@@ -90,7 +92,8 @@
                                         default:
                                             $grp_name = "No GROUP SELECTED.";
                                     }
-
+                                   
+                                    
                                  //  DebugBreak();
                                     echo '<tr  >
                                     <td>'.$n.'</td>
@@ -100,7 +103,8 @@
                                     <td>'.$vals["Fname"].'</td>
                                     <td>'.$grp_name.'</td>
                                     <td>'.$vals["sub1_abr"].','.$vals["sub2_abr"].','.$vals["sub3_abr"].','.$vals["sub4_abr"].','.$vals["sub5_abr"].','.$vals["sub6_abr"].','.$vals["sub7_abr"].','.$vals["sub8_abr"].'</td>
-                                     <td><img id="previewImg" style="width:40px; height: 40px;" src="'.base_url().GET_PRIVATE_IMAGE_PATH.$vals["picpath"].'" alt="Candidate Image"></td>';
+                                     <td><img id="previewImg" style="width:40px; height: 40px;" src="'.$image_path_selected. '" alt="Candidate Image"></td>';
+                                    // <td><img id="previewImg" style="width:40px; height: 40px;" src="'.base_url().GET_PRIVATE_IMAGE_PATH.$vals["picpath"].'" alt="Candidate Image"></td>';
                                      /*<td><img id="previewImg" style="width:40px; height: 40px;" src="/'.IMAGE_PATH.$Inst_Id.'/'.$vals['PicPath'].'" alt="Candidate Image"></td>';*/
                                     echo'<td>
                                     <button type="button" class="btn btn-info" value="'.$formno.'" onclick="NewForm('.$formno.')">Save Form</button>

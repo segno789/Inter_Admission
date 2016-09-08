@@ -1142,7 +1142,8 @@ class Admission_inter extends CI_Controller {
         
  
 
-    /*  $target_path = REGULAR_IMAGE_PATH.$Inst_Id.'/';
+    /* 
+     $target_path = REGULAR_IMAGE_PATH.$Inst_Id.'/';
         if (!file_exists($target_path)){
 
             mkdir($target_path);
@@ -1159,7 +1160,64 @@ class Admission_inter extends CI_Controller {
             $this->session->set_flashdata('NewEnrolment_error',$data);
                 //  echo '<pre>'; print_r($allinputdata['excep']);exit();
             redirect('Admission_inter/NewEnrolment_NewForm_inter/');
-        }*/
+        }
+        
+        */
+        
+        DebugBreak();
+        
+        $temp_file_name = @$_POST['pic']; //'OldPics/Pic16-MA/MA11th16/123456.jpg';
+        $whatIWant = substr($temp_file_name, strpos($temp_file_name, ".") - 6);    
+      
+        $temp_db_rno = @$_POST['InterRno_hidden'];
+        $spreate_filename = explode(".",$whatIWant);
+        $temp_file_rno= $spreate_filename[0];
+        if($temp_file_rno != $temp_db_rno)
+        {
+            echo "Picture Error";
+        }
+        else
+        {
+            echo "Successfull";
+        }
+        
+          $target_path = REGULAR_IMAGE_PATH.$Inst_Id;
+        if (!file_exists($target_path)){
+
+        mkdir($target_path);
+        }
+
+        if(@$_POST['gend']==1)
+        {
+           $base_path =base_url().PRIVATE_IMAGE_PATH.'male.JPG';  
+        }
+        else
+        {
+           $base_path =base_url().PRIVATE_IMAGE_PATH.'female.JPG';  
+        }
+        //@$_POST['pic'];
+       // $base_path = GET_PRIVATE_IMAGE_PATH_COPY.@$_POST['pic'];
+        $copyimg = $target_path.'/'.$formno.'.jpg';
+
+        if (!(copy($base_path, $copyimg))) 
+        {
+        $data['excep'] = 'The file you are attempting to upload size is between 4 to 20 Kb.';
+        $this->session->set_flashdata('NewEnrolment_error',$data);
+        redirect('Admission/Pre_Inter_Data/');
+        }
+
+        if (!(copy($base_path, $copyimg))) 
+        {
+        $data['excep'] = 'The file you are attempting to upload size is between 4 to 20 Kb.';
+        $this->session->set_flashdata('NewEnrolment_error',$data);
+
+        redirect('Admission/Pre_Inter_Data/');
+        $this->frmvalidation('Pre_Inter_Data',$data,0);       
+
+
+        $this->load->view('common/footer.php');
+        }
+        
       
       $data_error = array(
       'formNo' =>$this->input->post('formNo'),
