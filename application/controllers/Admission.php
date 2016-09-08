@@ -1648,7 +1648,7 @@ $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;
         else if($oldsess == 'Supplementary'){
             $oldsess =  2;    
         }
-          DebugBreak();
+        //  DebugBreak();
 
         $data = array(
             'name' =>$this->input->post('cand_name'),
