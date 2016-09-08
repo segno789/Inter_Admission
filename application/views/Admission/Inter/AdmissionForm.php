@@ -15,8 +15,8 @@
                                 <div class="controls controls-row">
                                     <label class="control-label span2" >
                                     </label> 
-                                    <img id="image_upload_preview" style="width:140px; height: 140px;" src="<?php echo base_url().GET_PRIVATE_IMAGE_PATH.$data[0]['picpath'];?>" alt="Candidate Image" />
-                                    <input type="hidden" id="pic" name="pic"  value="<?php echo $data[0]['picpath'];?>"/>    
+                                    <img id="image_upload_preview" style="width:140px; height: 140px;" src="<?php if($data[0]['sex']==1){echo base_url().'/Uploads/IS2016/Private/male.JPG';}else{echo base_url().'/Uploads/IS2016/Private/female.JPG';} //echo base_url().GET_PRIVATE_IMAGE_PATH.$data[0]['picpath'];?>" alt="Candidate Image" />
+                                    <input type="hidden" id="pic" name="pic"  value="<?php if($data[0]['sex']==1){echo base_url().'/Uploads/IS2016/Private/male.JPG';}else{echo base_url().'/Uploads/IS2016/Private/female.JPG';} ?>"/>    
                                 </div>
                             </div>
                             <div class="controls controls-row">

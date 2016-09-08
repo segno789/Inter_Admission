@@ -134,11 +134,11 @@ class Admission extends CI_Controller {
         //$data['PicPath']
         if($data['sex']==1)
         {
-            $pdf->Image(base_url().PRIVATE_IMAGE_PATH.'download.jpg',6.5, 1.15+$Y, 0.95, 1.0, "JPG");    
+            $pdf->Image(base_url().PRIVATE_IMAGE_PATH.'male.jpg',6.5, 1.15+$Y, 0.95, 1.0, "JPG");    
         }
         else
         {
-            $pdf->Image(base_url().PRIVATE_IMAGE_PATH.'130659.jpg',6.5, 1.15+$Y, 0.95, 1.0, "JPG");        
+            $pdf->Image(base_url().PRIVATE_IMAGE_PATH.'female.jpg',6.5, 1.15+$Y, 0.95, 1.0, "JPG");        
         }
 
         //  $pdf->Image(base_url().PRIVATE_IMAGE_PATH.$data['PicPath'],6.5, 1.15+$Y, 0.95, 1.0, "JPG");
@@ -552,7 +552,7 @@ class Admission extends CI_Controller {
         $pdf->Cell(0.5,0.5,"Zone Code:",0,'R');
         $pdf->SetFont('Arial','B',8);
         $pdf->SetXY(1.5,3.15+$Y);
-        $pdf->Cell( 0.5,0.5,$data['Zone_cd']." - MANDI-BAHUDDIN".$data['zone_name']."",0,'L');
+        $pdf->Cell( 0.5,0.5,$data['Zone_cd']."-".$data['zone_name']."",0,'L');
 
         $pdf->SetFont('Arial','',8);
         $pdf->SetXY(3.5,3.2+$Y);
@@ -958,11 +958,11 @@ class Admission extends CI_Controller {
 
         if($data['sex']==1)
         {
-            $pdf->Image(base_url().PRIVATE_IMAGE_PATH.'download.jpg',6.5, 10.3+$Y, 0.95, 1.0, "JPG");   
+            $pdf->Image(base_url().PRIVATE_IMAGE_PATH.'male.jpg',6.5, 10.3+$Y, 0.95, 1.0, "JPG");   
         }
         else
         {
-            $pdf->Image(base_url().PRIVATE_IMAGE_PATH.'130659.jpg',6.5, 10.3+$Y, 0.95, 1.0, "JPG");
+            $pdf->Image(base_url().PRIVATE_IMAGE_PATH.'female.jpg',6.5, 10.3+$Y, 0.95, 1.0, "JPG");
 
         }
 
@@ -1003,7 +1003,7 @@ class Admission extends CI_Controller {
 
         $pdf->SetXY(1.48, 10.59+$Y);
         $pdf->SetFont('Arial','B',8);
-        $pdf->Cell( 0.5,0.5,$data['Zone_cd']." - MANDI-BAHUDDIN".$data['zone_name'],0,'L');
+        $pdf->Cell( 0.5,0.5,$data['Zone_cd']."-".$data['zone_name'],0,'L');
 
         $pdf->Image(base_url().'assets/img/CandidateCopy.jpg',0.27,10.86, 7.58,0.60, "jpeg");  
 
@@ -1648,7 +1648,7 @@ $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;
         else if($oldsess == 'Supplementary'){
             $oldsess =  2;    
         }
-        //  DebugBreak();
+          DebugBreak();
 
         $data = array(
             'name' =>$this->input->post('cand_name'),
@@ -1750,14 +1750,14 @@ $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;
            'exam_type'=>$_POST['exam_type'],
            'brd_name'=>@$_POST['oldboard']
         );*/   
-      //debugBreak();
+    //  debugBreak();
         
         
         
         
-        /*
         
-        $temp_file_name = @$_POST['pic'] //'OldPics/Pic16-MA/MA11th16/123456.jpg';
+        
+        $temp_file_name = @$_POST['pic']; //'OldPics/Pic16-MA/MA11th16/123456.jpg';
         $whatIWant = substr($temp_file_name, strpos($temp_file_name, ".") - 6);    
       
         $temp_db_rno = @$_POST['InterRno_hidden'];
@@ -1778,14 +1778,23 @@ $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;
         mkdir($target_path);
         }
 
-        $base_path = GET_PRIVATE_IMAGE_PATH_COPY.@$_POST['pic'];
+        if(@$_POST['gend']==1)
+        {
+           $base_path =base_url().PRIVATE_IMAGE_PATH.'male.JPG';  
+        }
+        else
+        {
+           $base_path =base_url().PRIVATE_IMAGE_PATH.'female.JPG';  
+        }
+        //@$_POST['pic'];
+       // $base_path = GET_PRIVATE_IMAGE_PATH_COPY.@$_POST['pic'];
         $copyimg = $target_path.$formno.'.jpg';
 
         if (!(copy($base_path, $copyimg))) 
         {
         $data['excep'] = 'The file you are attempting to upload size is between 4 to 20 Kb.';
         $this->session->set_flashdata('NewEnrolment_error',$data);
-        redirect('Admission/Pre_Inter_data/');
+        redirect('Admission/Pre_Inter_Data/');
         }
 
         if (!(copy($base_path, $copyimg))) 
@@ -1793,12 +1802,14 @@ $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;
         $data['excep'] = 'The file you are attempting to upload size is between 4 to 20 Kb.';
         $this->session->set_flashdata('NewEnrolment_error',$data);
 
-        redirect('Admission/Pre_Matric_data/');
-        $this->frmvalidation('Pre_Matric_data',$data,0);       
+        redirect('Admission/Pre_Inter_Data/');
+        $this->frmvalidation('Pre_Inter_Data',$data,0);       
 
 
         $this->load->view('common/footer.php');
-        }*/
+        }
+        
+        
         $this->frmvalidation('Pre_Inter_Data',$data_error,0);
         $logedIn = $this->Admission_model->Insert_NewEnorlement($data);
         if($logedIn != false)
