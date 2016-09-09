@@ -1164,7 +1164,7 @@ class Admission_inter extends CI_Controller {
         
         */
         
-        DebugBreak();
+       // DebugBreak();
         
         $temp_file_name = @$_POST['pic']; //'OldPics/Pic16-MA/MA11th16/123456.jpg';
         $whatIWant = substr($temp_file_name, strpos($temp_file_name, ".") - 6);    
