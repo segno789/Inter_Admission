@@ -77,11 +77,11 @@
                                         <th><b style="margin-left: 2px;">Form No. : <img src="<?php echo base_url(); ?>assets/css_matric/img/required.png" alt="Required Field." class="tooltip" title="Required Field." /></b></th>
                                         <td><input type="text" style=" font-size: 22px; width:96%; padding: 4px; color: #5b5b5b; border: 1px solid #dcdcdc; -moz-border-radius: 3px; -webkit-border-radius: 3px;"  id="formid" name="formid" maxlength="6" required="required"></td>
                                     </tr>
-                                    <tr>
+                                    <!--<tr>
                                         <th><b style="margin-left:2px;">Date Of Birth:</b><img src="<?php echo base_url(); ?>assets/css_matric/img/required.png" alt="Required Field." class="tooltip" title="Required Field." /></th>
                                         <td><input readonly="readonly" type="text" style=" font-size: 22px; width:96%; padding: 4px; color: #5b5b5b; border: 1px solid #dcdcdc; -moz-border-radius: 3px; -webkit-border-radius: 3px;" id="dob" name="dob" required="required">
                                         </td>
-                                    </tr>
+                                    </tr>  -->
                                     <tr>
                                         <th> <br />
                                         </th>
