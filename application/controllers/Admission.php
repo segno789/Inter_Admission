@@ -1757,7 +1757,7 @@ $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;
 
         }
              */
-        DebugBreak();
+      //  DebugBreak();
         $this->frmvalidation('Pre_Inter_Data',$data_error,0);
         $logedIn = $this->Admission_model->Insert_NewEnorlement($data);
         if($logedIn != false)
