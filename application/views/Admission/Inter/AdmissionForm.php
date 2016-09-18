@@ -1,4 +1,11 @@
 
+<?php 
+
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+?>
+
 <div class="dashboard-wrapper class wysihtml5-supported">
     <div class="left-sidebar">
         <div class="row-fluid">
@@ -15,8 +22,8 @@
                                 <div class="controls controls-row">
                                     <label class="control-label span2" >
                                     </label> 
-                                    <img id="image_upload_preview" style="width:140px; height: 140px;" src="<?php if($data[0]['sex']==1){echo base_url().'/Uploads/IS2016/Private/male.JPG';}else{echo base_url().'/Uploads/IS2016/Private/female.JPG';} //echo base_url().GET_PRIVATE_IMAGE_PATH.$data[0]['picpath'];?>" alt="Candidate Image" />
-                                    <input type="hidden" id="pic" name="pic"  value="<?php if($data[0]['sex']==1){echo base_url().'/Uploads/IS2016/Private/male.JPG';}else{echo base_url().'/Uploads/IS2016/Private/female.JPG';} ?>"/>    
+                                    <img id="image_upload_preview" style="width:140px; height: 140px;" src="<?php echo base_url().GET_PRIVATE_IMAGE_PATH.$data[0]['picpath'];?>" alt="Candidate Image" />
+                                    <input type="hidden" id="pic" name="pic"  value="<?php echo $data[0]['picpath']?>"/>    
                                 </div>
                             </div>
                             <div class="controls controls-row">
@@ -146,8 +153,8 @@
                                     Hafiz-e-Quran :
                                 </label>
                                 <div class="controls controls-row">
-                                    <label class='radio inline span1'><input type='radio' id='hafiz1' value='1'  name='hafiz'> No</label>
-                                    <label class='radio inline span1'><input type='radio' id='hafiz2' value='2' checked='checked' name='hafiz'> Yes</label>    
+                                    <label class='radio inline span1'><input type='radio' id='hafiz1' value='1' checked  name='hafiz'> No</label>
+                                    <label class='radio inline span1'><input type='radio' id='hafiz2' value='2'  name='hafiz'> Yes</label>    
                                     <label class="control-label span3" >
                                         Religion :
                                     </label> 
