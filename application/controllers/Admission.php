@@ -1244,7 +1244,7 @@ class Admission extends CI_Controller {
     public function Pre_Inter_Data()
     {       
 
-      //   DebugBreak();     
+       //  DebugBreak();     
          $this->load->library('session');
          $mrollno='';
          $hsscrno='';
@@ -1551,7 +1551,7 @@ class Admission extends CI_Controller {
 
         $examtype = @$_POST['exam_type'];
         $marksImp = @$_POST['ddlMarksImproveoptions'];
-        // debugBreak();
+         //debugBreak();
 
         $cat = $this->makecat($examtype,$marksImp,$is11th);
         $cat11 = @$cat['cat11'];
@@ -1708,7 +1708,7 @@ $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;
             'picpath'=>@$_POST['pic'],
             'brd_name'=>@$_POST['oldboard']
         );
-        
+       //   DebugBreak();
         $data_error = array(
         'matRno_hidden'=>$this->input->post('matRno_hidden'),
         'oldrno'=>$this->input->post('InterRno_hidden'),
@@ -1724,7 +1724,7 @@ $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;
         
         
         
-        $temp_file_name = @$_POST['pic']; //'OldPics/Pic16-MA/MA11th16/123456.jpg';
+      /*  $temp_file_name = @$_POST['pic']; //'OldPics/Pic16-MA/MA11th16/123456.jpg';
         $whatIWant = substr($temp_file_name, strpos($temp_file_name, ".") - 6);    
       
         $temp_db_rno = @$_POST['InterRno_hidden'];
@@ -1733,8 +1733,8 @@ $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;
         if($temp_file_rno != $temp_db_rno)
         {
             $allinputdata = "";
-            $allinputdata['excep'] = 'Your Pictures is not matched. ';
-            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            $data_error['excep'] = 'Your Pictures is not matched. ';
+            $this->session->set_flashdata('NewEnrolment_error',$data_error);
             redirect('Admission/Pre_Inter_Data/');
 
             return;
@@ -1750,14 +1750,14 @@ $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;
         $copyimg = $target_path.$formno.'.jpg';
         if (!(copy($base_path, $copyimg))) 
         {
-            $data['excep'] = 'The file you are attempting to upload size is between 4 to 20 Kb.';
-            $this->session->set_flashdata('NewEnrolment_error',$data);
+            $data_error['excep'] = 'The file you are attempting to upload size is between 4 to 20 Kb.';
+            $this->session->set_flashdata('NewEnrolment_error',$data_error);
 
             redirect('Admission/Pre_Inter_Data/');
 
         }
-        
-        
+             */
+        DebugBreak();
         $this->frmvalidation('Pre_Inter_Data',$data_error,0);
         $logedIn = $this->Admission_model->Insert_NewEnorlement($data);
         if($logedIn != false)
@@ -1771,8 +1771,8 @@ $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;
         else
         {     
             $allinputdata = "";
-            $allinputdata['excep'] = 'An error has occoured. Please try again later. ';
-            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            $data_error['excep'] = 'An error has occoured. Please try again later. ';
+            $this->session->set_flashdata('NewEnrolment_error',$data_error);
             redirect('Admission/Pre_Inter_Data/');
            // redirect('Admission');
             return;
