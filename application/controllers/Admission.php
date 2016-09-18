@@ -126,22 +126,15 @@ class Admission extends CI_Controller {
         //        DebugBreak();
         $Barcode = $data['formNo']."@".$data['class'].'@'.$data['sess'].'@'.$data["Iyear"];
         $image =  $this->set_barcode($Barcode);
-
+         
 
 
 
         $pdf->Image(BARCODE_PATH.$image,2.9, 0.61  ,2.4,0.24,"PNG");
         //$data['PicPath']
-        if($data['sex']==1)
-        {
-            $pdf->Image(base_url().PRIVATE_IMAGE_PATH.'male.jpg',6.5, 1.15+$Y, 0.95, 1.0, "JPG");    
-        }
-        else
-        {
-            $pdf->Image(base_url().PRIVATE_IMAGE_PATH.'female.jpg',6.5, 1.15+$Y, 0.95, 1.0, "JPG");        
-        }
+        
 
-        //  $pdf->Image(base_url().PRIVATE_IMAGE_PATH.$data['PicPath'],6.5, 1.15+$Y, 0.95, 1.0, "JPG");
+        $pdf->Image(base_url().PRIVATE_IMAGE_PATH.$data['PicPath'],6.5, 1.15+$Y, 0.95, 1.0, "JPG");
         $pdf->Image(base_url()."assets/img/logo2.png",0.4, 0.2, 0.65, 0.65, "PNG");
         $pdf->SetFont('Arial','',8);
 
@@ -524,6 +517,14 @@ class Admission extends CI_Controller {
 
         $pdf->SetFont('Arial','',7);
         $pdf->SetXY($xangle,4.8+$yy);
+        
+        if($data["grp_cd"] != 5)
+        {
+          $data['sub5A'] =  $data['sub5']; 
+          $data['sub6A'] =  $data['sub6']; 
+          $data['sub7A'] =  $data['sub7']; 
+        }
+        
         $pdf->Cell($boxWidth,0.2,$data['sub5Ap2'] != 1 ? '':  '    '.'5. '.  $this->GetSubNameHere($data['sub5A']),1,0,'L',1);
 
         $pdf->SetFont('Arial','',7);
@@ -956,18 +957,10 @@ class Admission extends CI_Controller {
 
 
 
-        if($data['sex']==1)
-        {
-            $pdf->Image(base_url().PRIVATE_IMAGE_PATH.'male.jpg',6.5, 10.3+$Y, 0.95, 1.0, "JPG");   
-        }
-        else
-        {
-            $pdf->Image(base_url().PRIVATE_IMAGE_PATH.'female.jpg',6.5, 10.3+$Y, 0.95, 1.0, "JPG");
-
-        }
+        
 
         //  $pdf->Image(base_url().PRIVATE_IMAGE_PATH.'download.jpg',6.5, 10.3+$Y, 0.95, 1.0, "JPG");
-        //        $pdf->Image(base_url().PRIVATE_IMAGE_PATH.$data['PicPath'],6.5, 10.3+$Y, 0.95, 1.0, "JPG");
+               $pdf->Image(base_url().PRIVATE_IMAGE_PATH.$data['PicPath'],6.5, 10.3+$Y, 0.95, 1.0, "JPG");
         $pdf->SetFont('Arial','',8);
 
 
@@ -1033,7 +1026,7 @@ class Admission extends CI_Controller {
     {
 
         $dueDate='';
-        $single_date= '31-08-2016';  $double_date= '15-09-20156';  $tripple_date= '22-09-2016';
+        $single_date= SingleDateFee;  $double_date= DoubleDateFee;  $tripple_date= TripleDateFee;
         $today = date("d-M-Y");
 
         if(strtotime($today) <= strtotime($single_date)) 
@@ -1215,7 +1208,7 @@ class Admission extends CI_Controller {
     function GetFeeWithdue($fee){
         //DebugBreak();
         $dueDate='';
-        $single_date= '31-08-2016';  $double_date= '15-09-2016';  $tripple_date= '22-09-2016';
+         $single_date= SingleDateFee;  $double_date= DoubleDateFee;  $tripple_date= TripleDateFee;
         $today = date("d-m-Y");
 
         if(strtotime($today) <= strtotime($single_date)) 
@@ -1553,31 +1546,7 @@ class Admission extends CI_Controller {
             $sub2ap2 = 1; 
             $sub2 =  $_POST['sub2p2'];    
         }
-        /* if(@$_POST['sub3p2'] != 0)
-        {
-        $sub3ap2 = 1;  
-        $sub3 =  $_POST['sub3p2'];    
-        }*/
-        /* if(@$_POST['sub4p2'] != 0)
-        {
-        $sub4ap2 = 1; 
-        $sub4 =  $_POST['sub4p2'];     
-        }
-        if(@$_POST['sub5p2'] != 0)
-        {
-        $sub5ap2 = 1;    
-        $sub5 =  $_POST['sub5p2'];  
-        }
-        if(@$_POST['sub6p2'] != 0)
-        {
-        $sub6ap2 = 1;    
-        $sub6 =  $_POST['sub6p2'];  
-        }
-        if(@$_POST['sub7p2'] != 0)
-        {
-        $sub7ap2 = 1;    
-        $sub7 =  $_POST['sub7p2'];  
-        }*/
+       
 
 
         $examtype = @$_POST['exam_type'];
@@ -1632,7 +1601,7 @@ class Admission extends CI_Controller {
         $AdmFee = $this->Admission_model->getrulefee($ispractical);
          //debugBreak();
 
-        $AdmFeeCatWise = '1300';
+        $AdmFeeCatWise = '1700';
         if($cat11 != 0 && $cat12 != 0)
         {
             $AdmFeeCatWise = $AdmFee[0]['Comp_Pvt_Amount'];
@@ -1749,34 +1718,7 @@ $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;
         'cattype_hidden'=>$this->input->post('cattype_hidden'),
         'oldClass'=>$this->input->post('oldClass'),
         );
-        
-   /*              $mrollno =@$data['data']['matRno_hidden'];// $_POST["txtMatRno"];
-        $hsscrno = @$data['data']['oldrno'];
-        $oldClass= @$data['data']['oldClass'];
-        $iyear    = @$data['data']['InterYear_hidden'];
-        $session = @$data['data']['InterSess_hidden'];
-        $board   = @$data['data']['oldboardid'];
-        $CatType = @$data['data']['cattype_hidden'];
-        $Insert_server_error=@$data['data']['excep'];
-        $mrollno = $_POST["txtMatRno"];
-        $hsscrno = $_POST["oldRno"];
-        $oldClass= $_POST["oldClass"];
-        $iyear    = $_POST["oldYear"];
-        $session = $_POST["oldSess"];
-        $board   = $_POST["oldBrd_cd"];
-        $CatType = @$_POST["CatType"];
-        $data_forError = array(
-          
-            'rno'=>@$_POST['oldrno'],
-            'sess'=>$oldsess,
-            'Iyear'=>@$_POST['oldyear'],
-            'Brd_cd'=>@$_POST['oldboardid'],
-            'class'=>@$_POST['oldclass'],
-           'exam_type'=>$_POST['exam_type'],
-           'brd_name'=>@$_POST['oldboard']
-        );*/   
-    //  debugBreak();
-        
+  
         
         
         
@@ -1790,48 +1732,29 @@ $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;
         $temp_file_rno= $spreate_filename[0];
         if($temp_file_rno != $temp_db_rno)
         {
-            echo "Picture Error";
+            $allinputdata = "";
+            $allinputdata['excep'] = 'Your Pictures is not matched. ';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect('Admission/Pre_Inter_Data/');
+
+            return;
         }
-        else
-        {
-            echo "Successfull";
-        }
+       
         
-          $target_path = PRIVATE_IMAGE_PATH;
+        $target_path = PRIVATE_IMAGE_PATH;
+        $base_path = GET_PRIVATE_IMAGE_PATH_COPY.@$_POST['pic'];
         if (!file_exists($target_path)){
 
-        mkdir($target_path);
+            mkdir($target_path);
         }
-
-        if(@$_POST['gend']==1)
-        {
-           $base_path =base_url().PRIVATE_IMAGE_PATH.'male.JPG';  
-        }
-        else
-        {
-           $base_path =base_url().PRIVATE_IMAGE_PATH.'female.JPG';  
-        }
-        //@$_POST['pic'];
-       // $base_path = GET_PRIVATE_IMAGE_PATH_COPY.@$_POST['pic'];
         $copyimg = $target_path.$formno.'.jpg';
-
         if (!(copy($base_path, $copyimg))) 
         {
-        $data['excep'] = 'The file you are attempting to upload size is between 4 to 20 Kb.';
-        $this->session->set_flashdata('NewEnrolment_error',$data);
-        redirect('Admission/Pre_Inter_Data/');
-        }
+            $data['excep'] = 'The file you are attempting to upload size is between 4 to 20 Kb.';
+            $this->session->set_flashdata('NewEnrolment_error',$data);
 
-        if (!(copy($base_path, $copyimg))) 
-        {
-        $data['excep'] = 'The file you are attempting to upload size is between 4 to 20 Kb.';
-        $this->session->set_flashdata('NewEnrolment_error',$data);
+            redirect('Admission/Pre_Inter_Data/');
 
-        redirect('Admission/Pre_Inter_Data/');
-        $this->frmvalidation('Pre_Inter_Data',$data,0);       
-
-
-        $this->load->view('common/footer.php');
         }
         
         
@@ -1843,15 +1766,15 @@ $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;
             $allinputdata['excep'] = 'success';
             $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
             $msg = $formno;                                           
-            redirect('Admission/formdownloaded/'.$formno.'/'.$dob);
+            redirect('Admission/formdownloaded/'.$formno);
         }
         else
         {     
             $allinputdata = "";
             $allinputdata['excep'] = 'An error has occoured. Please try again later. ';
             $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-            redirect(checkFormNo_then_download);
-            redirect('Admission');
+            redirect('Admission/Pre_Inter_Data/');
+           // redirect('Admission');
             return;
             echo 'Data NOT Saved Successfully !';
         } 
