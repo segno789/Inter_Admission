@@ -1449,7 +1449,7 @@ class Admission extends CI_Controller {
         $sub1ap1 = 0;        $sub2ap1 = 0;        $sub3ap1 = 0;        $sub4ap1 = 0;        $sub5ap1 = 0;        $sub6ap1 = 0;        $sub7ap1 = 0;     
         $sub1ap2 = 0;        $sub2ap2 = 0;        $sub3ap2 = 0;        $sub4ap2 = 0;        $sub5ap2 = 0;        $sub6ap2 = 0;        $sub7ap2 = 0;     $sub8ap2 = 0;
 
-
+          $grp_cd = $this->input->post('std_group');
         $is11th = 0;
 
         if(@$_POST['sub1'] != 0)
@@ -1507,25 +1507,41 @@ class Admission extends CI_Controller {
             $sub4 =  @$_POST['sub4p2'];
 
         }
-        if(@$_POST['sub5p2'] != 0)
+        //DebugBreak();
+        if(@$_POST['sub5p2'] != 0 && $grp_cd == 5)
         {
             $sub5ap2 = 1;    
             $sub5a =  @$_POST['sub5p2'];
 
         }
-        if(@$_POST['sub6p2'] != 0)
+        else if(@$_POST['sub5p2'] != 0 && $grp_cd != 5)
+        {
+           $sub5ap2 = 1;    
+            $sub5 =  @$_POST['sub5p2']; 
+        }
+        if(@$_POST['sub6p2'] != 0 && $grp_cd == 5)
         {
             $sub6ap2 = 1;    
             $sub6a =  @$_POST['sub6p2'];
 
         }
-        if(@$_POST['sub7p2'] != 0)
+        else   if(@$_POST['sub6p2'] != 0 && $grp_cd != 5)
+        {
+            $sub6ap2 = 1;    
+            $sub6 =  @$_POST['sub6p2'];
+        }
+        if(@$_POST['sub7p2'] != 0  && $grp_cd == 5)
         {
             $sub7ap2 = 1;    
             $sub7a =  @$_POST['sub7p2'];
 
         }
+        else  if(@$_POST['sub7p2'] != 0  && $grp_cd != 5)
+         {
+            $sub7ap2 = 1;    
+            $sub7 =  @$_POST['sub7p2'];
 
+        }
 
         if(@$_POST['sub1p2'] != 0)
         {
@@ -1572,7 +1588,7 @@ class Admission extends CI_Controller {
         $cat11 = @$cat['cat11'];
         $cat12 = @$cat['cat12'];
         $Speciality = $this->input->post('speciality');
-        $grp_cd = $this->input->post('std_group');
+        
 
         $per_grp = @$_POST['pregrp'];
 
