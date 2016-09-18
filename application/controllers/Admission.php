@@ -126,7 +126,7 @@ class Admission extends CI_Controller {
         //        DebugBreak();
         $Barcode = $data['formNo']."@".$data['class'].'@'.$data['sess'].'@'.$data["Iyear"];
         $image =  $this->set_barcode($Barcode);
-
+         
 
 
 
