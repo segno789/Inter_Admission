@@ -192,6 +192,11 @@ header("Pragma: no-cache");
                                     echo " <label class='radio inline span1'><input type='radio' value='1' id='UrbanRural' name='UrbanRural'> Urban
                                     </label><label class='radio inline span2'><input type='radio'  id='UrbanRural' value='2'  checked='checked'  name='UrbanRural'>  Rural </label>";
                                 }
+                                else
+                                {
+                                    echo " <label class='radio inline span1'><input type='radio' value='1' id='UrbanRural' checked='checked' name='UrbanRural'> Urban
+                                    </label><label class='radio inline span2'><input type='radio'  id='UrbanRural' value='2' name='UrbanRural'>  Rural </label>";
+                                }
                                 ?>
                             </div>
                             <div class="control-group" style="margin-top: 50px;">
@@ -299,7 +304,7 @@ header("Pragma: no-cache");
                                         $IsRegular = $data[0]['IsRegular'];
                                         $coll_cd = $data[0]['coll_cd']; 
 
-                                        if($exam_type == 1 || $exam_type == 3 || $exam_type == 9 || $exam_type == 11 || $exam_type == 16){
+                                        if($exam_type == 1 || $exam_type == 3 || $exam_type == 9 || $exam_type == 11 || $exam_type == 16 || $exam_type == 14 || $exam_type == 15){
                                             if($grp_cd == 1){
                                                 echo "<option value='1' selected='selected'>PRE-MEDICAL</option>";       
                                             }
@@ -472,8 +477,26 @@ header("Pragma: no-cache");
                             </div>
 
                             <?php
+                           // DebugBreak();
                             @$cattype = @$_POST['CatType'];
                             if($exam_type == 16 && $cattype == 1){
+                                echo"  
+                                <div class='control-group'>
+                                <label class='control-label span1'>
+                                Select Category:  
+                                </label> 
+                                <div class='controls controls-row '>
+                                <select id='ddlMarksImproveoptions' class='dropdown span2' name='ddlMarksImproveoptions'>
+                                <option value='0' selected='selected'>Select Any One </option>
+                                <option value='1'>PART-1 FULL </option>
+                                <option value='2'>PART-2 FULL</option>                                
+                                <option value='3'>BOTH PART FULL</option>
+                                <option value='4'>SUBJECT WISE</option>            
+                                </select>
+                                </div>
+                                </div>";
+                            }
+                            if($exam_type == 14 && $cattype == 1){
                                 echo"  
                                 <div class='control-group'>
                                 <label class='control-label span1'>
@@ -496,10 +519,10 @@ header("Pragma: no-cache");
                                 <div class="control row controls-row">
                                     <label class="control-label span3 " id="lblpart1cat" name="lblpart1cat" style="text-decoration: underline; font-weight: bold;" >
                                         <?php
-                                        if(($exam_type == 7 || $exam_type == 8 || $exam_type == 9 || $exam_type == 13 || $exam_type == 16 ) && $cattype == 1){
+                                        if(($exam_type == 7 || $exam_type == 8 || $exam_type == 9 || $exam_type == 13 || $exam_type == 16 || $exam_type == 14 ) && $cattype == 1){
                                             echo'Category P-1: MARKS IMPROVEMENT';
                                         }
-                                        else if (($exam_type ==11 || $exam_type == 16)&& $cattype == 2){
+                                        else if (($exam_type ==11 || $exam_type == 16 || $exam_type == 15)&& $cattype == 2){
                                             echo'Category P-1: ADDITIONAL';
                                         }
                                         else{
@@ -509,10 +532,10 @@ header("Pragma: no-cache");
                                     </label>
                                     <label class="control-label span3 " id="lblpart2cat" name="lblpart2cat" style="text-decoration: underline; font-weight: bold;" >
                                         <?php
-                                       if(($exam_type == 7 || $exam_type == 8 || $exam_type == 9 || $exam_type == 13 || $exam_type == 16 ) && $cattype == 1){
+                                       if(($exam_type == 7 || $exam_type == 8 || $exam_type == 9 || $exam_type == 13 || $exam_type == 16 || $exam_type == 14 ) && $cattype == 1){
                                             echo'Category P-2: MARKS IMPROVEMENT';
                                         }
-                                        else if (($exam_type ==11 || $exam_type == 16)&& $cattype == 2)
+                                        else if (($exam_type ==11 || $exam_type == 16 || $exam_type == 15)&& $cattype == 2)
                                         {
                                             echo'Category P-2: ADDITIONAL';
                                         }
@@ -2035,12 +2058,12 @@ header("Pragma: no-cache");
                                 else if($exam_type == 4){
                                     echo'sub_grp_load_exam_type4();';
                                 }
-                                else if($exam_type == 16 && $cattype == 2){
+                                else if(($exam_type == 16 || $exam_type == 15) && $cattype == 2){
                                     echo'sub_grp_load_additional();';
                                 }
-                                else if($exam_type == 14){
+                               /* else if($exam_type == 14){
                                     echo'ClearALLDropDowns();';
-                                }
+                                }*/
                                 else{
                                     echo'sub_grp_load();';
                                 }
