@@ -1181,25 +1181,29 @@ class Admission extends CI_Controller {
                 $cate['cat11'] = 2;
                 $cate['cat12'] = 2;
             }
-            else if(($exam_type == 16 || ($exam_type == 16 && $cattype == 1)) && $marksImp == 2)
+          
+             else if(($exam_type == 14 || ($exam_type == 16 && $cattype == 1)) && $marksImp == 2)
             {
                 $cate['cat11'] = 0;
                 $cate['cat12'] = 3;
             }
-            else if(($exam_type == 16 || ($exam_type == 16 && $cattype == 1))  && $marksImp == 1){
+          
+                 else if(($exam_type == 14 || ($exam_type == 16 && $cattype == 1))  && $marksImp == 1){
                 $cate['cat11'] = 3;
                 $cate['cat12'] = 0;
             }
-            else if(($exam_type == 16 || ($exam_type == 16 && $cattype == 1))  && $marksImp == 3){
+         
+                  else if(($exam_type == 14 || ($exam_type == 16 && $cattype == 1))  && $marksImp == 3){
                 $cate['cat11'] = 3;
                 $cate['cat12'] = 3;
             }
-            else if(($exam_type == 16 || ($exam_type == 16 && $cattype == 1))  && $marksImp ==4){
+            
+                 else if(($exam_type == 14 || ($exam_type == 16 && $cattype == 1))  && $marksImp ==4){
                 $cate['cat11'] = 7;
                 $cate['cat12'] = 7;
             }
-
-            else if($exam_type == 16 || ($exam_type == 16 && $cattype == 2)){
+             else if($exam_type == 15 || ($exam_type == 16 && $cattype == 2)){
+            
                 $cate['cat11'] =  5;
                 $cate['cat12'] = 5;
             }        
@@ -1331,7 +1335,7 @@ class Admission extends CI_Controller {
         }
         
         
-        
+           // DebugBreak();
 
         if($error_msg !='')
         {
@@ -1342,7 +1346,7 @@ class Admission extends CI_Controller {
             redirect('Admission/matric_default');
 
         }
-        else if(($exam_type == 14 || $exam_type == 15 || $exam_type == 16) && !isset($CatType))
+        else if(($exam_type == 16) && !isset($CatType))
         {
 
             $this->load->library('session');
@@ -1350,6 +1354,7 @@ class Admission extends CI_Controller {
             $this->session->set_flashdata('matric_error',$mydata );
             redirect('Admission/matric_default');
         }
+        
         else if(($exam_type == 1 &&($data[0]['regPvt']==1 )) )
         {
           
@@ -1371,6 +1376,14 @@ class Admission extends CI_Controller {
 
         else
         {
+            if($exam_type == 14)
+            {
+              @$_POST["CatType"]= 1;  
+            }
+            if($exam_type == 15)
+            {
+              @$_POST["CatType"]= 2;  
+            }
             $brd_name=$this->Admission_model->Brd_Name($board);
             $data[0]['brd_name']=$brd_name[0]['Brd_Abr'] ;
             $data['sscrno']=$mrollno;
