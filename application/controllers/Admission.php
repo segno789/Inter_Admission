@@ -62,11 +62,11 @@ class Admission extends CI_Controller {
         return $code.'.png';
 
     }
-
+    
     public function checkFormNo_then_download()
     {
         //DebugBreak();
-
+         $this->output->delete_cache();
         $formno_seg = $this->uri->segment(3);
         $dob_seg = $this->uri->segment(4);
         if($formno_seg !=0){
@@ -1142,7 +1142,7 @@ class Admission extends CI_Controller {
 
     private function makecat($exam_type,$marksImp,$is11th)
     {
-        // debugBreak();
+         //debugBreak();
         $cate =  array();
 
         if($exam_type == 2)
@@ -1248,7 +1248,7 @@ class Admission extends CI_Controller {
     public function Pre_Inter_Data()
     {       
 
-       //  DebugBreak();     
+        // DebugBreak();     
          $this->load->library('session');
          $mrollno='';
          $hsscrno='';
@@ -1405,8 +1405,21 @@ class Admission extends CI_Controller {
         $this->load->model('Admission_model');
         $this->load->library('session');
         $Inst_Id = 999999;
+        //DebugBreak();
+            
         // DebugBreak();
         $formno = $this->Admission_model->GetFormNo();
+        $data_error = array(
+        'matRno_hidden'=>$this->input->post('matRno_hidden'),
+        'oldrno'=>$this->input->post('InterRno_hidden'),
+        'InterYear_hidden'=>$this->input->post('InterYear_hidden'),
+        'InterSess_hidden'=>$this->input->post('InterSess_hidden'),
+        'oldboardid'=>$this->input->post('oldboardid'),
+        'cattype_hidden'=>$this->input->post('cattype_hidden'),
+        'oldClass'=>$this->input->post('oldClass'),
+        );
+  
+          $this->frmvalidation('Pre_Inter_Data',$data_error,0);
         $allinputdata = array('cand_name'=>@$_POST['cand_name'],
             'father_name'=>@$_POST['father_name'],
             'bay_form'=>@$_POST['bay_form'],
@@ -1458,6 +1471,7 @@ class Admission extends CI_Controller {
           $grp_cd = $this->input->post('std_group');
         $is11th = 0;
 
+        
         if(@$_POST['sub1'] != 0)
         {
             $sub1ap1 = 1; 
@@ -1563,8 +1577,9 @@ class Admission extends CI_Controller {
 
 
         $examtype = @$_POST['exam_type'];
+        
         $marksImp = @$_POST['ddlMarksImproveoptions'];
-         //debugBreak();
+         debugBreak();
 
         $cat = $this->makecat($examtype,$marksImp,$is11th);
         $cat11 = @$cat['cat11'];
@@ -1597,19 +1612,17 @@ class Admission extends CI_Controller {
         );
 
         $ispractical = 0;
-        if($per_grp == 1 || $pre_grp == 2 || $pre_grp == 4)
+        if($per_grp == 1 || $pre_grp == 2 || $pre_grp == 4 || $grp_cd == 1 || $grp_cd == 2 || $grp_cd == 4)
         {
             $ispractical =1;
         }
+       // DebugBreak();
         if(array_search(@$_POST['sub4'],$practical_Sub) || array_search(@$_POST['sub5'],$practical_Sub) || array_search(@$_POST['sub6'],$practical_Sub) ||
             array_search(@$_POST['sub7'],$practical_Sub) || array_search(@$_POST['sub7p2'],$practical_Sub) ||
             array_search(@$_POST['sub4p2'],$practical_Sub) || array_search(@$_POST['sub5p2'],$practical_Sub) || array_search(@$_POST['sub6p2'],$practical_Sub)){
             $ispractical =1;
         }
-        if(@$_POST['cattype_hidden']==2)
-        {
-            $ispractical =0;
-        }
+       
 
         $AdmFee = $this->Admission_model->getrulefee($ispractical);
          //debugBreak();
@@ -1722,16 +1735,6 @@ $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;
             'brd_name'=>@$_POST['oldboard']
         );
        //   DebugBreak();
-        $data_error = array(
-        'matRno_hidden'=>$this->input->post('matRno_hidden'),
-        'oldrno'=>$this->input->post('InterRno_hidden'),
-        'InterYear_hidden'=>$this->input->post('InterYear_hidden'),
-        'InterSess_hidden'=>$this->input->post('InterSess_hidden'),
-        'oldboardid'=>$this->input->post('oldboardid'),
-        'cattype_hidden'=>$this->input->post('cattype_hidden'),
-        'oldClass'=>$this->input->post('oldClass'),
-        );
-  
         
         
         
@@ -1770,8 +1773,8 @@ $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;
 
         }
              */
-      //  DebugBreak();
-        $this->frmvalidation('Pre_Inter_Data',$data_error,0);
+        DebugBreak();
+       
         $logedIn = $this->Admission_model->Insert_NewEnorlement($data);
         if($logedIn != false)
         {
@@ -1859,7 +1862,7 @@ $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;
     function frmvalidation($viewName,$allinputdata,$isupdate)
     {
 
-        //  DebugBreak();
+          DebugBreak();
         $_POST['address']  = str_replace("'", "", $_POST['address'] );
         $language_sub_cd = array(
 

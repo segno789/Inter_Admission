@@ -51,6 +51,8 @@ class CI_Model {
 		return $CI->$key;
 	}
 }
+
+
 // END Model Class
 
 /* End of file Model.php */

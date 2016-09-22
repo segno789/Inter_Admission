@@ -304,7 +304,7 @@ header("Pragma: no-cache");
                                         $IsRegular = $data[0]['IsRegular'];
                                         $coll_cd = $data[0]['coll_cd']; 
 
-                                        if($exam_type == 1 || $exam_type == 3 || $exam_type == 9 || $exam_type == 11 || $exam_type == 16 || $exam_type == 14 || $exam_type == 15){
+                                        if($exam_type == 1  || $exam_type == 3 || $exam_type == 9 || $exam_type == 11 || $exam_type == 16 || $exam_type == 14 || $exam_type == 15){
                                             if($grp_cd == 1){
                                                 echo "<option value='1' selected='selected'>PRE-MEDICAL</option>";       
                                             }
@@ -323,13 +323,13 @@ header("Pragma: no-cache");
                                             }
                                         }
 
-                                        else if($exam_type == 2){
+                                       /* else if($exam_type == 2){
                                             echo "<option value='0'>SELECT GROUP</option>";
                                             echo "<option value='3'>HUMANITIES</option>";
                                             echo "<option value='5'>COMMERCE</option>";    
-                                        }
+                                        } */
 
-                                        if($exam_type == 4 || $exam_type == 5 || $exam_type == 6){
+                                        if( $exam_type == 2 || $exam_type == 4 || $exam_type == 5 || $exam_type == 6){
                                             if($grp_cd == 1){
                                                 echo "<option value='1' selected='selected'>PRE-MEDICAL</option>";      
                                                 echo "<option value='3'>HUMANITIES</option>";
@@ -1104,11 +1104,11 @@ header("Pragma: no-cache");
                                         $("#sub3").empty();
                                         $("#sub3").append('<option value="0">NONE</option>');
                                     }
-                                    if((sub3pf2 == "3") || (sub3st2 == "2"))
+                                    if((sub8pf2 == "3") || (sub8st2 == "2"))
                                     {
                                         $("#sub3p2").empty();
-                                        $("#sub3p2").append(new Option('<?php  echo  array_search($data[0]['sub3'],$subarray); ?>',sub3));
-                                        $("#sub3p2 option[value='" + sub3 + "']").attr("selected","selected");
+                                        $("#sub3p2").append(new Option('<?php  echo  array_search($data[0]['sub8'],$subarray); ?>',sub8));
+                                        $("#sub3p2 option[value='" + sub8 + "']").attr("selected","selected");
                                     }
                                     else
                                     {
@@ -1276,7 +1276,7 @@ header("Pragma: no-cache");
                                     $("#sub8").hide();
                                     $("#sub8p2").hide();
                                 }
-
+                                
                                 function sub_grp_load_exam_type3(){
 
                                     Empty_All_Dropdowns();
@@ -1670,6 +1670,8 @@ header("Pragma: no-cache");
                                 }
                                 function sub_grp_load_exam_type6(){
 
+                                    debugger;
+                                    
                                     Empty_All_Dropdowns();
                                     hide_sub7_sub8();
 
@@ -2044,13 +2046,14 @@ header("Pragma: no-cache");
 
                                 <?php
 
-                               // debugBreak();
+                              //  debugBreak();
                                 
                                 if($exam_type == 1){ 
                                     echo 'sub_grp_load_exam_type1();'; 
                                 }
                                 else if($exam_type == 2){
-                                    echo'ClearALLDropDowns();';
+                                    
+                                    echo'sub_grp_load_MarksImp_FULL();';
                                 }
                                 else if($exam_type == 3){
                                     echo'sub_grp_load_exam_type3();';
@@ -2064,6 +2067,9 @@ header("Pragma: no-cache");
                                /* else if($exam_type == 14){
                                     echo'ClearALLDropDowns();';
                                 }*/
+                                else if($exam_type == 6){
+                                    echo'sub_grp_load_exam_type6();';
+                                }
                                 else{
                                     echo'sub_grp_load();';
                                 }
@@ -2091,7 +2097,7 @@ header("Pragma: no-cache");
                                 });
 
                                 $('#std_group').change(function(){
-
+                                        debugger;
                                     var sel_group = $('#std_group').val();    
 
                                     if(sel_group == grp_cd  && exam_type != 2) 
