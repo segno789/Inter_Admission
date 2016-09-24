@@ -40,42 +40,71 @@
                             <div class="controls controls-row">
                                 <select id="std_group"   class="dropdown span3"  name="std_group">
                             <?php        
-                                    $subgroups =  split(',',$grp_cd);
+                                    $subgroups =  split(',',$grp_cdi);
                             echo "<option value='0' >SELECT GROUP</option>";
                             for($i =0 ; $i<count($subgroups); $i++)
                             {
-                                if($subgroups[$i] == 1)
-                                {
-                                   
-                                        echo "<option value='1' >SCIENCE WITH BIOLOGY</option>";    
-                                }
-                                else if($subgroups[$i] == 7)
-                                {
-                                   
-                                        echo "<option value='7'>SCIENCE  WITH COMPUTER SCIENCE</option>"; 
-
-                                }
-                                else if($subgroups[$i] == 8)
-                                {
-                                    
-                                        echo "<option value='8'>SCIENCE  WITH ELECTRICAL WIRING</option>";  
-                                    
-                                }
-                                else if($subgroups[$i] == 2)
-                                {
-                                   
-                                        echo "<option value='2'>HUMANTIES</option>";   
-                                    
-
-                                }
-                                else if($subgroups[$i] == 5)
-                                {
-                                   
-                                        echo "<option value='5'>DEAF AND DUMB</option>";  
-                                    
-
-                                }
-                            }
+                                           
+                                            if($subgroups[$i] == 1)
+                                            {
+                                                if($grp == 1)
+                                                {
+                                                    echo "<option value='1' selected='selected'>PRE-MEDICAL</option>";  
+                                                }
+                                                else 
+                                                {
+                                                    echo "<option value='1' >PRE-MEDICAL</option>";    
+                                                }
+                                            }
+                                            else if($subgroups[$i] == 2)
+                                            {
+                                                if($grp == 2)
+                                                {
+                                                    echo "<option value='2' selected='selected'>PRE-ENGINEERING</option>";
+                                                }
+                                                else
+                                                {
+                                                   echo "<option value='2'>PRE-ENGINEERING</option>"; 
+                                                }
+                                                  
+                                            }
+                                            else if($subgroups[$i] == 3)
+                                            {
+                                                 if($grp == 3)
+                                                {
+                                                    echo "<option value='3' selected='selected'>HUMANITIES</option>";  
+                                                }
+                                                else
+                                                {
+                                                  echo "<option value='3'>HUMANITIES</option>";  
+                                                }
+                                                
+                                            }
+                                            else if($subgroups[$i] == 4)
+                                            {
+                                                 if($grp == 4)
+                                                {
+                                                  echo "<option value='4' selected='selected'>GENERAL SCIENCE</option>";  
+                                                }
+                                                else
+                                                {
+                                                  echo "<option value='4'>GENERAL SCIENCE</option>";   
+                                                }
+                                                
+                                            }
+                                            else if($subgroups[$i] == 5)
+                                            {
+                                                 if($grp == 5)
+                                                {
+                                                   echo "<option value='5' selected='selected'>COMMERCE</option>";  
+                                                }
+                                                else
+                                                {
+                                                   echo "<option value='5'>COMMERCE</option>";  
+                                                }
+                                               
+                                            }
+                                        } 
                             
                             echo "</select>" ?>
                                     

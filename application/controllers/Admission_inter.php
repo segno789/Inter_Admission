@@ -211,7 +211,7 @@ class Admission_inter extends CI_Controller {
         $challanNo = $result[0]['Challan_No']; 
 
        // DebugBreak();
-        if(date('Y-m-d',strtotime(SINGLE_LAST_DATE11))>=date('Y-m-d'))
+        if(date('Y-m-d',strtotime(SingleDateFee))>=date('Y-m-d'))
         {
             $rule_fee   =  $this->Admission_inter_model->getrulefee(); 
             $challanDueDate  = date('d-m-Y',strtotime($rule_fee[0]['End_Date'] )) ;
@@ -232,7 +232,7 @@ class Admission_inter extends CI_Controller {
         // $temp = $user['Inst_Id'].'11-2017-19';
         //$image =  $this->set_barcode($temp);
         
-        $temp = $challanNo.'@'.$user['Inst_Id'].'@'.$Batch_Id.'@11@2016@1';
+        $temp = $challanNo.'@'.$user['Inst_Id'].'@'.$Batch_Id.'@12@2016@2';
         //  $image =  $this->set_barcode($temp);
         //DebugBreak();
         $temp =  $this->set_barcode($temp);
@@ -870,7 +870,7 @@ class Admission_inter extends CI_Controller {
     }
     public function NewEnrolment_INSERT_inter()
     {
-   DebugBreak();
+   //DebugBreak();
         $this->load->model('Admission_inter_model');
         // //DebugBreak();
         $this->load->library('session');
@@ -1065,7 +1065,7 @@ class Admission_inter extends CI_Controller {
 
         //DebugBreak();
       
-      DebugBreak();
+//      DebugBreak();
         $data = array(
             'name' =>$this->input->post('cand_name'),
             'Fname' =>$this->input->post('father_name'),
@@ -2085,26 +2085,26 @@ class Admission_inter extends CI_Controller {
         $Totalprocessing_fee = 0;
         $netTotal = 0;
         /*====================  Counting Fee  ==============================*/    
-              $practical_Sub = array(
-            'LibSC'=>'8',
-            'GEO'=>'12',
-            'PSY'=>'16',
-            'ST'=>'18',
-            'H-ECO'=>'21',
-            'F/ART'=>'23',
-            'CP'=>'38',
-            'HPD'=>'42',
-            'BIO'=>'46',
-            'PHY'=>'47',
-            'CH'=>'48',
-            'Cl/T'=>'75',
-            'HM'=>'76',
-            'NUR'=>'79',
-            'CSc'=>'83',
-            'AGRI'=>'90',
-            'TYP'=>'96',
-            'CST'=>'98',
-            
+            $practical_Sub = array(
+
+            'LIBRARY SCIENCE'=>'8',
+            'GEOGRAPHY'=>'12',
+            'PSYCHOLOGY'=>'16',
+            'STATISTICS'=>'18',
+            'OUTLINES OF HOME ECONOMICS'=>'21',
+            'FINE ARTS'=>'23',
+            'COMMERCIAL PRACTICE'=>'38',
+            'HEALTH & PHYSICAL EDUCATION'=>'42',
+            'BIOLOGY'=>'46',
+            'PHYSICS'=>'47',
+            'CHEMISTRY'=>'48',
+            'COMPUTER SCIENCE'=>'83',
+            'NURSING'=>'79',
+            'AGRICULTURE'=>'90',
+            'TYPING'=>'96',
+            'COMPUTER STUDIES'=>'98',
+            'CLOTHING & TEXTILE (Home-Economics Group)'=>'75',
+            'HOME MANAGEMNET (Home-Economics Group)'=>'76'
         );
         // DebugBreak();
         $ispractical = 0;
@@ -2114,14 +2114,14 @@ class Admission_inter extends CI_Controller {
         $Adm_Fee_withArts_Composite = $AdmFee[1]['Comp_Amount'];
         $Adm_Fee_withArts_10th_Only = $AdmFee[1]['Amount'];
         $Adm_ProcessingFee = $AdmFee[0]['Processing_Fee'];
-        DebugBreak();
+       // DebugBreak();
         $q1 = $user_info['fee'];
         $total_std = 0;
         foreach($q1 as $k=>$v) 
         {
             $ids[] = $v["FormNo"];
             $total_std++;
-            $ispractical = 0;
+            //$ispractical = 0;
             $is9th = 0;
              if($v["Spec"] == 1 || $v["Spec"] ==  2)
                 {
@@ -2223,7 +2223,7 @@ class Admission_inter extends CI_Controller {
             return;
         }
 
-        DebugBreak();
+       // DebugBreak();
         $RegGrp = $this->uri->segment(3);
         $this->load->model('Admission_inter_model');
         $this->load->library('session');
@@ -2675,7 +2675,7 @@ class Admission_inter extends CI_Controller {
         $user = $Logged_In_Array['logged_in'];
         $this->load->model('Admission_inter_model');
         $fetch_data = array('Inst_cd'=>$user['Inst_Id'],'Batch_Id'=>$Batch_Id);
-        $temp = $user['Inst_Id'].'09-2016-18';
+        $temp = $user['Inst_Id'];
         $image =  $this->set_barcode($temp);
         $data = array('data'=>$this->Admission_inter_model->revenue_pdf($fetch_data),'inst_Name'=>$user['inst_Name'],'inst_cd'=>$user['Inst_Id'],'barcode'=>$image);
         $this->load->view('Admission/inter/RevenueForm.php',$data);
@@ -2888,7 +2888,7 @@ class Admission_inter extends CI_Controller {
 
           //  DebugBreak();
       
-            $Barcode = $form_No."@".'10'.'@'.$data['sess'].'@'.$data["Iyear"];
+            $Barcode = $form_No."@".'12'.'@'.$data['sess'].'@'.$data["Iyear"];
 
             $bardata = Barcode::fpdf($pdf, $black, $bx, $by, $angle, $type, array('code'=>$Barcode), $width, $height);
 
@@ -3282,7 +3282,7 @@ class Admission_inter extends CI_Controller {
             $pdf->Cell(0.5,0.5,"Zone:",0,'R');
             $pdf->SetFont('Arial','B',8);
             $pdf->SetXY(1.0,4.25+$Y);
-            $pdf->Cell( 0.5,0.5,$data['zone_cd']." - ".$data['ZoneName']."GUJRANWALA",0,'L');
+            $pdf->Cell( 0.5,0.5,$data['zone_cd']." - ".$data['ZoneName'],0,'L');
             
             $pdf->SetXY(3.5,4.25+$Y);
             $pdf->SetFont('Arial','',8);

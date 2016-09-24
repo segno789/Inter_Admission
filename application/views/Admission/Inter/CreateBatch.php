@@ -26,7 +26,8 @@
                     <div class="controls controls-row">
                         <label class="radio inline span1">
                         <?php
-                        ////DebugBreak();
+                      //  DebugBreak();
+                        $grp = $grp_selected;
                         //echo $spl_cd;
                         if(@$spl_cd == "1")
                         {
@@ -115,8 +116,8 @@
                             ";
 
 
-                            // //DebugBreak();
-                            $subgroups =  split(',',$grp_cd);
+                            
+                            $subgroups =  split(',',$grp_cdi);
                             echo "<option value='0' >SELECT GROUP</option>";
                             for($i =0 ; $i<count($subgroups); $i++)
                                         {
@@ -223,70 +224,71 @@
 
                             
                            // @$msg_status;
-                            @$subgroups =  split(',',@$grp_cd);
+                            @$subgroups =  split(',',@$grp_cdi);
                             echo "<option value='0' >SELECT GROUP</option>";
                             for($i =0 ; $i<count($subgroups); $i++)
                             {
-                                if($subgroups[$i] == 1)
-                                {
-                                    if(@$grp_selected == 1 )
-                                    {
-                                        echo "<option value='1' selected='selected'>SCIENCE WITH BIOLOGY</option>";  
-                                    }
-                                    else 
-                                    {
-                                        echo "<option value='1' >SCIENCE WITH BIOLOGY</option>";    
-                                    }
-                                }
-                                else if($subgroups[$i] == 7)
-                                {
-                                    if(@$grp_selected == 7)
-                                    {
-                                        echo "<option value='7' selected='selected'>SCIENCE  WITH COMPUTER SCIENCE</option>";
-                                    }
-                                    else
-                                    {
-                                        echo "<option value='7'>SCIENCE  WITH COMPUTER SCIENCE</option>"; 
-                                    }
-
-                                }
-                                else if($subgroups[$i] == 8)
-                                {
-                                    if(@$grp_selected== 8 )
-                                    {
-                                        echo "<option value='8' selected='selected'>SCIENCE  WITH ELECTRICAL WIRING</option>";  
-                                    }
-                                    else
-                                    {
-                                        echo "<option value='8'>SCIENCE  WITH ELECTRICAL WIRING</option>";  
-                                    }
-
-                                }
-                                else if($subgroups[$i] == 2)
-                                {
-                                    if(@$grp_selected == 2)
-                                    {
-                                        echo "<option value='2' selected='selected'>HUMANTIES</option>";  
-                                    }
-                                    else
-                                    {
-                                        echo "<option value='2'>HUMANTIES</option>";   
-                                    }
-
-                                }
-                                else if($subgroups[$i] == 5)
-                                {
-                                    if(@$grp_selected == 5)
-                                    {
-                                        echo "<option value='5' selected='selected'>DEAF AND DUMB</option>";  
-                                    }
-                                    else
-                                    {
-                                        echo "<option value='5'>DEAF AND DUMB</option>";  
-                                    }
-
-                                }
-                            }
+                                           
+                                            if($subgroups[$i] == 1)
+                                            {
+                                                if($grp == 1)
+                                                {
+                                                    echo "<option value='1' selected='selected'>PRE-MEDICAL</option>";  
+                                                }
+                                                else 
+                                                {
+                                                    echo "<option value='1' >PRE-MEDICAL</option>";    
+                                                }
+                                            }
+                                            else if($subgroups[$i] == 2)
+                                            {
+                                                if($grp == 2)
+                                                {
+                                                    echo "<option value='2' selected='selected'>PRE-ENGINEERING</option>";
+                                                }
+                                                else
+                                                {
+                                                   echo "<option value='2'>PRE-ENGINEERING</option>"; 
+                                                }
+                                                  
+                                            }
+                                            else if($subgroups[$i] == 3)
+                                            {
+                                                 if($grp == 3)
+                                                {
+                                                    echo "<option value='3' selected='selected'>HUMANITIES</option>";  
+                                                }
+                                                else
+                                                {
+                                                  echo "<option value='3'>HUMANITIES</option>";  
+                                                }
+                                                
+                                            }
+                                            else if($subgroups[$i] == 4)
+                                            {
+                                                 if($grp == 4)
+                                                {
+                                                  echo "<option value='4' selected='selected'>GENERAL SCIENCE</option>";  
+                                                }
+                                                else
+                                                {
+                                                  echo "<option value='4'>GENERAL SCIENCE</option>";   
+                                                }
+                                                
+                                            }
+                                            else if($subgroups[$i] == 5)
+                                            {
+                                                 if($grp == 5)
+                                                {
+                                                   echo "<option value='5' selected='selected'>COMMERCE</option>";  
+                                                }
+                                                else
+                                                {
+                                                   echo "<option value='5'>COMMERCE</option>";  
+                                                }
+                                               
+                                            }
+                                        } 
                             echo "</select>
                             </div>
                             </div>

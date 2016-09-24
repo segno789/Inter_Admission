@@ -44,7 +44,7 @@
     </tr>
     <tr>
         <td colspan="8"><div style="font-size:16px;font-weight:bold;text-align:center;">REVENUE FORM SHOWING DETAILS OF ADMISSION <br />
-                10th Class (SESSION 2016-2018)
+                12th Class (SESSION 2016-2018)
             </div> 
         </td>
     </tr>
@@ -55,7 +55,7 @@
         <td colspan="8" style="font-size:12px;"><strong>Institute Name:</strong> <?php echo  $inst_Name;?></td>
     </tr>
     <tr>
-        <td colspan="8" style="font-size:12px;"><img style="margin-left: 605px;height: 19px;     width: 135px;" src="<?php  echo "/".BARCODE_PATH.$barcode; ?>" /></td>
+        <td colspan="8" style="font-size:12px;"><img style="margin-left: 605px;height: 19px;     width: 135px;" src="<?php  echo BARCODE_PATH.$barcode; ?>" /></td>
     </tr>
     <tr>
         <td colspan="8" align="center">
@@ -110,9 +110,9 @@
     $n = 0; 
     foreach ($data['stdinfo'] as $key=>$vals) {
         $n++;
-        if($vals->RegFineFee == '')
+        if($vals->AdmFine == '')
         {
-            $vals->RegFineFee = 0;
+            $vals->AdmFine = 0;
         }
         ?>
         <tr>
@@ -121,10 +121,10 @@
             <td class="td"><strong><?php echo $vals->Fname;?></strong></td>
 
 
-            <td class="td" style="text-align:center !important;"><?php echo $vals->regFee ;?></td>
-            <td class="td" style="text-align:center !important;"><?php echo $vals->RegFineFee;?></td>
-            <td class="td" style="text-align:center !important;"><?php echo $vals->RegProcessFee;?></td>
-            <td class="td" style="text-align:center !important;"><?php echo $vals->RegTotalFee?></td>
+            <td class="td" style="text-align:center !important;"><?php echo $vals->AdmFee ;?></td>
+            <td class="td" style="text-align:center !important;"><?php echo $vals->AdmFine;?></td>
+            <td class="td" style="text-align:center !important;"><?php echo $vals->AdmProcessFee;?></td>
+            <td class="td" style="text-align:center !important;"><?php echo $vals->AdmTotalFee?></td>
 
         </tr>
         <?php
