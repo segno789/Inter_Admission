@@ -62,11 +62,11 @@ class Admission extends CI_Controller {
         return $code.'.png';
 
     }
-    
+
     public function checkFormNo_then_download()
     {
         //DebugBreak();
-         $this->output->delete_cache();
+
         $formno_seg = $this->uri->segment(3);
         $dob_seg = $this->uri->segment(4);
         if($formno_seg !=0){
@@ -620,8 +620,8 @@ class Admission extends CI_Controller {
         $pdf->Cell( 0.5,0.5,"CMD Account No. 00427900072103",0,'L');
 
         $pdf->SetXY(5.2,6.46+$Y);
-        $pdf->SetFont('Arial','b',$FontSize);
-        $pdf->Cell( 0.5,0.5,"Bank Challan No. ".$data['chalanno'],0,'L');
+        $pdf->SetFont('Arial','B',$FontSize+1.3);
+        $pdf->Cell( 0.5,0.5,"Bank Challan No.  ".$data['chalanno'],0,'L');
 
         $Y = $Y - 0.5;
         $pdf->SetXY(0.2, 7.09+$Y);
@@ -689,7 +689,7 @@ class Admission extends CI_Controller {
         $pdf->Cell( 0.5,0.5,"Manager/Cashier:___________________________ ",0,'L');
 
         $pdf->SetXY(3.2, 7.3+$Y);
-        $pdf->SetFont('Arial','b',$FontSize+0.5);
+        $pdf->SetFont('Arial','b',$FontSize+0.9);
         $pdf->Cell( 0.5,0.5,"Form No:".$data['formNo'],0,'L');
 
         $pdf->SetXY(0,5.0+3.0+$Y);
@@ -746,8 +746,8 @@ class Admission extends CI_Controller {
         $pdf->Cell(0.5,0.5,$data["Fname"],0,'L');
 
         $pdf->SetXY(6.2,6.46+$Y);
-        $pdf->SetFont('Arial','b',$FontSize);
-        $pdf->Cell( 0.5,0.5,"Bank Challan No. ".$data['chalanno'],0,'L');
+        $pdf->SetFont('Arial','b',$FontSize+1.3);
+        $pdf->Cell( 0.5,0.5,"Bank Challan No.  ".$data['chalanno'],0,'L');
 
         $Y = $Y - 0.5;
         $pdf->SetXY(0.2, 7.09+$Y);
@@ -896,8 +896,8 @@ class Admission extends CI_Controller {
 
         $pdf->SetXY(3.2, 8.55+$Y);
         $pdf->SetTextColor(0,0,0);
-        $pdf->SetFont('Arial','b',8);
-        $pdf->Cell( 0.5,0.5,"Bank Challan No. ".$data['chalanno'],0,'L');
+        $pdf->SetFont('Arial','b',9.3);
+        $pdf->Cell( 0.5,0.5,"Bank Challan No.  ".$data['chalanno'],0,'L');
 
         $pdf->SetXY(3.2, 8.9+$Y);
         $pdf->SetFont('Arial','b',$FontSize+0.5);
@@ -1008,8 +1008,8 @@ class Admission extends CI_Controller {
 
         $pdf->SetXY(3.5, 10.05+$Y);
         $pdf->SetTextColor(0,0,0);
-        $pdf->SetFont('Arial','b',8);
-        $pdf->Cell( 0.5,0.5,"Bank Challan No. ".$data['chalanno'],0,'L');
+        $pdf->SetFont('Arial','b',9.3);
+        $pdf->Cell( 0.5,0.5,"Bank Challan No.  ".$data['chalanno'],0,'L');
 
 
         $pdf->SetXY(3.4, 10.7+$Y);
@@ -1140,9 +1140,9 @@ class Admission extends CI_Controller {
                     else return -1;
     }
 
-    private function makecat($exam_type,$marksImp,$is11th)
+    private function makecat($cattype,$exam_type,$marksImp,$is11th)
     {
-         //debugBreak();
+        // debugBreak();
         $cate =  array();
 
         if($exam_type == 2)
@@ -1188,17 +1188,20 @@ class Admission extends CI_Controller {
                 $cate['cat12'] = 3;
             }
           
-                 else if(($exam_type == 14 || ($exam_type == 16 && $cattype == 1))  && $marksImp == 1){
+            else if(($exam_type == 14 || ($exam_type == 16 && $cattype == 1))  && $marksImp == 1)
+            {
                 $cate['cat11'] = 3;
                 $cate['cat12'] = 0;
             }
          
-                  else if(($exam_type == 14 || ($exam_type == 16 && $cattype == 1))  && $marksImp == 3){
+            else if(($exam_type == 14 || ($exam_type == 16 && $cattype == 1))  && $marksImp == 3)
+            {
                 $cate['cat11'] = 3;
                 $cate['cat12'] = 3;
             }
             
-                 else if(($exam_type == 14 || ($exam_type == 16 && $cattype == 1))  && $marksImp ==4){
+            else if(($exam_type == 14 || ($exam_type == 16 && $cattype == 1))  && $marksImp ==4)
+            {
                 $cate['cat11'] = 7;
                 $cate['cat12'] = 7;
             }
@@ -1248,7 +1251,7 @@ class Admission extends CI_Controller {
     public function Pre_Inter_Data()
     {       
 
-        // DebugBreak();     
+       //  DebugBreak();     
          $this->load->library('session');
          $mrollno='';
          $hsscrno='';
@@ -1354,7 +1357,22 @@ class Admission extends CI_Controller {
             $this->session->set_flashdata('matric_error',$mydata );
             redirect('Admission/matric_default');
         }
-        
+       else if(($exam_type == 17))
+        {
+               $error_msg.='<span style="font-size: 16pt; color:red;">' . 'You can not Marks Improve.</span>';
+            $this->load->library('session');
+            $mydata = array('data'=>$_POST,'error_msg'=>$error_msg,'exam_type'=>$exam_type);
+            $this->session->set_flashdata('matric_error',$mydata );
+            redirect('Admission/matric_default');
+        }
+         else if(($exam_type == 18))
+        {
+               $error_msg.='<span style="font-size: 16pt; color:red;">' . 'Your Result is not cleared.</span>';
+            $this->load->library('session');
+            $mydata = array('data'=>$_POST,'error_msg'=>$error_msg,'exam_type'=>$exam_type);
+            $this->session->set_flashdata('matric_error',$mydata );
+            redirect('Admission/matric_default');
+        } 
         else if(($exam_type == 1 &&($data[0]['regPvt']==1 )) )
         {
           
@@ -1405,21 +1423,8 @@ class Admission extends CI_Controller {
         $this->load->model('Admission_model');
         $this->load->library('session');
         $Inst_Id = 999999;
-        //DebugBreak();
-            
         // DebugBreak();
         $formno = $this->Admission_model->GetFormNo();
-        $data_error = array(
-        'matRno_hidden'=>$this->input->post('matRno_hidden'),
-        'oldrno'=>$this->input->post('InterRno_hidden'),
-        'InterYear_hidden'=>$this->input->post('InterYear_hidden'),
-        'InterSess_hidden'=>$this->input->post('InterSess_hidden'),
-        'oldboardid'=>$this->input->post('oldboardid'),
-        'cattype_hidden'=>$this->input->post('cattype_hidden'),
-        'oldClass'=>$this->input->post('oldClass'),
-        );
-  
-          $this->frmvalidation('Pre_Inter_Data',$data_error,0);
         $allinputdata = array('cand_name'=>@$_POST['cand_name'],
             'father_name'=>@$_POST['father_name'],
             'bay_form'=>@$_POST['bay_form'],
@@ -1471,7 +1476,6 @@ class Admission extends CI_Controller {
           $grp_cd = $this->input->post('std_group');
         $is11th = 0;
 
-        
         if(@$_POST['sub1'] != 0)
         {
             $sub1ap1 = 1; 
@@ -1575,13 +1579,12 @@ class Admission extends CI_Controller {
         }
        
 
-
+          $cattype = @$_POST['cattype_hidden'];
         $examtype = @$_POST['exam_type'];
-        
         $marksImp = @$_POST['ddlMarksImproveoptions'];
-         debugBreak();
+         //debugBreak();
 
-        $cat = $this->makecat($examtype,$marksImp,$is11th);
+        $cat = $this->makecat($cattype,$examtype,$marksImp,$is11th);
         $cat11 = @$cat['cat11'];
         $cat12 = @$cat['cat12'];
         $Speciality = $this->input->post('speciality');
@@ -1612,17 +1615,15 @@ class Admission extends CI_Controller {
         );
 
         $ispractical = 0;
-        if($per_grp == 1 || $pre_grp == 2 || $pre_grp == 4 || $grp_cd == 1 || $grp_cd == 2 || $grp_cd == 4)
+        if($per_grp == 1 || $pre_grp == 2 || $pre_grp == 4  || $grp_cd == 1 || $grp_cd == 2 || $grp_cd == 4)
         {
             $ispractical =1;
         }
-       // DebugBreak();
-        if(array_search(@$_POST['sub4'],$practical_Sub) || array_search(@$_POST['sub5'],$practical_Sub) || array_search(@$_POST['sub6'],$practical_Sub) ||
-            array_search(@$_POST['sub7'],$practical_Sub) || array_search(@$_POST['sub7p2'],$practical_Sub) ||
-            array_search(@$_POST['sub4p2'],$practical_Sub) || array_search(@$_POST['sub5p2'],$practical_Sub) || array_search(@$_POST['sub6p2'],$practical_Sub)){
+        if(array_search(@$_POST['sub4'],$practical_Sub) || array_search(@$_POST['sub5'],$practical_Sub) || array_search(@$_POST['sub6'],$practical_Sub) || array_search(@$_POST['sub7'],$practical_Sub) || array_search(@$_POST['sub7p2'],$practical_Sub) || array_search(@$_POST['sub4p2'],$practical_Sub) || array_search(@$_POST['sub5p2'],$practical_Sub) || array_search(@$_POST['sub6p2'],$practical_Sub))
+        {
             $ispractical =1;
         }
-       
+      
 
         $AdmFee = $this->Admission_model->getrulefee($ispractical);
          //debugBreak();
@@ -1735,12 +1736,22 @@ $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;
             'brd_name'=>@$_POST['oldboard']
         );
        //   DebugBreak();
+        $data_error = array(
+        'matRno_hidden'=>$this->input->post('matRno_hidden'),
+        'oldrno'=>$this->input->post('InterRno_hidden'),
+        'InterYear_hidden'=>$this->input->post('InterYear_hidden'),
+        'InterSess_hidden'=>$this->input->post('InterSess_hidden'),
+        'oldboardid'=>$this->input->post('oldboardid'),
+        'cattype_hidden'=>$this->input->post('cattype_hidden'),
+        'oldClass'=>$this->input->post('oldClass'),
+        );
+  
         
         
         
         
         
-      /*  $temp_file_name = @$_POST['pic']; //'OldPics/Pic16-MA/MA11th16/123456.jpg';
+        $temp_file_name = @$_POST['pic']; //'OldPics/Pic16-MA/MA11th16/123456.jpg';
         $whatIWant = substr($temp_file_name, strpos($temp_file_name, ".") - 6);    
       
         $temp_db_rno = @$_POST['InterRno_hidden'];
@@ -1772,9 +1783,9 @@ $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;
             redirect('Admission/Pre_Inter_Data/');
 
         }
-             */
-        DebugBreak();
-       
+             
+      //  DebugBreak();
+        $this->frmvalidation('Pre_Inter_Data',$data_error,0);
         $logedIn = $this->Admission_model->Insert_NewEnorlement($data);
         if($logedIn != false)
         {
@@ -1862,7 +1873,7 @@ $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;
     function frmvalidation($viewName,$allinputdata,$isupdate)
     {
 
-          DebugBreak();
+        //  DebugBreak();
         $_POST['address']  = str_replace("'", "", $_POST['address'] );
         $language_sub_cd = array(
 
@@ -1952,7 +1963,7 @@ $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;
 
         }
 
-        else if(@$_POST['MarkOfIden']== '')
+        else if(@$_POST['MarkOfIden']== ''  )
         {
             $allinputdata['excep'] = 'Please Enter Your Mark of Identification';
             $this->session->set_flashdata('NewEnrolment_error',$allinputdata);

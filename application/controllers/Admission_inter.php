@@ -430,7 +430,7 @@ class Admission_inter extends CI_Controller {
     }
     public function StudentsData()
     {    
-       // DebugBreak();
+      // DebugBreak();
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
@@ -1118,8 +1118,8 @@ class Admission_inter extends CI_Controller {
             'ruralOrurban' =>$this->input->post('UrbanRural'),
             'Inst_cd' =>($Inst_Id),
             'FormNo' =>($formno),
-            'cat09' =>$cat11,
-            'cat10' =>$cat12,
+            'cat11' =>$cat11,
+            'cat12' =>$cat12,
             'rno'=>@$_POST['OldRno'],
             'sess'=>@$_POST['Oldsess'],
             'Iyear'=>@$_POST['Oldyear'],
@@ -1164,60 +1164,42 @@ class Admission_inter extends CI_Controller {
         
         */
         
-       // DebugBreak();
+       //DebugBreak();
         
+       
         $temp_file_name = @$_POST['pic']; //'OldPics/Pic16-MA/MA11th16/123456.jpg';
         $whatIWant = substr($temp_file_name, strpos($temp_file_name, ".") - 6);    
       
-        $temp_db_rno = @$_POST['InterRno_hidden'];
+        $temp_db_rno = @$_POST['OldRno'];
         $spreate_filename = explode(".",$whatIWant);
         $temp_file_rno= $spreate_filename[0];
         if($temp_file_rno != $temp_db_rno)
         {
-            echo "Picture Error";
+            $allinputdata = "";
+            $data_error['excep'] = 'Your Pictures is not matched. ';
+            $this->session->set_flashdata('NewEnrolment_error',$data_error);
+            redirect('Admission_inter/NewEnrolment_NewForm_inter/'.@$_POST['OldRno']);
+
+            return;
         }
-        else
-        {
-            echo "Successfull";
-        }
+       
         
-          $target_path = REGULAR_IMAGE_PATH.$Inst_Id;
+        $target_path = REGULAR_IMAGE_PATH;
+        $base_path = GET_PRIVATE_IMAGE_PATH_COPY.@$_POST['pic'];
         if (!file_exists($target_path)){
 
-        mkdir($target_path);
+            mkdir($target_path);
         }
-
-        if(@$_POST['gend']==1)
-        {
-           $base_path =base_url().PRIVATE_IMAGE_PATH.'male.JPG';  
-        }
-        else
-        {
-           $base_path =base_url().PRIVATE_IMAGE_PATH.'female.JPG';  
-        }
-        //@$_POST['pic'];
-       // $base_path = GET_PRIVATE_IMAGE_PATH_COPY.@$_POST['pic'];
-        $copyimg = $target_path.'/'.$formno.'.jpg';
-
+        $copyimg = $target_path.$formno.'.jpg';
         if (!(copy($base_path, $copyimg))) 
         {
-        $data['excep'] = 'The file you are attempting to upload size is between 4 to 20 Kb.';
-        $this->session->set_flashdata('NewEnrolment_error',$data);
-        redirect('Admission/Pre_Inter_Data/');
+            $data_error['excep'] = 'The file you are attempting to upload size is between 4 to 20 Kb.';
+            $this->session->set_flashdata('NewEnrolment_error',$data_error);
+
+            redirect('Admission_inter/NewEnrolment_NewForm_inter/'.@$_POST['OldRno']);
+
         }
-
-        if (!(copy($base_path, $copyimg))) 
-        {
-        $data['excep'] = 'The file you are attempting to upload size is between 4 to 20 Kb.';
-        $this->session->set_flashdata('NewEnrolment_error',$data);
-
-        redirect('Admission/Pre_Inter_Data/');
-        $this->frmvalidation('Pre_Inter_Data',$data,0);       
-
-
-        $this->load->view('common/footer.php');
-        }
-        
+             
       
       $data_error = array(
       'formNo' =>$this->input->post('formNo'),
@@ -1314,7 +1296,7 @@ class Admission_inter extends CI_Controller {
     }
      public function NewEnrolment_NewForm_inter()
     {    
-//    DebugBreak();
+
    // $this->uri->segment(3);
     
         $this->load->library('session');
@@ -1336,7 +1318,7 @@ class Admission_inter extends CI_Controller {
             $isReAdm = 0;
             $RegStdData['isReAdm']=$isReAdm;
             $RegStdData['Oldrno']=0;
-            $formno = $RegStdata['oldFormNo'];
+             $formno = $this->uri->segment(3);
             $year = 2015; 
             $error_msg = $RegStdata['excep'];
             $RegStdData = array('data'=>$this->Admission_inter_model->EditEnrolement_data($formno,$year,$Inst_Id),'isReAdm'=>$isReAdm,'Oldrno'=>0,'error_msg'=>$error_msg);

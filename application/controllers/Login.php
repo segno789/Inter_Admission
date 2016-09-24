@@ -127,69 +127,9 @@ class Login extends CI_Controller {
                     }
                     $isfeeding = -1;
                     $isinterfeeding = -1;
-                    $lastdate = SINGLE_LAST_DATE;
+                    $lastdate = SingleDateFee;
                   //  DebugBreak();
-                     
-                    if($logedIn['tbl_inst']['edu_lvl'] == 1 ||  $logedIn['tbl_inst']['edu_lvl'] == 3)
-                    {
-                          if($logedIn['SpecPermission']==1)
-                        {
-                          $lastdate=  $logedIn['spec_info']['FeedingDate'];
-                            if(date('Y-m-d',strtotime($lastdate))>=date('Y-m-d'))
-                            {
-                                 $isfeeding = 1;
-                            }
-                           else {
-                                 $isfeeding = 0;
-                            }
-                            
-                        }
-                        else
-                        {
-                            
-                        
-                        if(date('Y-m-d',strtotime(SINGLE_LAST_DATE))>=date('Y-m-d') || date('Y-m-d',strtotime(DOUBLE_LAST_DATE))>=date('Y-m-d'))
-                        {
-                            $isfeeding = 1    ;
-                        }
-                        else if($logedIn['tbl_inst']['feedingDate'] != null)
-                        {
-                            $lastdate  = date('Y-m-d',strtotime($logedIn['tbl_inst']['feedingDate'])) ;
-                            if(date('Y-m-d')<=$lastdate)
-                            {
-
-                                $isfeeding = 1; 
-                            }
-                            else 
-                            {    $lastdate = SINGLE_LAST_DATE;
-                                $isfeeding = -1;
-                            }
-                        }
-                        }
-                        
-                     
-
-                    }  
-                    if($logedIn['tbl_inst']['edu_lvl'] == 2 || $logedIn['tbl_inst']['edu_lvl'] == 3 )
-                    {
-                        if(date('Y-m-d',strtotime(SINGLE_LAST_DATE11))>=date('Y-m-d') || date('Y-m-d',strtotime(DOUBLE_LAST_DATE11))>=date('Y-m-d'))
-                        {
-                            $isinterfeeding = 1    ;
-                        }
-                        else if($logedIn['tbl_inst']['feedingDate'] != null)
-                        {
-                            $lastdate  = date('Y-m-d',strtotime($logedIn['tbl_inst']['feedingDate'])) ;
-                            if(date('Y-m-d')<=$lastdate)
-                            {
-
-                                $isinterfeeding = 1; 
-                            }
-                            else 
-                            {
-                                $isinterfeeding = -1;
-                            }
-                        }
-                    }
+                   
 
 
                    // DebugBreak();
@@ -215,21 +155,17 @@ class Login extends CI_Controller {
                         'isfeedingallow' => $isfeeding   ,
                         'isinterfeeding' => $isinterfeeding ,
                         'lastdate' => $lastdate ,  
-                        'isSpecial' => $logedIn['SpecPermission'],   
-                        'isSpecial_Fee' => $logedIn['spec_info']   
                     );
                     $this->load->library('session');
                     $this->session->set_userdata('logged_in', $sess_array); 
                     // redirect('Registration/','refresh');
-                    // redirect('Admission_matric/','refresh');
-                    if($logedIn['tbl_inst']['edu_lvl'] == 1 ||  $logedIn['tbl_inst']['edu_lvl'] == 3)
+                    // redirect('Admission_matric/');
+                    if($logedIn['tbl_inst']['edu_lvl'] == 2 || $logedIn['tbl_inst']['edu_lvl'] == 3 )
                     {
-                        redirect('Admission_inter/','refresh');
+                      redirect('Admission_inter/');  
                     }
-                    else  if($logedIn['tbl_inst']['edu_lvl'] == 2 || $logedIn['tbl_inst']['edu_lvl'] == 3 )
-                    {
-                        redirect('Admission_inter/','refresh');  
-                    }
+                    
+                   
                 }
             }
             else
@@ -247,64 +183,7 @@ class Login extends CI_Controller {
         }
 
     }
-    public function biselogin()
-    {
-        // DebugBreak();
-        $this->load->helper('url');
-        $data = array(
-            'user_status' => ''                     
-
-        );
-
-
-        if(@$_POST['username'] != '' && @$_POST['password'] != '')
-        {   
-            if(@$_POST['username'] == 2222 || @$_POST['username'] == 2303 || @$_POST['username'] == 2229)
-            {
-
-
-
-                $this->load->model('login_model'); 
-                $logedIn = $this->login_model->biseauth($_POST['username'],$_POST['password']);
-                if($logedIn != false)
-                {  
-                    $sess_array = array(
-                        'Inst_Id' => $logedIn['Emp_cd'] ,
-                        'edu_lvl' => $logedIn['BS'],
-                        'inst_Name' => $logedIn['Name'],
-                        'isdeaf' => 0,
-                        'isboardoperator' => 1,
-                    );
-                    $this->load->library('session');
-                    $this->session->set_userdata('logged_in', $sess_array); 
-                    redirect('BiseCorrection/reg9thcorrections', 'refresh'); 
-                }
-                else
-                {  
-                    $data = array(
-                        'user_status' => 1                     
-                    );
-                    $this->load->view('login/biselogin.php',$data);
-
-                }
-            }
-            else
-            {
-                $data = array(
-                    'user_status' => '7'                     
-
-                );
-                $this->load->view('login/biselogin.php',$data);
-            }
-
-        }
-        else
-        {
-
-            $this->load->view('login/biselogin.php',$data);
-        }
-
-    }
+ 
 
     function logout()
     {
@@ -313,30 +192,17 @@ class Login extends CI_Controller {
         // DebugBreak();
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
-        $userinfo = @$Logged_In_Array['logged_in'];
-        if($userinfo['isboardoperator']==1){
-            $this->session->unset_userdata('logged_in');
-            $this->session->unset_userdata('user_id');
-            $this->session->unset_userdata('username');
-            $this->session->unset_userdata('logged_in_front');
-            $this->session->unset_userdata('user_id_front');
-            $this->session->unset_userdata('username_front');
 
-            $this->session->sess_destroy();    
-            redirect('login/biselogin','refresh');
-        }
-        else{
-            $this->session->unset_userdata('logged_in');
-            $this->session->unset_userdata('user_id');
-            $this->session->unset_userdata('username');
-            $this->session->unset_userdata('logged_in_front');
-            $this->session->unset_userdata('user_id_front');
-            $this->session->unset_userdata('username_front');
+        $this->session->unset_userdata('logged_in');
+        $this->session->unset_userdata('user_id');
+        $this->session->unset_userdata('username');
+        $this->session->unset_userdata('logged_in_front');
+        $this->session->unset_userdata('user_id_front');
+        $this->session->unset_userdata('username_front');
 
-            $this->session->sess_destroy();
-            redirect('login','refresh');
-        }
-
+        $this->session->sess_destroy();
+        redirect('login');
+        
 
 
     }

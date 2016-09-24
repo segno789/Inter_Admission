@@ -20,12 +20,13 @@
                                         <th style="width: 4%;">
                                             Sr.No.
                                         </th>
+                                         <th style="width: 5%;">
+                                            Previous Roll.No.
+                                        </th>
                                         <th style="width: 5%;">
                                             Matric Roll.No.
                                         </th>
-                                        <th style="width: 5%;">
-                                            Previous Roll.No.
-                                        </th>
+                                       
                                         <th style="width:20%">
                                             Name
                                         </th>
@@ -97,8 +98,9 @@
                                  //  DebugBreak();
                                     echo '<tr  >
                                     <td>'.$n.'</td>
-                                    <td>'.$vals["matRno"].'</td>
                                     <td>'.$vals["rno"].'</td>
+                                    <td>'.$vals["matRno"].'</td>
+                                    
                                     <td>'.$vals["name"].'</td>
                                     <td>'.$vals["Fname"].'</td>
                                     <td>'.$grp_name.'</td>
@@ -107,7 +109,7 @@
                                     // <td><img id="previewImg" style="width:40px; height: 40px;" src="'.base_url().GET_PRIVATE_IMAGE_PATH.$vals["picpath"].'" alt="Candidate Image"></td>';
                                      /*<td><img id="previewImg" style="width:40px; height: 40px;" src="/'.IMAGE_PATH.$Inst_Id.'/'.$vals['PicPath'].'" alt="Candidate Image"></td>';*/
                                     echo'<td>
-                                    <button type="button" class="btn btn-info" value="'.$formno.'" onclick="NewForm('.$formno.')">Save Form</button>
+                                    <button type="button" class="btn btn-info" value="'.$vals["rno"].'" onclick="NewForm('.$vals["rno"].')">Save Form</button>
                                    
                                     </td>
                                     </tr>';
