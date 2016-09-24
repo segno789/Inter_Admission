@@ -870,7 +870,7 @@ class Admission_inter extends CI_Controller {
     }
     public function NewEnrolment_INSERT_inter()
     {
-//   DebugBreak();
+   DebugBreak();
         $this->load->model('Admission_inter_model');
         // //DebugBreak();
         $this->load->library('session');
@@ -1167,7 +1167,7 @@ class Admission_inter extends CI_Controller {
        //DebugBreak();
         
        
-        $temp_file_name = @$_POST['pic']; //'OldPics/Pic16-MA/MA11th16/123456.jpg';
+       /* $temp_file_name = @$_POST['pic']; //'OldPics/Pic16-MA/MA11th16/123456.jpg';
         $whatIWant = substr($temp_file_name, strpos($temp_file_name, ".") - 6);    
       
         $temp_db_rno = @$_POST['OldRno'];
@@ -1181,7 +1181,7 @@ class Admission_inter extends CI_Controller {
             redirect('Admission_inter/NewEnrolment_NewForm_inter/'.@$_POST['OldRno']);
 
             return;
-        }
+        }                         */
        
         
         $target_path = REGULAR_IMAGE_PATH;
