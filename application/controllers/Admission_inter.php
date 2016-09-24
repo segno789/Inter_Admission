@@ -1191,7 +1191,7 @@ class Admission_inter extends CI_Controller {
             mkdir($target_path);
         }
         $copyimg = $target_path.'/'.$formno.'.jpg';
-        if (!(copy($base_path, $copyimg))) 
+        if ((copy($base_path, $copyimg))) 
         {
             $data_error['excep'] = 'The file you are attempting to upload size is between 4 to 20 Kb.';
             $this->session->set_flashdata('NewEnrolment_error',$data_error);
@@ -1299,6 +1299,7 @@ class Admission_inter extends CI_Controller {
 
    // $this->uri->segment(3);
     
+//        DebugBreak();
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
