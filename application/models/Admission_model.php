@@ -67,7 +67,7 @@ class Admission_model extends CI_Model
         $CellNo = $data['MobNo'];
         $medium = $data['medium'];
         $Inst_Rno = strtoupper($data['Inst_Rno']);
-        $MarkOfIden =strtoupper(@$data['MarkOfIden']);
+        $MarkOfIden =strtoupper(@$data['markOfIden']);
         $Speciality = $data['Speciality'];
         $nat = $data['nat'];
         $sex = $data['sex'];

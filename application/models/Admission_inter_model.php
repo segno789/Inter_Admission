@@ -13,10 +13,10 @@ class Admission_inter_model extends CI_Model
     public function getStudentsData($data){
         //sp_form_data
         //SELECT * FROM  fl_dataforMa15 WHERE  (isSubmit is null or isSubmit= 0) and class = 9 and iyear = 2014 and sch_cd = ".$user->inst_cd
-       // DebugBreak();
+      // DebugBreak();
         $inst_cd = $data['Inst_Id'];
         $gender = $data['gender'];
-        $query = $this->db->query("Admission_online..SP_SELECT_IS2016_TEST $inst_cd,12,2015,1,$gender");
+        $query = $this->db->query("Admission_online..SP_SELECT_IS2016_TEST $inst_cd,11,2015,1,$gender");
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
@@ -290,7 +290,7 @@ class Admission_inter_model extends CI_Model
     {
            //  //DebugBreak();
         
-        $query = $this->db->get_where('Admission_online..tblAdmissionDataForHSSC',  array('FormNo' => $formno,'class'=>12,'iyear'=>$year,'sess'=>1));     
+        $query = $this->db->get_where('Admission_online..tblAdmissionDataForHSSC',  array('rno' => $formno,'class'=>11,'iyear'=>$year,'sess'=>1));     
          
         $rowcount = $query->num_rows();
         if($rowcount > 0)

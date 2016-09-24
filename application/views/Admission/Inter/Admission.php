@@ -7,12 +7,12 @@
                 <div class="widget no-margin">
                     <div class="widget-header">
                         <div class="title">
-                            Matric Admission Dashboard<a data-original-title="" id="notifications">s</a>
+                            Inter Admission Dashboard<a data-original-title="" id="notifications">s</a>
                         </div>
 
                     </div>
                     <div class="widget-body">
-                        <h1    style="text-align: center;"><font color="#000000" size="+1" >Note:-Last Date of Online Admission for 10th is <b class="blink_text"><?php echo lastdate; ?></b></font></h1>
+                        <h1    style="text-align: center;"><font color="#000000" size="+1" >Note:-Last Date of Online Admission for 12th is <b class="blink_text"><?php echo lastdate; ?></b></font></h1>
                         <!--<b class="blink_text" style="margin-left: 36%;"> Please update your Institute Profile, In Case of Govt institute EMIS code is mandatory </b>-->
 
 
@@ -20,28 +20,28 @@
 
 
                         <div class="shortcutHome">
-                            <a href="<?php echo base_url(); ?>index.php/Admission_matric/StudentsData"><img src="<?php echo base_url();?>assets/img/enrolment.png"><br>Old Students</a>
+                            <a href="<?php echo base_url(); ?>index.php/Admission_Inter/StudentsData"><img src="<?php echo base_url();?>assets/img/enrolment.png"><br>Old Students</a>
                         </div>
                         <!--  <div class="shortcutHome">
                         <a href="GetInfo.php"><img src="<?php echo base_url();?>assets/img/enrolment.png"><br>Re-Admission</a>
                         </div>  -->    
                          <div class="shortcutHome">
-                            <a href="<?php echo base_url(); ?>index.php/Admission_matric/FormPrinting"><img src="<?php echo base_url();?>assets/img/reports.png"><br>Reports </a>
+                            <a href="<?php echo base_url(); ?>index.php/Admission_Inter/FormPrinting"><img src="<?php echo base_url();?>assets/img/reports.png"><br>Reports </a>
                         </div>
                         <div class="shortcutHome">
-                            <a href="<?php echo base_url(); ?>index.php/Admission_matric/EditForms"><img src="<?php echo base_url();?>assets/img/edit_form.png"><br>Edit Form</a>
+                            <a href="<?php echo base_url(); ?>index.php/Admission_Inter/EditForms"><img src="<?php echo base_url();?>assets/img/edit_form.png"><br>Edit Form</a>
                         </div>
                        
                         <div class="shortcutHome">
 
 
-                            <a href="<?php echo base_url(); ?>index.php/Admission_matric/CreateBatch"><img src="<?php echo base_url();?>assets/img/batch_list.png"><br>Create Batch</a> 
+                            <a href="<?php echo base_url(); ?>index.php/Admission_Inter/CreateBatch"><img src="<?php echo base_url();?>assets/img/batch_list.png"><br>Create Batch</a> 
 
                         </div>
 
 
                         <div class="shortcutHome">
-                            <a href="<?php echo base_url(); ?>index.php/Admission_matric/batchlist"><img src="<?php echo base_url();?>assets/img/lists.png"><br>Batch List</a>
+                            <a href="<?php echo base_url(); ?>index.php/Admission_Inter/batchlist"><img src="<?php echo base_url();?>assets/img/lists.png"><br>Batch List</a>
                         </div>
                         <div class="shortcutHome">
                          <a href="<?php echo base_url(); ?>/assets/pdfs/instructions.pdf"><img src="<?php echo base_url();?>assets/img/lists.png"><br>Instructions</a>
@@ -116,7 +116,7 @@
                             <a href="<?php echo base_url(); ?>/assets/img//Image_error.pdf" class="guidlines blink_text" target="_blank" style="font-size: 18px;">Instruction for Error occured due to Image uploading. </a>-->
                             <br /><br />
                             <strong>NOTE:</strong><br/>
-<!--                             <br/>1. Please upload photo of student carefully and with good quality as this picture will be used in his/her matriculation Roll Number Slip/Result Card/certificate.<br /> 4.Picture size must be less than  20 kb, and use only Passport size with small letter ".jpg" extention image.-->
+<!--                             <br/>1. Please upload photo of student carefully and with good quality as this picture will be used in his/her Interulation Roll Number Slip/Result Card/certificate.<br /> 4.Picture size must be less than  20 kb, and use only Passport size with small letter ".jpg" extention image.-->
                             1. Fill correct Address of candiate as now governmet often demand addresses of regular candidates also from Board, for various purposes. i.e, Laptop Distribution, Soler Panel distribution, scholership etc.<br /> 
                             2. In case of any problem regarding Admission, please send us email on <span style="font-weight:bold; font-family:Verdana, Geneva, sans-serif; font-style:italic; color:#00F" > complaint4bisegrw@gmail.com </span>
                             with your <span style="font-weight:bolder; "> User Id, Password,  Contact No. </span>  and description of problem. <br />
