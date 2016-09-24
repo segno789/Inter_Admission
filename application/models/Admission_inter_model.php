@@ -246,7 +246,7 @@ class Admission_inter_model extends CI_Model
      public function EditEnrolement_singleForm($formno)
     {
 
-         ////DebugBreak();
+        // DebugBreak();
         //$query = $this->db->get_where('matric_new..tblbiodata', array('sch_cd' => $inst_cd,'class' => 10, 'iyear' => 2016, 'regpvt'=>1,));
         //sp_get_regInfo_spl_case
 
@@ -660,7 +660,7 @@ class Admission_inter_model extends CI_Model
     }
     public function bay_form_comp($bayformno)
     {
-        $query = $this->db->get_where('Admission_online..MSAdm2016',  array('BForm' => $bayformno,'IsDeleted'=>0));
+        $query = $this->db->get_where('Admission_online..ISAdm2016',  array('BForm' => $bayformno,'IsDeleted'=>0));
         $rowcount = $query->num_rows();
         if ($rowcount > 0){
             return true;
@@ -671,7 +671,7 @@ class Admission_inter_model extends CI_Model
     }
     public function bay_form_fnic_dob_comp($bayformno,$fnic,$dob)
     {
-        $query = $this->db->get_where('Admission_online..MSAdm2016',  array('BForm' => $bayformno,'FNIC' => $fnic,'Dob' => $dob,'IsDeleted'=>0));
+        $query = $this->db->get_where('Admission_online..ISAdm2016',  array('BForm' => $bayformno,'FNIC' => $fnic,'Dob' => $dob,'IsDeleted'=>0));
         $rowcount = $query->num_rows();
         if ($rowcount > 0){
             return true;
