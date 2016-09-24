@@ -1414,7 +1414,7 @@ class Admission_inter extends CI_Controller {
         $error = array();
         // //DebugBreak();
         $formno =  $_POST['formNo'];  //$this->Admission_inter_model->GetFormNo($Inst_Id);//, $fname);//$_POST['username'],$_POST['password']);
-        $target_path = IMAGE_PATH.$Inst_Id.'/';
+      /*  $target_path = IMAGE_PATH.$Inst_Id.'/';
         // $target_path = '../uploads2/'.$Inst_Id.'/';
         if (!file_exists($target_path)){
 
@@ -1424,9 +1424,9 @@ class Admission_inter extends CI_Controller {
         if (!file_exists($target_path)){
 
             mkdir($target_path);
-        }
+        }                       */
 
-        $config['upload_path']   = $target_path;
+      /*  $config['upload_path']   = $target_path;
         $config['allowed_types'] = 'jpg';
         $config['max_size']      = '20';
         $config['max_width']     = '260';
@@ -1439,7 +1439,7 @@ class Admission_inter extends CI_Controller {
 
         //$config['new_image']    = $formno.'.JPEG';
 
-        $this->load->library('upload', $config);
+        $this->load->library('upload', $config);     */
         $sub1ap1 = 0;
         $sub2ap1 = 0;
         $sub3ap1 = 0;
@@ -1480,7 +1480,7 @@ class Admission_inter extends CI_Controller {
         {
             $sub8ap1 = 1;    
         }
-        $check = getimagesize($_FILES["image"]["tmp_name"]);
+       // $check = getimagesize($_FILES["image"]["tmp_name"]);
         // //DebugBreak();
         if(@$_POST['IsReAdm'] == '1')
         {
@@ -2965,15 +2965,15 @@ class Admission_inter extends CI_Controller {
             //------ Picture Box on Centre      
             $pdf->SetXY(6.6, 1.55+$Y );
             $pdf->Cell(1.0,1.0,'',1,0,'C',0);
-           // $pdf->Image(base_url().REGULAR_IMAGE_PATH.$user['Inst_Id']."/".$data["picpath"],6.5, 1.55+$Y, 1.25, 1.4, "JPG");
-          if($data["sex"]==1)
+           $pdf->Image(REGULAR_IMAGE_PATH.$user['Inst_Id']."/".$data["picpath"],6.5, 1.55+$Y, 1.25, 1.0, "JPG");
+         /* if($data["sex"]==1)
           {
             $pdf->Image( base_url().'uploads/download.jpg',6.6, 1.55+$Y, 1.0, 1.0, "JPG");  
           }
           else
           {
               $pdf->Image( base_url().'uploads/130659.jpg',6.6, 1.55+$Y, 1.0, 1.0, "JPG");
-          }
+          }           */
             
             $pdf->SetFont('Arial','',8);
 
