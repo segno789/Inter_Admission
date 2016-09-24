@@ -22,8 +22,8 @@
 
                                     </label> 
                                     <!--echo '/'.IMAGE_PATH.$Inst_Id.'/'.$data[0]['PicPath'];-->
-                                    <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="<?php if($data[0]['sex']==1){echo base_url().'/Uploads/IS2016/Private/male.JPG';}else{echo base_url().'/Uploads/IS2016/Private/female.JPG';} ?>" alt="Candidate Image">
-                                 <input type="hidden" value="<?php if($data[0]['sex']==1){echo base_url().'/Uploads/IS2016/Private/male.JPG';}else{echo base_url().'/Uploads/IS2016/Private/female.JPG';}?>" name="pic">
+                                    <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="<?php echo  '../../'.$data['0']['picpath'] ?>" alt="Candidate Image">
+                                 <input type="hidden" value="<?php echo  $data['0']['picpath']?>" name="pic">
                                 </div>
                             </div>
                             <div class="control-group">

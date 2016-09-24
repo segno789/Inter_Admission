@@ -804,8 +804,8 @@ class Admission_inter extends CI_Controller {
             'ruralOrurban' =>$this->input->post('UrbanRural'),
             'Inst_cd' =>($Inst_Id),
             'FormNo' =>($formno),
-            'cat09' =>$cat11,
-            'cat10' =>$cat12,
+            'cat11' =>$cat11,
+            'cat12' =>$cat12,
             'oldRno'=>@$_POST['OldRno'],
             'sess'=>@$_POST['Oldsess'],
             'Iyear'=>@$_POST['Oldyear'],
@@ -1065,7 +1065,7 @@ class Admission_inter extends CI_Controller {
 
         //DebugBreak();
       
-      // DebugBreak();
+      DebugBreak();
         $data = array(
             'name' =>$this->input->post('cand_name'),
             'Fname' =>$this->input->post('father_name'),
@@ -1184,13 +1184,13 @@ class Admission_inter extends CI_Controller {
         }                         */
        
         
-        $target_path = REGULAR_IMAGE_PATH;
+        $target_path = REGULAR_IMAGE_PATH.$Inst_Id;
         $base_path = GET_PRIVATE_IMAGE_PATH_COPY.@$_POST['pic'];
         if (!file_exists($target_path)){
 
             mkdir($target_path);
         }
-        $copyimg = $target_path.$formno.'.jpg';
+        $copyimg = $target_path.'/'.$formno.'.jpg';
         if (!(copy($base_path, $copyimg))) 
         {
             $data_error['excep'] = 'The file you are attempting to upload size is between 4 to 20 Kb.';

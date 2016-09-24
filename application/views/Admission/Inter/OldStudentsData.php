@@ -39,9 +39,7 @@
                                         <th style="width:15%" class="hidden-phone">
                                             Subject Group
                                         </th>
-                                        <th style="width:15%" class="hidden-phone">
-                                            Selected Subjects
-                                        </th>
+                                        
                                          <th style="width:5%" class="hidden-phone">
                                             Picture
                                         </th>
@@ -54,7 +52,7 @@
                                     <?php
                                // DebugBreak();
                                $image_path_selected = '';
-                                if($data[0]['sex']==1){ $image_path_selected = base_url().'/Uploads/IS2016/Private/male.JPG';}else{$image_path_selected = base_url().'/Uploads/IS2016/Private/female.JPG';}
+                             //   if($data[0]['sex']==1){ $image_path_selected = base_url().'/Uploads/IS2016/Private/male.JPG';}else{$image_path_selected = base_url().'/Uploads/IS2016/Private/female.JPG';}
                                     if($data != false)
                                     {
                                     $n=0;  
@@ -64,16 +62,7 @@
                                     $formno = !empty($vals["formNo"])?$vals["formNo"]:"N/A";
                                     $grp_name = $vals["grp_cd"];
                                     $sub7 = $vals["sub7"];
-                                 /*   if($grp_name==1 && $sub7==78)
-                                    {
-                                        $grp_name = 7;
-                                    }
-                                    if($grp_name == 1 && $sub7 == 43){
-                                        $grp_name = 8;
-                                    }
-                                    if($grp_name == 1 && $sub7 == 8){
-                                        $grp_name = 1;
-                                    }*/
+                                     $image_path_selected = '../'.$vals['picpath']; 
                                     switch ($grp_name) {
                                         case '1':
                                             $grp_name = 'PRE-MEDICAL';
@@ -104,7 +93,6 @@
                                     <td>'.$vals["name"].'</td>
                                     <td>'.$vals["Fname"].'</td>
                                     <td>'.$grp_name.'</td>
-                                    <td>'.$vals["sub1_abr"].','.$vals["sub2_abr"].','.$vals["sub3_abr"].','.$vals["sub4_abr"].','.$vals["sub5_abr"].','.$vals["sub6_abr"].','.$vals["sub7_abr"].','.$vals["sub8_abr"].'</td>
                                      <td><img id="previewImg" style="width:40px; height: 40px;" src="'.$image_path_selected. '" alt="Candidate Image"></td>';
                                     // <td><img id="previewImg" style="width:40px; height: 40px;" src="'.base_url().GET_PRIVATE_IMAGE_PATH.$vals["picpath"].'" alt="Candidate Image"></td>';
                                      /*<td><img id="previewImg" style="width:40px; height: 40px;" src="/'.IMAGE_PATH.$Inst_Id.'/'.$vals['PicPath'].'" alt="Candidate Image"></td>';*/
