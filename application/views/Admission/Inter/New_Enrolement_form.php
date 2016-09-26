@@ -53,11 +53,11 @@
                                     Bay Form No :
                                 </label>
                                 <div class="controls controls-row">
-                                    <input class="span3" type="text" id="bay_form" name="bay_form" placeholder="Bay Form No." value="<?php echo  $data['0']['BForm']; ?>" required="required" <?php if( $data['0']['BForm']>=10) echo "readonly='readonly'";  ?>>
+                                    <input class="span3" type="text" id="bay_form" name="bay_form" readonly="readonly" placeholder="Bay Form No." value="<?php echo  $data['0']['BForm']; ?>" required="required" <?php if( $data['0']['BForm']>=10) echo "readonly='readonly'";  ?>>
                                     <label class="control-label span2" for="father_cnic">
                                         Father's CNIC :
                                     </label> 
-                                    <input class="span3" id="father_cnic" name="father_cnic" type="text" placeholder="34101-1111111-1" value="<?php echo  $data['0']['FNIC']; ?>" <?php if($data['0']['FNIC']>=10) echo "readonly='readonly'";  ?> required="required">
+                                    <input class="span3" id="father_cnic" name="father_cnic" type="text" readonly="readonly" placeholder="34101-1111111-1" value="<?php echo  $data['0']['FNIC']; ?>" <?php if($data['0']['FNIC']>=10) echo "readonly='readonly'";  ?> required="required">
                                 </div>
                             </div>
 
