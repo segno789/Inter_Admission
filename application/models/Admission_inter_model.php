@@ -502,8 +502,9 @@ class Admission_inter_model extends CI_Model
         $forms_id = $data['forms_id'];
         $todaydate = $data['todaydate'];
         $total_std = $data['total_std'];
+        $cert_fee = $data['cert_fee'];
         //        EXEC Batch_Create @Inst_Cd = ".$user->inst_cd.",@UserId = ".$user->get_currentUser_ID()."@Amount = ".$tot_fee.",@Total_ProcessingFee = ".$prs_fee.",@Total_RegistrationFee = ".$reg_fee.",@Total_LateRegistrationFee =".$late_fee.",@Total_LateAdmissionFee = 0,@Valid_Date = '$today',@form_ids = '$forms_id'"
-        $query = $this->db->query("Admission_online..Batch_Create_12th_2016 $inst_cd,$reg_fee,$fine,$processing_fee,$total_std,$total_fee,$TotalRegFee,$Totalprocessing_fee,$TotalLatefee,'$todaydate','$forms_id'");
+        $query = $this->db->query("Admission_online..Batch_Create_12th_2016 $inst_cd,$reg_fee,$fine,$processing_fee,$total_std,$total_fee,$TotalRegFee,$Totalprocessing_fee,$TotalLatefee,'$todaydate','$forms_id',$cert_fee");
     }
     public function Batch_List($data)
     {
