@@ -287,7 +287,7 @@ class Admission extends CI_Controller {
 
         $pdf->SetXY(3.5+$x,1.85+$Y);
         $pdf->SetFont('Arial','',$FontSize);
-        $pdf->Cell(0.5,0.5,"Father CNIC:",0,'R');
+       // $pdf->Cell(0.5,0.5,"Father CNIC:",0,'R');
 
         $pdf->SetFont('Arial','B',$FontSize);
         $pdf->SetXY(4.5+$x,1.85+$Y);
@@ -296,7 +296,7 @@ class Admission extends CI_Controller {
         //--------------------------- BAY FORM NO line 
         $pdf->SetXY(3.5+$x, 1.70+$Y);
         $pdf->SetFont('Arial','',$FontSize);
-        $pdf->Cell( 0.5,0.5,"Bay Form No:",0,'L');
+       // $pdf->Cell( 0.5,0.5,"Bay Form No:",0,'L');
         $pdf->SetFont('Arial','B',$FontSize);
         $pdf->SetXY(4.5+$x,1.70+$Y);
         $pdf->Cell(0.5,0.5,'',0,'L');
@@ -347,7 +347,7 @@ class Admission extends CI_Controller {
        
         $pdf->SetFont('Arial','B',$FontSize);
         $pdf->SetXY(4.5+$x,2.15+$Y);
-        $pdf->Cell(0.5,0.5,'',0,'L');
+        $pdf->Cell(0.5,0.5,'PAKISTANI',0,'L');
 
         $pdf->SetXY(3.5+$x,2.30+$Y);
         $pdf->SetFont('Arial','',$FontSize);
