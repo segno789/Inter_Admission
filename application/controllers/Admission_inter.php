@@ -196,6 +196,9 @@ class Admission_inter extends CI_Controller {
             $feestructure[]     = $result[0]['Total_RegistrationFee'];   
             $displayfeetitle[] =  'Total Admission Fee';   
        
+            $feestructure[]     = $result[0]['Total_CertificateFee'];   
+            $displayfeetitle[] =  'Total Certificate Fee';  
+            
             $feestructure[]=$result[0]['Total_LateRegistrationFee']; 
             $displayfeetitle[] =  'Total Late Admission Fee';   
        
