@@ -1462,14 +1462,14 @@ if(isset($files)){
             return status;
         }   
 
-        else if(bFormNo == "" || bFormNo == 0 || bFormNo == undefined)
+      /*  else if(bFormNo == "" || bFormNo == 0 || bFormNo == undefined)
         {
             $('#ErrMsg').show(); 
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
             $('#ErrMsg').html("<b>Please Enter your bay-Form</b>"); 
             $('#bay_form').focus();  
             return status; 
-        }
+        }*/
         else if(FNic == "" || FNic.length == undefined )
         {
             $('#ErrMsg').show(); 

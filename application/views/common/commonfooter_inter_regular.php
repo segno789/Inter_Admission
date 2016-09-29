@@ -600,16 +600,16 @@
                 window.location.href = '<?=base_url()?>Admission_inter/CreateBatch/'+'97/3/2/';
                 // alert("Transfer Thai Gayo");
             }
-            else  if(this.value == '3'){
-                window.location.href = '<?=base_url()?>Admission_inter/CreateBatch/'+'98/3/3/';
-                // alert("Transfer Thai Gayo");
-            }
-            else  if(this.value == '4'){
-                window.location.href = '<?=base_url()?>Admission_inter/CreateBatch/'+'98/3/4/';
-                //  alert("Transfer Thai Gayo");
-            }
             else  if(this.value == '5'){
                 window.location.href = '<?=base_url()?>Admission_inter/CreateBatch/'+'98/3/5/';
+                // alert("Transfer Thai Gayo");
+            }
+            else  if(this.value == '7'){
+                window.location.href = '<?=base_url()?>Admission_inter/CreateBatch/'+'98/3/7/';
+                //  alert("Transfer Thai Gayo");
+            }
+            else  if(this.value == '8'){
+                window.location.href = '<?=base_url()?>Admission_inter/CreateBatch/'+'98/3/8/';
                 //  alert("Transfer Thai Gayo");
             }
 

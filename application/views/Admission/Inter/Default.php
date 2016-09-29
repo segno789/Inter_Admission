@@ -53,6 +53,8 @@
                             </div>
                             <div style="vertical-align:bottom;margin-top: 20px; font-weight: bold;">
                                 <input type="button" value="Next" id="proceed" name="proceed" class="jbtn jmedium jblack">
+                                </br>
+                                <img src="assets/img/inqurey.jpg" alt="" style="width: 60%;">
                                 <!-- <input type="button" value="Cancel" onclick="window.location='#';" class="jbtn jmedium jblack"> -->
                             </div>
                         </form>

@@ -212,7 +212,7 @@
             return status;
         }   
 
-        else if(bFormNo == "" || bFormNo == 0 || bFormNo == undefined)
+        /*else if(bFormNo == "" )
         {
             $('#ErrMsg').show(); 
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
@@ -220,8 +220,8 @@
             alertify.error("Please Enter your bay-Form") 
             $('#bay_form').focus();  
             return status; 
-        }
-        else if(FNic == "" || FNic.length == undefined )
+        }*/
+        else if(FNic == ""  )
         {
             $('#ErrMsg').show(); 
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });

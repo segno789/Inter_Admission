@@ -303,8 +303,9 @@ header("Pragma: no-cache");
                                         $class = $data[0]['class'];
                                         $IsRegular = $data[0]['IsRegular'];
                                         $coll_cd = $data[0]['coll_cd']; 
-                                        
-                                        if($exam_type == 1  || $exam_type == 3 || $exam_type == 9 || $exam_type == 11 || $exam_type == 16 || $exam_type == 14 || $exam_type == 15){
+
+                                        if($exam_type == 1   || $exam_type == 3 || $exam_type == 9 || $exam_type == 11 || $exam_type == 16 || $exam_type == 14 || $exam_type == 15)
+                                        {
                                             if($grp_cd == 1){
                                                 echo "<option value='1' selected='selected'>PRE-MEDICAL</option>";       
                                             }
@@ -320,16 +321,14 @@ header("Pragma: no-cache");
                                             }
                                             else if($grp_cd == 5){
                                                 echo "<option value='5'>COMMERCE</option>";            
-                                            }
+                                            } 
                                         }
 
-                                       /* else if($exam_type == 2){
-                                            echo "<option value='0'>SELECT GROUP</option>";
-                                            echo "<option value='3'>HUMANITIES</option>";
-                                            echo "<option value='5'>COMMERCE</option>";    
-                                        } */
+                                        
+                                        
+                                   
 
-                                        if( $exam_type == 2 || $exam_type == 4 || $exam_type == 5 || $exam_type == 6){
+                                        if($exam_type == 4 || $exam_type == 5 || $exam_type == 6 ||  $exam_type == 2){
                                             if($grp_cd == 1){
                                                 echo "<option value='1' selected='selected'>PRE-MEDICAL</option>";      
                                                 echo "<option value='3'>HUMANITIES</option>";
@@ -635,6 +634,7 @@ header("Pragma: no-cache");
                             <input type="hidden" name="exam_type"  id="exam_type"  value="<?php echo @$exam_type = $data[0]['exam_type']; ?>">
                             <input type="hidden" name="pregrp"     id="pregrp"     value="<?php echo @$pregrp = $data[0]['grp_cd']; ?>">
                             <input type="hidden" name="oldboardid" id="oldboardid" value="<?php   echo @$data['board'];?>"/>
+                           
                             <input type="hidden" name="matRno_hidden" id="matRno_hidden" value="<?php   echo @$data[0]['matRno'];?>"/>
                             <input type="hidden" name="InterRno_hidden" id="InterRno_hidden" value="<?php   echo @$data[0]['rno'];?>"/>
                             <input type="hidden" name="InterYear_hidden" id="InterYear_hidden" value="<?php   echo @$data[0]['Iyear'];?>"/>
@@ -725,7 +725,6 @@ header("Pragma: no-cache");
                                     $('#sub7').hide();$('#sub7p2').hide();
                                     $('#sub8').hide(); $('#sub8p2').hide();    
                                 }
-                               
 
                                 function Empty_All_Dropdowns(){
                                     $('#sub1').empty();$('#sub1p2').empty();
@@ -1009,7 +1008,6 @@ header("Pragma: no-cache");
                                 var sub5 = "<?php echo @$data[0]['sub5']; ?>";
                                 var sub6 = "<?php echo @$data[0]['sub6']; ?>";
                                 var sub7 = "<?php echo @$data[0]['sub7']; ?>";
-                                var sub7a = "<?php echo @$data[0]['sub7A']; ?>";
                                 var sub8 = "<?php echo @$data[0]['sub8']; ?>";
                                 // Part 1 Subjects Pass fail .
                                 var sub1pf1 = "<?php echo @$data[0]['sub1pf1']; ?>";
@@ -1022,7 +1020,7 @@ header("Pragma: no-cache");
                                 var sub8pf1 = "<?php echo @$data[0]['sub8pf1']; ?>";
 
                                 // Part 2 Subjects Pass Fail.
-                                var sub1pf2 = "<?php echo @$data[0]['sub1pf2']; ?>";
+                                var sub1pf2 = "<?php echo @$data[0]['sub1Pf2']; ?>";
                                 var sub2pf2 = "<?php echo @$data[0]['sub2pf2']; ?>";
                                 var sub3pf2 = "<?php echo @$data[0]['sub3pf2']; ?>";
                                 var sub4pf2 = "<?php echo @$data[0]['sub4pf2']; ?>";
@@ -1053,6 +1051,13 @@ header("Pragma: no-cache");
                                 var exam_type = "<?php echo @$data[0]['exam_type']?>";
 
                                 function sub_grp_load(){
+
+                                    
+                                    if(grp_cd == 5)
+                                    {
+                                        $('#sub7').show();
+                                        $('#sub7p2').show();
+                                    }
                                 
                                     if((sub1pf1 == "3") || (sub1st1 == "2"))
                                     {
@@ -1201,7 +1206,7 @@ header("Pragma: no-cache");
                                     if((sub7pf2 == "3") || (sub7st2 == "2"))
                                     {
                                         $("#sub7p2").empty();
-                                        $("#sub7p2").append(new Option('<?php  echo  array_search($data[0]['sub7A'],$subarray); ?>',sub7));
+                                        $("#sub7p2").append(new Option('<?php  echo  array_search($data[0]['sub7A'],$subarray); ?>','<?php echo $data[0]['sub7A']?>'));
                                         $("#sub7p2 option[value='" + sub7 + "']").attr("selected","selected");
                                     }
                                     else
@@ -1236,7 +1241,7 @@ header("Pragma: no-cache");
                                 function sub_grp_load_exam_type1(){
                                        
                                     Empty_All_Dropdowns();
-                               
+
                                     $("#sub1").append('<option value="0">NONE</option>');
                                     $("#sub1p2").append(new Option('<?php  echo  array_search($data[0]['sub1'],$subarray); ?>',sub1));
 
@@ -1251,13 +1256,15 @@ header("Pragma: no-cache");
                                     
                                     if(grp_cd == 5)
                                      {
-                                  
-                                     
+                                         
+                                       $('#sub7').show();
+                                        $('#sub7p2').show();  
+                                         
                                            $("#sub5").append('<option value="0">NONE</option>'); 
-                                    $("#sub5p2").append(new Option('<?php  echo  array_search($data[0]['sub5A'],$subarray); ?>',sub5));
+                                    $("#sub5p2").append(new Option('<?php  echo  array_search($data[0]['sub5A'],$subarray); ?>','<?php echo $data[0]['sub5A']?>'));
 
                                     $("#sub6").append('<option value="0">NONE</option>');
-                                    $("#sub6p2").append(new Option('<?php  echo  array_search($data[0]['sub6A'],$subarray); ?>',sub6));  
+                                    $("#sub6p2").append(new Option('<?php  echo  array_search($data[0]['sub6A'],$subarray); ?>','<?php echo $data[0]['sub6A']?>'));  
                                      } 
                                      else
                                      {
@@ -1270,10 +1277,8 @@ header("Pragma: no-cache");
                                     
 
                                     if(sub7 != '' || grp_cd == 5){
-                                    $("#sub7").show();
-                                  $("#sub7p2").show();
                                         $("#sub7").append('<option value="0">NONE</option>');
-                                        $("#sub7p2").append(new Option('<?php  echo  array_search($data[0]['sub7A'],$subarray); ?>',sub7));    
+                                        $("#sub7p2").append(new Option('<?php  echo  array_search($data[0]['sub7A'],$subarray); ?>','<?php echo $data[0]['sub7A']?>'));    
                                     }
                                     else{
                                         $("#sub7").hide();
@@ -1282,7 +1287,7 @@ header("Pragma: no-cache");
                                     $("#sub8").hide();
                                     $("#sub8p2").hide();
                                 }
-                                
+
                                 function sub_grp_load_exam_type3(){
 
                                     Empty_All_Dropdowns();
@@ -1372,7 +1377,7 @@ header("Pragma: no-cache");
                                     {
                                         if(grp_cd == 5)
                                         {
-                                           $("#sub5p2").append(new Option('<?php  echo  array_search($data[0]['sub5A'],$subarray); ?>',sub5)); 
+                                           $("#sub5p2").append(new Option('<?php  echo  array_search($data[0]['sub5A'],$subarray); ?>','<?php echo $data[0]['sub5A']?>')); 
                                         }
                                         else
                                         {
@@ -1397,7 +1402,7 @@ header("Pragma: no-cache");
                                     {
                                          if(grp_cd == 5)
                                         {
-                                           $("#sub6p2").append(new Option('<?php  echo  array_search($data[0]['sub6A'],$subarray); ?>',sub5)); 
+                                           $("#sub6p2").append(new Option('<?php  echo  array_search($data[0]['sub6A'],$subarray); ?>','<?php echo $data[0]['sub6A']?>')); 
                                         }
                                         else
                                         {
@@ -1411,8 +1416,8 @@ header("Pragma: no-cache");
                                     }
 
                                     if(sub7 != ''){
-                                    $("#sub7").show();
-                                  $("#sub7p2").show();
+                                        $('#sub7').show();
+                                        $('#sub7p2').show();
                                         if((sub7pf1 == "3") || (sub7st1 == "2"))
                                         {
                                             $("#sub7").append(new Option('<?php  echo  array_search($data[0]['sub7'],$subarray); ?>',sub7));
@@ -1424,7 +1429,7 @@ header("Pragma: no-cache");
                                         }
                                         if((sub7pf2 == "3") || (sub7st2 == "2"))
                                         {
-                                            $("#sub7p2").append(new Option('<?php  echo  array_search($data[0]['sub7A'],$subarray); ?>',sub7));
+                                            $("#sub7p2").append(new Option('<?php  echo  array_search($data[0]['sub7A'],$subarray); ?>','<?php echo $data[0]['sub7A']?>'));
                                         }
                                         else
                                         {
@@ -1521,7 +1526,7 @@ header("Pragma: no-cache");
                                     {
                                         if(grp_cd ==5)
                                         {
-                                        $("#sub5p2").append(new Option('<?php  echo  array_search($data[0]['sub5A'],$subarray); ?>',sub5));
+                                        $("#sub5p2").append(new Option('<?php  echo  array_search($data[0]['sub5A'],$subarray); ?>','<?php echo $data[0]['sub5A']?>'));
 
                                         }
                                         else
@@ -1547,7 +1552,7 @@ header("Pragma: no-cache");
                                     {
                                          if(grp_cd ==5)
                                         {
-                                        $("#sub6p2").append(new Option('<?php  echo  array_search($data[0]['sub6A'],$subarray); ?>',sub5));
+                                        $("#sub6p2").append(new Option('<?php  echo  array_search($data[0]['sub6A'],$subarray); ?>','<?php echo $data[0]['sub6A']?>'));
 
                                         }
                                         else
@@ -1561,11 +1566,9 @@ header("Pragma: no-cache");
                                         $("#sub6p2").append('<option value="0">NONE</option>');
                                     }
 
-                                    if(sub7 != '')
-                                    {
-                                    $("#sub7").show();
-                                  $("#sub7p2").show();
-                                         
+                                    if(sub7 != ''){
+                                        $('#sub7').show();
+                                        $('#sub7p2').show();
                                         if((sub7pf1 == "3") || (sub7st1 == "2"))
                                         {
                                            // $("#sub7").append(new Option('<?php  echo  array_search($data[0]['sub7'],$subarray); ?>',sub7));
@@ -1577,7 +1580,7 @@ header("Pragma: no-cache");
                                         }
                                         if((sub7pf2 == "3") || (sub7st2 == "2"))
                                         {
-                                            $("#sub7p2").append(new Option('<?php  echo  array_search($data[0]['sub7A'],$subarray); ?>',sub7a));
+                                            $("#sub7p2").append(new Option('<?php  echo  array_search($data[0]['sub7A'],$subarray); ?>','<?php echo $data[0]['sub7A']?>'));
                                         }
                                         else
                                         {
@@ -1666,8 +1669,8 @@ header("Pragma: no-cache");
                                     
 
                                     if(sub7 != ''){
-                                    $("#sub7").show();
-                                  $("#sub7p2").show();
+                                        $('#sub7').show();
+                                        $('#sub7p2').show();
                                         if((sub7pf1 == "3") || (sub7st1 == "2"))
                                         {
                                             $("#sub7").append(new Option('<?php  echo  array_search($data[0]['sub7'],$subarray); ?>',sub7));
@@ -1684,8 +1687,6 @@ header("Pragma: no-cache");
                                 }
                                 function sub_grp_load_exam_type6(){
 
-                                    debugger;
-                                    
                                     Empty_All_Dropdowns();
                                     hide_sub7_sub8();
 
@@ -1773,7 +1774,7 @@ header("Pragma: no-cache");
                                     {
                                         if(grp_cd == 5)
                                         {
-                                           $("#sub5p2").append(new Option('<?php  echo  array_search($data[0]['sub5A'],$subarray); ?>',sub5)); 
+                                           $("#sub5p2").append(new Option('<?php  echo  array_search($data[0]['sub5A'],$subarray); ?>','<?php echo $data[0]['sub5A']?>')); 
                                         }
                                         else
                                         {
@@ -1798,7 +1799,7 @@ header("Pragma: no-cache");
                                     {
                                         if(grp_cd == 5)
                                         {
-                                           $("#sub6p2").append(new Option('<?php  echo  array_search($data[0]['sub6A'],$subarray); ?>',sub5)); 
+                                           $("#sub6p2").append(new Option('<?php  echo  array_search($data[0]['sub6A'],$subarray); ?>','<?php echo $data[0]['sub6A']?>')); 
                                         }
                                         else
                                         $("#sub6p2").append(new Option('<?php  echo  array_search($data[0]['sub6'],$subarray); ?>',sub6));
@@ -1809,8 +1810,8 @@ header("Pragma: no-cache");
                                     }
 
                                     if(sub7 != ''){
-                                    $("#sub7").show();
-                                  $("#sub7p2").show();
+                                        $('#sub7').show();
+                                        $('#sub7p2').show();
                                         if((sub7pf1 == "3") || (sub7st1 == "2"))
                                         {
                                             $("#sub7").append(new Option('<?php  echo  array_search($data[0]['sub7'],$subarray); ?>',sub7));
@@ -1822,7 +1823,7 @@ header("Pragma: no-cache");
                                         }
                                         if((sub7pf2 == "3") || (sub7st2 == "2"))
                                         {
-                                            $("#sub7p2").append(new Option('<?php  echo  array_search($data[0]['sub7A'],$subarray); ?>',sub7));
+                                            $("#sub7p2").append(new Option('<?php  echo  array_search($data[0]['sub7A'],$subarray); ?>','<?php echo $data[0]['sub7A']?>'));
                                         }
                                         else
                                         {
@@ -1859,13 +1860,12 @@ header("Pragma: no-cache");
                                     $("#sub4p2").append(new Option('<?php  echo  array_search($data[0]['sub4'],$subarray); ?>',sub4));
 
                                     if(grp_cd == 5){
-                                    
-                                        $("#sub5p2").append(new Option('<?php  echo  array_search($data[0]['sub5A'],$subarray); ?>',sub5));
-                                        $("#sub6p2").append(new Option('<?php  echo  array_search($data[0]['sub6A'],$subarray); ?>',sub6));
+                                        $("#sub5p2").append(new Option('<?php  echo  array_search($data[0]['sub5A'],$subarray); ?>','<?php echo $data[0]['sub5A']?>'));
+                                        $("#sub6p2").append(new Option('<?php  echo  array_search($data[0]['sub6A'],$subarray); ?>','<?php echo $data[0]['sub6A']?>'));
                                         $('#sub7').show();
                                         $('#sub7p2').show();
                                         $("#sub7").append('<option value="0">NONE</option>');
-                                        $("#sub7p2").append(new Option('<?php  echo  array_search($data[0]['sub7A'],$subarray); ?>',sub7));
+                                        $("#sub7p2").append(new Option('<?php  echo  array_search($data[0]['sub7A'],$subarray); ?>','<?php echo $data[0]['sub7A']?>'));
                                     }
                                     else{
                                         $("#sub5p2").append(new Option('<?php  echo  array_search($data[0]['sub5'],$subarray); ?>',sub5));
@@ -1889,11 +1889,11 @@ header("Pragma: no-cache");
                                     $("#sub6").append(new Option('<?php  echo  array_search($data[0]['sub6'],$subarray); ?>',sub6));
 
                                     if(grp_cd == 5){
-                                        $("#sub5p2").append(new Option('<?php  echo  array_search($data[0]['sub5A'],$subarray); ?>',sub5));
-                                        $("#sub6p2").append(new Option('<?php  echo  array_search($data[0]['sub6A'],$subarray); ?>',sub6));    
+                                        $("#sub5p2").append(new Option('<?php  echo  array_search($data[0]['sub5A'],$subarray); ?>','<?php echo $data[0]['sub5A']?>'));
+                                        $("#sub6p2").append(new Option('<?php  echo  array_search($data[0]['sub6A'],$subarray); ?>','<?php echo $data[0]['sub6A']?>'));    
                                         $('#sub7').show();$('#sub7p2').show();
                                         $("#sub7").append(new Option('<?php  echo  array_search($data[0]['sub7'],$subarray); ?>',sub7));
-                                        $("#sub7p2").append(new Option('<?php  echo  array_search($data[0]['sub7A'],$subarray); ?>',sub7));   
+                                        $("#sub7p2").append(new Option('<?php  echo  array_search($data[0]['sub7A'],$subarray); ?>','<?php echo $data[0]['sub7A']?>'));   
                                     }
                                     else {
                                         $("#sub5p2").append(new Option('<?php  echo  array_search($data[0]['sub5'],$subarray); ?>',sub5));
@@ -1905,7 +1905,7 @@ header("Pragma: no-cache");
 
                                     Empty_All_Dropdowns();
                                     hide_sub7_sub8();
-
+                                      debugger;
                                     if((sub1pf1 == "2" || sub1pf2 == "2") )
                                     {
                                         $("#sub1").append(new Option('<?php  echo  array_search($data[0]['sub1'],$subarray); ?>',sub1));
@@ -1970,12 +1970,12 @@ header("Pragma: no-cache");
                                         if((sub5pf1 == "2" || sub5pf2 == "2"))
                                         {
                                             $("#sub5").append(new Option('<?php  echo  array_search($data[0]['sub5'],$subarray); ?>',sub5));
-                                            $("#sub5p2").append(new Option('<?php  echo  array_search($data[0]['sub5A'],$subarray); ?>',sub5));
+                                            $("#sub5p2").append(new Option('<?php  echo  array_search($data[0]['sub5A'],$subarray); ?>','<?php echo $data[0]['sub5A']?>'));
                                         }
                                         else
                                         {
                                             $("#sub5p2").append('<option value="0">NONE</option>');
-                                            $("#sub5p2").append(new Option('<?php  echo  array_search($data[0]['sub5A'],$subarray); ?>',sub5));
+                                            $("#sub5p2").append(new Option('<?php  echo  array_search($data[0]['sub5A'],$subarray); ?>','<?php echo $data[0]['sub5A']?>'));
 
                                             $("#sub5").append('<option value="0">NONE</option>');
                                             $("#sub5").append(new Option('<?php  echo  array_search($data[0]['sub5'],$subarray); ?>',sub5));
@@ -1984,12 +1984,12 @@ header("Pragma: no-cache");
                                         if((sub6pf1 == "2" || sub6pf2 == "2"))
                                         {
                                             $("#sub6").append(new Option('<?php  echo  array_search($data[0]['sub6'],$subarray); ?>',sub6));
-                                            $("#sub6p2").append(new Option('<?php  echo  array_search($data[0]['sub6A'],$subarray); ?>',sub6));
+                                            $("#sub6p2").append(new Option('<?php  echo  array_search($data[0]['sub6A'],$subarray); ?>','<?php echo $data[0]['sub6A']?>'));
                                         }
                                         else
                                         {
                                             $("#sub6p2").append('<option value="0">NONE</option>');
-                                            $("#sub6p2").append(new Option('<?php  echo  array_search($data[0]['sub6A'],$subarray); ?>',sub6));
+                                            $("#sub6p2").append(new Option('<?php  echo  array_search($data[0]['sub6A'],$subarray); ?>','<?php echo $data[0]['sub6A']?>'));
                                             $("#sub6").append('<option value="0">NONE</option>');
                                             $("#sub6").append(new Option('<?php  echo  array_search($data[0]['sub6'],$subarray); ?>',sub6));
                                         }
@@ -1999,12 +1999,12 @@ header("Pragma: no-cache");
                                         if((sub7pf1 == "2" || sub7pf2 == "2"))
                                         {
                                             $("#sub7").append(new Option('<?php  echo  array_search($data[0]['sub7'],$subarray); ?>',sub7));
-                                            $("#sub7p2").append(new Option('<?php  echo  array_search($data[0]['sub7A'],$subarray); ?>',sub7));
+                                            $("#sub7p2").append(new Option('<?php  echo  array_search($data[0]['sub7A'],$subarray); ?>','<?php echo $data[0]['sub7A']?>'));
                                         }
                                         else
                                         {
                                             $("#sub7p2").append('<option value="0">NONE</option>');
-                                            $("#sub7p2").append(new Option('<?php  echo  array_search($data[0]['sub7A'],$subarray); ?>',sub7));
+                                            $("#sub7p2").append(new Option('<?php  echo  array_search($data[0]['sub7A'],$subarray); ?>','<?php echo $data[0]['sub7A']?>'));
 
                                             $("#sub7").append('<option value="0">NONE</option>');
                                             $("#sub7").append(new Option('<?php  echo  array_search($data[0]['sub7'],$subarray); ?>',sub7)); 
@@ -2063,14 +2063,15 @@ header("Pragma: no-cache");
 
                                 <?php
 
-                              //  debugBreak();
+                               // debugBreak();
                                 
                                 if($exam_type == 1){ 
                                     echo 'sub_grp_load_exam_type1();'; 
                                 }
                                 else if($exam_type == 2){
-                                    
-                                    echo'sub_grp_load_MarksImp_FULL();';
+                                    /*echo'ClearALLDropDowns();';*/
+                                    echo 'sub_grp_load_MarksImp_FULL();'; 
+                                                                                                              
                                 }
                                 else if($exam_type == 3){
                                     echo'sub_grp_load_exam_type3();';
@@ -2084,7 +2085,7 @@ header("Pragma: no-cache");
                                /* else if($exam_type == 14){
                                     echo'ClearALLDropDowns();';
                                 }*/
-                                else if($exam_type == 6){
+                                 else if($exam_type == 6){
                                     echo'sub_grp_load_exam_type6();';
                                 }
                                 else{
@@ -2114,7 +2115,7 @@ header("Pragma: no-cache");
                                 });
 
                                 $('#std_group').change(function(){
-                                        debugger;
+
                                     var sel_group = $('#std_group').val();    
 
                                     if(sel_group == grp_cd  && exam_type != 2) 
@@ -2276,15 +2277,31 @@ header("Pragma: no-cache");
                                 });
                                 // sub 5 change event 
                                 $("#sub5").change(function(){
-                                    debugger;
                                     var id4 =$("#sub4").val();
                                     var id4p2 =$("#sub4p2").val();
                                     var id5 =$("#sub5").val();
                                     var id5p2 =$("#sub5p2").val();
                                     var id6 =$("#sub6").val();
                                     var id6p2 =$("#sub6p2").val();
-                                    $("#sub5p2").val(id5);
-
+                                  
+                                    
+                                     if(grp_cd == 5)
+                                   {
+                                       if(id5 == 0)
+                                       {
+                                           $("#sub5p2").val(0);
+                                       }
+                                       else
+                                       {
+                                            $("#sub5p2").val(94);   
+                                       }
+                                    
+                                   }
+                                   else
+                                   {
+                                        $("#sub5p2").val(id5); 
+                                   }
+                                    
                                     if((id5 !=0) && (id4 == id5)){
                                         alertify.error('Please Choose Different Subject');
                                         $("#sub5").val('0');
@@ -2331,6 +2348,23 @@ header("Pragma: no-cache");
                                     var id6p2 =$("#sub6p2").val();
                                     $("#sub5").val(id5p2);
 
+                                    
+                                    if(grp_cd == 5)
+                                    {
+                                        if(id5p2 == 0)
+                                        {
+                                            $("#sub5").val(0);
+                                        }
+                                        else
+                                        {
+                                            $("#sub5").val(71);   
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                        $("#sub5").val(id5p2);
+                                    }
                                     if((id5p2 !=0) && (id4p2 == id5p2)){
                                         alertify.error('Please Choose Different Subject');
                                         $("#sub5").val('0');
@@ -2369,13 +2403,30 @@ header("Pragma: no-cache");
                                 });
                                 // sub 6 change event
                                 $("#sub6").change(function(){
+                                  
                                     var id4 =$("#sub4").val();
                                     var id4p2 =$("#sub4p2").val();
                                     var id5 =$("#sub5").val();
                                     var id5p2 =$("#sub5p2").val();
                                     var id6 =$("#sub6").val();
                                     var id6p2 =$("#sub6p2").val();
-                                    $("#sub6p2").val(id6);
+                                   if(grp_cd == 5)
+                                   {
+                                       if(id6 == 0)
+                                       {
+                                           $("#sub6p2").val(0);
+                                       }
+                                       else
+                                       {
+                                            $("#sub6p2").val(97);   
+                                       }
+                                    
+                                   }
+                                   else
+                                   {
+                                      $("#sub6p2").val(id6);   
+                                   }
+                                   
 
                                     if((id6 !=0) && (id4 == id6)){
                                         alertify.error('Please Choose Different Subject');
@@ -2416,14 +2467,31 @@ header("Pragma: no-cache");
 
                                 });
                                 $("#sub6p2").change(function(){
+                                   debugger;
                                     var id4 =$("#sub4").val();
                                     var id4p2 =$("#sub4p2").val();
                                     var id5 =$("#sub5").val();
                                     var id5p2 =$("#sub5p2").val();
                                     var id6 =$("#sub6").val();
                                     var id6p2 =$("#sub6p2").val();
-                                    $("#sub6").val(id6p2);
+                                  
 
+                                     if(grp_cd == 5)
+                                   {
+                                       if(id6p2 == 0)
+                                       {
+                                           $("#sub6").val(0);
+                                       }
+                                       else
+                                       {
+                                            $("#sub6").val(80);
+                                       }
+                                       
+                                   }
+                                   else
+                                   {
+                                       $("#sub6").val(id6p2);  
+                                   }
                                     if((id6p2 !=0) && (id4p2 == id6p2)){
                                         alertify.error('Please Choose Different Subject');
                                         $("#sub6").val('0');

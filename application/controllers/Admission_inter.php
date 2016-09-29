@@ -14,7 +14,7 @@ class Admission_inter extends CI_Controller {
     {
 
 //        DebugBreak(); 
-        $msg = $this->uri->segment(3);
+        $msg = 7;//$this->uri->segment(3);
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
@@ -1191,7 +1191,7 @@ class Admission_inter extends CI_Controller {
             mkdir($target_path);
         }
         $copyimg = $target_path.'/'.$formno.'.jpg';
-        if ((copy($base_path, $copyimg))) 
+        if (!(copy($base_path, $copyimg))) 
         {
             $data_error['excep'] = 'The file you are attempting to upload size is between 4 to 20 Kb.';
             $this->session->set_flashdata('NewEnrolment_error',$data_error);
@@ -1299,7 +1299,6 @@ class Admission_inter extends CI_Controller {
 
    // $this->uri->segment(3);
     
-//        DebugBreak();
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
@@ -2085,6 +2084,7 @@ class Admission_inter extends CI_Controller {
         $TotalLatefee = 0;
         $Totalprocessing_fee = 0;
         $netTotal = 0;
+         $cert_fee = 550;
         /*====================  Counting Fee  ==============================*/    
             $practical_Sub = array(
 
@@ -2115,7 +2115,6 @@ class Admission_inter extends CI_Controller {
         $Adm_Fee_withArts_Composite = $AdmFee[1]['Comp_Amount'];
         $Adm_Fee_withArts_10th_Only = $AdmFee[1]['Amount'];
         $Adm_ProcessingFee = $AdmFee[0]['Processing_Fee'];
-        $cert_fee = 500;
        // DebugBreak();
         $q1 = $user_info['fee'];
         $total_std = 0;
@@ -2194,12 +2193,12 @@ class Admission_inter extends CI_Controller {
              
             
 
-            $netTotal = (int)$netTotal +$Adm_fee + $LAdm_fee+$Adm_ProcessingFee + $cert_fee;
+            $netTotal = (int)$netTotal +$Adm_fee + $LAdm_fee+$Adm_ProcessingFee+ $cert_fee;;
         
 
 
         $forms_id   = implode(",",$ids);        
-        $tot_fee     = $Totalprocessing_fee+$TotalAdmFee+$TotalLatefee + $cert_fee;
+        $tot_fee     = $Totalprocessing_fee+$TotalAdmFee+$TotalLatefee+$cert_fee;
         // $challan_No = 0;
         $today = date("Y-m-d H:i:s");
         $data = array('inst_cd'=>$Inst_Id,'total_fee'=>$tot_fee,'proces_fee'=>$Adm_ProcessingFee,'reg_fee'=>$Adm_fee,'fine'=>$LAdm_fee,'TotalRegFee'=>$TotalAdmFee,'TotalLatefee'=>$TotalLatefee,'Totalprocessing_fee'=>$Totalprocessing_fee,'forms_id'=>$forms_id,'todaydate'=>$today,'total_std'=>$total_std,'cert_fee'=>$cert_fee);
@@ -2246,7 +2245,7 @@ class Admission_inter extends CI_Controller {
         $TotalLatefee = 0;
         $Totalprocessing_fee = 0;
         $netTotal = 0;
-         $cert_fee = 500;
+         $cert_fee = 550;
         /*====================  Counting Fee  ==============================*/    
                       $practical_Sub = array(
             'LibSC'=>'8',
@@ -2350,12 +2349,12 @@ class Admission_inter extends CI_Controller {
              
             
 
-            $netTotal = (int)$netTotal +$Adm_fee + $LAdm_fee+$Adm_ProcessingFee + $cert_fee;
+            $netTotal = (int)$netTotal +$Adm_fee + $LAdm_fee+$Adm_ProcessingFee+$cert_fee;
         
 
 
         $forms_id   = implode(",",$ids);        
-        $tot_fee     = $Totalprocessing_fee+$TotalAdmFee+$TotalLatefee+ $cert_fee;
+        $tot_fee     = $Totalprocessing_fee+$TotalAdmFee+$TotalLatefee+$cert_fee;
         // $challan_No = 0;
         $today = date("Y-m-d H:i:s");
         $data = array('inst_cd'=>$Inst_Id,'total_fee'=>$tot_fee,'proces_fee'=>$Adm_ProcessingFee,'reg_fee'=>$Adm_fee,'fine'=>$LAdm_fee,'TotalRegFee'=>$TotalAdmFee,'TotalLatefee'=>$TotalLatefee,'Totalprocessing_fee'=>$Totalprocessing_fee,'forms_id'=>$forms_id,'todaydate'=>$today,'total_std'=>$total_std,'cert_fee'=>$cert_fee);
@@ -3777,7 +3776,7 @@ class Admission_inter extends CI_Controller {
 
         }
       
-        else if(@$_POST['bay_form'] == '' )
+      /*  else if(@$_POST['bay_form'] == '' )
         {
             $allinputdata['excep'] = 'Please Enter Your Bay Form No.';
             $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
@@ -3786,7 +3785,7 @@ class Admission_inter extends CI_Controller {
             return;
 
 
-        }
+        }*/
       
             else if(@$_POST['father_cnic'] == '' )
             {

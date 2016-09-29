@@ -102,8 +102,8 @@ class Admission extends CI_Controller {
         $pdf->SetFont('Arial','U',12);
         $pdf->SetXY(1.2,0.2);
         $pdf->Cell(0, 0.2, "BOARD OF INTERMEDIATE AND SECONDARY EDUCATION, GUJRANWALA", 0.25, "C");
-        $pdf->Image(base_url()."assets/img/ExamCenter.jpg",4.5,2.995+$Y, 2.78,0.15, "jpeg");        
-        $pdf->Image(base_url()."assets/img/12.jpg",7.40,0.22, 0.23,0.23, "JPG");    
+        $pdf->Image("assets/img/ExamCenter.jpg",4.5,2.995+$Y, 2.78,0.15, "jpeg");        
+        $pdf->Image("assets/img/12.jpg",7.40,0.22, 0.23,0.23, "JPG");    
 
         $pdf->SetFont('Arial','U',7);
         $pdf->SetXY(1.2,0.4);
@@ -134,8 +134,8 @@ class Admission extends CI_Controller {
         //$data['PicPath']
         
 
-        $pdf->Image(base_url().PRIVATE_IMAGE_PATH.$data['PicPath'],6.5, 1.15+$Y, 0.95, 1.0, "JPG");
-        $pdf->Image(base_url()."assets/img/logo2.png",0.4, 0.2, 0.65, 0.65, "PNG");
+        $pdf->Image(PRIVATE_IMAGE_PATH.$data['PicPath'],6.5, 1.15+$Y, 0.95, 1.0, "JPG");
+        $pdf->Image("assets/img/logo2.png",0.4, 0.2, 0.65, 0.65, "PNG");
         $pdf->SetFont('Arial','',8);
 
         //------------- Personal Infor Box
@@ -447,7 +447,7 @@ class Admission extends CI_Controller {
         $pdf->SetXY($xx,4.0+$yy);
         $pdf->Cell($boxWidth,0.2,$data['sub1Ap1'] != 1 ? '':   '    '.'1. '. $this->GetSubNameHere($data['sub1']),1,0,'L',1);
 
-        $pdf->Image(base_url().'assets/img/crossed.jpg',6.2,5.35+$yy, 1.3,0.15, "jpeg");  
+        $pdf->Image('assets/img/crossed.jpg',6.2,5.35+$yy, 1.3,0.15, "jpeg");  
         $pdf->SetXY(6.1,3.8+$yy);
         $pdf->Cell(1.4,1.5,'',1,0,'C',0); 
         $pdf->SetXY(6.3,3.8+$yy);
@@ -559,7 +559,7 @@ class Admission extends CI_Controller {
         $pdf->SetXY(3.5,3.2+$Y);
         $pdf->Cell(4,0.50,'',1,0,'C',0); 
 
-        $pdf->Image(base_url().'assets/img/admission_form.jpg',4.07,1.9, 2.38,0.20, "jpeg");
+        $pdf->Image('assets/img/admission_form.jpg',4.07,1.9, 2.38,0.20, "jpeg");
 
         $pdf->SetXY(3.2,5.75+$Y);
         $pdf->SetFont('Arial','b',8);
@@ -695,7 +695,7 @@ class Admission extends CI_Controller {
         $pdf->SetXY(0,5.0+3.0+$Y);
         $pdf->SetFont('Arial','',10);
 
-        $pdf->Image(base_url().'assets/img/cutter.jpg',0.2,6.50, 9.2,0.09, "jpeg"); 
+        $pdf->Image('assets/img/cutter.jpg',0.2,6.50, 9.2,0.09, "jpeg"); 
 
         $Y = $Y + 1.68;
 
@@ -716,7 +716,7 @@ class Admission extends CI_Controller {
 
         $bx = 6.8;
         $by = 6.1;
-        $pdf->Image(base_url()."assets/img/12.jpg",7.58,6.2+$Y, 0.30,0.30, "JPG");  
+        $pdf->Image("assets/img/12.jpg",7.58,6.2+$Y, 0.30,0.30, "JPG");  
 
         $pdf->Image(BARCODE_PATH.$image,5.15, 6.8  ,2.4,0.24,"PNG");
 
@@ -820,7 +820,7 @@ class Admission extends CI_Controller {
         $pdf->SetXY(0,5.0+3.0+$Y);
         $pdf->SetFont('Arial','',10);
 
-        $pdf->Image(base_url().'assets/img/cutter.jpg',0.2,7.70, 9.2,0.09, "jpeg");  
+        $pdf->Image('assets/img/cutter.jpg',0.2,7.70, 9.2,0.09, "jpeg");  
 
         $Y = $Y - 0.39;
 
@@ -851,7 +851,7 @@ class Admission extends CI_Controller {
 
         $pdf->Image(BARCODE_PATH.$image,5.15, 8.5+$Y  ,2.4,0.24,"PNG");
 
-        $pdf->Image(base_url()."assets/img/12.jpg",7.58,8.3+$Y, 0.30,0.30, "jpg");  
+        $pdf->Image("assets/img/12.jpg",7.58,8.3+$Y, 0.30,0.30, "jpg");  
 
         $pdf->SetXY(0.5,8.65+$Y);
         $pdf->SetTextColor(0,0,0);
@@ -887,7 +887,7 @@ class Admission extends CI_Controller {
         $pdf->SetFont('Arial','B',7);
         $pdf->Cell( 0.5,0.5,ucwords($obj->words),0,'L');
 
-        $pdf->Image(base_url().'assets/img/BankCopy.jpg',0.25,8.80, 7.4,0.25, "jpeg");   
+        $pdf->Image('assets/img/BankCopy.jpg',0.25,8.80, 7.4,0.25, "jpeg");   
 
         $pdf->SetXY(0.5, 8.55+$Y);
         $pdf->SetFont('Arial','b',8);
@@ -911,7 +911,7 @@ class Admission extends CI_Controller {
         $pdf->SetXY(0,5.0+3.0+$Y);
         $pdf->SetFont('Arial','',10);
         // //DebugBreak();
-        $pdf->Image(base_url().'assets/img/cutter.jpg',0.2,9.1, 8.3,0.09, "jpeg");  
+        $pdf->Image('assets/img/cutter.jpg',0.2,9.1, 8.3,0.09, "jpeg");  
 
         $Y = $Y - 0.09;
         //
@@ -944,7 +944,7 @@ class Admission extends CI_Controller {
 
         $pdf->Image(BARCODE_PATH.$image,5.15, 10.0+$Y  ,2.4,0.24,"PNG");
 
-        $pdf->Image(base_url()."assets/img/12.jpg",7.58,9.8+$Y, 0.30,0.30, "JPG");  
+        $pdf->Image("assets/img/12.jpg",7.58,9.8+$Y, 0.30,0.30, "JPG");  
 
         $pdf->SetXY(0.5,10.2+$Y);
         $pdf->SetTextColor(0,0,0);
@@ -959,8 +959,8 @@ class Admission extends CI_Controller {
 
         
 
-        //  $pdf->Image(base_url().PRIVATE_IMAGE_PATH.'download.jpg',6.5, 10.3+$Y, 0.95, 1.0, "JPG");
-               $pdf->Image(base_url().PRIVATE_IMAGE_PATH.$data['PicPath'],6.5, 10.3+$Y, 0.95, 1.0, "JPG");
+        //  $pdf->Image(PRIVATE_IMAGE_PATH.'download.jpg',6.5, 10.3+$Y, 0.95, 1.0, "JPG");
+               $pdf->Image(PRIVATE_IMAGE_PATH.$data['PicPath'],6.5, 10.3+$Y, 0.95, 1.0, "JPG");
         $pdf->SetFont('Arial','',8);
 
 
@@ -998,7 +998,7 @@ class Admission extends CI_Controller {
         $pdf->SetFont('Arial','B',8);
         $pdf->Cell( 0.5,0.5,$data['Zone_cd']."-".$data['zone_name'],0,'L');
 
-        $pdf->Image(base_url().'assets/img/CandidateCopy.jpg',0.27,10.86, 7.58,0.60, "jpeg");  
+        $pdf->Image('assets/img/CandidateCopy.jpg',0.27,10.86, 7.58,0.60, "jpeg");  
 
 
         $pdf->SetXY(0.5, 10.05+$Y);
@@ -1373,7 +1373,7 @@ class Admission extends CI_Controller {
             $this->session->set_flashdata('matric_error',$mydata );
             redirect('Admission/matric_default');
         } 
-        else if(($exam_type == 1 &&($data[0]['regPvt']==1 )) )
+        else if(($exam_type == 1 &&($data[0]['regPvt']==1  && $data[0]['status'] !=4)) )
         {
           
             $error_msg.='<span style="font-size: 16pt; color:red;">' . 'You can not appear as a Private Candidate. Please send Addmission from Your Institute.</span>';
@@ -1583,7 +1583,21 @@ class Admission extends CI_Controller {
         $examtype = @$_POST['exam_type'];
         $marksImp = @$_POST['ddlMarksImproveoptions'];
          //debugBreak();
-
+           $data_error = array(
+        'matRno_hidden'=>$this->input->post('matRno_hidden'),
+        'oldrno'=>$this->input->post('InterRno_hidden'),
+        'InterYear_hidden'=>$this->input->post('InterYear_hidden'),
+        'InterSess_hidden'=>$this->input->post('InterSess_hidden'),
+        'oldboardid'=>$this->input->post('oldboardid'),
+        'cattype_hidden'=>$this->input->post('cattype_hidden'),
+        'oldClass'=>$this->input->post('oldClass'),
+        );
+  
+         $_POST['category']    = $cattype;
+         $this->frmvalidation('Pre_Inter_Data',$data_error,0);
+         
+         
+         
         $cat = $this->makecat($cattype,$examtype,$marksImp,$is11th);
         $cat11 = @$cat['cat11'];
         $cat12 = @$cat['cat12'];
@@ -1726,6 +1740,7 @@ $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;
             'sess'=>$oldsess,
             'Iyear'=>@$_POST['oldyear'],
             'Brd_cd'=>@$_POST['oldboardid'],
+            
             'class'=>@$_POST['oldclass'],
             'schm'=>1,
             'AdmProcessFee'=>$AdmFee[0]['Processing_Fee'],
@@ -1736,16 +1751,7 @@ $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;
             'brd_name'=>@$_POST['oldboard']
         );
        //   DebugBreak();
-        $data_error = array(
-        'matRno_hidden'=>$this->input->post('matRno_hidden'),
-        'oldrno'=>$this->input->post('InterRno_hidden'),
-        'InterYear_hidden'=>$this->input->post('InterYear_hidden'),
-        'InterSess_hidden'=>$this->input->post('InterSess_hidden'),
-        'oldboardid'=>$this->input->post('oldboardid'),
-        'cattype_hidden'=>$this->input->post('cattype_hidden'),
-        'oldClass'=>$this->input->post('oldClass'),
-        );
-  
+       
         
         
         
@@ -1785,7 +1791,7 @@ $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;
         }
              
       //  DebugBreak();
-        $this->frmvalidation('Pre_Inter_Data',$data_error,0);
+        
         $logedIn = $this->Admission_model->Insert_NewEnorlement($data);
         if($logedIn != false)
         {
@@ -1924,7 +1930,7 @@ $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;
 
         }
 
-        else if(@$_POST['bay_form'] == '' || @$_POST['bay_form'] == '00000-0000000-0')
+        else if(@$_POST['bay_form'] == '' )
         {
             $allinputdata['excep'] = 'Please Enter Your Bay Form No.';
             $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
@@ -1935,7 +1941,7 @@ $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;
 
         }
 
-        else if(@$_POST['father_cnic'] == '' || @$_POST['father_cnic'] == '00000-0000000-0' )
+        else if(@$_POST['father_cnic'] == ''  )
         {
             $allinputdata['excep'] = 'Please Enter Your Father CNIC';
             $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
@@ -2630,30 +2636,16 @@ $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;
         // Additional Subjects.
         else if(@$_POST['exam_type']==16 && @$_POST['category']==2)
         {
-            if(@$_POST['sub6'] == 0 ||@$_POST['sub6p2'] == 0 )
+            DebugBreak();
+            if(@$_POST['sub6'] == 0 && @$_POST['sub6p2'] == 0 && @$_POST['sub5'] == 0 && @$_POST['sub5p2'] == 0 && @$_POST['sub4'] == 0 && @$_POST['sub4p2'] == 0)
             {
-                $allinputdata['excep'] = 'Please Select Part-II Subject 6';
+                $allinputdata['excep'] = 'Please Select atleast one subject.';
                 $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
                 redirect('Admission/'.$viewName);
                 return;
 
             }
-            else if(@$_POST['sub7'] == 0 || @$_POST['sub7p2'] == 0)
-            {
-                $allinputdata['excep'] = 'Please Select Part-II Subject 7';
-                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                redirect('Admission/'.$viewName);
-                return;
-
-            }
-            else if(@$_POST['sub8'] == 0 || @$_POST['sub8p2'] == 0)
-            {
-                $allinputdata['excep'] = 'Please Select Part-II Subject 8';
-                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                redirect('Admission/'.$viewName);
-                return;
-
-            }
+            
             else if(
                 (in_array(@$_POST['sub4'],$language_sub_cd)&&(in_array(@$_POST['sub5'],$language_sub_cd)|| in_array(@$_POST['sub6'],$language_sub_cd))) ||
                 (in_array(@$_POST['sub5'],$language_sub_cd)&&(in_array(@$_POST['sub4'],$language_sub_cd)|| in_array(@$_POST['sub6'],$language_sub_cd))) ||

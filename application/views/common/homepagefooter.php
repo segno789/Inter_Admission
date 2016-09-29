@@ -247,8 +247,7 @@
 
         $("#btndwnForm").click(function(){
             var formno = $("#formid").val();
-            var dob = $("#dob").val();
-
+         
 
             if(formno == "")
             {
@@ -260,11 +259,7 @@
                 alertify.error("Please write Valid Form No.");
                 return false;    
             }
-            else if(dob == "")
-            {
-                alertify.error("Please write Date of Birth.");
-                return false;        
-            }
+          
             else
             {
                 alertify.log("Please wait while your form is downloading....")    
@@ -276,14 +271,12 @@
         function downloadform(){
             //debugger;
             var formno = $("#formid").val();
-            var dob = $("#dob").val();
+           // var dob = $("#dob").val();
             if(formno == ""){
                 return false;
             }
-            if(dob == ""){
-                return false;
-            }
-            window.location.href='<?php  echo base_url(); ?>Admission/checkFormNo_then_download/'+formno+'/'+dob;  
+           
+            window.location.href='<?php  echo base_url(); ?>Admission/checkFormNo_then_download/'+formno;  
         }
 
         function validateForm() {

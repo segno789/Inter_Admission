@@ -28,11 +28,12 @@
         BISE GRW - BOARD OF INTERMEDIATE AND SECONDARY EDUCATION GUJRANWALA
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+<META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- bootstrap css -->
-    <script type="text/javascript" src="http://html5shiv.googlecode.com/svn/trunk/html5.js">
-    </script>
+   
     <link href="<?php echo base_url(); ?>assets/css/icomoon/style.css" rel="stylesheet">
     <!--[if lte IE 7]>
     <script src="css/icomoon-font/lte-ie7.js">
