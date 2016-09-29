@@ -89,12 +89,906 @@ class Admission extends CI_Controller {
             redirect('Admission');
             return;
         }
+        
         $data = $data[0];
         $this->load->library('pdf_rotate');
         $pdf = new pdf_rotate('P','in',"A4");
         $lmargin =1.5;
         $rmargin =7.3;
         $pdf ->SetRightMargin(80);
+        if($formno < 600000)
+        {
+           $pdf->AddPage();
+        $x = 0.55;
+        $Y = -0.20;
+        $session = Session == "1" ? "Annual" : "Supplymentry";
+        $pdf->SetFont('Arial','U',12);
+        $pdf->SetXY(1.2,0.2);
+        $pdf->Cell(0, 0.2, "BOARD OF INTERMEDIATE AND SECONDARY EDUCATION, GUJRANWALA", 0.25, "C");
+        $pdf->Image(base_url()."assets/img/ExamCenter.jpg",4.5,2.995+$Y, 2.78,0.15, "jpeg");        
+        $pdf->Image(base_url()."assets/img/12.jpg",7.40,0.22, 0.23,0.23, "JPG");    
+
+        $pdf->SetFont('Arial','U',7);
+        $pdf->SetXY(1.2,0.4);
+        $pdf->Cell(0, 0.2, "ADMISSION /REVENUE FORM ", 0.25, "C");
+        $pdf->SetFont('Arial','',7);
+        $pdf->SetXY(2.68,0.4);
+        $pdf->Cell(0, 0.2, strtoupper("(Private Candidate) for Languages  Examination ".$session.", ".Year), 0.25, "C");
+
+        //--------------------------- Form No & Rno
+        $pdf->SetFont('Arial','B',12);
+        $pdf->SetXY(1.2,0.65+$Y);
+        $pdf->Cell( 0.5,0.5,"Form No:".$data['formNo'],0,'L');
+        $pdf->SetXY(5.8,0.65+$Y);
+        $pdf->Cell(0.5,0.5, "Roll No: _______________",0,'L');    
+        $pdf->SetFont('Arial','B',7);
+        $pdf->SetXY(6.6,.80+$Y);
+        $pdf->Cell(0.5,0.5, "(For office use only)",0,'L');
+        //------ Picture Box on Centre      
+
+              // DebugBreak();
+        $Barcode = $data['formNo']."@".$data['class'].'@'.$data['sess'].'@'.$data["Iyear"];
+        $image =  $this->set_barcode($Barcode);
+         
+
+
+
+        $pdf->Image(BARCODE_PATH.$image,2.9, 0.61  ,2.4,0.24,"PNG");
+        //$data['PicPath']
+        
+
+       // $pdf->Image(base_url().PRIVATE_IMAGE_PATH.$data['PicPath'],6.5, 1.15+$Y, 0.95, 1.0, "JPG");
+        $pdf->Image(base_url()."assets/img/logo2.png",0.4, 0.2, 0.65, 0.65, "PNG");
+        $pdf->SetFont('Arial','',8);
+
+        //------------- Personal Infor Box
+        //====================================================================================================================
+
+        $FontSize=7;
+        $HeightLine1= 1.75;
+        $HeightLine2=2.0;
+        $Y = -0.7;
+        //--------------------------- Subject Group
+        $grp_name = $data["grp_cd"];
+        switch ($grp_name) {
+            case '1':
+                $grp_name = 'FAZAL ARABIC  ';
+                break;
+            case '2':
+                $grp_name = '    FAZAL URDU';
+                break;
+            case '3':
+                $grp_name = '    FAZAL PUNJABI';
+                break;
+            case '5':
+                $grp_name = 'ADEEB ARABIC';
+                break;
+            case '6':
+                $grp_name = 'ADEEB URDU';
+                break;
+            
+            default:
+                $grp_name = "NO GROUP SELECTED.";
+        }
+
+        //--------------------------- 1st line 
+        /* $pdf->SetXY(0.5,1.55+$Y);
+        $pdf->SetFont('Arial','',$FontSize);
+        $pdf->Cell( 0.5,0.5,"Form No:",0,'L');
+
+        $pdf->SetFont('Arial','B',$FontSize);
+        $pdf->SetXY(1.5,1.55+$Y);
+        $pdf->Cell( 0.5,0.5,$data['formNo'],0,'L');*/
+
+
+        //$chkcat09 = ($data['mi_type']!= 2?$this->getCatName($data['cat11']):'Aditional') ;
+
+      //  $chkcat10 = ($data['mi_type']!= 2?$this->getCatName($data['cat12']):'Aditional');
+
+        $pdf->SetXY(1.8,1.38+$Y);
+        $pdf->SetFont('Arial','BU',9);
+       /* if($chkcat09 != -1 && $chkcat10 != -1)
+        {
+
+           // $pdf->Cell( 0.5,0.7,strtoupper($grp_name." GROUP  (11th: ".$chkcat09."  12th:".$chkcat10.")"),0,'L');
+            //$pdf->SetFont('Arial','B',10);
+            // $pdf->SetXY(2.5,1.55+$Y);
+            //$pdf->Cell( 0.5,0.5,"(11th: ",0,'L');
+            // $pdf->SetXY(3.0,1.55+$Y);
+            // $pdf->SetFont('Arial','B',10);
+            //$pdf->Cell( 0.5,0.5, ,0,'L'); 
+            //  $pdf->SetXY(4.0,1.55+$Y);
+            //  $pdf->SetFont('Arial','B',10);
+            //$pdf->Cell( 0.5,0.5,"",0,'L');
+            //  $pdf->SetXY(4.4,1.55+$Y);
+            //  $pdf->SetFont('Arial','B',10);
+            //$pdf->Cell( 0.5,0.5,$chkcat10.")",0,'L');
+
+        }
+        else if($chkcat09 != -1)
+        {
+
+           // $pdf->Cell( 0.5,0.7,strtoupper($grp_name." GROUP  (11th: ".$chkcat09.")"),0,'L');
+            //  $pdf->SetFont('Arial','B',10);
+            //  $pdf->SetXY(2.5,1.55+$Y);
+            //   $pdf->Cell( 0.5,0.5,"(11th: ",0,'L');
+            //  $pdf->SetXY(3.0,1.55+$Y);
+            //  $pdf->SetFont('Arial','B',10);
+            // $pdf->Cell(0.5,0.5, $chkcat09.')',0,'L');
+        }
+        else if($chkcat10 != -1)
+        {
+
+          //  $pdf->Cell( 0.5,0.7,strtoupper($grp_name." GROUP  (12th: ".$chkcat10.")"),0,'L');
+            // $pdf->SetFont('Arial','B',10);
+            // $pdf->SetXY(2.5,1.55+$Y);
+            //  $pdf->Cell( 0.5,0.5,"(12th: ",0,'L');
+            // $pdf->SetXY(3.0,1.55+$Y);
+            // $pdf->SetFont('Arial','B',10);
+            // $pdf->Cell(0.5,0.5,$chkcat10.')',0,'L');  
+        } */
+        $LastSess = 0 ;
+        //  //DebugBreak();
+        if($data["SessOfLastAp"] == 1 or $data["SessOfLastAp"] == 2  )
+        {
+            $LastSess =  $data["SessOfLastAp"]==1?"A":"S";
+        }
+        else
+        {
+        $LastSess = "A" ;
+        }     
+        $MLastSess='';
+        if($data["sessOfPass"] == 1 or $data["sessOfPass"] == 2  )
+        {
+            $MLastSess =  $data["sessOfPass"]==1?"A":"S";
+        } 
+
+
+
+        $yearOfLastAp = $data['YearOfLastAp'];
+        $cand_chance = $data['chance'];
+        $cand_Notif = '';
+        $cand_Nofif_part1 =$data['result'];
+        $str = '';
+
+
+        $pdf->SetXY(0.5,1.7+$Y);
+        $pdf->SetFont('Arial','',$FontSize);
+        $pdf->Cell( 0.5,0.5,"Name:",0,'L');
+        $pdf->SetFont('Arial','B',$FontSize);
+        $pdf->SetXY(1.5,1.7+$Y);
+        $pdf->Cell(0.5,0.5,$data["name"],0,'L');
+        //--------------------------- FATHER NAME 
+
+        $pdf->SetXY(0.5, 1.85+$Y);
+        $pdf->SetFont('Arial','',$FontSize);
+        $pdf->Cell( 0.5,0.5,"Father's Name:",0,'L');
+        $pdf->SetFont('Arial','B',$FontSize);
+        $pdf->SetXY(1.5,1.85+$Y);
+        $pdf->Cell(0.5,0.5,$data["Fname"],0,'L');
+
+        //--------------------------- 3rd line 
+        //__Mobile    
+              //  debugBreak();
+        $pdf->SetXY(0.5, 2.0+$Y);
+        $pdf->SetFont('Arial','',$FontSize);
+        $pdf->Cell( 0.5,0.5,"Inter Info:",0,'L');
+        $pdf->SetFont('Arial','B',$FontSize);
+        $pdf->SetXY(1.5,2.0+$Y);
+        $pdf->Cell(0.5,0.5,$data["orno"]." ( $LastSess,  $yearOfLastAp, ".$data['IBrd_Abbr']." )",0,'L');
+
+        $pdf->SetXY(0.5, 2.15+$Y);
+        $pdf->SetFont('Arial','',$FontSize);
+        $pdf->Cell( 0.5,0.5,"SSC Info:",0,'L');
+        $pdf->SetFont('Arial','B',$FontSize);
+        $pdf->SetXY(1.5,2.15+$Y);
+        $pdf->Cell(0.5,0.5,$data["matrno"]." ( $MLastSess, ".$data['matyear'].', '.$data['MBrd_Abbr']." )",0,'L');
+
+
+        $pdf->SetXY(3.5+$x,1.85+$Y);
+        $pdf->SetFont('Arial','',$FontSize);
+       // $pdf->Cell(0.5,0.5,"Father CNIC:",0,'R');
+
+        $pdf->SetFont('Arial','B',$FontSize);
+        $pdf->SetXY(4.5+$x,1.85+$Y);
+        $pdf->Cell(0.5,0.5,'',0,'L');
+        // //DebugBreak();
+        //--------------------------- BAY FORM NO line 
+        $pdf->SetXY(3.5+$x, 1.70+$Y);
+        $pdf->SetFont('Arial','',$FontSize);
+       // $pdf->Cell( 0.5,0.5,"Bay Form No:",0,'L');
+        $pdf->SetFont('Arial','B',$FontSize);
+        $pdf->SetXY(4.5+$x,1.70+$Y);
+        $pdf->Cell(0.5,0.5,'',0,'L');
+        $pdf->SetXY(3.5+$x,2.0+$Y);
+        $pdf->SetFont('Arial','',$FontSize);
+        $pdf->Cell( 0.5,0.5,"Mobile No:",0,'L');
+        $pdf->SetFont('Arial','B',$FontSize);
+        $pdf->SetXY(4.5+$x,2.0+$Y);
+        $pdf->Cell(0.5,0.5,$data["MobNo"],0,'L');
+        //--------------------------- Dob line 
+        /*$pdf->SetXY(0.5,2.15+$Y);
+        $pdf->SetFont('Arial','',$FontSize);
+        $pdf->Cell( 0.5,0.5,"Date Of Birth:",0,'L');
+        $pdf->SetFont('Arial','B',$FontSize);
+        $pdf->SetXY(1.5,2.15+$Y);
+        $pdf->Cell(0.5,0.5,date("d-m-Y", strtotime($data["Dob"])),0,'L');*/
+
+        //--------------------------- Gender Nationality Dob
+
+        //  DebugBreak();
+        $pdf->SetXY(0.5,2.30+$Y);
+        $pdf->SetFont('Arial','',$FontSize);
+        $pdf->Cell( 0.5,0.5,"Registration No:",0,'L');
+        $pdf->SetFont('Arial','B',$FontSize);
+        $pdf->SetXY(1.5,2.30+$Y);
+        $pdf->Cell(0.5,0.5,$data["regno"],0,'L');
+
+        $pdf->SetFont('Arial','B',$FontSize);
+        $pdf->SetXY(6.8,2.53+$Y);                                               
+        $pdf->Cell(0.5,0.5,$data["sex"]==1?"MALE":"FEMALE",0,'L');
+
+        //--------------------------- id mark and Medium 
+        //DebugBreak();
+        $pdf->SetXY(0.5,2.50+$Y);
+        $pdf->SetFont('Arial','',$FontSize);
+        $pdf->Cell( 0.5,0.5,"Speciality:",0,'L');
+        $pdf->SetFont('Arial','B',$FontSize);
+        $pdf->SetXY(1.50,2.50+$Y);
+        $pdf->Cell(0.5,0.5,'',0,'L');
+
+        //DebugBreak();
+        //--------------------------- Speciality and Internal Grade 
+        $pdf->SetXY(3.5+$x,2.15+$Y);
+        $pdf->SetFont('Arial','',$FontSize);
+        $pdf->Cell( 0.5,0.5,"Nationality:",0,'L');
+       
+            $nat = '';
+       
+        $pdf->SetFont('Arial','B',$FontSize);
+        $pdf->SetXY(4.5+$x,2.15+$Y);
+        $pdf->Cell(0.5,0.5,'PAKISTANI',0,'L');
+
+        $pdf->SetXY(3.5+$x,2.30+$Y);
+        $pdf->SetFont('Arial','',$FontSize);
+        $pdf->Cell( 0.5,0.5,"Religion:",0,'L');
+        $Religion = "MUSLIM";
+        
+
+        $pdf->SetFont('Arial','B',$FontSize);
+        $pdf->SetXY(4.5+$x,2.30+$Y);
+        $pdf->Cell(0.5,0.5,'MUSLIM',0,'L');
+        $xx= 0.8;
+        $yy = $Y-0.05;
+        $boxWidth = 2.9;
+        $pdf->SetFont('Arial','B',8);
+        $pdf->SetXY($xx,3.8+$yy);
+        $pdf->SetFillColor(240,240,240);
+        $pdf->Cell($boxWidth,0.2,$grp_name,1,0,'C',1);
+        $pdf->SetFillColor(255,255,255);
+        $pdf->SetFont('Arial','',7);
+        $pdf->SetXY($xx,4.0+$yy);
+        $pdf->Cell($boxWidth,0.2,@$data['sub1ap'] != 1 ? '':   '    '.'1. PAPER-I',1,0,'L',1);
+
+        $pdf->Image(base_url().'assets/img/crossed.jpg',6.2,5.35+$yy, 1.3,0.15, "jpeg");  
+        $pdf->SetXY(6.1,3.8+$yy);
+        $pdf->Cell(1.4,1.5,'',1,0,'C',0); 
+        $pdf->SetXY(6.3,3.8+$yy);
+        $pdf->MultiCell(1.1,0.2, 'Paste Recent Photograph & Must Be Cross Attested by the Head/Deputy Head of Institution',0,'C'); 
+
+        $pdf->SetXY(6.1,6.0+$yy);
+        $pdf->Cell(1.4,0.65,'',1,0,'C',0); 
+        $pdf->SetXY(6.2,6.48+$yy);
+        $pdf->MultiCell(1.1,0.2, 'Thumb Impression',0,'C'); 
+
+        //   DebugBreak();
+
+        $pdf->SetFillColor(255,255,255);
+        $pdf->SetFont('Arial','',7);
+        $pdf->SetXY($xx,4.2+$yy);
+        $pdf->Cell($boxWidth,0.2,@$data['sub2ap'] != 1 ? '':   '    '.'2. PAPER-II',1,0,'L',1);
+
+        $pdf->SetFont('Arial','',7);
+        $pdf->SetXY($xx,4.4+$yy);
+        $pdf->Cell($boxWidth,0.2,@$data['sub3ap'] != 1 ? '':   '    '.'3. PAPER-III' ,1,0,'L',1);
+
+        $pdf->SetFont('Arial','',7);
+        $pdf->SetXY($xx,4.6+$yy);
+        $pdf->Cell($boxWidth,0.2,@$data['sub4ap'] != 1 ? '':   '    '.'4. PAPER-IV',1,0,'L',1);
+
+        $pdf->SetFont('Arial','',7);
+        $pdf->SetXY($xx,4.8+$yy);
+        $pdf->Cell($boxWidth,0.2,@$data['sub5ap'] != 1 ? '':   '    '.'5. PAPER-V',1,0,'L',1);
+
+        $pdf->SetFont('Arial','',7);
+        $pdf->SetXY($xx,5.0+$yy);
+        $pdf->Cell($boxWidth,0.2,@$data['sub6ap'] != 1 ? '':   '    '.'6. PAPER-VI',1,0,'L',1);
+
+        $pdf->SetFont('Arial','',7);                                                                     
+        $pdf->SetXY($xx,5.2+$yy);
+        $pdf->Cell($boxWidth,0.2, '    ',1,0,'L',1);
+
+        /*$pdf->SetFont('Arial','',7);
+        $pdf->SetXY($xx,5.4+$yy);
+        $pdf->Cell($boxWidth,0.2,$data['sub8Ap2'] != 1 ? '':   '    '.'8. '. $this->GetSubNameHere($data['sub8']),1,0,'L',1);
+        */
+        $xangle = 3.0;
+
+        /*$pdf->SetFont('Arial','B',8);
+        $pdf->SetXY($xangle,3.8+$yy);
+        $pdf->SetFillColor(240,240,240);
+        $pdf->Cell($boxWidth,0.2,'',1,0,'C',1);    
+        $pdf->SetFillColor(255,255,255);
+        $pdf->SetFont('Arial','',7);
+        $pdf->SetXY($xangle,4.0+$yy);
+        $pdf->Cell($boxWidth,0.2,'',1,0,'L',1);
+        $pdf->SetFont('Arial','',7);
+        $pdf->SetXY($xangle,4.2+$yy);
+        $pdf->Cell($boxWidth,0.2,'',1,0,'L',1);         */
+         //$pdf->Image(base_url().'assets/img/crossed.jpg',3.0.2,3.8+$yy, 1.3,0.15, "jpeg");
+        /* $grp_name = $data["grp_cd"];
+        switch ($grp_name) {
+            case '1':
+                $grp_name = 'FAZAL ARABIC  ';
+                break;
+            case '2':
+                $grp_name = '    FAZAL URDU';
+                break;
+            case '3':
+                $grp_name = '    FAZAL PUNJABI';
+                break;
+            case '5':
+                $grp_name = 'ADEEB ARABIC';
+                break;
+            case '6':
+                $grp_name = 'ADEEB URDU';
+                break;
+            
+            default:
+                $grp_name = "NO GROUP SELECTED.";
+        }       */
+         
+         $pdf->Image(base_url().'assets/img/examaloomsharkia.gif',4.1,3.1, 1.8,0.4, "gif"); 
+          
+          if( $data["grp_cd"] == 1)
+          {
+           $pdf->Image(base_url().'assets/img/fazilarabic.gif',4.5,3.8, 0.9,0.4, "gif");  
+          }
+          else
+             if( $data["grp_cd"] == 2)
+          {
+             $pdf->Image(base_url().'assets/img/fazilurdu.gif',4.5,3.8, 0.9,0.4, "gif");
+          }
+           else
+             if( $data["grp_cd"] == 3)
+          {
+                 $pdf->Image(base_url().'assets/img/fazilpunjabi.gif',4.5,3.8, 0.9,0.4, "gif");
+          }
+           else
+             if( $data["grp_cd"] == 5)
+          {
+                 $pdf->Image(base_url().'assets/img/adeebarbic.gif',4.5,3.8, 0.9,0.4, "gif");
+          }
+           else
+             if( $data["grp_cd"] == 6)
+          {
+                   $pdf->Image(base_url().'assets/img/adeeburdu.gif',4.5,3.8, 0.9,0.4, "gif");
+          }
+          
+           
+           
+             
+        /* $pdf->SetFont('Arial','',7);
+        $pdf->SetXY($xangle,4.4+$yy);
+        $pdf->Cell($boxWidth,0.2,$data['sub3Ap1'] != 1 ? '':  '    '.'3. '.  $this->GetSubNameHere($data['sub3']),1,0,'L',1);*/
+
+      /*  $pdf->SetFont('Arial','',7);
+        $pdf->SetXY($xangle,4.4+$yy);
+        $pdf->Cell($boxWidth,0.2,'',1,0,'L',1);
+
+        $pdf->SetFont('Arial','',7);
+        $pdf->SetXY($xangle,4.6+$yy);
+        $pdf->Cell($boxWidth,0.2,'',1,0,'L',1);
+
+        $pdf->SetFont('Arial','',7);
+        $pdf->SetXY($xangle,4.8+$yy);
+        
+              
+        $pdf->Cell($boxWidth,0.2,'',1,0,'L',1);
+
+        $pdf->SetFont('Arial','',7);
+        $pdf->SetXY($xangle,5.0+$yy);
+        $pdf->Cell($boxWidth,0.2,'',1,0,'L',1);
+
+        $pdf->SetFont('Arial','',7);
+        $pdf->SetXY($xangle,5.2+$yy);
+        $pdf->Cell($boxWidth,0.2,'',1,0,'L',1);   */
+
+        //DebugBreak();
+        $pdf->SetXY(0.5,2.65+$Y);
+        $pdf->SetFont('Arial','',7);
+        $pdf->Cell( 0.5,0.5,"Address:",0,'L');
+
+        $pdf->SetFont('Arial','B',7);
+        $pdf->SetXY(1.5,2.65+$Y);
+        $pdf->Cell(0.5,0.5,$data["address"],0,'L');
+
+        $pdf->SetXY(0.5,2.85+$Y);
+        $pdf->SetFont('Arial','',7);
+        $pdf->Cell( 0.5,0.5,"Address(in Urdu):___________________________________________________________________________________________________________________",0,'L');
+
+        $pdf->SetXY(0.5,3.15+$Y);
+        $pdf->SetFont('Arial','',8);
+        $pdf->Cell(0.5,0.5,"Zone Code:",0,'R');
+        $pdf->SetFont('Arial','B',8);
+        $pdf->SetXY(1.5,3.15+$Y);
+        $pdf->Cell( 0.5,0.5,$data['Zone_cd']."-".$data['zone_name']."",0,'L');
+
+        $pdf->SetFont('Arial','',8);
+        $pdf->SetXY(3.5,3.2+$Y);
+        $pdf->Cell(4,0.50,'',1,0,'C',0); 
+
+        $pdf->Image(base_url().'assets/img/admission_form.jpg',4.07,1.9, 2.38,0.20, "jpeg");
+
+        $pdf->SetXY(3.2,5.75+$Y);
+        $pdf->SetFont('Arial','b',8);
+        $pdf->Cell(0.2,0.5,"Stamp/Signature",0,'R');
+        $pdf->SetXY(3.2,5.9+$Y);
+        $pdf->SetFont('Arial','',8);
+        $pdf->Cell(0.2,0.5,"Headmaster/Headmistress/Principal",0,'R');
+        $pdf->SetXY(3.2,6.05+$Y);
+        $pdf->SetFont('Arial','',8);
+        $pdf->Cell(0.2,0.5,"Head Of Institution Name",0,'R');
+        $pdf->SetXY(3.2,6.2+$Y);
+        $pdf->SetFont('Arial','',8);
+        $pdf->Cell(0.2,0.5,"School/College Code",0,'R');
+        $pdf->SetXY(3.2,6.35+$Y);
+        $pdf->SetFont('Arial','',8);
+        $pdf->Cell(0.2,0.5,"CNIC",0,'R');
+
+        $pdf->SetXY(0.2,5.25+$Y);
+        $pdf->SetFont('Arial','b',9);
+        $pdf->Cell(0.5,0.5,"Affidavit:-",0,'R');
+        $pdf->SetXY(0.8,5.25+$Y);
+        $pdf->SetFont('Arial','b',7);
+        $pdf->Cell(0.5,0.5,"I have read this form. The data/information on this form and in online system is same as last entered/modified/provided by me and it's correctness",0,'R');
+        $pdf->SetXY(0.2,5.37+$Y);
+        $pdf->SetFont('Arial','b',7);
+        $pdf->Cell(0.5,0.5,"is only my responsibility.I understand that only the information/data provided in the online system along with the photograph and some other handwritten ",0,'R');
+        $pdf->SetXY(0.2,5.49+$Y);
+        $pdf->SetFont('Arial','b',7);
+        $pdf->Cell(0.5,0.5,"details on this form will be used for further processing. I accept all the terms and conditions in this regard.",0,'R');
+
+        $pdf->SetXY(0.2,5.75+$Y);
+        $pdf->SetFont('Arial','b',7);
+        $pdf->Cell(0.5,0.5,"Candidate's Signature in Urdu______________________",0,'R');
+        $pdf->SetXY(0.2,6.05+$Y);
+        $pdf->SetFont('Arial','b',7);
+        $pdf->Cell(0.5,0.5,"Candidate's Signature in English____________________",0,'R');
+
+      //   DebugBreak();
+        $Updated_AdmFee = $this->GetFeeWithdue($data['AdmFee']);
+
+        $pdf->SetXY(0.2,6.4+$Y);
+        $pdf->SetFillColor(0,0,0);
+        $pdf->SetTextColor(255,255,255);
+        $pdf->SetFont('Arial','B',7);
+        $pdf->Cell($boxWidth,0.2,'Due Date: '.$this->GetDueDate(),1,0,'C',1); 
+
+        $bx = 6.8;
+        $by = 6.1;
+        $Barcode = $data['formNo']."@".$data['class'].'@'.$data['sess'].'@'.$data["Iyear"];
+
+        $pdf->SetXY(0.2,6.46+$Y);
+        $pdf->SetTextColor(0,0,0);
+        $pdf->SetFont('Arial','BI',7);
+        $pdf->Cell(0.2,0.5,"Printing Date: " .date('d-M-Y h:i A'),0,'L');
+
+        $pdf->SetXY(3.2,6.46+$Y);
+        $pdf->SetFont('Arial','b',$FontSize);
+        $pdf->Cell( 0.5,0.5,"CMD Account No. 00427900072103",0,'L');
+
+        $pdf->SetXY(5.2,6.46+$Y);
+        $pdf->SetFont('Arial','B',$FontSize+1.3);
+        $pdf->Cell( 0.5,0.5,"Bank Challan No.  ".$data['ChallanNo'],0,'L');
+
+        $Y = $Y - 0.5;
+        $pdf->SetXY(0.2, 7.09+$Y);
+        $pdf->SetFont('Arial','',$FontSize);
+        $pdf->Cell( 0.5,0.5,"Admission Fee ",0,'L');
+
+
+        $pdf->SetXY(1.2, 7.09+$Y); 
+        $pdf->SetFont('Arial','b',$FontSize);
+        $pdf->Cell( 0.5,0.5,$Updated_AdmFee.'/-',0,'L');
+
+
+        $pdf->SetXY(1.8, 7.09+$Y);
+        $pdf->SetFont('Arial','',$FontSize);
+        $pdf->Cell( 0.5,0.5,"Late Fee ",0,'L');
+
+
+        $pdf->SetXY(2.59, 7.09+$Y); 
+        $pdf->SetFont('Arial','b',$FontSize);
+        $pdf->Cell( 0.5,0.5,'0/-',0,'L');
+
+        $pdf->SetXY(3.2, 7.09+$Y);
+        $pdf->SetFont('Arial','',$FontSize);
+        $pdf->Cell( 0.5,0.5,"Processing + Form Fee ",0,'L');
+        $pdf->SetXY(4.6, 7.09+$Y); 
+        $pdf->SetFont('Arial','b',$FontSize);
+        $pdf->Cell( 0.5,0.5,$data['AdmProcessFee'].' /-',0,'L');
+
+        $pdf->SetXY(5.42, 7.09+$Y);
+        $pdf->SetFont('Arial','',$FontSize);
+        $pdf->Cell( 0.5,0.5,"Certificate Fee ",0,'L');
+        $pdf->SetXY(6.3, 7.09+$Y); 
+        $pdf->SetFont('Arial','b',$FontSize);
+        $pdf->Cell( 0.5,0.5,'0 /-',0,'L');
+
+        $pdf->SetXY(6.8, 7.09+$Y);
+        $pdf->SetFont('Arial','',$FontSize);
+        $pdf->Cell( 0.5,0.5,"Registration Fee ",0,'L');
+        $pdf->SetXY(7.59, 7.09+$Y); 
+        $pdf->SetFont('Arial','b',$FontSize);
+        $pdf->Cell( 0.5,0.5,'0/-',0,'L');
+
+        $pdf->SetXY(0.2, 7.19+$Y);
+        $pdf->SetFont('Arial','b',$FontSize);
+        $pdf->Cell( 0.5,0.5,"Total Amount Rs.",0,'L');
+
+        $pdf->SetXY(1.2, 7.19+$Y);
+        $pdf->SetFont('Arial','b',8);
+        $pdf->Cell( 0.5,0.5,$Updated_AdmFee+$data['AdmProcessFee'].' /-',0,'L');
+
+        $pdf->SetXY(1.8, 7.19+$Y);
+        $pdf->SetFont('Arial','',$FontSize-0.5);
+        $pdf->Cell( 0.5,0.5,"Amount in Words:",0,'L');
+
+        $this->load->library('NumbertoWord');
+        $obj    = new NumbertoWord();
+        $obj->toWords($data['AdmTotalFee'],"Only.",""); 
+
+        $pdf->SetXY(2.6, 7.19+$Y);
+        $pdf->SetFont('Arial','B',7);
+        $pdf->Cell( 0.5,0.5,ucwords($obj->words),0,'L');
+
+        $pdf->SetXY(5.3, 7.29+$Y);
+        $pdf->SetFont('Arial','b',$FontSize+0.5);
+        $pdf->Cell( 0.5,0.5,"Manager/Cashier:___________________________ ",0,'L');
+
+        $pdf->SetXY(3.2, 7.3+$Y);
+        $pdf->SetFont('Arial','b',$FontSize+0.9);
+        $pdf->Cell( 0.5,0.5,"Form No:".$data['formNo'],0,'L');
+
+        $pdf->SetXY(0,5.0+3.0+$Y);
+        $pdf->SetFont('Arial','',10);
+
+        $pdf->Image(base_url().'assets/img/cutter.jpg',0.2,6.50, 9.2,0.09, "jpeg"); 
+
+        $Y = $Y + 1.68;
+
+        $pdf->SetXY(0.2,6.1+$Y);
+        $pdf->SetFillColor(0,0,0);                                     
+        $pdf->SetFont('Arial','BI',7);
+        $pdf->Cell(0.2,0.5,"Board Copy: (Along with Scroll)",0,'L');
+
+        $pdf->SetXY(0.2,6.0+$Y);
+        $pdf->SetFont('Arial','b',$FontSize);
+        $pdf->Cell( 0.5,0.5,strtoupper("BOARD OF INTERMEDIATE AND SECONDARY EDUCATION GUJRANWALA , Lanugaues ".$session." Examination ,".Year.""),0,'C');
+
+        $pdf->SetXY(0.2,6.4+$Y);
+        $pdf->SetFillColor(0,0,0);
+        $pdf->SetTextColor(255,255,255);
+        $pdf->SetFont('Arial','B',7);
+        $pdf->Cell($boxWidth,0.2,'Due Date: '.$this->GetDueDate(),1,0,'C',1); 
+
+        $bx = 6.8;
+        $by = 6.1;
+        $pdf->Image(base_url()."assets/img/12.jpg",7.58,6.2+$Y, 0.30,0.30, "JPG");  
+
+        $pdf->Image(BARCODE_PATH.$image,5.15, 6.8  ,2.4,0.24,"PNG");
+
+        $pdf->SetXY(3.2,6.16+$Y);
+        $pdf->SetTextColor(0,0,0);
+        $pdf->SetFont('Arial','BI',7);
+        $pdf->Cell(0.2,0.5,"Printing Date: " .date('d-M-Y h:i A'),0,'L');
+
+        $pdf->SetXY(3.2,6.26+$Y);
+        $pdf->SetFont('Arial','b',$FontSize);
+        $pdf->Cell( 0.5,0.5,"CMD Account No. 00427900072103",0,'L');
+
+        $pdf->SetXY(0.2,6.46+$Y);
+        $pdf->SetTextColor(0,0,0);
+        $pdf->SetFont('Arial','',$FontSize);
+        $pdf->Cell( 0.5,0.5,"Name:",0,'L');
+        $pdf->SetFont('Arial','B',$FontSize);
+        $pdf->SetXY(0.5,6.46+$Y);
+        $pdf->Cell(0.5,0.5,$data["name"],0,'L');
+        //--------------------------- FATHER NAME 
+
+        $pdf->SetXY(2.8,6.46+$Y);
+        $pdf->SetFont('Arial','',$FontSize);
+        $pdf->Cell( 0.5,0.5,"Father's Name:",0,'L');
+        $pdf->SetFont('Arial','B',$FontSize);
+        $pdf->SetXY(3.5,6.46+$Y);
+        $pdf->Cell(0.5,0.5,$data["Fname"],0,'L');
+
+        $pdf->SetXY(6.2,6.46+$Y);
+        $pdf->SetFont('Arial','b',$FontSize+1.3);
+        $pdf->Cell( 0.5,0.5,"Bank Challan No.  ".$data['ChallanNo'],0,'L');
+
+        $Y = $Y - 0.5;
+        $pdf->SetXY(0.2, 7.09+$Y);
+        $pdf->SetFont('Arial','',$FontSize);
+        $pdf->Cell( 0.5,0.5,"Admission Fee ",0,'L');
+
+
+        $pdf->SetXY(1.2, 7.09+$Y); 
+        $pdf->SetFont('Arial','b',$FontSize);
+        $pdf->Cell( 0.5,0.5, $Updated_AdmFee.'/-',0,'L');
+
+
+        $pdf->SetXY(1.8, 7.09+$Y);
+        $pdf->SetFont('Arial','',$FontSize);
+        $pdf->Cell( 0.5,0.5,"Late Fee ",0,'L');
+
+
+        $pdf->SetXY(2.59, 7.09+$Y); 
+        $pdf->SetFont('Arial','b',$FontSize);
+        $pdf->Cell( 0.5,0.5,'0/-',0,'L');
+
+        $pdf->SetXY(3.2, 7.09+$Y);
+        $pdf->SetFont('Arial','',$FontSize);
+        $pdf->Cell( 0.5,0.5,"Processing + Form Fee ",0,'L');
+        $pdf->SetXY(4.6, 7.09+$Y); 
+        $pdf->SetFont('Arial','b',$FontSize);
+        $pdf->Cell( 0.5,0.5,$data['AdmProcessFee'].'/-',0,'L');
+
+        $pdf->SetXY(5.42, 7.09+$Y);
+        $pdf->SetFont('Arial','',$FontSize);
+        $pdf->Cell( 0.5,0.5,"Certificate Fee ",0,'L');
+        $pdf->SetXY(6.3, 7.09+$Y); 
+        $pdf->SetFont('Arial','b',$FontSize);
+        $pdf->Cell( 0.5,0.5,'0/-',0,'L');
+
+        $pdf->SetXY(6.8, 7.09+$Y);
+        $pdf->SetFont('Arial','',$FontSize);
+        $pdf->Cell( 0.5,0.5,"Registration Fee ",0,'L');
+        $pdf->SetXY(7.59, 7.09+$Y); 
+        $pdf->SetFont('Arial','b',$FontSize);
+        $pdf->Cell( 0.5,0.5,'0/-',0,'L');
+
+        $pdf->SetXY(0.2, 7.19+$Y);
+        $pdf->SetFont('Arial','b',$FontSize);
+        $pdf->Cell( 0.5,0.5,"Total Amount Rs.",0,'L');
+
+        $pdf->SetXY(1.2, 7.19+$Y);
+        $pdf->SetFont('Arial','b',8);
+        $pdf->Cell( 0.5,0.5,$Updated_AdmFee+$data['AdmProcessFee'].'/-',0,'L');
+
+
+        $pdf->SetXY(1.8, 7.19+$Y);
+        $pdf->SetFont('Arial','',$FontSize);
+        $pdf->Cell( 0.5,0.5,"Amount in Words:",0,'L');
+
+
+        $pdf->SetXY(2.6, 7.19+$Y);
+        $pdf->SetFont('Arial','B',7);
+        $pdf->Cell( 0.5,0.5,ucwords($obj->words),0,'L');
+
+
+        $pdf->SetXY(5.3, 7.29+$Y);
+        $pdf->SetFont('Arial','b',$FontSize);
+        $pdf->Cell( 0.5,0.5,"Manager/Cashier:___________________________ ",0,'L');
+
+        $pdf->SetXY(3.2, 7.3+$Y);
+        $pdf->SetFont('Arial','b',$FontSize+0.5);
+        $pdf->Cell( 0.5,0.5,"Form No:".$data['formNo'],0,'L');
+
+        $pdf->SetXY(0,5.0+3.0+$Y);
+        $pdf->SetFont('Arial','',10);
+
+        $pdf->Image(base_url().'assets/img/cutter.jpg',0.2,7.70, 9.2,0.09, "jpeg");  
+
+        $Y = $Y - 0.39;
+
+        $pdf->SetXY(0.2,8.1+$Y);
+        $pdf->SetFont('Arial','b',$FontSize);
+        $pdf->Cell( 0.5,0.5,strtoupper("BOARD OF INTERMEDIATE AND SECONDARY EDUCATION GUJRANWALA , Languages ".$session." Examination ,".Year.""),0,'C');
+
+
+        $bx = 6.8;
+        $by = 8.1;
+
+        $pdf->SetXY(3.2,8.3+$Y);
+        $pdf->SetTextColor(0,0,0);
+        $pdf->SetFont('Arial','BI',7);
+        $pdf->Cell(0.2,0.5,"Printing Date: " .date('d-M-Y h:i A'),0,'L');
+
+        $pdf->SetXY(0.2,8.20+$Y);
+        $pdf->SetFillColor(0,0,0);                                     
+        $pdf->SetFont('Arial','BI',7);
+        $pdf->Cell(0.2,0.5,"Bank Copy:  (To be retained with HBL) ",0,'L');
+
+
+        $pdf->SetXY(0.2,8.5+$Y);
+        $pdf->SetFillColor(0,0,0);
+        $pdf->SetTextColor(255,255,255);
+        $pdf->SetFont('Arial','B',7);
+        $pdf->Cell($boxWidth,0.2,'Due Date: '.$this->GetDueDate(),1,0,'C',1); 
+
+        $pdf->Image(BARCODE_PATH.$image,5.15, 8.5+$Y  ,2.4,0.24,"PNG");
+
+        $pdf->Image(base_url()."assets/img/12.jpg",7.58,8.3+$Y, 0.30,0.30, "jpg");  
+
+        $pdf->SetXY(0.5,8.65+$Y);
+        $pdf->SetTextColor(0,0,0);
+        $pdf->SetFont('Arial','',$FontSize);
+        $pdf->Cell( 0.5,0.5,"Name:",0,'L');
+        $pdf->SetFont('Arial','B',$FontSize);
+        $pdf->SetXY(1.0,8.65+$Y);
+        $pdf->Cell(0.5,0.5,$data["name"],0,'L');
+        //--------------------------- FATHER NAME 
+
+        $pdf->SetXY(3.2, 8.65+$Y);
+        $pdf->SetFont('Arial','',$FontSize);
+        $pdf->Cell( 0.5,0.5,"Father's Name:",0,'L');
+        $pdf->SetFont('Arial','B',$FontSize);
+        $pdf->SetXY(4.2,8.65+$Y);
+        $pdf->Cell(0.5,0.5,$data["Fname"],0,'L');
+
+
+        $pdf->SetXY(0.5, 8.79+$Y);
+        $pdf->SetFont('Arial','b',$FontSize);
+        $pdf->Cell( 0.5,0.5,"Total Amount Rs.",0,'L');
+
+        $pdf->SetXY(1.35, 8.79+$Y);
+        $pdf->SetFont('Arial','b',8);
+        $pdf->Cell( 0.5,0.5,$Updated_AdmFee+$data['AdmProcessFee'].'/-',0,'L');
+
+
+        $pdf->SetXY(1.85, 8.79+$Y);
+        $pdf->SetFont('Arial','',$FontSize);
+        $pdf->Cell( 0.5,0.5,"Amount in Words:",0,'L');
+
+        $pdf->SetXY(2.68, 8.79+$Y);
+        $pdf->SetFont('Arial','B',7);
+        $pdf->Cell( 0.5,0.5,ucwords($obj->words),0,'L');
+
+        $pdf->Image(base_url().'assets/img/BankCopy.jpg',0.25,8.80, 7.4,0.25, "jpeg");   
+
+        $pdf->SetXY(0.5, 8.55+$Y);
+        $pdf->SetFont('Arial','b',8);
+        $pdf->Cell( 0.5,0.5,"CMD Account No. 00427900072103",0,'L');
+
+
+        $pdf->SetXY(3.2, 8.55+$Y);
+        $pdf->SetTextColor(0,0,0);
+        $pdf->SetFont('Arial','b',9.3);
+        $pdf->Cell( 0.5,0.5,"Bank Challan No.  ".$data['ChallanNo'],0,'L');
+
+        $pdf->SetXY(3.2, 8.9+$Y);
+        $pdf->SetFont('Arial','b',$FontSize+0.5);
+        $pdf->Cell( 0.5,0.5,"Form No:".$data['formNo'],0,'L');
+
+        $pdf->SetXY(5.3, 8.9+$Y);
+        $pdf->SetFont('Arial','b',$FontSize);
+        $pdf->Cell( 0.5,0.5,"Manager/Cashier:___________________________ ",0,'L');
+
+
+        $pdf->SetXY(0,5.0+3.0+$Y);
+        $pdf->SetFont('Arial','',10);
+        // //DebugBreak();
+        $pdf->Image(base_url().'assets/img/cutter.jpg',0.2,9.1, 8.3,0.09, "jpeg");  
+
+        $Y = $Y - 0.09;
+        //
+
+
+        $pdf->SetXY(0.2,9.6+$Y);
+        $pdf->SetFont('Arial','b',$FontSize);
+        $pdf->Cell( 0.5,0.5,strtoupper("BOARD OF INTERMEDIATE AND SECONDARY EDUCATION GUJRANWALA ,  LANGUAGES ".$session." Examination ,".Year." "),0,'C');
+
+        $bx = 6.8;
+        $by = 9.5;
+
+
+        $pdf->SetXY(3.2,9.8+$Y);
+        $pdf->SetTextColor(0,0,0);
+        $pdf->SetFont('Arial','BI',7);
+        $pdf->Cell(0.2,0.5,"Printing Date: " .date('d-M-Y h:i A'),0,'L');
+
+        $pdf->SetXY(0.2,9.69+$Y);
+        $pdf->SetFillColor(0,0,0);                                     
+        $pdf->SetFont('Arial','BI',7);
+        $pdf->Cell(0.2,0.5,"Candidate Copy",0,'L');
+
+
+        $pdf->SetXY(0.2,10.0+$Y);
+        $pdf->SetFillColor(0,0,0);
+        $pdf->SetTextColor(255,255,255);
+        $pdf->SetFont('Arial','B',7);
+        $pdf->Cell($boxWidth,0.2,'Due Date: '.$this->GetDueDate(),1,0,'C',1); 
+
+        $pdf->Image(BARCODE_PATH.$image,5.15, 10.0+$Y  ,2.4,0.24,"PNG");
+
+        $pdf->Image(base_url()."assets/img/12.jpg",7.58,9.8+$Y, 0.30,0.30, "JPG");  
+
+        $pdf->SetXY(0.5,10.2+$Y);
+        $pdf->SetTextColor(0,0,0);
+        $pdf->SetFont('Arial','',$FontSize);
+        $pdf->Cell( 0.5,0.5,"Form No:",0,'L');
+
+        $pdf->SetFont('Arial','B',$FontSize);
+        $pdf->SetXY(1.0,10.2+$Y);
+        $pdf->Cell( 0.5,0.5,$data['formNo'],0,'L');
+
+
+
+        
+
+        //  $pdf->Image(base_url().PRIVATE_IMAGE_PATH.'download.jpg',6.5, 10.3+$Y, 0.95, 1.0, "JPG");
+            //   $pdf->Image(base_url().PRIVATE_IMAGE_PATH.$data['PicPath'],6.5, 10.3+$Y, 0.95, 1.0, "JPG");
+        $pdf->SetFont('Arial','',8);
+
+
+        $pdf->SetXY(0.5,10.35+$Y);
+        $pdf->SetTextColor(0,0,0);
+        $pdf->SetFont('Arial','',$FontSize);
+        $pdf->Cell( 0.5,0.5,"Name:",0,'L');
+        $pdf->SetFont('Arial','B',$FontSize);
+        $pdf->SetXY(1.0,10.35+$Y);
+        $pdf->Cell(0.5,0.5,$data["name"],0,'L');
+        //--------------------------- FATHER NAME 
+
+        $pdf->SetXY(3.2, 10.35+$Y);
+        $pdf->SetFont('Arial','',$FontSize);
+        $pdf->Cell( 0.5,0.5,"Father's Name:",0,'L');
+        $pdf->SetFont('Arial','B',$FontSize);
+        $pdf->SetXY(4.0,10.35+$Y);
+        $pdf->Cell(0.5,0.5,$data["Fname"],0,'L');
+
+
+        $pdf->SetXY(0.5, 10.49+$Y);
+        $pdf->SetFont('Arial','b',$FontSize);
+        $pdf->Cell( 0.5,0.5,"Total Amount Rs.",0,'L');
+
+        $pdf->SetXY(1.35, 10.49+$Y);
+        $pdf->SetFont('Arial','b',8);
+        $pdf->Cell( 0.5,0.5,$data['AdmTotalFee'].'/-',0,'L');
+
+
+        $pdf->SetXY(0.5, 10.59+$Y);
+        $pdf->SetFont('Arial','',$FontSize);
+        $pdf->Cell( 0.5,0.5,"Zone Code:",0,'L');
+
+        $pdf->SetXY(1.48, 10.59+$Y);
+        $pdf->SetFont('Arial','B',8);
+        $pdf->Cell( 0.5,0.5,$data['Zone_cd']."-".$data['zone_name'],0,'L');
+
+        $pdf->Image(base_url().'assets/img/CandidateCopy.jpg',0.27,10.86, 7.58,0.60, "jpeg");  
+
+
+        $pdf->SetXY(0.5, 10.05+$Y);
+        $pdf->SetFont('Arial','b',8);
+        $pdf->Cell( 0.5,0.5,"CMD Account No. 00427900072103",0,'L');
+
+
+        $pdf->SetXY(3.5, 10.05+$Y);
+        $pdf->SetTextColor(0,0,0);
+        $pdf->SetFont('Arial','b',9.3);
+        $pdf->Cell( 0.5,0.5,"Bank Challan No.  ".$data['ChallanNo'],0,'L');
+
+
+        $pdf->SetXY(3.4, 10.7+$Y);
+        $pdf->SetFont('Arial','b',$FontSize);
+        $pdf->Cell( 0.5,0.5,"Manager/Cashier:___________________________ ",0,'L');
+
+
+        $filename="Admission_Forms_".$data['formNo']."_"   .  ".pdf";
+        $pdf->Output($filename, 'I');
+        }
         $pdf->AddPage();
         $x = 0.55;
         $Y = -0.20;
@@ -123,7 +1017,7 @@ class Admission extends CI_Controller {
         $pdf->Cell(0.5,0.5, "(For office use only)",0,'L');
         //------ Picture Box on Centre      
 
-        //        DebugBreak();
+              // DebugBreak();
         $Barcode = $data['formNo']."@".$data['class'].'@'.$data['sess'].'@'.$data["Iyear"];
         $image =  $this->set_barcode($Barcode);
          
@@ -1151,6 +2045,13 @@ class Admission extends CI_Controller {
             $cate['cat11'] = 1;
             $cate['cat12'] = 1;
         }
+        else
+        if($exam_type == 2)
+
+        {
+            $cate['cat11'] = 1;
+            $cate['cat12'] = 1;
+        }
         else  if($exam_type == 1)
 
         {
@@ -1213,7 +2114,7 @@ class Admission extends CI_Controller {
             return $cate;
     }
     function GetFeeWithdue($fee){
-        //DebugBreak();
+       // DebugBreak();
         $dueDate='';
          $single_date= SingleDateFee;  $double_date= DoubleDateFee;  $tripple_date= TripleDateFee;
         $today = date("d-m-Y");
@@ -1284,6 +2185,15 @@ class Admission extends CI_Controller {
         $session = $_POST["oldSess"];
         $board   = $_POST["oldBrd_cd"];
         $CatType = @$_POST["CatType"];
+        
+        if(isset($_POST["isaloom"]))
+        {
+        $isaloom =1;
+        }
+        else
+        {
+        $isaloom =0;
+        }
         }
         
 
@@ -1293,9 +2203,12 @@ class Admission extends CI_Controller {
         $data['iYear']=$iyear;
         $data['session']=$session;
         $data['board']=$board;
+        $data['isaloom']= $isaloom;
         $this->load->model('Admission_model');
+        
+        
         $data = $this->Admission_model->Pre_Inter_data($data);
-
+      
         $error_msg = '';
 
         if(!$data){
@@ -1312,7 +2225,7 @@ class Admission extends CI_Controller {
         }
 
         $nxtrnosess = $data['0']['NextRno_Sess_Year'];
-        $matric_rno = $data['0']['matRno'];
+        $matric_rno = $data['0']['matrno'];
         $inter_rno = $data['0']['rno'];
 
         if ($nxtrnosess != '') {
@@ -1411,7 +2324,15 @@ class Admission extends CI_Controller {
             $data['session']=$session;
             $data['board']=$board;
             $data['Insert_server_error']=$Insert_server_error;
-            $this->load->view('common/commonheader.php');        
+            $this->load->view('common/commonheader.php');
+           // DebugBreak() ;
+             $data['isaloom'] = $isaloom;
+            if(($isaloom == 1))
+            {
+            $this->load->view('Admission/Inter/LanguagesForm.php',  array('data'=>$data));
+            $this->load->view('common/commonfooter.php');
+            return;
+            }       
             $this->load->view('Admission/Inter/AdmissionForm.php',  array('data'=>$data));
             $this->load->view('common/commonfooter.php');
         }
@@ -1423,7 +2344,7 @@ class Admission extends CI_Controller {
         $this->load->model('Admission_model');
         $this->load->library('session');
         $Inst_Id = 999999;
-        // DebugBreak();
+       //  DebugBreak();
         $formno = $this->Admission_model->GetFormNo();
         $allinputdata = array('cand_name'=>@$_POST['cand_name'],
             'father_name'=>@$_POST['father_name'],
@@ -1601,6 +2522,11 @@ class Admission extends CI_Controller {
         $cat = $this->makecat($cattype,$examtype,$marksImp,$is11th);
         $cat11 = @$cat['cat11'];
         $cat12 = @$cat['cat12'];
+        if($grp_cd > 9)
+        {
+        $cat11 = 4;
+        $cat12 = 4;
+        }
         $Speciality = $this->input->post('speciality');
         
 
@@ -1773,6 +2699,33 @@ $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;
             return;
         }
        
+      /*  
+        $target_path = PRIVATE_IMAGE_PATH;
+        $base_path = GET_PRIVATE_IMAGE_PATH_COPY.@$_POST['pic'];
+        if (!file_exists($target_path)){
+
+            mkdir($target_path);
+        }
+        $copyimg = $target_path.$formno.'.jpg';
+        if (!(copy($base_path, $copyimg))) 
+        {
+            $data_error['excep'] = 'The file you are attempting to upload size is between 4 to 20 Kb.';
+            $this->session->set_flashdata('NewEnrolment_error',$data_error);
+
+            redirect('Admission/Pre_Inter_Data/');
+
+        }*//* $spreate_filename = explode(".",$whatIWant);
+        $temp_file_rno= $spreate_filename[0];
+        if($temp_file_rno != $temp_db_rno)
+        {
+            $allinputdata = "";
+            $data_error['excep'] = 'Your Pictures is not matched. ';
+            $this->session->set_flashdata('NewEnrolment_error',$data_error);
+            redirect('Admission/Pre_Inter_Data/');
+
+            return;
+        }
+       
         
         $target_path = PRIVATE_IMAGE_PATH;
         $base_path = GET_PRIVATE_IMAGE_PATH_COPY.@$_POST['pic'];
@@ -1788,11 +2741,218 @@ $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;
 
             redirect('Admission/Pre_Inter_Data/');
 
-        }
+        }           */
              
       //  DebugBreak();
         
         $logedIn = $this->Admission_model->Insert_NewEnorlement($data);
+        if($logedIn != false)
+        {
+            $allinputdata = "";
+            $allinputdata['excep'] = 'success';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            $msg = $formno;                                           
+            redirect('Admission/formdownloaded/'.$formno);
+        }
+        else
+        {     
+            $allinputdata = "";
+            $data_error['excep'] = 'An error has occoured. Please try again later. ';
+            $this->session->set_flashdata('NewEnrolment_error',$data_error);
+            redirect('Admission/Pre_Inter_Data/');
+           // redirect('Admission');
+            return;
+            echo 'Data NOT Saved Successfully !';
+        } 
+
+    }
+     public function NewEnrolment_insert_Languages()
+    {
+   
+        $this->load->model('Admission_model');
+        $this->load->library('session');
+      
+        $formno = $this->Admission_model->GetFormNo_Languages();
+        $sub1 = 0;        $sub2 = 0;        $sub3 = 0;        $sub4 = 0;        $sub5 = 0;        $sub6 = 0;      
+        $sub1ap1 = 0;        $sub2ap1 = 0;        $sub3ap1 = 0;        $sub4ap1 = 0;        $sub5ap1 = 0;        $sub6ap1 = 0;         
+        
+          $grp_cd = $this->input->post('std_group');
+        
+        if(@$_POST['sub1'] != 0)
+        {
+            $sub1ap1 = 1; 
+            $sub1 =  $_POST['sub1'];   
+         
+        }
+        if(@$_POST['sub2'] != 0)
+        {
+            $sub2ap1 = 1;    
+            $sub2 =  $_POST['sub2'];
+         
+        }
+        if(@$_POST['sub3'] != 0)
+        {
+            $sub3ap1 = 1;   
+            $sub3 =  $_POST['sub3'];
+        
+        }
+        if(@$_POST['sub4'] != 0)
+        {
+            $sub4ap1 = 1;    
+            $sub4 =  $_POST['sub4'];
+        
+        }
+        if(@$_POST['sub5'] != 0)
+        {
+            $sub5ap1 = 1;    
+            $sub5 =  $_POST['sub5'];
+        
+        }
+        if(@$_POST['sub6'] != 0)
+        {
+            $sub6ap1 = 1;    
+            $sub6 =  $_POST['sub6'];
+        
+        }
+        $cattype = @$_POST['cattype_hidden'];
+        $examtype = @$_POST['exam_type'];
+        $marksImp = @$_POST['ddlMarksImproveoptions'];
+      
+        
+        $per_grp = @$_POST['pregrp'];
+        
+        $AdmFeeCatWise = '900';
+       
+$TotalAdmFee =  295+$AdmFeeCatWise;  
+        
+
+        $oldsess = @$_POST['oldsess'];
+
+        if($oldsess == 'Annual'){
+            $oldsess =  1;    
+        }
+        else if($oldsess == 'Supplementary'){
+            $oldsess =  2;    
+        }
+          //DebugBreak();
+
+        $data = array(
+            'name' =>$this->input->post('cand_name'),
+            'Fname' =>$this->input->post('father_name'),
+           
+            'MobNo' =>$this->input->post('mob_number'),
+           
+            'markOfIden' =>$this->input->post('MarkOfIden'),
+           
+            'sex' =>$this->input->post('gend'),
+          
+            'addr' =>$this->input->post('address'),
+            'grp_cd' => $grp_cd,
+            'sub1' =>$sub1,
+            'sub2' =>$sub2,
+            'sub3' =>$sub3,
+            'sub4' =>$sub4,
+            'sub5' =>$sub5,
+            'sub6' =>$sub6,
+           
+            'sub1ap1' => ($sub1ap1),
+            'sub2ap1' => ($sub2ap1),
+            'sub3ap1' => ($sub3ap1),
+            'sub4ap1' => ($sub4ap1),
+            'sub5ap1' => ($sub5ap1),
+            'sub6ap1' => ($sub6ap1),
+            'sub7ap1' => ($sub7ap1),
+            
+            'FormNo' =>($formno),
+           
+            'dist'=>@$_POST['pvtinfo_dist'],
+            'teh'=>@$_POST['pvtinfo_teh'],
+            'zone'=>@$_POST['pvtZone'],
+            'rno'=>@$_POST['oldrno'],
+            'sess'=>$oldsess,
+            'Iyear'=>@$_POST['oldyear'],
+            'Brd_cd'=>@$_POST['oldboardid'],
+            'AdmProcessFee'=>295,
+            'AdmFee'=>$AdmFeeCatWise,
+            'AdmTotalFee'=>$TotalAdmFee,
+            'exam_type'=>$_POST['exam_type'],
+            'picpath'=>@$_POST['pic'],
+            
+        );
+       //   DebugBreak();
+        $data_error = array(
+        'matRno_hidden'=>$this->input->post('matRno_hidden'),
+        'oldrno'=>$this->input->post('InterRno_hidden'),
+        'InterYear_hidden'=>$this->input->post('InterYear_hidden'),
+        'InterSess_hidden'=>$this->input->post('InterSess_hidden'),
+        'oldboardid'=>$this->input->post('oldboardid'),
+        'cattype_hidden'=>$this->input->post('cattype_hidden'),
+        'oldClass'=>$this->input->post('oldClass'),
+        );
+     
+        $temp_file_name = @$_POST['pic']; //'OldPics/Pic16-MA/MA11th16/123456.jpg';
+        $whatIWant = substr($temp_file_name, strpos($temp_file_name, ".") - 6);    
+      
+        $temp_db_rno = @$_POST['InterRno_hidden'];
+        $spreate_filename = explode(".",$whatIWant);
+        $temp_file_rno= $spreate_filename[0];
+       /* if($temp_file_rno != $temp_db_rno)
+        {
+            $allinputdata = "";
+            $data_error['excep'] = 'Your Pictures is not matched. ';
+            $this->session->set_flashdata('NewEnrolment_error',$data_error);
+            redirect('Admission/Pre_Inter_Data/');
+
+            return;
+        }   */
+       
+      /*  
+        $target_path = PRIVATE_IMAGE_PATH;
+        $base_path = GET_PRIVATE_IMAGE_PATH_COPY.@$_POST['pic'];
+        if (!file_exists($target_path)){
+
+            mkdir($target_path);
+        }
+        $copyimg = $target_path.$formno.'.jpg';
+        if (!(copy($base_path, $copyimg))) 
+        {
+            $data_error['excep'] = 'The file you are attempting to upload size is between 4 to 20 Kb.';
+            $this->session->set_flashdata('NewEnrolment_error',$data_error);
+
+            redirect('Admission/Pre_Inter_Data/');
+
+        }*//* $spreate_filename = explode(".",$whatIWant);
+        $temp_file_rno= $spreate_filename[0];
+        if($temp_file_rno != $temp_db_rno)
+        {
+            $allinputdata = "";
+            $data_error['excep'] = 'Your Pictures is not matched. ';
+            $this->session->set_flashdata('NewEnrolment_error',$data_error);
+            redirect('Admission/Pre_Inter_Data/');
+
+            return;
+        }
+       
+        
+        $target_path = PRIVATE_IMAGE_PATH;
+        $base_path = GET_PRIVATE_IMAGE_PATH_COPY.@$_POST['pic'];
+        if (!file_exists($target_path)){
+
+            mkdir($target_path);
+        }
+        $copyimg = $target_path.$formno.'.jpg';
+        if (!(copy($base_path, $copyimg))) 
+        {
+            $data_error['excep'] = 'The file you are attempting to upload size is between 4 to 20 Kb.';
+            $this->session->set_flashdata('NewEnrolment_error',$data_error);
+
+            redirect('Admission/Pre_Inter_Data/');
+
+        }           */
+             
+      //  DebugBreak();
+       // $this->frmvalidation('Pre_Inter_Data',$data_error,0);
+        $logedIn = $this->Admission_model->Insert_NewEnorlement_Languages($data);
         if($logedIn != false)
         {
             $allinputdata = "";

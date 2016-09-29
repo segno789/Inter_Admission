@@ -291,6 +291,82 @@
         status = 1;
         return status;
     }
+    function  check_NewEnrol_validation_Languages(){
+
+    
+    debugger;
+        var name =  $('#cand_name').val();
+        var dist_cd= $('#pvtinfo_dist option:selected').val();
+        var teh_cd= $('#pvtinfo_teh').val();
+        var zone_cd= $('#pvtZone').val();
+          var MarkOfIdent = $('#MarkOfIden').val();
+          var address = $('#address').val();
+       // var pp_cent= $('#pp_cent').val();           
+          var status = 0;
+        var mobNo = $('#mob_number').val();
+       
+         if(mobNo == "" || mobNo == 0 || mobNo == undefined)
+        {
+            $('#ErrMsg').show(); 
+            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+
+            alertify.error("Please Enter your Mobile No.") 
+            $('#mob_number').focus();   
+            return status;  
+        }
+
+        else if(MarkOfIdent == "" || MarkOfIdent == 0 || MarkOfIdent == undefined)
+        {
+            $('#ErrMsg').show(); 
+            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+
+            alertify.error("Please Enter your Mark of Indentification") 
+            $('#MarkOfIden').focus();   
+            return status;  
+        }
+        else if(address == "" || address == 0 || address.length ==undefined )
+        {
+            $('#ErrMsg').show(); 
+            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+            $('#ErrMsg').html("<b>Please Enter your Address</b>"); 
+            alertify.error("Please Enter your Address")
+            $('#address').focus(); 
+            return status;    
+        }
+
+        else  if (dist_cd < 1) 
+        {
+            alertify.error('Please select District '); 
+            $("#pvtinfo_dist").focus();
+            return status;  
+        }
+
+        else if (teh_cd < 1) {
+
+            alertify.error('Please select Tehsil');                          
+            $("#pvtinfo_teh").focus();
+            return status;  
+        }
+        else if (zone_cd < 1) 
+        {
+            alertify.error('Please select Zone. ');                          
+            $("#pvtZone").focus();
+            return status;  
+        }
+
+        else if (grp_cd == 0) 
+        {
+            $('#ErrMsg').show(); 
+            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+            alertify.error('Please Select your Study Group '); 
+            $("#std_group").focus();
+            return status;  
+        }
+        
+        status = 1;
+        return status;
+    }
+    
     function gotodefaultpage(){
         var msg = "Are you sure you want to cancel ?"
         alertify.confirm(msg, function (e) {

@@ -106,6 +106,11 @@
                                                     </select>
                                                 </td>
                                             </tr>
+                                            <tr>
+                                            <td colspan="4">
+                                            <label style="font-size: 23px;"> <input type="checkbox" name="isaloom" id="isaloom" style="width: 24px; height: 24px;"  >  <u>Aloom-e-Sharkia Examination</u> </label>
+                                            </td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                     <?php

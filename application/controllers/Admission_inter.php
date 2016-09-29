@@ -13,7 +13,6 @@ class Admission_inter extends CI_Controller {
     public function index()
     {
 
-//        DebugBreak(); 
         $msg = 7;//$this->uri->segment(3);
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -171,7 +170,7 @@ class Admission_inter extends CI_Controller {
         }
 
 
-    }
+     }
      public function ChallanForm_Adm10th_Regular()
     {
        // DebugBreak();
@@ -196,6 +195,9 @@ class Admission_inter extends CI_Controller {
             $feestructure[]     = $result[0]['Total_RegistrationFee'];   
             $displayfeetitle[] =  'Total Admission Fee';   
        
+            $feestructure[]     = $result[0]['Total_CertificateFee'];   
+            $displayfeetitle[] =  'Total Certificate Fee';  
+            
             $feestructure[]=$result[0]['Total_LateRegistrationFee']; 
             $displayfeetitle[] =  'Total Late Admission Fee';   
        
@@ -430,7 +432,7 @@ class Admission_inter extends CI_Controller {
     }
     public function StudentsData()
     {    
-      // DebugBreak();
+       DebugBreak();
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
