@@ -303,7 +303,18 @@ header("Pragma: no-cache");
                                         $class = $data[0]['class'];
                                         $IsRegular = $data[0]['IsRegular'];
                                         $coll_cd = $data[0]['coll_cd']; 
+                                        $cat11 = $data[0]['cat11'];
+                                        $cat12 = $data[0]['cat12'];
                                         
+                                        if($cat11 == 4 && $cat12 == 4)
+                                        {
+                                               echo "<option value='10' selected='selected'>FAZIL ARABIC</option>"; 
+                                               echo "<option value='11' selected='selected'>FAZIL URDU</option>"; 
+                                               echo "<option value='12' selected='selected'>FAZIL PUNJABI</option>"; 
+                                               echo "<option value='13' selected='selected'>ADEEB ARABIC</option>"; 
+                                               echo "<option value='14' selected='selected'>ADEEB URDU</option>"; 
+                                        }
+                                        else                                      
                                         if($exam_type == 1  || $exam_type == 3 || $exam_type == 9 || $exam_type == 11 || $exam_type == 16 || $exam_type == 14 || $exam_type == 15){
                                             if($grp_cd == 1){
                                                 echo "<option value='1' selected='selected'>PRE-MEDICAL</option>";       
@@ -329,7 +340,7 @@ header("Pragma: no-cache");
                                             echo "<option value='5'>COMMERCE</option>";    
                                         } */
 
-                                        if( $exam_type == 2 || $exam_type == 4 || $exam_type == 5 || $exam_type == 6){
+                                        if( ($exam_type == 2 && $cat11 != 4 ) || $exam_type == 4 || $exam_type == 5 || $exam_type == 6){
                                             if($grp_cd == 1){
                                                 echo "<option value='1' selected='selected'>PRE-MEDICAL</option>";      
                                                 echo "<option value='3'>HUMANITIES</option>";
@@ -525,7 +536,13 @@ header("Pragma: no-cache");
                                         else if (($exam_type ==11 || $exam_type == 16 || $exam_type == 15)&& $cattype == 2){
                                             echo'Category P-1: ADDITIONAL';
                                         }
-                                        else{
+                                        else if($cat11 == 4)
+                                        {
+                                               echo'Languages Subjects';
+                                        }
+                                        else
+                                        
+                                        {
                                             echo'PART-I Subjects';
                                         }
                                         ?>
@@ -538,6 +555,10 @@ header("Pragma: no-cache");
                                         else if (($exam_type ==11 || $exam_type == 16 || $exam_type == 15)&& $cattype == 2)
                                         {
                                             echo'Category P-2: ADDITIONAL';
+                                        }
+                                         else if($cat11 == 4)
+                                        {
+                                               echo'';
                                         }
                                         else{
                                             echo'PART-II Subjects';
@@ -1830,6 +1851,33 @@ header("Pragma: no-cache");
                                         }   
                                     }
                                 }
+                                function LanguagesAloom_e_sharkia()
+                                {
+                                     Empty_All_Dropdowns();
+                                    hide_sub7_sub8();
+                                    ClearDropDownsP2();
+                                    $("#sub1").append(new Option('PAPER-I','1'));
+                                     $("#sub1").append(new Option('NONE','0'));
+                                    $("#sub2").append(new Option('PAPER-II','2'));
+                                    $("#sub2").append(new Option('NONE','0'));
+                                    $("#sub3").append(new Option('PAPER-III','3'));
+                                    $("#sub3").append(new Option('NONE','0'));
+                                    $("#sub4").append(new Option('PAPER-IV','4'));
+                                    $("#sub4").append(new Option('NONE','0'));
+                                    $("#sub5").append(new Option('PAPER-V','5'));
+                                    $("#sub5").append(new Option('NONE','0'));
+                                    $("#sub6").append(new Option('PAPER-IV','6'));
+                                    $("#sub6").append(new Option('NONE','0'));
+                                    
+                                    $("#sub1p2").hide();
+                                    $("#sub2p2").hide();
+                                    $("#sub3p2").hide();
+                                    $("#sub4p2").hide();
+                                    $("#sub5p2").hide();
+                                    $("#sub6p2").hide();
+                                    
+                                    
+                                }
                                 function sub_grp_load_MarksImp_PI(){
                                     Empty_All_Dropdowns();
                                     hide_sub7_sub8();
@@ -2068,7 +2116,7 @@ header("Pragma: no-cache");
                                 if($exam_type == 1){ 
                                     echo 'sub_grp_load_exam_type1();'; 
                                 }
-                                else if($exam_type == 2){
+                                else if($exam_type == 2 && $cat11 != 4){
                                     
                                     echo'sub_grp_load_MarksImp_FULL();';
                                 }
@@ -2086,6 +2134,10 @@ header("Pragma: no-cache");
                                 }*/
                                 else if($exam_type == 6){
                                     echo'sub_grp_load_exam_type6();';
+                                }
+                                else if($exam_type == 2 && $cat11 == 4)
+                                {
+                                echo 'LanguagesAloom_e_sharkia()';
                                 }
                                 else{
                                     echo'sub_grp_load();';

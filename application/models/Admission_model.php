@@ -9,7 +9,19 @@ class Admission_model extends CI_Model
 
     public function Pre_Inter_Data($data)
     {
+      //  DebugBreak();
+        
+        if( ($data['isaloom']==1))
+        {
+        $query = $this->db->get_where(getinfo_languages, array('rno' => $data['hsscrno'], 'Iyear' => $data['iYear'], 'Sess'=>$data['session']));
+        }
+        else
+        {
         $query = $this->db->get_where(getinfo, array('matRno'=>$data['sscrno'],'rno' => $data['hsscrno'], 'class' => $data['hsscclass'], 'Iyear' => $data['iYear'], 'sess'=>$data['session'],'IntBrd_cd'=>$data['board']));
+        }
+        
+        
+        
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
@@ -55,7 +67,30 @@ class Admission_model extends CI_Model
         }
 
     }
+      public function GetFormNo_Languages()
+    {
+    
+    
+     //DebugBreak();
+        $this->db->select('formno');
+        $this->db->order_by("formno", "DESC");
+        $formno = $this->db->get('admission_online..IStbllanguagesinter');
+        //$formno =$this->db->get_where('',array('regPvt'=>2));
+        $rowcount = $formno->num_rows();
 
+        if($rowcount == 0 )
+        {
+            $formno = formnovalid_Languages+1;
+            return $formno;
+        }
+        else
+        {
+            $row  = $formno->result_array();
+            $formno = $row[0]['formno']+1;
+            return $formno;
+        }
+
+    }
     public function Insert_NewEnorlement($data)
     {    
         //DebugBreak();  
@@ -149,11 +184,81 @@ class Admission_model extends CI_Model
         $query = $this->db->query(Insert_sp." '$formno',12,2016,2,'$name','$fname','$BForm','$FNIC','$CellNo',$medium,'".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$sub8,1,$oldrno,$oldyear,$oldsess,$old_class,$IsHafiz,$Inst_cd,$UrbanRural,$RegGrp,$cat09,$cat10,$sub1ap2,$sub2ap2,$sub4ap2,$sub5ap2,$sub6ap2,$sub7ap2,$sub8ap2,$dist_cd,$teh_cd,$zone_cd,$Brd_cd,$AdmProcFee,$AdmFee,$TotalAdmFee,$sub5a,$sub6a,$sub7a");
         return true;
     }
+     public function Insert_NewEnorlement_Languages($data)
+    {    
+        //DebugBreak();  
+        $name = strtoupper($data['name']);
+        $fname =strtoupper($data['Fname']);
+      
+        $CellNo = $data['MobNo'];
+      
+        $MarkOfIden =strtoupper(@$data['markOfIden']);
+      
+        $sex = $data['sex'];
+          
+        $addr =strtoupper($data['addr']) ;
+
+        $grp_cd = $data['grp_cd'];
+
+        $sub1= $data['sub1'];
+        $sub2 = $data['sub2'];
+        $sub3 = $data['sub3'];
+        $sub4 = $data['sub4'];
+        $sub5 = $data['sub5'];
+        $sub6 = $data['sub6'];
+       
+        
+
+
+        $sub1ap1 = $data['sub1ap1'];
+        $sub2ap1 = $data['sub2ap1'];
+        $sub3ap1 = $data['sub3ap1'];
+        $sub4ap1 = $data['sub4ap1'];
+        $sub5ap1 = $data['sub5ap1'];
+        $sub6ap1 = $data['sub6ap1'];
+       
+
+       
+        $formno = $data['FormNo'];
+        $RegGrp = $data['grp_cd'];
+        
+        //-------Marks Improve CAT --------\\
+        $dist_cd =  $data['dist'];
+        $teh_cd =  $data['teh'];
+        $zone_cd =  $data['zone'];
+        $oldrno =  $data['rno'];
+        $oldyear =  $data['Iyear'];
+        $oldsess =  $data['sess'];
+        //  DebugBreak();
+        
+        $Brd_cd =  $data['Brd_cd'];
+        
+       
+
+        $AdmProcFee =  $data['AdmProcessFee'];
+
+        $AdmFee = $data['AdmFee'];
+
+        $TotalAdmFee =  $AdmFee + $AdmProcFee;
+
+       // DebugBreak();
+
+        $query = $this->db->query(Insert_sp_Languages." '$formno',2016,2,'$name','$fname','$CellNo','".$MarkOfIden."',$sex,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,1,$oldrno,$oldyear,$oldsess,$dist_cd,$teh_cd,$zone_cd,$Brd_cd,$AdmProcFee,$AdmFee,$TotalAdmFee");
+        return true;
+    }
     public function get_formno_data($formno)
     {
 
-        ////DebugBreak();
+       // DebugBreak();
+        if($formno <600000)
+        {
+        $query = $this->db->query(formprint_sp_Languages."'$formno'");
+        }
+        else
+        {
         $query = $this->db->query(formprint_sp."'$formno'");
+        }
+        
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {

@@ -12,7 +12,7 @@
 
                     </div>
                     <div class="widget-body">
-                        <h1    style="text-align: center;"><font color="#000000" size="+1" >Note:-Last Date of Online Admission for 12th is <b class="blink_text"><?php echo lastdate; ?></b></font></h1>
+                        <h1    style="text-align: center;"><font color="#000000" size="+1" >Note:-Last Date of Online Admission for 12th is <b class="blink_text"><?php  echo lastdate; ?></b></font></h1>
                         <!--<b class="blink_text" style="margin-left: 36%;"> Please update your Institute Profile, In Case of Govt institute EMIS code is mandatory </b>-->
 
 
