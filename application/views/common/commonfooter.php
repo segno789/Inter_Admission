@@ -294,7 +294,7 @@
     function  check_NewEnrol_validation_Languages(){
 
     
-    debugger;
+   
         var name =  $('#cand_name').val();
         var dist_cd= $('#pvtinfo_dist option:selected').val();
         var teh_cd= $('#pvtinfo_teh').val();

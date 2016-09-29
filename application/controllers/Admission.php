@@ -89,15 +89,18 @@ class Admission extends CI_Controller {
             redirect('Admission');
             return;
         }
-        
         $data = $data[0];
         $this->load->library('pdf_rotate');
         $pdf = new pdf_rotate('P','in',"A4");
         $lmargin =1.5;
         $rmargin =7.3;
         $pdf ->SetRightMargin(80);
-        if($formno < 600000)
+        
+          if($formno < 600000)
         {
+        
+          
+          
            $pdf->AddPage();
         $x = 0.55;
         $Y = -0.20;
@@ -137,8 +140,8 @@ class Admission extends CI_Controller {
         //$data['PicPath']
         
 
-       // $pdf->Image(base_url().PRIVATE_IMAGE_PATH.$data['PicPath'],6.5, 1.15+$Y, 0.95, 1.0, "JPG");
-        $pdf->Image(base_url()."assets/img/logo2.png",0.4, 0.2, 0.65, 0.65, "PNG");
+       $pdf->Image(PRIVATE_IMAGE_PATH.$data['PicPath'],6.5, 1.15+$Y, 0.95, 1.0, "JPG");
+        $pdf->Image("assets/img/logo2.png",0.4, 0.2, 0.65, 0.65, "PNG");
         $pdf->SetFont('Arial','',8);
 
         //------------- Personal Infor Box
@@ -171,62 +174,11 @@ class Admission extends CI_Controller {
                 $grp_name = "NO GROUP SELECTED.";
         }
 
-        //--------------------------- 1st line 
-        /* $pdf->SetXY(0.5,1.55+$Y);
-        $pdf->SetFont('Arial','',$FontSize);
-        $pdf->Cell( 0.5,0.5,"Form No:",0,'L');
-
-        $pdf->SetFont('Arial','B',$FontSize);
-        $pdf->SetXY(1.5,1.55+$Y);
-        $pdf->Cell( 0.5,0.5,$data['formNo'],0,'L');*/
-
-
-        //$chkcat09 = ($data['mi_type']!= 2?$this->getCatName($data['cat11']):'Aditional') ;
-
-      //  $chkcat10 = ($data['mi_type']!= 2?$this->getCatName($data['cat12']):'Aditional');
+      
 
         $pdf->SetXY(1.8,1.38+$Y);
         $pdf->SetFont('Arial','BU',9);
-       /* if($chkcat09 != -1 && $chkcat10 != -1)
-        {
-
-           // $pdf->Cell( 0.5,0.7,strtoupper($grp_name." GROUP  (11th: ".$chkcat09."  12th:".$chkcat10.")"),0,'L');
-            //$pdf->SetFont('Arial','B',10);
-            // $pdf->SetXY(2.5,1.55+$Y);
-            //$pdf->Cell( 0.5,0.5,"(11th: ",0,'L');
-            // $pdf->SetXY(3.0,1.55+$Y);
-            // $pdf->SetFont('Arial','B',10);
-            //$pdf->Cell( 0.5,0.5, ,0,'L'); 
-            //  $pdf->SetXY(4.0,1.55+$Y);
-            //  $pdf->SetFont('Arial','B',10);
-            //$pdf->Cell( 0.5,0.5,"",0,'L');
-            //  $pdf->SetXY(4.4,1.55+$Y);
-            //  $pdf->SetFont('Arial','B',10);
-            //$pdf->Cell( 0.5,0.5,$chkcat10.")",0,'L');
-
-        }
-        else if($chkcat09 != -1)
-        {
-
-           // $pdf->Cell( 0.5,0.7,strtoupper($grp_name." GROUP  (11th: ".$chkcat09.")"),0,'L');
-            //  $pdf->SetFont('Arial','B',10);
-            //  $pdf->SetXY(2.5,1.55+$Y);
-            //   $pdf->Cell( 0.5,0.5,"(11th: ",0,'L');
-            //  $pdf->SetXY(3.0,1.55+$Y);
-            //  $pdf->SetFont('Arial','B',10);
-            // $pdf->Cell(0.5,0.5, $chkcat09.')',0,'L');
-        }
-        else if($chkcat10 != -1)
-        {
-
-          //  $pdf->Cell( 0.5,0.7,strtoupper($grp_name." GROUP  (12th: ".$chkcat10.")"),0,'L');
-            // $pdf->SetFont('Arial','B',10);
-            // $pdf->SetXY(2.5,1.55+$Y);
-            //  $pdf->Cell( 0.5,0.5,"(12th: ",0,'L');
-            // $pdf->SetXY(3.0,1.55+$Y);
-            // $pdf->SetFont('Arial','B',10);
-            // $pdf->Cell(0.5,0.5,$chkcat10.')',0,'L');  
-        } */
+     
         $LastSess = 0 ;
         //  //DebugBreak();
         if($data["SessOfLastAp"] == 1 or $data["SessOfLastAp"] == 2  )
@@ -448,63 +400,36 @@ class Admission extends CI_Controller {
                 $grp_name = "NO GROUP SELECTED.";
         }       */
          
-         $pdf->Image(base_url().'assets/img/examaloomsharkia.gif',4.1,3.1, 1.8,0.4, "gif"); 
+         $pdf->Image('assets/img/examaloomsharkia.gif',4.1,3.1, 1.8,0.4, "gif"); 
           
           if( $data["grp_cd"] == 1)
           {
-           $pdf->Image(base_url().'assets/img/fazilarabic.gif',4.5,3.8, 0.9,0.4, "gif");  
+           $pdf->Image('assets/img/fazilarabic.gif',4.5,3.8, 0.9,0.4, "gif");  
           }
           else
              if( $data["grp_cd"] == 2)
           {
-             $pdf->Image(base_url().'assets/img/fazilurdu.gif',4.5,3.8, 0.9,0.4, "gif");
+             $pdf->Image('assets/img/fazilurdu.gif',4.5,3.8, 0.9,0.4, "gif");
           }
            else
              if( $data["grp_cd"] == 3)
           {
-                 $pdf->Image(base_url().'assets/img/fazilpunjabi.gif',4.5,3.8, 0.9,0.4, "gif");
+                 $pdf->Image('assets/img/fazilpunjabi.gif',4.5,3.8, 0.9,0.4, "gif");
           }
            else
              if( $data["grp_cd"] == 5)
           {
-                 $pdf->Image(base_url().'assets/img/adeebarbic.gif',4.5,3.8, 0.9,0.4, "gif");
+                 $pdf->Image('assets/img/adeebarbic.gif',4.5,3.8, 0.9,0.4, "gif");
           }
            else
              if( $data["grp_cd"] == 6)
           {
-                   $pdf->Image(base_url().'assets/img/adeeburdu.gif',4.5,3.8, 0.9,0.4, "gif");
+                   $pdf->Image('assets/img/adeeburdu.gif',4.5,3.8, 0.9,0.4, "gif");
           }
           
            
            
-             
-        /* $pdf->SetFont('Arial','',7);
-        $pdf->SetXY($xangle,4.4+$yy);
-        $pdf->Cell($boxWidth,0.2,$data['sub3Ap1'] != 1 ? '':  '    '.'3. '.  $this->GetSubNameHere($data['sub3']),1,0,'L',1);*/
-
-      /*  $pdf->SetFont('Arial','',7);
-        $pdf->SetXY($xangle,4.4+$yy);
-        $pdf->Cell($boxWidth,0.2,'',1,0,'L',1);
-
-        $pdf->SetFont('Arial','',7);
-        $pdf->SetXY($xangle,4.6+$yy);
-        $pdf->Cell($boxWidth,0.2,'',1,0,'L',1);
-
-        $pdf->SetFont('Arial','',7);
-        $pdf->SetXY($xangle,4.8+$yy);
-        
-              
-        $pdf->Cell($boxWidth,0.2,'',1,0,'L',1);
-
-        $pdf->SetFont('Arial','',7);
-        $pdf->SetXY($xangle,5.0+$yy);
-        $pdf->Cell($boxWidth,0.2,'',1,0,'L',1);
-
-        $pdf->SetFont('Arial','',7);
-        $pdf->SetXY($xangle,5.2+$yy);
-        $pdf->Cell($boxWidth,0.2,'',1,0,'L',1);   */
-
-        //DebugBreak();
+       
         $pdf->SetXY(0.5,2.65+$Y);
         $pdf->SetFont('Arial','',7);
         $pdf->Cell( 0.5,0.5,"Address:",0,'L');
@@ -880,7 +805,7 @@ class Admission extends CI_Controller {
         $pdf->SetXY(0,5.0+3.0+$Y);
         $pdf->SetFont('Arial','',10);
         // //DebugBreak();
-        $pdf->Image(base_url().'assets/img/cutter.jpg',0.2,9.1, 8.3,0.09, "jpeg");  
+        $pdf->Image('assets/img/cutter.jpg',0.2,9.1, 8.3,0.09, "jpeg");  
 
         $Y = $Y - 0.09;
         //
@@ -913,7 +838,7 @@ class Admission extends CI_Controller {
 
         $pdf->Image(BARCODE_PATH.$image,5.15, 10.0+$Y  ,2.4,0.24,"PNG");
 
-        $pdf->Image(base_url()."assets/img/12.jpg",7.58,9.8+$Y, 0.30,0.30, "JPG");  
+        $pdf->Image("assets/img/12.jpg",7.58,9.8+$Y, 0.30,0.30, "JPG");  
 
         $pdf->SetXY(0.5,10.2+$Y);
         $pdf->SetTextColor(0,0,0);
@@ -988,7 +913,13 @@ class Admission extends CI_Controller {
 
         $filename="Admission_Forms_".$data['formNo']."_"   .  ".pdf";
         $pdf->Output($filename, 'I');
+        return true;
         }
+        
+        
+        
+        
+        
         $pdf->AddPage();
         $x = 0.55;
         $Y = -0.20;
@@ -1017,7 +948,7 @@ class Admission extends CI_Controller {
         $pdf->Cell(0.5,0.5, "(For office use only)",0,'L');
         //------ Picture Box on Centre      
 
-              // DebugBreak();
+        //        DebugBreak();
         $Barcode = $data['formNo']."@".$data['class'].'@'.$data['sess'].'@'.$data["Iyear"];
         $image =  $this->set_barcode($Barcode);
          
@@ -2045,13 +1976,6 @@ class Admission extends CI_Controller {
             $cate['cat11'] = 1;
             $cate['cat12'] = 1;
         }
-        else
-        if($exam_type == 2)
-
-        {
-            $cate['cat11'] = 1;
-            $cate['cat12'] = 1;
-        }
         else  if($exam_type == 1)
 
         {
@@ -2114,7 +2038,7 @@ class Admission extends CI_Controller {
             return $cate;
     }
     function GetFeeWithdue($fee){
-       // DebugBreak();
+        //DebugBreak();
         $dueDate='';
          $single_date= SingleDateFee;  $double_date= DoubleDateFee;  $tripple_date= TripleDateFee;
         $today = date("d-m-Y");
@@ -2185,16 +2109,19 @@ class Admission extends CI_Controller {
         $session = $_POST["oldSess"];
         $board   = $_POST["oldBrd_cd"];
         $CatType = @$_POST["CatType"];
+         if(isset($_POST["isaloom"]))
+            {
+                $isaloom =1;
+            }
+            else
+            {
+                $isaloom =0;
+            }
+        }
         
-        if(isset($_POST["isaloom"]))
-        {
-        $isaloom =1;
-        }
-        else
-        {
-        $isaloom =0;
-        }
-        }
+        
+        
+        
         
 
         $data['sscrno']=$mrollno;
@@ -2203,12 +2130,10 @@ class Admission extends CI_Controller {
         $data['iYear']=$iyear;
         $data['session']=$session;
         $data['board']=$board;
-        $data['isaloom']= $isaloom;
+         $data['isaloom']= $isaloom;
         $this->load->model('Admission_model');
-        
-        
         $data = $this->Admission_model->Pre_Inter_data($data);
-      
+
         $error_msg = '';
 
         if(!$data){
@@ -2225,7 +2150,7 @@ class Admission extends CI_Controller {
         }
 
         $nxtrnosess = $data['0']['NextRno_Sess_Year'];
-        $matric_rno = $data['0']['matrno'];
+        $matric_rno = @$data['0']['matRno'];
         $inter_rno = $data['0']['rno'];
 
         if ($nxtrnosess != '') {
@@ -2324,8 +2249,11 @@ class Admission extends CI_Controller {
             $data['session']=$session;
             $data['board']=$board;
             $data['Insert_server_error']=$Insert_server_error;
-            $this->load->view('common/commonheader.php');
-           // DebugBreak() ;
+            
+            
+            
+            
+            $this->load->view('common/commonheader.php');        
              $data['isaloom'] = $isaloom;
             if(($isaloom == 1))
             {
@@ -2344,7 +2272,7 @@ class Admission extends CI_Controller {
         $this->load->model('Admission_model');
         $this->load->library('session');
         $Inst_Id = 999999;
-       //  DebugBreak();
+        // DebugBreak();
         $formno = $this->Admission_model->GetFormNo();
         $allinputdata = array('cand_name'=>@$_POST['cand_name'],
             'father_name'=>@$_POST['father_name'],
@@ -2522,11 +2450,6 @@ class Admission extends CI_Controller {
         $cat = $this->makecat($cattype,$examtype,$marksImp,$is11th);
         $cat11 = @$cat['cat11'];
         $cat12 = @$cat['cat12'];
-        if($grp_cd > 9)
-        {
-        $cat11 = 4;
-        $cat12 = 4;
-        }
         $Speciality = $this->input->post('speciality');
         
 
@@ -2699,33 +2622,6 @@ $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;
             return;
         }
        
-      /*  
-        $target_path = PRIVATE_IMAGE_PATH;
-        $base_path = GET_PRIVATE_IMAGE_PATH_COPY.@$_POST['pic'];
-        if (!file_exists($target_path)){
-
-            mkdir($target_path);
-        }
-        $copyimg = $target_path.$formno.'.jpg';
-        if (!(copy($base_path, $copyimg))) 
-        {
-            $data_error['excep'] = 'The file you are attempting to upload size is between 4 to 20 Kb.';
-            $this->session->set_flashdata('NewEnrolment_error',$data_error);
-
-            redirect('Admission/Pre_Inter_Data/');
-
-        }*//* $spreate_filename = explode(".",$whatIWant);
-        $temp_file_rno= $spreate_filename[0];
-        if($temp_file_rno != $temp_db_rno)
-        {
-            $allinputdata = "";
-            $data_error['excep'] = 'Your Pictures is not matched. ';
-            $this->session->set_flashdata('NewEnrolment_error',$data_error);
-            redirect('Admission/Pre_Inter_Data/');
-
-            return;
-        }
-       
         
         $target_path = PRIVATE_IMAGE_PATH;
         $base_path = GET_PRIVATE_IMAGE_PATH_COPY.@$_POST['pic'];
@@ -2741,7 +2637,7 @@ $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;
 
             redirect('Admission/Pre_Inter_Data/');
 
-        }           */
+        }
              
       //  DebugBreak();
         
@@ -2766,9 +2662,9 @@ $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;
         } 
 
     }
-     public function NewEnrolment_insert_Languages()
+ public function NewEnrolment_insert_Languages()
     {
-   
+   //DebugBreak();
         $this->load->model('Admission_model');
         $this->load->library('session');
       
@@ -2889,39 +2785,12 @@ $TotalAdmFee =  295+$AdmFeeCatWise;
         'cattype_hidden'=>$this->input->post('cattype_hidden'),
         'oldClass'=>$this->input->post('oldClass'),
         );
-     
-        $temp_file_name = @$_POST['pic']; //'OldPics/Pic16-MA/MA11th16/123456.jpg';
-        $whatIWant = substr($temp_file_name, strpos($temp_file_name, ".") - 6);    
-      
+
+       /* $temp_file_name = @$_POST['pic']; //'OldPics/Pic16-MA/MA11th16/123456.jpg';
+        $whatIWant = substr($temp_file_name, strpos($temp_file_name, ".") - 3);    
+
         $temp_db_rno = @$_POST['InterRno_hidden'];
         $spreate_filename = explode(".",$whatIWant);
-        $temp_file_rno= $spreate_filename[0];
-       /* if($temp_file_rno != $temp_db_rno)
-        {
-            $allinputdata = "";
-            $data_error['excep'] = 'Your Pictures is not matched. ';
-            $this->session->set_flashdata('NewEnrolment_error',$data_error);
-            redirect('Admission/Pre_Inter_Data/');
-
-            return;
-        }   */
-       
-      /*  
-        $target_path = PRIVATE_IMAGE_PATH;
-        $base_path = GET_PRIVATE_IMAGE_PATH_COPY.@$_POST['pic'];
-        if (!file_exists($target_path)){
-
-            mkdir($target_path);
-        }
-        $copyimg = $target_path.$formno.'.jpg';
-        if (!(copy($base_path, $copyimg))) 
-        {
-            $data_error['excep'] = 'The file you are attempting to upload size is between 4 to 20 Kb.';
-            $this->session->set_flashdata('NewEnrolment_error',$data_error);
-
-            redirect('Admission/Pre_Inter_Data/');
-
-        }*//* $spreate_filename = explode(".",$whatIWant);
         $temp_file_rno= $spreate_filename[0];
         if($temp_file_rno != $temp_db_rno)
         {
@@ -2931,9 +2800,9 @@ $TotalAdmFee =  295+$AdmFeeCatWise;
             redirect('Admission/Pre_Inter_Data/');
 
             return;
-        }
-       
-        
+        }*/
+
+
         $target_path = PRIVATE_IMAGE_PATH;
         $base_path = GET_PRIVATE_IMAGE_PATH_COPY.@$_POST['pic'];
         if (!file_exists($target_path)){
@@ -2948,7 +2817,7 @@ $TotalAdmFee =  295+$AdmFeeCatWise;
 
             redirect('Admission/Pre_Inter_Data/');
 
-        }           */
+        }
              
       //  DebugBreak();
        // $this->frmvalidation('Pre_Inter_Data',$data_error,0);
@@ -2973,7 +2842,6 @@ $TotalAdmFee =  295+$AdmFeeCatWise;
         } 
 
     }
-
     public function formdownloaded(){
 
         //DebugBreak();
@@ -3796,8 +3664,7 @@ $TotalAdmFee =  295+$AdmFeeCatWise;
         // Additional Subjects.
         else if(@$_POST['exam_type']==16 && @$_POST['category']==2)
         {
-            DebugBreak();
-            if(@$_POST['sub6'] == 0 && @$_POST['sub6p2'] == 0 && @$_POST['sub5'] == 0 && @$_POST['sub5p2'] == 0 && @$_POST['sub4'] == 0 && @$_POST['sub4p2'] == 0)
+             if(@$_POST['sub6'] == 0 && @$_POST['sub6p2'] == 0 && @$_POST['sub5'] == 0 && @$_POST['sub5p2'] == 0 && @$_POST['sub4'] == 0 && @$_POST['sub4p2'] == 0)
             {
                 $allinputdata['excep'] = 'Please Select atleast one subject.';
                 $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
@@ -3805,7 +3672,6 @@ $TotalAdmFee =  295+$AdmFeeCatWise;
                 return;
 
             }
-            
             else if(
                 (in_array(@$_POST['sub4'],$language_sub_cd)&&(in_array(@$_POST['sub5'],$language_sub_cd)|| in_array(@$_POST['sub6'],$language_sub_cd))) ||
                 (in_array(@$_POST['sub5'],$language_sub_cd)&&(in_array(@$_POST['sub4'],$language_sub_cd)|| in_array(@$_POST['sub6'],$language_sub_cd))) ||

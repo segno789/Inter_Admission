@@ -13,6 +13,7 @@ class Admission_inter extends CI_Controller {
     public function index()
     {
 
+//        DebugBreak(); 
         $msg = 7;//$this->uri->segment(3);
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -170,7 +171,7 @@ class Admission_inter extends CI_Controller {
         }
 
 
-     }
+    }
      public function ChallanForm_Adm10th_Regular()
     {
        // DebugBreak();
@@ -195,9 +196,6 @@ class Admission_inter extends CI_Controller {
             $feestructure[]     = $result[0]['Total_RegistrationFee'];   
             $displayfeetitle[] =  'Total Admission Fee';   
        
-            $feestructure[]     = $result[0]['Total_CertificateFee'];   
-            $displayfeetitle[] =  'Total Certificate Fee';  
-            
             $feestructure[]=$result[0]['Total_LateRegistrationFee']; 
             $displayfeetitle[] =  'Total Late Admission Fee';   
        
@@ -432,7 +430,7 @@ class Admission_inter extends CI_Controller {
     }
     public function StudentsData()
     {    
-       DebugBreak();
+      // DebugBreak();
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
@@ -2281,6 +2279,7 @@ class Admission_inter extends CI_Controller {
       // DebugBreak();
         $q1 = $user_info['fee'];
         $total_std = 0;
+        $totalcertfi = 0;
         foreach($q1 as $k=>$v) 
         {
             $ids[] = $v["FormNo"];
@@ -2346,17 +2345,18 @@ class Admission_inter extends CI_Controller {
             
                     $TotalAdmFee = $TotalAdmFee + $Adm_fee;
                     $TotalLatefee = $TotalLatefee + $LAdm_fee;
+                    $totalcertfi = $totalcertfi+$cert_fee;
                     $Totalprocessing_fee = $Totalprocessing_fee + $Adm_ProcessingFee;
                 } 
              
             
 
-            $netTotal = (int)$netTotal +$Adm_fee + $LAdm_fee+$Adm_ProcessingFee+$cert_fee;
+            $netTotal = (int)$netTotal +$Adm_fee + $LAdm_fee+$Adm_ProcessingFee+$totalcertfi;
         
 
 
         $forms_id   = implode(",",$ids);        
-        $tot_fee     = $Totalprocessing_fee+$TotalAdmFee+$TotalLatefee+$cert_fee;
+        $tot_fee     = $Totalprocessing_fee+$TotalAdmFee+$TotalLatefee+$totalcertfi;
         // $challan_No = 0;
         $today = date("Y-m-d H:i:s");
         $data = array('inst_cd'=>$Inst_Id,'total_fee'=>$tot_fee,'proces_fee'=>$Adm_ProcessingFee,'reg_fee'=>$Adm_fee,'fine'=>$LAdm_fee,'TotalRegFee'=>$TotalAdmFee,'TotalLatefee'=>$TotalLatefee,'Totalprocessing_fee'=>$Totalprocessing_fee,'forms_id'=>$forms_id,'todaydate'=>$today,'total_std'=>$total_std,'cert_fee'=>$cert_fee);
