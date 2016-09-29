@@ -293,12 +293,16 @@
     }
     function  check_NewEnrol_validation_Languages(){
 
+    
+    debugger;
         var name =  $('#cand_name').val();
         var dist_cd= $('#pvtinfo_dist option:selected').val();
         var teh_cd= $('#pvtinfo_teh').val();
         var zone_cd= $('#pvtZone').val();
-        var pp_cent= $('#pp_cent').val();           
-       
+          var MarkOfIdent = $('#MarkOfIden').val();
+          var address = $('#address').val();
+       // var pp_cent= $('#pp_cent').val();           
+          var status = 0;
         var mobNo = $('#mob_number').val();
        
          if(mobNo == "" || mobNo == 0 || mobNo == undefined)

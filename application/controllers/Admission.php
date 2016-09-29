@@ -232,6 +232,10 @@ class Admission extends CI_Controller {
         if($data["SessOfLastAp"] == 1 or $data["SessOfLastAp"] == 2  )
         {
             $LastSess =  $data["SessOfLastAp"]==1?"A":"S";
+        }
+        else
+        {
+        $LastSess = "A" ;
         }     
         $MLastSess='';
         if($data["sessOfPass"] == 1 or $data["sessOfPass"] == 2  )
@@ -348,19 +352,19 @@ class Admission extends CI_Controller {
         $pdf->SetXY(3.5+$x,2.30+$Y);
         $pdf->SetFont('Arial','',$FontSize);
         $pdf->Cell( 0.5,0.5,"Religion:",0,'L');
-          $Religion = "MUSLIM";
+        $Religion = "MUSLIM";
         
 
         $pdf->SetFont('Arial','B',$FontSize);
         $pdf->SetXY(4.5+$x,2.30+$Y);
         $pdf->Cell(0.5,0.5,'MUSLIM',0,'L');
-        $xx= 0.5;
+        $xx= 0.8;
         $yy = $Y-0.05;
-        $boxWidth = 2.6;
+        $boxWidth = 2.9;
         $pdf->SetFont('Arial','B',8);
         $pdf->SetXY($xx,3.8+$yy);
         $pdf->SetFillColor(240,240,240);
-        $pdf->Cell($boxWidth,0.2,'Languages Subjects',1,0,'C',1);
+        $pdf->Cell($boxWidth,0.2,$grp_name,1,0,'C',1);
         $pdf->SetFillColor(255,255,255);
         $pdf->SetFont('Arial','',7);
         $pdf->SetXY($xx,4.0+$yy);
@@ -410,7 +414,7 @@ class Admission extends CI_Controller {
         */
         $xangle = 3.0;
 
-        $pdf->SetFont('Arial','B',8);
+        /*$pdf->SetFont('Arial','B',8);
         $pdf->SetXY($xangle,3.8+$yy);
         $pdf->SetFillColor(240,240,240);
         $pdf->Cell($boxWidth,0.2,'',1,0,'C',1);    
@@ -420,13 +424,65 @@ class Admission extends CI_Controller {
         $pdf->Cell($boxWidth,0.2,'',1,0,'L',1);
         $pdf->SetFont('Arial','',7);
         $pdf->SetXY($xangle,4.2+$yy);
-        $pdf->Cell($boxWidth,0.2,'',1,0,'L',1);
-
+        $pdf->Cell($boxWidth,0.2,'',1,0,'L',1);         */
+         //$pdf->Image(base_url().'assets/img/crossed.jpg',3.0.2,3.8+$yy, 1.3,0.15, "jpeg");
+        /* $grp_name = $data["grp_cd"];
+        switch ($grp_name) {
+            case '1':
+                $grp_name = 'FAZAL ARABIC  ';
+                break;
+            case '2':
+                $grp_name = '    FAZAL URDU';
+                break;
+            case '3':
+                $grp_name = '    FAZAL PUNJABI';
+                break;
+            case '5':
+                $grp_name = 'ADEEB ARABIC';
+                break;
+            case '6':
+                $grp_name = 'ADEEB URDU';
+                break;
+            
+            default:
+                $grp_name = "NO GROUP SELECTED.";
+        }       */
+         
+         $pdf->Image(base_url().'assets/img/examaloomsharkia.gif',4.1,3.1, 1.8,0.4, "gif"); 
+          
+          if( $data["grp_cd"] == 1)
+          {
+           $pdf->Image(base_url().'assets/img/fazilarabic.gif',4.5,3.8, 0.9,0.4, "gif");  
+          }
+          else
+             if( $data["grp_cd"] == 2)
+          {
+             $pdf->Image(base_url().'assets/img/fazilurdu.gif',4.5,3.8, 0.9,0.4, "gif");
+          }
+           else
+             if( $data["grp_cd"] == 3)
+          {
+                 $pdf->Image(base_url().'assets/img/fazilpunjabi.gif',4.5,3.8, 0.9,0.4, "gif");
+          }
+           else
+             if( $data["grp_cd"] == 5)
+          {
+                 $pdf->Image(base_url().'assets/img/adeebarbic.gif',4.5,3.8, 0.9,0.4, "gif");
+          }
+           else
+             if( $data["grp_cd"] == 6)
+          {
+                   $pdf->Image(base_url().'assets/img/adeeburdu.gif',4.5,3.8, 0.9,0.4, "gif");
+          }
+          
+           
+           
+             
         /* $pdf->SetFont('Arial','',7);
         $pdf->SetXY($xangle,4.4+$yy);
         $pdf->Cell($boxWidth,0.2,$data['sub3Ap1'] != 1 ? '':  '    '.'3. '.  $this->GetSubNameHere($data['sub3']),1,0,'L',1);*/
 
-        $pdf->SetFont('Arial','',7);
+      /*  $pdf->SetFont('Arial','',7);
         $pdf->SetXY($xangle,4.4+$yy);
         $pdf->Cell($boxWidth,0.2,'',1,0,'L',1);
 
@@ -446,7 +502,7 @@ class Admission extends CI_Controller {
 
         $pdf->SetFont('Arial','',7);
         $pdf->SetXY($xangle,5.2+$yy);
-        $pdf->Cell($boxWidth,0.2,'',1,0,'L',1);
+        $pdf->Cell($boxWidth,0.2,'',1,0,'L',1);   */
 
         //DebugBreak();
         $pdf->SetXY(0.5,2.65+$Y);
@@ -670,7 +726,7 @@ class Admission extends CI_Controller {
 
         $pdf->SetXY(1.2, 7.09+$Y); 
         $pdf->SetFont('Arial','b',$FontSize);
-        $pdf->Cell( 0.5,0.5, $data['AdmFee'].'/-',0,'L');
+        $pdf->Cell( 0.5,0.5, $Updated_AdmFee.'/-',0,'L');
 
 
         $pdf->SetXY(1.8, 7.09+$Y);
@@ -709,7 +765,7 @@ class Admission extends CI_Controller {
 
         $pdf->SetXY(1.2, 7.19+$Y);
         $pdf->SetFont('Arial','b',8);
-        $pdf->Cell( 0.5,0.5,$data['AdmTotalFee'].'/-',0,'L');
+        $pdf->Cell( 0.5,0.5,$Updated_AdmFee+$data['AdmProcessFee'].'/-',0,'L');
 
 
         $pdf->SetXY(1.8, 7.19+$Y);
@@ -789,7 +845,7 @@ class Admission extends CI_Controller {
 
         $pdf->SetXY(1.35, 8.79+$Y);
         $pdf->SetFont('Arial','b',8);
-        $pdf->Cell( 0.5,0.5,$data['AdmTotalFee'].'/-',0,'L');
+        $pdf->Cell( 0.5,0.5,$Updated_AdmFee+$data['AdmProcessFee'].'/-',0,'L');
 
 
         $pdf->SetXY(1.85, 8.79+$Y);
@@ -832,7 +888,7 @@ class Admission extends CI_Controller {
 
         $pdf->SetXY(0.2,9.6+$Y);
         $pdf->SetFont('Arial','b',$FontSize);
-        $pdf->Cell( 0.5,0.5,strtoupper("BOARD OF INTERMEDIATE AND SECONDARY EDUCATION GUJRANWALA , INTERMEDIATE (PART-II & COMPOSITE) ".$session." Examination ,".Year." "),0,'C');
+        $pdf->Cell( 0.5,0.5,strtoupper("BOARD OF INTERMEDIATE AND SECONDARY EDUCATION GUJRANWALA ,  LANGUAGES ".$session." Examination ,".Year." "),0,'C');
 
         $bx = 6.8;
         $by = 9.5;

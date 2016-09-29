@@ -409,7 +409,7 @@ header("Pragma: no-cache");
                         
 
                             <div class="span6">
-                                <button type="submit" onclick="return checks()" name="btnsubmitUpdateEnrol" class="btn btn-large btn-info offset2">
+                                <button type="submit" onclick="return checks();" name="btnsubmitUpdateEnrol" class="btn btn-large btn-info offset2">
                                     Save Form
                                 </button>
                                 <a href="<?php echo base_url(); ?>assets/img/Instruction.jpg" download="FileName" class="btn btn-large btn-info" >Download Instruction</a>
