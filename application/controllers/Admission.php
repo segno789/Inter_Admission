@@ -689,12 +689,12 @@ class Admission extends CI_Controller {
 
         $pdf->Image(BARCODE_PATH.$image,5.15, 6.8  ,2.4,0.24,"PNG");
 
-        $pdf->SetXY(2.8,6.16+$Y);
+        $pdf->SetXY(3.2,6.16+$Y);
         $pdf->SetTextColor(0,0,0);
         $pdf->SetFont('Arial','BI',7);
         $pdf->Cell(0.2,0.5,"Printing Date: " .date('d-M-Y h:i A'),0,'L');
 
-        $pdf->SetXY(2.8,6.26+$Y);
+        $pdf->SetXY(3.2,6.26+$Y);
         $pdf->SetFont('Arial','b',$FontSize);
         $pdf->Cell( 0.5,0.5,"CMD Account No. 00427900072103",0,'L');
 
