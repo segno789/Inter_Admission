@@ -25,16 +25,19 @@
                                         <th style="width:7%">
                                             Batch Id.
                                         </th>
-                                        <th style="width:15%">
+                                        <th style="width:10%">
                                             Total Forms In Batch
                                         </th>
-                                        <th style="width:15%">
+                                        <th style="width:10%">
                                             Total Registration Fee
                                         </th>
                                         <th style="width:13%" class="hidden-phone">
                                             Total Processing Fee
                                         </th>
-                                        <th style="width:20%" class="hidden-phone">
+                                         <th style="width:10%" class="hidden-phone">
+                                            Total Certificate Fee
+                                        </th>
+                                        <th style="width:10%" class="hidden-phone">
                                             Total Amount
                                         </th>
                                          <th style="width:25%" class="hidden-phone">
@@ -60,6 +63,7 @@
                                     <td>'.$vals["COUNT"].'</td>
                                     <td>'.$vals["Total_RegistrationFee"].'</td>
                                     <td>'.$vals["Total_ProcessingFee"].'</td> 
+                                    <td style="font-weight: bold;font-size: 16px;">'.$vals["TotalCertificateFee"].'</td>
                                     <td style="font-weight: bold;font-size: 16px;">'.$vals["Amount"].'</td>
                                     <td><button type="button" class="btn btn-info" value="'.$vals['Batch_ID'].'" onclick="ReturnForm('.$vals['Batch_ID'].')">Return Form</button>
                                     <button type="button" class="btn btn-info" value="'.$vals['Batch_ID'].'" onclick="ChallanForm_Adm10th_Regular('.$vals['Batch_ID'].')">Download Challan Form</button>

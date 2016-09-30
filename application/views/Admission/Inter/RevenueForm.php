@@ -82,6 +82,11 @@
                     <td>&nbsp;</td>
                 </tr>
                 <tr>
+                    <td><strong>Amount Of Certificate Fee:</strong></td>
+                    <td><strong><?php echo  $data['batch_info'][0]["TotalCertificateFee"];?></strong></td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
                     <td><strong>Total Amount:</strong></td>
                     <td><strong><?php echo  $data['batch_info'][0]["Amount"];?></strong></td>
                     <td>&nbsp;</td>
@@ -102,6 +107,7 @@
         <th class="th">Adm. Fee</th>
         <th class="th">Late Adm Fee</th>
         <th class="th">Process. Fee</th>
+        <th class="th">Cert. Fee</th>
         <th class="th">Total Amount</th>
     </tr>
 
@@ -124,6 +130,7 @@
             <td class="td" style="text-align:center !important;"><?php echo $vals->AdmFee ;?></td>
             <td class="td" style="text-align:center !important;"><?php echo $vals->AdmFine;?></td>
             <td class="td" style="text-align:center !important;"><?php echo $vals->AdmProcessFee;?></td>
+            <td class="td" style="text-align:center !important;"><?php echo '550'; ?></td>
             <td class="td" style="text-align:center !important;"><?php echo $vals->AdmTotalFee?></td>
 
         </tr>
@@ -138,6 +145,7 @@
         <th class="th"><?php echo  $data['batch_info'][0]["Total_RegistrationFee"];;?></th>
         <th class="th"><?php echo $data['batch_info'][0]["Total_LateRegistrationFee"];;?></th>
         <th class="th"><?php echo $data['batch_info'][0]["Total_ProcessingFee"];?></th>
+        <th class="th"><?php echo $data['batch_info'][0]["TotalCertificateFee"];?></th>
         <th class="th"><?php echo $data['batch_info'][0]["Amount"];?></th>
     </tr>
 
