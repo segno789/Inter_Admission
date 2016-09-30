@@ -991,6 +991,9 @@ class Admission extends CI_Controller {
             case '6':
                 $grp_name = 'HOME ECONOMICS';
                 break;
+            case '9':
+                $grp_name = 'KHASA';
+                break;    
             default:
                 $grp_name = "NO GROUP SELECTED.";
         }
@@ -2085,6 +2088,7 @@ class Admission extends CI_Controller {
          $session='';
          $board='';
          $CatType='';
+         $isaloom = 0;
          $Insert_server_error='';
         if($this->session->flashdata('NewEnrolment_error'))
         {
@@ -2118,12 +2122,7 @@ class Admission extends CI_Controller {
                 $isaloom =0;
             }
         }
-        
-        
-        
-        
-        
-
+       
         $data['sscrno']=$mrollno;
         $data['hsscrno']=$hsscrno;
         $data['hsscclass']=$oldClass;
@@ -2272,7 +2271,7 @@ class Admission extends CI_Controller {
         $this->load->model('Admission_model');
         $this->load->library('session');
         $Inst_Id = 999999;
-        // DebugBreak();
+       // DebugBreak();
         $formno = $this->Admission_model->GetFormNo();
         $allinputdata = array('cand_name'=>@$_POST['cand_name'],
             'father_name'=>@$_POST['father_name'],
@@ -2606,7 +2605,7 @@ $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;
         
         
         
-        $temp_file_name = @$_POST['pic']; //'OldPics/Pic16-MA/MA11th16/123456.jpg';
+   /*     $temp_file_name = @$_POST['pic']; //'OldPics/Pic16-MA/MA11th16/123456.jpg';
         $whatIWant = substr($temp_file_name, strpos($temp_file_name, ".") - 6);    
       
         $temp_db_rno = @$_POST['InterRno_hidden'];
@@ -2637,7 +2636,7 @@ $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;
 
             redirect('Admission/Pre_Inter_Data/');
 
-        }
+        }  */
              
       //  DebugBreak();
         
@@ -2907,7 +2906,7 @@ $TotalAdmFee =  295+$AdmFeeCatWise;
     function frmvalidation($viewName,$allinputdata,$isupdate)
     {
 
-        //  DebugBreak();
+         // DebugBreak();
         $_POST['address']  = str_replace("'", "", $_POST['address'] );
         $language_sub_cd = array(
 
@@ -3120,7 +3119,76 @@ $TotalAdmFee =  295+$AdmFeeCatWise;
                     return;
 
                 }
+                  else if(@$_POST['std_group'] == 9 )
+                { //DebugBreak();
+                    if(@$_POST['sub1p2'] == 0)
+                    {
+                        $allinputdata['excep'] = 'Please Select Part-II Subject 1';
+                        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                        redirect('Admission/'.$viewName);
+                        return;
 
+                    }
+                    else if(@$_POST['sub2p2'] == 0)
+                    {
+                        $allinputdata['excep'] = 'Please Select Part-II Subject 2';
+                        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                        redirect('Admission/'.$viewName);
+                        return;
+                    }
+
+                   
+                    else if(@$_POST['sub4p2'] == 0 && @$_POST['std_group'] != 4)
+                    {
+                        $allinputdata['excep'] = 'Please Select Part-II Subject 4';
+                        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                        redirect('Admission/'.$viewName);
+                        return;
+
+                    }
+                    else if(@$_POST['sub5p2'] == 0 && @$_POST['std_group'] != 4)
+                    {
+                        $allinputdata['excep'] = 'Please Select Part-II Subject 5';
+                        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                        redirect('Admission/'.$viewName);
+                        return;
+
+                    }
+                   
+                    /*else if(@$_POST['sub8p2'] == 0 && @$_POST['std_group'] != 4)
+                    {
+                    $allinputdata['excep'] = 'Please Select Part-II Subject 8';
+                    $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                    redirect('Admission/'.$viewName);
+                    return;
+
+                    }*/
+                    else if(
+                        (in_array(@$_POST['sub4'],$language_sub_cd)&&(in_array(@$_POST['sub5'],$language_sub_cd)|| in_array(@$_POST['sub6'],$language_sub_cd))) ||
+                        (in_array(@$_POST['sub5'],$language_sub_cd)&&(in_array(@$_POST['sub4'],$language_sub_cd)|| in_array(@$_POST['sub6'],$language_sub_cd))) ||
+                        (in_array(@$_POST['sub6'],$language_sub_cd)&&(in_array(@$_POST['sub4'],$language_sub_cd)|| in_array(@$_POST['sub5'],$language_sub_cd))) 
+                        )
+                        {
+                            $allinputdata['excep'] = 'Please Select One Subject from Languages Subjects.';
+                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                            redirect('Admission/'.$viewName);
+                            return;
+
+                        }
+                        else if(
+                            (in_array(@$_POST['sub4'],$history_sub_cd)&&(in_array(@$_POST['sub5'],$history_sub_cd)|| in_array(@$_POST['sub6'],$history_sub_cd))) ||
+                            (in_array(@$_POST['sub5'],$history_sub_cd)&&(in_array(@$_POST['sub4'],$history_sub_cd)|| in_array(@$_POST['sub6'],$history_sub_cd))) ||
+                            (in_array(@$_POST['sub6'],$history_sub_cd)&&(in_array(@$_POST['sub4'],$history_sub_cd)|| in_array(@$_POST['sub5'],$history_sub_cd))) 
+                            )
+                            {
+                                $allinputdata['excep'] = 'Please Select One Subject from History Subjects.';
+                                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                                redirect('Admission/'.$viewName);
+                                return;
+
+                            }
+
+                }
                 else if(@$_POST['exam_type'] == 1)
                 {
                     if(@$_POST['sub1p2']==0)

@@ -303,7 +303,12 @@ header("Pragma: no-cache");
                                         $class = $data[0]['class'];
                                         $IsRegular = $data[0]['IsRegular'];
                                         $coll_cd = $data[0]['coll_cd']; 
-
+                                        $cat11  = $data[0]['cat11'];
+                                        if($cat11==4)
+                                        {
+                                           echo "<option value='9' selected='selected'>KAHSA</option>";   
+                                        }
+                                        else
                                         if($exam_type == 1   || $exam_type == 3 || $exam_type == 9 || $exam_type == 11 || $exam_type == 16 || $exam_type == 14 || $exam_type == 15)
                                         {
                                             if($grp_cd == 1){
@@ -324,7 +329,7 @@ header("Pragma: no-cache");
                                             } 
                                         }
 
-                                        
+                                         else
                                         
                                    
 
@@ -996,6 +1001,42 @@ header("Pragma: no-cache");
                                         $("#sub6p2").append(new Option(text,val));
                                     });
 
+                                    $('#sub7').hide();$('#sub7p2').hide();
+                                    $('#sub8').hide(); $('#sub8p2').hide();
+                                }
+                                function AamKhasa_subj()
+                                {
+                                    Empty_All_Dropdowns();
+
+                                    $("#sub1").append('<option value="1">ENGLISH</option>');
+                                    $("#sub1p2").append('<option value="1">ENGLISH</option>');
+
+                                    $("#sub2").append('<option value="2">URDU</option>');
+                                    $("#sub2p2").append('<option value="2">URDU</option>');
+
+                                   /* $("#sub3").append('<option value="92">ISLAMIC EDUCATION</option>');
+                                    $("#sub3p2").append('<option value="91">PAKISTAN STUDIES</option>');  */
+
+                                   
+                                    $.each(huminities_without_practical,function(val,text){
+
+                                        $("#sub4").append(new Option(text,val));
+                                        $("#sub4p2").append(new Option(text,val));
+                                    });
+                                     $.each(huminities_without_practical,function(val,text){
+
+                                        $("#sub5").append(new Option(text,val));
+                                        $("#sub5p2").append(new Option(text,val));
+                                    });
+
+
+                                    /*$.each(huminities_without_practical,function(val,text){
+
+                                        $("#sub6").append(new Option(text,val));
+                                        $("#sub6p2").append(new Option(text,val));
+                                    }); */
+                                    $("#sub3").hide();$("#sub3p2").hide();
+                                    $("#sub6").hide();$("#sub6p2").hide();
                                     $('#sub7').hide();$('#sub7p2').hide();
                                     $('#sub8').hide(); $('#sub8p2').hide();
                                 }
@@ -2060,11 +2101,31 @@ header("Pragma: no-cache");
                                     $('#sub3p2').empty();
                                 }
 
+                                function Aama_Khasa()
+                                {
+                                  Empty_All_Dropdowns();
+                                    hide_sub7_sub8();
+                                    AamKhasa_subj();
+                                      
+                                    /*$("#sub1").append(new Option('<?php  echo  array_search($data[0]['sub1'],$subarray); ?>',sub1));
+                                    $("#sub1p2").append(new Option('<?php  echo  array_search($data[0]['sub1'],$subarray); ?>',sub1));
+                                    $("#sub2").append(new Option('<?php  echo  array_search($data[0]['sub2'],$subarray); ?>',sub2));
+                                    $("#sub2p2").append(new Option('<?php  echo  array_search($data[0]['sub2'],$subarray); ?>',sub2));
+                                    $("#sub3").append(new Option('<?php  echo  array_search($data[0]['sub3'],$subarray); ?>',sub3));
+                                    $("#sub3p2").append(new Option('<?php  echo  array_search($data[0]['sub8'],$subarray); ?>',sub8));
+                                    $("#sub4").append(new Option('<?php  echo  array_search($data[0]['sub4'],$subarray); ?>',sub4));
+                                    $("#sub4p2").append(new Option('<?php  echo  array_search($data[0]['sub4'],$subarray); ?>',sub4)); */
+                                    
+                                }
 
                                 <?php
 
                                // debugBreak();
-                                
+                                if($cat11 == 4)
+                                {
+                                echo 'Aama_Khasa();';
+                                }
+                                else
                                 if($exam_type == 1){ 
                                     echo 'sub_grp_load_exam_type1();'; 
                                 }
