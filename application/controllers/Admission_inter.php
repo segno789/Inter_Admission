@@ -198,6 +198,7 @@ class Admission_inter extends CI_Controller {
        
             $feestructure[]    =  $result[0]['Total_LateRegistrationFee']; 
             $displayfeetitle[] =  'Total Late Admission Fee'; 
+            
             $feestructure[]    =  $result[0]['TotalCertificateFee']; 
             $displayfeetitle[] =  'Total Certificate Fee';    
        
@@ -2058,7 +2059,7 @@ class Admission_inter extends CI_Controller {
     }
     public function Make_Batch_Group_wise()
     {
-        DebugBreak();
+       
         $RegGrp = $this->uri->segment(3);
         $Spl_case = $this->uri->segment(4);
 
@@ -2218,7 +2219,6 @@ class Admission_inter extends CI_Controller {
     }
     public function Make_Batch_Formwise()
     {
-        DebugBreak();
         if(!empty($_POST["chk"]))
         {
 
