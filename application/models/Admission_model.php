@@ -32,7 +32,34 @@ class Admission_model extends CI_Model
             return  false;
         }
     }
+ public function updatefee($formno,$adminfee,$totalfee,$fine,$isalooma)
+    {
+        if($isalooma == 0)
+        {
+           $data = array(
+                    'AdmFee' =>$adminfee,
+                    'AdmTotalFee' =>$totalfee,
+                    'AdmFine' =>$fine,
+                    'cDate'=> date('Y-m-d H:i:s')
+                    );
+        $this->db->where('formNo',$formno);
+        $this->db->update('Admission_Online..ISAdm2016',$data);  
+        }
+        else if($isalooma == 1)
+        {
+           $data = array(
+                    'AdmFee' =>$adminfee,
+                    'AdmTotalFee' =>$totalfee,
+                    'Fine' =>$fine,
+                    'cDate'=> date('Y-m-d H:i:s')
+                    );
+        $this->db->where('formNo',$formno);
+        $this->db->update('Admission_Online..IStbllanguagesinter',$data);  
+        }
+       
+        return true;
 
+    }
    public function GetFormNo_Languages()
     {
     
