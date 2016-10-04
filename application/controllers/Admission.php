@@ -65,7 +65,7 @@ class Admission extends CI_Controller {
 
     public function checkFormNo_then_download()
     {
-        //DebugBreak();
+       // DebugBreak();
 
         $formno_seg = $this->uri->segment(3);
         $dob_seg = $this->uri->segment(4);
@@ -129,7 +129,7 @@ class Admission extends CI_Controller {
         $pdf->Cell(0.5,0.5, "(For office use only)",0,'L');
         //------ Picture Box on Centre      
 
-               DebugBreak();
+              // DebugBreak();
         $Barcode = $data['formNo']."@".$data['class'].'@'.$data['sess'].'@'.$data["Iyear"];
         $image =  $this->set_barcode($Barcode);
          
@@ -2052,7 +2052,7 @@ class Admission extends CI_Controller {
             return $cate;
     }
       function GetFeeWithdue($fee){
-        //DebugBreak();
+        DebugBreak();
         $dueDate='';
          $single_date= SingleDateFee;  $double_date= DoubleDateFee;  $tripple_date= TripleDateFee;
         $today = date("d-m-Y");
