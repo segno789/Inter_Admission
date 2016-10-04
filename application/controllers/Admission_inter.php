@@ -2429,7 +2429,7 @@ class Admission_inter extends CI_Controller {
         redirect('Registration/FormPrinting');
         return; 
         }
-        $temp = $user['Inst_Id'].'@09@2016-18';
+        $temp = $user['Inst_Id'].'@12@2016-18';
         $image =  $this->set_barcode($temp);
         $this->load->library('PDF_Rotate');
         $pdf = new PDF_Rotate('P','in',"A4");
@@ -2542,7 +2542,7 @@ class Admission_inter extends CI_Controller {
         $yy = 2.05+$y;
      
         $boxWidth = 2.6;
-        $pdf->SetFont('Arial','B',10);
+       $pdf->SetFont('Arial','B',7);
         $pdf->SetXY($xx,3.8+$yy);
         $pdf->SetFillColor(240,240,240);
         $pdf->Cell($boxWidth-2.2,0.2,'Sr#',1,0,'C',1);
@@ -2552,7 +2552,7 @@ class Admission_inter extends CI_Controller {
         $pdf->Cell($boxWidth-1.8,0.2,'With Late Fee',1,0,'L',1);
         $pdf->Cell($boxWidth-1.7,0.2,'Without Late fee',1,0,'L',1);
         
-        $pdf->SetFont('Arial','B',10);
+        $pdf->SetFont('Arial','B',7);
         $pdf->Cell($boxWidth-1.5,0.2,'No. of Students.',1,0,'C',1);
         $pdf->SetFillColor(255,255,255);
         $pdf->SetFont('Arial','',7);
