@@ -129,7 +129,7 @@ class Admission extends CI_Controller {
         $pdf->Cell(0.5,0.5, "(For office use only)",0,'L');
         //------ Picture Box on Centre      
 
-              // DebugBreak();
+               DebugBreak();
         $Barcode = $data['formNo']."@".$data['class'].'@'.$data['sess'].'@'.$data["Iyear"];
         $image =  $this->set_barcode($Barcode);
          
