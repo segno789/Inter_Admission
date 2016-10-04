@@ -193,13 +193,14 @@ class Admission_inter extends CI_Controller {
             $feestructure[]    =  $result[0]['Total_ProcessingFee'];    
             $displayfeetitle[] =  'Total Processing Fee';    
        
-            $feestructure[]    =  $result[0]['Total_RegistrationFee'];   
+            $feestructure[]     = $result[0]['Total_RegistrationFee'];   
             $displayfeetitle[] =  'Total Admission Fee';   
        
-            $feestructure[]    =  $result[0]['Total_LateRegistrationFee']; 
-            $displayfeetitle[] =  'Total Late Admission Fee'; 
-            $feestructure[]    =  $result[0]['TotalCertificateFee']; 
-            $displayfeetitle[] =  'Total Certificate Fee';    
+            $feestructure[]=$result[0]['Total_LateRegistrationFee']; 
+            $displayfeetitle[] =  'Total Late Admission Fee';   
+            
+             $feestructure[]    =  $result[0]['TotalCertificateFee']; 
+            $displayfeetitle[] =  'Total Certificate Fee';   
        
         $turn=1;     
         $pdf=new PDF_Rotate("P","in","A4");
@@ -326,7 +327,7 @@ class Admission_inter extends CI_Controller {
             //$pdf->Cell(0.5,0.3,"Institute Code: ".$user['Inst_Id'].'-'.$user['inst_Name'],0,2,'L');
             $pdf->MultiCell(4, .1, "Institute Code: ".$user['Inst_Id'].'-'.$user['inst_Name'],0);
             $pdf->SetXY(4,$y+1.15+$dy);
-            $pdf->SetFont('Arial','B',9);
+            $pdf->SetFont('Arial','B',8);
             $pdf->Cell(0.5,0.3,"Amount in Words: ".$feeInWords,0,2,'L');
 
             $x = 0.55;
@@ -1186,7 +1187,7 @@ class Admission_inter extends CI_Controller {
         }                         */
        
         
-       /* $target_path = REGULAR_IMAGE_PATH.$Inst_Id;
+        $target_path = REGULAR_IMAGE_PATH.$Inst_Id;
         $base_path = GET_PRIVATE_IMAGE_PATH_COPY.@$_POST['pic'];
         if (!file_exists($target_path)){
 
@@ -1200,7 +1201,7 @@ class Admission_inter extends CI_Controller {
 
             redirect('Admission_inter/NewEnrolment_NewForm_inter/'.@$_POST['OldRno']);
 
-        }      */
+        }
              
       
       $data_error = array(
@@ -2058,7 +2059,7 @@ class Admission_inter extends CI_Controller {
     }
     public function Make_Batch_Group_wise()
     {
-        DebugBreak();
+       // DebugBreak();
         $RegGrp = $this->uri->segment(3);
         $Spl_case = $this->uri->segment(4);
 
@@ -2120,7 +2121,7 @@ class Admission_inter extends CI_Controller {
        // DebugBreak();
         $q1 = $user_info['fee'];
         $total_std = 0;
-         $total_cert = 0;
+        $total_cert = 0;
         foreach($q1 as $k=>$v) 
         {
             $ids[] = $v["FormNo"];
@@ -2197,7 +2198,7 @@ class Admission_inter extends CI_Controller {
              
             
 
-            $netTotal = (int)$netTotal +$Adm_fee + $LAdm_fee+$Adm_ProcessingFee+ $cert_fee+$total_cert;
+            $netTotal = (int)$netTotal +$Adm_fee + $LAdm_fee+$Adm_ProcessingFee+ $total_cert;;
         
 
 
@@ -2218,7 +2219,7 @@ class Admission_inter extends CI_Controller {
     }
     public function Make_Batch_Formwise()
     {
-        DebugBreak();
+      //  DebugBreak();
         if(!empty($_POST["chk"]))
         {
 
@@ -2250,7 +2251,6 @@ class Admission_inter extends CI_Controller {
         $Totalprocessing_fee = 0;
         $netTotal = 0;
          $cert_fee = 550;
-         $total_cert = 0;
         /*====================  Counting Fee  ==============================*/    
                       $practical_Sub = array(
             'LibSC'=>'8',
@@ -2284,7 +2284,7 @@ class Admission_inter extends CI_Controller {
       // DebugBreak();
         $q1 = $user_info['fee'];
         $total_std = 0;
-       
+        $total_cert = 0;
         foreach($q1 as $k=>$v) 
         {
             $ids[] = $v["FormNo"];

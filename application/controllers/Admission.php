@@ -169,6 +169,9 @@ class Admission extends CI_Controller {
             case '6':
                 $grp_name = 'ADEEB URDU';
                 break;
+            case '7':
+                $grp_name = 'HOME ECONOMICS';
+                break;
             
             default:
                 $grp_name = "NO GROUP SELECTED.";
@@ -881,7 +884,8 @@ class Admission extends CI_Controller {
 
         $pdf->SetXY(1.35, 10.49+$Y);
         $pdf->SetFont('Arial','b',8);
-        $pdf->Cell( 0.5,0.5,$data['AdmTotalFee'].'/-',0,'L');
+        /*$pdf->Cell( 0.5,0.5,$data['AdmTotalFee'].'/-',0,'L');*/
+        $pdf->Cell( 0.5,0.5,$Updated_AdmFee+$data['AdmProcessFee'].'/-',0,'L');
 
 
         $pdf->SetXY(0.5, 10.59+$Y);
@@ -993,7 +997,10 @@ class Admission extends CI_Controller {
                 break;
             case '9':
                 $grp_name = 'KHASA';
-                break;    
+                break; 
+                 case '7':
+                $grp_name = 'HOME ECONOMICS';
+                break;   
             default:
                 $grp_name = "NO GROUP SELECTED.";
         }
@@ -1506,7 +1513,7 @@ class Admission extends CI_Controller {
 
         $this->load->library('NumbertoWord');
         $obj    = new NumbertoWord();
-        $obj->toWords($data['AdmTotalFee'],"Only.",""); 
+        $obj->toWords($Updated_AdmFee+$data['AdmProcessFee'],"Only.",""); 
 
         $pdf->SetXY(2.6, 7.19+$Y);
         $pdf->SetFont('Arial','B',7);
@@ -1585,7 +1592,8 @@ class Admission extends CI_Controller {
 
         $pdf->SetXY(1.2, 7.09+$Y); 
         $pdf->SetFont('Arial','b',$FontSize);
-        $pdf->Cell( 0.5,0.5, $data['AdmFee'].'/-',0,'L');
+        /*$pdf->Cell( 0.5,0.5, $data['AdmFee'].'/-',0,'L'); */ 
+        $pdf->Cell( 0.5,0.5, $Updated_AdmFee.'/-',0,'L'); 
 
 
         $pdf->SetXY(1.8, 7.09+$Y);
@@ -1624,7 +1632,8 @@ class Admission extends CI_Controller {
 
         $pdf->SetXY(1.2, 7.19+$Y);
         $pdf->SetFont('Arial','b',8);
-        $pdf->Cell( 0.5,0.5,$data['AdmTotalFee'].'/-',0,'L');
+        /*$pdf->Cell( 0.5,0.5,$data['AdmTotalFee'].'/-',0,'L');*/
+        $pdf->Cell( 0.5,0.5,$Updated_AdmFee+$data['AdmProcessFee'].'/-',0,'L');
 
 
         $pdf->SetXY(1.8, 7.19+$Y);
@@ -1704,7 +1713,8 @@ class Admission extends CI_Controller {
 
         $pdf->SetXY(1.35, 8.79+$Y);
         $pdf->SetFont('Arial','b',8);
-        $pdf->Cell( 0.5,0.5,$data['AdmTotalFee'].'/-',0,'L');
+/*        $pdf->Cell( 0.5,0.5,$data['AdmTotalFee'].'/-',0,'L');*/
+        $pdf->Cell( 0.5,0.5,$Updated_AdmFee+$data['AdmProcessFee'].'/-',0,'L');
 
 
         $pdf->SetXY(1.85, 8.79+$Y);
@@ -1815,7 +1825,8 @@ class Admission extends CI_Controller {
 
         $pdf->SetXY(1.35, 10.49+$Y);
         $pdf->SetFont('Arial','b',8);
-        $pdf->Cell( 0.5,0.5,$data['AdmTotalFee'].'/-',0,'L');
+        /*$pdf->Cell( 0.5,0.5,$data['AdmTotalFee'].'/-',0,'L');*/
+        $pdf->Cell( 0.5,0.5,$Updated_AdmFee+$data['AdmProcessFee'].'/-',0,'L');
 
 
         $pdf->SetXY(0.5, 10.59+$Y);
@@ -1961,7 +1972,7 @@ class Admission extends CI_Controller {
 
     function getCatName($cat)
     {
-        if ($cat==1) return "Full Appear";
+        if ($cat==1 || $cat==4) return "Full Appear";
         else if ($cat ==2) return "Re-Appear";
             else if ($cat ==3 or $cat == 7) return "Marks Improve";
                 else if ($cat ==5 ) return "Additional";
@@ -2040,7 +2051,7 @@ class Admission extends CI_Controller {
             }        
             return $cate;
     }
-    function GetFeeWithdue($fee){
+      function GetFeeWithdue($fee){
         //DebugBreak();
         $dueDate='';
          $single_date= SingleDateFee;  $double_date= DoubleDateFee;  $tripple_date= TripleDateFee;
@@ -2052,12 +2063,11 @@ class Admission extends CI_Controller {
         }
         else if( $today <= $double_date )
         {
-            $dueDate = $fee*2;
+            $dueDate = $fee;
         }
         else if( $today <= $tripple_date )
         {
-            $fee = $fee/2;
-            $dueDate = $fee*3;
+            $dueDate = $fee;
         }
         else if($today > $tripple_date )
         {
@@ -2065,10 +2075,8 @@ class Admission extends CI_Controller {
             $your_date = strtotime($tripple_date);
             $datediff = $now - $your_date;
             $days = floor($datediff/(60*60*24));
-
-            $fine = $days*500;
-            $fee = $fee/3;
-            $dueDate = $fee*3 + $fine;
+            
+            $dueDate = $days*500;
         }
         return $dueDate;
 
@@ -2088,7 +2096,6 @@ class Admission extends CI_Controller {
          $session='';
          $board='';
          $CatType='';
-         $isaloom = 0;
          $Insert_server_error='';
         if($this->session->flashdata('NewEnrolment_error'))
         {
@@ -2122,7 +2129,12 @@ class Admission extends CI_Controller {
                 $isaloom =0;
             }
         }
-       
+        
+        
+        
+        
+        
+
         $data['sscrno']=$mrollno;
         $data['hsscrno']=$hsscrno;
         $data['hsscclass']=$oldClass;
@@ -2142,7 +2154,7 @@ class Admission extends CI_Controller {
         $specialcase = $data['0']['Spl_Name'];
         $specialcode = $data['0']['spl_cd'];
         $exam_type =   $data['0']['exam_type'];
-        if($specialcode != ''){
+        if($specialcode != '' && $specialcode != 34 ){
 
             $error_msg.='<span style="font-size: 16pt; color:red;">' . '   Your Admission cannot be procceed due to     ' . '</span>';
             $error_msg.='<span style="font-size: 16pt; color:red;">' . $specialcase . '</span>';
@@ -2271,7 +2283,7 @@ class Admission extends CI_Controller {
         $this->load->model('Admission_model');
         $this->load->library('session');
         $Inst_Id = 999999;
-       // DebugBreak();
+        // DebugBreak();
         $formno = $this->Admission_model->GetFormNo();
         $allinputdata = array('cand_name'=>@$_POST['cand_name'],
             'father_name'=>@$_POST['father_name'],
@@ -2447,12 +2459,22 @@ class Admission extends CI_Controller {
          
          
         $cat = $this->makecat($cattype,$examtype,$marksImp,$is11th);
-        $cat11 = @$cat['cat11'];
-        $cat12 = @$cat['cat12'];
+         $per_grp = @$_POST['pregrp'];
+        if($grp_cd == 9)
+        {
+            $cat11 = 4;
+            $cat12 = 4;
+            $grp_cd = $per_grp; 
+        }
+        else
+        {
+            $cat11 = @$cat['cat11'];
+            $cat12 = @$cat['cat12'];
+        }
         $Speciality = $this->input->post('speciality');
         
 
-        $per_grp = @$_POST['pregrp'];
+        
 
         $practical_Sub = array(
 
@@ -2532,7 +2554,8 @@ $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;
             $oldsess =  2;    
         }
           //DebugBreak();
-
+ $addre =  str_replace("'", "", $this->input->post('address'));
+ $MarkOfIden =  str_replace("'", "", $this->input->post('MarkOfIden'));
         $data = array(
             'name' =>$this->input->post('cand_name'),
             'Fname' =>$this->input->post('father_name'),
@@ -2541,13 +2564,13 @@ $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;
             'MobNo' =>$this->input->post('mob_number'),
             'medium' =>$this->input->post('medium'),
             'Inst_Rno' =>$this->input->post('Inst_Rno'),
-            'markOfIden' =>$this->input->post('MarkOfIden'),
+            'markOfIden' =>$MarkOfIden,
             'Speciality' => ($Speciality),
             'nat' =>$this->input->post('nationality'),
             'sex' =>$this->input->post('gend'),
             'IsHafiz' =>$this->input->post('hafiz'),
             'rel' =>$this->input->post('religion'),
-            'addr' =>$this->input->post('address'),
+            'addr' =>$addre,
             'grp_cd' => $grp_cd,
             'sub1' =>$sub1,
             'sub2' =>$sub2,
@@ -2605,7 +2628,7 @@ $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;
         
         
         
-   /*     $temp_file_name = @$_POST['pic']; //'OldPics/Pic16-MA/MA11th16/123456.jpg';
+        $temp_file_name = @$_POST['pic']; //'OldPics/Pic16-MA/MA11th16/123456.jpg';
         $whatIWant = substr($temp_file_name, strpos($temp_file_name, ".") - 6);    
       
         $temp_db_rno = @$_POST['InterRno_hidden'];
@@ -2636,7 +2659,7 @@ $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;
 
             redirect('Admission/Pre_Inter_Data/');
 
-        }  */
+        }
              
       //  DebugBreak();
         
@@ -2906,7 +2929,7 @@ $TotalAdmFee =  295+$AdmFeeCatWise;
     function frmvalidation($viewName,$allinputdata,$isupdate)
     {
 
-         // DebugBreak();
+        //  DebugBreak();
         $_POST['address']  = str_replace("'", "", $_POST['address'] );
         $language_sub_cd = array(
 
@@ -3119,7 +3142,8 @@ $TotalAdmFee =  295+$AdmFeeCatWise;
                     return;
 
                 }
-                  else if(@$_POST['std_group'] == 9 )
+
+                 else if(@$_POST['std_group'] == 9 )
                 { //DebugBreak();
                     if(@$_POST['sub1p2'] == 0)
                     {
@@ -3155,15 +3179,7 @@ $TotalAdmFee =  295+$AdmFeeCatWise;
 
                     }
                    
-                    /*else if(@$_POST['sub8p2'] == 0 && @$_POST['std_group'] != 4)
-                    {
-                    $allinputdata['excep'] = 'Please Select Part-II Subject 8';
-                    $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                    redirect('Admission/'.$viewName);
-                    return;
-
-                    }*/
-                    else if(
+                   else if(
                         (in_array(@$_POST['sub4'],$language_sub_cd)&&(in_array(@$_POST['sub5'],$language_sub_cd)|| in_array(@$_POST['sub6'],$language_sub_cd))) ||
                         (in_array(@$_POST['sub5'],$language_sub_cd)&&(in_array(@$_POST['sub4'],$language_sub_cd)|| in_array(@$_POST['sub6'],$language_sub_cd))) ||
                         (in_array(@$_POST['sub6'],$language_sub_cd)&&(in_array(@$_POST['sub4'],$language_sub_cd)|| in_array(@$_POST['sub5'],$language_sub_cd))) 
