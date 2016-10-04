@@ -65,7 +65,7 @@ class Admission extends CI_Controller {
 
     public function checkFormNo_then_download()
     {
-        //DebugBreak();
+       // DebugBreak();
 
         $formno_seg = $this->uri->segment(3);
         $dob_seg = $this->uri->segment(4);
@@ -2062,8 +2062,8 @@ class Admission extends CI_Controller {
             }        
             return $cate;
     }
-      function GetFeeWithdue($fee,$edate,$data,$isalooma){
-     
+      function GetFeeWithdue($fee){
+        DebugBreak();
         $dueDate='';
         $isupdate = 0;
          $single_date= SingleDateFee;  $double_date= DoubleDateFee;  $tripple_date= TripleDateFee;

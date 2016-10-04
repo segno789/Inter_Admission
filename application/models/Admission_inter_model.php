@@ -46,6 +46,21 @@ class Admission_inter_model extends CI_Model
         $this->db->insert('tblInstitutes_all_Info', $data); 
         return true;
     }
+    public function forwarding_pdf_final($fetch_data)
+    {
+        //DebugBreak();
+        $Inst_cd = $fetch_data['Inst_cd'];
+        $query = $this->db->query("admission_online..sp_Forwading_letter_final_12TH $Inst_cd");
+        $rowcount = $query->num_rows();
+        if($rowcount > 0)
+        {
+            return $query->result_array();
+        }
+        else
+        {
+            return  false;
+        }
+    }
     public function get_zone()
     {
 

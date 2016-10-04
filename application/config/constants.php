@@ -56,6 +56,8 @@ define('formnovalid','600000');
 define('formnovalid_Languages','400000');
 define('return_pdf_isPicture','1');
 define('CURRENT_SESS','2016-2018');
+define('corr_bank_chall_class','INTER');
+define('session_year','2016-2018');
 
 
 
