@@ -175,14 +175,15 @@ class Admission_model extends CI_Model
         $old_class =  $data['class'];
 
         $AdmProcFee =  $data['AdmProcessFee'];
-
+        $AdmFine =  $data['AdmFine'];
+        
         $AdmFee = $data['AdmFee'];
 
-        $TotalAdmFee =  $AdmFee + $AdmProcFee;
+        $TotalAdmFee =  $AdmFee + $AdmProcFee+$AdmFine;
 
        // DebugBreak();
 
-        $query = $this->db->query(Insert_sp." '$formno',12,2016,2,'$name','$fname','$BForm','$FNIC','$CellNo',$medium,'".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$sub8,1,$oldrno,$oldyear,$oldsess,$old_class,$IsHafiz,$Inst_cd,$UrbanRural,$RegGrp,$cat09,$cat10,$sub1ap2,$sub2ap2,$sub4ap2,$sub5ap2,$sub6ap2,$sub7ap2,$sub8ap2,$dist_cd,$teh_cd,$zone_cd,$Brd_cd,$AdmProcFee,$AdmFee,$TotalAdmFee,$sub5a,$sub6a,$sub7a");
+        $query = $this->db->query(Insert_sp." '$formno',12,2016,2,'$name','$fname','$BForm','$FNIC','$CellNo',$medium,'".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$sub8,1,$oldrno,$oldyear,$oldsess,$old_class,$IsHafiz,$Inst_cd,$UrbanRural,$RegGrp,$cat09,$cat10,$sub1ap2,$sub2ap2,$sub4ap2,$sub5ap2,$sub6ap2,$sub7ap2,$sub8ap2,$dist_cd,$teh_cd,$zone_cd,$Brd_cd,$AdmProcFee,$AdmFee,$TotalAdmFee,$sub5a,$sub6a,$sub7a,$AdmFine");
         return true;
     }
       public function Insert_NewEnorlement_Languages($data)
@@ -306,7 +307,9 @@ class Admission_model extends CI_Model
     }
 
     public function getrulefee($isPrSub){
-        $date =  date('Y-m-d') ;
+       
+     //  DebugBreak();
+        $date =  '2016-10-13';//date('Y-m-d') ;
         $query = $this->db->get_where('admission_Online..RuleFeeAdm', array('class' => 12,'sess' => 2, 'isPrSub' => $isPrSub,'Start_Date <='=>$date,'End_Date >='=>$date));
         $rowcount = $query->num_rows();
         if($rowcount > 0)

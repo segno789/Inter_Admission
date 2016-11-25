@@ -63,8 +63,9 @@ define('session_year','2016');
 
 define('currdate','date("d-m-Y");');
 define ('SingleDateFee','03-10-2016');
-define('DoubleDateFee', '20-10-2016');
-define('TripleDateFee', '30-10-2016');
+define('DoubleDateFee', '07-10-2016');
+define('TripleDateFee', '13-10-2016');
+define('TripleDateFeeinter', '13-10-2016');
                                 
 define('getinfo','admission_online..tblAdmissionDataForHSSC');
 define('getinfo_languages','admission_online..tblAdmissionDataLang');
