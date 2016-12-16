@@ -494,14 +494,9 @@ class Admission extends CI_Controller {
         $pdf->SetFont('Arial','b',7);
         $pdf->Cell(0.5,0.5,"Candidate's Signature in English____________________",0,'R');
 
-       // DebugBreak();
-        $Updated_AdmFee = $this->GetFeeWithdue($data['AdmFee'],$data['edate'],$data,1);
+      //   DebugBreak();
+        $Updated_AdmFee = $this->GetFeeWithdue($data['AdmFee']);
 
-        $fine = $Updated_AdmFee['fine'];
-        $Updated_AdmFee = $Updated_AdmFee['admfee'];
-
-        $totalamount = $Updated_AdmFee+$data['AdmProcessFee'] +$fine;
-        
         $pdf->SetXY(0.2,6.4+$Y);
         $pdf->SetFillColor(0,0,0);
         $pdf->SetTextColor(255,255,255);
@@ -572,7 +567,7 @@ class Admission extends CI_Controller {
 
         $pdf->SetXY(1.2, 7.19+$Y);
         $pdf->SetFont('Arial','b',8);
-        $pdf->Cell( 0.5,0.5,$totalamount.' /-',0,'L');
+        $pdf->Cell( 0.5,0.5,$Updated_AdmFee+$data['AdmProcessFee'].' /-',0,'L');
 
         $pdf->SetXY(1.8, 7.19+$Y);
         $pdf->SetFont('Arial','',$FontSize-0.5);
@@ -580,7 +575,7 @@ class Admission extends CI_Controller {
 
         $this->load->library('NumbertoWord');
         $obj    = new NumbertoWord();
-        $obj->toWords($totalamount,"Only.",""); 
+        $obj->toWords($data['AdmTotalFee'],"Only.",""); 
 
         $pdf->SetXY(2.6, 7.19+$Y);
         $pdf->SetFont('Arial','B',7);
@@ -698,7 +693,7 @@ class Admission extends CI_Controller {
 
         $pdf->SetXY(1.2, 7.19+$Y);
         $pdf->SetFont('Arial','b',8);
-        $pdf->Cell( 0.5,0.5,$totalamount.'/-',0,'L');
+        $pdf->Cell( 0.5,0.5,$Updated_AdmFee+$data['AdmProcessFee'].'/-',0,'L');
 
 
         $pdf->SetXY(1.8, 7.19+$Y);
@@ -778,7 +773,7 @@ class Admission extends CI_Controller {
 
         $pdf->SetXY(1.35, 8.79+$Y);
         $pdf->SetFont('Arial','b',8);
-        $pdf->Cell( 0.5,0.5,$totalamount.'/-',0,'L');
+        $pdf->Cell( 0.5,0.5,$Updated_AdmFee+$data['AdmProcessFee'].'/-',0,'L');
 
 
         $pdf->SetXY(1.85, 8.79+$Y);
@@ -890,7 +885,7 @@ class Admission extends CI_Controller {
         $pdf->SetXY(1.35, 10.49+$Y);
         $pdf->SetFont('Arial','b',8);
         /*$pdf->Cell( 0.5,0.5,$data['AdmTotalFee'].'/-',0,'L');*/
-        $pdf->Cell( 0.5,0.5,$totalamount.'/-',0,'L');
+        $pdf->Cell( 0.5,0.5,$Updated_AdmFee+$data['AdmProcessFee'].'/-',0,'L');
 
 
         $pdf->SetXY(0.5, 10.59+$Y);
@@ -1436,16 +1431,10 @@ class Admission extends CI_Controller {
         $pdf->SetXY(0.2,6.05+$Y);
         $pdf->SetFont('Arial','b',7);
         $pdf->Cell(0.5,0.5,"Candidate's Signature in English____________________",0,'R');
-        
-       // DebugBreak();
 
-        $Updated_AdmFee = $this->GetFeeWithdue($data['AdmFee'],$data['edate'],$data,1);
 
-        $fine = $Updated_AdmFee['fine'];
-        $Updated_AdmFee = $Updated_AdmFee['admfee'];
-        
-        $totalamount = $Updated_AdmFee+$data['AdmProcessFee'] +$fine;
-        
+        $Updated_AdmFee = $this->GetFeeWithdue($data['AdmFee']);
+
         $pdf->SetXY(0.2,6.4+$Y);
         $pdf->SetFillColor(0,0,0);
         $pdf->SetTextColor(255,255,255);
@@ -1477,7 +1466,7 @@ class Admission extends CI_Controller {
 
         $pdf->SetXY(1.2, 7.09+$Y); 
         $pdf->SetFont('Arial','b',$FontSize);
-        $pdf->Cell( 0.5,0.5,$Updated_AdmFee.'/-',0,'L');
+        $pdf->Cell( 0.5,0.5,$data['AdmFee'].'/-',0,'L');
 
 
         $pdf->SetXY(1.8, 7.09+$Y);
@@ -1487,7 +1476,7 @@ class Admission extends CI_Controller {
 
         $pdf->SetXY(2.59, 7.09+$Y); 
         $pdf->SetFont('Arial','b',$FontSize);
-        $pdf->Cell( 0.5,0.5,$fine.'/-',0,'L');
+        $pdf->Cell( 0.5,0.5,$Updated_AdmFee,0,'L');
 
         $pdf->SetXY(3.2, 7.09+$Y);
         $pdf->SetFont('Arial','',$FontSize);
@@ -1516,7 +1505,7 @@ class Admission extends CI_Controller {
 
         $pdf->SetXY(1.2, 7.19+$Y);
         $pdf->SetFont('Arial','b',8);
-        $pdf->Cell( 0.5,0.5,$totalamount.' /-',0,'L');
+        $pdf->Cell( 0.5,0.5,$Updated_AdmFee+$data['AdmProcessFee']+$data['AdmFee'].' /-',0,'L');
 
         $pdf->SetXY(1.8, 7.19+$Y);
         $pdf->SetFont('Arial','',$FontSize-0.5);
@@ -1524,7 +1513,7 @@ class Admission extends CI_Controller {
 
         $this->load->library('NumbertoWord');
         $obj    = new NumbertoWord();
-        $obj->toWords($totalamount,"Only.",""); 
+        $obj->toWords($Updated_AdmFee+$data['AdmProcessFee']+$data['AdmFee'],"Only.",""); 
 
         $pdf->SetXY(2.6, 7.19+$Y);
         $pdf->SetFont('Arial','B',7);
@@ -1604,7 +1593,7 @@ class Admission extends CI_Controller {
         $pdf->SetXY(1.2, 7.09+$Y); 
         $pdf->SetFont('Arial','b',$FontSize);
         /*$pdf->Cell( 0.5,0.5, $data['AdmFee'].'/-',0,'L'); */ 
-        $pdf->Cell( 0.5,0.5, $Updated_AdmFee.'/-',0,'L'); 
+        $pdf->Cell( 0.5,0.5,$data['AdmFee'] .'/-',0,'L'); 
 
 
         $pdf->SetXY(1.8, 7.09+$Y);
@@ -1614,7 +1603,7 @@ class Admission extends CI_Controller {
 
         $pdf->SetXY(2.59, 7.09+$Y); 
         $pdf->SetFont('Arial','b',$FontSize);
-        $pdf->Cell( 0.5,0.5,'0/-',0,'L');
+        $pdf->Cell( 0.5,0.5,$Updated_AdmFee,0,'L');
 
         $pdf->SetXY(3.2, 7.09+$Y);
         $pdf->SetFont('Arial','',$FontSize);
@@ -1644,7 +1633,7 @@ class Admission extends CI_Controller {
         $pdf->SetXY(1.2, 7.19+$Y);
         $pdf->SetFont('Arial','b',8);
         /*$pdf->Cell( 0.5,0.5,$data['AdmTotalFee'].'/-',0,'L');*/
-        $pdf->Cell( 0.5,0.5,$totalamount.'/-',0,'L');
+        $pdf->Cell( 0.5,0.5,$Updated_AdmFee+$data['AdmProcessFee']+$data['AdmFee'].'/-',0,'L');
 
 
         $pdf->SetXY(1.8, 7.19+$Y);
@@ -1725,7 +1714,7 @@ class Admission extends CI_Controller {
         $pdf->SetXY(1.35, 8.79+$Y);
         $pdf->SetFont('Arial','b',8);
 /*        $pdf->Cell( 0.5,0.5,$data['AdmTotalFee'].'/-',0,'L');*/
-        $pdf->Cell( 0.5,0.5,$totalamount.'/-',0,'L');
+        $pdf->Cell( 0.5,0.5,$Updated_AdmFee+$data['AdmProcessFee']+$data['AdmFee'].'/-',0,'L');
 
 
         $pdf->SetXY(1.85, 8.79+$Y);
@@ -1837,7 +1826,7 @@ class Admission extends CI_Controller {
         $pdf->SetXY(1.35, 10.49+$Y);
         $pdf->SetFont('Arial','b',8);
         /*$pdf->Cell( 0.5,0.5,$data['AdmTotalFee'].'/-',0,'L');*/
-        $pdf->Cell( 0.5,0.5,$totalamount.'/-',0,'L');
+        $pdf->Cell( 0.5,0.5,$Updated_AdmFee+$data['AdmProcessFee']+$data['AdmFee'].'/-',0,'L');
 
 
         $pdf->SetXY(0.5, 10.59+$Y);
@@ -2063,18 +2052,10 @@ class Admission extends CI_Controller {
             return $cate;
     }
       function GetFeeWithdue($fee){
-        DebugBreak();
+       // DebugBreak();
         $dueDate='';
-        $isupdate = 0;
          $single_date= SingleDateFee;  $double_date= DoubleDateFee;  $tripple_date= TripleDateFee;
         $today = date("d-m-Y");
-        $edate = date("d-m-Y",strtotime($edate));
-        $cdate = $data['cDate'];
-        if($cdate != null)
-        {
-             $cdate = date("d-m-Y",strtotime($cdate));
-        }
-       
 
         if(strtotime($today) <= strtotime($single_date)) 
         {
@@ -2082,78 +2063,24 @@ class Admission extends CI_Controller {
         }
         else if( $today <= $double_date )
         {
-            if((strtotime($edate) < strtotime($today)) )
-            {
-                if($cdate == null)
-                {
-                    $dueDate = $fee*2; 
-                    $isupdate = 1; 
-                }
-                else
-                {
-                   $dueDate = $fee; 
-                }
-            }
-            else
-            {
-                 $dueDate = $fee;
-            }
+            $dueDate = $fee;
         }
         else if( $today <= $tripple_date )
         {
-            if(strtotime($edate) < strtotime($today))
-            {
-                 if($cdate == null)
-                 {
-                     $isupdate = 1;
-                     $dueDate = $fee*3; 
-                 }
-                 else
-                 {
-                     $dueDate = $fee;
-                 }
-
-            }
-            else
-            {
-                $dueDate = $fee;
-            }
+            $dueDate = $fee;
         }
-       
-        if($today > $tripple_date )
+        else if($today > $tripple_date )
         {
-            $isupdate = 1;
+        //DebugBreak();
             $now = time(); // or your date as well
             $your_date = strtotime($tripple_date);
             $datediff = $now - $your_date;
             $days = floor($datediff/(60*60*24));
             
-            $dueDatearry['fine'] = $days*500;
+            $dueDate = ($days*500);
+             
         }
-        else
-        {
-          $dueDatearry['fine'] = 0;  
-        }
-        $dueDatearry['admfee'] = $dueDate;
-        $dueDatearry['isupdate'] = $isupdate;
-        if($isupdate ==  1)
-        {
-           // $this->load->model('Admission_model');
-
-            $data['AdmTotalFee'] = $data['AdmProcessFee'] +$dueDatearry['admfee'] +$dueDatearry['fine'];
-            
-            if($isalooma == 1)
-            {
-                 $data['FormNo'] = $data['formno'];
-
-            }
-            
-            $this->Admission_model->updatefee($data['FormNo'],$dueDatearry['admfee'],$data['AdmTotalFee'],$dueDatearry['fine'],$isalooma);   
-        }
-      
-        
-        
-        return $dueDatearry;
+        return $dueDate;
 
     }
 
@@ -2617,7 +2544,18 @@ class Admission extends CI_Controller {
             $AdmFeeCatWise = $AdmFeeCatWise;
            // $AdmFeeCatWise  =0;
         }
-$TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;  
+         $today = date("d-m-Y");
+          $dueDate = 0;
+        if($today > TripleDateFeeinter )
+        {
+            $now = time(); // or your date as well
+            $your_date = strtotime(TripleDateFeeinter);
+            $datediff = $now - $your_date;
+            $days = floor($datediff/(60*60*24));
+            
+            $dueDate = $days*500;
+        }
+$TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise + $dueDate;  
         
 
         $oldsess = @$_POST['oldsess'];
@@ -2628,7 +2566,7 @@ $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;
         else if($oldsess == 'Supplementary'){
             $oldsess =  2;    
         }
-          //DebugBreak();
+        //  DebugBreak();
  $addre =  str_replace("'", "", $this->input->post('address'));
  $MarkOfIden =  str_replace("'", "", $this->input->post('MarkOfIden'));
         $data = array(
@@ -2694,7 +2632,8 @@ $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;
             'AdmTotalFee'=>$TotalAdmFee,
             'exam_type'=>$_POST['exam_type'],
             'picpath'=>@$_POST['pic'],
-            'brd_name'=>@$_POST['oldboard']
+            'brd_name'=>@$_POST['oldboard'],
+            'AdmFine'=>$dueDate
         );
        //   DebugBreak();
        

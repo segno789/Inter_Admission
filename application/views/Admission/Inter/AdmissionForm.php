@@ -22,7 +22,7 @@ header("Pragma: no-cache");
                                 <div class="controls controls-row">
                                     <label class="control-label span2" >
                                     </label> 
-                                    <img id="image_upload_preview" style="width:140px; height: 140px;" src="<?php echo base_url().GET_PRIVATE_IMAGE_PATH.$data[0]['picpath'];?>" alt="Candidate Image" />
+                                    <img id="image_upload_preview" style="width:140px; height: 140px;" src="<?php echo '../../'.GET_PRIVATE_IMAGE_PATH.$data[0]['picpath'];?>" alt="Candidate Image" />
                                     <input type="hidden" id="pic" name="pic"  value="<?php echo $data[0]['picpath']?>"/>    
                                 </div>
                             </div>
@@ -301,7 +301,7 @@ header("Pragma: no-cache");
                                         $exam_type = $data[0]['exam_type'];
                                         $status = $data[0]['status'];
                                         $class = $data[0]['class'];
-                                        $IsRegular = $data[0]['IsRegular'];
+                                        $IsRegular = @$data[0]['IsRegular'];
                                         $coll_cd = $data[0]['coll_cd']; 
                                         $cat11  = $data[0]['cat11'];
                                         if($cat11==4)
@@ -356,6 +356,10 @@ header("Pragma: no-cache");
                                             else if($grp_cd == 5){
                                                 echo "<option value='5' selected='selected'>COMMERCE</option>";       
                                                 echo "<option value='3'>HUMANITIES</option>";  
+                                            }
+                                              else if($grp_cd == 7){
+                                                echo "<option value='7' selected='selected'>Home Economics</option>";       
+                                              
                                             }
                                         }
 
@@ -990,7 +994,7 @@ header("Pragma: no-cache");
                                     });
 
                                     $.each(huminities_without_practical,function(val,text){
-
+                                       
                                         $("#sub5").append(new Option(text,val));
                                         $("#sub5p2").append(new Option(text,val));
                                     });
@@ -2336,8 +2340,7 @@ header("Pragma: no-cache");
                                     var id5p2 =$("#sub5p2").val();
                                     var id6 =$("#sub6").val();
                                     var id6p2 =$("#sub6p2").val();
-                                  
-                                    
+                                    var grp_cd = $('#std_group').val();
                                      if(grp_cd == 5)
                                    {
                                        if(id5 == 0)
@@ -2400,8 +2403,7 @@ header("Pragma: no-cache");
                                     var id6 =$("#sub6").val();
                                     var id6p2 =$("#sub6p2").val();
                                     $("#sub5").val(id5p2);
-
-                                    
+                                     var grp_cd = $('#std_group').val();
                                     if(grp_cd == 5)
                                     {
                                         if(id5p2 == 0)
@@ -2463,6 +2465,7 @@ header("Pragma: no-cache");
                                     var id5p2 =$("#sub5p2").val();
                                     var id6 =$("#sub6").val();
                                     var id6p2 =$("#sub6p2").val();
+                                     var grp_cd = $('#std_group').val();
                                    if(grp_cd == 5)
                                    {
                                        if(id6 == 0)
@@ -2528,7 +2531,7 @@ header("Pragma: no-cache");
                                     var id6 =$("#sub6").val();
                                     var id6p2 =$("#sub6p2").val();
                                   
-
+                                  var grp_cd = $('#std_group').val();
                                      if(grp_cd == 5)
                                    {
                                        if(id6p2 == 0)

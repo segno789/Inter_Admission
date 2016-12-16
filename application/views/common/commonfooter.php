@@ -291,7 +291,7 @@
         status = 1;
         return status;
     }
-    function  check_NewEnrol_validation_Languages(){
+     function  check_NewEnrol_validation_Languages(){
 
     
    
@@ -366,7 +366,6 @@
         status = 1;
         return status;
     }
-    
     function gotodefaultpage(){
         var msg = "Are you sure you want to cancel ?"
         alertify.confirm(msg, function (e) {

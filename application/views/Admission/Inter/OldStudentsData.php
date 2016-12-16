@@ -93,7 +93,7 @@
                                     <td>'.$vals["name"].'</td>
                                     <td>'.$vals["Fname"].'</td>
                                     <td>'.$grp_name.'</td>
-                                     <td><img id="previewImg" style="width:40px; height: 40px;" src="'.$image_path_selected. '" alt="Candidate Image"></td>';
+                                     <td><img id="previewImg" style="width:40px; height: 40px;" src="'.$image_path_selected. '?'.rand(10000,1000000).'" alt="Candidate Image"></td>';
                                     // <td><img id="previewImg" style="width:40px; height: 40px;" src="'.base_url().GET_PRIVATE_IMAGE_PATH.$vals["picpath"].'" alt="Candidate Image"></td>';
                                      /*<td><img id="previewImg" style="width:40px; height: 40px;" src="/'.IMAGE_PATH.$Inst_Id.'/'.$vals['PicPath'].'" alt="Candidate Image"></td>';*/
                                     echo'<td>

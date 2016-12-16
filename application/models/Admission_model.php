@@ -32,7 +32,7 @@ class Admission_model extends CI_Model
             return  false;
         }
     }
- public function updatefee($formno,$adminfee,$totalfee,$fine,$isalooma)
+public function updatefee($formno,$adminfee,$totalfee,$fine,$isalooma)
     {
         if($isalooma == 0)
         {
@@ -187,6 +187,7 @@ class Admission_model extends CI_Model
         $oldrno =  $data['rno'];
         $oldyear =  $data['Iyear'];
         $oldsess =  $data['sess'];
+        $AdmFine =  $data['AdmFine'];
         //  DebugBreak();
 
 
@@ -205,11 +206,12 @@ class Admission_model extends CI_Model
 
         $AdmFee = $data['AdmFee'];
 
-        $TotalAdmFee =  $AdmFee + $AdmProcFee;
+       // $TotalAdmFee =  $AdmFee + $AdmProcFee;
+       $TotalAdmFee =  $AdmFee + $AdmProcFee+$AdmFine;
 
        // DebugBreak();
 
-        $query = $this->db->query(Insert_sp." '$formno',12,2016,2,'$name','$fname','$BForm','$FNIC','$CellNo',$medium,'".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$sub8,1,$oldrno,$oldyear,$oldsess,$old_class,$IsHafiz,$Inst_cd,$UrbanRural,$RegGrp,$cat09,$cat10,$sub1ap2,$sub2ap2,$sub4ap2,$sub5ap2,$sub6ap2,$sub7ap2,$sub8ap2,$dist_cd,$teh_cd,$zone_cd,$Brd_cd,$AdmProcFee,$AdmFee,$TotalAdmFee,$sub5a,$sub6a,$sub7a");
+        $query = $this->db->query(Insert_sp." '$formno',12,2016,2,'$name','$fname','$BForm','$FNIC','$CellNo',$medium,'".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$sub8,1,$oldrno,$oldyear,$oldsess,$old_class,$IsHafiz,$Inst_cd,$UrbanRural,$RegGrp,$cat09,$cat10,$sub1ap2,$sub2ap2,$sub4ap2,$sub5ap2,$sub6ap2,$sub7ap2,$sub8ap2,$dist_cd,$teh_cd,$zone_cd,$Brd_cd,$AdmProcFee,$AdmFee,$TotalAdmFee,$sub5a,$sub6a,$sub7a,$AdmFine");
         return true;
     }
       public function Insert_NewEnorlement_Languages($data)
@@ -300,7 +302,7 @@ class Admission_model extends CI_Model
     public function getzone($tehcd)
     {
 
-        $query = $this->db->get_where('matric_new..tblZones', array('mYear' => 2016,'Class' => 12,'Sess'=>2, 'teh_cd' => $tehcd));
+        $query = $this->db->get_where('matric_new..tblZones_new', array('mYear' => 2016,'Class' => 12,'Sess'=>2, 'teh_cd' => $tehcd));
 
         $rowcount = $query->num_rows();
         if($rowcount > 0)
@@ -319,7 +321,7 @@ class Admission_model extends CI_Model
         $gend = $data['gen'];
           // DebugBreak();
         $where = " mYear = 2016  AND class = 12 AND  sess = 2 AND Zone_cd =  $zone  AND  (cent_Gen = $gend OR cent_Gen = 3) ";      
-        $query = $this->db->query("SELECT * FROM matric_new..tblcentre WHERE $where");
+        $query = $this->db->query("SELECT * FROM matric_new..tblcentre_new WHERE $where");
 
         $rowcount = $query->num_rows();
         if($rowcount > 0)

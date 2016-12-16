@@ -46,7 +46,13 @@ class Login extends CI_Controller {
                     );
                     $this->load->view('login/login.php',$data);
                 }  
-
+                else  if($logedIn['tbl_inst']['edu_lvl']== 1)
+                {
+                    $data = array(
+                        'user_status' => 2                     
+                    );
+                    $this->load->view('login/login.php',$data);
+                }  
                 if($logedIn['tbl_inst']['edu_lvl'] == 1)
                 {
                     /* if(($logedIn['tbl_inst']['allowed_mGrp'] == NULL || $logedIn['tbl_inst']['allowed_mGrp'] == 0 || $logedIn['tbl_inst']['allowed_mGrp'] == '') && $logedIn['tbl_inst']['IsGovernment'] ==2)
@@ -135,6 +141,7 @@ class Login extends CI_Controller {
                    // DebugBreak();
                     $sess_array = array(
                         'Inst_Id' => $logedIn['flusers']['inst_cd'] ,
+                        'pass' => $logedIn['flusers']['pass'] ,
                         'edu_lvl' => $logedIn['tbl_inst']['edu_lvl'],
                         'inst_Name' => $logedIn['flusers']['inst_name'],
                         'gender' => $logedIn['tbl_inst']['Gender'],
@@ -162,7 +169,7 @@ class Login extends CI_Controller {
                     // redirect('Admission_matric/');
                     if($logedIn['tbl_inst']['edu_lvl'] == 2 || $logedIn['tbl_inst']['edu_lvl'] == 3 )
                     {
-                      redirect('Admission_inter/');  
+                      redirect('dashboard/');  
                     }
                     
                    
