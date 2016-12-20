@@ -25,7 +25,7 @@
                                                 echo Year;
                                         ?></label></td>
                                     <td><label class="myUrduheading">   امتحان انٹر
-                                             <?php
+                                            <?php
                                             if(Session == 1){
                                                 echo' سالانہ';
                                             }
@@ -54,7 +54,7 @@
                             <div style="vertical-align:bottom;margin-top: 20px; font-weight: bold;">
                                 <input type="button" value="Next" id="proceed" name="proceed" class="jbtn jmedium jblack">
                                 </br>
-                                <img src="<?=base_url()?>assets/img/inqurey.jpg" alt="" style="width: 60%;">
+                                <!--<img src="<?=base_url()?>assets/img/inqurey.jpg" alt="" style="width: 60%;"> -->
                                 <!-- <input type="button" value="Cancel" onclick="window.location='#';" class="jbtn jmedium jblack"> -->
                             </div>
                         </form>
@@ -80,9 +80,9 @@
                                         <td><input type="text" style=" font-size: 22px; width:96%; padding: 4px; color: #5b5b5b; border: 1px solid #dcdcdc; -moz-border-radius: 3px; -webkit-border-radius: 3px;"  id="formid" name="formid" maxlength="6" required="required"></td>
                                     </tr>
                                     <!--<tr>
-                                        <th><b style="margin-left:2px;">Date Of Birth:</b><img src="<?php echo base_url(); ?>assets/css_matric/img/required.png" alt="Required Field." class="tooltip" title="Required Field." /></th>
-                                        <td><input readonly="readonly" type="text" style=" font-size: 22px; width:96%; padding: 4px; color: #5b5b5b; border: 1px solid #dcdcdc; -moz-border-radius: 3px; -webkit-border-radius: 3px;" id="dob" name="dob" required="required">
-                                        </td>
+                                    <th><b style="margin-left:2px;">Date Of Birth:</b><img src="<?php echo base_url(); ?>assets/css_matric/img/required.png" alt="Required Field." class="tooltip" title="Required Field." /></th>
+                                    <td><input readonly="readonly" type="text" style=" font-size: 22px; width:96%; padding: 4px; color: #5b5b5b; border: 1px solid #dcdcdc; -moz-border-radius: 3px; -webkit-border-radius: 3px;" id="dob" name="dob" required="required">
+                                    </td>
                                     </tr>  -->
                                     <tr>
                                         <th> <br />

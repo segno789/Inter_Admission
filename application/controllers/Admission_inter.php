@@ -433,7 +433,7 @@ class Admission_inter extends CI_Controller {
     }
     public function StudentsData()
     {    
-      // DebugBreak();
+       DebugBreak();
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
@@ -457,7 +457,7 @@ class Admission_inter extends CI_Controller {
         $Logged_In_Array = $this->session->all_userdata();
         $user = $Logged_In_Array['logged_in'];
         $this->load->model('Admission_inter_model');
-        //  $error['grp_cd'] = $user['grp_cd'];
+      
         $myarr = array('Inst_Id'=>$user['Inst_Id'],'gender'=>$user['gender']);
         $data = array(
             'data' => $this->Admission_inter_model->getStudentsData($myarr),
@@ -1315,8 +1315,8 @@ class Admission_inter extends CI_Controller {
         $this->load->model('Admission_inter_model');
         
         if($this->session->flashdata('NewEnrolment_error')){
-           // DebugBreak();
-            //$formno
+           //DebugBreak();
+  
             $RegStdata = $this->session->flashdata('NewEnrolment_error');   
             $isReAdm = 0;
             $RegStdData['isReAdm']=$isReAdm;

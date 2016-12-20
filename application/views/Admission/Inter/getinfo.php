@@ -33,7 +33,7 @@
                                                 <?php
                                                     if(Session == 1){
                                                         echo'
-                                                        <option value="2015">2016</option>
+                                                        <option value="2016" selected>2016</option>
                                                         <option value="2015">2015</option>
                                                         <option value="2014" >2014</option>
                                                         <option value="2013">2013</option>
@@ -108,7 +108,7 @@
                                             </tr>
                                             <tr>
                                             <td colspan="4">
-                                            <label style="font-size: 23px;"> <input type="checkbox" name="isaloom" id="isaloom" style="width: 24px; height: 24px;"  >  <u>Aloom-e-Sharkia Examination</u> </label>
+                                            <label style="font-size: 23px;"> <input type="checkbox" name="isaloom" id="isaloom" style="width: 24px; height: 24px;">  <u>Aloom-e-Sharkia Examination</u> </label>
                                             </td>
                                             </tr>
                                         </tbody>

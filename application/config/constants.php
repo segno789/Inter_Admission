@@ -39,14 +39,14 @@ define('BARCODE_PATH', 'assets/pdfs/');
 
 define('PRIVATE_IMAGE_PATH', 'uploads/private/');
 define('REGULAR_IMAGE_PATH', 'uploads/regular/');
-define('Session','2');  // 1 for Annual and 2 for Supply
-define('Year','2016');  
+define('Session','1');  // 1 for Annual and 2 for Supply
+define('Year','2017');  
 define('lastdate','20-08-2016');
 define('GET_PRIVATE_IMAGE_PATH', '');
 define('GET_PRIVATE_IMAGE_PATH_COPY', '');
 
 
-define('Insert_sp','Admission_online..ISAdm2016_sp_insert'); // for insertion Inter supply private
+define('Insert_sp','admission_online..ISAdm2016_sp_insert'); // for insertion Inter supply private
 define('Insert_sp_Languages','Admission_online..ISAdm2016_sp_insert_LANGUAGES'); // for insertion Inter supply private
 define('Insert_sp_matric_annual','Admission_online..MA_P1_Reg_Adm2016_sp_insert'); // for insertion matric Annual
 define('formprint_sp','Admission_online..sp_form_data_11th');    // for selection matric supply
