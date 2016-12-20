@@ -32,7 +32,34 @@ class Admission_model extends CI_Model
             return  false;
         }
     }
+public function updatefee($formno,$adminfee,$totalfee,$fine,$isalooma)
+    {
+        if($isalooma == 0)
+        {
+           $data = array(
+                    'AdmFee' =>$adminfee,
+                    'AdmTotalFee' =>$totalfee,
+                    'AdmFine' =>$fine,
+                    'cDate'=> date('Y-m-d H:i:s')
+                    );
+        $this->db->where('formNo',$formno);
+        $this->db->update('Admission_Online..ISAdm2016',$data);  
+        }
+        else if($isalooma == 1)
+        {
+           $data = array(
+                    'AdmFee' =>$adminfee,
+                    'AdmTotalFee' =>$totalfee,
+                    'Fine' =>$fine,
+                    'cDate'=> date('Y-m-d H:i:s')
+                    );
+        $this->db->where('formNo',$formno);
+        $this->db->update('Admission_Online..IStbllanguagesinter',$data);  
+        }
+       
+        return true;
 
+    }
    public function GetFormNo_Languages()
     {
     
@@ -160,6 +187,7 @@ class Admission_model extends CI_Model
         $oldrno =  $data['rno'];
         $oldyear =  $data['Iyear'];
         $oldsess =  $data['sess'];
+        $AdmFine =  $data['AdmFine'];
         //  DebugBreak();
 
 
@@ -175,11 +203,11 @@ class Admission_model extends CI_Model
         $old_class =  $data['class'];
 
         $AdmProcFee =  $data['AdmProcessFee'];
-        $AdmFine =  $data['AdmFine'];
-        
+
         $AdmFee = $data['AdmFee'];
 
-        $TotalAdmFee =  $AdmFee + $AdmProcFee+$AdmFine;
+       // $TotalAdmFee =  $AdmFee + $AdmProcFee;
+       $TotalAdmFee =  $AdmFee + $AdmProcFee+$AdmFine;
 
        // DebugBreak();
 
@@ -274,7 +302,7 @@ class Admission_model extends CI_Model
     public function getzone($tehcd)
     {
 
-        $query = $this->db->get_where('matric_new..tblZones', array('mYear' => 2016,'Class' => 12,'Sess'=>2, 'teh_cd' => $tehcd));
+        $query = $this->db->get_where('matric_new..tblZones_new', array('mYear' => 2016,'Class' => 12,'Sess'=>2, 'teh_cd' => $tehcd));
 
         $rowcount = $query->num_rows();
         if($rowcount > 0)
@@ -293,7 +321,7 @@ class Admission_model extends CI_Model
         $gend = $data['gen'];
           // DebugBreak();
         $where = " mYear = 2016  AND class = 12 AND  sess = 2 AND Zone_cd =  $zone  AND  (cent_Gen = $gend OR cent_Gen = 3) ";      
-        $query = $this->db->query("SELECT * FROM matric_new..tblcentre WHERE $where");
+        $query = $this->db->query("SELECT * FROM matric_new..tblcentre_new WHERE $where");
 
         $rowcount = $query->num_rows();
         if($rowcount > 0)
@@ -307,9 +335,7 @@ class Admission_model extends CI_Model
     }
 
     public function getrulefee($isPrSub){
-       
-     //  DebugBreak();
-        $date =  '2016-10-13';//date('Y-m-d') ;
+        $date =  date('Y-m-d') ;
         $query = $this->db->get_where('admission_Online..RuleFeeAdm', array('class' => 12,'sess' => 2, 'isPrSub' => $isPrSub,'Start_Date <='=>$date,'End_Date >='=>$date));
         $rowcount = $query->num_rows();
         if($rowcount > 0)

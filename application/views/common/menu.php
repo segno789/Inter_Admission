@@ -4,14 +4,18 @@
         <div class="dashboard-container">
         <div class="top-nav">
             <ul>
-                <!-- <li>
+                
+                <?php if($isselected == '1'){?>
+                <li>
                 <a href="<?php echo base_url(); ?>dashboard" class="<?php if($isselected == '1') {echo 'selected';}?>" >
                 <div class="fs1" aria-hidden="true" data-icon="&#xe0a0;"> </div>
                 Dashboard
                 </a>
-                </li>-->
+                </li>
 
-                <?php if($isselected == '5'){?>
+                <?php } 
+                
+                else if($isselected == '5'){?>
 
                     <li>
                         <a style="width: 115px;" href="<?php echo base_url(); ?>Complaints" class="<?php if($isselected == '5') {echo 'selected';}?>" >
@@ -196,7 +200,10 @@
             if($isselected == '1') { 
                 ?>
                 <ul >
-                    <li><a href="<?php echo base_url(); ?>index.php"  data-original-title="" class="<?php if($isselected == '1') {echo 'heading';}?>">Dashboard</a></li>
+                    <li><a href="<?php echo base_url(); ?>dashboard"  data-original-title="" class="<?php if($isselected == '1') {echo 'heading';}?>">Dashboard</a></li>
+                    <li>
+                        <a onclick="return logout();">Logout</a>
+                    </li>
                     <!-- <li>
                     <a href="#notifications">
                     Notifications
@@ -484,11 +491,7 @@
                                 Create Batch
                             </a>
                         </li>
-
-                        <?php }
-                        ?>
-                        
-                    <li>
+                            <li>
                         <a href="<?php echo base_url(); ?>Admission_inter/batchlist">
                             Batch List
                         </a>
@@ -497,21 +500,27 @@
                         <a href="<?php echo base_url(); ?>Admission_inter/FormPrinting">
                            Proof Form Printing
                         </a>
+                    </li>   
+                       <li>
+                        <a style="cursor: pointer" onclick="return logout();">Logout</a>
                     </li>
+                    </ul>
+                        <?php }
+                        ?>
+                        
+                   
                    <!-- <li>
                         <a href="<?php //echo base_url(); ?>/Admission_matric/Profile">
                             Profile
                         </a>
                     </li>-->
-                    <li>
-                        <a style="cursor: pointer" onclick="return logout();">Logout</a>
-                    </li>
+                 
                     <!--  <li>
                     <a href="<?php echo base_url(); ?>Registration/ProofReading">
                     Proof Reading
                     </a>
                     </li>-->
-                </ul>
+                
                 
             <div class="btn-group pull-right">
                 <button class="btn btn-primary">

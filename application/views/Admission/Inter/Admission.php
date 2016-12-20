@@ -12,7 +12,7 @@
 
                     </div>
                     <div class="widget-body">
-                        <h1    style="text-align: center;"><font color="#000000" size="+1" >Note:-Last Date of Online Admission for 12th is <b class="blink_text"><?php  echo lastdate; ?></b></font></h1>
+                        <h1    style="text-align: center;"><font color="#000000" size="+1" >Note:-Last Date of Online Admission for 12th is <b class="blink_text"><?php echo lastdate; ?></b></font></h1>
                         <!--<b class="blink_text" style="margin-left: 36%;"> Please update your Institute Profile, In Case of Govt institute EMIS code is mandatory </b>-->
 
 
@@ -111,10 +111,10 @@
                         <div style="  margin-top: 10px;margin-left: 20px;font-size: 16px;">
                             <!--    ( <a href="#" class="guidlines">Read Instruction's Guide</a>  ) -->
                             <br/>
+                            <a href="<?php echo base_url(); ?>Admission_Inter/forwarding_pdf/" target="_blank" class="guidlines blink_text" style="font-size: 18px;">Download Farwarding letter. </a>
                            <!-- <a href="http://www.bisegrw.com/download/online/registration/Training_Manual_9th_Registration_Central_Software_Urdu.pdf" target="_blank" class="guidlines blink_text" style="font-size: 18px;">Download 9th Registration Training Manual. </a> <br/>
                             <a href="<?php echo base_url(); ?>/assets/img/ForwardingLetter.pdf" target="_blank" class="guidlines blink_text" style="font-size: 18px;">Download Farwarding letter. </a> <br/>
                             <a href="<?php echo base_url(); ?>/assets/img//Image_error.pdf" class="guidlines blink_text" target="_blank" style="font-size: 18px;">Instruction for Error occured due to Image uploading. </a>-->
-                            <a href="<?=base_url()?>/Admission_Inter/forwarding_pdf/"  class="guidlines blink_text" style="font-size: 18px;">Download Farwarding letter. </a> <br/>
                             <br /><br />
                             <strong>NOTE:</strong><br/>
 <!--                             <br/>1. Please upload photo of student carefully and with good quality as this picture will be used in his/her matriculation Roll Number Slip/Result Card/certificate.<br /> 4.Picture size must be less than  20 kb, and use only Passport size with small letter ".jpg" extention image.-->

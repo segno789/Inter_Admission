@@ -2089,7 +2089,7 @@ class Admission extends CI_Controller {
     public function Pre_Inter_Data()
     {       
 
-         DebugBreak();     
+       //  DebugBreak();     
          $this->load->library('session');
          $mrollno='';
          $hsscrno='';
@@ -2153,8 +2153,8 @@ class Admission extends CI_Controller {
             $error_msg.='<span style="font-size: 16pt; color:red;">' . 'No Any Student Found Against Your Criteria</span>';
         }
 
-        $specialcase = @$data['0']['Spl_Name'];
-        $specialcode = @$data['0']['spl_cd'];
+        $specialcase = $data['0']['Spl_Name'];
+        $specialcode = $data['0']['spl_cd'];
         $exam_type =   $data['0']['exam_type'];
         if($specialcode != '' && $specialcode != 34 ){
 
@@ -2545,7 +2545,7 @@ class Admission extends CI_Controller {
            // $AdmFeeCatWise  =0;
         }
          $today = date("d-m-Y");
-         
+          $dueDate = 0;
         if($today > TripleDateFeeinter )
         {
             $now = time(); // or your date as well
@@ -2648,7 +2648,7 @@ $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise + $dueDate;
         $temp_db_rno = @$_POST['InterRno_hidden'];
         $spreate_filename = explode(".",$whatIWant);
         $temp_file_rno= $spreate_filename[0];
-       /* if($temp_file_rno != $temp_db_rno)
+        if($temp_file_rno != $temp_db_rno)
         {
             $allinputdata = "";
             $data_error['excep'] = 'Your Pictures is not matched. ';
@@ -2656,7 +2656,7 @@ $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise + $dueDate;
             redirect('Admission/Pre_Inter_Data/');
 
             return;
-        }    */
+        }
        
         
         $target_path = PRIVATE_IMAGE_PATH;
@@ -2666,14 +2666,14 @@ $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise + $dueDate;
             mkdir($target_path);
         }
         $copyimg = $target_path.$formno.'.jpg';
-       /* if (!(copy($base_path, $copyimg))) 
+        if (!(copy($base_path, $copyimg))) 
         {
             $data_error['excep'] = 'The file you are attempting to upload size is between 4 to 20 Kb.';
             $this->session->set_flashdata('NewEnrolment_error',$data_error);
 
             redirect('Admission/Pre_Inter_Data/');
 
-        } */
+        }
              
       //  DebugBreak();
         

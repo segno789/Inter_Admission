@@ -29,11 +29,16 @@
                     <div class="inHeaderLogin" style="/* width: 50%; */">
                         <a href="" rel="home" data-original-title="BISE Gujranwala" style=""><img style="margin-top: 9px;text-align:left;width:150px;/* float: left; */margin-left: 14px;" src="<?php echo base_url(); ?>assets/img/icon.png" alt="Logo BISE GRW"></a>
                         <!--Intimation-->
-                        <p style="color: wheat;text-align: center;font-size: 23px;margin-left: 28px;/* float: left; */margin-top: -129px;">Board of Intermediate &amp; Secondary Education, Gujranwala <br><br> Admission Inter      <?php if(Session=='1')
-                echo 'Annual';
-            else if(Session =='2')
-                echo 'Supply';?> 
-        <?php  echo Year; ?></p> <?php //echo CURRENT_SESS;?></p>
+                        <p style="color: wheat;text-align: center;font-size: 23px;margin-left: 28px;/* float: left; */margin-top: -129px;">Board of Intermediate &amp; Secondary Education, Gujranwala <br><br>     
+                        <?php 
+                        echo  TITLEHSSC
+                        //if(Session=='1')
+//                                    echo 'Annual';
+//                                    else if(Session =='2')
+//                                echo 'Supply';
+                                
+                                ?> 
+        <?php  //echo Year; ?></p> <?php //echo CURRENT_SESS;?></p>
                     </div>
                 </div>
            
@@ -58,7 +63,7 @@
                                             }
                                             else if($user_status == 2)
                                             {
-                                                echo "<b style='color: #f63131;    font-size: 15px;'>Only Schools are allowed to downlaod slips.</b>";
+                                                echo "<b style='color: #f63131;    font-size: 15px;'>Only Colleges/Higher Schools are allowed to login.</b>";
                                             }
                                             else if($user_status == 3)
                                             {
