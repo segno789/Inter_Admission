@@ -10,7 +10,7 @@
                         </div>
 
                     </div>
-                    <form action="<?=base_url()?>index.php/Admission_9th_reg/NewEnrolment_update/" method="post" id="form_make_adm">
+                    <form action="<?=base_url()?>index.php/Admission_11th_reg/NewEnrolment_update/" method="post" id="form_make_adm" name="form_make_adm">
                         <div class="widget-body">
                       <!--  <div class='control-group'>
                               <label class='control-label span1'>
@@ -41,73 +41,85 @@
                                     Select Group:
                                 </label>
                                 <div class='controls controls-row'>
-                                    <select id='make_adm9th_groups' name='make_adm9th_groups'>
+                                    <select id='make_adm11th_groups' name='make_adm11th_groups'>
                                         <?php
 
                                         // DebugBreak();
-                                        $subgroups =  split(',',$grp_cd);
+                                        $subgroups =  split(',',$grp_cdi);
                                         echo "<option value='0' >SELECT GROUP</option>";
                                         for($i =0 ; $i<count($subgroups); $i++)
                                         {
                                             if($subgroups[$i] == 1)
-                                            {
-                                                if($grp_selected == 1)
                                                 {
-                                                    echo "<option value='1' selected='selected'>SCIENCE WITH BIOLOGY</option>";  
+                                                    if($grp_selected == 1)
+                                                    {
+                                                        echo "<option value='1' selected='selected'>Pre-Medical</option>";  
+                                                    }
+                                                    else 
+                                                    {
+                                                        echo "<option value='1' >Pre-Medical</option>";    
+                                                    }
                                                 }
-                                                else 
+                                                else if($subgroups[$i] == 2)
                                                 {
-                                                    echo "<option value='1' >SCIENCE WITH BIOLOGY</option>";    
-                                                }
-                                            }
-                                            else if($subgroups[$i] == 7)
-                                            {
-                                                if($grp_selected == 7 )
-                                                {
-                                                    echo "<option value='7' selected='selected'>SCIENCE  WITH COMPUTER SCIENCE</option>";
-                                                }
-                                                else
-                                                {
-                                                    echo "<option value='7'>SCIENCE  WITH COMPUTER SCIENCE</option>"; 
-                                                }
+                                                    if($grp_selected == 2)
+                                                    {
+                                                        echo "<option value='2' selected='selected'>Pre-Engineering</option>";
+                                                    }
+                                                    else
+                                                    {
+                                                        echo "<option value='2'>Pre-Engineering</option>"; 
+                                                    }
 
-                                            }
-                                            else if($subgroups[$i] == 8)
-                                            {
-                                                if($grp_selected == 8)
-                                                {
-                                                    echo "<option value='8' selected='selected'>SCIENCE  WITH ELECTRICAL WIRING</option>";  
                                                 }
-                                                else
+                                                else if($subgroups[$i] == 3)
                                                 {
-                                                    echo "<option value='8'>SCIENCE  WITH ELECTRICAL WIRING</option>";  
-                                                }
+                                                    if($grp_selected == 3)
+                                                    {
+                                                        echo "<option value='3' selected='selected'>Humanities</option>";  
+                                                    }
+                                                    else
+                                                    {
+                                                        echo "<option value='3'>Humanities</option>";  
+                                                    }
 
-                                            }
-                                            else if($subgroups[$i] == 2)
-                                            {
-                                                if($grp_selected == 2 )
-                                                {
-                                                    echo "<option value='2' selected='selected'>GENERAL</option>";  
                                                 }
-                                                else
+                                                else if($subgroups[$i] == 4)
                                                 {
-                                                    echo "<option value='2'>GENERAL</option>";   
-                                                }
+                                                    if($grp_selected == 4)
+                                                    {
+                                                        echo "<option value='4' selected='selected'>General Science</option>";  
+                                                    }
+                                                    else
+                                                    {
+                                                        echo "<option value='4'>General Science</option>";   
+                                                    }
 
-                                            }
-                                            else if($subgroups[$i] == 5)
-                                            {
-                                                if($grp_selected == 5 )
-                                                {
-                                                    echo "<option value='5' selected='selected'>DEAF AND DUMB</option>";  
                                                 }
-                                                else
+                                                else if($subgroups[$i] == 5)
                                                 {
-                                                    echo "<option value='5'>DEAF AND DUMB</option>";  
-                                                }
+                                                    if($grp_selected == 5)
+                                                    {
+                                                        echo "<option value='5' selected='selected'>Commerce</option>";  
+                                                    }
+                                                    else
+                                                    {
+                                                        echo "<option value='5'>Commerce</option>";  
+                                                    }
 
-                                            }
+                                                }
+                                                else if($subgroups[$i] == 6)
+                                                {
+                                                    if($grp_selected == 6)
+                                                    {
+                                                        echo "<option value='6' selected='selected'>Home Economics</option>";  
+                                                    }
+                                                    else
+                                                    {
+                                                        echo "<option value='6'>Home Economics</option>";  
+                                                    }
+
+                                                }
                                         }
                                         /* <option value='1'>SCIENCE GROUP WITH BIOLOGY</option>
                                         <option value='7'>SCIENCE GROUP WITH COMPUTER SCIENCE</option>
@@ -162,54 +174,45 @@
                                                     $grp_name='';                             
                                                     foreach($data as $key=>$vals):
                                                         $n++;
-                                                        $formno = !empty($vals["formNo"])?$vals["formNo"]:"N/A";
+                                                        $formno = !empty($vals["FormNo"])?$vals["FormNo"]:"N/A";
                                                         $grp_name = $vals["grp_cd"];
                                                         $sub7 = $vals["sub8"];
-                                                        if($grp_name==1 && $sub7==78)
-                                                        {
-                                                            $grp_name = 7;
-                                                        }
-                                                        if($grp_name == 1 && $sub7 == 43){
-                                                            $grp_name = 8;
-                                                        }
-                                                        if($grp_name == 1 && $sub7 == 8){
-                                                            $grp_name = 1;
-                                                        }
+                                                       
                                                         switch ($grp_name) {
-                                                            case '1':
-                                                                $grp_name = 'SCIENCE WITH BIOLOGY';
-                                                                break;
-                                                            case '7':
-                                                                $grp_name = 'SCIENCE  WITH COMPUTER SCIENCE';
-                                                                break;
-                                                            case '8':
-                                                                $grp_name = 'SCIENCE  WITH ELECTRICAL WIRING';
-                                                                break;
-                                                            case '2':
-                                                                $grp_name = 'Humanities';
-                                                                break;
-                                                            case '5':
-                                                                $grp_name = 'Deaf and Dumb';
-                                                                break;
-                                                            default:
-                                                                $grp_name = "No Group Selected.";
-                                                        }
-
-                                                        $picpath =  DIRPATH9th.'/'.$Inst_Id.'/'.$vals["picpath"];
+                                                        case '1':
+                                                            $grp_name = 'PRE-MEDICAL';
+                                                            break;
+                                                        case '2':
+                                                            $grp_name = 'PRE-ENGINEERING';
+                                                            break;
+                                                        case '3':
+                                                            $grp_name = 'HUMANITIES';
+                                                            break;
+                                                        case '4':
+                                                            $grp_name = 'GENERAL SCIENCE';
+                                                            break;
+                                                        case '5':
+                                                            $grp_name = 'COMMERCE';
+                                                            break;
+                                                        default:
+                                                            $grp_name = "No GROUP SELECTED.";
+                                                            }
+                                                        // DebugBreak();
+                                                        $picpath =  DIRPATH11th.'/'.$Inst_Id.'/'.$vals["PicPath"];
                                                        // echo $picpath;
                                                         $type = pathinfo($picpath, PATHINFO_EXTENSION);
-                                                        $vals["picpath"] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
+                                                        $vals["PicPath"] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
                                                         
                                                         //  DebugBreak();
                                                         echo '<tr  >
                                                         <td>'.$n.'</td>
-                                                        <td>'.$vals["formNo"].'</td>
+                                                        <td>'.$vals["FormNo"].'</td>
                                                         <td>'.$vals["name"].'</td>
                                                         <td>'.$vals["Fname"].'</td>
                                                         <td>'.date("d-m-Y", strtotime($vals["Dob"])).'</td>
                                                         <td>'.$grp_name.'</td>
-                                                        <td>'.$vals["sub1_abr"].','.$vals["sub2_abr"].','.$vals["sub3_abr"].','.$vals["sub4_abr"].','.$vals["sub5_abr"].','.$vals["sub6_abr"].','.$vals["sub7_abr"].','.$vals["sub8_abr"].'</td>
-                                                        <td><img id="previewImg" style="width:40px; height: 40px;" src="'.$vals["picpath"] .'" alt="Candidate Image"></td>
+                                                        <td>'.$vals["sub1_abr"].','.$vals["sub2_abr"].','.$vals["sub3_abr"].','.$vals["sub4_abr"].','.$vals["sub5_abr"].','.$vals["sub6_abr"].','.$vals["sub7_abr"].'</td>
+                                                        <td><img id="previewImg" style="width:40px; height: 40px;" src="'.$vals["PicPath"] .'" alt="Candidate Image"></td>
                                                         <td> <button type="button" class="btn btn-info" value="'.$formno.'" onclick="NewForm('.$formno.')">View Form</button></td>
                                                         <td><input style="width: 24px; height: 24px;" type="checkbox" name="chk[]" value="'.$formno.'" /></td> </tr>';
                                                         /*<td><img id="previewImg" style="width:40px; height: 40px;" src="/'.IMAGE_PATH.$Inst_Id.'/'.$vals['PicPath'].'" alt="Candidate Image"></td>';*/

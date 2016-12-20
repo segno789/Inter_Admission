@@ -7,12 +7,12 @@
                 <div class="widget no-margin">
                     <div class="widget-header">
                         <div class="title">
-                            9th Admission Dashboard<a data-original-title="" id="notifications">s</a>
+                            11th Admission Dashboard<a data-original-title="" id="notifications">s</a>
                         </div>
 
                     </div>
                     <div class="widget-body">
-                        <h1    style="text-align: center;"><font color="#000000" size="+1" >Note:-Last Date of Online Admission for 9th  without late fee is <b class="blink_text"> <?php echo SingleDateFee9th ;?></b></font></h1>
+                        <h1    style="text-align: center;"><font color="#000000" size="+1" >Note:-Last Date of Online Admission for 11th  without late fee is <b class="blink_text"> <?php echo SingleDateFee11th ;?></b></font></h1>
                         <h4>Welcome to Board of Intermediate &amp; Secondary Education, GUJRANWALA</br></br> &nbsp; Dashboard</h4>
                           <?php 
                           
@@ -33,16 +33,16 @@
                         </div>       -->
                           <?php }?>
                            <div class="shortcutHome">
-                            <a href="<?php echo base_url();?>index.php/Admission_9th_reg/studentsData"><img src="<?php echo base_url();?>assets/img/enrolment.png"><br>Make-Admission</a>
+                            <a href="<?php echo base_url();?>index.php/Admission_11th_reg/studentsData"><img src="<?php echo base_url();?>assets/img/enrolment.png"><br>Make-Admission</a>
                         </div> 
                          <div class="shortcutHome">
-                            <a href="<?php echo base_url(); ?>index.php/Admission_9th_reg/studentsData_cancelAdm"><img src="<?php echo base_url();?>assets/img/edit_form.png"><br>Cancel Form</a>
+                            <a href="<?php echo base_url(); ?>index.php/Admission_11th_reg/studentsData_cancelAdm"><img src="<?php echo base_url();?>assets/img/edit_form.png"><br>Cancel Form</a>
                         </div>
                           <div class="shortcutHome">
-                            <a href="<?php echo base_url(); ?>index.php/Admission_9th_reg/FormPrinting"><img src="<?php echo base_url();?>assets/img/reports.png"><br>Form Printing </a>
+                            <a href="<?php echo base_url(); ?>index.php/Admission_11th_reg/FormPrinting"><img src="<?php echo base_url();?>assets/img/reports.png"><br>Form Printing </a>
                         </div> 
                         <div class="shortcutHome">
-                            <a href="<?php echo base_url(); ?>index.php/Admission_9th_reg/RevenueList"><img src="<?php echo base_url();?>assets/img/lists.png"><br>Revenue List Printing</a>
+                            <a href="<?php echo base_url(); ?>index.php/Admission_11th_reg/RevenueList"><img src="<?php echo base_url();?>assets/img/lists.png"><br>Revenue List Printing</a>
                         </div>
 
                         <div class="shortcutHome">
@@ -112,9 +112,9 @@
                         <div style="  margin-top: -190px;margin-left: 20px;font-size: 16px;">
                             <!--    ( <a href="#" class="guidlines">Read Instruction's Guide</a>  ) -->
                             <br/>
-                            <!--<a href="http://www.bisegrw.com/download/online/registration/Training_Manual_9th_Registration_Central_Software_Urdu.pdf" target="_blank" class="guidlines blink_text" style="font-size: 18px;">Download 9th Registration Training Manual. </a> <br/>-->
-                             <a href="<?=base_url()?>Admission_9th_reg/forwarding_pdf/"  class="guidlines blink_text" style="font-size: 18px;">Download Farwarding letter. </a> <br/>
-                             <a href="<?=base_url()?>Admission_9th_reg/ChallanForm_Adm9hth_Regular/9"  class="guidlines blink_text" style="font-size: 18px;">Download Challan Form. </a> <br/>
+                            <!--<a href="http://www.bisegrw.com/download/online/registration/Training_Manual_11th_Registration_Central_Software_Urdu.pdf" target="_blank" class="guidlines blink_text" style="font-size: 18px;">Download 11th Registration Training Manual. </a> <br/>-->
+                             <a href="<?=base_url()?>Admission_11th_reg/forwarding_pdf/"  class="guidlines blink_text" style="font-size: 18px;">Download Farwarding letter. </a> <br/>
+                             <a href="<?=base_url()?>Admission_11th_reg/ChallanForm_Adm9hth_Regular/9"  class="guidlines blink_text" style="font-size: 18px;">Download Challan Form. </a> <br/>
                           <!--  <a href="<?php //echo base_url(); ?>/assets/img//Image_error.pdf" class="guidlines blink_text" target="_blank" style="font-size: 18px;">Instruction for Error occured due to Image uploading. </a>-->
                             <br /><br />
                             <strong>NOTE:</strong> <br/>

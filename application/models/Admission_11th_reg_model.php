@@ -1,6 +1,6 @@
 <?php
 
-class Admission_9th_reg_model extends CI_Model 
+class Admission_11th_reg_model extends CI_Model 
 {
     public function __construct()    
     {
@@ -44,20 +44,7 @@ class Admission_9th_reg_model extends CI_Model
         return $res;
     }
     
-      public function iszoneset($inst_cd){
-       
-        $query = $this->db->get_where('Registration..Instexam_Info', array('iyear' => Year,'class'=>9,'sess'=>Session,'inst_cd'=>$inst_cd));
-        $rowcount = $query->num_rows();
-       
-        if($rowcount > 0)
-        {
-            return $query->result_array();
-        }
-        else
-        {
-            return  0;
-        }
-    }
+     
     public function getStudentsData($data){
         //sp_form_data
         //SELECT * FROM  fl_dataforMa15 WHERE  (isSubmit is null or isSubmit= 0) and class = 9 and iyear = 2014 and sch_cd = ".$user->inst_cd
@@ -325,7 +312,7 @@ class Admission_9th_reg_model extends CI_Model
     }
     public function Update_NewEnorlement($data)//$father_name,$bay_form,$father_cnic,$dob,$mob_number)  MA_P1_Reg_Adm2016_sp_Update
     { 
-        //DebugBreak();
+        DebugBreak();
         // $forms_id =array("'" . implode("','", $_POST["chk"]) . "'");
        
         if(@$_POST['isformwise']==1)
@@ -336,18 +323,18 @@ class Admission_9th_reg_model extends CI_Model
             {
                 $sm_data[] = array(
                     'IsAdmission'=>1,'cDate'=> date('Y-m-d H:i:s'),'formNo'=>$_POST["chk"][$i],
-                    'zone_cd'=>$_POST["zone_cd"]
+                   // 'zone_cd'=>$_POST["zone_cd"]
                 );
             }
             $sm_data ;
-            $this->db->update_batch('Registration..MA_P1_Reg_Adm2016',$sm_data,'formNo');
+            $this->db->update_batch('Registration..IA_P1_Reg_Adm2016_temp',$sm_data,'formNo');
         }
         else if(@$_POST['isformwise']==2)
         {
             $data=array('IsAdmission'=>1,'cDate'=> date('Y-m-d H:i:s'));
-            $this->db->where('Reggrp',$_POST['make_adm9th_groups']);
-             $this->db->where('Sch_cd',$_POST['Inst_Id']);
-            $this->db->update('Registration..MA_P1_Reg_Adm2016',$data);
+            $this->db->where('Reggrp',$_POST['make_adm11th_groups']);
+             $this->db->where('coll_cd',$_POST['Inst_Id']);
+            $this->db->update('Registration..IA_P1_Reg_Adm2016_temp',$data);
         }
         else if(@$_POST['isformwise']==3)
         {
@@ -356,11 +343,11 @@ class Admission_9th_reg_model extends CI_Model
             for ($i = 0; $i < count($_POST["chk"]); $i++) 
             {
                 $sm_data[] = array(
-                    'IsAdmission'=>0,'cDate'=> date('Y-m-d H:i:s'),'formNo'=>$_POST["chk"][$i],'zone_cd'=>$_POST["zone_cd"]
+                    'IsAdmission'=>0,'cDate'=> date('Y-m-d H:i:s'),'formNo'=>$_POST["chk"][$i]//,'zone_cd'=>$_POST["zone_cd"]
                 );
             }
             $sm_data ;
-            $this->db->update_batch('Registration..MA_P1_Reg_Adm2016',$sm_data,'formNo');
+            $this->db->update_batch('Registration..IA_P1_Reg_Adm2016_temp',$sm_data,'formNo');
         }
 
         return true;
@@ -472,19 +459,19 @@ class Admission_9th_reg_model extends CI_Model
 
     public function Make_adm($myinfo)
     {  
-        //DebugBreak();
+       // DebugBreak();
         $inst_cd = $myinfo['Inst_cd'];
         $spl_cd = $myinfo['spl_cd'];
         $grp_selected = $myinfo['grp_selected'];
         $sess = Session;
-        $Year = Year-1;
+        $Year = Year;
         if($grp_selected == FALSE)
         {
-            $query = $this->db->query("Registration..sp_get_regInfo_9th_Make_adm $inst_cd,9,$Year,$sess");    
+            $query = $this->db->query("Registration..sp_get_regInfo_11th_Make_adm $inst_cd,11,$Year,$sess");    
         }
         else
         {
-            $query = $this->db->query("Registration..sp_get_regInfo_Groupwise_9th_Make_adm $inst_cd,9,$Year,$sess,$grp_selected");    
+            $query = $this->db->query("Registration..sp_get_regInfo_Groupwise_11th_Make_adm $inst_cd,11,$Year,$sess,$grp_selected");    
         }
 
         $rowcount = $query->num_rows();
@@ -572,7 +559,7 @@ class Admission_9th_reg_model extends CI_Model
         $query = $this->db->get_where('Registration..MA_P1_Reg_Adm2016',  array('formNo' => $formno,'class'=>9,'iyear'=>$year,'sess'=>1));     
         } */
 
-        $query = $this->db->get_where('Registration..MA_P1_Reg_Adm2016',  array('formNo' => $formno,'class'=>9,'iyear'=>$year,'sess'=>1));     
+        $query = $this->db->get_where('Registration..IA_P1_Reg_Adm2016_temp',  array('formNo' => $formno,'class'=>11,'iyear'=>Year,'sess'=>Session));     
 
         $rowcount = $query->num_rows();
         if($rowcount > 0)

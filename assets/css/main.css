@@ -5499,6 +5499,7 @@ font-size: 11px; }
 .top-nav ul li a:hover {
 color: #3693cf; }
 .top-nav ul li .selected {
+    width: 91px;
     -webkit-border-radius: 4px 4px 0 0;
     -moz-border-radius: 4px 4px 0 0;
     border-radius: 4px 4px 0 0;

@@ -50,7 +50,7 @@
                                 </thead>
                                 <tbody>
                                     <?php
-                               // DebugBreak();
+                                DebugBreak();
                                $image_path_selected = '';
                              //   if($data[0]['sex']==1){ $image_path_selected = base_url().'/Uploads/IS2016/Private/male.JPG';}else{$image_path_selected = base_url().'/Uploads/IS2016/Private/female.JPG';}
                                     if($data != false)

@@ -39,13 +39,13 @@ define('BARCODE_PATH', 'assets/pdfs/');
 
 define('PRIVATE_IMAGE_PATH', 'uploads/private/');
 define('REGULAR_IMAGE_PATH', 'uploads/regular/');
-define('Session','2');  // 1 for Annual and 2 for Supply
+define('Session','1');  // 1 for Annual and 2 for Supply
 define('Year','2016');  
 define('lastdate','20-08-2016');
 define('GET_PRIVATE_IMAGE_PATH', '');
 define('GET_PRIVATE_IMAGE_PATH_COPY', '');
-
-
+define('DIRPATH11th','F:/xampp/htdocs/Share Images/'); 
+define('IMAGE_PATH', 'uploads/2016/');
 define('Insert_sp','Admission_online..ISAdm2016_sp_insert'); // for insertion Inter supply private
 define('Insert_sp_Languages','Admission_online..ISAdm2016_sp_insert_LANGUAGES'); // for insertion Inter supply private
 define('Insert_sp_matric_annual','Admission_online..MA_P1_Reg_Adm2016_sp_insert'); // for insertion matric Annual
@@ -58,9 +58,8 @@ define('return_pdf_isPicture','1');
 define('CURRENT_SESS','2016-2018');
 define('corr_bank_chall_class','INTER SUPPLY');
 define('session_year','2016-2018');
-
-
-
+define('TITLEHSSC','INTER ANNUAL EXAMINATION');
+define('SingleDateFee11th','03-10-2016');
 define('currdate','date("d-m-Y");');
 define ('SingleDateFee','03-10-2016');
 define('DoubleDateFee', '07-10-2016');

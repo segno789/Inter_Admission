@@ -104,7 +104,17 @@
                         </a>
                     </li>
                     <?php }
+                      
                     
+                     else if($isselected == '14' ){?>
+
+                    <li>
+                        <a href="<?php echo base_url(); ?>Admission_matric" class="<?php if($isselected == '14' ) {echo 'selected';}?>" >
+                            <div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>
+                            11th Admission
+                        </a>
+                    </li>
+                    <?php }
                      else if($isselected == '11'){?>
 
                     <li>
@@ -271,40 +281,40 @@
                 <?php
             }
             ?>
-            <?php   // 9th admission
-            if($isselected == '3'){
+            
+            <?php   // 11th admission
+            if($isselected == '14'){
                 ?>
                 <ul >
-                    <li><a href="<?php echo base_url(); ?>Admission"   data-original-title="" >Admission</a></li>
+              
+                    <li><a href="<?php echo base_url(); ?>Admission_11th_reg"   data-original-title="" >Admission</a></li>
                     <li>
-                        <a href="<?php echo base_url(); ?>Admission/StudentsData">
+                        <a href="<?php echo base_url(); ?>Admission_11th_reg/StudentsData">
                             Students Data
                         </a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url(); ?>Admission/EditForms">
+                        <a href="<?php echo base_url(); ?>Admission_11th_reg/EditForms">
                             Edit Forms
                         </a>
                     </li>
-                    <li>
-                        <a href="<?php echo base_url(); ?>Admission/CreateBatch">
-                            Create Batch
+                   <li>
+                        <a href="<?php echo base_url(); ?>Admission_11th_reg/EditPicForms">
+                            Edit Pictures Forms
                         </a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url(); ?>Admission/BatchList">
-                            Batch List
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<?php echo base_url(); ?>Admission/FormPrinting">
+                        <a href="<?php echo base_url(); ?>Admission_11th_reg/FormPrinting">
                             Form Printing
                         </a>
                     </li>
-                    <li>
-                        <a href="<?php echo base_url(); ?>Admission/ProofReading">
-                            Proof Reading
+                     <li>
+                        <a href="<?php echo base_url(); ?>Admission_11th_reg/RevenueList">
+                            Revenue List Printing
                         </a>
+                    </li>
+                    <li>
+                        <a onclick="return logout();">Logout</a>
                     </li>
 
                 </ul>

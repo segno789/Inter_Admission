@@ -48,13 +48,13 @@ class Admission_11th_reg extends CI_Controller {
             $this->load->view('Admission/Matric/errorPage.php',$userinfo);
             $this->load->view('common/footer.php'); 
         }
-        else if($isset == 0)
+       /* else if($isset == 0)
         {
             
             // $this->load->view('common/menu.php',$userinfo);
             $this->load->view('Admission/11th/Incomplete_inst_info.php',$userinfo);
             $this->load->view('common/footer.php');
-        }
+        }*/
         else{
             $userinfo['isselected'] = 14;
             $userinfo['isdashbord'] = 1;
@@ -487,7 +487,7 @@ class Admission_11th_reg extends CI_Controller {
         $this->load->view('common/header.php',$userinfo);
         $this->load->view('common/menu.php',$data);
         $this->load->view('Admission/11th/OldStudentsData.php',$data);
-        $this->load->view('common/commonfooter9th.php');
+        $this->load->view('common/footer11th.php');
 
     }
     public function StudentsData_cancelAdm()
@@ -677,20 +677,20 @@ class Admission_11th_reg extends CI_Controller {
 
         $seltedOption = @$_POST['isformwise']; // if it is one then submit of selected forms, if it is 2 then submit group wise, if it is 3 then it is cancel selected admissions.
         $_POST['Inst_Id'] = $Inst_Id;
-        $isset = $this->Admission_11th_reg_model->iszoneset($Inst_Id);
-        $_POST['zone_cd'] = $isset[0]['zone_cd'];
+       // $isset = $this->Admission_11th_reg_model->iszoneset($Inst_Id);
+        //$_POST['zone_cd'] = $isset[0]['zone_cd'];
         $logedIn = $this->Admission_11th_reg_model->Update_NewEnorlement($_POST);
         $this->session->set_flashdata('error', 'success');
         if($seltedOption == 1 || $seltedOption == 2)
         {
-            redirect('Admission_9th_reg/StudentsData_cancelAdm');
+            redirect('Admission_11th_reg/StudentsData_cancelAdm');
         }
         else if($seltedOption == 3)
         {
-            redirect('Admission_9th_reg/StudentsData');
+            redirect('Admission_11th_reg/StudentsData');
         }
 
-        $this->load->view('common/footer.php');
+        $this->load->view('common/footer11th.php');
     }
     public function NewEnrolment_Delete($formno)
     {
@@ -2045,7 +2045,7 @@ class Admission_11th_reg extends CI_Controller {
     } 
     public function commonfooter($data)
     {
-        $this->load->view('common/footer.php',$data);
+        $this->load->view('common/footer11th.php',$data);
     }
     public function Print_Admission_Form_Groupwise()
     {

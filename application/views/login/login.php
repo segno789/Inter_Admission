@@ -38,7 +38,7 @@
 //                                echo 'Supply';
                                 
                                 ?> 
-        <?php  //echo Year; ?></p> <?php //echo CURRENT_SESS;?></p>
+        <?php  //echo Year; ?></p> <?php //echo CURRENT_SESS; ?></p>
                     </div>
                 </div>
            
@@ -56,7 +56,7 @@
                                         <div class="span12">
                                             <p>Fill out the form below to login.</p>
                                             <?php 
-
+                                              // DebugBreak();
                                            if($user_status == 1)
                                             {
                                                 echo "<b style='color: #f63131;    font-size: 15px;'>Your UserId/Password is not correct.Please use correct information</b>";
