@@ -63,8 +63,7 @@ class Admission extends CI_Controller {
 
     public function checkFormNo_then_download()
     {
-        // DebugBreak();
-
+        //DebugBreak();
         $formno_seg = $this->uri->segment(3);
         $dob_seg = $this->uri->segment(4);
         if($formno_seg !=0){
@@ -74,7 +73,6 @@ class Admission extends CI_Controller {
         else{
             return true;
         }
-
 
         $this->load->model('Admission_model');
         $this->load->library('session');
@@ -137,12 +135,11 @@ class Admission extends CI_Controller {
             $pdf->Image(BARCODE_PATH.$image,2.9, 0.61  ,2.4,0.24,"PNG");
             //$data['PicPath']
 
-
-            $pdf->Image(PRIVATE_IMAGE_PATH.$data['PicPath'],6.5, 1.15+$Y, 0.95, 1.0, "JPG");
+            $pdf->Image(base_url().$data['PicPath'],6.5, 1.15+$Y, 0.95, 1.0, "JPG");
             $pdf->Image("assets/img/logo2.png",0.4, 0.2, 0.65, 0.65, "PNG");
             $pdf->SetFont('Arial','',8);
 
-            //------------- Personal Infor Box
+            //------------- Personal Infor Box----------------
             //====================================================================================================================
 
             $FontSize=7;
@@ -543,7 +540,7 @@ class Admission extends CI_Controller {
             $pdf->Cell( 0.5,0.5,"Processing + Form Fee ",0,'L');
             $pdf->SetXY(4.6, 7.09+$Y); 
             $pdf->SetFont('Arial','b',$FontSize);
-            $pdf->Cell( 0.5,0.5,$data['AdmProcessFee'].' /-',0,'L');
+            $pdf->Cell( 0.5,0.5,$data['`AdmProcessFee`'].' /-',0,'L');
 
             $pdf->SetXY(5.42, 7.09+$Y);
             $pdf->SetFont('Arial','',$FontSize);
@@ -849,16 +846,7 @@ class Admission extends CI_Controller {
             $pdf->SetFont('Arial','B',$FontSize);
             $pdf->SetXY(1.0,10.2+$Y);
             $pdf->Cell( 0.5,0.5,$data['formNo'],0,'L');
-
-
-
-
-
-            //  $pdf->Image(base_url().PRIVATE_IMAGE_PATH.'download.jpg',6.5, 10.3+$Y, 0.95, 1.0, "JPG");
-            //   $pdf->Image(base_url().PRIVATE_IMAGE_PATH.$data['PicPath'],6.5, 10.3+$Y, 0.95, 1.0, "JPG");
             $pdf->SetFont('Arial','',8);
-
-
             $pdf->SetXY(0.5,10.35+$Y);
             $pdf->SetTextColor(0,0,0);
             $pdf->SetFont('Arial','',$FontSize);
@@ -866,7 +854,7 @@ class Admission extends CI_Controller {
             $pdf->SetFont('Arial','B',$FontSize);
             $pdf->SetXY(1.0,10.35+$Y);
             $pdf->Cell(0.5,0.5,$data["name"],0,'L');
-            //--------------------------- FATHER NAME 
+            //--------------------------- FATHER NAME------------ 
 
             $pdf->SetXY(3.2, 10.35+$Y);
             $pdf->SetFont('Arial','',$FontSize);
@@ -882,10 +870,7 @@ class Admission extends CI_Controller {
 
             $pdf->SetXY(1.35, 10.49+$Y);
             $pdf->SetFont('Arial','b',8);
-            /*$pdf->Cell( 0.5,0.5,$data['AdmTotalFee'].'/-',0,'L');*/
             $pdf->Cell( 0.5,0.5,$Updated_AdmFee+$data['AdmProcessFee'].'/-',0,'L');
-
-
             $pdf->SetXY(0.5, 10.59+$Y);
             $pdf->SetFont('Arial','',$FontSize);
             $pdf->Cell( 0.5,0.5,"Zone Code:",0,'L');
@@ -950,18 +935,16 @@ class Admission extends CI_Controller {
         $pdf->Cell(0.5,0.5, "(For office use only)",0,'L');
         //------ Picture Box on Centre      
 
-        //        DebugBreak();
+        //DebugBreak();
         $Barcode = $data['formNo']."@".$data['class'].'@'.$data['sess'].'@'.$data["Iyear"];
         $image =  $this->set_barcode($Barcode);
 
-
-
-
         $pdf->Image(BARCODE_PATH.$image,2.9, 0.61  ,2.4,0.24,"PNG");
-        //$data['PicPath']
-
-
-        $pdf->Image(PRIVATE_IMAGE_PATH.$data['PicPath'],6.5, 1.15+$Y, 0.95, 1.0, "JPG");
+        
+        //$pdf->Image(PRIVATE_IMAGE_PATH.$data['PicPath'],6.5, 1.15+$Y, 0.95, 1.0, "JPG");
+        
+        $pdf->Image(base_url().$data['picpath'],6.5, 1.15+$Y, 0.95, 1.0, "JPG");
+        
         $pdf->Image("assets/img/logo2.png",0.4, 0.2, 0.65, 0.65, "PNG");
         $pdf->SetFont('Arial','',8);
 
@@ -1796,7 +1779,7 @@ class Admission extends CI_Controller {
 
 
         //  $pdf->Image(PRIVATE_IMAGE_PATH.'download.jpg',6.5, 10.3+$Y, 0.95, 1.0, "JPG");
-        $pdf->Image(PRIVATE_IMAGE_PATH.$data['PicPath'],6.5, 10.3+$Y, 0.95, 1.0, "JPG");
+        $pdf->Image(base_url().$data['PicPath'],6.5, 10.3+$Y, 0.95, 1.0, "JPG");
         $pdf->SetFont('Arial','',8);
 
 
@@ -2184,8 +2167,8 @@ class Admission extends CI_Controller {
         }
 
 
-      /*  if (!file_exists($picpathdb)){
-            $error_msg.='<span style="font-size: 16pt; color:red;"> Your Image is MISSING </span>';
+        /*  if (!file_exists($picpathdb)){
+        $error_msg.='<span style="font-size: 16pt; color:red;"> Your Image is MISSING </span>';
 
         } */
 
@@ -2270,6 +2253,13 @@ class Admission extends CI_Controller {
         }
 
     }
+    
+    
+    public function Pre_Matric_data(){
+        
+    }
+     
+    
 
     public function NewEnrolment_insert()  {
         $this->load->model('Admission_model');
@@ -2277,6 +2267,7 @@ class Admission extends CI_Controller {
         $Inst_Id = 999999;
         //  DebugBreak();
         $formno = $this->Admission_model->GetFormNo();
+
         $allinputdata = array('cand_name'=>@$_POST['cand_name'],
             'father_name'=>@$_POST['father_name'],
             'bay_form'=>@$_POST['bay_form'],
@@ -2625,22 +2616,23 @@ class Admission extends CI_Controller {
             'brd_name'=>@$_POST['oldboard'],
             'AdmFine'=>$dueDate
         );
+        //$copyimg = @$_POST['pic'];
 
         //DebugBreak();
 
-        $temp_file_name = @$_POST['pic']; //'OldPics/Pic16-MA/MA11th16/123456.jpg';
+        /*$temp_file_name = @$_POST['pic']; //'OldPics/Pic16-MA/MA11th16/123456.jpg';
         $whatIWant = substr($temp_file_name, strpos($temp_file_name, ".") - 6);    
         $temp_db_rno = @$_POST['InterRno_hidden'];
         $spreate_filename = explode(".",$whatIWant);
         $temp_file_rno= $spreate_filename[0];
         if($temp_file_rno != $temp_db_rno)
         {
-            $allinputdata = "";
-            $data_error['excep'] = 'Your Pictures is not matched. ';
-            $this->session->set_flashdata('NewEnrolment_error',$data_error);
-            redirect('Admission/Pre_Inter_Data/');
+        $allinputdata = "";
+        $data_error['excep'] = 'Your Pictures is not matched. ';
+        $this->session->set_flashdata('NewEnrolment_error',$data_error);
+        redirect('Admission/Pre_Inter_Data/');
 
-            return;
+        return;
         }
 
 
@@ -2648,17 +2640,17 @@ class Admission extends CI_Controller {
         $base_path = GET_PRIVATE_IMAGE_PATH_COPY.@$_POST['pic'];
         if (!file_exists($target_path)){
 
-            mkdir($target_path);
+        mkdir($target_path);
         }
         $copyimg = $target_path.$formno.'.jpg';
         if (!(copy($base_path, $copyimg))) 
         {
-            $data_error['excep'] = 'The file you are attempting to upload size is between 4 to 20 Kb.';
-            $this->session->set_flashdata('NewEnrolment_error',$data_error);
+        $data_error['excep'] = 'The file you are attempting to upload size is between 4 to 20 Kb.';
+        $this->session->set_flashdata('NewEnrolment_error',$data_error);
 
-            redirect('Admission/Pre_Inter_Data/');
+        redirect('Admission/Pre_Inter_Data/');
 
-        }
+        }                               */
 
         $logedIn = $this->Admission_model->Insert_NewEnorlement($data);
         if($logedIn != false)
@@ -2873,7 +2865,6 @@ class Admission extends CI_Controller {
         $this->load->view('common/commonheader.php');
         $this->load->view('Admission/Inter/FormDownloaded.php',$myarray);
         $this->load->view('common/footer.php');
-        // $this->load->view('common/commonfooter.php');
     }
 
     public function matric_default(){
@@ -2922,10 +2913,12 @@ class Admission extends CI_Controller {
         echo json_encode($value);
     }
 
-    function frmvalidation($viewName,$allinputdata,$isupdate){
+    function frmvalidation(){
 
-        //  DebugBreak();
-        $_POST['address']  = str_replace("'", "", $_POST['address'] );
+        //DebugBreak();
+
+        $allinputdata['excep'] = '';
+
         $language_sub_cd = array(
 
             //'ISLAMIC STUDIES'
@@ -2941,6 +2934,7 @@ class Admission extends CI_Controller {
             //'URDU (ADVANCE)'=>
             37
         );
+
         $history_sub_cd = array(
 
             //'HISTORY OF PAKISTAN'=>
@@ -2958,9 +2952,7 @@ class Admission extends CI_Controller {
         if(@$_POST['cand_name'] == '' )
         {
             $allinputdata['excep'] = 'Please Enter Your Name';
-            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-            redirect('Admission/'.$viewName);
-            return; //"NewEnrolment_EditForm_matric"
+
 
         }
         //(strpos($a, 'are') !== false)
@@ -2969,19 +2961,14 @@ class Admission extends CI_Controller {
         else if (@$_POST['father_name'] == '')
         {
             $allinputdata['excep'] = 'Please Enter Your Father Name';
-            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-            redirect('Admission/'.$viewName);
-            return;
+
 
         }
 
         else if(@$_POST['bay_form'] == '' )
         {
             $allinputdata['excep'] = 'Please Enter Your Bay Form No.';
-            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-            redirect('Admission/'.$viewName);
-            $this->$viewName($allinputdata['formNo']);
-            return;
+
 
 
         }
@@ -2989,9 +2976,7 @@ class Admission extends CI_Controller {
         else if(@$_POST['father_cnic'] == ''  )
         {
             $allinputdata['excep'] = 'Please Enter Your Father CNIC';
-            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-            redirect('Admission/'.$viewName);
-            return;
+
 
 
         }
@@ -3000,129 +2985,96 @@ class Admission extends CI_Controller {
         else if(@$_POST['mob_number'] == '')
         {
             $allinputdata['excep'] = 'Please Enter Your Mobile Number';
-            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-            redirect('Admission/'.$viewName);
-            return;
+
 
         }
         else if(@$_POST['medium'] == 0)
         {
             $allinputdata['excep'] = 'Please Select Your Medium';
-            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-            redirect('Admission/'.$viewName);
-            return;
+
 
         }
 
         else if(@$_POST['MarkOfIden']== ''  )
         {
             $allinputdata['excep'] = 'Please Enter Your Mark of Identification';
-            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-            redirect('Admission/'.$viewName);
-            return;
+
 
         }
 
         else if((@$_POST['medium'] != '1') and (@$_POST['medium'] != '2') )
         {
             $allinputdata['excep'] = 'Please Select Your medium';
-            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-            redirect('Admission/'.$viewName);
-            return;
+
 
         }
         else if((@$_POST['nationality'] != '1') and (@$_POST['nationality'] != '2') )
         {
             $allinputdata['excep'] = 'Please Select Your Nationality';
-            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-            redirect('Admission/'.$viewName);
-            return;
+
 
         }
         else if((@$_POST['gend'] != '1') and (@$_POST['gend'] != '2'))
         {
             $allinputdata['excep'] = 'Please Select Your Gender';
-            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-            redirect('Admission/'.$viewName);
-            return;
+
 
         }
         else if((@$_POST['hafiz']!= '1') and (@$_POST['hafiz']!= '2'))
         {
             $allinputdata['excep'] = 'Please Select Your Hafiz-e-Quran option';
-            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-            redirect('Admission/'.$viewName);
-            return;
+
 
         }
         else if((@$_POST['religion'] != '1') and (@$_POST['religion'] != '2'))
         {
             $allinputdata['excep'] = 'Please Select Your religion';
-            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-            redirect('Admission/'.$viewName);
-            return;
+
 
         }
         else if((@$_POST['UrbanRural'] != '1') and (@$_POST['UrbanRural'] != '2'))
         {
             $allinputdata['excep'] = 'Please Select Your Residency';
-            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-            redirect('Admission/'.$viewName);
-            return;
+
 
         }
         else if(@$_POST['address'] =='')
         {
             $allinputdata['excep'] = 'Please Enter Your Address';
-            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-            redirect('Admission/'.$viewName);
-            return;
+
 
         }
         else if(@$_POST['pvtinfo_dist'] =='')
         {
             $allinputdata['excep'] = 'Please Select Your District First!';
-            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-            redirect('Admission/'.$viewName);
-            return;
+
 
         }
         else if(@$_POST['pvtinfo_teh'] =='')
         {
             $allinputdata['excep'] = 'Please Select Your Tehsil First! ';
-            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-            redirect('Admission/'.$viewName);
-            return;
+
 
         }
         else if(@$_POST['pvtZone'] =='')
         {
             $allinputdata['excep'] = 'Please Select Your Zone First! ';
-            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-            redirect('Admission/'.$viewName);
-            return;
+
 
         }
 
         else if(@$_POST['std_group'] == 0)
         {
             $allinputdata['excep'] = 'Please Select Your Study Group';
-            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-            redirect('Admission/'.$viewName);
-            return;
-
         }
-        else
-            if(
-                (in_array(@$_POST['sub4'],$language_sub_cd)&&(in_array(@$_POST['sub5'],$language_sub_cd)|| in_array(@$_POST['sub6'],$language_sub_cd))) ||
-                (in_array(@$_POST['sub5'],$language_sub_cd)&&(in_array(@$_POST['sub4'],$language_sub_cd)|| in_array(@$_POST['sub6'],$language_sub_cd))) ||
-                (in_array(@$_POST['sub6'],$language_sub_cd)&&(in_array(@$_POST['sub4'],$language_sub_cd)|| in_array(@$_POST['sub5'],$language_sub_cd))) 
+        else if(
+            (in_array(@$_POST['sub4'],$language_sub_cd)&&(in_array(@$_POST['sub5'],$language_sub_cd)|| in_array(@$_POST['sub6'],$language_sub_cd))) ||
+            (in_array(@$_POST['sub5'],$language_sub_cd)&&(in_array(@$_POST['sub4'],$language_sub_cd)|| in_array(@$_POST['sub6'],$language_sub_cd))) ||
+            (in_array(@$_POST['sub6'],$language_sub_cd)&&(in_array(@$_POST['sub4'],$language_sub_cd)|| in_array(@$_POST['sub5'],$language_sub_cd))) 
             )
             {
                 $allinputdata['excep'] = 'Please Select One Subject from Languages Subjects.';
-                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                redirect('Admission/'.$viewName);
-                return;
+
 
             }
             else if(
@@ -3132,46 +3084,32 @@ class Admission extends CI_Controller {
                 )
                 {
                     $allinputdata['excep'] = 'Please Select One Subject from History Subjects.';
-                    $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                    redirect('Admission/'.$viewName);
-                    return;
+
 
                 }
 
                 else if(@$_POST['std_group'] == 9 )
-                { //DebugBreak();
+                { 
                     if(@$_POST['sub1p2'] == 0)
                     {
                         $allinputdata['excep'] = 'Please Select Part-II Subject 1';
-                        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                        redirect('Admission/'.$viewName);
-                        return;
+
 
                     }
                     else if(@$_POST['sub2p2'] == 0)
                     {
                         $allinputdata['excep'] = 'Please Select Part-II Subject 2';
-                        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                        redirect('Admission/'.$viewName);
-                        return;
+
                     }
 
 
                     else if(@$_POST['sub4p2'] == 0 && @$_POST['std_group'] != 4)
                     {
                         $allinputdata['excep'] = 'Please Select Part-II Subject 4';
-                        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                        redirect('Admission/'.$viewName);
-                        return;
-
                     }
                     else if(@$_POST['sub5p2'] == 0 && @$_POST['std_group'] != 4)
                     {
                         $allinputdata['excep'] = 'Please Select Part-II Subject 5';
-                        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                        redirect('Admission/'.$viewName);
-                        return;
-
                     }
 
                     else if(
@@ -3181,9 +3119,6 @@ class Admission extends CI_Controller {
                         )
                         {
                             $allinputdata['excep'] = 'Please Select One Subject from Languages Subjects.';
-                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                            redirect('Admission/'.$viewName);
-                            return;
 
                         }
                         else if(
@@ -3193,9 +3128,7 @@ class Admission extends CI_Controller {
                             )
                             {
                                 $allinputdata['excep'] = 'Please Select One Subject from History Subjects.';
-                                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                                redirect('Admission/'.$viewName);
-                                return;
+
 
                             }
 
@@ -3205,57 +3138,39 @@ class Admission extends CI_Controller {
                     if(@$_POST['sub1p2']==0)
                     {
                         $allinputdata['excep'] = 'Please Select Part-II Subject 1';
-                        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                        redirect('Admission/'.$viewName);
-                        return;
+
                     }
                     else
                         if(@$_POST['sub2p2']==0)
                         {
                             $allinputdata['excep'] = 'Please Select Part-II Subject 2';
-                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                            redirect('Admission/'.$viewName);
-                            return;
+
                         }
                         else
                             if(@$_POST['sub3p2']==0)
                             {
                                 $allinputdata['excep'] = 'Please Select Part-II Subject 3';
-                                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                                redirect('Admission/'.$viewName);
-                                return;
                             }
                             else
                                 if(@$_POST['sub4p2']==0)
                                 {
                                     $allinputdata['excep'] = 'Please Select Part-II Subject 4';
-                                    $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                                    redirect('Admission/'.$viewName);
-                                    return;
                                 }
                                 else
                                     if(@$_POST['sub5p2']==0)
                                     {
                                         $allinputdata['excep'] = 'Please Select Part-II Subject 5';
-                                        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                                        redirect('Admission/'.$viewName);
-                                        return;
                                     }
                                     else
                                         if(@$_POST['sub6p2']==0)
                                         {
                                             $allinputdata['excep'] = 'Please Select Part-II Subject 6';
-                                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                                            redirect('Admission/'.$viewName);
-                                            return;
                                         }
                                         else
                                             if(@$_POST['std_group']==5 && @$_POST['sub7p2']==0)
                                             {
                                                 $allinputdata['excep'] = 'Please Select Part-II Subject 7';
-                                                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                                                redirect('Admission/'.$viewName);
-                                                return;
+
                                             }
                                             else if(
                                                 (in_array(@$_POST['sub4'],$language_sub_cd)&&(in_array(@$_POST['sub5'],$language_sub_cd)|| in_array(@$_POST['sub6'],$language_sub_cd))) ||
@@ -3264,9 +3179,7 @@ class Admission extends CI_Controller {
                                                 )
                                                 {
                                                     $allinputdata['excep'] = 'Please Select One Subject from Languages Subjects.';
-                                                    $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                                                    redirect('Admission/'.$viewName);
-                                                    return;
+
 
                                                 }
                                                 else if(
@@ -3276,79 +3189,40 @@ class Admission extends CI_Controller {
                                                     )
                                                     {
                                                         $allinputdata['excep'] = 'Please Select One Subject from History Subjects.';
-                                                        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                                                        redirect('Admission/'.$viewName);
-                                                        return;
-
                                                     }
 
                 }
                 else if(@$_POST['exam_type'] == 2)
-                { //DebugBreak();
+                { 
                     if(@$_POST['sub1p2'] == 0)
                     {
                         $allinputdata['excep'] = 'Please Select Part-II Subject 1';
-                        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                        redirect('Admission/'.$viewName);
-                        return;
-
                     }
                     else if(@$_POST['sub2p2'] == 0)
                     {
                         $allinputdata['excep'] = 'Please Select Part-II Subject 2';
-                        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                        redirect('Admission/'.$viewName);
-                        return;
                     }
 
                     else if(@$_POST['sub3p2'] == 0)
                     {
                         $allinputdata['excep'] = 'Please Select Part-II Subject 3';
-                        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                        redirect('Admission/'.$viewName);
-                        return;
-
                     }
                     else if(@$_POST['sub4p2'] == 0 && @$_POST['std_group'] != 4)
                     {
                         $allinputdata['excep'] = 'Please Select Part-II Subject 4';
-                        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                        redirect('Admission/'.$viewName);
-                        return;
-
                     }
                     else if(@$_POST['sub5p2'] == 0 && @$_POST['std_group'] != 4)
                     {
                         $allinputdata['excep'] = 'Please Select Part-II Subject 5';
-                        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                        redirect('Admission/'.$viewName);
-                        return;
-
                     }
                     else if(@$_POST['sub6p2'] == 0 && @$_POST['std_group'] != 4)
                     {
                         $allinputdata['excep'] = 'Please Select Part-II Subject 6';
-                        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                        redirect('Admission/'.$viewName);
-                        return;
-
                     }
                     else if(@$_POST['sub7p2'] == 0 && @$_POST['std_group'] == 5)
                     {
                         $allinputdata['excep'] = 'Please Select Part-II Subject 7';
-                        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                        redirect('Admission/'.$viewName);
-                        return;
-
                     }
-                    /*else if(@$_POST['sub8p2'] == 0 && @$_POST['std_group'] != 4)
-                    {
-                    $allinputdata['excep'] = 'Please Select Part-II Subject 8';
-                    $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                    redirect('Admission/'.$viewName);
-                    return;
-
-                    }*/
                     else if(
                         (in_array(@$_POST['sub4'],$language_sub_cd)&&(in_array(@$_POST['sub5'],$language_sub_cd)|| in_array(@$_POST['sub6'],$language_sub_cd))) ||
                         (in_array(@$_POST['sub5'],$language_sub_cd)&&(in_array(@$_POST['sub4'],$language_sub_cd)|| in_array(@$_POST['sub6'],$language_sub_cd))) ||
@@ -3356,10 +3230,6 @@ class Admission extends CI_Controller {
                         )
                         {
                             $allinputdata['excep'] = 'Please Select One Subject from Languages Subjects.';
-                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                            redirect('Admission/'.$viewName);
-                            return;
-
                         }
                         else if(
                             (in_array(@$_POST['sub4'],$history_sub_cd)&&(in_array(@$_POST['sub5'],$history_sub_cd)|| in_array(@$_POST['sub6'],$history_sub_cd))) ||
@@ -3368,10 +3238,6 @@ class Admission extends CI_Controller {
                             )
                             {
                                 $allinputdata['excep'] = 'Please Select One Subject from History Subjects.';
-                                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                                redirect('Admission/'.$viewName);
-                                return;
-
                             }
 
                 }
@@ -3409,66 +3275,35 @@ class Admission extends CI_Controller {
             if($sel_sub_p1_count == 0)
             {
                 $allinputdata['excep'] = 'Please Select at least one Part-I Subject.';
-                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                redirect('Admission/'.$viewName);
-                return;
-
             }
             if(@$_POST['sub1p2'] == 0)
             {
                 $allinputdata['excep'] = 'Please Select Part-II Subject 1';
-                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                redirect('Admission/'.$viewName);
-                return;
-
             }
             else if(@$_POST['sub2p2'] == 0)
             {
                 $allinputdata['excep'] = 'Please Select Part-II Subject 2';
-                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                redirect('Admission/'.$viewName);
-                return;
             }
 
             else if(@$_POST['sub3p2'] == 0)
             {
                 $allinputdata['excep'] = 'Please Select Part-II Subject 3';
-                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                redirect('Admission/'.$viewName);
-                return;
-
             }
             else if(@$_POST['sub4p2'] == 0 && @$_POST['std_group'] != 4)
             {
                 $allinputdata['excep'] = 'Please Select Part-II Subject 4';
-                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                redirect('Admission/'.$viewName);
-                return;
-
             }
             else if(@$_POST['sub5p2'] == 0 && @$_POST['std_group'] != 4)
             {
                 $allinputdata['excep'] = 'Please Select Part-II Subject 5';
-                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                redirect('Admission/'.$viewName);
-                return;
-
             }
             else if(@$_POST['sub6p2'] == 0 && @$_POST['std_group'] != 4)
             {
                 $allinputdata['excep'] = 'Please Select Part-II Subject 6';
-                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                redirect('Admission/'.$viewName);
-                return;
-
             }
             else if(@$_POST['sub7p2'] == 0 && @$_POST['std_group'] == 5)
             {
                 $allinputdata['excep'] = 'Please Select Part-II Subject 7';
-                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                redirect('Admission/'.$viewName);
-                return;
-
             }
             else if(
                 (in_array(@$_POST['sub4'],$language_sub_cd)&&(in_array(@$_POST['sub5'],$language_sub_cd)|| in_array(@$_POST['sub6'],$language_sub_cd))) ||
@@ -3477,10 +3312,6 @@ class Admission extends CI_Controller {
                 )
                 {
                     $allinputdata['excep'] = 'Please Select One Subject from Languages Subjects.';
-                    $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                    redirect('Admission/'.$viewName);
-                    return;
-
                 }
                 else if(
                     (in_array(@$_POST['sub4'],$history_sub_cd)&&(in_array(@$_POST['sub5'],$history_sub_cd)|| in_array(@$_POST['sub6'],$history_sub_cd))) ||
@@ -3489,13 +3320,7 @@ class Admission extends CI_Controller {
                     )
                     {
                         $allinputdata['excep'] = 'Please Select One Subject from History Subjects.';
-                        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                        redirect('Admission/'.$viewName);
-                        return;
-
                     }
-
-
 
         }
         else if(@$_POST['exam_type']==4)
@@ -3533,10 +3358,6 @@ class Admission extends CI_Controller {
             if($sel_sub_p2_count == 0)
             {
                 $allinputdata['excep'] = 'Please Select at least one Part-II Subject.';
-                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                redirect('Admission/'.$viewName);
-                return;
-
             }
             else if(
                 (in_array(@$_POST['sub4'],$language_sub_cd)&&(in_array(@$_POST['sub5'],$language_sub_cd)|| in_array(@$_POST['sub6'],$language_sub_cd))) ||
@@ -3545,10 +3366,6 @@ class Admission extends CI_Controller {
                 )
                 {
                     $allinputdata['excep'] = 'Please Select One Subject from Languages Subjects.';
-                    $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                    redirect('Admission/'.$viewName);
-                    return;
-
                 }
                 else if(
                     (in_array(@$_POST['sub4'],$history_sub_cd)&&(in_array(@$_POST['sub5'],$history_sub_cd)|| in_array(@$_POST['sub6'],$history_sub_cd))) ||
@@ -3557,10 +3374,6 @@ class Admission extends CI_Controller {
                     )
                     {
                         $allinputdata['excep'] = 'Please Select One Subject from History Subjects.';
-                        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                        redirect('Admission/'.$viewName);
-                        return;
-
                     }
 
 
@@ -3602,9 +3415,6 @@ class Admission extends CI_Controller {
             if($sel_sub_p1_count == 0)
             {
                 $allinputdata['excep'] = 'Please Select at least one Part-II Subject.';
-                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                redirect('Admission/'.$viewName);
-                return;
 
             }
             else if(
@@ -3614,10 +3424,6 @@ class Admission extends CI_Controller {
                 )
                 {
                     $allinputdata['excep'] = 'Please Select One Subject from Languages Subjects.';
-                    $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                    redirect('Admission/'.$viewName);
-                    return;
-
                 }
                 else if(
                     (in_array(@$_POST['sub4'],$history_sub_cd)&&(in_array(@$_POST['sub5'],$history_sub_cd)|| in_array(@$_POST['sub6'],$history_sub_cd))) ||
@@ -3626,10 +3432,6 @@ class Admission extends CI_Controller {
                     )
                     {
                         $allinputdata['excep'] = 'Please Select One Subject from History Subjects.';
-                        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                        redirect('Admission/'.$viewName);
-                        return;
-
                     }  
 
 
@@ -3670,9 +3472,7 @@ class Admission extends CI_Controller {
             if($sel_sub_p1_count == 0)
             {
                 $allinputdata['excep'] = 'Please Select at least one Part-I Subject.';
-                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                redirect('Admission/'.$viewName);
-                return;
+
 
             }
             if(@$_POST['sub1p2'] != 0)
@@ -3706,9 +3506,7 @@ class Admission extends CI_Controller {
             if($sel_sub_p2_count == 0)
             {
                 $allinputdata['excep'] = 'Please Select at least one Part-II Subject.';
-                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                redirect('Admission/'.$viewName);
-                return;
+
 
             }
             else if(
@@ -3718,9 +3516,6 @@ class Admission extends CI_Controller {
                 )
                 {
                     $allinputdata['excep'] = 'Please Select One Subject from Languages Subjects.';
-                    $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                    redirect('Admission/'.$viewName);
-                    return;
 
                 }
                 else if(
@@ -3730,25 +3525,15 @@ class Admission extends CI_Controller {
                     )
                     {
                         $allinputdata['excep'] = 'Please Select One Subject from History Subjects.';
-                        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                        redirect('Admission/'.$viewName);
-                        return;
-
                     }
-
-
-
-
         }
         // Additional Subjects.
-        else if(@$_POST['exam_type']==16 && @$_POST['category']==2)
+        else if(@$_POST['exam_type']==16 && @$_POST['category']== 2)
         {
             if(@$_POST['sub6'] == 0 && @$_POST['sub6p2'] == 0 && @$_POST['sub5'] == 0 && @$_POST['sub5p2'] == 0 && @$_POST['sub4'] == 0 && @$_POST['sub4p2'] == 0)
             {
                 $allinputdata['excep'] = 'Please Select atleast one subject.';
-                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                redirect('Admission/'.$viewName);
-                return;
+
 
             }
             else if(
@@ -3758,10 +3543,6 @@ class Admission extends CI_Controller {
                 )
                 {
                     $allinputdata['excep'] = 'Please Select One Subject from Languages Subjects.';
-                    $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                    redirect('Admission/'.$viewName);
-                    return;
-
                 }
                 else if(
                     (in_array(@$_POST['sub4'],$history_sub_cd)&&(in_array(@$_POST['sub5'],$history_sub_cd)|| in_array(@$_POST['sub6'],$history_sub_cd))) ||
@@ -3770,10 +3551,6 @@ class Admission extends CI_Controller {
                     )
                     {
                         $allinputdata['excep'] = 'Please Select One Subject from History Subjects.';
-                        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                        redirect('Admission/'.$viewName);
-                        return;
-
                     }
         }
         // Marks Improvements
@@ -3782,57 +3559,43 @@ class Admission extends CI_Controller {
             if(@$_POST['sub1']==0)
             {
                 $allinputdata['excep'] = 'Please Select Part-I Subject 1';
-                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                redirect('Admission/'.$viewName);
-                return;
+
             }
             else
                 if(@$_POST['sub2']==0)
                 {
                     $allinputdata['excep'] = 'Please Select Part-I Subject 2';
-                    $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                    redirect('Admission/'.$viewName);
-                    return;
+
                 }
                 else
                     if(@$_POST['sub3']==0)
                     {
                         $allinputdata['excep'] = 'Please Select Part-I Subject 3';
-                        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                        redirect('Admission/'.$viewName);
-                        return;
+
                     }
                     else
                         if(@$_POST['sub4']==0)
                         {
                             $allinputdata['excep'] = 'Please Select Part-I Subject 4';
-                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                            redirect('Admission/'.$viewName);
-                            return;
+
                         }
                         else
                             if(@$_POST['sub5']==0)
                             {
                                 $allinputdata['excep'] = 'Please Select Part-I Subject 5';
-                                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                                redirect('Admission/'.$viewName);
-                                return;
+
                             }
                             else
                                 if(@$_POST['sub6']==0)
                                 {
                                     $allinputdata['excep'] = 'Please Select Part-I Subject 6';
-                                    $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                                    redirect('Admission/'.$viewName);
-                                    return;
+
                                 }
                                 else
                                     if(@$_POST['std_group']==5 && @$_POST['sub7']==0)
                                     {
                                         $allinputdata['excep'] = 'Please Select Part-I Subject 7';
-                                        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                                        redirect('Admission/'.$viewName);
-                                        return;
+
                                     }
                                     else if(
                                         (in_array(@$_POST['sub4'],$language_sub_cd)&&(in_array(@$_POST['sub5'],$language_sub_cd)|| in_array(@$_POST['sub6'],$language_sub_cd))) ||
@@ -3841,9 +3604,7 @@ class Admission extends CI_Controller {
                                         )
                                         {
                                             $allinputdata['excep'] = 'Please Select One Subject from Languages Subjects.';
-                                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                                            redirect('Admission/'.$viewName);
-                                            return;
+
 
                                         }
                                         else if(
@@ -3853,9 +3614,7 @@ class Admission extends CI_Controller {
                                             )
                                             {
                                                 $allinputdata['excep'] = 'Please Select One Subject from History Subjects.';
-                                                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                                                redirect('Admission/'.$viewName);
-                                                return;
+
 
                                             }
         }
@@ -3864,57 +3623,43 @@ class Admission extends CI_Controller {
             if(@$_POST['sub1p2']==0)
             {
                 $allinputdata['excep'] = 'Please Select Part-II Subject 1';
-                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                redirect('Admission/'.$viewName);
-                return;
+
             }
             else
                 if(@$_POST['sub2p2']==0)
                 {
                     $allinputdata['excep'] = 'Please Select Part-II Subject 2';
-                    $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                    redirect('Admission/'.$viewName);
-                    return;
+
                 }
                 else
                     if(@$_POST['sub3p2']==0)
                     {
                         $allinputdata['excep'] = 'Please Select Part-II Subject 3';
-                        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                        redirect('Admission/'.$viewName);
-                        return;
+
                     }
                     else
                         if(@$_POST['sub4p2']==0)
                         {
                             $allinputdata['excep'] = 'Please Select Part-II Subject 4';
-                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                            redirect('Admission/'.$viewName);
-                            return;
+
                         }
                         else
                             if(@$_POST['sub5p2']==0)
                             {
                                 $allinputdata['excep'] = 'Please Select Part-II Subject 5';
-                                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                                redirect('Admission/'.$viewName);
-                                return;
+
                             }
                             else
                                 if(@$_POST['sub6p2']==0)
                                 {
                                     $allinputdata['excep'] = 'Please Select Part-II Subject 6';
-                                    $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                                    redirect('Admission/'.$viewName);
-                                    return;
+
                                 }
                                 else
                                     if(@$_POST['std_group']==5 && @$_POST['sub7p2']==0)
                                     {
                                         $allinputdata['excep'] = 'Please Select Part-II Subject 7';
-                                        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                                        redirect('Admission/'.$viewName);
-                                        return;
+
                                     }
                                     else if(
                                         (in_array(@$_POST['sub4'],$language_sub_cd)&&(in_array(@$_POST['sub5'],$language_sub_cd)|| in_array(@$_POST['sub6'],$language_sub_cd))) ||
@@ -3923,9 +3668,7 @@ class Admission extends CI_Controller {
                                         )
                                         {
                                             $allinputdata['excep'] = 'Please Select One Subject from Languages Subjects.';
-                                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                                            redirect('Admission/'.$viewName);
-                                            return;
+
 
                                         }
                                         else if(
@@ -3935,9 +3678,7 @@ class Admission extends CI_Controller {
                                             )
                                             {
                                                 $allinputdata['excep'] = 'Please Select One Subject from History Subjects.';
-                                                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                                                redirect('Admission/'.$viewName);
-                                                return;
+
 
                                             }
         }
@@ -3976,9 +3717,7 @@ class Admission extends CI_Controller {
             if($sel_sub_p1_count == 0)
             {
                 $allinputdata['excep'] = 'Please Select at least one Part-I Subject.';
-                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                redirect('Admission/'.$viewName);
-                return;
+
 
             }
             if(@$_POST['sub1p2'] != 0)
@@ -4012,9 +3751,7 @@ class Admission extends CI_Controller {
             if($sel_sub_p2_count == 0)
             {
                 $allinputdata['excep'] = 'Please Select at least one Part-II Subject.';
-                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                redirect('Admission/'.$viewName);
-                return;
+
 
             }
             else if(
@@ -4024,9 +3761,7 @@ class Admission extends CI_Controller {
                 )
                 {
                     $allinputdata['excep'] = 'Please Select One Subject from Languages Subjects.';
-                    $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                    redirect('Admission/'.$viewName);
-                    return;
+
 
                 }
                 else if(
@@ -4036,16 +3771,16 @@ class Admission extends CI_Controller {
                     )
                     {
                         $allinputdata['excep'] = 'Please Select One Subject from History Subjects.';
-                        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                        redirect('Admission/'.$viewName);
-                        return;
+
                     }
         }
 
-        
-        //echo json_encode($allinputdata);
-        
-        
-        
+
+        if($allinputdata['excep'] == '')
+        {
+            $allinputdata['excep'] =  'Success';
+        }
+
+        echo json_encode($allinputdata);
     }
 }

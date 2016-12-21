@@ -23,7 +23,7 @@ header("Pragma: no-cache");
                                     <label class="control-label span2" >
                                     </label> 
                                     <img id="image_upload_preview" style="width:140px; height: 140px;" src="<?php echo '../../'.GET_PRIVATE_IMAGE_PATH.$data[0]['picpath'];?>" alt="Candidate Image" />
-                                    <input type="hidden" id="pic" name="pic"  value="<?php echo $data[0]['picpath']?>"/>    
+                                    <input type="hidden" id="pic" name="pic" value="<?php echo  $data['0']['picpath']; ?>" />    
                                 </div>
                             </div>
                             <div class="controls controls-row">
@@ -2598,7 +2598,27 @@ header("Pragma: no-cache");
                                 }
                                 else
                                 {
-                                    return true;
+                                    $.ajax({
+
+                                        type: "POST",
+                                        url: "<?php  echo site_url('Admission/frmvalidation'); ?>",
+                                        data: $("#myform").serialize() ,
+                                        datatype : 'html',
+                                        success: function(data)
+                                        {
+                                            var obj = JSON.parse (data);
+                                            if(obj.excep == 'Success')
+                                            {
+                                                return true;
+                                            }
+
+                                            else
+                                            {
+                                                alertify.error(obj.excep);
+                                                return false;     
+                                            }
+                                        }
+                                    });
                                 } 
                             }
 
@@ -2620,36 +2640,7 @@ header("Pragma: no-cache");
 
                         </script>
 
-                        <script type="text/javascript">
 
-                            $('#btnsubmitUpdateEnrol').click(function(event) {
-
-
-                                debugger;
-
-                                form = $("#myform").serialize();
-
-
-
-                                $.ajax({
-
-                                    beforeSend: function() {  $('.mPageloader').show(); },
-                                    complete: function() { $('.mPageloader').hide();},
-
-
-                                    type: "POST",
-                                    url: "<?php  echo site_url('Admission/frmvalidation'); ?>",
-
-                                    data: form,
-
-                                    success: function(data){
-                                      alert('calling');
-                                    }
-                                });
-                                event.preventDefault();
-                                return false;  
-                            });
-                        </script>
 
                     </div>  
                 </div>
