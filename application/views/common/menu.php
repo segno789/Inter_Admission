@@ -542,28 +542,28 @@
                 </button>
                 <ul class="dropdown-menu pull-right">
                     <li>
-                        <a href="index.html" data-original-title="">
+                        <a href="<?php echo base_url(); ?>Dashboard" data-original-title="">
                             Dashboard
                         </a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url(); ?>Registration.php" data-original-title="">
-                            Registration
+                        <a href="<?php echo base_url(); ?>Admission_11th_reg/StudentsData" data-original-title="">
+                            11th Old Students
                         </a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url(); ?>Admission.php" data-original-title="">
-                            Admission
+                        <a href="<?php echo base_url(); ?>Admission_11th_reg/EditForms" data-original-title="">
+                            11th Edit Forms
                         </a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url(); ?>Result.php" data-original-title="">
-                            Result
+                        <a href="<?php echo base_url(); ?>Admission_11th_reg/FormPrinting" data-original-title="">
+                            11th Form Printing
                         </a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url(); ?>Profile.php" data-original-title="">
-                            Profile
+                        <a onclick="return logout();" data-original-title="">
+                            Logout
                         </a>
                     </li>
                 </ul>

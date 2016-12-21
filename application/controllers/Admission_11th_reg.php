@@ -40,21 +40,14 @@ class Admission_11th_reg extends CI_Controller {
         $this->load->view('common/header.php',$userinfo);
         $this->load->model('Admission_11th_reg_model');
 
-        $inst_cd = 362521;
-        $isset = $this->Admission_11th_reg_model->iszoneset($Inst_Id);
+        $inst_cd = '';
+        //$isset = $this->Admission_11th_reg_model->iszoneset($Inst_Id);
         //DebugBreak();
        if($Inst_Id == $inst_cd)
         {
             $this->load->view('Admission/Matric/errorPage.php',$userinfo);
             $this->load->view('common/footer.php'); 
         }
-       /* else if($isset == 0)
-        {
-            
-            // $this->load->view('common/menu.php',$userinfo);
-            $this->load->view('Admission/11th/Incomplete_inst_info.php',$userinfo);
-            $this->load->view('common/footer.php');
-        }*/
         else{
             $userinfo['isselected'] = 14;
             $userinfo['isdashbord'] = 1;
@@ -3147,7 +3140,7 @@ class Admission_11th_reg extends CI_Controller {
     }  
   public function ChallanForm_Adm9hth_Regular()
     { 
-  DebugBreak();
+  //DebugBreak();
      $Grp_cd = $this->uri->segment(3);
      $this->load->library('session');
         $this->load->library('NumbertoWord');
