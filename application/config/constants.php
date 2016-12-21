@@ -58,7 +58,7 @@ define('return_pdf_isPicture','1');
 define('CURRENT_SESS','2016-2018');
 define('corr_bank_chall_class','INTER SUPPLY');
 define('session_year','2016-2018');
-define('TITLEHSSC','INTER ANNUAL EXAMINATION');
+define('TITLEHSSC','Online HSSC Annual Admission 2017');
 define('SingleDateFee11th','03-10-2016');
 define('currdate','date("d-m-Y");');
 define ('SingleDateFee','03-10-2016');
@@ -71,7 +71,7 @@ define('getinfo_languages','admission_online..tblAdmissionDataLang');
 
 
 //===============10TH Regular Admission Matric challan varaible
-define('corr_bank_chall_class1','10th');
+define('corr_bank_chall_class1','12th');
 define('CURRENT_SESS1','2016'); 
 
 
