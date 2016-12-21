@@ -327,14 +327,14 @@ class Admission_11th_reg_model extends CI_Model
                 );
             }
             $sm_data ;
-            $this->db->update_batch('Registration..IA_P1_Reg_Adm2016_temp',$sm_data,'formNo');
+            $this->db->update_batch('Registration..IA_P1_Reg_Adm2016',$sm_data,'formNo');
         }
         else if(@$_POST['isformwise']==2)
         {
             $data=array('IsAdmission'=>1,'cDate'=> date('Y-m-d H:i:s'));
             $this->db->where('Reggrp',$_POST['make_adm11th_groups']);
              $this->db->where('coll_cd',$_POST['Inst_Id']);
-            $this->db->update('Registration..IA_P1_Reg_Adm2016_temp',$data);
+            $this->db->update('Registration..IA_P1_Reg_Adm2016',$data);
         }
         else if(@$_POST['isformwise']==3)
         {
@@ -347,7 +347,7 @@ class Admission_11th_reg_model extends CI_Model
                 );
             }
             $sm_data ;
-            $this->db->update_batch('Registration..IA_P1_Reg_Adm2016_temp',$sm_data,'formNo');
+            $this->db->update_batch('Registration..IA_P1_Reg_Adm2016',$sm_data,'formNo');
         }
 
         return true;
