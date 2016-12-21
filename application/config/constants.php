@@ -40,11 +40,11 @@ define('BARCODE_PATH', 'assets/pdfs/');
 define('PRIVATE_IMAGE_PATH', 'uploads/private/');
 define('REGULAR_IMAGE_PATH', 'uploads/regular/');
 define('Session','1');  // 1 for Annual and 2 for Supply
-define('Year','2016');  
+define('Year','2017');  
 define('lastdate','20-08-2016');
 define('GET_PRIVATE_IMAGE_PATH', '');
 define('GET_PRIVATE_IMAGE_PATH_COPY', '');
-define('DIRPATH11th','F:/xampp/htdocs/Share Images/'); 
+define('DIRPATH11th','D:/xampp/htdocs/Inter_Admission/Uploads/IS2016/regular/2510010001.jpg'); 
 define('IMAGE_PATH', 'uploads/2016/');
 define('Insert_sp','Admission_online..ISAdm2016_sp_insert'); // for insertion Inter supply private
 define('Insert_sp_Languages','Admission_online..ISAdm2016_sp_insert_LANGUAGES'); // for insertion Inter supply private
@@ -65,7 +65,7 @@ define ('SingleDateFee','03-10-2016');
 define('DoubleDateFee', '07-10-2016');
 define('TripleDateFee', '13-10-2016');
 define('TripleDateFeeinter', '13-10-2016');
-                                
+define ('class_for_11th_Adm','11th');                                
 define('getinfo','admission_online..tblAdmissionDataForHSSC');
 define('getinfo_languages','admission_online..tblAdmissionDataLang');
 

@@ -298,11 +298,11 @@
                             Edit Forms
                         </a>
                     </li>
-                   <li>
-                        <a href="<?php echo base_url(); ?>Admission_11th_reg/EditPicForms">
+                   <!--<li>
+                        <a href="<?php //echo base_url(); ?>Admission_11th_reg/EditPicForms">
                             Edit Pictures Forms
                         </a>
-                    </li>
+                    </li>   -->
                     <li>
                         <a href="<?php echo base_url(); ?>Admission_11th_reg/FormPrinting">
                             Form Printing

@@ -6,7 +6,7 @@
                 <div class="widget no-margin">
                     <div class="widget-header">
                         <div class="title">
-                            Edit Forms 9th Admission<a data-original-title="" id="notifications">s</a>
+                            11th Admission Forms list<a data-original-title="" id="notifications">s</a>
                         </div>
                         
                     </div>
@@ -58,28 +58,28 @@
                                     $grp_name='';                             
                                     foreach($data as $key=>$vals):
                                     $n++;
-                                    $formno = !empty($vals["formNo"])?$vals["formNo"]:"N/A";
-                                    $grp_name = $vals["RegGrp"];
-                                    switch ($grp_name) {
-                                        case '1':
-                                            $grp_name = 'SCIENCE WITH BIOLOGY';
-                                            break;
-                                        case '7':
-                                            $grp_name = 'SCIENCE  WITH COMPUTER SCIENCE';
-                                            break;
-                                        case '8':
-                                            $grp_name = 'SCIENCE  WITH ELECTRICAL WIRING';
-                                            break;
-                                        case '2':
-                                            $grp_name = 'Humanities';
-                                            break;
-                                        case '5':
-                                            $grp_name = 'Deaf and Dumb';
-                                            break;
-                                        default:
-                                            $grp_name = "No Group Selected.";
-                                    }
-  $picpath =  DIRPATH9th.'/'.$Inst_Id.'/'.$vals["PicPath"];
+                                    $formno = !empty($vals["FormNo"])?$vals["FormNo"]:"N/A";
+                                    $grp_name = $vals["grp_cd"];
+                                   switch ($grp_name) {
+                                                        case '1':
+                                                            $grp_name = 'PRE-MEDICAL';
+                                                            break;
+                                                        case '2':
+                                                            $grp_name = 'PRE-ENGINEERING';
+                                                            break;
+                                                        case '3':
+                                                            $grp_name = 'HUMANITIES';
+                                                            break;
+                                                        case '4':
+                                                            $grp_name = 'GENERAL SCIENCE';
+                                                            break;
+                                                        case '5':
+                                                            $grp_name = 'COMMERCE';
+                                                            break;
+                                                        default:
+                                                            $grp_name = "No GROUP SELECTED.";
+                                                            }
+  $picpath =  DIRPATH11th.'/'.$Inst_Id.'/'.$vals["PicPath"];
                                                        // echo $picpath;
                                                         $type = pathinfo($picpath, PATHINFO_EXTENSION);
                                                         $vals["PicPath"] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
@@ -90,7 +90,7 @@
                                     <td>'.$vals["Fname"].'</td>
                                     <td>'.date("d-m-Y", strtotime($vals["Dob"])).'</td>
                                     <td>'.$grp_name.'</td>
-                                    <td>'.$vals["sub1_abr"].','.$vals["sub2_abr"].','.$vals["sub3_abr"].','.$vals["sub4_abr"].','.$vals["sub5_abr"].','.$vals["sub6_abr"].','.$vals["sub7_abr"].','.$vals["sub8_abr"].'</td>
+                                    <td>'.$vals["sub1_abr"].','.$vals["sub2_abr"].','.$vals["sub3_abr"].','.$vals["sub4_abr"].','.$vals["sub5_abr"].','.$vals["sub6_abr"].','.$vals["sub7_abr"].'</td>
                                      <td><img id="previewImg" style="width:40px; height: 40px;" src="'.$vals['PicPath'].'" alt="Candidate Image"></td>
                                      <td align="center"><input style="    width: 24px;
     height: 24px;" type="checkbox" name="chk[]" value="'.$formno.'" /></td>';
@@ -109,9 +109,9 @@
                         </div>
                         <div class="control-group">
                             <div class="controls controls-row">
-                                <label class="label label-important" style="font-size: large;">
+                               <!-- <label class="label label-important" style="font-size: large;">
                                     Note: Please write "No Image" in the above search to check if any image of candidate is missing or not.
-                                </label>
+                                </label>  -->
                             </div>
                         </div>
                     </div>

@@ -436,10 +436,45 @@ if(isset($files)){
     }
 
     function Print_Registration_Form_Proofreading_Groupwise(grp_cd){
-        window.location.href =  '<?=base_url()?>/index.php/Registration/Print_Registration_Form_Proofreading_Groupwise/'+grp_cd + '/1'
+        window.location.href =  '<?=base_url()?>/index.php/Admission_11th_reg/Print_Admission_Form_Groupwise/'+grp_cd + '/1'
     }
     function Print_Registration_Form_Proofreading_Formnowise(startformno,endformno){
-        window.location.href =  '<?=base_url()?>/index.php/Registration/Print_Registration_Form_Proofreading_Groupwise/'+startformno + '/2' +'/'+endformno+'/';
+        window.location.href =  '<?=base_url()?>/index.php/Admission_11th_reg/Print_Admission_Form_Groupwise/'+startformno + '/2' +'/'+endformno+'/';
+    }
+    $('#get_revenue').click( function()
+    {
+        var option =  $('input[type=radio][name=opt]:checked').val(); 
+        // alert(option);
+        // return;
+        if(option == "1")
+        {
+            var std_group = $('#std_group').val();
+            if(std_group == "0"){
+                alertify.error("Please Select a Group First !");
+                return;
+            }
+            Revenue_list_groupwise(std_group);
+        }
+        else if(option =="2")
+        {
+            var startformno = $('#strt_formNo').val();
+            var endformno = $('#ending_formNo').val();
+            if((startformno.length < 10 ||  startformno.length > 10) && (endformno.length < 10 ||  endformno.length > 10))
+            {
+                alertify.error("Invalid Form No.");
+                return;
+            }
+            Revenue_list_Formnowise(startformno,endformno);
+        }
+        else{
+            return;
+        }
+    })
+      function Revenue_list_groupwise(grp_cd){
+        window.location.href =  '<?=base_url()?>Admission_11th_reg/revenue_pdf/'+grp_cd + '/4'
+    }
+    function Revenue_list_Formnowise(startformno,endformno){
+        window.location.href = '<?=base_url()?>Admission_11th_reg/revenue_pdf/'+startformno + '/5' +'/'+endformno+'/';
     }
     $('#get_report').click( function(){
         var option =  $('input[type=radio][name=opt]:checked').val(); 
@@ -1098,7 +1133,7 @@ if(isset($files)){
 
             if (e) {
                 // user clicked "ok"
-                window.location.href ='<?php echo base_url(); ?>index.php/Registration/NewEnrolment_Delete/'+formrno;
+                window.location.href ='<?php echo base_url(); ?>index.php/Admission_11th_reg/NewEnrolment_Delete/'+formrno;
             } else {
                 // user clicked "cancel"
 
