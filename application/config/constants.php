@@ -44,12 +44,18 @@ define('Year','2017');
 define('lastdate','20-08-2016');
 
 define('GET_PRIVATE_IMAGE_PATH_COPY', '');
+<<<<<<< HEAD
 
 
 //define('Insert_sp','admission_online..ISAdm2016_sp_insert'); // for insertion Inter supply private
 
 define('Insert_sp','admission_online..sp_insert_IAAdm'); // for insertion Inter annual private
 
+=======
+define('DIRPATH11th','D:/xampp/htdocs/Inter_Admission/Uploads/IS2016/regular/2510010001.jpg'); 
+define('IMAGE_PATH', 'uploads/2016/');
+define('Insert_sp','Admission_online..ISAdm2016_sp_insert'); // for insertion Inter supply private
+>>>>>>> bceabbfc92c0294b076ecff6df94b0ff8e1efff4
 define('Insert_sp_Languages','Admission_online..ISAdm2016_sp_insert_LANGUAGES'); // for insertion Inter supply private
 define('Insert_sp_matric_annual','Admission_online..MA_P1_Reg_Adm2016_sp_insert'); // for insertion matric Annual
 define('formprint_sp','Admission_online..sp_form_data_11th');    // for selection matric supply
@@ -65,11 +71,11 @@ define('return_pdf_isPicture','1');
 define('CURRENT_SESS','2016-2018');
 define('corr_bank_chall_class','INTER SUPPLY');
 define('session_year','2016-2018');
-
-
-
+define('TITLEHSSC','Online HSSC Annual Admission 2017');
+define('SingleDateFee11th','03-10-2016');
 define('currdate','date("d-m-Y");');
 define ('SingleDateFee','03-10-2016');
+<<<<<<< HEAD
 define('DoubleDateFee', '20-10-2016');
 define('TripleDateFee', '30-10-2016');
                      
@@ -77,12 +83,18 @@ define('TripleDateFee', '30-10-2016');
 
 define('LoadBioDataFromMatric','admission_online..Prev_Get_Student_Matric');                     
                                 
+=======
+define('DoubleDateFee', '07-10-2016');
+define('TripleDateFee', '13-10-2016');
+define('TripleDateFeeinter', '13-10-2016');
+define ('class_for_11th_Adm','11th');                                
+>>>>>>> bceabbfc92c0294b076ecff6df94b0ff8e1efff4
 define('getinfo','admission_online..tblAdmissionDataForHSSC');
 define('getinfo_languages','admission_online..tblAdmissionDataLang');
 
 
 //===============10TH Regular Admission Matric challan varaible
-define('corr_bank_chall_class1','10th');
+define('corr_bank_chall_class1','12th');
 define('CURRENT_SESS1','2016'); 
 
 

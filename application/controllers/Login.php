@@ -18,6 +18,12 @@ class Login extends CI_Controller {
     * map to /index.php/welcome/<method_name>
     * @see http://codeigniter.com/user_guide/general/urls.html
     */
+    function __construct()
+    {
+        parent:: __construct();
+
+        $this->clear_cache();
+    }
     public function index()
     {
         $this->load->helper('url');
@@ -188,23 +194,24 @@ class Login extends CI_Controller {
         }
 
     }
+<<<<<<< HEAD
 
+=======
+   function clear_cache()
+    {
+        $this->output->set_header("Cache-Control: no-store, no-cache, must-revalidate, no-transform, max-age=0, post-check=0, pre-check=0");
+        $this->output->set_header("Pragma: no-cache");
+    }
+>>>>>>> bceabbfc92c0294b076ecff6df94b0ff8e1efff4
 
     function logout()
     {
+        
         $this->load->helper('url');
-
         // DebugBreak();
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
-
-        $this->session->unset_userdata('logged_in');
-        $this->session->unset_userdata('user_id');
-        $this->session->unset_userdata('username');
-        $this->session->unset_userdata('logged_in_front');
-        $this->session->unset_userdata('user_id_front');
-        $this->session->unset_userdata('username_front');
-
+        $this->session->set_userdata('logged_in', ''); 
         $this->session->sess_destroy();
         redirect('login');
 
