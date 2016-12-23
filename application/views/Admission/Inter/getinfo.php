@@ -33,7 +33,7 @@
                                                         <?php
                                                         if(Session == 1){
                                                             echo'
-                                                            
+                                                            <option value="2016" selected>2016</option>
                                                             <option value="2015">2015</option>
                                                             <option value="2014" >2014</option>
                                                             <option value="2013">2013</option>
@@ -178,7 +178,7 @@
                                             <tr>
 
                                                 <td><label class=mytblmargin style="margin-right: 62px;"><b>Date of Birth</b><br /></label></td>
-                                                <td><input type="text" class="panjang required custom" onKeyPress="validatenumber(event);" maxlength="10" id="txtMatRno" required="required" name="txtMatRno" value="<?php  echo @$spl_cd['data']['txtMatRno'];  ?>"></td> 
+                                                <td><input type="text" class="panjang required custom" onKeyPress="validatenumber(event);" maxlength="10" id="txtDob" required="required" name="txtDob" value="<?php  echo @$spl_cd['data']['txtMatRno'];  ?>"></td> 
 
                                                 <td><label class=mytblmargin><b>Matric Roll No.</b><br /></label></td>
                                                 <td><input type="text" class="panjang required custom" onKeyPress="validatenumber(event);" maxlength="10" id="txtMatRno" required="required" name="txtMatRno" value="<?php  echo @$spl_cd['data']['txtMatRno'];  ?>"></td> 
@@ -190,7 +190,6 @@
                                                         <?php
                                                         if(Session == 1){
                                                             echo'
-                                                            <option value="2016" selected>2016</option>
                                                             <option value="2015">2015</option>
                                                             <option value="2014" >2014</option>
                                                             <option value="2013">2013</option>
@@ -276,45 +275,7 @@
 
 
                             </div>
-                            <table width="99%">
-                                <tbody>
-                                    <tr>
-                                        <th><b></b></th>
-                                        <td colspan="2">
-                                        </td>
-                                    </tr> 
-                                    <tr> 
-                                        <td>
-                                        </td>                      
-                                        <td colspan="2" class="return_msg" style="color:#FF0000;font-size: 18px;">
-                                            <?php
 
-                                            if(@$_GET['nrno'] >0)
-                                            {
-                                                if(@$_GET['nsession'] == 1)
-                                                {
-                                                    $sname = "Annual";
-                                                }
-                                                else if(@$_GET['nsession'] == 2)
-                                                {
-                                                    $sname = "Supplementary";
-                                                }
-                                                echo "You are appeared in  <b>$sname, ".$_GET['nyear']."</b> with Roll Number: <b>".$_GET['nrno']."</b>";    
-                                            }
-                                            if(@$_GET['nsplc'] != '')
-                                            {
-                                                echo "You are <b>".$_GET['nsplc']."</b></br> Please clear your objection from Matric Branch B.I.S.E Gujranwala";   
-                                            }
-
-                                            ?>
-                                        </td>
-                                        <td>
-                                        </td>
-                                    </tr>    
-                                    <tr>
-                                    </tr>                
-                                </tbody>
-                            </table>    
                         </div>
                     </div>
                 </div>
@@ -326,6 +287,9 @@
 <p><strong style=" font-size: 24px;"> Please follow this fee structure </strong></p>
 <img src="<?php echo base_url(); ?>assets/img/fee.jpg"  alt="Fee Structure"/>
 <p><strong> Result will be RL-FEE if any student submit less fee than above criteria.</strong></p>
+
+
+
 
 <script type="text/javascript">
 
@@ -342,6 +306,7 @@
 
 
     function validatenumber(evt) {
+
         var theEvent = evt || window.event;
         var key = theEvent.keyCode || theEvent.which;
         key = String.fromCharCode( key );
@@ -363,5 +328,6 @@
             alert("Last Appear Intermediate Roll No Must be filled out");
             return false;
         }
-    }
+    }  
 </script>
+

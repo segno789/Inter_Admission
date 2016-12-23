@@ -22,12 +22,22 @@ header("Pragma: no-cache");
                                 <div class="controls controls-row">
                                     <label class="control-label span2" >
                                     </label> 
-                                    <img id="image_upload_preview" style="width:140px; height: 140px;" src="<?php echo '../../'.GET_PRIVATE_IMAGE_PATH.$data[0]['picpath'];?>" alt="Candidate Image" />
+                                    <img id="image_upload_preview" name="image_upload_preview" style="width:140px; height: 140px;" src="<?php echo base_url() .$data[0]['picpath'];?>" alt="Candidate Image" />
                                     <input type="hidden" id="pic" name="pic" value="<?php echo  $data['0']['picpath']; ?>" />    
                                 </div>
                             </div>
                             <div class="controls controls-row">
-                                <!--<input type='file' id="inputFile" disabled="disabled"onchange="return ValidateFileUpload(this);"/>-->
+
+                                <?php  if($data[0]['picpath'] == '')   {
+                                    echo
+                                    "<input type='file' style='margin-left:10%; margin-bottom:1%;' id='inputFile' name='inputFile' onchange='return ValidateFileUpload(this);'/>";
+                                }
+                                else {
+                                    echo " <input type='file' style='margin-left:10%; margin-bottom:1%;' disabled = 'disabled' id='inputFile' name='inputFile' onchange='return ValidateFileUpload(this);'/> ";
+                                }
+
+                                ?>
+
                             </div>
                             <div class="control-group">
                                 <label class="control-label span1" >

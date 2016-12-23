@@ -940,11 +940,11 @@ class Admission extends CI_Controller {
         $image =  $this->set_barcode($Barcode);
 
         $pdf->Image(BARCODE_PATH.$image,2.9, 0.61  ,2.4,0.24,"PNG");
-        
+
         //$pdf->Image(PRIVATE_IMAGE_PATH.$data['PicPath'],6.5, 1.15+$Y, 0.95, 1.0, "JPG");
-        
+
         $pdf->Image(base_url().$data['picpath'],6.5, 1.15+$Y, 0.95, 1.0, "JPG");
-        
+
         $pdf->Image("assets/img/logo2.png",0.4, 0.2, 0.65, 0.65, "PNG");
         $pdf->SetFont('Arial','',8);
 
@@ -2253,13 +2253,41 @@ class Admission extends CI_Controller {
         }
 
     }
-    
-    
+
+
     public function Pre_Matric_data(){
-        
+
+        DebugBreak();
+
+        $this->load->library('session');
+        $SSC_RNO = '';
+        $Dob = '';
+        $SSC_Year = '';
+        $SSC_Session = '';
+        $SSC_Board = '';
+
+        $data = array('data'=> "");
+
+
+        $data = array(
+
+            $SSC_RNO = $_POST["txtMatRno"],
+            $Dob = $_POST["txtDob"],
+            $SSC_Year = $_POST["oldYear"],
+            $SSC_Session = $_POST["oldSess"],
+            $SSC_Board = $_POST["oldBrd_cd"]
+        );
+
+        $this->load->model('Admission_model');
+        $data = $this->Admission_model->Pre_Matric_data($data);
+
+        $this->load->view('common/commonheaderfresh.php');        
+        $this->load->view('Admission/Inter/AdmissionForm_Fresh.php', array('data'=>$data));
+        $this->load->view('common/footerfresh.php');
     }
-     
-    
+
+
+
 
     public function NewEnrolment_insert()  {
         $this->load->model('Admission_model');
@@ -2547,7 +2575,9 @@ class Admission extends CI_Controller {
         else if($oldsess == 'Supplementary'){
             $oldsess =  2;    
         }
-        //  DebugBreak();
+        
+        //DebugBreak();
+        
         $addre =  str_replace("'", "", $this->input->post('address'));
         $MarkOfIden =  str_replace("'", "", $this->input->post('MarkOfIden'));
         $data = array(
@@ -2612,45 +2642,31 @@ class Admission extends CI_Controller {
             'AdmFee'=>$AdmFeeCatWise,
             'AdmTotalFee'=>$TotalAdmFee,
             'exam_type'=>$_POST['exam_type'],
+
             'picpath'=>@$_POST['pic'],
+
             'brd_name'=>@$_POST['oldboard'],
             'AdmFine'=>$dueDate
         );
-        //$copyimg = @$_POST['pic'];
 
         //DebugBreak();
 
-        /*$temp_file_name = @$_POST['pic']; //'OldPics/Pic16-MA/MA11th16/123456.jpg';
-        $whatIWant = substr($temp_file_name, strpos($temp_file_name, ".") - 6);    
-        $temp_db_rno = @$_POST['InterRno_hidden'];
-        $spreate_filename = explode(".",$whatIWant);
-        $temp_file_rno= $spreate_filename[0];
-        if($temp_file_rno != $temp_db_rno)
-        {
-        $allinputdata = "";
-        $data_error['excep'] = 'Your Pictures is not matched. ';
-        $this->session->set_flashdata('NewEnrolment_error',$data_error);
-        redirect('Admission/Pre_Inter_Data/');
+        if(@$_POST['pic'] == ''){
 
-        return;
+            $config['upload_path']   = PRIVATE_IMAGE_PATH;
+            $config['allowed_types'] = 'jpeg|jpg|png';              
+            $config['file_name']    = @$_POST['InterRno_hidden'];  
+
+            $this->load->library('upload', $config);
+
+            if ( ! $this->upload->do_upload('inputFile')) {
+                $error = array('error' => $this->upload->display_errors()); 
+            }
+            else { 
+                $data['picpath'] = array('upload_data' => $this->upload->data()); 
+            } 
         }
 
-
-        $target_path = PRIVATE_IMAGE_PATH;
-        $base_path = GET_PRIVATE_IMAGE_PATH_COPY.@$_POST['pic'];
-        if (!file_exists($target_path)){
-
-        mkdir($target_path);
-        }
-        $copyimg = $target_path.$formno.'.jpg';
-        if (!(copy($base_path, $copyimg))) 
-        {
-        $data_error['excep'] = 'The file you are attempting to upload size is between 4 to 20 Kb.';
-        $this->session->set_flashdata('NewEnrolment_error',$data_error);
-
-        redirect('Admission/Pre_Inter_Data/');
-
-        }                               */
 
         $logedIn = $this->Admission_model->Insert_NewEnorlement($data);
         if($logedIn != false)
@@ -2672,6 +2688,8 @@ class Admission extends CI_Controller {
         } 
 
     }
+
+
 
     public function NewEnrolment_insert_Languages() {
         //DebugBreak();

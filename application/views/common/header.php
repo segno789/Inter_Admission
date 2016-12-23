@@ -57,6 +57,7 @@
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.fancybox.pack.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/jquery-ui.js"></script>
 
+
 </head>
 <body>
 <div class="mPageloader">
@@ -97,49 +98,8 @@
             <span class="caret">
             </span>
         </button>
-        <ul class="dropdown-menu pull-right">
-            <!--  <li>
-            <a href="#">
-            Edit Profile
-            </a>
-            </li> -->
-            <!-- <li>
-            <a href="Profile/Profile.php">
-            Account Settings
-            </a>
-            </li>-->
-            <li>
-                <a onclick="return logout();">
-                    Logout
-                </a>
-            </li>
-        </ul>
+        
     </div>
-    <!--  <ul class="mini-nav">
-    <li>
-    <a href="#">
-    <div class="fs1" aria-hidden="true" data-icon="&#xe040;"></div>
-    <span class="info-label badge badge-warning">
-    3
-    </span>
-    </a>
-    </li>
-    <li>
-    <a href="#">
-    <div class="fs1" aria-hidden="true" data-icon="&#xe04c;"></div>
-    <span class="info-label badge badge-info">
-    5
-    </span>
-    </a>
-    </li>
-    <li>
-    <a href="#">
-    <div class="fs1" aria-hidden="true" data-icon="&#xe037;"></div>
-    <span class="info-label badge badge-success">
-    9
-    </span>
-    </a>
-    </li>
-    </ul>   -->
+    
 
 </header>

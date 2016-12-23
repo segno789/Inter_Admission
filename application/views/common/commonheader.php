@@ -15,6 +15,7 @@
     <link href="<?php echo base_url(); ?>assets/css_matric/jquery-1.8.2-custom.css" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/jquery.fancybox.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/alertify.core.css">
+
 </head>
 <body>
 <div class="mPageloader">

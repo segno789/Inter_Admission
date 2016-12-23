@@ -42,13 +42,13 @@ define('REGULAR_IMAGE_PATH', 'uploads/regular/');
 define('Session','1');  // 1 for Annual and 2 for Supply
 define('Year','2017');  
 define('lastdate','20-08-2016');
-define('GET_PRIVATE_IMAGE_PATH', '');
+
 define('GET_PRIVATE_IMAGE_PATH_COPY', '');
 
 
 //define('Insert_sp','admission_online..ISAdm2016_sp_insert'); // for insertion Inter supply private
 
-define('Insert_sp','admission_online..IAAdm2017_sp_insert'); // for insertion Inter annual private
+define('Insert_sp','admission_online..sp_insert_IAAdm'); // for insertion Inter annual private
 
 define('Insert_sp_Languages','Admission_online..ISAdm2016_sp_insert_LANGUAGES'); // for insertion Inter supply private
 define('Insert_sp_matric_annual','Admission_online..MA_P1_Reg_Adm2016_sp_insert'); // for insertion matric Annual
@@ -72,6 +72,10 @@ define('currdate','date("d-m-Y");');
 define ('SingleDateFee','03-10-2016');
 define('DoubleDateFee', '20-10-2016');
 define('TripleDateFee', '30-10-2016');
+                     
+
+
+define('LoadBioDataFromMatric','admission_online..Prev_Get_Student_Matric');                     
                                 
 define('getinfo','admission_online..tblAdmissionDataForHSSC');
 define('getinfo_languages','admission_online..tblAdmissionDataLang');

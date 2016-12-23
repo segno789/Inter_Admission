@@ -24,13 +24,15 @@
 
 
 
+
+
 </body>
 </html>
 
 <script type="text/javascript">
 
     $(document).ready(function(){
-
+        
         $("#pvtinfo_dist").change(function(){
             var distId =  $("#pvtinfo_dist").val();
             $('#pvtinfo_teh').empty();
@@ -141,10 +143,10 @@
             }
 
         })
-          var Insert_server_error= "<?php  echo @$data['Insert_server_error']; ?>";
+        var Insert_server_error= "<?php  echo @$data['Insert_server_error']; ?>";
         if(Insert_server_error !='')
         {
-             alertify.error(Insert_server_error);
+            alertify.error(Insert_server_error);
         }
     });
 
@@ -214,12 +216,12 @@
 
         /*else if(bFormNo == "" )
         {
-            $('#ErrMsg').show(); 
-            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+        $('#ErrMsg').show(); 
+        $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
 
-            alertify.error("Please Enter your bay-Form") 
-            $('#bay_form').focus();  
-            return status; 
+        alertify.error("Please Enter your bay-Form") 
+        $('#bay_form').focus();  
+        return status; 
         }*/
         else if(FNic == ""  )
         {
@@ -287,25 +289,25 @@
             $("#std_group").focus();
             return status;  
         }
-        
+
         status = 1;
         return status;
     }
-     function  check_NewEnrol_validation_Languages(){
+    function  check_NewEnrol_validation_Languages(){
 
-    
-   
+
+
         var name =  $('#cand_name').val();
         var dist_cd= $('#pvtinfo_dist option:selected').val();
         var teh_cd= $('#pvtinfo_teh').val();
         var zone_cd= $('#pvtZone').val();
-          var MarkOfIdent = $('#MarkOfIden').val();
-          var address = $('#address').val();
-       // var pp_cent= $('#pp_cent').val();           
-          var status = 0;
+        var MarkOfIdent = $('#MarkOfIden').val();
+        var address = $('#address').val();
+        // var pp_cent= $('#pp_cent').val();           
+        var status = 0;
         var mobNo = $('#mob_number').val();
-       
-         if(mobNo == "" || mobNo == 0 || mobNo == undefined)
+
+        if(mobNo == "" || mobNo == 0 || mobNo == undefined)
         {
             $('#ErrMsg').show(); 
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
@@ -362,7 +364,7 @@
             $("#std_group").focus();
             return status;  
         }
-        
+
         status = 1;
         return status;
     }

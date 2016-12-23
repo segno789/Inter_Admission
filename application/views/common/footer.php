@@ -18,6 +18,7 @@
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.fancybox.pack.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/jquery-ui.js"></script>
 
+
 <?php 
 if(isset($files)){
     foreach($files as $file){
@@ -27,6 +28,7 @@ if(isset($files)){
 ?> 
 <script type="">
     $(document).ready(function () {
+             
         $('#data-table').dataTable({
             "sPaginationType": "full_numbers",
             "cache": false
