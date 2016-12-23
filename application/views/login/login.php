@@ -27,7 +27,7 @@
                         <a href="" rel="home" data-original-title="BISE Gujranwala" style=""><img style="margin-top: 9px;text-align:left;width:150px;/* float: left; */margin-left: 14px;" src="<?php echo base_url(); ?>assets/img/icon.png" alt="Logo BISE GRW"></a>
                         <!--Intimation-->
                         <p style="color: wheat;text-align: center;font-size: 23px;margin-left: 28px;/* float: left; */margin-top: -129px;">Board of Intermediate &amp; Secondary Education, Gujranwala <br><br>     
-<<<<<<< HEAD
+                            <<<<<<< HEAD
                             <?php 
                             if(Session =='1')
                                 echo 'Annual';
@@ -36,17 +36,17 @@
 
                             ?> 
                         <?php  //echo Year; ?></p> <?php //echo CURRENT_SESS;?></p>
-=======
+                        =======
                         <?php 
                         echo  TITLEHSSC
                         //if(Session=='1')
-//                                    echo 'Annual';
-//                                    else if(Session =='2')
-//                                echo 'Supply';
-                                
-                                ?> 
-        <?php  //echo Year; ?></p> <?php //echo CURRENT_SESS; ?></p>
->>>>>>> bceabbfc92c0294b076ecff6df94b0ff8e1efff4
+                        //                                    echo 'Annual';
+                        //                                    else if(Session =='2')
+                        //                                echo 'Supply';
+
+                        ?> 
+                        <?php  //echo Year; ?></p> <?php //echo CURRENT_SESS; ?></p>
+                        >>>>>>> bceabbfc92c0294b076ecff6df94b0ff8e1efff4
                     </div>
                 </div>
 
@@ -64,40 +64,40 @@
                                         <div class="span12">
                                             <p>Fill out the form below to login.</p>
                                             <?php 
-<<<<<<< HEAD
+
 
                                             if($user_status == 1)
-=======
-                                              // DebugBreak();
-                                           if($user_status == 1)
->>>>>>> bceabbfc92c0294b076ecff6df94b0ff8e1efff4
-                                            {
-                                                echo "<b style='color: #f63131;    font-size: 15px;'>Your UserId/Password is not correct.Please use correct information</b>";
-                                            }
-                                            else if($user_status == 2)
-                                            {
-                                                echo "<b style='color: #f63131;    font-size: 15px;'>Only Colleges/Higher Schools are allowed to login.</b>";
-                                            }
-                                            else if($user_status == 3)
-                                            {
-                                                echo "<b style='color: #f63131;    font-size: 15px;'>Currently your account is inActive.</b>";
-                                            }
-                                            else if($user_status == 4)
-                                            {
-                                                echo "<b style='color: #f63131;    font-size: 13px;'> Your Registration Returns (2014-2016) not submitted. Please contact to Online Registration Branch B.I.S.E. Gujranwala.</b>";
-                                            }
-                                            else if($user_status == 5)
-                                            {
-                                                echo "<b style='color: #f63131;    font-size: 13px;'> Plaese wait some maintaince.</b>";
-                                            }
-                                            else if($user_status == 6)
-                                            {
-                                                echo "<b style='color: #f63131;    font-size: 13px;'>  Your Institution Students are not Enrolled in Matric Annual 2016.</b>";
-                                            }
-                                            else if($user_status == 7)
-                                            {
-                                                echo "<b style='color: #f63131;    font-size: 13px;'>  Your subject Groups are not filled.Please Contact to Affiliations Branch at B.I.S.E Gujranwala.</b>";
-                                            }
+
+                                                // DebugBreak();
+                                                if($user_status == 1)
+
+                                                {
+                                                    echo "<b style='color: #f63131;    font-size: 15px;'>Your UserId/Password is not correct.Please use correct information</b>";
+                                                }
+                                                else if($user_status == 2)
+                                                {
+                                                    echo "<b style='color: #f63131;    font-size: 15px;'>Only Colleges/Higher Schools are allowed to login.</b>";
+                                                }
+                                                else if($user_status == 3)
+                                                {
+                                                    echo "<b style='color: #f63131;    font-size: 15px;'>Currently your account is inActive.</b>";
+                                                }
+                                                else if($user_status == 4)
+                                                {
+                                                    echo "<b style='color: #f63131;    font-size: 13px;'> Your Registration Returns (2014-2016) not submitted. Please contact to Online Registration Branch B.I.S.E. Gujranwala.</b>";
+                                                }
+                                                else if($user_status == 5)
+                                                {
+                                                    echo "<b style='color: #f63131;    font-size: 13px;'> Plaese wait some maintaince.</b>";
+                                                }
+                                                else if($user_status == 6)
+                                                {
+                                                    echo "<b style='color: #f63131;    font-size: 13px;'>  Your Institution Students are not Enrolled in Matric Annual 2016.</b>";
+                                                }
+                                                else if($user_status == 7)
+                                                {
+                                                    echo "<b style='color: #f63131;    font-size: 13px;'>  Your subject Groups are not filled.Please Contact to Affiliations Branch at B.I.S.E Gujranwala.</b>";
+                                                }
 
                                             ?>
                                         </div>

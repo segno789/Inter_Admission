@@ -61,21 +61,10 @@ class Login extends CI_Controller {
                 }  
                 if($logedIn['tbl_inst']['edu_lvl'] == 1)
                 {
-                    /* if(($logedIn['tbl_inst']['allowed_mGrp'] == NULL || $logedIn['tbl_inst']['allowed_mGrp'] == 0 || $logedIn['tbl_inst']['allowed_mGrp'] == '') && $logedIn['tbl_inst']['IsGovernment'] ==2)
-                    {
-                    $isgroup =1;
-                    $data = array(
-                    'user_status' => 7                     
-                    );
-                    $this->load->view('login/login.php',$data);
-                    }          */
-
                     if($logedIn['tbl_inst']['IsGovernment'] ==2 and ($logedIn['tbl_inst']['allowed_mGrp'] == '1,2' || $logedIn['tbl_inst']['allowed_mGrp'] == '2,1' || $logedIn['tbl_inst']['allowed_mGrp'] == '1' || $logedIn['tbl_inst']['allowed_mGrp'] == '2' || $logedIn['tbl_inst']['allowed_mGrp'] == '1,7' || $logedIn['tbl_inst']['allowed_mGrp'] == '7,1'))
                     {
                         $logedIn['tbl_inst']['allowed_mGrp'] = '1,2,7';
                     }
-
-
                 }
                 else if($logedIn['tbl_inst']['edu_lvl'] == 2)
                 {
@@ -171,8 +160,6 @@ class Login extends CI_Controller {
                     );
                     $this->load->library('session');
                     $this->session->set_userdata('logged_in', $sess_array); 
-                    // redirect('Registration/','refresh');
-                    // redirect('Admission_matric/');
                     if($logedIn['tbl_inst']['edu_lvl'] == 2 || $logedIn['tbl_inst']['edu_lvl'] == 3 )
                     {
                         redirect('dashboard/');  
@@ -185,41 +172,28 @@ class Login extends CI_Controller {
                     'user_status' => 1                     
                 );
                 $this->load->view('login/login.php',$data);
-
             }
         }
         else
         {
             $this->load->view('login/login.php',$data);
         }
-
     }
-<<<<<<< HEAD
 
-=======
-   function clear_cache()
+    function clear_cache()
     {
         $this->output->set_header("Cache-Control: no-store, no-cache, must-revalidate, no-transform, max-age=0, post-check=0, pre-check=0");
         $this->output->set_header("Pragma: no-cache");
     }
->>>>>>> bceabbfc92c0294b076ecff6df94b0ff8e1efff4
 
     function logout()
     {
-        
         $this->load->helper('url');
-        // DebugBreak();
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $this->session->set_userdata('logged_in', ''); 
         $this->session->sess_destroy();
         redirect('login');
-
-
-
     }
 
-}
-/*'Inst_Id' => $logedIn->Inst_cd,
-'edu_lvl' => $logedIn->edu_lvl,
-'Name' => $logedIn->name,*/
+}                          
