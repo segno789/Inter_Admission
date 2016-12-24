@@ -54,7 +54,6 @@ define('formprint_sp','Admission_online..sp_form_data_11th');    // for selectio
 
 define('formprint_sp_12th','admission_online..sp_form_data_12th');    // for form data of 12th class
 
-
 define('formprint_sp_Languages','Admission_online..sp_form_data_11th_Languages');    // for selection matric supply
 define('formprint_sp_matric_annual','Admission_online..sp_form_data');    // for selection matric Annual
 define('formnovalid','600000');
@@ -70,8 +69,6 @@ define ('SingleDateFee','03-10-2016');
 define('DoubleDateFee', '20-10-2016');
 define('TripleDateFee', '30-10-2016');
                                                                                                  
-define('LoadBioDataFromMatric','admission_online..Prev_Get_Student_Matric');                     
-
 define('TripleDateFeeinter', '13-10-2016');
 define ('class_for_11th_Adm','11th');                                
 define('getinfo','admission_online..tblAdmissionDataForHSSC');

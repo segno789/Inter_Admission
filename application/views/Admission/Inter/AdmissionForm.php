@@ -1018,6 +1018,8 @@ header("Pragma: no-cache");
                                     $('#sub7').hide();$('#sub7p2').hide();
                                     $('#sub8').hide(); $('#sub8p2').hide();
                                 }
+                                
+                                
                                 function AamKhasa_subj()
                                 {
                                     Empty_All_Dropdowns();

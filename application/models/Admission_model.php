@@ -17,9 +17,19 @@ class Admission_model extends CI_Model
         $SSC_Year =  $data[2];
         $SSC_Session =  $data[3];
         $ssc_Board =  $data[4];
-
-        $query = $this->db->query('exec '.LoadBioDataFromMatric." $SSC_RNO,'".$dob."',$SSC_Year,$SSC_Session,$ssc_Board");
-        return true;
+        
+        $this->db->reconnect();
+        $query = $this->db->query("admission_online..Prev_Get_Student_Matric  $SSC_RNO, '".$dob."', $SSC_Year, $SSC_Session, $ssc_Board");
+        $rowcount = $query->num_rows();
+        $this->db->close();
+        if($rowcount > 0)
+        {
+            return $query->result_array();
+        }
+        else
+        {
+            return  false;
+        }
     }
 
     public function Pre_Inter_Data($data)

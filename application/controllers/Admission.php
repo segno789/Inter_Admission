@@ -2257,7 +2257,7 @@ class Admission extends CI_Controller {
 
     public function Pre_Matric_data(){
 
-        DebugBreak();
+        //DebugBreak();
 
         $this->load->library('session');
         $SSC_RNO = '';

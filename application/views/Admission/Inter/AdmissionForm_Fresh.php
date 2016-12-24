@@ -45,11 +45,11 @@ header("Pragma: no-cache");
                                     Bay Form No :
                                 </label>
                                 <div class="controls controls-row">
-                                    <input class="span3" type="text" id="bay_form" name="bay_form"  placeholder="34101-1111111-1" value="<?php echo  $data['0']['BForm'];?>" readonly="readonly" required="required" >
+                                    <input class="span3" type="text" id="bay_form" name="bay_form"  placeholder="34101-1111111-1" value="<?php echo  @$data['0']['bformNo'];?>" readonly="readonly" required="required" >
                                     <label class="control-label span2" for="father_cnic">
                                         Father's CNIC :
                                     </label> 
-                                    <input class="span3" id="father_cnic" name="father_cnic" type="text" placeholder="34101-1111111-1"  value="<?php echo  $data['0']['FNIC'];?>" readonly="readonly" required="required">
+                                    <input class="span3" id="father_cnic" name="father_cnic" type="text" placeholder="34101-1111111-1"  value="<?php echo  @$data['0']['FNIC'];?>" readonly="readonly" required="required">
                                 </div>
                             </div>
                             <div class="control-group">
@@ -57,39 +57,17 @@ header("Pragma: no-cache");
                                     MEDIUM:
                                 </label>
                                 <div class="controls controls-row">
-                                    <select id="medium" class="dropdown span3" name="medium">
-                                        <?php 
-                                        $med = $data['0']['Medium'] ;
-                                        if($med == 1)
-                                        {
-                                            echo  
-                                            "<option value='1' selected='selected'>Urdu</option>
-                                            <option value='1'>English</option>";
-                                        }
-                                        else
-                                        {
-                                            echo  
-                                            "<option value='2' >Urdu</option> 
-                                            <option value='2' selected='selected'>English</option>";
-                                        }
-                                        ?>
+                                    <select id="medium" class="dropdown span3" name="medium">   
+                                        <option value='1' selected='selected'>Urdu</option>
+                                        <option value='1'>English</option>;
                                     </select>
                                     <label class="control-label span2" >
                                         Speciality:
                                     </label> 
                                     <select id="speciality"  class="span3" name="speciality">
-                                        <?php 
-                                        {
-                                            echo 
-                                            "<option value='0' selected='selected'>None</option> 
-                                            <option value='1'>Deaf &amp; Dumb</option>";
-                                            if(Session != 2)
-                                            {
-                                                echo "<option value='2'>Board Employee</option>";    
-                                            }
-
-                                        }
-                                        ?>
+                                        "<option value='0' selected='selected'>None</option> 
+                                        <option value='1'>Deaf &amp; Dumb</option>;
+                                        <option value='2'>Board Employee</option>;    
                                     </select>
                                 </div>
                             </div>
@@ -111,7 +89,7 @@ header("Pragma: no-cache");
                                 </label>
                                 <div class="controls controls-row">  
                                     <?php
-                                    $nat = $data[0]['nat'];
+                                    $nat = $data[0]['IsPakistani'];
                                     if($nat == 1)
                                     {
                                         echo 
@@ -129,7 +107,7 @@ header("Pragma: no-cache");
                                     </label> 
                                     <?php
 
-                                    $gender = $data[0]['sex'];
+                                    $gender = $data[0]['Gender'];
 
                                     if($gender == 1)
                                     {
@@ -158,7 +136,7 @@ header("Pragma: no-cache");
                                         Religion :
                                     </label> 
                                     <?php
-                                    $rel = $data[0]['rel'];
+                                    $rel = $data[0]['IsMuslim'];
                                     if($rel == 1)
                                     {
                                         echo
@@ -180,7 +158,7 @@ header("Pragma: no-cache");
                             </label>
                             <div class="controls controls-row">  
                                 <?php
-                                $resid = $data[0]['ruralOrurban'];
+                                $resid = $data[0]['isRural'];
                                 if($resid == 1 )
                                 {
                                     echo " <label class='radio inline span1'><input type='radio' value='1' id='UrbanRural' checked='checked' name='UrbanRural'> Urban
@@ -214,14 +192,14 @@ header("Pragma: no-cache");
                             </div>
                             <div class="control-group">
                                 <label class="control-label span1" >
-                                    Rno :
+                                    SSC Roll No :
                                 </label>
                                 <div class="controls controls-row">
-                                    <input class="span3" type="text" readonly="readonly" id="oldrno" style="text-transform: uppercase;" name="oldrno" value="<?php  echo  $data['0']['rno']; ?>" required="required" maxlength="60" >
+                                    <input class="span3" type="text" readonly="readonly" id="oldrno" style="text-transform: uppercase;" name="oldrno" value="<?php  echo  $data['0']['SSC_RNO']; ?>" required="required" maxlength="60" >
                                     <label class="control-label span2" >
-                                        Year:
+                                        SSC Year:
                                     </label> 
-                                    <input type="text" class="span3" name="oldyear" id = "oldyear" readonly="readonly" value="<?php  echo $data['0']['Iyear']; ?>"/> 
+                                    <input type="text" class="span3" name="oldyear" id = "oldyear" readonly="readonly" value="<?php  echo $data['0']['SSC_Year']; ?>"/> 
                                 </div>
                             </div>
                             <div class="control-group">
@@ -229,12 +207,11 @@ header("Pragma: no-cache");
                                     Session :
                                 </label>
                                 <div class="controls controls-row">
-                                    <input type="text" class="span3" id="oldsess" name="oldsess" readonly="readonly" value="<?php echo $data['0']['sess'] == 1 ? "Annual" :"Supplementary"; ?>"/> 
+                                    <input type="text" class="span3" id="oldsess" name="oldsess" readonly="readonly" value="<?php echo $data['0']['SSC_Session'] == 1 ? "Annual" :"Supplementary"; ?>"/> 
                                     <label class="control-label span2" >
                                         Board:
                                     </label> 
-                                    <input type="text" class="span3" id="oldboard" name="oldboard" readonly="readonly" value="<?php echo $data[0]['brd_name'];?>"/>     
-                                    <input type="hidden" class="span3" id="oldClass" name="oldClass"  value="<?php echo $data[0]['class'];?>"/>     
+                                    <input type="text" class="span3" id="oldboard" name="oldboard" readonly="readonly" value="<?php echo $data[0]['SSC_Board'];?>"/>     
                                 </div>
                             </div>
                             <hr>
@@ -292,8 +269,10 @@ header("Pragma: no-cache");
                                     Study Group :
                                 </label>
                                 <div class="controls controls-row">
-                                    <select id="std_group" class="dropdown span6"  name="std_group">
-
+                                    <select id="std_group" class="dropdown span6" name="std_group">
+                                        <option value="0" selected="selected">NONE</option>
+                                        <option value="3">HUMANITIES</option>
+                                        <option value="5">COMMERCE</option>
                                     </select>                                            
                                 </div>
                             </div>
@@ -411,6 +390,242 @@ header("Pragma: no-cache");
                             </div> 
                         </form>
 
+
+
+                        <script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
+                        <script type="text/javascript">
+                            function ValidateFileUpload() {
+                                var fuData = document.getElementById('inputFile');
+                                var FileUploadPath = fuData.value;
+                                if (FileUploadPath == '') {
+                                    alert("Please upload an image");
+                                    jQuery('#image_upload_preview').removeAttr('src');
+                                } 
+                                else {
+                                    var Extension = FileUploadPath.substring(
+                                        FileUploadPath.lastIndexOf('.') + 1).toLowerCase();
+                                    if (Extension == "jpeg" || Extension == "jpg") {
+                                        if (fuData.files && fuData.files[0]) {
+                                            var reader = new FileReader();
+                                            reader.onload = function(e) {
+                                                $('#image_upload_preview').attr('src', e.target.result);
+                                            }
+                                            reader.readAsDataURL(fuData.files[0]);
+                                        }
+                                    } 
+                                    else {
+                                        $('#inputFile').removeAttr('value');
+                                        jQuery('#image_upload_preview').removeAttr('src');
+                                        alert("Image only allows file types of JPEG. ");
+                                        return false;
+                                    }
+                                }
+                                var file_size = $('#inputFile')[0].files[0].size;
+                                if(file_size>20480) {                                    
+                                    $('#inputFile').removeAttr('value');
+                                    jQuery('#image_upload_preview').removeAttr('src');
+                                    alert("File size can be between 20KB"); 
+                                    return false;
+                                } 
+                            }
+
+
+                            $(document).ready(function(){
+                                $.fancybox("#instruction");
+                            });
+
+
+                            function ClearAllDropDowns() {
+
+                                $("#sub1").append('<option value="0">NONE</option>');
+                                $("#sub1p2").append('<option value="0">NONE</option>');
+
+                                $("#sub2").append('<option value="0">NONE</option>');
+                                $("#sub2p2").append('<option value="0">NONE</option>');
+
+                                $("#sub3").append('<option value="0">NONE</option>');
+                                $("#sub3p2").append('<option value="0">NONE</option>');
+
+                                $("#sub4").append('<option value="0">NONE</option>');
+                                $("#sub4p2").append('<option value="0">NONE</option>');
+
+                                $("#sub5").append('<option value="0">NONE</option>');
+                                $("#sub5p2").append('<option value="0">NONE</option>');
+
+                                $("#sub6").append('<option value="0">NONE</option>');
+                                $("#sub6p2").append('<option value="0">NONE</option>');
+
+                                $("#sub7").append('<option value="0">NONE</option>');
+                                $("#sub7p2").append('<option value="0">NONE</option>');
+
+                                $("#sub8").append('<option value="0">NONE</option>');
+                                $("#sub8p2").append('<option value="0">NONE</option>');
+
+                            }
+
+                            function Empty_All_Dropdowns(){
+
+                                $('#sub1').empty();$('#sub1p2').empty();
+                                $('#sub2').empty();$('#sub2p2').empty();
+                                $('#sub3').empty();$('#sub3p2').empty();
+                                $('#sub4').empty();$('#sub4p2').empty();
+                                $('#sub5').empty();$('#sub5p2').empty();
+                                $('#sub6').empty(); $('#sub6p2').empty();
+                                $('#sub7').empty();$('#sub7p2').empty();
+                                $('#sub8').empty(); $('#sub8p2').empty();
+                            }
+
+                            var huminities_sub_practical = {
+                                0:'SELECT ONE',              
+                                8:'LIBRARY SCIENCE',
+                                12:'GEOGRAPHY',
+                                16:'PSYCHOLOGY',
+                                18:'STATISTICS',
+                                21:'OUTLINES OF HOME ECONOMICS',
+                                23:'FINE ARTS',
+                                42:'HEALTH & PHYSICAL EDUCATION',
+                                79:'NURSING',
+                                83:'COMPUTER SCIENCE',
+                                90:'AGRICULTURE'
+                            }
+
+                            var huminities_without_practical = {
+
+                                0:'SELECT ONE',
+                                11:'ECONOMICS',
+                                14:'PHILOSOPHY',
+                                17:'CIVICS',
+                                19:'MATHEMATICS',
+                                20:'ISLAMIC STUDIES',
+                                24:'ARABIC',
+                                27:'ENGLISH ELECTIVE',
+                                32:'PUNJABI',
+                                34:'PERSIAN',
+                                37:'URDU (ADVANCE)',
+                                43:'EDUCATION',
+                                45:'SOCIOLOGY',
+                                55:'HISTORY OF PAKISTAN',
+                                56:'HISTORY OF ISLAM',
+                                57:'HISTORY OF INDO-PAK',
+                                58:'HISTORY OF MODREN WORLD'
+                            }
+
+                            var huminities_complete_subjects = {
+                                0:'SELECT ONE',
+                                11:'ECONOMICS',
+                                14:'PHILOSOPHY',
+                                17:'CIVICS',
+                                19:'MATHEMATICS',
+                                20:'ISLAMIC STUDIES',
+                                24:'ARABIC',
+                                27:'ENGLISH ELECTIVE',
+                                32:'PUNJABI',
+                                34:'PERSIAN',
+                                37:'URDU (ADVANCE)',
+                                43:'EDUCATION',
+                                45:'SOCIOLOGY',
+                                55:'HISTORY OF PAKISTAN',
+                                56:'HISTORY OF ISLAM',
+                                57:'HISTORY OF INDO-PAK',
+                                58:'HISTORY OF MODREN WORLD',
+                                8:'LIBRARY SCIENCE',
+                                12:'GEOGRAPHY',
+                                16:'PSYCHOLOGY',
+                                18:'STATISTICS',
+                                21:'OUTLINES OF HOME ECONOMICS',
+                                23:'FINE ARTS',
+                                42:'HEALTH & PHYSICAL EDUCATION',
+                                79:'NURSING',
+                                83:'COMPUTER SCIENCE',
+                                90:'AGRICULTURE'
+                            }
+
+                            function LoadHumanitiesSubjects(){
+
+                                Empty_All_Dropdowns();
+
+                                $("#sub1").append('<option value="1">ENGLISH</option>');
+                                $("#sub1p2").append('<option value="1">ENGLISH</option>');
+
+                                $("#sub2").append('<option value="2">URDU</option>');
+                                $("#sub2p2").append('<option value="2">URDU</option>');
+
+                                $("#sub3").append('<option value="92">ISLAMIC EDUCATION</option>');
+                                $("#sub3p2").append('<option value="91">PAKISTAN STUDIES</option>');
+
+                                $.each(huminities_without_practical,function(val,text){
+
+                                    $("#sub4").append(new Option(text,val));
+                                    $("#sub4p2").append(new Option(text,val));
+                                });
+
+                                $.each(huminities_without_practical,function(val,text){
+
+                                    $("#sub5").append(new Option(text,val));
+                                    $("#sub5p2").append(new Option(text,val));
+                                });
+
+                                $.each(huminities_without_practical,function(val,text){
+
+                                    $("#sub6").append(new Option(text,val));
+                                    $("#sub6p2").append(new Option(text,val));
+                                });
+
+                                $('#sub7').hide();$('#sub7p2').hide();
+                                $('#sub8').hide(); $('#sub8p2').hide();
+                            }
+
+                            function LoadCommerceSubjects(){
+                                Empty_All_Dropdowns();
+
+                                $('#sub7').show();$('#sub7p2').show();
+                                $('#sub8').hide(); $('#sub8p2').hide();
+
+                                $("#sub1").append('<option value="1">ENGLISH</option>');
+                                $("#sub1p2").append('<option value="1">ENGLISH</option>');
+
+                                $("#sub2").append('<option value="2">URDU</option>');
+                                $("#sub2p2").append('<option value="2">URDU</option>');
+
+                                $("#sub3").append('<option value="92">ISLAMIC EDUCATION</option>');
+                                $("#sub3p2").append('<option value="91">PAKISTAN STUDIES</option>');
+
+                                $("#sub4").append('<option value="70">PRINCIPLES OF ACCOUNTING</option>');
+                                $("#sub4p2").append('<option value="70">PRINCIPLES OF ACCOUNTING</option>');
+
+                                $("#sub5").append('<option value="71">PRINCIPLES OF ECONOMICS</option>');
+
+                                $("#sub5p2").append('<option value="94">COMMERCIAL GEOGRAPHY</option>');
+
+                                $("#sub6").append('<option value="80">BUSINESS MATH</option>');
+
+                                $("#sub6p2").append('<option value="97">BUSINESS STATISTICS</option>');
+
+                                $("#sub7").append('<option value="39">PRINCIPLES OF COMMERCE</option>');
+
+                                $("#sub7p2").append('<option value="95">BANKING</option>');
+                            }
+
+                            $('#std_group').change(function(){
+
+                                var sel_group = $('#std_group').val();    
+
+                                if(sel_group == 0) 
+                                {
+                                    Empty_All_Dropdowns();
+                                    ClearAllDropDowns();
+                                }     
+
+                                else if(sel_group == 3){
+                                    LoadHumanitiesSubjects();
+                                }
+
+                                else if (sel_group == 5){
+                                    LoadCommerceSubjects();
+                                }
+                            });
+
+                        </script>
 
 
 

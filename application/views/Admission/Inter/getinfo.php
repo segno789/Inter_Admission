@@ -178,10 +178,10 @@
                                             <tr>
 
                                                 <td><label class=mytblmargin style="margin-right: 62px;"><b>Date of Birth</b><br /></label></td>
-                                                <td><input type="text" class="panjang required custom" onKeyPress="validatenumber(event);" maxlength="10" id="txtDob" required="required" name="txtDob" value="<?php  echo @$spl_cd['data']['txtMatRno'];  ?>"></td> 
+                                                <td><input type="text" class="panjang required custom" onKeyPress="validatenumber(event);" maxlength="10" id="txtDob" onclick="return maskdob(this);" required="required" name="txtDob" value=""></td> 
 
                                                 <td><label class=mytblmargin><b>Matric Roll No.</b><br /></label></td>
-                                                <td><input type="text" class="panjang required custom" onKeyPress="validatenumber(event);" maxlength="10" id="txtMatRno" required="required" name="txtMatRno" value="<?php  echo @$spl_cd['data']['txtMatRno'];  ?>"></td> 
+                                                <td><input type="text" class="panjang required custom" onKeyPress="validatenumber(event);" maxlength="10" id="txtMatRno" required="required" name="txtMatRno" value=""></td> 
 
                                             </tr>
                                             <tr>
@@ -199,7 +199,14 @@
                                                             <option value="2009">2009</option>
                                                             <option value="2008" >2008</option>
                                                             <option value="2007">2007</option>
-                                                            <option value="100" >Before 2007</option>';
+                                                            <option value="2006" >2006</option>
+                                                            <option value="2005">2005</option>
+                                                            <option value="2004" >2004</option>
+                                                            <option value="2003">2003</option>
+                                                            <option value="2002" >2002</option>
+                                                            <option value="2001">2001</option>
+                                                            <option value="2000" >2000</option>
+                                                            <option value="100" >Before 2000</option>';
                                                         }
                                                         else if(Session == 2){
                                                             echo'
@@ -306,7 +313,6 @@
 
 
     function validatenumber(evt) {
-
         var theEvent = evt || window.event;
         var key = theEvent.keyCode || theEvent.which;
         key = String.fromCharCode( key );
@@ -314,7 +320,14 @@
         if( !regex.test(key) ) {
             theEvent.returnValue = false;
             if(theEvent.preventDefault) theEvent.preventDefault();
+
         }
+    }
+
+
+    function maskdob(){
+
+        $(document.getElementById("txtDob")).mask("99-99-9999", { placeholder: "DD-MM-YYYY" });
     }
 
     function validateForm() {
@@ -328,6 +341,8 @@
             alert("Last Appear Intermediate Roll No Must be filled out");
             return false;
         }
-    }  
+    } 
+
+
 </script>
 
