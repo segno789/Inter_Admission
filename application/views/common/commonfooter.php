@@ -32,7 +32,7 @@
 <script type="text/javascript">
 
     $(document).ready(function(){
-        
+
         $("#pvtinfo_dist").change(function(){
             var distId =  $("#pvtinfo_dist").val();
             $('#pvtinfo_teh').empty();
@@ -73,6 +73,8 @@
 
 
         });
+
+
         $("#pvtinfo_teh").change(function(){
             var tehId =  $("#pvtinfo_teh").val();
             if(tehId == 0){
@@ -143,6 +145,8 @@
             }
 
         })
+
+
         var Insert_server_error= "<?php  echo @$data['Insert_server_error']; ?>";
         if(Insert_server_error !='')
         {
@@ -293,9 +297,8 @@
         status = 1;
         return status;
     }
+
     function  check_NewEnrol_validation_Languages(){
-
-
 
         var name =  $('#cand_name').val();
         var dist_cd= $('#pvtinfo_dist option:selected').val();

@@ -1018,8 +1018,8 @@ header("Pragma: no-cache");
                                     $('#sub7').hide();$('#sub7p2').hide();
                                     $('#sub8').hide(); $('#sub8p2').hide();
                                 }
-                                
-                                
+
+
                                 function AamKhasa_subj()
                                 {
                                     Empty_All_Dropdowns();
@@ -2256,8 +2256,6 @@ header("Pragma: no-cache");
 
                                 })
 
-
-
                                 // sub 4 change event 
                                 $("#sub4").change(function(){
                                     var id4 =$("#sub4").val();
@@ -2535,7 +2533,7 @@ header("Pragma: no-cache");
 
                                 });
                                 $("#sub6p2").change(function(){
-                                    debugger;
+                                    
                                     var id4 =$("#sub4").val();
                                     var id4p2 =$("#sub4p2").val();
                                     var id5 =$("#sub5").val();
