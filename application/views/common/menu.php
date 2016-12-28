@@ -4,17 +4,17 @@
         <div class="dashboard-container">
         <div class="top-nav">
             <ul>
-                
-                <?php if($isselected == '1'){?>
-                <li>
-                <a href="<?php echo base_url(); ?>dashboard" class="<?php if($isselected == '1') {echo 'selected';}?>" >
-                <div class="fs1" aria-hidden="true" data-icon="&#xe0a0;"> </div>
-                Dashboard
-                </a>
-                </li>
 
-                <?php } 
-                
+                <?php if($isselected == '1'){?>
+                    <li>
+                        <a href="<?php echo base_url(); ?>dashboard" class="<?php if($isselected == '1') {echo 'selected';}?>" >
+                            <div class="fs1" aria-hidden="true" data-icon="&#xe0a0;"> </div>
+                            Dashboard
+                        </a>
+                    </li>
+
+                    <?php } 
+
                 else if($isselected == '5'){?>
 
                     <li>
@@ -46,7 +46,7 @@
 
                     <li>
                         <a href="<?php echo base_url(); ?>Registration" class="<?php if($isselected == '2') {echo 'selected';}?>" >
-                            <div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>
+                            <div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>  
                             9th Registration
                         </a>
                     </li>
@@ -94,8 +94,8 @@
                         </a>
                     </li>
                     <?php }
-                    
-                     else if($isselected == '9' ){?>
+
+                else if($isselected == '9' ){?>
 
                     <li>
                         <a href="<?php echo base_url(); ?>Admission_matric" class="<?php if($isselected == '9' ) {echo 'selected';}?>" >
@@ -104,6 +104,10 @@
                         </a>
                     </li>
                     <?php }
+<<<<<<< HEAD
+
+                else if($isselected == '11'){?>
+=======
                       
                     
                      else if($isselected == '14' ){?>
@@ -116,6 +120,7 @@
                     </li>
                     <?php }
                      else if($isselected == '11'){?>
+>>>>>>> bceabbfc92c0294b076ecff6df94b0ff8e1efff4
 
                     <li>
                         <a href="<?php echo base_url(); ?>Admission_inter" class="<?php if( $isselected == '11') {echo 'selected';}?>" >
@@ -124,7 +129,7 @@
                         </a>
                     </li>
                     <?php }?>
-                    
+
             </ul>
             <div class="clearfix">
             </div>
@@ -298,11 +303,11 @@
                             Edit Forms
                         </a>
                     </li>
-                   <li>
-                        <a href="<?php echo base_url(); ?>Admission_11th_reg/EditPicForms">
+                   <!--<li>
+                        <a href="<?php //echo base_url(); ?>Admission_11th_reg/EditPicForms">
                             Edit Pictures Forms
                         </a>
-                    </li>
+                    </li>   -->
                     <li>
                         <a href="<?php echo base_url(); ?>Admission_11th_reg/FormPrinting">
                             Form Printing
@@ -354,28 +359,28 @@
                 </ul>
                 <?php
             }
-           
+
             if($isselected == '7'){
                 ?>
                 <ul >
-                
+
                     <li><a href="<?php echo base_url(); ?>NinthCorrection"   data-original-title="" class="<?php if($isselected == '7') {echo 'heading';}?>">9th Correction </a></li>
-                  <li><a href="<?php echo base_url(); ?>NinthCorrection/EditForms"   data-original-title="" >Apply for Correction </a></li>
+                    <li><a href="<?php echo base_url(); ?>NinthCorrection/EditForms"   data-original-title="" >Apply for Correction </a></li>
                     <li>
                         <a href="<?php echo base_url(); ?>NinthCorrection/Applied">
                             Applications
                         </a>
                     </li>
-                    
+
                     <li>
                         <a onclick="return logout();">Logout</a>
                     </li>
-                   
+
 
                 </ul>
                 <?php
             }
-            
+
             // Inter Registration
             if($isselected == '6') { 
                 ?>
@@ -424,7 +429,7 @@
                         </a>
                     </li>
                     <li>
-                        <a style="cursor: pointer" onclick="return logout();">Logout</a>
+                        <a style="cursor: default" onclick="return logout();">Logout</a>
                     </li>
                     <!--  <li>
                     <a href="<?php echo base_url(); ?>Registration/ProofReading">
@@ -435,103 +440,103 @@
                 <?php
             }
             ?>
-           
-           
+
+
             <?php
             // Matric Admission
-              if($isselected == '9') { 
+            if($isselected == '9') { 
                 ?>
                 <ul >
-                    <li><a href="<?php echo base_url(); ?>Admission_matric"   data-original-title="" class="<?php if($isselected == '9') {echo 'heading';}?>">Admission</a></li>
-
-                   
+                <li><a href="<?php echo base_url(); ?>Admission_matric"   data-original-title="" class="<?php if($isselected == '9') {echo 'heading';}?>">Admission</a></li>
 
 
-                        <li>
-                            <a href="<?php echo base_url(); ?>Admission_matric/StudentsData">
-                                Old Students 
-                            </a>
-                        </li>
-                        <!-- <li>
-                        <a href="<?php echo base_url(); ?>Admission_matric/ReAdmission">
-                        Re-Admissions
-                        </a>
-                        </li>-->
 
-                        <li>
-                            <a href="<?php echo base_url(); ?>Admission_matric/EditForms">
-                                Edit Forms
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<?php echo base_url(); ?>Admission_matric/CreateBatch">
-                                Create Batch
-                            </a>
-                        </li>
 
-                        <?php }
-                        
-           //  Inter Admission
-           if($isselected == '11') { 
+                <li>
+                    <a href="<?php echo base_url(); ?>Admission_matric/StudentsData">
+                        Old Students 
+                    </a>
+                </li>
+                <!-- <li>
+                <a href="<?php echo base_url(); ?>Admission_matric/ReAdmission">
+                Re-Admissions
+                </a>
+                </li>-->
+
+                <li>
+                    <a href="<?php echo base_url(); ?>Admission_matric/EditForms">
+                        Edit Forms
+                    </a>
+                </li>
+                <li>
+                    <a href="<?php echo base_url(); ?>Admission_matric/CreateBatch">
+                        Create Batch
+                    </a>
+                </li>
+
+                <?php }
+
+            //  Inter Admission
+            if($isselected == '11') { 
                 ?>
                 <ul >
                     <li><a href="<?php echo base_url(); ?>Admission_inter"   data-original-title="" class="<?php if($isselected == '11') {echo 'heading';}?>">Admission</a></li>
 
-                   
 
 
-                        <li>
-                            <a href="<?php echo base_url(); ?>Admission_inter/StudentsData">
-                                Old Students 
-                            </a>
-                        </li>
-                        <!-- <li>
-                        <a href="<?php echo base_url(); ?>Admission_matric/ReAdmission">
-                        Re-Admissions
+
+                    <li>
+                        <a href="<?php echo base_url(); ?>Admission_inter/StudentsData">
+                            Old Students 
                         </a>
-                        </li>-->
+                    </li>
+                    <!-- <li>
+                    <a href="<?php echo base_url(); ?>Admission_matric/ReAdmission">
+                    Re-Admissions
+                    </a>
+                    </li>-->
 
-                        <li>
-                            <a href="<?php echo base_url(); ?>Admission_inter/EditForms">
-                                Edit Forms
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<?php echo base_url(); ?>Admission_inter/CreateBatch">
-                                Create Batch
-                            </a>
-                        </li>
-                            <li>
+                    <li>
+                        <a href="<?php echo base_url(); ?>Admission_inter/EditForms">
+                            Edit Forms
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url(); ?>Admission_inter/CreateBatch">
+                            Create Batch
+                        </a>
+                    </li>
+                    <li>
                         <a href="<?php echo base_url(); ?>Admission_inter/batchlist">
                             Batch List
                         </a>
                     </li>
                     <li>
                         <a href="<?php echo base_url(); ?>Admission_inter/FormPrinting">
-                           Proof Form Printing
+                            Proof Form Printing
                         </a>
                     </li>   
-                       <li>
+                    <li>
                         <a style="cursor: pointer" onclick="return logout();">Logout</a>
                     </li>
-                    </ul>
-                        <?php }
-                        ?>
-                        
-                   
-                   <!-- <li>
-                        <a href="<?php //echo base_url(); ?>/Admission_matric/Profile">
-                            Profile
-                        </a>
-                    </li>-->
-                 
-                    <!--  <li>
-                    <a href="<?php echo base_url(); ?>Registration/ProofReading">
-                    Proof Reading
-                    </a>
-                    </li>-->
-                
-                
+                </ul>
+                <?php }
+            ?>
+
+
+            <!-- <li>
+            <a href="<?php //echo base_url(); ?>/Admission_matric/Profile">
+            Profile
+            </a>
+            </li>-->
+
+            <!--  <li>
+            <a href="<?php echo base_url(); ?>Registration/ProofReading">
+            Proof Reading
+            </a>
+            </li>-->
+
+
             <div class="btn-group pull-right">
                 <button class="btn btn-primary">
                     Main Menu

@@ -13,7 +13,7 @@ class Admission_inter extends CI_Controller {
     public function index()
     {
 
-//        DebugBreak(); 
+        //        DebugBreak(); 
         $msg = 7;//$this->uri->segment(3);
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -143,9 +143,9 @@ class Admission_inter extends CI_Controller {
                         //$this->session->set_flashdata('incomplete',$allinfo);
                         $info = array('count'=>$count,'Inst_id'=>$Inst_Id,'Inst_name'=>$Inst_name,'field_status'=>$field_status,'zone'=>$zone,'error'=>$errors,'fill_values'=>$fillvalues);
                         //$this->load->view('Admission_inter/Admission_inter.php',$info);
-                       // $this->load->view('Admission_inter/9th/Incomplete_inst_info.php',$info);
-                       // $this->load->view('common/commonfooter_inter_regular.php');
-                   
+                        // $this->load->view('Admission_inter/9th/Incomplete_inst_info.php',$info);
+                        // $this->load->view('common/commonfooter_inter_regular.php');
+
                         $this->load->view('common/menu.php',$userinfo);
                         $this->load->model('Admission_inter_model');
                         $count = $this->Admission_inter_model->Dashboard($Inst_Id);
@@ -172,36 +172,36 @@ class Admission_inter extends CI_Controller {
 
 
     }
-     public function ChallanForm_Adm10th_Regular()
+    public function ChallanForm_Adm10th_Regular()
     {
-       // DebugBreak();
-     $Batch_Id = $this->uri->segment(3);
-     $this->load->library('session');
+        // DebugBreak();
+        $Batch_Id = $this->uri->segment(3);
+        $this->load->library('session');
         $this->load->library('NumbertoWord');
         $Logged_In_Array = $this->session->all_userdata();
         $user = $Logged_In_Array['logged_in'];
-         $this->load->model('Admission_inter_model');
+        $this->load->model('Admission_inter_model');
         $fetch_data = array('Inst_cd'=>$user['Inst_Id'],'Batch_Id'=>$Batch_Id);
-         //$grp_cd = $this->uri->segment(3);
-       // $fetch_data = array('Inst_cd'=>$user['Inst_Id'],'formno'=>$formno);
+        //$grp_cd = $this->uri->segment(3);
+        // $fetch_data = array('Inst_cd'=>$user['Inst_Id'],'formno'=>$formno);
         //  DebugBreak();
         $result = $this->Admission_inter_model->Print_challan_Form($fetch_data);
         $this->load->library('PDF_Rotate');
 
         $ctid=1;  //correction type of id starts from one and multiples by 2 for next type of correction id
-      
-            $feestructure[]    =  $result[0]['Total_ProcessingFee'];    
-            $displayfeetitle[] =  'Total Processing Fee';    
-       
-            $feestructure[]     = $result[0]['Total_RegistrationFee'];   
-            $displayfeetitle[] =  'Total Admission Fee';   
-       
-            $feestructure[]=$result[0]['Total_LateRegistrationFee']; 
-            $displayfeetitle[] =  'Total Late Admission Fee';   
-            
-             $feestructure[]    =  $result[0]['TotalCertificateFee']; 
-            $displayfeetitle[] =  'Total Certificate Fee';   
-       
+
+        $feestructure[]    =  $result[0]['Total_ProcessingFee'];    
+        $displayfeetitle[] =  'Total Processing Fee';    
+
+        $feestructure[]     = $result[0]['Total_RegistrationFee'];   
+        $displayfeetitle[] =  'Total Admission Fee';   
+
+        $feestructure[]=$result[0]['Total_LateRegistrationFee']; 
+        $displayfeetitle[] =  'Total Late Admission Fee';   
+
+        $feestructure[]    =  $result[0]['TotalCertificateFee']; 
+        $displayfeetitle[] =  'Total Certificate Fee';   
+
         $turn=1;     
         $pdf=new PDF_Rotate("P","in","A4");
         $pdf->AliasNbPages();
@@ -213,7 +213,7 @@ class Admission_inter extends CI_Controller {
         $challanMSG=array(1=>"(May be deposited in any HBL Branch)",2=>"(To be sent to the Admission Branch Via BISE One Window)", 3=>"(To be retained with HBL)", 4=>"(To be sent to the Board via HBL Branch aloongwith scroll)"  );
         $challanNo = $result[0]['Challan_No']; 
 
-       // DebugBreak();
+        // DebugBreak();
         if(date('Y-m-d',strtotime(SingleDateFee))>=date('Y-m-d'))
         {
             $rule_fee   =  $this->Admission_inter_model->getrulefee(); 
@@ -234,7 +234,7 @@ class Admission_inter extends CI_Controller {
         //  $pdf->SetDrawColor(0,0,0);
         // $temp = $user['Inst_Id'].'11-2017-19';
         //$image =  $this->set_barcode($temp);
-        
+
         $temp = $challanNo.'@'.$user['Inst_Id'].'@'.$Batch_Id.'@12@2016@2';
         //  $image =  $this->set_barcode($temp);
         //DebugBreak();
@@ -246,9 +246,9 @@ class Admission_inter extends CI_Controller {
         for ($j=1;$j<=4;$j++) 
         {
 
-            
-            
-            
+
+
+
             $yy = 0.04;
             if($turn==1){$dyy=0.2;} 
             else {
@@ -319,7 +319,7 @@ class Admission_inter extends CI_Controller {
             $pdf->SetFont('Arial','B',8);
 
             //if(intval($result[0]['sex'])==1){$sodo="S/O ";}else{$sodo="D/O ";}
-           // $pdf->Cell(0.5,0.25,$user['Inst_Id'].'-'.$user['inst_Name'],0,2,'L');
+            // $pdf->Cell(0.5,0.25,$user['Inst_Id'].'-'.$user['inst_Name'],0,2,'L');
             // $pdf->Cell(0.5,0.25,,0,2,'L');
             $pdf->SetX(4);
             $pdf->SetFont('Arial','I',6.5);
@@ -392,7 +392,7 @@ class Admission_inter extends CI_Controller {
             else if($corcnt ==5){
                 $y += .2;
             }
-            
+
             else if($corcnt ==6){
                 $y += .16;
             }
@@ -433,7 +433,7 @@ class Admission_inter extends CI_Controller {
     }
     public function StudentsData()
     {    
-      // DebugBreak();
+        DebugBreak();
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
@@ -457,7 +457,7 @@ class Admission_inter extends CI_Controller {
         $Logged_In_Array = $this->session->all_userdata();
         $user = $Logged_In_Array['logged_in'];
         $this->load->model('Admission_inter_model');
-        //  $error['grp_cd'] = $user['grp_cd'];
+
         $myarr = array('Inst_Id'=>$user['Inst_Id'],'gender'=>$user['gender']);
         $data = array(
             'data' => $this->Admission_inter_model->getStudentsData($myarr),
@@ -559,7 +559,7 @@ class Admission_inter extends CI_Controller {
     }
     public function NewEnrolment_update_inter()
     {
-//   DebugBreak();
+        //   DebugBreak();
         $this->load->model('Admission_inter_model');
         // //DebugBreak();
         $this->load->library('session');
@@ -614,13 +614,13 @@ class Admission_inter extends CI_Controller {
 
         // $name = 'Waseem Saleem';
         // $fname = 'Muhammad Saleem'; 
-         $sub1 = 0;         $sub2 = 0;              $sub3 = 0;          $sub4 = 0;           $sub5 = 0;         $sub6 = 0;            $sub7 = 0;  $sub8=0; $sub4a=0; $sub5a =0; $sub6a = 0; $sub7a = 0;     
+        $sub1 = 0;         $sub2 = 0;              $sub3 = 0;          $sub4 = 0;           $sub5 = 0;         $sub6 = 0;            $sub7 = 0;  $sub8=0; $sub4a=0; $sub5a =0; $sub6a = 0; $sub7a = 0;     
         $sub1ap1 = 0;        $sub2ap1 = 0;        $sub3ap1 = 0;        $sub4ap1 = 0;        $sub5ap1 = 0;        $sub6ap1 = 0;        $sub7ap1 = 0;     
         $sub1ap2 = 0;        $sub2ap2 = 0;        $sub3ap2 = 0;        $sub4ap2 = 0;        $sub5ap2 = 0;        $sub6ap2 = 0;        $sub7ap2 = 0;     $sub8ap2 = 0; 
 
 
         $is11th = 0;
-//debugBreak();
+        //debugBreak();
         if(@$_POST['sub1'] != 0)
         {
             $sub1ap1 = 1; 
@@ -738,23 +738,23 @@ class Admission_inter extends CI_Controller {
         // debugBreak();
 
         //$cat = $this->makecat($examtype,$marksImp,$is11th);
-        
+
         if($is11th==1)
         {
-        $cat11 = 2;    
+            $cat11 = 2;    
         }
         else
         {
-        $cat11 = 0;        
+            $cat11 = 0;        
         }
-        
+
         $cat12 = 1;
         $Speciality = $this->input->post('speciality');
         $grp_cd = $this->input->post('std_group');
 
         ////DebugBreak();
-      
-// DebugBreak();
+
+        // DebugBreak();
         $data = array(
             'name' =>$this->input->post('cand_name'),
             'Fname' =>$this->input->post('father_name'),
@@ -795,7 +795,7 @@ class Admission_inter extends CI_Controller {
             'sub5ap1' => ($sub5ap1),
             'sub6ap1' => ($sub6ap1),
             'sub7ap1' => ($sub7ap1),
-           // 'sub8ap1' => ($sub8ap1),
+            // 'sub8ap1' => ($sub8ap1),
             'sub1ap2' => ($sub1ap2),
             'sub2ap2' => ($sub2ap2),
             //'sub3ap2' => ($sub3ap2),
@@ -815,8 +815,8 @@ class Admission_inter extends CI_Controller {
             'Brd_cd'=>@$_POST['Oldbrd'],
             'schm'=>1,
             //'picpath'=>@$_POST['pic'],
-               'oldFormNo'=>@$_POST['formNo'],
-               'pvtinfo_dist'=>@$_POST['pvtinfo_dist'],
+            'oldFormNo'=>@$_POST['formNo'],
+            'pvtinfo_dist'=>@$_POST['pvtinfo_dist'],
             'pvtinfo_teh'=>@$_POST['pvtinfo_teh'],
             'pvtZone'=>@$_POST['pvtZone'],
 
@@ -824,30 +824,30 @@ class Admission_inter extends CI_Controller {
 
 
 
-                                         
+
         );                  
-                        
- 
-               // DebugBreak();
-    /*  $target_path = REGULAR_IMAGE_PATH.$Inst_Id.'/';
+
+
+        // DebugBreak();
+        /*  $target_path = REGULAR_IMAGE_PATH.$Inst_Id.'/';
         if (!file_exists($target_path)){
 
-            mkdir($target_path);
+        mkdir($target_path);
         }
-       
+
         $base_path = GET_PRIVATE_IMAGE_PATH_COPY.@$_POST['pic'];
         $copyimg = $target_path.$formno.'.jpg';
-       
-        
+
+
         if (!(copy($base_path, $copyimg))) 
         {
-            
-            $data['excep'] = 'The picture is not upload.';
-            $this->session->set_flashdata('NewEnrolment_error',$data);
-                //  echo '<pre>'; print_r($allinputdata['excep']);exit();
-            redirect('Admission_inter/NewEnrolment_NewForm_inter/');
+
+        $data['excep'] = 'The picture is not upload.';
+        $this->session->set_flashdata('NewEnrolment_error',$data);
+        //  echo '<pre>'; print_r($allinputdata['excep']);exit();
+        redirect('Admission_inter/NewEnrolment_NewForm_inter/');
         }*/
-      
+
         $this->frmvalidation('NewEnrolment_EditForm_inter',$data,0);
         $data['isupdate']=1;
         $logedIn = $this->Admission_inter_model->Insert_NewEnorlement($data);//, $fname);//$_POST['username'],$_POST['password']);
@@ -873,7 +873,7 @@ class Admission_inter extends CI_Controller {
     }
     public function NewEnrolment_INSERT_inter()
     {
-   //DebugBreak();
+        //DebugBreak();
         $this->load->model('Admission_inter_model');
         // //DebugBreak();
         $this->load->library('session');
@@ -928,13 +928,13 @@ class Admission_inter extends CI_Controller {
 
         // $name = 'Waseem Saleem';
         // $fname = 'Muhammad Saleem'; 
-         $sub1 = 0;         $sub2 = 0;              $sub3 = 0;          $sub4 = 0;           $sub5 = 0;         $sub6 = 0;            $sub7 = 0;  $sub8=0; $sub4a=0; $sub5a =0; $sub6a = 0; $sub7a = 0;     
+        $sub1 = 0;         $sub2 = 0;              $sub3 = 0;          $sub4 = 0;           $sub5 = 0;         $sub6 = 0;            $sub7 = 0;  $sub8=0; $sub4a=0; $sub5a =0; $sub6a = 0; $sub7a = 0;     
         $sub1ap1 = 0;        $sub2ap1 = 0;        $sub3ap1 = 0;        $sub4ap1 = 0;        $sub5ap1 = 0;        $sub6ap1 = 0;        $sub7ap1 = 0;     
         $sub1ap2 = 0;        $sub2ap2 = 0;        $sub3ap2 = 0;        $sub4ap2 = 0;        $sub5ap2 = 0;        $sub6ap2 = 0;        $sub7ap2 = 0;     $sub8ap2 = 0; 
 
 
         $is11th = 0;
-//debugBreak();
+        //debugBreak();
         if(@$_POST['sub1'] != 0)
         {
             $sub1ap1 = 1; 
@@ -1052,23 +1052,23 @@ class Admission_inter extends CI_Controller {
         // debugBreak();
 
         //$cat = $this->makecat($examtype,$marksImp,$is11th);
-        
+
         if($is11th==1)
         {
-        $cat11 = 2;    
+            $cat11 = 2;    
         }
         else
         {
-        $cat11 = 0;        
+            $cat11 = 0;        
         }
-        
+
         $cat12 = 1;
         $Speciality = $this->input->post('speciality');
         $grp_cd = $this->input->post('std_group');
 
         //DebugBreak();
-      
-//      DebugBreak();
+
+        //      DebugBreak();
         $data = array(
             'name' =>$this->input->post('cand_name'),
             'Fname' =>$this->input->post('father_name'),
@@ -1109,7 +1109,7 @@ class Admission_inter extends CI_Controller {
             'sub5ap1' => ($sub5ap1),
             'sub6ap1' => ($sub6ap1),
             'sub7ap1' => ($sub7ap1),
-           // 'sub8ap1' => ($sub8ap1),
+            // 'sub8ap1' => ($sub8ap1),
             'sub1ap2' => ($sub1ap2),
             'sub2ap2' => ($sub2ap2),
             //'sub3ap2' => ($sub3ap2),
@@ -1129,7 +1129,7 @@ class Admission_inter extends CI_Controller {
             'Brd_cd'=>@$_POST['Oldbrd'],
             'schm'=>1,
             //'picpath'=>@$_POST['pic'],
-            
+
             'oldFormNo'=>@$_POST['formNo'],
             ////       pvtinfo_dist     pvtinfo_teh      pvtZone
             'pvtinfo_dist'=>@$_POST['pvtinfo_dist'],
@@ -1142,51 +1142,51 @@ class Admission_inter extends CI_Controller {
 
 
         );
-        
- 
 
-    /* 
-     $target_path = REGULAR_IMAGE_PATH.$Inst_Id.'/';
+
+
+        /* 
+        $target_path = REGULAR_IMAGE_PATH.$Inst_Id.'/';
         if (!file_exists($target_path)){
 
-            mkdir($target_path);
+        mkdir($target_path);
         }
-       
+
         $base_path = GET_PRIVATE_IMAGE_PATH_COPY.@$_POST['pic'];
         $copyimg = $target_path.$formno.'.jpg';
-       
-        
+
+
         if (!(copy($base_path, $copyimg))) 
         {
-            
-            $data['excep'] = 'The picture is not upload.';
-            $this->session->set_flashdata('NewEnrolment_error',$data);
-                //  echo '<pre>'; print_r($allinputdata['excep']);exit();
-            redirect('Admission_inter/NewEnrolment_NewForm_inter/');
+
+        $data['excep'] = 'The picture is not upload.';
+        $this->session->set_flashdata('NewEnrolment_error',$data);
+        //  echo '<pre>'; print_r($allinputdata['excep']);exit();
+        redirect('Admission_inter/NewEnrolment_NewForm_inter/');
         }
-        
+
         */
-        
-       //DebugBreak();
-        
-       
-       /* $temp_file_name = @$_POST['pic']; //'OldPics/Pic16-MA/MA11th16/123456.jpg';
+
+        //DebugBreak();
+
+
+        /* $temp_file_name = @$_POST['pic']; //'OldPics/Pic16-MA/MA11th16/123456.jpg';
         $whatIWant = substr($temp_file_name, strpos($temp_file_name, ".") - 6);    
-      
+
         $temp_db_rno = @$_POST['OldRno'];
         $spreate_filename = explode(".",$whatIWant);
         $temp_file_rno= $spreate_filename[0];
         if($temp_file_rno != $temp_db_rno)
         {
-            $allinputdata = "";
-            $data_error['excep'] = 'Your Pictures is not matched. ';
-            $this->session->set_flashdata('NewEnrolment_error',$data_error);
-            redirect('Admission_inter/NewEnrolment_NewForm_inter/'.@$_POST['OldRno']);
+        $allinputdata = "";
+        $data_error['excep'] = 'Your Pictures is not matched. ';
+        $this->session->set_flashdata('NewEnrolment_error',$data_error);
+        redirect('Admission_inter/NewEnrolment_NewForm_inter/'.@$_POST['OldRno']);
 
-            return;
+        return;
         }                         */
-       
-        
+
+
         $target_path = REGULAR_IMAGE_PATH.$Inst_Id;
         $base_path = GET_PRIVATE_IMAGE_PATH_COPY.@$_POST['pic'];
         if (!file_exists($target_path)){
@@ -1202,13 +1202,13 @@ class Admission_inter extends CI_Controller {
             redirect('Admission_inter/NewEnrolment_NewForm_inter/'.@$_POST['OldRno']);
 
         }
-             
-      
-      $data_error = array(
-      'formNo' =>$this->input->post('formNo'),
-      
-      );
-    //  debugBreak();
+
+
+        $data_error = array(
+            'formNo' =>$this->input->post('formNo'),
+
+        );
+        //  debugBreak();
         $this->frmvalidation('NewEnrolment_NewForm_inter',$data,0);
         $data['isupdate']=0;
         $logedIn = $this->Admission_inter_model->Insert_NewEnorlement($data);//, $fname);//$_POST['username'],$_POST['password']);
@@ -1232,7 +1232,7 @@ class Admission_inter extends CI_Controller {
         } 
         $this->load->view('common/footer.php');
     }
-     private function makecat($exam_type,$marksImp,$is11th)
+    private function makecat($exam_type,$marksImp,$is11th)
     {
         // debugBreak();
         $cate =  array();
@@ -1297,11 +1297,11 @@ class Admission_inter extends CI_Controller {
             }        
             return $cate;
     }
-     public function NewEnrolment_NewForm_inter()
+    public function NewEnrolment_NewForm_inter()
     {    
 
-   // $this->uri->segment(3);
-    
+        // $this->uri->segment(3);
+
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
@@ -1313,15 +1313,15 @@ class Admission_inter extends CI_Controller {
             'isselected' => '11',
         );
         $this->load->model('Admission_inter_model');
-        
+
         if($this->session->flashdata('NewEnrolment_error')){
-           // DebugBreak();
-            //$formno
+            //DebugBreak();
+
             $RegStdata = $this->session->flashdata('NewEnrolment_error');   
             $isReAdm = 0;
             $RegStdData['isReAdm']=$isReAdm;
             $RegStdData['Oldrno']=0;
-             $formno = $this->uri->segment(3);
+            $formno = $this->uri->segment(3);
             $year = 2015; 
             $error_msg = $RegStdata['excep'];
             $RegStdData = array('data'=>$this->Admission_inter_model->EditEnrolement_data($formno,$year,$Inst_Id),'isReAdm'=>$isReAdm,'Oldrno'=>0,'error_msg'=>$error_msg);
@@ -1348,7 +1348,7 @@ class Admission_inter extends CI_Controller {
     }
     public function NewEnrolment_EditForm_inter()
     {    
-   //DebugBreak();
+        //DebugBreak();
         $this->load->library('session');
         $formno = $this->uri->segment(3);
         $Logged_In_Array = $this->session->all_userdata();
@@ -1363,10 +1363,10 @@ class Admission_inter extends CI_Controller {
         $msg = $this->uri->segment(3);
         if(isset($msg))
         {
-          $formno=$msg;  
+            $formno=$msg;  
         }
         $this->load->model('Admission_inter_model');
-     //   DebugBreak();
+        //   DebugBreak();
         if($this->session->flashdata('NewEnrolment_error')){
             //DebugBreak();
             $RegStdData['data'][0] = $this->session->flashdata('NewEnrolment_error');   
@@ -1389,7 +1389,7 @@ class Admission_inter extends CI_Controller {
                 $isReAdm = 0;
                 $year = 2016;    
             }
-              $error_msg = '';
+            $error_msg = '';
             $RegStdData = array('data'=>$this->Admission_inter_model->EditEnrolement_singleForm($formno,$year,$Inst_Id),'isReAdm'=>$isReAdm,'Oldrno'=>0,'error_msg'=>$error_msg);
         }
         $this->load->view('common/menu.php',$data);
@@ -1417,19 +1417,19 @@ class Admission_inter extends CI_Controller {
         $error = array();
         // //DebugBreak();
         $formno =  $_POST['formNo'];  //$this->Admission_inter_model->GetFormNo($Inst_Id);//, $fname);//$_POST['username'],$_POST['password']);
-      /*  $target_path = IMAGE_PATH.$Inst_Id.'/';
+        /*  $target_path = IMAGE_PATH.$Inst_Id.'/';
         // $target_path = '../uploads2/'.$Inst_Id.'/';
         if (!file_exists($target_path)){
 
-            mkdir($target_path);
+        mkdir($target_path);
         }
         $target_path = IMAGE_PATH.$Inst_Id.'/';
         if (!file_exists($target_path)){
 
-            mkdir($target_path);
+        mkdir($target_path);
         }                       */
 
-      /*  $config['upload_path']   = $target_path;
+        /*  $config['upload_path']   = $target_path;
         $config['allowed_types'] = 'jpg';
         $config['max_size']      = '20';
         $config['max_width']     = '260';
@@ -1483,7 +1483,7 @@ class Admission_inter extends CI_Controller {
         {
             $sub8ap1 = 1;    
         }
-       // $check = getimagesize($_FILES["image"]["tmp_name"]);
+        // $check = getimagesize($_FILES["image"]["tmp_name"]);
         // //DebugBreak();
         if(@$_POST['IsReAdm'] == '1')
         {
@@ -1615,7 +1615,7 @@ class Admission_inter extends CI_Controller {
 
 
         ////DebugBreak();
-        
+
 
         /*  $a = getimagesize($filepath);
         if($a[2]!=2)
@@ -1665,7 +1665,7 @@ class Admission_inter extends CI_Controller {
         {
             $sub8ap1 = 1;    
         }
-         $cat09 = 0;
+        $cat09 = 0;
         for($i=1; $i<9; $i++)
         {
             if( ${'sub'.$i.'ap1'}==1)
@@ -1895,9 +1895,9 @@ class Admission_inter extends CI_Controller {
             $this->commonfooter(array("files"=>array("jquery.maskedinput.js","validate.NewEnrolment.js"))); 
         }
     }
-     public function EditForms()
+    public function EditForms()
     {
-     //  DebugBreak();
+        //  DebugBreak();
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
@@ -1935,7 +1935,7 @@ class Admission_inter extends CI_Controller {
     }
     public function NewForms()
     {
-     //  DebugBreak();
+        //  DebugBreak();
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
@@ -1971,7 +1971,7 @@ class Admission_inter extends CI_Controller {
 
 
     }
-     public function BatchList()
+    public function BatchList()
     {
         // //DebugBreak();
         $data = array(
@@ -2020,7 +2020,7 @@ class Admission_inter extends CI_Controller {
     }
     public function CreateBatch()
     {
-       // DebugBreak();
+        // DebugBreak();
         $data = array(
             'isselected' => '11',
 
@@ -2059,7 +2059,7 @@ class Admission_inter extends CI_Controller {
     }
     public function Make_Batch_Group_wise()
     {
-       // DebugBreak();
+        // DebugBreak();
         $RegGrp = $this->uri->segment(3);
         $Spl_case = $this->uri->segment(4);
 
@@ -2078,7 +2078,7 @@ class Admission_inter extends CI_Controller {
             redirect('Admission_inter/CreateBatch');
             return;
         }
-       // $is_gov            =  $user_info['info'][0]['IsGovernment'];  //getValue("IsGovernment", " Admission_online..tblinstitutes_all", "Inst_cd =".$user->inst_cd);
+        // $is_gov            =  $user_info['info'][0]['IsGovernment'];  //getValue("IsGovernment", " Admission_online..tblinstitutes_all", "Inst_cd =".$user->inst_cd);
         /*====================  Counting Fee  ==============================*/
         $processing_fee = 0;
         $Adm_fee           = 0;
@@ -2087,9 +2087,9 @@ class Admission_inter extends CI_Controller {
         $TotalLatefee = 0;
         $Totalprocessing_fee = 0;
         $netTotal = 0;
-         $cert_fee = 550;
+        $cert_fee = 550;
         /*====================  Counting Fee  ==============================*/    
-            $practical_Sub = array(
+        $practical_Sub = array(
 
             'LIBRARY SCIENCE'=>'8',
             'GEOGRAPHY'=>'12',
@@ -2118,7 +2118,7 @@ class Admission_inter extends CI_Controller {
         $Adm_Fee_withArts_Composite = $AdmFee[1]['Comp_Amount'];
         $Adm_Fee_withArts_10th_Only = $AdmFee[1]['Amount'];
         $Adm_ProcessingFee = $AdmFee[0]['Processing_Fee'];
-       // DebugBreak();
+        // DebugBreak();
         $q1 = $user_info['fee'];
         $total_std = 0;
         $total_cert = 0;
@@ -2128,78 +2128,78 @@ class Admission_inter extends CI_Controller {
             $total_std++;
             //$ispractical = 0;
             $is9th = 0;
-             if($v["Spec"] == 1 || $v["Spec"] ==  2)
+            if($v["Spec"] == 1 || $v["Spec"] ==  2)
+            {
+                $Adm_fee = 0;
+                $TotalLatefee = $TotalLatefee + $LAdm_fee;
+                $Adm_ProcessingFee; 
+                // $Totalprocessing_fee = $Totalprocessing_fee + $Adm_ProcessingFee;
+            }
+            else
+            {
+                if($v['grp_cd']==1 ||$v['grp_cd']==2 || $v['grp_cd']==4)
                 {
-                    $Adm_fee = 0;
-                    $TotalLatefee = $TotalLatefee + $LAdm_fee;
-                    $Adm_ProcessingFee; 
-                   // $Totalprocessing_fee = $Totalprocessing_fee + $Adm_ProcessingFee;
+                    $ispractical = 1;    
+                }
+                if(array_search($v['sub4'],$practical_Sub) || array_search($v['sub5'],$practical_Sub) || array_search($v['sub5a'],$practical_Sub) || array_search($v['sub6a'],$practical_Sub) || array_search($v['sub6'],$practical_Sub) || array_search($v['sub7a'],$practical_Sub))
+                {
+                    $ispractical =1;
                 }
                 else
                 {
-                    if($v['grp_cd']==1 ||$v['grp_cd']==2 || $v['grp_cd']==4)
-                    {
-                        $ispractical = 1;    
-                    }
-                   if(array_search($v['sub4'],$practical_Sub) || array_search($v['sub5'],$practical_Sub) || array_search($v['sub5a'],$practical_Sub) || array_search($v['sub6a'],$practical_Sub) || array_search($v['sub6'],$practical_Sub) || array_search($v['sub7a'],$practical_Sub))
-                    {
-                    $ispractical =1;
-                     }
-                     else
-                     {
-                         $ispractical =0;
-                     }
-                    
-                    if($v['cat11'] != 0)
-                    {
-                        $is9th=1;
-                    }
-                    else
-                    {
-                        $is9th=0;
-                    }
-                    if($ispractical == 1 && $is9th==0)
-                    {
-                    
+                    $ispractical =0;
+                }
+
+                if($v['cat11'] != 0)
+                {
+                    $is9th=1;
+                }
+                else
+                {
+                    $is9th=0;
+                }
+                if($ispractical == 1 && $is9th==0)
+                {
+
                     $Adm_fee = $Adm_Fee_withSci_10th_Only;
                     $TotalLatefee = $TotalLatefee + $LAdm_fee;
                     $Adm_ProcessingFee; 
-                   // $Totalprocessing_fee = $Totalprocessing_fee + $Adm_ProcessingFee;
-                    }
-                    else if($ispractical == 1 && $is9th != 0)
-                    {
+                    // $Totalprocessing_fee = $Totalprocessing_fee + $Adm_ProcessingFee;
+                }
+                else if($ispractical == 1 && $is9th != 0)
+                {
                     $Adm_fee = $Adm_Fee_withSci_Composite;
                     $TotalLatefee = $TotalLatefee + $LAdm_fee;
                     $Adm_ProcessingFee; 
-                   // $Totalprocessing_fee = $Totalprocessing_fee + $Adm_ProcessingFee;  
-                    }
-                    else if($ispractical == 0 && $is9th ==0)
-                    {
+                    // $Totalprocessing_fee = $Totalprocessing_fee + $Adm_ProcessingFee;  
+                }
+                else if($ispractical == 0 && $is9th ==0)
+                {
                     $Adm_fee = $Adm_Fee_withArts_10th_Only;
                     $TotalLatefee = $TotalLatefee + $LAdm_fee;
                     $Adm_ProcessingFee; 
-                   // $Totalprocessing_fee = $Totalprocessing_fee + $Adm_ProcessingFee;  
-                    }
-                    else if($ispractical == 0 && $is9th !=0)
-                    {
+                    // $Totalprocessing_fee = $Totalprocessing_fee + $Adm_ProcessingFee;  
+                }
+                else if($ispractical == 0 && $is9th !=0)
+                {
                     $Adm_fee = $Adm_Fee_withArts_Composite;
                     $TotalLatefee = $TotalLatefee + $LAdm_fee;
                     $Adm_ProcessingFee; 
-                  //  $Totalprocessing_fee = $Totalprocessing_fee + $Adm_ProcessingFee;  
-                    }
-                    //$AdmFee
+                    //  $Totalprocessing_fee = $Totalprocessing_fee + $Adm_ProcessingFee;  
                 }
-            
-                    $TotalAdmFee = $TotalAdmFee + $Adm_fee;
-                    $TotalLatefee = $TotalLatefee + $LAdm_fee;
-                    $Totalprocessing_fee = $Totalprocessing_fee + $Adm_ProcessingFee;
-                    $total_cert = $total_cert+$cert_fee;
-                } 
-             
-            
+                //$AdmFee
+            }
 
-            $netTotal = (int)$netTotal +$Adm_fee + $LAdm_fee+$Adm_ProcessingFee+ $total_cert;;
-        
+            $TotalAdmFee = $TotalAdmFee + $Adm_fee;
+            $TotalLatefee = $TotalLatefee + $LAdm_fee;
+            $Totalprocessing_fee = $Totalprocessing_fee + $Adm_ProcessingFee;
+            $total_cert = $total_cert+$cert_fee;
+        } 
+
+
+
+        $netTotal = (int)$netTotal +$Adm_fee + $LAdm_fee+$Adm_ProcessingFee+ $total_cert;;
+
 
 
         $forms_id   = implode(",",$ids);        
@@ -2219,7 +2219,7 @@ class Admission_inter extends CI_Controller {
     }
     public function Make_Batch_Formwise()
     {
-      //  DebugBreak();
+        //  DebugBreak();
         if(!empty($_POST["chk"]))
         {
 
@@ -2229,7 +2229,7 @@ class Admission_inter extends CI_Controller {
             return;
         }
 
-       // DebugBreak();
+        // DebugBreak();
         $RegGrp = $this->uri->segment(3);
         $this->load->model('Admission_inter_model');
         $this->load->library('session');
@@ -2242,7 +2242,7 @@ class Admission_inter extends CI_Controller {
         $User_info_data = array('Inst_Id'=>$Inst_Id,'forms_id'=>$forms_id,'rule_fee'=>$rule_fee[0]['Rule_Fee_ID']);
         $user_info  =  $this->Admission_inter_model->user_info_Formwise($User_info_data); //$db->first("SELECT * FROM  Admission_online..tblinstitutes_all WHERE Inst_Cd = " .$user->inst_cd);
         $is_gov            =  $user_info['info'][0]['IsGovernment'];  //getValue("IsGovernment", " Admission_online..tblinstitutes_all", "Inst_cd =".$user->inst_cd);
-            /*====================  Counting Fee  ==============================*/
+        /*====================  Counting Fee  ==============================*/
         $processing_fee = 0;
         $Adm_fee           = 0;
         $LAdm_fee          = 0;
@@ -2250,9 +2250,9 @@ class Admission_inter extends CI_Controller {
         $TotalLatefee = 0;
         $Totalprocessing_fee = 0;
         $netTotal = 0;
-         $cert_fee = 550;
+        $cert_fee = 550;
         /*====================  Counting Fee  ==============================*/    
-                      $practical_Sub = array(
+        $practical_Sub = array(
             'LibSC'=>'8',
             'GEO'=>'12',
             'PSY'=>'16',
@@ -2271,7 +2271,7 @@ class Admission_inter extends CI_Controller {
             'AGRI'=>'90',
             'TYP'=>'96',
             'CST'=>'98',
-            
+
         );
         // DebugBreak();
         $ispractical = 0;
@@ -2281,7 +2281,7 @@ class Admission_inter extends CI_Controller {
         $Adm_Fee_withArts_Composite = $AdmFee[1]['Comp_Amount'];
         $Adm_Fee_withArts_10th_Only = $AdmFee[1]['Amount'];
         $Adm_ProcessingFee = $AdmFee[0]['Processing_Fee'];
-      // DebugBreak();
+        // DebugBreak();
         $q1 = $user_info['fee'];
         $total_std = 0;
         $total_cert = 0;
@@ -2291,73 +2291,73 @@ class Admission_inter extends CI_Controller {
             $total_std++;
             $ispractical = 0;
             $is9th = 0;
-             if($v["Spec"] == 1 || $v["Spec"] ==  2)
+            if($v["Spec"] == 1 || $v["Spec"] ==  2)
+            {
+                $Adm_fee = 0;
+                $TotalLatefee = $TotalLatefee + $LAdm_fee;
+                $Totalprocessing_fee = $Totalprocessing_fee + $Adm_ProcessingFee;
+            }
+            else
+            {
+                if($v['grp_cd']==1 ||$v['grp_cd']==2 || $v['grp_cd']==4)
                 {
-                    $Adm_fee = 0;
-                    $TotalLatefee = $TotalLatefee + $LAdm_fee;
-                    $Totalprocessing_fee = $Totalprocessing_fee + $Adm_ProcessingFee;
+                    $ispractical = 1;    
+                }
+                if(array_search($v['sub4'],$practical_Sub) || array_search($v['sub5'],$practical_Sub) || array_search($v['sub5a'],$practical_Sub) || array_search($v['sub6a'],$practical_Sub) || array_search($v['sub6'],$practical_Sub) || array_search($v['sub7a'],$practical_Sub))
+                {
+                    $ispractical =1;
                 }
                 else
                 {
-                    if($v['grp_cd']==1 ||$v['grp_cd']==2 || $v['grp_cd']==4)
-                    {
-                        $ispractical = 1;    
-                    }
-                   if(array_search($v['sub4'],$practical_Sub) || array_search($v['sub5'],$practical_Sub) || array_search($v['sub5a'],$practical_Sub) || array_search($v['sub6a'],$practical_Sub) || array_search($v['sub6'],$practical_Sub) || array_search($v['sub7a'],$practical_Sub))
-                    {
-                    $ispractical =1;
-                     }
-                     else
-                     {
-                         $ispractical =0;
-                     }
-                    
-                    if($v['cat11'] != 0)
-                    {
-                        $is9th=1;
-                    }
-                    else
-                    {
-                        $is9th=0;
-                    }
-                    if($ispractical == 1 && $is9th==0)
-                    {
-                    
-                    $Adm_fee = $Adm_Fee_withSci_10th_Only;
-                     $LAdm_fee;
-                    $Adm_ProcessingFee;
-                    }
-                    else if($ispractical == 1 && $is9th != 0)
-                    {
-                    $Adm_fee = $Adm_Fee_withSci_Composite;
-                     $LAdm_fee;
-                    $Adm_ProcessingFee;  
-                    }
-                    else if($ispractical == 0 && $is9th ==0)
-                    {
-                    $Adm_fee = $Adm_Fee_withArts_10th_Only;
-                     $LAdm_fee;
-                    $Adm_ProcessingFee;  
-                    }
-                    else if($ispractical == 0 && $is9th !=0)
-                    {
-                    $Adm_fee = $Adm_Fee_withArts_Composite;
-                     $LAdm_fee;
-                     $Adm_ProcessingFee;  
-                    }
-                    //$AdmFee
+                    $ispractical =0;
                 }
-            
-                    $TotalAdmFee = $TotalAdmFee + $Adm_fee;
-                    $TotalLatefee = $TotalLatefee + $LAdm_fee;
-                    $total_cert = $total_cert+$cert_fee;
-                    $Totalprocessing_fee = $Totalprocessing_fee + $Adm_ProcessingFee;
-                } 
-             
-            
 
-            $netTotal = (int)$netTotal +$Adm_fee + $LAdm_fee+$Adm_ProcessingFee+$total_cert;
-        
+                if($v['cat11'] != 0)
+                {
+                    $is9th=1;
+                }
+                else
+                {
+                    $is9th=0;
+                }
+                if($ispractical == 1 && $is9th==0)
+                {
+
+                    $Adm_fee = $Adm_Fee_withSci_10th_Only;
+                    $LAdm_fee;
+                    $Adm_ProcessingFee;
+                }
+                else if($ispractical == 1 && $is9th != 0)
+                {
+                    $Adm_fee = $Adm_Fee_withSci_Composite;
+                    $LAdm_fee;
+                    $Adm_ProcessingFee;  
+                }
+                else if($ispractical == 0 && $is9th ==0)
+                {
+                    $Adm_fee = $Adm_Fee_withArts_10th_Only;
+                    $LAdm_fee;
+                    $Adm_ProcessingFee;  
+                }
+                else if($ispractical == 0 && $is9th !=0)
+                {
+                    $Adm_fee = $Adm_Fee_withArts_Composite;
+                    $LAdm_fee;
+                    $Adm_ProcessingFee;  
+                }
+                //$AdmFee
+            }
+
+            $TotalAdmFee = $TotalAdmFee + $Adm_fee;
+            $TotalLatefee = $TotalLatefee + $LAdm_fee;
+            $total_cert = $total_cert+$cert_fee;
+            $Totalprocessing_fee = $Totalprocessing_fee + $Adm_ProcessingFee;
+        } 
+
+
+
+        $netTotal = (int)$netTotal +$Adm_fee + $LAdm_fee+$Adm_ProcessingFee+$total_cert;
+
 
 
         $forms_id   = implode(",",$ids);        
@@ -2415,7 +2415,7 @@ class Admission_inter extends CI_Controller {
         return $code.'.png';
 
     }
-      public function forwarding_pdf()
+    public function forwarding_pdf()
     {
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -2425,9 +2425,9 @@ class Admission_inter extends CI_Controller {
         $result = array('data'=>$this->Admission_inter_model->forwarding_pdf_final($fetch_data),'inst_Name'=>$user['inst_Name']);    
         if(empty($result['data']))
         {
-        $this->session->set_flashdata('error', $Condition);
-        redirect('Registration/FormPrinting');
-        return; 
+            $this->session->set_flashdata('error', $Condition);
+            redirect('Registration/FormPrinting');
+            return; 
         }
         $temp = $user['Inst_Id'].'@12@2016-18';
         $image =  $this->set_barcode($temp);
@@ -2446,9 +2446,9 @@ class Admission_inter extends CI_Controller {
         $SR=1;
 
         $pdf->AddPage();
-        
-         $pdf->Image("assets/img/logo2.png",0.4, 0.25, 0.55, 0.55, "PNG");
-        
+
+        $pdf->Image("assets/img/logo2.png",0.4, 0.25, 0.55, 0.55, "PNG");
+
         $pdf->SetFont('Arial','U',14);
         $pdf->SetXY( 1.0,0.2);
         $pdf->Cell(0, 0.2, "BOARD OF INTERMEDIATE AND SECONDARY EDUCATION, GUJRANWALA", 0.25, "C");
@@ -2513,31 +2513,31 @@ class Admission_inter extends CI_Controller {
         $pdf->SetXY(0.4+$x,4.0+$y);
         $pdf->Cell(0, 0.25, "Sir,", 0.25, "C");
 
-        
+
         $pdf->SetFont('Arial','',10);
         $pdf->SetXY(0.9+$x,4.3+$y);
-        
+
         $pdf->MultiCell(6.5, 0.2, "  I am forwarding registration forms along with the relevent enclosures of Candidates Group appearing from my Institute in the ensuring ".corr_bank_chall_class." ".session_year." Admission are
             ", 0,"J",0);
-         
-            $x = 1; 
-            $dy = 4.6; 
-            $pdf->SetXY(0.5,$y+$dy);
-            $pdf->SetFont('Arial','',10);
-            //$pdf->Cell( 0.5,0.5,"Group:",0,'L');
-                /*$pdf->Cell(0.5,0.5,"PRE-MEDICAL",0,'L');
-            else      if ($data["grp_cd"]=='2')
-                $pdf->Cell(0.5,0.5,"PRE-ENGINEERING",0,'L');
-                else      if ($data["grp_cd"]=='3')
-                    $pdf->Cell(0.5,0.5,"HUMANITIES",0,'L');
-                    else      if ($data["grp_cd"]=='4')
-                        $pdf->Cell(0.5,0.5,"GENERAL SCIENCE",0,'L');
-                        else      if ($data["grp_cd"]=='5')
-                            $pdf->Cell(0.5,0.5,"COMMERCE",0,'L');    */
-            $pdf->SetFont('Arial','B',10);
-            $pdf->SetXY(1.7,$y+$dy);
-          
-              $x = 1; 
+
+        $x = 1; 
+        $dy = 4.6; 
+        $pdf->SetXY(0.5,$y+$dy);
+        $pdf->SetFont('Arial','',10);
+        //$pdf->Cell( 0.5,0.5,"Group:",0,'L');
+        /*$pdf->Cell(0.5,0.5,"PRE-MEDICAL",0,'L');
+        else      if ($data["grp_cd"]=='2')
+        $pdf->Cell(0.5,0.5,"PRE-ENGINEERING",0,'L');
+        else      if ($data["grp_cd"]=='3')
+        $pdf->Cell(0.5,0.5,"HUMANITIES",0,'L');
+        else      if ($data["grp_cd"]=='4')
+        $pdf->Cell(0.5,0.5,"GENERAL SCIENCE",0,'L');
+        else      if ($data["grp_cd"]=='5')
+        $pdf->Cell(0.5,0.5,"COMMERCE",0,'L');    */
+        $pdf->SetFont('Arial','B',10);
+        $pdf->SetXY(1.7,$y+$dy);
+
+        $x = 1; 
         $dy = 4.6; 
         $pdf->SetXY(0.5,$y+$dy);
         $pdf->SetFont('Arial','',10);
@@ -2562,7 +2562,7 @@ class Admission_inter extends CI_Controller {
         $pdf->Cell($boxWidth-0.7,$boxhieght,'Group Name',1,0,'L',1);
         $pdf->SetFont('Arial','B',$fontsize);
         $pdf->Cell($boxWidth-1.5,$boxhieght,'No. of Students.',1,0,'C',1);
-       
+
         $yy = $boxhieght+$yy;
         $pdf->SetFillColor(255,255,255);
         $pdf->SetFont('Arial','',$fontsize);
@@ -2571,7 +2571,7 @@ class Admission_inter extends CI_Controller {
         $pdf->Cell($boxWidth-2.2,$boxhieght,'1',1,0,'C',1);
         $pdf->Cell($boxWidth-0.7,$boxhieght,'PRE-MEDICAL',1,0,'L',1);
         $pdf->SetFont('Arial','',10);
-       
+
         $pdf->Cell($boxWidth-1.5,$boxhieght,$result['data'][0]['grpFee1'],1,0,'C',1);
 
         $yy = $boxhieght+$yy;
@@ -2580,35 +2580,35 @@ class Admission_inter extends CI_Controller {
         $pdf->Cell($boxWidth-2.2,$boxhieght,'2',1,0,'C',1);
         $pdf->Cell($boxWidth-0.7,$boxhieght,'PRE-ENGINEERING',1,0,'L',1);
         $pdf->SetFont('Arial','',10);
-      
+
 
         $pdf->Cell($boxWidth-1.5,$boxhieght,$result['data'][0]['grpFee2'],1,0,'C',1);
-        
+
         $yy = $boxhieght+$yy;
         $pdf->SetXY($xx,$yy);
         $pdf->SetFont('Arial','',$fontsize);
         $pdf->Cell($boxWidth-2.2,$boxhieght,'3',1,0,'C',1);
         $pdf->Cell($boxWidth-0.7,$boxhieght,'HUMANITIES',1,0,'L',1);
         $pdf->SetFont('Arial','',10);
-      
+
         $pdf->Cell($boxWidth-1.5,$boxhieght,$result['data'][0]['grpFee3'],1,0,'C',1);
-        
-          $yy = $boxhieght+$yy;
-         $pdf->SetXY($xx,$yy);
+
+        $yy = $boxhieght+$yy;
+        $pdf->SetXY($xx,$yy);
         $pdf->SetFont('Arial','',$fontsize);
         $pdf->Cell($boxWidth-2.2,$boxhieght,'4',1,0,'C',1);
         $pdf->Cell($boxWidth-0.7,$boxhieght,'GENERAL SCIENCE',1,0,'L',1);
         $pdf->SetFont('Arial','',10);
-      
+
         $pdf->Cell($boxWidth-1.5,$boxhieght,$result['data'][0]['grpFee4'],1,0,'C',1);
-        
+
         $yy = $boxhieght+$yy;
         $pdf->SetXY($xx,$yy);
         $pdf->SetFont('Arial','',$fontsize);
         $pdf->Cell($boxWidth-2.2,$boxhieght,'5',1,0,'C',1);
         $pdf->Cell($boxWidth-0.7,$boxhieght,'COMMERCE',1,0,'L',1);
         $pdf->SetFont('Arial','',10);
-      
+
         $pdf->Cell($boxWidth-1.5,$boxhieght,$result['data'][0]['grpFee5'],1,0,'C',1);
 
         $yy = $boxhieght+$yy;
@@ -2617,74 +2617,74 @@ class Admission_inter extends CI_Controller {
         $pdf->Cell($boxWidth-2.2,$boxhieght,'',1,0,'C',1);
 
         $pdf->Cell($boxWidth-0.7    ,$boxhieght,'Total:',1,0,'L',1);
-     
+
         $pdf->Cell($boxWidth-1.5,$boxhieght,$result['data'][0]['totalFee'],1,0,'C',1);
-        
+
         $y = $y+1;
         $pdf->SetFont('Arial','',10);
         $pdf->SetXY(0.9,6.6+$y);    
         $pdf->MultiCell(6.5,0.2," Name of the candidates who have not completed the required number of attendances up to the date of the submission of their forms are being submitted provisionally and are mentioned overleaf. Final report regarding their eligibility will be sent to you in due course as instructed in the book of instructions and information.
-        ",0,"J",0)    ;
-        
+            ",0,"J",0)    ;
+
         $pdf->SetFont('Arial','',10);
         $pdf->SetXY(0.9,7.4+$y);    
         $pdf->MultiCell(6.5,0.2," I certify that the forms have been filled in strictly according to the instructions and the certificate printed on the admission forms have been signed by me. I also certify that I have initialled all corrections made in the admission forms.
 
-        ",0,"J",0)    ;
-        
+            ",0,"J",0)    ;
+
         $pdf->SetFont('Arial','B',10);
         $pdf->SetXY(0.9,8.0+$y);    
         $pdf->MultiCell(8.5,0.2," All my candidates will appear at ________________________________________________________ ",0,"L",0)    ;
-        
+
         $pdf->SetFont('Arial','B',10);
         $pdf->SetXY(0.9,8.25+$y);    
         $pdf->Cell(1.6,0.2,"(Other remarks if any)",0,"R",0);
-        
+
         $pdf->SetFont('Arial','B',10);
         $pdf->SetXY(0.9,8.55+$y); 
         $pdf->MultiCell(8.5,0.2,"____________________________________________________________________________________",0,"L",0)    ;   
-        
-        
+
+
         $pdf->SetFont('Arial','B',10);
         $pdf->SetXY(0.9,8.85+$y);    
         $pdf->MultiCell(8.5,0.2,"____________________________________________________________________________________",0,"L",0)    ;   
-        
+
         $pdf->SetFont('Arial','B',10);
         $pdf->SetXY(0.9,9.15+$y);    
         $pdf->MultiCell(8.5,0.2,"____________________________________________________________________________________",0,"L",0)    ;   
-        
+
         $pdf->SetFont('Arial','B',10);
         $pdf->SetXY(0.9,9.4+$y);    
-       $pdf->MultiCell(6.6,0.2,"Yours Obediently,",0,"R",0)    ;   
-        
+        $pdf->MultiCell(6.6,0.2,"Yours Obediently,",0,"R",0)    ;   
+
         $pdf->SetFont('Arial','B',10);
         $pdf->SetXY(0.9,9.65+$y);    
         $pdf->MultiCell(8.5,0.2,"Enclosures:",0,"L",0)    ;  
-        
+
         $pdf->SetFont('Arial','B',10);
         $pdf->SetXY(0.9,9.95+$y);    
         $pdf->MultiCell(8.5,0.2,"1.____________________________",0,"L",0)    ;  
-        
+
         $pdf->SetFont('Arial','B',10);
         $pdf->SetXY(0.9,10.25+$y);    
         $pdf->MultiCell(8.5,0.2,"2.____________________________",0,"L",0)    ;  
-        
+
         $pdf->SetFont('Arial','B',10);
         $pdf->SetXY(0.9,10.55+$y);    
         $pdf->MultiCell(8.5,0.2,"3.____________________________",0,"L",0)    ;  
-        
+
         $pdf->SetFont('Arial','B',10);
         $pdf->SetXY(0.9,10.85+$y);    
         $pdf->MultiCell(8.5,0.2,"4.____________________________",0,"L",0)    ;  
-        
+
         $pdf->SetFont('Arial','B',10);
         $pdf->SetXY(0.9,11.15+$y);    
         $pdf->MultiCell(8.5,0.2,"5.____________________________",0,"L",0)    ;  
-        
+
         $pdf->SetFont('Arial','UB',10);
         $pdf->SetXY(5.4,11.05+$y);    
         $pdf->MultiCell(8.5,0.2,"Signature & Stamp of Principal",0,"L",0)    ; 
-        
+
         $pdf->SetFont('Arial','B',8);
         $pdf->SetXY(5.4,11.25+$y);    
         $pdf->MultiCell(8.5,0.2,'Print Date: '. date('d-m-Y H:i:s a'),0,"L",0)    ;  
@@ -2693,7 +2693,7 @@ class Admission_inter extends CI_Controller {
     public function return_pdf()
     {
 
-      //  DebugBreak();
+        //  DebugBreak();
 
         $Condition = $this->uri->segment(4);
         /*
@@ -3075,7 +3075,7 @@ class Admission_inter extends CI_Controller {
     public function Print_Admission_inter_Form_Proofreading_Groupwise()
     {
 
-      // DebugBreak();
+        // DebugBreak();
         $Condition = $this->uri->segment(4);
 
         $this->load->library('session');
@@ -3098,14 +3098,14 @@ class Admission_inter extends CI_Controller {
             $result = array('data'=>$this->Admission_inter_model->Print_Form_Formnowise($fetch_data),'inst_Name'=>$user['inst_Name']);
             //Print_Form_Formnowise
         }
-           if($Condition == "3")
+        if($Condition == "3")
         {
             $Batch_Id = $this->uri->segment(3);
             $fetch_data = array('Inst_cd'=>$user['Inst_Id'],'Batch_Id'=>$Batch_Id);
             $result = array('data'=>$this->Admission_inter_model->Print_Form_Batchwise($fetch_data),'inst_Name'=>$user['inst_Name']);    
         }
 
-        
+
 
         if(empty($result['data'])){
             $this->session->set_flashdata('error', $Condition);
@@ -3169,8 +3169,8 @@ class Admission_inter extends CI_Controller {
 
             //$Barcode = $form_No.$data["iYear"].$data['sess'].$data['class'];
 
-          //  DebugBreak();
-      
+            //  DebugBreak();
+
             $Barcode = $form_No."@".'12'.'@'.$data['sess'].'@'.$data["Iyear"];
 
             $bardata = Barcode::fpdf($pdf, $black, $bx, $by, $angle, $type, array('code'=>$Barcode), $width, $height);
@@ -3188,7 +3188,7 @@ class Admission_inter extends CI_Controller {
             $pdf->Image(base_url()."assets/img/logo2.png",0.05,0.2, 0.75,0.75, "PNG");
             $pdf->Image(base_url()."assets/img/12.jpg",7.49,0.39, 0.36,0.36, "JPG");    
 
-            
+
             if(Session==1)
             {
                 $pdf->SetFont('Arial','',8);
@@ -3199,9 +3199,9 @@ class Admission_inter extends CI_Controller {
                 $pdf->SetFont('Arial','',9);
                 $pdf->SetXY(1.2,0.35);    
             }
-            
+
             $pdf->Cell(0, 0.25, "ADMISSION FORM FOR INTERMEDIATE (PART-II & COMPOSITE) ".$session_constant." EXAMINATION, 2016", 0.25, "C");
-           // DebugBreak();
+            // DebugBreak();
             //--------------- Proof Read    
             if($data['Batch_ID'] == 0 and $data['regPvt']==1)
             {
@@ -3244,20 +3244,20 @@ class Admission_inter extends CI_Controller {
             }
 
 
-           // DebugBreak();
+            // DebugBreak();
             //------ Picture Box on Centre      
             $pdf->SetXY(6.6, 1.55+$Y );
             $pdf->Cell(1.0,1.0,'',1,0,'C',0);
-           $pdf->Image(REGULAR_IMAGE_PATH.$user['Inst_Id']."/".$data["picpath"],6.5, 1.55+$Y, 1.25, 1.0, "JPG");
-         /* if($data["sex"]==1)
-          {
+            $pdf->Image(REGULAR_IMAGE_PATH.$user['Inst_Id']."/".$data["picpath"],6.5, 1.55+$Y, 1.25, 1.0, "JPG");
+            /* if($data["sex"]==1)
+            {
             $pdf->Image( base_url().'uploads/download.jpg',6.6, 1.55+$Y, 1.0, 1.0, "JPG");  
-          }
-          else
-          {
-              $pdf->Image( base_url().'uploads/130659.jpg',6.6, 1.55+$Y, 1.0, 1.0, "JPG");
-          }           */
-            
+            }
+            else
+            {
+            $pdf->Image( base_url().'uploads/130659.jpg',6.6, 1.55+$Y, 1.0, 1.0, "JPG");
+            }           */
+
             $pdf->SetFont('Arial','',8);
 
             //------------- Personal Infor Box
@@ -3277,19 +3277,19 @@ class Admission_inter extends CI_Controller {
             $pdf->SetFont('Arial','B',8);
             $pdf->SetXY(1.5,1.6+$Y);
             $pdf->Cell(0.5,0.5,$data["name"],0,'L');
-             //--------------------------- 
-              $pdf->SetXY(3.5+$x,1.6+$Y);
+            //--------------------------- 
+            $pdf->SetXY(3.5+$x,1.6+$Y);
             $pdf->SetFont('Arial','',7);
-            
+
             $pdf->Cell( 0.5,0.5,"Bay Form/CNIC No:",0,'L');
             $pdf->SetFont('Arial','B',8);
             $pdf->SetXY(4.5+$x,1.6+$Y);
-            
+
             $pdf->Cell(0.5,0.5,$data["BForm"],0,'L');
-            
+
             //--------------------------- FATHER NAME 
-            
-          $pdf->SetXY(0.5, 1.85+$Y);
+
+            $pdf->SetXY(0.5, 1.85+$Y);
             $pdf->SetFont('Arial','',8);
             $pdf->Cell( 0.5,0.5,"Father's Name:",0,'L');
             $pdf->SetFont('Arial','B',8);
@@ -3298,7 +3298,7 @@ class Admission_inter extends CI_Controller {
 
 
             //--------------------------- 3rd line 
-            
+
             $pdf->SetXY(0.5,2.1+$Y);
             $pdf->SetFont('Arial','',8);
             $pdf->Cell( 0.5,0.5,"Nationality:",0,'L');
@@ -3312,17 +3312,17 @@ class Admission_inter extends CI_Controller {
             $pdf->SetXY(1.5,1.85+$Y);*/
             //$pdf->Cell(0.5,0.5,$data["Dob"],0,'L');
 
-             $pdf->SetXY(3.5+$x,2.35+$Y);
+            $pdf->SetXY(3.5+$x,2.35+$Y);
             $pdf->SetFont('Arial','',8);
-            
+
             $pdf->Cell( 0.5,0.5,"Registration No:",0,'L');
-             $pdf->SetFont('Arial','B',8);
+            $pdf->SetFont('Arial','B',8);
             $pdf->SetXY(4.5+$x,2.35+$Y);
-            
-            
+
+
             $pdf->Cell(0.5,0.5,$data["strRegNo"],0,'L');
             //--------------------------- BAY FORM NO line 
-            
+
 
             $pdf->SetXY(3.5+$x,1.85+$Y);
             $pdf->SetFont('Arial','',8);
@@ -3330,8 +3330,8 @@ class Admission_inter extends CI_Controller {
             $pdf->SetFont('Arial','B',8);
             $pdf->SetXY(4.5+$x,1.85+$Y);
             $pdf->Cell(0.5,0.5,$data["FNIC"],0,'L');
-            
-               $spl_casename = 'NONE';
+
+            $spl_casename = 'NONE';
             if($data["Spec"] == 0)
             {
                 $spl_casename = 'NONE';
@@ -3344,7 +3344,7 @@ class Admission_inter extends CI_Controller {
             {
                 $spl_casename = 'Board Employee';
             }
-           $pdf->SetXY(3.5+$x,2.10+$Y);
+            $pdf->SetXY(3.5+$x,2.10+$Y);
             $pdf->SetFont('Arial','',8);
             $pdf->Cell( 0.5,0.5,"Speciality:",0,'L');
             $pdf->SetFont('Arial','B',8);
@@ -3368,30 +3368,30 @@ class Admission_inter extends CI_Controller {
             $pdf->Cell(0.5,0.5,$data["nat"]==1?"PAKISTANI":"NON-PAKISTANI",0,'R');
 
             */
-            
-           /* $pdf->Cell(0.5,0.5,"Locality:",0,'R');
-           
+
+            /* $pdf->Cell(0.5,0.5,"Locality:",0,'R');
+
 
 
             if($data['regPvt']==1)
             {
-                $pdf->Cell(0.5,0.5,$data["ruralOrurban"]==0?"URBAN":"RURAL",0,'L');
+            $pdf->Cell(0.5,0.5,$data["ruralOrurban"]==0?"URBAN":"RURAL",0,'L');
             }
             else if($data['regPvt']==2){
 
-                $pdf->Cell(0.5,0.5,$data["ruralOrurban"]==1?"URBAN":"RURAL",0,'L');
+            $pdf->Cell(0.5,0.5,$data["ruralOrurban"]==1?"URBAN":"RURAL",0,'L');
             }*/
-            
-              //--------------------------- Speciality and Internal Grade 
-           $pdf->SetXY(0.5,2.60+$Y);
+
+            //--------------------------- Speciality and Internal Grade 
+            $pdf->SetXY(0.5,2.60+$Y);
             $pdf->SetFont('Arial','',8);
             $pdf->Cell( 0.5,0.5,"Institute Grade:",0,'L');
-             $pdf->SetFont('Arial','B',8);
+            $pdf->SetFont('Arial','B',8);
             $pdf->SetXY(1.5,2.60+$Y);
             $pdf->Cell(0.5,0.5,$data["CollGrade"],0,'L');
 
             //--------------------------- Gender Nationality 
-           /* $pdf->SetXY(0.5,2.60+$Y);
+            /* $pdf->SetXY(0.5,2.60+$Y);
             $pdf->SetFont('Arial','',8);
             $pdf->Cell( 0.5,0.5,"Gender:",0,'L');
             $pdf->SetFont('Arial','B',8);
@@ -3414,16 +3414,16 @@ class Admission_inter extends CI_Controller {
             $pdf->SetXY(4.5+$x,2.60+$Y);
             $pdf->Cell(0.5,0.5,$data["nat"]==1?"PAKISTANI":"NON-PAKISTANI",0,'R');  */           
             //--------------------------- id mark and Contact No. 
-         
 
 
 
 
 
-           // $pdf->SetFont('Arial','B',8);
+
+            // $pdf->SetFont('Arial','B',8);
             /* $pdf->SetXY(4.5+$x,3.35+$Y);
             $pdf->Cell(0.5,0.5, $data["mobNo"],0,'L');    */
-           /* $pdf->SetXY(3.5+$x,2.85+$Y);
+            /* $pdf->SetXY(3.5+$x,2.85+$Y);
             $pdf->SetFont('Arial','',8);
             $pdf->Cell( 0.5,0.5,"Contact No:",0,'L');
             $pdf->SetFont('Arial','B',8);
@@ -3439,7 +3439,7 @@ class Admission_inter extends CI_Controller {
             //             $pdf->Cell(0.5,0.5,$data["med"]==1?"URDU":"ENGLISH",0,'L');            
 
             //--------------------------- Speciality and Internal Grade 
-           /* $pdf->SetXY(0.5,3.1+$Y);
+            /* $pdf->SetXY(0.5,3.1+$Y);
             $pdf->SetFont('Arial','',8);
             $pdf->Cell( 0.5,0.5,"Identification:",0,'L');
             $pdf->SetFont('Arial','B',8);
@@ -3458,7 +3458,7 @@ class Admission_inter extends CI_Controller {
 
 
             //====================================================================================================================            
-          //DebugBreak();
+            //DebugBreak();
             $Y = $Y-0.5;
             //------------- Old Exam Infor if any Box
             $pdf->SetFont('Arial','B',8);
@@ -3566,14 +3566,14 @@ class Admission_inter extends CI_Controller {
             $pdf->SetFont('Arial','B',8);
             $pdf->SetXY(1.0,4.25+$Y);
             $pdf->Cell( 0.5,0.5,$data['zone_cd']." - ".$data['ZoneName'],0,'L');
-            
+
             $pdf->SetXY(3.5,4.25+$Y);
             $pdf->SetFont('Arial','',8);
             $pdf->Cell(0.5,0.5,"Mobile No:",0,'R');
             $pdf->SetFont('Arial','B',8);
             $pdf->SetXY(4.1,4.25+$Y);
             $pdf->Cell( 0.5,0.5, $data['MobNo'],0,'L');
-            
+
             /*     //__Mobile    
             $pdf->SetXY(6.4,4.05+$Y);
             $pdf->SetFont('Arial','',8);
@@ -3718,125 +3718,125 @@ class Admission_inter extends CI_Controller {
             $pdf->SetXY(1.5,5.3+$Y);
             if($catt09 != '')
             {
-            $pdf->Cell( 0.5,0.5,$catt09.' in Part-I and '.$catt10.' in Part-II ' ,0,'L');    
+                $pdf->Cell( 0.5,0.5,$catt09.' in Part-I and '.$catt10.' in Part-II ' ,0,'L');    
             }
             else
             {
-            $pdf->Cell( 0.5,0.5,$catt10.' in Part-II ' ,0,'L');
+                $pdf->Cell( 0.5,0.5,$catt10.' in Part-II ' ,0,'L');
             }
-            
+
 
             //$pdf->SetXY(4.7,5.3+$Y);
-           // $pdf->Cell( 0.5,0.5,$catt10.' in Part-II ',0,'L');
+            // $pdf->Cell( 0.5,0.5,$catt10.' in Part-II ',0,'L');
             //--------------
             $pdf->SetFont('Arial','B',12);
             $pdf->SetXY(0.5,5.75+$Y);
-           // $pdf->Cell( 0.5,0.5,"9th",0,'L');
+            // $pdf->Cell( 0.5,0.5,"9th",0,'L');
             $boxWidth = 3.8;
             $xx= 0.5;
-        $yy = $Y+2.2;
-         $pdf->SetFont('Arial','B',8);
-        $pdf->SetXY($xx,3.8+$yy);
-        $pdf->SetFillColor(240,240,240);
-        $pdf->Cell($boxWidth,0.2,'Part-I Subjects',1,0,'L',1);
-        $pdf->SetFillColor(255,255,255);
-        $pdf->SetFont('Arial','',7);
-        $pdf->SetXY($xx,4.0+$yy);
-        $pdf->Cell($boxWidth,0.2,$data['sub1Ap1'] != 1 ? '':   '    '.'1. '. $this->GetSubNameHere($data['sub1']),1,0,'L',1);
+            $yy = $Y+2.2;
+            $pdf->SetFont('Arial','B',8);
+            $pdf->SetXY($xx,3.8+$yy);
+            $pdf->SetFillColor(240,240,240);
+            $pdf->Cell($boxWidth,0.2,'Part-I Subjects',1,0,'L',1);
+            $pdf->SetFillColor(255,255,255);
+            $pdf->SetFont('Arial','',7);
+            $pdf->SetXY($xx,4.0+$yy);
+            $pdf->Cell($boxWidth,0.2,$data['sub1Ap1'] != 1 ? '':   '    '.'1. '. $this->GetSubNameHere($data['sub1']),1,0,'L',1);
 
-       /* $pdf->Image(base_url().'assets/img/crossed.jpg',6.2,5.35+$yy, 1.3,0.15, "jpeg");  
-        $pdf->SetXY(6.1,3.8+$yy);
-        $pdf->Cell(1.4,1.5,'',1,0,'C',0); 
-        $pdf->SetXY(6.3,3.8+$yy);
-        $pdf->MultiCell(1.1,0.2, 'Paste Recent Photograph & Must Be Cross Attested by the Head/Deputy Head of Institution',0,'C'); 
+            /* $pdf->Image(base_url().'assets/img/crossed.jpg',6.2,5.35+$yy, 1.3,0.15, "jpeg");  
+            $pdf->SetXY(6.1,3.8+$yy);
+            $pdf->Cell(1.4,1.5,'',1,0,'C',0); 
+            $pdf->SetXY(6.3,3.8+$yy);
+            $pdf->MultiCell(1.1,0.2, 'Paste Recent Photograph & Must Be Cross Attested by the Head/Deputy Head of Institution',0,'C'); 
 
-        $pdf->SetXY(6.1,6.0+$yy);
-        $pdf->Cell(1.4,0.65,'',1,0,'C',0); 
-        $pdf->SetXY(6.2,6.48+$yy);
-        $pdf->MultiCell(1.1,0.2, 'Thumb Impression',0,'C'); */
+            $pdf->SetXY(6.1,6.0+$yy);
+            $pdf->Cell(1.4,0.65,'',1,0,'C',0); 
+            $pdf->SetXY(6.2,6.48+$yy);
+            $pdf->MultiCell(1.1,0.2, 'Thumb Impression',0,'C'); */
 
-        //   DebugBreak();
+            //   DebugBreak();
 
-        $pdf->SetFillColor(255,255,255);
-        
-         $pdf->SetFont('Arial','',7);
-        $pdf->SetXY($xx,4.0+$yy);
-        $pdf->Cell($boxWidth,0.2,$data['sub1Ap1'] != 1 ? '':  '    '.'1. '.  $data['sub1_NAME'],1,0,'L',1);
-        
-        
-        $pdf->SetFont('Arial','',7);
-        $pdf->SetXY($xx,4.2+$yy);
-        $pdf->Cell($boxWidth,0.2,$data['sub2Ap1'] != 1 ? '':   '    '.'2. '.  $data['sub2_NAME'],1,0,'L',1);
+            $pdf->SetFillColor(255,255,255);
 
-        $pdf->SetFont('Arial','',7);
-        $pdf->SetXY($xx,4.4+$yy);
-        $pdf->Cell($boxWidth,0.2,$data['sub3Ap1'] != 1 ? '':   '    '.'3. '.  $data['sub3_NAME'],1,0,'L',1);
+            $pdf->SetFont('Arial','',7);
+            $pdf->SetXY($xx,4.0+$yy);
+            $pdf->Cell($boxWidth,0.2,$data['sub1Ap1'] != 1 ? '':  '    '.'1. '.  $data['sub1_NAME'],1,0,'L',1);
 
-        $pdf->SetFont('Arial','',7);
-        $pdf->SetXY($xx,4.6+$yy);
-        $pdf->Cell($boxWidth,0.2,$data['sub4Ap1'] != 1 ? '':   '    '.'4. '. $data['sub4_NAME'],1,0,'L',1);
 
-        $pdf->SetFont('Arial','',7);
-        $pdf->SetXY($xx,4.8+$yy);
-        $pdf->Cell($boxWidth,0.2,$data['sub5Ap1'] != 1 ? '':   '    '.'5. '.  $data['sub5_NAME'],1,0,'L',1);
+            $pdf->SetFont('Arial','',7);
+            $pdf->SetXY($xx,4.2+$yy);
+            $pdf->Cell($boxWidth,0.2,$data['sub2Ap1'] != 1 ? '':   '    '.'2. '.  $data['sub2_NAME'],1,0,'L',1);
 
-        $pdf->SetFont('Arial','',7);
-        $pdf->SetXY($xx,5.0+$yy);
-        $pdf->Cell($boxWidth,0.2,$data['sub6Ap1'] != 1 ? '':   '    '.'6. '.  $data['sub6_NAME'],1,0,'L',1);
+            $pdf->SetFont('Arial','',7);
+            $pdf->SetXY($xx,4.4+$yy);
+            $pdf->Cell($boxWidth,0.2,$data['sub3Ap1'] != 1 ? '':   '    '.'3. '.  $data['sub3_NAME'],1,0,'L',1);
 
-        $pdf->SetFont('Arial','',7);                                                                     
-        $pdf->SetXY($xx,5.2+$yy);
-        $pdf->Cell($boxWidth,0.2,$data['sub7Ap1'] != 1 ? '':   '    '.'7. '.  $data['sub7_NAME'],1,0,'L',1);
+            $pdf->SetFont('Arial','',7);
+            $pdf->SetXY($xx,4.6+$yy);
+            $pdf->Cell($boxWidth,0.2,$data['sub4Ap1'] != 1 ? '':   '    '.'4. '. $data['sub4_NAME'],1,0,'L',1);
 
-        /*$pdf->SetFont('Arial','',7);
-        $pdf->SetXY($xx,5.4+$yy);
-        $pdf->Cell($boxWidth,0.2,$data['sub8Ap2'] != 1 ? '':   '    '.'8. '. $this->GetSubNameHere($data['sub8']),1,0,'L',1);
-        */
-        $xangle = 4.0;
+            $pdf->SetFont('Arial','',7);
+            $pdf->SetXY($xx,4.8+$yy);
+            $pdf->Cell($boxWidth,0.2,$data['sub5Ap1'] != 1 ? '':   '    '.'5. '.  $data['sub5_NAME'],1,0,'L',1);
 
-        $pdf->SetFont('Arial','B',8);
-        $pdf->SetXY($xangle,3.8+$yy);
-        $pdf->SetFillColor(240,240,240);
-        $pdf->Cell($boxWidth,0.2,'Part-II Subjects',1,0,'L',1);    
-        $pdf->SetFillColor(255,255,255);
-        $pdf->SetFont('Arial','',7);
-        $pdf->SetXY($xangle,4.0+$yy);
-        $pdf->Cell($boxWidth,0.2,$data['sub1Ap2'] != 1 ? '':  '    '.'1. '.  $data['sub1_NAME'],1,0,'L',1);
-        $pdf->SetFont('Arial','',7);
-        $pdf->SetXY($xangle,4.2+$yy);
-        $pdf->Cell($boxWidth,0.2,$data['sub2Ap2'] != 1 ? '':  '    '.'2. '.  $data['sub2_NAME'],1,0,'L',1);
+            $pdf->SetFont('Arial','',7);
+            $pdf->SetXY($xx,5.0+$yy);
+            $pdf->Cell($boxWidth,0.2,$data['sub6Ap1'] != 1 ? '':   '    '.'6. '.  $data['sub6_NAME'],1,0,'L',1);
 
-        /* $pdf->SetFont('Arial','',7);
-        $pdf->SetXY($xangle,4.4+$yy);
-        $pdf->Cell($boxWidth,0.2,$data['sub3Ap1'] != 1 ? '':  '    '.'3. '.  $this->GetSubNameHere($data['sub3']),1,0,'L',1);*/
+            $pdf->SetFont('Arial','',7);                                                                     
+            $pdf->SetXY($xx,5.2+$yy);
+            $pdf->Cell($boxWidth,0.2,$data['sub7Ap1'] != 1 ? '':   '    '.'7. '.  $data['sub7_NAME'],1,0,'L',1);
 
-        $pdf->SetFont('Arial','',7);
-        $pdf->SetXY($xangle,4.4+$yy);
-        $pdf->Cell($boxWidth,0.2,$data['sub8Ap2'] != 1 ? '':  '    '.'3. '.  $data['sub8_NAME'],1,0,'L',1);
+            /*$pdf->SetFont('Arial','',7);
+            $pdf->SetXY($xx,5.4+$yy);
+            $pdf->Cell($boxWidth,0.2,$data['sub8Ap2'] != 1 ? '':   '    '.'8. '. $this->GetSubNameHere($data['sub8']),1,0,'L',1);
+            */
+            $xangle = 4.0;
 
-        $pdf->SetFont('Arial','',7);
-        $pdf->SetXY($xangle,4.6+$yy);
-        $pdf->Cell($boxWidth,0.2,$data['sub4Ap2'] != 1 ? '':  '    '.'4. '. $data['sub4_NAME'],1,0,'L',1);
+            $pdf->SetFont('Arial','B',8);
+            $pdf->SetXY($xangle,3.8+$yy);
+            $pdf->SetFillColor(240,240,240);
+            $pdf->Cell($boxWidth,0.2,'Part-II Subjects',1,0,'L',1);    
+            $pdf->SetFillColor(255,255,255);
+            $pdf->SetFont('Arial','',7);
+            $pdf->SetXY($xangle,4.0+$yy);
+            $pdf->Cell($boxWidth,0.2,$data['sub1Ap2'] != 1 ? '':  '    '.'1. '.  $data['sub1_NAME'],1,0,'L',1);
+            $pdf->SetFont('Arial','',7);
+            $pdf->SetXY($xangle,4.2+$yy);
+            $pdf->Cell($boxWidth,0.2,$data['sub2Ap2'] != 1 ? '':  '    '.'2. '.  $data['sub2_NAME'],1,0,'L',1);
 
-        $pdf->SetFont('Arial','',7);
-        $pdf->SetXY($xangle,4.8+$yy);
-        $pdf->Cell($boxWidth,0.2,$data['sub5Ap2'] != 1 ? '':  '    '.'5. '.  $data['sub5_NAME'],1,0,'L',1);
+            /* $pdf->SetFont('Arial','',7);
+            $pdf->SetXY($xangle,4.4+$yy);
+            $pdf->Cell($boxWidth,0.2,$data['sub3Ap1'] != 1 ? '':  '    '.'3. '.  $this->GetSubNameHere($data['sub3']),1,0,'L',1);*/
 
-        $pdf->SetFont('Arial','',7);
-        $pdf->SetXY($xangle,5.0+$yy);
-        $pdf->Cell($boxWidth,0.2,$data['sub6Ap2'] != 1 ? '':  '    '.'6. '. $data['sub6_NAME'],1,0,'L',1);
+            $pdf->SetFont('Arial','',7);
+            $pdf->SetXY($xangle,4.4+$yy);
+            $pdf->Cell($boxWidth,0.2,$data['sub8Ap2'] != 1 ? '':  '    '.'3. '.  $data['sub8_NAME'],1,0,'L',1);
 
-        $pdf->SetFont('Arial','',7);
-        $pdf->SetXY($xangle,5.2+$yy);
-        $pdf->Cell($boxWidth,0.2,$data['sub7Ap2'] != 1 ? '':  '    '.'7. '. $data['sub7_NAME'],1,0,'L',1);
-      //  $pdf->Cell($boxWidth,0.2,$data['sub1Ap1'] != 1 ? '':   '    '.'1. '. $this->GetSubNameHere($data['sub1']),1,0,'L',1);
-           /* $pdf->SetXY(5.2,5.55+$Y);
+            $pdf->SetFont('Arial','',7);
+            $pdf->SetXY($xangle,4.6+$yy);
+            $pdf->Cell($boxWidth,0.2,$data['sub4Ap2'] != 1 ? '':  '    '.'4. '. $data['sub4_NAME'],1,0,'L',1);
+
+            $pdf->SetFont('Arial','',7);
+            $pdf->SetXY($xangle,4.8+$yy);
+            $pdf->Cell($boxWidth,0.2,$data['sub5Ap2'] != 1 ? '':  '    '.'5. '.  $data['sub5_NAME'],1,0,'L',1);
+
+            $pdf->SetFont('Arial','',7);
+            $pdf->SetXY($xangle,5.0+$yy);
+            $pdf->Cell($boxWidth,0.2,$data['sub6Ap2'] != 1 ? '':  '    '.'6. '. $data['sub6_NAME'],1,0,'L',1);
+
+            $pdf->SetFont('Arial','',7);
+            $pdf->SetXY($xangle,5.2+$yy);
+            $pdf->Cell($boxWidth,0.2,$data['sub7Ap2'] != 1 ? '':  '    '.'7. '. $data['sub7_NAME'],1,0,'L',1);
+            //  $pdf->Cell($boxWidth,0.2,$data['sub1Ap1'] != 1 ? '':   '    '.'1. '. $this->GetSubNameHere($data['sub1']),1,0,'L',1);
+            /* $pdf->SetXY(5.2,5.55+$Y);
             $pdf->Cell( 0.5,0.5,"10th",0,'L');*/
             //-----------------------------
 
             $x = 1;
             //--------------------------- Subjects
-          /*  $pdf->SetFont('Arial','',8);
+            /*  $pdf->SetFont('Arial','',8);
             $pdf->SetXY(1.1,5.85+$Y);
             $pdf->Cell(0.3,0.4,"1._______________________________",0,'L');             
             $pdf->SetXY(1.15,5.75+$Y);
@@ -3991,7 +3991,7 @@ class Admission_inter extends CI_Controller {
             $pdf->Image(base_url()."assets/img/note2.jpg",6.19,10.8, 1.48,0.25, "jpg");   
 
             //-------------------------- End of Page 1     
-           
+
 
 
             //======================================================================================
@@ -4018,14 +4018,14 @@ class Admission_inter extends CI_Controller {
 
         return 1;
     }
-     public function getcenter()
+    public function getcenter()
     {
-       // DebugBreak();
+        // DebugBreak();
         $data = array(
             'zoneCode' => $this->input->post('pvtZone'),
             'gen' => $this->input->post('gend'),
         );
-           
+
         $this->load->model('Admission_model');
         $value = array('center'=> $this->Admission_model->getcenter($data)) ;
         echo json_encode($value);
@@ -4034,7 +4034,7 @@ class Admission_inter extends CI_Controller {
     function frmvalidation($viewName,$allinputdata,$isupdate)
     {
 
-      // DebugBreak();
+        // DebugBreak();
         $_POST['address']  = str_replace("'", "", $_POST['address'] );
 
 
@@ -4047,7 +4047,7 @@ class Admission_inter extends CI_Controller {
 
         }
         //(strpos($a, 'are') !== false)
-       
+
 
         else if (@$_POST['father_name'] == '')
         {
@@ -4057,130 +4057,130 @@ class Admission_inter extends CI_Controller {
             return;
 
         }
-      
-      /*  else if(@$_POST['bay_form'] == '' )
+
+        /*  else if(@$_POST['bay_form'] == '' )
         {
-            $allinputdata['excep'] = 'Please Enter Your Bay Form No.';
-            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-            redirect('Admission_inter/'.$viewName);
-            $this->$viewName($allinputdata['formNo']);
-            return;
+        $allinputdata['excep'] = 'Please Enter Your Bay Form No.';
+        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+        redirect('Admission_inter/'.$viewName);
+        $this->$viewName($allinputdata['formNo']);
+        return;
 
 
         }*/
-      
-            else if(@$_POST['father_cnic'] == '' )
-            {
-                $allinputdata['excep'] = 'Please Enter Your Father CNIC';
-                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                redirect('Admission_inter/'.$viewName);
-                return;
+
+        else if(@$_POST['father_cnic'] == '' )
+        {
+            $allinputdata['excep'] = 'Please Enter Your Father CNIC';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect('Admission_inter/'.$viewName);
+            return;
 
 
-            }
-           
-            /*else if (@$_POST['dob_hidden'] == '' )
-            {
-                $allinputdata['excep'] = 'Please Enter Your  Date of Birth';
-                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                redirect('Admission_inter/'.$viewName);
-                return;
+        }
 
-            } */
-            else if(@$_POST['mob_number'] == '')
-            {
-                $allinputdata['excep'] = 'Please Enter Your Mobile Number';
-                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                redirect('Admission_inter/'.$viewName);
-                return;
+        /*else if (@$_POST['dob_hidden'] == '' )
+        {
+        $allinputdata['excep'] = 'Please Enter Your  Date of Birth';
+        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+        redirect('Admission_inter/'.$viewName);
+        return;
 
-            }
-            else if(@$_POST['medium'] == 0)
-            {
-                $allinputdata['excep'] = 'Please Select Your Medium';
-                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                redirect('Admission_inter/'.$viewName);
-                return;
+        } */
+        else if(@$_POST['mob_number'] == '')
+        {
+            $allinputdata['excep'] = 'Please Enter Your Mobile Number';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect('Admission_inter/'.$viewName);
+            return;
 
-            }
-            else if(@$_POST['Inst_Rno']== '')
-            { 
-                $allinputdata['excep'] = 'Please Enter Your Roll Number';
-                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                redirect('Admission_inter/'.$viewName);
-                return;
+        }
+        else if(@$_POST['medium'] == 0)
+        {
+            $allinputdata['excep'] = 'Please Select Your Medium';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect('Admission_inter/'.$viewName);
+            return;
 
-            }
-            else if(@$_POST['MarkOfIden']== '')
-            {
-                $allinputdata['excep'] = 'Please Enter Your Mark of Identification';
-                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                redirect('Admission_inter/'.$viewName);
-                return;
+        }
+        else if(@$_POST['Inst_Rno']== '')
+        { 
+            $allinputdata['excep'] = 'Please Enter Your Roll Number';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect('Admission_inter/'.$viewName);
+            return;
 
-            }
-            /* else if((@$_POST['speciality'] != '0')or (@$_POST['speciality'] != '1') or (@$_POST['speciality'] != '2'))
-            {
-            $error['excep'] = 'Please Enter Your Speciality';
-            $this->load->view('Admission_inter/9th/NewEnrolment.php',$error);
-            }*/
-            else if((@$_POST['medium'] != '1') and (@$_POST['medium'] != '2') )
-            {
-                $allinputdata['excep'] = 'Please Select Your medium';
-                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                redirect('Admission_inter/'.$viewName);
-                return;
+        }
+        else if(@$_POST['MarkOfIden']== '')
+        {
+            $allinputdata['excep'] = 'Please Enter Your Mark of Identification';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect('Admission_inter/'.$viewName);
+            return;
 
-            }
-            else if((@$_POST['nationality'] != '1') and (@$_POST['nationality'] != '2') )
-            {
-                $allinputdata['excep'] = 'Please Select Your Nationality';
-                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                redirect('Admission_inter/'.$viewName);
-                return;
+        }
+        /* else if((@$_POST['speciality'] != '0')or (@$_POST['speciality'] != '1') or (@$_POST['speciality'] != '2'))
+        {
+        $error['excep'] = 'Please Enter Your Speciality';
+        $this->load->view('Admission_inter/9th/NewEnrolment.php',$error);
+        }*/
+        else if((@$_POST['medium'] != '1') and (@$_POST['medium'] != '2') )
+        {
+            $allinputdata['excep'] = 'Please Select Your medium';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect('Admission_inter/'.$viewName);
+            return;
 
-            }
-            else if((@$_POST['gender'] != '1') and (@$_POST['gender'] != '2'))
-            {
-                $allinputdata['excep'] = 'Please Select Your Gender';
-                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                redirect('Admission_inter/'.$viewName);
-                return;
+        }
+        else if((@$_POST['nationality'] != '1') and (@$_POST['nationality'] != '2') )
+        {
+            $allinputdata['excep'] = 'Please Select Your Nationality';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect('Admission_inter/'.$viewName);
+            return;
 
-            }
-            else if((@$_POST['hafiz']!= '1') and (@$_POST['hafiz']!= '2'))
-            {
-                $allinputdata['excep'] = 'Please Select Your Hafiz-e-Quran option';
-                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                redirect('Admission_inter/'.$viewName);
-                return;
+        }
+        else if((@$_POST['gender'] != '1') and (@$_POST['gender'] != '2'))
+        {
+            $allinputdata['excep'] = 'Please Select Your Gender';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect('Admission_inter/'.$viewName);
+            return;
 
-            }
-            else if((@$_POST['religion'] != '1') and (@$_POST['religion'] != '2'))
-            {
-                $allinputdata['excep'] = 'Please Select Your religion';
-                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                redirect('Admission_inter/'.$viewName);
-                return;
+        }
+        else if((@$_POST['hafiz']!= '1') and (@$_POST['hafiz']!= '2'))
+        {
+            $allinputdata['excep'] = 'Please Select Your Hafiz-e-Quran option';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect('Admission_inter/'.$viewName);
+            return;
 
-            }
-            else if((@$_POST['UrbanRural'] != '1') and (@$_POST['UrbanRural'] != '2'))
-            {
-                $allinputdata['excep'] = 'Please Select Your Residency';
-                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                redirect('Admission_inter/'.$viewName);
-                return;
+        }
+        else if((@$_POST['religion'] != '1') and (@$_POST['religion'] != '2'))
+        {
+            $allinputdata['excep'] = 'Please Select Your religion';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect('Admission_inter/'.$viewName);
+            return;
 
-            }
-            else if(@$_POST['address'] =='')
-            {
-                $allinputdata['excep'] = 'Please Enter Your Address';
-                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                redirect('Admission_inter/'.$viewName);
-                return;
+        }
+        else if((@$_POST['UrbanRural'] != '1') and (@$_POST['UrbanRural'] != '2'))
+        {
+            $allinputdata['excep'] = 'Please Select Your Residency';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect('Admission_inter/'.$viewName);
+            return;
 
-            }
-             else if(@$_POST['pvtinfo_dist'] =='')
+        }
+        else if(@$_POST['address'] =='')
+        {
+            $allinputdata['excep'] = 'Please Enter Your Address';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect('Admission_inter/'.$viewName);
+            return;
+
+        }
+        else if(@$_POST['pvtinfo_dist'] =='')
         {
             $allinputdata['excep'] = 'Please Select Your District First!';        
             $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
@@ -4204,220 +4204,212 @@ class Admission_inter extends CI_Controller {
             return;
 
         }
-            else if(@$_POST['std_group_hidden'] == 0)
-            {
-                $allinputdata['excep'] = 'Please Select Your Study Group';
-                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                redirect('Admission_inter/'.$viewName);
-                return;
+        else if(@$_POST['std_group_hidden'] == 0)
+        {
+            $allinputdata['excep'] = 'Please Select Your Study Group';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect('Admission_inter/'.$viewName);
+            return;
 
-            }
-            else if((@$_POST['std_group_hidden'] == 1) && ((@$_POST['sub4p2']!=47) || (@$_POST['sub5p2']!=48)||(@$_POST['sub6p2']!=46)))
-            {
+        }
+        else if((@$_POST['std_group_hidden'] == 1) && ((@$_POST['sub4p2']!=47) || (@$_POST['sub5p2']!=48)||(@$_POST['sub6p2']!=46)))
+        {
 
-                $allinputdata['excep'] = 'Subjects not according to Group';
-                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                redirect('Admission_inter/'.$viewName);
-                return;
+            $allinputdata['excep'] = 'Subjects not according to Group';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect('Admission_inter/'.$viewName);
+            return;
 
-            }
-            else if((@$_POST['std_group_hidden'] == 7)&& ((@$_POST['sub5p2']!=6) || (@$_POST['sub6p2']!=7)||(@$_POST['sub7p2']!=78)))
-            {
+        }
+        else if((@$_POST['std_group_hidden'] == 7)&& ((@$_POST['sub5p2']!=6) || (@$_POST['sub6p2']!=7)||(@$_POST['sub7p2']!=78)))
+        {
 
-                $allinputdata['excep'] = 'Subjects not according to Group';
-                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                redirect('Admission_inter/'.$viewName);
-                return;
+            $allinputdata['excep'] = 'Subjects not according to Group';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect('Admission_inter/'.$viewName);
+            return;
 
-            }
-            else if((@$_POST['std_group_hidden'] == 8)&& ((@$_POST['sub5p2']!=6) || (@$_POST['sub6p2']!=7)||(@$_POST['sub7p2']!=43)))
-            {
+        }
+        else if((@$_POST['std_group_hidden'] == 8)&& ((@$_POST['sub5p2']!=6) || (@$_POST['sub6p2']!=7)||(@$_POST['sub7p2']!=43)))
+        {
 
-                $allinputdata['excep'] = 'Subjects not according to Group';
-                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                redirect('Admission_inter/'.$viewName);
-                return;
+            $allinputdata['excep'] = 'Subjects not according to Group';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect('Admission_inter/'.$viewName);
+            return;
 
-            }
-            else if((@$_POST['std_group_hidden'] == 2) && ((@$_POST['sub5p2']==6) || (@$_POST['sub6p2']==7)||(@$_POST['sub7p2']==43)|| (@$_POST['sub7p2']==43) || (@$_POST['sub7p2']==8)))
-            {
-                $allinputdata['excep'] = 'Subjects not according to Group';
-                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                redirect('Admission_inter/'.$viewName);
-                return;
+        }
+        else if((@$_POST['std_group_hidden'] == 2) && ((@$_POST['sub5p2']==6) || (@$_POST['sub6p2']==7)||(@$_POST['sub7p2']==43)|| (@$_POST['sub7p2']==43) || (@$_POST['sub7p2']==8)))
+        {
+            $allinputdata['excep'] = 'Subjects not according to Group';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect('Admission_inter/'.$viewName);
+            return;
 
-            }
-            else if((@$_POST['std_group_hidden'] == 5)&& ((@$_POST['sub5p2']==6) || (@$_POST['sub6p2']==7)|| (@$_POST['sub7p2']==43) || (@$_POST['sub7p2']==8)))
-            {
-                $allinputdata['excep'] = 'Subjects not according to Group';
-                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                redirect('Admission_inter/'.$viewName);
-                return;
+        }
+        else if((@$_POST['std_group_hidden'] == 5)&& ((@$_POST['sub5p2']==6) || (@$_POST['sub6p2']==7)|| (@$_POST['sub7p2']==43) || (@$_POST['sub7p2']==8)))
+        {
+            $allinputdata['excep'] = 'Subjects not according to Group';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect('Admission_inter/'.$viewName);
+            return;
 
-            }
-            
-          /*  else if((@$_POST['sub1p2'] == @$_POST['sub2p2']) ||(@$_POST['sub1p2'] == @$_POST['sub3p2'])||(@$_POST['sub1p2'] == @$_POST['sub4p2'])||(@$_POST['sub1p2'] == @$_POST['sub5p2'])||(@$_POST['sub1p2'] == @$_POST['sub6p2'])||(@$_POST['sub1p2'] == @$_POST['sub7p2'])||
-                (@$_POST['sub1p2'] == @$_POST['sub8p2']))
-                {
-                    $allinputdata['excep'] = 'Please Select Different Subjects';
-                    $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                    redirect('Admission_inter/'.$viewName);
-                    return;
+        }
 
-                }
-                else if((@$_POST['sub2p2'] == @$_POST['sub1p2']) ||(@$_POST['sub2p2'] == @$_POST['sub3p2'])||(@$_POST['sub2p2'] == @$_POST['sub4p2'])||(@$_POST['sub2p2'] == @$_POST['sub5p2'])||(@$_POST['sub2p2'] == @$_POST['sub6p2'])||(@$_POST['sub2p2'] == @$_POST['sub7p2'])                         ||(@$_POST['sub2'] == @$_POST['sub8'])
-                    )
-                    {
-                        $allinputdata['excep'] = 'Please Select Different Subjects';
-                        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                        redirect('Admission_inter/'.$viewName);
-                        return;
+        /*  else if((@$_POST['sub1p2'] == @$_POST['sub2p2']) ||(@$_POST['sub1p2'] == @$_POST['sub3p2'])||(@$_POST['sub1p2'] == @$_POST['sub4p2'])||(@$_POST['sub1p2'] == @$_POST['sub5p2'])||(@$_POST['sub1p2'] == @$_POST['sub6p2'])||(@$_POST['sub1p2'] == @$_POST['sub7p2'])||
+        (@$_POST['sub1p2'] == @$_POST['sub8p2']))
+        {
+        $allinputdata['excep'] = 'Please Select Different Subjects';
+        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+        redirect('Admission_inter/'.$viewName);
+        return;
 
-                    }
-                    else if((@$_POST['sub3p2'] == @$_POST['sub1p2']) ||(@$_POST['sub3p2'] == @$_POST['sub2p2'])||(@$_POST['sub3p2'] == @$_POST['sub4p2'])||(@$_POST['sub3p2'] == @$_POST['sub5p2'])||(@$_POST['sub3p2'] == @$_POST['sub6p2'])||(@$_POST['sub3p2'] == @$_POST['                                sub7'])||(@$_POST['sub3'] == @$_POST['sub8'])
-                        )
-                        {
-                            $allinputdata['excep'] = 'Please Select Different Subjects';
-                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                            redirect('Admission_inter/'.$viewName);
-                            return;
+        }
+        else if((@$_POST['sub2p2'] == @$_POST['sub1p2']) ||(@$_POST['sub2p2'] == @$_POST['sub3p2'])||(@$_POST['sub2p2'] == @$_POST['sub4p2'])||(@$_POST['sub2p2'] == @$_POST['sub5p2'])||(@$_POST['sub2p2'] == @$_POST['sub6p2'])||(@$_POST['sub2p2'] == @$_POST['sub7p2'])                         ||(@$_POST['sub2'] == @$_POST['sub8'])
+        )
+        {
+        $allinputdata['excep'] = 'Please Select Different Subjects';
+        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+        redirect('Admission_inter/'.$viewName);
+        return;
 
-                        }
-                        else if((@$_POST['sub4p2'] == @$_POST['sub1p2']) ||(@$_POST['sub4p2'] == @$_POST['sub3p2'])||(@$_POST['sub4p2'] == @$_POST['sub2p2'])||(@$_POST['sub4p2'] == @$_POST['sub5p2'])||(@$_POST['sub4p2'] == @$_POST['sub6p2'])||(@$_POST['sub4p2'] == @$_POST[                                 'sub7p2'])||(@$_POST['sub4p2'] == @$_POST['sub8p2']))
-                        {
-                            $allinputdata['excep'] = 'Please Select Different Subjects';
-                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                            redirect('Admission_inter/'.$viewName);
-                            return;
+        }
+        else if((@$_POST['sub3p2'] == @$_POST['sub1p2']) ||(@$_POST['sub3p2'] == @$_POST['sub2p2'])||(@$_POST['sub3p2'] == @$_POST['sub4p2'])||(@$_POST['sub3p2'] == @$_POST['sub5p2'])||(@$_POST['sub3p2'] == @$_POST['sub6p2'])||(@$_POST['sub3p2'] == @$_POST['                                sub7'])||(@$_POST['sub3'] == @$_POST['sub8'])
+        )
+        {
+        $allinputdata['excep'] = 'Please Select Different Subjects';
+        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+        redirect('Admission_inter/'.$viewName);
+        return;
 
-                        }
-                        else if((@$_POST['sub5p2'] == @$_POST['sub1p2']) ||(@$_POST['sub5p2'] == @$_POST['sub3p2'])||(@$_POST['sub5p2'] == @$_POST['sub4p2'])||(@$_POST['sub5p2'] == @$_POST['sub2p2'])||(@$_POST['sub5p2'] == @$_POST['sub6p2'])||(@$_POST['sub5p2'] == @                                        $_POST['sub7'])||(@$_POST['sub5'] == @$_POST['sub8']))
-                        {
-                            $allinputdata['excep'] = 'Please Select Different Subjects';
-                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                            redirect('Admission_inter/'.$viewName);
-                            return;
+        }
+        else if((@$_POST['sub4p2'] == @$_POST['sub1p2']) ||(@$_POST['sub4p2'] == @$_POST['sub3p2'])||(@$_POST['sub4p2'] == @$_POST['sub2p2'])||(@$_POST['sub4p2'] == @$_POST['sub5p2'])||(@$_POST['sub4p2'] == @$_POST['sub6p2'])||(@$_POST['sub4p2'] == @$_POST[                                 'sub7p2'])||(@$_POST['sub4p2'] == @$_POST['sub8p2']))
+        {
+        $allinputdata['excep'] = 'Please Select Different Subjects';
+        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+        redirect('Admission_inter/'.$viewName);
+        return;
 
-                        }
-                        else if((@$_POST['sub6p2'] == @$_POST['sub1p2']) ||(@$_POST['sub6p2'] == @$_POST['sub3p2'])||(@$_POST['sub6p2'] == @$_POST['sub4p2'])||(@$_POST['sub6p2'] == @$_POST['sub5p2'])||(@$_POST['sub6p2'] == @$_POST['sub2p2'])||(@$_POST['sub6p2'] ==                                          @$_POST['sub7'])||(@$_POST['sub6'] == @$_POST['sub8']))
-                        {
-                            $allinputdata['excep'] = 'Please Select Different Subjects';
-                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                            redirect('Admission_inter/'.$viewName);
-                            return;
+        }
+        else if((@$_POST['sub5p2'] == @$_POST['sub1p2']) ||(@$_POST['sub5p2'] == @$_POST['sub3p2'])||(@$_POST['sub5p2'] == @$_POST['sub4p2'])||(@$_POST['sub5p2'] == @$_POST['sub2p2'])||(@$_POST['sub5p2'] == @$_POST['sub6p2'])||(@$_POST['sub5p2'] == @                                        $_POST['sub7'])||(@$_POST['sub5'] == @$_POST['sub8']))
+        {
+        $allinputdata['excep'] = 'Please Select Different Subjects';
+        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+        redirect('Admission_inter/'.$viewName);
+        return;
 
-                        }
-                        else if((@$_POST['sub7p2'] == @$_POST['sub1p2']) ||(@$_POST['sub7p2'] == @$_POST['sub3p2'])||(@$_POST['sub7p2'] == @$_POST['sub4p2'])||(@$_POST['sub7p2'] == @$_POST['sub5p2'])||(@$_POST['sub7p2'] == @$_POST['sub6p2'])||(@$_POST['sub7p2']                                              == @$_POST['sub2'])||(@$_POST['sub7'] == @$_POST['sub8']))
-                        {
-                            $allinputdata['excep'] = 'Please Select Different Subjects';
-                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                            redirect('Admission_inter/'.$viewName);
-                            return;
+        }
+        else if((@$_POST['sub6p2'] == @$_POST['sub1p2']) ||(@$_POST['sub6p2'] == @$_POST['sub3p2'])||(@$_POST['sub6p2'] == @$_POST['sub4p2'])||(@$_POST['sub6p2'] == @$_POST['sub5p2'])||(@$_POST['sub6p2'] == @$_POST['sub2p2'])||(@$_POST['sub6p2'] ==                                          @$_POST['sub7'])||(@$_POST['sub6'] == @$_POST['sub8']))
+        {
+        $allinputdata['excep'] = 'Please Select Different Subjects';
+        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+        redirect('Admission_inter/'.$viewName);
+        return;
 
-                        }
-                        else if((@$_POST['sub8p2'] == @$_POST['sub1p2']) ||(@$_POST['sub8p2'] == @$_POST['sub3p2'])||(@$_POST['sub8p2'] == @$_POST['sub4p2'])||(@$_POST['sub8p2'] == @$_POST['sub5p2'])||(@$_POST['sub8p2'] == @$_POST['sub6p2'])||(@$_POST['                                                   sub8'] == @$_POST['sub7'])||(@$_POST['sub8'] == @$_POST['sub2']))
-                        {
-                            $allinputdata['excep'] = 'Please Select Different Subjects';
-                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                            redirect('Admission_inter/'.$viewName);
-                            return;
+        }
+        else if((@$_POST['sub7p2'] == @$_POST['sub1p2']) ||(@$_POST['sub7p2'] == @$_POST['sub3p2'])||(@$_POST['sub7p2'] == @$_POST['sub4p2'])||(@$_POST['sub7p2'] == @$_POST['sub5p2'])||(@$_POST['sub7p2'] == @$_POST['sub6p2'])||(@$_POST['sub7p2']                                              == @$_POST['sub2'])||(@$_POST['sub7'] == @$_POST['sub8']))
+        {
+        $allinputdata['excep'] = 'Please Select Different Subjects';
+        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+        redirect('Admission_inter/'.$viewName);
+        return;
 
-                        }*/
-                        else if((@$_POST['sub7p2'] ==20) && (@$_POST['sub8p2']==21))
-                        {
-                            $allinputdata['excep'] = 'Double History is not Allowed Please choose a different Subject';
-                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                            redirect('Admission_inter/'.$viewName);
-                            return;
+        }
+        else if((@$_POST['sub8p2'] == @$_POST['sub1p2']) ||(@$_POST['sub8p2'] == @$_POST['sub3p2'])||(@$_POST['sub8p2'] == @$_POST['sub4p2'])||(@$_POST['sub8p2'] == @$_POST['sub5p2'])||(@$_POST['sub8p2'] == @$_POST['sub6p2'])||(@$_POST['                                                   sub8'] == @$_POST['sub7'])||(@$_POST['sub8'] == @$_POST['sub2']))
+        {
+        $allinputdata['excep'] = 'Please Select Different Subjects';
+        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+        redirect('Admission_inter/'.$viewName);
+        return;
 
-                        }
-                        else if((@$_POST['sub8p2'] ==20) && (@$_POST['sub7p2']==21))
-                        {
-                            $allinputdata['excep'] = 'Double History is not Allowed Please choose a different Subject';
-                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                            redirect('Admission_inter/'.$viewName);
-                            return;
+        }*/
+        else if((@$_POST['sub7p2'] ==20) && (@$_POST['sub8p2']==21))
+        {
+            $allinputdata['excep'] = 'Double History is not Allowed Please choose a different Subject';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect('Admission_inter/'.$viewName);
+            return;
 
-                        }
-                        else if(@$_POST['sub6p2'] == @$_POST['sub8p2'])
-                        {
-                            $allinputdata['excep'] = 'Please Select Different Subjects';
-                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                            redirect('Admission_inter/'.$viewName);
-                            return;
+        }
+        else if((@$_POST['sub8p2'] ==20) && (@$_POST['sub7p2']==21))
+        {
+            $allinputdata['excep'] = 'Double History is not Allowed Please choose a different Subject';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect('Admission_inter/'.$viewName);
+            return;
 
-                        }
-                       /* else if(@$_POST['sub7p2'] == @$_POST['sub8p2'])
-                        {
-                            $allinputdata['excep'] = 'Please Select Different Subjects';
-                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                            redirect('Admission_inter/'.$viewName);
-                            return;
+        }
+        else if(@$_POST['sub6p2'] == @$_POST['sub8p2'])
+        {
+            $allinputdata['excep'] = 'Please Select Different Subjects';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect('Admission_inter/'.$viewName);
+            return;
 
-                        }  */
-                        else if(@$_POST['sub1p2'] == 0)
-                        {
-                            $allinputdata['excep'] = 'Please Select Part-II Subject 1';
-                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                            redirect('Admission_inter/'.$viewName);
-                            return;
+        }
+        /* else if(@$_POST['sub7p2'] == @$_POST['sub8p2'])
+        {
+        $allinputdata['excep'] = 'Please Select Different Subjects';
+        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+        redirect('Admission_inter/'.$viewName);
+        return;
 
-                        }
-                        else if(@$_POST['sub2p2'] == 0)
-                        {
-                            $allinputdata['excep'] = 'Please Select Part-II Subject 2';
-                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                            redirect('Admission_inter/'.$viewName);
-                            return;
-                        }
-                        else if(@$_POST['sub3p2'] == 0)
-                        {
-                            $allinputdata['excep'] = 'Please Select Part-II Subject 3';
-                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                            redirect('Admission_inter/'.$viewName);
-                            return;
+        }  */
+        else if(@$_POST['sub1p2'] == 0)
+        {
+            $allinputdata['excep'] = 'Please Select Part-II Subject 1';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect('Admission_inter/'.$viewName);
+            return;
 
-                        }
-                        else if(@$_POST['sub4p2'] == 0)
-                        {
-                            $allinputdata['excep'] = 'Please Select Part-II Subject 4';
-                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                            redirect('Admission_inter/'.$viewName);
-                            return;
+        }
+        else if(@$_POST['sub2p2'] == 0)
+        {
+            $allinputdata['excep'] = 'Please Select Part-II Subject 2';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect('Admission_inter/'.$viewName);
+            return;
+        }
+        else if(@$_POST['sub3p2'] == 0)
+        {
+            $allinputdata['excep'] = 'Please Select Part-II Subject 3';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect('Admission_inter/'.$viewName);
+            return;
 
-                        }
-                        else if(@$_POST['sub5p2'] == 0)
-                        {
-                            $allinputdata['excep'] = 'Please Select Part-II Subject 5';
-                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                            redirect('Admission_inter/'.$viewName);
-                            return;
+        }
+        else if(@$_POST['sub4p2'] == 0)
+        {
+            $allinputdata['excep'] = 'Please Select Part-II Subject 4';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect('Admission_inter/'.$viewName);
+            return;
 
-                        }
-                        else if(@$_POST['sub6p2'] == 0)
-                        {
-                            $allinputdata['excep'] = 'Please Select Part-II Subject 6';
-                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                            redirect('Admission_inter/'.$viewName);
-                            return;
+        }
+        else if(@$_POST['sub5p2'] == 0)
+        {
+            $allinputdata['excep'] = 'Please Select Part-II Subject 5';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect('Admission_inter/'.$viewName);
+            return;
 
-                        }
-                        else if(@$_POST['sub7p2']==0 && @$_POST['std_group_hidden']==7)
-                        {
-                            $allinputdata['excep'] = 'Please Select Part-II Subject 7';
-                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                            redirect('Admission_inter/'.$viewName);
-                            return;
+        }
+        else if(@$_POST['sub6p2'] == 0)
+        {
+            $allinputdata['excep'] = 'Please Select Part-II Subject 6';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect('Admission_inter/'.$viewName);
+            return;
 
-                        }
-                        /*else if(@$_POST['sub8p2'] == 0)
-                        {
-                            $allinputdata['excep'] = 'Please Select Part-II Subject 8';
-                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                            redirect('Admission_inter/'.$viewName);
-                            return;
+        }
+        else if(@$_POST['sub7p2']==0 && @$_POST['std_group_hidden']==7)
+        {
+            $allinputdata['excep'] = 'Please Select Part-II Subject 7';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect('Admission_inter/'.$viewName);
+            return;
 
-                        }     */
+        }
     }
 
 }

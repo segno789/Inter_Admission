@@ -519,7 +519,7 @@ class Admission_11th_reg extends CI_Controller {
         $this->load->view('common/header.php',$userinfo);
         $this->load->view('common/menu.php',$data);
         $this->load->view('Admission/11th/CancelAdm.php',$data);
-        $this->load->view('common/commonfooter9th.php');
+        $this->load->view('common/footer11th.php');
 
     }
     public function Profile_Update()
@@ -692,7 +692,7 @@ class Admission_11th_reg extends CI_Controller {
         $RegStdData = array('data'=>$this->Admission_11th_reg_model->Delete_NewEnrolement($formno));
         $this->load->library('session');
         $this->session->set_flashdata('error', '2');
-        redirect('Admission_9th_reg/EditForms');
+        redirect('Admission_11th_reg/EditForms');
         return;
     }
     /* public function financeReoprt()
@@ -1024,7 +1024,7 @@ class Admission_11th_reg extends CI_Controller {
         $this->load->view('common/header.php',$userinfo);
         $this->load->view('common/menu.php',$data);
         $this->load->view('Admission/11th/EditForms.php',$RegStdData);
-        $this->load->view('common/commonfooter9th.php');
+        $this->load->view('common/footer11th.php');
 
 
 
@@ -1317,7 +1317,7 @@ class Admission_11th_reg extends CI_Controller {
         $error['error_msg'] = $error_msg;
         $this->commonheader($data);
         $this->load->view('Admission/11th/FormPrinting.php',$error);
-        $this->load->view('common/commonfooter9th.php');
+        $this->load->view('common/footer11th.php');
         //$this->commonfooter(array("files"=>array("jquery.maskedinput.js","validate.NewEnrolment.js")));
 
         //$this->load->model('Admission_11th_reg_model');
@@ -1348,7 +1348,7 @@ class Admission_11th_reg extends CI_Controller {
         $error['error_msg'] = $error_msg;
         $this->commonheader($data);
         $this->load->view('Admission/11th/RevenueList.php',$error);
-        $this->load->view('common/commonfooter9th.php');
+        $this->load->view('common/footer11th.php');
         //$this->commonfooter(array("files"=>array("jquery.maskedinput.js","validate.NewEnrolment.js")));
 
         //$this->load->model('Admission_11th_reg_model');
@@ -1735,7 +1735,7 @@ class Admission_11th_reg extends CI_Controller {
         }
 
 
-        $temp = $user['Inst_Id'].'@9@'.Session;
+        $temp = $user['Inst_Id'].'@11@'.Session;
         $image =  $this->set_barcode($temp);
         // --------------------------------------- Fee Calculation Section ------------------------------------------------
       //  DebugBreak();
@@ -1925,7 +1925,7 @@ class Admission_11th_reg extends CI_Controller {
 
         //DebugBreak();
         // Govt. Institutes no Adm Fee for Single Date.
-        $date = new DateTime(SingleDateFee9th);
+        $date = new DateTime(SingleDateFee);
         $singleDate =  $date->format('Y-m-d'); 
         if(date('Y-m-d') <= $singleDate && $user_info['info'][0]['IsGovernment'] == 1)
         {    
@@ -2070,7 +2070,7 @@ class Admission_11th_reg extends CI_Controller {
 
         if(empty($result['data'])){
             $this->session->set_flashdata('error', 'No Found');
-            redirect('Admission_9th_reg/FormPrinting');
+            redirect('Admission_11th_reg/FormPrinting');
             return;
 
         }
@@ -2098,7 +2098,7 @@ class Admission_11th_reg extends CI_Controller {
 
         $type     = 'code128';
         $black    = '000000'; // color in hex
-        // DebugBreak();
+//         DebugBreak();
         $result = $result['data'] ;
         //if(!empty($result)):
         foreach ($result as $key=>$data) 
@@ -2112,29 +2112,29 @@ class Admission_11th_reg extends CI_Controller {
             //--------------------------- Subject Group
             $grp_name = $data["grp_cd"];
             switch ($grp_name) {
-                case '1':
-                    $grp_name = 'SCIENCE';
-                    break;
-                case '7':
-                    $grp_name = 'SCIENCE  WITH COMPUTER SCIENCE';
-                    break;
-                case '8':
-                    $grp_name = 'SCIENCE  WITH ELECTRICAL WIRING';
-                    break;
-                case '2':
-                    $grp_name = 'Humanities';
-                    break;
-                case '5':
-                    $grp_name = 'Deaf and Dumb';
-                    break;
-                default:
-                    $grp_name = "No Group Selected.";
-            }
+                                                        case '1':
+                                                            $grp_name = 'PRE-MEDICAL';
+                                                            break;
+                                                        case '2':
+                                                            $grp_name = 'PRE-ENGINEERING';
+                                                            break;
+                                                        case '3':
+                                                            $grp_name = 'HUMANITIES';
+                                                            break;
+                                                        case '4':
+                                                            $grp_name = 'GENERAL SCIENCE';
+                                                            break;
+                                                        case '5':
+                                                            $grp_name = 'COMMERCE';
+                                                            break;
+                                                        default:
+                                                            $grp_name = "No GROUP SELECTED.";
+                                                            }
 
             $pdf->SetFillColor(0,0,0);
             $pdf->SetDrawColor(0,0,0); 
 
-            $temp = $data['formNo'].'@9@'.Session.'@'.Year; 
+            $temp = $data['FormNo'].'@11@'.Session.'@'.Year; 
             $image =  $this->set_barcode($temp);
             $pdf->Image(BARCODE_PATH.$image,3.0, 0.7  ,2.2,0.30,"PNG");
             $pdf->Image(BARCODE_PATH.$image,5.7, 6.2  ,2.2,0.30,"PNG");
@@ -2147,7 +2147,7 @@ class Admission_11th_reg extends CI_Controller {
 
             $pdf->Image("assets/img/logo2.png",0.5,0.2, 0.75,0.75, "PNG");
             $pdf->SetXY( 1,0.5);
-            $pdf->Image("assets/img/9th.png",7.5,0.5, 0.50,0.50, "PNG");        
+            $pdf->Image("assets/img/11th.png",7.5,0.5, 0.50,0.50, "PNG");        
 
             $pdf->SetFont('Arial','',8);
             $pdf->SetXY(2.3,0.4);
@@ -2158,7 +2158,7 @@ class Admission_11th_reg extends CI_Controller {
             else{
                 $ses = "SUPPLYMENTARY";
             }
-            $pdf->Cell(0, 0.25,@$data["regPvt"]==1?"ADMISSION FORM FOR SECONDARY SCHOOL (".class_for_9th_Adm.") ".$ses." EXAMINATION, ".Year :" ADMISSION FORM FOR SECONDARY SCHOOL (".class_for_9th_Adm.") ".$ses." EXAMINATION, ".Year, 0.25, "C");
+            $pdf->Cell(0, 0.25,@$data["regPvt"]==1?"ADMISSION FORM FOR HIGHER SECONDARY SCHOOL (".class_for_11th_Adm.") ".$ses." EXAMINATION, ".Year :" ADMISSION FORM FOR HIGHER SECONDARY SCHOOL (".class_for_11th_Adm.") ".$ses." EXAMINATION, ".Year, 0.25, "C");
 
 
             $pdf->SetFont('Arial','',8);
@@ -2173,7 +2173,7 @@ class Admission_11th_reg extends CI_Controller {
 
             $pdf->SetXY(1,0.8+$Y);
             $pdf->SetFont('Arial','B',12);
-            $pdf->Cell( 0.5,0.5,@$data['formNo'],0,'L');
+            $pdf->Cell( 0.5,0.5,@$data['FormNo'],0,'L');
 
             $pdf->SetFont('Arial','B',12);
             $pdf->SetXY(4.99,0.85+$Y);
@@ -2205,7 +2205,8 @@ class Admission_11th_reg extends CI_Controller {
             $pdf->Cell(7.6,0.2,'PERSONAL INFORMATION',1,0,'L',1);
 
             $Y = 0.2;
-            $pdf->Image(DIRPATH9th.'/'.$data["Sch_cd"].'/'.$data["PicPath"],6.0+$x,2.4+$Y , 1.30, 1.30, "JPG");
+            //$pdf->Image(DIRPATH11th.'/'.$data["Sch_cd"].'/'.$data["PicPath"],6.0+$x,2.4+$Y , 1.30, 1.30, "JPG");
+            $pdf->Image(DIRPATH11th,6.0+$x,2.4+$Y , 1.30, 1.30, "JPG");
             //--------------------------- 1st line 
             $pdf->SetXY(0.5, 2+$Y);
             $pdf->SetFont('Arial','',8);
@@ -2243,7 +2244,7 @@ class Admission_11th_reg extends CI_Controller {
 
             //--------------------------- Gender Nationality 
             $locality = "";
-            if(@$data['RuralORUrban']==1)
+            if(@$data['ruralOrurban']==1)
             {
             $locality = "URBAN";
             }
@@ -2316,7 +2317,7 @@ class Admission_11th_reg extends CI_Controller {
             $pdf->Cell( 0.5,0.5,"(Candidate/Guardian's)",0,'L');
             $pdf->SetFont('Arial','B',8);
             $pdf->SetXY(1.6,3.5+$Y);
-            $pdf->Cell(0.5,0.5,strtoupper(@$data["CellNo"]),0,'L');
+            $pdf->Cell(0.5,0.5,strtoupper(@$data["MobNo"]),0,'L');
 
 
 
@@ -2423,38 +2424,38 @@ class Admission_11th_reg extends CI_Controller {
 
             //--------------------------- 7th line 
             //if(@$data["IsReAdm"]==1)
-            //{
-            //    
-            //    //------------- Old Exam Infor if any Box
-            //    $pdf->SetFont('Arial','B',8);
-            //    $pdf->SetXY(0.5,5+$Y);
-            //    $pdf->SetFillColor(240,240,240);
-            //    $pdf->Cell(8,0.2,'OLD EXAMINATION INFORMATION  ',1,0,'L',1);         
-            //    
-            //    $pdf->SetXY(0.5,5.1+$Y);
-            //    $pdf->SetFont('Arial','',8);
-            //    $pdf->Cell( 0.5,0.5,"Roll No:",0,'L');
-            //     
-            //    $pdf->SetFont('Arial','B',8);
-            //    $pdf->SetXY(1.45,5.1+$Y);
-            //    $pdf->Cell(0.5,0.5,@$data["oldRno"],0,'L');
-            //
-            //    $pdf->SetXY(2.5,5.1+$Y);
-            //    $pdf->SetFont('Arial','',8);
-            //    $pdf->Cell( 0.5,0.5,"Year:",0,'L');
-            //    $pdf->SetFont('Arial','B',8);
-            //    $pdf->SetXY(3.25,5.1+$Y);
-            //    $pdf->Cell(0.5,0.5,@$data["oldYear"],0,'L');
-            //            
-            //     $pdf->SetXY(3.8,5.1+$Y);
-            //     $pdf->SetFont('Arial','',8);
-            //     $pdf->Cell( 0.5,0.5,"Session:",0,'L');
-            //     $pdf->SetFont('Arial','B',8);
-            //     $pdf->SetXY(4.3,5.1+$Y);
-            //     $pdf->Cell(0.5,0.5,@$data["oldSess"]==1?"Annual":"Supplementary",0,'R');
-            //                
-            //   
-            //}
+           // {
+                
+                //------------- Old Exam Infor if any Box
+                $pdf->SetFont('Arial','B',8);
+                $pdf->SetXY(0.5,5+$Y);
+                $pdf->SetFillColor(240,240,240);
+                $pdf->Cell(8,0.2,'OLD EXAMINATION INFORMATION  ',1,0,'L',1);         
+                
+                $pdf->SetXY(0.5,5.1+$Y);
+                $pdf->SetFont('Arial','',8);
+                $pdf->Cell( 0.5,0.5,"Roll No:",0,'L');
+                 
+                $pdf->SetFont('Arial','B',8);
+                $pdf->SetXY(1.45,5.1+$Y);
+                $pdf->Cell(0.5,0.5,@$data["matRno"],0,'L');
+            
+                $pdf->SetXY(2.5,5.1+$Y);
+                $pdf->SetFont('Arial','',8);
+                $pdf->Cell( 0.5,0.5,"Year:",0,'L');
+                $pdf->SetFont('Arial','B',8);
+                $pdf->SetXY(3.25,5.1+$Y);
+                $pdf->Cell(0.5,0.5,@$data["yearOfPass"],0,'L');
+                        
+                 $pdf->SetXY(3.8,5.1+$Y);
+                 $pdf->SetFont('Arial','',8);
+                 $pdf->Cell( 0.5,0.5,"Session:",0,'L');
+                 $pdf->SetFont('Arial','B',8);
+                 $pdf->SetXY(4.3,5.1+$Y);
+                 $pdf->Cell(0.5,0.5,@$data["sessOfPass"]==1?"Annual":"Supplementary",0,'R');
+                            
+               
+           // }
 
 
 
@@ -2548,10 +2549,10 @@ class Admission_11th_reg extends CI_Controller {
             $pdf->Cell(0.5,0.5,  @$data['sub7Ap1'] != 1 ? '':   '    '. (@$data['sub7_NAME']),0,'L');
 
             //  DebugBreak();
-            $pdf->SetXY(3.5,6.95+$Y);
+          /*  $pdf->SetXY(3.5,6.95+$Y);
             $pdf->Cell(0.3,0.4,"8._______________________________",0,'L');
             $pdf->SetXY(3.5,6.85+$Y);
-            $pdf->Cell(0.5,0.5,  @$data['sub8ap1'] != 1 ? '':   '    '. (@$data['sub8_NAME']),0,'R');
+            $pdf->Cell(0.5,0.5,  @$data['sub8ap1'] != 1 ? '':   '    '. (@$data['sub8_NAME']),0,'R'); */
 
             //------ Picture Box on right side with subjects list    
             if(@$data["regPvt"]==2)
@@ -2648,7 +2649,7 @@ class Admission_11th_reg extends CI_Controller {
         //======================================================================================
 
 
-        $pdf->Output($data["Sch_cd"].'.pdf', 'I');
+        $pdf->Output($data["coll_cd"].'.pdf', 'I');
     }
     function convertImage($originalImage, $outputImage, $quality,$ext)
     {

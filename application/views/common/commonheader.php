@@ -6,7 +6,7 @@
         BISE GRW - BOARD OF INTERMEDIATE AND SECONDARY EDUCATION GUJRANWALA
     </title>
     <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
-<META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">    
     <meta name="author" content="">
@@ -15,6 +15,7 @@
     <link href="<?php echo base_url(); ?>assets/css_matric/jquery-1.8.2-custom.css" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/jquery.fancybox.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/alertify.core.css">
+
 </head>
 <body>
 <div class="mPageloader">

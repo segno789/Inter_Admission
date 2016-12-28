@@ -35,13 +35,13 @@ class Login extends CI_Controller {
         if(@$_POST['username'] != '' && @$_POST['password'] != '')
         {   
 
-             $this->load->model('login_model'); 
-             $logedIn = $this->login_model->auth($_POST['username'],$_POST['password']);
-             $this->load->model('login_model'); 
-             $logedIn = $this->login_model->auth($_POST['username'],$_POST['password']);
-             $isgroup = -1;
-        //  DebugBreak();   
-        if($logedIn != false)
+            $this->load->model('login_model'); 
+            $logedIn = $this->login_model->auth($_POST['username'],$_POST['password']);
+            $this->load->model('login_model'); 
+            $logedIn = $this->login_model->auth($_POST['username'],$_POST['password']);
+            $isgroup = -1;
+            //  DebugBreak();   
+            if($logedIn != false)
             {  
 
 
@@ -61,21 +61,10 @@ class Login extends CI_Controller {
                 }  
                 if($logedIn['tbl_inst']['edu_lvl'] == 1)
                 {
-                    /* if(($logedIn['tbl_inst']['allowed_mGrp'] == NULL || $logedIn['tbl_inst']['allowed_mGrp'] == 0 || $logedIn['tbl_inst']['allowed_mGrp'] == '') && $logedIn['tbl_inst']['IsGovernment'] ==2)
-                    {
-                    $isgroup =1;
-                    $data = array(
-                    'user_status' => 7                     
-                    );
-                    $this->load->view('login/login.php',$data);
-                    }          */
-
                     if($logedIn['tbl_inst']['IsGovernment'] ==2 and ($logedIn['tbl_inst']['allowed_mGrp'] == '1,2' || $logedIn['tbl_inst']['allowed_mGrp'] == '2,1' || $logedIn['tbl_inst']['allowed_mGrp'] == '1' || $logedIn['tbl_inst']['allowed_mGrp'] == '2' || $logedIn['tbl_inst']['allowed_mGrp'] == '1,7' || $logedIn['tbl_inst']['allowed_mGrp'] == '7,1'))
                     {
                         $logedIn['tbl_inst']['allowed_mGrp'] = '1,2,7';
                     }
-
-
                 }
                 else if($logedIn['tbl_inst']['edu_lvl'] == 2)
                 {
@@ -109,7 +98,7 @@ class Login extends CI_Controller {
                 }
                 if($isgroup ==-1)
                 {
-                   // $this->load->model('RollNoSlip_model');
+                    // $this->load->model('RollNoSlip_model');
                     $isdeaf = 0;
                     if($logedIn['tbl_inst']['edu_lvl'] == 1)
                     {
@@ -140,11 +129,11 @@ class Login extends CI_Controller {
                     $isfeeding = -1;
                     $isinterfeeding = -1;
                     $lastdate = SingleDateFee;
-                  //  DebugBreak();
-                   
+                    //  DebugBreak();
 
 
-                   // DebugBreak();
+
+                    // DebugBreak();
                     $sess_array = array(
                         'Inst_Id' => $logedIn['flusers']['inst_cd'] ,
                         'pass' => $logedIn['flusers']['pass'] ,
@@ -171,14 +160,10 @@ class Login extends CI_Controller {
                     );
                     $this->load->library('session');
                     $this->session->set_userdata('logged_in', $sess_array); 
-                    // redirect('Registration/','refresh');
-                    // redirect('Admission_matric/');
                     if($logedIn['tbl_inst']['edu_lvl'] == 2 || $logedIn['tbl_inst']['edu_lvl'] == 3 )
                     {
-                      redirect('dashboard/');  
+                        redirect('dashboard/');  
                     }
-                    
-                   
                 }
             }
             else
@@ -187,16 +172,15 @@ class Login extends CI_Controller {
                     'user_status' => 1                     
                 );
                 $this->load->view('login/login.php',$data);
-
             }
         }
         else
         {
             $this->load->view('login/login.php',$data);
         }
-
     }
-   function clear_cache()
+
+    function clear_cache()
     {
         $this->output->set_header("Cache-Control: no-store, no-cache, must-revalidate, no-transform, max-age=0, post-check=0, pre-check=0");
         $this->output->set_header("Pragma: no-cache");
@@ -204,20 +188,12 @@ class Login extends CI_Controller {
 
     function logout()
     {
-        
         $this->load->helper('url');
-        // DebugBreak();
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $this->session->set_userdata('logged_in', ''); 
         $this->session->sess_destroy();
         redirect('login');
-        
-
-
     }
 
-}
-/*'Inst_Id' => $logedIn->Inst_cd,
-'edu_lvl' => $logedIn->edu_lvl,
-'Name' => $logedIn->name,*/
+}                          

@@ -5,7 +5,7 @@
                 <div class="widget no-margin">
                     <div class="widget-header">
                         <div class="title">
-                            Form Printing 9th Admission<a data-original-title="" id="notifications">s</a>
+                            Form Printing 11th Admission<a data-original-title="" id="notifications">s</a>
                         </div>
                                            </div>
                     <div class="widget-body">
@@ -39,45 +39,91 @@
                             </label>
                             <div class="controls controls-row">
                                 <select id="std_group"   class="dropdown span3"  name="std_group">
-                            <?php        
-                                    $subgroups =  split(',',$grp_cd);
-                            echo "<option value='0' >SELECT GROUP</option>";
-                            for($i =0 ; $i<count($subgroups); $i++)
-                            {
-                                if($subgroups[$i] == 1)
-                                {
-                                   
-                                        echo "<option value='1' >SCIENCE WITH BIOLOGY</option>";    
-                                }
-                                else if($subgroups[$i] == 7)
-                                {
-                                   
-                                        echo "<option value='7'>SCIENCE  WITH COMPUTER SCIENCE</option>"; 
+                           <?php
 
-                                }
-                                else if($subgroups[$i] == 8)
-                                {
-                                    
-                                        echo "<option value='8'>SCIENCE  WITH ELECTRICAL WIRING</option>";  
-                                    
-                                }
-                                else if($subgroups[$i] == 2)
-                                {
-                                   
-                                        echo "<option value='2'>HUMANTIES</option>";   
-                                    
+                                        // DebugBreak();
+                                        $subgroups =  split(',',$grp_cdi);
+                                        echo "<option value='0' >SELECT GROUP</option>";
+                                        for($i =0 ; $i<count($subgroups); $i++)
+                                        {
+                                            if($subgroups[$i] == 1)
+                                                {
+                                                    if($grp_selected == 1)
+                                                    {
+                                                        echo "<option value='1' selected='selected'>Pre-Medical</option>";  
+                                                    }
+                                                    else 
+                                                    {
+                                                        echo "<option value='1' >Pre-Medical</option>";    
+                                                    }
+                                                }
+                                                else if($subgroups[$i] == 2)
+                                                {
+                                                    if($grp_selected == 2)
+                                                    {
+                                                        echo "<option value='2' selected='selected'>Pre-Engineering</option>";
+                                                    }
+                                                    else
+                                                    {
+                                                        echo "<option value='2'>Pre-Engineering</option>"; 
+                                                    }
 
-                                }
-                                else if($subgroups[$i] == 5)
-                                {
-                                   
-                                        echo "<option value='5'>DEAF AND DUMB</option>";  
-                                    
+                                                }
+                                                else if($subgroups[$i] == 3)
+                                                {
+                                                    if($grp_selected == 3)
+                                                    {
+                                                        echo "<option value='3' selected='selected'>Humanities</option>";  
+                                                    }
+                                                    else
+                                                    {
+                                                        echo "<option value='3'>Humanities</option>";  
+                                                    }
 
-                                }
-                            }
-                            
-                            echo "</select>" ?>
+                                                }
+                                                else if($subgroups[$i] == 4)
+                                                {
+                                                    if($grp_selected == 4)
+                                                    {
+                                                        echo "<option value='4' selected='selected'>General Science</option>";  
+                                                    }
+                                                    else
+                                                    {
+                                                        echo "<option value='4'>General Science</option>";   
+                                                    }
+
+                                                }
+                                                else if($subgroups[$i] == 5)
+                                                {
+                                                    if($grp_selected == 5)
+                                                    {
+                                                        echo "<option value='5' selected='selected'>Commerce</option>";  
+                                                    }
+                                                    else
+                                                    {
+                                                        echo "<option value='5'>Commerce</option>";  
+                                                    }
+
+                                                }
+                                                else if($subgroups[$i] == 6)
+                                                {
+                                                    if($grp_selected == 6)
+                                                    {
+                                                        echo "<option value='6' selected='selected'>Home Economics</option>";  
+                                                    }
+                                                    else
+                                                    {
+                                                        echo "<option value='6'>Home Economics</option>";  
+                                                    }
+
+                                                }
+                                        }
+                                        /* <option value='1'>SCIENCE GROUP WITH BIOLOGY</option>
+                                        <option value='7'>SCIENCE GROUP WITH COMPUTER SCIENCE</option>
+                                        <option value='2'>HUMANTIES</option>
+                                        <option value='5'>DEAF AND DUMB</option>*/
+                                        ?> 
+                                        </select>
                                     
                                     
                                     

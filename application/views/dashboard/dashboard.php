@@ -50,6 +50,20 @@
                                             </div>
                                         </a>
                                     </form>
+<<<<<<< HEAD
+                                </div>
+                                <!-- <div class="metro-nav-block nav-block-blue double">
+                                <form action="http://hssc.bisegrw.com/login" id="adm9form" method="post" target="_blank">
+                                <input type="hidden" type="hidden" name="username" id='username' value="<?=  $Inst_Id?>">
+                                <input type="hidden" type="hidden" name="password" id='password' value="<?= $pass?>">
+                                <a  target="_blank" onclick="document.getElementById('adm9form').submit();" >
+                                <div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>
+                                <div class="brand">
+                                11th Admission
+                                </div>
+                                </a>
+                                </form>
+=======
                                 </div>-->
                                <!-- <div class="metro-nav-block nav-block-blue double">
                                     <form action="http://hssc.bisegrw.com/login" id="adm9form" method="post" target="_blank">
@@ -62,6 +76,7 @@
                                             </div>
                                         </a>
                                     </form>
+>>>>>>> bceabbfc92c0294b076ecff6df94b0ff8e1efff4
                                 </div>       -->
                                <!-- <div class="metro-nav-block nav-block-red">
                                     <form action="http://slips.bisegrw.com/" id="slips9thform" method="post" target="_blank">
@@ -86,8 +101,26 @@
                                             </div>
                                         </a>
                                     </form>
+<<<<<<< HEAD
+                                </div>
+                                <div class="metro-nav-block nav-block-green">
+
+
+                                    <form action="<?php  echo base_url(); ?>/index.php/Admission_inter" id="adm10form" method="post" target="_blank">
+                                        <input type="hidden" type="hidden" name="username" id='username' value="<?=  $Inst_Id?>">
+                                        <input type="hidden" type="hidden" name="password" id='password' value="<?= $pass?>">
+                                        <a  target="_blank" onclick="document.getElementById('adm10form').submit();" >
+                                            <div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>
+                                            <div class="brand">
+                                                12th Admission
+                                            </div>
+                                        </a>
+                                    </form>
+                                </div>
+=======
                                 </div>-->
                              
+>>>>>>> bceabbfc92c0294b076ecff6df94b0ff8e1efff4
 
                                 <!--<div class="metro-nav-block nav-block-red double">
                                     <form action="http://slips.bisegrw.com/" id="slip10form" method="post" target="_blank">
@@ -100,9 +133,14 @@
                                             </div>
                                         </a>
                                     </form>
+<<<<<<< HEAD
+                                </div>
+
+=======
                                 </div>-->
 
 <!--
+>>>>>>> bceabbfc92c0294b076ecff6df94b0ff8e1efff4
                                 <div class="metro-nav-block nav-block-blue">
                                     <form action="http://results.bisegrw.com/" id="res10form" method="post" target="_blank">
                                         <input type="hidden" type="hidden" name="username" id='username' value="<?=  $Inst_Id?>">
@@ -123,6 +161,4 @@
             </div>
         </div>
     </div>
-</div>
-</div>
 </div>

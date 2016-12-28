@@ -10,7 +10,7 @@
                         </div>
 
                     </div>
-                    <form action="<?=base_url()?>index.php/Admission_9th_reg/NewEnrolment_update/" method="post" id="form_make_adm">
+                    <form action="<?=base_url()?>index.php/Admission_11th_reg/NewEnrolment_update/" method="post" id="form_make_adm">
                         <div class="widget-body">
                             <div class='control-group'>
                                 <div class='controls controls-row'>
@@ -58,49 +58,40 @@
                                                     $grp_name='';                             
                                                     foreach($data as $key=>$vals):
                                                         $n++;
-                                                        $formno = !empty($vals["formNo"])?$vals["formNo"]:"N/A";
+                                                        $formno = !empty($vals["FormNo"])?$vals["FormNo"]:"N/A";
                                                         $grp_name = $vals["grp_cd"];
-                                                        $sub7 = $vals["sub8"];
-                                                        if($grp_name==1 && $sub7==78)
-                                                        {
-                                                            $grp_name = 7;
-                                                        }
-                                                        if($grp_name == 1 && $sub7 == 43){
-                                                            $grp_name = 8;
-                                                        }
-                                                        if($grp_name == 1 && $sub7 == 8){
-                                                            $grp_name = 1;
-                                                        }
+                                                      //  $sub7 = $vals["sub8"];
+                                                       
                                                         switch ($grp_name) {
-                                                            case '1':
-                                                                $grp_name = 'SCIENCE WITH BIOLOGY';
-                                                                break;
-                                                            case '7':
-                                                                $grp_name = 'SCIENCE  WITH COMPUTER SCIENCE';
-                                                                break;
-                                                            case '8':
-                                                                $grp_name = 'SCIENCE  WITH ELECTRICAL WIRING';
-                                                                break;
-                                                            case '2':
-                                                                $grp_name = 'Humanities';
-                                                                break;
-                                                            case '5':
-                                                                $grp_name = 'Deaf and Dumb';
-                                                                break;
-                                                            default:
-                                                                $grp_name = "No Group Selected.";
-                                                        }
+                                                        case '1':
+                                                            $grp_name = 'PRE-MEDICAL';
+                                                            break;
+                                                        case '2':
+                                                            $grp_name = 'PRE-ENGINEERING';
+                                                            break;
+                                                        case '3':
+                                                            $grp_name = 'HUMANITIES';
+                                                            break;
+                                                        case '4':
+                                                            $grp_name = 'GENERAL SCIENCE';
+                                                            break;
+                                                        case '5':
+                                                            $grp_name = 'COMMERCE';
+                                                            break;
+                                                        default:
+                                                            $grp_name = "No GROUP SELECTED.";
+                                                            }
 
                                                         //  DebugBreak();
                                                         echo '<tr  >
                                                         <td>'.$n.'</td>
-                                                        <td>'.$vals["formNo"].'</td>
+                                                        <td>'.$vals["FormNo"].'</td>
                                                         <td>'.$vals["name"].'</td>
                                                         <td>'.$vals["Fname"].'</td>
                                                         <td>'.date("d-m-Y", strtotime($vals["Dob"])).'</td>
                                                         <td>'.$grp_name.'</td>
-                                                        <td>'.$vals["sub1_abr"].','.$vals["sub2_abr"].','.$vals["sub3_abr"].','.$vals["sub4_abr"].','.$vals["sub5_abr"].','.$vals["sub6_abr"].','.$vals["sub7_abr"].','.$vals["sub8_abr"].'</td>
-                                                        <td><img id="previewImg" style="width:40px; height: 40px;" src="'.GET_IMAGE_PATH_9th_Admission_Annual.$Inst_Id.'/'.$vals["picpath"].'?'.rand(10000,1000000).'" alt="Candidate Image"></td>
+                                                        <td>'.$vals["sub1_abr"].','.$vals["sub2_abr"].','.$vals["sub3_abr"].','.$vals["sub4_abr"].','.$vals["sub5_abr"].','.$vals["sub6_abr"].','.$vals["sub7_abr"].'</td>
+                                                        <td><img id="previewImg" style="width:40px; height: 40px;" src="'.DIRPATH11th.$Inst_Id.'/'.$vals["PicPath"].'?'.rand(10000,1000000).'" alt="Candidate Image"></td>
                                                         <td><input style="width: 24px; height: 24px;" type="checkbox" name="chk[]" value="'.$formno.'" /></td> </tr>';
                                                         /*<td><img id="previewImg" style="width:40px; height: 40px;" src="/'.IMAGE_PATH.$Inst_Id.'/'.$vals['PicPath'].'" alt="Candidate Image"></td>';*/
                                                         /* echo'<td>
@@ -127,9 +118,9 @@
 
                                     <div class="control-group">
                                         <div class="controls controls-row">
-                                            <label class="label label-important" style="font-size: large;">
+                                           <!-- <label class="label label-important" style="font-size: large;">
                                                 Note: Please write "No Image" in the above search to check if any image of candidate is missing or not.
-                                            </label>
+                                            </label>     -->
                                         </div>
                                     </div>
                                 </div>
