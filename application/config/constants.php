@@ -40,9 +40,9 @@ define('BARCODE_PATH', 'assets/pdfs/');
 define('PRIVATE_IMAGE_PATH', 'uploads/private/');
 define('REGULAR_IMAGE_PATH', 'uploads/regular/');
 define('Session','1');  // 1 for Annual and 2 for Supply
-define('Year','2016');  
+define('Year','2017');  
 define('lastdate','20-08-2016');
-define('GET_PRIVATE_IMAGE_PATH', '');
+define('GET_PRIVATE_IMAGE_PATH', 'F:\xampp\htdocs\Inter_Admission\Uploads\2016\11th\private\\');
 define('GET_PRIVATE_IMAGE_PATH_COPY', '');
 define('DIRPATH11th','F:/xampp/htdocs/Share Images/'); 
 define('IMAGE_PATH', 'uploads/2016/');
@@ -61,14 +61,20 @@ define('session_year','2016-2018');
 define('TITLEHSSC','Online HSSC Annual Admission 2017');
 define('SingleDateFee11th','03-10-2016');
 define('currdate','date("d-m-Y");');
-define ('SingleDateFee','03-10-2016');
-define('DoubleDateFee', '07-10-2016');
-define('TripleDateFee', '13-10-2016');
+define ('SingleDateFee','23-12-2016');
+define('DoubleDateFee', '30-12-2016');
+define('TripleDateFee', '10-01-2017');
 define('TripleDateFeeinter', '13-10-2016');
                                 
 define('getinfo','admission_online..tblAdmissionDataForHSSC');
 define('getinfo_languages','admission_online..tblAdmissionDataLang');
 
+
+////11th Image
+
+
+define('formprint_sp_11th','Registration..sp_form_data_11thAdm');    // for selection 9th Annual
+define('class_for_9th_Adm','11th');
 
 //===============10TH Regular Admission Matric challan varaible
 define('corr_bank_chall_class1','12th');

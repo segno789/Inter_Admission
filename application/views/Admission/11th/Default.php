@@ -5,7 +5,7 @@
                 <div class="widget">
                     <div class="widget-header">
                         <div class="title">
-                            Exam Inter  <?php  if(Session=='1')
+                            Exam HSSC Part-I  <?php  if(Session=='1')
                                 echo 'Annual, ';
                             else if(Session =='2')
                                 echo 'Supply, '; 
@@ -18,7 +18,7 @@
                         <form enctype="multipart/form-data" id="options" name="options" method="post" action="" >
                             <table>
                                 <tr>
-                                    <td ><label class="welcome_note myEngheading" >Exam HSSC Part-II <?php if(Session=='1')
+                                    <td ><label class="welcome_note myEngheading" >Exam HSSC Part-I <?php if(Session=='1')
                                                 echo 'Annual, ';
                                             else if(Session =='2')
                                                 echo 'Supply, '; 
@@ -52,7 +52,7 @@
                                 Regular Candidate </br>
                             </div>
                             <div style="vertical-align:bottom;margin-top: 20px; font-weight: bold;">
-                                <input type="button" value="Next" id="proceed" name="proceed" class="jbtn jmedium jblack">
+                                <input type="button" value="Next" id="proceed11th" name="proceed11th" class="jbtn jmedium jblack">
                                 </br>
                                 <img src="<?=base_url()?>assets/img/inqurey.jpg" alt="" style="width: 60%;">
                                 <!-- <input type="button" value="Cancel" onclick="window.location='#';" class="jbtn jmedium jblack"> -->

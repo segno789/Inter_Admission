@@ -42,7 +42,7 @@
 <div id="header">
     <div class="inHeaderLogin">
         <a href="" title="BISE Gujranwala" rel="home"><img style="margin-top: 9px;text-align:left;width:150px;float: left;margin-left: 22%; " src="<?php echo base_url(); ?>assets/img/logo.jpg" alt="Logo BISE GRW"></a>
-        <p style="color: wheat;text-align: center;font-size: 28px;margin-left: 28px;float: left;     margin-top: 40px;">Board of Intermediate & Secondary Education, Gujranwala </br></br> Admission HSSC Part-II      <?php if(Session=='1')
+        <p style="color: wheat;text-align: center;font-size: 28px;margin-left: 28px;float: left;     margin-top: 40px;">Board of Intermediate & Secondary Education, Gujranwala </br></br> Admission HSSC Part-I      <?php if(Session=='1')
                 echo 'Annual';
             else if(Session =='2')
                 echo 'Supply';?> 

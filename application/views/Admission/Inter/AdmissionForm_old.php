@@ -22,7 +22,7 @@ header("Pragma: no-cache");
                                 <div class="controls controls-row">
                                     <label class="control-label span2" >
                                     </label> 
-                                    <img id="image_upload_preview" style="width:140px; height: 140px;" src="<?php echo '../../'.GET_PRIVATE_IMAGE_PATH.$data[0]['picpath'];?>" alt="Candidate Image" />
+                                    <img id="image_upload_preview" style="width:140px; height: 140px;" src="<?php echo base_url().GET_PRIVATE_IMAGE_PATH.$data[0]['picpath'];?>" alt="Candidate Image" />
                                     <input type="hidden" id="pic" name="pic"  value="<?php echo $data[0]['picpath']?>"/>    
                                 </div>
                             </div>
@@ -278,7 +278,6 @@ header("Pragma: no-cache");
                                     <option value='0'>SELECT ZONE</option>
                                 </select>
                             </div>
-                            </div>
                             <div id="instruction" style="display:none; width:700px" >
                                   <img src="<?php  echo base_url().'assets/img/Instruction.jpg'; ?>" border="0" width="950" height="773" alt="Instruction.jpg (152,412 bytes)">
                             </div>
@@ -302,15 +301,13 @@ header("Pragma: no-cache");
                                         $exam_type = $data[0]['exam_type'];
                                         $status = $data[0]['status'];
                                         $class = $data[0]['class'];
-                                        $IsRegular = @$data[0]['IsRegular'];
+                                        $IsRegular = $data[0]['IsRegular'];
                                         $coll_cd = $data[0]['coll_cd']; 
-                                        $cat11  = $data[0]['cat11'];
-                                        if($cat11==4)
+ if($cat11==4)
                                         {
                                            echo "<option value='9' selected='selected'>KAHSA</option>";   
                                         }
-                                        else
-                                        if($exam_type == 1   || $exam_type == 3 || $exam_type == 9 || $exam_type == 11 || $exam_type == 16 || $exam_type == 14 || $exam_type == 15)
+                                       else if($exam_type == 1   || $exam_type == 3 || $exam_type == 9 || $exam_type == 11 || $exam_type == 16 || $exam_type == 14 || $exam_type == 15)
                                         {
                                             if($grp_cd == 1){
                                                 echo "<option value='1' selected='selected'>PRE-MEDICAL</option>";       
@@ -330,7 +327,7 @@ header("Pragma: no-cache");
                                             } 
                                         }
 
-                                         else
+                                        
                                         
                                    
 
@@ -357,10 +354,6 @@ header("Pragma: no-cache");
                                             else if($grp_cd == 5){
                                                 echo "<option value='5' selected='selected'>COMMERCE</option>";       
                                                 echo "<option value='3'>HUMANITIES</option>";  
-                                            }
-                                              else if($grp_cd == 7){
-                                                echo "<option value='7' selected='selected'>Home Economics</option>";       
-                                              
                                             }
                                         }
 
@@ -995,7 +988,7 @@ header("Pragma: no-cache");
                                     });
 
                                     $.each(huminities_without_practical,function(val,text){
-                                       
+
                                         $("#sub5").append(new Option(text,val));
                                         $("#sub5p2").append(new Option(text,val));
                                     });
@@ -1009,7 +1002,7 @@ header("Pragma: no-cache");
                                     $('#sub7').hide();$('#sub7p2').hide();
                                     $('#sub8').hide(); $('#sub8p2').hide();
                                 }
-                                function AamKhasa_subj()
+                                  function AamKhasa_subj()
                                 {
                                     Empty_All_Dropdowns();
 
@@ -1045,7 +1038,6 @@ header("Pragma: no-cache");
                                     $('#sub7').hide();$('#sub7p2').hide();
                                     $('#sub8').hide(); $('#sub8p2').hide();
                                 }
-
                                 var grp_cd ="<?php if(@$data[0]['exam_type']=="3"){ echo 0; } else{echo  @$data[0]['grp_cd'];}  ?>";
                                 var sub1 ="<?php echo @$data[0]['sub1']; ?>";
                                 var sub2 = "<?php echo @$data[0]['sub2']; ?>";
@@ -2105,7 +2097,6 @@ header("Pragma: no-cache");
                                     $('#sub3').empty();
                                     $('#sub3p2').empty();
                                 }
-
                                 function Aama_Khasa()
                                 {
                                   Empty_All_Dropdowns();
@@ -2118,12 +2109,11 @@ header("Pragma: no-cache");
                                 <?php
 
                                // debugBreak();
-                                if($cat11 == 4)
+                                 if($cat11 == 4)
                                 {
                                 echo 'Aama_Khasa();';
                                 }
-                                else
-                                if($exam_type == 1){ 
+                                else if($exam_type == 1){ 
                                     echo 'sub_grp_load_exam_type1();'; 
                                 }
                                 else if($exam_type == 2){
@@ -2341,7 +2331,8 @@ header("Pragma: no-cache");
                                     var id5p2 =$("#sub5p2").val();
                                     var id6 =$("#sub6").val();
                                     var id6p2 =$("#sub6p2").val();
-                                    var grp_cd = $('#std_group').val();
+                                  
+                                    
                                      if(grp_cd == 5)
                                    {
                                        if(id5 == 0)
@@ -2404,7 +2395,8 @@ header("Pragma: no-cache");
                                     var id6 =$("#sub6").val();
                                     var id6p2 =$("#sub6p2").val();
                                     $("#sub5").val(id5p2);
-                                     var grp_cd = $('#std_group').val();
+
+                                    
                                     if(grp_cd == 5)
                                     {
                                         if(id5p2 == 0)
@@ -2466,7 +2458,6 @@ header("Pragma: no-cache");
                                     var id5p2 =$("#sub5p2").val();
                                     var id6 =$("#sub6").val();
                                     var id6p2 =$("#sub6p2").val();
-                                     var grp_cd = $('#std_group').val();
                                    if(grp_cd == 5)
                                    {
                                        if(id6 == 0)
@@ -2532,7 +2523,7 @@ header("Pragma: no-cache");
                                     var id6 =$("#sub6").val();
                                     var id6p2 =$("#sub6p2").val();
                                   
-                                  var grp_cd = $('#std_group').val();
+
                                      if(grp_cd == 5)
                                    {
                                        if(id6p2 == 0)
