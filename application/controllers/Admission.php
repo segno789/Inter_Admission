@@ -2263,7 +2263,7 @@ class Admission extends CI_Controller {
         $SSC_Year = '';
         $SSC_Session = '';
         $SSC_Board = '';
-
+        $board ='';
         $data = array('data'=> "");
         $data = array(
 
@@ -2277,9 +2277,14 @@ class Admission extends CI_Controller {
         $this->load->model('Admission_model');
         $data = $this->Admission_model->Pre_Matric_data($data);
 
-        DebugBreak();
+        //DebugBreak();
+        $board    = $data[0]['SSC_Board'];
+        $oldclass    = $data[0]['SSC_CLASS'];
 
-
+        $brd_name=$this->Admission_model->Brd_Name($board);
+        $data[0]['brd_name']= $brd_name[0]['Brd_Abr'] ;
+        $data[0]['brd_cd']= $board;
+        $data[0]['oldclass']= $oldclass;
 
         $this->load->view('common/commonheader.php');        
         $this->load->view('Admission/Inter/AdmissionForm_Fresh.php', array('data'=>$data));
@@ -2290,11 +2295,11 @@ class Admission extends CI_Controller {
 
     public function NewEnrolment_insert_Fresh()
     {
-
-        DebugBreak();
-
+        //DebugBreak();
         $this->load->model('Admission_model');
+
         $this->load->library('session');
+
         $Inst_Id = 999999;
 
         $formno = $this->Admission_model->GetFormNo();
@@ -2303,7 +2308,6 @@ class Admission extends CI_Controller {
             'father_name'=>@$_POST['father_name'],
             'bay_form'=>@$_POST['bay_form'],
             'father_cnic'=>@$_POST['father_cnic'],
-
             'mob_number'=>@$_POST['mob_number'],
             'medium'=>@$_POST['medium'],
             'speciality'=>@$_POST['speciality'],
@@ -2348,7 +2352,6 @@ class Admission extends CI_Controller {
         $sub1ap2 = 0;$sub2ap2 = 0;$sub3ap2 = 0;$sub4ap2 = 0;$sub5ap2 = 0;$sub6ap2 = 0;$sub7ap2 = 0;$sub8ap2 = 0;
 
         $grp_cd = $this->input->post('std_group');
-        $is11th = 0;
 
         if(@$_POST['sub1'] != 0)
         {
@@ -2403,14 +2406,12 @@ class Admission extends CI_Controller {
         {
             $sub4ap2 = 1;    
             $sub4 =  @$_POST['sub4p2'];
-
         }
 
         if(@$_POST['sub5p2'] != 0 && $grp_cd == 5)
         {
             $sub5ap2 = 1;    
             $sub5a =  @$_POST['sub5p2'];
-
         }
         else if(@$_POST['sub5p2'] != 0 && $grp_cd != 5)
         {
@@ -2423,7 +2424,7 @@ class Admission extends CI_Controller {
             $sub6a =  @$_POST['sub6p2'];
 
         }
-        else   if(@$_POST['sub6p2'] != 0 && $grp_cd != 5)
+        else if(@$_POST['sub6p2'] != 0 && $grp_cd != 5)
         {
             $sub6ap2 = 1;    
             $sub6 =  @$_POST['sub6p2'];
@@ -2434,7 +2435,7 @@ class Admission extends CI_Controller {
             $sub7a =  @$_POST['sub7p2'];
 
         }
-        else  if(@$_POST['sub7p2'] != 0  && $grp_cd != 5)
+        else if(@$_POST['sub7p2'] != 0  && $grp_cd != 5)
         {
             $sub7ap2 = 1;    
             $sub7 =  @$_POST['sub7p2'];
@@ -2452,84 +2453,14 @@ class Admission extends CI_Controller {
             $sub2 =  $_POST['sub2p2'];    
         }
 
-
-        $cattype = @$_POST['cattype_hidden'];
-        $examtype = @$_POST['exam_type'];
-        $marksImp = @$_POST['ddlMarksImproveoptions'];
-
-
-
-        $_POST['category']    = $cattype;
-        //$this->frmvalidation('Pre_Inter_Data',$data_error,0);
-
-
-        $cat = $this->makecat($cattype,$examtype,$marksImp,$is11th);
-        $per_grp = @$_POST['pregrp'];
-        if($grp_cd == 9)
-        {
-            $cat11 = 4;
-            $cat12 = 4;
-            $grp_cd = $per_grp; 
-        }
-        else
-        {
-            $cat11 = @$cat['cat11'];
-            $cat12 = @$cat['cat12'];
-        }
         $Speciality = $this->input->post('speciality');
 
-
-
-
-        $practical_Sub = array(
-
-            'LIBRARY SCIENCE'=>'8',
-            'GEOGRAPHY'=>'12',
-            'PSYCHOLOGY'=>'16',
-            'STATISTICS'=>'18',
-            'OUTLINES OF HOME ECONOMICS'=>'21',
-            'FINE ARTS'=>'23',
-            'COMMERCIAL PRACTICE'=>'38',
-            'HEALTH & PHYSICAL EDUCATION'=>'42',
-            'BIOLOGY'=>'46',
-            'PHYSICS'=>'47',
-            'CHEMISTRY'=>'48',
-            'COMPUTER SCIENCE'=>'83',
-            'NURSING'=>'79',
-            'AGRICULTURE'=>'90',
-            'TYPING'=>'96',
-            'COMPUTER STUDIES'=>'98',
-            'CLOTHING & TEXTILE (Home-Economics Group)'=>'75',
-            'HOME MANAGEMNET (Home-Economics Group)'=>'76'
-        );
-
-        $ispractical = 0;
-        if($per_grp == 1 || $pre_grp == 2 || $pre_grp == 4  || $grp_cd == 1 || $grp_cd == 2 || $grp_cd == 4)
-        {
-            $ispractical =1;
-        }
-        if(array_search(@$_POST['sub4'],$practical_Sub) || array_search(@$_POST['sub5'],$practical_Sub) || array_search(@$_POST['sub6'],$practical_Sub) || array_search(@$_POST['sub7'],$practical_Sub) || array_search(@$_POST['sub7p2'],$practical_Sub) || array_search(@$_POST['sub4p2'],$practical_Sub) || array_search(@$_POST['sub5p2'],$practical_Sub) || array_search(@$_POST['sub6p2'],$practical_Sub))
-        {
-            $ispractical =1;
-        }
-
-
         $AdmFee = $this->Admission_model->getrulefee($ispractical);
-        //debugBreak();
 
         $AdmFeeCatWise = '1700';
-        if($cat11 != 0 && $cat12 != 0)
-        {
-            $AdmFeeCatWise = $AdmFee[0]['Comp_Pvt_Amount'];
-        }
-        else if(($cat11 == 0 && $cat12 != 0) || ($cat11 != 0 && $cat12 == 0))
-        {
-            $AdmFeeCatWise = $AdmFee[0]['PVT_Amount'];
-        }
-        else if($cat11 == 0 && $cat12 == 0)
-        {
-            return;
-        }
+
+        $cat11 = 1; $cat12 = 1;
+
         if($Speciality>0)
         {
             if($Speciality ==2 && Session ==2 )
@@ -2540,12 +2471,10 @@ class Admission extends CI_Controller {
             {
                 $AdmFeeCatWise = 0;    
             }
-
         }
         else
         {
             $AdmFeeCatWise = $AdmFeeCatWise;
-            // $AdmFeeCatWise  =0;
         }
         $today = date("d-m-Y");
         $dueDate = 0;
@@ -2555,11 +2484,9 @@ class Admission extends CI_Controller {
             $your_date = strtotime(TripleDateFeeinter);
             $datediff = $now - $your_date;
             $days = floor($datediff/(60*60*24));
-
             $dueDate = $days*500;
         }
         $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise + $dueDate;  
-
 
         $oldsess = @$_POST['oldsess'];
 
@@ -2570,10 +2497,11 @@ class Admission extends CI_Controller {
             $oldsess =  2;    
         }
 
-        //DebugBreak();
-
         $addre =  str_replace("'", "", $this->input->post('address'));
         $MarkOfIden =  str_replace("'", "", $this->input->post('MarkOfIden'));
+
+        //DebugBreak();
+
         $data = array(
             'name' =>$this->input->post('cand_name'),
             'Fname' =>$this->input->post('father_name'),
@@ -2624,13 +2552,16 @@ class Admission extends CI_Controller {
             'dist'=>@$_POST['pvtinfo_dist'],
             'teh'=>@$_POST['pvtinfo_teh'],
             'zone'=>@$_POST['pvtZone'],
-            'Reggrp'=>"2",
             'rno'=>@$_POST['oldrno'],
             'sess'=>$oldsess,
             'Iyear'=>@$_POST['oldyear'],
+
             'Brd_cd'=>@$_POST['oldboardid'],
 
-            'class'=>@$_POST['oldclass'],
+
+            'oldclass'=>10,//@$_POST['oldclass'],
+
+
             'schm'=>1,
             'AdmProcessFee'=>$AdmFee[0]['Processing_Fee'],
             'AdmFee'=>$AdmFeeCatWise,
@@ -2645,24 +2576,21 @@ class Admission extends CI_Controller {
 
         //DebugBreak();
 
-        if(@$_POST['pic'] == ''){
+        $config['upload_path']   = PRIVATE_IMAGE_PATH_FRESH;
+        $config['allowed_types'] = 'jpeg|jpg';              
+        $config['file_name']    = $formno;//@$_POST['InterRno_hidden']; 
 
-            $config['upload_path']   = PRIVATE_IMAGE_PATH;
-            $config['allowed_types'] = 'jpeg|jpg|png';              
-            $config['file_name']    = @$_POST['InterRno_hidden'];  
+        $this->load->library('upload', $config);
 
-            $this->load->library('upload', $config);
-
-            if ( ! $this->upload->do_upload('inputFile')) {
-                $error = array('error' => $this->upload->display_errors()); 
-            }
-            else { 
-                $data['picpath'] = array('upload_data' => $this->upload->data()); 
-            } 
+        if ( ! $this->upload->do_upload('inputFile')) {
+            $error = array('error' => $this->upload->display_errors()); 
         }
-
+        else { 
+            $data['picpath'] = array('upload_data' => $this->upload->data()); 
+        } 
 
         $logedIn = $this->Admission_model->Insert_NewEnorlement($data);
+
         if($logedIn != false)
         {
             $allinputdata = "";
@@ -2679,18 +2607,14 @@ class Admission extends CI_Controller {
             redirect('Admission/Pre_Inter_Data/');
             return;
             echo 'Data NOT Saved Successfully !';
-        } 
-
+        }
     }
-
-
-
 
     public function NewEnrolment_insert()  {
         $this->load->model('Admission_model');
         $this->load->library('session');
         $Inst_Id = 999999;
-        //  DebugBreak();
+        //DebugBreak();
         $formno = $this->Admission_model->GetFormNo();
 
         $allinputdata = array('cand_name'=>@$_POST['cand_name'],
@@ -2862,6 +2786,7 @@ class Admission extends CI_Controller {
         );
 
         $_POST['category']    = $cattype;
+
         $this->frmvalidation('Pre_Inter_Data',$data_error,0);
 
 
@@ -2880,9 +2805,6 @@ class Admission extends CI_Controller {
             $cat12 = @$cat['cat12'];
         }
         $Speciality = $this->input->post('speciality');
-
-
-
 
         $practical_Sub = array(
 
@@ -3051,7 +2973,7 @@ class Admission extends CI_Controller {
         if(@$_POST['pic'] == ''){
 
             $config['upload_path']   = PRIVATE_IMAGE_PATH;
-            $config['allowed_types'] = 'jpeg|jpg|png';              
+            $config['allowed_types'] = 'jpeg|jpg';              
             $config['file_name']    = @$_POST['InterRno_hidden'];  
 
             $this->load->library('upload', $config);
@@ -3063,7 +2985,6 @@ class Admission extends CI_Controller {
                 $data['picpath'] = array('upload_data' => $this->upload->data()); 
             } 
         }
-
 
         $logedIn = $this->Admission_model->Insert_NewEnorlement($data);
         if($logedIn != false)
@@ -3085,8 +3006,6 @@ class Admission extends CI_Controller {
         } 
 
     }
-
-
 
     public function NewEnrolment_insert_Languages() {
         //DebugBreak();
@@ -3328,8 +3247,225 @@ class Admission extends CI_Controller {
         echo json_encode($value);
     }
 
-    function frmvalidation(){
 
+    public function frmvalidation_Fresh(){
+
+        $allinputdata['excep'] = '';
+
+        $language_sub_cd = array(
+
+            //'ISLAMIC STUDIES'
+            1,
+            //'ARABIC'=>
+            24,
+            //'ENGLISH ELECTIVE'=>
+            27,
+            //'PUNJABI'=>
+            32,
+            //'PERSIAN'=>
+            34,
+            //'URDU (ADVANCE)'=>
+            37
+        );
+
+        $history_sub_cd = array(
+
+            //'HISTORY OF PAKISTAN'=>
+            55,
+            //'HISTORY OF ISLAM'=>
+            56,
+            //'HISTORY OF INDO-PAK'=>
+            57,
+            //'HISTORY OF MODREN WORLD'=>
+            58
+        );
+
+
+        if(@$_POST['cand_name'] == '' )
+        {
+            $allinputdata['excep'] = 'Please Enter Your Name';
+        }
+
+        else if (@$_POST['father_name'] == '')
+        {
+            $allinputdata['excep'] = 'Please Enter Your Father Name';
+        }
+
+        else if(@$_POST['bay_form'] == '' )
+        {
+            $allinputdata['excep'] = 'Please Enter Your Bay Form No.';
+        }
+
+        else if(@$_POST['father_cnic'] == ''  )
+        {
+            $allinputdata['excep'] = 'Please Enter Your Father CNIC';
+        }
+
+        else if(@$_POST['mob_number'] == '')
+        {
+            $allinputdata['excep'] = 'Please Enter Your Mobile Number';
+        }
+
+        else if(@$_POST['medium'] == 0)
+        {
+            $allinputdata['excep'] = 'Please Select Your Medium';
+        }
+
+        else if(@$_POST['MarkOfIden']== ''  )
+        {
+            $allinputdata['excep'] = 'Please Enter Your Mark of Identification';
+        }
+
+        else if((@$_POST['medium'] != '1') and (@$_POST['medium'] != '2') )
+        {
+            $allinputdata['excep'] = 'Please Select Your medium';               
+        }
+
+        else if((@$_POST['nationality'] != '1') and (@$_POST['nationality'] != '2') )
+        {
+            $allinputdata['excep'] = 'Please Select Your Nationality';
+        }
+
+        else if((@$_POST['gend'] != '1') and (@$_POST['gend'] != '2'))
+        {
+            $allinputdata['excep'] = 'Please Select Your Gender';
+        }
+
+        else if((@$_POST['hafiz']!= '1') and (@$_POST['hafiz']!= '2'))
+        {
+            $allinputdata['excep'] = 'Please Select Your Hafiz-e-Quran option';
+        }
+
+        else if((@$_POST['religion'] != '1') and (@$_POST['religion'] != '2'))
+        {
+            $allinputdata['excep'] = 'Please Select Your religion';
+        }
+
+        else if((@$_POST['UrbanRural'] != '1') and (@$_POST['UrbanRural'] != '2'))
+        {
+            $allinputdata['excep'] = 'Please Select Your Residency';
+        }
+
+        else if(@$_POST['address'] =='')
+        {
+            $allinputdata['excep'] = 'Please Enter Your Address';
+        }
+
+        else if(@$_POST['pvtinfo_dist'] =='')
+        {
+            $allinputdata['excep'] = 'Please Select Your District First!';
+        }
+
+        else if(@$_POST['pvtinfo_teh'] =='')
+        {
+            $allinputdata['excep'] = 'Please Select Your Tehsil First! ';
+        }
+
+        else if(@$_POST['pvtZone'] =='')
+        {
+            $allinputdata['excep'] = 'Please Select Your Zone First! ';
+        }
+
+        else if(@$_POST['std_group'] == 0)
+        {
+            $allinputdata['excep'] = 'Please Select Your Study Group';
+        }
+        //validate part I subjects
+
+        else if(@$_POST['sub1']==0)
+        {
+            $allinputdata['excep'] = 'Please Select Part-I Subject 1';
+
+        }
+        else if(@$_POST['sub2']==0)
+        {
+            $allinputdata['excep'] = 'Please Select Part-I Subject 2';
+
+        }
+        else if(@$_POST['sub3']==0)
+        {
+            $allinputdata['excep'] = 'Please Select Part-I Subject 3';
+
+        }
+        else if(@$_POST['sub4']==0)
+        {
+            $allinputdata['excep'] = 'Please Select Part-I Subject 4';
+        }
+        else if(@$_POST['sub5']==0)
+        {
+            $allinputdata['excep'] = 'Please Select Part-I Subject 5';
+
+        }
+        else if(@$_POST['sub6']==0)
+        {
+            $allinputdata['excep'] = 'Please Select Part-I Subject 6';
+        }
+        else if(@$_POST['sub7'] == 0 && @$_POST['std_group'] == 5){
+
+            $allinputdata['excep'] = 'Please Select Part-I Subject 7';
+        }
+
+        //validate part II subjects
+
+        else if(@$_POST['sub1p2'] == 0)
+        {
+            $allinputdata['excep'] = 'Please Select Part-II Subject 1';
+        }
+        else if(@$_POST['sub2p2'] == 0)
+        {
+            $allinputdata['excep'] = 'Please Select Part-II Subject 2';
+        }
+
+        else if(@$_POST['sub3p2'] == 0)
+        {
+            $allinputdata['excep'] = 'Please Select Part-II Subject 3';
+        }
+        else if(@$_POST['sub4p2'] == 0)
+        {
+            $allinputdata['excep'] = 'Please Select Part-II Subject 4';
+        }
+        else if(@$_POST['sub5p2'] == 0)
+        {
+            $allinputdata['excep'] = 'Please Select Part-II Subject 5';
+        }
+        else if(@$_POST['sub6p2'] == 0)
+        {
+            $allinputdata['excep'] = 'Please Select Part-II Subject 6';
+        }
+
+        else if(@$_POST['sub7p2'] == 0 && @$_POST['std_group'] == 5)
+        {
+            $allinputdata['excep'] = 'Please Select Part-II Subject 7';
+        }
+
+        else if(
+            (in_array(@$_POST['sub4'],$language_sub_cd)&&(in_array(@$_POST['sub5'],$language_sub_cd)|| in_array(@$_POST['sub6'],$language_sub_cd))) ||
+            (in_array(@$_POST['sub5'],$language_sub_cd)&&(in_array(@$_POST['sub4'],$language_sub_cd)|| in_array(@$_POST['sub6'],$language_sub_cd))) ||
+            (in_array(@$_POST['sub6'],$language_sub_cd)&&(in_array(@$_POST['sub4'],$language_sub_cd)|| in_array(@$_POST['sub5'],$language_sub_cd))) 
+            )
+            {
+                $allinputdata['excep'] = 'Please Select One Subject from Languages Subjects.';
+            }
+            else if(
+                (in_array(@$_POST['sub4'],$history_sub_cd)&&(in_array(@$_POST['sub5'],$history_sub_cd)|| in_array(@$_POST['sub6'],$history_sub_cd))) ||
+                (in_array(@$_POST['sub5'],$history_sub_cd)&&(in_array(@$_POST['sub4'],$history_sub_cd)|| in_array(@$_POST['sub6'],$history_sub_cd))) ||
+                (in_array(@$_POST['sub6'],$history_sub_cd)&&(in_array(@$_POST['sub4'],$history_sub_cd)|| in_array(@$_POST['sub5'],$history_sub_cd))) 
+                )
+                {
+                    $allinputdata['excep'] = 'Please Select One Subject from History Subjects.';
+                }                        
+
+                if($allinputdata['excep'] == '')
+        {
+            $allinputdata['excep'] =  'Success';
+        }
+
+
+
+        echo json_encode($allinputdata);    
+    }
+
+    function frmvalidation(){
         //DebugBreak();
 
         $allinputdata['excep'] = '';
@@ -3370,8 +3506,6 @@ class Admission extends CI_Controller {
 
 
         }
-        //(strpos($a, 'are') !== false)
-
 
         else if (@$_POST['father_name'] == '')
         {
@@ -3396,13 +3530,13 @@ class Admission extends CI_Controller {
 
         }
 
-
         else if(@$_POST['mob_number'] == '')
         {
             $allinputdata['excep'] = 'Please Enter Your Mobile Number';
 
 
         }
+
         else if(@$_POST['medium'] == 0)
         {
             $allinputdata['excep'] = 'Please Select Your Medium';
@@ -3423,54 +3557,55 @@ class Admission extends CI_Controller {
 
 
         }
+
         else if((@$_POST['nationality'] != '1') and (@$_POST['nationality'] != '2') )
         {
             $allinputdata['excep'] = 'Please Select Your Nationality';
 
 
         }
+
         else if((@$_POST['gend'] != '1') and (@$_POST['gend'] != '2'))
         {
             $allinputdata['excep'] = 'Please Select Your Gender';
 
 
         }
+
         else if((@$_POST['hafiz']!= '1') and (@$_POST['hafiz']!= '2'))
         {
             $allinputdata['excep'] = 'Please Select Your Hafiz-e-Quran option';
 
 
         }
+
         else if((@$_POST['religion'] != '1') and (@$_POST['religion'] != '2'))
         {
             $allinputdata['excep'] = 'Please Select Your religion';
-
-
         }
+
         else if((@$_POST['UrbanRural'] != '1') and (@$_POST['UrbanRural'] != '2'))
         {
             $allinputdata['excep'] = 'Please Select Your Residency';
-
-
         }
+
         else if(@$_POST['address'] =='')
         {
             $allinputdata['excep'] = 'Please Enter Your Address';
-
-
         }
+
         else if(@$_POST['pvtinfo_dist'] =='')
         {
             $allinputdata['excep'] = 'Please Select Your District First!';
-
-
         }
+
         else if(@$_POST['pvtinfo_teh'] =='')
         {
             $allinputdata['excep'] = 'Please Select Your Tehsil First! ';
 
 
         }
+
         else if(@$_POST['pvtZone'] =='')
         {
             $allinputdata['excep'] = 'Please Select Your Zone First! ';
@@ -3482,6 +3617,7 @@ class Admission extends CI_Controller {
         {
             $allinputdata['excep'] = 'Please Select Your Study Group';
         }
+
         else if(
             (in_array(@$_POST['sub4'],$language_sub_cd)&&(in_array(@$_POST['sub5'],$language_sub_cd)|| in_array(@$_POST['sub6'],$language_sub_cd))) ||
             (in_array(@$_POST['sub5'],$language_sub_cd)&&(in_array(@$_POST['sub4'],$language_sub_cd)|| in_array(@$_POST['sub6'],$language_sub_cd))) ||

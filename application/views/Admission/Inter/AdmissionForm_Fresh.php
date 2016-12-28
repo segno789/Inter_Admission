@@ -16,7 +16,7 @@ header("Pragma: no-cache");
                         </div>
                     </div>
                     <div class="widget-body" >
-                        <form class="form-horizontal no-margin" action="<?php  echo base_url(); ?>/index.php/Admission/NewEnrolment_insert_Fresh" method="post" enctype="multipart/form-data" name="myform" id="myform">
+                        <form class="form-horizontal no-margin" action="<?php  echo base_url(); ?>/index.php/Admission/NewEnrolment_insert_Fresh" method="post" enctype="multipart/form-data" name="myform" id="myform" onsubmit="return checks(this);">
                             <div class="control-group">
                                 <div class="controls controls-row">
                                     <label class="control-label span2" >
@@ -26,7 +26,7 @@ header("Pragma: no-cache");
                                 </div>
                             </div>
                             <div class="controls controls-row">
-                                <input type='file' id="inputFile" onchange="return ValidateFileUpload(this);"/>
+                                <input type='file' id="inputFile" name="inputFile" onchange="return ValidateFileUpload(this);"/>
                             </div>
                             <div class="control-group">
                                 <label class="control-label span1" >
@@ -211,7 +211,7 @@ header("Pragma: no-cache");
                                     <label class="control-label span2" >
                                         Board:
                                     </label> 
-                                    <input type="text" class="span3" id="oldboard" name="oldboard" readonly="readonly" value="<?php echo $data[0]['SSC_Board'];?>"/>     
+                                    <input type="text" class="span3" id="oldboard" name="oldboard" readonly="readonly" value="<?php echo $data[0]['brd_name'];?>"/>     
                                 </div>
                             </div>
                             <hr>
@@ -252,7 +252,7 @@ header("Pragma: no-cache");
                             </label>
 
                             <div class="controls controls-row">
-                                <select id="pvtZone"  class="span3" name="pvtZone">
+                                <select id="pvtZone" class="span3" name="pvtZone">
                                     <option value='0'>SELECT ZONE</option>
                                 </select>
                             </div>
@@ -392,7 +392,8 @@ header("Pragma: no-cache");
                             </div> 
                         </form>
 
-
+                        <input type="hidden" name="oldboardid" id="oldboardid" value="<?php  echo @$data[0]['brd_cd'];?>"/>
+                        <input type="hidden" class="span3" id="oldClass" name="oldClass"  value="<?php echo $data[0]['oldclass'];?>"/>     
 
                         <script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
                         <script type="text/javascript">
@@ -437,8 +438,10 @@ header("Pragma: no-cache");
                                 $(document.getElementById("bay_form")).mask("99999-9999999-9", { placeholder: "_" });
                                 $(document.getElementById("father_cnic")).mask("99999-9999999-9", { placeholder: "_" });
                                 $(document.getElementById("mob_number")).mask("9999-9999999", { placeholder: "_" });
-                            });
 
+                                Empty_All_Dropdowns();
+                                ClearAllDropDowns();
+                            });
 
                             function ClearAllDropDowns() {
 
@@ -550,20 +553,15 @@ header("Pragma: no-cache");
                                 Empty_All_Dropdowns();
 
                                 $("#sub1").append('<option value="1">ENGLISH</option>');
-                                $("#sub1").append('<option value="0">NONE</option>');
                                 $("#sub1p2").append('<option value="1">ENGLISH</option>');
-                                $("#sub1p2").append('<option value="0">NONE</option>');
+
 
                                 $("#sub2").append('<option value="2">URDU</option>');
-                                $("#sub2").append('<option value="0">NONE</option>');
                                 $("#sub2p2").append('<option value="2">URDU</option>');
-                                $("#sub2p2").append('<option value="0">NONE</option>');
 
-                                
                                 $("#sub3").append('<option value="92">ISLAMIC EDUCATION</option>');
-                                $("#sub3").append('<option value="0">NONE</option>');
                                 $("#sub3p2").append('<option value="91">PAKISTAN STUDIES</option>');
-                                $("#sub3p2").append('<option value="0">NONE</option>');
+
 
                                 $.each(huminities_without_practical,function(val,text){
 
@@ -594,39 +592,36 @@ header("Pragma: no-cache");
                                 $('#sub8').hide(); $('#sub8p2').hide();
 
                                 $("#sub1").append('<option value="1">ENGLISH</option>');
-                                $("#sub1").append('<option value="0">NONE</option>');
+
                                 $("#sub1p2").append('<option value="1">ENGLISH</option>');
-                                $("#sub1p2").append('<option value="0">NONE</option>');
 
                                 $("#sub2").append('<option value="2">URDU</option>');
-                                $("#sub2").append('<option value="0">NONE</option>');
+
                                 $("#sub2p2").append('<option value="2">URDU</option>');
-                                $("#sub2p2").append('<option value="0">NONE</option>');
+
 
                                 $("#sub3").append('<option value="92">ISLAMIC EDUCATION</option>');
-                                $("#sub3").append('<option value="0">NONE</option>');
+
                                 $("#sub3p2").append('<option value="91">PAKISTAN STUDIES</option>');
-                                $("#sub3p2").append('<option value="0">NONE</option>');
+
 
                                 $("#sub4").append('<option value="70">PRINCIPLES OF ACCOUNTING</option>');
-                                $("#sub4").append('<option value="0">NONE</option>');
+
                                 $("#sub4p2").append('<option value="70">PRINCIPLES OF ACCOUNTING</option>');
-                                $("#sub4p2").append('<option value="0">NONE</option>');
+
 
                                 $("#sub5").append('<option value="71">PRINCIPLES OF ECONOMICS</option>');
-                                $("#sub5").append('<option value="0">NONE</option>');
+
                                 $("#sub5p2").append('<option value="94">COMMERCIAL GEOGRAPHY</option>');
-                                $("#sub5p2").append('<option value="0">NONE</option>');
 
                                 $("#sub6").append('<option value="80">BUSINESS MATH</option>');
-                                $("#sub6").append('<option value="0">NONE</option>');
+
                                 $("#sub6p2").append('<option value="97">BUSINESS STATISTICS</option>');
-                                $("#sub6p2").append('<option value="0">NONE</option>');
 
                                 $("#sub7").append('<option value="39">PRINCIPLES OF COMMERCE</option>');
-                                $("#sub7").append('<option value="0">NONE</option>');
+
                                 $("#sub7p2").append('<option value="95">BANKING</option>');
-                                $("#sub7p2").append('<option value="0">NONE</option>');
+
                             }
 
                             $('#std_group').change(function(){
@@ -648,7 +643,6 @@ header("Pragma: no-cache");
                                 }
                             });
 
-
                             function CancelAlert(){
                                 var msg = "Are You Sure You want to Cancel this Form ?"
                                 alertify.confirm(msg, function (e) {
@@ -658,7 +652,6 @@ header("Pragma: no-cache");
                                     }
                                 });
                             }
-
 
                             $("#sub4").change(function(){
                                 var id4 =$("#sub4").val();
@@ -997,14 +990,16 @@ header("Pragma: no-cache");
                                     $("#sub6").val('0');
                                     $("#sub6p2").val('0');
                                 } 
-                                
-                            });
 
+                            });
 
 
                             function checks(){
 
-                                var status  =  check_NewEnrol_validation();
+                                //debugger;
+
+                                var status  =  check_NewEnrol_validation_Fresh();
+
                                 if(status == 0)
                                 {
                                     return false;    
@@ -1012,9 +1007,8 @@ header("Pragma: no-cache");
                                 else
                                 {
                                     $.ajax({
-
                                         type: "POST",
-                                        url: "<?php  echo site_url('Admission/frmvalidation'); ?>",
+                                        url: "<?php  echo site_url('Admission/frmvalidation_Fresh'); ?>",
                                         data: $("#myform").serialize() ,
                                         datatype : 'html',
                                         success: function(data)
@@ -1024,21 +1018,16 @@ header("Pragma: no-cache");
                                             {
                                                 return true;
                                             }
-
                                             else
                                             {
                                                 alertify.error(obj.excep);
-                                                return false;     
+                                                return false;    
                                             }
                                         }
                                     });
                                 } 
                             }
-
-
                         </script>
-
-
 
                     </div>  
                 </div>

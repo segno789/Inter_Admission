@@ -38,6 +38,9 @@ define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 define('BARCODE_PATH', 'assets/pdfs/');
 
 define('PRIVATE_IMAGE_PATH', 'uploads/private/');
+
+define('PRIVATE_IMAGE_PATH_FRESH', 'uploads/Fresh');
+
 define('REGULAR_IMAGE_PATH', 'uploads/regular/');
 define('Session','1');  // 1 for Annual and 2 for Supply
 define('Year','2017');  
