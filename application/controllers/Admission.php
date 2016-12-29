@@ -2071,6 +2071,7 @@ class Admission extends CI_Controller {
     public function Pre_Inter_Data() {       
 
         //DebugBreak();     
+        
         $this->load->library('session');
         $mrollno='';
         $hsscrno='';
