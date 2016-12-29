@@ -383,6 +383,7 @@
 
 <script>
     $( function() {
-        $( "#txtDob" ).datepicker({ dateFormat: 'dd-mm-yy', changeMonth: true, changeYear: true }).val();
+        $( "#txtDob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate:new Date(2001, 7, 1),minDate:new Date(1980, 0, 1)}).val();
+       
     } );
 </script>
