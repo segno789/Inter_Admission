@@ -69,7 +69,39 @@
                     SSC Board:
                 </label>
                 <select id="sec_board" class="span3" name="oldBrd_cd">
-                    <option value="1">BISE, GUJRANWALA</option><option value="2">BISE,  LAHORE</option><option value="3">BISE,  RAWALPINDI</option><option value="4">BISE,  MULTAN</option><option value="5">BISE,  FAISALABAD</option><option value="6">BISE,  BAHAWALPUR</option><option value="7">BISE,  SARGODHA</option><option value="8">BISE,  DERA GHAZI KHAN</option><option value="9">FBISE, ISLAMABAD</option><option value="10">BISE, MIRPUR</option><option value="11">BISE, ABBOTTABAD</option><option value="12">BISE, PESHAWAR</option><option value="13">BSE, KARACHI</option><option value="14">BISE, QUETTA</option><option value="15">BISE, MARDAN</option><option value="17">CAMBRIDGE</option><option value="18">AIOU, ISLAMABAD</option><option value="19">BISE, KOHAT</option><option value="20">KARAKURUM</option><option value="21">MALAKAN</option><option value="22">BISE, BANNU</option><option value="23">BISE, D.I.KHAN</option><option value="24">AKUEB, KARACHI</option><option value="25">BISE, HYDERABAD</option><option value="26">BISE, LARKANA</option><option value="27">BISE, MIRPUR(SINDH)</option><option value="28">BISE, SUKKUR</option><option value="29">BISE, SWAT</option><option value="30">SBTE KARACHI</option><option value="31">PBTE, LAHORE</option><option value="32">AFBHE RAWALPINDI</option><option value="33">BIE, KARACHI</option><option value="34">BISE SAHIWAL</option>
+                    <option value="1">BISE, GUJRANWALA</option>
+                    <option value="2">BISE,  LAHORE</option>
+                    <option value="3">BISE,  RAWALPINDI</option>
+                    <option value="4">BISE,  MULTAN</option>
+                    <option value="5">BISE,  FAISALABAD</option>
+                    <option value="6">BISE,  BAHAWALPUR</option>
+                    <option value="7">BISE,  SARGODHA</option>
+                    <option value="8">BISE,  DERA GHAZI KHAN</option>
+                    <option value="9">FBISE, ISLAMABAD</option>
+                    <option value="10">BISE, MIRPUR</option>
+                    <option value="11">BISE, ABBOTTABAD</option>
+                    <option value="12">BISE, PESHAWAR</option>
+                    <option value="13">BSE, KARACHI</option>
+                    <option value="14">BISE, QUETTA</option>
+                    <option value="15">BISE, MARDAN</option>
+                    <option value="17">CAMBRIDGE</option>
+                    <option value="18">AIOU, ISLAMABAD</option>
+                    <option value="19">BISE, KOHAT</option>
+                    <option value="20">KARAKURUM</option>
+                    <option value="21">MALAKAN</option>
+                    <option value="22">BISE, BANNU</option>
+                    <option value="23">BISE, D.I.KHAN</option>
+                    <option value="24">AKUEB, KARACHI</option>
+                    <option value="25">BISE, HYDERABAD</option>
+                    <option value="26">BISE, LARKANA</option>
+                    <option value="27">BISE, MIRPUR(SINDH)</option>
+                    <option value="28">BISE, SUKKUR</option>
+                    <option value="29">BISE, SWAT</option>
+                    <option value="30">SBTE KARACHI</option>
+                    <option value="31">PBTE, LAHORE</option>
+                    <option value="32">AFBHE RAWALPINDI</option>
+                    <option value="33">BIE, KARACHI</option>
+                    <option value="34">BISE SAHIWAL</option>
                 </select>
             </div>
         </div>

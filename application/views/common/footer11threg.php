@@ -46,7 +46,7 @@ if(isset($files)){
                 beforeSend: function() {  $('.mPageloader').show(); },
                 complete: function() { $('.mPageloader').hide();},
                 success: function(data) {
-                    debugger;
+                    
                      var obj = JSON.parse(data) ;
                      if(obj.error ==  1)
                      {
