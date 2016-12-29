@@ -3223,20 +3223,21 @@ class Admission extends CI_Controller {
 
     public function getzone(){
 
-        //DebugBreak();
+       
 
         $data = array(
             'tehCode' => $this->input->post('tehCode'),
+            'gend' => $this->input->post('gend'),
         );
 
         $tehCode = $data['tehCode'];
         $this->load->model('Admission_model');
-        $value = array('teh'=> $this->Admission_model->getzone($tehCode)) ;
+        $value = array('teh'=> $this->Admission_model->getzone($data)) ;
         echo json_encode($value);
     }
 
     public function getcenter(){
-        //DebugBreak();
+      
         $data = array(
             'zoneCode' => $this->input->post('pvtZone'),
             'gen' => $this->input->post('gend'),

@@ -213,11 +213,29 @@ if(isset($files)){
 
 
         });
-        $("#pvtinfo_teh").change(function(){
+        $("#pvtinfo_teh").change(function()
+        {
             var tehId =  $("#pvtinfo_teh").val();
-            if(tehId == 0){
-                alert("Select Tehsil First");
+            
+            var gender = '';
+
+            if(isotherboard != 1)
+            {
+                gender = $("input[name=ogender]:checked").val();
             }
+            else
+            {
+                gender =  $("input[name=gender]").val() ;
+            }
+            
+             if(gender == "" || gender == 0 || gender == undefined  || gender.length == undefined)
+            {
+                 alertify.error("Select Gender First");
+            }
+          else  if(tehId == 0){
+                alertify.error("Select Tehsil First");
+            }
+            
             else{
 
                 jQuery.ajax({
@@ -225,7 +243,7 @@ if(isset($files)){
                     type: "POST",
                     url: "<?php echo base_url(); ?>" + "Admission/getzone/",
                     dataType: 'json',
-                    data: {tehCode: tehId},
+                    data: {tehCode: tehId,'gend':gender},
                     beforeSend: function() {  $('.mPageloader').show(); },
                     complete: function() { $('.mPageloader').hide();},
                     success: function(json) {
@@ -253,18 +271,32 @@ if(isset($files)){
 
             debugger;
             var tehId =  $("#pvtZone").val();
-            var gend = $("#gen").val();
+             var gender = '';
 
-            if(tehId == 0){
+            if(isotherboard != 1)
+            {
+                gender = $("input[name=ogender]:checked").val();
+            }
+            else
+            {
+                gender =  $("input[name=gender]").val() ;
+            }
+            
+             if(gender == "" || gender == 0 || gender == undefined  || gender.length == undefined)
+            {
+                 alertify.error("Select Gender First");
+            }
+
+            else if(tehId == 0){
                 alert("Select Zone First");
             }
             else{
                 jQuery.ajax({
 
                     type: "POST",
-                    url: "<?php echo base_url(); ?>index.php/Admission/getcenter/",
+                    url: "<?php echo base_url(); ?>Admission/getcenter/",
                     dataType: 'json',
-                    data: $("#myform").serialize(),
+                     data: {pvtZone: tehId,'gend':gender},
                     beforeSend: function() {  $('.mPageloader').show(); },
                     complete: function() { $('.mPageloader').hide();},
                     success: function(json) {
@@ -474,8 +506,11 @@ if(isset($files)){
     })
 
 
-    function  check_NewEnrol_validation_11th(){
+    function  check_NewEnrol_validation_11th()
+    {
         // 
+       
+       
         var name =  $('#cand_name').val();
         var fName = $('#father_name').val();
         var picname = $('#picname').val();
@@ -493,7 +528,16 @@ if(isset($files)){
 
         var grp_cd = $('#std_group').val();
         var brd_cd = $('#brd_cd').val();
-
+        var gender = '';
+        debugger
+        if(isotherboard != 1)
+        {
+           gender = $("input[name=ogender]:checked").val();
+        }
+        else
+        {
+            gender =  $("input[name=gender]").val() ;
+        }
         var address = $('#address').val();
         var image = $('#image').val();
         var MarkOfIdent = $('#MarkOfIden').val();
@@ -509,7 +553,8 @@ if(isset($files)){
 
             //$("#sub1").append(new Option('Urdu',2));    
         }
-        else {
+        else 
+        {
             $("#nationality").val(1);
             //$("#sub1").prepend("<option  value='2'> URDU </option>");
         }
@@ -539,7 +584,7 @@ if(isset($files)){
             return status;
         }   
 
-        else if(parseInt(mat_Year) > 2013 && (bFormNo == "" || bFormNo == 0 || bFormNo == undefined) && isotherboard != 1)
+        else if((bFormNo == "" || bFormNo == 0 || bFormNo == undefined))
         {
             $('#ErrMsg').show(); 
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
@@ -548,7 +593,7 @@ if(isset($files)){
             $('#bay_form').focus();  
             return status; 
         }
-        else if(parseInt(mat_Year) > 2013 && (FNic == "" || FNic.length == undefined ))
+        else if(FNic == "" ||  FNic == 0  || FNic.length == undefined )
         {
             $('#ErrMsg').show(); 
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
@@ -557,7 +602,53 @@ if(isset($files)){
             $('#father_cnic').focus();  
             return status; 
         }
+         else if(dob == "" || dob.length == undefined)
+        {
+            $('#ErrMsg').show(); 
+            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+            //$('#ErrMsg').html("<b>Please Enter your Date of Birth</b>"); 
+            alertify.error("Please Enter your Date of Birth") 
+            $('#dob').focus(); 
+            return status;  
+        }       
+        else if(mobNo == "" || mobNo == 0 || mobNo.length == undefined || mobNo == '-')
+        {
+            $('#ErrMsg').show(); 
+            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+            // $('#ErrMsg').html("<b>Please Enter your Mobile No.</b>"); 
+            alertify.error("Please Enter your Mobile No.") 
+            $('#mob_number').focus();   
+            return status;  
+        }
 
+        else if(MarkOfIdent == "" || MarkOfIdent == 0 || MarkOfIdent.length == undefined)
+        {
+            $('#ErrMsg').show(); 
+            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+            //$('#ErrMsg').html("<b>Please Enter your Mark of Indentification</b>"); 
+            alertify.error("Please Enter your Mark of Indentification") 
+            $('#MarkOfIden').focus();   
+            return status;  
+        }
+         else if(gender == "" || gender == 0 || gender == undefined  || gender.length == undefined)
+        {
+            $('#ErrMsg').show(); 
+            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+            //$('#ErrMsg').html("<b>Please Enter your Mark of Indentification</b>"); 
+            alertify.error("Please Select Gender") 
+           // $('#MarkOfIden').focus();   
+            return status;  
+        }
+        else if(address == "" || address == 0 || address.length ==undefined )
+        {
+            $('#ErrMsg').show(); 
+            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+           // $('#ErrMsg').html("<b>Please Enter your Address</b>"); 
+            alertify.error("Please Enter your Address")
+            $('#address').focus(); 
+            return status;    
+        }
+           
         else if(pvtinfo_dist == "" || pvtinfo_dist == 0  || pvtinfo_dist == undefined){
 
             alertify.error("Please Select First District  ") 
@@ -641,43 +732,7 @@ if(isset($files)){
         }
 
 
-        else if(mobNo == "" || mobNo == 0 || mobNo == undefined)
-        {
-            $('#ErrMsg').show(); 
-            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-            // $('#ErrMsg').html("<b>Please Enter your Mobile No.</b>"); 
-            alertify.error("Please Enter your Mobile No.") 
-            $('#mob_number').focus();   
-            return status;  
-        }
-
-        else if(MarkOfIdent == "" || MarkOfIdent == 0 || MarkOfIdent == undefined)
-        {
-            $('#ErrMsg').show(); 
-            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-            //$('#ErrMsg').html("<b>Please Enter your Mark of Indentification</b>"); 
-            alertify.error("Please Enter your Mark of Indentification") 
-            $('#MarkOfIden').focus();   
-            return status;  
-        }
-        else if(address == "" || address == 0 || address.length ==undefined )
-        {
-            $('#ErrMsg').show(); 
-            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-            $('#ErrMsg').html("<b>Please Enter your Address</b>"); 
-            alertify.error("Please Enter your Address")
-            $('#address').focus(); 
-            return status;    
-        }
-        else if(dob == "" || dob.length == undefined)
-        {
-            $('#ErrMsg').show(); 
-            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-            //$('#ErrMsg').html("<b>Please Enter your Date of Birth</b>"); 
-            alertify.error("Please Enter your Date of Birth") 
-            $('#dob').focus(); 
-            return status;  
-        }           
+        
 
       
         status = 1;

@@ -217,6 +217,11 @@
                                         echo " <label class='radio inline span1'><input type='radio' id='gender1' value='1'  disabled='disabled' name='gender'> Male</label> 
                                         <label class='radio inline span1'><input type='radio' id='gender2' value='2'  checked='checked'  disabled='disabled'  name='gender'> Female </label> " ;
                                     }
+                                    else
+                                    {
+                                         echo " <label class='radio inline span1' style='    color: red;'><input type='radio' id='gender1'  name='ogender' value='1'> Male</label> 
+                                        <label class='radio inline span1'  style='    color: red;'><input type='radio' id='gender2' value='2'   name='ogender'> Female </label> " ;
+                                    }
 
                                     ?>
                                     <input type="hidden" name="gender" value="<?php echo $gender; ?>">

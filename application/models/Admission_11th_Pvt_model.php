@@ -36,7 +36,7 @@ class Admission_11th_Pvt_model extends CI_Model
         if($rowcount > 0)
         {
 
-            $query2 = $this->db->get_where('Admission_Online..RuleFeeAdm', array('class' => 12,'sess' => 1, 'Start_Date <='=>$date,'End_Date >='=>$date));
+            $query2 = $this->db->get_where('Admission_Online..RuleFeeAdm', array('class' => 12,'sess' => 1, 'Start_Date <='=>$date,'End_Date >='=>$date,'isPrSub'=>0));
             $resultarr = array("info"=>$query->result_array(),"rule_fee"=>$query2->result_array());
             return  $resultarr;
         }
@@ -121,7 +121,7 @@ class Admission_11th_Pvt_model extends CI_Model
         $OldBrd = $data['SSC_brd_cd'];
         $IsReAdm = $data['IsReAdm'];
         $picname = $data['picname'];
-      
+       $Inst_Rno = '';
         //    DebugBreak();
         if($iOldRno ==  false)
             $iOldRno =  0;
@@ -150,6 +150,7 @@ class Admission_11th_Pvt_model extends CI_Model
                 return  false;
             }
         }
+        DebugBreak();
         // $sync= $this->load->database('sync', TRUE);
  
         // $this->db->trans_start();
