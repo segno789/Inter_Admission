@@ -2255,8 +2255,6 @@ class Admission extends CI_Controller {
         }
 
     }
-
-
     public function Pre_Matric_data(){
 
         //DebugBreak();
@@ -2294,9 +2292,92 @@ class Admission extends CI_Controller {
         $this->load->view('Admission/Inter/AdmissionForm_Fresh.php', array('data'=>$data));
         $this->load->view('common/commonfooter.php');
     }
+    public function Get_students_record()
+    {
+
+        DebugBreak();
+        $mrollno = $_POST["txtMatRno"];
+
+        $board   =  $_POST["oldBrd_cd"];
+
+        $year    =  $_POST["oldYear"];
+
+        $session =$_POST["oldSess"];
+
+        $data = array('mrollno'=>"$mrollno",'board'=>$board,'year'=>$year,'session'=>$session);
+        $this->load->model('Admission_11th_Pvt_model');
+
+        $error['excep'] = '';
+
+        if($board == 1)
+        {
+            if(!ctype_digit($mrollno))
+            {
+                $error['excep'] = 'SSC ROLL NO. IS INCORRECT';
+
+            }
+            $RegStdData = array('data'=>$this->Admission_11th_Pvt_model->Pre_Matric_data($data),'isReAdm'=>0,'Oldrno'=>0,'Inst_Rno'=>'','excep'=>'','isHafiz'=>'');  
+
+            $spl_cd = $RegStdData['data'][0]['spl_cd'];
+            $msg = $RegStdData['data'][0]['Mesg'];
+            $SpacialCase = $RegStdData['data'][0]['SpacialCase'];
+            $status = $RegStdData['data'][0]['status'];
+
+            if($RegStdData['data'] == -1)
+            {
+                $error['excep'] = 'NO DATA FOUND AGAINST YOUR RECORD';
+
+            }
+            else if($RegStdData['data'][0]['SSC_RNo'] == '' || $RegStdData['data'][0]['SSC_RNo'] == 0 || strlen ($RegStdData['data'][0]['SSC_RNo']) != 6)
+            {
+                $error['excep'] =  'SSC ROLL NO. IS INCORRECT';
+
+            }
+            else if($msg != '')
+            {
+                $error['excep'] =  $msg;
 
 
+            }
+            else if($status != 1)
+            {
+                $error['excep'] =  'You are FAILED in matric ';
 
+            }
+            else if($spl_cd != null && $spl_cd != 34)
+            {
+                $error['excep'] = 'You can not appear due to '.$SpacialCase;
+
+            }
+
+
+        }
+        else if(@$RegStdData['data'] == False and $board != 1)
+        {
+            $error['excep'] = '';
+            $RegStdData['data'][0]['SSC_RNo'] = $_POST["oldRno"];
+            $RegStdData['data'][0]['SSC_Year'] = $_POST["oldYear"];
+            $RegStdData['data'][0]['SSC_Sess'] = $_POST["oldSess"];
+            $RegStdData['data'][0]['SSC_brd_cd'] = $_POST["oldBrd_cd"];
+            $RegStdData['data'][0]['sub1']=1;
+            $RegStdData['isReAdm']=0;
+            // DebugBreak();
+            $mylen = strlen(trim($RegStdData['data'][0]['SSC_RNo']));
+            if(trim($RegStdData['data'][0]['SSC_RNo']," ") == '' ||  trim($RegStdData['data'][0]['SSC_RNo']) == '0' || $mylen < 4 )
+            {
+                $error['excep'] = 'SSC ROLL NO. IS INCORRECT';
+
+            }
+
+        }  
+
+        if($error['excep'] == '')
+        {
+            $error['excep'] =  'success'; 
+        }  
+        echo   json_encode($error)  ;
+
+    }
     public function NewEnrolment_insert_Fresh()
     {
         //DebugBreak();
@@ -2616,7 +2697,6 @@ class Admission extends CI_Controller {
             echo 'Data NOT Saved Successfully !';
         }
     }
-
     public function NewEnrolment_insert()  {
         $this->load->model('Admission_model');
         $this->load->library('session');
@@ -3225,20 +3305,21 @@ class Admission extends CI_Controller {
 
     public function getzone(){
 
-        //DebugBreak();
+       
 
         $data = array(
             'tehCode' => $this->input->post('tehCode'),
+            'gend' => $this->input->post('gend'),
         );
 
         $tehCode = $data['tehCode'];
         $this->load->model('Admission_model');
-        $value = array('teh'=> $this->Admission_model->getzone($tehCode)) ;
+        $value = array('teh'=> $this->Admission_model->getzone($data)) ;
         echo json_encode($value);
     }
 
     public function getcenter(){
-        //DebugBreak();
+      
         $data = array(
             'zoneCode' => $this->input->post('pvtZone'),
             'gen' => $this->input->post('gend'),

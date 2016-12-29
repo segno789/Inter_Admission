@@ -16,7 +16,7 @@ header("Pragma: no-cache");
                         </div>
                     </div>
                     <div class="widget-body" >
-                        <form class="form-horizontal no-margin" action="<?php  echo base_url(); ?>/index.php/Admission/NewEnrolment_insert_Fresh" method="post" enctype="multipart/form-data" name="myform" id="myform" onsubmit="return checks(this);">
+                        <form class="form-horizontal no-margin" action="<?php  echo base_url(); ?>Admission/NewEnrolment_insert_Fresh" method="post" enctype="multipart/form-data" name="myform" id="myform" onsubmit="return checks(this);">
                             <div class="control-group">
                                 <div class="controls controls-row">
                                     <label class="control-label span2" >

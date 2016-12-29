@@ -45,7 +45,7 @@ define('REGULAR_IMAGE_PATH', 'uploads/regular/');
 define('Session','1');  // 1 for Annual and 2 for Supply
 define('Year','2017');  
 define('lastdate','30-01-2017');
-
+define('GET_PRIVATE_IMAGE_PATH', 'F:\xampp\htdocs\Inter_Admission\Uploads\2016\11th\private\\');
 define('GET_PRIVATE_IMAGE_PATH_COPY', '');
 define('Insert_sp','admission_online..sp_insert_IAAdm'); // for insertion Inter annual private
 define('DIRPATH11th','D:/xampp/htdocs/Inter_Admission/Uploads/IS2016/regular/2510010001.jpg'); 
@@ -77,6 +77,12 @@ define ('class_for_11th_Adm','11th');
 define('getinfo','admission_online..tblAdmissionDataForHSSC');
 define('getinfo_languages','admission_online..tblAdmissionDataLang');
 
+
+////11th Image
+
+
+define('formprint_sp_11th','Registration..sp_form_data_11thAdm');    // for selection 9th Annual
+define('class_for_9th_Adm','11th');
 
 //===============10TH Regular Admission Matric challan varaible
 define('corr_bank_chall_class1','12th');
