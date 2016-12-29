@@ -2075,6 +2075,7 @@ class Admission extends CI_Controller {
     {       
 
         DebugBreak();     
+
         $this->load->library('session');
         $mrollno='';
         $hsscrno='';
@@ -2283,7 +2284,17 @@ class Admission extends CI_Controller {
         $this->load->model('Admission_model');
         $data = $this->Admission_model->Pre_Matric_data($data);
 
-        //DebugBreak();
+
+        $error_msg = '';
+
+        if(!$data){
+            $error_msg.='<span style="font-size: 16pt; color:red;">No Any Student Found Against Your Criteria</span>';
+            $mydata = array('data'=>$_POST,'norec'=>$error_msg);
+            $this->session->set_flashdata('matric_error',$mydata );
+            redirect('Admission/matric_default');
+        }
+
+
         $board    = $data[0]['SSC_Board'];
         $oldclass    = $data[0]['SSC_CLASS'];
 
@@ -3324,7 +3335,7 @@ DebugBreak();
 
     public function getzone(){
 
-       
+
 
         $data = array(
             'tehCode' => $this->input->post('tehCode'),
@@ -3338,7 +3349,7 @@ DebugBreak();
     }
 
     public function getcenter(){
-      
+
         $data = array(
             'zoneCode' => $this->input->post('pvtZone'),
             'gen' => $this->input->post('gend'),
