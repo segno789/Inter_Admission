@@ -44,7 +44,7 @@ define('PRIVATE_IMAGE_PATH_FRESH', 'uploads/Fresh');
 define('REGULAR_IMAGE_PATH', 'uploads/regular/');
 define('Session','1');  // 1 for Annual and 2 for Supply
 define('Year','2017');  
-define('lastdate','20-08-2016');
+define('lastdate','30-01-2017');
 define('GET_PRIVATE_IMAGE_PATH', 'F:\xampp\htdocs\Inter_Admission\Uploads\2016\11th\private\\');
 define('GET_PRIVATE_IMAGE_PATH_COPY', '');
 define('Insert_sp','admission_online..sp_insert_IAAdm'); // for insertion Inter annual private
@@ -66,12 +66,13 @@ define('CURRENT_SESS','2016-2018');
 define('corr_bank_chall_class','INTER SUPPLY');
 define('session_year','2016-2018');
 define('TITLEHSSC','Online HSSC Annual Admission 2017');
-define('SingleDateFee11th','03-10-2016');
+//define('SingleDateFee11th','03-10-2016');
 define('currdate','date("d-m-Y");');
-define ('SingleDateFee','23-12-2016');
-define('DoubleDateFee', '30-12-2016');
-define('TripleDateFee', '10-01-2017');
-define('TripleDateFeeinter', '13-10-2016');
+define ('SingleDateFee','30-01-2017');
+define('DoubleDateFee', '28-02-2017');
+define('TripleDateFee', '15-03-2017');
+                                                                                                 
+//define('TripleDateFeeinter', '13-10-2016');
 define ('class_for_11th_Adm','11th');                                
 define('getinfo','admission_online..tblAdmissionDataForHSSC');
 define('getinfo_languages','admission_online..tblAdmissionDataLang');

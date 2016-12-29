@@ -94,9 +94,6 @@ class Admission extends CI_Controller {
 
         if($formno < 600000)
         {
-
-
-
             $pdf->AddPage();
             $x = 0.55;
             $Y = -0.20;
@@ -489,7 +486,8 @@ class Admission extends CI_Controller {
             $pdf->SetFont('Arial','b',7);
             $pdf->Cell(0.5,0.5,"Candidate's Signature in English____________________",0,'R');
 
-            //   DebugBreak();
+            DebugBreak();
+
             $Updated_AdmFee = $this->GetFeeWithdue($data['AdmFee']);
 
             $pdf->SetXY(0.2,6.4+$Y);
@@ -1844,10 +1842,13 @@ class Admission extends CI_Controller {
 
     function GetDueDate()
     {
+        //DebugBreak();
 
         $dueDate='';
         $single_date= SingleDateFee;  $double_date= DoubleDateFee;  $tripple_date= TripleDateFee;
-        $today = date("d-M-Y");
+        //$today = date("d-M-Y");
+
+        $today = date("d-m-Y");
 
         if(strtotime($today) <= strtotime($single_date)) 
         {
@@ -2033,7 +2034,9 @@ class Admission extends CI_Controller {
             return $cate;
     }
     function GetFeeWithdue($fee){
-        // DebugBreak();
+
+        //DebugBreak();
+
         $dueDate='';
         $single_date= SingleDateFee;  $double_date= DoubleDateFee;  $tripple_date= TripleDateFee;
         $today = date("d-m-Y");
@@ -2384,6 +2387,7 @@ class Admission extends CI_Controller {
     public function NewEnrolment_insert_Fresh()
     {
         //DebugBreak();
+
         $this->load->model('Admission_model');
 
         $this->load->library('session');
@@ -2541,6 +2545,8 @@ class Admission extends CI_Controller {
             $sub2 =  $_POST['sub2p2'];    
         }
 
+        $ispractical = 0;
+
         $Speciality = $this->input->post('speciality');
 
         $AdmFee = $this->Admission_model->getrulefee($ispractical);
@@ -2677,7 +2683,7 @@ class Admission extends CI_Controller {
             $data['picpath'] = array('upload_data' => $this->upload->data()); 
         } 
 
-        $logedIn = $this->Admission_model->Insert_NewEnorlement($data);
+        $logedIn = $this->Admission_model->NewEnrolment_insert_Fresh($data);
 
         if($logedIn != false)
         {
@@ -2701,7 +2707,9 @@ class Admission extends CI_Controller {
         $this->load->model('Admission_model');
         $this->load->library('session');
         $Inst_Id = 999999;
+
         //DebugBreak();
+
         $formno = $this->Admission_model->GetFormNo();
 
         $allinputdata = array('cand_name'=>@$_POST['cand_name'],
@@ -2872,7 +2880,7 @@ class Admission extends CI_Controller {
             'oldClass'=>$this->input->post('oldClass'),
         );
 
-        $_POST['category']    = $cattype;
+        $_POST['category'] = $cattype;
 
         $this->frmvalidation('Pre_Inter_Data',$data_error,0);
 
@@ -2925,9 +2933,7 @@ class Admission extends CI_Controller {
             $ispractical =1;
         }
 
-
         $AdmFee = $this->Admission_model->getrulefee($ispractical);
-        //debugBreak();
 
         $AdmFeeCatWise = '1700';
         if($cat11 != 0 && $cat12 != 0)
@@ -2944,7 +2950,7 @@ class Admission extends CI_Controller {
         }
         if($Speciality>0)
         {
-            if($Speciality ==2 && Session ==2 )
+            if($Speciality == 2 && Session == 2)
             {
                 $AdmFeeCatWise = $AdmFeeCatWise;    
             }
@@ -2952,26 +2958,24 @@ class Admission extends CI_Controller {
             {
                 $AdmFeeCatWise = 0;    
             }
-
         }
         else
         {
             $AdmFeeCatWise = $AdmFeeCatWise;
-            // $AdmFeeCatWise  =0;
         }
-        $today = date("d-m-Y");
-        $dueDate = 0;
-        if($today > TripleDateFeeinter )
+        $today = date("d-m-Y");   $dueDate = 0;
+
+        /* if($today > TripleDateFeeinter )
         {
-            $now = time(); // or your date as well
-            $your_date = strtotime(TripleDateFeeinter);
-            $datediff = $now - $your_date;
-            $days = floor($datediff/(60*60*24));
+        $now = time(); // or your date as well
+        $your_date = strtotime(TripleDateFeeinter);
+        $datediff = $now - $your_date;
+        $days = floor($datediff/(60*60*24));
 
-            $dueDate = $days*500;
-        }
+        $dueDate = $days*500;
+        }  */
+
         $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise + $dueDate;  
-
 
         $oldsess = @$_POST['oldsess'];
 
@@ -2981,8 +2985,6 @@ class Admission extends CI_Controller {
         else if($oldsess == 'Supplementary'){
             $oldsess =  2;    
         }
-
-        //DebugBreak();
 
         $addre =  str_replace("'", "", $this->input->post('address'));
         $MarkOfIden =  str_replace("'", "", $this->input->post('MarkOfIden'));
@@ -3090,8 +3092,7 @@ class Admission extends CI_Controller {
             redirect('Admission/Pre_Inter_Data/');
             return;
             echo 'Data NOT Saved Successfully !';
-        } 
-
+        }
     }
 
     public function NewEnrolment_insert_Languages() {
