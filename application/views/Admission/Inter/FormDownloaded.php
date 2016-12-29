@@ -12,7 +12,7 @@
                         <div id="dt_example" class="example_alt_pagination">
                             <div class="info"  style="position:relative;margin:0;padding:0;overflow:hidden;">
                                 <!--FORM START-->
-                                <form enctype="multipart/form-data" id="ReturnStatus" name="ReturnStatus" method="post" action="<?php echo base_url(); ?>/index.php/Admission/checkFormNo_then_download/<?php echo $msg; ?>/<?php echo $dob; ?>" >
+                                <form enctype="multipart/form-data" id="ReturnStatus" name="ReturnStatus" method="post" action="<?php echo base_url(); ?>Admission/checkFormNo_then_download/<?php echo $msg; ?>/<?php echo $dob; ?>" >
                             </div>
                             <p>  <strong style=" font-size: 24px;"> Your Form No.<?php echo $msg; ?> </strong></p>
                             <input type="submit" value="Download" id="btnDownloadForm" class="jbtn jmedium jblack">

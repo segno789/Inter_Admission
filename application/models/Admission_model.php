@@ -34,15 +34,23 @@ class Admission_model extends CI_Model
 
     public function Pre_Inter_Data($data)
     {
-        //DebugBreak();
+        DebugBreak();
 
         if( ($data['isaloom']==1))
         {
             $query = $this->db->get_where(getinfo_languages, array('rno' => $data['hsscrno'], 'Iyear' => $data['iYear'], 'Sess'=>$data['session']));
         }
+        else if ($data['iYear']<=2014)
+        {
+            $query = $this->db->query("matric_new..Inter_Results '".$data['hsscrno']."','".$data['hsscclass']."','".$data['iYear']."','".$data['session']."'");
+        }
         else
         {
-            $query = $this->db->get_where(getinfo, array('matRno'=>$data['sscrno'],'rno' => $data['hsscrno'], 'class' => $data['hsscclass'], 'Iyear' => $data['iYear'], 'sess'=>$data['session'],'IntBrd_cd'=>$data['board']));
+            $tblname =  getinfo;
+             $query = $this->db->query("SELECT * FROM $tblname WHER matRno = '".$data['sscrno']."' AND rno = '".$data['hsscrno']."' AND class = '".$data['hsscclass']."' AND Iyear = '".$data['iYear']."' AND sess = '".$data['session']."'   AND IntBrd_cd = '".$data['board']."' AND iyear <> 2016 Class <> 11");
+            
+            
+        //    $query = $this->db->get_where( getinfo, array('matRno'=>$data['sscrno'],'rno' => $data['hsscrno'], 'class' => $data['hsscclass'], 'Iyear' => $data['iYear'], 'sess'=>$data['session'],'IntBrd_cd'=>$data['board']));
         }
 
 
@@ -290,11 +298,18 @@ class Admission_model extends CI_Model
         $cat12 = $data['cat12'];     
 
         $picpath = $data['picpath'];
-
+//DebugBreak();
         if($picpath == '')
-            $IsNewPic = 1;
-        else
-            $IsNewPic = 0;
+        {
+             $IsNewPic = 1;
+             $temppath = $data['picname'];
+        }
+          
+        else{
+           $IsNewPic = 0; 
+           $temppath = '';
+        }
+            
 
         $dist_cd =  $data['dist'];
         $teh_cd =  $data['teh'];
@@ -307,11 +322,24 @@ class Admission_model extends CI_Model
         $old_class = $data['class'];
         $AdmProcFee =  $data['AdmProcessFee'];
         $AdmFee =  $data['AdmFee'];
+        $certFee =  $data['certfee'];
 
-        $TotalAdmFee =  $AdmFee + $AdmProcFee+$AdmFine;
+        $TotalAdmFee =  $data['AdmTotalFee'];
 
-        $query = $this->db->query(Insert_sp." '$formno',12,2017,1,'$name','$fname','$BForm','$FNIC','$CellNo',$medium,'".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$sub8,1,'".$picpath."',$oldrno,$oldyear,$oldsess,$old_class,$IsHafiz,$Inst_cd,$UrbanRural,$cat11,$cat12,$sub1ap2,$sub2ap2,$sub4ap2,$sub5ap2,$sub6ap2,$sub7ap2,$sub8ap2,$dist_cd,$teh_cd,$zone_cd,$Brd_cd,$AdmProcFee,$AdmFee,$TotalAdmFee,$sub5a,$sub6a,$sub7a,$AdmFine,$IsNewPic");
-        return true;
+        $query = $this->db->query(Insert_sp." '$formno',12,2017,1,'$name','$fname','$BForm','$FNIC','$CellNo',$medium,'".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$sub8,1,'".$picpath."',$oldrno,$oldyear,$oldsess,$old_class,$IsHafiz,$Inst_cd,$UrbanRural,$cat11,$cat12,$sub1ap2,$sub2ap2,$sub4ap2,$sub5ap2,$sub6ap2,$sub7ap2,$sub8ap2,$dist_cd,$teh_cd,$zone_cd,$Brd_cd,$AdmProcFee,$AdmFee,$TotalAdmFee,$sub5a,$sub6a,$sub7a,$AdmFine,$IsNewPic,$certFee,'$temppath'");
+        
+       $rowcount = $query->num_rows();
+        if($rowcount > 0)
+        {
+            return $query->result_array();
+        }
+        else
+        {
+            // $this->savepics($formno,11,2016,1,$data['Image']) ;
+
+             return -1;
+           // return $error;
+        }
     }
     public function Insert_NewEnorlement_Languages($data)
     {    

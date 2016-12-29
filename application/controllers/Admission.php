@@ -74,6 +74,9 @@ class Admission extends CI_Controller {
             return true;
         }
 
+       
+        
+        
         $this->load->model('Admission_model');
         $this->load->library('session');
         // DebugBreak();
@@ -900,10 +903,8 @@ class Admission extends CI_Controller {
             $pdf->Output($filename, 'I');
             return true;
         }
-
-
-
-
+        
+        //$Updated_AdmFee+$data['AdmProcessFee']+$data['AdmFee'];
 
         $pdf->AddPage();
         $x = 0.55;
@@ -941,7 +942,7 @@ class Admission extends CI_Controller {
 
         //$pdf->Image(PRIVATE_IMAGE_PATH.$data['PicPath'],6.5, 1.15+$Y, 0.95, 1.0, "JPG");
 
-        $pdf->Image(base_url().$data['picpath'],6.5, 1.15+$Y, 0.95, 1.0, "JPG");
+        $pdf->Image(DIRPATH12TH.$data['picpath'],6.5, 1.15+$Y, 0.95, 1.0, "JPG");
 
         $pdf->Image("assets/img/logo2.png",0.4, 0.2, 0.65, 0.65, "PNG");
         $pdf->SetFont('Arial','',8);
@@ -1059,64 +1060,64 @@ class Admission extends CI_Controller {
         $cand_Notif = $data['Prev_result2'];
         $cand_Nofif_part1 =$data['Prev_result1'];
         $str = '';
-        /*     if($data['cat11']==2 || $data['cat12']==2)
+/*        if($data['cat11']==2 || $data['cat12']==2)
         {
 
-        if($data['Prev_chance']==1)
-        {
-        if($data['cat11']==2 && $data['cat12']==2)
-        {
+            if($data['Prev_chance']==1)
+            {
+                if($data['cat11']==2 && $data['cat12']==2)
+                {
 
-        $str = "S-17 [P-I $cand_Nofif_part1,P-II $cand_Notif]";    
-        }
-        else if($data['cat11']==2 && $data['cat12'] !=2)
-        {
-        $str = "S-17 [P-I $cand_Nofif_part1]";        
-        }
-        else if($data['cat11'] !=2 && $data['cat12']==2)
-        {
-        $str = "S-17 [P-II $cand_Notif]";        
-        }
+                    $str = "A-18 [P-I $cand_Nofif_part1,P-II $cand_Notif]";    
+                }
+                else if($data['cat11']==2 && $data['cat12'] !=2)
+                {
+                    $str = "A-18 [P-I $cand_Nofif_part1]";        
+                }
+                else if($data['cat11'] !=2 && $data['cat12']==2)
+                {
+                    $str = "A-18 [P-II $cand_Notif]";        
+                }
 
-        }
-        else
-        if($data['Prev_chance']==2)
-        {
-        if($data['cat11']==2 && $data['cat12']==2)
-        {
+            }
+            else
+                if($data['Prev_chance']==2)
+                {
+                    if($data['cat11']==2 && $data['cat12']==2)
+                    {
 
-        $str = "A-17 [P-I $cand_Nofif_part1,P-II $cand_Notif]";    
-        }
-        else if($data['cat11']==2 && $data['cat12'] !=2)
-        {
-        $str = "A-17 [P-I $cand_Nofif_part1]";        
-        }
-        else if($data['cat11'] !=2 && $data['cat12']==2)
-        {
-        $str = "A-17 [P-II $cand_Notif]";        
-        }
-        }
-        else
-        if($data['Prev_chance']==3)
-        {
-        if($data['cat11']==2 && $data['cat12']==2)
-        {
+                        $str = "S-17 [P-I $cand_Nofif_part1,P-II $cand_Notif]";    
+                    }
+                    else if($data['cat11']==2 && $data['cat12'] !=2)
+                    {
+                        $str = "S-17 [P-I $cand_Nofif_part1]";        
+                    }
+                    else if($data['cat11'] !=2 && $data['cat12']==2)
+                    {
+                        $str = "S-17 [P-II $cand_Notif]";        
+                    }
+            }
+            else
+                if($data['Prev_chance']==3)
+                {
+                    if($data['cat11']==2 && $data['cat12']==2)
+                    {
 
-        $str = " S-16 [P-I $cand_Nofif_part1,P-II $cand_Notif]";    
-        }
-        else if($data['cat11']==2 && $data['cat12'] !=2)
-        {
-        $str = "S-16 [P-I $cand_Nofif_part1]";        
-        }
-        else if($data['cat11'] !=2 && $data['cat12']==2)
-        {
-        $str = "S-16 [P-II $cand_Notif]";        
-        }
-        }
-        if($data['Prev_chance']==4)
-        {
-        $str ="";
-        }    
+                        $str = " A-17 [P-I $cand_Nofif_part1,P-II $cand_Notif]";    
+                    }
+                    else if($data['cat11']==2 && $data['cat12'] !=2)
+                    {
+                        $str = "A-17 [P-I $cand_Nofif_part1]";        
+                    }
+                    else if($data['cat11'] !=2 && $data['cat12']==2)
+                    {
+                        $str = "A-17 [P-II $cand_Notif]";        
+                    }
+            }
+            if($data['Prev_chance']==4)
+            {
+                $str ="";
+            }    
         }*/
         //if()
 
@@ -1411,9 +1412,11 @@ class Admission extends CI_Controller {
         $pdf->SetFont('Arial','b',7);
         $pdf->Cell(0.5,0.5,"Candidate's Signature in English____________________",0,'R');
 
-
+//DebugBreak();
         $Updated_AdmFee = $this->GetFeeWithdue($data['AdmFee']);
 
+        
+        
         $pdf->SetXY(0.2,6.4+$Y);
         $pdf->SetFillColor(0,0,0);
         $pdf->SetTextColor(255,255,255);
@@ -1435,7 +1438,7 @@ class Admission extends CI_Controller {
 
         $pdf->SetXY(5.2,6.46+$Y);
         $pdf->SetFont('Arial','B',$FontSize+1.3);
-        $pdf->Cell( 0.5,0.5,"Bank Challan No.  ".$data['chalanno'],0,'L');
+        $pdf->Cell( 0.5,0.5,"Bank Challan No.  ".$data['formNo'],0,'L');
 
         $Y = $Y - 0.5;
         $pdf->SetXY(0.2, 7.09+$Y);
@@ -1455,7 +1458,7 @@ class Admission extends CI_Controller {
 
         $pdf->SetXY(2.59, 7.09+$Y); 
         $pdf->SetFont('Arial','b',$FontSize);
-        $pdf->Cell( 0.5,0.5,$Updated_AdmFee,0,'L');
+        $pdf->Cell( 0.5,0.5,$data['AdmFine'],0,'L');
 
         $pdf->SetXY(3.2, 7.09+$Y);
         $pdf->SetFont('Arial','',$FontSize);
@@ -1469,7 +1472,7 @@ class Admission extends CI_Controller {
         $pdf->Cell( 0.5,0.5,"Certificate Fee ",0,'L');
         $pdf->SetXY(6.3, 7.09+$Y); 
         $pdf->SetFont('Arial','b',$FontSize);
-        $pdf->Cell( 0.5,0.5,'0 /-',0,'L');
+        $pdf->Cell( 0.5,0.5,$data['CertificateFee'].' /-',0,'L');
 
         $pdf->SetXY(6.8, 7.09+$Y);
         $pdf->SetFont('Arial','',$FontSize);
@@ -1484,7 +1487,7 @@ class Admission extends CI_Controller {
 
         $pdf->SetXY(1.2, 7.19+$Y);
         $pdf->SetFont('Arial','b',8);
-        $pdf->Cell( 0.5,0.5,$Updated_AdmFee+$data['AdmProcessFee']+$data['AdmFee'].' /-',0,'L');
+        $pdf->Cell( 0.5,0.5,$data['AdmTotalFee'].' /-',0,'L');
 
         $pdf->SetXY(1.8, 7.19+$Y);
         $pdf->SetFont('Arial','',$FontSize-0.5);
@@ -1492,7 +1495,7 @@ class Admission extends CI_Controller {
 
         $this->load->library('NumbertoWord');
         $obj    = new NumbertoWord();
-        $obj->toWords($Updated_AdmFee+$data['AdmProcessFee']+$data['AdmFee'],"Only.",""); 
+        $obj->toWords($data['AdmTotalFee'],"Only.",""); 
 
         $pdf->SetXY(2.6, 7.19+$Y);
         $pdf->SetFont('Arial','B',7);
@@ -1561,7 +1564,7 @@ class Admission extends CI_Controller {
 
         $pdf->SetXY(6.2,6.46+$Y);
         $pdf->SetFont('Arial','b',$FontSize+1.3);
-        $pdf->Cell( 0.5,0.5,"Bank Challan No.  ".$data['chalanno'],0,'L');
+        $pdf->Cell( 0.5,0.5,"Bank Challan No.  ".$data['formNo'],0,'L');
 
         $Y = $Y - 0.5;
         $pdf->SetXY(0.2, 7.09+$Y);
@@ -1596,7 +1599,7 @@ class Admission extends CI_Controller {
         $pdf->Cell( 0.5,0.5,"Certificate Fee ",0,'L');
         $pdf->SetXY(6.3, 7.09+$Y); 
         $pdf->SetFont('Arial','b',$FontSize);
-        $pdf->Cell( 0.5,0.5,'0/-',0,'L');
+        $pdf->Cell( 0.5,0.5,$data['CertificateFee'].'/-',0,'L');
 
         $pdf->SetXY(6.8, 7.09+$Y);
         $pdf->SetFont('Arial','',$FontSize);
@@ -1612,7 +1615,7 @@ class Admission extends CI_Controller {
         $pdf->SetXY(1.2, 7.19+$Y);
         $pdf->SetFont('Arial','b',8);
         /*$pdf->Cell( 0.5,0.5,$data['AdmTotalFee'].'/-',0,'L');*/
-        $pdf->Cell( 0.5,0.5,$Updated_AdmFee+$data['AdmProcessFee']+$data['AdmFee'].'/-',0,'L');
+        $pdf->Cell( 0.5,0.5,$data['AdmTotalFee'].'/-',0,'L');
 
 
         $pdf->SetXY(1.8, 7.19+$Y);
@@ -1693,7 +1696,7 @@ class Admission extends CI_Controller {
         $pdf->SetXY(1.35, 8.79+$Y);
         $pdf->SetFont('Arial','b',8);
         /*        $pdf->Cell( 0.5,0.5,$data['AdmTotalFee'].'/-',0,'L');*/
-        $pdf->Cell( 0.5,0.5,$Updated_AdmFee+$data['AdmProcessFee']+$data['AdmFee'].'/-',0,'L');
+        $pdf->Cell( 0.5,0.5,$data['AdmTotalFee'].'/-',0,'L');
 
 
         $pdf->SetXY(1.85, 8.79+$Y);
@@ -1714,7 +1717,7 @@ class Admission extends CI_Controller {
         $pdf->SetXY(3.2, 8.55+$Y);
         $pdf->SetTextColor(0,0,0);
         $pdf->SetFont('Arial','b',9.3);
-        $pdf->Cell( 0.5,0.5,"Bank Challan No.  ".$data['chalanno'],0,'L');
+        $pdf->Cell( 0.5,0.5,"Bank Challan No.  ".$data['formNo'],0,'L');
 
         $pdf->SetXY(3.2, 8.9+$Y);
         $pdf->SetFont('Arial','b',$FontSize+0.5);
@@ -1777,7 +1780,7 @@ class Admission extends CI_Controller {
 
 
         //  $pdf->Image(PRIVATE_IMAGE_PATH.'download.jpg',6.5, 10.3+$Y, 0.95, 1.0, "JPG");
-        $pdf->Image(base_url().$data['PicPath'],6.5, 10.3+$Y, 0.95, 1.0, "JPG");
+        $pdf->Image(DIRPATH12TH.$data['PicPath'],6.5, 10.3+$Y, 0.95, 1.0, "JPG");
         $pdf->SetFont('Arial','',8);
 
 
@@ -1805,7 +1808,7 @@ class Admission extends CI_Controller {
         $pdf->SetXY(1.35, 10.49+$Y);
         $pdf->SetFont('Arial','b',8);
         /*$pdf->Cell( 0.5,0.5,$data['AdmTotalFee'].'/-',0,'L');*/
-        $pdf->Cell( 0.5,0.5,$Updated_AdmFee+$data['AdmProcessFee']+$data['AdmFee'].'/-',0,'L');
+        $pdf->Cell( 0.5,0.5,$data['AdmTotalFee'].'/-',0,'L');
 
 
         $pdf->SetXY(0.5, 10.59+$Y);
@@ -1827,7 +1830,7 @@ class Admission extends CI_Controller {
         $pdf->SetXY(3.5, 10.05+$Y);
         $pdf->SetTextColor(0,0,0);
         $pdf->SetFont('Arial','b',9.3);
-        $pdf->Cell( 0.5,0.5,"Bank Challan No.  ".$data['chalanno'],0,'L');
+        $pdf->Cell( 0.5,0.5,"Bank Challan No.  ".$data['formNo'],0,'L');
 
 
         $pdf->SetXY(3.4, 10.7+$Y);
@@ -2068,9 +2071,10 @@ class Admission extends CI_Controller {
 
     }
 
-    public function Pre_Inter_Data() {       
+    public function Pre_Inter_Data() 
+    {       
 
-        //DebugBreak();     
+        DebugBreak();     
         $this->load->library('session');
         $mrollno='';
         $hsscrno='';
@@ -2254,7 +2258,8 @@ class Admission extends CI_Controller {
         }
 
     }
-    public function Pre_Matric_data(){
+    public function Pre_Matric_data()
+    {
 
         //DebugBreak();
 
@@ -2294,7 +2299,7 @@ class Admission extends CI_Controller {
     public function Get_students_record()
     {
 
-        DebugBreak();
+       
         $mrollno = $_POST["txtMatRno"];
 
         $board   =  $_POST["oldBrd_cd"];
@@ -2703,7 +2708,7 @@ class Admission extends CI_Controller {
 
         //DebugBreak();
 
-        $formno = $this->Admission_model->GetFormNo();
+        $formno = '';//$this->Admission_model->GetFormNo();
 
         $allinputdata = array('cand_name'=>@$_POST['cand_name'],
             'father_name'=>@$_POST['father_name'],
@@ -2875,7 +2880,7 @@ class Admission extends CI_Controller {
 
         $_POST['category'] = $cattype;
 
-        $this->frmvalidation('Pre_Inter_Data',$data_error,0);
+        //$this->frmvalidation('Pre_Inter_Data',$data_error,0);
 
 
 
@@ -2895,7 +2900,6 @@ class Admission extends CI_Controller {
         $Speciality = $this->input->post('speciality');
 
         $practical_Sub = array(
-
             'LIBRARY SCIENCE'=>'8',
             'GEOGRAPHY'=>'12',
             'PSYCHOLOGY'=>'16',
@@ -2925,10 +2929,12 @@ class Admission extends CI_Controller {
         {
             $ispractical =1;
         }
-
+DebugBreak();
         $AdmFee = $this->Admission_model->getrulefee($ispractical);
 
         $AdmFeeCatWise = '1700';
+        $Certificate = 0;
+        $regfee = '';
         if($cat11 != 0 && $cat12 != 0)
         {
             $AdmFeeCatWise = $AdmFee[0]['Comp_Pvt_Amount'];
@@ -2956,19 +2962,27 @@ class Admission extends CI_Controller {
         {
             $AdmFeeCatWise = $AdmFeeCatWise;
         }
+        
+        if(($examtype ==  1 || $examtype == 3 || $_POST['oldyear'] <= 2014 || $Speciality>0)  && Session == 1)
+        {
+            $Certificate =  550;
+        }
+        
+        
+        
         $today = date("d-m-Y");   $dueDate = 0;
 
-        /* if($today > TripleDateFeeinter )
+        if(strtotime($today) > strtotime(TripleDateFeeinter) )
         {
-        $now = time(); // or your date as well
-        $your_date = strtotime(TripleDateFeeinter);
-        $datediff = $now - $your_date;
-        $days = floor($datediff/(60*60*24));
+            $now = time(); // or your date as well
+            $your_date = strtotime(TripleDateFeeinter);
+            $datediff = $now - $your_date;
+            $days = floor($datediff/(60*60*24));
 
-        $dueDate = $days*500;
-        }  */
+            $dueDate = $days*500;
+        }  
 
-        $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise + $dueDate;  
+        $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise + $dueDate + $Certificate;  
 
         $oldsess = @$_POST['oldsess'];
 
@@ -3036,23 +3050,22 @@ class Admission extends CI_Controller {
             'sess'=>$oldsess,
             'Iyear'=>@$_POST['oldyear'],
             'Brd_cd'=>@$_POST['oldboardid'],
-
             'class'=>@$_POST['oldclass'],
             'schm'=>1,
             'AdmProcessFee'=>$AdmFee[0]['Processing_Fee'],
             'AdmFee'=>$AdmFeeCatWise,
             'AdmTotalFee'=>$TotalAdmFee,
             'exam_type'=>$_POST['exam_type'],
-
             'picpath'=>@$_POST['pic'],
-
+            'picname'=>@$_POST['picname'],
             'brd_name'=>@$_POST['oldboard'],
-            'AdmFine'=>$dueDate
+            'AdmFine'=>$dueDate,
+            'certfee'=>$Certificate
         );
 
         //DebugBreak();
 
-        if(@$_POST['pic'] == ''){
+       /* if(@$_POST['pic'] == ''){
 
             $config['upload_path']   = PRIVATE_IMAGE_PATH;
             $config['allowed_types'] = 'jpeg|jpg';              
@@ -3067,25 +3080,32 @@ class Admission extends CI_Controller {
                 $data['picpath'] = array('upload_data' => $this->upload->data()); 
             } 
         }
+*/
 
         $logedIn = $this->Admission_model->Insert_NewEnorlement($data);
-        if($logedIn != false)
+       
+        $info =  '';
+        foreach($logedIn[0] as $key=>$val)
         {
-            $allinputdata = "";
-            $allinputdata['excep'] = 'success';
-            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-            $msg = $formno;                                           
-            redirect('Admission/formdownloaded/'.$formno);
+            if($key == 'formno')
+            {
+                if($logedIn[0]['tempath'] != '')
+                {
+                    $oldpath =  GET_PRIVATE_IMAGE_PATH.'\12th'.$logedIn[0]['tempath'];
+                    $newpath =  GET_PRIVATE_IMAGE_PATH.'\12th'.$val.'.jpg';
+                    $err = rename($oldpath,$newpath); 
+                }
+                $info['error'] = 1;
+                $info['formno'] = $val;
+            }
+            else if($key == 'error')
+            {
+                $info['error'] = $val;
+                $info['formno'] = '';
+            }
         }
-        else
-        {     
-            $allinputdata = "";
-            $data_error['excep'] = 'An error has occoured. Please try again later. ';
-            $this->session->set_flashdata('NewEnrolment_error',$data_error);
-            redirect('Admission/Pre_Inter_Data/');
-            return;
-            echo 'Data NOT Saved Successfully !';
-        }
+        echo  json_encode($info);
+       
     }
 
     public function NewEnrolment_insert_Languages() {
@@ -4414,5 +4434,51 @@ class Admission extends CI_Controller {
         }
 
         echo json_encode($allinputdata);
+    }
+    
+     public function uploadpic()
+    {
+        
+        ############ Configuration ##############
+        $config["generate_image_file"]            = true;
+        $config["generate_thumbnails"]            = false;
+        $config["image_max_size"]                 = 150; //Maximum image size (height and width)
+        $config["thumbnail_size"]                  = 200; //Thumbnails will be cropped to 200x200 pixels
+        $config["image_prefix"]                 = "temp_"; //Normal thumb Prefix
+        $config["thumbnail_prefix"]                = "thumb_"; //Normal thumb Prefix
+        $config["destination_folder"]            = 'F:\xampp\htdocs\Inter_Admission\Uploads\2016\private\12th\\'; //upload directory ends with / (slash)
+        $config["thumbnail_destination_folder"]    = ''; //upload directory ends with / (slash)
+        $config["upload_url"]                     = "../uploads/2016/private/11th/"; 
+        $config["quality"]                         = 90; //jpeg quality
+        $config["random_file_name"]                = true; //randomize each file name
+
+
+        if(!isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
+            exit;  //try detect AJAX request, simply exist if no Ajax
+        }
+
+
+        //specify uploaded file variable
+        $config["file_data"] = $_FILES["__files"]; 
+
+        $this->load->library('ImageResize');
+
+        //create class instance 
+        $im = new ImageResize(); 
+
+        try{
+            $responses = $im->resize($config); //initiate image resize
+
+            //output images
+            foreach($responses["images"] as $response){
+                echo ' <input type="hidden" class="span2 hidden" id="picname" name="picname" value="'.$response.'">
+                        <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="'.$config["upload_url"].$response.'"  alt="Candidate Image">';
+            }
+
+        }catch(Exception $e){
+            echo '<div class="error">';
+            echo $e->getMessage();
+            echo '</div>';
+        }
     }
 }
