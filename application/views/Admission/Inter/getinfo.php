@@ -146,17 +146,6 @@
                                 </form>
 
 
-
-
-
-
-
-
-
-
-
-
-
                                 <?php if(Session ==  1) {?>
 
 
@@ -178,20 +167,15 @@
                                             <tbody>
                                                 <tr>
 
-                                                     <td><label class=mytblmargin style="margin-right: 62px;"><b>Date of Birth</b><br /></label></td>
-                                                    <td><input type="text" class="panjang required custom" onKeyPress="validatenumber(event);" maxlength="10" id="txtDob" onclick="return maskdob(this);" required="required" name="txtDob" value=""></td> 
+                                                    <td><label class=mytblmargin style="margin-right: 62px;"><b>Date of Birth</b><br /></label></td>
+                                                    <td><input type="text" class="panjang required custom" onKeyPress="validatenumber(event);" maxlength="10" id="txtDob" readonly="readonly" onclick="return maskdob(this);" required="required" name="txtDob" value=""></td> 
 
                                                     <td><label class=mytblmargin><b>Matric Roll No.</b><br /></label></td>
                                                     <td><input type="text" class="panjang required custom" onKeyPress="validatenumber(event);" maxlength="10" id="txtMatRno" required="required" name="txtMatRno" value=""></td> 
-
-                                                   
-
-
-
                                                 </tr>
                                                 <tr>
 
-                                                 <td><label class=mytblmargin style="margin-right: 80px;"><b>SSC Year</b><br /></label></td>
+                                                    <td><label class=mytblmargin style="margin-right: 80px;"><b>SSC Year</b><br /></label></td>
                                                     <td><select id="oldYear" class="custom" name="oldYear">
                                                             <?php
                                                             if(Session == 1){
@@ -231,11 +215,11 @@
                                                             <option value="2">SUPPLEMENTARY</option>
                                                         </select>
                                                     </td>
-                                                   
+
 
                                                 </tr>
                                                 <tr>
-                                                 <td><label class=mytblmargin style="margin-right: 74px;" ><b>SSC Board</b><br /></label></td>
+                                                    <td><label class=mytblmargin style="margin-right: 74px;" ><b>SSC Board</b><br /></label></td>
                                                     <td>
                                                         <select id="sec_board" class="custom" name="oldBrd_cd">
                                                             <option value="1">BISE, GUJRANWALA</option>
@@ -281,6 +265,12 @@
 
                                             </tbody>
                                         </table>
+
+
+
+                                        <div>
+                                            <?php echo @$spl_cd['norec']; ?>
+                                        </div>
 
                                         <div style="vertical-align:bottom;margin-top: 20px;">
                                             <input type="submit" value="Proceed" id="proceed" name="proceed" class="jbtn jmedium jblack" onclick="return proceed12th()">
@@ -371,6 +361,8 @@
         $(document.getElementById("txtDob")).mask("99-99-9999", { placeholder: "DD-MM-YYYY" });
     }
 
+
+
     function validateForm() {
         var x = document.forms["ReturnStatus"]["txtMatRno"].value;
         var y = document.forms["ReturnStatus"]["oldRno"].value;
@@ -386,4 +378,11 @@
 
 
 </script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+<script>
+    $( function() {
+        $( "#txtDob" ).datepicker({ dateFormat: 'dd-mm-yy', changeMonth: true, changeYear: true }).val();
+    } );
+</script>

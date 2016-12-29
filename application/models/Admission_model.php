@@ -10,8 +10,6 @@ class Admission_model extends CI_Model
 
     public function Pre_Matric_data($data){
 
-        //DebugBreak();
-
         $SSC_RNO =  $data[0];
         $dob =  $data[1];
         $SSC_Year =  $data[2];
@@ -21,7 +19,7 @@ class Admission_model extends CI_Model
         $query = $this->db->query("admission_online..Prev_Get_Student_Matric  $SSC_RNO, '".$dob."', $SSC_Year, $SSC_Session, $ssc_Board");
 
         $rowcount = $query->num_rows();
-        $this->db->close();
+
         if($rowcount > 0)
         {
             return $query->result_array();
@@ -396,12 +394,12 @@ class Admission_model extends CI_Model
     public function getzone($data)
     {
 
-         $tehcd = $data['tehCode'];
+        $tehcd = $data['tehCode'];
         $gend = $data['gend'];
         //$query = $this->db->get_where('matric_new..tblZones', array('mYear' => 2016,'Class' => 12,'Sess'=>1, 'teh_cd' => $tehcd));
-         $where = " mYear = 2017  AND class = 12 AND  sess = 1 and Flag= 0 AND teh_cd =  $tehcd  AND  (Gender = $gend OR Gender = 3) ";      
+        $where = " mYear = 2017  AND class = 12 AND  sess = 1 and Flag= 0 AND teh_cd =  $tehcd  AND  (Gender = $gend OR Gender = 3) ";      
         $query = $this->db->query("SELECT * FROM matric_new..tblZones WHERE $where");
-        
+
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
