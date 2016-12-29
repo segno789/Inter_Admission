@@ -2294,7 +2294,8 @@ class Admission extends CI_Controller {
     public function Get_students_record()
     {
 
-        $mrollno = $_POST["oldRno"];
+        DebugBreak();
+        $mrollno = $_POST["txtMatRno"];
 
         $board   =  $_POST["oldBrd_cd"];
 
@@ -2307,76 +2308,68 @@ class Admission extends CI_Controller {
 
         $error['excep'] = '';
 
-        $isfeed =  $this->Admission_11th_Pvt_model->IsFeeded($data);
-
-        if($isfeed >0)
+        if($board == 1)
         {
-            $error['excep'] = 'You have already send regular admission';
-        }
-        else
-        {
-            if($board == 1)
+            if(!ctype_digit($mrollno))
             {
-                if(!ctype_digit($mrollno))
-                {
-                    $error['excep'] = 'SSC ROLL NO. IS INCORRECT';
+                $error['excep'] = 'SSC ROLL NO. IS INCORRECT';
 
-                }
-                $RegStdData = array('data'=>$this->Admission_11th_Pvt_model->Pre_Matric_data($data),'isReAdm'=>0,'Oldrno'=>0,'Inst_Rno'=>'','excep'=>'','isHafiz'=>'');  
+            }
+            $RegStdData = array('data'=>$this->Admission_11th_Pvt_model->Pre_Matric_data($data),'isReAdm'=>0,'Oldrno'=>0,'Inst_Rno'=>'','excep'=>'','isHafiz'=>'');  
 
-                $spl_cd = $RegStdData['data'][0]['spl_cd'];
-                $msg = $RegStdData['data'][0]['Mesg'];
-                $SpacialCase = $RegStdData['data'][0]['SpacialCase'];
-                $status = $RegStdData['data'][0]['status'];
+            $spl_cd = $RegStdData['data'][0]['spl_cd'];
+            $msg = $RegStdData['data'][0]['Mesg'];
+            $SpacialCase = $RegStdData['data'][0]['SpacialCase'];
+            $status = $RegStdData['data'][0]['status'];
 
-                if($RegStdData['data'] == -1)
-                {
-                    $error['excep'] = 'NO DATA FOUND AGAINST YOUR RECORD';
+            if($RegStdData['data'] == -1)
+            {
+                $error['excep'] = 'NO DATA FOUND AGAINST YOUR RECORD';
 
-                }
-                else if($RegStdData['data'][0]['SSC_RNo'] == '' || $RegStdData['data'][0]['SSC_RNo'] == 0 || strlen ($RegStdData['data'][0]['SSC_RNo']) != 6)
-                {
-                    $error['excep'] =  'SSC ROLL NO. IS INCORRECT';
+            }
+            else if($RegStdData['data'][0]['SSC_RNo'] == '' || $RegStdData['data'][0]['SSC_RNo'] == 0 || strlen ($RegStdData['data'][0]['SSC_RNo']) != 6)
+            {
+                $error['excep'] =  'SSC ROLL NO. IS INCORRECT';
 
-                }
-                else if($msg != '')
-                {
-                    $error['excep'] =  $msg;
-
-
-                }
-                else if($status != 1)
-                {
-                    $error['excep'] =  'You are FAILED in matric ';
-
-                }
-                else if($spl_cd != null && $spl_cd != 34)
-                {
-                    $error['excep'] = 'You can not appear due to '.$SpacialCase;
-
-                }
+            }
+            else if($msg != '')
+            {
+                $error['excep'] =  $msg;
 
 
             }
-            else if(@$RegStdData['data'] == False and $board != 1)
+            else if($status != 1)
             {
-                $error['excep'] = '';
-                $RegStdData['data'][0]['SSC_RNo'] = $_POST["oldRno"];
-                $RegStdData['data'][0]['SSC_Year'] = $_POST["oldYear"];
-                $RegStdData['data'][0]['SSC_Sess'] = $_POST["oldSess"];
-                $RegStdData['data'][0]['SSC_brd_cd'] = $_POST["oldBrd_cd"];
-                $RegStdData['data'][0]['sub1']=1;
-                $RegStdData['isReAdm']=0;
-                // DebugBreak();
-                $mylen = strlen(trim($RegStdData['data'][0]['SSC_RNo']));
-                if(trim($RegStdData['data'][0]['SSC_RNo']," ") == '' ||  trim($RegStdData['data'][0]['SSC_RNo']) == '0' || $mylen < 4 )
-                {
-                    $error['excep'] = 'SSC ROLL NO. IS INCORRECT';
+                $error['excep'] =  'You are FAILED in matric ';
 
-                }
+            }
+            else if($spl_cd != null && $spl_cd != 34)
+            {
+                $error['excep'] = 'You can not appear due to '.$SpacialCase;
 
-            }  
+            }
+
+
         }
+        else if(@$RegStdData['data'] == False and $board != 1)
+        {
+            $error['excep'] = '';
+            $RegStdData['data'][0]['SSC_RNo'] = $_POST["oldRno"];
+            $RegStdData['data'][0]['SSC_Year'] = $_POST["oldYear"];
+            $RegStdData['data'][0]['SSC_Sess'] = $_POST["oldSess"];
+            $RegStdData['data'][0]['SSC_brd_cd'] = $_POST["oldBrd_cd"];
+            $RegStdData['data'][0]['sub1']=1;
+            $RegStdData['isReAdm']=0;
+            // DebugBreak();
+            $mylen = strlen(trim($RegStdData['data'][0]['SSC_RNo']));
+            if(trim($RegStdData['data'][0]['SSC_RNo']," ") == '' ||  trim($RegStdData['data'][0]['SSC_RNo']) == '0' || $mylen < 4 )
+            {
+                $error['excep'] = 'SSC ROLL NO. IS INCORRECT';
+
+            }
+
+        }  
+
         if($error['excep'] == '')
         {
             $error['excep'] =  'success'; 

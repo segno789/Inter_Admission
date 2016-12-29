@@ -173,18 +173,25 @@
                                         </div>
                                     </div>
 
-                                    <form enctype="multipart/form-data" id="getPervRec" name="getPervRec" method="post" action="<?php echo base_url(); ?>/index.php/Admission/Pre_Matric_data">
+                                    <form enctype="multipart/form-data" id="getPervRec" name="getPervRec" method="post" action="<?php echo base_url(); ?>Admission/Pre_Matric_data">
                                         <table width="99%" class="tbl_form fresh_cand" >
                                             <tbody>
                                                 <tr>
 
-                                                    <!-- <td><label class=mytblmargin style="margin-right: 62px;"><b>Date of Birth</b><br /></label></td>
-                                                    <td><input type="text" class="panjang required custom" onKeyPress="validatenumber(event);" maxlength="10" id="txtDob" onclick="return maskdob(this);" required="required" name="txtDob" value=""></td> -->
+                                                     <td><label class=mytblmargin style="margin-right: 62px;"><b>Date of Birth</b><br /></label></td>
+                                                    <td><input type="text" class="panjang required custom" onKeyPress="validatenumber(event);" maxlength="10" id="txtDob" onclick="return maskdob(this);" required="required" name="txtDob" value=""></td> 
 
                                                     <td><label class=mytblmargin><b>Matric Roll No.</b><br /></label></td>
                                                     <td><input type="text" class="panjang required custom" onKeyPress="validatenumber(event);" maxlength="10" id="txtMatRno" required="required" name="txtMatRno" value=""></td> 
 
-                                                    <td><label class=mytblmargin style="margin-right: 80px;"><b>SSC Year</b><br /></label></td>
+                                                   
+
+
+
+                                                </tr>
+                                                <tr>
+
+                                                 <td><label class=mytblmargin style="margin-right: 80px;"><b>SSC Year</b><br /></label></td>
                                                     <td><select id="oldYear" class="custom" name="oldYear">
                                                             <?php
                                                             if(Session == 1){
@@ -218,19 +225,17 @@
                                                             ?>
                                                         </select>
                                                     </td>
-
-
-
-                                                </tr>
-                                                <tr>
-
                                                     <td><label class=mytblmargin><b>SSC Session</b><br /></label></td>
                                                     <td><select id="oldSess" class="custom" name="oldSess">
                                                             <option value="1" >ANNUAL</option>
                                                             <option value="2">SUPPLEMENTARY</option>
                                                         </select>
                                                     </td>
-                                                    <td><label class=mytblmargin style="margin-right: 74px;" ><b>SSC Board</b><br /></label></td>
+                                                   
+
+                                                </tr>
+                                                <tr>
+                                                 <td><label class=mytblmargin style="margin-right: 74px;" ><b>SSC Board</b><br /></label></td>
                                                     <td>
                                                         <select id="sec_board" class="custom" name="oldBrd_cd">
                                                             <option value="1">BISE, GUJRANWALA</option>
@@ -272,9 +277,7 @@
                                                     </td>
 
 
-
                                                 </tr>
-
 
                                             </tbody>
                                         </table>
@@ -317,10 +320,9 @@
             success: function(data)
             {
                 var obj = JSON.parse(data) ;
-                console.log(obj)
                 if(obj.excep == 'success')
                 {
-                    $('#ReturnStatus').submit();
+                    $('#getPervRec').submit();
                 }
                 else
                 {
@@ -329,6 +331,7 @@
 
             },
             error: function(request, status, error){
+                $('.mPageloader').hide();
                 alertify.error(request.responseText);
             }
         });
