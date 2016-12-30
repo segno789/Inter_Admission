@@ -9,6 +9,7 @@ class Admission_model extends CI_Model
 
     public function Pre_Inter_Data($data)
     {
+        //DebugBreak();
         $query = $this->db->get_where(getinfo, array('matRno'=>$data['sscrno'],'rno' => $data['hsscrno'], 'class' => $data['hsscclass'], 'Iyear' => $data['iYear'], 'sess'=>$data['session'],'IntBrd_cd'=>$data['board']));
         $rowcount = $query->num_rows();
         if($rowcount > 0)
@@ -34,12 +35,9 @@ class Admission_model extends CI_Model
     public function GetFormNo()
     {
         $this->db->select('FormNo');
-       // $this->db->select_max('formNo');
-       
-        //$this->db->where('regPvt',2);
         $this->db->order_by("FormNo", "DESC");
         $formno = $this->db->get('admission_online..ISAdm2016',array('regPvt'=>2));
-        //$formno =$this->db->get_where('',array('regPvt'=>2));
+        
         $rowcount = $formno->num_rows();
 
         if($rowcount == 0 )
@@ -53,7 +51,6 @@ class Admission_model extends CI_Model
             $formno = $row[0]['FormNo']+1;
             return $formno;
         }
-
     }
 
     public function Insert_NewEnorlement($data)

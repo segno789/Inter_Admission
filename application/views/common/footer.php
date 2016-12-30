@@ -18,6 +18,7 @@
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.fancybox.pack.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/jquery-ui.js"></script>
 
+
 <?php 
 if(isset($files)){
     foreach($files as $file){
@@ -27,6 +28,9 @@ if(isset($files)){
 ?> 
 <script type="">
     $(document).ready(function () {
+                  
+      $( "#txtDob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate:new Date(2001, 7, 1),minDate:new Date(1980, 0, 1)}).val();
+       
         $('#data-table').dataTable({
             "sPaginationType": "full_numbers",
             "cache": false
@@ -259,6 +263,8 @@ if(isset($files)){
     //$( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true }).val();
 
     $( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate: new Date(2003, 7,1),yearRange: '1970:2003'}).val();
+    
+    
     
 
     $( "#batch_real_PaidDate" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, startDate:new Date() }).val();

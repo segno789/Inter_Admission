@@ -234,6 +234,16 @@
                 e.preventDefault();
             }
         });
+        $("#proceed11th").click(function(){
+            var isreg =  $('input[name=candidate]:checked', '#options').val();
+            if(isreg==1){
+                window.location.href='<?php  echo base_url(); ?>Admission_11th_pvt/Students_matricInfo';
+            }
+            else{
+                window.location.href='<?php  echo base_url(); ?>login'  
+            }
+           
+        })
         $("#proceed").click(function(){
             var isreg =  $('input[name=candidate]:checked', '#options').val();
             if(isreg==1){
@@ -242,7 +252,7 @@
             else{
                 window.location.href='<?php  echo base_url(); ?>login'  
             }
-            console.log(isreg);
+           
         })
 
         $("#btndwnForm").click(function(){
@@ -961,4 +971,5 @@
         });
 
     }
+   
 </script>
