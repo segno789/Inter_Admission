@@ -32,6 +32,8 @@
 <script type="text/javascript">
 
     $(document).ready(function(){
+   
+        
  $('.mPageloader').hide();
         $("#pvtinfo_dist").change(function(){
             var distId =  $("#pvtinfo_dist").val();

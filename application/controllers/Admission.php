@@ -2310,7 +2310,7 @@ class Admission extends CI_Controller {
     public function Get_students_record()
     {
 
-       
+       DebugBreak();
         $mrollno = $_POST["txtMatRno"];
 
         $board   =  $_POST["oldBrd_cd"];
@@ -2370,7 +2370,7 @@ class Admission extends CI_Controller {
         else if(@$RegStdData['data'] == False and $board != 1)
         {
             $error['excep'] = '';
-            $RegStdData['data'][0]['SSC_RNo'] = $_POST["oldRno"];
+            $RegStdData['data'][0]['SSC_RNo'] = $_POST["txtMatRno"];
             $RegStdData['data'][0]['SSC_Year'] = $_POST["oldYear"];
             $RegStdData['data'][0]['SSC_Sess'] = $_POST["oldSess"];
             $RegStdData['data'][0]['SSC_brd_cd'] = $_POST["oldBrd_cd"];
