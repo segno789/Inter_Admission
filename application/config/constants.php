@@ -38,14 +38,14 @@ define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 define('BARCODE_PATH', 'assets/pdfs/');
 
 
-define('DIRPATH12TH','F:\xampp\htdocs\Share Images\\'); 
+define('DIRPATH12TH','D:\xampp\htdocs\Share Images\\'); 
 define('PRIVATE_IMAGE_PATH', 'uploads/private/');
 define('PRIVATE_IMAGE_PATH_FRESH', 'uploads/Fresh');
 define('REGULAR_IMAGE_PATH', 'uploads/regular/');
 define('Session','1');  // 1 for Annual and 2 for Supply
 define('Year','2017');  
 define('lastdate','30-01-2017');
-define('GET_PRIVATE_IMAGE_PATH', 'F:\xampp\htdocs\Inter_Admission\Uploads\2016\private\\');
+define('GET_PRIVATE_IMAGE_PATH', 'D:\xampp\htdocs\Inter_Admission\Uploads\2016\private\\');
 define('GET_PRIVATE_IMAGE_PATH_COPY', '');
 define('Insert_sp','admission_online..sp_insert_IAAdm'); // for insertion Inter annual private
 define('DIRPATH11th','D:/xampp/htdocs/Inter_Admission/Uploads/IS2016/regular/2510010001.jpg'); 

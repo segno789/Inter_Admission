@@ -32,7 +32,7 @@ class Admission_model extends CI_Model
 
     public function Pre_Inter_Data($data)
     {
-        DebugBreak();
+        //DebugBreak();
 
         if( ($data['isaloom']==1))
         {
