@@ -74,9 +74,9 @@ class Admission extends CI_Controller {
             return true;
         }
 
-       
-        
-        
+
+
+
         $this->load->model('Admission_model');
         $this->load->library('session');
         // DebugBreak();
@@ -903,7 +903,7 @@ class Admission extends CI_Controller {
             $pdf->Output($filename, 'I');
             return true;
         }
-        
+
         //$Updated_AdmFee+$data['AdmProcessFee']+$data['AdmFee'];
 
         $pdf->AddPage();
@@ -1060,64 +1060,64 @@ class Admission extends CI_Controller {
         $cand_Notif = $data['Prev_result2'];
         $cand_Nofif_part1 =$data['Prev_result1'];
         $str = '';
-/*        if($data['cat11']==2 || $data['cat12']==2)
+        /*        if($data['cat11']==2 || $data['cat12']==2)
         {
 
-            if($data['Prev_chance']==1)
-            {
-                if($data['cat11']==2 && $data['cat12']==2)
-                {
+        if($data['Prev_chance']==1)
+        {
+        if($data['cat11']==2 && $data['cat12']==2)
+        {
 
-                    $str = "A-18 [P-I $cand_Nofif_part1,P-II $cand_Notif]";    
-                }
-                else if($data['cat11']==2 && $data['cat12'] !=2)
-                {
-                    $str = "A-18 [P-I $cand_Nofif_part1]";        
-                }
-                else if($data['cat11'] !=2 && $data['cat12']==2)
-                {
-                    $str = "A-18 [P-II $cand_Notif]";        
-                }
+        $str = "A-18 [P-I $cand_Nofif_part1,P-II $cand_Notif]";    
+        }
+        else if($data['cat11']==2 && $data['cat12'] !=2)
+        {
+        $str = "A-18 [P-I $cand_Nofif_part1]";        
+        }
+        else if($data['cat11'] !=2 && $data['cat12']==2)
+        {
+        $str = "A-18 [P-II $cand_Notif]";        
+        }
 
-            }
-            else
-                if($data['Prev_chance']==2)
-                {
-                    if($data['cat11']==2 && $data['cat12']==2)
-                    {
+        }
+        else
+        if($data['Prev_chance']==2)
+        {
+        if($data['cat11']==2 && $data['cat12']==2)
+        {
 
-                        $str = "S-17 [P-I $cand_Nofif_part1,P-II $cand_Notif]";    
-                    }
-                    else if($data['cat11']==2 && $data['cat12'] !=2)
-                    {
-                        $str = "S-17 [P-I $cand_Nofif_part1]";        
-                    }
-                    else if($data['cat11'] !=2 && $data['cat12']==2)
-                    {
-                        $str = "S-17 [P-II $cand_Notif]";        
-                    }
-            }
-            else
-                if($data['Prev_chance']==3)
-                {
-                    if($data['cat11']==2 && $data['cat12']==2)
-                    {
+        $str = "S-17 [P-I $cand_Nofif_part1,P-II $cand_Notif]";    
+        }
+        else if($data['cat11']==2 && $data['cat12'] !=2)
+        {
+        $str = "S-17 [P-I $cand_Nofif_part1]";        
+        }
+        else if($data['cat11'] !=2 && $data['cat12']==2)
+        {
+        $str = "S-17 [P-II $cand_Notif]";        
+        }
+        }
+        else
+        if($data['Prev_chance']==3)
+        {
+        if($data['cat11']==2 && $data['cat12']==2)
+        {
 
-                        $str = " A-17 [P-I $cand_Nofif_part1,P-II $cand_Notif]";    
-                    }
-                    else if($data['cat11']==2 && $data['cat12'] !=2)
-                    {
-                        $str = "A-17 [P-I $cand_Nofif_part1]";        
-                    }
-                    else if($data['cat11'] !=2 && $data['cat12']==2)
-                    {
-                        $str = "A-17 [P-II $cand_Notif]";        
-                    }
-            }
-            if($data['Prev_chance']==4)
-            {
-                $str ="";
-            }    
+        $str = " A-17 [P-I $cand_Nofif_part1,P-II $cand_Notif]";    
+        }
+        else if($data['cat11']==2 && $data['cat12'] !=2)
+        {
+        $str = "A-17 [P-I $cand_Nofif_part1]";        
+        }
+        else if($data['cat11'] !=2 && $data['cat12']==2)
+        {
+        $str = "A-17 [P-II $cand_Notif]";        
+        }
+        }
+        if($data['Prev_chance']==4)
+        {
+        $str ="";
+        }    
         }*/
         //if()
 
@@ -1412,11 +1412,11 @@ class Admission extends CI_Controller {
         $pdf->SetFont('Arial','b',7);
         $pdf->Cell(0.5,0.5,"Candidate's Signature in English____________________",0,'R');
 
-//DebugBreak();
+        //DebugBreak();
         $Updated_AdmFee = $this->GetFeeWithdue($data['AdmFee']);
 
-        
-        
+
+
         $pdf->SetXY(0.2,6.4+$Y);
         $pdf->SetFillColor(0,0,0);
         $pdf->SetTextColor(255,255,255);
@@ -2074,7 +2074,7 @@ class Admission extends CI_Controller {
     public function Pre_Inter_Data() 
     {       
 
-        DebugBreak();     
+
 
         $this->load->library('session');
         $mrollno='';
@@ -2292,10 +2292,8 @@ class Admission extends CI_Controller {
                 redirect('Admission/matric_default');
             }
         }
-
         $board    = $data[0]['SSC_Board'];
         $oldclass    = $data[0]['SSC_CLASS'];
-
         $brd_name=$this->Admission_model->Brd_Name($board);
         $data[0]['brd_name']= $brd_name[0]['Brd_Abr'] ;
         $data[0]['brd_cd']= $board;
@@ -2308,7 +2306,7 @@ class Admission extends CI_Controller {
     public function Get_students_record()
     {
 
-       
+
         $mrollno = $_POST["txtMatRno"];
 
         $board   =  $_POST["oldBrd_cd"];
@@ -2710,7 +2708,8 @@ class Admission extends CI_Controller {
             echo 'Data NOT Saved Successfully !';
         }
     }
-    public function NewEnrolment_insert()  {
+    public function NewEnrolment_insert() 
+    {
         $this->load->model('Admission_model');
         $this->load->library('session');
         $Inst_Id = 999999;
@@ -2938,7 +2937,7 @@ class Admission extends CI_Controller {
         {
             $ispractical =1;
         }
-DebugBreak();
+        DebugBreak();
         $AdmFee = $this->Admission_model->getrulefee($ispractical);
 
         $AdmFeeCatWise = '1700';
@@ -2971,14 +2970,14 @@ DebugBreak();
         {
             $AdmFeeCatWise = $AdmFeeCatWise;
         }
-        
+
         if(($examtype ==  1 || $examtype == 3 || $_POST['oldyear'] <= 2014 || $Speciality>0)  && Session == 1)
         {
             $Certificate =  550;
         }
-        
-        
-        
+
+
+
         $today = date("d-m-Y");   $dueDate = 0;
 
         if(strtotime($today) > strtotime(TripleDateFeeinter) )
@@ -3074,25 +3073,25 @@ DebugBreak();
 
         //DebugBreak();
 
-       /* if(@$_POST['pic'] == ''){
+        /* if(@$_POST['pic'] == ''){
 
-            $config['upload_path']   = PRIVATE_IMAGE_PATH;
-            $config['allowed_types'] = 'jpeg|jpg';              
-            $config['file_name']    = @$_POST['InterRno_hidden'];  
+        $config['upload_path']   = PRIVATE_IMAGE_PATH;
+        $config['allowed_types'] = 'jpeg|jpg';              
+        $config['file_name']    = @$_POST['InterRno_hidden'];  
 
-            $this->load->library('upload', $config);
+        $this->load->library('upload', $config);
 
-            if ( ! $this->upload->do_upload('inputFile')) {
-                $error = array('error' => $this->upload->display_errors()); 
-            }
-            else { 
-                $data['picpath'] = array('upload_data' => $this->upload->data()); 
-            } 
+        if ( ! $this->upload->do_upload('inputFile')) {
+        $error = array('error' => $this->upload->display_errors()); 
         }
-*/
+        else { 
+        $data['picpath'] = array('upload_data' => $this->upload->data()); 
+        } 
+        }
+        */
 
         $logedIn = $this->Admission_model->Insert_NewEnorlement($data);
-       
+
         $info =  '';
         foreach($logedIn[0] as $key=>$val)
         {
@@ -3114,10 +3113,10 @@ DebugBreak();
             }
         }
         echo  json_encode($info);
-       
-    }
 
-    public function NewEnrolment_insert_Languages() {
+    }
+    public function NewEnrolment_insert_Languages() 
+    {
         //DebugBreak();
         $this->load->model('Admission_model');
         $this->load->library('session');
@@ -3296,8 +3295,8 @@ DebugBreak();
         } 
 
     }
-
-    public function formdownloaded(){
+    public function formdownloaded()
+    {
 
         //DebugBreak();
 
@@ -3311,7 +3310,8 @@ DebugBreak();
         $this->load->view('common/footer.php');
     }
 
-    public function matric_default(){
+    public function matric_default()
+    {
         // DebugBreak();
         $data = array(
             'isselected' => '3',
@@ -3331,7 +3331,8 @@ DebugBreak();
         $this->load->view('common/footer.php');
     }
 
-    public function getzone(){
+    public function getzone()
+    {
 
 
 
@@ -3346,7 +3347,8 @@ DebugBreak();
         echo json_encode($value);
     }
 
-    public function getcenter(){
+    public function getcenter()
+    {
 
         $data = array(
             'zoneCode' => $this->input->post('pvtZone'),
@@ -3359,7 +3361,8 @@ DebugBreak();
     }
 
 
-    public function frmvalidation_Fresh(){
+    public function frmvalidation_Fresh()
+    {
 
         $allinputdata['excep'] = '';
 
@@ -3576,7 +3579,8 @@ DebugBreak();
         echo json_encode($allinputdata);    
     }
 
-    function frmvalidation(){
+    function frmvalidation()
+    {
         //DebugBreak();
 
         $allinputdata['excep'] = '';
@@ -4444,10 +4448,10 @@ DebugBreak();
 
         echo json_encode($allinputdata);
     }
-    
-     public function uploadpic()
+
+    public function uploadpic()
     {
-        
+
         ############ Configuration ##############
         $config["generate_image_file"]            = true;
         $config["generate_thumbnails"]            = false;
@@ -4481,7 +4485,7 @@ DebugBreak();
             //output images
             foreach($responses["images"] as $response){
                 echo ' <input type="hidden" class="span2 hidden" id="picname" name="picname" value="'.$response.'">
-                        <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="'.$config["upload_url"].$response.'"  alt="Candidate Image">';
+                <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="'.$config["upload_url"].$response.'"  alt="Candidate Image">';
             }
 
         }catch(Exception $e){
