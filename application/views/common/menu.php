@@ -104,31 +104,25 @@
                         </a>
                     </li>
                     <?php }
-<<<<<<< HEAD
 
-                else if($isselected == '11'){?>
-=======
-                      
+                else if($isselected == '14' || $isselected == '11'){
                     
-                     else if($isselected == '14' ){?>
-
+                    
+                    ?>
                     <li>
-                        <a href="<?php echo base_url(); ?>Admission_matric" class="<?php if($isselected == '14' ) {echo 'selected';}?>" >
+                      <a href="<?php echo base_url(); ?>Admission_11th_reg" class="<?php if($isselected == '14' ) {echo 'selected';}?>">
                             <div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>
                             11th Admission
                         </a>
                     </li>
-                    <?php }
-                     else if($isselected == '11'){?>
->>>>>>> bceabbfc92c0294b076ecff6df94b0ff8e1efff4
-
                     <li>
                         <a href="<?php echo base_url(); ?>Admission_inter" class="<?php if( $isselected == '11') {echo 'selected';}?>" >
                             <div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>
-                            Admission
+                            12th Admission
                         </a>
                     </li>
                     <?php }?>
+                  
 
             </ul>
             <div class="clearfix">
