@@ -44,7 +44,7 @@ define('Year','2017');
 define('lastdate','20-08-2016');
 define('GET_PRIVATE_IMAGE_PATH', '');
 define('GET_PRIVATE_IMAGE_PATH_COPY', '');
-define('DIRPATH11th','D:/xampp/htdocs/Inter_Admission/Uploads/IS2016/regular/2510010001.jpg'); 
+define('DIRPATH11th','D:/xampp/htdocs/Inter_Admission/Uploads/IS2016/regular/'); 
 define('IMAGE_PATH', 'uploads/2016/');
 define('Insert_sp','Admission_online..ISAdm2016_sp_insert'); // for insertion Inter supply private
 define('Insert_sp_Languages','Admission_online..ISAdm2016_sp_insert_LANGUAGES'); // for insertion Inter supply private
@@ -55,16 +55,16 @@ define('formprint_sp_matric_annual','Admission_online..sp_form_data');    // for
 define('formnovalid','600000');
 define('formnovalid_Languages','400000');
 define('return_pdf_isPicture','1');
-define('CURRENT_SESS','2016-2018');
+define('CURRENT_SESS','2017-2019');
 define('corr_bank_chall_class','INTER SUPPLY');
-define('session_year','2016-2018');
+define('session_year','2017-2019');
 define('TITLEHSSC','Online HSSC Annual Admission 2017');
 define('SingleDateFee11th','03-10-2016');
 define('currdate','date("d-m-Y");');
-define ('SingleDateFee','03-10-2016');
-define('DoubleDateFee', '07-10-2016');
-define('TripleDateFee', '13-10-2016');
-define('TripleDateFeeinter', '13-10-2016');
+define ('SingleDateFee','30-01-2017');
+define('DoubleDateFee', '02-01-2017');
+define('TripleDateFee', '10-01-2017');
+define('TripleDateFeeinter', '30-01-2017');
 define ('class_for_11th_Adm','11th');                                
 define('getinfo','admission_online..tblAdmissionDataForHSSC');
 define('getinfo_languages','admission_online..tblAdmissionDataLang');
@@ -72,7 +72,7 @@ define('getinfo_languages','admission_online..tblAdmissionDataLang');
 
 //===============10TH Regular Admission Matric challan varaible
 define('corr_bank_chall_class1','12th');
-define('CURRENT_SESS1','2016'); 
+define('CURRENT_SESS1','2017'); 
 
 
 

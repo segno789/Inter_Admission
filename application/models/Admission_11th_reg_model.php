@@ -82,7 +82,7 @@ class Admission_11th_reg_model extends CI_Model
     {
         //DebugBreak();
         $Inst_cd = $fetch_data['Inst_cd'];
-        $query = $this->db->query("Registration..sp_Forwading_letter_final_9TH $Inst_cd");
+        $query = $this->db->query("Registration..sp_Forwading_letter_final_11TH_ADM $Inst_cd");
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
@@ -295,7 +295,7 @@ class Admission_11th_reg_model extends CI_Model
         $zone = $data['zoneCode'];
         $gend = $data['gen'];
         
-        $where = " mYear = 2017  AND class =10  AND  sess = 1 AND Zone_cd =  $zone  AND  (cent_Gen = $gend OR cent_Gen = 3) ";      
+        $where = " mYear = 2017  AND class =12  AND  sess = 2 AND Zone_cd =  $zone  AND  (cent_Gen = $gend OR cent_Gen = 3) ";      
         $query = $this->db->query("SELECT * FROM matric_new..tblcentre WHERE $where");
 
         //$query = $this->db->get_where('matric_new..tblcentre', array('mYear' => 2016,'class' => 10,'sess'=>2, 'Zone_cd' => $zone, 'cent_Gen' => $gend)); 
@@ -373,48 +373,31 @@ class Admission_11th_reg_model extends CI_Model
         {
            return  false;
         }
-        $this->db->update_batch('Registration..MA_P1_Reg_Adm2016',$data,'formNo');
+        $this->db->update_batch('Registration..IA_P1_Reg_Adm2016',$data,'formNo');
         // DebugBreak();
            if($isformwise == 9)
         {
         $this->db->select('Sum(AdmFee) as sum_AdmFee,sum(AdmProcessFee) as sum_procFee,sum(AdmFine) as sum_admfine,sum(AdmTotalFee) as sum_TotalFee',False);
-        $this->db->group_by("Sch_cd");
-        $query = $this->db->get_where('Registration..MA_P1_Reg_Adm2016', array('sch_cd' => $inst_cd)); 
+        $this->db->group_by("coll_cd");
+        $query = $this->db->get_where('Registration..IA_P1_Reg_Adm2016', array('coll_cd' => $inst_cd)); 
         }
           else if($isformwise == 6)
         {
         $this->db->select('Sum(AdmFee) as sum_AdmFee,sum(AdmProcessFee) as sum_procFee,sum(AdmFine) as sum_admfine,sum(AdmTotalFee) as sum_TotalFee',False);
-        $this->db->group_by("Sch_cd");
-        $query = $this->db->get_where('Registration..MA_P1_Reg_Adm2016', array('sch_cd' => $inst_cd)); 
+        $this->db->group_by("coll_cd");
+        $query = $this->db->get_where('Registration..IA_P1_Reg_Adm2016', array('coll_cd' => $inst_cd)); 
         }
        else if($isformwise == 4)
         {
             $grp_cd = $grp_cd;
-            $this->db->select('formNo,name, Fname,RegGrp, sub6,sub7,sub8, IsReAdm,AdmFee,AdmProcessFee,AdmFine,AdmTotalFee,Spec');
-            if($grp_cd == 7)
-            {
-                $sub_cd= 78;   
-                $query = $this->db->get_where('Registration..MA_P1_Reg_Adm2016', array('sch_cd' => $inst_cd,'grp_cd'=>$grp_cd,'sub8'=>$sub_cd,'IsAdmission'=>1,'isdeleted'=>0 ,'batch_id > '=>0)); 
-            }
-            else if($grp_cd == 8)
-            {
-                $sub_cd= 43;  
-                $query = $this->db->get_where('Registration..MA_P1_Reg_Adm2016', array('sch_cd' => $inst_cd,'grp_cd'=>$grp_cd,'sub8'=>$sub_cd,'IsAdmission'=>1,'isdeleted'=>0 ,'batch_id > '=>0));
-            }
-            else if ($grp_cd == 1  )
-            {
-                $sub_cd= 8; 
-                $query = $this->db->get_where('Registration..MA_P1_Reg_Adm2016', array('sch_cd' => $inst_cd,'grp_cd'=>$grp_cd,'sub8'=>$sub_cd,'IsAdmission'=>1,'isdeleted'=>0 ,'batch_id > '=>0));  
-            }
-            else if ($grp_cd == 2 OR  $grp_cd== 5 )
-            {
-                $query = $this->db->get_where('Registration..MA_P1_Reg_Adm2016', array('sch_cd' => $inst_cd,'grp_cd'=>$grp_cd,'IsAdmission'=>1,'isdeleted'=>0 ,'batch_id > '=>0));
-            }
+            $this->db->select('formNo,name, Fname,RegGrp,grp_cd, IsReAdm,AdmFee,AdmProcessFee,AdmFine,AdmTotalFee,Spec');
+            $query = $this->db->get_where('Registration..IA_P1_Reg_Adm2016', array('coll_cd' => $inst_cd,'grp_cd'=>$grp_cd,'IsAdmission'=>1,'isdeleted'=>0 ,'batch_id > '=>0)); 
+           
         }
         else
         {
-        $this->db->select('formNo,name, Fname,RegGrp sub6,sub7,sub8, IsReAdm,AdmFee,AdmProcessFee,AdmFine,AdmTotalFee,Spec');
-        $query = $this->db->get_where('Registration..MA_P1_Reg_Adm2016', array('sch_cd' => $inst_cd,'formNo <= '=>$startFormno,'formNo >='=>$endingFormno,'IsAdmission'=>1)); 
+        $this->db->select('formNo,name, Fname,RegGrp grp_cd, IsReAdm,AdmFee,AdmProcessFee,AdmFine,AdmTotalFee,Spec');
+        $query = $this->db->get_where('Registration..IA_P1_Reg_Adm2016', array('coll_cd' => $inst_cd,'formNo <= '=>$startFormno,'formNo >='=>$endingFormno,'IsAdmission'=>1)); 
         }
         //$query = $this->db->get("Registration..MA_P1_Reg_Adm2016");    
         $rowcount = $query->num_rows();
@@ -682,7 +665,7 @@ class Admission_11th_reg_model extends CI_Model
         if($rowcount > 0)
         {
 
-            $query2 = $this->db->get_where('Admission_Online..RuleFeeAdm', array('class' => 9,'sess' => 1, 'Start_Date <='=>$date,'End_Date >='=>$date));
+            $query2 = $this->db->get_where('Admission_Online..RuleFeeAdm', array('class' => 12,'sess' => 1, 'Start_Date <='=>$date,'End_Date >='=>$date));
             $resultarr = array("info"=>$query->result_array(),"rule_fee"=>$query2->result_array());
             return  $resultarr;
         }
@@ -811,7 +794,7 @@ class Admission_11th_reg_model extends CI_Model
     }
     public function Print_Form_Formnowise($fetch_data)
     {
-        //  //DebugBreak();
+        //DebugBreak();
         $Inst_cd = $fetch_data['Inst_cd'];
         $start_formno = $fetch_data['start_formno'];
         $end_formno = $fetch_data['end_formno'];
@@ -832,7 +815,7 @@ class Admission_11th_reg_model extends CI_Model
         //DebugBreak();
 
         $Inst_cd = $fetch_data['Inst_cd'];
-        $this->db->select('formNo,name, Fname, sub6,sub7,sub8, IsReAdm,regFee,RegProcessFee,RegFineFee,RegTotalFee,Spec,challan_overall,challanno');
+        $this->db->select('formNo,name, Fname, grp_cd, IsReAdm,regFee,RegProcessFee,RegFineFee,RegTotalFee,Spec,challan_overall,challanno');
         $this->db->from('Registration..IA_P1_Reg_Adm2016');
         if($fetch_data['option']==4)
         {
@@ -845,7 +828,7 @@ class Admission_11th_reg_model extends CI_Model
             $end_formno = $fetch_data['endformno'];
             $this->db->where('formNo >=', $start_formno);
             $this->db->where('formNo <=', $end_formno);
-            $this->db->where('Sch_cd', $Inst_cd);
+            $this->db->where('coll_cd', $Inst_cd);
             $this->db->where('IsAdmission', 1);
             $this->db->where('isdeleted', 0);
             $this->db->where('batch_id >' , 0);
@@ -853,30 +836,14 @@ class Admission_11th_reg_model extends CI_Model
          else  if($fetch_data['option']==6)
         {
             $grp_cd = $fetch_data['Grp_cd'];
-            $this->db->where(array('Sch_cd' => $Inst_cd));
+            $this->db->where(array('coll_cd' => $Inst_cd));
             $this->db->where('IsAdmission', 1);
             $this->db->where('isdeleted', 0);
             $this->db->where('batch_id >' , 0);
             
-            if($grp_cd == 7)
-            {
-                $sub_cd= 78;   
-                $this->db->where(array('grp_cd'=>1,'sub8'=>$sub_cd));  
-            }
-            else if($grp_cd == 8)
-            {
-                $sub_cd= 43;  
-                $this->db->where(array('grp_cd'=>1,'sub8'=>$sub_cd));  
-            }
-            else if ($grp_cd == 1  )
-            {
-                $sub_cd= 8; 
-                $this->db->where(array('grp_cd'=>1,'sub8'=>$sub_cd));  
-            }
-            else if ($grp_cd == 2 OR  $grp_cd== 5 )
-            {
-                $this->db->where(array('grp_cd' => $grp_cd)); 
-            }
+               
+                $this->db->where(array('grp_cd'=>$grp_cd,));  
+            
             
             
             
@@ -886,7 +853,7 @@ class Admission_11th_reg_model extends CI_Model
          else  if($fetch_data['option']==9)
         {
             $grp_cd = $fetch_data['Grp_cd'];
-            $this->db->where('Sch_cd' , $Inst_cd);
+            $this->db->where('coll_cd' , $Inst_cd);
             $this->db->where('IsAdmission',1);
             $this->db->where('isdeleted', 0);
             $this->db->where('batch_id >' , 0);
@@ -984,12 +951,12 @@ class Admission_11th_reg_model extends CI_Model
        //  $this->db->where('challan_overall',False);
        $inst_cd =  $info['Inst_Id'];
        // $this->db->order_by("challan_overall", "DESC");
-        $formno = $this->db->get_where('Registration..MA_P1_Reg_Adm2016', array('sch_cd' => $inst_cd,'challan_overall '=>0));
+        $formno = $this->db->get_where('Registration..IA_P1_Reg_Adm2016', array('coll_cd' => $inst_cd,'challan_overall '=>0));
         $rowcount = $formno->num_rows();
 
         if($rowcount > 0 )
         {
-        $query = $this->db->query("Admission_online..sp_gen_challanNo_overall $inst_cd");
+        $query = $this->db->query("Admission_online..sp_gen_challanNo_overall_11th $inst_cd");
         //$query = $this->db->insert('msadmissions2015', $data);//,'Fname' => $father_name,'BForm'=>$bay_form,'FNIC'=>$father_cnic,'Dob'=>$dob,'CellNo'=>$mob_number));
        //  $challanno =  $query->result_array();  
         }

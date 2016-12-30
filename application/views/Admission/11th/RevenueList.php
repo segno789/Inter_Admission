@@ -146,10 +146,11 @@
                       </div>
                         <div class="control-group">
                             <div class="controls controls-row">
-                            <label class="span1"></label>
+                           <!-- <label class="span1"></label>-->
                                <!-- <input type="submit" name="get_report" id="get_report"class="btn btn-large btn-info" value="Final Print of Return">
                                 <input type="submit" name="get_Proof" class="btn btn-large btn-info " id="get_Proof" value="Get Proof Print of Return">  -->
                                 <input type="submit" name="get_revenue" id="get_revenue" class="btn btn-large btn-info span2"  value="Print Revenue List">
+                                 <input type="submit" name="get_cutlist" id="get_cutlist" class="btn btn-large btn-success span2"  value="Print Cut List">
                             </div>
                         </div>
                         <div class="control-group">
