@@ -12,7 +12,7 @@
 
                     </div>
                     <div class="widget-body">
-                        <h1    style="text-align: center;"><font color="#000000" size="+1" >Note:-Last Date of Online Admission for 11th  without late fee is <b class="blink_text"> <?php echo SingleDateFee11th ;?></b></font></h1>
+                        <h1    style="text-align: center;"><font color="#000000" size="+1" >Note:-Last Date of Online Admission for 11th  without late fee is <b class="blink_text"> <?php echo SingleDateFee ;?></b></font></h1>
                         <h4>Welcome to Board of Intermediate &amp; Secondary Education, GUJRANWALA</br></br> &nbsp; Dashboard</h4>
                           <?php 
                           
