@@ -2273,27 +2273,25 @@ class Admission extends CI_Controller {
         $board ='';
         $data = array('data'=> "");
         $data = array(
-
-            $SSC_RNO = $_POST["txtMatRno"],
-            $Dob = $_POST["txtDob"],
-            $SSC_Year = $_POST["oldYear"],
-            $SSC_Session = $_POST["oldSess"],
-            $SSC_Board = $_POST["oldBrd_cd"]
+            'SSC_RNO' => $_POST["txtMatRno"],
+            'Dob' => $_POST["txtDob"],
+            'SSC_Year' => $_POST["oldYear"],
+            'SSC_Session' => $_POST["oldSess"],
+            'SSC_Board' => $_POST["oldBrd_cd"]
         );
-
-        $this->load->model('Admission_model');
-        $data = $this->Admission_model->Pre_Matric_data($data);
-
-
         $error_msg = '';
-
-        if(!$data){
-            $error_msg.='<span style="font-size: 16pt; color:red;">No Any Student Found Against Your Criteria</span>';
-            $mydata = array('data'=>$_POST,'norec'=>$error_msg);
-            $this->session->set_flashdata('matric_error',$mydata );
-            redirect('Admission/matric_default');
+        $this->load->model('Admission_model');
+        if($_POST["oldBrd_cd"] == 1)
+        {
+            $data = $this->Admission_model->Pre_Matric_data($data);
+            if(!$data)
+            {
+                $error_msg.='<span style="font-size: 16pt; color:red;">No Any Student Found Against Your Criteria</span>';
+                $mydata = array('data'=>$_POST,'norec'=>$error_msg);
+                $this->session->set_flashdata('matric_error',$mydata );
+                redirect('Admission/matric_default');
+            }
         }
-
 
         $board    = $data[0]['SSC_Board'];
         $oldclass    = $data[0]['SSC_CLASS'];
@@ -2310,7 +2308,7 @@ class Admission extends CI_Controller {
     public function Get_students_record()
     {
 
-       DebugBreak();
+       
         $mrollno = $_POST["txtMatRno"];
 
         $board   =  $_POST["oldBrd_cd"];
