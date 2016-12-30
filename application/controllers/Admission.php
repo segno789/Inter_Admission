@@ -2074,7 +2074,7 @@ class Admission extends CI_Controller {
     public function Pre_Inter_Data() 
     {       
 
-
+        //DebugBreak();     
 
         $this->load->library('session');
         $mrollno='';
@@ -2190,7 +2190,6 @@ class Admission extends CI_Controller {
             $mydata = array('data'=>$_POST,'error_msg'=>$error_msg,'exam_type'=>$exam_type);
             $this->session->set_flashdata('matric_error',$mydata);
             redirect('Admission/matric_default');
-
         }
         else if(($exam_type == 16) && !isset($CatType))
         {
@@ -2281,19 +2280,19 @@ class Admission extends CI_Controller {
         );
         $error_msg = '';
         $this->load->model('Admission_model');
-        if($_POST["oldBrd_cd"] == 1)
+
+        $data = $this->Admission_model->Pre_Matric_data($data);
+        if(!$data)
         {
-            $data = $this->Admission_model->Pre_Matric_data($data);
-            if(!$data)
-            {
-                $error_msg.='<span style="font-size: 16pt; color:red;">No Any Student Found Against Your Criteria</span>';
-                $mydata = array('data'=>$_POST,'norec'=>$error_msg);
-                $this->session->set_flashdata('matric_error',$mydata );
-                redirect('Admission/matric_default');
-            }
+            $error_msg.='<span style="font-size: 16pt; color:red;">No Any Student Found Against Your Criteria</span>';
+            $mydata = array('data'=>$_POST,'norec'=>$error_msg);
+            $this->session->set_flashdata('matric_error',$mydata );
+            redirect('Admission/matric_default');
         }
+
         $board    = $data[0]['SSC_Board'];
         $oldclass    = $data[0]['SSC_CLASS'];
+
         $brd_name=$this->Admission_model->Brd_Name($board);
         $data[0]['brd_name']= $brd_name[0]['Brd_Abr'] ;
         $data[0]['brd_cd']= $board;
@@ -2557,6 +2556,7 @@ class Admission extends CI_Controller {
         $AdmFee = $this->Admission_model->getrulefee($ispractical);
 
         $AdmFeeCatWise = '1700';
+        $Certificate = 550;
 
         $cat11 = 1; $cat12 = 1;
 
@@ -2577,7 +2577,7 @@ class Admission extends CI_Controller {
         }
         $today = date("d-m-Y");
         $dueDate = 0;
-        if($today > TripleDateFeeinter )
+        if(strtotime($today) > strtotime(TripleDateFeeinter) )
         {
             $now = time(); // or your date as well
             $your_date = strtotime(TripleDateFeeinter);
@@ -2654,23 +2654,18 @@ class Admission extends CI_Controller {
             'rno'=>@$_POST['oldrno'],
             'sess'=>$oldsess,
             'Iyear'=>@$_POST['oldyear'],
-
             'Brd_cd'=>@$_POST['oldboardid'],
-
-
-            'oldclass'=>10,//@$_POST['oldclass'],
-
-
+            'oldclass'=>10,
             'schm'=>1,
             'AdmProcessFee'=>$AdmFee[0]['Processing_Fee'],
             'AdmFee'=>$AdmFeeCatWise,
             'AdmTotalFee'=>$TotalAdmFee,
             'exam_type'=>$_POST['exam_type'],
-
             'picpath'=>@$_POST['pic'],
-
             'brd_name'=>@$_POST['oldboard'],
-            'AdmFine'=>$dueDate
+            'AdmFine'=>$dueDate,
+            'picname'=>@$_POST['picname'],
+            'certfee'=>$Certificate
         );
 
         //DebugBreak();
@@ -2687,6 +2682,8 @@ class Admission extends CI_Controller {
         else { 
             $data['picpath'] = array('upload_data' => $this->upload->data()); 
         } 
+
+        DebugBreak();
 
         $logedIn = $this->Admission_model->NewEnrolment_insert_Fresh($data);
 
@@ -2708,8 +2705,7 @@ class Admission extends CI_Controller {
             echo 'Data NOT Saved Successfully !';
         }
     }
-    public function NewEnrolment_insert() 
-    {
+    public function NewEnrolment_insert()  {
         $this->load->model('Admission_model');
         $this->load->library('session');
         $Inst_Id = 999999;
@@ -2937,7 +2933,7 @@ class Admission extends CI_Controller {
         {
             $ispractical =1;
         }
-        DebugBreak();
+        //DebugBreak();
         $AdmFee = $this->Admission_model->getrulefee($ispractical);
 
         $AdmFeeCatWise = '1700';
@@ -2975,8 +2971,6 @@ class Admission extends CI_Controller {
         {
             $Certificate =  550;
         }
-
-
 
         $today = date("d-m-Y");   $dueDate = 0;
 
@@ -3065,9 +3059,9 @@ class Admission extends CI_Controller {
             'AdmTotalFee'=>$TotalAdmFee,
             'exam_type'=>$_POST['exam_type'],
             'picpath'=>@$_POST['pic'],
-            'picname'=>@$_POST['picname'],
             'brd_name'=>@$_POST['oldboard'],
             'AdmFine'=>$dueDate,
+            'picname'=>@$_POST['picname'],
             'certfee'=>$Certificate
         );
 
@@ -3115,8 +3109,8 @@ class Admission extends CI_Controller {
         echo  json_encode($info);
 
     }
-    public function NewEnrolment_insert_Languages() 
-    {
+
+    public function NewEnrolment_insert_Languages() {
         //DebugBreak();
         $this->load->model('Admission_model');
         $this->load->library('session');
@@ -3295,8 +3289,8 @@ class Admission extends CI_Controller {
         } 
 
     }
-    public function formdownloaded()
-    {
+
+    public function formdownloaded(){
 
         //DebugBreak();
 
@@ -3310,8 +3304,7 @@ class Admission extends CI_Controller {
         $this->load->view('common/footer.php');
     }
 
-    public function matric_default()
-    {
+    public function matric_default(){
         // DebugBreak();
         $data = array(
             'isselected' => '3',
@@ -3331,8 +3324,7 @@ class Admission extends CI_Controller {
         $this->load->view('common/footer.php');
     }
 
-    public function getzone()
-    {
+    public function getzone(){
 
 
 
@@ -3347,8 +3339,7 @@ class Admission extends CI_Controller {
         echo json_encode($value);
     }
 
-    public function getcenter()
-    {
+    public function getcenter(){
 
         $data = array(
             'zoneCode' => $this->input->post('pvtZone'),
@@ -3361,8 +3352,7 @@ class Admission extends CI_Controller {
     }
 
 
-    public function frmvalidation_Fresh()
-    {
+    public function frmvalidation_Fresh(){
 
         $allinputdata['excep'] = '';
 
@@ -3579,8 +3569,7 @@ class Admission extends CI_Controller {
         echo json_encode($allinputdata);    
     }
 
-    function frmvalidation()
-    {
+    function frmvalidation(){
         //DebugBreak();
 
         $allinputdata['excep'] = '';
