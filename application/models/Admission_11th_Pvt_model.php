@@ -150,7 +150,7 @@ class Admission_11th_Pvt_model extends CI_Model
                 return  false;
             }
         }
-        DebugBreak();
+      
         // $sync= $this->load->database('sync', TRUE);
  
         // $this->db->trans_start();

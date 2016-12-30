@@ -32,6 +32,8 @@
 <script type="text/javascript">
 
     $(document).ready(function(){
+   
+        
  $('.mPageloader').hide();
         $("#pvtinfo_dist").change(function(){
             var distId =  $("#pvtinfo_dist").val();
@@ -77,8 +79,15 @@
 
         $("#pvtinfo_teh").change(function(){
             var tehId =  $("#pvtinfo_teh").val();
-            if(tehId == 0){
-                alert("Select Tehsil First");
+            
+             gender =  $("input[name=gender]").val() ;
+             if(gender == "" || gender == 0 || gender == undefined  || gender.length == undefined)
+            {
+                 alertify.error("Select Gender First");
+            }
+
+            else if(tehId == 0){
+                alertify.error("Select Zone First");
             }
             else{
 
@@ -87,7 +96,7 @@
                     type: "POST",
                     url: "<?php echo base_url(); ?>" + "index.php/Admission/getzone/",
                     dataType: 'json',
-                    data: {tehCode: tehId},
+                    data: {tehCode: tehId,'gend':gender},
                     beforeSend: function() {  $('.mPageloader').show(); },
                     complete: function() { $('.mPageloader').hide();},
                     success: function(json) {
@@ -114,20 +123,25 @@
 
         $("#pvtZone").change(function(){
 
-            debugger;
+            
             var tehId =  $("#pvtZone").val();
-            var gend = $("#gen").val();
-
-            if(tehId == 0){
-                alert("Select Zone First");
+            var gender = $("input[name=gender]").val() ;
+             if(gender == "" || gender == 0 || gender == undefined  || gender.length == undefined)
+            {
+                 alertify.error("Select Gender First");
             }
+
+            else if(tehId == 0){
+                alertify.error("Select Zone First");
+            }
+           
             else{
                 jQuery.ajax({
 
                     type: "POST",
                     url: "<?php echo base_url(); ?>index.php/Admission/getcenter/",
                     dataType: 'json',
-                    data: $("#myform").serialize(),
+                    data: {pvtZone: tehId,'gend':gender},
                     beforeSend: function() {  $('.mPageloader').show(); },
                     complete: function() { $('.mPageloader').hide();},
                     success: function(json) {

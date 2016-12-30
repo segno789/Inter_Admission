@@ -13,7 +13,7 @@
                         <div id="dt_example" class="example_alt_pagination">
                             <div class="info"  style="position:relative;margin:0;padding:0;overflow:hidden;">
                                 <!--FORM START-->
-                                <form enctype="multipart/form-data" id="ReturnStatus" name="ReturnStatus" onsubmit="return validateForm(this);" method="post" action="<?php echo base_url(); ?>/index.php/Admission/Pre_Inter_data">
+                                <form enctype="multipart/form-data" id="ReturnStatus" name="ReturnStatus" onsubmit="return validateForm(this);" method="post" action="<?php echo base_url(); ?>Admission/Pre_Inter_data">
                                     <table width="99%" class="tbl_form fresh_cand" >
                                         <tbody>
                                             <tr>
@@ -376,13 +376,6 @@
         }
     } 
 
-
+   
 </script>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-<script>
-    $( function() {
-        $( "#txtDob" ).datepicker({ dateFormat: 'dd-mm-yy', changeMonth: true, changeYear: true }).val();
-    } );
-</script>
