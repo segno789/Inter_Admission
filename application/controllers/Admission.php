@@ -2712,7 +2712,7 @@ class Admission extends CI_Controller {
         $this->load->model('Admission_model');
         $this->load->library('session');
         $Inst_Id = 999999;
-
+        
         //DebugBreak();
 
         $formno = $this->Admission_model->GetFormNo();
