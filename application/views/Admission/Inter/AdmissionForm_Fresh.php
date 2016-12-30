@@ -33,6 +33,7 @@ header("Pragma: no-cache");
                                     Candidate Name:
                                 </label>
                                 <div class="controls controls-row">
+
                                     <input class="span3"  type="text" id="cand_name" style="text-transform: uppercase;" name="cand_name" placeholder="Candidate Name" maxlength="60" readonly="readonly"  value="<?php echo $data[0]['name']; ?>">
                                     <label class="control-label span2" for="lblfather_name">
                                         Father's Name :
@@ -996,10 +997,7 @@ header("Pragma: no-cache");
 
                             function checks(){
 
-                                //debugger;
-
-                                var status  =  check_NewEnrol_validation_Fresh();
-
+                                var status  =  check_NewEnrol_validation();
                                 if(status == 0)
                                 {
                                     return false;    
@@ -1007,8 +1005,9 @@ header("Pragma: no-cache");
                                 else
                                 {
                                     $.ajax({
+
                                         type: "POST",
-                                        url: "<?php  echo site_url('Admission/frmvalidation_Fresh'); ?>",
+                                        url: "<?php  echo site_url('Admission/frmvalidation'); ?>",
                                         data: $("#myform").serialize() ,
                                         datatype : 'html',
                                         success: function(data)
@@ -1016,17 +1015,50 @@ header("Pragma: no-cache");
                                             var obj = JSON.parse (data);
                                             if(obj.excep == 'Success')
                                             {
-                                                return true;
+                                                $.ajax({
+                                                    type: "POST",
+                                                    url: "<?php echo base_url(); ?>" + "Admission/NewEnrolment_insert_Fresh/",
+                                                    data: $("#myform").serialize() ,
+                                                    datatype : 'html',
+                                                    beforeSend: function() {  $('.mPageloader').show(); },
+                                                    complete: function() { $('.mPageloader').hide();},
+                                                    success: function(data) {
+                                                        var obj = JSON.parse(data) ;
+                                                        if(obj.error ==  1)
+                                                        {
+                                                            window.location.href ='<?php echo base_url(); ?>Admission/formdownloaded/'+obj.formno; 
+                                                        }
+                                                        else
+                                                        {
+                                                            $('.mPageloader').hide();
+                                                            alertify.error(obj.error);
+                                                            return false; 
+                                                        }
+
+                                                    },
+                                                    error: function(request, status, error){
+                                                        $('.mPageloader').hide();
+                                                        alertify.error(request.responseText);
+                                                    }
+                                                });
+
+                                                return false
                                             }
+
                                             else
                                             {
+                                                $('.mPageloader').hide();
                                                 alertify.error(obj.excep);
-                                                return false;    
+                                                return false;     
                                             }
                                         }
                                     });
+
+                                    return false;     
                                 } 
                             }
+
+
                         </script>
 
                     </div>  

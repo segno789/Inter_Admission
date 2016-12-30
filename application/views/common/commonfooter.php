@@ -32,9 +32,9 @@
 <script type="text/javascript">
 
     $(document).ready(function(){
-   
-        
- $('.mPageloader').hide();
+
+
+        $('.mPageloader').hide();
         $("#pvtinfo_dist").change(function(){
             var distId =  $("#pvtinfo_dist").val();
             $('#pvtinfo_teh').empty();
@@ -79,11 +79,11 @@
 
         $("#pvtinfo_teh").change(function(){
             var tehId =  $("#pvtinfo_teh").val();
-            
-             gender =  $("input[name=gender]").val() ;
-             if(gender == "" || gender == 0 || gender == undefined  || gender.length == undefined)
+
+            gender =  $("input[name=gender]").val() ;
+            if(gender == "" || gender == 0 || gender == undefined  || gender.length == undefined)
             {
-                 alertify.error("Select Gender First");
+                alertify.error("Select Gender First");
             }
 
             else if(tehId == 0){
@@ -123,18 +123,18 @@
 
         $("#pvtZone").change(function(){
 
-            
+
             var tehId =  $("#pvtZone").val();
             var gender = $("input[name=gender]").val() ;
-             if(gender == "" || gender == 0 || gender == undefined  || gender.length == undefined)
+            if(gender == "" || gender == 0 || gender == undefined  || gender.length == undefined)
             {
-                 alertify.error("Select Gender First");
+                alertify.error("Select Gender First");
             }
 
             else if(tehId == 0){
                 alertify.error("Select Zone First");
             }
-           
+
             else{
                 jQuery.ajax({
 
@@ -230,6 +230,40 @@
             $('#mob_number').focus();   
             return status;  
         }
+
+        else if (!$('input[name=nationality]:checked').val() ) {   
+            alertify.error("Please Check Nationality") 
+            $('#nationality').focus();   
+            return status;        
+        }
+
+        else if (!$('input[name=gender]:checked').val() ) {   
+            alertify.error("Please Check Gender") 
+            $('#gender1').focus();   
+            return status;        
+        }
+
+
+        else if (!$('input[name=hafiz]:checked').val() ) {   
+            alertify.error("Please Check Hafiz-e-Quran") 
+            $('#hafiz1').focus();   
+            return status;        
+        }
+
+        else if (!$('input[name=religion]:checked').val() ) {   
+            alertify.error("Please Check Religion") 
+            $('#religion').focus();   
+            return status;        
+        }
+
+
+
+        else if (!$('input[name=UrbanRural]:checked').val() ) {   
+            alertify.error("Please Check Locality ") 
+            $('#UrbanRural1').focus();   
+            return status;        
+        }
+
 
         else if(MarkOfIdent == "" || MarkOfIdent == 0 || MarkOfIdent == undefined){
             alertify.error("Please Enter your Mark of Indentification") 
