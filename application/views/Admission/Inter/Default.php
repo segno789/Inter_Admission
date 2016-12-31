@@ -62,7 +62,7 @@
                         <hr />
                         <div class="info"  style="position:relative;margin:0;padding:0;overflow:hidden;">
                             <!--FORM START-->
-                            <form id="registration" name="registration" method="post" action="<?php base_url(); ?>Admission/">
+                            <form id="registration" name="registration" method="post" action="<?php base_url(); ?>Admission/checkFormNo_then_download">
                                 <table width="100%">
                                     <tr>
                                         <td width="50%">

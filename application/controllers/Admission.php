@@ -9,6 +9,8 @@ class Admission extends CI_Controller {
 
     public function index()
     {
+        //DebugBreak();
+
         $data = array(
             'isselected' => '3',
         );
@@ -41,45 +43,35 @@ class Admission extends CI_Controller {
             return('BOARD EMPLOYEE CHILD');
             else if ($spclty == 1 )
                 return('DISABLE');
-
-
     }
 
     private function set_barcode($code)
-    {
-        //DebugBreak()  ;
-        //load library
+    {                             
         $this->load->library('zend');
         //load in folder Zend
         $this->zend->load('Zend/Barcode');
-
 
         $file = Zend_Barcode::draw('code128','image', array('text' => $code,'drawText'=>false), array());
         //$code = $code;
         $store_image = imagepng($file,BARCODE_PATH."{$code}.png");
         return $code.'.png';
-
     }
 
     public function checkFormNo_then_download()
     {
         //DebugBreak();
+
         $formno_seg = $this->uri->segment(3);
-        $dob_seg = $this->uri->segment(4);
         if($formno_seg !=0){
             $formno = $formno_seg;     
-            //$dob = $dob_seg;
         }
         else{
             return true;
         }
 
-
-
-
         $this->load->model('Admission_model');
         $this->load->library('session');
-        // DebugBreak();
+
         $data = $this->Admission_model->get_formno_data($formno);
         if($data == false)
         {
@@ -128,9 +120,6 @@ class Admission extends CI_Controller {
             // DebugBreak();
             $Barcode = $data['formNo']."@".$data['class'].'@'.$data['sess'].'@'.$data["Iyear"];
             $image =  $this->set_barcode($Barcode);
-
-
-
 
             $pdf->Image(BARCODE_PATH.$image,2.9, 0.61  ,2.4,0.24,"PNG");
             //$data['PicPath']
@@ -2073,7 +2062,7 @@ class Admission extends CI_Controller {
 
     public function Pre_Inter_Data() 
     {       
-        DebugBreak();     
+        //DebugBreak();     
 
         $this->load->library('session');
         $mrollno='';
@@ -2131,7 +2120,7 @@ class Admission extends CI_Controller {
         if(!$data){
             $error_msg.='<span style="font-size: 16pt; color:red;">No Any Student Found Against Your Criteria</span>';
         }
-         
+
         $specialcase = $data['0']['Spl_Name'];
         $specialcode = $data['0']['spl_cd'];
         $exam_type =   $data['0']['exam_type'];
@@ -2276,7 +2265,7 @@ class Admission extends CI_Controller {
         $this->load->model('Admission_model');
 
         if( $_POST["oldBrd_cd"] != 1){
-            
+
             //Getting values
             $oldyear    = $data['SSC_Year'];
             $oldsess    = $data['SSC_Session'];
@@ -3021,9 +3010,10 @@ class Admission extends CI_Controller {
             $data['picpath'] = array('upload_data' => $this->upload->data()); 
         } 
 
-        //DebugBreak();
+
 
         $logedIn = $this->Admission_model->NewEnrolment_insert_Fresh($data);
+
 
         $info =  '';
         foreach($logedIn[0] as $key=>$val)
@@ -3045,7 +3035,7 @@ class Admission extends CI_Controller {
                 $info['formno'] = '';
             }
         }
-        echo  json_encode($info);
+        echo  json_encode($info);  
 
     }
 
@@ -3229,8 +3219,6 @@ class Admission extends CI_Controller {
         $_POST['category'] = $cattype;
 
         //$this->frmvalidation('Pre_Inter_Data',$data_error,0);
-
-
 
         $cat = $this->makecat($cattype,$examtype,$marksImp,$is11th);
         $per_grp = @$_POST['pregrp'];
@@ -3451,9 +3439,7 @@ class Admission extends CI_Controller {
             }
         }
         echo  json_encode($info);
-
     }
-
 
     public function NewEnrolment_insert_Languages() {
         //DebugBreak();

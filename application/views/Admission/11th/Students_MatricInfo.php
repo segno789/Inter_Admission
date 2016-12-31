@@ -113,6 +113,10 @@
             
                 <input type="submit" value="Next" id="proceedbtn" name="proceedbtn" onclick="return proceed11th();" class="btn btn-large btn-info offset4" style="width: 150px;">
                 <input type="button" value="Cancel" onclick="return CancelAlert();" class="btn btn-large btn-danger">
+                <br/>
+                <br/>
+                <br/>
+                <input type="submit" value="Apply for ADEEB & ALAM Languages Examination" id="proceedbtn_lang" name="proceedbtn_lang" onclick="return proceed11th_lang();" class="btn btn-large btn-success offset4">
            
         </div>
 
@@ -168,6 +172,19 @@ function CancelAlert()
         });
 
         return false;
+
+}
+function proceed11th_lang()
+{
+         var msg = "Are You Sure You want to Apply for Languages Examination?"
+        alertify.confirm(msg, function (e) {
+            if (e) {
+                window.location.href ='<?php echo base_url(); ?>Admission_11th_pvt/NewEnrolmentPVT_Lang';
+            } else {
+            }
+        });
+
+       
 
 }
     

@@ -53,7 +53,7 @@
     </tr>
     <tr>
         <td colspan="8"><div style="font-size:16px;font-weight:bold;text-align:center;">REVENUE FORM SHOWING DETAILS OF ADMISSIONS <br />
-                <?php echo class_for_9th_Adm ?> Class (SESSION <?php echo CURRENT_SESS1 ?>)
+                <?php echo class_for_11th_Adm ?> Class (SESSION <?php echo CURRENT_SESS ?>)
             </div> 
         </td>
     </tr>
@@ -137,28 +137,27 @@
             <td class="td"><strong><?php echo $vals['name'];?></strong></td>
             <td class="td"><strong><?php echo $vals['Fname'];?></strong></td>
             <?php
-          //  DebugBreak()  ;
+           // DebugBreak()  ;
             $grp_name = $vals["grp_cd"];
-            switch ($grp_name) {
-                case '1':
-                    //$grp_name = 'SCIENCE WITH BIOLOGY';
-                    $grp_name = 'SCIENCE';
-                    break;
-                case '7':
-                    $grp_name = 'SCIENCE';
-                    break;
-                case '8':
-                    $grp_name = 'SCIENCE';
-                    break;
-                case '2':
-                    $grp_name = 'Humanities';
-                    break;
-                case '5':
-                    $grp_name = 'Deaf and Dumb';
-                    break;
-                default:
-                    $grp_name = "No Group Selected.";
-            }
+              switch ($grp_name) {
+                                                        case '1':
+                                                            $grp_name = 'PRE-MEDICAL';
+                                                            break;
+                                                        case '2':
+                                                            $grp_name = 'PRE-ENGINEERING';
+                                                            break;
+                                                        case '3':
+                                                            $grp_name = 'HUMANITIES';
+                                                            break;
+                                                        case '4':
+                                                            $grp_name = 'GENERAL SCIENCE';
+                                                            break;
+                                                        case '5':
+                                                            $grp_name = 'COMMERCE';
+                                                            break;
+                                                        default:
+                                                            $grp_name = "No GROUP SELECTED.";
+                                                            }
             ?>
             <td class="td"><strong><?php echo $grp_name;?></strong></td>
 
