@@ -177,6 +177,91 @@ class Admission_11th_Pvt_model extends CI_Model
 
 
     }
+     public function Insert_NewEnorlement_lang($data)//$father_name,$bay_form,$father_cnic,$dob,$mob_number)  
+    {
+       
+        $name = strtoupper($data['name']);
+        $fname =strtoupper($data['Fname']);
+        $BForm = $data['bFormNo'];
+        $FNIC = $data['FNIC'];
+        $Dob = $data['dob'];
+        $dist = $data['dist'];
+        $teh = $data['teh'];
+        $zone = $data['zone'];
+        $CellNo = $data['MobNo'];
+        $medium = $data['medium'];
+        $Inst_Rno = strtoupper($data['Inst_Rno']);
+        $MarkOfIden =strtoupper($data['markOfIden']);
+        $Speciality = $data['Speciality'];
+        $nat = $data['IsPakistani'];
+        $sex = $data['sex'];
+        $IsHafiz = $data['IsHafiz'];
+        $rel = $data['IsMuslim'];
+        $addr =strtoupper($data['addr']) ;
+        $sub1=  $data['sub1'];
+        $sub2 = $data['sub2'];
+        $sub3 = $data['sub3'];
+        $sub4 = $data['sub4'];
+        $sub5 = $data['sub5'];
+        $sub6 = $data['sub6'];
+        $sub7 = $data['sub7'];
+
+        $sub1ap1 = $data['sub1ap1'];
+        $sub2ap1 = $data['sub2ap1'];
+        $sub3ap1 = $data['sub3ap1'];
+        $sub4ap1 = $data['sub4ap1'];
+        $sub5ap1 = $data['sub5ap1'];
+        $sub6ap1 = $data['sub6ap1'];
+        $sub7ap1 = $data['sub7ap1'];
+        $UrbanRural = $data['isRural'];
+        $Inst_cd = $data['Inst_cd'];
+        $formno = '';
+        $RegGrp = $data['RegGrp'];
+        $grp_cd = $RegGrp;
+        $iOldRno = @$data['old_RNo'];
+        $iOldYear = @$data['old_year'];
+        $iOldSess = @$data['old_sess'];
+        $IsReAdm = $data['IsReAdm'];
+        $IsReAdm = $data['IsReAdm'];
+        $lang_cat = $data['lang_cat'];
+        $lang_specialSub = $data['lang_specialSub'];
+       $Inst_Rno = '';
+         //   DebugBreak();
+        if($iOldRno ==  false)
+            $iOldRno =  0;
+        if($iOldYear ==  false)
+            $iOldYear =  0;
+        if($iOldSess ==  false)
+            $iOldSess =  0;
+        //  $pic_base_65 = $data['Image'];
+        //  DebugBreak();
+        //  DebugBreak();
+        // $sync= $this->load->database('sync', TRUE);
+ 
+        // $this->db->trans_start();
+        $query = $this->db->query(" Registration..IAP1AdmPvt_sp_insert_lang '$formno',11,2016,1,'$name','$fname','$BForm','$FNIC','$Dob','$CellNo',$medium,'$Inst_Rno','".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,2,$iOldRno,$iOldYear,$iOldSess,$IsHafiz,$Inst_cd,$UrbanRural,$RegGrp,$dist,$teh,$zone,'$picname',$IsReAdm,$lang_cat,$lang_specialSub");
+     
+      //  $this->db->trans_complete();
+
+       
+       
+
+        $rowcount = $query->num_rows();
+        if($rowcount > 0)
+        {
+            return $query->result_array();
+        }
+        else
+        {
+            // $this->savepics($formno,11,2016,1,$data['Image']) ;
+
+             return -1;
+           // return $error;
+        }
+        // return true;
+
+
+    }
     public function bay_form_fnic($bayformno,$fnic)
     {
         $query = $this->db->get_where('Registration..IA_P1_Reg_Adm2016',  array('BForm' => $bayformno,'FNIC' => $fnic,'IsDeleted'=>0));

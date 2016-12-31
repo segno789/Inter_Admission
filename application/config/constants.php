@@ -47,9 +47,9 @@ define('Year','2017');
 define('lastdate','30-01-2017');
 define('GET_PRIVATE_IMAGE_PATH', 'D:\xampp\htdocs\Inter_Admission\Uploads\2016\private\\');
 define('GET_PRIVATE_IMAGE_PATH_COPY', '');
-define('DIRPATH11th','D:/xampp/htdocs/Inter_Admission/Uploads/IS2016/regular/2510010001.jpg');
+//define('DIRPATH11th','D:/xampp/htdocs/Inter_Admission/Uploads/IS2016/regular/2510010001.jpg');
 define('DIRPATH11th','D:/xampp/htdocs/Inter_Admission/Uploads/IS2016/regular/'); 
-define('DIRPATH11th','D:/xampp/htdocs/Inter_Admission/Uploads/IS2016/regular/2510010001.jpg'); 
+//define('DIRPATH11th','D:/xampp/htdocs/Inter_Admission/Uploads/IS2016/regular/2510010001.jpg'); 
 
 define('Insert_sp_Languages','Admission_online..ISAdm2016_sp_insert_LANGUAGES'); // for insertion Inter supply private
 define('Insert_sp_matric_annual','Admission_online..MA_P1_Reg_Adm2016_sp_insert'); // for insertion matric Annual
@@ -68,12 +68,13 @@ define('session_year','2017-2019');
 define('TITLEHSSC','Online HSSC Annual Admission 2017');
 //define('SingleDateFee11th','03-10-2016');
 define('currdate','date("d-m-Y");');
-define('TripleDateFeeinter', '13-10-2016');define ('class_for_11th_Adm','11th');                                
+define('TripleDateFeeinter', '13-10-2016');
+define ('class_for_11th_Adm','11th');                                
 define('getinfo','admission_online..tblAdmissionDataForHSSC');
 define('getinfo_languages','admission_online..tblAdmissionDataLang');
+define('save_dir','D:/xampp/htdocs/Inter_Admission/Uploads/IS2016/regular/');
 
-
-define('CURRENT_SESS1','2016'); 
+//define('CURRENT_SESS1','2016'); 
 define('corr_bank_chall_class1','12th');
 define('CURRENT_SESS1','2017'); 
 
@@ -81,5 +82,5 @@ define('formprint_sp_11th','Registration..sp_form_data_11thAdm');    // for sele
 define('class_for_9th_Adm','11th');
 
 //===============10TH Regular Admission Matric challan varaible
-define('corr_bank_chall_class1','12th');
-define('CURRENT_SESS1','2016'); 
+//define('corr_bank_chall_class1','12th');
+//define('CURRENT_SESS1','2016'); 

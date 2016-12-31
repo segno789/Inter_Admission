@@ -286,7 +286,7 @@
                 return false;
             }
            
-            window.location.href='<?php  echo base_url(); ?>Admission/checkFormNo_then_download/'+formno;  
+            window.location.href='<?php  echo base_url(); ?>Admission_11th_pvt/checkFormNo_then_download/'+formno;  
         }
 
         function validateForm() {
