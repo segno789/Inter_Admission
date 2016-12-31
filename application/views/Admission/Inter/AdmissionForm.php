@@ -2724,9 +2724,6 @@ header("Pragma: no-cache");
                                 $(document.getElementById("father_cnic")).mask("99999-9999999-9", { placeholder: "_" });
                                 $(document.getElementById("mob_number")).mask("9999-9999999", { placeholder: "_" });
                             });
-
-
-
                             var max_file_size             = 20000; //allowed file size. (1 MB = 1048576)
                             var allowed_file_types         = ['image/jpeg', 'image/pjpeg']; //allowed file types
                             var result_output             = '#output'; //ID of an element for response output

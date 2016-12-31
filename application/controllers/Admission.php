@@ -2287,7 +2287,8 @@ class Admission extends CI_Controller {
             $this->load->view('common/commonfooter.php'); 
         }
 
-        else if( $_POST["oldBrd_cd"] == 1){
+        else if( $_POST["oldBrd_cd"] == 1)
+        {
 
             $data = $this->Admission_model->Pre_Matric_data($data);
             if(!$data)
@@ -4794,7 +4795,7 @@ class Admission extends CI_Controller {
         $config["thumbnail_prefix"]                = "thumb_"; //Normal thumb Prefix
         $config["destination_folder"]            = 'F:\xampp\htdocs\Inter_Admission\Uploads\2016\private\12th\\'; //upload directory ends with / (slash)
         $config["thumbnail_destination_folder"]    = ''; //upload directory ends with / (slash)
-        $config["upload_url"]                     = "../uploads/2016/private/11th/"; 
+        $config["upload_url"]                     = "../uploads/2016/private/12th/"; 
         $config["quality"]                         = 90; //jpeg quality
         $config["random_file_name"]                = true; //randomize each file name
 

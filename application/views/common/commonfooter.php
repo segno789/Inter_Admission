@@ -415,6 +415,7 @@
         var image = $('#image').val();
         var MarkOfIdent = $('#MarkOfIden').val();
         var Inst_Rno = $('#Inst_Rno').val();
+        var picname = $('#picname').val();
         var status = 0;
         var $img = $("#previewImg");
         var src = $img.attr("src");
@@ -431,13 +432,9 @@
         }
 
 
-        if(src == '') {
-            $img.addClass("highlight");
-            $img.css("border", "3px solid yellow");
-            $('#ErrMsg').show();  
-            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+        if(picname == '') {
             alertify.error("Please upload your Picture First.")
-            $img.focus(); 
+            $('#image').focus(); 
             return status;
         }
         else if(name == "" ||  name == undefined){

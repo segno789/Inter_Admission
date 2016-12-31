@@ -52,20 +52,16 @@
 
                     </div>
                     <div class="widget-body">
-
                         <form class="form-horizontal no-margin" action="<?php  echo base_url(); ?>Admission_11th_pvt/NewEnrolment_insert" method="post" enctype="multipart/form-data" id='admfrmID'>
-
                             <div class="control-group">
                                 <h4 class="span4">Personal Information :</h4>
                                 <label class="control-label span2" style="width: 411px;margin-left: -199px;">
-
                                     <img src="<?php echo base_url(); ?>assets/img/upalodimage.jpg" alt="" >
                                 </label>
                                 <div class="controls controls-row" id="output">
                                     <input type="hidden" class="span2 hidden" id="isReAdm" name="isReAdm" value="0">
                                     <input type="hidden" class="span2 hidden" id="picname" name="picname" value="">
                                     <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="<?php echo base_url(); ?>assets/img/profile.png" alt="Candidate Image">
-
 
                                 </div>
                             </div>
