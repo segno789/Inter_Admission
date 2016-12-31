@@ -2281,13 +2281,17 @@ class Admission extends CI_Controller {
         $error_msg = '';
         $this->load->model('Admission_model');
 
-        $data = $this->Admission_model->Pre_Matric_data($data);
-        if(!$data)
+        if($_POST["oldBrd_cd"] ==1)
         {
-            $error_msg.='<span style="font-size: 16pt; color:red;">No Any Student Found Against Your Criteria</span>';
-            $mydata = array('data'=>$_POST,'norec'=>$error_msg);
-            $this->session->set_flashdata('matric_error',$mydata );
-            redirect('Admission/matric_default');
+            $data = $this->Admission_model->Pre_Matric_data($data);
+            if(!$data)
+            {
+                $error_msg.='<span style="font-size: 16pt; color:red;">No Any Student Found Against Your Criteria</span>';
+                $mydata = array('data'=>$_POST,'norec'=>$error_msg);
+                $this->session->set_flashdata('matric_error',$mydata );
+                redirect('Admission/matric_default');
+            }
+
         }
 
         $board    = $data[0]['SSC_Board'];
