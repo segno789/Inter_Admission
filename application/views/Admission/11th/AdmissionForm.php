@@ -1,10 +1,7 @@
 <style type="">
-
-
     .form-wrap #output{
         margin: 10px 0;
     }
-
     .form-wrap .images {
         width: 100%;
         display: block;
@@ -38,7 +35,6 @@
         display:inline-block;
         color: #000000;
     }
-
 </style>
 <div class="dashboard-wrapper class wysihtml5-supported">
     <div class="left-sidebar">
@@ -607,7 +603,8 @@
 
                                     </select>
                                 </div>
-                            </div>    <div class="control-group">
+                            </div>    
+                            <div class="control-group">
                                 <label class="control-label span1" >
 
                                 </label>
