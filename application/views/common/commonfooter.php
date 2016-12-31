@@ -168,7 +168,8 @@
         }
     });
 
-    function check_NewEnrol_validation_Fresh(){
+    function check_NewEnrol_validation_Fresh()
+    {
 
         var inputimage = $("#inputFile").val();  
         var name =  $('#cand_name').val();
@@ -390,7 +391,8 @@
         return status;
     }
 
-    function check_NewEnrol_validation(){
+    function check_NewEnrol_validation()
+    {
 
         var name =  $('#cand_name').val();
         var dist_cd= $('#pvtinfo_dist option:selected').val();
@@ -510,7 +512,8 @@
         return status;
     }
 
-    function  check_NewEnrol_validation_Languages(){
+    function  check_NewEnrol_validation_Languages()
+    {
 
         var name =  $('#cand_name').val();
         var dist_cd= $('#pvtinfo_dist option:selected').val();

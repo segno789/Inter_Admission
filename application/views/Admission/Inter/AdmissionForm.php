@@ -2646,7 +2646,8 @@ header("Pragma: no-cache");
                                 });
                             });
 
-                            function checks(){
+                            function checks()
+                            {
 
                                 var status  =  check_NewEnrol_validation();
                                 if(status == 0)
