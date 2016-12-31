@@ -70,7 +70,9 @@ define('TITLEHSSC','Online HSSC Annual Admission 2017');
 define('currdate','date("d-m-Y");');
 define('TripleDateFeeinter', '13-10-2016');
 define ('class_for_11th_Adm','11th');                                
-define('getinfo','admission_online..tblAdmissionDataForHSSC');
+//define('getinfo','admission_online..tblAdmissionDataForHSSC');
+define('getinfo','admission_online..sp_Admission_HSSC_Annual');
+
 define('getinfo_languages','admission_online..tblAdmissionDataLang');
 define('save_dir','D:/xampp/htdocs/Inter_Admission/Uploads/IS2016/regular/');
 

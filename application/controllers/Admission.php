@@ -9,6 +9,8 @@ class Admission extends CI_Controller {
 
     public function index()
     {
+        //DebugBreak();
+
         $data = array(
             'isselected' => '3',
         );
@@ -41,45 +43,35 @@ class Admission extends CI_Controller {
             return('BOARD EMPLOYEE CHILD');
             else if ($spclty == 1 )
                 return('DISABLE');
-
-
     }
 
     private function set_barcode($code)
-    {
-        //DebugBreak()  ;
-        //load library
+    {                             
         $this->load->library('zend');
         //load in folder Zend
         $this->zend->load('Zend/Barcode');
-
 
         $file = Zend_Barcode::draw('code128','image', array('text' => $code,'drawText'=>false), array());
         //$code = $code;
         $store_image = imagepng($file,BARCODE_PATH."{$code}.png");
         return $code.'.png';
-
     }
 
     public function checkFormNo_then_download()
     {
         //DebugBreak();
+
         $formno_seg = $this->uri->segment(3);
-        $dob_seg = $this->uri->segment(4);
         if($formno_seg !=0){
             $formno = $formno_seg;     
-            //$dob = $dob_seg;
         }
         else{
             return true;
         }
 
-
-
-
         $this->load->model('Admission_model');
         $this->load->library('session');
-        // DebugBreak();
+
         $data = $this->Admission_model->get_formno_data($formno);
         if($data == false)
         {
@@ -128,9 +120,6 @@ class Admission extends CI_Controller {
             // DebugBreak();
             $Barcode = $data['formNo']."@".$data['class'].'@'.$data['sess'].'@'.$data["Iyear"];
             $image =  $this->set_barcode($Barcode);
-
-
-
 
             $pdf->Image(BARCODE_PATH.$image,2.9, 0.61  ,2.4,0.24,"PNG");
             //$data['PicPath']
@@ -2073,7 +2062,6 @@ class Admission extends CI_Controller {
 
     public function Pre_Inter_Data() 
     {       
-
         //DebugBreak();     
 
         $this->load->library('session');
@@ -2088,7 +2076,7 @@ class Admission extends CI_Controller {
         if($this->session->flashdata('NewEnrolment_error'))
         {
             $data = array('data'=>$this->session->flashdata('NewEnrolment_error'));  
-            $mrollno  = @$data['data']['matRno_hidden'];// $_POST["txtMatRno"];
+            $mrollno  = @$data['data']['matRno_hidden'];
             $hsscrno  = @$data['data']['oldrno'];
             $oldClass = @$data['data']['oldClass'];
             $iyear    = @$data['data']['InterYear_hidden'];
@@ -2132,10 +2120,6 @@ class Admission extends CI_Controller {
         if(!$data){
             $error_msg.='<span style="font-size: 16pt; color:red;">No Any Student Found Against Your Criteria</span>';
         }
-
-        //DebugBreak();
-
-        $picpathdb = base_url() . $data['0']['picpath'];
 
         $specialcase = $data['0']['Spl_Name'];
         $specialcode = $data['0']['spl_cd'];
@@ -2260,8 +2244,7 @@ class Admission extends CI_Controller {
     }
     public function Pre_Matric_data()
     {
-
-        //DebugBreak();
+        //DebugBreak();                     
 
         $this->load->library('session');
         $SSC_RNO = '';
@@ -2281,37 +2264,55 @@ class Admission extends CI_Controller {
         $error_msg = '';
         $this->load->model('Admission_model');
 
-        $data = $this->Admission_model->Pre_Matric_data($data);
-        if(!$data)
-        {
-            $error_msg.='<span style="font-size: 16pt; color:red;">No Any Student Found Against Your Criteria</span>';
-            $mydata = array('data'=>$_POST,'norec'=>$error_msg);
-            $this->session->set_flashdata('matric_error',$mydata );
-            redirect('Admission/matric_default');
+        if( $_POST["oldBrd_cd"] != 1){
+
+            //Getting values
+            $oldyear    = $data['SSC_Year'];
+            $oldsess    = $data['SSC_Session'];
+            $oldrno    = $data['SSC_RNO'];
+            $oldboard = $_POST["oldBrd_cd"];
+
+            //posting values to form
+            $data[0]['SSC_RNO']     = $oldrno;
+            $data[0]['SSC_Year']    = $oldyear;
+            $data[0]['SSC_Session'] = $oldsess;
+            $brd_name=$this->Admission_model->Brd_Name($oldboard);
+            $data[0]['brd_name']= $brd_name[0]['Brd_Abr'] ;
+
+            $this->load->view('common/commonheader.php');        
+            $this->load->view('Admission/Inter/OtherBoard.php', array('data'=>$data));
+            $this->load->view('common/commonfooter.php'); 
         }
 
-        $board    = $data[0]['SSC_Board'];
-        $oldclass    = $data[0]['SSC_CLASS'];
+        else if( $_POST["oldBrd_cd"] == 1){
 
-        $brd_name=$this->Admission_model->Brd_Name($board);
-        $data[0]['brd_name']= $brd_name[0]['Brd_Abr'] ;
-        $data[0]['brd_cd']= $board;
-        $data[0]['oldclass']= $oldclass;
+            $data = $this->Admission_model->Pre_Matric_data($data);
+            if(!$data)
+            {
+                $error_msg.='<span style="font-size: 16pt; color:red;">No Any Student Found Against Your Criteria</span>';
+                $mydata = array('data'=>$_POST,'norec'=>$error_msg);
+                $this->session->set_flashdata('matric_error',$mydata );
+                redirect('Admission/matric_default');
+            }
 
-        $this->load->view('common/commonheader.php');        
-        $this->load->view('Admission/Inter/AdmissionForm_Fresh.php', array('data'=>$data));
-        $this->load->view('common/commonfooter.php');
+            $board    = $data[0]['SSC_Board'];
+            $oldclass    = $data[0]['SSC_CLASS'];
+
+            $brd_name=$this->Admission_model->Brd_Name($board);
+            $data[0]['brd_name']= $brd_name[0]['Brd_Abr'] ;
+            $data[0]['brd_cd']= $board;
+            $data[0]['oldclass']= $oldclass;
+
+            $this->load->view('common/commonheader.php');        
+            $this->load->view('Admission/Inter/AdmissionForm_Fresh.php', array('data'=>$data));
+            $this->load->view('common/commonfooter.php');
+        }
     }
     public function Get_students_record()
     {
-
-
         $mrollno = $_POST["txtMatRno"];
-
         $board   =  $_POST["oldBrd_cd"];
-
         $year    =  $_POST["oldYear"];
-
         $session =$_POST["oldSess"];
 
         $data = array('mrollno'=>"$mrollno",'board'=>$board,'year'=>$year,'session'=>$session);
@@ -2388,8 +2389,9 @@ class Admission extends CI_Controller {
         echo   json_encode($error)  ;
 
     }
-    public function NewEnrolment_insert_Fresh()
-    {
+
+    public function NewEnrolment_insert_Fresh_OtherBoard(){
+
         //DebugBreak();
 
         $this->load->model('Admission_model');
@@ -2398,7 +2400,331 @@ class Admission extends CI_Controller {
 
         $Inst_Id = 999999;
 
-        $formno = $this->Admission_model->GetFormNo();
+        $formno = '';//$this->Admission_model->GetFormNo();
+
+        $allinputdata = array('cand_name'=>@$_POST['cand_name'],
+            'father_name'=>@$_POST['father_name'],
+            'bay_form'=>@$_POST['bay_form'],
+            'father_cnic'=>@$_POST['father_cnic'],
+            'mob_number'=>@$_POST['mob_number'],
+            'medium'=>@$_POST['medium'],
+            'speciality'=>@$_POST['speciality'],
+            'MarkOfIden'=>@$_POST['MarkOfIden'],
+            'medium'=>@$_POST['medium'],
+            'nationality'=>@$_POST['nationality'],
+            'gender'=>@$_POST['gender'],
+            'hafiz'=>@$_POST['hafiz'],
+            'religion'=>@$_POST['religion'],
+            'std_group'=>@$_POST['std_group'],
+            'address'=>@$_POST['address'],
+            'UrbanRural'=>@$_POST['UrbanRural'],
+            'dist'=>@$_POST['pvtinfo_dist'],
+            'teh'=>@$_POST['pvtinfo_teh'],
+            'zone'=>@$_POST['pvtZone'],
+
+            'oldrno'=>@$_POST['oldSSC_Rno'],
+            'oldyear'=>@$_POST['oldSSC_Year'],
+            'oldsess'=>@$_POST['oldSSC_Session'],
+            'oldboard'=>@$_POST['oldSSC_Board'],
+            'oldClass'=>10,
+
+            'sub1'=>@$_POST['sub1'],
+            'sub2'=>@$_POST['sub2'],
+            'sub3'=>@$_POST['sub3'],
+            'sub4'=>@$_POST['sub4'],
+            'sub5'=>@$_POST['sub5'],
+            'sub6'=>@$_POST['sub6'],
+            'sub7'=>@$_POST['sub7'],
+
+            'sub1p2'=>@$_POST['sub1p2'],
+            'sub2p2'=>@$_POST['sub2p2'],
+            'sub3p2'=>@$_POST['sub3p2'],
+            'sub4p2'=>@$_POST['sub4p2'],
+            'sub5p2'=>@$_POST['sub5p2'],
+            'sub6p2'=>@$_POST['sub6p2'],
+            'sub7p2'=>@$_POST['sub7p2'],
+
+        );
+
+        $sub1 = 0; $sub2 = 0;$sub3 = 0; $sub4 = 0; $sub5 = 0; $sub6 = 0; $sub7 = 0; $sub8=0; $sub4a=0; $sub5a =0; $sub6a = 0; $sub7a = 0;     
+        $sub1ap1 = 0;$sub2ap1 = 0;$sub3ap1 = 0;$sub4ap1 = 0;$sub5ap1 = 0;$sub6ap1 = 0;$sub7ap1 = 0;
+        $sub1ap2 = 0;$sub2ap2 = 0;$sub3ap2 = 0;$sub4ap2 = 0;$sub5ap2 = 0;$sub6ap2 = 0;$sub7ap2 = 0;$sub8ap2 = 0;
+
+        $grp_cd = $this->input->post('std_group');
+
+        if(@$_POST['sub1'] != 0)
+        {
+            $sub1ap1 = 1; 
+            $sub1 =  $_POST['sub1'];   
+            $is11th = 1;
+        }
+        if(@$_POST['sub2'] != 0)
+        {
+            $sub2ap1 = 1;    
+            $sub2 =  $_POST['sub2'];
+            $is11th = 1;
+        }
+        if(@$_POST['sub3'] != 0)
+        {
+            $sub3ap1 = 1;   
+            $sub3 =  $_POST['sub3'];
+            $is11th = 1;
+        }
+        if(@$_POST['sub4'] != 0)
+        {
+            $sub4ap1 = 1;    
+            $sub4 =  $_POST['sub4'];
+            $is11th = 1;
+        }
+        if(@$_POST['sub5'] != 0)
+        {
+            $sub5ap1 = 1;    
+            $sub5 =  $_POST['sub5'];
+            $is11th = 1;
+        }
+        if(@$_POST['sub6'] != 0)
+        {
+            $sub6ap1 = 1;    
+            $sub6 =  $_POST['sub6'];
+            $is11th = 1;
+        }
+        if(@$_POST['sub7'] != 0)
+        {
+            $sub7ap1 = 1;    
+            $sub7 =  $_POST['sub7'];
+            $is11th = 1;
+        }
+        if(@$_POST['sub3p2'] != 0)
+        {
+            $sub8ap2 = 1;    
+            $sub8 =  @$_POST['sub3p2'];
+
+        }
+
+        if(@$_POST['sub4p2'] != 0)
+        {
+            $sub4ap2 = 1;    
+            $sub4 =  @$_POST['sub4p2'];
+        }
+
+        if(@$_POST['sub5p2'] != 0 && $grp_cd == 5)
+        {
+            $sub5ap2 = 1;    
+            $sub5a =  @$_POST['sub5p2'];
+        }
+        else if(@$_POST['sub5p2'] != 0 && $grp_cd != 5)
+        {
+            $sub5ap2 = 1;    
+            $sub5 =  @$_POST['sub5p2']; 
+        }
+        if(@$_POST['sub6p2'] != 0 && $grp_cd == 5)
+        {
+            $sub6ap2 = 1;    
+            $sub6a =  @$_POST['sub6p2'];
+
+        }
+        else if(@$_POST['sub6p2'] != 0 && $grp_cd != 5)
+        {
+            $sub6ap2 = 1;    
+            $sub6 =  @$_POST['sub6p2'];
+        }
+        if(@$_POST['sub7p2'] != 0  && $grp_cd == 5)
+        {
+            $sub7ap2 = 1;    
+            $sub7a =  @$_POST['sub7p2'];
+
+        }
+        else if(@$_POST['sub7p2'] != 0  && $grp_cd != 5)
+        {
+            $sub7ap2 = 1;    
+            $sub7 =  @$_POST['sub7p2'];
+
+        }
+
+        if(@$_POST['sub1p2'] != 0)
+        {
+            $sub1ap2 = 1; 
+            $sub1 =  $_POST['sub1p2'];  
+        }
+        if(@$_POST['sub2p2'] != 0)
+        {
+            $sub2ap2 = 1; 
+            $sub2 =  $_POST['sub2p2'];    
+        }
+
+        $ispractical = 0;
+
+        $Speciality = $this->input->post('speciality');
+
+        $AdmFee = $this->Admission_model->getrulefee($ispractical);
+
+        $AdmFeeCatWise = '1700';
+        $Certificate = 550;
+
+        $cat11 = 1; $cat12 = 1;
+
+        if($Speciality>0)
+        {
+            if($Speciality ==2 && Session ==2 )
+            {
+                $AdmFeeCatWise = $AdmFeeCatWise;    
+            }
+            else
+            {
+                $AdmFeeCatWise = 0;    
+            }
+        }
+        else
+        {
+            $AdmFeeCatWise = $AdmFeeCatWise;
+        }
+        $today = date("d-m-Y");
+        $dueDate = 0;
+        if(strtotime($today) > strtotime(TripleDateFeeinter) )
+        {
+            $now = time(); // or your date as well
+            $your_date = strtotime(TripleDateFeeinter);
+            $datediff = $now - $your_date;
+            $days = floor($datediff/(60*60*24));
+            $dueDate = $days*500;
+        }
+        $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise + $dueDate;  
+
+        $oldsess = @$_POST['oldsess'];
+
+        if($oldsess == 'Annual'){
+            $oldsess =  1;    
+        }
+        else if($oldsess == 'Supplementary'){
+            $oldsess =  2;    
+        }
+
+        $addre =  str_replace("'", "", $this->input->post('address'));
+        $MarkOfIden =  str_replace("'", "", $this->input->post('MarkOfIden'));
+
+        $data = array(
+            'name' =>$this->input->post('cand_name'),
+            'Fname' =>$this->input->post('father_name'),
+            'BForm' =>$this->input->post('bay_form'),
+            'FNIC' =>$this->input->post('father_cnic'),
+            'MobNo' =>$this->input->post('mob_number'),
+            'medium' =>$this->input->post('medium'),
+            'Inst_Rno' =>$this->input->post('Inst_Rno'),
+            'markOfIden' =>$MarkOfIden,
+            'Speciality' => ($Speciality),
+            'nat' =>$this->input->post('nationality'),
+            'sex' =>$this->input->post('gender'),
+            'IsHafiz' =>$this->input->post('hafiz'),
+            'rel' =>$this->input->post('religion'),
+            'addr' =>$addre,
+            'grp_cd' => $grp_cd,
+            'sub1' =>$sub1,
+            'sub2' =>$sub2,
+            'sub3' =>$sub3,
+            'sub4' =>$sub4,
+            'sub5' =>$sub5,
+            'sub6' =>$sub6,
+            'sub7' => $sub7,
+            'sub8' =>$sub8,
+            'sub5a'=>$sub5a,
+            'sub6a'=>$sub6a,
+            'sub7a'=>$sub7a,
+            'sub1ap1' => ($sub1ap1),
+            'sub2ap1' => ($sub2ap1),
+            'sub3ap1' => ($sub3ap1),
+            'sub4ap1' => ($sub4ap1),
+            'sub5ap1' => ($sub5ap1),
+            'sub6ap1' => ($sub6ap1),
+            'sub7ap1' => ($sub7ap1),
+            'sub1ap2' => ($sub1ap2),
+            'sub2ap2' => ($sub2ap2),
+            'sub3ap2' => ($sub3ap2),
+            'sub4ap2' => ($sub4ap2),
+            'sub5ap2' => ($sub5ap2),
+            'sub6ap2' => ($sub6ap2),
+            'sub7ap2' => ($sub7ap2),
+            'sub8ap2' => ($sub8ap2),
+            'RuralORUrban' =>$this->input->post('UrbanRural'),
+            'Inst_cd' =>($Inst_Id),
+            'FormNo' =>($formno),
+            'cat11' =>$cat11,
+            'cat12' =>$cat12,
+            'dist'=>@$_POST['pvtinfo_dist'],
+            'teh'=>@$_POST['pvtinfo_teh'],
+            'zone'=>@$_POST['pvtZone'],
+
+
+            'rno'=>@$_POST['oldSSC_Rno'],
+            'Iyear'=>@$_POST['oldSSC_Year'],
+            'sess'=>@$_POST['oldSSC_Session'],
+            'Brd_cd'=>@$_POST['oldSSC_Board'],
+            'oldClass'=>10,
+
+
+
+
+
+            'schm'=>1,
+            'AdmProcessFee'=>$AdmFee[0]['Processing_Fee'],
+            'AdmFee'=>$AdmFeeCatWise,
+            'AdmTotalFee'=>$TotalAdmFee,
+            'exam_type'=>$_POST['exam_type'],
+            'picpath'=>@$_POST['pic'],
+            'brd_name'=>@$_POST['oldboard'],
+            'AdmFine'=>$dueDate,
+            'picname'=>@$_POST['picname'],
+            'certfee'=>$Certificate
+        );
+
+        $config['upload_path']   = PRIVATE_IMAGE_PATH_FRESH;
+        $config['allowed_types'] = 'jpeg|jpg';              
+        $config['file_name']    = $formno;
+
+        $this->load->library('upload', $config);
+
+        if ( ! $this->upload->do_upload('inputFile')) {
+            $error = array('error' => $this->upload->display_errors()); 
+        }
+        else { 
+            $data['picpath'] = array('upload_data' => $this->upload->data()); 
+        } 
+
+        $logedIn = $this->Admission_model->NewEnrolment_insert_Fresh_OtherBoard($data);
+
+        $info =  '';
+        foreach($logedIn[0] as $key=>$val)
+        {
+            if($key == 'formno')
+            {
+                if($logedIn[0]['tempath'] != '')
+                {
+                    $oldpath =  GET_PRIVATE_IMAGE_PATH.'\12th'.$logedIn[0]['tempath'];
+                    $newpath =  GET_PRIVATE_IMAGE_PATH.'\12th'.$val.'.jpg';
+                    $err = rename($oldpath,$newpath); 
+                }
+                $info['error'] = 1;
+                $info['formno'] = $val;
+            }
+            else if($key == 'error')
+            {
+                $info['error'] = $val;
+                $info['formno'] = '';
+            }
+        }
+        echo  json_encode($info);
+
+    }
+
+    public function NewEnrolment_insert_Fresh() {
+        //DebugBreak();
+
+        $this->load->model('Admission_model');
+
+        $this->load->library('session');
+
+        $Inst_Id = 999999;
+
+        $formno = '';//$this->Admission_model->GetFormNo();
 
         $allinputdata = array('cand_name'=>@$_POST['cand_name'],
             'father_name'=>@$_POST['father_name'],
@@ -2683,28 +3009,35 @@ class Admission extends CI_Controller {
             $data['picpath'] = array('upload_data' => $this->upload->data()); 
         } 
 
-        DebugBreak();
+
 
         $logedIn = $this->Admission_model->NewEnrolment_insert_Fresh($data);
 
-        if($logedIn != false)
+
+        $info =  '';
+        foreach($logedIn[0] as $key=>$val)
         {
-            $allinputdata = "";
-            $allinputdata['excep'] = 'success';
-            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-            $msg = $formno;                                           
-            redirect('Admission/formdownloaded/'.$formno);
+            if($key == 'formno')
+            {
+                if($logedIn[0]['tempath'] != '')
+                {
+                    $oldpath =  GET_PRIVATE_IMAGE_PATH.'\12th'.$logedIn[0]['tempath'];
+                    $newpath =  GET_PRIVATE_IMAGE_PATH.'\12th'.$val.'.jpg';
+                    $err = rename($oldpath,$newpath); 
+                }
+                $info['error'] = 1;
+                $info['formno'] = $val;
+            }
+            else if($key == 'error')
+            {
+                $info['error'] = $val;
+                $info['formno'] = '';
+            }
         }
-        else
-        {     
-            $allinputdata = "";
-            $data_error['excep'] = 'An error has occoured. Please try again later. ';
-            $this->session->set_flashdata('NewEnrolment_error',$data_error);
-            redirect('Admission/Pre_Inter_Data/');
-            return;
-            echo 'Data NOT Saved Successfully !';
-        }
+        echo  json_encode($info);  
+
     }
+
     public function NewEnrolment_insert()  {
         $this->load->model('Admission_model');
         $this->load->library('session');
@@ -2885,8 +3218,6 @@ class Admission extends CI_Controller {
         $_POST['category'] = $cattype;
 
         //$this->frmvalidation('Pre_Inter_Data',$data_error,0);
-
-
 
         $cat = $this->makecat($cattype,$examtype,$marksImp,$is11th);
         $per_grp = @$_POST['pregrp'];
@@ -3107,7 +3438,6 @@ class Admission extends CI_Controller {
             }
         }
         echo  json_encode($info);
-
     }
 
     public function NewEnrolment_insert_Languages() {
@@ -3115,7 +3445,7 @@ class Admission extends CI_Controller {
         $this->load->model('Admission_model');
         $this->load->library('session');
 
-        $formno = $this->Admission_model->GetFormNo_Languages();
+        $formno = '';//$this->Admission_model->GetFormNo_Languages();
         $sub1 = 0;        $sub2 = 0;        $sub3 = 0;        $sub4 = 0;        $sub5 = 0;        $sub6 = 0;      
         $sub1ap1 = 0;        $sub2ap1 = 0;        $sub3ap1 = 0;        $sub4ap1 = 0;        $sub5ap1 = 0;        $sub6ap1 = 0;         
 
@@ -3266,28 +3596,29 @@ class Admission extends CI_Controller {
 
         }
 
-        //  DebugBreak();
-        // $this->frmvalidation('Pre_Inter_Data',$data_error,0);
         $logedIn = $this->Admission_model->Insert_NewEnorlement_Languages($data);
-        if($logedIn != false)
-        {
-            $allinputdata = "";
-            $allinputdata['excep'] = 'success';
-            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-            $msg = $formno;                                           
-            redirect('Admission/formdownloaded/'.$formno);
-        }
-        else
-        {     
-            $allinputdata = "";
-            $data_error['excep'] = 'An error has occoured. Please try again later. ';
-            $this->session->set_flashdata('NewEnrolment_error',$data_error);
-            redirect('Admission/Pre_Inter_Data/');
-            // redirect('Admission');
-            return;
-            echo 'Data NOT Saved Successfully !';
-        } 
 
+        $info =  '';
+        foreach($logedIn[0] as $key=>$val)
+        {
+            if($key == 'formno')
+            {
+                if($logedIn[0]['tempath'] != '')
+                {
+                    $oldpath =  GET_PRIVATE_IMAGE_PATH.'\12th'.$logedIn[0]['tempath'];
+                    $newpath =  GET_PRIVATE_IMAGE_PATH.'\12th'.$val.'.jpg';
+                    $err = rename($oldpath,$newpath); 
+                }
+                $info['error'] = 1;
+                $info['formno'] = $val;
+            }
+            else if($key == 'error')
+            {
+                $info['error'] = $val;
+                $info['formno'] = '';
+            }
+        }
+        echo  json_encode($info);
     }
 
     public function formdownloaded(){
@@ -3325,8 +3656,6 @@ class Admission extends CI_Controller {
     }
 
     public function getzone(){
-
-
 
         $data = array(
             'tehCode' => $this->input->post('tehCode'),
