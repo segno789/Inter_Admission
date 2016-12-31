@@ -38,19 +38,27 @@ class Admission_model extends CI_Model
         {
             $query = $this->db->get_where(getinfo_languages, array('rno' => $data['hsscrno'], 'Iyear' => $data['iYear'], 'Sess'=>$data['session']));
         }
-        else if ($data['iYear']<=2014)
-        {
-            $query = $this->db->query("matric_new..Inter_Results '".$data['hsscrno']."','".$data['hsscclass']."','".$data['iYear']."','".$data['session']."'");
-        }
+
         else
         {
-            $tblname =  getinfo;
+            $data = array(
+                'rno'   => $data['hsscrno'],
+                'class' => $data['hsscclass'],
+                'Iyear' => $data['iYear'],
+                'sess'  =>$data['session'],
+                'brd_cd'=>$data['board'],
+                'matRno'=>$data['sscrno']
+            );
 
-            // $query = $this->db->query("SELECT * FROM $tblname WHERE matRno = '".$data['sscrno']."' AND rno = '".$data['hsscrno']."' AND class = '".$data['hsscclass']."' AND Iyear = '".$data['iYear']."' AND sess = '".$data['session']."'   AND IntBrd_cd = '".$data['board']."' AND iyear <> 2016 Class <> 11");
+            $rno    = $data['rno'];
+            $class  = $data['class'];
+            $Iyear  = $data['Iyear'];
+            $sess   = $data['sess'];
+            $board  = $data['brd_cd'];
+            $matRno = $data['matRno'];
 
-            $query = $this->db->get_where( getinfo, array('matRno'=>$data['sscrno'],'rno' => $data['hsscrno'], 'class' => $data['hsscclass'], 'Iyear' => $data['iYear'], 'sess'=>$data['session'],'IntBrd_cd'=>$data['board']));
+            $query = $this->db->query("admission_online..sp_Admission_HSSC_Annual $rno, $class, $Iyear, $sess, $board, $matRno, 1");
         }
-
 
         $rowcount = $query->num_rows();
         if($rowcount > 0)
@@ -230,7 +238,7 @@ class Admission_model extends CI_Model
         $picpath = $data['picpath']['upload_data']['full_path'];
 
         $IsNewPic = 1;
-        
+
         if($picpath == '')
         {
             $temppath = $data['picname'];
@@ -529,7 +537,7 @@ class Admission_model extends CI_Model
         $tehcd = $data['tehCode'];
         $gend = $data['gend'];
         $query = $this->db->get_where('matric_new..tblZones', array('mYear' => 2016,'Class' => 12,'Sess'=>1, 'teh_cd' => $tehcd));
-        
+
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {

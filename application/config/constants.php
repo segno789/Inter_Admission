@@ -74,7 +74,9 @@ define('TripleDateFee', '15-03-2017');
                                                                                                  
 define('TripleDateFeeinter', '15-03-2017');
 define ('class_for_11th_Adm','11th');                                
-define('getinfo','admission_online..tblAdmissionDataForHSSC');
+//define('getinfo','admission_online..tblAdmissionDataForHSSC');
+define('getinfo','admission_online..sp_Admission_HSSC_Annual');
+
 define('getinfo_languages','admission_online..tblAdmissionDataLang');
 
 

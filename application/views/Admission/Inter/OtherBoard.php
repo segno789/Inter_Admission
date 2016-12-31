@@ -132,8 +132,38 @@ header("Pragma: no-cache");
                                     <textarea style="height:150px; text-transform: uppercase;"  id="address" class="span8" name="address" required="required"></textarea>
                                 </div>
                             </div>
+                            <hr>
+
+                            <div class="control-group">
+                                <h4 class="span4">Old Exam Information :</h4>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label span1" >
+                                    SSC Roll No :
+                                </label>
+                                <div class="controls controls-row">
+                                    <input class="span3" type="text" readonly="readonly" id="oldrno" style="text-transform: uppercase;" name="oldrno" value="<?php  echo  $data['0']['SSC_RNO']; ?>" required="required" maxlength="60" >
+                                    <label class="control-label span2" >
+                                        SSC Year:
+                                    </label> 
+                                    <input type="text" class="span3" name="oldyear" id = "oldyear" readonly="readonly" value="<?php  echo $data['0']['SSC_Year']; ?>"/> 
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label span1" >
+                                    Session :
+                                </label>
+                                <div class="controls controls-row">
+                                    <input type="text" class="span3" id="oldsess" name="oldsess" readonly="readonly" value="<?php echo $data['0']['SSC_Session'] == 1 ? "Annual" :"Supplementary"; ?>"/> 
+                                    <label class="control-label span2" >
+                                        Board:
+                                    </label> 
+                                    <input type="text" class="span3" id="oldboard" name="oldboard" readonly="readonly" value="<?php echo $data[0]['brd_name'];?>"/>     
+                                </div>
+                            </div>
 
                             <hr>
+
                             <div class="control-group">
                                 <h4 class="span3">Exam Proposed Center Information :</h4>
                                 <div class="controls controls-row">

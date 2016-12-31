@@ -2073,8 +2073,7 @@ class Admission extends CI_Controller {
 
     public function Pre_Inter_Data() 
     {       
-
-        //DebugBreak();     
+        DebugBreak();     
 
         $this->load->library('session');
         $mrollno='';
@@ -2088,7 +2087,7 @@ class Admission extends CI_Controller {
         if($this->session->flashdata('NewEnrolment_error'))
         {
             $data = array('data'=>$this->session->flashdata('NewEnrolment_error'));  
-            $mrollno  = @$data['data']['matRno_hidden'];// $_POST["txtMatRno"];
+            $mrollno  = @$data['data']['matRno_hidden'];
             $hsscrno  = @$data['data']['oldrno'];
             $oldClass = @$data['data']['oldClass'];
             $iyear    = @$data['data']['InterYear_hidden'];
@@ -2132,11 +2131,7 @@ class Admission extends CI_Controller {
         if(!$data){
             $error_msg.='<span style="font-size: 16pt; color:red;">No Any Student Found Against Your Criteria</span>';
         }
-
-        //DebugBreak();
-
-        //$picpathdb = base_url() . $data['0']['picpath'];
-
+         
         $specialcase = $data['0']['Spl_Name'];
         $specialcode = $data['0']['spl_cd'];
         $exam_type =   $data['0']['exam_type'];
@@ -2281,6 +2276,19 @@ class Admission extends CI_Controller {
         $this->load->model('Admission_model');
 
         if( $_POST["oldBrd_cd"] != 1){
+            
+            //Getting values
+            $oldyear    = $data['SSC_Year'];
+            $oldsess    = $data['SSC_Session'];
+            $oldrno    = $data['SSC_RNO'];
+            $oldboard = $_POST["oldBrd_cd"];
+
+            //posting values to form
+            $data[0]['SSC_RNO']     = $oldrno;
+            $data[0]['SSC_Year']    = $oldyear;
+            $data[0]['SSC_Session'] = $oldsess;
+            $brd_name=$this->Admission_model->Brd_Name($oldboard);
+            $data[0]['brd_name']= $brd_name[0]['Brd_Abr'] ;
 
             $this->load->view('common/commonheader.php');        
             $this->load->view('Admission/Inter/OtherBoard.php', array('data'=>$data));
@@ -2313,14 +2321,9 @@ class Admission extends CI_Controller {
     }
     public function Get_students_record()
     {
-
-
         $mrollno = $_POST["txtMatRno"];
-
         $board   =  $_POST["oldBrd_cd"];
-
         $year    =  $_POST["oldYear"];
-
         $session =$_POST["oldSess"];
 
         $data = array('mrollno'=>"$mrollno",'board'=>$board,'year'=>$year,'session'=>$session);
@@ -3630,8 +3633,6 @@ class Admission extends CI_Controller {
             }
         }
         echo  json_encode($info);
-
-
     }
 
     public function formdownloaded(){
@@ -3669,8 +3670,6 @@ class Admission extends CI_Controller {
     }
 
     public function getzone(){
-
-
 
         $data = array(
             'tehCode' => $this->input->post('tehCode'),
