@@ -101,12 +101,12 @@ header("Pragma: no-cache");
                                 <label class="control-label span1" >
                                     Bay Form No :
                                 </label>
-                                <div class="controls controls-row">
-                                    <input class="span3" type="text" id="bay_form" name="bay_form"  placeholder="34101-1111111-1" value="<?php echo  $data['0']['BForm'];?>" readonly="readonly" required="required" >
+                                <div class="controls controls-row">                                         
+                                    <input class="span3" type="text" id="bay_form" name="bay_form"  placeholder="34101-1111111-1" value="<?php echo  $data['0']['BForm'];?>"  required="required" >
                                     <label class="control-label span2" for="father_cnic">
                                         Father's CNIC :
                                     </label> 
-                                    <input class="span3" id="father_cnic" name="father_cnic" type="text" placeholder="34101-1111111-1"  value="<?php echo  $data['0']['FNIC'];?>" readonly="readonly" required="required">
+                                    <input class="span3" id="father_cnic" name="father_cnic" type="text" placeholder="34101-1111111-1"  value="<?php echo  $data['0']['FNIC'];?>"  required="required">
                                 </div>
                             </div>
                             <div class="control-group">
@@ -154,7 +154,7 @@ header("Pragma: no-cache");
                                 <label class="control-label span1" >
                                     Mark Of Identification :
                                 </label>
-                                <div class="controls controls-row">
+                                <div class="controls controls-row">                                                           
                                     <input class="span3" type="text" id="MarkOfIden" style="text-transform: uppercase;" name="MarkOfIden" value="<?php echo  $data['0']['markOfIden']; ?>" required="required" maxlength="60" >
                                     <label class="control-label span2" >
                                         Mobile Number :
