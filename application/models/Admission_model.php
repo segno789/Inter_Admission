@@ -38,7 +38,6 @@ class Admission_model extends CI_Model
         {
             $query = $this->db->get_where(getinfo_languages, array('rno' => $data['hsscrno'], 'Iyear' => $data['iYear'], 'Sess'=>$data['session']));
         }
-
         else
         {
             $data = array(

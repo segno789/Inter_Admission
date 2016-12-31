@@ -2648,6 +2648,7 @@ header("Pragma: no-cache");
 
                             function checks(){
 
+
                                 var status  =  check_NewEnrol_validation();
                                 if(status == 0)
                                 {
@@ -2655,12 +2656,16 @@ header("Pragma: no-cache");
                                 }
                                 else
                                 {
+
+                                    debugger;
+
                                     $.ajax({
 
                                         type: "POST",
                                         url: "<?php  echo site_url('Admission/frmvalidation'); ?>",
                                         data: $("#myform").serialize() ,
                                         datatype : 'html',
+
                                         success: function(data)
                                         {
                                             var obj = JSON.parse (data);
@@ -2671,8 +2676,10 @@ header("Pragma: no-cache");
                                                     url: "<?php echo base_url(); ?>" + "Admission/NewEnrolment_insert/",
                                                     data: $("#myform").serialize() ,
                                                     datatype : 'html',
-                                                    beforeSend: function() {  $('.mPageloader').show(); },
-                                                    complete: function() { $('.mPageloader').hide();},
+
+                                                    //beforeSend: function() {  $('.mPageloader').show(); },                                                     
+                                                    //complete: function() { $('.mPageloader').hide();},
+
                                                     success: function(data) {
                                                         var obj = JSON.parse(data) ;
                                                         if(obj.error ==  1)
@@ -2681,14 +2688,12 @@ header("Pragma: no-cache");
                                                         }
                                                         else
                                                         {
-                                                            $('.mPageloader').hide();
                                                             alertify.error(obj.error);
                                                             return false; 
                                                         }
-
                                                     },
                                                     error: function(request, status, error){
-                                                        $('.mPageloader').hide();
+
                                                         alertify.error(request.responseText);
                                                     }
                                                 });
@@ -2698,14 +2703,14 @@ header("Pragma: no-cache");
 
                                             else
                                             {
-                                                $('.mPageloader').hide();
+
                                                 alertify.error(obj.excep);
                                                 return false;     
                                             }
                                         }
                                     });
 
-                                    return false;     
+                                    return false;   
                                 } 
                             }
 
@@ -2724,8 +2729,6 @@ header("Pragma: no-cache");
                                 $(document.getElementById("father_cnic")).mask("99999-9999999-9", { placeholder: "_" });
                                 $(document.getElementById("mob_number")).mask("9999-9999999", { placeholder: "_" });
                             });
-
-
 
                             var max_file_size             = 20000; //allowed file size. (1 MB = 1048576)
                             var allowed_file_types         = ['image/jpeg', 'image/pjpeg']; //allowed file types
@@ -2826,11 +2829,7 @@ header("Pragma: no-cache");
                                 });
                             });
 
-
-
                         </script>
-
-
 
                     </div>  
                 </div>
