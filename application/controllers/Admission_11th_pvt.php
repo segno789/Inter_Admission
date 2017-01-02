@@ -107,7 +107,13 @@ class Admission_11th_pvt extends CI_Controller {
         $this->load->view('common/footer11threg.php');
     }
     
-    
+       public function NewEnrolmentPVT_Lang()
+    {
+                         
+        $this->load->view('common/commonheader11th.php');
+        $this->load->view('Admission/11th/AdmissionForm_lang.php');
+        $this->load->view('common/footer11threg_lang.php');
+    }
     public function Get_students_record()
     {
 
@@ -376,7 +382,145 @@ class Admission_11th_pvt extends CI_Controller {
       
       echo  json_encode($info);
     }
-   
+      public function NewEnrolment_insert_lang()
+    {
+        $this->load->model('Admission_11th_Pvt_model');
+        $this->load->library('session');
+        $error = array();
+       
+        
+        $sub1ap1 = 0;
+        $sub2ap1 = 0;
+        $sub3ap1 = 0;
+        $sub4ap1 = 0;
+        $sub5ap1 = 0;
+        $sub6ap1 = 0;
+        $sub7ap1 = 0;
+        $sub8ap1 = 0;
+        if(@$_POST['sub1'] != 0)
+        {
+            $sub1ap1 = 1;    
+        }
+        if(@$_POST['sub2'] != 0)
+        {
+            $sub2ap1 = 1;    
+        }
+        if(@$_POST['sub3'] != 0)
+        {
+            $sub3ap1 = 1;    
+        }
+        if(@$_POST['sub4'] != 0)
+        {
+            $sub4ap1 = 1;    
+        }
+        if(@$_POST['sub5'] != 0)
+        {
+            $sub5ap1 = 1;    
+        }
+        if(@$_POST['sub6'] != 0)
+        {
+            $sub6ap1 = 1;    
+        }
+        
+       
+            $sub7 = 0;   
+            $sub7ap1 = 0; 
+            $nationality_hidden =@$_POST['nationality'];
+            $gender = $this->input->post('ogender');
+          //  DebugBreak();
+        if(@$_POST['isAlreadyApplied']==true)
+        {
+           $oldrno = @$_POST['old_rno_lang'];
+           $oldyear = @$_POST['old_year_lang'];
+           $oldsess = @$_POST['old_sess_lang'];
+           $oldbrd = 1;
+           $isAlreadyapplied = 1;
+           
+           
+        }
+        else
+        {
+           $oldrno = false;
+           $oldyear = false;
+           $oldsess = false;
+           $oldbrd = 0;
+           $isAlreadyapplied = 0;
+        }
+        //nationality_hidden
+        $addre =  str_replace("'", "", $this->input->post('address'));
+        $addre = preg_replace('/[^\x20-\x7E]/','', $addre);
+        $MarkOfIden =  str_replace("'", "", $this->input->post('MarkOfIden'));
+        $MarkOfIden = preg_replace('/[^\x20-\x7E]/','', $MarkOfIden);
+        $data = array(
+            'name' =>$this->input->post('cand_name'),
+            'Fname' =>$this->input->post('father_name'),
+            'bFormNo' =>$this->input->post('bay_form'),
+            'FNIC' =>$this->input->post('father_cnic'),
+            'dob' =>$this->input->post('dob'),
+            'dist' =>$this->input->post('pvtinfo_dist'),
+            'teh' =>$this->input->post('pvtinfo_teh'),
+            'zone' =>$this->input->post('pvtZone'),
+            'MobNo' =>$this->input->post('mob_number'),
+            'medium' =>$this->input->post('medium'),
+            'Inst_Rno' =>$this->input->post('Inst_Rno'),
+            'markOfIden' =>$MarkOfIden,
+            'Speciality' =>$this->input->post('speciality'),
+            'IsPakistani' =>$nationality_hidden,
+            'sex' =>$gender,
+            'IsHafiz' =>$this->input->post('hafiz'),
+            'IsMuslim' =>$this->input->post('religion'),
+            'addr' =>$addre,
+            'RegGrp' =>$this->input->post('std_group'),
+            'sub1' =>$this->input->post('sub1'),
+            'sub2' =>$this->input->post('sub2'),
+            'sub3' =>$this->input->post('sub3'),
+            'sub4' =>$this->input->post('sub4'),
+            'sub5' =>$this->input->post('sub5'),
+            'sub6' =>$this->input->post('sub6'),
+            'sub7' =>($sub7),
+            'sub1ap1' => ($sub1ap1),
+            'sub2ap1' => ($sub2ap1),
+            'sub3ap1' => ($sub3ap1),
+            'sub4ap1' => ($sub4ap1),
+            'sub5ap1' => ($sub5ap1),
+            'sub6ap1' => ($sub6ap1),
+            'sub7ap1' => ($sub7ap1),
+            'isRural' =>$this->input->post('UrbanRural'),
+            'Inst_cd' =>(999999),
+            'FormNo' =>(''),
+            'old_RNo'=>$oldrno,
+            'old_year'=>$oldyear,
+            'old_sess'=>$oldsess,
+            'picname'=>$this->input->post('picname'),
+            'IsReAdm'=>$isAlreadyapplied,
+            'lang_cat' =>$this->input->post('lang_cat'),
+            'lang_specialSub' =>$this->input->post('lang_specialSub'),
+            
+        );
+           
+        $logedIn = $this->Admission_11th_Pvt_model->Insert_NewEnorlement_lang($data);//, $fname);//$_POST['username'],$_POST['password']);
+        //$error = $logedIn[0]['error'];
+
+      $info =  '';
+      foreach($logedIn[0] as $key=>$val)
+      {
+          if($key == 'formno')
+          {
+             $oldpath =  GET_PRIVATE_IMAGE_PATH.'\11th'.$logedIn[0]['tempath'];
+             $newpath =  GET_PRIVATE_IMAGE_PATH.'\11th'.$val.'.jpg';
+             $err = rename($oldpath,$newpath);
+              $info['error'] = 1;
+              $info['formno'] = $val;
+          }
+          else if($key == 'error')
+          {
+              $info['error'] = $val;
+              $info['formno'] = '';
+          }
+      }
+      
+      echo  json_encode($info);
+    }
     public  function GetSpeciality($spclty)
     {
         if ($spclty == 0 )
@@ -392,7 +536,7 @@ class Admission_11th_pvt extends CI_Controller {
     }
     public function checkFormNo_then_download()
     {
-
+//         DebugBreak();
         $formno_seg = $this->uri->segment(3);
         // $dob_seg = $this->uri->segment(4);
         if($formno_seg !=0 ){ //&& $dob_seg != ''
@@ -415,7 +559,7 @@ class Admission_11th_pvt extends CI_Controller {
         }
 
         // --------------------------------------- Fee Calculation Section ------------------------------------------------
-    //    DebugBreak();
+      //  DebugBreak();
         $User_info_data = array('Inst_Id'=>999999, 'date' => date('Y-m-d'));
         $user_info  =  $this->Admission_11th_Pvt_model->getuser_info($User_info_data); 
         $isfine = 0;
@@ -523,7 +667,7 @@ class Admission_11th_pvt extends CI_Controller {
        
             if($data['IsReAdm']==1)
             {
-                $AllStdFee = array('formNo'=> $data['FormNo'],'regFee'=>1000,'AdmFee'=>$ArtsAdmFee_ReAdm,'AdmFine'=>$Total_fine,'AdmProcessFee'=>$ArtsProcFee,'AdmTotalFee'=>$ArtsAdmFee_ReAdm+$ArtsProcFee+$Total_fine);
+                $AllStdFee = array('formNo'=> $data['FormNo'],'regFee'=>0,'AdmFee'=>$ArtsAdmFee_ReAdm,'AdmFine'=>$Total_fine,'AdmProcessFee'=>$ArtsProcFee,'AdmTotalFee'=>$ArtsAdmFee_ReAdm+$ArtsProcFee+$Total_fine);
             }
             else if($data['Spec']>0 && (date('Y-m-d') <= $singleDate) )
             {
@@ -536,7 +680,7 @@ class Admission_11th_pvt extends CI_Controller {
             }
             else
             {
-                $AllStdFee = array('formNo'=>$data['FormNo'],'regFee'=>1000,'AdmFee'=>$ArtsAdmFee,'AdmFine'=>$Total_fine,'AdmProcessFee'=>$ArtsProcFee,'AdmTotalFee'=>$ArtsAdmFee+$ArtsProcFee+$Total_fine);
+                $AllStdFee = array('formNo'=>$data['FormNo'],'regFee'=>1000,'AdmFee'=>$ArtsAdmFee,'AdmFine'=>$Total_fine,'AdmProcessFee'=>$ArtsProcFee,'AdmTotalFee'=>$ArtsAdmFee+$ArtsProcFee+$Total_fine+1000);
             }
         
 
@@ -611,7 +755,16 @@ class Admission_11th_pvt extends CI_Controller {
             $ses = "SUPPLYMENTARY";
         }
         
+        if($data["grp_cd"] == 9)
+        {
+        $heading = 'BOARD OF INTERMEDIATE AND SECONDARY EDUCATION, GUJRANWALA ( LANGUAGES EXAMINATION, '.Year.')';
+        }
+        else
+        {
         $heading = 'BOARD OF INTERMEDIATE AND SECONDARY EDUCATION, GUJRANWALA (INTERMEDIATE PART-I '.$ses.' EXAMINATION, '.Year.')';
+        }
+        
+        
         
         
         $pdf->SetFont('Arial','U',12);
@@ -626,8 +779,18 @@ class Admission_11th_pvt extends CI_Controller {
         //$this->Image("logo.jpg",0.05,0.3, 0.75,0.75, "JPG", "http://www.biseGujranwala.edu.pk");
         
         $pdf->SetFont('Arial','',9);
+        
+        if($data["grp_cd"] == 9)
+        {
+        $pdf->SetXY(2.0,0.4);
+        $pdf->Cell(0, 0.2, "ADMISSION & REVENUE FORM FOR LANGUAGES EXAMINATION , ".Year, 0.25, "C");
+        }
+        else
+        {
         $pdf->SetXY(1.4,0.4);
         $pdf->Cell(0, 0.2, "ADMISSION & REVENUE FORM FOR THE INTERMEDIATE (PART I) ".$ses." EXAMINATION , ".Year, 0.25, "C");
+        }
+        
         //--------------- Proof Read    
         /*if($data['batch_id'] == 0 and $data['RegPvt']==1)
         {
@@ -712,11 +875,12 @@ class Admission_11th_pvt extends CI_Controller {
                 $grp_name = 'HOME ECONOMICS';
                 break;
             case '9':
-                $grp_name = 'KHASA';
+                $grp_name = 'ALOOM-E-SHARKIA';
                 break; 
                  case '7':
                 $grp_name = 'HOME ECONOMICS';
-                break;   
+                break; 
+                
             default:
                 $grp_name = "NO GROUP SELECTED.";
         }
@@ -821,7 +985,23 @@ class Admission_11th_pvt extends CI_Controller {
 
        // DebugBreak();
         $data["sessOfPass"]==1? $sess = "ANNUAL":$sess = "SUPPLY";
+        $data['oldSess_reg'] ==1? $sess_lang = "ANNUAL":$sess_lang = "SUPPLY";
         $ssc_info  = $data["matRno"].' ('.$sess.', '.$data['yearOfPass'].', '.$data['Brd_Abbr'].' )';
+        if($data['IsReAdm']==1 && $data['IsLangexam']==1)
+        {
+        $lang_info = $data['oldRno_reg'].' ('.$sess_lang.', '.$data['oldYear_reg'].', BISE, Gujranwala )';
+        $ssc_info  = "";
+        }
+        else
+        {
+        $lang_info = "";
+        }
+        
+        if($data['IsLangexam']==1)
+        {
+        $ssc_info  = "";
+        }
+        
         
         $pdf->SetXY($myx,2.53+$Y);
         $pdf->SetFont('Arial','',8);
@@ -843,7 +1023,7 @@ class Admission_11th_pvt extends CI_Controller {
         $pdf->Cell( 0,0.1,"Perv. Exam Info:",0,'L');
         $pdf->SetFont('Arial','B',8);
         $pdf->SetXY($col2,2.98+$Y);
-        $pdf->Cell(0,0.1,'',0,'R');
+        $pdf->Cell(0,0.1,$lang_info,0,'R');
            
         $pdf->SetXY(0.7,3.12+$Y);
         $pdf->SetFont('Arial','',8);
@@ -890,7 +1070,40 @@ class Admission_11th_pvt extends CI_Controller {
         $pdf->SetFont('Arial','B',8);
         $pdf->SetXY($xx,3.8+$Y);
         $pdf->SetFillColor(240,240,240);
+        
+          if($data["grp_cd"] == 9)
+        {
+        if($data['Lang_cat']==1)
+        {
+        $catname_lang = "ADEEB";
+        }
+        else
+        {
+        $catname_lang = "ALAM";
+        }
+        if($data['Lang_spec_sub']==2)
+        {
+        $catSub_lang = "URDU";
+        }
+        else if($data['Lang_spec_sub']==32)
+        {
+        $catSub_lang = "PUNJABI";
+        }
+        else if($data['Lang_spec_sub']==34)
+        {
+        $catSub_lang = "PERSIAN";
+        }
+        else if($data['Lang_spec_sub']==24)
+        {
+        $catSub_lang = "ARABIC";
+        }
+        $pdf->Cell($boxWidth,0.2,'Group:  '.$catname_lang.' ,     Category : '.$catSub_lang.' ',1,0,'C',1);
+        }
+        else
+        {
         $pdf->Cell($boxWidth,0.2,'Subjects:Part - I ',1,0,'C',1);
+        }
+        
         $pdf->SetFillColor(255,255,255);
         
         //$pdf->Cell($boxWidth,0.2, $data['sub1Ap1'] != 1 ? '':   '    '. GetSubNameHere($data['sub1']) ,0,'L',1);
@@ -914,31 +1127,82 @@ class Admission_11th_pvt extends CI_Controller {
         $pdf->SetFillColor(255,255,255);
         $pdf->SetFont('Arial','',7);
         $pdf->SetXY($xx,4.0+$Y);
+        if($data["grp_cd"] == 9)
+        {
+        $pdf->Cell($boxWidth,0.2,$data['sub1Ap1'] != 1 ? '':   '    '.'1. PAPER-I',1,0,'L',1);
+        }
+        else
+        {
         $pdf->Cell($boxWidth,0.2,$data['sub1Ap1'] != 1 ? '':   '    '.'1. '.$data['sub1_name'],1,0,'L',1);
+        }
+        
         
         $pdf->SetFont('Arial','',7);
         $pdf->SetXY($xx,4.2+$Y);
+        if($data["grp_cd"] == 9)
+        {
+        $pdf->Cell($boxWidth,0.2,$data['sub2Ap1'] != 1 ? '':   '    '.'2. PAPER-II',1,0,'L',1);
+        }
+        else
+        {
         $pdf->Cell($boxWidth,0.2,$data['sub2Ap1'] != 1 ? '':   '    '.'2. '. $data['sub2_name'],1,0,'L',1);
+        }
+        
 
         $pdf->SetFont('Arial','',7);
         $pdf->SetXY($xx,4.4+$Y);
+         if($data["grp_cd"] == 9)
+        {
+        $pdf->Cell($boxWidth,0.2,$data['sub3Ap1'] != 1 ? '':   '    '.'3. PAPER-III',1,0,'L',1);
+        }
+        else
+        {
         $pdf->Cell($boxWidth,0.2,$data['sub3Ap1'] != 1 ? '':   '    '.'3. '. $data['sub3_name'],1,0,'L',1);
+        }
+        
 
         $pdf->SetFont('Arial','',7);
         $pdf->SetXY($xx,4.6+$Y);
+        if($data["grp_cd"] == 9)
+        {
+        $pdf->Cell($boxWidth,0.2,$data['sub4Ap1'] != 1 ? '':   '    '.'4. PAPER-IV',1,0,'L',1);
+        }
+        else
+        {
         $pdf->Cell($boxWidth,0.2,$data['sub4Ap1'] != 1 ? '':   '    '.'4. '. $data['sub4_name'],1,0,'L',1);
+        }
+        
 
         $pdf->SetFont('Arial','',7);
         $pdf->SetXY($xx,4.8+$Y);
+         if($data["grp_cd"] == 9)
+        {
+        $pdf->Cell($boxWidth,0.2,$data['sub5Ap1'] != 1 ? '':   '    '.'5. PAPER-V',1,0,'L',1);
+        }
+        else
+        {
         $pdf->Cell($boxWidth,0.2,$data['sub5Ap1'] != 1 ? '':   '    '.'5. '. $data['sub5_name'],1,0,'L',1);
+        }
+        
 
         $pdf->SetFont('Arial','',7);
         $pdf->SetXY($xx,5.0+$Y);
+         if($data["grp_cd"] == 9)
+        {
+        $pdf->Cell($boxWidth,0.2,$data['sub6Ap1'] != 1 ? '':   '    '.'6. PAPER-VI',1,0,'L',1);
+        }
+        else
+        {
         $pdf->Cell($boxWidth,0.2,$data['sub6Ap1'] != 1 ? '':   '    '.'6. '. $data['sub6_name'],1,0,'L',1);
+        }
+        
 
         $pdf->SetFont('Arial','',7);                                                                     
         $pdf->SetXY($xx,5.2+$Y);
+        
         $pdf->Cell($boxWidth,0.2,$data['sub7Ap1'] != 1 ? '':   '    '.'7. '. $data['sub7_name'],1,0,'L',1);
+        
+        
 
        
         $pdf->SetXY(0.7,5.49+$Y);

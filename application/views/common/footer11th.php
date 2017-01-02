@@ -470,6 +470,41 @@ if(isset($files)){
             return;
         }
     })
+     $('#get_cutlist').click( function()
+    {
+        var option =  $('input[type=radio][name=opt]:checked').val(); 
+        // alert(option);
+        // return;
+        if(option == "1")
+        {
+            var std_group = $('#std_group').val();
+            if(std_group == "0"){
+                alertify.error("Please Select a Group First !");
+                return;
+            }
+            Cut_list_groupwise(std_group);
+        }
+        else if(option =="2")
+        {
+            var startformno = $('#strt_formNo').val();
+            var endformno = $('#ending_formNo').val();
+            if((startformno.length < 10 ||  startformno.length > 10) && (endformno.length < 10 ||  endformno.length > 10))
+            {
+                alertify.error("Invalid Form No.");
+                return;
+            }
+            Cut_list_Formnowise(startformno,endformno);
+        }
+        else{
+            return;
+        }
+    })
+     function Cut_list_groupwise(grp_cd){
+        window.location.href =  '<?=base_url()?>Admission_11th_reg/return_pdf/'+grp_cd + '/4'
+    }
+    function Cut_list_Formnowise(startformno,endformno){
+        window.location.href = '<?=base_url()?>Admission_11th_reg/return_pdf/'+startformno + '/5' +'/'+endformno+'/';
+    }
       function Revenue_list_groupwise(grp_cd){
         window.location.href =  '<?=base_url()?>Admission_11th_reg/revenue_pdf/'+grp_cd + '/4'
     }
