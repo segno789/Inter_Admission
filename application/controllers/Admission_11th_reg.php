@@ -1860,7 +1860,7 @@ class Admission_11th_reg extends CI_Controller {
             $pdf->SetXY(5.88,0.99+$Y);
             $pdf->Cell(0.5,0.5, "(For office use only)",0,'L');
 
-
+             
 
 
             if(@$data["regPvt"]==1)
@@ -1890,7 +1890,8 @@ class Admission_11th_reg extends CI_Controller {
             {
             $pdf->Image(DIRPATH11th.'130659.jpg',6.0+$x,2.4+$Y , 1.30, 1.30, "JPG");
             }
-            
+             $pdf->SetFont('Arial','B',23);
+            $pdf->TextWithRotation($x-0.2,2.8+$Y, $data['FormNo'],90,0);
             //--------------------------- 1st line 
             $pdf->SetXY(0.5, 2+$Y);
             $pdf->SetFont('Arial','',8);
