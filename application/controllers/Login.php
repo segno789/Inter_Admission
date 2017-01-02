@@ -34,6 +34,7 @@ class Login extends CI_Controller {
 
         if(@$_POST['username'] != '' && @$_POST['password'] != '')
         {   
+            //DebugBreak();
 
             $this->load->model('login_model'); 
             $logedIn = $this->login_model->auth($_POST['username'],$_POST['password']);
@@ -192,6 +193,7 @@ class Login extends CI_Controller {
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $this->session->set_userdata('logged_in', ''); 
+        $this->clear_cache();
         $this->session->sess_destroy();
         redirect('login');
     }

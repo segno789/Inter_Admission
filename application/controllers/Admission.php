@@ -2095,14 +2095,7 @@ class Admission extends CI_Controller {
             $session = $_POST["oldSess"];
             $board   = $_POST["oldBrd_cd"];
             $CatType = @$_POST["CatType"];
-            if(isset($_POST["isaloom"]))
-            {
-                $isaloom =1;
-            }
-            else
-            {
-                $isaloom =0;
-            }
+            if(isset($_POST["isaloom"])) $isaloom = 1;else $isaloom = 0;
         }
 
         $data['sscrno']=$mrollno;
@@ -4176,7 +4169,7 @@ class Admission extends CI_Controller {
                                                     }
 
                 }
-                else if(@$_POST['exam_type'] == 2)
+                else if((@$_POST['exam_type'] == 2 )&& (@$_POST['std_group'] == 3 || @$_POST['std_group'] == 5))
                 { 
                     if(@$_POST['sub1p2'] == 0)
                     {
