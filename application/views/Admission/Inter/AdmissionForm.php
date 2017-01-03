@@ -2640,9 +2640,7 @@ header("Pragma: no-cache");
                                         alertify.error('Please Choose Different Subject. You Are NOT Allowed to Choose the Double History');
                                         $("#sub6").val('0');
                                         $("#sub6p2").val('0');
-                                    } 
-
-
+                                    }
                                 });
                             });
 
@@ -2704,7 +2702,6 @@ header("Pragma: no-cache");
 
                                             else
                                             {
-
                                                 alertify.error(obj.excep);
                                                 return false;     
                                             }

@@ -56,7 +56,7 @@ class Admission_model extends CI_Model
             $board  = $data['brd_cd'];
             $matRno = $data['matRno'];
 
-            $query = $this->db->query("admission_online..sp_Admission_HSSC_Annual $rno, $class, $Iyear, $sess, $board, $matRno, 1");
+            $query = $this->db->query("admission_online..sp_Admission_HSSC_Annual $rno, $class, $Iyear, $sess, $board, $matRno, 999999");
         }
 
         $rowcount = $query->num_rows();

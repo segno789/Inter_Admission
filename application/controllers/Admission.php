@@ -2095,14 +2095,7 @@ class Admission extends CI_Controller {
             $session = $_POST["oldSess"];
             $board   = $_POST["oldBrd_cd"];
             $CatType = @$_POST["CatType"];
-            if(isset($_POST["isaloom"]))
-            {
-                $isaloom =1;
-            }
-            else
-            {
-                $isaloom =0;
-            }
+            if(isset($_POST["isaloom"])) $isaloom = 1;else $isaloom = 0;
         }
 
         $data['sscrno']=$mrollno;
@@ -2167,7 +2160,6 @@ class Admission extends CI_Controller {
             $error_msg.='<span style="font-size: 16pt; color:red;"> Matric Roll No is Invalid</span>';
         }
 
-
         if($error_msg !='')
         {
             $this->load->library('session');
@@ -2199,10 +2191,9 @@ class Admission extends CI_Controller {
             $this->session->set_flashdata('matric_error',$mydata );
             redirect('Admission/matric_default');
         } 
-        else if(($exam_type == 1 &&($data[0]['regPvt']==1  && $data[0]['status'] !=4)) )
+        else if($data[0]['class'] == 11 &&$data[0]['regPvt']==1)
         {
-
-            $error_msg.='<span style="font-size: 16pt; color:red;">' . 'You can not appear as a Private Candidate. Please send Addmission from Your Institute.</span>';
+            $error_msg.='<span style="font-size: 16pt; color:red;">' . 'You can not appear as a Private Candidate. Please contact your Institute.</span>';
             $this->load->library('session');
             $mydata = array('data'=>$_POST,'error_msg'=>$error_msg,'exam_type'=>$exam_type);
             $this->session->set_flashdata('matric_error',$mydata );
@@ -4177,7 +4168,7 @@ class Admission extends CI_Controller {
                                                     }
 
                 }
-                else if(@$_POST['exam_type'] == 2)
+                else if((@$_POST['exam_type'] == 2 )&& (@$_POST['std_group'] == 3 || @$_POST['std_group'] == 5))
                 { 
                     if(@$_POST['sub1p2'] == 0)
                     {

@@ -13,8 +13,8 @@ class Admission_inter extends CI_Controller {
     public function index()
     {
 
-        //        DebugBreak(); 
-        $msg = 7;//$this->uri->segment(3);
+
+        $msg = 7;
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
@@ -88,7 +88,7 @@ class Admission_inter extends CI_Controller {
         }
         $Inst_name = $userinfo['inst_Name'];
         $this->load->view('common/header.php',$userinfo);
-        ////DebugBreak();
+        //DebugBreak();
         if($msg == 7)
         {
             $this->load->view('common/menu.php',$userinfo);
@@ -102,7 +102,6 @@ class Admission_inter extends CI_Controller {
         {
             if( ($field_status['email'] == 0) || ($field_status['phone'] == 0) || ($field_status['cell'] == 0) || ($field_status['dist'] == 0) || ($field_status['teh'] == 0)|| ($field_status['zone'] == 0))
             {
-                // $this->session->set_userdata("status",$this->session->flashdata('status'));
                 if($this->session->flashdata('status'))
                 {
                     $this->load->view('common/menu.php',$userinfo);
@@ -118,12 +117,12 @@ class Admission_inter extends CI_Controller {
                     {
                         $this->load->model('Admission_inter_model');
                         $count = $this->Admission_inter_model->Dashboard($Inst_Id);
-                        // //DebugBreak();
+                        //DebugBreak();
                         if($field_status['zone'] == 0)
                         {
                             $zone = $this->Admission_inter_model->get_zone();
                         }
-                        ////DebugBreak();
+                        //DebugBreak();
                         if($this->session->flashdata('incomplete'))
                         {
                             $all_PreData = $this->session->flashdata('incomplete'); 
@@ -140,11 +139,8 @@ class Admission_inter extends CI_Controller {
                             $errors ="";
                             $fillvalues="";
                         }
-                        //$this->session->set_flashdata('incomplete',$allinfo);
+
                         $info = array('count'=>$count,'Inst_id'=>$Inst_Id,'Inst_name'=>$Inst_name,'field_status'=>$field_status,'zone'=>$zone,'error'=>$errors,'fill_values'=>$fillvalues);
-                        //$this->load->view('Admission_inter/Admission_inter.php',$info);
-                        // $this->load->view('Admission_inter/9th/Incomplete_inst_info.php',$info);
-                        // $this->load->view('common/commonfooter_inter_regular.php');
 
                         $this->load->view('common/menu.php',$userinfo);
                         $this->load->model('Admission_inter_model');
@@ -152,12 +148,8 @@ class Admission_inter extends CI_Controller {
                         $info = array('count'=>$count,'Inst_id'=>$Inst_Id,'Inst_name'=>$Inst_name);
                         $this->load->view('Admission/inter/Admission.php',$info);
                         $this->load->view('common/commonfooter_inter_regular.php');    
-
                     } 
                 }
-
-                //$this->load->view('common/menu.php',$userinfo);
-
             }
             else
             {
@@ -169,12 +161,10 @@ class Admission_inter extends CI_Controller {
                 $this->load->view('common/footer.php');    
             } 
         }
-
-
     }
     public function ChallanForm_Adm10th_Regular()
     {
-        // DebugBreak();
+        //DebugBreak();
         $Batch_Id = $this->uri->segment(3);
         $this->load->library('session');
         $this->load->library('NumbertoWord');
@@ -182,9 +172,7 @@ class Admission_inter extends CI_Controller {
         $user = $Logged_In_Array['logged_in'];
         $this->load->model('Admission_inter_model');
         $fetch_data = array('Inst_cd'=>$user['Inst_Id'],'Batch_Id'=>$Batch_Id);
-        //$grp_cd = $this->uri->segment(3);
-        // $fetch_data = array('Inst_cd'=>$user['Inst_Id'],'formno'=>$formno);
-        //  DebugBreak();
+
         $result = $this->Admission_inter_model->Print_challan_Form($fetch_data);
         $this->load->library('PDF_Rotate');
 
@@ -227,16 +215,14 @@ class Admission_inter extends CI_Controller {
 
         $obj    = new NumbertoWord();
         $obj->toWords($result[0]['Amount'],"Only.","");
-        // $pdf->Cell( 0.5,0.5,ucwords($obj->words),0,'L');
-        $feeInWords = ucwords($obj->words);//strtoupper(cNum2Words($totalfee)); 
+
+        $feeInWords = ucwords($obj->words);
 
         //-------------------- PRINT BARCODE
-        //  $pdf->SetDrawColor(0,0,0);
-        // $temp = $user['Inst_Id'].'11-2017-19';
-        //$image =  $this->set_barcode($temp);
+
 
         $temp = $challanNo.'@'.$user['Inst_Id'].'@'.$Batch_Id.'@12@2016@2';
-        //  $image =  $this->set_barcode($temp);
+
         //DebugBreak();
         $temp =  $this->set_barcode($temp);
 
@@ -257,10 +243,10 @@ class Admission_inter extends CI_Controller {
             $corcnt = 0;
             $pdf->SetFont('Arial','BI',11);
             $pdf->SetXY(1.0,$yy+$dyy);
-            //   DebugBreak();
+            //DebugBreak();
             $pdf->Cell(2.45, 0.4, "BOARD OF INTERMEDIATE AND SECONDARY EDUCATION, GUJRANWALA", 0.25, "L");
             $pdf->Image(base_url()."assets/img/icon2.png",0.30,$yy+$dyy, 0.50,0.50, "PNG", "http://www.bisegrw.com");
-            //  $pdf->Image(BARCODE_PATH.$Barcode,3.2, 1.15+$yy ,1.8,0.20,"PNG");
+
             $pdf->Image(base_url().BARCODE_PATH.$temp,5.8, $yy+$dyy+0.30 ,1.8,0.20,"PNG");
             $challanTitle = $challanCopy[$j];
             $generatingpdf=true;
@@ -271,11 +257,6 @@ class Admission_inter extends CI_Controller {
             }
             $turn++;
             $y = 0.08;
-
-            //$pdf->SetFont('Arial','BI',14);
-            //$pdf->SetXY(5.5,$y+$dy);
-            //$pdf->Image(BARCODE_PATH.$image,3.2, 0.61  ,1.8,0.20,"PNG");
-            //$pdf->Cell(0.5, $y, $challanCopy[$j], 0.25, "L");
 
             $pdf->SetFont('Arial','BI',9);
             $pdf->SetXY(1.0,$y+$dy);
@@ -318,13 +299,9 @@ class Admission_inter extends CI_Controller {
             $pdf->SetX(4.0);
             $pdf->SetFont('Arial','B',8);
 
-            //if(intval($result[0]['sex'])==1){$sodo="S/O ";}else{$sodo="D/O ";}
-            // $pdf->Cell(0.5,0.25,$user['Inst_Id'].'-'.$user['inst_Name'],0,2,'L');
-            // $pdf->Cell(0.5,0.25,,0,2,'L');
             $pdf->SetX(4);
             $pdf->SetFont('Arial','I',6.5);
-            // DebugBreak();
-            //$pdf->Cell(0.5,0.3,"Institute Code: ".$user['Inst_Id'].'-'.$user['inst_Name'],0,2,'L');
+
             $pdf->MultiCell(4, .1, "Institute Code: ".$user['Inst_Id'].'-'.$user['inst_Name'],0);
             $pdf->SetXY(4,$y+1.15+$dy);
             $pdf->SetFont('Arial','B',8);
@@ -334,41 +311,22 @@ class Admission_inter extends CI_Controller {
             $y += 0.2;
 
             //------------- Fee Statement
-            //  DebugBreak();
+
             $ctid=1;
             $multiply=1;
 
-            /*    foreach ($feestructure as $value) {
-            //  $value = $value * 2;
-
-            $pdf->SetFont('Arial','',9);
-            $pdf->SetXY(0.5,$y+$dy);
-            $pdf->Cell( 0.5,0.5,$displayfeetitle[$ctid],0,'L');
-            $pdf->SetFont('Arial','B',10);
-            $pdf->SetXY(3,$y+$dy);
-            $pdf->Cell(0.8,0.5,$feestructure[$ctid],0,'C');
-            $ctid *= 2;
-            $y += 0.18;
-            }*/
-            // DebugBreak();
+            //DebugBreak();
             $total =  count($feestructure);
             for ($k = 0; $k<count($feestructure); $k++){
 
-
                 $pdf->SetFont('Arial','',9);
                 $pdf->SetXY(0.5,$y+$dy);
-
-                //$feestructure = array(1=>0, 2=>0, 4=>0, 8=>0, 16=>0, 32=>0, 64=>0, 128=>0);
                 $pdf->Cell( 0.5,0.5,$displayfeetitle[$k],0,'L');
                 $pdf->SetFont('Arial','B',10);
                 $pdf->SetXY(3,$y+$dy);
                 $pdf->Cell(0.8,0.5,$feestructure[$k],0,'C');
                 $y += 0.18;
                 $corcnt = $k;
-
-
-
-
             }
 
             //------------- Total Amount
@@ -415,7 +373,6 @@ class Admission_inter extends CI_Controller {
             if ($turn>1){
                 $y += 0.4;
                 $pdf->Image( base_url().'assets/img/cut_line.png' ,0.3,$y+$dy, 7.5,0.15, "PNG");   
-                // $pdf->Image("images/cut_line.png",0.3,$y+$dy, 7.5,0.15, "PNG");
             }            
         }  
         if ($generatingpdf==true)
@@ -427,13 +384,11 @@ class Admission_inter extends CI_Controller {
         }  
 
         //======================================================================================
-        //  }
-
-        //  $pdf->Output($data["Sch_cd"].'.pdf', 'I');
     }
     public function StudentsData()
     {    
         //DebugBreak();
+
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
@@ -443,8 +398,6 @@ class Admission_inter extends CI_Controller {
 
         );
         $msg = $this->uri->segment(3);
-
-
 
         if($msg == FALSE){
 
@@ -559,9 +512,9 @@ class Admission_inter extends CI_Controller {
     }
     public function NewEnrolment_update_inter()
     {
-        //   DebugBreak();
+        //DebugBreak();
+
         $this->load->model('Admission_inter_model');
-        // //DebugBreak();
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
@@ -570,25 +523,19 @@ class Admission_inter extends CI_Controller {
         $this->commonheader($userinfo);
         $error = array();
 
-        // //DebugBreak();
 
         if (!isset($Inst_Id))
         {
-            //$error['excep'][1] = 'Please Login!';
+
             $this->load->view('login/login.php');
         }
-        // if (!isset($Inst_Id))
-        // {
-        //$error['excep'][1] = 'Please Login!';
-        //    $this->load->view('login/login.php');
-        // }
-        // $this->Registration_model->Insert_NewEnorlement($data);    
-        $formno = @$_POST['formNo']; //$formno = $this->Admission_inter_model->GetFormNo($Inst_Id);// $this->Admission_model->GetFormNo();//, $fname);//$_POST['username'],$_POST['password']);
+
+        $formno = @$_POST['formNo']; 
 
         $allinputdata = array('cand_name'=>@$_POST['cand_name'],'father_name'=>@$_POST['father_name'],
             'bay_form'=>@$_POST['bay_form'],'father_cnic'=>@$_POST['father_cnic'],
             'dob'=>@$_POST['dob'],'mob_number'=>@$_POST['mob_number'],
-            'medium'=>@$_POST['medium'],//'Inst_Rno'=>@$_POST['Inst_Rno'],
+            'medium'=>@$_POST['medium'],
             'speciality'=>@$_POST['speciality'],'MarkOfIden'=>@$_POST['MarkOfIden'],
             'medium'=>@$_POST['medium'],'nationality'=>@$_POST['nationality'],
             'gender'=>@$_POST['gend'],'hafiz'=>@$_POST['hafiz'],
@@ -612,15 +559,13 @@ class Admission_inter extends CI_Controller {
 
         );
 
-        // $name = 'Waseem Saleem';
-        // $fname = 'Muhammad Saleem'; 
         $sub1 = 0;         $sub2 = 0;              $sub3 = 0;          $sub4 = 0;           $sub5 = 0;         $sub6 = 0;            $sub7 = 0;  $sub8=0; $sub4a=0; $sub5a =0; $sub6a = 0; $sub7a = 0;     
         $sub1ap1 = 0;        $sub2ap1 = 0;        $sub3ap1 = 0;        $sub4ap1 = 0;        $sub5ap1 = 0;        $sub6ap1 = 0;        $sub7ap1 = 0;     
         $sub1ap2 = 0;        $sub2ap2 = 0;        $sub3ap2 = 0;        $sub4ap2 = 0;        $sub5ap2 = 0;        $sub6ap2 = 0;        $sub7ap2 = 0;     $sub8ap2 = 0; 
 
 
         $is11th = 0;
-        //debugBreak();
+
         if(@$_POST['sub1'] != 0)
         {
             $sub1ap1 = 1; 
@@ -706,38 +651,9 @@ class Admission_inter extends CI_Controller {
             $sub2ap2 = 1; 
             $sub2 =  $_POST['sub2p2'];    
         }
-        /* if(@$_POST['sub3p2'] != 0)
-        {
-        $sub3ap2 = 1;  
-        $sub3 =  $_POST['sub3p2'];    
-        }*/
-        /* if(@$_POST['sub4p2'] != 0)
-        {
-        $sub4ap2 = 1; 
-        $sub4 =  $_POST['sub4p2'];     
-        }
-        if(@$_POST['sub5p2'] != 0)
-        {
-        $sub5ap2 = 1;    
-        $sub5 =  $_POST['sub5p2'];  
-        }
-        if(@$_POST['sub6p2'] != 0)
-        {
-        $sub6ap2 = 1;    
-        $sub6 =  $_POST['sub6p2'];  
-        }
-        if(@$_POST['sub7p2'] != 0)
-        {
-        $sub7ap2 = 1;    
-        $sub7 =  $_POST['sub7p2'];  
-        }*/
 
-
-        //$examtype = @$_POST['exam_type'];
         $marksImp = @$_POST['ddlMarksImproveoptions'];
-        // debugBreak();
 
-        //$cat = $this->makecat($examtype,$marksImp,$is11th);
 
         if($is11th==1)
         {
@@ -752,9 +668,7 @@ class Admission_inter extends CI_Controller {
         $Speciality = $this->input->post('speciality');
         $grp_cd = $this->input->post('std_group');
 
-        ////DebugBreak();
 
-        // DebugBreak();
         $data = array(
             'name' =>$this->input->post('cand_name'),
             'Fname' =>$this->input->post('father_name'),
@@ -768,7 +682,7 @@ class Admission_inter extends CI_Controller {
             'nat' =>$this->input->post('nationality'),
             'sex' =>$this->input->post('sex'),
             'Ishafiz' =>$this->input->post('hafiz'),
-            //'rel' =>(4),
+
             'rel' =>$this->input->post('religion'),
             'addr' =>$this->input->post('address'),
             'grp_cd' =>$this->input->post('std_group_hidden'),
@@ -782,12 +696,12 @@ class Admission_inter extends CI_Controller {
             'sub8' =>($sub8),
             'sub1p2' =>$this->input->post('sub1p2'),
             'sub2p2' =>$this->input->post('sub2p2'),
-            //'sub3p2' =>$this->input->post('sub3p2'),
+            'sub3p2' =>$this->input->post('sub3p2'),
             'sub4p2' =>$this->input->post('sub4p2'),
             'sub5p2' =>$this->input->post('sub5p2'),
             'sub6p2' =>$this->input->post('sub6p2'),
             'sub7p2' =>($sub7a),
-            'sub8p2' =>$sub8,
+            'sub8p2' =>$sub8ap2,
             'sub1ap1' => ($sub1ap1),
             'sub2ap1' => ($sub2ap1),
             'sub3ap1' => ($sub3ap1),
@@ -795,10 +709,10 @@ class Admission_inter extends CI_Controller {
             'sub5ap1' => ($sub5ap1),
             'sub6ap1' => ($sub6ap1),
             'sub7ap1' => ($sub7ap1),
-            // 'sub8ap1' => ($sub8ap1),
+            'sub8ap1' => ($sub8ap1),
             'sub1ap2' => ($sub1ap2),
             'sub2ap2' => ($sub2ap2),
-            //'sub3ap2' => ($sub3ap2),
+            'sub3ap2' => ($sub3ap2),
             'sub4ap2' => ($sub4ap2),
             'sub5ap2' => ($sub5ap2),
             'sub6ap2' => ($sub6ap2),
@@ -814,44 +728,18 @@ class Admission_inter extends CI_Controller {
             'Iyear'=>@$_POST['Oldyear'],
             'Brd_cd'=>@$_POST['Oldbrd'],
             'schm'=>1,
-            //'picpath'=>@$_POST['pic'],
+            'picpath'=>@$_POST['pic'],
             'oldFormNo'=>@$_POST['formNo'],
             'pvtinfo_dist'=>@$_POST['pvtinfo_dist'],
             'pvtinfo_teh'=>@$_POST['pvtinfo_teh'],
             'pvtZone'=>@$_POST['pvtZone'],
-
-
-
-
-
-
         );                  
 
+        //$this->frmvalidation('NewEnrolment_EditForm_inter',$data,0);
 
-        // DebugBreak();
-        /*  $target_path = REGULAR_IMAGE_PATH.$Inst_Id.'/';
-        if (!file_exists($target_path)){
-
-        mkdir($target_path);
-        }
-
-        $base_path = GET_PRIVATE_IMAGE_PATH_COPY.@$_POST['pic'];
-        $copyimg = $target_path.$formno.'.jpg';
-
-
-        if (!(copy($base_path, $copyimg))) 
-        {
-
-        $data['excep'] = 'The picture is not upload.';
-        $this->session->set_flashdata('NewEnrolment_error',$data);
-        //  echo '<pre>'; print_r($allinputdata['excep']);exit();
-        redirect('Admission_inter/NewEnrolment_NewForm_inter/');
-        }*/
-
-        $this->frmvalidation('NewEnrolment_EditForm_inter',$data,0);
         $data['isupdate']=1;
-        $logedIn = $this->Admission_inter_model->Insert_NewEnorlement($data);//, $fname);//$_POST['username'],$_POST['password']);
-        ////DebugBreak();
+        $logedIn = $this->Admission_inter_model->Insert_NewEnorlement($data);
+
         if( !isset($logedIn))
         {  
             $allinputdata = "";
@@ -874,8 +762,9 @@ class Admission_inter extends CI_Controller {
     public function NewEnrolment_INSERT_inter()
     {
         //DebugBreak();
+
         $this->load->model('Admission_inter_model');
-        // //DebugBreak();
+
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
@@ -884,25 +773,17 @@ class Admission_inter extends CI_Controller {
         $this->commonheader($userinfo);
         $error = array();
 
-        // //DebugBreak();
-
         if (!isset($Inst_Id))
         {
-            //$error['excep'][1] = 'Please Login!';
             $this->load->view('login/login.php');
         }
-        // if (!isset($Inst_Id))
-        // {
-        //$error['excep'][1] = 'Please Login!';
-        //    $this->load->view('login/login.php');
-        // }
-        // $this->Registration_model->Insert_NewEnorlement($data);    
-        $formno = $formno = $this->Admission_inter_model->GetFormNo($Inst_Id);// $this->Admission_model->GetFormNo();//, $fname);//$_POST['username'],$_POST['password']);
+
+        $formno = $formno = $this->Admission_inter_model->GetFormNo($Inst_Id);
 
         $allinputdata = array('cand_name'=>@$_POST['cand_name'],'father_name'=>@$_POST['father_name'],
             'bay_form'=>@$_POST['bay_form'],'father_cnic'=>@$_POST['father_cnic'],
             'dob'=>@$_POST['dob'],'mob_number'=>@$_POST['mob_number'],
-            'medium'=>@$_POST['medium'],//'Inst_Rno'=>@$_POST['Inst_Rno'],
+            'medium'=>@$_POST['medium'],
             'speciality'=>@$_POST['speciality'],'MarkOfIden'=>@$_POST['MarkOfIden'],
             'medium'=>@$_POST['medium'],'nationality'=>@$_POST['nationality'],
             'gender'=>@$_POST['gend'],'hafiz'=>@$_POST['hafiz'],
@@ -925,16 +806,13 @@ class Admission_inter extends CI_Controller {
             'sub7p2'=>@$_POST['sub7p2'],'sub8p2'=>@$_POST['sub8p2'],
 
         );
-
-        // $name = 'Waseem Saleem';
-        // $fname = 'Muhammad Saleem'; 
         $sub1 = 0;         $sub2 = 0;              $sub3 = 0;          $sub4 = 0;           $sub5 = 0;         $sub6 = 0;            $sub7 = 0;  $sub8=0; $sub4a=0; $sub5a =0; $sub6a = 0; $sub7a = 0;     
         $sub1ap1 = 0;        $sub2ap1 = 0;        $sub3ap1 = 0;        $sub4ap1 = 0;        $sub5ap1 = 0;        $sub6ap1 = 0;        $sub7ap1 = 0;     
         $sub1ap2 = 0;        $sub2ap2 = 0;        $sub3ap2 = 0;        $sub4ap2 = 0;        $sub5ap2 = 0;        $sub6ap2 = 0;        $sub7ap2 = 0;     $sub8ap2 = 0; 
 
 
         $is11th = 0;
-        //debugBreak();
+
         if(@$_POST['sub1'] != 0)
         {
             $sub1ap1 = 1; 
@@ -1020,38 +898,8 @@ class Admission_inter extends CI_Controller {
             $sub2ap2 = 1; 
             $sub2 =  $_POST['sub2p2'];    
         }
-        /* if(@$_POST['sub3p2'] != 0)
-        {
-        $sub3ap2 = 1;  
-        $sub3 =  $_POST['sub3p2'];    
-        }*/
-        /* if(@$_POST['sub4p2'] != 0)
-        {
-        $sub4ap2 = 1; 
-        $sub4 =  $_POST['sub4p2'];     
-        }
-        if(@$_POST['sub5p2'] != 0)
-        {
-        $sub5ap2 = 1;    
-        $sub5 =  $_POST['sub5p2'];  
-        }
-        if(@$_POST['sub6p2'] != 0)
-        {
-        $sub6ap2 = 1;    
-        $sub6 =  $_POST['sub6p2'];  
-        }
-        if(@$_POST['sub7p2'] != 0)
-        {
-        $sub7ap2 = 1;    
-        $sub7 =  $_POST['sub7p2'];  
-        }*/
 
-
-        //$examtype = @$_POST['exam_type'];
         $marksImp = @$_POST['ddlMarksImproveoptions'];
-        // debugBreak();
-
-        //$cat = $this->makecat($examtype,$marksImp,$is11th);
 
         if($is11th==1)
         {
@@ -1066,9 +914,6 @@ class Admission_inter extends CI_Controller {
         $Speciality = $this->input->post('speciality');
         $grp_cd = $this->input->post('std_group');
 
-        //DebugBreak();
-
-        //      DebugBreak();
         $data = array(
             'name' =>$this->input->post('cand_name'),
             'Fname' =>$this->input->post('father_name'),
@@ -1082,7 +927,7 @@ class Admission_inter extends CI_Controller {
             'nat' =>$this->input->post('nationality'),
             'sex' =>$this->input->post('sex'),
             'Ishafiz' =>$this->input->post('hafiz'),
-            //'rel' =>(4),
+
             'rel' =>$this->input->post('religion'),
             'addr' =>$this->input->post('address'),
             'grp_cd' =>$this->input->post('std_group_hidden'),
@@ -1096,12 +941,13 @@ class Admission_inter extends CI_Controller {
             'sub8' =>($sub8),
             'sub1p2' =>$this->input->post('sub1p2'),
             'sub2p2' =>$this->input->post('sub2p2'),
-            //'sub3p2' =>$this->input->post('sub3p2'),
+
             'sub4p2' =>$this->input->post('sub4p2'),
             'sub5p2' =>$this->input->post('sub5p2'),
             'sub6p2' =>$this->input->post('sub6p2'),
             'sub7p2' =>($sub7a),
-            'sub8p2' =>$sub8,
+            'sub8ap2' =>$sub8ap2,
+
             'sub1ap1' => ($sub1ap1),
             'sub2ap1' => ($sub2ap1),
             'sub3ap1' => ($sub3ap1),
@@ -1109,15 +955,14 @@ class Admission_inter extends CI_Controller {
             'sub5ap1' => ($sub5ap1),
             'sub6ap1' => ($sub6ap1),
             'sub7ap1' => ($sub7ap1),
-            // 'sub8ap1' => ($sub8ap1),
+
             'sub1ap2' => ($sub1ap2),
             'sub2ap2' => ($sub2ap2),
-            //'sub3ap2' => ($sub3ap2),
+
             'sub4ap2' => ($sub4ap2),
             'sub5ap2' => ($sub5ap2),
             'sub6ap2' => ($sub6ap2),
             'sub7ap2' => ($sub7ap2),
-            'sub8ap2' => ($sub8ap2),
             'ruralOrurban' =>$this->input->post('UrbanRural'),
             'Inst_cd' =>($Inst_Id),
             'FormNo' =>($formno),
@@ -1128,91 +973,22 @@ class Admission_inter extends CI_Controller {
             'Iyear'=>@$_POST['Oldyear'],
             'Brd_cd'=>@$_POST['Oldbrd'],
             'schm'=>1,
-            //'picpath'=>@$_POST['pic'],
+
+            'picpath'=>@$_POST['pic'],
 
             'oldFormNo'=>@$_POST['formNo'],
-            ////       pvtinfo_dist     pvtinfo_teh      pvtZone
             'pvtinfo_dist'=>@$_POST['pvtinfo_dist'],
             'pvtinfo_teh'=>@$_POST['pvtinfo_teh'],
             'pvtZone'=>@$_POST['pvtZone'],
-
-
-
-
-
-
         );
-
-
-
-        /* 
-        $target_path = REGULAR_IMAGE_PATH.$Inst_Id.'/';
-        if (!file_exists($target_path)){
-
-        mkdir($target_path);
-        }
-
-        $base_path = GET_PRIVATE_IMAGE_PATH_COPY.@$_POST['pic'];
-        $copyimg = $target_path.$formno.'.jpg';
-
-
-        if (!(copy($base_path, $copyimg))) 
-        {
-
-        $data['excep'] = 'The picture is not upload.';
-        $this->session->set_flashdata('NewEnrolment_error',$data);
-        //  echo '<pre>'; print_r($allinputdata['excep']);exit();
-        redirect('Admission_inter/NewEnrolment_NewForm_inter/');
-        }
-
-        */
-
-        //DebugBreak();
-
-
-        /* $temp_file_name = @$_POST['pic']; //'OldPics/Pic16-MA/MA11th16/123456.jpg';
-        $whatIWant = substr($temp_file_name, strpos($temp_file_name, ".") - 6);    
-
-        $temp_db_rno = @$_POST['OldRno'];
-        $spreate_filename = explode(".",$whatIWant);
-        $temp_file_rno= $spreate_filename[0];
-        if($temp_file_rno != $temp_db_rno)
-        {
-        $allinputdata = "";
-        $data_error['excep'] = 'Your Pictures is not matched. ';
-        $this->session->set_flashdata('NewEnrolment_error',$data_error);
-        redirect('Admission_inter/NewEnrolment_NewForm_inter/'.@$_POST['OldRno']);
-
-        return;
-        }                         */
-
-
-        $target_path = REGULAR_IMAGE_PATH.$Inst_Id;
-        $base_path = GET_PRIVATE_IMAGE_PATH_COPY.@$_POST['pic'];
-        if (!file_exists($target_path)){
-
-            mkdir($target_path);
-        }
-        $copyimg = $target_path.'/'.$formno.'.jpg';
-        if (!(copy($base_path, $copyimg))) 
-        {
-            $data_error['excep'] = 'The file you are attempting to upload size is between 4 to 20 Kb.';
-            $this->session->set_flashdata('NewEnrolment_error',$data_error);
-
-            redirect('Admission_inter/NewEnrolment_NewForm_inter/'.@$_POST['OldRno']);
-
-        }
-
 
         $data_error = array(
             'formNo' =>$this->input->post('formNo'),
-
         );
-        //  debugBreak();
-        $this->frmvalidation('NewEnrolment_NewForm_inter',$data,0);
+        //$this->frmvalidation('NewEnrolment_NewForm_inter',$data,0);
         $data['isupdate']=0;
-        $logedIn = $this->Admission_inter_model->Insert_NewEnorlement($data);//, $fname);//$_POST['username'],$_POST['password']);
-        ////DebugBreak();
+        $logedIn = $this->Admission_inter_model->Insert_NewEnorlement($data);
+
         if( !isset($logedIn))
         {  
             $allinputdata = "";
@@ -1234,7 +1010,6 @@ class Admission_inter extends CI_Controller {
     }
     private function makecat($exam_type,$marksImp,$is11th)
     {
-        // debugBreak();
         $cate =  array();
 
         if($exam_type == 2)
@@ -1299,13 +1074,13 @@ class Admission_inter extends CI_Controller {
     }
     public function NewEnrolment_NewForm_inter()
     {    
-
-        // $this->uri->segment(3);
+        //DebugBreak();
 
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
         $Inst_Id = $userinfo['Inst_Id'];
+
         $this->load->view('common/header.php',$userinfo);
         $isReAdm = 0;
         $year = 0;
@@ -1315,6 +1090,7 @@ class Admission_inter extends CI_Controller {
         $this->load->model('Admission_inter_model');
 
         if($this->session->flashdata('NewEnrolment_error')){
+
             //DebugBreak();
 
             $RegStdata = $this->session->flashdata('NewEnrolment_error');   
@@ -1322,20 +1098,22 @@ class Admission_inter extends CI_Controller {
             $RegStdData['isReAdm']=$isReAdm;
             $RegStdData['Oldrno']=0;
             $formno = $this->uri->segment(3);
-            $year = 2015; 
+            $year = 2016; 
             $error_msg = $RegStdata['excep'];
             $RegStdData = array('data'=>$this->Admission_inter_model->EditEnrolement_data($formno,$year,$Inst_Id),'isReAdm'=>$isReAdm,'Oldrno'=>0,'error_msg'=>$error_msg);
 
         }
         else{
+            //DebugBreak();
+
             $error['excep'] = '';
             if($this->session->flashdata('IsReAdm')){
                 $isReAdm = 1;
-                $year = 2015;
+                $year = 2016;
             }
             else{
                 $isReAdm = 0;
-                $year = 2015;    
+                $year = 2016;    
             }
             $formno = $this->uri->segment(3);
             $error_msg = '';
@@ -1344,11 +1122,11 @@ class Admission_inter extends CI_Controller {
         $this->load->view('common/menu.php',$data);
         $this->load->view('Admission/inter/New_Enrolement_form.php',$RegStdData);   
         $this->load->view('common/commonfooter_inter_regular.php');
-
     }
     public function NewEnrolment_EditForm_inter()
     {    
         //DebugBreak();
+
         $this->load->library('session');
         $formno = $this->uri->segment(3);
         $Logged_In_Array = $this->session->all_userdata();
@@ -1366,9 +1144,11 @@ class Admission_inter extends CI_Controller {
             $formno=$msg;  
         }
         $this->load->model('Admission_inter_model');
-        //   DebugBreak();
+
+        //DebugBreak();
+
         if($this->session->flashdata('NewEnrolment_error')){
-            //DebugBreak();
+
             $RegStdData['data'][0] = $this->session->flashdata('NewEnrolment_error');   
             $isReAdm = 0;
             $RegStdData['isReAdm']=$isReAdm;
@@ -1387,8 +1167,9 @@ class Admission_inter extends CI_Controller {
             }
             else{
                 $isReAdm = 0;
-                $year = 2016;    
+                $year = 2017;    
             }
+
             $error_msg = '';
             $RegStdData = array('data'=>$this->Admission_inter_model->EditEnrolement_singleForm($formno,$year,$Inst_Id),'isReAdm'=>$isReAdm,'Oldrno'=>0,'error_msg'=>$error_msg);
         }
@@ -1399,7 +1180,7 @@ class Admission_inter extends CI_Controller {
     }
     public function NewEnrolment_update()
     {
-        // //DebugBreak();
+        //DebugBreak();
 
         $this->load->model('Admission_inter_model');
 
@@ -1411,38 +1192,12 @@ class Admission_inter extends CI_Controller {
         $this->commonheader($userinfo);
         if (!isset($Inst_Id))
         {
-            //$error['excep'][1] = 'Please Login!';
             $this->load->view('login/login.php');
         }
         $error = array();
-        // //DebugBreak();
-        $formno =  $_POST['formNo'];  //$this->Admission_inter_model->GetFormNo($Inst_Id);//, $fname);//$_POST['username'],$_POST['password']);
-        /*  $target_path = IMAGE_PATH.$Inst_Id.'/';
-        // $target_path = '../uploads2/'.$Inst_Id.'/';
-        if (!file_exists($target_path)){
 
-        mkdir($target_path);
-        }
-        $target_path = IMAGE_PATH.$Inst_Id.'/';
-        if (!file_exists($target_path)){
+        $formno =  $_POST['formNo'];
 
-        mkdir($target_path);
-        }                       */
-
-        /*  $config['upload_path']   = $target_path;
-        $config['allowed_types'] = 'jpg';
-        $config['max_size']      = '20';
-        $config['max_width']     = '260';
-        $config['max_height']    = '290';
-        $config['overwrite']     = TRUE;
-        $config['file_name']     = $formno.'.jpg';
-
-        $filepath = $target_path. $config['file_name']  ;
-
-
-        //$config['new_image']    = $formno.'.JPEG';
-
-        $this->load->library('upload', $config);     */
         $sub1ap1 = 0;
         $sub2ap1 = 0;
         $sub3ap1 = 0;
@@ -1746,7 +1501,8 @@ class Admission_inter extends CI_Controller {
     }
     public function NewEnrolment_Delete($formno)
     {
-        // //DebugBreak();
+        //DebugBreak();
+        
         $this->load->model('Admission_inter_model');
         $RegStdData = array('data'=>$this->Admission_inter_model->Delete_NewEnrolement($formno));
         $this->load->library('session');
@@ -1897,7 +1653,6 @@ class Admission_inter extends CI_Controller {
     }
     public function EditForms()
     {
-        //  DebugBreak();
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
@@ -1921,7 +1676,7 @@ class Admission_inter extends CI_Controller {
         $Logged_In_Array = $this->session->all_userdata();
         $user = $Logged_In_Array['logged_in'];
         $this->load->model('Admission_inter_model');
-        //  $error['grp_cd'] = $user['grp_cd'];
+
         $RegStdData = array('data'=>$this->Admission_inter_model->EditEnrolement($user['Inst_Id']),'grp_cd'=>$user['grp_cd']);
         $RegStdData['msg_status'] = $error_msg;
         $userinfo = $Logged_In_Array['logged_in'];
@@ -1929,9 +1684,6 @@ class Admission_inter extends CI_Controller {
         $this->load->view('common/menu.php',$data);
         $this->load->view('Admission/inter/EditForms.php',$RegStdData);
         $this->load->view('common/commonfooter_inter_regular.php');
-
-
-
     }
     public function NewForms()
     {
@@ -2020,10 +1772,10 @@ class Admission_inter extends CI_Controller {
     }
     public function CreateBatch()
     {
-        // DebugBreak();
+        //DebugBreak();
+        
         $data = array(
             'isselected' => '11',
-
         );
         $msg = $this->uri->segment(3);
         $spl_cd = $this->uri->segment(4);
@@ -3067,7 +2819,6 @@ class Admission_inter extends CI_Controller {
                                                                                                                                                                                                                                                                                                                                                                                         else if($_sub_cd == 94)  $ret_val = "HEALTH & PHYSICAL EDUCATION_DFD";   
                                                                                                                                                                                                                                                                                                                                                                                             return $ret_val ;             
     }
-
     public function commonfooter($data)
     {
         $this->load->view('common/footer.php',$data);
@@ -4411,5 +4162,4 @@ class Admission_inter extends CI_Controller {
 
         }
     }
-
 }

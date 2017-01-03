@@ -50,7 +50,7 @@
                                 </thead>
                                 <tbody>
                                     <?php
-                                  //  //DebugBreak();
+                                   
                                     if($data != false)
                                     {
                                     $n=0;  
@@ -58,7 +58,7 @@
                                     foreach($data as $key=>$vals):
                                     $n++;
                                     $formno = !empty($vals["FormNo"])?$vals["FormNo"]:"N/A";
-                                    $grp_name = $vals["RegGrp"];
+                                    $grp_name = $vals["grp_cd"];
                                     switch ($grp_name) {
                                         case '1':
                                             $grp_name = 'PRE-MEDICAL';
@@ -87,7 +87,7 @@
                                     
                                     <td>'.$grp_name.'</td>
                                    <td>'.$vals["sub1_abr"].','.$vals["sub2_abr"].','.$vals["sub8_abr"].','.$vals["sub4_abr"].','.$vals["sub5_abr"].','.$vals["sub6_abr"].','.$vals["sub7_abr"].'</td>
-                                     <td><img id="previewImg" style="width:40px; height: 40px;" src="'.base_url().REGULAR_IMAGE_PATH.$Inst_Id.'/'.$vals['picpath'].'?'.rand(10000,1000000).'" alt="Candidate Image"></td>';
+                                     <td><img id="previewImg" style="width:40px; height: 40px;" src="'.base_url().$vals['picpath'].'?'.rand(10000,1000000).'" alt="Candidate Image"></td>';
                                     
                                     echo'<td>
                                     <button type="button" class="btn btn-info" value="'.$formno.'" onclick="EditForm('.$formno.')">Edit Form</button>

@@ -6,12 +6,12 @@
                 <div class="widget no-margin">
                     <div class="widget-header">
                         <div class="title">
-                         View All Old Students Records   <a data-original-title="" id="notifications"></a>
+                            View All Old Students Records   <a data-original-title="" id="notifications"></a>
                         </div>
-                        
+
                     </div>
                     <div class="widget-body">
-                        
+
                         <hr>
                         <div id="dt_example" class="example_alt_pagination">
                             <table class="table table-condensed table-striped table-hover table-bordered pull-left" id="data-table">
@@ -20,27 +20,27 @@
                                         <th style="width: 4%;">
                                             Sr.No.
                                         </th>
-                                         <th style="width: 5%;">
+                                        <th style="width: 5%;">
                                             Previous Roll.No.
                                         </th>
                                         <th style="width: 5%;">
                                             Matric Roll.No.
                                         </th>
-                                       
+
                                         <th style="width:20%">
                                             Name
                                         </th>
                                         <th style="width:20%">
                                             Father's Name
                                         </th>
-                                      <!--  <th style="width:5%" class="hidden-phone">
-                                            DOB
+                                        <!--  <th style="width:5%" class="hidden-phone">
+                                        DOB
                                         </th>-->
                                         <th style="width:15%" class="hidden-phone">
                                             Subject Group
                                         </th>
-                                        
-                                         <th style="width:5%" class="hidden-phone">
+
+                                        <th style="width:5%" class="hidden-phone">
                                             Picture
                                         </th>
                                         <th style="width:10%" class="hidden-phone" >
@@ -50,61 +50,57 @@
                                 </thead>
                                 <tbody>
                                     <?php
-                                //DebugBreak();
-                               $image_path_selected = '';
-                             //   if($data[0]['sex']==1){ $image_path_selected = base_url().'/Uploads/IS2016/Private/male.JPG';}else{$image_path_selected = base_url().'/Uploads/IS2016/Private/female.JPG';}
+
+                                    $image_path_selected = '';
+
                                     if($data != false)
                                     {
-                                    $n=0;  
-                                    $grp_name='';                             
-                                    foreach($data as $key=>$vals):
-                                    $n++;
-                                    $formno = !empty($vals["formNo"])?$vals["formNo"]:"N/A";
-                                    $grp_name = $vals["grp_cd"];
-                                    $sub7 = $vals["sub7"];
-                                     $image_path_selected = '../'.$vals['picpath']; 
-                                    switch ($grp_name) {
-                                        case '1':
-                                            $grp_name = 'PRE-MEDICAL';
-                                            break;
-                                        case '2':
-                                            $grp_name = 'PRE-ENGINEERING';
-                                            break;
-                                        case '3':
-                                            $grp_name = 'HUMANITIES';
-                                            break;
-                                        case '4':
-                                            $grp_name = 'GENERAL SCIENCE';
-                                            break;
-                                        case '5':
-                                            $grp_name = 'COMMERCE';
-                                            break;
-                                        default:
-                                            $grp_name = "No GROUP SELECTED.";
-                                    }
-                                   
-                                    
-                                 //  DebugBreak();
-                                    echo '<tr  >
-                                    <td>'.$n.'</td>
-                                    <td>'.$vals["rno"].'</td>
-                                    <td>'.$vals["matRno"].'</td>
-                                    
-                                    <td>'.$vals["name"].'</td>
-                                    <td>'.$vals["Fname"].'</td>
-                                    <td>'.$grp_name.'</td>
-                                     <td><img id="previewImg" style="width:40px; height: 40px;" src="'.$image_path_selected. '?'.rand(10000,1000000).'" alt="Candidate Image"></td>';
-                                    // <td><img id="previewImg" style="width:40px; height: 40px;" src="'.base_url().GET_PRIVATE_IMAGE_PATH.$vals["picpath"].'" alt="Candidate Image"></td>';
-                                     /*<td><img id="previewImg" style="width:40px; height: 40px;" src="/'.IMAGE_PATH.$Inst_Id.'/'.$vals['PicPath'].'" alt="Candidate Image"></td>';*/
-                                    echo'<td>
-                                    <button type="button" class="btn btn-info" value="'.$vals["rno"].'" onclick="NewForm('.$vals["rno"].')">Save Form</button>
-                                   
-                                    </td>
-                                    </tr>';
-                                    endforeach;
+                                        $n=0;  
+                                        $grp_name='';                             
+                                        foreach($data as $key=>$vals):
+                                        $n++;
+                                        $formno = !empty($vals["formNo"])?$vals["formNo"]:"N/A";
+                                        $grp_name = $vals["grp_cd"];
+                                        $sub7 = $vals["sub7"];
+                                        $image_path_selected = '../'.$vals['picpath']; 
+                                        switch ($grp_name) {
+                                            case '1':
+                                                $grp_name = 'PRE-MEDICAL';
+                                                break;
+                                            case '2':
+                                                $grp_name = 'PRE-ENGINEERING';
+                                                break;
+                                            case '3':
+                                                $grp_name = 'HUMANITIES';
+                                                break;
+                                            case '4':
+                                                $grp_name = 'GENERAL SCIENCE';
+                                                break;
+                                            case '5':
+                                                $grp_name = 'COMMERCE';
+                                                break;
+                                            default:
+                                                $grp_name = "No GROUP SELECTED.";
+                                        }
+
+                                        echo '<tr  >
+                                        <td>'.$n.'</td>
+                                        <td>'.$vals["rno"].'</td>
+                                        <td>'.$vals["matRno"].'</td>
+
+                                        <td>'.$vals["name"].'</td>
+                                        <td>'.$vals["Fname"].'</td>
+                                        <td>'.$grp_name.'</td>
+                                        <td><img id="previewImg" style="width:40px; height: 40px;" src="'.$image_path_selected. '?'.rand(10000,1000000).'" alt="Candidate Image"></td>';
+                                        echo'<td>
+                                        <button type="button" class="btn btn-info" value="'.$vals["rno"].'" onclick="NewForm('.$vals["rno"].')">Save Form</button>
+
+                                        </td>
+                                        </tr>';
+                                        endforeach;
                                     }
                                     ?>
- </tbody>
+                                </tbody>
                             </table>
                             <div class="clearfix"></div>
                         </div>
