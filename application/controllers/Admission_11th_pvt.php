@@ -772,10 +772,10 @@ class Admission_11th_pvt extends CI_Controller {
         $pdf->Cell(0, 0.2, "BOARD OF INTERMEDIATE AND SECONDARY EDUCATION, GUJRANWALA", 0.25, "C");
         $pdf->Image("assets/img/logo2.png",.60,0.3, 0.65,0.65, "PNG");
         $pdf->Image("assets/img/ExamCenter.jpg",4.5,2.90, 2.78,0.15, "jpeg");        
-        $pdf->Image("assets/img/11.jpg",7.7,0.23, 0.24,0.24, "JPG");
-        $pdf->Image("assets/img/11.jpg",7.7,7.45, 0.24,0.24, "JPG");      
-        $pdf->Image("assets/img/11.jpg",7.7,9.04, 0.24,0.24, "JPG");   
-        $pdf->Image("assets/img/11.jpg",7.7,10.46, 0.24,0.24, "JPG");   
+        $pdf->Image("assets/img/11th.png",7.6,0.07,  0.50,0.50, "PNG");
+        $pdf->Image("assets/img/11th.png",7.7,7.25,  0.50,0.50, "PNG");      
+        $pdf->Image("assets/img/11th.png",7.7,8.80,  0.50,0.50, "PNG");   
+        $pdf->Image("assets/img/11th.png",7.7,10.16,  0.50,0.50, "PNG");   
         //$this->Image("logo.jpg",0.05,0.3, 0.75,0.75, "JPG", "http://www.biseGujranwala.edu.pk");
         
         $pdf->SetFont('Arial','',9);
@@ -1210,7 +1210,7 @@ class Admission_11th_pvt extends CI_Controller {
         $pdf->Cell(0,0.1,"Affidavit:-",0,'L');
         $pdf->SetXY(0.7,5.6+$Y);
         $pdf->SetFont('Arial','',8);
-        $pdf->MultiCell(7.3,0.15, "I have read this form/instructions. The data/information on this form and in online system is same as last entered/modified/provided by me and it's correctness is only my responsibility. I understand that only the information/data provided in the online system along with the photograph and some other handwritten details on this form will be used for further processing. I accept all the terms and conditions in this regard.",0,'L'); 
+        $pdf->MultiCell(7.3,0.15, "I have read this admission form/instructions. The data/information on this form and in online system is same as last entered/modified/provided by me and it's correctness is only my responsibility. I understand that only the information/data provided in the online system along with the photograph and some other handwritten details on this form will be used for further processing. I accept all the terms and conditions in this regard.",0,'L'); 
        
         
         
@@ -1239,7 +1239,7 @@ class Admission_11th_pvt extends CI_Controller {
         $pdf->Cell(0,0.1,"Headmaster/Headmistress/Principal",0,'R');
         $pdf->SetXY($stampx,6.15+$Y);
         $pdf->SetFont('Arial','',8);
-        $pdf->Cell(0,0.1,"Head Of Institution Name",0,'R');
+        $pdf->Cell(0,0.1,"Name Head Of Institute",0,'R');
         $pdf->SetXY($stampx,6.3+$Y);
         $pdf->SetFont('Arial','',8);
         $pdf->Cell(0,0.1,"School/College Code",0,'R');
