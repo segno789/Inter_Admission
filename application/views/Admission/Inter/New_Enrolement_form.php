@@ -605,7 +605,7 @@
                                         <option value="0"  <?php if($data[0]['sub3pf1']==1) echo "selected='selected'"; ?> >NONE</option>
                                     </select> 
                                     <select id="sub3p2" class="span3 dropdown" name="sub3p2">
-                                         <option value="<?php echo $data[0]['sub8'];?>"><?php
+                                        <option value="<?php echo $data[0]['sub8'];?>"><?php
                                             echo array_search($data[0]['sub8'],$subarray);
                                         ?></option>
                                     </select> 
@@ -763,23 +763,17 @@
                         </form>
                         <script type="text/javascript">
 
-
-
                             function checks(){
 
                                 var status  =  check_NewEnrol_validation_regular();
                                 if(status == 0)
                                 {
-
                                     return false;    
                                 }
                                 else
                                 {
-
                                     return true;
-                                } 
-
-
+                                }
                             }
                             function CancelAlert()
                             {
