@@ -68,7 +68,7 @@ class Admission_inter_model extends CI_Model
     }
     public function Dashboard($inst_cd)
     {
-        $query = $this->db->query("Admission_online..Dashboard_adm_10th $inst_cd");
+        $query = $this->db->query("Admission_online..Dashboard_adm_12th $inst_cd");
 
         $rowcount = $query->num_rows();
         if($rowcount > 0)

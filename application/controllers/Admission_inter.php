@@ -12,8 +12,7 @@ class Admission_inter extends CI_Controller {
     }
     public function index()
     {
-
-
+        //DebugBreak();
         $msg = 7;
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
