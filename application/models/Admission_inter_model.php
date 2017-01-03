@@ -549,7 +549,7 @@ class Admission_inter_model extends CI_Model
         $Batch_Id = $fetch_data['Batch_Id'];
 
         $this->db->select('name, Fname, IsReAdm,AdmFee,AdmProcessFee,AdmFine,AdmTotalFee');
-        $this->db->from('Admission_online..ISAdm2016');
+        $this->db->from(REGULAR_INSERT_TABLE);
         $this->db->where(array('coll_cd' => $Inst_cd,'Batch_ID'=>$Batch_Id));
         $result_1 = $this->db->get()->result();
 
