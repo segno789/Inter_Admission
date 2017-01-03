@@ -42,6 +42,9 @@ define('DIRPATH12TH','D:\xampp\htdocs\Share Images\\');
 define('PRIVATE_IMAGE_PATH', 'uploads/private/');
 define('PRIVATE_IMAGE_PATH_FRESH', 'uploads/Fresh');
 define('REGULAR_IMAGE_PATH', 'uploads/regular/');
+
+define('REGULAR_INSERT_TABLE', 'Admission_online..IAAdm');
+
 define('Session','1');  // 1 for Annual and 2 for Supply
 define('Year','2017');  
 define('lastdate','30-01-2017');
@@ -69,6 +72,9 @@ define('TITLEHSSC','Online HSSC Annual Admission 2017');
 //define('SingleDateFee11th','03-10-2016');
 define('currdate','date("d-m-Y");');
 define('TripleDateFeeinter', '13-10-2016');
+
+define('SingleDateFee', '30-01-2017');
+
 define ('class_for_11th_Adm','11th');                                
 //define('getinfo','admission_online..tblAdmissionDataForHSSC');
 define('getinfo','admission_online..sp_Admission_HSSC_Annual');

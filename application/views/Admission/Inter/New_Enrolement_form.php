@@ -605,17 +605,9 @@
                                         <option value="0"  <?php if($data[0]['sub3pf1']==1) echo "selected='selected'"; ?> >NONE</option>
                                     </select> 
                                     <select id="sub3p2" class="span3 dropdown" name="sub3p2">
-                                        <option value="<?php 
-                                        
-                                        if($data[0]['sub8'] == ''){
-                                            echo '<option value="91">PAKISTAN STUDIES</option>';
-                                        }
-                                                     else{
-                                                         
-                                                     
-                                        echo $data[0]['sub8'];?>"><?php
+                                         <option value="<?php echo $data[0]['sub8'];?>"><?php
                                             echo array_search($data[0]['sub8'],$subarray);
-                                                     }?></option>
+                                        ?></option>
                                     </select> 
                                 </div>
                                 <div class="control row controls-row">
