@@ -68,7 +68,7 @@ class Admission_inter_model extends CI_Model
     }
     public function Dashboard($inst_cd)
     {
-        $query = $this->db->query("Admission_online..Dashboard_adm_10th $inst_cd");
+        $query = $this->db->query("Admission_online..Dashboard_adm_12th $inst_cd");
 
         $rowcount = $query->num_rows();
         if($rowcount > 0)
@@ -341,7 +341,7 @@ class Admission_inter_model extends CI_Model
 
             if($spl_cd == "0")
             {
-                $q1         = $this->db->query("select * from Admission_online..IAAdm where coll_cd =$Inst_cd and (isdeleted = 0 or isdeleted is null) and (batch_id = 0 or batch_id is null) and RegGrp =$RegGrp");
+                $q1         = $this->db->query("select * from Admission_online..IAAdm where coll_cd =$Inst_cd and (isdeleted = 0 or isdeleted is null) and (batch_id = 0 or batch_id is null) and grp_cd =$RegGrp");
             }
             else{
                 $q1         = $this->db->query("select * from Admission_online..IAAdm where coll_cd =$Inst_cd and (isdeleted = 0 or isdeleted is null) and(batch_id = 0 or batch_id is null) and  Spec =$spl_cd");
@@ -356,7 +356,7 @@ class Admission_inter_model extends CI_Model
             else{
                 return false;
             }
-            $q2         = $this->db->get_where('Admission_Online..RuleFeeAdm',array('Rule_Fee_ID'=>1));
+            $q2 = $this->db->get_where('Admission_Online..RuleFeeAdm',array('Rule_Fee_ID'=>1));
             $resultarr = array("info"=>$query->result_array(),"fee"=>$result_1,"rule_fee"=>$q2->result_array());
             return  $resultarr;
         }
@@ -414,7 +414,7 @@ class Admission_inter_model extends CI_Model
     public function getrulefee(){
         $date =  date('Y-m-d') ;
         //DebugBreak();
-        $query = $this->db->get_where('Admission_Online..RuleFeeAdm', array('class' => 12,'sess' => 2, 'Start_Date <='=>$date,'End_Date >='=>$date));
+        $query = $this->db->get_where('Admission_Online..RuleFeeAdm', array('class' => 12,'sess' => 1, 'Start_Date <='=>$date,'End_Date >='=>$date));
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
@@ -465,7 +465,7 @@ class Admission_inter_model extends CI_Model
         $total_std = $data['total_std'];
         $cert_fee = $data['cert_fee'];
         $total_cert = $data['total_cert'];
-        $query = $this->db->query("Admission_online..Batch_Create_12th_2016 $inst_cd,$reg_fee,$fine,$processing_fee,$total_std,$total_fee,$TotalRegFee,$Totalprocessing_fee,$TotalLatefee,'$todaydate','$forms_id',$cert_fee,$total_cert");
+        $query = $this->db->query("Admission_online..Batch_Create_12th $inst_cd,$reg_fee,$fine,$processing_fee,$total_std,$total_fee,$TotalRegFee,$Totalprocessing_fee,$TotalLatefee,'$todaydate','$forms_id',$cert_fee,$total_cert");
     }
     public function Batch_List($data)
     {
@@ -530,7 +530,7 @@ class Admission_inter_model extends CI_Model
         //DebugBreak();
         $Inst_cd = $fetch_data['Inst_cd'];
         $Batch_Id = $fetch_data['Batch_Id'];
-        $query = $this->db->query("Admission_online..sp_get_reg_Print_Form_batchidwise_Inter_II $Inst_cd,$Batch_Id");
+        $query = $this->db->query("admission_online..sp_get_reg_Print_Form_batchidwise_Inter_II $Inst_cd, $Batch_Id");
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
@@ -549,7 +549,7 @@ class Admission_inter_model extends CI_Model
         $Batch_Id = $fetch_data['Batch_Id'];
 
         $this->db->select('name, Fname, IsReAdm,AdmFee,AdmProcessFee,AdmFine,AdmTotalFee');
-        $this->db->from('Admission_online..ISAdm2016');
+        $this->db->from(REGULAR_INSERT_TABLE);
         $this->db->where(array('coll_cd' => $Inst_cd,'Batch_ID'=>$Batch_Id));
         $result_1 = $this->db->get()->result();
 

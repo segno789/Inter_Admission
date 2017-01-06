@@ -12,8 +12,7 @@ class Admission_inter extends CI_Controller {
     }
     public function index()
     {
-
-
+        //DebugBreak();
         $msg = 7;
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -1502,7 +1501,7 @@ class Admission_inter extends CI_Controller {
     public function NewEnrolment_Delete($formno)
     {
         //DebugBreak();
-        
+
         $this->load->model('Admission_inter_model');
         $RegStdData = array('data'=>$this->Admission_inter_model->Delete_NewEnrolement($formno));
         $this->load->library('session');
@@ -1725,23 +1724,22 @@ class Admission_inter extends CI_Controller {
     }
     public function BatchList()
     {
-        // //DebugBreak();
+        //DebugBreak();
+
         $data = array(
             'isselected' => '11',
 
         );
-        // $this->commonheader($data);
+
         $this->load->model('Admission_inter_model');
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
         $userinfo['isselected'] = 2;
         $Inst_Id = $userinfo['Inst_Id'];
-        //$page_name  = "Create Batch";
+
         if($this->session->flashdata('BatchList_error')){
-
             $error_msg = $this->session->flashdata('BatchList_error');    
-
         }
         else{
             $error_msg = '';
@@ -1751,14 +1749,8 @@ class Admission_inter extends CI_Controller {
         $user_info_arr = array('info'=>$user_info,'errors'=>$error_msg);
         $this->load->view('common/header.php',$userinfo);
         $this->load->view('common/menu.php',$data);
-
         $this->load->view('Admission/inter/BatchList.php',$user_info_arr);
-
-
         $this->load->view('common/commonfooter_inter_regular.php');
-        //$this->commonheader($data);
-        //  $this->load->view('Admission_inter/9th/BatchList.php');
-        //$this->commonfooter();
     }
     public function ProofReading()
     {
@@ -1772,8 +1764,6 @@ class Admission_inter extends CI_Controller {
     }
     public function CreateBatch()
     {
-        //DebugBreak();
-        
         $data = array(
             'isselected' => '11',
         );
@@ -1783,14 +1773,11 @@ class Admission_inter extends CI_Controller {
 
         $this->load->library('session');
         if($this->session->flashdata('error')){
-
             $error_msg = $this->session->flashdata('error');    
-
         }
         else{
             $error_msg = 0;
         }
-
 
         $Logged_In_Array = $this->session->all_userdata();
         $user = $Logged_In_Array['logged_in'];
@@ -1805,13 +1792,11 @@ class Admission_inter extends CI_Controller {
 
         $this->load->view('Admission/inter/CreateBatch.php',$RegStdData);
         $this->load->view('common/commonfooter_inter_regular.php');
-
-
-
     }
     public function Make_Batch_Group_wise()
     {
-        // DebugBreak();
+        //DebugBreak();
+
         $RegGrp = $this->uri->segment(3);
         $Spl_case = $this->uri->segment(4);
 
@@ -1823,15 +1808,14 @@ class Admission_inter extends CI_Controller {
         $Inst_Id = $userinfo['Inst_Id'];
         $page_name  = "Create Batch";
         $User_info_data = array('Inst_Id'=>$Inst_Id,'RegGrp'=>$RegGrp,'spl_case'=>$Spl_case);
-        $user_info  =  $this->Admission_inter_model->user_info($User_info_data); //$db->first("SELECT * FROM  Admission_online..tblinstitutes_all WHERE Inst_Cd = " .$user->inst_cd);
+        $user_info  =  $this->Admission_inter_model->user_info($User_info_data);
         if($user_info == false)
         {
             $this->session->set_flashdata('error', '3');
             redirect('Admission_inter/CreateBatch');
             return;
         }
-        // $is_gov            =  $user_info['info'][0]['IsGovernment'];  //getValue("IsGovernment", " Admission_online..tblinstitutes_all", "Inst_cd =".$user->inst_cd);
-        /*====================  Counting Fee  ==============================*/
+
         $processing_fee = 0;
         $Adm_fee           = 0;
         $LAdm_fee          = 0;
@@ -1864,7 +1848,7 @@ class Admission_inter extends CI_Controller {
         );
         // DebugBreak();
         $ispractical = 0;
-        $AdmFee = $this->Admission_inter_model->getrulefee($ispractical);//$this->makefee($cat,$Speciality,$sub7,$sub8,$grp_cd,$per_grp);
+        $AdmFee = $this->Admission_inter_model->getrulefee($ispractical);
         $Adm_Fee_withSci_Composite = $AdmFee[0]['Comp_Amount'];
         $Adm_Fee_withSci_10th_Only = $AdmFee[0]['Amount'];
         $Adm_Fee_withArts_Composite = $AdmFee[1]['Comp_Amount'];
@@ -1948,40 +1932,29 @@ class Admission_inter extends CI_Controller {
             $total_cert = $total_cert+$cert_fee;
         } 
 
-
-
         $netTotal = (int)$netTotal +$Adm_fee + $LAdm_fee+$Adm_ProcessingFee+ $total_cert;;
-
-
 
         $forms_id   = implode(",",$ids);        
         $tot_fee     = $Totalprocessing_fee+$TotalAdmFee+$TotalLatefee+$total_cert;
-        // $challan_No = 0;
+
         $today = date("Y-m-d H:i:s");
         $data = array('inst_cd'=>$Inst_Id,'total_fee'=>$tot_fee,'proces_fee'=>$Adm_ProcessingFee,'reg_fee'=>$Adm_fee,'fine'=>$LAdm_fee,'TotalRegFee'=>$TotalAdmFee,'TotalLatefee'=>$TotalLatefee,'Totalprocessing_fee'=>$Totalprocessing_fee,'forms_id'=>$forms_id,'todaydate'=>$today,'total_std'=>$total_std,'cert_fee'=>$cert_fee,'total_cert'=>$total_cert);
         $this->Admission_inter_model->Batch_Insertion($data); 
         redirect('Admission_inter/BatchList');
-        return;
-        // $result    = $db->query(" EXEC Batch_Create @Inst_Cd = ".$user->inst_cd.",@UserId = ".$user->get_currentUser_ID()."@Amount = ".$tot_fee.",@Total_ProcessingFee = ".$prs_fee.",@Total_Admission_interFee = ".$reg_fee.",@Total_LateAdmission_interFee =".$late_fee.",@Total_LateAdmissionFee = 0,@Valid_Date = '$today',@form_ids = '$forms_id'");
-
-        // redirect_to("create-batch.php");
-
-
-        //  $iselectricalactive = getValue("iselectricalallow", "Admission_online..tblinstitutes_all", "Inst_cd =".$user->inst_cd); 
+        return;                                                                                                                     
     }
     public function Make_Batch_Formwise()
     {
-        //  DebugBreak();
+        //DebugBreak();
+
         if(!empty($_POST["chk"]))
         {
-
             $forms_id =   "'".implode("','",$_POST["chk"])."'";    
         }
         else{
             return;
         }
-
-        // DebugBreak();
+        //DebugBreak();
         $RegGrp = $this->uri->segment(3);
         $this->load->model('Admission_inter_model');
         $this->load->library('session');
@@ -1992,9 +1965,9 @@ class Admission_inter extends CI_Controller {
         $page_name  = "Create Batch";
         $rule_fee = $this->Admission_inter_model->getrulefee();
         $User_info_data = array('Inst_Id'=>$Inst_Id,'forms_id'=>$forms_id,'rule_fee'=>$rule_fee[0]['Rule_Fee_ID']);
-        $user_info  =  $this->Admission_inter_model->user_info_Formwise($User_info_data); //$db->first("SELECT * FROM  Admission_online..tblinstitutes_all WHERE Inst_Cd = " .$user->inst_cd);
-        $is_gov            =  $user_info['info'][0]['IsGovernment'];  //getValue("IsGovernment", " Admission_online..tblinstitutes_all", "Inst_cd =".$user->inst_cd);
-        /*====================  Counting Fee  ==============================*/
+        $user_info  =  $this->Admission_inter_model->user_info_Formwise($User_info_data); 
+        $is_gov =  $user_info['info'][0]['IsGovernment'];
+
         $processing_fee = 0;
         $Adm_fee           = 0;
         $LAdm_fee          = 0;
@@ -2003,7 +1976,7 @@ class Admission_inter extends CI_Controller {
         $Totalprocessing_fee = 0;
         $netTotal = 0;
         $cert_fee = 550;
-        /*====================  Counting Fee  ==============================*/    
+
         $practical_Sub = array(
             'LibSC'=>'8',
             'GEO'=>'12',
@@ -2025,15 +1998,15 @@ class Admission_inter extends CI_Controller {
             'CST'=>'98',
 
         );
-        // DebugBreak();
+
         $ispractical = 0;
-        $AdmFee =$rule_fee;// $this->Admission_inter_model->getrulefee($ispractical);//$this->makefee($cat,$Speciality,$sub7,$sub8,$grp_cd,$per_grp);
+        $AdmFee =$rule_fee;
         $Adm_Fee_withSci_Composite = $AdmFee[0]['Comp_Amount'];
         $Adm_Fee_withSci_10th_Only = $AdmFee[0]['Amount'];
         $Adm_Fee_withArts_Composite = $AdmFee[1]['Comp_Amount'];
         $Adm_Fee_withArts_10th_Only = $AdmFee[1]['Amount'];
         $Adm_ProcessingFee = $AdmFee[0]['Processing_Fee'];
-        // DebugBreak();
+
         $q1 = $user_info['fee'];
         $total_std = 0;
         $total_cert = 0;
@@ -2114,7 +2087,7 @@ class Admission_inter extends CI_Controller {
 
         $forms_id   = implode(",",$ids);        
         $tot_fee     = $Totalprocessing_fee+$TotalAdmFee+$TotalLatefee+$total_cert;
-        // $challan_No = 0;
+
         $today = date("Y-m-d H:i:s");
         $data = array('inst_cd'=>$Inst_Id,'total_fee'=>$tot_fee,'proces_fee'=>$Adm_ProcessingFee,'reg_fee'=>$Adm_fee,'fine'=>$LAdm_fee,'TotalRegFee'=>$TotalAdmFee,'TotalLatefee'=>$TotalLatefee,'Totalprocessing_fee'=>$Totalprocessing_fee,'forms_id'=>$forms_id,'todaydate'=>$today,'total_std'=>$total_std,'cert_fee'=>$cert_fee,'total_cert'=>$total_cert);
         $this->Admission_inter_model->Batch_Insertion($data); 
@@ -2123,9 +2096,10 @@ class Admission_inter extends CI_Controller {
     }
     public function FormPrinting()
     {
+        //DebugBreak();
 
         $this->load->library('session');
-        ////DebugBreak();
+        
         if(!( $this->session->flashdata('error'))){
 
             $error_msg = "0";    
@@ -2139,30 +2113,24 @@ class Admission_inter extends CI_Controller {
         $data = array(
             'isselected' => '11',
         );
-        //  //DebugBreak();
+
         $error = array();
         $error['excep'] = '';
         $error['gender'] = $userinfo['gender'];
         $error['isrural'] = $userinfo['isrural'];
         $error['error_msg'] = $error_msg;
         $this->commonheader($data);
-        $this->load->view('Admission/inter/FormPrinting.php',$error);
+        /*$this->load->view('Admission/inter/FormPrinting.php',$error);*/
+        $this->load->view('Admission/inter/FormPrinting.php');
         $this->load->view('common/commonfooter_inter_regular.php');
-        //$this->commonfooter(array("files"=>array("jquery.maskedinput.js","validate.NewEnrolment.js")));
-
-        //$this->load->model('Admission_inter_model');
     }
     private function set_barcode($code)
     {
-        ////DebugBreak()  ;
-        //load library
+
         $this->load->library('zend');
-        //load in folder Zend
         $this->zend->load('Zend/Barcode');
-
-
         $file = Zend_Barcode::draw('code128','image', array('text' => $code,'drawText'=>false), array());
-        //$code = $code;
+
         $store_image = imagepng($file,BARCODE_PATH."{$code}.png");
         return $code.'.png';
 
@@ -2276,16 +2244,7 @@ class Admission_inter extends CI_Controller {
         $dy = 4.6; 
         $pdf->SetXY(0.5,$y+$dy);
         $pdf->SetFont('Arial','',10);
-        //$pdf->Cell( 0.5,0.5,"Group:",0,'L');
-        /*$pdf->Cell(0.5,0.5,"PRE-MEDICAL",0,'L');
-        else      if ($data["grp_cd"]=='2')
-        $pdf->Cell(0.5,0.5,"PRE-ENGINEERING",0,'L');
-        else      if ($data["grp_cd"]=='3')
-        $pdf->Cell(0.5,0.5,"HUMANITIES",0,'L');
-        else      if ($data["grp_cd"]=='4')
-        $pdf->Cell(0.5,0.5,"GENERAL SCIENCE",0,'L');
-        else      if ($data["grp_cd"]=='5')
-        $pdf->Cell(0.5,0.5,"COMMERCE",0,'L');    */
+      
         $pdf->SetFont('Arial','B',10);
         $pdf->SetXY(1.7,$y+$dy);
 
@@ -2507,16 +2466,13 @@ class Admission_inter extends CI_Controller {
         }
         $temp = $user['Inst_Id'].'09-2016-18';
         $image =  $this->set_barcode($temp);
-        // $pdf->Image(base_url().'assets/pdfs/'.'/'.$image,6.3,0.5, 1.8, 0.20, "PNG");
-        //$studeninfo['data']['info'][0]['barcode'] = $image;
+       
         $this->load->library('PDF_Rotate');
 
 
         $pdf = new PDF_Rotate('P','in',"A4");
         $pdf->Rotate(0,-1,-1);
-        //   $pdf->SetFont('Arial','B',50);
-        //             $pdf->SetTextColor(255,192,203);
-        //             $pdf->Rotate(35,190,'W a t e r m a r k   d e m o',45);
+       
         $pdf->AliasNbPages();
         if($Condition==4 or $Condition == 5)
         {
@@ -2544,22 +2500,16 @@ class Admission_inter extends CI_Controller {
 
         $i = 4;
         $result = $result['data'] ;
-        // //DebugBreak();
+   
         foreach ($result as $key=>$data) 
         {
-            ////DebugBreak();
-            ////DebugBreak();
+          
             $i++;
             $countofrecords=$countofrecords+1;
             if($countofrecords==15) {
                 $countofrecords=0;
 
                 $pdf->AddPage();
-
-                //     $pdf->SetFont('Arial','B',50);
-                //                 $pdf->SetTextColor(255,192,203);
-                //                 $pdf->Rotate(35,190,'W a t e r m a r k   d e m o',45);
-
 
                 if($Condition==4 or $Condition == 5)
                 {
@@ -2674,25 +2624,18 @@ class Admission_inter extends CI_Controller {
 
             if($data["IsReAdm"] == '1' )
                 $pdf->Text($col4+.1,$ln[$countofrecords]+0.55,strtoupper($data["oldRno_reg"]).'-'.$data["oldYear_reg"]);
-            //$pdf->Text($col4+.1,$ln[$countofrecords]+0.55,'(Re-Admission)');
+            
             else
                 $pdf->Text($col4+.1,$ln[$countofrecords]+0.55,'(NEW)');
 
             $pdf->SetFont('Arial','B',7);    
-            //            $pdf->Text($col5+.05,$ln[$countofrecords]+0.2,GroupName($data["Grp_Cd"]));
+            
             $pdf->Text($col5+.05,$ln[$countofrecords]+0.2,  $data["sub1_abr"].','.$data["sub2_abr"].','.$data["sub3_abr"].','.$data["sub4_abr"]);
             $pdf->SetFont('Arial','',7);    
             $pdf->Text($col5+.05,$ln[$countofrecords]+0.4,$data["sub5_abr"].','.$data["sub6_abr"].','.$data["sub7_abr"].','.$data["sub8_abr"]);
-
-            //$pdf->Image(IMAGE_PATH.$data["Sch_cd"].'/'.$data["PicPath"],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG"); 
-
             ++$SR;
-
-
-            //Certified that I have checked all the relevant record of the students and the particulars as mentioned above are correct.
             $pdf->SetFont('Arial','',8);
             $pdf->Text($lmargin+.5,10.8,"Certified that I have checked all the relevant record of the students and the particulars as mentioned above are correct.");
-            //$pdf->Text($lmargin+.5,11,"Signature _____________________");
             $pdf->SetFont('Arial','',10);
             $pdf->Text($rmargin-2.5,11.2,"_____________________________________");
             $pdf->Text($rmargin-2.5,11.4,"Signature of Head of Institution with Stamp");
@@ -2703,7 +2646,8 @@ class Admission_inter extends CI_Controller {
     }
     public function revenue_pdf()
     {
-        //  //DebugBreak();
+        //DebugBreak();
+
         $Batch_Id = $this->uri->segment(3);
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -2826,7 +2770,8 @@ class Admission_inter extends CI_Controller {
     public function Print_Admission_inter_Form_Proofreading_Groupwise()
     {
 
-        // DebugBreak();
+        //DebugBreak();
+
         $Condition = $this->uri->segment(4);
 
         $this->load->library('session');
@@ -2856,22 +2801,17 @@ class Admission_inter extends CI_Controller {
             $result = array('data'=>$this->Admission_inter_model->Print_Form_Batchwise($fetch_data),'inst_Name'=>$user['inst_Name']);    
         }
 
-
-
         if(empty($result['data'])){
             $this->session->set_flashdata('error', $Condition);
             redirect('Admission_inter/FormPrinting');
             return;
-
         }
-
 
         $this->load->library('PDF_Rotate');
 
 
         $pdf = new PDF_Rotate('P','in',"A4");
-        //      $this->load->library('PDFF');
-        //        $pdf=new PDFF('P','in',"A4");  
+
         $pdf->AliasNbPages();
         $pdf->SetMargins(0.5,0.5,0.5);
         $grp_cd = $this->uri->segment(3);
@@ -2888,9 +2828,9 @@ class Admission_inter extends CI_Controller {
 
         $type     = 'code128';
         $black    = '000000'; // color in hex
-        // //DebugBreak();
+
         $result = $result['data'] ;
-        //if(!empty($result)):
+
         $session_constant='';
         if(Session==1){
             $session_constant="ANNUAL";
@@ -2900,8 +2840,6 @@ class Admission_inter extends CI_Controller {
         }
         foreach ($result as $key=>$data) 
         {
-
-            // //DebugBreak();
             $form_No = $data["FormNo"]; 
             $fontSize = 8; 
             $marge    = .4;   // between barcode and hri in pixel
@@ -2918,10 +2856,6 @@ class Admission_inter extends CI_Controller {
             $pdf->AddPage();
             $Y = 0;
 
-            //$Barcode = $form_No.$data["iYear"].$data['sess'].$data['class'];
-
-            //  DebugBreak();
-
             $Barcode = $form_No."@".'12'.'@'.$data['sess'].'@'.$data["Iyear"];
 
             $bardata = Barcode::fpdf($pdf, $black, $bx, $by, $angle, $type, array('code'=>$Barcode), $width, $height);
@@ -2932,7 +2866,7 @@ class Admission_inter extends CI_Controller {
             $pdf->SetDrawColor(0, 0, 0, 50);
             $pdf->SetFillColor(0, 0, 0, 100);
             $pdf->SetTextColor(0, 0, 0, 100);
-            //$pdf->PrintBarcode(3.75,0.8,(int)$Barcode,.3,.0099);
+
             $pdf->SetFont('Arial','U',14);
             $pdf->SetXY( 0.75,0.2);
             $pdf->Cell(0, 0.2, "BOARD OF INTERMEDIATE AND SECONDARY EDUCATION, GUJRANWALA", 0.25, "C");
@@ -2952,7 +2886,7 @@ class Admission_inter extends CI_Controller {
             }
 
             $pdf->Cell(0, 0.25, "ADMISSION FORM FOR INTERMEDIATE (PART-II & COMPOSITE) ".$session_constant." EXAMINATION, 2016", 0.25, "C");
-            // DebugBreak();
+
             //--------------- Proof Read    
             if($data['Batch_ID'] == 0 and $data['regPvt']==1)
             {
@@ -2967,7 +2901,7 @@ class Admission_inter extends CI_Controller {
 
 
             $pdf->SetFont('Arial','B',10);
-            $pdf->SetXY(3.2,0.5);
+            $pdf->SetXY(3.2,0.55);
             $pdf->Cell(0, 0.25,"(REGULAR CANDIDATE)", 0.25, "C");
 
             //--------------------------- Form No & Rno
@@ -2986,28 +2920,18 @@ class Admission_inter extends CI_Controller {
             $pdf->SetFont('Arial','B',7);
             $pdf->SetXY(6.6,.80+$Y);
             $pdf->Cell(0.5,0.5, "(For office use only)",0,'L');
-            // //DebugBreak();
+            
             if($data["regPvt"]==1)
             {
                 $pdf->SetXY(0.4,0.95+$Y);
                 $pdf->SetFont('Arial','B',10);
                 $pdf->Cell( 0.5,0.5,'Institute: '.$user['Inst_Id'].''.'-'.$user['inst_Name'],0,'R');
             }
-
-
-            // DebugBreak();
             //------ Picture Box on Centre      
             $pdf->SetXY(6.6, 1.55+$Y );
             $pdf->Cell(1.0,1.0,'',1,0,'C',0);
-            $pdf->Image(REGULAR_IMAGE_PATH.$user['Inst_Id']."/".$data["picpath"],6.5, 1.55+$Y, 1.25, 1.0, "JPG");
-            /* if($data["sex"]==1)
-            {
-            $pdf->Image( base_url().'uploads/download.jpg',6.6, 1.55+$Y, 1.0, 1.0, "JPG");  
-            }
-            else
-            {
-            $pdf->Image( base_url().'uploads/130659.jpg',6.6, 1.55+$Y, 1.0, 1.0, "JPG");
-            }           */
+            $pdf->Image(base_url().$data["picpath"],6.5, 1.55+$Y, 1.25, 1.0, "JPG");
+
 
             $pdf->SetFont('Arial','',8);
 
@@ -3056,12 +2980,7 @@ class Admission_inter extends CI_Controller {
             $pdf->SetFont('Arial','B',8);
             $pdf->SetXY(1.5,2.1+$Y);
             $pdf->Cell(0.5,0.5,$data["nat"]==1?"PAKISTANI":"NON-PAKISTANI",0,'R');  
-            /*$pdf->SetXY(0.5, 1.85+$Y);
-            $pdf->SetFont('Arial','',8);
-            $pdf->Cell( 0.5,0.5,"Date Of Birth:",0,'L');
-            $pdf->SetFont('Arial','B',8);
-            $pdf->SetXY(1.5,1.85+$Y);*/
-            //$pdf->Cell(0.5,0.5,$data["Dob"],0,'L');
+
 
             $pdf->SetXY(3.5+$x,2.35+$Y);
             $pdf->SetFont('Arial','',8);
@@ -3111,28 +3030,6 @@ class Admission_inter extends CI_Controller {
             $pdf->SetXY(1.5,2.35+$Y);
             $pdf->Cell(0.5,0.5,$data["rel"]==1?"MUSLIM":"NON-MUSLIM",0,'L');
 
-            /*     $pdf->SetXY(2.4,$Y+2.7);
-            $pdf->SetFont('Arial','',8);
-            $pdf->Cell( 0.5,0.5,"Nationality:",0,'R');
-            $pdf->SetFont('Arial','B',8);
-            $pdf->SetXY(3.4,$Y+2.7);
-            $pdf->Cell(0.5,0.5,$data["nat"]==1?"PAKISTANI":"NON-PAKISTANI",0,'R');
-
-            */
-
-            /* $pdf->Cell(0.5,0.5,"Locality:",0,'R');
-
-
-
-            if($data['regPvt']==1)
-            {
-            $pdf->Cell(0.5,0.5,$data["ruralOrurban"]==0?"URBAN":"RURAL",0,'L');
-            }
-            else if($data['regPvt']==2){
-
-            $pdf->Cell(0.5,0.5,$data["ruralOrurban"]==1?"URBAN":"RURAL",0,'L');
-            }*/
-
             //--------------------------- Speciality and Internal Grade 
             $pdf->SetXY(0.5,2.60+$Y);
             $pdf->SetFont('Arial','',8);
@@ -3141,62 +3038,10 @@ class Admission_inter extends CI_Controller {
             $pdf->SetXY(1.5,2.60+$Y);
             $pdf->Cell(0.5,0.5,$data["CollGrade"],0,'L');
 
-            //--------------------------- Gender Nationality 
-            /* $pdf->SetXY(0.5,2.60+$Y);
-            $pdf->SetFont('Arial','',8);
-            $pdf->Cell( 0.5,0.5,"Gender:",0,'L');
-            $pdf->SetFont('Arial','B',8);
-            $pdf->SetXY(1.5,2.60+$Y);
 
-            /*    if($data["sex"] == 0)
-            {
-            $arr1 = array( 
-            "sex"           => trim($gender_allowed));
-            $db->update("Admission_online..adm_reg_ma2016",$arr1,"sch_cd = ".trim($user->inst_cd));
-            }*/
 
             $pdf->SetXY(6.9,2.6+$Y);
             $pdf->Cell(0.5,0.5,$data['sex']==1?"MALE":"FEMALE",0,'L');
-            // //DebugBreak();
-            /*$pdf->SetXY(3.5+$x,2.60+$Y);
-            $pdf->SetFont('Arial','',8);
-            $pdf->Cell( 0.5,0.5,"Nationality:",0,'L');
-            $pdf->SetFont('Arial','B',8);
-            $pdf->SetXY(4.5+$x,2.60+$Y);
-            $pdf->Cell(0.5,0.5,$data["nat"]==1?"PAKISTANI":"NON-PAKISTANI",0,'R');  */           
-            //--------------------------- id mark and Contact No. 
-
-
-
-
-
-
-            // $pdf->SetFont('Arial','B',8);
-            /* $pdf->SetXY(4.5+$x,3.35+$Y);
-            $pdf->Cell(0.5,0.5, $data["mobNo"],0,'L');    */
-            /* $pdf->SetXY(3.5+$x,2.85+$Y);
-            $pdf->SetFont('Arial','',8);
-            $pdf->Cell( 0.5,0.5,"Contact No:",0,'L');
-            $pdf->SetFont('Arial','B',8);
-            $pdf->SetXY(4.5+$x,2.85+$Y);
-            $pdf->Cell(0.5,0.5, $data["MobNo"],0,'L'); */     
-
-            //         
-            //    $pdf->SetXY(3.5+$x,2.85+$Y);
-            //     $pdf->SetFont('Arial','',8);
-            //     $pdf->Cell( 0.5,0.5,"Medium:",0,'L');
-            //               $pdf->SetFont('Arial','B',8);
-            //             $pdf->SetXY(4.5+$x,2.85+$Y);
-            //             $pdf->Cell(0.5,0.5,$data["med"]==1?"URDU":"ENGLISH",0,'L');            
-
-            //--------------------------- Speciality and Internal Grade 
-            /* $pdf->SetXY(0.5,3.1+$Y);
-            $pdf->SetFont('Arial','',8);
-            $pdf->Cell( 0.5,0.5,"Identification:",0,'L');
-            $pdf->SetFont('Arial','B',8);
-            $pdf->SetXY(1.50,3.1+$Y);
-            $pdf->Cell(0.5,0.5,$data["markOfIden"],0,'L');*/
-
 
 
             $pdf->SetXY(3.5+$x,2.60+$Y);
@@ -3237,7 +3082,7 @@ class Admission_inter extends CI_Controller {
             $pdf->SetFont('Arial','B',8);
             $pdf->SetXY(4.3,3.6+$Y);
             $pdf->Cell(0.5,0.5,$data["sessOfPass"]==1?"Annual":"Supplementary",0,'R');
-            // //DebugBreak();
+
             $pdf->SetXY(5.3,3.6+$Y);
             $pdf->SetFont('Arial','',8);
             $pdf->Cell( 0.5,0.5,"Board:",0,'L');
@@ -3246,12 +3091,7 @@ class Admission_inter extends CI_Controller {
             $pdf->Cell(0.5,0.5,$data["brd_name"],0,'R');
 
 
-            /*$pdf->SetXY(3.5+$x,3.35+$Y);
-            $pdf->SetFont('Arial','',8);
-            $pdf->Cell( 0.5,0.5,"Contact No:",0,'L');
-            $pdf->SetFont('Arial','B',8);
-            $pdf->SetXY(4.5+$x,3.35+$Y);
-            $pdf->Cell(0.5,0.5, $data["mobNo"],0,'L');     */
+
 
             $Y= $Y+0.45;            
 
@@ -3325,24 +3165,6 @@ class Admission_inter extends CI_Controller {
             $pdf->SetXY(4.1,4.25+$Y);
             $pdf->Cell( 0.5,0.5, $data['MobNo'],0,'L');
 
-            /*     //__Mobile    
-            $pdf->SetXY(6.4,4.05+$Y);
-            $pdf->SetFont('Arial','',8);
-            $pdf->Cell( 0.5,0.5,"Mobile No:",0,'L');
-            $pdf->SetFont('Arial','b',8);
-            $pdf->SetXY(7.0,4.05+$Y);
-            $pdf->Cell(0.5,0.5,$data["mobNo"],0,'R');*/
-
-
-            //__Address
-            /*  $pdf->SetXY(0.5,4.05+$Y);
-            $pdf->SetFont('Arial','',8);
-            $pdf->Cell( 0.5,0.5,"Address(In Urdu):",0,'L');
-            $pdf->SetFont('Arial','b',8);
-            $pdf->SetXY(1.45,4.05+$Y);
-            $pdf->Cell(0.5,0.5,'_______________________________________________________________________________________________',0,'L');       */
-
-
             //__Address
             $pdf->SetXY(0.5,4.4+$Y);
             $pdf->SetFont('Arial','',8);
@@ -3361,24 +3183,6 @@ class Admission_inter extends CI_Controller {
 
 
 
-            //-----
-
-            /* //__Address
-            $pdf->SetXY(0.5,4.05+$Y);
-            $pdf->SetFont('Arial','',8);
-            $pdf->Cell( 0.5,0.5,"Address(In Urdu):",0,'L');
-            $pdf->SetFont('Arial','b',8);
-            $pdf->SetXY(1.45,4.05+$Y);
-            $pdf->Cell(0.5,0.5,'______________________________________________________________________________________',0,'L');     
-
-            //__Address
-            $pdf->SetXY(0.5,4.30+$Y);
-            $pdf->SetFont('Arial','',8);
-            $pdf->Cell( 0.5,0.5,"Address:",0,'L');
-            $pdf->SetFont('Arial','b',8);
-            $pdf->SetXY(1.2,4.30+$Y);
-            $pdf->Cell(0.5,0.5,$data["addr"],0,'L');    */
-            ////DebugBreak();
             //------------- Exam Info Box
             $pdf->SetFont('Arial','B',8);
             $pdf->SetXY(0.2,4.99+$Y);
@@ -3475,14 +3279,9 @@ class Admission_inter extends CI_Controller {
             {
                 $pdf->Cell( 0.5,0.5,$catt10.' in Part-II ' ,0,'L');
             }
-
-
-            //$pdf->SetXY(4.7,5.3+$Y);
-            // $pdf->Cell( 0.5,0.5,$catt10.' in Part-II ',0,'L');
-            //--------------
             $pdf->SetFont('Arial','B',12);
             $pdf->SetXY(0.5,5.75+$Y);
-            // $pdf->Cell( 0.5,0.5,"9th",0,'L');
+            
             $boxWidth = 3.8;
             $xx= 0.5;
             $yy = $Y+2.2;
@@ -3494,19 +3293,6 @@ class Admission_inter extends CI_Controller {
             $pdf->SetFont('Arial','',7);
             $pdf->SetXY($xx,4.0+$yy);
             $pdf->Cell($boxWidth,0.2,$data['sub1Ap1'] != 1 ? '':   '    '.'1. '. $this->GetSubNameHere($data['sub1']),1,0,'L',1);
-
-            /* $pdf->Image(base_url().'assets/img/crossed.jpg',6.2,5.35+$yy, 1.3,0.15, "jpeg");  
-            $pdf->SetXY(6.1,3.8+$yy);
-            $pdf->Cell(1.4,1.5,'',1,0,'C',0); 
-            $pdf->SetXY(6.3,3.8+$yy);
-            $pdf->MultiCell(1.1,0.2, 'Paste Recent Photograph & Must Be Cross Attested by the Head/Deputy Head of Institution',0,'C'); 
-
-            $pdf->SetXY(6.1,6.0+$yy);
-            $pdf->Cell(1.4,0.65,'',1,0,'C',0); 
-            $pdf->SetXY(6.2,6.48+$yy);
-            $pdf->MultiCell(1.1,0.2, 'Thumb Impression',0,'C'); */
-
-            //   DebugBreak();
 
             $pdf->SetFillColor(255,255,255);
 
@@ -3587,92 +3373,7 @@ class Admission_inter extends CI_Controller {
 
             $x = 1;
             //--------------------------- Subjects
-            /*  $pdf->SetFont('Arial','',8);
-            $pdf->SetXY(1.1,5.85+$Y);
-            $pdf->Cell(0.3,0.4,"1._______________________________",0,'L');             
-            $pdf->SetXY(1.15,5.75+$Y);
-            $pdf->Cell(0.5,0.5, $data['sub1Ap1'] != 1 ? '':   '    '. $data['sub1_NAME'] ,1,'L');
-
-            $pdf->SetXY(4.6,5.85+$Y);
-            $pdf->Cell(0.3,0.4,"1._______________________________",0,'L');
-            $pdf->SetXY(4.65,5.75+$Y);
-            $pdf->Cell(0.5,0.5,  $data['sub1Ap2'] != 1 ? '':  '    '.  $data['sub1_NAME'],1,'R');
-            //------------------sub2
-            $pdf->SetXY(1.1,6.1+$Y);
-            $pdf->Cell(0.3,0.4,"2._______________________________",0,'L');    
-            $pdf->SetXY(1.15,6.0+$Y);
-            $pdf->Cell(0.5,0.5,  $data['sub2Ap1'] != 1 ? '':  '    '.  $data['sub2_NAME'],1,'L');
-
-            $pdf->SetXY(4.6,6.1+$Y);
-            $pdf->Cell(0.3,0.4,"2._______________________________",0,'L');
-            $pdf->SetXY(4.65,6.0+$Y);
-            $pdf->Cell(0.5,0.5,  $data['sub2Ap2'] != 1 ? '':   '    '. $data['sub2_NAME'],1,'R');
-            //------------------sub3
-            $pdf->SetXY(1.1,6.35+$Y);
-            $pdf->Cell(0.3,0.4,"3._______________________________",1,'L');    
-            $pdf->SetXY(1.15,6.25+$Y);
-            $pdf->Cell(0.5,0.5,  $data['sub3Ap1'] != 1 ? '':   '    '. $data['sub3_NAME'],1,'L');
-            ////DebugBreak();
-            $pdf->SetXY(4.6,6.35+$Y);
-            $pdf->Cell(0.3,0.4,"3._______________________________",1,'L');
-            $pdf->SetXY(4.65,6.25+$Y);
-            //$pdf->Cell(0.5,0.5,  $data['sub3ap2'] != 1 ? '':   '    '. $data['sub3_NAME'],0,'R');
-            //----------- sub4
-            $pdf->SetXY(1.1,6.6+$Y);
-            $pdf->Cell(0.3,0.4,"4._______________________________",1,'L');    
-            $pdf->SetXY(1.15,6.5+$Y);
-            //$pdf->Cell(0.5,0.5,  $data['sub8ap1'] != 1 ? '':   '    '. $data['sub4_NAME'],0,'L');
-
-            $pdf->SetXY(4.6,6.6+$Y);
-            $pdf->Cell(0.3,0.4,"4._______________________________",1,'L');
-            $pdf->SetXY(4.65,6.5+$Y);
-            $pdf->Cell(0.5,0.5,  $data['sub8Ap2'] != 1 ? '':  '    '. $data['sub8_NAME'],1,'R');
-
-
-            //----------------sub5    
-            $pdf->SetXY(1.1,6.85+$Y);
-            $pdf->Cell(0.3,0.4,"5._______________________________",1,'L');    
-            $pdf->SetXY(1.15,6.75+$Y);
-            $pdf->Cell(0.5,0.5,  $data['sub4Ap1'] != 1 ? '':   '    '. $data['sub4_NAME'],1,'L');
-
-
-            $pdf->SetXY(4.6,6.85+$Y);
-            $pdf->Cell(0.3,0.4,"5._______________________________",1,'L');
-            $pdf->SetXY(4.65,6.75+$Y);
-            $pdf->Cell(0.5,0.5,  $data['sub4Ap2'] != 1 ? '':   '    '. $data['sub4_NAME'],1,'R');
-            //-----------------sub6
-            $pdf->SetXY(1.1,7.1+$Y);
-            $pdf->Cell(0.3,0.4,"6._______________________________",1,'L');    
-            $pdf->SetXY(1.20,7.0+$Y);
-            $pdf->Cell(0.5,0.5,  $data['sub5Ap1'] != 1 ? '': '  '. $data['sub5_NAME'],1,'L');
-
-            $pdf->SetXY(4.6,7.1+$Y);
-            $pdf->Cell(0.3,0.4,"6._______________________________",1,'L');
-            $pdf->SetXY(4.65,7.0+$Y);
-            $pdf->Cell(0.5,0.5,  $data['sub5Ap2'] != 1 ? '':  '    '. $data['sub5_NAME'],1,'R');
-
-            //----------------sub7
-            $pdf->SetXY(1.1,7.35+$Y);
-            $pdf->Cell(0.3,0.4,"7._______________________________",1,'L');        
-            $pdf->SetXY(1.15,7.25+$Y);
-            $pdf->Cell(0.5,0.5,  $data['sub6Ap1'] != 1 ? '':   '    '. $data['sub6_NAME'],1,'L');
-
-            $pdf->SetXY(4.6,7.35+$Y);
-            $pdf->Cell(0.3,0.4,"7._______________________________",1,'L');
-            $pdf->SetXY(4.65,7.25+$Y);
-            $pdf->Cell(0.5,0.5,  $data['sub6Ap2'] != 1 ? '':   '    '. $data['sub6_NAME'],1,'R');
-            //-----------------sub8
-
-            $pdf->SetXY(1.1,7.6+$Y);
-            $pdf->Cell(0.3,0.4,"8._______________________________",1,'L');        
-            $pdf->SetXY(1.15,7.5+$Y);
-            $pdf->Cell(0.5,0.5,  $data['sub7Ap1'] != 1 ? '':   '    '. $data['sub7_NAME'],1,'L');
-
-            $pdf->SetXY(4.6,7.6+$Y);
-            $pdf->Cell(0.3,0.4,"8._______________________________",1,'L');
-            $pdf->SetXY(4.65,7.50+$Y);
-            $pdf->Cell(0.5,0.5,  $data['sub7Ap2'] != 1 ? '':   '    '. $data['sub7_NAME'],1,'R');*/
-            //-------------------     
+           
             $pdf->SetXY(0.5,7.55 +$Y);
             $pdf->SetFont('Arial','UIB',9);
             $pdf->Cell( 0.5,0.5,'Affidavit:',0,'L');

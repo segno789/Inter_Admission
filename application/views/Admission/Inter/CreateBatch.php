@@ -26,9 +26,8 @@
                     <div class="controls controls-row">
                         <label class="radio inline span1">
                         <?php
-                        //  DebugBreak();
                         $grp = $grp_selected;
-                        //echo $spl_cd;
+
                         if(@$spl_cd == "1")
                         {
                             echo "<input type='radio' name='batch_opt'  value='3'>Group Wise <br>
@@ -90,11 +89,6 @@
                                 <input type='submit' id='create_batch' name='create_batch' class='btn btn-large btn-info' value='Create Batch of Complete Group' onclick='return  makebatch_groupwise();' >  </div>
                                 </div>";
                             }
-
-
-
-
-
                         }
                         else if(@$spl_cd == "3"){
                             echo "<input type='radio' name='batch_opt' checked='checked' value='3'>Group Wise <br>
@@ -114,8 +108,6 @@
                             <div class='controls controls-row'>
                             <select id='std_groups' name='std_group'>
                             ";
-
-
 
                             $subgroups =  split(',',$grp_cdi);
                             echo "<option value='0' >SELECT GROUP</option>";
@@ -220,10 +212,7 @@
                             <div class='controls controls-row'>
                             <select id='std_groups' name='std_group'>
                             ";
-                            //   //DebugBreak();
 
-
-                            // @$msg_status;
                             @$subgroups =  split(',',@$grp_cdi);
                             echo "<option value='0' >SELECT GROUP</option>";
                             for($i =0 ; $i<count($subgroups); $i++)
@@ -304,15 +293,8 @@
                                 <input type='submit' id='create_batch2' name='create_batch2' class='btn btn-large btn-info' value='Create Batch Of Selected Forms' onclick='return  makebatch_formnowise();'  > </div>
                                 </div>";
                             }
-
-
-
-
                         }
                         ?>
-
-
-
                         <div id="dt_example" class="example_alt_pagination">
                             <form method="POST" id="frmchk" action="<?=base_url()?>/index.php/Admission_inter/Make_Batch_Formwise">
                                 <table class="table table-condensed table-striped table-hover table-bordered pull-left"  id="data-table">
@@ -402,9 +384,6 @@
                                             endforeach;
                                         }
                                         ?>
-
-
-
                                     </tbody>
                                 </table>
                             </form>
@@ -418,5 +397,3 @@
         </div>
     </div>
 </div>
-<script type="text/javascript">
-</script>

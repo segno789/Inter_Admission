@@ -48,15 +48,14 @@
                                 </thead>
                                 <tbody>
                                     <?php
-                                   // //DebugBreak();
-                                    
+                                                                       
                                     if($info!= false)
                                     {
                                     $n=0;  
                                     $grp_name='';                             
                                     foreach($Inst_Cd = $info as $key=>$vals):
                                     $n++;
-                                    //$formno = !empty($vals["formNo"])?$vals["formNo"]:"N/A";
+                                    
                                     echo '<tr  >
                                     <td>'.$n.'</td>
                                     <td>'.$vals['Batch_ID'].'</td>
@@ -65,7 +64,7 @@
                                     <td>'.$vals["Total_ProcessingFee"].'</td> 
                                     <td style="font-weight: bold;font-size: 16px;">'.$vals["TotalCertificateFee"].'</td>
                                     <td style="font-weight: bold;font-size: 16px;">'.$vals["Amount"].'</td>
-                                    <td><button type="button" class="btn btn-info" value="'.$vals['Batch_ID'].'" onclick="ReturnForm('.$vals['Batch_ID'].')">Return Form</button>
+                                    <td><button type="button" class="btn btn-info" value="'.$vals['Batch_ID'].'" onclick="ReturnForm('.$vals['Batch_ID'].')">Return Forms</button>
                                     <button type="button" class="btn btn-info" value="'.$vals['Batch_ID'].'" onclick="ChallanForm_Adm10th_Regular('.$vals['Batch_ID'].')">Download Challan Form</button>
                                     <button type="button" class="btn btn-info" value="'.$vals['Batch_ID'].'" onclick="RevenueForm('.$vals['Batch_ID'].')">Revenue Form</button>';
                                     /*if($vals['flag']==0){

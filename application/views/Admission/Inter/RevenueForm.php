@@ -55,7 +55,7 @@
         <td colspan="8" style="font-size:12px;"><strong>Institute Name:</strong> <?php echo  $inst_Name;?></td>
     </tr>
     <tr>
-        <td colspan="8" style="font-size:12px;"><img style="margin-left: 605px;height: 25px;     width: 104px;" src="<?php  echo '/'.BARCODE_PATH.$barcode; ?>" /></td>
+        <td colspan="8" style="font-size:12px;"><img style="margin-left: 605px;height: 25px;     width: 104px;" src="<?php  echo base_url().BARCODE_PATH.$barcode; ?>" /></td>
     </tr>
     <tr>
         <td colspan="8" align="center">
