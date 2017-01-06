@@ -219,7 +219,13 @@
             $('#father_cnic').focus();  
             return status; 
         }
+          else if(FNic == bFormNo  )
+        {
 
+            alertify.error("B-form Number and Father CNIC cannot be same.") 
+            $('#bay_form').focus();   
+            return status; 
+        }
         else if(medium == "" || medium < 1 ){
             alertify.error("Please Select Medium") 
             $('#medium').focus();  
@@ -458,6 +464,21 @@
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
             alertify.error("Please Enter your Father's CNIC") 
             $('#father_cnic').focus();  
+            return status; 
+        }
+        else if(bFormNo == ""  ){
+            $('#ErrMsg').show(); 
+            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+            alertify.error("Please Enter your B-form") 
+            $('#bay_form').focus();  
+            return status; 
+        }
+        
+          else if(FNic == bFormNo  )
+        {
+
+            alertify.error("B-form Number and Father CNIC cannot be same.") 
+            $('#bay_form').focus();   
             return status; 
         }
         else if(mobNo == "" || mobNo == 0 || mobNo == undefined){

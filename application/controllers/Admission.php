@@ -2114,6 +2114,23 @@ class Admission extends CI_Controller {
             $error_msg.='<span style="font-size: 16pt; color:red;">No Any Student Found Against Your Criteria</span>';
         }
 
+        $picpath = DIRPATH12TH.'\\'.@$data[0]['picpath'];
+           // echo $picpath;die();
+           $isexit = is_file($picpath);
+           if(!$isexit)
+           {
+               $error_msg.= '<span style="font-size: 16pt; color:red;">' . 'Your Picture is missing.</span>';            
+
+
+           }
+           else
+           {
+               $type = pathinfo($picpath, PATHINFO_EXTENSION);
+               $data[0]['picpath'] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
+
+           } 
+        
+        
         $specialcase = $data['0']['Spl_Name'];
         $specialcode = $data['0']['spl_cd'];
         $exam_type =   $data['0']['exam_type'];
@@ -4769,7 +4786,7 @@ class Admission extends CI_Controller {
         $config["thumbnail_size"]                  = 200; //Thumbnails will be cropped to 200x200 pixels
         $config["image_prefix"]                 = "temp_"; //Normal thumb Prefix
         $config["thumbnail_prefix"]                = "thumb_"; //Normal thumb Prefix
-        $config["destination_folder"]            = 'F:\xampp\htdocs\Inter_Admission\Uploads\2016\private\12th\\'; //upload directory ends with / (slash)
+        $config["destination_folder"]            = GET_PRIVATE_IMAGE_PATH.'12th\\'; //upload directory ends with / (slash)
         $config["thumbnail_destination_folder"]    = ''; //upload directory ends with / (slash)
         $config["upload_url"]                     = "../uploads/2016/private/12th/"; 
         $config["quality"]                         = 90; //jpeg quality

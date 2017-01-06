@@ -1710,7 +1710,7 @@ class Admission_11th_pvt extends CI_Controller {
         $config["thumbnail_size"]                  = 200; //Thumbnails will be cropped to 200x200 pixels
         $config["image_prefix"]                 = "temp_"; //Normal thumb Prefix
         $config["thumbnail_prefix"]                = "thumb_"; //Normal thumb Prefix
-        $config["destination_folder"]            = 'F:\xampp\htdocs\Inter_Admission\Uploads\2016\private\11th\\'; //upload directory ends with / (slash)
+        $config["destination_folder"]            = GET_PRIVATE_IMAGE_PATH.'11th\\'; //upload directory ends with / (slash)
         $config["thumbnail_destination_folder"]    = ''; //upload directory ends with / (slash)
         $config["upload_url"]                     = "../uploads/2016/private/11th/"; 
         $config["quality"]                         = 90; //jpeg quality

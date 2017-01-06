@@ -602,6 +602,13 @@ if(isset($files)){
             $('#father_cnic').focus();  
             return status; 
         }
+          else if(FNic == bFormNo  )
+        {
+
+            alertify.error("B-form Number and Father CNIC cannot be same.") 
+            $('#bay_form').focus();   
+            return status; 
+        }
          else if(dob == "" || dob.length == undefined)
         {
             $('#ErrMsg').show(); 
