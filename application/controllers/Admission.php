@@ -59,6 +59,7 @@ class Admission extends CI_Controller {
 
     public function checkFormNo_then_download()
     {
+
         //DebugBreak();
 
         $formno_seg = $this->uri->segment(3);
@@ -67,12 +68,12 @@ class Admission extends CI_Controller {
         }
         else{
             return true;
-        }
+        }     
 
         $this->load->model('Admission_model');
         $this->load->library('session');
 
-        $data = $this->Admission_model->get_formno_data($formno);
+        $data = $this->Admission_model->get_formno_data($formno['formno']);
         if($data == false)
         {
             $error = 'No Data Exist againt '.$formno.' Form No. Please check it again.';
@@ -345,47 +346,10 @@ class Admission extends CI_Controller {
 
             $pdf->SetFont('Arial','',7);                                                                     
             $pdf->SetXY($xx,5.2+$yy);
-            $pdf->Cell($boxWidth,0.2, '    ',1,0,'L',1);
+            $pdf->Cell($boxWidth,0.2, '    ',1,0,'L',1);                                                                         
 
-            /*$pdf->SetFont('Arial','',7);
-            $pdf->SetXY($xx,5.4+$yy);
-            $pdf->Cell($boxWidth,0.2,$data['sub8Ap2'] != 1 ? '':   '    '.'8. '. $this->GetSubNameHere($data['sub8']),1,0,'L',1);
-            */
             $xangle = 3.0;
 
-            /*$pdf->SetFont('Arial','B',8);
-            $pdf->SetXY($xangle,3.8+$yy);
-            $pdf->SetFillColor(240,240,240);
-            $pdf->Cell($boxWidth,0.2,'',1,0,'C',1);    
-            $pdf->SetFillColor(255,255,255);
-            $pdf->SetFont('Arial','',7);
-            $pdf->SetXY($xangle,4.0+$yy);
-            $pdf->Cell($boxWidth,0.2,'',1,0,'L',1);
-            $pdf->SetFont('Arial','',7);
-            $pdf->SetXY($xangle,4.2+$yy);
-            $pdf->Cell($boxWidth,0.2,'',1,0,'L',1);         */
-            //$pdf->Image(base_url().'assets/img/crossed.jpg',3.0.2,3.8+$yy, 1.3,0.15, "jpeg");
-            /* $grp_name = $data["grp_cd"];
-            switch ($grp_name) {
-            case '1':
-            $grp_name = 'FAZAL ARABIC  ';
-            break;
-            case '2':
-            $grp_name = '    FAZAL URDU';
-            break;
-            case '3':
-            $grp_name = '    FAZAL PUNJABI';
-            break;
-            case '5':
-            $grp_name = 'ADEEB ARABIC';
-            break;
-            case '6':
-            $grp_name = 'ADEEB URDU';
-            break;
-
-            default:
-            $grp_name = "NO GROUP SELECTED.";
-            }       */
 
             $pdf->Image('assets/img/examaloomsharkia.gif',4.1,3.1, 1.8,0.4, "gif"); 
 
@@ -427,7 +391,7 @@ class Admission extends CI_Controller {
 
             $pdf->SetXY(0.5,2.85+$Y);
             $pdf->SetFont('Arial','',7);
-            $pdf->Cell( 0.5,0.5,"Address(in Urdu):___________________________________________________________________________________________________________________",0,'L');
+            $pdf->Cell( 0.5,0.5,"Address:___________________________________________________________________________________________________________________",0,'L');
 
             $pdf->SetXY(0.5,3.15+$Y);
             $pdf->SetFont('Arial','',8);
@@ -478,7 +442,7 @@ class Admission extends CI_Controller {
             $pdf->SetFont('Arial','b',7);
             $pdf->Cell(0.5,0.5,"Candidate's Signature in English____________________",0,'R');
 
-            DebugBreak();
+
 
             $Updated_AdmFee = $this->GetFeeWithdue($data['AdmFee']);
 
@@ -598,7 +562,7 @@ class Admission extends CI_Controller {
 
             $bx = 6.8;
             $by = 6.1;
-            $pdf->Image(base_url()."assets/img/12.jpg",7.58,6.2+$Y, 0.30,0.30, "JPG");  
+            $pdf->Image(base_url()."assets/img/12.jpg",7.58,6.2+$Y, 0.35,0.35, "JPG");  
 
             $pdf->Image(BARCODE_PATH.$image,5.15, 6.8  ,2.4,0.24,"PNG");
 
@@ -861,6 +825,7 @@ class Admission extends CI_Controller {
             $pdf->SetXY(1.35, 10.49+$Y);
             $pdf->SetFont('Arial','b',8);
             $pdf->Cell( 0.5,0.5,$Updated_AdmFee+$data['AdmProcessFee'].'/-',0,'L');
+
             $pdf->SetXY(0.5, 10.59+$Y);
             $pdf->SetFont('Arial','',$FontSize);
             $pdf->Cell( 0.5,0.5,"Zone Code:",0,'L');
@@ -868,6 +833,7 @@ class Admission extends CI_Controller {
             $pdf->SetXY(1.48, 10.59+$Y);
             $pdf->SetFont('Arial','B',8);
             $pdf->Cell( 0.5,0.5,$data['Zone_cd']."-".$data['zone_name'],0,'L');
+
 
             $pdf->Image(base_url().'assets/img/CandidateCopy.jpg',0.27,10.86, 7.58,0.60, "jpeg");  
 
@@ -902,8 +868,8 @@ class Admission extends CI_Controller {
         $pdf->SetFont('Arial','U',12);
         $pdf->SetXY(1.2,0.2);
         $pdf->Cell(0, 0.2, "BOARD OF INTERMEDIATE AND SECONDARY EDUCATION, GUJRANWALA", 0.25, "C");
-        $pdf->Image("assets/img/ExamCenter.jpg",4.5,2.995+$Y, 2.78,0.15, "jpeg");        
-        $pdf->Image("assets/img/12.jpg",7.40,0.22, 0.23,0.23, "JPG");    
+        //$pdf->Image("assets/img/ExamCenter.jpg",4.5,2.995+$Y, 2.78,0.15, "jpeg");        
+        $pdf->Image("assets/img/12.jpg",7.40,0.22, 0.37,0.37, "JPG");    
 
         $pdf->SetFont('Arial','U',7);
         $pdf->SetXY(1.2,0.4);
@@ -931,7 +897,7 @@ class Admission extends CI_Controller {
 
         //$pdf->Image(PRIVATE_IMAGE_PATH.$data['PicPath'],6.5, 1.15+$Y, 0.95, 1.0, "JPG");
 
-        $pdf->Image(DIRPATH12TH.$data['picpath'],6.5, 1.15+$Y, 0.95, 1.0, "JPG");
+        $pdf->Image(DIRPATH12TH.$data['picpath'],6.5, 1.30+$Y, 0.95, 1.0, "JPG");
 
         $pdf->Image("assets/img/logo2.png",0.4, 0.2, 0.65, 0.65, "PNG");
         $pdf->SetFont('Arial','',8);
@@ -1128,19 +1094,20 @@ class Admission extends CI_Controller {
         $pdf->Cell(0.5,0.5,$data["Fname"],0,'L');
 
         //--------------------------- 3rd line 
-        //__Mobile    
-        //        debugBreak();
+
+
+
         $pdf->SetXY(0.5, 2.0+$Y);
         $pdf->SetFont('Arial','',$FontSize);
         $pdf->Cell( 0.5,0.5,"Inter Info:",0,'L');
-        $pdf->SetFont('Arial','B',$FontSize);
+        $pdf->SetFont('Arial','B',9);
         $pdf->SetXY(1.5,2.0+$Y);
         $pdf->Cell(0.5,0.5,$data["oldRno"]." ( $LastSess,  $yearOfLastAp, ".$data['IBrd_Abbr']." )",0,'L');
 
         $pdf->SetXY(0.5, 2.15+$Y);
         $pdf->SetFont('Arial','',$FontSize);
         $pdf->Cell( 0.5,0.5,"SSC Info:",0,'L');
-        $pdf->SetFont('Arial','B',$FontSize);
+        //$pdf->SetFont('Arial','B',$FontSize);
         $pdf->SetXY(1.5,2.15+$Y);
         $pdf->Cell(0.5,0.5,$data["matRno"]." ( $MLastSess, ".$data['yearOfPass'].', '.$data['MBrd_Abbr']." )",0,'L');
 
@@ -1185,7 +1152,7 @@ class Admission extends CI_Controller {
         $pdf->Cell(0.5,0.5,$data["strRegNo"],0,'L');
 
         $pdf->SetFont('Arial','B',$FontSize);
-        $pdf->SetXY(6.8,2.53+$Y);                                               
+        $pdf->SetXY(6.8,2.65+$Y);                                               
         $pdf->Cell(0.5,0.5,$data["sex"]==1?"MALE":"FEMALE",0,'L');
 
         //--------------------------- id mark and Medium 
@@ -1340,30 +1307,65 @@ class Admission extends CI_Controller {
         $pdf->Cell($boxWidth,0.2,$data['sub7Ap2'] != 1 ? '':  '    '.'7. '.  $this->GetSubNameHere($data['sub7A']),1,0,'L',1);
 
         //DebugBreak();
-        $pdf->SetXY(0.5,2.65+$Y);
+
+        $pdf->SetXY(0.5, 2.92+$Y);
+        $pdf->SetFont('Arial','',$FontSize);
+        $pdf->Cell( 0.5,0.5,"District Name:",0,'L');
+
+        $pdf->SetXY(1.5, 2.92+$Y);
+        $pdf->SetFont('Arial','B',7);
+        $pdf->Cell( 0.5,0.5,$data['dist_name'],0,'L');
+
+
+        $pdf->SetXY(4.05, 2.92+$Y);
+        $pdf->SetFont('Arial','',$FontSize);
+        $pdf->Cell( 0.5,0.5,"Tehsil Name:",0,'L');
+
+        $pdf->SetXY(5.05, 2.92+$Y);
+        $pdf->SetFont('Arial','B',7);
+        $pdf->Cell( 0.5,0.5,$data['teh_name'],0,'L');
+
+
+        //DebugBreak();
+        $pdf->SetXY(0.5,2.73+$Y);
         $pdf->SetFont('Arial','',7);
         $pdf->Cell( 0.5,0.5,"Address:",0,'L');
 
         $pdf->SetFont('Arial','B',7);
-        $pdf->SetXY(1.5,2.65+$Y);
+        $pdf->SetXY(1.5,2.73+$Y);
         $pdf->Cell(0.5,0.5,$data["addr"],0,'L');
 
-        $pdf->SetXY(0.5,2.85+$Y);
+        $pdf->SetXY(4.05,2.49+$Y);
+        $pdf->SetFont('Arial','',7);
+        $pdf->Cell( 0.5,0.5,"Scheme:",0,'L');
+
+        $pdf->SetFont('Arial','B',9);
+        $pdf->SetXY(5.05,2.49+$Y);
+
+        if($data["schm"] == 1 || $data["schm"] == 4){
+            $pdf->Cell(0.5,0.5,'NEW',0,'L');    
+        }
+        else if($data["schm"] == 2 || $data["schm"] == 3){
+            $pdf->Cell(0.5,0.5,'OLD',0,'L');        
+        } 
+
+
+        /*$pdf->SetXY(0.5,2.85+$Y);
         $pdf->SetFont('Arial','',7);
         $pdf->Cell( 0.5,0.5,"Address(in Urdu):___________________________________________________________________________________________________________________",0,'L');
-
-        $pdf->SetXY(0.5,3.15+$Y);
-        $pdf->SetFont('Arial','',8);
+        */
+        $pdf->SetXY(0.5,3.13+$Y);
+        $pdf->SetFont('Arial','',$FontSize);
         $pdf->Cell(0.5,0.5,"Zone Code:",0,'R');
-        $pdf->SetFont('Arial','B',8);
-        $pdf->SetXY(1.5,3.15+$Y);
+        $pdf->SetFont('Arial','B',$FontSize);
+        $pdf->SetXY(1.5,3.13+$Y);
         $pdf->Cell( 0.5,0.5,$data['Zone_cd']."-".$data['zone_name']."",0,'L');
 
-        $pdf->SetFont('Arial','',8);
+        /*$pdf->SetFont('Arial','',8);
         $pdf->SetXY(3.5,3.2+$Y);
-        $pdf->Cell(4,0.50,'',1,0,'C',0); 
+        $pdf->Cell(4,0.50,'',1,0,'C',0);   */
 
-        $pdf->Image('assets/img/admission_form.jpg',4.07,1.9, 2.38,0.20, "jpeg");
+        $pdf->Image('assets/img/admission_form.jpg',5.07,2.6, 2.38,0.20, "jpeg");
 
         $pdf->SetXY(3.2,5.75+$Y);
         $pdf->SetFont('Arial','b',8);
@@ -2030,7 +2032,7 @@ class Admission extends CI_Controller {
         //DebugBreak();
 
         $dueDate='';
-        $single_date= SingleDateFee;  $double_date= DoubleDateFee;  $tripple_date= TripleDateFee;
+        $single_date= SingleDateFee; $double_date= DoubleDateFee;  $tripple_date= TripleDateFee;
         $today = date("d-m-Y");
 
         if(strtotime($today) <= strtotime($single_date)) 
@@ -2052,12 +2054,9 @@ class Admission extends CI_Controller {
             $your_date = strtotime($tripple_date);
             $datediff = $now - $your_date;
             $days = floor($datediff/(60*60*24));
-
             $dueDate = ($days*500);
-
         }
         return $dueDate;
-
     }
 
     public function Pre_Inter_Data() 
@@ -2095,14 +2094,7 @@ class Admission extends CI_Controller {
             $session = $_POST["oldSess"];
             $board   = $_POST["oldBrd_cd"];
             $CatType = @$_POST["CatType"];
-            if(isset($_POST["isaloom"]))
-            {
-                $isaloom =1;
-            }
-            else
-            {
-                $isaloom =0;
-            }
+            if(isset($_POST["isaloom"])) $isaloom = 1;else $isaloom = 0;
         }
 
         $data['sscrno']=$mrollno;
@@ -2120,6 +2112,7 @@ class Admission extends CI_Controller {
         if(!$data){
             $error_msg.='<span style="font-size: 16pt; color:red;">No Any Student Found Against Your Criteria</span>';
         }
+
 
         $specialcase = $data['0']['Spl_Name'];
         $specialcode = $data['0']['spl_cd'];
@@ -2167,7 +2160,6 @@ class Admission extends CI_Controller {
             $error_msg.='<span style="font-size: 16pt; color:red;"> Matric Roll No is Invalid</span>';
         }
 
-
         if($error_msg !='')
         {
             $this->load->library('session');
@@ -2199,10 +2191,9 @@ class Admission extends CI_Controller {
             $this->session->set_flashdata('matric_error',$mydata );
             redirect('Admission/matric_default');
         } 
-        else if(($exam_type == 1 &&($data[0]['regPvt']==1  && $data[0]['status'] !=4)) )
+        else if($data[0]['class'] == 11 &&$data[0]['regPvt']==1)
         {
-
-            $error_msg.='<span style="font-size: 16pt; color:red;">' . 'You can not appear as a Private Candidate. Please send Addmission from Your Institute.</span>';
+            $error_msg.='<span style="font-size: 16pt; color:red;">' . 'You can not appear as a Private Candidate. Please contact your Institute.</span>';
             $this->load->library('session');
             $mydata = array('data'=>$_POST,'error_msg'=>$error_msg,'exam_type'=>$exam_type);
             $this->session->set_flashdata('matric_error',$mydata );
@@ -2229,6 +2220,10 @@ class Admission extends CI_Controller {
             $data['board']=$board;
             $data['Insert_server_error']=$Insert_server_error;
 
+            //DebugBreak();     
+
+            $data['oldschm']= $data['0']['schm'];
+
             $this->load->view('common/commonheader.php');        
             $data['isaloom'] = $isaloom;
             if(($isaloom == 1))
@@ -2240,7 +2235,6 @@ class Admission extends CI_Controller {
             $this->load->view('Admission/Inter/AdmissionForm.php',  array('data'=>$data));
             $this->load->view('common/commonfooter.php');
         }
-
     }
     public function Pre_Matric_data()
     {
@@ -2354,7 +2348,7 @@ class Admission extends CI_Controller {
             {
                 $error['excep'] =  'You are FAILED in matric ';
 
-            }
+            }  
             else if($spl_cd != null && $spl_cd != 34)
             {
                 $error['excep'] = 'You can not appear due to '.$SpacialCase;
@@ -2716,6 +2710,7 @@ class Admission extends CI_Controller {
     }
 
     public function NewEnrolment_insert_Fresh() {
+
         //DebugBreak();
 
         $this->load->model('Admission_model');
@@ -3072,6 +3067,7 @@ class Admission extends CI_Controller {
             'oldyear'=>@$_POST['oldyear'],
             'oldboard'=>@$_POST['oldboard'],
             'oldClass'=>@$_POST['oldClass'],
+            'oldschm'=>@$_POST['oldschm'],
 
             'sub1'=>@$_POST['sub1'],
             'sub2'=>@$_POST['sub2'],
@@ -3384,7 +3380,7 @@ class Admission extends CI_Controller {
             'Iyear'=>@$_POST['oldyear'],
             'Brd_cd'=>@$_POST['oldboardid'],
             'class'=>@$_POST['oldclass'],
-            'schm'=>1,
+            'schm'=>$this->input->post('oldschm'),
             'AdmProcessFee'=>$AdmFee[0]['Processing_Fee'],
             'AdmFee'=>$AdmFeeCatWise,
             'AdmTotalFee'=>$TotalAdmFee,
@@ -3396,27 +3392,7 @@ class Admission extends CI_Controller {
             'certfee'=>$Certificate
         );
 
-        //DebugBreak();
-
-        /* if(@$_POST['pic'] == ''){
-
-        $config['upload_path']   = PRIVATE_IMAGE_PATH;
-        $config['allowed_types'] = 'jpeg|jpg';              
-        $config['file_name']    = @$_POST['InterRno_hidden'];  
-
-        $this->load->library('upload', $config);
-
-        if ( ! $this->upload->do_upload('inputFile')) {
-        $error = array('error' => $this->upload->display_errors()); 
-        }
-        else { 
-        $data['picpath'] = array('upload_data' => $this->upload->data()); 
-        } 
-        }
-        */
-
         $logedIn = $this->Admission_model->Insert_NewEnorlement($data);
-
         $info =  '';
         foreach($logedIn[0] as $key=>$val)
         {
@@ -3424,7 +3400,7 @@ class Admission extends CI_Controller {
             {
                 if($logedIn[0]['tempath'] != '')
                 {
-                    $oldpath =  GET_PRIVATE_IMAGE_PATH.'\12th'.$logedIn[0]['tempath'];
+                    $oldpath = GET_PRIVATE_IMAGE_PATH.'\12th'.$logedIn[0]['tempath'];
                     $newpath =  GET_PRIVATE_IMAGE_PATH.'\12th'.$val.'.jpg';
                     $err = rename($oldpath,$newpath); 
                 }
@@ -3598,6 +3574,8 @@ class Admission extends CI_Controller {
 
         $logedIn = $this->Admission_model->Insert_NewEnorlement_Languages($data);
 
+
+
         $info =  '';
         foreach($logedIn[0] as $key=>$val)
         {
@@ -3618,12 +3596,11 @@ class Admission extends CI_Controller {
                 $info['formno'] = '';
             }
         }
-        echo  json_encode($info);
+        echo  json_encode($info); 
+
     }
 
     public function formdownloaded(){
-
-        //DebugBreak();
 
         $msg = $this->uri->segment(3);
         $dob = $this->uri->segment(4);
@@ -4176,7 +4153,7 @@ class Admission extends CI_Controller {
                                                     }
 
                 }
-                else if(@$_POST['exam_type'] == 2)
+                else if((@$_POST['exam_type'] == 2 )&& (@$_POST['std_group'] == 3 || @$_POST['std_group'] == 5))
                 { 
                     if(@$_POST['sub1p2'] == 0)
                     {

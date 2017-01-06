@@ -112,11 +112,11 @@
                                                     </select>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td colspan="4">
-                                                    <label style="font-size: 23px;"> <input type="checkbox" name="isaloom" id="isaloom" style="width: 24px; height: 24px;">  <u>Aloom-e-Sharkia Examination</u> </label>
-                                                </td>
-                                            </tr>
+                                            <!--    <tr>
+                                            <td colspan="4">
+                                            <label style="font-size: 23px;"> <input type="checkbox" name="isaloom" id="isaloom" style="width: 24px; height: 24px;">  <u>Aloom-e-Sharkia Examination</u> </label>
+                                            </td>
+                                            </tr> -->
                                         </tbody>
                                     </table>
                                     <?php
@@ -273,8 +273,6 @@
                                             </tbody>
                                         </table>
 
-
-
                                         <div>
                                             <?php echo @$spl_cd['norec']; ?>
                                         </div>
@@ -285,7 +283,6 @@
                                         </div>
                                     </form>
                                     <?php }?>
-
                             </div>
 
                         </div>
@@ -354,22 +351,17 @@
         var theEvent = evt || window.event;
         var key = theEvent.keyCode || theEvent.which;
         key = String.fromCharCode( key );
-        var regex = /^[0-9\b]+$/;    // allow only numbers [0-9] 
+        var regex = /^[0-9\b]+$/;    // allow only numbers [0-9]
         if( !regex.test(key) ) {
             theEvent.returnValue = false;
             if(theEvent.preventDefault) theEvent.preventDefault();
-
         }
     }
-
 
     function maskdob(){
 
         $(document.getElementById("txtDob")).mask("99-99-9999", { placeholder: "DD-MM-YYYY" });
     }
-
-
-
     function validateForm() {
         var x = document.forms["ReturnStatus"]["txtMatRno"].value;
         var y = document.forms["ReturnStatus"]["oldRno"].value;
@@ -382,7 +374,5 @@
             return false;
         }
     } 
-
-
 </script>
 

@@ -22,7 +22,7 @@
 
                                     </label> 
                                     <!--echo '/'.IMAGE_PATH.$Inst_Id.'/'.$data[0]['PicPath'];-->
-                                    <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="<?php echo '/'. $data['0']['picpath'] ?>" alt="Candidate Image">
+                                    <img id="previewImg" style="width:140px; height: 140px;" src="<?php echo base_url() .$data[0]['picpath'];?>" alt="Candidate Image" />
                                     <input type="hidden" value="<?php echo  $data['0']['picpath']?>" name="pic">
                                 </div>
                             </div>
@@ -244,7 +244,7 @@
                             <div class="controls controls-row">  
                                 <?php
                                 $resid = $data[0]['ruralOrurban'];
-                                if($resid == 1 )
+                                if($resid == 0  || $rel == 1 )
                                 {
                                     echo " <label class='radio inline span1'><input type='radio' value='1' id='UrbanRural' checked='checked' name='UrbanRural'> Urban
                                     </label><label class='radio inline span2'><input type='radio'  id='UrbanRural' value='2' name='UrbanRural'>  Rural </label>";
@@ -318,8 +318,6 @@
                                                 default:
                                                     echo "NO DISTRICT SELECTED";
                                                     break;
-
-
                                             }
 
                                         ?>    </option>
@@ -647,8 +645,8 @@
                                     </select> 
                                     <select id="sub5p2" class="span3 dropdown" name="sub5p2" selected="selected">
                                         <option value="<?php if($grp==5){ echo '94';} else echo $data[0]['sub5'];?>"><?php
-                                            
-                                             if($grp==5)
+
+                                            if($grp==5)
                                             { 
                                                 echo array_search(94,$subarray);
                                             }
@@ -656,8 +654,8 @@
                                             {
                                                 echo array_search($data[0]['sub5'],$subarray);
                                             }
-                                            
-                                           
+
+
                                         ?></option>
                                     </select> 
                                 </div>
@@ -688,7 +686,7 @@
                                     </select>
                                 </div>
                                 <?php 
-                               // echo  'test-------'.$grp;
+                                // echo  'test-------'.$grp;
                                 if($grp==5)
                                 { ?>
                                     <div class="control row controls-row">
@@ -753,6 +751,8 @@
                                 <input type="hidden"   value="<?php  echo  $data['0']['sub6pf1']; ?>"  name="sub6pf1_hidden">
                                 <input type="hidden"   value="<?php  echo  $data['0']['sub7pf1']; ?>"  name="sub7pf1_hidden">
 
+                                <input type="hidden"   value="<?php  echo $data['0']['schm']; ?>"  name="oldschm" id="oldschm">
+
                                 <button type="submit" onclick="return checks()" name="btnsubmitUpdateEnrol" class="btn btn-large btn-info offset2">
                                     Save Form
                                 </button>
@@ -765,23 +765,17 @@
                         </form>
                         <script type="text/javascript">
 
-
-
                             function checks(){
 
                                 var status  =  check_NewEnrol_validation_regular();
                                 if(status == 0)
                                 {
-
                                     return false;    
                                 }
                                 else
                                 {
-
                                     return true;
-                                } 
-
-
+                                }
                             }
                             function CancelAlert()
                             {
