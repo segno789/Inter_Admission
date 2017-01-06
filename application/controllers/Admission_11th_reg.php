@@ -143,11 +143,11 @@ class Admission_11th_reg extends CI_Controller {
 
         $pdf->SetFont('Arial','B',10);
         $pdf->SetXY(0.9+$x,0.7+$y);
-        $pdf->Cell(0, 0.25, "PRINCIPAL/HEADMASTER/HEADMISTRESS", 0.25, "C");
+        $pdf->Cell(0, 0.25, "PRINCIPAL", 0.25, "C");
 
         $pdf->SetFont('Arial','B',10);
         $pdf->SetXY(0.9+$x,0.7+$y);
-        $pdf->Cell(0, 0.25, "______________________________________", 0.25, "C");
+        $pdf->Cell(0, 0.25, "__________", 0.25, "C");
         
         $pdf->SetFont('Arial','B',10);
         $pdf->SetXY(4.9+$x,1.5+$y);
@@ -170,11 +170,11 @@ class Admission_11th_reg extends CI_Controller {
         
         $pdf->SetFont('Arial','B',10);
         $pdf->SetXY(4.9+$x,.7+$y);
-        $pdf->Cell(0, 0.25, "INST. Phone:___________________________", 0.25, "C");
+        $pdf->Cell(0, 0.25, "Institute Landline No:____________________", 0.25, "C");
         
         $pdf->SetFont('Arial','B',10);
         $pdf->SetXY(4.9+$x,1.2+$y);
-        $pdf->Cell(0, 0.25, "INST. Mob No:__________________________", 0.25, "C");
+        $pdf->Cell(0, 0.25, "Mob No:______________________________", 0.25, "C");
 
       
 
@@ -1845,12 +1845,12 @@ class Admission_11th_reg extends CI_Controller {
 
             //--------------------------- Form No & Rno
 
-            $pdf->SetXY(0.5,0.85+$Y);
+            $pdf->SetXY(0.5,0.89+$Y);
             $pdf->SetFont('Arial','',8);
             $pdf->Cell( 0.5,0.5,"Form No: _________________",0,'L');
 
             $pdf->SetXY(1,0.85+$Y);
-            $pdf->SetFont('Arial','B',12);
+            $pdf->SetFont('Arial','B',14);
             $pdf->Cell( 0.5,0.5,@$data['FormNo'],0,'L');
 
             $pdf->SetFont('Arial','B',12);
@@ -2079,9 +2079,9 @@ class Admission_11th_reg extends CI_Controller {
 
             $pdf->SetXY(3.7,4.3+$Y);
             $pdf->SetFont('Arial','',8);
-            $pdf->Cell(0.5,0.5,"Institute Cell No:",0,'R');
+            $pdf->Cell(0.5,0.5,"Institute Contact No:",0,'R');
             $pdf->SetFont('Arial','B',8);
-            $pdf->SetXY(4.6,4.3+$Y);
+            $pdf->SetXY(4.8,4.3+$Y);
             $pdf->Cell( 0.5,0.5,$user["cell"],0,'L');
 
            // DebugBreak();
@@ -2161,7 +2161,7 @@ class Admission_11th_reg extends CI_Controller {
                 $pdf->SetFont('Arial','B',8);
                 $pdf->SetXY(0.5,5+$Y);
                 $pdf->SetFillColor(240,240,240);
-                $pdf->Cell(7.6,0.2,'LAST EXAMINATION INFORMATION  ',1,0,'L',1);         
+                $pdf->Cell(7.6,0.2,'PREVIOUS INTERMEDIATE (PART-I/II) EXAMINATION INFORMATION  ',1,0,'L',1);         
                 
                 $pdf->SetXY(0.5,5.1+$Y);
                 $pdf->SetFont('Arial','',8);
@@ -2169,24 +2169,45 @@ class Admission_11th_reg extends CI_Controller {
                  //DebugBreak();
                 $pdf->SetFont('Arial','B',8);
                 $pdf->SetXY(0.95,5.1+$Y);
+                if(isset($data["oldRno_reg"]) && $data["oldRno_reg"] != 0)
+                {
                 $pdf->Cell(0.5,0.5,@$data["oldRno_reg"],0,'L');
+                }
+                else
+                {
+                $pdf->Cell(0.5,0.5,'',0,'L');
+                }
+                
             
                 $pdf->SetXY(1.5,5.1+$Y);
                 $pdf->SetFont('Arial','',8);
                 $pdf->Cell( 0.5,0.5,"Year:",0,'L');
                 $pdf->SetFont('Arial','B',8);
                 $pdf->SetXY(1.95,5.1+$Y);
+                 if(isset($data["oldYear_reg"]) && $data["oldYear_reg"] != 0)
+                {
                 $pdf->Cell(0.5,0.5,@$data["oldYear_reg"],0,'L');
+                }
+                else
+                {
+                $pdf->Cell(0.5,0.5,'',0,'L');
+                }
+                
                         
                  $pdf->SetXY(2.8,5.1+$Y);
                  $pdf->SetFont('Arial','',8);
                  $pdf->Cell( 0.5,0.5,"Session:",0,'L');
                  $pdf->SetFont('Arial','B',8);
                  $pdf->SetXY(3.3,5.1+$Y);
-                 if(isset($data["oldSess_reg"]))
-                 {
-                 $pdf->Cell(0.5,0.5,@$data["oldSess_reg"]==1?"Annual":"Supplementary",0,'R');
-                 }
+                 if(isset($data["oldSess_reg"]) && $data["oldSess_reg"] != 0)
+                {
+                $pdf->Cell(0.5,0.5,@$data["oldSess_reg"]==1?"Annual":"Supplementary",0,'R');
+                }
+                else
+                {
+                $pdf->Cell(0.5,0.5,'',0,'R');
+                }
+                 
                  
                  
                 /* $pdf->SetXY(4.5,5.1+$Y);
@@ -2205,7 +2226,7 @@ class Admission_11th_reg extends CI_Controller {
             $pdf->SetFont('Arial','B',8);
             $pdf->SetXY(0.5,5.7+$Y);
             $pdf->SetFillColor(240,240,240);
-            $pdf->Cell(7.6,0.2,'EXAM INFORMATION',1,0,'L',1);
+            $pdf->Cell(7.6,0.2,'EXAMINATION INFORMATION',1,0,'L',1);
             //---------------------- Feeding DATE      
             $pdf->SetFont('Arial','U',7);
             $pdf->SetXY(4.0,5.6+$Y);
@@ -2231,9 +2252,9 @@ class Admission_11th_reg extends CI_Controller {
             //__ Exam info
 
             //--------------------------- Subject Group
-            $pdf->SetXY(0.5,5.9+$Y);
+            $pdf->SetXY(0.8,5.9+$Y);
             $pdf->SetFont('Arial','',8);
-            $pdf->Cell( 0.5,0.5,"Subject Group:",0,'L');
+            $pdf->Cell( 0.5,0.5,"Group:",0,'L');
 
             $pdf->SetFont('Arial','B',8);
             $pdf->SetXY(1.3,5.9+$Y);
@@ -2256,10 +2277,10 @@ class Admission_11th_reg extends CI_Controller {
              $pdf->SetFont('Arial','',6);
             $pdf->SetXY(6.5,6.25+$Y);
             $pdf->SetFillColor(240,240,240);
-            $pdf->Cell(1.1,1.2,'Paste Recent Photograph',1,0,'C',1);
+            $pdf->Cell(1.3,1.4,'Paste Recent Photograph',1,0,'C',1);
             
             $pdf->SetFont('Arial','B',6);
-            $pdf->SetXY(6.48,7.29+$Y);
+            $pdf->SetXY(6.48,7.49+$Y);
             //$pdf->SetFillColor(260,260,260);
             $pdf->Cell(0.5,0.5,'Photo must be cross attested',0,'C');   
             
@@ -2305,7 +2326,7 @@ class Admission_11th_reg extends CI_Controller {
             $pdf->SetFillColor(260,260,260);
             $pdf->Cell(4.6,0.2,@$data['sub6Ap1'] != 1 ? '':   '6. '. (@$data['sub6_NAME']),1,0,'L',1);
               //DebugBreak();
-            if(@$data['sub7Ap1']!=1)
+            if(@$data['sub7Ap1']!=0)
             {
               $Y = $Y+0.2;
             $pdf->SetFont('Arial','',10);
@@ -2336,7 +2357,7 @@ class Admission_11th_reg extends CI_Controller {
 
             $pdf->SetXY(0.5,8+$Y);
             $pdf->SetFont('Arial','',9);
-            $pdf->MultiCell( 7,0.2,"    I have read this form. The data/information on this form and in online system is same as last entered/modified/provided by me and its correctness is only my responsbility. I understand that only the information/data provided in the online system alongwith photograph and some other handwritten details on this form will be used for further processing. I accept all the terms and conditions in this  regard.",0);
+            $pdf->MultiCell( 7,0.2,"    I have read this admission form. The data/information on this form and in online system is same as last entered/modified/provided by me and its correctness is only my responsbility. I understand that only the information/data provided in the online system alongwith photograph and some other handwritten details on this form will be used for further processing. I accept all the terms and conditions in this  regard.",0);
             //------ Thumb Box on Centre      
 
             $pdf->SetFont('Arial','',6);
@@ -2349,7 +2370,7 @@ class Admission_11th_reg extends CI_Controller {
             $pdf->SetXY(2.9,8.76+$Y);
             $pdf->Cell(4.8,1.550,'',1,0,'C',0); 
             $pdf->SetXY(2.9,9.0+$Y); 
-            $pdf->Cell(0,0,"Head of Institute Name:_____________________________________________________________________",'',0,'L',0); 
+            $pdf->Cell(0,0,"Name Head of Institute:_____________________________________________________________________",'',0,'L',0); 
             $pdf->SetXY(2.9,9.1+$Y);
             $pdf->Cell(4,0.45,"CNIC No:_____________________________",'',0,'L',0); 
             $pdf->SetXY(2.9,9.6+$Y);
@@ -2357,9 +2378,9 @@ class Admission_11th_reg extends CI_Controller {
             $pdf->SetXY(2.9,9.65+$Y);
             $pdf->Cell(4,0.45,"Landline No:___________________________",'',0,'L',0);                      
             $pdf->SetXY(2.9,9.9+$Y);
-            $pdf->Cell(4,0.45,"EMIS Code:_________________________(Government Institute only)______________________________________",'',0,'L',0); 
+            $pdf->Cell(4,0.45,"EMIS Code(If Government Institute):_________________________                      ________________________________",'',0,'L',0); 
             $pdf->SetXY(2.9,10.0+$Y);
-            $pdf->Cell(4,0.45,"                                                                                                                                               Stamp/Signature",'',0,'L',0); 
+            $pdf->Cell(4,0.45,"                                                                                                                                                         Stamp/Signature",'',0,'L',0); 
             
             $pdf->SetXY(0.5,9.2+$Y);
             $pdf->Cell(2,0.45,'',1,0,'C',0); 
