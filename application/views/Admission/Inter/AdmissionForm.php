@@ -67,7 +67,7 @@ header("Pragma: no-cache");
                                     <?php if($data[0]['picpath'] != '')  
                                     {?>
 
-                                        <img id="image_upload_preview" name="image_upload_preview" style="width:140px; height: 140px;" src="<?php echo $data[0]['picpath'];?>" alt="Candidate Image" />
+                                        <img id="image_upload_preview" name="image_upload_preview" style="width:140px; height: 140px;" src="<?php echo $data[0]['picpathImg'];?>" alt="Candidate Image" />
                                         <input type="hidden" id="pic" name="pic" value="<?php echo  $data['0']['picpath']; ?>" />    
                                         <?php } else{?>
                                         <img src="<?php echo base_url(); ?>assets/img/upalodimage.jpg" alt="" >
@@ -2663,7 +2663,8 @@ header("Pragma: no-cache");
                                         url: "<?php  echo site_url('Admission/frmvalidation'); ?>",
                                         data: $("#myform").serialize() ,
                                         datatype : 'html',
-
+                                         beforeSend: function() {  $('.mPageloader').show(); },
+                                        complete: function() { $('.mPageloader').hide();},
                                         success: function(data)
                                         {
                                             var obj = JSON.parse (data);
@@ -2674,8 +2675,12 @@ header("Pragma: no-cache");
                                                     url: "<?php echo base_url(); ?>" + "Admission/NewEnrolment_insert/",
                                                     data: $("#myform").serialize() ,
                                                     datatype : 'html',
+                                                     beforeSend: function() {  $('.mPageloader').show(); },
+                                                     complete: function() { $('.mPageloader').hide();},
 
                                                     success: function(data) {
+                                                     //   console.log(data)
+                                                    //    debugger;
                                                         var obj = JSON.parse(data) ;
                                                         if(obj.error ==  1)
                                                         {

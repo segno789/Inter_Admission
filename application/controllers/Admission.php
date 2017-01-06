@@ -2113,6 +2113,7 @@ class Admission extends CI_Controller {
             $error_msg.='<span style="font-size: 16pt; color:red;">No Any Student Found Against Your Criteria</span>';
         }
 
+     //   DebugBreak();
         $picpath = DIRPATH12TH.'\\'.@$data[0]['picpath'];
            // echo $picpath;die();
            $isexit = is_file($picpath);
@@ -2125,7 +2126,7 @@ class Admission extends CI_Controller {
            else
            {
                $type = pathinfo($picpath, PATHINFO_EXTENSION);
-               $data[0]['picpath'] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
+               $data[0]['picpathImg'] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
 
            } 
         
@@ -2179,13 +2180,12 @@ class Admission extends CI_Controller {
         if($error_msg !='')
         {
             $this->load->library('session');
-            $mydata = array('data'=>$_POST,'error_msg'=>$error_msg,'exam_type'=>$exam_type);
+            $mydata = array('data'=>$_POST,'error_msg'=>$error_msg,'exam_type'=>0);
             $this->session->set_flashdata('matric_error',$mydata);
             redirect('Admission/matric_default');
         }
         else if(($exam_type == 16) && !isset($CatType))
         {
-
             $this->load->library('session');
             $mydata = array('data'=>$_POST,'error_msg'=>$error_msg,'exam_type'=>$exam_type);
             $this->session->set_flashdata('matric_error',$mydata );
@@ -2195,7 +2195,7 @@ class Admission extends CI_Controller {
         {
             $error_msg.='<span style="font-size: 16pt; color:red;">' . 'You can not Marks Improve.</span>';
             $this->load->library('session');
-            $mydata = array('data'=>$_POST,'error_msg'=>$error_msg,'exam_type'=>$exam_type);
+            $mydata = array('data'=>$_POST,'error_msg'=>$error_msg,'exam_type'=>0);
             $this->session->set_flashdata('matric_error',$mydata );
             redirect('Admission/matric_default');
         }
@@ -2203,7 +2203,7 @@ class Admission extends CI_Controller {
         {
             $error_msg.='<span style="font-size: 16pt; color:red;">' . 'Your Result is not cleared.</span>';
             $this->load->library('session');
-            $mydata = array('data'=>$_POST,'error_msg'=>$error_msg,'exam_type'=>$exam_type);
+            $mydata = array('data'=>$_POST,'error_msg'=>$error_msg,'exam_type'=>0);
             $this->session->set_flashdata('matric_error',$mydata );
             redirect('Admission/matric_default');
         } 
@@ -2211,7 +2211,7 @@ class Admission extends CI_Controller {
         {
             $error_msg.='<span style="font-size: 16pt; color:red;">' . 'You can not appear as a Private Candidate. Please contact your Institute.</span>';
             $this->load->library('session');
-            $mydata = array('data'=>$_POST,'error_msg'=>$error_msg,'exam_type'=>$exam_type);
+            $mydata = array('data'=>$_POST,'error_msg'=>$error_msg,'exam_type'=>0);
             $this->session->set_flashdata('matric_error',$mydata );
             redirect('Admission/matric_default');
         }
@@ -2687,7 +2687,7 @@ class Admission extends CI_Controller {
             'certfee'=>$Certificate
         );
 
-        $config['upload_path']   = PRIVATE_IMAGE_PATH_FRESH;
+       /* $config['upload_path']   = PRIVATE_IMAGE_PATH_FRESH;
         $config['allowed_types'] = 'jpeg|jpg';              
         $config['file_name']    = $formno;
 
@@ -2698,7 +2698,7 @@ class Admission extends CI_Controller {
         }
         else { 
             $data['picpath'] = array('upload_data' => $this->upload->data()); 
-        } 
+        } */
 
         $logedIn = $this->Admission_model->NewEnrolment_insert_Fresh_OtherBoard($data);
 
@@ -3008,7 +3008,7 @@ class Admission extends CI_Controller {
 
         //DebugBreak();
 
-        $config['upload_path']   = PRIVATE_IMAGE_PATH_FRESH;
+       /* $config['upload_path']   = PRIVATE_IMAGE_PATH_FRESH;
         $config['allowed_types'] = 'jpeg|jpg';              
         $config['file_name']    = $formno;//@$_POST['InterRno_hidden']; 
 
@@ -3019,13 +3019,11 @@ class Admission extends CI_Controller {
         }
         else { 
             $data['picpath'] = array('upload_data' => $this->upload->data()); 
-        } 
+        } */
 
 
 
         $logedIn = $this->Admission_model->NewEnrolment_insert_Fresh($data);
-
-
         $info =  '';
         foreach($logedIn[0] as $key=>$val)
         {
@@ -3410,7 +3408,7 @@ class Admission extends CI_Controller {
             'certfee'=>$Certificate
         );
 
-        DebugBreak();
+     //   DebugBreak();
 
        
 
