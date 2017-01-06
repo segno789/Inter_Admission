@@ -407,7 +407,7 @@ class Admission_model extends CI_Model
         $cat12 = $data['cat12'];     
 
         $picpath = $data['picpath'];
-        //DebugBreak();
+        
         if($picpath == '')
         {
             $IsNewPic = 1;
@@ -435,6 +435,8 @@ class Admission_model extends CI_Model
 
         $TotalAdmFee =  $data['AdmTotalFee'];
 
+        //DebugBreak();
+        
         $query = $this->db->query(Insert_sp." '$formno',12,2017,1,'$name','$fname','$BForm','$FNIC','$CellNo',$medium,'".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$sub8,1,'".$picpath."',$oldrno,$oldyear,$oldsess,$old_class,$IsHafiz,$Inst_cd,$UrbanRural,$cat11,$cat12,$sub1ap2,$sub2ap2,$sub4ap2,$sub5ap2,$sub6ap2,$sub7ap2,$sub8ap2,$dist_cd,$teh_cd,$zone_cd,$Brd_cd,$AdmProcFee,$AdmFee,$TotalAdmFee,$sub5a,$sub6a,$sub7a,$AdmFine,$IsNewPic,$certFee,'$temppath'");
 
         $rowcount = $query->num_rows();
@@ -535,7 +537,7 @@ class Admission_model extends CI_Model
 
         $tehcd = $data['tehCode'];
         $gend = $data['gend'];
-        $query = $this->db->get_where('matric_new..tblZones', array('mYear' => 2016,'Class' => 12,'Sess'=>1, 'teh_cd' => $tehcd));
+        $query = $this->db->get_where('matric_new..tblZones', array('mYear' => 2017,'Class' => 12,'Sess'=>1, 'teh_cd' => $tehcd));
 
         $rowcount = $query->num_rows();
         if($rowcount > 0)

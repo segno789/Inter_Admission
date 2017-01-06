@@ -80,8 +80,6 @@ header("Pragma: no-cache");
                                 {
                                     echo '<input type="file" style="margin-left:10%; margin-bottom:1%;" class="span4" id="image" name="__files[]">';
                                 }
-
-
                                 ?>
 
                             </div>
@@ -155,11 +153,11 @@ header("Pragma: no-cache");
                                     Mark Of Identification :
                                 </label>
                                 <div class="controls controls-row">                                                           
-                                    <input class="span3" type="text" id="MarkOfIden" style="text-transform: uppercase;" name="MarkOfIden" value="<?php echo  $data['0']['markOfIden']; ?>" required="required" maxlength="60" >
+                                    <input class="span3" type="text" id="MarkOfIden" style="text-transform: uppercase;" name="MarkOfIden" value="<?php  echo $data['0']['markOfIden']; ?>" required="required" maxlength="60" >
                                     <label class="control-label span2" >
                                         Mobile Number :
                                     </label> 
-                                    <input class="span3" id="mob_number" name="mob_number" type="text" placeholder="0300-123456789" value="<?php echo  $data['0']['MobNo']; ?> " required="required">
+                                    <input class="span3" id="mob_number" name="mob_number" type="text" placeholder="0300-123456789" value="<?php  echo $data['0']['MobNo']; ?>" required="required">
                                 </div>
                             </div>
                             <div class="control-group">
@@ -696,11 +694,12 @@ header("Pragma: no-cache");
                                     </select> 
                                 </div> 
                             </div>
-                            <input type="hidden" name="oldclass"   id="oldclass" value="<?php   echo @$oldcls = $data[0]['class']?>">
+
+                            <input type="hidden" name="oldschm"   id="oldschm" value="<?php echo @$oldschm = @$data['oldschm']?>">
+                            <input type="hidden" name="oldclass"   id="oldclass" value="<?php  echo @$oldcls = $data[0]['class']?>">
                             <input type="hidden" name="exam_type"  id="exam_type"  value="<?php echo @$exam_type = $data[0]['exam_type']; ?>">
                             <input type="hidden" name="pregrp"     id="pregrp"     value="<?php echo @$pregrp = $data[0]['grp_cd']; ?>">
                             <input type="hidden" name="oldboardid" id="oldboardid" value="<?php   echo @$data['board'];?>"/>
-
                             <input type="hidden" name="matRno_hidden" id="matRno_hidden" value="<?php   echo @$data[0]['matRno'];?>"/>
                             <input type="hidden" name="InterRno_hidden" id="InterRno_hidden" value="<?php   echo @$data[0]['rno'];?>"/>
                             <input type="hidden" name="InterYear_hidden" id="InterYear_hidden" value="<?php   echo @$data[0]['Iyear'];?>"/>
@@ -2656,7 +2655,7 @@ header("Pragma: no-cache");
                                 else
                                 {
 
-                                    debugger;
+                                    //debugger;
 
                                     $.ajax({
 
@@ -2676,13 +2675,11 @@ header("Pragma: no-cache");
                                                     data: $("#myform").serialize() ,
                                                     datatype : 'html',
 
-                                                    //beforeSend: function() {  $('.mPageloader').show(); },                                                     
-                                                    //complete: function() { $('.mPageloader').hide();},
-
                                                     success: function(data) {
                                                         var obj = JSON.parse(data) ;
                                                         if(obj.error ==  1)
                                                         {
+                                                            //console.log(obj.formno);
                                                             window.location.href ='<?php echo base_url(); ?>Admission/formdownloaded/'+obj.formno; 
                                                         }
                                                         else
