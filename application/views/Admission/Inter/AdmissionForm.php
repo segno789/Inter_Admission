@@ -67,7 +67,7 @@ header("Pragma: no-cache");
                                     <?php if($data[0]['picpath'] != '')  
                                     {?>
 
-                                        <img id="image_upload_preview" name="image_upload_preview" style="width:140px; height: 140px;" src="<?php echo base_url() .$data[0]['picpath'];?>" alt="Candidate Image" />
+                                        <img id="image_upload_preview" name="image_upload_preview" style="width:140px; height: 140px;" src="<?php  echo base_url() .$data[0]['picpath'];?>" alt="Candidate Image" />
                                         <input type="hidden" id="pic" name="pic" value="<?php echo  $data['0']['picpath']; ?>" />    
                                         <?php } else{?>
                                         <img src="<?php echo base_url(); ?>assets/img/upalodimage.jpg" alt="" >
@@ -153,11 +153,11 @@ header("Pragma: no-cache");
                                     Mark Of Identification :
                                 </label>
                                 <div class="controls controls-row">                                                           
-                                    <input class="span3" type="text" id="MarkOfIden" style="text-transform: uppercase;" name="MarkOfIden" value="<?php echo  $data['0']['markOfIden']; ?>" required="required" maxlength="60" >
+                                    <input class="span3" type="text" id="MarkOfIden" style="text-transform: uppercase;" name="MarkOfIden" value="<?php  echo $data['0']['markOfIden']; ?>" required="required" maxlength="60" >
                                     <label class="control-label span2" >
                                         Mobile Number :
                                     </label> 
-                                    <input class="span3" id="mob_number" name="mob_number" type="text" placeholder="0300-123456789" value="<?php echo  $data['0']['MobNo']; ?> " required="required">
+                                    <input class="span3" id="mob_number" name="mob_number" type="text" placeholder="0300-123456789" value="<?php  echo $data['0']['MobNo']; ?>" required="required">
                                 </div>
                             </div>
                             <div class="control-group">
@@ -2654,7 +2654,7 @@ header("Pragma: no-cache");
                                 else
                                 {
 
-                                    debugger;
+                                    //debugger;
 
                                     $.ajax({
 
@@ -2678,6 +2678,7 @@ header("Pragma: no-cache");
                                                         var obj = JSON.parse(data) ;
                                                         if(obj.error ==  1)
                                                         {
+                                                            //console.log(obj.formno);
                                                             window.location.href ='<?php echo base_url(); ?>Admission/formdownloaded/'+obj.formno; 
                                                         }
                                                         else

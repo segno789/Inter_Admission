@@ -537,7 +537,7 @@ class Admission_model extends CI_Model
 
         $tehcd = $data['tehCode'];
         $gend = $data['gend'];
-        $query = $this->db->get_where('matric_new..tblZones', array('mYear' => 2016,'Class' => 12,'Sess'=>1, 'teh_cd' => $tehcd));
+        $query = $this->db->get_where('matric_new..tblZones', array('mYear' => 2017,'Class' => 12,'Sess'=>1, 'teh_cd' => $tehcd));
 
         $rowcount = $query->num_rows();
         if($rowcount > 0)

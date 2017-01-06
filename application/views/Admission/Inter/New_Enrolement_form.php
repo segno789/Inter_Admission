@@ -751,6 +751,8 @@
                                 <input type="hidden"   value="<?php  echo  $data['0']['sub6pf1']; ?>"  name="sub6pf1_hidden">
                                 <input type="hidden"   value="<?php  echo  $data['0']['sub7pf1']; ?>"  name="sub7pf1_hidden">
 
+                                <input type="hidden"   value="<?php  echo $data['0']['schm']; ?>"  name="oldschm" id="oldschm">
+
                                 <button type="submit" onclick="return checks()" name="btnsubmitUpdateEnrol" class="btn btn-large btn-info offset2">
                                     Save Form
                                 </button>
