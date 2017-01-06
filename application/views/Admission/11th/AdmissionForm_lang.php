@@ -525,7 +525,7 @@
                                 <div class="controls controls-row">
                                      <select id="lang_cat" name="lang_cat" class='span2'>
                                     <option value="1">ADEEB</option>
-                                    <option value="2">ALAM</option>
+                                    <option value="3">FAZAL</option>
                                     </select>
                                     <label class="control-label span2" >
                                         Subject :

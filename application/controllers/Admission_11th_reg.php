@@ -170,11 +170,11 @@ class Admission_11th_reg extends CI_Controller {
         
         $pdf->SetFont('Arial','B',10);
         $pdf->SetXY(4.9+$x,.7+$y);
-        $pdf->Cell(0, 0.25, "INST. Phone:___________________________", 0.25, "C");
+        $pdf->Cell(0, 0.25, "Institute Landline No:____________________", 0.25, "C");
         
         $pdf->SetFont('Arial','B',10);
         $pdf->SetXY(4.9+$x,1.2+$y);
-        $pdf->Cell(0, 0.25, "INST. Mob No:__________________________", 0.25, "C");
+        $pdf->Cell(0, 0.25, "Mob No:______________________________", 0.25, "C");
 
       
 
@@ -2169,24 +2169,45 @@ class Admission_11th_reg extends CI_Controller {
                  //DebugBreak();
                 $pdf->SetFont('Arial','B',8);
                 $pdf->SetXY(0.95,5.1+$Y);
+                if(isset($data["oldRno_reg"]) && $data["oldRno_reg"] != 0)
+                {
                 $pdf->Cell(0.5,0.5,@$data["oldRno_reg"],0,'L');
+                }
+                else
+                {
+                $pdf->Cell(0.5,0.5,'',0,'L');
+                }
+                
             
                 $pdf->SetXY(1.5,5.1+$Y);
                 $pdf->SetFont('Arial','',8);
                 $pdf->Cell( 0.5,0.5,"Year:",0,'L');
                 $pdf->SetFont('Arial','B',8);
                 $pdf->SetXY(1.95,5.1+$Y);
+                 if(isset($data["oldYear_reg"]) && $data["oldYear_reg"] != 0)
+                {
                 $pdf->Cell(0.5,0.5,@$data["oldYear_reg"],0,'L');
+                }
+                else
+                {
+                $pdf->Cell(0.5,0.5,'',0,'L');
+                }
+                
                         
                  $pdf->SetXY(2.8,5.1+$Y);
                  $pdf->SetFont('Arial','',8);
                  $pdf->Cell( 0.5,0.5,"Session:",0,'L');
                  $pdf->SetFont('Arial','B',8);
                  $pdf->SetXY(3.3,5.1+$Y);
-                 if(isset($data["oldSess_reg"]))
-                 {
-                 $pdf->Cell(0.5,0.5,@$data["oldSess_reg"]==1?"Annual":"Supplementary",0,'R');
-                 }
+                 if(isset($data["oldSess_reg"]) && $data["oldSess_reg"] != 0)
+                {
+                $pdf->Cell(0.5,0.5,@$data["oldSess_reg"]==1?"Annual":"Supplementary",0,'R');
+                }
+                else
+                {
+                $pdf->Cell(0.5,0.5,'',0,'R');
+                }
+                 
                  
                  
                 /* $pdf->SetXY(4.5,5.1+$Y);
@@ -2357,7 +2378,7 @@ class Admission_11th_reg extends CI_Controller {
             $pdf->SetXY(2.9,9.65+$Y);
             $pdf->Cell(4,0.45,"Landline No:___________________________",'',0,'L',0);                      
             $pdf->SetXY(2.9,9.9+$Y);
-            $pdf->Cell(4,0.45,"EMIS Code(Government Institute only):_________________________                      ________________________________",'',0,'L',0); 
+            $pdf->Cell(4,0.45,"EMIS Code(If Government Institute):_________________________                      ________________________________",'',0,'L',0); 
             $pdf->SetXY(2.9,10.0+$Y);
             $pdf->Cell(4,0.45,"                                                                                                                                                         Stamp/Signature",'',0,'L',0); 
             
