@@ -2099,7 +2099,7 @@ class Admission_inter extends CI_Controller {
         //DebugBreak();
 
         $this->load->library('session');
-        
+
         if(!( $this->session->flashdata('error'))){
 
             $error_msg = "0";    
@@ -2244,7 +2244,7 @@ class Admission_inter extends CI_Controller {
         $dy = 4.6; 
         $pdf->SetXY(0.5,$y+$dy);
         $pdf->SetFont('Arial','',10);
-      
+
         $pdf->SetFont('Arial','B',10);
         $pdf->SetXY(1.7,$y+$dy);
 
@@ -2466,13 +2466,13 @@ class Admission_inter extends CI_Controller {
         }
         $temp = $user['Inst_Id'].'09-2016-18';
         $image =  $this->set_barcode($temp);
-       
+
         $this->load->library('PDF_Rotate');
 
 
         $pdf = new PDF_Rotate('P','in',"A4");
         $pdf->Rotate(0,-1,-1);
-       
+
         $pdf->AliasNbPages();
         if($Condition==4 or $Condition == 5)
         {
@@ -2500,10 +2500,10 @@ class Admission_inter extends CI_Controller {
 
         $i = 4;
         $result = $result['data'] ;
-   
+
         foreach ($result as $key=>$data) 
         {
-          
+
             $i++;
             $countofrecords=$countofrecords+1;
             if($countofrecords==15) {
@@ -2624,12 +2624,12 @@ class Admission_inter extends CI_Controller {
 
             if($data["IsReAdm"] == '1' )
                 $pdf->Text($col4+.1,$ln[$countofrecords]+0.55,strtoupper($data["oldRno_reg"]).'-'.$data["oldYear_reg"]);
-            
+
             else
                 $pdf->Text($col4+.1,$ln[$countofrecords]+0.55,'(NEW)');
 
             $pdf->SetFont('Arial','B',7);    
-            
+
             $pdf->Text($col5+.05,$ln[$countofrecords]+0.2,  $data["sub1_abr"].','.$data["sub2_abr"].','.$data["sub3_abr"].','.$data["sub4_abr"]);
             $pdf->SetFont('Arial','',7);    
             $pdf->Text($col5+.05,$ln[$countofrecords]+0.4,$data["sub5_abr"].','.$data["sub6_abr"].','.$data["sub7_abr"].','.$data["sub8_abr"]);
@@ -2920,7 +2920,7 @@ class Admission_inter extends CI_Controller {
             $pdf->SetFont('Arial','B',7);
             $pdf->SetXY(6.6,.80+$Y);
             $pdf->Cell(0.5,0.5, "(For office use only)",0,'L');
-            
+
             if($data["regPvt"]==1)
             {
                 $pdf->SetXY(0.4,0.95+$Y);
@@ -3281,7 +3281,26 @@ class Admission_inter extends CI_Controller {
             }
             $pdf->SetFont('Arial','B',12);
             $pdf->SetXY(0.5,5.75+$Y);
-            
+
+
+
+            $pdf->SetXY(0.5,5.60+$Y);
+            $pdf->SetFont('Arial','',8);
+            $pdf->Cell( 0.5,0.5,"Scheme:",0,'L');
+
+            $pdf->SetFont('Arial','B',8);
+            $pdf->SetXY(1.5,5.60+$Y);
+
+            if($data["schm"] == 1){
+                $pdf->Cell(0.5,0.5,'NEW',0,'L');    
+            }
+            else if($data["schm"] == 2){
+                $pdf->Cell(0.5,0.5,'OLD',0,'L');        
+            } 
+
+
+
+
             $boxWidth = 3.8;
             $xx= 0.5;
             $yy = $Y+2.2;
@@ -3373,7 +3392,7 @@ class Admission_inter extends CI_Controller {
 
             $x = 1;
             //--------------------------- Subjects
-           
+
             $pdf->SetXY(0.5,7.55 +$Y);
             $pdf->SetFont('Arial','UIB',9);
             $pdf->Cell( 0.5,0.5,'Affidavit:',0,'L');
