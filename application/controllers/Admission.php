@@ -2687,22 +2687,7 @@ class Admission extends CI_Controller {
             'certfee'=>$Certificate
         );
 
-<<<<<<< .mine
-     /*   $config['upload_path']   = PRIVATE_IMAGE_PATH_FRESH;
-=======
-       /* $config['upload_path']   = PRIVATE_IMAGE_PATH_FRESH;
->>>>>>> .theirs
-        $config['allowed_types'] = 'jpeg|jpg';              
-        $config['file_name']    = $formno;
 
-        $this->load->library('upload', $config);
-
-        if ( ! $this->upload->do_upload('inputFile')) {
-            $error = array('error' => $this->upload->display_errors()); 
-        }
-        else { 
-            $data['picpath'] = array('upload_data' => $this->upload->data()); 
-        } */
 
         $logedIn = $this->Admission_model->NewEnrolment_insert_Fresh_OtherBoard($data);
 
@@ -3010,30 +2995,7 @@ class Admission extends CI_Controller {
             'certfee'=>$Certificate
         );
 
-        //DebugBreak();
-
-<<<<<<< .mine
-     /*   $config['upload_path']   = PRIVATE_IMAGE_PATH_FRESH;
-=======
-       /* $config['upload_path']   = PRIVATE_IMAGE_PATH_FRESH;
->>>>>>> .theirs
-        $config['allowed_types'] = 'jpeg|jpg';              
-        $config['file_name']    = $formno;//@$_POST['InterRno_hidden']; 
-
-        $this->load->library('upload', $config);
-
-        if ( ! $this->upload->do_upload('inputFile')) {
-            $error = array('error' => $this->upload->display_errors()); 
-        }
-        else { 
-            $data['picpath'] = array('upload_data' => $this->upload->data()); 
-<<<<<<< .mine
-        }  */
-=======
-        } */
->>>>>>> .theirs
-
-
+     
 
         $logedIn = $this->Admission_model->NewEnrolment_insert_Fresh($data);
         $info =  '';
