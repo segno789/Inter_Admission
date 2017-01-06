@@ -2670,7 +2670,7 @@ class Admission extends CI_Controller {
             'certfee'=>$Certificate
         );
 
-        $config['upload_path']   = PRIVATE_IMAGE_PATH_FRESH;
+     /*   $config['upload_path']   = PRIVATE_IMAGE_PATH_FRESH;
         $config['allowed_types'] = 'jpeg|jpg';              
         $config['file_name']    = $formno;
 
@@ -2681,7 +2681,7 @@ class Admission extends CI_Controller {
         }
         else { 
             $data['picpath'] = array('upload_data' => $this->upload->data()); 
-        } 
+        } */
 
         $logedIn = $this->Admission_model->NewEnrolment_insert_Fresh_OtherBoard($data);
 
@@ -2991,7 +2991,7 @@ class Admission extends CI_Controller {
 
         //DebugBreak();
 
-        $config['upload_path']   = PRIVATE_IMAGE_PATH_FRESH;
+     /*   $config['upload_path']   = PRIVATE_IMAGE_PATH_FRESH;
         $config['allowed_types'] = 'jpeg|jpg';              
         $config['file_name']    = $formno;//@$_POST['InterRno_hidden']; 
 
@@ -3002,7 +3002,7 @@ class Admission extends CI_Controller {
         }
         else { 
             $data['picpath'] = array('upload_data' => $this->upload->data()); 
-        } 
+        }  */
 
 
 

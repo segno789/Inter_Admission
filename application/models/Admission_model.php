@@ -95,7 +95,6 @@ class Admission_model extends CI_Model
         }
 
         return true;
-
     }
     public function GetFormNo_Languages()
     {
