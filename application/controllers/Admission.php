@@ -3047,7 +3047,8 @@ class Admission extends CI_Controller {
 
     }
 
-    public function NewEnrolment_insert()  {
+    public function NewEnrolment_insert()  
+    {
         $this->load->model('Admission_model');
         $this->load->library('session');
         $Inst_Id = 999999;
@@ -3405,24 +3406,9 @@ class Admission extends CI_Controller {
             'certfee'=>$Certificate
         );
 
-        //DebugBreak();
+        DebugBreak();
 
-        /* if(@$_POST['pic'] == ''){
-
-        $config['upload_path']   = PRIVATE_IMAGE_PATH;
-        $config['allowed_types'] = 'jpeg|jpg';              
-        $config['file_name']    = @$_POST['InterRno_hidden'];  
-
-        $this->load->library('upload', $config);
-
-        if ( ! $this->upload->do_upload('inputFile')) {
-        $error = array('error' => $this->upload->display_errors()); 
-        }
-        else { 
-        $data['picpath'] = array('upload_data' => $this->upload->data()); 
-        } 
-        }
-        */
+       
 
         $logedIn = $this->Admission_model->Insert_NewEnorlement($data);
 
