@@ -168,7 +168,8 @@
         }
     });
 
-    function check_NewEnrol_validation_Fresh(){
+    function check_NewEnrol_validation_Fresh()
+    {
 
         var inputimage = $("#inputFile").val();  
         var name =  $('#cand_name').val();
@@ -218,7 +219,13 @@
             $('#father_cnic').focus();  
             return status; 
         }
+          else if(FNic == bFormNo  )
+        {
 
+            alertify.error("B-form Number and Father CNIC cannot be same.") 
+            $('#bay_form').focus();   
+            return status; 
+        }
         else if(medium == "" || medium < 1 ){
             alertify.error("Please Select Medium") 
             $('#medium').focus();  
@@ -390,7 +397,8 @@
         return status;
     }
 
-    function check_NewEnrol_validation(){
+    function check_NewEnrol_validation()
+    {
 
         var name =  $('#cand_name').val();
         var dist_cd= $('#pvtinfo_dist option:selected').val();
@@ -415,6 +423,7 @@
         var image = $('#image').val();
         var MarkOfIdent = $('#MarkOfIden').val();
         var Inst_Rno = $('#Inst_Rno').val();
+        var picname = $('#picname').val();
         var status = 0;
         var $img = $("#previewImg");
         var src = $img.attr("src");
@@ -431,13 +440,9 @@
         }
 
 
-        if(src == '') {
-            $img.addClass("highlight");
-            $img.css("border", "3px solid yellow");
-            $('#ErrMsg').show();  
-            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+        if(picname == '') {
             alertify.error("Please upload your Picture First.")
-            $img.focus(); 
+            $('#image').focus(); 
             return status;
         }
         else if(name == "" ||  name == undefined){
@@ -459,6 +464,21 @@
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
             alertify.error("Please Enter your Father's CNIC") 
             $('#father_cnic').focus();  
+            return status; 
+        }
+        else if(bFormNo == ""  ){
+            $('#ErrMsg').show(); 
+            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+            alertify.error("Please Enter your B-form") 
+            $('#bay_form').focus();  
+            return status; 
+        }
+        
+          else if(FNic == bFormNo  )
+        {
+
+            alertify.error("B-form Number and Father CNIC cannot be same.") 
+            $('#bay_form').focus();   
             return status; 
         }
         else if(mobNo == "" || mobNo == 0 || mobNo == undefined){
@@ -513,7 +533,8 @@
         return status;
     }
 
-    function  check_NewEnrol_validation_Languages(){
+    function  check_NewEnrol_validation_Languages()
+    {
 
         var name =  $('#cand_name').val();
         var dist_cd= $('#pvtinfo_dist option:selected').val();

@@ -680,7 +680,16 @@ class Admission_11th_pvt extends CI_Controller {
             }
             else
             {
+            
+                if($data['grp_cd']==9 && $data['IsReAdm']==0)
+                {
+                $AllStdFee = array('formNo'=>$data['FormNo'],'regFee'=>1000,'AdmFee'=>$ArtsAdmFee,'AdmFine'=>$Total_fine,'CertFee'=>550,'AdmProcessFee'=>$ArtsProcFee,'AdmTotalFee'=>$ArtsAdmFee+$ArtsProcFee+$Total_fine+1000+550);
+                }
+                else
+                {
                 $AllStdFee = array('formNo'=>$data['FormNo'],'regFee'=>1000,'AdmFee'=>$ArtsAdmFee,'AdmFine'=>$Total_fine,'AdmProcessFee'=>$ArtsProcFee,'AdmTotalFee'=>$ArtsAdmFee+$ArtsProcFee+$Total_fine+1000);
+                }
+                
             }
         
 
@@ -738,7 +747,7 @@ class Admission_11th_pvt extends CI_Controller {
         $pdf->SetFillColor(0,0,0);
         $pdf->SetDrawColor(0,0,0); 
 
-        $temp = $data['FormNo'].'@11@'.Year.'@'.Session; 
+        $temp = $data['FormNo'].'@11@'.Session.'@'.Year; 
         $image =  $this->set_barcode($temp);
         $pdf->Image(BARCODE_PATH.$image,3.3, 0.6  ,2,0.25,"PNG");
         //$pdf->Image(BARCODE_PATH.$image,5.7, 6.0  ,2,0.25,"PNG");
@@ -764,18 +773,25 @@ class Admission_11th_pvt extends CI_Controller {
         $heading = 'BOARD OF INTERMEDIATE AND SECONDARY EDUCATION, GUJRANWALA (INTERMEDIATE PART-I '.$ses.' EXAMINATION, '.Year.')';
         }
         
-        
-        
-        
         $pdf->SetFont('Arial','U',12);
         $pdf->SetXY(1.2,0.2);
         $pdf->Cell(0, 0.2, "BOARD OF INTERMEDIATE AND SECONDARY EDUCATION, GUJRANWALA", 0.25, "C");
         $pdf->Image("assets/img/logo2.png",.60,0.3, 0.65,0.65, "PNG");
-        $pdf->Image("assets/img/ExamCenter.jpg",4.5,2.90, 2.78,0.15, "jpeg");        
-        $pdf->Image("assets/img/11.jpg",7.7,0.23, 0.24,0.24, "JPG");
-        $pdf->Image("assets/img/11.jpg",7.7,7.45, 0.24,0.24, "JPG");      
-        $pdf->Image("assets/img/11.jpg",7.7,9.04, 0.24,0.24, "JPG");   
-        $pdf->Image("assets/img/11.jpg",7.7,10.46, 0.24,0.24, "JPG");   
+       // $pdf->Image("assets/img/ExamCenter.jpg",4.5,2.90, 2.78,0.15, "jpeg");  
+        if($data["grp_cd"] != 9)
+        {      
+        $pdf->Image("assets/img/11th.png",7.6,0.07,  0.50,0.50, "PNG");
+        $pdf->Image("assets/img/11th.png",7.7,7.25,  0.50,0.50, "PNG");      
+        $pdf->Image("assets/img/11th.png",7.7,8.80,  0.50,0.50, "PNG");   
+        $pdf->Image("assets/img/11th.png",7.7,10.16,  0.50,0.50, "PNG");   
+        }
+        else
+        {
+        $pdf->Image("assets/img/aloom.GIF",7.6,0.07,  0.50,0.50, "GIF");
+        $pdf->Image("assets/img/aloom.GIF",7.7,7.25,  0.50,0.50, "GIF");      
+        $pdf->Image("assets/img/aloom.GIF",7.7,8.80,  0.50,0.50, "GIF");   
+        $pdf->Image("assets/img/aloom.GIF",7.7,10.16,  0.50,0.50, "GIF");
+        }
         //$this->Image("logo.jpg",0.05,0.3, 0.75,0.75, "JPG", "http://www.biseGujranwala.edu.pk");
         
         $pdf->SetFont('Arial','',9);
@@ -887,7 +903,16 @@ class Admission_11th_pvt extends CI_Controller {
 
         $pdf->SetXY(3.33,1.60+$Y);
         $pdf->SetFont('Arial','b',12);
+         if($data["grp_cd"] == 9)
+        {
+        $pdf->Cell( 0.0,0.0,"(ALOOM-E-SHARQIA)",0,'C');
+         $pdf->Image("assets/img/aloom.GIF",3.73,1.05,  1.0,0.40, "GIF");
+        }
+        else
+        {
         $pdf->Cell( 0.0,0.0,"(PRIVATE CANDIDATE)",0,'C');
+        }
+        
         
 
         $myx = 0.7;
@@ -1032,13 +1057,80 @@ class Admission_11th_pvt extends CI_Controller {
         $pdf->SetXY(1.8,3.12+$Y);
         $pdf->Cell( 0,0.1,$data['zone_cd']." - ".$data['zone_name']."",0,'L');
 
+        if($data["grp_cd"] == 9)
+        {
+        if($data['Lang_cat']==1)
+        {
+        $catname_lang = "ADEEB";
+        }
+        else
+        {
+        $catname_lang = "FAZAL";
+        }
+        if($data['Lang_spec_sub']==2)
+        {
+        $catSub_lang = "URDU";
+        }
+        else if($data['Lang_spec_sub']==32)
+        {
+        $catSub_lang = "PUNJABI";
+        }
+        else if($data['Lang_spec_sub']==34)
+        {
+        $catSub_lang = "PERSIAN";
+        }
+        else if($data['Lang_spec_sub']==24)
+        {
+        $catSub_lang = "ARABIC";
+        }
+        }
+        
+        $pdf->Image("assets/img/examaloomsharkia.GIF",3.83,2.75,  2.0,0.40, "GIF");
+        
+        
+        
+        // Adeeb urdu
+        if($data["grp_cd"] == 9 && $data['Lang_cat']==1 && $data['Lang_spec_sub']==2 )
+        {
+          $pdf->Image("assets/img/adeeburdu.GIF",2.73,2.75,  1.0,0.40, "GIF");
+        }
+        // Adeeb Arabic
+        else if ($data["grp_cd"] == 9 && $data['Lang_cat']==1 && $data['Lang_spec_sub']==24 )
+        {
+          $pdf->Image("assets/img/adeebarbic.GIF",2.73,2.75,  1.0,0.40, "GIF");
+        }
+        // Fazal Arabic
+        else if ($data["grp_cd"] == 9 && $data['Lang_cat']==3 && $data['Lang_spec_sub']==24 )
+        {
+          $pdf->Image("assets/img/fazilarabic.GIF",2.73,2.75,  1.0,0.40, "GIF");
+        }
+        // Fazal Urdu
+        else if($data["grp_cd"] == 9 && $data['Lang_cat']==3 && $data['Lang_spec_sub']==2 )
+        {
+          $pdf->Image("assets/img/fazilurdu.GIF",2.73,2.75,  1.0,0.40, "GIF");
+        }
+        // Fazal Punjabi
+        else if($data["grp_cd"] == 9 && $data['Lang_cat']==3 && $data['Lang_spec_sub']==32 )
+        {
+          $pdf->Image("assets/img/fazilpunjabi.GIF",2.73,2.75,  1.0,0.40, "GIF");
+        }
+        
+        
         $pdf->SetXY($myx,3.58+$Y);
         $pdf->SetFont('Arial','b',10);
+        if($data["grp_cd"] == 9)
+        {
+        $pdf->Cell( 0,0.1,"Group:".$catname_lang."  ".$catSub_lang,0,'L');
+        }
+        else
+        {
         $pdf->Cell( 0,0.1,"Group:".$grp_name."",0,'L');
+        }
         
-        $pdf->SetFont('Arial','',8);
+        
+      /*  $pdf->SetFont('Arial','',8);
         $pdf->SetXY(3.9,3.05+$Y);
-        $pdf->Cell(4,0.60,'',1,0,'C',0); 
+        $pdf->Cell(4,0.60,'',1,0,'C',0);  */
 
         
       
@@ -1071,33 +1163,11 @@ class Admission_11th_pvt extends CI_Controller {
         $pdf->SetXY($xx,3.8+$Y);
         $pdf->SetFillColor(240,240,240);
         
-          if($data["grp_cd"] == 9)
-        {
-        if($data['Lang_cat']==1)
-        {
-        $catname_lang = "ADEEB";
-        }
-        else
-        {
-        $catname_lang = "ALAM";
-        }
-        if($data['Lang_spec_sub']==2)
-        {
-        $catSub_lang = "URDU";
-        }
-        else if($data['Lang_spec_sub']==32)
-        {
-        $catSub_lang = "PUNJABI";
-        }
-        else if($data['Lang_spec_sub']==34)
-        {
-        $catSub_lang = "PERSIAN";
-        }
-        else if($data['Lang_spec_sub']==24)
-        {
-        $catSub_lang = "ARABIC";
-        }
-        $pdf->Cell($boxWidth,0.2,'Group:  '.$catname_lang.' ,     Category : '.$catSub_lang.' ',1,0,'C',1);
+          
+         if($data["grp_cd"] == 9)
+         {
+         
+        $pdf->Cell($boxWidth,0.2,"PAPER'S: ",1,0,'C',1);
         }
         else
         {
@@ -1199,8 +1269,11 @@ class Admission_11th_pvt extends CI_Controller {
 
         $pdf->SetFont('Arial','',7);                                                                     
         $pdf->SetXY($xx,5.2+$Y);
-        
+         if($data["grp_cd"] == 5)
+        {
         $pdf->Cell($boxWidth,0.2,$data['sub7Ap1'] != 1 ? '':   '    '.'7. '. $data['sub7_name'],1,0,'L',1);
+        }
+        
         
         
 
@@ -1210,7 +1283,7 @@ class Admission_11th_pvt extends CI_Controller {
         $pdf->Cell(0,0.1,"Affidavit:-",0,'L');
         $pdf->SetXY(0.7,5.6+$Y);
         $pdf->SetFont('Arial','',8);
-        $pdf->MultiCell(7.3,0.15, "I have read this form/instructions. The data/information on this form and in online system is same as last entered/modified/provided by me and it's correctness is only my responsibility. I understand that only the information/data provided in the online system along with the photograph and some other handwritten details on this form will be used for further processing. I accept all the terms and conditions in this regard.",0,'L'); 
+        $pdf->MultiCell(7.3,0.15, "I have read this admission form/instructions. The data/information on this form and in online system is same as last entered/modified/provided by me and it's correctness is only my responsibility. I understand that only the information/data provided in the online system along with the photograph and some other handwritten details on this form will be used for further processing. I accept all the terms and conditions in this regard.",0,'L'); 
        
         
         
@@ -1218,7 +1291,7 @@ class Admission_11th_pvt extends CI_Controller {
         $stampx = 3.4;
         $stampy = 5.2;
 
-        $pdf->Image("assets/img/admission_form.jpg",4.07,2.03, 2.38,0.20, "jpeg");                
+        $pdf->Image("assets/img/admission_form.jpg",4.07,2.33, 3.98,0.40, "jpeg");                
        
         $candidatex = 0.7;
 
@@ -1239,7 +1312,7 @@ class Admission_11th_pvt extends CI_Controller {
         $pdf->Cell(0,0.1,"Headmaster/Headmistress/Principal",0,'R');
         $pdf->SetXY($stampx,6.15+$Y);
         $pdf->SetFont('Arial','',8);
-        $pdf->Cell(0,0.1,"Head Of Institution Name",0,'R');
+        $pdf->Cell(0,0.1,"Name Head Of Institute",0,'R');
         $pdf->SetXY($stampx,6.3+$Y);
         $pdf->SetFont('Arial','',8);
         $pdf->Cell(0,0.1,"School/College Code",0,'R');
@@ -1331,27 +1404,36 @@ class Admission_11th_pvt extends CI_Controller {
         $pdf->Cell( 0,0,$mydata_final['AdmProcessFee'].'/-',0,'L');
 
 
-        $pdf->SetXY(5.8, 7.09+$Y);
+        $pdf->SetXY(5.4, 7.09+$Y);
         $pdf->SetFont('Arial','',$FontSize);
         $pdf->Cell( 0,0,"Registration Fee ",0,'L');
-        $pdf->SetXY(6.8, 7.09+$Y); 
+        $pdf->SetXY(6.3, 7.09+$Y); 
         $pdf->SetFont('Arial','b',$FontSize);
         $pdf->Cell( 0,0,$mydata_final['regFee'].'/-',0,'L');
+                  // DebugBreak();
+        if($data['grp_cd']==9)
+        {
+        $pdf->SetXY(6.8, 7.09+$Y);
+        $pdf->SetFont('Arial','',$FontSize);
+        $pdf->Cell( 0,0,"Cert Fee ",0,'L');
+        $pdf->SetXY(7.4, 7.09+$Y); 
+        $pdf->SetFont('Arial','b',$FontSize);
+        $pdf->Cell( 0,0,@$data['CertFee'].'/-',0,'L');
+        }
+        
 
-
-
-        $pdf->SetXY($myx, 7.23+$Y);
+        $pdf->SetXY($myx, 7.25+$Y);
         $pdf->SetFont('Arial','b',$FontSize);
         $pdf->Cell( 0,0,"Total Amount Rs.",0,'L');
         //DebugBreak();
-        $total = $mydata_final['AdmFee']+$mydata_final['regFee']+$mydata_final['AdmProcessFee']+$mydata_final['AdmFine'] ;
-        $pdf->SetXY(1.8, 7.23+$Y);
+        $total = $mydata_final['AdmFee']+$mydata_final['regFee']+$mydata_final['AdmProcessFee']+$mydata_final['AdmFine']+$mydata_final['CertFee'] ;
+        $pdf->SetXY(1.8, 7.25+$Y);
         $pdf->SetFont('Arial','b',8);
         $pdf->Cell( 0,0,$total.'/-',0,'L');
 
 
 
-        $pdf->SetXY(2.4, 7.23+$Y);
+        $pdf->SetXY(2.4, 7.25+$Y);
         $pdf->SetFont('Arial','',$FontSize);
         $pdf->Cell( 0,0,"Amount in Words:",0,'L');
 
@@ -1361,7 +1443,7 @@ class Admission_11th_pvt extends CI_Controller {
         $obj->toWords($total,"Only.","");
         $feeInWords = ucwords($obj->words);
       
-        $pdf->SetXY(3.38, 7.23+$Y);
+        $pdf->SetXY(3.38, 7.25+$Y);
         $pdf->SetFont('Arial','B',8);
         $pdf->Cell( 0,0,$feeInWords,"",0,'L');
 
@@ -1467,13 +1549,22 @@ class Admission_11th_pvt extends CI_Controller {
         $pdf->Cell( 0,0,$mydata_final['AdmProcessFee'].'/-',0,'L');
 
 
-        $pdf->SetXY(5.8, .93+$Y);
+        $pdf->SetXY(5.4, .93+$Y);
         $pdf->SetFont('Arial','',$FontSize);
         $pdf->Cell( 0,0,"Registration Fee ",0,'L');
-        $pdf->SetXY(6.8, .93+$Y); 
+        $pdf->SetXY(6.3, .93+$Y); 
         $pdf->SetFont('Arial','b',$FontSize);
         $pdf->Cell( 0,0,$mydata_final['regFee'].'/-',0,'L');
 
+        if($data['grp_cd']==9)
+        {
+        $pdf->SetXY(6.8, .93+$Y);
+        $pdf->SetFont('Arial','',$FontSize);
+        $pdf->Cell( 0,0,"Cert Fee ",0,'L');
+        $pdf->SetXY(7.4,.93+$Y); 
+        $pdf->SetFont('Arial','b',$FontSize);
+        $pdf->Cell( 0,0,$data['CertFee'].'/-',0,'L');
+        }
 
 
         $pdf->SetXY($myx, 1.2+$Y);
@@ -1710,7 +1801,7 @@ class Admission_11th_pvt extends CI_Controller {
         $config["thumbnail_size"]                  = 200; //Thumbnails will be cropped to 200x200 pixels
         $config["image_prefix"]                 = "temp_"; //Normal thumb Prefix
         $config["thumbnail_prefix"]                = "thumb_"; //Normal thumb Prefix
-        $config["destination_folder"]            = 'F:\xampp\htdocs\Inter_Admission\Uploads\2016\private\11th\\'; //upload directory ends with / (slash)
+        $config["destination_folder"]            = GET_PRIVATE_IMAGE_PATH.'11th\\'; //upload directory ends with / (slash)
         $config["thumbnail_destination_folder"]    = ''; //upload directory ends with / (slash)
         $config["upload_url"]                     = "../uploads/2016/private/11th/"; 
         $config["quality"]                         = 90; //jpeg quality

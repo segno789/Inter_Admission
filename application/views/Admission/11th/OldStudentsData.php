@@ -34,6 +34,8 @@
                                 
                                  </div>
                                   </div>   -->
+                               
+                 
                             <div class='control-group'>
                                 <label class='control-label span1'>
                                     Select Group:
@@ -195,12 +197,13 @@
                                                         default:
                                                             $grp_name = "No GROUP SELECTED.";
                                                             }
-                                                       
+                                                       //  DebugBreak();
                                                         $picpath =  DIRPATH11th.'/'.$Inst_Id.'/'.$vals["PicPath"];
-                                                       
+                                                       // echo $picpath;
                                                         $type = pathinfo($picpath, PATHINFO_EXTENSION);
                                                         $vals["PicPath"] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
                                                         
+                                                        //  DebugBreak();
                                                         echo '<tr  >
                                                         <td>'.$n.'</td>
                                                         <td>'.$vals["FormNo"].'</td>
@@ -212,6 +215,12 @@
                                                         <td><img id="previewImg" style="width:40px; height: 40px;" src="'.$vals["PicPath"] .'" alt="Candidate Image"></td>
                                                         <td> <button type="button" class="btn btn-info" value="'.$formno.'" onclick="NewForm('.$formno.')">View Form</button></td>
                                                         <td><input style="width: 24px; height: 24px;" type="checkbox" name="chk[]" value="'.$formno.'" /></td> </tr>';
+                                                        /*<td><img id="previewImg" style="width:40px; height: 40px;" src="/'.IMAGE_PATH.$Inst_Id.'/'.$vals['PicPath'].'" alt="Candidate Image"></td>';*/
+                                                        /* echo'<td>
+                                                        <button type="button" class="btn btn-info" value="'.$formno.'" onclick="NewForm('.$formno.')">Save Form</button>
+
+                                                        </td>
+                                                        </tr>';  */
                                                         endforeach;
                                                 }
                                                 ?>

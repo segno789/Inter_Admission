@@ -75,7 +75,7 @@
                                     <input class="span3" id="mob_number" name="mob_number" required="required" type="text" placeholder="0300-1234567">
                                 </div>
                             </div>
-                          
+
                             <div class="control-group">
                                 <label class="control-label span1" for="MarkOfIden">
                                     Mark Of Identification :
@@ -92,7 +92,7 @@
                                     </select>
                                 </div>
                             </div>
-                              <div class="control-group">
+                            <div class="control-group">
                                 <label class="control-label span1" for="medium">
                                     MEDIUM:
                                 </label>
@@ -101,10 +101,10 @@
                                         <option value="1" selected="selected">Urdu</option>
                                         <option value="2">English</option>
                                     </select>
-                                   <label class="control-label span2" for="UrbanRural">
+                                    <label class="control-label span2" for="UrbanRural">
                                         Residency :
                                     </label> 
-                                   <label class='radio inline span1'><input type='radio' value='1' id='UrbanRural' checked='checked' name='UrbanRural'> Urban
+                                    <label class='radio inline span1'><input type='radio' value='1' id='UrbanRural' checked='checked' name='UrbanRural'> Urban
                                     </label><label class='radio inline span1'><input type='radio'  id='UrbanRural' value='2' name='UrbanRural'>  Rural </label>  
                                 </div>
                             </div>
@@ -129,7 +129,7 @@
                                         <input type="radio" id="gender2" value="2" name="gender" > Female 
                                     </label> 
                                 </div>
-                                
+
                             </div>
                             <div class="control-group">
                                 <label class="control-label span1" for="name">
@@ -162,7 +162,7 @@
                                 </div>
                             </div>
                             <hr>
-                                      <div class="control-group">
+                            <div class="control-group">
                                 <h4 class="span4" style="margin-left: 30px;">Exam Proposed Center Information :</h4>
                                 <div class="controls controls-row">
                                     <label class="control-label span2">
@@ -195,120 +195,120 @@
                                 </div>
                             </div>
                             <div class="control-group">
-                            <label class="control-label span1" >
-                                Zone :
-                            </label>
+                                <label class="control-label span1" >
+                                    Zone :
+                                </label>
 
-                            <div class="controls controls-row">
-                                <select id="pvtZone"  class="span3" name="pvtZone">
-                                    <option value='0'>SELECT ZONE</option>
+                                <div class="controls controls-row">
+                                    <select id="pvtZone"  class="span3" name="pvtZone">
+                                        <option value='0'>SELECT ZONE</option>
 
-                                </select>
-                                <!-- <label class="control-label span2" >
-                                Board:
-                                </label> 
-                                <select id="speciality"  class="span3" name="speciality">
-                                <?php echo "<option value='1' selected='selected'>Gujranwala</option>";  ?>
-                                </select>
-                                </div>-->
+                                    </select>
+                                    <!-- <label class="control-label span2" >
+                                    Board:
+                                    </label> 
+                                    <select id="speciality"  class="span3" name="speciality">
+                                    <?php echo "<option value='1' selected='selected'>Gujranwala</option>";  ?>
+                                    </select>
+                                    </div>-->
+                                </div>
+                                <div id="instruction" style="display:none; width:700px" >
+                                    <img src="<?php echo base_url(); ?>assets/img/admission_form.jpg" border="0" width="10000" height="840" alt="admission_form.jpg">
+                                    <img src="<?php echo base_url(); ?>assets/img/instructions.jpg" border="0" width="10000" height="840" alt="admission_form.jpg">
+                                </div>
+                                <hr>
+
                             </div>
-                            <div id="instruction" style="display:none; width:700px" >
-                                <img src="<?php echo base_url(); ?>assets/img/admission_form.jpg" border="0" width="10000" height="840" alt="admission_form.jpg">
-                                <img src="<?php echo base_url(); ?>assets/img/instructions.jpg" border="0" width="10000" height="840" alt="admission_form.jpg">
-                            </div>
-                            <hr>
-                      
-                            </div>
-                             
-                                        <div class="control-group">
+
+                            <div class="control-group">
                                 <h4 class="span4">Exam Information :</h4>
                                 <div class="controls controls-row">
                                     <input type="hidden" class="span2 hidden"  value="0">
                                     <label class="control-label span2" for="father_name">
 
                                     </label> 
-                                    
+
                                 </div>
                             </div>
-                               <div class="control-group">
+                            <div class="control-group">
                                 <label class="control-label span1" for="nationality1">
                                     Study Group :
                                 </label>
                                 <div class="controls controls-row">
-                                <select id="std_group" class="dropdown span6"  name="std_group">
-                                <option value="0">Please Select Group</option>
-                            <option value="1">SCIENCE WITH BIOLOGY</option>
-                            <option value="7">SCIENCE  WITH COMPUTER SCIENCE</option>
-                                                        <option value="2">HUMANTIES</option>
-                            <option value="5">DEAF AND DUMB</option>
-                       </select>                                            
-                                    
+                                    <select id="std_group" class="dropdown span6"  name="std_group">
+                                        <option value="0">Please Select Group</option>
+                                        <option value="1">SCIENCE WITH BIOLOGY</option>
+                                        <option value="7">SCIENCE  WITH COMPUTER SCIENCE</option>
+                                        <option value="2">HUMANTIES</option>
+                                        <option value="5">DEAF AND DUMB</option>
+                                    </select>                                            
+
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label span3" for="name">
-                                 <b>Choose Subjects(Elective Subjects are Enabled Only)</b>   
+                                    <b>Choose Subjects(Elective Subjects are Enabled Only)</b>   
                                 </label>
                                 <div class="controls controls-row">
                                     <label class="control-label span8" >
                                     </label> 
                                 </div>
                             </div>
-                                  <div class="control-group">
+                            <div class="control-group">
                                 <label class="control-label span1" for="name">
-                                    
+
                                 </label>
                                 <div class="controls controls-row">
                                     <select id="sub1" class="span3 dropdown" name="sub1"><option value="1">Urdu</option></select> 
                                     <select id="sub2"  name="sub2" class="span3 dropdown">
-                                            <option value="2">English</option></select>
+                                        <option value="2">English</option></select>
                                 </div>
                             </div>
-                                    <div class="control-group">
+                            <div class="control-group">
                                 <label class="control-label span1" for="name">
-                                    
+
                                 </label>
                                 <div class="controls controls-row">
                                     <select id="sub3" class="span3 dropdown" name="sub3"><option value="3">Islamyat Compulsory</option></select> 
                                     <select id="sub4"  name="sub4" class="span3 dropdown">
-                                            <option value="4">Pakistan Studies</option></select>
+                                        <option value="4">Pakistan Studies</option></select>
                                 </div>
                             </div>    
                             <div class="control-group">
                                 <label class="control-label span1" for="name">
-                                    
+
                                 </label>
                                 <div class="controls controls-row">
                                     <select id="sub5" class="span3 dropdown" name="sub5"></select> 
                                     <select id="sub6"  name="sub6" class="span3 dropdown">
-                                            </select>
+                                    </select>
                                 </div>
                             </div>    <div class="control-group">
                                 <label class="control-label span1" for="name">
-                                    
+
                                 </label>
                                 <div class="controls controls-row">
                                     <select id="sub7" class="span3 dropdown" name="sub7"></select> 
                                     <select id="sub8"  name="sub8" class="span3 dropdown">
-                                            </select>
+                                    </select>
                                 </div>
                             </div>
-                        
-                           
+
+
                             <div class="row">
-                            <div class="col-lg-2">
-                            </div>
-                            <div class="col-lg-4">
-                                <button type="submit" name="save" class="btn btn-large btn-info" onclick="return checks();"> 
-                                    Save Form
-                                </button>
-                                <input type="button" class="btn btn-large btn-danger" value="Cancel" onclick="window.location='index.php';" >
-                            </div>
-                            </div>
-                            
-                                <div class="clearfix">
+                                <div class="col-lg-2">
                                 </div>
-                            
+                                <div class="col-lg-4">
+                                    <button type="submit" name="save" class="btn btn-large btn-info" onclick="return checks();"> 
+                                        Save Form
+                                    </button>
+                                    <input type="button" class="btn btn-large btn-danger" value="Cancel" onclick="window.location='index.php';" >
+                                </div>
+                            </div>
+
+                            <div class="clearfix">
+                            </div>
+
 
                         </form>
 
@@ -333,13 +333,13 @@
             return true;
         } 
     }
-function  check_NewEnrol_validation(){
+    function  check_NewEnrol_validation(){
 
         var name =  $('#cand_name').val();
         var dist_cd= $('#pvtinfo_dist').val();
         var teh_cd= $('#pvtinfo_teh').val();
         var zone_cd= $('#pvtZone').val();
-      //  var pp_cent= $('#pp_cent').val();           
+        //  var pp_cent= $('#pp_cent').val();           
         var sub6p1 = $('#sub5').val();
         var sub6p2 = $('#sub6').val();           
         var sub7p1 = $('#sub7').val();
@@ -355,40 +355,46 @@ function  check_NewEnrol_validation(){
         var address = $('#address').val();
         var image = $('#image').val();
         var MarkOfIdent = $('#MarkOfIden').val();
-         var gend = $("input[name=gender]:checked").val();
+        var gend = $("input[name=gender]:checked").val();
         var status = 0;
         // alert('sub6 '+sub6p1+ ' and '+ sub6p2);
         if(name == "" ||  name == undefined){
-              alertify.error("Please Enter your  Name.");
-          
+            alertify.error("Please Enter your  Name.");
+
             $('#cand_name').focus(); 
             return status;
         }
         else if(fName == "" || fName == undefined){
             alertify.error("Please Enter your  Father's Name.");
-           
+
             $('#father_name').focus(); 
             return status;
         }   
 
         else if(bFormNo == "" || bFormNo == 0 || bFormNo == undefined)
         {
-             alertify.error("Please Enter your  bay-Form.");
+            alertify.error("Please Enter your  bay-Form.");
             $('#bay_form').focus();  
             return status; 
         }
         else if(FNic == "" || FNic.length == undefined )
         {
-             alertify.error("Please Enter your  Father's CNIC.");
-            
+            alertify.error("Please Enter your  Father's CNIC.");
+
             $('#father_cnic').focus();  
             return status; 
         }
+        else if(FNic == bFormNo  )
+        {
 
+            alertify.error("B-form Number and Father CNIC cannot be same.") 
+            $('#bay_form').focus();   
+            return status; 
+        }
         else if(dob == "" || dob.length == undefined)
         {
-             alertify.error("Please Enter your  Date of Birth.");
-            
+            alertify.error("Please Enter your  Date of Birth.");
+
             $('#dob').focus(); 
             return status;  
         }
@@ -396,20 +402,20 @@ function  check_NewEnrol_validation(){
         else if(mobNo == "" || mobNo == 0 || mobNo == undefined)
         {
             alertify.error("Please Enter your Mobile No.");
-            
+
             $('#mob_number').focus();   
             return status;  
         }
         else if(gend == "" || gend== undefined)
         {
-             alertify.error("Please Select Your Gender.");
+            alertify.error("Please Select Your Gender.");
             //$('#ErrMsg').html("<b>Please Select Your Gender.</b>"); 
             $("input[name=gender]:checked").focus();   
             return status;  
         }
         else if(MarkOfIdent == "" || MarkOfIdent == 0 || MarkOfIdent == undefined)
         {
-             alertify.error("Please Enter your Mark of Indentification.");
+            alertify.error("Please Enter your Mark of Indentification.");
             //$('#ErrMsg').html("<b>Please Enter your Mark of Indentification</b>"); 
             $('#MarkOfIden').focus();   
             return status;  
@@ -425,39 +431,39 @@ function  check_NewEnrol_validation(){
         else  if (dist_cd < 1) 
         {
 
-             alertify.error("Please select District.");
-      
-        $("#pvtinfo_dist").focus();
+            alertify.error("Please select District.");
 
-        return status;  
+            $("#pvtinfo_dist").focus();
+
+            return status;  
         }
 
         else   if (teh_cd < 1) {
-        alertify.error("Please select Tehsil.");
-        //alert('Please select Tehsil');                          
-        $("#pvtinfo_teh").focus();
-        return status;  
+            alertify.error("Please select Tehsil.");
+            //alert('Please select Tehsil');                          
+            $("#pvtinfo_teh").focus();
+            return status;  
         }
         else  if (zone_cd < 1) {
-alertify.error("Please select Zone.");
-       // alert('Please select Zone. ');                          
-        $("#pvtZone").focus();
-        return status;  
+            alertify.error("Please select Zone.");
+            // alert('Please select Zone. ');                          
+            $("#pvtZone").focus();
+            return status;  
         }
-        
+
 
         else   if ($("#std_group").find('option:selected').val() < 1) 
         {
-             alertify.error("Please Enter your Study Group.");
-           
+            alertify.error("Please Enter your Study Group.");
+
             // alert('Study Group not selected ');                          
             $("#std_group").focus();
             return status;  
         }
         else   if ($("#sub3").find('option:selected').val() < 1) 
         {
-             alertify.error("Plesae select  Subject.");
-                             
+            alertify.error("Plesae select  Subject.");
+
             $("#sub3").focus();
 
             return status;  
@@ -465,7 +471,7 @@ alertify.error("Please select Zone.");
         else   if ($("#sub5").find('option:selected').val() < 1) 
         {
             alertify.error("Plesae select  Subject.");
-                                   
+
             $("#sub5").focus();
 
             return status;  
@@ -473,9 +479,9 @@ alertify.error("Please select Zone.");
 
         else   if ($("#sub6").find('option:selected').val() < 1) 
         {
-             alertify.error("Plesae select 6th Subject.");
-                                   
-            
+            alertify.error("Plesae select 6th Subject.");
+
+
             // alert('Plesae select 6th Subject  ');                          
             $("#sub6").focus();
             return status;  
@@ -483,11 +489,11 @@ alertify.error("Please select Zone.");
 
         else   if ($("#sub7").find('option:selected').val() < 1) 
         {
-             alertify.error("Plesae select 7th Subject.");
-                                   
-            
+            alertify.error("Plesae select 7th Subject.");
+
+
             // alert('Plesae select 6th Subject  ');                          
-             
+
             $("#sub7").focus();
             return status;  
         }
@@ -495,7 +501,7 @@ alertify.error("Please select Zone.");
         else   if ($("#sub8").find('option:selected').val() < 1) 
         {
             alertify.error("Plesae select 8th Subject.");
-              
+
             $("#sub8").focus();
             return status;  
         }
@@ -507,8 +513,28 @@ alertify.error("Please select Zone.");
 
 
     }
-     $(document).on("focusin", "#dob", function() {
-   $(this).prop('readonly', true);  
-});
+    $(document).on("focusin", "#dob", function() {
+        $(this).prop('readonly', true);  
+    });
+    $('#cand_name').keydown(function (e) {
+        if (e.shiftKey || e.ctrlKey || e.altKey) {
+            e.preventDefault();
+        } else {
+            var key = e.keyCode;
+            if (!((key == 8) || (key == 32) || (key == 46) || (key >= 35 && key <= 40) || (key >= 65 && key <= 90))) {
+                e.preventDefault();
+            }
+        }
+    });
+    $('#father_name').keydown(function (e) {
+        if (e.shiftKey || e.ctrlKey || e.altKey) {
+            e.preventDefault();
+        } else {
+            var key = e.keyCode;
+            if (!((key == 8) || (key == 32) || (key == 46) || (key >= 35 && key <= 40) || (key >= 65 && key <= 90))) {
+                e.preventDefault();
+            }
+        }
+    });
 
 </script>

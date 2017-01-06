@@ -2113,7 +2113,24 @@ class Admission extends CI_Controller {
             $error_msg.='<span style="font-size: 16pt; color:red;">No Any Student Found Against Your Criteria</span>';
         }
 
+     //   DebugBreak();
+        $picpath = DIRPATH12TH.'\\'.@$data[0]['picpath'];
+           // echo $picpath;die();
+           $isexit = is_file($picpath);
+           if(!$isexit)
+           {
+               $error_msg.= '<span style="font-size: 16pt; color:red;">' . 'Your Picture is missing.</span>';            
 
+
+           }
+           else
+           {
+               $type = pathinfo($picpath, PATHINFO_EXTENSION);
+               $data[0]['picpathImg'] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
+
+           } 
+        
+        
         $specialcase = $data['0']['Spl_Name'];
         $specialcode = $data['0']['spl_cd'];
         $exam_type =   $data['0']['exam_type'];
@@ -2163,13 +2180,12 @@ class Admission extends CI_Controller {
         if($error_msg !='')
         {
             $this->load->library('session');
-            $mydata = array('data'=>$_POST,'error_msg'=>$error_msg,'exam_type'=>$exam_type);
+            $mydata = array('data'=>$_POST,'error_msg'=>$error_msg,'exam_type'=>0);
             $this->session->set_flashdata('matric_error',$mydata);
             redirect('Admission/matric_default');
         }
         else if(($exam_type == 16) && !isset($CatType))
         {
-
             $this->load->library('session');
             $mydata = array('data'=>$_POST,'error_msg'=>$error_msg,'exam_type'=>$exam_type);
             $this->session->set_flashdata('matric_error',$mydata );
@@ -2179,7 +2195,7 @@ class Admission extends CI_Controller {
         {
             $error_msg.='<span style="font-size: 16pt; color:red;">' . 'You can not Marks Improve.</span>';
             $this->load->library('session');
-            $mydata = array('data'=>$_POST,'error_msg'=>$error_msg,'exam_type'=>$exam_type);
+            $mydata = array('data'=>$_POST,'error_msg'=>$error_msg,'exam_type'=>0);
             $this->session->set_flashdata('matric_error',$mydata );
             redirect('Admission/matric_default');
         }
@@ -2187,7 +2203,7 @@ class Admission extends CI_Controller {
         {
             $error_msg.='<span style="font-size: 16pt; color:red;">' . 'Your Result is not cleared.</span>';
             $this->load->library('session');
-            $mydata = array('data'=>$_POST,'error_msg'=>$error_msg,'exam_type'=>$exam_type);
+            $mydata = array('data'=>$_POST,'error_msg'=>$error_msg,'exam_type'=>0);
             $this->session->set_flashdata('matric_error',$mydata );
             redirect('Admission/matric_default');
         } 
@@ -2195,7 +2211,7 @@ class Admission extends CI_Controller {
         {
             $error_msg.='<span style="font-size: 16pt; color:red;">' . 'You can not appear as a Private Candidate. Please contact your Institute.</span>';
             $this->load->library('session');
-            $mydata = array('data'=>$_POST,'error_msg'=>$error_msg,'exam_type'=>$exam_type);
+            $mydata = array('data'=>$_POST,'error_msg'=>$error_msg,'exam_type'=>0);
             $this->session->set_flashdata('matric_error',$mydata );
             redirect('Admission/matric_default');
         }
@@ -2278,7 +2294,8 @@ class Admission extends CI_Controller {
             $this->load->view('common/commonfooter.php'); 
         }
 
-        else if( $_POST["oldBrd_cd"] == 1){
+        else if( $_POST["oldBrd_cd"] == 1)
+        {
 
             $data = $this->Admission_model->Pre_Matric_data($data);
             if(!$data)
@@ -2670,7 +2687,11 @@ class Admission extends CI_Controller {
             'certfee'=>$Certificate
         );
 
+<<<<<<< .mine
      /*   $config['upload_path']   = PRIVATE_IMAGE_PATH_FRESH;
+=======
+       /* $config['upload_path']   = PRIVATE_IMAGE_PATH_FRESH;
+>>>>>>> .theirs
         $config['allowed_types'] = 'jpeg|jpg';              
         $config['file_name']    = $formno;
 
@@ -2991,7 +3012,11 @@ class Admission extends CI_Controller {
 
         //DebugBreak();
 
+<<<<<<< .mine
      /*   $config['upload_path']   = PRIVATE_IMAGE_PATH_FRESH;
+=======
+       /* $config['upload_path']   = PRIVATE_IMAGE_PATH_FRESH;
+>>>>>>> .theirs
         $config['allowed_types'] = 'jpeg|jpg';              
         $config['file_name']    = $formno;//@$_POST['InterRno_hidden']; 
 
@@ -3002,13 +3027,15 @@ class Admission extends CI_Controller {
         }
         else { 
             $data['picpath'] = array('upload_data' => $this->upload->data()); 
+<<<<<<< .mine
         }  */
+=======
+        } */
+>>>>>>> .theirs
 
 
 
         $logedIn = $this->Admission_model->NewEnrolment_insert_Fresh($data);
-
-
         $info =  '';
         foreach($logedIn[0] as $key=>$val)
         {
@@ -3033,7 +3060,8 @@ class Admission extends CI_Controller {
 
     }
 
-    public function NewEnrolment_insert()  {
+    public function NewEnrolment_insert()  
+    {
         $this->load->model('Admission_model');
         $this->load->library('session');
         $Inst_Id = 999999;
@@ -3391,6 +3419,10 @@ class Admission extends CI_Controller {
             'picname'=>@$_POST['picname'],
             'certfee'=>$Certificate
         );
+
+     //   DebugBreak();
+
+       
 
         $logedIn = $this->Admission_model->Insert_NewEnorlement($data);
         $info =  '';
@@ -4754,9 +4786,9 @@ class Admission extends CI_Controller {
         $config["thumbnail_size"]                  = 200; //Thumbnails will be cropped to 200x200 pixels
         $config["image_prefix"]                 = "temp_"; //Normal thumb Prefix
         $config["thumbnail_prefix"]                = "thumb_"; //Normal thumb Prefix
-        $config["destination_folder"]            = 'F:\xampp\htdocs\Inter_Admission\Uploads\2016\private\12th\\'; //upload directory ends with / (slash)
+        $config["destination_folder"]            = GET_PRIVATE_IMAGE_PATH.'12th\\'; //upload directory ends with / (slash)
         $config["thumbnail_destination_folder"]    = ''; //upload directory ends with / (slash)
-        $config["upload_url"]                     = "../uploads/2016/private/11th/"; 
+        $config["upload_url"]                     = "../uploads/2016/private/12th/"; 
         $config["quality"]                         = 90; //jpeg quality
         $config["random_file_name"]                = true; //randomize each file name
 
