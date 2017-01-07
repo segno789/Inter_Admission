@@ -31,9 +31,7 @@
                                         <th style="width:20%">
                                             Father's Name
                                         </th>
-                                        <th style="width:5%" class="hidden-phone">
-                                            DOB
-                                        </th>
+                                       
                                         <th style="width:20%" class="hidden-phone">
                                             Subject Group
                                         </th>
@@ -88,7 +86,6 @@
                                     <td>'.$formno.'</td>
                                     <td>'.$vals["name"].'</td>
                                     <td>'.$vals["Fname"].'</td>
-                                    <td>'.date("d-m-Y", strtotime($vals["Dob"])).'</td>
                                     <td>'.$grp_name.'</td>
                                     <td>'.$vals["sub1_abr"].','.$vals["sub2_abr"].','.$vals["sub3_abr"].','.$vals["sub4_abr"].','.$vals["sub5_abr"].','.$vals["sub6_abr"].','.$vals["sub7_abr"].'</td>
                                      <td><img id="previewImg" style="width:40px; height: 40px;" src="'.$vals['PicPath'].'" alt="Candidate Image"></td>
