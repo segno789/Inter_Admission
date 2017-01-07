@@ -257,8 +257,6 @@
 
         $("#btndwnForm").click(function(){
             var formno = $("#formid").val();
-         
-
             if(formno == "")
             {
                 alertify.error("Please write Form No.");
@@ -269,7 +267,6 @@
                 alertify.error("Please write Valid Form No.");
                 return false;    
             }
-          
             else
             {
                 alertify.log("Please wait while your form is downloading....")    
@@ -278,6 +275,36 @@
 
 
         })
+        $("#btndwnForm12").click(function(){
+            var formno = $("#formid").val();
+            if(formno == "")
+            {
+                alertify.error("Please write Form No.");
+                return false;    
+            }
+            else if(formno.length < 5)
+            {
+                alertify.error("Please write Valid Form No.");
+                return false;    
+            }
+            else
+            {
+                alertify.log("Please wait while your form is downloading....")    
+                downloadform12();    
+            }
+
+
+        })
+         function downloadform12(){
+            //debugger;
+            var formno = $("#formid").val();
+           // var dob = $("#dob").val();
+            if(formno == ""){
+                return false;
+            }
+           
+            window.location.href='<?php  echo base_url(); ?>Admission/checkFormNo_then_download/'+formno;  
+        }
         function downloadform(){
             //debugger;
             var formno = $("#formid").val();

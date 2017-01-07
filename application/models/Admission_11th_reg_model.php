@@ -275,7 +275,7 @@ class Admission_11th_reg_model extends CI_Model
       public function getzone($tehcd)
     {
 
-        $query = $this->db->get_where('matric_new..tblZones', array('mYear' => 2017,'Class' => 10,'Sess'=>1, 'teh_cd' => $tehcd));
+        $query = $this->db->get_where('matric_new..tblZones', array('mYear' => 2017,'Class' => 12,'Sess'=>1, 'teh_cd' => $tehcd));
         // //DebugBreak();
         $rowcount = $query->num_rows();
         if($rowcount > 0)
@@ -541,9 +541,9 @@ class Admission_11th_reg_model extends CI_Model
         else{
         $query = $this->db->get_where('Registration..MA_P1_Reg_Adm2016',  array('formNo' => $formno,'class'=>9,'iyear'=>$year,'sess'=>1));     
         } */
-
-        $query = $this->db->get_where('Registration..IA_P1_Reg_Adm2016_temp',  array('formNo' => $formno,'class'=>11,'iyear'=>Year,'sess'=>Session));     
-
+        $year = $year-1;
+        $query = $this->db->get_where('Registration..IA_P1_Reg_Adm2016_temp',  array('formNo' => $formno,'class'=>11,'iyear'=>$year,'sess'=>Session));     
+       // DebugBreak();
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {

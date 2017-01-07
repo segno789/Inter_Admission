@@ -149,32 +149,35 @@ class Admission_11th_reg extends CI_Controller {
         $pdf->SetXY(0.9+$x,0.7+$y);
         $pdf->Cell(0, 0.25, "__________", 0.25, "C");
         
-        $pdf->SetFont('Arial','B',10);
-        $pdf->SetXY(4.9+$x,1.5+$y);
-        $pdf->Cell(0, 0.25, "Dated:________________________________", 0.25, "C");
+        
+         $pdf->SetFont('Arial','B',10);
+        $pdf->SetXY(0.4+$x,1.6+$y);
+        
+        $pdf->Cell(0, 0.25, "Dated:______________________", 0.25, "C");
         
        
 
-        $pdf->SetFont('Arial','',10);
-        $pdf->SetXY(0.4+$x,1.2+$y);
+        /*$pdf->SetFont('Arial','',10);
+        $pdf->SetXY(0.4+$x,1.3+$y);
         $pdf->Cell(0, 0.25, "TEH:__________________", 0.25, "C");
 
          $pdf->SetFont('Arial','',10);
-        $pdf->SetXY(2.1+$x,1.2+$y);
-        $pdf->Cell(0, 0.25, " DISTT:________________", 0.25, "C");
+        $pdf->SetXY(2.1+$x,1.3+$y);
+        $pdf->Cell(0, 0.25, " DISTT:_____________________", 0.25, "C");     */
         
         
         $pdf->SetFont('Arial','',10);
-        $pdf->SetXY(0.4+$x,1.5+$y);
-        $pdf->Cell(0, 0.25, "NO:__________________", 0.25, "C");
+        $pdf->SetXY(0.4+$x,1.2+$y);
+        $pdf->Cell(0, 0.25, "NO:_________________________", 0.25, "C");
         
         $pdf->SetFont('Arial','B',10);
-        $pdf->SetXY(4.9+$x,.7+$y);
-        $pdf->Cell(0, 0.25, "Institute Landline No:____________________", 0.25, "C");
+        $pdf->SetXY(4.9+$x,1.2+$y);            
+        $pdf->Cell(0, 0.25, "Institute Landline No:___________________", 0.25, "C");
         
         $pdf->SetFont('Arial','B',10);
-        $pdf->SetXY(4.9+$x,1.2+$y);
-        $pdf->Cell(0, 0.25, "Mob No:______________________________", 0.25, "C");
+        $pdf->SetXY(4.9+$x,1.6+$y);
+        
+        $pdf->Cell(0, 0.25, "Mobile No:____________________________", 0.25, "C");
 
       
 
@@ -304,16 +307,16 @@ class Admission_11th_reg extends CI_Controller {
         $pdf->Cell($boxWidth-1.7,0.2,$result['data'][0]['wlateFee5'],1,0,'C',1); */
         $pdf->Cell($boxWidth-1.5,0.2,$result['data'][0]['grpFee5'],1,0,'C',1);
         
-         $pdf->SetXY($xx,5+$yy);
+       /* $pdf->SetXY($xx,5+$yy);
         $pdf->SetFont('Arial','',7);
         $pdf->Cell($boxWidth-2.2,0.2,'6',1,0,'C',1);
         $pdf->Cell($boxWidth-0.7,0.2,'ETICHS FOR NON MUSLIMS',1,0,'L',1);
-        $pdf->SetFont('Arial','',10);
+        $pdf->SetFont('Arial','',10);  */
         /* $pdf->Cell($boxWidth-1.8,0.2,$result['data'][0]['lateFee5'],1,0,'C',1);
         $pdf->Cell($boxWidth-1.7,0.2,$result['data'][0]['wlateFee5'],1,0,'C',1); */
-        $pdf->Cell($boxWidth-1.5,0.2,$result['data'][0]['grpFee5'],1,0,'C',1);
+        //$pdf->Cell($boxWidth-1.5,0.2,$result['data'][0]['grpFee5'],1,0,'C',1);
 
-        $pdf->SetXY($xx,5.2+$yy);
+        $pdf->SetXY($xx,5+$yy);
         $pdf->SetFont('Arial','B',11);
         $pdf->Cell($boxWidth-2.2,0.2,'',1,0,'C',1);
 
@@ -392,7 +395,7 @@ class Admission_11th_reg extends CI_Controller {
         $pdf->MultiCell(8.5,0.2,"Signature & Stamp of Principal",0,"L",0)    ; 
 
         $pdf->SetFont('Arial','B',8);
-        $pdf->SetXY(5.4,11.25+$y);    
+         $pdf->SetXY(0.9,11.45+$y);     
         $pdf->MultiCell(8.5,0.2,'Print Date: '. date('d-m-Y H:i:s a'),0,"L",0)    ;  
 
         $pdf->Output('123'.'.pdf', 'I');
@@ -2481,7 +2484,8 @@ class Admission_11th_reg extends CI_Controller {
      
   public function ChallanForm_Adm11hth_Regular()
     { 
-  //DebugBreak();
+    
+    //DebugBreak();
      $Grp_cd = $this->uri->segment(3);
      $this->load->library('session');
         $this->load->library('NumbertoWord');
@@ -2778,7 +2782,7 @@ class Admission_11th_reg extends CI_Controller {
 
         
         // DebugBreak();
-        $data = array('data'=>$this->Admission_11th_reg_model->revenue_pdf($fetch_data),'inst_Name'=>$user['inst_Name'],'inst_cd'=>$user['Inst_Id'],"SciAdmFee"=>$SciAdmFee,"ArtsAdmFee"=>$ArtsAdmFee,"SciProcFee"=>$SciProcFee,"ArtsProcFee"=>$ArtsProcFee);
+        $data = array('data'=>$this->Admission_11th_reg_model->revenue_pdf($fetch_data),'inst_Name'=>$user['inst_Name'],'inst_cd'=>$user['Inst_Id'],"SciAdmFee"=>@$SciAdmFee,"ArtsAdmFee"=>@$ArtsAdmFee,"SciProcFee"=>@$SciProcFee,"ArtsProcFee"=>@$ArtsProcFee);
         //
         // ------------------------------------- Assign Each Candidate Fee According to Special case, Re-Admission ,Government Candidate and Newly Affiliated Institutes.
         $n=0;

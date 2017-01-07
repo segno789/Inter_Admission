@@ -1066,7 +1066,26 @@ if(isset($files)){
         }
      
     })
-
+    $("#lang_cat").change(function(){
+   // debugger;
+        var myv =  $("#lang_cat").val();
+    if( myv== 1)
+    {
+         $("#lang_specialSub").empty();
+          $("#lang_specialSub").prepend("<option  value='24'> ARABIC </option>");
+          $("#lang_specialSub").prepend("<option  value='2'> URDU </option>");
+         
+    }
+    if(myv== 3)
+    {
+      $("#lang_specialSub").empty();
+          $("#lang_specialSub").prepend("<option  value='24'> ARABIC </option>");
+          $("#lang_specialSub").prepend("<option  value='2'> URDU </option>");
+          $("#lang_specialSub").prepend("<option  value='32'> PUNJABI </option>");
+          $("#lang_specialSub").prepend("<option  value='34'> PERSIAN </option>");
+          
+    }
+    })
     var NationalityVal = $("input[name=nationality]:checked").val();
 
     function Hum_Deaf_Subjects_NewEnrolement(sub6,sub7,sub8)

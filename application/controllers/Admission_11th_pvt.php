@@ -362,13 +362,14 @@ class Admission_11th_pvt extends CI_Controller {
         $logedIn = $this->Admission_11th_Pvt_model->Insert_NewEnorlement($data);//, $fname);//$_POST['username'],$_POST['password']);
         //$error = $logedIn[0]['error'];
 
+        
       $info =  '';
       foreach($logedIn[0] as $key=>$val)
       {
           if($key == 'formno')
           {
-             $oldpath =  GET_PRIVATE_IMAGE_PATH.'\11th'.$logedIn[0]['tempath'];
-             $newpath =  GET_PRIVATE_IMAGE_PATH.'\11th'.$val.'.jpg';
+             $oldpath =  GET_PRIVATE_IMAGE_PATH.'\11th\\'.$logedIn[0]['tempath'];
+             $newpath =  GET_PRIVATE_IMAGE_PATH.'\11th\\'.$val.'.jpg';
              $err = rename($oldpath,$newpath);
               $info['error'] = 1;
               $info['formno'] = $val;
@@ -506,8 +507,8 @@ class Admission_11th_pvt extends CI_Controller {
       {
           if($key == 'formno')
           {
-             $oldpath =  GET_PRIVATE_IMAGE_PATH.'\11th'.$logedIn[0]['tempath'];
-             $newpath =  GET_PRIVATE_IMAGE_PATH.'\11th'.$val.'.jpg';
+             $oldpath =  GET_PRIVATE_IMAGE_PATH.'\11th\\'.$logedIn[0]['tempath'];
+             $newpath =  GET_PRIVATE_IMAGE_PATH.'\11th\\'.$val.'.jpg';
              $err = rename($oldpath,$newpath);
               $info['error'] = 1;
               $info['formno'] = $val;
@@ -554,7 +555,7 @@ class Admission_11th_pvt extends CI_Controller {
         {
             $error = 'No Data Exist againt '.$formno.' Form No. Please check it again.';
             $this->session->set_flashdata('downerror',$error);
-            redirect('Admission_9th');
+            redirect('Admission_11th_pvt');
             return;
         }
 
@@ -780,17 +781,17 @@ class Admission_11th_pvt extends CI_Controller {
        // $pdf->Image("assets/img/ExamCenter.jpg",4.5,2.90, 2.78,0.15, "jpeg");  
         if($data["grp_cd"] != 9)
         {      
-        $pdf->Image("assets/img/11th.png",7.6,0.07,  0.50,0.50, "PNG");
-        $pdf->Image("assets/img/11th.png",7.7,7.25,  0.50,0.50, "PNG");      
-        $pdf->Image("assets/img/11th.png",7.7,8.80,  0.50,0.50, "PNG");   
-        $pdf->Image("assets/img/11th.png",7.7,10.16,  0.50,0.50, "PNG");   
+        $pdf->Image("assets/img/11th.png",7.6,0.19,  0.40,0.40, "PNG");
+        $pdf->Image("assets/img/11th.png",7.7,7.40,  0.30,0.30, "PNG");      
+        $pdf->Image("assets/img/11th.png",7.7,8.98,  0.30,0.30, "PNG");   
+        $pdf->Image("assets/img/11th.png",7.7,10.40,  0.30,0.30, "PNG");   
         }
         else
         {
-        $pdf->Image("assets/img/aloom.GIF",7.6,0.07,  0.50,0.50, "GIF");
-        $pdf->Image("assets/img/aloom.GIF",7.7,7.25,  0.50,0.50, "GIF");      
-        $pdf->Image("assets/img/aloom.GIF",7.7,8.80,  0.50,0.50, "GIF");   
-        $pdf->Image("assets/img/aloom.GIF",7.7,10.16,  0.50,0.50, "GIF");
+        $pdf->Image("assets/img/aloom.JPG",7.55,0.2,  0.50,0.40, "JPG");
+        $pdf->Image("assets/img/aloom.JPG",7.7,7.28,  0.50,0.40, "JPG");      
+        $pdf->Image("assets/img/aloom.JPG",7.7,8.89,  0.50,0.40, "JPG");   
+        $pdf->Image("assets/img/aloom.JPG",7.7,10.28,  0.50,0.40, "JPG");
         }
         //$this->Image("logo.jpg",0.05,0.3, 0.75,0.75, "JPG", "http://www.biseGujranwala.edu.pk");
         
@@ -850,7 +851,7 @@ class Admission_11th_pvt extends CI_Controller {
         /*       }
         $pdf->SetFont('Arial','',8);*/
 
-        $pdf->Image(GET_PRIVATE_IMAGE_PATH. @$data["PicPath"],6.5, 1.10+$Y, 0.95, 1.0, "JPG");
+        $pdf->Image(GET_PRIVATE_IMAGE_PATH.'11th\\'. @$data["PicPath"],6.5, 1.10+$Y, 0.95, 1.0, "JPG");
         $pdf->SetFont('Arial','',10);
 
 
@@ -906,7 +907,7 @@ class Admission_11th_pvt extends CI_Controller {
          if($data["grp_cd"] == 9)
         {
         $pdf->Cell( 0.0,0.0,"(ALOOM-E-SHARQIA)",0,'C');
-         $pdf->Image("assets/img/aloom.GIF",3.73,1.05,  1.0,0.40, "GIF");
+         $pdf->Image("assets/img/aloom.JPG",3.73,1.07,  1.0,0.350, "JPG");
         }
         else
         {
@@ -1085,34 +1086,39 @@ class Admission_11th_pvt extends CI_Controller {
         }
         }
         
-        $pdf->Image("assets/img/examaloomsharkia.GIF",3.83,2.75,  2.0,0.40, "GIF");
+        
         
         
         
         // Adeeb urdu
         if($data["grp_cd"] == 9 && $data['Lang_cat']==1 && $data['Lang_spec_sub']==2 )
         {
-          $pdf->Image("assets/img/adeeburdu.GIF",2.73,2.75,  1.0,0.40, "GIF");
+        $pdf->Image("assets/img/examaloomsharkia.JPG",3.83,2.75,  2.0,0.40, "JPG");
+          $pdf->Image("assets/img/adeeburdu.JPG",2.73,2.75,  1.0,0.40, "JPG");
         }
         // Adeeb Arabic
         else if ($data["grp_cd"] == 9 && $data['Lang_cat']==1 && $data['Lang_spec_sub']==24 )
         {
-          $pdf->Image("assets/img/adeebarbic.GIF",2.73,2.75,  1.0,0.40, "GIF");
+        $pdf->Image("assets/img/examaloomsharkia.JPG",3.83,2.75,  2.0,0.40, "JPG");
+          $pdf->Image("assets/img/adeebarbic.JPG",2.73,2.75,  1.0,0.40, "JPG");
         }
         // Fazal Arabic
         else if ($data["grp_cd"] == 9 && $data['Lang_cat']==3 && $data['Lang_spec_sub']==24 )
         {
-          $pdf->Image("assets/img/fazilarabic.GIF",2.73,2.75,  1.0,0.40, "GIF");
+        $pdf->Image("assets/img/examaloomsharkia.JPG",3.83,2.75,  2.0,0.40, "JPG");
+          $pdf->Image("assets/img/fazilarabic.JPG",2.73,2.75,  1.0,0.40, "JPG");
         }
         // Fazal Urdu
         else if($data["grp_cd"] == 9 && $data['Lang_cat']==3 && $data['Lang_spec_sub']==2 )
         {
-          $pdf->Image("assets/img/fazilurdu.GIF",2.73,2.75,  1.0,0.40, "GIF");
+        $pdf->Image("assets/img/examaloomsharkia.JPG",3.83,2.75,  2.0,0.40, "JPG");
+          $pdf->Image("assets/img/fazilurdu.JPG",2.73,2.75,  1.0,0.40, "JPG");
         }
         // Fazal Punjabi
         else if($data["grp_cd"] == 9 && $data['Lang_cat']==3 && $data['Lang_spec_sub']==32 )
         {
-          $pdf->Image("assets/img/fazilpunjabi.GIF",2.73,2.75,  1.0,0.40, "GIF");
+        $pdf->Image("assets/img/examaloomsharkia.JPG",3.83,2.75,  2.0,0.40, "JPG");
+          $pdf->Image("assets/img/fazilpunjabi.JPG",2.73,2.75,  1.0,0.40, "JPG");
         }
         
         
@@ -1426,7 +1432,7 @@ class Admission_11th_pvt extends CI_Controller {
         $pdf->SetFont('Arial','b',$FontSize);
         $pdf->Cell( 0,0,"Total Amount Rs.",0,'L');
         //DebugBreak();
-        $total = $mydata_final['AdmFee']+$mydata_final['regFee']+$mydata_final['AdmProcessFee']+$mydata_final['AdmFine']+$mydata_final['CertFee'] ;
+        $total = @$mydata_final['AdmFee']+@$mydata_final['regFee']+@$mydata_final['AdmProcessFee']+@$mydata_final['AdmFine'] ;
         $pdf->SetXY(1.8, 7.25+$Y);
         $pdf->SetFont('Arial','b',8);
         $pdf->Cell( 0,0,$total.'/-',0,'L');
@@ -1785,8 +1791,8 @@ class Admission_11th_pvt extends CI_Controller {
         );
 
         $tehCode = $data['tehCode'];
-        $this->load->model('Admission_9th_reg_model');
-        $value = array('teh'=> $this->Admission_9th_reg_model->getzone($tehCode)) ;
+        $this->load->model('Admission_11th_pvt_model');
+        $value = array('teh'=> $this->Admission_11th_pvt_model->getzone($tehCode)) ;
         echo json_encode($value);
 
     }
@@ -1803,7 +1809,7 @@ class Admission_11th_pvt extends CI_Controller {
         $config["thumbnail_prefix"]                = "thumb_"; //Normal thumb Prefix
         $config["destination_folder"]            = GET_PRIVATE_IMAGE_PATH.'11th\\'; //upload directory ends with / (slash)
         $config["thumbnail_destination_folder"]    = ''; //upload directory ends with / (slash)
-        $config["upload_url"]                     = "../uploads/2016/private/11th/"; 
+        $config["upload_url"]                     = "../uplaods/2016/private/11th/"; 
         $config["quality"]                         = 90; //jpeg quality
         $config["random_file_name"]                = true; //randomize each file name
 
@@ -1844,8 +1850,8 @@ class Admission_11th_pvt extends CI_Controller {
             'gen' => $this->input->post('gend'),
         );
 
-        $this->load->model('Admission_9th_reg_model');
-        $value = array('center'=> $this->Admission_9th_reg_model->getcenter($data)) ;
+        $this->load->model('Admission_11th_pvt_model');
+        $value = array('center'=> $this->Admission_11th_pvt_model->getcenter($data)) ;
         echo json_encode($value);
 
     } 

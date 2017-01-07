@@ -532,8 +532,6 @@
                                     </label> 
                                     <select class='span2' id="lang_specialSub" name="lang_specialSub">
                                     <option value="2">URDU</option>
-                                    <option value="32">PUNJABI</option>
-                                    <option value="34">PERSIAN</option>
                                     <option value="24">ARABIC</option>
                                     </select>
                                 </div>
@@ -695,5 +693,6 @@
         });
     }
 
-
+     
+    
 </script>

@@ -88,7 +88,7 @@ class Admission extends CI_Controller {
         $rmargin =7.3;
         $pdf ->SetRightMargin(80);
 
-        if($formno < 600000)
+      /*  if($formno < 600000)
         {
             $pdf->AddPage();
             $x = 0.55;
@@ -247,12 +247,7 @@ class Admission extends CI_Controller {
             $pdf->SetXY(4.5+$x,2.0+$Y);
             $pdf->Cell(0.5,0.5,$data["MobNo"],0,'L');
             //--------------------------- Dob line 
-            /*$pdf->SetXY(0.5,2.15+$Y);
-            $pdf->SetFont('Arial','',$FontSize);
-            $pdf->Cell( 0.5,0.5,"Date Of Birth:",0,'L');
-            $pdf->SetFont('Arial','B',$FontSize);
-            $pdf->SetXY(1.5,2.15+$Y);
-            $pdf->Cell(0.5,0.5,date("d-m-Y", strtotime($data["Dob"])),0,'L');*/
+         
 
             //--------------------------- Gender Nationality Dob
 
@@ -858,7 +853,7 @@ class Admission extends CI_Controller {
             $pdf->Output($filename, 'I');
             return true;
         }
-
+*/
         //$Updated_AdmFee+$data['AdmProcessFee']+$data['AdmFee'];
 
         $pdf->AddPage();

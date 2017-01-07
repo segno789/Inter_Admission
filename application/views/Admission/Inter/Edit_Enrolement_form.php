@@ -22,8 +22,18 @@
 
                                     </label> 
                                     <!--echo '/'.IMAGE_PATH.$Inst_Id.'/'.$data[0]['PicPath'];-->
-                                    <img id="previewImg" style="width:140px; height: 140px; margin-top: 1%;" class="span2" src="<?php  echo base_url().$data['0']['picpath']?>" alt="Candidate Image">
-                                    <input type="hidden" value="<?php  echo  '/'.REGULAR_IMAGE_PATH.$data['0']['coll_cd'].'/'.$data['0']['picpath']?>" name="pic">
+                                    
+                                     <?php
+                                    
+                                    $image_path_selected = DIRPATH12TH.$data[0]['picpath']; 
+
+                                    $type = pathinfo($image_path_selected, PATHINFO_EXTENSION);
+                                    $image_path_selected = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($image_path_selected));
+
+                                    ?>
+                                    
+                                    <img id="previewImg" style="width:140px; height: 140px; margin-top: 1%;" class="span2" src="<?php  echo $image_path_selected?>" alt="Candidate Image">
+                                    <input type="hidden" value="<?php  echo  $data['0']['picpath']?>" name="pic">
                                 </div>
                             </div>
                             <div class="control-group">
