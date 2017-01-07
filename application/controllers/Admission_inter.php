@@ -779,7 +779,6 @@ class Admission_inter extends CI_Controller {
 
         $formno = $formno = $this->Admission_inter_model->GetFormNo($Inst_Id);
 
-
         $allinputdata = array('cand_name'=>@$_POST['cand_name'],'father_name'=>@$_POST['father_name'],
             'bay_form'=>@$_POST['bay_form'],'father_cnic'=>@$_POST['father_cnic'],
             'dob'=>@$_POST['dob'],'mob_number'=>@$_POST['mob_number'],
@@ -805,7 +804,6 @@ class Admission_inter extends CI_Controller {
             'sub1p2'=>@$_POST['sub1p2'],'sub2p2'=>@$_POST['sub2p2'],'sub3p2'=>@$_POST['sub3p2'],
             'sub4p2'=>@$_POST['sub4p2'],'sub5p2'=>@$_POST['sub5p2'],'sub6p2'=>@$_POST['sub6p2'],
             'sub7p2'=>@$_POST['sub7p2'],'sub8p2'=>@$_POST['sub8p2'],
-
 
         );
         $sub1 = 0;         $sub2 = 0;              $sub3 = 0;          $sub4 = 0;           $sub5 = 0;         $sub6 = 0;            $sub7 = 0;  $sub8=0; $sub4a=0; $sub5a =0; $sub6a = 0; $sub7a = 0;     
@@ -991,9 +989,15 @@ class Admission_inter extends CI_Controller {
         $data_error = array(
             'formNo' =>$this->input->post('formNo'),
         );
-        //$this->frmvalidation('NewEnrolment_NewForm_inter',$data,0);
+        
+        $this->frmvalidation('NewEnrolment_NewForm_inter',$data,0);
+
         $data['isupdate']=0;
         $logedIn = $this->Admission_inter_model->Insert_NewEnorlement($data);
+
+
+
+
 
         if( !isset($logedIn))
         {  
@@ -1012,7 +1016,7 @@ class Admission_inter extends CI_Controller {
             return;
             echo 'Data NOT Saved Successfully !';
         } 
-        $this->load->view('common/footer.php');
+        $this->load->view('common/footer.php'); 
     }
     private function makecat($exam_type,$marksImp,$is11th)
     {
@@ -3505,9 +3509,7 @@ class Admission_inter extends CI_Controller {
 
     }
     function frmvalidation($viewName,$allinputdata,$isupdate)
-    {
-
-        // DebugBreak();
+    {        
         $_POST['address']  = str_replace("'", "", $_POST['address'] );
 
 
@@ -3516,11 +3518,9 @@ class Admission_inter extends CI_Controller {
             $allinputdata['excep'] = 'Please Enter Your Name';
             $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
             redirect('Admission_inter/'.$viewName.'');
-            return; //"NewEnrolment_EditForm_inter"
+            return;
 
         }
-        //(strpos($a, 'are') !== false)
-
 
         else if (@$_POST['father_name'] == '')
         {
@@ -3531,58 +3531,36 @@ class Admission_inter extends CI_Controller {
 
         }
 
-        /*  else if(@$_POST['bay_form'] == '' )
-        {
-        $allinputdata['excep'] = 'Please Enter Your Bay Form No.';
-        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-        redirect('Admission_inter/'.$viewName);
-        $this->$viewName($allinputdata['formNo']);
-        return;
-
-
-        }*/
-
         else if(@$_POST['father_cnic'] == '' )
         {
             $allinputdata['excep'] = 'Please Enter Your Father CNIC';
             $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
             redirect('Admission_inter/'.$viewName);
             return;
-
-
         }
 
-        /*else if (@$_POST['dob_hidden'] == '' )
-        {
-        $allinputdata['excep'] = 'Please Enter Your  Date of Birth';
-        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-        redirect('Admission_inter/'.$viewName);
-        return;
-
-        } */
         else if(@$_POST['mob_number'] == '')
         {
             $allinputdata['excep'] = 'Please Enter Your Mobile Number';
             $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
             redirect('Admission_inter/'.$viewName);
             return;
-
         }
+
         else if(@$_POST['medium'] == 0)
         {
             $allinputdata['excep'] = 'Please Select Your Medium';
             $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
             redirect('Admission_inter/'.$viewName);
             return;
-
         }
+
         else if(@$_POST['Inst_Rno']== '')
         { 
             $allinputdata['excep'] = 'Please Enter Your Roll Number';
             $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
             redirect('Admission_inter/'.$viewName);
             return;
-
         }
         else if(@$_POST['MarkOfIden']== '')
         {
@@ -3590,13 +3568,8 @@ class Admission_inter extends CI_Controller {
             $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
             redirect('Admission_inter/'.$viewName);
             return;
-
         }
-        /* else if((@$_POST['speciality'] != '0')or (@$_POST['speciality'] != '1') or (@$_POST['speciality'] != '2'))
-        {
-        $error['excep'] = 'Please Enter Your Speciality';
-        $this->load->view('Admission_inter/9th/NewEnrolment.php',$error);
-        }*/
+
         else if((@$_POST['medium'] != '1') and (@$_POST['medium'] != '2') )
         {
             $allinputdata['excep'] = 'Please Select Your medium';
