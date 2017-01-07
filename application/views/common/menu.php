@@ -289,12 +289,12 @@
                     <li><a href="<?php echo base_url(); ?>Admission_11th_reg"   data-original-title="" >Admission</a></li>
                     <li>
                         <a href="<?php echo base_url(); ?>Admission_11th_reg/StudentsData">
-                            Students Data
+                            Make Admission
                         </a>
                     </li>
                     <li>
                         <a href="<?php echo base_url(); ?>Admission_11th_reg/EditForms">
-                            Edit Forms
+                            Cancel Admission
                         </a>
                     </li>
                    <!--<li>
