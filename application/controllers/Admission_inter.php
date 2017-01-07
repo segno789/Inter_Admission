@@ -989,7 +989,7 @@ class Admission_inter extends CI_Controller {
         $data_error = array(
             'formNo' =>$this->input->post('formNo'),
         );
-        
+
         $this->frmvalidation('NewEnrolment_NewForm_inter',$data,0);
 
         $data['isupdate']=0;
@@ -2777,6 +2777,208 @@ class Admission_inter extends CI_Controller {
     {
         $this->load->view('common/footer.php',$data);
     }
+
+    public function Cutlist_Pdf($result)
+    {
+
+        //DebugBreak();
+
+        $this->load->library('session');
+        $Logged_In_Array = $this->session->all_userdata();
+        $user = $Logged_In_Array['logged_in'];
+
+
+        $temp = $user['Inst_Id'].'12@2017';
+        $image =  $this->set_barcode($temp);
+        $this->load->library('PDF_Rotate');
+
+        $pdf = new PDF_Rotate('P','in',"A4");
+        $pdf->Rotate(0,-1,-1);
+        $pdf->AliasNbPages();
+
+        $pdf->SetMargins(0.5,0.5,0.5);
+        $lmargin =0.5;
+        $rmargin =7.5;
+        $topMargin = 0.5;
+        $countofrecords=14;
+        $title=1.0;
+        $cnt=0; $ln[0]=1.5;
+        $SR=1;
+        while($cnt<15) 
+        {
+            $cnt++;
+            $ln[$cnt]=$ln[$cnt-1]+ 0.6; 
+        }
+
+        $i = 4;
+        $result = $result['data'] ;
+
+        foreach ($result as $key=>$data) 
+        {
+
+            $i++;
+            $countofrecords=$countofrecords+1;
+            if($countofrecords==15) {
+                $countofrecords=0;
+
+                $pdf->AddPage();
+
+
+                $pdf->SetFont('Arial','U',14);
+                $pdf->SetXY( 0.4,0.2);
+                $pdf->Cell(0, 0.2, "BOARD OF INTERMEDIATE AND SECONDARY EDUCATION, GUJRANWALA", 0.25, "C");
+
+                $pdf->SetFont('Arial','b',10);
+                $pdf->SetXY(1.0,0.4);
+                $pdf->Cell(0, 0.2, "STUDENT LIST OF INTERMEDIATE (PART-II) ANNUAL ".CURRENT_SESS1." ADMISSION FORM", 0.25, "L");
+
+                $pdf->SetFont('Arial','',10);
+                $pdf->SetXY(2.6,0.4);
+                $pdf->Image(BARCODE_PATH.$image,6.3,0.43, 1.8, 0.20, "PNG"); 
+                $pdf->SetFont('Arial','',9);
+                $pdf->SetXY(1.4,0.6);
+                $pdf->Cell(0, 0.25,$user['Inst_Id']. "-". $user['inst_Name'], 0.25, "C");
+
+                $pdf->SetFont('Arial','',10);
+                $pdf->SetXY(6.9,0.8);
+                $pdf->Cell(0, 0.25,  'Gender: '. ($data['sex']==1?"MALE":"FEMALE" ), 0.25, "C");
+                $grp_name = $data["grp_cd"];
+                switch ($grp_name) {
+                    case '1':
+                        $grp_name = 'PRE-MEDICAL';
+                        break;
+                    case '2':
+                        $grp_name = 'PRE-ENGINEERING';
+                        break;
+                    case '3':
+                        $grp_name = 'HUMANITIES';
+                        break;
+                    case '4':
+                        $grp_name = 'GENERAL SCIENCE';
+                        break;
+                    case '5':
+                        $grp_name = 'COMMERCE';
+                        break;
+                    default:
+                        $grp_name = "No GROUP SELECTED.";
+                }
+                $pdf->SetFont('Arial','',10);
+                $pdf->SetXY(2.5,0.8);
+                $pdf->Cell(0, 0.25,  'Group: '.$grp_name, 0.25, "C");
+
+
+                $pdf->rect($lmargin,1,$rmargin,10.5);              
+                $cnt=-1;
+
+                while($cnt<15) 
+                { 
+                    $cnt++;
+                    $pdf->Line($lmargin, $ln[$cnt],$rmargin+.5,$ln[$cnt]);    
+                }
+
+
+                $col1=$lmargin+.3;    
+                $col2=$col1+0.9;    
+                $col3=$col2+1.8;
+                $col4=$col3+1.1;    
+                $col5=$col4+1.0;    
+                $col6=$col5+1.8;
+
+                $pdf->Line($col1,$title,$col1,$ln[15]);
+                $pdf->Line($col2,$title,$col2,$ln[15]);
+                $pdf->Line($col3,$title,$col3,$ln[15]);
+                $pdf->Line($col4,$title,$col4,$ln[15]);
+                $pdf->Line($col5,$title,$col5,$ln[15]);
+                $pdf->Line($col6,$title,$col6,$ln[15]);
+
+                $pdf->SetFont('Arial','B',9);
+                $pdf->Text($lmargin+.03,$title+.3,"Sr#");   
+                $pdf->Text($col1+.2,$title+.3,"FormNo.");
+
+                $pdf->Text($col2+.1,$title+.2,"Name / Father`s Name");
+                $pdf->Text($col2+.1,$title+.4,"Mobile No");
+
+                $pdf->Text($col3+.1,$title+.2,"Bay Form No"); 
+                $pdf->Text($col3+.1,$title+.4,"Father CNIC");
+
+
+                $pdf->Text($col4+.1,$title+.21,"Religion");
+                $pdf->Text($col4+.1,$title+.45,"Old RNo-Year");
+
+                $pdf->Text($col5+.1,$title+.3,"Subjects");
+
+                $pdf->Text($col6+.1,$title+.3,"Picture");
+            }
+
+            $adm = date("d-m-Y", strtotime($data["edate"]));
+
+            //============================ Values ==========================================            
+            $pdf->SetFont('Arial','',10);    
+            $pdf->Text($lmargin+.03  , $ln[$countofrecords]+0.3 , $SR);                 // Sr No
+            $pdf->Text($col1+.05    , $ln[$countofrecords]+0.3,$data["FormNo"]);       // Form No
+
+            $pdf->SetFont('Arial','B',8);    
+            $pdf->Text($col2+.1,$ln[$countofrecords]+0.2,strtoupper($data["name"]));
+            $pdf->SetFont('Arial','',8);                
+            $pdf->Text($col2+.1,$ln[$countofrecords]+0.4,strtoupper($data["Fname"]));
+            $pdf->SetFont('Arial','',7.5);                
+            $pdf->Text($col2+.1,$ln[$countofrecords]+0.55,$data["MobNo"]);
+            $pdf->SetFont('Arial','',8);
+            $pdf->Text($col3+.1,$ln[$countofrecords]+0.2,$data["BForm"]);
+            $pdf->Text($col3+.1,$ln[$countofrecords]+0.4,$data["FNIC"]);
+
+            $pdf->Text($col4+.1,$ln[$countofrecords]+0.4,$data["rel"]==1?"Muslim":"Non-Muslim");
+
+
+            $pdf->Text($col4+.1,$ln[$countofrecords]+0.25,$data['YearOfLastAp'].'-'. $data['oldRno']);
+
+            $pdf->SetFont('Arial','B',7);    
+
+            $pdf->Text($col5+.05,$ln[$countofrecords]+0.2,  $data["sub1_abr"].','.$data["sub2_abr"].','.$data["sub3_abr"].','.$data["sub4_abr"]);
+            $pdf->SetFont('Arial','',7);    
+            $pdf->Text($col5+.05,$ln[$countofrecords]+0.4,$data["sub5_abr"].','.$data["sub6_abr"].','.$data["sub7_abr"]);
+
+            if($user['gender']==1)
+            {
+                $pdf->Image(base_url().$data['picpath'],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG"); 
+            }
+            else
+            {
+                $pdf->Image(base_url().noimage,$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG"); 
+            }
+
+            ++$SR;
+
+            $pdf->SetFont('Arial','',8);
+            $pdf->Text($lmargin+.5,10.8,"Certified that I have checked all the relevant record of the students and the particulars as mentioned above are correct.");
+
+            $pdf->SetFont('Arial','',10);
+            $pdf->Text($rmargin-2.5,11.2,"_____________________________________");
+            $pdf->Text($rmargin-2.5,11.4,"Signature of Head of Institution with Stamp");
+            $pdf->Text($lmargin+0.5,11.4,'Print Date: '. date('d-m-Y H:i:s a'));    
+
+        }
+        $pdf->Output($data["coll_cd"].'.pdf', 'I');
+    }
+
+    public function CutList()
+    {
+        //DebugBreak();
+
+        $this->load->library('session');
+        $Logged_In_Array = $this->session->all_userdata();
+        $user = $Logged_In_Array['logged_in'];
+        $this->load->model('Admission_inter_model');
+
+        $Batch_Id = $this->uri->segment(3);
+        $fetch_data = array('Inst_cd'=>$user['Inst_Id'],'Batch_Id'=>$Batch_Id);
+        $result = array('data'=>$this->Admission_inter_model->CutList_Model($fetch_data),'inst_Name'=>$user['inst_Name']);    
+
+
+        $this->Cutlist_Pdf($result);
+
+    }
+
     public function Print_Admission_inter_Form_Proofreading_Groupwise()
     {
 
@@ -2785,7 +2987,6 @@ class Admission_inter extends CI_Controller {
         $Condition = $this->uri->segment(4);
 
         $this->load->library('session');
-
         $Logged_In_Array = $this->session->all_userdata();
         $user = $Logged_In_Array['logged_in'];
         $this->load->model('Admission_inter_model');
@@ -3391,10 +3592,6 @@ class Admission_inter extends CI_Controller {
             $pdf->SetFont('Arial','',7);
             $pdf->SetXY($xangle,5.2+$yy);
             $pdf->Cell($boxWidth,0.2,$data['sub7Ap2'] != 1 ? '':  '    '.'7. '. $data['sub7_NAME'],1,0,'L',1);
-            //  $pdf->Cell($boxWidth,0.2,$data['sub1Ap1'] != 1 ? '':   '    '.'1. '. $this->GetSubNameHere($data['sub1']),1,0,'L',1);
-            /* $pdf->SetXY(5.2,5.55+$Y);
-            $pdf->Cell( 0.5,0.5,"10th",0,'L');*/
-            //-----------------------------
 
             $x = 1;
             //--------------------------- Subjects

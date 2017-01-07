@@ -527,6 +527,25 @@ class Admission_inter_model extends CI_Model
             return  false;
         }
     }
+
+    public function CutList_Model($fetch_data){
+
+        //DebugBreak();
+
+        $Inst_cd = $fetch_data['Inst_cd'];
+        $Batch_Id = $fetch_data['Batch_Id'];
+        $query = $this->db->query("exec Admission_online..sp_get_adm_Print_Form_12th $Inst_cd, $Batch_Id");
+        $rowcount = $query->num_rows();
+        if($rowcount > 0)
+        {
+            return $query->result_array();
+        }
+        else
+        {
+            return  false;
+        }
+    }
+
     public function Print_Form_Batchwise($fetch_data)
     {
         //DebugBreak();
