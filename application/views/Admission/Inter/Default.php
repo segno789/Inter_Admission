@@ -88,7 +88,7 @@
                                         <th> <br />
                                         </th>
                                         <td><span style="vertical-align:bottom;margin-top: 20px;">
-                                            <input type="button" value="Download" name="btndwnForm" id="btndwnForm" class="jbtn jmedium jblack" />
+                                            <input type="button" value="Download" name="btndwnForm" id="btndwnForm12" class="jbtn jmedium jblack" />
                                         </span> </td>
                                     </tr>
                                 </table>
