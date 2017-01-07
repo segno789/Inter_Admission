@@ -2485,7 +2485,7 @@ class Admission_11th_reg extends CI_Controller {
   public function ChallanForm_Adm11hth_Regular()
     { 
     
-    DebugBreak();
+    //DebugBreak();
      $Grp_cd = $this->uri->segment(3);
      $this->load->library('session');
         $this->load->library('NumbertoWord');
