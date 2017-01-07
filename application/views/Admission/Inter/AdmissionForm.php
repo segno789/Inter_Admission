@@ -100,12 +100,33 @@ header("Pragma: no-cache");
                                     Bay Form No :
                                 </label>
                                 <div class="controls controls-row">         
-                                                                                                
-                                    <input class="span3" type="text" id="bay_form" name="bay_form"  placeholder="34101-1111111-1" value="<?php echo  $data['0']['BForm'];?>"  required="required" >
+
+                                    <?php
+                                    //DebugBreak();
+
+                                    $bform = $data['0']['BForm'];
+
+                                    if($bform =='' || $bform == '00000-0000000-0'){
+                                        echo '<input class="span3" type="text" id="bay_form" name="bay_form"  placeholder="34101-1111111-1" value=""  required="required" >';
+                                    }
+                                    else{
+                                        echo'<input class="span3" type="text" id="bay_form" name="bay_form"  placeholder="34101-1111111-1" value='.@$data[0][BForm].' readonly="readonly"  required="required" >';
+                                    }
+                                    ?>
                                     <label class="control-label span2" for="father_cnic">
                                         Father's CNIC :
                                     </label> 
-                                    <input class="span3" id="father_cnic" name="father_cnic" type="text" placeholder="34101-1111111-1"  value="<?php echo  $data['0']['FNIC'];?>"  required="required">
+
+                                    <?php
+                                    $fnic = $data['0']['FNIC'];
+                                    if($fnic == '' || $fnic == '00000-0000000-0'){
+                                        echo'<input class="span3" id="father_cnic" name="father_cnic" type="text" placeholder="34101-1111111-1"  value=""  required="required">';        
+                                    }
+                                    else{
+                                        echo'<input class="span3" id="father_cnic" name="father_cnic" type="text" placeholder="34101-1111111-1"  value='.@$data[0][FNIC].' readonly="readonly"  required="required">';
+                                    }
+
+                                    ?>
                                 </div>
                             </div>
                             <div class="control-group">
