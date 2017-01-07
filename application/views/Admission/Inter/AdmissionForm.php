@@ -2663,10 +2663,6 @@ header("Pragma: no-cache");
                                         url: "<?php  echo site_url('Admission/frmvalidation'); ?>",
                                         data: $("#myform").serialize() ,
                                         datatype : 'html',
-                                         beforeSend: function() {  $('.mPageloader').show(); },
-                                        complete: function() { $('.mPageloader').hide();},
-                                        beforeSend: function() {  $('.mPageloader').show(); },
-                                        complete: function() { $('.mPageloader').hide();},
 
                                         success: function(data)
                                         {
@@ -2678,15 +2674,15 @@ header("Pragma: no-cache");
                                                     url: "<?php echo base_url(); ?>" + "Admission/NewEnrolment_insert/",
                                                     data: $("#myform").serialize() ,
                                                     datatype : 'html',
-                                                     beforeSend: function() {  $('.mPageloader').show(); },
-                                                     complete: function() { $('.mPageloader').hide();},
 
                                                     beforeSend: function() {  $('.mPageloader').show(); },
                                                     complete: function() { $('.mPageloader').hide();},
 
+
                                                     success: function(data) {
-                                                     //   console.log(data)
-                                                    //    debugger;
+
+                                                        //console.log(data);
+
                                                         var obj = JSON.parse(data) ;
                                                         if(obj.error ==  1)
                                                         {

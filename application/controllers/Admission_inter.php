@@ -917,6 +917,7 @@ class Admission_inter extends CI_Controller {
         $grp_cd = $this->input->post('std_group');
 
 
+        DebugBreak();
 
         $data = array(
             'name' =>$this->input->post('cand_name'),
