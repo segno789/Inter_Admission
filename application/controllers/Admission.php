@@ -2983,7 +2983,7 @@ class Admission extends CI_Controller {
             'Iyear'=>@$_POST['oldyear'],
             'Brd_cd'=>@$_POST['oldboardid'],
             'oldclass'=>10,
-            'schm'=>1,
+            'schm'=>@$_POST['oldschm'],
             'AdmProcessFee'=>$AdmFee[0]['Processing_Fee'],
             'AdmFee'=>$AdmFeeCatWise,
             'AdmTotalFee'=>$TotalAdmFee,
@@ -2994,8 +2994,6 @@ class Admission extends CI_Controller {
             'picname'=>@$_POST['picname'],
             'certfee'=>$Certificate
         );
-
-     
 
         $logedIn = $this->Admission_model->NewEnrolment_insert_Fresh($data);
         $info =  '';
