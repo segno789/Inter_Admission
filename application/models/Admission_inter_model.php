@@ -473,7 +473,7 @@ class Admission_inter_model extends CI_Model
     {
         //DebugBreak();
         $inst_cd = $data['Inst_Id'];
-        $q2         = $this->db->get_where('Admission_online..fl_reg_batch_test_inter',array('Inst_Cd'=>$inst_cd,'Is_Delete'=>0));
+        $q2         = $this->db->get_where('Admission_online..fl_adm_batch',array('Inst_Cd'=>$inst_cd,'Is_Delete'=>0));
         $result = $q2->result_array();
         return $result;
     }
@@ -555,7 +555,7 @@ class Admission_inter_model extends CI_Model
         $this->db->where(array('coll_cd' => $Inst_cd,'Batch_ID'=>$Batch_Id));
         $result_1 = $this->db->get()->result();
 
-        $query_1 = $this->db->get_where('Admission_online..fl_reg_batch_test_inter',  array('Inst_Cd' => $Inst_cd,'Batch_ID'=>$Batch_Id));
+        $query_1 = $this->db->get_where('Admission_online..fl_adm_batch',  array('Inst_Cd' => $Inst_cd,'Batch_ID'=>$Batch_Id));
         $rowcount = $query_1->num_rows();
         if($rowcount > 0){
             $query_1 = $query_1->result_array();
