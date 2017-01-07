@@ -69,7 +69,7 @@
                                             <label class="welcome_note myEngheading">Download Your Already Feeded Form</label>
                                         </td>
                                         <td width="50%" >
-                                            <label class=myUrduheading>آن لائن داخلہ فارم یہاں سے ڈونلوڈ کیجیے</label>
+                                           <label class=myUrduheading><img src="../assets/img/downloadimg.png" style="    height: 50px;" alt=""></label>
                                         </td>
                                     </tr>
                                 </table>
@@ -97,7 +97,7 @@
                             <table width="100%">
                                 <tr><td width="50%">
                                         <label class="myEngParagraph">In case of any problem regarding Admissions, please send us email on </label>
-                                    </td> <td width="50%"> <label class="myUrduParagraph">براے مہربانی آن لائن داخلہ فارم مے کسی مسلے کی صورت مے دیے گیے ای میل ایڈریس پر میل کیجیے </label></td></tr></table>
+                                    </td> <td width="50%"> <label class="myUrduParagraph"><img src="../assets/img/inqirey.png" alt=""> </label></td></tr></table>
                             <div style=";">
                                 <br/><span style="font-weight:bold; font-size:24px; font-family:Verdana, Geneva, sans-serif; color:#F00" > complaint4bisegrw@gmail.com </span>
                             </div>
