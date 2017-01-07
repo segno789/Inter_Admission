@@ -1264,7 +1264,7 @@ class Admission_11th_reg extends CI_Controller {
                 $pdf->Text($col3+.1,$title+.2,"Bay Form No"); 
                 $pdf->Text($col3+.1,$title+.4,"Father CNIC");
 
-                $pdf->Text($col4+.1,$title+.2,"Date Of Birth");
+               // $pdf->Text($col4+.1,$title+.2,"Date Of Birth");
                 $pdf->Text($col4+.1,$title+.31,"Relegion");
                 $pdf->Text($col4+.1,$title+.45,"Old RNo-Year");
 
@@ -1290,7 +1290,7 @@ class Admission_11th_reg extends CI_Controller {
             $pdf->Text($col3+.1,$ln[$countofrecords]+0.2,$data["BForm"]);
             $pdf->Text($col3+.1,$ln[$countofrecords]+0.4,$data["FNIC"]);
 
-            $pdf->Text($col4+.1,$ln[$countofrecords]+0.2,$dob);
+          //  $pdf->Text($col4+.1,$ln[$countofrecords]+0.2,$dob);
             $pdf->Text($col4+.1,$ln[$countofrecords]+0.4,$data["rel"]==1?"Muslim":"Non-Muslim");
 
             if($data["IsReAdm"] == '1' )
