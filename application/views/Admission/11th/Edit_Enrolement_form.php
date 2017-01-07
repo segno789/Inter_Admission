@@ -63,17 +63,30 @@
 
                             <div class="control-group">
                                 <label class="control-label span1" >
-                                    Date of Birth:(dd-mm-yyyy)
+                                     Speciality:
                                 </label>
 
                                 <div class="controls controls-row">
-                                    <input class="span3" type="text" id="dob" name="dob" placeholder="DOB" value="
-                                    <?php
-                                    $source = $data['0']['Dob'];;
-                                    $date = new DateTime($source);
-                                    echo $date->format('d-m-Y'); 
-                                     ?>" required="required" disabled="disabled" readonly="readonly" readonly='readonly' <?php if($isReAdm==1 || $isReAdm==2) echo "readonly='readonly'"; ?> >
-
+                                    <select id="speciality"  class="span3" name="speciality"  disabled="disabled" readonly='readonly'>
+                                     <?php // DebugBreak();
+                                    $spec = $data['0']['Spec'] ;
+                                           // $med = 2; 
+                                        if($spec == 0)
+                                        {
+                                          echo  "<option value='0' selected='selected'>None</option>  <option value='1'>Deaf &amp; Dumb</option> <option value='2'>Board Employee</option>";
+                                        }
+                                        else if($spec == 1)
+                                        {
+                                         echo  "<option value='0' >None</option>  <option value='1' selected='selected'>Deaf &amp; Dumb</option> <option value='2'>Board Employee</option>";
+                                        }
+                                        else if($spec == 2){
+                                        echo  "<option value='0' >None</option>  <option value='1' >Deaf &amp; Dumb</option> <option value='2' selected='selected'>Board Employee</option>";                                           
+                                        }
+                                    ?>
+                                        
+                                       
+                                        
+                                    </select>
                                     <label class="control-label span2" >
                                         Mobile Number :
                                     </label> 
@@ -113,28 +126,9 @@
                                 <div class="controls controls-row">
                                     <input class="span3" type="text" id="MarkOfIden" style="text-transform: uppercase;" name="MarkOfIden" readonly='readonly' value="<?php echo  $data['0']['markOfIden']; ?>" required="required" maxlength="60" >
                                     <label class="control-label span2" >
-                                        Speciality:
+                                      
                                     </label> 
-                                    <select id="speciality"  class="span3" name="speciality"  disabled="disabled" readonly='readonly'>
-                                     <?php // DebugBreak();
-                                    $spec = $data['0']['Spec'] ;
-                                           // $med = 2; 
-                                        if($spec == 0)
-                                        {
-                                          echo  "<option value='0' selected='selected'>None</option>  <option value='1'>Deaf &amp; Dumb</option> <option value='2'>Board Employee</option>";
-                                        }
-                                        else if($spec == 1)
-                                        {
-                                         echo  "<option value='0' >None</option>  <option value='1' selected='selected'>Deaf &amp; Dumb</option> <option value='2'>Board Employee</option>";
-                                        }
-                                        else if($spec == 2){
-                                        echo  "<option value='0' >None</option>  <option value='1' >Deaf &amp; Dumb</option> <option value='2' selected='selected'>Board Employee</option>";                                           
-                                        }
-                                    ?>
-                                        
-                                       
-                                        
-                                    </select>
+                                    
                                 </div>
                             </div>
                             <div class="control-group">
