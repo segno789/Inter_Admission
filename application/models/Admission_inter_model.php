@@ -182,6 +182,10 @@ class Admission_inter_model extends CI_Model
         $oldrno =  $data['rno'];
         $oldyear =  $data['Iyear'];
         $oldsess =  $data['sess'];
+
+
+        $schm =  $data['schm'];
+
         $Brd_cd =  $data['Brd_cd'];
         $pvtinfo_dist = $data['pvtinfo_dist'];
         $pvtinfo_teh = $data['pvtinfo_teh'];
@@ -200,9 +204,7 @@ class Admission_inter_model extends CI_Model
             $oldrno =  $data['oldRno'];
         }
 
-        //DebugBreak();
-
-        $query = $this->db->query("Admission_online..sp_insert_IAAdm_regular '$formno',12,2017,1,'$name','$fname','$BForm','$FNIC','$CellNo',$medium,'$Inst_Rno','".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$sub8,1,'".$PicPath."',$oldrno,$oldyear,$oldsess,$IsHafiz,$Inst_cd,$UrbanRural,$cat11,$cat12,$sub1ap2,$sub2ap2,$sub4ap2,$sub5ap2,$sub6ap2,$sub7ap2,$sub8ap2,$Brd_cd,$sub5a,$sub6a,$sub7a,$pvtinfo_dist,$pvtinfo_teh,$pvtZone,$isupdate,$isNewPic");
+        $query = $this->db->query("Admission_online..sp_insert_IAAdm_regular '$formno',12,2017,1,'$name','$fname','$BForm','$FNIC','$CellNo',$medium,'$Inst_Rno','".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$sub8,1,'".$PicPath."',$oldrno,$oldyear,$oldsess,$IsHafiz,$Inst_cd,$UrbanRural,$cat11,$cat12,$sub1ap2,$sub2ap2,$sub4ap2,$sub5ap2,$sub6ap2,$sub7ap2,$sub8ap2,$Brd_cd,$sub5a,$sub6a,$sub7a,$pvtinfo_dist,$pvtinfo_teh,$pvtZone,$isupdate,$isNewPic,$schm");
 
         $rowcount = $query->num_rows();
         if($rowcount > 0)
@@ -471,7 +473,7 @@ class Admission_inter_model extends CI_Model
     {
         //DebugBreak();
         $inst_cd = $data['Inst_Id'];
-        $q2         = $this->db->get_where('Admission_online..fl_reg_batch_test_inter',array('Inst_Cd'=>$inst_cd,'Is_Delete'=>0));
+        $q2         = $this->db->get_where('Admission_online..fl_adm_batch',array('Inst_Cd'=>$inst_cd,'Is_Delete'=>0));
         $result = $q2->result_array();
         return $result;
     }
@@ -553,7 +555,7 @@ class Admission_inter_model extends CI_Model
         $this->db->where(array('coll_cd' => $Inst_cd,'Batch_ID'=>$Batch_Id));
         $result_1 = $this->db->get()->result();
 
-        $query_1 = $this->db->get_where('Admission_online..fl_reg_batch_test_inter',  array('Inst_Cd' => $Inst_cd,'Batch_ID'=>$Batch_Id));
+        $query_1 = $this->db->get_where('Admission_online..fl_adm_batch',  array('Inst_Cd' => $Inst_cd,'Batch_ID'=>$Batch_Id));
         $rowcount = $query_1->num_rows();
         if($rowcount > 0){
             $query_1 = $query_1->result_array();

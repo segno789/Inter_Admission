@@ -21,14 +21,14 @@
                                     <label class="control-label span2" >
 
                                     </label> 
-                                    <!--echo '/'.IMAGE_PATH.$Inst_Id.'/'.$data[0]['PicPath'];-->
+
                                     <img id="previewImg" style="width:140px; height: 140px;" src="<?php echo base_url() .$data[0]['picpath'];?>" alt="Candidate Image" />
                                     <input type="hidden" value="<?php echo  $data['0']['picpath']?>" name="pic">
                                 </div>
                             </div>
                             <div class="control-group">
 
-                                <label id="ErrMsg" class="control-label span2" style=" text-align: left;"><?php ?></label>
+                                <label id="ErrMsg" class="control-label span2" style=" text-align:left;"><?php ?></label>
                                 <div class="controls controls-row">
                                     <input class="span3 hidden"  type="text" placeholder="" >  
 

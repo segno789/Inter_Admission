@@ -1007,7 +1007,7 @@ header("Pragma: no-cache");
                                     $.ajax({
 
                                         type: "POST",
-                                        url: "<?php  echo site_url('Admission/frmvalidation'); ?>",
+                                        url: "<?php  echo site_url('Admission/frmvalidation_Fresh'); ?>",
                                         data: $("#myform").serialize() ,
                                         datatype : 'html',
                                         success: function(data)

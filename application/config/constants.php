@@ -26,6 +26,7 @@ define('REGULAR_INSERT_TABLE', 'Admission_online..IAAdm');
 define('Session','1');
 define('Year','2017');  
 define('lastdate','30-01-2017');
+define('GET_REGULAR_IMAGE_PATH', 'D:/xampp/htdocs/Inter_Admission\Uploads\2016\Regular\\');
 define('GET_PRIVATE_IMAGE_PATH', 'D:/xampp/htdocs/Inter_Admission\Uploads\2016\private\\');
 define('GET_PRIVATE_IMAGE_PATH_COPY', '');
 
@@ -49,11 +50,9 @@ define('session_year','2017-2019');
 define('TITLEHSSC','Online HSSC Annual Admission 2017');
 
 define('currdate','date("d-m-Y");');
-define('TripleDateFeeinter', '13-10-2016');
+define('TripleDateFeeinter', '13-10-2017');
 
 define('SingleDateFee', '30-01-2017');
-
-
 define('DoubleDateFee', '15-02-2017');
 define('TripleDateFee', '20-02-2017');
 
@@ -71,4 +70,3 @@ define('CURRENT_SESS1','2017');
 
 define('formprint_sp_11th','Registration..sp_form_data_11thAdm');
 define('class_for_9th_Adm','11th');
-

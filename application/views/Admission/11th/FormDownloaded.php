@@ -14,7 +14,7 @@
                                 <!--FORM START-->
                                 <form enctype="multipart/form-data" id="ReturnStatus" name="ReturnStatus" method="post" action="<?php echo base_url(); ?>Admission_11th_pvt/checkFormNo_then_download/<?php echo $msg; ?>/<?php echo $dob; ?>" >
                             </div>
-                            <p>  <strong style=" font-size: 24px;"> Your Form No.<?php echo @$msg; ?> </strong></p>
+                            <p>  <strong style=" font-size: 24px;"> Your Form No.<?php echo $msg; ?> </strong></p>
                             <input type="submit" value="Download" id="btnDownloadForm" class="jbtn jmedium jblack">
                             <input type="button" class="jbtn jmedium jblack" value="Cancel" id="btnCancel" name="btnCancel" onclick="return CancelAlert();" >
                             <div class="clearfix">

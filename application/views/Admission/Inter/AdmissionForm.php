@@ -67,7 +67,7 @@ header("Pragma: no-cache");
                                     <?php if($data[0]['picpath'] != '')  
                                     {?>
 
-                                        <img id="image_upload_preview" name="image_upload_preview" style="width:140px; height: 140px;" src="<?php  echo base_url() .$data[0]['picpath'];?>" alt="Candidate Image" />
+                                        <img id="image_upload_preview" name="image_upload_preview" style="width:140px; height: 140px;" src="<?php echo $data[0]['picpathImg'];?>" alt="Candidate Image" />
                                         <input type="hidden" id="pic" name="pic" value="<?php echo  $data['0']['picpath']; ?>" />    
                                         <?php } else{?>
                                         <img src="<?php echo base_url(); ?>assets/img/upalodimage.jpg" alt="" >
@@ -99,7 +99,8 @@ header("Pragma: no-cache");
                                 <label class="control-label span1" >
                                     Bay Form No :
                                 </label>
-                                <div class="controls controls-row">                                         
+                                <div class="controls controls-row">         
+                                                                                                
                                     <input class="span3" type="text" id="bay_form" name="bay_form"  placeholder="34101-1111111-1" value="<?php echo  $data['0']['BForm'];?>"  required="required" >
                                     <label class="control-label span2" for="father_cnic">
                                         Father's CNIC :
@@ -2643,7 +2644,8 @@ header("Pragma: no-cache");
                                 });
                             });
 
-                            function checks(){
+                            function checks()
+                            {
 
 
                                 var status  =  check_NewEnrol_validation();
@@ -2674,11 +2676,17 @@ header("Pragma: no-cache");
                                                     data: $("#myform").serialize() ,
                                                     datatype : 'html',
 
+                                                    beforeSend: function() {  $('.mPageloader').show(); },
+                                                    complete: function() { $('.mPageloader').hide();},
+
+
                                                     success: function(data) {
+
+                                                        //console.log(data);
+
                                                         var obj = JSON.parse(data) ;
                                                         if(obj.error ==  1)
                                                         {
-                                                            //console.log(obj.formno);
                                                             window.location.href ='<?php echo base_url(); ?>Admission/formdownloaded/'+obj.formno; 
                                                         }
                                                         else
@@ -2692,10 +2700,8 @@ header("Pragma: no-cache");
                                                         alertify.error(request.responseText);
                                                     }
                                                 });
-
                                                 return false
                                             }
-
                                             else
                                             {
                                                 alertify.error(obj.excep);
@@ -2703,7 +2709,6 @@ header("Pragma: no-cache");
                                             }
                                         }
                                     });
-
                                     return false;   
                                 } 
                             }
@@ -2723,7 +2728,6 @@ header("Pragma: no-cache");
                                 $(document.getElementById("father_cnic")).mask("99999-9999999-9", { placeholder: "_" });
                                 $(document.getElementById("mob_number")).mask("9999-9999999", { placeholder: "_" });
                             });
-
                             var max_file_size             = 20000; //allowed file size. (1 MB = 1048576)
                             var allowed_file_types         = ['image/jpeg', 'image/pjpeg']; //allowed file types
                             var result_output             = '#output'; //ID of an element for response output
