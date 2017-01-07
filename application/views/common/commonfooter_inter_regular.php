@@ -727,6 +727,12 @@
         });
         // window.location.href = '<?=base_url()?>/RollNoSlip/MatricRollNo/'+formrno
     }
+
+    function CutList(Batch_ID)
+    {
+        window.location.href = '<?=base_url()?>Admission_inter/CutList/'+Batch_ID + '/'
+    }
+
     function ReturnForm(Batch_ID)
     {
         window.location.href = '<?=base_url()?>Admission_inter/Print_Admission_inter_Form_Proofreading_Groupwise/'+Batch_ID + '/3'
