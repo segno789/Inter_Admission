@@ -49,7 +49,7 @@ define('session_year','2017-2019');
 define('TITLEHSSC','Online HSSC Annual Admission 2017');
 
 define('currdate','date("d-m-Y");');
-define('TripleDateFeeinter', '13-10-2016');
+define('TripleDateFeeinter', '13-10-2017');
 
 define('SingleDateFee', '30-01-2017');
 define('DoubleDateFee', '15-02-2017');
@@ -69,4 +69,3 @@ define('CURRENT_SESS1','2017');
 
 define('formprint_sp_11th','Registration..sp_form_data_11thAdm');
 define('class_for_9th_Adm','11th');
-

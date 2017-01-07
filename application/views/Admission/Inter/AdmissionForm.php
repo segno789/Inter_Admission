@@ -2663,8 +2663,7 @@ header("Pragma: no-cache");
                                         url: "<?php  echo site_url('Admission/frmvalidation'); ?>",
                                         data: $("#myform").serialize() ,
                                         datatype : 'html',
-                                         beforeSend: function() {  $('.mPageloader').show(); },
-                                        complete: function() { $('.mPageloader').hide();},
+
                                         success: function(data)
                                         {
                                             var obj = JSON.parse (data);
@@ -2675,16 +2674,18 @@ header("Pragma: no-cache");
                                                     url: "<?php echo base_url(); ?>" + "Admission/NewEnrolment_insert/",
                                                     data: $("#myform").serialize() ,
                                                     datatype : 'html',
-                                                     beforeSend: function() {  $('.mPageloader').show(); },
-                                                     complete: function() { $('.mPageloader').hide();},
+
+                                                    beforeSend: function() {  $('.mPageloader').show(); },
+                                                    complete: function() { $('.mPageloader').hide();},
+
 
                                                     success: function(data) {
-                                                     //   console.log(data)
-                                                    //    debugger;
+
+                                                        //console.log(data);
+
                                                         var obj = JSON.parse(data) ;
                                                         if(obj.error ==  1)
                                                         {
-                                                            //console.log(obj.formno);
                                                             window.location.href ='<?php echo base_url(); ?>Admission/formdownloaded/'+obj.formno; 
                                                         }
                                                         else
@@ -2698,10 +2699,8 @@ header("Pragma: no-cache");
                                                         alertify.error(request.responseText);
                                                     }
                                                 });
-
                                                 return false
                                             }
-
                                             else
                                             {
                                                 alertify.error(obj.excep);
@@ -2709,7 +2708,6 @@ header("Pragma: no-cache");
                                             }
                                         }
                                     });
-
                                     return false;   
                                 } 
                             }

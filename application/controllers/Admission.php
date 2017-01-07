@@ -74,10 +74,6 @@ class Admission extends CI_Controller {
         $this->load->library('session');
 
         $data = $this->Admission_model->get_formno_data($formno);
-        
-       // echo  '<pre>';print_r($data);
-       // exit();
-        
         if($data == false)
         {
             $error = 'No Data Exist againt '.$formno.' Form No. Please check it again.';
@@ -2112,24 +2108,24 @@ class Admission extends CI_Controller {
             $error_msg.='<span style="font-size: 16pt; color:red;">No Any Student Found Against Your Criteria</span>';
         }
 
-     //   DebugBreak();
+        //   DebugBreak();
         $picpath = DIRPATH12TH.'\\'.@$data[0]['picpath'];
-           // echo $picpath;die();
-           $isexit = is_file($picpath);
-           if(!$isexit)
-           {
-               $error_msg.= '<span style="font-size: 16pt; color:red;">' . 'Your Picture is missing.</span>';            
+        // echo $picpath;die();
+        $isexit = is_file($picpath);
+        if(!$isexit)
+        {
+            $error_msg.= '<span style="font-size: 16pt; color:red;">' . 'Your Picture is missing.</span>';            
 
 
-           }
-           else
-           {
-               $type = pathinfo($picpath, PATHINFO_EXTENSION);
-               $data[0]['picpathImg'] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
+        }
+        else
+        {
+            $type = pathinfo($picpath, PATHINFO_EXTENSION);
+            $data[0]['picpathImg'] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
 
-           } 
-        
-        
+        } 
+
+
         $specialcase = $data['0']['Spl_Name'];
         $specialcode = $data['0']['spl_cd'];
         $exam_type =   $data['0']['exam_type'];
@@ -2674,7 +2670,7 @@ class Admission extends CI_Controller {
 
 
 
-            'schm'=>1,
+            'schm'=>4,
             'AdmProcessFee'=>$AdmFee[0]['Processing_Fee'],
             'AdmFee'=>$AdmFeeCatWise,
             'AdmTotalFee'=>$TotalAdmFee,
@@ -2686,18 +2682,7 @@ class Admission extends CI_Controller {
             'certfee'=>$Certificate
         );
 
-       /* $config['upload_path']   = PRIVATE_IMAGE_PATH_FRESH;
-        $config['allowed_types'] = 'jpeg|jpg';              
-        $config['file_name']    = $formno;
 
-        $this->load->library('upload', $config);
-
-        if ( ! $this->upload->do_upload('inputFile')) {
-            $error = array('error' => $this->upload->display_errors()); 
-        }
-        else { 
-            $data['picpath'] = array('upload_data' => $this->upload->data()); 
-        } */
 
         $logedIn = $this->Admission_model->NewEnrolment_insert_Fresh_OtherBoard($data);
 
@@ -2993,7 +2978,7 @@ class Admission extends CI_Controller {
             'Iyear'=>@$_POST['oldyear'],
             'Brd_cd'=>@$_POST['oldboardid'],
             'oldclass'=>10,
-            'schm'=>1,
+            'schm'=>4,
             'AdmProcessFee'=>$AdmFee[0]['Processing_Fee'],
             'AdmFee'=>$AdmFeeCatWise,
             'AdmTotalFee'=>$TotalAdmFee,
@@ -3004,23 +2989,6 @@ class Admission extends CI_Controller {
             'picname'=>@$_POST['picname'],
             'certfee'=>$Certificate
         );
-
-        //DebugBreak();
-
-       /* $config['upload_path']   = PRIVATE_IMAGE_PATH_FRESH;
-        $config['allowed_types'] = 'jpeg|jpg';              
-        $config['file_name']    = $formno;//@$_POST['InterRno_hidden']; 
-
-        $this->load->library('upload', $config);
-
-        if ( ! $this->upload->do_upload('inputFile')) {
-            $error = array('error' => $this->upload->display_errors()); 
-        }
-        else { 
-            $data['picpath'] = array('upload_data' => $this->upload->data()); 
-        } */
-
-
 
         $logedIn = $this->Admission_model->NewEnrolment_insert_Fresh($data);
         $info =  '';
@@ -3267,10 +3235,11 @@ class Admission extends CI_Controller {
         );
 
         $ispractical = 0;
-        if($per_grp == 1 || $pre_grp == 2 || $pre_grp == 4  || $grp_cd == 1 || $grp_cd == 2 || $grp_cd == 4)
+
+        /*if($per_grp == 1 || $pre_grp == 2 || $pre_grp == 4  || $grp_cd == 1 || $grp_cd == 2 || $grp_cd == 4)
         {
-            $ispractical =1;
-        }
+        $ispractical =1;
+        }*/
         if(array_search(@$_POST['sub4'],$practical_Sub) || array_search(@$_POST['sub5'],$practical_Sub) || array_search(@$_POST['sub6'],$practical_Sub) || array_search(@$_POST['sub7'],$practical_Sub) || array_search(@$_POST['sub7p2'],$practical_Sub) || array_search(@$_POST['sub4p2'],$practical_Sub) || array_search(@$_POST['sub5p2'],$practical_Sub) || array_search(@$_POST['sub6p2'],$practical_Sub))
         {
             $ispractical =1;
@@ -3407,9 +3376,7 @@ class Admission extends CI_Controller {
             'certfee'=>$Certificate
         );
 
-     //   DebugBreak();
-
-       
+        //DebugBreak();
 
         $logedIn = $this->Admission_model->Insert_NewEnorlement($data);
         $info =  '';
@@ -3895,6 +3862,7 @@ class Admission extends CI_Controller {
     }
 
     function frmvalidation(){
+
         //DebugBreak();
 
         $allinputdata['excep'] = '';
@@ -4534,6 +4502,13 @@ class Admission extends CI_Controller {
                     }
         }
         // Marks Improvements
+
+        else if (@$_POST['exam_type']==14){
+            if(@$_POST['ddlMarksImproveoptions']==0){
+                $allinputdata['excep'] = 'Please Select Category';
+            }
+        }
+
         else if (@$_POST['exam_type']==16 && @$_POST['category']==1 && @$_POST['ddlMarksImproveoptions']==1)
         {
             if(@$_POST['sub1']==0)
@@ -4598,7 +4573,7 @@ class Admission extends CI_Controller {
 
                                             }
         }
-        else if (@$_POST['exam_type']==16 && @$_POST['category']==1 && @$_POST['ddlMarksImproveoptions']==2)
+        else if (@$_POST['exam_type']==16  && @$_POST['category']==1 && @$_POST['ddlMarksImproveoptions']==2)
         {
             if(@$_POST['sub1p2']==0)
             {
