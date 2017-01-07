@@ -981,9 +981,9 @@ class Admission_inter extends CI_Controller {
             'picpath'=>@$_POST['pic'],
 
             'oldFormNo'=>@$_POST['formNo'],
-            'pvtinfo_dist'=>@$_POST['pvtinfo_dist'],
-            'pvtinfo_teh'=>@$_POST['pvtinfo_teh'],
-            'pvtZone'=>@$_POST['pvtZone'],
+            'pvtinfo_dist'=>$userinfo['dist'],
+            'pvtinfo_teh'=>$userinfo['teh'],
+            'pvtZone'=>$userinfo['zone'],
         );
 
         $data_error = array(
@@ -2185,7 +2185,7 @@ class Admission_inter extends CI_Controller {
 
         $pdf->SetFont('Arial','',10);
         $pdf->SetXY(1.5,0.4);
-        $pdf->Cell(0, 0.25, "FORWARDING LETTER SHOWING DETAILS OF ".corr_bank_chall_class." ADMISSION, 2016", 0.25, "C");
+        $pdf->Cell(0, 0.25, "FORWARDING LETTER SHOWING DETAILS OF ".corr_bank_chall_class." ADMISSION, ".session_year, 0.25, "C");
 
         $pdf->SetFont('Arial','',10);
         $pdf->SetXY(2.6,2.4);
@@ -2247,7 +2247,7 @@ class Admission_inter extends CI_Controller {
         $pdf->SetFont('Arial','',10);
         $pdf->SetXY(0.9+$x,4.3+$y);
 
-        $pdf->MultiCell(6.5, 0.2, "  I am forwarding registration forms along with the relevent enclosures of Candidates Group appearing from my Institute in the ensuring ".corr_bank_chall_class." 2016 Admission are
+        $pdf->MultiCell(6.5, 0.2, "  I am forwarding registration forms along with the relevent enclosures of Candidates Group appearing from my Institute in the ensuring ".corr_bank_chall_class." ".session_year." Admission are
             ", 0,"J",0);
 
         $x = 1; 
@@ -2940,7 +2940,7 @@ class Admission_inter extends CI_Controller {
             //------ Picture Box on Centre      
             $pdf->SetXY(6.6, 1.55+$Y );
             $pdf->Cell(1.0,1.0,'',1,0,'C',0);
-            $pdf->Image(base_url().$data["picpath"],6.5, 1.55+$Y, 1.25, 1.0, "JPG");
+            $pdf->Image(DIRPATH12TH.$data["picpath"],6.5, 1.55+$Y, 1.25, 1.0, "JPG");
 
 
             $pdf->SetFont('Arial','',8);

@@ -22,7 +22,15 @@
 
                                     </label> 
 
-                                    <img id="previewImg" style="width:140px; height: 140px;" src="<?php echo base_url() .$data[0]['picpath'];?>" alt="Candidate Image" />
+                                    <?php
+                                    
+                                    $image_path_selected = DIRPATH12TH.$data[0]['picpath']; 
+
+                                    $type = pathinfo($image_path_selected, PATHINFO_EXTENSION);
+                                    $image_path_selected = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($image_path_selected));
+
+                                    ?>
+                                    <img id="previewImg" style="width:140px; height: 140px;" src="<?php echo $image_path_selected;?>" alt="Candidate Image" />
                                     <input type="hidden" value="<?php echo  $data['0']['picpath']?>" name="pic">
                                 </div>
                             </div>
@@ -269,8 +277,9 @@
                                 </div>
                             </div>
 
-                            <hr>
-
+                          
+                            <?php if(Session ==  2) {?>
+                              <hr>
                             <div class="control-group">
                                 <h4 class="span3">Exam Proposed Center Information :</h4>
                                 <div class="controls controls-row">
@@ -341,6 +350,9 @@
                                     <option value='0'>SELECT ZONE</option>
                                 </select>
                             </div>
+                            
+                            <?php }?>
+                            
                             <div id="instruction" style="display:none; width:700px" ></div>
                             <hr>
                             <div class="control-group">

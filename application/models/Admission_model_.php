@@ -149,9 +149,8 @@ class Admission_model extends CI_Model
     public function get_formno_data($formno)
     {
 
-        //DebugBreak();
-        
-        $query = $this->db->query(formprint_sp_12th."'$formno'");
+        ////DebugBreak();
+        $query = $this->db->query(formprint_sp."'$formno'");
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
