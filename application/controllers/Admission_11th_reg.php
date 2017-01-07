@@ -2484,7 +2484,8 @@ class Admission_11th_reg extends CI_Controller {
      
   public function ChallanForm_Adm11hth_Regular()
     { 
-  //DebugBreak();
+    
+    DebugBreak();
      $Grp_cd = $this->uri->segment(3);
      $this->load->library('session');
         $this->load->library('NumbertoWord');
@@ -2781,7 +2782,7 @@ class Admission_11th_reg extends CI_Controller {
 
         
         // DebugBreak();
-        $data = array('data'=>$this->Admission_11th_reg_model->revenue_pdf($fetch_data),'inst_Name'=>$user['inst_Name'],'inst_cd'=>$user['Inst_Id'],"SciAdmFee"=>$SciAdmFee,"ArtsAdmFee"=>$ArtsAdmFee,"SciProcFee"=>$SciProcFee,"ArtsProcFee"=>$ArtsProcFee);
+        $data = array('data'=>$this->Admission_11th_reg_model->revenue_pdf($fetch_data),'inst_Name'=>$user['inst_Name'],'inst_cd'=>$user['Inst_Id'],"SciAdmFee"=>@$SciAdmFee,"ArtsAdmFee"=>@$ArtsAdmFee,"SciProcFee"=>@$SciProcFee,"ArtsProcFee"=>@$ArtsProcFee);
         //
         // ------------------------------------- Assign Each Candidate Fee According to Special case, Re-Admission ,Government Candidate and Newly Affiliated Institutes.
         $n=0;
