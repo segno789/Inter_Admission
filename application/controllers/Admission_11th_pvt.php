@@ -782,9 +782,9 @@ class Admission_11th_pvt extends CI_Controller {
         if($data["grp_cd"] != 9)
         {      
         $pdf->Image("assets/img/11th.png",7.6,0.07,  0.50,0.50, "PNG");
-        $pdf->Image("assets/img/11th.png",7.7,7.25,  0.50,0.50, "PNG");      
-        $pdf->Image("assets/img/11th.png",7.7,8.80,  0.50,0.50, "PNG");   
-        $pdf->Image("assets/img/11th.png",7.7,10.16,  0.50,0.50, "PNG");   
+        $pdf->Image("assets/img/11th.png",7.7,7.35,  0.40,0.40, "PNG");      
+        $pdf->Image("assets/img/11th.png",7.7,8.90,  0.40,0.40, "PNG");   
+        $pdf->Image("assets/img/11th.png",7.7,10.33,  0.40,0.40, "PNG");   
         }
         else
         {
