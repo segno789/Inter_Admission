@@ -322,7 +322,7 @@
 </div>
 <script type="">
     function checks(){
-        debugger;
+        //debugger;
         var status  =  check_NewEnrol_validation();
         if(status == 0)
         {

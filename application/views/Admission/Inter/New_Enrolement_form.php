@@ -21,7 +21,7 @@
                                     <label class="control-label span2" >
 
                                     </label> 
-                                    <!--echo '/'.IMAGE_PATH.$Inst_Id.'/'.$data[0]['PicPath'];-->
+
                                     <?php
                                     
                                     $image_path_selected = DIRPATH12TH.$data[0]['picpath']; 
@@ -36,7 +36,7 @@
                             </div>
                             <div class="control-group">
 
-                                <label id="ErrMsg" class="control-label span2" style=" text-align: left;"><?php ?></label>
+                                <label id="ErrMsg" class="control-label span2" style=" text-align:left;"><?php ?></label>
                                 <div class="controls controls-row">
                                     <input class="span3 hidden"  type="text" placeholder="" >  
 

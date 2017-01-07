@@ -788,10 +788,10 @@ class Admission_11th_pvt extends CI_Controller {
         }
         else
         {
-        $pdf->Image("assets/img/aloom.GIF",7.6,0.07,  0.50,0.50, "GIF");
-        $pdf->Image("assets/img/aloom.GIF",7.7,7.25,  0.50,0.50, "GIF");      
-        $pdf->Image("assets/img/aloom.GIF",7.7,8.80,  0.50,0.50, "GIF");   
-        $pdf->Image("assets/img/aloom.GIF",7.7,10.16,  0.50,0.50, "GIF");
+        $pdf->Image("assets/img/aloom.JPG",7.55,0.2,  0.50,0.40, "JPG");
+        $pdf->Image("assets/img/aloom.JPG",7.7,7.28,  0.50,0.40, "JPG");      
+        $pdf->Image("assets/img/aloom.JPG",7.7,8.89,  0.50,0.40, "JPG");   
+        $pdf->Image("assets/img/aloom.JPG",7.7,10.28,  0.50,0.40, "JPG");
         }
         //$this->Image("logo.jpg",0.05,0.3, 0.75,0.75, "JPG", "http://www.biseGujranwala.edu.pk");
         
@@ -907,7 +907,7 @@ class Admission_11th_pvt extends CI_Controller {
          if($data["grp_cd"] == 9)
         {
         $pdf->Cell( 0.0,0.0,"(ALOOM-E-SHARQIA)",0,'C');
-         $pdf->Image("assets/img/aloom.GIF",3.73,1.05,  1.0,0.40, "GIF");
+         $pdf->Image("assets/img/aloom.JPG",3.73,1.07,  1.0,0.350, "JPG");
         }
         else
         {
@@ -1086,34 +1086,39 @@ class Admission_11th_pvt extends CI_Controller {
         }
         }
         
-        $pdf->Image("assets/img/examaloomsharkia.GIF",3.83,2.75,  2.0,0.40, "GIF");
+        
         
         
         
         // Adeeb urdu
         if($data["grp_cd"] == 9 && $data['Lang_cat']==1 && $data['Lang_spec_sub']==2 )
         {
-          $pdf->Image("assets/img/adeeburdu.GIF",2.73,2.75,  1.0,0.40, "GIF");
+        $pdf->Image("assets/img/examaloomsharkia.JPG",3.83,2.75,  2.0,0.40, "JPG");
+          $pdf->Image("assets/img/adeeburdu.JPG",2.73,2.75,  1.0,0.40, "JPG");
         }
         // Adeeb Arabic
         else if ($data["grp_cd"] == 9 && $data['Lang_cat']==1 && $data['Lang_spec_sub']==24 )
         {
-          $pdf->Image("assets/img/adeebarbic.GIF",2.73,2.75,  1.0,0.40, "GIF");
+        $pdf->Image("assets/img/examaloomsharkia.JPG",3.83,2.75,  2.0,0.40, "JPG");
+          $pdf->Image("assets/img/adeebarbic.JPG",2.73,2.75,  1.0,0.40, "JPG");
         }
         // Fazal Arabic
         else if ($data["grp_cd"] == 9 && $data['Lang_cat']==3 && $data['Lang_spec_sub']==24 )
         {
-          $pdf->Image("assets/img/fazilarabic.GIF",2.73,2.75,  1.0,0.40, "GIF");
+        $pdf->Image("assets/img/examaloomsharkia.JPG",3.83,2.75,  2.0,0.40, "JPG");
+          $pdf->Image("assets/img/fazilarabic.JPG",2.73,2.75,  1.0,0.40, "JPG");
         }
         // Fazal Urdu
         else if($data["grp_cd"] == 9 && $data['Lang_cat']==3 && $data['Lang_spec_sub']==2 )
         {
-          $pdf->Image("assets/img/fazilurdu.GIF",2.73,2.75,  1.0,0.40, "GIF");
+        $pdf->Image("assets/img/examaloomsharkia.JPG",3.83,2.75,  2.0,0.40, "JPG");
+          $pdf->Image("assets/img/fazilurdu.JPG",2.73,2.75,  1.0,0.40, "JPG");
         }
         // Fazal Punjabi
         else if($data["grp_cd"] == 9 && $data['Lang_cat']==3 && $data['Lang_spec_sub']==32 )
         {
-          $pdf->Image("assets/img/fazilpunjabi.GIF",2.73,2.75,  1.0,0.40, "GIF");
+        $pdf->Image("assets/img/examaloomsharkia.JPG",3.83,2.75,  2.0,0.40, "JPG");
+          $pdf->Image("assets/img/fazilpunjabi.JPG",2.73,2.75,  1.0,0.40, "JPG");
         }
         
         

@@ -22,8 +22,8 @@ header("Pragma: no-cache");
                                 <div class="controls controls-row">
                                     <label class="control-label span2" >
                                     </label> 
-                                    <img id="image_upload_preview" style="width:140px; height: 140px;" src="<?php echo base_url().GET_PRIVATE_IMAGE_PATH.$data[0]['picpath'];?>" alt="Candidate Image" />
-                                    <input type="hidden" id="pic" name="pic"  value="<?php echo $data[0]['picpath']?>"/>    
+                                    <img id="image_upload_preview" style="width:140px; height: 140px;" src="<?php echo base_url().GET_PRIVATE_IMAGE_PATH.@@$data[0]['picpath'];?>" alt="Candidate Image" />
+                                    <input type="hidden" id="pic" name="pic"  value="<?php echo @@$data[0]['picpath']?>"/>    
                                 </div>
                             </div>
                             <div class="controls controls-row">
@@ -34,11 +34,11 @@ header("Pragma: no-cache");
                                     Candidate Name:
                                 </label>
                                 <div class="controls controls-row">
-                                    <input class="span3"  type="text" id="cand_name" style="text-transform: uppercase;" name="cand_name" placeholder="Candidate Name" maxlength="60" readonly="readonly"  value="<?php echo $data[0]['name']; ?>">
+                                    <input class="span3"  type="text" id="cand_name" style="text-transform: uppercase;" name="cand_name" placeholder="Candidate Name" maxlength="60" readonly="readonly"  value="<?php echo @@$data[0]['name']; ?>">
                                     <label class="control-label span2" for="lblfather_name">
                                         Father's Name :
                                     </label> 
-                                    <input class="span3" id="father_name" name="father_name" style="text-transform: uppercase;" type="text" placeholder="Father's Name" maxlength="60" readonly="readonly" value="<?php echo  $data['0']['fname']; ?>" required="required">
+                                    <input class="span3" id="father_name" name="father_name" style="text-transform: uppercase;" type="text" placeholder="Father's Name" maxlength="60" readonly="readonly" value="<?php echo  @@$data['0']['fname']; ?>" required="required">
                                 </div>
                             </div>
                          
@@ -48,11 +48,11 @@ header("Pragma: no-cache");
                                     Mark Of Identification :
                                 </label>
                                 <div class="controls controls-row">
-                                    <input class="span3" type="text" id="MarkOfIden" style="text-transform: uppercase;" name="MarkOfIden" value="<?php  echo  $data['0']['IdentMark']; ?>" required="required" maxlength="60" >
+                                    <input class="span3" type="text" id="MarkOfIden" style="text-transform: uppercase;" name="MarkOfIden" value="<?php  echo  @@$data['0']['IdentMark']; ?>" required="required" maxlength="60" >
                                     <label class="control-label span2" >
                                         Mobile Number :
                                     </label> 
-                                    <input class="span3" id="mob_number" name="mob_number" type="text" placeholder="0300-123456789" value="<?php echo  $data['0']['MobNo']; ?> " required="required">
+                                    <input class="span3" id="mob_number" name="mob_number" type="text" placeholder="0300-123456789" value="<?php echo  @@$data['0']['MobNo']; ?> " required="required">
                                 </div>
                             </div>
                             <div class="control-group">
@@ -63,7 +63,7 @@ header("Pragma: no-cache");
                                     </label> 
                                     <?php
 
-                                    $gender = $data[0]['sex'];
+                                    $gender = @@$data[0]['sex'];
 
                                     if($gender == 1)
                                     {
@@ -90,7 +90,7 @@ header("Pragma: no-cache");
                                 </label>
                                 <div class="controls controls-row">
                                     <textarea style="height:150px; text-transform: uppercase;"  id="address" class="span8" name="address" required="required"><?php
-                                        echo $data[0]['address'];
+                                        echo @$data[0]['address'];
                                     ?></textarea>
                                 </div>
                             </div>
@@ -103,11 +103,11 @@ header("Pragma: no-cache");
                                     Rno :
                                 </label>
                                 <div class="controls controls-row">
-                                    <input class="span3" type="text" readonly="readonly" id="oldrno" style="text-transform: uppercase;" name="oldrno" value="<?php  echo  $data['0']['rno']; ?>" required="required" maxlength="60" >
+                                    <input class="span3" type="text" readonly="readonly" id="oldrno" style="text-transform: uppercase;" name="oldrno" value="<?php  echo  @$data['0']['rno']; ?>" required="required" maxlength="60" >
                                     <label class="control-label span2" >
                                         Year:
                                     </label> 
-                                    <input type="text" class="span3" name="oldyear" id = "oldyear" readonly="readonly" value="<?php  echo $data['0']['Iyear']; ?>"/> 
+                                    <input type="text" class="span3" name="oldyear" id = "oldyear" readonly="readonly" value="<?php  echo @$data['0']['Iyear']; ?>"/> 
                                 </div>
                             </div>
                             <div class="control-group">
@@ -115,11 +115,11 @@ header("Pragma: no-cache");
                                     Session :
                                 </label>
                                 <div class="controls controls-row">
-                                    <input type="text" class="span3" id="oldsess" name="oldsess" readonly="readonly" value="<?php echo $data['0']['Sess'] == 1 ? "Annual" :"Supplementary"; ?>"/> 
+                                    <input type="text" class="span3" id="oldsess" name="oldsess" readonly="readonly" value="<?php echo @$data['0']['Sess'] == 1 ? "Annual" :"Supplementary"; ?>"/> 
                                     <label class="control-label span2" >
                                         Board:
                                     </label> 
-                                    <input type="text" class="span3" id="oldboard" name="oldboard" readonly="readonly" value="<?php echo $data[0]['brd_name'];?>"/>     
+                                    <input type="text" class="span3" id="oldboard" name="oldboard" readonly="readonly" value="<?php echo @$data[0]['brd_name'];?>"/>     
                                       
                                 </div>
                             </div>
@@ -181,10 +181,10 @@ header("Pragma: no-cache");
                                     <select id="std_group" class="dropdown span6"  name="std_group">
                                         <?php
                                         //DebugBreak();
-                                        $grp_cd = $data[0]['grp_cd'];
-                                        $chance = $data[0]['chance'];
-                                        $exam_type = $data[0]['exam_type'];
-                                        $status = $data[0]['status'];
+                                        $grp_cd = @$data[0]['grp_cd'];
+                                        $chance = @$data[0]['chance'];
+                                        $exam_type = @$data[0]['exam_type'];
+                                        $status = @$data[0]['status'];
                                         if($exam_type == 1  || $exam_type == 3 || $exam_type == 9 || $exam_type == 11 || $exam_type == 16 || $exam_type == 14 || $exam_type == 15){
                                             if($grp_cd == 1){
                                                echo "<option value='1' selected='selected'>FAZAL ARABIC </option>";      
@@ -381,30 +381,30 @@ header("Pragma: no-cache");
                                
                             </div>
                            
-                            <input type="hidden" name="exam_type"  id="exam_type"  value="<?php echo @$exam_type = $data[0]['exam_type']; ?>">
-                            <input type="hidden" name="exam_type"  id="exam_type"  value="<?php echo @$isaloom = $data['isaloom']; ?>">
-                            <input type="hidden" name="pregrp"     id="pregrp"     value="<?php echo @$pregrp = $data[0]['grp_cd']; ?>">
-                            <input type="hidden" name="oldboardid" id="oldboardid" value="<?php   echo @$data['board'];?>"/>
-                            <input type="hidden" name="matRno_hidden" id="matRno_hidden" value="<?php   echo @$data[0]['matrno'];?>"/>
-                            <input type="hidden" name="InterRno_hidden" id="InterRno_hidden" value="<?php   echo @$data[0]['rno'];?>"/>
-                            <input type="hidden" name="InterYear_hidden" id="InterYear_hidden" value="<?php   echo @$data[0]['Iyear'];?>"/>
-                            <input type="hidden" name="InterSess_hidden" id="InterSess_hidden" value="<?php   echo @$data['0']['Sess'];?>"/>
+                            <input type="hidden" name="exam_type"  id="exam_type"  value="<?php echo @$exam_type = @$data[0]['exam_type']; ?>">
+                            <input type="hidden" name="exam_type"  id="exam_type"  value="<?php echo @$isaloom = @$data['isaloom']; ?>">
+                            <input type="hidden" name="pregrp"     id="pregrp"     value="<?php echo @$pregrp = @$data[0]['grp_cd']; ?>">
+                            <input type="hidden" name="oldboardid" id="oldboardid" value="<?php   echo @@$data['board'];?>"/>
+                            <input type="hidden" name="matRno_hidden" id="matRno_hidden" value="<?php   echo @@$data[0]['matrno'];?>"/>
+                            <input type="hidden" name="InterRno_hidden" id="InterRno_hidden" value="<?php   echo @@$data[0]['rno'];?>"/>
+                            <input type="hidden" name="InterYear_hidden" id="InterYear_hidden" value="<?php   echo @@$data[0]['Iyear'];?>"/>
+                            <input type="hidden" name="InterSess_hidden" id="InterSess_hidden" value="<?php   echo @@$data['0']['Sess'];?>"/>
                             <input type="hidden" name="cattype_hidden" id="cattype_hidden" value="<?php   echo  @$cattype;?>"/>
-                            <input type="hidden" name="sub1pf1_hidden" id="sub1pf1_hidden" value="<?php   echo  @$data[0]['sub1pf1'];?>"/>
-                            <input type="hidden" name="sub2pf1_hidden" id="sub1pf1_hidden" value="<?php   echo  @$data[0]['sub2pf1'];?>"/>
-                            <input type="hidden" name="sub3pf1_hidden" id="sub1pf1_hidden" value="<?php   echo  @$data[0]['sub3pf1'];?>"/>
-                            <input type="hidden" name="sub4pf1_hidden" id="sub1pf1_hidden" value="<?php   echo  @$data[0]['sub4pf1'];?>"/>
-                            <input type="hidden" name="sub5pf1_hidden" id="sub1pf1_hidden" value="<?php   echo  @$data[0]['sub5pf1'];?>"/>
-                            <input type="hidden" name="sub6pf1_hidden" id="sub1pf1_hidden" value="<?php   echo  @$data[0]['sub6pf1'];?>"/>
-                            <input type="hidden" name="sub7pf1_hidden" id="sub1pf1_hidden" value="<?php   echo  @$data[0]['sub7pf1'];?>"/>
+                            <input type="hidden" name="sub1pf1_hidden" id="sub1pf1_hidden" value="<?php   echo  @@$data[0]['sub1pf1'];?>"/>
+                            <input type="hidden" name="sub2pf1_hidden" id="sub1pf1_hidden" value="<?php   echo  @@$data[0]['sub2pf1'];?>"/>
+                            <input type="hidden" name="sub3pf1_hidden" id="sub1pf1_hidden" value="<?php   echo  @@$data[0]['sub3pf1'];?>"/>
+                            <input type="hidden" name="sub4pf1_hidden" id="sub1pf1_hidden" value="<?php   echo  @@$data[0]['sub4pf1'];?>"/>
+                            <input type="hidden" name="sub5pf1_hidden" id="sub1pf1_hidden" value="<?php   echo  @@$data[0]['sub5pf1'];?>"/>
+                            <input type="hidden" name="sub6pf1_hidden" id="sub1pf1_hidden" value="<?php   echo  @@$data[0]['sub6pf1'];?>"/>
+                            <input type="hidden" name="sub7pf1_hidden" id="sub1pf1_hidden" value="<?php   echo  @@$data[0]['sub7pf1'];?>"/>
                            
-                            <input type="hidden" name="sub1st1_hidden" id="sub1st1_hidden" value="<?php   echo  @$data[0]['sub1st1'];?>"/>
-                            <input type="hidden" name="sub2st1_hidden" id="sub1st1_hidden" value="<?php   echo  @$data[0]['sub2st1'];?>"/>
-                            <input type="hidden" name="sub3st1_hidden" id="sub1st1_hidden" value="<?php   echo  @$data[0]['sub3st1'];?>"/>
-                            <input type="hidden" name="sub4st1_hidden" id="sub1st1_hidden" value="<?php   echo  @$data[0]['sub4st1'];?>"/>
-                            <input type="hidden" name="sub5st1_hidden" id="sub1st1_hidden" value="<?php   echo  @$data[0]['sub5st1'];?>"/>
-                            <input type="hidden" name="sub6st1_hidden" id="sub1st1_hidden" value="<?php   echo  @$data[0]['sub6st1'];?>"/>
-                            <input type="hidden" name="sub7st1_hidden" id="sub1st1_hidden" value="<?php   echo  @$data[0]['sub7st1'];?>"/>
+                            <input type="hidden" name="sub1st1_hidden" id="sub1st1_hidden" value="<?php   echo  @@$data[0]['sub1st1'];?>"/>
+                            <input type="hidden" name="sub2st1_hidden" id="sub1st1_hidden" value="<?php   echo  @@$data[0]['sub2st1'];?>"/>
+                            <input type="hidden" name="sub3st1_hidden" id="sub1st1_hidden" value="<?php   echo  @@$data[0]['sub3st1'];?>"/>
+                            <input type="hidden" name="sub4st1_hidden" id="sub1st1_hidden" value="<?php   echo  @@$data[0]['sub4st1'];?>"/>
+                            <input type="hidden" name="sub5st1_hidden" id="sub1st1_hidden" value="<?php   echo  @@$data[0]['sub5st1'];?>"/>
+                            <input type="hidden" name="sub6st1_hidden" id="sub1st1_hidden" value="<?php   echo  @@$data[0]['sub6st1'];?>"/>
+                            <input type="hidden" name="sub7st1_hidden" id="sub1st1_hidden" value="<?php   echo  @@$data[0]['sub7st1'];?>"/>
                            
                         
 
@@ -597,35 +597,35 @@ header("Pragma: no-cache");
 
                            
 
-                                var grp_cd ="<?php if(@$data[0]['exam_type']=="3"){ echo 0; } else{echo  @$data[0]['grp_cd'];}  ?>";
-                                var sub1 ="<?php echo @$data[0]['sub1']; ?>";
-                                var sub2 = "<?php echo @$data[0]['sub2']; ?>";
-                                var sub3 ="<?php echo @$data[0]['sub3']; ?>";
-                                var sub4 = "<?php echo @$data[0]['sub4']; ?>";
-                                var sub5 = "<?php echo @$data[0]['sub5']; ?>";
-                                var sub6 = "<?php echo @$data[0]['sub6']; ?>";
+                                var grp_cd ="<?php if(@@$data[0]['exam_type']=="3"){ echo 0; } else{echo  @@$data[0]['grp_cd'];}  ?>";
+                                var sub1 ="<?php echo @@$data[0]['sub1']; ?>";
+                                var sub2 = "<?php echo @@$data[0]['sub2']; ?>";
+                                var sub3 ="<?php echo @@$data[0]['sub3']; ?>";
+                                var sub4 = "<?php echo @@$data[0]['sub4']; ?>";
+                                var sub5 = "<?php echo @@$data[0]['sub5']; ?>";
+                                var sub6 = "<?php echo @@$data[0]['sub6']; ?>";
                               
                                 // Part 1 Subjects Pass fail .
-                                var sub1pf1 = "<?php echo @$data[0]['sub1pf']; ?>";
-                                var sub2pf1 ="<?php echo @$data[0]['sub2pf']; ?>";
-                                var sub3pf1 = "<?php echo @$data[0]['sub3pf']; ?>";
-                                var sub4pf1 = "<?php echo @$data[0]['sub4pf']; ?>";
-                                var sub5pf1 ="<?php echo @$data[0]['sub5pf']; ?>";
-                                var sub6pf1 = "<?php echo @$data[0]['sub6pf']; ?>";
-                                var sub7pf1 = "<?php echo @$data[0]['sub7pf']; ?>";
-                                var sub8pf1 = "<?php echo @$data[0]['sub8pf']; ?>";
+                                var sub1pf1 = "<?php echo @@$data[0]['sub1pf']; ?>";
+                                var sub2pf1 ="<?php echo @@$data[0]['sub2pf']; ?>";
+                                var sub3pf1 = "<?php echo @@$data[0]['sub3pf']; ?>";
+                                var sub4pf1 = "<?php echo @@$data[0]['sub4pf']; ?>";
+                                var sub5pf1 ="<?php echo @@$data[0]['sub5pf']; ?>";
+                                var sub6pf1 = "<?php echo @@$data[0]['sub6pf']; ?>";
+                                var sub7pf1 = "<?php echo @@$data[0]['sub7pf']; ?>";
+                                var sub8pf1 = "<?php echo @@$data[0]['sub8pf']; ?>";
 
                               
 
                                 // Part 1 Subjects Present and Absent Status
-                                var sub1st1 = "<?php echo @$data[0]['sub1st']; ?>";
-                                var sub2st1 ="<?php echo @$data[0]['sub2st']; ?>";
-                                var sub3st1 = "<?php echo @$data[0]['sub3st']; ?>";
-                                var sub4st1 ="<?php echo @$data[0]['sub4st']; ?>";
-                                var sub5st1 ="<?php echo @$data[0]['sub5st']; ?>";
-                                var sub6st1 = "<?php echo @$data[0]['sub6st']; ?>";
-                                var sub7st1 = "<?php echo @$data[0]['sub7st']; ?>";
-                                var sub8st1 = "<?php echo @$data[0]['sub8st']; ?>";
+                                var sub1st1 = "<?php echo @@$data[0]['sub1st']; ?>";
+                                var sub2st1 ="<?php echo @@$data[0]['sub2st']; ?>";
+                                var sub3st1 = "<?php echo @@$data[0]['sub3st']; ?>";
+                                var sub4st1 ="<?php echo @@$data[0]['sub4st']; ?>";
+                                var sub5st1 ="<?php echo @@$data[0]['sub5st']; ?>";
+                                var sub6st1 = "<?php echo @@$data[0]['sub6st']; ?>";
+                                var sub7st1 = "<?php echo @@$data[0]['sub7st']; ?>";
+                                var sub8st1 = "<?php echo @@$data[0]['sub8st']; ?>";
 
                                 
 
@@ -633,7 +633,7 @@ header("Pragma: no-cache");
                                 
                                     if((sub1pf1 == "3") || (sub1st1 == "2"))
                                     {
-                                        $("#sub1").append(new Option('<?php  echo  array_search($data[0]['sub1'],$subarray); ?>',sub1));
+                                        $("#sub1").append(new Option('<?php  echo  array_search(@$data[0]['sub1'],$subarray); ?>',sub1));
                                         $("#sub1 option[value='" + sub1 + "']").attr("selected","selected");
                                     }
                                     else
@@ -645,7 +645,7 @@ header("Pragma: no-cache");
                                     if((sub2pf1 == "3") || (sub2st1 == "2"))
                                     {
                                         $("#sub2").empty();
-                                        $("#sub2").append(new Option('<?php  echo  array_search($data[0]['sub2'],$subarray); ?>',sub2));
+                                        $("#sub2").append(new Option('<?php  echo  array_search(@$data[0]['sub2'],$subarray); ?>',sub2));
                                         $("#sub2 option[value='" + sub2 + "']").attr("selected","selected");
                                     }
                                     else
@@ -657,7 +657,7 @@ header("Pragma: no-cache");
                                     if((sub3pf1 == "3") || (sub3st1 == "2"))
                                     {
                                         $("#sub3").empty();
-                                        $("#sub3").append(new Option('<?php  echo  array_search($data[0]['sub3'],$subarray); ?>',sub3));
+                                        $("#sub3").append(new Option('<?php  echo  array_search(@$data[0]['sub3'],$subarray); ?>',sub3));
                                         $("#sub3 option[value='" + sub3 + "']").attr("selected","selected");
                                     }
                                     else
@@ -669,7 +669,7 @@ header("Pragma: no-cache");
                                     if((sub4pf1 == "3") || (sub4st1 == "2"))
                                     {
                                         $("#sub4").empty();
-                                        $("#sub4").append(new Option('<?php  echo  array_search($data[0]['sub4'],$subarray); ?>',sub4));
+                                        $("#sub4").append(new Option('<?php  echo  array_search(@$data[0]['sub4'],$subarray); ?>',sub4));
                                         $("#sub4 option[value='" + sub4 + "']").attr("selected","selected");
 
                                     }
@@ -683,7 +683,7 @@ header("Pragma: no-cache");
                                     {
                                         $("#sub5").empty();
 
-                                        $("#sub5").append(new Option('<?php  echo  array_search($data[0]['sub5'],$subarray); ?>',sub5));
+                                        $("#sub5").append(new Option('<?php  echo  array_search(@$data[0]['sub5'],$subarray); ?>',sub5));
                                         $("#sub5 option[value='" + sub5 + "']").attr("selected","selected");
 
                                     }
@@ -696,7 +696,7 @@ header("Pragma: no-cache");
                                     if((sub6pf1 == "3") || (sub6st1 == "2"))
                                     {
                                         $("#sub6").empty();
-                                        $("#sub6").append(new Option('<?php  echo  array_search($data[0]['sub6'],$subarray); ?>',sub6));
+                                        $("#sub6").append(new Option('<?php  echo  array_search(@$data[0]['sub6'],$subarray); ?>',sub6));
                                         $("#sub6 option[value='" + sub1 + "']").attr("selected","selected");
                                     }
                                     else
@@ -718,7 +718,7 @@ header("Pragma: no-cache");
                                     
                                     if((sub1pf1 == "3") || (sub1st1 == "2"))
                                     {
-                                        $("#sub1").append(new Option('<?php  echo  array_search($data[0]['sub1'],$subarray); ?>',sub1));
+                                        $("#sub1").append(new Option('<?php  echo  array_search(@$data[0]['sub1'],$subarray); ?>',sub1));
                                         //$("#sub1").append('<option value="0">NONE</option>');
                                     }
                                     else
@@ -729,7 +729,7 @@ header("Pragma: no-cache");
                                     // Subject 2 
                                     if((sub2pf1 == "3") || (sub2st1 == "2"))
                                     {
-                                        $("#sub2").append(new Option('<?php  echo  array_search($data[0]['sub2'],$subarray); ?>',sub2));
+                                        $("#sub2").append(new Option('<?php  echo  array_search(@$data[0]['sub2'],$subarray); ?>',sub2));
                                         //$("#sub2").append('<option value="0">NONE</option>');
                                     }
                                     else
@@ -739,7 +739,7 @@ header("Pragma: no-cache");
                                    
                                     if((sub3pf1 == "3") || (sub3st1 == "2"))
                                     {
-                                        $("#sub3").append(new Option('<?php  echo  array_search($data[0]['sub3'],$subarray); ?>',sub3));
+                                        $("#sub3").append(new Option('<?php  echo  array_search(@$data[0]['sub3'],$subarray); ?>',sub3));
                                        // $("#sub3").append('<option value="0">NONE</option>');
                                     }
                                     else
@@ -749,7 +749,7 @@ header("Pragma: no-cache");
                                    
                                     if((sub4pf1 == "3") || (sub4st1 == "2"))
                                     {
-                                        $("#sub4").append(new Option('<?php  echo  array_search($data[0]['sub4'],$subarray); ?>',sub4));
+                                        $("#sub4").append(new Option('<?php  echo  array_search(@$data[0]['sub4'],$subarray); ?>',sub4));
                                         //$("#sub4").append('<option value="0">NONE</option>');
                                     }
                                     else
@@ -759,7 +759,7 @@ header("Pragma: no-cache");
                                     
                                     if((sub5pf1 == "3") || (sub5st1 == "2"))
                                     {
-                                        $("#sub5").append(new Option('<?php  echo  array_search($data[0]['sub5'],$subarray); ?>',sub5));
+                                        $("#sub5").append(new Option('<?php  echo  array_search(@$data[0]['sub5'],$subarray); ?>',sub5));
                                        // $("#sub5").append('<option value="0">NONE</option>');
                                     }
                                     else
@@ -769,7 +769,7 @@ header("Pragma: no-cache");
                                     
                                     if((sub6pf1 == "3") || (sub6st1 == "2"))
                                     {
-                                        $("#sub6").append(new Option('<?php  echo  array_search($data[0]['sub6'],$subarray); ?>',sub6));
+                                        $("#sub6").append(new Option('<?php  echo  array_search(@$data[0]['sub6'],$subarray); ?>',sub6));
                                        // $("#sub6").append('<option value="0">NONE</option>');
                                     }
                                     else
