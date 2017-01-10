@@ -67,8 +67,8 @@ header("Pragma: no-cache");
                                     <?php if($data[0]['picpath'] != '')  
                                     {?>
 
-                                        <img id="image_upload_preview" name="image_upload_preview" style="width:140px; height: 140px;" src="<?php echo $data[0]['picpathImg'];?>" alt="Candidate Image" />
-                                        <input type="hidden" id="pic" name="pic" value="<?php echo  $data['0']['picpath']; ?>" />    
+                                        <img id="image_upload_preview" name="image_upload_preview" style="width:140px; height: 140px;" src="<?php echo @$data[0]['picpathImg'];?>" alt="Candidate Image" />
+                                        <input type="hidden" id="pic" name="pic" value="<?php echo  @$data['0']['picpath']; ?>" />    
                                         <?php } else{?>
                                         <img src="<?php echo base_url(); ?>assets/img/upalodimage.jpg" alt="" >
                                         <?php }?>
@@ -76,7 +76,7 @@ header("Pragma: no-cache");
                             </div>
                             <div class="controls controls-row">
 
-                                <?php  if($data[0]['picpath'] == '')  
+                                <?php  if(@$data[0]['picpath'] == '')  
                                 {
                                     echo '<input type="file" style="margin-left:10%; margin-bottom:1%;" class="span4" id="image" name="__files[]">';
                                 }
@@ -99,12 +99,34 @@ header("Pragma: no-cache");
                                 <label class="control-label span1" >
                                     Bay Form No :
                                 </label>
-                                <div class="controls controls-row">                                         
-                                    <input class="span3" type="text" id="bay_form" name="bay_form"  placeholder="34101-1111111-1" value="<?php echo  $data['0']['BForm'];?>"  required="required" >
+                                <div class="controls controls-row">         
+
+                                    <?php
+                                    //DebugBreak();
+
+                                    $bform = $data['0']['BForm'];
+
+                                    if($bform =='' || $bform == '00000-0000000-0'){
+                                        echo '<input class="span3" type="text" id="bay_form" name="bay_form"  placeholder="34101-1111111-1" value=""  required="required" >';
+                                    }
+                                    else{
+                                        echo'<input class="span3" type="text" id="bay_form" name="bay_form"  placeholder="34101-1111111-1" value='.@$data[0][BForm].' readonly="readonly"  required="required" >';
+                                    }
+                                    ?>
                                     <label class="control-label span2" for="father_cnic">
                                         Father's CNIC :
                                     </label> 
-                                    <input class="span3" id="father_cnic" name="father_cnic" type="text" placeholder="34101-1111111-1"  value="<?php echo  $data['0']['FNIC'];?>"  required="required">
+
+                                    <?php
+                                    $fnic = $data['0']['FNIC'];
+                                    if($fnic == '' || $fnic == '00000-0000000-0'){
+                                        echo'<input class="span3" id="father_cnic" name="father_cnic" type="text" placeholder="34101-1111111-1"  value=""  required="required">';        
+                                    }
+                                    else{
+                                        echo'<input class="span3" id="father_cnic" name="father_cnic" type="text" placeholder="34101-1111111-1"  value='.@$data[0][FNIC].' readonly="readonly"  required="required">';
+                                    }
+
+                                    ?>
                                 </div>
                             </div>
                             <div class="control-group">
@@ -350,7 +372,7 @@ header("Pragma: no-cache");
                                 <div class="controls controls-row">
                                     <select id="std_group" class="dropdown span6"  name="std_group">
                                         <?php
-                                        // DebugBreak();
+                                        //DebugBreak();
                                         $grp_cd = $data[0]['grp_cd'];
                                         $chance = $data[0]['chance'];
                                         $exam_type = $data[0]['exam_type'];
@@ -386,8 +408,6 @@ header("Pragma: no-cache");
 
                                         else
 
-
-
                                             if($exam_type == 4 || $exam_type == 5 || $exam_type == 6 ||  $exam_type == 2){
                                                 if($grp_cd == 1){
                                                     echo "<option value='1' selected='selected'>PRE-MEDICAL</option>";      
@@ -413,8 +433,7 @@ header("Pragma: no-cache");
                                                     echo "<option value='3'>HUMANITIES</option>";  
                                                 }
                                                 else if($grp_cd == 7){
-                                                    echo "<option value='7' selected='selected'>Home Economics</option>";       
-
+                                                    echo "<option value='7' selected='selected'>Home Economics</option>";
                                                 }
                                         }
 
@@ -1391,10 +1410,110 @@ header("Pragma: no-cache");
                                     $("#sub8p2").hide();
                                 }
 
-                                function sub_grp_load_exam_type3(){
 
-                                    debugger;
+                                function sub_grp_load_exam_type3_11th(){
+
+                                    Empty_All_Dropdowns();
+                                    $('#sub7').hide();
+                                    $('#sub7p2').hide();
+
+                                    if((sub1pf1 == "2") || (sub1st1 == "2")){
+
+                                        $("#sub1").append(new Option('<?php  echo  array_search($data[0]['sub1'],$subarray); ?>',sub1));      
+                                        $("#sub1").append('<option value="0">NONE</option>');      
+                                    }
+
+                                    else{
+                                        $("#sub1").append('<option value="0">NONE</option>');            
+                                    }
+
+                                    if((sub2pf1 == "2") || (sub2st1 == "2")){
+                                        $("#sub2").append(new Option('<?php  echo  array_search($data[0]['sub2'],$subarray); ?>',sub2));      
+                                        $("#sub2").append('<option value="0">NONE</option>');      
+                                    }
+
+                                    else{
+                                        $("#sub2").append('<option value="0">NONE</option>');            
+                                    }
+
+                                    if((sub3pf1 == "2") || (sub3st1 == "2")){
+                                        $("#sub3").append(new Option('<?php  echo  array_search($data[0]['sub3'],$subarray); ?>',sub3));      
+                                        $("#sub3").append('<option value="0">NONE</option>');      
+                                    }
+
+                                    else{
+                                        $("#sub3").append('<option value="0">NONE</option>');            
+                                    }
+
+                                    if((sub3pf1 == "2") || (sub3st1 == "2")){
+                                        $("#sub4").append(new Option('<?php  echo  array_search($data[0]['sub3'],$subarray); ?>',sub4));      
+                                        $("#sub4").append('<option value="0">NONE</option>');      
+                                    }
+
+                                    else{
+                                        $("#sub4").append('<option value="0">NONE</option>');            
+                                    }
+
+                                    if((sub5pf1 == "2") || (sub5st1 == "2")){
+                                        $("#sub5").append(new Option('<?php  echo  array_search($data[0]['sub3'],$subarray); ?>',sub5));      
+                                        $("#sub5").append('<option value="0">NONE</option>');      
+                                    }
+
+                                    else{
+                                        $("#sub5").append('<option value="0">NONE</option>');            
+                                    }
+
+                                    if((sub6pf1 == "2") || (sub6st1 == "2")){
+                                        $("#sub6").append(new Option('<?php  echo  array_search($data[0]['sub3'],$subarray); ?>',sub6));      
+                                        $("#sub6").append('<option value="0">NONE</option>');      
+                                    }
+                                    else{
+                                        $("#sub6").append('<option value="0">NONE</option>');            
+                                    }
+
+                                    if((sub7pf1 == "2") || (sub7st1 == "2")){
+                                        $("#sub7").append(new Option('<?php  echo  array_search($data[0]['sub3'],$subarray); ?>',sub7));      
+                                        $("#sub7").append('<option value="0">NONE</option>');      
+                                    }
+                                    else{
+                                        $("#sub7").append('<option value="0">NONE</option>');            
+                                    }
                                     
+                                    
+
+                                    $("#sub1p2").append(new Option('<?php  echo  array_search($data[0]['sub1'],$subarray); ?>',sub1));
+                                    $("#sub2p2").append(new Option('<?php  echo  array_search($data[0]['sub2'],$subarray); ?>',sub2));
+                                    $("#sub3p2").append(new Option('<?php  echo  array_search($data[0]['sub8'],$subarray); ?>',sub8));
+                                    $("#sub4p2").append(new Option('<?php  echo  array_search($data[0]['sub4'],$subarray); ?>',sub4));
+
+                                    if(grp_cd == 5)
+                                    {
+
+                                        $('#sub7').show();
+                                        $('#sub7p2').show();  
+                                        $("#sub5p2").append(new Option('<?php  echo  array_search($data[0]['sub5A'],$subarray); ?>','<?php echo $data[0]['sub5A']?>'));
+                                        $("#sub6p2").append(new Option('<?php  echo  array_search($data[0]['sub6A'],$subarray); ?>','<?php echo $data[0]['sub6A']?>'));  
+                                    } 
+                                    else
+                                    {
+                                        $("#sub5p2").append(new Option('<?php  echo  array_search($data[0]['sub5'],$subarray); ?>',sub5));
+                                        $("#sub6p2").append(new Option('<?php  echo  array_search($data[0]['sub6'],$subarray); ?>',sub6));  
+                                    }                 
+
+                                    if(sub7 != '' || grp_cd == 5){
+
+                                        $("#sub7p2").append(new Option('<?php  echo  array_search($data[0]['sub7A'],$subarray); ?>','<?php echo $data[0]['sub7A']?>'));    
+                                    }
+                                    else{
+                                        $("#sub7").hide();
+                                        $("#sub7p2").hide();    
+                                    }
+                                    $("#sub8").hide();
+                                    $("#sub8p2").hide();
+                                }
+
+                                function sub_grp_load_exam_type3_12th(){
+
                                     Empty_All_Dropdowns();
                                     hide_sub7_sub8();
 
@@ -1463,7 +1582,6 @@ header("Pragma: no-cache");
                                     if((sub4pf2 == "3") || (sub4st2 == "2"))
                                     {
                                         $("#sub4p2").append(new Option('<?php  echo  array_search($data[0]['sub4'],$subarray); ?>',sub4));
-
                                     }
                                     else
                                     {
@@ -1954,7 +2072,6 @@ header("Pragma: no-cache");
                                         $("#sub7p2").append('<option value="0">NONE</option>');
                                     }
                                 }
-
                                 function sub_grp_load__MarksImp_PII(){
                                     Empty_All_Dropdowns();
                                     hide_sub7_sub8();
@@ -1977,7 +2094,6 @@ header("Pragma: no-cache");
                                         $("#sub6p2").append(new Option('<?php  echo  array_search($data[0]['sub6'],$subarray); ?>',sub6));    
                                     }
                                 }
-
                                 function sub_grp_load_MarksImp_FULL(){
                                     Empty_All_Dropdowns();
                                     hide_sub7_sub8();
@@ -2005,7 +2121,6 @@ header("Pragma: no-cache");
                                         $("#sub6p2").append(new Option('<?php  echo  array_search($data[0]['sub6'],$subarray); ?>',sub6));    
                                     }
                                 }
-
                                 function sub_grp_load_MarksImp_Subj_wise(){
 
                                     Empty_All_Dropdowns();
@@ -2147,7 +2262,6 @@ header("Pragma: no-cache");
                                         }
                                     }
                                 }
-
                                 function sub_grp_load_additional(){
 
                                     humanities_subjects();
@@ -2164,7 +2278,6 @@ header("Pragma: no-cache");
                                     $('#sub3').empty();
                                     $('#sub3p2').empty();
                                 }
-
                                 function Aama_Khasa()
                                 {
                                     Empty_All_Dropdowns();
@@ -2190,8 +2303,12 @@ header("Pragma: no-cache");
                                         echo 'sub_grp_load_MarksImp_FULL();'; 
 
                                     }
-                                    else if($exam_type == 3){
-                                        echo'sub_grp_load_exam_type3();';
+                                    else if($exam_type == 3 && $class == 11){
+                                        echo'sub_grp_load_exam_type3_11th();';
+                                    }
+
+                                    else if($exam_type == 3 && $class == 12){
+                                        echo'sub_grp_load_exam_type3_12th();';
                                     }
                                     else if($exam_type == 4){
                                         echo'sub_grp_load_exam_type4();';
