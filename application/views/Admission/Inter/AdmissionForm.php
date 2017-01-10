@@ -99,8 +99,7 @@ header("Pragma: no-cache");
                                 <label class="control-label span1" >
                                     Bay Form No :
                                 </label>
-                                <div class="controls controls-row">         
-                                                                                                
+                                <div class="controls controls-row">                                         
                                     <input class="span3" type="text" id="bay_form" name="bay_form"  placeholder="34101-1111111-1" value="<?php echo  $data['0']['BForm'];?>"  required="required" >
                                     <label class="control-label span2" for="father_cnic">
                                         Father's CNIC :
@@ -1394,6 +1393,8 @@ header("Pragma: no-cache");
 
                                 function sub_grp_load_exam_type3(){
 
+                                    debugger;
+                                    
                                     Empty_All_Dropdowns();
                                     hide_sub7_sub8();
 
