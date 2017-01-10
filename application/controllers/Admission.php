@@ -2111,7 +2111,6 @@ class Admission extends CI_Controller {
         //DebugBreak();
 
         $picpath = DIRPATH12TH.'\\'.@$data[0]['picpath'];
-
         $isexit = is_file($picpath);
         if(!$isexit)
         {
