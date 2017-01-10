@@ -1119,13 +1119,24 @@ header("Pragma: no-cache");
                                     $('#sub8').hide(); $('#sub8p2').hide();
                                 }
 
-                                var grp_cd ="<?php if(@$data[0]['exam_type']=="3"){ echo 0; } else{echo  @$data[0]['grp_cd'];}  ?>";
+
+
+                                var grp_cd ="<?php echo @$data[0]['grp_cd']; ?>";
                                 var sub1 ="<?php echo @$data[0]['sub1']; ?>";
                                 var sub2 = "<?php echo @$data[0]['sub2']; ?>";
                                 var sub3 ="<?php echo @$data[0]['sub3']; ?>";
                                 var sub4 = "<?php echo @$data[0]['sub4']; ?>";
                                 var sub5 = "<?php echo @$data[0]['sub5']; ?>";
+
+                                var sub5A = "<?php echo @$data[0]['sub5A']; ?>";
+
                                 var sub6 = "<?php echo @$data[0]['sub6']; ?>";
+
+
+                                var sub6A = "<?php echo @$data[0]['sub6A']; ?>";
+
+                                var sub7A = "<?php echo @$data[0]['sub7A']; ?>";
+
                                 var sub7 = "<?php echo @$data[0]['sub7']; ?>";
                                 var sub8 = "<?php echo @$data[0]['sub8']; ?>";
                                 // Part 1 Subjects Pass fail .
@@ -1356,7 +1367,6 @@ header("Pragma: no-cache");
                                         $("#sub8p2").append('<option value="0">NONE</option>');
                                     }
                                 }
-
                                 function sub_grp_load_exam_type1(){
 
                                     Empty_All_Dropdowns();
@@ -1408,8 +1418,6 @@ header("Pragma: no-cache");
                                     $("#sub8").hide();
                                     $("#sub8p2").hide();
                                 }
-
-
                                 function sub_grp_load_exam_type3(){
 
                                     Empty_All_Dropdowns();
@@ -1478,178 +1486,29 @@ header("Pragma: no-cache");
                                         $("#sub7").append('<option value="0">NONE</option>');            
                                     }
 
-
-
                                     $("#sub1p2").append(new Option('<?php  echo  array_search($data[0]['sub1'],$subarray); ?>',sub1));
                                     $("#sub2p2").append(new Option('<?php  echo  array_search($data[0]['sub2'],$subarray); ?>',sub2));
                                     $("#sub3p2").append(new Option('<?php  echo  array_search($data[0]['sub8'],$subarray); ?>',sub8));
                                     $("#sub4p2").append(new Option('<?php  echo  array_search($data[0]['sub4'],$subarray); ?>',sub4));
 
-                                    if(grp_cd == 5)
-                                    {
-
-                                        $('#sub7').show();
-                                        $('#sub7p2').show();  
-                                        $("#sub5p2").append(new Option('<?php  echo  array_search($data[0]['sub5A'],$subarray); ?>','<?php echo $data[0]['sub5A']?>'));
-                                        $("#sub6p2").append(new Option('<?php  echo  array_search($data[0]['sub6A'],$subarray); ?>','<?php echo $data[0]['sub6A']?>'));  
-                                        $("#sub7p2").append(new Option('<?php  echo  array_search($data[0]['sub7A'],$subarray); ?>','<?php echo $data[0]['sub7A']?>'));    
-                                    } 
-                                    else
-                                    {
-                                        $("#sub5p2").append(new Option('<?php  echo  array_search($data[0]['sub5'],$subarray); ?>',sub5));
-                                        $("#sub6p2").append(new Option('<?php  echo  array_search($data[0]['sub6'],$subarray); ?>',sub6));                                           $("#sub7").hide();
-                                        $("#sub7p2").hide();    
-                                    }                 
-
+                                    $("#sub5p2").append(new Option('<?php  echo  array_search($data[0]['sub5'],$subarray); ?>',sub5));
+                                    $("#sub6p2").append(new Option('<?php  echo  array_search($data[0]['sub6'],$subarray); ?>',sub6));                                          
+                                    $("#sub7").hide();
+                                    $("#sub7p2").hide();
                                     $("#sub8").hide();
                                     $("#sub8p2").hide();
-                                }
-                                function sub_grp_load_exam_type3_12th(){
 
-                                    Empty_All_Dropdowns();
-                                    hide_sub7_sub8();
-
-                                    if((sub1pf1 == "3") || (sub1st1 == "2"))
+                                    if(grp_cd == '5')
                                     {
-                                        $("#sub1").append(new Option('<?php  echo  array_search($data[0]['sub1'],$subarray); ?>',sub1));
-                                        $("#sub1").append('<option value="0">NONE</option>');
-                                    }
-                                    else
-                                    {   
-                                        $("#sub1").append('<option value="0">NONE</option>');
-                                    }
-                                    if((sub1pf2 == "3") || (sub1st2 == "2"))
-                                    {
-
-                                    }
-                                    else
-                                    {  
-                                        $("#sub1p2").append('<option value="0">NONE</option>');
-                                    }
-                                    // Subject 2 
-                                    if((sub2pf1 == "3") || (sub2st1 == "2"))
-                                    {
-                                        $("#sub2").append(new Option('<?php  echo  array_search($data[0]['sub2'],$subarray); ?>',sub2));
-                                        $("#sub2").append('<option value="0">NONE</option>');
-                                    }
-                                    else
-                                    {
-                                        $("#sub2").append('<option value="0">NONE</option>');
-                                    }
-                                    if((sub2pf2 == "3") || (sub2st2 == "2"))
-                                    {
-                                        $("#sub2p2").append(new Option('<?php  echo  array_search($data[0]['sub2'],$subarray); ?>',sub2));
-                                    }
-                                    else
-                                    {
-                                        $("#sub2p2").empty();
-                                        $("#sub2p2").append('<option value="0">NONE</option>');
-                                    }
-                                    if((sub3pf1 == "3") || (sub3st1 == "2"))
-                                    {
-                                        $("#sub3").append(new Option('<?php  echo  array_search($data[0]['sub3'],$subarray); ?>',sub3));
-                                        $("#sub3").append('<option value="0">NONE</option>');
-                                    }
-                                    else
-                                    {
-                                        $("#sub3").append('<option value="0">NONE</option>');
-                                    }
-                                    if((sub8pf2 == "3") || (sub8st2 == "2"))
-                                    {
-                                        $("#sub3p2").append(new Option('<?php  echo  array_search($data[0]['sub8'],$subarray); ?>',sub8));
-                                    }
-                                    else
-                                    {
-                                        $("#sub3p2").append('<option value="0">NONE</option>');
-                                    }
-                                    if((sub4pf1 == "3") || (sub4st1 == "2"))
-                                    {
-                                        $("#sub4").append(new Option('<?php  echo  array_search($data[0]['sub4'],$subarray); ?>',sub4));
-                                        $("#sub4").append('<option value="0">NONE</option>');
-                                    }
-                                    else
-                                    {
-                                        $("#sub4").append('<option value="0">NONE</option>');
-                                    }
-                                    if((sub4pf2 == "3") || (sub4st2 == "2"))
-                                    {
-                                        $("#sub4p2").append(new Option('<?php  echo  array_search($data[0]['sub4'],$subarray); ?>',sub4));
-                                    }
-                                    else
-                                    {
-                                        $("#sub4p2").append('<option value="0">NONE</option>');
-                                    }
-                                    if((sub5pf1 == "3") || (sub5st1 == "2"))
-                                    {
-                                        $("#sub5").append(new Option('<?php  echo  array_search($data[0]['sub5'],$subarray); ?>',sub5));
-                                        $("#sub5").append('<option value="0">NONE</option>');
-                                    }
-                                    else
-                                    {
-                                        $("#sub5").append('<option value="0">NONE</option>');
-                                    }
-                                    if((sub5pf2 == "3") || (sub5st2 == "2"))
-                                    {
-                                        if(grp_cd == 5)
-                                        {
-                                            $("#sub5p2").append(new Option('<?php  echo  array_search($data[0]['sub5A'],$subarray); ?>','<?php echo $data[0]['sub5A']?>')); 
-                                        }
-                                        else
-                                        {
-                                            $("#sub5p2").append(new Option('<?php  echo  array_search($data[0]['sub5'],$subarray); ?>',sub5));
-
-                                        }
-                                    }
-                                    else
-                                    {
-                                        $("#sub5p2").append('<option value="0">NONE</option>');
-                                    }
-                                    if((sub6pf1 == "3") || (sub6st1 == "2"))
-                                    {
-                                        $("#sub6").append(new Option('<?php  echo  array_search($data[0]['sub6'],$subarray); ?>',sub6));
-                                        $("#sub6").append('<option value="0">NONE</option>');
-                                    }
-                                    else
-                                    {
-                                        $("#sub6").append('<option value="0">NONE</option>');
-                                    }
-                                    if((sub6pf2 == "3") || (sub6st2 == "2"))
-                                    {
-                                        if(grp_cd == 5)
-                                        {
-                                            $("#sub6p2").append(new Option('<?php  echo  array_search($data[0]['sub6A'],$subarray); ?>','<?php echo $data[0]['sub6A']?>')); 
-                                        }
-                                        else
-                                        {
-                                            $("#sub6p2").append(new Option('<?php  echo  array_search($data[0]['sub6'],$subarray); ?>',sub6));
-
-                                        }
-                                    }
-                                    else
-                                    {
-                                        $("#sub6p2").append('<option value="0">NONE</option>');
-                                    }
-
-                                    if(sub7 != ''){
+                                        debugger;
                                         $('#sub7').show();
-                                        $('#sub7p2').show();
-                                        if((sub7pf1 == "3") || (sub7st1 == "2"))
-                                        {
-                                            $("#sub7").append(new Option('<?php  echo  array_search($data[0]['sub7'],$subarray); ?>',sub7));
-                                            $("#sub7").append('<option value="0">NONE</option>');
-                                        }
-                                        else
-                                        {
-                                            $("#sub7").append('<option value="0">NONE</option>');
-                                        }
-                                        if((sub7pf2 == "3") || (sub7st2 == "2"))
-                                        {
-                                            $("#sub7p2").append(new Option('<?php  echo  array_search($data[0]['sub7A'],$subarray); ?>','<?php echo $data[0]['sub7A']?>'));
-                                        }
-                                        else
-                                        {
-                                            $("#sub7p2").append('<option value="0">NONE</option>');
-                                        }   
+                                        $('#sub7p2').show();  
+                                        $("#sub5p2").append(new Option('<?php  echo  array_search($data[0]['sub5A'],$subarray); ?>', sub5A));
+                                        $("#sub6p2").append(new Option('<?php  echo  array_search($data[0]['sub6A'],$subarray); ?>', sub6A));  
+                                        $("#sub7p2").append(new Option('<?php  echo  array_search($data[0]['sub7A'],$subarray); ?>', sub7A));    
+                                    }
+                                    else{
+                                        //do nothing;
                                     }
                                 }
                                 function sub_grp_load_exam_type4(){
@@ -2270,18 +2129,13 @@ header("Pragma: no-cache");
                                     $('#sub3').empty();
                                     $('#sub3p2').empty();
                                 }
-                                function Aama_Khasa()
-                                {
+                                function Aama_Khasa(){
                                     Empty_All_Dropdowns();
                                     hide_sub7_sub8();
                                     AamKhasa_subj();
-
-
                                 }
-
                                 <?php
 
-                                // debugBreak();
                                 if($cat11 == 4)
                                 {
                                     echo 'Aama_Khasa();';
@@ -2291,26 +2145,21 @@ header("Pragma: no-cache");
                                         echo 'sub_grp_load_exam_type1();'; 
                                     }
                                     else if($exam_type == 2){
-                                        /*echo'ClearALLDropDowns();';*/
+                                        
                                         echo 'sub_grp_load_MarksImp_FULL();'; 
 
                                     }
                                     else if($exam_type == 3 ){
                                         echo'sub_grp_load_exam_type3();';
                                     }
-
-                                    /* else if($exam_type == 3 && $class == 12){
-                                    echo'sub_grp_load_exam_type3_12th();';
-                                    }*/
+                                    
                                     else if($exam_type == 4){
                                         echo'sub_grp_load_exam_type4();';
                                     }
                                     else if(($exam_type == 16 || $exam_type == 15) && $cattype == 2){
                                         echo'sub_grp_load_additional();';
                                     }
-                                    /* else if($exam_type == 14){
-                                    echo'ClearALLDropDowns();';
-                                    }*/
+                                    
                                     else if($exam_type == 6){
                                         echo'sub_grp_load_exam_type6();';
                                     }
