@@ -1066,18 +1066,15 @@ header("Pragma: no-cache");
 
                                         $("#sub4").append(new Option(text,val));
                                         $("#sub4p2").append(new Option(text,val));
-                                    });
 
-                                    $.each(huminities_without_practical,function(val,text){
 
                                         $("#sub5").append(new Option(text,val));
                                         $("#sub5p2").append(new Option(text,val));
-                                    });
 
-                                    $.each(huminities_without_practical,function(val,text){
 
                                         $("#sub6").append(new Option(text,val));
                                         $("#sub6p2").append(new Option(text,val));
+
                                     });
 
                                     $('#sub7').hide();$('#sub7p2').hide();
@@ -1376,6 +1373,8 @@ header("Pragma: no-cache");
                                     $("#sub4").append('<option value="0">NONE</option>');
                                     $("#sub4p2").append(new Option('<?php  echo  array_search($data[0]['sub4'],$subarray); ?>',sub4));
 
+                                    //debugger;
+
                                     if(grp_cd == 5)
                                     {
 
@@ -1478,8 +1477,8 @@ header("Pragma: no-cache");
                                     else{
                                         $("#sub7").append('<option value="0">NONE</option>');            
                                     }
-                                    
-                                    
+
+
 
                                     $("#sub1p2").append(new Option('<?php  echo  array_search($data[0]['sub1'],$subarray); ?>',sub1));
                                     $("#sub2p2").append(new Option('<?php  echo  array_search($data[0]['sub2'],$subarray); ?>',sub2));
@@ -1493,7 +1492,7 @@ header("Pragma: no-cache");
                                         $('#sub7p2').show();  
                                         $("#sub5p2").append(new Option('<?php  echo  array_search($data[0]['sub5A'],$subarray); ?>','<?php echo $data[0]['sub5A']?>'));
                                         $("#sub6p2").append(new Option('<?php  echo  array_search($data[0]['sub6A'],$subarray); ?>','<?php echo $data[0]['sub6A']?>'));  
-                                         $("#sub7p2").append(new Option('<?php  echo  array_search($data[0]['sub7A'],$subarray); ?>','<?php echo $data[0]['sub7A']?>'));    
+                                        $("#sub7p2").append(new Option('<?php  echo  array_search($data[0]['sub7A'],$subarray); ?>','<?php echo $data[0]['sub7A']?>'));    
                                     } 
                                     else
                                     {
@@ -1521,7 +1520,7 @@ header("Pragma: no-cache");
                                     }
                                     if((sub1pf2 == "3") || (sub1st2 == "2"))
                                     {
-                                      
+
                                     }
                                     else
                                     {  
@@ -2300,8 +2299,8 @@ header("Pragma: no-cache");
                                         echo'sub_grp_load_exam_type3();';
                                     }
 
-                                   /* else if($exam_type == 3 && $class == 12){
-                                        echo'sub_grp_load_exam_type3_12th();';
+                                    /* else if($exam_type == 3 && $class == 12){
+                                    echo'sub_grp_load_exam_type3_12th();';
                                     }*/
                                     else if($exam_type == 4){
                                         echo'sub_grp_load_exam_type4();';
@@ -2416,6 +2415,7 @@ header("Pragma: no-cache");
 
                                 // sub 4 change event 
                                 $("#sub4").change(function(){
+
                                     var id4 =$("#sub4").val();
                                     var id4p2 =$("#sub4p2").val();
                                     var id5 =$("#sub5").val();
@@ -2502,29 +2502,17 @@ header("Pragma: no-cache");
                                 });
                                 // sub 5 change event 
                                 $("#sub5").change(function(){
+
+                                    //debugger;
+
                                     var id4 =$("#sub4").val();
                                     var id4p2 =$("#sub4p2").val();
                                     var id5 =$("#sub5").val();
-                                    var id5p2 =$("#sub5p2").val();
+                                    var id5p2 =$("#sub5p2").val(id5);
                                     var id6 =$("#sub6").val();
                                     var id6p2 =$("#sub6p2").val();
                                     var grp_cd = $('#std_group').val();
-                                    if(grp_cd == 5)
-                                    {
-                                        if(id5 == 0)
-                                        {
-                                            $("#sub5p2").val(0);
-                                        }
-                                        else
-                                        {
-                                            $("#sub5p2").val(94);   
-                                        }
 
-                                    }
-                                    else
-                                    {
-                                        $("#sub5p2").val(id5); 
-                                    }
 
                                     if((id5 !=0) && (id4 == id5)){
                                         alertify.error('Please Choose Different Subject');
@@ -2563,31 +2551,21 @@ header("Pragma: no-cache");
                                     }
 
                                 });
+
                                 $("#sub5p2").change(function(){
+
+                                    //debugger;
+
                                     var id4 =$("#sub4").val();
                                     var id4p2 =$("#sub4p2").val();
-                                    var id5 =$("#sub5").val();
+                                    var id5 =$("#sub5").val(id5p2);
                                     var id5p2 =$("#sub5p2").val();
                                     var id6 =$("#sub6").val();
                                     var id6p2 =$("#sub6p2").val();
+
                                     $("#sub5").val(id5p2);
                                     var grp_cd = $('#std_group').val();
-                                    if(grp_cd == 5)
-                                    {
-                                        if(id5p2 == 0)
-                                        {
-                                            $("#sub5").val(0);
-                                        }
-                                        else
-                                        {
-                                            $("#sub5").val(71);   
-                                        }
 
-                                    }
-                                    else
-                                    {
-                                        $("#sub5").val(id5p2);
-                                    }
                                     if((id5p2 !=0) && (id4p2 == id5p2)){
                                         alertify.error('Please Choose Different Subject');
                                         $("#sub5").val('0');
@@ -2632,25 +2610,8 @@ header("Pragma: no-cache");
                                     var id5 =$("#sub5").val();
                                     var id5p2 =$("#sub5p2").val();
                                     var id6 =$("#sub6").val();
-                                    var id6p2 =$("#sub6p2").val();
+                                    var id6p2 =$("#sub6p2").val(id6);
                                     var grp_cd = $('#std_group').val();
-                                    if(grp_cd == 5)
-                                    {
-                                        if(id6 == 0)
-                                        {
-                                            $("#sub6p2").val(0);
-                                        }
-                                        else
-                                        {
-                                            $("#sub6p2").val(97);   
-                                        }
-
-                                    }
-                                    else
-                                    {
-                                        $("#sub6p2").val(id6);   
-                                    }
-
 
                                     if((id6 !=0) && (id4 == id6)){
                                         alertify.error('Please Choose Different Subject');
@@ -2690,32 +2651,20 @@ header("Pragma: no-cache");
                                     }
 
                                 });
+
                                 $("#sub6p2").change(function(){
 
                                     var id4 =$("#sub4").val();
                                     var id4p2 =$("#sub4p2").val();
                                     var id5 =$("#sub5").val();
                                     var id5p2 =$("#sub5p2").val();
-                                    var id6 =$("#sub6").val();
+                                    var id6 =$("#sub6").val(id6p2);
                                     var id6p2 =$("#sub6p2").val();
 
-                                    var grp_cd = $('#std_group').val();
-                                    if(grp_cd == 5)
-                                    {
-                                        if(id6p2 == 0)
-                                        {
-                                            $("#sub6").val(0);
-                                        }
-                                        else
-                                        {
-                                            $("#sub6").val(80);
-                                        }
+                                    $("#sub6").val(id6p2);
 
-                                    }
-                                    else
-                                    {
-                                        $("#sub6").val(id6p2);  
-                                    }
+                                    var grp_cd = $('#std_group').val();
+
                                     if((id6p2 !=0) && (id4p2 == id6p2)){
                                         alertify.error('Please Choose Different Subject');
                                         $("#sub6").val('0');

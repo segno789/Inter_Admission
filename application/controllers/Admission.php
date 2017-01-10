@@ -2110,7 +2110,7 @@ class Admission extends CI_Controller {
 
         //DebugBreak();
 
-        $picpath = DIRPATH12TH.'\\'.@$data[0]['picpath'];
+        /*$picpath = DIRPATH12TH.'\\'.@$data[0]['picpath'];
         $isexit = is_file($picpath);
         if(!$isexit)
         {
@@ -2120,7 +2120,7 @@ class Admission extends CI_Controller {
         {
             $type = pathinfo($picpath, PATHINFO_EXTENSION);
             $data[0]['picpathImg'] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
-        }
+        }                */
 
         $specialcase = $data['0']['Spl_Name'];
         $specialcode = $data['0']['spl_cd'];
