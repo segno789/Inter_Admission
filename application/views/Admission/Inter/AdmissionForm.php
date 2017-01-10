@@ -372,7 +372,7 @@ header("Pragma: no-cache");
                                 <div class="controls controls-row">
                                     <select id="std_group" class="dropdown span6"  name="std_group">
                                         <?php
-                                        // DebugBreak();
+                                        //DebugBreak();
                                         $grp_cd = $data[0]['grp_cd'];
                                         $chance = $data[0]['chance'];
                                         $exam_type = $data[0]['exam_type'];
@@ -407,9 +407,7 @@ header("Pragma: no-cache");
                                         }
 
                                         else
-
-
-
+                                        
                                             if($exam_type == 4 || $exam_type == 5 || $exam_type == 6 ||  $exam_type == 2){
                                                 if($grp_cd == 1){
                                                     echo "<option value='1' selected='selected'>PRE-MEDICAL</option>";      
@@ -435,11 +433,10 @@ header("Pragma: no-cache");
                                                     echo "<option value='3'>HUMANITIES</option>";  
                                                 }
                                                 else if($grp_cd == 7){
-                                                    echo "<option value='7' selected='selected'>Home Economics</option>";       
-
+                                                    echo "<option value='7' selected='selected'>Home Economics</option>";
                                                 }
-                                        }
-
+                                            }
+                                        
                                         $subarray = array(
                                             'NONE'=>'',
                                             'NONE'=>'0',
