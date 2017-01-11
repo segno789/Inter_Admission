@@ -115,6 +115,7 @@
                             <br/>
                             <!--<a href="http://www.bisegrw.com/download/online/registration/Training_Manual_11th_Registration_Central_Software_Urdu.pdf" target="_blank" class="guidlines blink_text" style="font-size: 18px;">Download 11th Registration Training Manual. </a> <br/>-->
                              <a href="<?=base_url()?>Admission_11th_reg/forwarding_pdf/"  class="guidlines blink_text" style="font-size: 18px;">Download Farwarding letter. </a> <br/>
+                             <a href="<?php echo base_url(); ?>Admission_11th_reg/financeReoprt" target="_blank" class="guidlines blink_text" style="font-size: 18px;">Download Finance Farwarding letter. </a> <br/>
                              <a href="<?=base_url()?>Admission_11th_reg/ChallanForm_Adm11hth_Regular/9"  class="guidlines blink_text" style="font-size: 18px;">Download Challan Form. </a> <br/>
                           <!--  <a href="<?php //echo base_url(); ?>/assets/img//Image_error.pdf" class="guidlines blink_text" target="_blank" style="font-size: 18px;">Instruction for Error occured due to Image uploading. </a>-->
                             <br /><br />

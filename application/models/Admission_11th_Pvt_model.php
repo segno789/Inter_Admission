@@ -226,6 +226,29 @@ class Admission_11th_Pvt_model extends CI_Model
         $lang_cat = $data['lang_cat'];
         $lang_specialSub = $data['lang_specialSub'];
        $Inst_Rno = '';
+       $aloom_grp_final = 0;
+       ///   For ADEEB Arabic and Urdu.
+       if($lang_cat == 1 && $lang_specialSub ==24)
+       {
+       $aloom_grp_final = 5;
+       }
+       if($lang_cat == 1 && $lang_specialSub ==2)
+       {
+       $aloom_grp_final = 6;
+       }
+       ///   For FAZAL Arabic Urdu and Punjabi.
+       if($lang_cat == 3 && $lang_specialSub ==24)
+       {
+        $aloom_grp_final = 1;
+       }
+       if($lang_cat == 3 && $lang_specialSub ==2)
+       {
+        $aloom_grp_final = 2;
+       }
+       if($lang_cat == 3 && $lang_specialSub ==32)
+       {
+        $aloom_grp_final = 3;
+       }
          //   DebugBreak();
         if($iOldRno ==  false)
             $iOldRno =  0;
@@ -239,7 +262,7 @@ class Admission_11th_Pvt_model extends CI_Model
         // $sync= $this->load->database('sync', TRUE);
  
         // $this->db->trans_start();
-        $query = $this->db->query(" Registration..IAP1AdmPvt_sp_insert_lang '$formno',11,2016,1,'$name','$fname','$BForm','$FNIC','$Dob','$CellNo',$medium,'$Inst_Rno','".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,2,$iOldRno,$iOldYear,$iOldSess,$IsHafiz,$Inst_cd,$UrbanRural,$RegGrp,$dist,$teh,$zone,'$picname',$IsReAdm,$lang_cat,$lang_specialSub");
+        $query = $this->db->query(" Registration..IAP1AdmPvt_sp_insert_lang '$formno',11,2016,1,'$name','$fname','$BForm','$FNIC','$Dob','$CellNo',$medium,'$Inst_Rno','".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,2,$iOldRno,$iOldYear,$iOldSess,$IsHafiz,$Inst_cd,$UrbanRural,$RegGrp,$dist,$teh,$zone,'$picname',$IsReAdm,$aloom_grp_final");
      
       //  $this->db->trans_complete();
 

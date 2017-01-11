@@ -592,7 +592,7 @@ class Admission_11th_reg extends CI_Controller {
 
         $fontSize = 10; 
         $marge    = .95;   // between barcode and hri in pixel
-        $bx        = 170.6;  // barcode center
+        $bx        = 175.6;  // barcode center
         $by        = 34.75;  // barcode center
         $height   = 5.7;   // barcode height in 1D ; module size in 2D
         $width    = .26;  // barcode height in 1D ; not use in 2D
@@ -609,7 +609,7 @@ class Admission_11th_reg extends CI_Controller {
         
         $result[0] = $result['data'][0];
          // DebugBreak();
-        $pdf->Image("assets/img/9thForwardingLetterIncome.png",5,6, 200,280, "PNG");
+        $pdf->Image("assets/img/forwardingletter11th_branch.png",5,6, 200,280, "PNG");
        // $pdf->Image("assets/img/M2.jpg",100, 2.8, 10, 10, "jpg");
         $bardata = Barcode::fpdf($pdf, $black, $bx, $by, $angle, $type, array('code'=>$Barcode), $width, $height);
 
@@ -617,14 +617,14 @@ class Admission_11th_reg extends CI_Controller {
         Barcode::rotate(-$len / 2, ($bardata['height'] / 2) + $fontSize + $marge, $angle, $xt, $yt);
         
         $pdf->SetFont('Arial','B',11.5);
-        $pdf->SetXY(70.5, 44);
+        $pdf->SetXY(61.5, 44);
         $pdf->Cell(0,0,$data['iyear'],0,0,'L',0);
         
         
         
       //  DebugBreak();
         //Finance Page
-        $Y = 67;
+        $Y = 72;
         $font = 12;
         $x = 13; 
         for($i =0 ; $i<7 ; $i++)
@@ -635,7 +635,7 @@ class Admission_11th_reg extends CI_Controller {
             //$result[0]['Total_sci']
             if($i == 6)
             {
-                $pdf->SetXY($x-8, $Y-7.5);
+                $pdf->SetXY($x-10, $Y-7.5);
             $pdf->Cell(0,0,$result[0]['Total_sci'],0,0,'L',0);
             }
             else if($i == 5)
@@ -643,15 +643,15 @@ class Admission_11th_reg extends CI_Controller {
             $pdf->Cell(0,0,$result[0]['Total_Arts'],0,0,'L',0);
             }
             else if($i == 4)
-            {
+            {      $pdf->SetXY($x-10, $Y-7.5);
             $pdf->Cell(0,0,$result[0]['Total_ArtsPr'],0,0,'L',0);
             }
             else if($i == 3)
-            {
+            {        $pdf->SetXY($x-10, $Y-7.5);
             $pdf->Cell(0,0,$result[0]['Total_ReApSc'],0,0,'L',0);
             }
             else if($i == 2)
-            {
+            {           $pdf->SetXY($x-5, $Y-7.5);
             $pdf->Cell(0,0,$result[0]['Total_ReApArts'],0,0,'L',0);
             }
              else if($i == 1)
@@ -683,11 +683,11 @@ class Admission_11th_reg extends CI_Controller {
         }
         
             $pdf->SetFont('Arial','B',$font);
-            $pdf->SetXY($x-115, $Y+32);
+            $pdf->SetXY($x-115, $Y+42);
             $pdf->Cell(0,0,$result[0]['Total_Fee'].'/-',0,0,'L',0);
             
             $pdf->SetFont('Arial','B',$font);
-            $pdf->SetXY($x-59, $Y+32);
+            $pdf->SetXY($x-59, $Y+42);
             $pdf->Cell(0,0,$result[0]['Total_SpeCandidate'],0,0,'L',0);
         
        // DebugBreak();
@@ -707,10 +707,13 @@ class Admission_11th_reg extends CI_Controller {
             $pdf->SetXY($x-30, $Y+206);
             $pdf->Cell(0,0,$user['cell'],0,0,'L',0);
         /////Matric Branch Copy
+        
+        
         $Y = 64;
         $font = 12;
-        $x = 13; 
+        $x = 10; 
          $pdf->AddPage('P',"A4");
+          $pdf->Image("assets/img/forwardingletter_finance.png",5,6, 200,280, "PNG");
           for($i =0 ; $i<7 ; $i++)
         {
             $pdf->SetFont('Arial','B',$font);
@@ -730,6 +733,7 @@ class Admission_11th_reg extends CI_Controller {
             }
             else if($i == 3)
             {
+            
             $pdf->Cell(0,0,$result[0]['Total_ReApSc'],0,0,'L',0);
             }
             else if($i == 2)
@@ -745,7 +749,7 @@ class Admission_11th_reg extends CI_Controller {
             else if($i == 0)
             {
                 $pdf->SetFont('Arial','B',$font-3);
-                $pdf->SetXY($x-5, $Y-2);
+                $pdf->SetXY($x, $Y-2);
             $pdf->Cell(0,0,$result[0]['Total_Fee'].'/-',0,0,'L',0);
             }
             if($i==1)
@@ -770,15 +774,15 @@ class Admission_11th_reg extends CI_Controller {
             }
         }
             $pdf->SetFont('Arial','B',$font);
-            $pdf->SetXY($x-115, $Y+37);
+            $pdf->SetXY($x-115, $Y+47);
             $pdf->Cell(0,0,$result[0]['Total_Fee'].'/-',0,0,'L',0);
             
             $pdf->SetFont('Arial','B',$font);
-            $pdf->SetXY($x-59, $Y+37);
+            $pdf->SetXY($x-59, $Y+47);
             $pdf->Cell(0,0,$result[0]['Total_SpeCandidate'],0,0,'L',0);
             
             $pdf->SetFont('Arial','B',$font);
-            $pdf->SetXY($x-30, $Y+178);
+            $pdf->SetXY($x-20, $Y+178);
             $pdf->Cell(0,0,$user['Inst_Id'],0,0,'L',0);
             
             $font = 9;
@@ -795,15 +799,15 @@ class Admission_11th_reg extends CI_Controller {
             $pdf->SetXY($x-30, $Y+213);
             $pdf->Cell(0,0,$user['cell'],0,0,'L',0);
             
-         $pdf->Image("assets/img/9thForwardingLetter9th.png",5,8, 200,280, "PNG");
+        
         //$pdf->Image("assets/img/M3.jpg",100, 2.8, 10, 10, "jpg");
-        $bardata = Barcode::fpdf($pdf, $black, $bx+2, $by, $angle, $type, array('code'=>$Barcode), $width, $height);
+        $bardata = Barcode::fpdf($pdf, $black, $bx+2, $by+5, $angle, $type, array('code'=>$Barcode), $width, $height);
 
         $len = $pdf->GetStringWidth($bardata['hri']);
         Barcode::rotate(-$len / 2, ($bardata['height'] / 2) + $fontSize + $marge, $angle, $xt, $yt);
         
         $pdf->SetFont('Arial','B',11.5);
-        $pdf->SetXY(70.5, 46);
+        $pdf->SetXY(85.5, 42);
         $pdf->Cell(0,0,$data['iyear'],0,0,'L',0);
         
        

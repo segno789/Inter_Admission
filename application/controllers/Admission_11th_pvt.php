@@ -1060,30 +1060,28 @@ class Admission_11th_pvt extends CI_Controller {
 
         if($data["grp_cd"] == 9)
         {
-        if($data['Lang_cat']==1)
+         if($data['Lang_cat']==5)
         {
-        $catname_lang = "ADEEB";
+        $catname_lang = "ADEEB  ARABIC";
         }
-        else
+        else if($data['Lang_cat']==6)
         {
-        $catname_lang = "FAZAL";
+        $catname_lang = "ADEEB  URDU";
         }
-        if($data['Lang_spec_sub']==2)
+        
+         else if($data['Lang_cat']==1)
         {
-        $catSub_lang = "URDU";
+        $catname_lang = "FAZAL  ARABIC";
         }
-        else if($data['Lang_spec_sub']==32)
+         else if($data['Lang_cat']==2)
         {
-        $catSub_lang = "PUNJABI";
+        $catname_lang = "FAZAL  URDU";
         }
-        else if($data['Lang_spec_sub']==34)
+         else if($data['Lang_cat']==3)
         {
-        $catSub_lang = "PERSIAN";
+        $catname_lang = "FAZAL PUNJABI";
         }
-        else if($data['Lang_spec_sub']==24)
-        {
-        $catSub_lang = "ARABIC";
-        }
+        
         }
         
         
@@ -1091,31 +1089,31 @@ class Admission_11th_pvt extends CI_Controller {
         
         
         // Adeeb urdu
-        if($data["grp_cd"] == 9 && $data['Lang_cat']==1 && $data['Lang_spec_sub']==2 )
+        if($data["grp_cd"] == 9 && $data['Lang_cat']==5 )
         {
         $pdf->Image("assets/img/examaloomsharkia.JPG",3.83,2.75,  2.0,0.40, "JPG");
           $pdf->Image("assets/img/adeeburdu.JPG",2.73,2.75,  1.0,0.40, "JPG");
         }
         // Adeeb Arabic
-        else if ($data["grp_cd"] == 9 && $data['Lang_cat']==1 && $data['Lang_spec_sub']==24 )
+        else if ($data["grp_cd"] == 9 && $data['Lang_cat']==6 )
         {
         $pdf->Image("assets/img/examaloomsharkia.JPG",3.83,2.75,  2.0,0.40, "JPG");
           $pdf->Image("assets/img/adeebarbic.JPG",2.73,2.75,  1.0,0.40, "JPG");
         }
         // Fazal Arabic
-        else if ($data["grp_cd"] == 9 && $data['Lang_cat']==3 && $data['Lang_spec_sub']==24 )
+        else if ($data["grp_cd"] == 9 && $data['Lang_cat']==1 )
         {
         $pdf->Image("assets/img/examaloomsharkia.JPG",3.83,2.75,  2.0,0.40, "JPG");
           $pdf->Image("assets/img/fazilarabic.JPG",2.73,2.75,  1.0,0.40, "JPG");
         }
         // Fazal Urdu
-        else if($data["grp_cd"] == 9 && $data['Lang_cat']==3 && $data['Lang_spec_sub']==2 )
+        else if($data["grp_cd"] == 9 && $data['Lang_cat']==2 )
         {
         $pdf->Image("assets/img/examaloomsharkia.JPG",3.83,2.75,  2.0,0.40, "JPG");
           $pdf->Image("assets/img/fazilurdu.JPG",2.73,2.75,  1.0,0.40, "JPG");
         }
         // Fazal Punjabi
-        else if($data["grp_cd"] == 9 && $data['Lang_cat']==3 && $data['Lang_spec_sub']==32 )
+        else if($data["grp_cd"] == 9 && $data['Lang_cat']==3 )
         {
         $pdf->Image("assets/img/examaloomsharkia.JPG",3.83,2.75,  2.0,0.40, "JPG");
           $pdf->Image("assets/img/fazilpunjabi.JPG",2.73,2.75,  1.0,0.40, "JPG");
@@ -1126,7 +1124,7 @@ class Admission_11th_pvt extends CI_Controller {
         $pdf->SetFont('Arial','b',10);
         if($data["grp_cd"] == 9)
         {
-        $pdf->Cell( 0,0.1,"Group:".$catname_lang."  ".$catSub_lang,0,'L');
+        $pdf->Cell( 0,0.1,"Group:".$catname_lang,0,'L');
         }
         else
         {

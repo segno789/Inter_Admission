@@ -98,7 +98,7 @@ class Admission_11th_reg_model extends CI_Model
         //DebugBreak();
         $Inst_cd = $fetch_data['Inst_cd'];
        // $query = $this->db->query("Admission_online..sp_Forwading_letter_final_10TH $Inst_cd");
-        $query = $this->db->query("Admission_online..sp_ForwardingLetter_Finance_9thADM $Inst_cd");
+        $query = $this->db->query("Admission_online..sp_ForwardingLetter_Finance_11thADM $Inst_cd");
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {

@@ -1082,7 +1082,7 @@ if(isset($files)){
           $("#lang_specialSub").prepend("<option  value='24'> ARABIC </option>");
           $("#lang_specialSub").prepend("<option  value='2'> URDU </option>");
           $("#lang_specialSub").prepend("<option  value='32'> PUNJABI </option>");
-          $("#lang_specialSub").prepend("<option  value='34'> PERSIAN </option>");
+          //$("#lang_specialSub").prepend("<option  value='34'> PERSIAN </option>");
           
     }
     })
