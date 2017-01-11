@@ -1309,17 +1309,8 @@ class Admission_11th_reg extends CI_Controller {
             $pdf->SetFont('Arial','',7);    
             $pdf->Text($col5+.05,$ln[$countofrecords]+0.4,$data["sub5_abr"].','.$data["sub6_abr"].','.$data["sub7_abr"]);
            // DebugBreak();
-             if($user['gender']==1)
-            {
-            $pdf->Image(DIRPATH11th.'2510010001.jpg',$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG"); 
-           // $pdf->Image(DIRPATH11th.'2510010001.jpg',6.0+$x,2.4+$Y , 1.30, 1.30, "JPG");
-            }
-            else
-            {
-            $pdf->Image(DIRPATH11th.'130659.jpg',$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG"); 
-           // $pdf->Image(DIRPATH11th.'130659.jpg',6.0+$x,2.4+$Y , 1.30, 1.30, "JPG");
-            }
-           // $pdf->Image(IMAGE_PATH.$data["coll_cd"].'/'.$data["PicPath"],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG"); 
+          
+            $pdf->Image(DIRPATH11th.'/'.$data["coll_cd"].'/'.$data["PicPath"],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG"); 
 
             ++$SR;
 
@@ -1651,7 +1642,7 @@ class Admission_11th_reg extends CI_Controller {
 
 
         // DebugBreak();
-        $data = array('data'=>$this->Admission_11th_reg_model->revenue_pdf($fetch_data),'inst_Name'=>$user['inst_Name'],'inst_cd'=>$user['Inst_Id'],'barcode'=>$image,"SciAdmFee"=>$SciAdmFee,"ArtsAdmFee"=>$ArtsAdmFee,"SciProcFee"=>@$SciProcFee,"ArtsProcFee"=>@$ArtsProcFee);
+        $data = array('data'=>$this->Admission_11th_reg_model->revenue_pdf($fetch_data),'inst_Name'=>$user['inst_Name'],'inst_cd'=>$user['Inst_Id'],'barcode'=>@$image,"SciAdmFee"=>@$SciAdmFee,"ArtsAdmFee"=>@$ArtsAdmFee,"SciProcFee"=>@$SciProcFee,"ArtsProcFee"=>@$ArtsProcFee);
         //
         // ------------------------------------- Assign Each Candidate Fee According to Special case, Re-Admission ,Government Candidate and Newly Affiliated Institutes.
         if(empty($data['data']['stdinfo']))
@@ -1887,16 +1878,17 @@ class Admission_11th_reg extends CI_Controller {
             $pdf->Cell(7.6,0.2,'PERSONAL INFORMATION',1,0,'L',1);
 
             $Y = 0.2;
+            $pdf->Image(DIRPATH11th.'/'.$user['Inst_Id'].'/'.$data["PicPath"],6.0+$x,2.4+$Y , 1.30, 1.30, "JPG");
             //$pdf->Image(DIRPATH11th.'/'.$data["Sch_cd"].'/'.$data["PicPath"],6.0+$x,2.4+$Y , 1.30, 1.30, "JPG");
             //DebugBreak();
-            if($user['gender']==1)
+           /* if($user['gender']==1)
             {
             $pdf->Image(DIRPATH11th.'2510010001.jpg',6.0+$x,2.4+$Y , 1.30, 1.30, "JPG");
             }
             else
             {
             $pdf->Image(DIRPATH11th.'130659.jpg',6.0+$x,2.4+$Y , 1.30, 1.30, "JPG");
-            }
+            }*/
              $pdf->SetFont('Arial','B',23);
             $pdf->TextWithRotation($x-0.2,2.8+$Y, $data['FormNo'],90,0);
             //--------------------------- 1st line 

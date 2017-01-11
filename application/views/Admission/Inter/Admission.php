@@ -80,7 +80,7 @@
                                         <td style="border: none;padding: 4px;">Total Entries:</td>
                                         <td style="border: none;padding: 4px;">
                                             <b><?php
-                                                echo      $count[0]['Total_Entries'];
+                                                echo  $count[0]['Total_Entries'];
                                         ?></b>                                </td>
                                     </tr>
 

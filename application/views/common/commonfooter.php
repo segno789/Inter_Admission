@@ -6,7 +6,7 @@
 
 <!--Add the following script at the bottom of the web page (before </body></html>)-->
 <!--<script type="text/javascript" async="async" defer="defer" data-cfasync="false" src="https://mylivechat.com/chatinline.aspx?hccid=93646887"></script>-->
-
+               
 <script src="<?php echo base_url(); ?>assets/js_matric/jquery-1.8.3.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/bootstrap.js"></script>
 <script src="<?php echo base_url(); ?>assets/js_matric/jquery.validate.js"></script>
@@ -19,12 +19,8 @@
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js_matric/jquery-ui.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.fancybox.pack.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/alertify.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/js/jquery-ui.js"></script>
-
-
-
-
-
+<script src="<?php echo base_url(); ?>assets/js/jquery-ui.js"></script>    
+                                            
 
 </body>
 </html>
