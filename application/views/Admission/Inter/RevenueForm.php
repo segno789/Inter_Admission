@@ -44,7 +44,9 @@
     </tr>
     <tr>
         <td colspan="8"><div style="font-size:16px;font-weight:bold;text-align:center;">REVENUE FORM SHOWING DETAILS OF ADMISSION <br />
-                12th Class (SESSION 2016-2018)
+                12th Class (SESSION <?php
+                                         echo Year;
+                                     ?>)
             </div> 
         </td>
     </tr>

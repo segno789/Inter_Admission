@@ -544,6 +544,7 @@ class Admission_inter extends CI_Controller {
             'dist'=>@$_POST['pvtinfo_dist'],
             'teh'=>@$_POST['pvtinfo_teh'],
             'zone'=>@$_POST['pvtZone'],
+
             'oldrno'=>@$_POST['OldRno'],
             'oldsess'=>@$_POST['OldSess'],
             'oldyear'=>@$_POST['OldYear'],
@@ -729,9 +730,11 @@ class Admission_inter extends CI_Controller {
             'schm'=>1,
             'picpath'=>@$_POST['pic'],
             'oldFormNo'=>@$_POST['formNo'],
-            'pvtinfo_dist'=>@$_POST['pvtinfo_dist'],
-            'pvtinfo_teh'=>@$_POST['pvtinfo_teh'],
-            'pvtZone'=>@$_POST['pvtZone'],
+
+            'pvtinfo_dist'=>$userinfo['dist'],
+            'pvtinfo_teh'=>$userinfo['teh'],
+            'pvtZone'=>$userinfo['zone'],
+
         );                  
 
         //$this->frmvalidation('NewEnrolment_EditForm_inter',$data,0);
@@ -3092,7 +3095,7 @@ class Admission_inter extends CI_Controller {
                 $pdf->SetXY(1.2,0.35);    
             }
 
-            $pdf->Cell(0, 0.25, "ADMISSION FORM FOR INTERMEDIATE (PART-II & COMPOSITE) ".$session_constant." EXAMINATION, 2016", 0.25, "C");
+            $pdf->Cell(0, 0.25, "ADMISSION FORM FOR INTERMEDIATE (PART-II & COMPOSITE) ".$session_constant." EXAMINATION, ".Year."", 0.25, "C");
 
             //--------------- Proof Read    
             if($data['Batch_ID'] == 0 and $data['regPvt']==1)

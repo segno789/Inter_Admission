@@ -22,16 +22,16 @@
 
                                     </label> 
                                     <!--echo '/'.IMAGE_PATH.$Inst_Id.'/'.$data[0]['PicPath'];-->
-                                    
-                                     <?php
-                                    
+
+                                    <?php
+
                                     $image_path_selected = DIRPATH12TH.$data[0]['picpath']; 
 
                                     $type = pathinfo($image_path_selected, PATHINFO_EXTENSION);
                                     $image_path_selected = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($image_path_selected));
 
                                     ?>
-                                    
+
                                     <img id="previewImg" style="width:140px; height: 140px; margin-top: 1%;" class="span2" src="<?php  echo $image_path_selected?>" alt="Candidate Image">
                                     <input type="hidden" value="<?php  echo  $data['0']['picpath']?>" name="pic">
                                 </div>
@@ -278,79 +278,86 @@
                                     ?></textarea>
                                 </div>
                             </div>
-                            <hr>
-                            <div class="control-group">
-                                <h4 class="span3">Exam Proposed Center Information :</h4>
-                                <div class="controls controls-row">
-                                    <label class="control-label span2">
-                                    </label> 
+
+                            <?php if(Session ==  2) {?>
+
+                                <hr>
+                                <div class="control-group">
+                                    <h4 class="span3">Exam Proposed Center Information :</h4>
+                                    <div class="controls controls-row">
+                                        <label class="control-label span2">
+                                        </label> 
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="control-group">
+                                <div class="control-group">
+                                    <label class="control-label span1" >
+                                        District :
+                                    </label>
+                                    <div class="controls controls-row">
+                                        <select class='span3' id='pvtinfo_dist' name='pvtinfo_dist' required='required'>
+                                            <option value='0'>SELECT DISTRICT</option>
+                                            <option value="<?php echo   $data[0]['dist_cd']; ?>">
+                                                <?php
+                                                // DebugBreak();
+                                                $dist =  $data[0]['dist_cd'];
+                                                switch($dist)
+                                                {
+                                                    case 1:
+                                                        echo "GUJRANWALA";
+                                                        break;
+
+                                                    case 2:
+                                                        echo "GUJRAT";
+                                                        break;
+
+                                                    case 3:
+                                                        echo "HAFIZABAD";
+                                                        break;
+
+                                                    case 4:
+                                                        echo "MANDI BAHA-UD-DIN";
+                                                        break;
+
+                                                    case 5:
+                                                        echo "NAROWAL";
+                                                        break;
+
+                                                    case 6:
+                                                        echo "SIALKOT";
+                                                        break;
+
+                                                    default:
+                                                        echo "NO DISTRICT SELECTED";
+                                                        break;
+
+
+                                                }
+
+                                            ?>    </option>
+
+                                        </select>
+                                        <label class="control-label span2" >
+                                            Tehsil:
+                                        </label> 
+                                        <select class='span3' id='pvtinfo_teh' name='pvtinfo_teh' required='required'>
+                                            <option value='0'>SELECT TEHSIL</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="control-group">
                                 <label class="control-label span1" >
-                                    District :
+                                    Zone :
                                 </label>
+
                                 <div class="controls controls-row">
-                                    <select class='span3' id='pvtinfo_dist' name='pvtinfo_dist' required='required'>
-                                        <option value='0'>SELECT DISTRICT</option>
-                                        <option value="<?php echo   $data[0]['dist_cd']; ?>">
-                                            <?php
-                                            // DebugBreak();
-                                            $dist =  $data[0]['dist_cd'];
-                                            switch($dist)
-                                            {
-                                                case 1:
-                                                    echo "GUJRANWALA";
-                                                    break;
-
-                                                case 2:
-                                                    echo "GUJRAT";
-                                                    break;
-
-                                                case 3:
-                                                    echo "HAFIZABAD";
-                                                    break;
-
-                                                case 4:
-                                                    echo "MANDI BAHA-UD-DIN";
-                                                    break;
-
-                                                case 5:
-                                                    echo "NAROWAL";
-                                                    break;
-
-                                                case 6:
-                                                    echo "SIALKOT";
-                                                    break;
-
-                                                default:
-                                                    echo "NO DISTRICT SELECTED";
-                                                    break;
-
-
-                                            }
-
-                                        ?>    </option>
-
-                                    </select>
-                                    <label class="control-label span2" >
-                                        Tehsil:
-                                    </label> 
-                                    <select class='span3' id='pvtinfo_teh' name='pvtinfo_teh' required='required'>
-                                        <option value='0'>SELECT TEHSIL</option>
+                                    <select id="pvtZone"  class="span3" name="pvtZone">
+                                        <option value='0'>SELECT ZONE</option>
                                     </select>
                                 </div>
-                            </div>
-                            <div class="control-group">
-                            <label class="control-label span1" >
-                                Zone :
-                            </label>
 
-                            <div class="controls controls-row">
-                                <select id="pvtZone"  class="span3" name="pvtZone">
-                                    <option value='0'>SELECT ZONE</option>
-                                </select>
-                            </div>
+
+                                <?php }?>
+
                             <div id="instruction" style="display:none; width:700px" ></div>
 
                             <hr>
