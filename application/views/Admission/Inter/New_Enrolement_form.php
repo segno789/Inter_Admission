@@ -716,6 +716,10 @@
                                         </select> 
                                         <select id="sub7p2" class="span3 dropdown" name="sub7p2" selected="selected">
 
+                                         <option value="<?php echo '0';?>"><?php
+                                                echo array_search(0,$subarray);
+                                            ?></option>
+                                        
                                             <option value="<?php echo '95';?>"><?php
                                                 echo array_search(95,$subarray);
                                             ?></option>

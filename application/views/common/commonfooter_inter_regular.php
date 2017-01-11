@@ -1455,6 +1455,16 @@
             return status;  
         }
 
+        else if(grp_cd == 5){
+            if($("#sub7p2").val() == 0){
+                $('#ErrMsg').show(); 
+                $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+                alertify.error('Please Select Part II, Subject 7 '); 
+                $("#sub7p2").focus();
+                return status;  
+            }
+        }
+
         status = 1;
         return status;
     }
