@@ -25,13 +25,13 @@
                         <!--  <div class="shortcutHome">
                         <a href="GetInfo.php"><img src="<?php echo base_url();?>assets/img/enrolment.png"><br>Re-Admission</a>
                         </div>  -->    
-                         <div class="shortcutHome">
+                        <div class="shortcutHome">
                             <a href="<?php echo base_url(); ?>Admission_inter/FormPrinting"><img src="<?php echo base_url();?>assets/img/reports.png"><br>Reports </a>
                         </div>
                         <div class="shortcutHome">
                             <a href="<?php echo base_url(); ?>Admission_inter/EditForms"><img src="<?php echo base_url();?>assets/img/edit_form.png"><br>Edit Form</a>
                         </div>
-                       
+
                         <div class="shortcutHome">
 
 
@@ -43,9 +43,9 @@
                         <div class="shortcutHome">
                             <a href="<?php echo base_url(); ?>Admission_inter/batchlist"><img src="<?php echo base_url();?>assets/img/lists.png"><br>Batch List</a>
                         </div>
-                       <!-- <div class="shortcutHome">
-                         <a href="<?php echo base_url(); ?>/assets/pdfs/instructions.pdf"><img src="<?php echo base_url();?>assets/img/lists.png"><br>Instructions</a>
-                          </div>-->
+                        <!-- <div class="shortcutHome">
+                        <a href="<?php echo base_url(); ?>/assets/pdfs/instructions.pdf"><img src="<?php echo base_url();?>assets/img/lists.png"><br>Instructions</a>
+                        </div>-->
                         <div class="shortcutHome">
                             <a href="<?php echo base_url(); ?>/login/logout"><img src="<?php echo base_url();?>assets/img/logout_icon.png"><br>Logout</a>
                         </div>
@@ -108,22 +108,19 @@
                         </div>
 
                         <div class="clear"></div>
-                        <div style="  margin-top: 10px;margin-left: 20px;font-size: 16px;">
-                            <!--    ( <a href="#" class="guidlines">Read Instruction's Guide</a>  ) -->
-                            <br/>
-                            <a href="<?php echo base_url(); ?>Admission_Inter/forwarding_pdf/" target="_blank" class="guidlines blink_text" style="font-size: 18px;">Download Farwarding letter. </a>
-                           <!-- <a href="http://www.bisegrw.com/download/online/registration/Training_Manual_9th_Registration_Central_Software_Urdu.pdf" target="_blank" class="guidlines blink_text" style="font-size: 18px;">Download 9th Registration Training Manual. </a> <br/>
-                            <a href="<?php echo base_url(); ?>/assets/img/ForwardingLetter.pdf" target="_blank" class="guidlines blink_text" style="font-size: 18px;">Download Farwarding letter. </a> <br/>
-                            <a href="<?php echo base_url(); ?>/assets/img//Image_error.pdf" class="guidlines blink_text" target="_blank" style="font-size: 18px;">Instruction for Error occured due to Image uploading. </a>-->
-                            <br /><br />
-                            <strong>NOTE:</strong><br/>
-<!--                             <br/>1. Please upload photo of student carefully and with good quality as this picture will be used in his/her matriculation Roll Number Slip/Result Card/certificate.<br /> 4.Picture size must be less than  20 kb, and use only Passport size with small letter ".jpg" extention image.-->
+                        <div style="margin-left: 20px;font-size: 16px;">
+                            <a href="<?php echo base_url(); ?>Admission_Inter/forwarding_pdf/" target="_blank" class="guidlines blink_text" style="font-size: 18px;">Download Forwarding letter.</a>
+                            <br />
+                            <a href="<?php echo base_url(); ?>Admission_Inter/financeReoprt/" target="_blank" class="guidlines blink_text" style="font-size: 18px;">Download Finance Forwarding letter.</a>
+                            <br />  <br/>
+                            <strong>NOTE:</strong><br/><br/>
+                            
                             1. Fill correct Address of candiate as now governmet often demand addresses of regular candidates also from Board, for various purposes. i.e, Laptop Distribution, Soler Panel distribution, scholership etc.<br /> 
                             2. In case of any problem regarding Admission, please send us email on <span style="font-weight:bold; font-family:Verdana, Geneva, sans-serif; font-style:italic; color:#00F" > complaint4bisegrw@gmail.com </span>
                             with your <span style="font-weight:bolder; "> User Id, Password,  Contact No. </span>  and description of problem. <br />
                             3. Please <span style="font-weight:bold; font-family:Verdana, Geneva, sans-serif;  color:#F24F00" > Ensure Mobile Number of student/Gaurdian must be correct.</span> As now Board Send Roll Number Slips information, result information and any other information regarding student's exam through SMS, and in case of
                             any problem of student's data , Board also contact to student on his mobile number.  <br/>
-                            
+
                         </div>
                     </div>      
                     <div class="clear"></div>  
