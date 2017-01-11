@@ -995,10 +995,6 @@ class Admission_inter extends CI_Controller {
         $data['isupdate']=0;
         $logedIn = $this->Admission_inter_model->Insert_NewEnorlement($data);
 
-
-
-
-
         if( !isset($logedIn))
         {  
             $allinputdata = "";
@@ -3707,6 +3703,9 @@ class Admission_inter extends CI_Controller {
     }
     function frmvalidation($viewName,$allinputdata,$isupdate)
     {        
+
+        //DebugBreak();
+
         $_POST['address']  = str_replace("'", "", $_POST['address'] );
 
 
@@ -3823,37 +3822,36 @@ class Admission_inter extends CI_Controller {
             return;
 
         }
-        else if(@$_POST['pvtinfo_dist'] =='')
+        /* else if(@$_POST['pvtinfo_dist'] =='')
         {
-            $allinputdata['excep'] = 'Please Select Your District First!';        
-            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-            redirect('Admission_inter/'.$viewName);
-            return;
+        $allinputdata['excep'] = 'Please Select Your District First!';        
+        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+        redirect('Admission_inter/'.$viewName);
+        return;
 
         }
         else if(@$_POST['pvtinfo_teh'] =='')
         {
-            $allinputdata['excep'] = 'Please Select Your Tehsil First! ';
-            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-            redirect('Admission_inter/'.$viewName);
-            return;
+        $allinputdata['excep'] = 'Please Select Your Tehsil First! ';
+        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+        redirect('Admission_inter/'.$viewName);
+        return;
 
         }
         else if(@$_POST['pvtZone'] =='')
         {
-            $allinputdata['excep'] = 'Please Select Your Zone First! ';
-            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-            redirect('Admission_inter/'.$viewName);
-            return;
+        $allinputdata['excep'] = 'Please Select Your Zone First! ';
+        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+        redirect('Admission_inter/'.$viewName);
+        return;
 
-        }
+        }             */
         else if(@$_POST['std_group_hidden'] == 0)
         {
             $allinputdata['excep'] = 'Please Select Your Study Group';
             $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
             redirect('Admission_inter/'.$viewName);
             return;
-
         }
         else if((@$_POST['std_group_hidden'] == 1) && ((@$_POST['sub4p2']!=47) || (@$_POST['sub5p2']!=48)||(@$_POST['sub6p2']!=46)))
         {
