@@ -3183,15 +3183,15 @@ class Admission_inter extends CI_Controller {
             $pdf->SetFont('Arial','',7);    
             $pdf->Text($col5+.05,$ln[$countofrecords]+0.4,$data["sub5_abr"].','.$data["sub6_abr"].','.$data["sub7_abr"]);
 
-            if($user['gender']==1)
+           /* if($user['gender']==1)
             {
                 $pdf->Image(base_url().$data['picpath'],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG"); 
             }
             else
             {
-                $pdf->Image(base_url().noimage,$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG"); 
-            }
-
+                $pdf->Image(DIRPATH12TH.$data['PicPath'],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG"); 
+            }*/
+            $pdf->Image(DIRPATH12TH.$data['picpath'],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG"); 
             ++$SR;
 
             $pdf->SetFont('Arial','',8);

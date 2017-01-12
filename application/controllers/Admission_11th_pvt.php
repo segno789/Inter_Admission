@@ -32,7 +32,7 @@ class Admission_11th_pvt extends CI_Controller {
         redirect('login');
         }  */
     }
-     public function index()
+    public function index()
     {
 
         $data = array(
@@ -58,18 +58,18 @@ class Admission_11th_pvt extends CI_Controller {
 
         $this->load->view('common/homepagefooter.php');
     }
-     public function Students_matricInfo(){
-       // DebugBreak();   //Students_matricInfo matric_error
+    public function Students_matricInfo(){
+        // DebugBreak();   //Students_matricInfo matric_error
         $this->load->view('common/commonheader11th.php');
-        
+
         $this->load->view('Admission/11th/Students_MatricInfo.php');
         $this->load->view('common/commonfooter.php');
 
     }
-    
+
     public function NewEnrolmentPVT()
     {
-        
+
         $mrollno = $_POST["oldRno"];
 
         $board   =  $_POST["oldBrd_cd"];
@@ -79,7 +79,7 @@ class Admission_11th_pvt extends CI_Controller {
         $session =$_POST["oldSess"];
         $this->load->model('Admission_11th_Pvt_model');
         $data = array('mrollno'=>"$mrollno",'board'=>$board,'year'=>$year,'session'=>$session);
-         if($board == 1)
+        if($board == 1)
         {
             if(!ctype_digit($mrollno))
             {
@@ -102,14 +102,14 @@ class Admission_11th_pvt extends CI_Controller {
             $RegStdData['data'][0]['sub1']=1;
         }
         $this->load->view('common/commonheader11th.php');
-        
+
         $this->load->view('Admission/11th/AdmissionForm.php',$RegStdData);
         $this->load->view('common/footer11threg.php');
     }
-    
-       public function NewEnrolmentPVT_Lang()
+
+    public function NewEnrolmentPVT_Lang()
     {
-                         
+
         $this->load->view('common/commonheader11th.php');
         $this->load->view('Admission/11th/AdmissionForm_lang.php');
         $this->load->view('common/footer11threg_lang.php');
@@ -231,7 +231,7 @@ class Admission_11th_pvt extends CI_Controller {
         $this->output->set_header("Pragma: no-cache");
     }
 
-   
+
     public  function GetDistName($id) 
     {
         $retVal = "";
@@ -244,13 +244,13 @@ class Admission_11th_pvt extends CI_Controller {
                             return $retVal;             
     }
 
-     public function NewEnrolment_insert()
+    public function NewEnrolment_insert()
     {
         $this->load->model('Admission_11th_Pvt_model');
         $this->load->library('session');
         $error = array();
-       
-        
+
+
         $sub1ap1 = 0;
         $sub2ap1 = 0;
         $sub3ap1 = 0;
@@ -283,7 +283,7 @@ class Admission_11th_pvt extends CI_Controller {
         {
             $sub6ap1 = 1;    
         }
-        
+
         if((@$_POST['std_group'] == 5))
         {
             $sub7 = @$_POST['sub7'];
@@ -294,8 +294,8 @@ class Admission_11th_pvt extends CI_Controller {
             $sub7 = 0;   
             $sub7ap1 = 0; 
         }
-        
-       // DebugBreak();
+
+        // DebugBreak();
         if(@$_POST['OldBrd'] == 1)
         {
             $nationality_hidden = @$_POST['nationality_hidden'];
@@ -304,7 +304,7 @@ class Admission_11th_pvt extends CI_Controller {
         else
         {
             $nationality_hidden =@$_POST['nationality'];
-             $gender = $this->input->post('ogender');
+            $gender = $this->input->post('ogender');
         }
         //nationality_hidden
         $addre =  str_replace("'", "", $this->input->post('address'));
@@ -358,38 +358,38 @@ class Admission_11th_pvt extends CI_Controller {
             'picname'=>$this->input->post('picname'),
             'IsReAdm'=>0  ,
         );
-           
+
         $logedIn = $this->Admission_11th_Pvt_model->Insert_NewEnorlement($data);//, $fname);//$_POST['username'],$_POST['password']);
         //$error = $logedIn[0]['error'];
 
-        
-      $info =  '';
-      foreach($logedIn[0] as $key=>$val)
-      {
-          if($key == 'formno')
-          {
-             $oldpath =  GET_PRIVATE_IMAGE_PATH.'\11th\\'.$logedIn[0]['tempath'];
-             $newpath =  GET_PRIVATE_IMAGE_PATH.'\11th\\'.$val.'.jpg';
-             $err = rename($oldpath,$newpath);
-              $info['error'] = 1;
-              $info['formno'] = $val;
-          }
-          else if($key == 'error')
-          {
-              $info['error'] = $val;
-              $info['formno'] = '';
-          }
-      }
-      
-      echo  json_encode($info);
+
+        $info =  '';
+        foreach($logedIn[0] as $key=>$val)
+        {
+            if($key == 'formno')
+            {
+                $oldpath =  GET_PRIVATE_IMAGE_PATH.'\11th\\'.$logedIn[0]['tempath'];
+                $newpath =  GET_PRIVATE_IMAGE_PATH.'\11th\\'.$val.'.jpg';
+                $err = rename($oldpath,$newpath);
+                $info['error'] = 1;
+                $info['formno'] = $val;
+            }
+            else if($key == 'error')
+            {
+                $info['error'] = $val;
+                $info['formno'] = '';
+            }
+        }
+
+        echo  json_encode($info);
     }
-      public function NewEnrolment_insert_lang()
+    public function NewEnrolment_insert_lang()
     {
         $this->load->model('Admission_11th_Pvt_model');
         $this->load->library('session');
         $error = array();
-       
-        
+
+
         $sub1ap1 = 0;
         $sub2ap1 = 0;
         $sub3ap1 = 0;
@@ -422,30 +422,30 @@ class Admission_11th_pvt extends CI_Controller {
         {
             $sub6ap1 = 1;    
         }
-        
-       
-            $sub7 = 0;   
-            $sub7ap1 = 0; 
-            $nationality_hidden =@$_POST['nationality'];
-            $gender = $this->input->post('ogender');
-          //  DebugBreak();
+
+
+        $sub7 = 0;   
+        $sub7ap1 = 0; 
+        $nationality_hidden =@$_POST['nationality'];
+        $gender = $this->input->post('ogender');
+        //  DebugBreak();
         if(@$_POST['isAlreadyApplied']==true)
         {
-           $oldrno = @$_POST['old_rno_lang'];
-           $oldyear = @$_POST['old_year_lang'];
-           $oldsess = @$_POST['old_sess_lang'];
-           $oldbrd = 1;
-           $isAlreadyapplied = 1;
-           
-           
+            $oldrno = @$_POST['old_rno_lang'];
+            $oldyear = @$_POST['old_year_lang'];
+            $oldsess = @$_POST['old_sess_lang'];
+            $oldbrd = 1;
+            $isAlreadyapplied = 1;
+
+
         }
         else
         {
-           $oldrno = false;
-           $oldyear = false;
-           $oldsess = false;
-           $oldbrd = 0;
-           $isAlreadyapplied = 0;
+            $oldrno = false;
+            $oldyear = false;
+            $oldsess = false;
+            $oldbrd = 0;
+            $isAlreadyapplied = 0;
         }
         //nationality_hidden
         $addre =  str_replace("'", "", $this->input->post('address'));
@@ -496,31 +496,31 @@ class Admission_11th_pvt extends CI_Controller {
             'IsReAdm'=>$isAlreadyapplied,
             'lang_cat' =>$this->input->post('lang_cat'),
             'lang_specialSub' =>$this->input->post('lang_specialSub'),
-            
+
         );
-           
+
         $logedIn = $this->Admission_11th_Pvt_model->Insert_NewEnorlement_lang($data);//, $fname);//$_POST['username'],$_POST['password']);
         //$error = $logedIn[0]['error'];
 
-      $info =  '';
-      foreach($logedIn[0] as $key=>$val)
-      {
-          if($key == 'formno')
-          {
-             $oldpath =  GET_PRIVATE_IMAGE_PATH.'\11th\\'.$logedIn[0]['tempath'];
-             $newpath =  GET_PRIVATE_IMAGE_PATH.'\11th\\'.$val.'.jpg';
-             $err = rename($oldpath,$newpath);
-              $info['error'] = 1;
-              $info['formno'] = $val;
-          }
-          else if($key == 'error')
-          {
-              $info['error'] = $val;
-              $info['formno'] = '';
-          }
-      }
-      
-      echo  json_encode($info);
+        $info =  '';
+        foreach($logedIn[0] as $key=>$val)
+        {
+            if($key == 'formno')
+            {
+                $oldpath =  GET_PRIVATE_IMAGE_PATH.'\11th\\'.$logedIn[0]['tempath'];
+                $newpath =  GET_PRIVATE_IMAGE_PATH.'\11th\\'.$val.'.jpg';
+                $err = rename($oldpath,$newpath);
+                $info['error'] = 1;
+                $info['formno'] = $val;
+            }
+            else if($key == 'error')
+            {
+                $info['error'] = $val;
+                $info['formno'] = '';
+            }
+        }
+
+        echo  json_encode($info);
     }
     public  function GetSpeciality($spclty)
     {
@@ -535,9 +535,38 @@ class Admission_11th_pvt extends CI_Controller {
 
 
     }
+      function GetDueDate()
+    {
+      //  DebugBreak();
+
+        $dueDate='';
+        $single_date= SingleDateFee;  $double_date= DoubleDateFee;  $tripple_date= TripleDateFee;
+        //$today = date("d-M-Y");
+
+        $today = date("d-m-Y");
+
+        if(strtotime($today) <= strtotime($single_date)) 
+        {
+            $dueDate = $single_date;
+        }
+        elseif(strtotime($today) > strtotime($single_date) && strtotime($today) <= strtotime($double_date) )
+        {
+            $dueDate = $double_date;
+        }
+        elseif(strtotime($today) > strtotime($double_date) && strtotime($today) <= strtotime($tripple_date) )
+        {
+            $dueDate = $tripple_date;
+        }
+        elseif(strtotime($today) > strtotime($tripple_date) )
+        {
+            $dueDate = $today;
+        }
+        return $dueDate;
+
+    }
     public function checkFormNo_then_download()
     {
-//         DebugBreak();
+        //         DebugBreak();
         $formno_seg = $this->uri->segment(3);
         // $dob_seg = $this->uri->segment(4);
         if($formno_seg !=0 ){ //&& $dob_seg != ''
@@ -560,155 +589,30 @@ class Admission_11th_pvt extends CI_Controller {
         }
 
         // --------------------------------------- Fee Calculation Section ------------------------------------------------
-      //  DebugBreak();
-        $User_info_data = array('Inst_Id'=>999999, 'date' => date('Y-m-d'));
-        $user_info  =  $this->Admission_11th_Pvt_model->getuser_info($User_info_data); 
-        $isfine = 0;
-        $Total_fine = 0;
-        $processFee = 295;
-        // Declare Science & Arts Fee's According to Fee Table .  Note: this will assign to Triple date fee. After triple date it will not asign fees.
-        if(!empty($user_info['rule_fee'])) 
-        {    
-            $endDate =date('Y-m-d', strtotime($user_info['rule_fee'][0]['End_Date'])); 
-            $singleDate = $endDate;
-            if($user_info['rule_fee'][0]['isPrSub']==1)
-            {
-                $SciAdmFee = $user_info['rule_fee'][0]['PVT_Amount'];
-                $SciProcFee = $processFee;//$user_info['rule_fee'][0]['Processing_Fee'];
-                // For ReAdmission Fee
-                $SciAdmFee_ReAdm = $user_info['rule_fee'][0]['PVT_Amount'];
-                $SciProcFee_ReAdm = $processFee;//$user_info['rule_fee'][0]['Processing_Fee'];
-
-            } else if( $user_info['rule_fee'][1]['isPrSub']== 1 )
-            {
-                $SciAdmFee = $user_info['rule_fee'][1]['PVT_Amount'];
-                $SciProcFee = $processFee;//$user_info['rule_fee'][1]['Processing_Fee'];
-                // For ReAdmission Fee
-                $SciAdmFee_ReAdm = $user_info['rule_fee'][1]['PVT_Amount'];
-                $SciProcFee_ReAdm = $processFee;//$user_info['rule_fee'][1]['Processing_Fee'];
-
-            }
-            if($user_info['rule_fee'][0]['isPrSub']==0)
-            {
-                $ArtsAdmFee = $user_info['rule_fee'][0]['PVT_Amount'];
-                $ArtsProcFee =$processFee;//$user_info['rule_fee'][0]['Processing_Fee'];
-                // For ReAdmission Fee
-                $ArtsAdmFee_ReAdm = $user_info['rule_fee'][0]['PVT_Amount'];
-                $ArtsProcFee_ReAdm = $processFee;//$user_info['rule_fee'][0]['Processing_Fee'];
-            }
-            else if($user_info['rule_fee'][1]['isPrSub']== 0 )
-            {
-                $ArtsAdmFee = $user_info['rule_fee'][1]['PVT_Amount'];
-                $ArtsProcFee = $processFee;//$user_info['rule_fee'][1]['Processing_Fee'];
-                // For ReAdmission Fee
-                $ArtsAdmFee_ReAdm = $user_info['rule_fee'][1]['PVT_Amount'];
-                $ArtsProcFee_ReAdm = $processFee;//$user_info['rule_fee'][1]['Processing_Fee'];
-            }
-        }
-        else
-        {
-            
-            $date = new DateTime(SingleDateFee);
-            $singleDate =  $date->format('Y-m-d');                                                                     
-            $User_info_data = array('Inst_Id'=>999999, 'date' => $singleDate);
-            $user_info  =  $this->Admission_11th_Pvt_model->getuser_info($User_info_data);
-            if($user_info['rule_fee'][0]['isPrSub']==1)
-            {
-                $SciAdmFee = $user_info['rule_fee'][0]['PVT_Amount'];
-                $SciProcFee =$processFee;// $user_info['rule_fee'][0]['Processing_Fee'];
-                // For ReAdmission Fee
-                $SciAdmFee_ReAdm = $user_info['rule_fee'][0]['PVT_Amount'];
-                $SciProcFee_ReAdm =$processFee;// $user_info['rule_fee'][0]['Processing_Fee'];
-
-            } 
-            else if( $user_info['rule_fee'][1]['isPrSub']== 1 )
-            {
-                $SciAdmFee = $user_info['rule_fee'][1]['PVT_Amount'];
-                $SciProcFee = $processFee;//$user_info['rule_fee'][1]['Processing_Fee'];
-                // For ReAdmission Fee
-                $SciAdmFee_ReAdm = $user_info['rule_fee'][1]['PVT_Amount'];
-                $SciProcFee_ReAdm =$processFee;// $user_info['rule_fee'][1]['Processing_Fee'];
-
-            }
-            if($user_info['rule_fee'][0]['isPrSub']==0)
-            {
-                $ArtsAdmFee = $user_info['rule_fee'][0]['PVT_Amount'];
-                $ArtsProcFee =$processFee;//$user_info['rule_fee'][0]['Processing_Fee'];
-                // For ReAdmission Fee
-                $ArtsAdmFee_ReAdm = $user_info['rule_fee'][0]['PVT_Amount'];
-                $ArtsProcFee_ReAdm = $processFee;//$user_info['rule_fee'][0]['Processing_Fee'];
-            }
-            else if($user_info['rule_fee'][1]['isPrSub']== 0 )
-            {
-                $ArtsAdmFee = $user_info['rule_fee'][1]['PVT_Amount'];
-                $ArtsProcFee = $processFee;//$user_info['rule_fee'][1]['Processing_Fee'];
-                // For ReAdmission Fee
-                $ArtsAdmFee_ReAdm = $user_info['rule_fee'][1]['PVT_Amount'];
-                $ArtsProcFee_ReAdm =$processFee;// $user_info['rule_fee'][1]['Processing_Fee'];
-            }
-
-            $TripleDate = date('Y-m-d',strtotime(TripleDateFee)); 
-            $now = date('Y-m-d'); // or your date as well
-            $days = (strtotime($TripleDate) - strtotime($now)) / (60 * 60 * 24);
-            $fine = 500;
-            $days = abs($days);
-
-            $endDate = date('d-m-Y');
-            $SciAdmFee =  ($SciAdmFee*3); 
-            $ArtsAdmFee = ($ArtsAdmFee*3); 
-            $Total_fine = $days*$fine;
-            // For ReAdmission 
-            $SciAdmFee_ReAdm =  ($SciAdmFee_ReAdm*3); 
-            $ArtsAdmFee_ReAdm = ($ArtsAdmFee_ReAdm*3);
+        //  DebugBreak();
 
 
-
-        }  // DebugBreak();
         $data = $data[0];
-       
-            if($data['IsReAdm']==1)
-            {
-                $AllStdFee = array('formNo'=> $data['FormNo'],'regFee'=>0,'AdmFee'=>$ArtsAdmFee_ReAdm,'AdmFine'=>$Total_fine,'AdmProcessFee'=>$ArtsProcFee,'AdmTotalFee'=>$ArtsAdmFee_ReAdm+$ArtsProcFee+$Total_fine);
-            }
-            else if($data['Spec']>0 && (date('Y-m-d') <= $singleDate) )
-            {
-                $regfee =  1000;
-                if($data['Spec'] ==  2)
-                {
-                    $regfee = 0; 
-                }
-                $AllStdFee = array('formNo'=>$data['FormNo'],'regFee'=>$regfee,'AdmFee'=>0,'AdmFine'=>$Total_fine,'AdmProcessFee'=>$ArtsProcFee,'AdmTotalFee'=>$ArtsProcFee+$Total_fine);
-            }
-            else
-            {
-            
-                if($data['grp_cd']==9 && $data['IsReAdm']==0)
-                {
-                $AllStdFee = array('formNo'=>$data['FormNo'],'regFee'=>1000,'AdmFee'=>$ArtsAdmFee,'AdmFine'=>$Total_fine,'CertFee'=>550,'AdmProcessFee'=>$ArtsProcFee,'AdmTotalFee'=>$ArtsAdmFee+$ArtsProcFee+$Total_fine+1000+550);
-                }
-                else
-                {
-                $AllStdFee = array('formNo'=>$data['FormNo'],'regFee'=>1000,'AdmFee'=>$ArtsAdmFee,'AdmFine'=>$Total_fine,'AdmProcessFee'=>$ArtsProcFee,'AdmTotalFee'=>$ArtsAdmFee+$ArtsProcFee+$Total_fine+1000);
-                }
-                
-            }
-        
+
+
 
         // --------------------------------------- Fee Calculation Section END------------------------------------------------
-        // DebugBreak();
+         //DebugBreak();
 
-        $mydata_final = array($this->Admission_11th_Pvt_model->Update_AdmissionFeePvt($AllStdFee));
-        $mydata_final = $mydata_final[0][0];
+        $mydata_final = $this->feecalculate($data);
+        $mydata_final = $mydata_final[0];
 
         $this->load->library('NumbertoWord');
         $this->load->library('PDF_Rotate');
         $pdf = new PDF_Rotate('P','in',"A4");
 
-        $fee =      "1200";      
+        $fee =      "1500";      
         $AfterDueDatefee = "0";
-        $AdmFee=         "650";  
+        $AdmFee=         "800";  
 
-        $endDate =date('d-m-Y', strtotime($singleDate)); 
+        
+        
+        $endDate =date('d-m-Y', strtotime($this->GetDueDate())); 
 
         $lmargin =1.5;
         $rmargin =7.3;
@@ -734,7 +638,7 @@ class Admission_11th_pvt extends CI_Controller {
         //$pdf ->SetMargins($lmargin,1.5,5.5);
 
 
-        
+
 
 
         if(@$data["Spec"] >0)
@@ -764,50 +668,50 @@ class Admission_11th_pvt extends CI_Controller {
         else{
             $ses = "SUPPLYMENTARY";
         }
-        
+
         if($data["grp_cd"] == 9)
         {
-        $heading = 'BOARD OF INTERMEDIATE AND SECONDARY EDUCATION, GUJRANWALA ( LANGUAGES EXAMINATION, '.Year.')';
+            $heading = 'BOARD OF INTERMEDIATE AND SECONDARY EDUCATION, GUJRANWALA ( LANGUAGES EXAMINATION, '.Year.')';
         }
         else
         {
-        $heading = 'BOARD OF INTERMEDIATE AND SECONDARY EDUCATION, GUJRANWALA (INTERMEDIATE PART-I '.$ses.' EXAMINATION, '.Year.')';
+            $heading = 'BOARD OF INTERMEDIATE AND SECONDARY EDUCATION, GUJRANWALA (INTERMEDIATE PART-I '.$ses.' EXAMINATION, '.Year.')';
         }
-        
+
         $pdf->SetFont('Arial','U',12);
         $pdf->SetXY(1.2,0.2);
         $pdf->Cell(0, 0.2, "BOARD OF INTERMEDIATE AND SECONDARY EDUCATION, GUJRANWALA", 0.25, "C");
         $pdf->Image("assets/img/logo2.png",.60,0.3, 0.65,0.65, "PNG");
-       // $pdf->Image("assets/img/ExamCenter.jpg",4.5,2.90, 2.78,0.15, "jpeg");  
+        // $pdf->Image("assets/img/ExamCenter.jpg",4.5,2.90, 2.78,0.15, "jpeg");  
         if($data["grp_cd"] != 9)
         {      
-        $pdf->Image("assets/img/11th.png",7.6,0.19,  0.40,0.40, "PNG");
-        $pdf->Image("assets/img/11th.png",7.7,7.40,  0.30,0.30, "PNG");      
-        $pdf->Image("assets/img/11th.png",7.7,8.98,  0.30,0.30, "PNG");   
-        $pdf->Image("assets/img/11th.png",7.7,10.40,  0.30,0.30, "PNG");   
+            $pdf->Image("assets/img/11th.png",7.6,0.19,  0.40,0.40, "PNG");
+            $pdf->Image("assets/img/11th.png",7.7,7.40,  0.30,0.30, "PNG");      
+            $pdf->Image("assets/img/11th.png",7.7,8.98,  0.30,0.30, "PNG");   
+            $pdf->Image("assets/img/11th.png",7.7,10.40,  0.30,0.30, "PNG");   
         }
         else
         {
-        $pdf->Image("assets/img/aloom.JPG",7.55,0.2,  0.50,0.40, "JPG");
-        $pdf->Image("assets/img/aloom.JPG",7.7,7.28,  0.50,0.40, "JPG");      
-        $pdf->Image("assets/img/aloom.JPG",7.7,8.89,  0.50,0.40, "JPG");   
-        $pdf->Image("assets/img/aloom.JPG",7.7,10.28,  0.50,0.40, "JPG");
+            $pdf->Image("assets/img/aloom.JPG",7.55,0.2,  0.50,0.40, "JPG");
+            $pdf->Image("assets/img/aloom.JPG",7.7,7.28,  0.50,0.40, "JPG");      
+            $pdf->Image("assets/img/aloom.JPG",7.7,8.89,  0.50,0.40, "JPG");   
+            $pdf->Image("assets/img/aloom.JPG",7.7,10.28,  0.50,0.40, "JPG");
         }
         //$this->Image("logo.jpg",0.05,0.3, 0.75,0.75, "JPG", "http://www.biseGujranwala.edu.pk");
-        
+
         $pdf->SetFont('Arial','',9);
-        
+
         if($data["grp_cd"] == 9)
         {
-        $pdf->SetXY(2.0,0.4);
-        $pdf->Cell(0, 0.2, "ADMISSION & REVENUE FORM FOR LANGUAGES EXAMINATION , ".Year, 0.25, "C");
+            $pdf->SetXY(2.0,0.4);
+            $pdf->Cell(0, 0.2, "ADMISSION & REVENUE FORM FOR LANGUAGES EXAMINATION , ".Year, 0.25, "C");
         }
         else
         {
-        $pdf->SetXY(1.4,0.4);
-        $pdf->Cell(0, 0.2, "ADMISSION & REVENUE FORM FOR THE INTERMEDIATE (PART I) ".$ses." EXAMINATION , ".Year, 0.25, "C");
+            $pdf->SetXY(1.4,0.4);
+            $pdf->Cell(0, 0.2, "ADMISSION & REVENUE FORM FOR THE INTERMEDIATE (PART I) ".$ses." EXAMINATION , ".Year, 0.25, "C");
         }
-        
+
         //--------------- Proof Read    
         /*if($data['batch_id'] == 0 and $data['RegPvt']==1)
         {
@@ -837,19 +741,6 @@ class Admission_11th_pvt extends CI_Controller {
         $pdf->Cell(0.0,0.1, "(For office use only)",0,'L');
 
 
-        //------ Picture Box on Centre      
-        /*$pdf->SetXY(6.5, 1.5+$Y );
-        $pdf->Cell(0.75,1.0,'',1,0,'C',0);               */
-        //$pdf->Image('uploads/'. $data["picPath"],6.5, 1.15+$Y, 0.95, 1.0, "JPG");
-        /* $size = '';
-        if($size==0){ 
-        $pdf->Image( 'images/no_image.png',6.5, 1.15+$Y, 0.95, 1.0, "PNG");
-        }
-        else
-        { */
-        // $pdf->Image( '../uploads/'. @$data["PicPath"],6.5, 1.15+$Y, 0.95, 1.0, "JPG");
-        /*       }
-        $pdf->SetFont('Arial','',8);*/
 
         $pdf->Image(GET_PRIVATE_IMAGE_PATH.'11th\\'. @$data["PicPath"],6.5, 1.10+$Y, 0.95, 1.0, "JPG");
         $pdf->SetFont('Arial','',10);
@@ -860,12 +751,7 @@ class Admission_11th_pvt extends CI_Controller {
         //------------- Personal Infor Box
         //====================================================================================================================
 
-        /*$x = 0.55;
-        $pdf->SetXY(0.2,1.28+$Y);
-        $pdf->SetFillColor(240,240,240);
-        $pdf->SetFont('Arial','B',8);
-        $pdf->Cell(8,0.2,'PERSONAL INFORMATION',1,0,'L',1);
-        */
+
         $Y = -0.6;
         $FontSize=8;
         $HeightLine1= 1.75;
@@ -894,27 +780,27 @@ class Admission_11th_pvt extends CI_Controller {
             case '9':
                 $grp_name = 'ALOOM-E-SHARKIA';
                 break; 
-                 case '7':
+            case '7':
                 $grp_name = 'HOME ECONOMICS';
                 break; 
-                
+
             default:
                 $grp_name = "NO GROUP SELECTED.";
         }
 
         $pdf->SetXY(3.33,1.60+$Y);
         $pdf->SetFont('Arial','b',12);
-         if($data["grp_cd"] == 9)
+        if($data["grp_cd"] == 9)
         {
-        $pdf->Cell( 0.0,0.0,"(ALOOM-E-SHARQIA)",0,'C');
-         $pdf->Image("assets/img/aloom.JPG",3.73,1.07,  1.0,0.350, "JPG");
+            $pdf->Cell( 0.0,0.0,"(ALOOM-E-SHARQIA)",0,'C');
+            $pdf->Image("assets/img/aloom.JPG",3.73,1.07,  1.0,0.350, "JPG");
         }
         else
         {
-        $pdf->Cell( 0.0,0.0,"(PRIVATE CANDIDATE)",0,'C');
+            $pdf->Cell( 0.0,0.0,"(PRIVATE CANDIDATE)",0,'C');
         }
-        
-        
+
+
 
         $myx = 0.7;
 
@@ -923,10 +809,10 @@ class Admission_11th_pvt extends CI_Controller {
         $pdf->SetFont('Arial','B',12);
         $pdf->Cell( 0,0,"Form No: ".$data['FormNo'],0,'L');
 
-      
 
-       $col2 =  1.6;
-        
+
+        $col2 =  1.6;
+
         $pdf->SetXY($myx,1.75+$Y);
         $pdf->SetFont('Arial','',$FontSize);
         $pdf->Cell( 0.1,0,"Name:",0,'L');
@@ -988,7 +874,7 @@ class Admission_11th_pvt extends CI_Controller {
 
         //debugbreak();
         //--------------------------- Dob line 
-       /* $pdf->SetXY($myx,2.05+$Y);
+        /* $pdf->SetXY($myx,2.05+$Y);
         $pdf->SetFont('Arial','',$FontSize);
         $pdf->Cell( 0.5,0.5,"Date Of Birth:",0,'L');
         $pdf->SetFont('Arial','B',$FontSize);
@@ -1009,26 +895,26 @@ class Admission_11th_pvt extends CI_Controller {
         $pdf->SetXY(4.5+$x,2.36+$Y);
         $pdf->Cell(0,0.1,@$data["MobNo"],0,'L');
 
-       // DebugBreak();
+        // DebugBreak();
         $data["sessOfPass"]==1? $sess = "ANNUAL":$sess = "SUPPLY";
         $data['oldSess_reg'] ==1? $sess_lang = "ANNUAL":$sess_lang = "SUPPLY";
         $ssc_info  = $data["matRno"].' ('.$sess.', '.$data['yearOfPass'].', '.$data['Brd_Abbr'].' )';
         if($data['IsReAdm']==1 && $data['IsLangexam']==1)
         {
-        $lang_info = $data['oldRno_reg'].' ('.$sess_lang.', '.$data['oldYear_reg'].', BISE, Gujranwala )';
-        $ssc_info  = "";
+            $lang_info = $data['oldRno_reg'].' ('.$sess_lang.', '.$data['oldYear_reg'].', BISE, Gujranwala )';
+            $ssc_info  = "";
         }
         else
         {
-        $lang_info = "";
+            $lang_info = "";
         }
-        
+
         if($data['IsLangexam']==1)
         {
-        $ssc_info  = "";
+            $ssc_info  = "";
         }
-        
-        
+
+
         $pdf->SetXY($myx,2.53+$Y);
         $pdf->SetFont('Arial','',8);
         $pdf->Cell( 0,0.1,"SSC Exam Info:",0,'L');
@@ -1036,21 +922,21 @@ class Admission_11th_pvt extends CI_Controller {
         $pdf->SetXY($col2,2.53+$Y);
         $pdf->Cell(0,0.1,$ssc_info,0,'L');
 
-        
+
         $pdf->SetXY($myx,2.82+$Y);
         $pdf->SetFont('Arial','',8);
         $pdf->Cell( 0.0,0.1,"Address:",0,'L');
         $pdf->SetFont('Arial','',7);
         $pdf->SetXY($col2,2.82+$Y);
         $pdf->Cell(0.0,0.1,$data["addr"],0,'L');
-      
+
         $pdf->SetXY($myx,2.98+$Y);
         $pdf->SetFont('Arial','',8);
         $pdf->Cell( 0,0.1,"Perv. Exam Info:",0,'L');
         $pdf->SetFont('Arial','B',8);
         $pdf->SetXY($col2,2.98+$Y);
         $pdf->Cell(0,0.1,$lang_info,0,'R');
-           
+
         $pdf->SetXY(0.7,3.12+$Y);
         $pdf->SetFont('Arial','',8);
         $pdf->Cell(0,0.1,"Proposed Exam Area:",0,'L');
@@ -1060,85 +946,82 @@ class Admission_11th_pvt extends CI_Controller {
 
         if($data["grp_cd"] == 9)
         {
-         if($data['Lang_cat']==5)
-        {
-        $catname_lang = "ADEEB  ARABIC";
+            if($data['Lang_cat']==5)
+            {
+                $catname_lang = "ADEEB  ARABIC";
+            }
+            else if($data['Lang_cat']==6)
+            {
+                $catname_lang = "ADEEB  URDU";
+            }
+
+            else if($data['Lang_cat']==1)
+            {
+                $catname_lang = "FAZAL  ARABIC";
+            }
+            else if($data['Lang_cat']==2)
+            {
+                $catname_lang = "FAZAL  URDU";
+            }
+            else if($data['Lang_cat']==3)
+            {
+                $catname_lang = "FAZAL PUNJABI";
+            }
+
         }
-        else if($data['Lang_cat']==6)
-        {
-        $catname_lang = "ADEEB  URDU";
-        }
-        
-         else if($data['Lang_cat']==1)
-        {
-        $catname_lang = "FAZAL  ARABIC";
-        }
-         else if($data['Lang_cat']==2)
-        {
-        $catname_lang = "FAZAL  URDU";
-        }
-         else if($data['Lang_cat']==3)
-        {
-        $catname_lang = "FAZAL PUNJABI";
-        }
-        
-        }
-        
-        
-        
-        
-        
+
+
+
+
+
         // Adeeb urdu
         if($data["grp_cd"] == 9 && $data['Lang_cat']==5 )
         {
-        $pdf->Image("assets/img/examaloomsharkia.JPG",3.83,2.75,  2.0,0.40, "JPG");
-          $pdf->Image("assets/img/adeeburdu.JPG",2.73,2.75,  1.0,0.40, "JPG");
+            $pdf->Image("assets/img/examaloomsharkia.JPG",3.83,2.75,  2.0,0.40, "JPG");
+            $pdf->Image("assets/img/adeeburdu.JPG",2.73,2.75,  1.0,0.40, "JPG");
         }
         // Adeeb Arabic
         else if ($data["grp_cd"] == 9 && $data['Lang_cat']==6 )
         {
-        $pdf->Image("assets/img/examaloomsharkia.JPG",3.83,2.75,  2.0,0.40, "JPG");
-          $pdf->Image("assets/img/adeebarbic.JPG",2.73,2.75,  1.0,0.40, "JPG");
+            $pdf->Image("assets/img/examaloomsharkia.JPG",3.83,2.75,  2.0,0.40, "JPG");
+            $pdf->Image("assets/img/adeebarbic.JPG",2.73,2.75,  1.0,0.40, "JPG");
         }
         // Fazal Arabic
         else if ($data["grp_cd"] == 9 && $data['Lang_cat']==1 )
         {
-        $pdf->Image("assets/img/examaloomsharkia.JPG",3.83,2.75,  2.0,0.40, "JPG");
-          $pdf->Image("assets/img/fazilarabic.JPG",2.73,2.75,  1.0,0.40, "JPG");
+            $pdf->Image("assets/img/examaloomsharkia.JPG",3.83,2.75,  2.0,0.40, "JPG");
+            $pdf->Image("assets/img/fazilarabic.JPG",2.73,2.75,  1.0,0.40, "JPG");
         }
         // Fazal Urdu
         else if($data["grp_cd"] == 9 && $data['Lang_cat']==2 )
         {
-        $pdf->Image("assets/img/examaloomsharkia.JPG",3.83,2.75,  2.0,0.40, "JPG");
-          $pdf->Image("assets/img/fazilurdu.JPG",2.73,2.75,  1.0,0.40, "JPG");
+            $pdf->Image("assets/img/examaloomsharkia.JPG",3.83,2.75,  2.0,0.40, "JPG");
+            $pdf->Image("assets/img/fazilurdu.JPG",2.73,2.75,  1.0,0.40, "JPG");
         }
         // Fazal Punjabi
         else if($data["grp_cd"] == 9 && $data['Lang_cat']==3 )
         {
-        $pdf->Image("assets/img/examaloomsharkia.JPG",3.83,2.75,  2.0,0.40, "JPG");
-          $pdf->Image("assets/img/fazilpunjabi.JPG",2.73,2.75,  1.0,0.40, "JPG");
+            $pdf->Image("assets/img/examaloomsharkia.JPG",3.83,2.75,  2.0,0.40, "JPG");
+            $pdf->Image("assets/img/fazilpunjabi.JPG",2.73,2.75,  1.0,0.40, "JPG");
         }
-        
-        
+
+
         $pdf->SetXY($myx,3.58+$Y);
         $pdf->SetFont('Arial','b',10);
         if($data["grp_cd"] == 9)
         {
-        $pdf->Cell( 0,0.1,"Group:".$catname_lang,0,'L');
+            $pdf->Cell( 0,0.1,"Group:".$catname_lang,0,'L');
         }
         else
         {
-        $pdf->Cell( 0,0.1,"Group:".$grp_name."",0,'L');
+            $pdf->Cell( 0,0.1,"Group:".$grp_name."",0,'L');
         }
-        
-        
-      /*  $pdf->SetFont('Arial','',8);
-        $pdf->SetXY(3.9,3.05+$Y);
-        $pdf->Cell(4,0.60,'',1,0,'C',0);  */
 
-        
-      
-      
+
+
+
+
+
         $pdf->SetFont('Arial','B',$FontSize-.5);
         $pdf->SetXY(6.8,2.74+$Y);                                               
         $pdf->Cell(0,0.1,$data["sex"]==1?"MALE":"FEMALE",0,'L');
@@ -1147,11 +1030,11 @@ class Admission_11th_pvt extends CI_Controller {
         $pdf->TextWithRotation($x+.55,2.8+$Y, $data['FormNo'],90,0); 
 
 
-        
 
-        
+
+
         //--------------------------- Speciality and Internal Grade 
-        
+
         /*$pdf->SetXY(3.5+$x,2.5+$Y);
         $pdf->SetFont('Arial','',$FontSize);
         $pdf->Cell( 0.5,0.5,"Scheme:",0,'L');
@@ -1160,26 +1043,26 @@ class Admission_11th_pvt extends CI_Controller {
         $pdf->Cell(0.5,0.5, ($data["schm"]==1? "NEW": "OLD"),0,'L');    */        
 
         // DebugBreak();
-//DebugBreak();
+        //DebugBreak();
         $xx= 0.8;
         $boxWidth = 3.0;
         $pdf->SetFont('Arial','B',8);
         $pdf->SetXY($xx,3.8+$Y);
         $pdf->SetFillColor(240,240,240);
-        
-          
-         if($data["grp_cd"] == 9)
-         {
-         
-        $pdf->Cell($boxWidth,0.2,"PAPER'S: ",1,0,'C',1);
+
+
+        if($data["grp_cd"] == 9)
+        {
+
+            $pdf->Cell($boxWidth,0.2,"PAPER'S: ",1,0,'C',1);
         }
         else
         {
-        $pdf->Cell($boxWidth,0.2,'Subjects:Part - I ',1,0,'C',1);
+            $pdf->Cell($boxWidth,0.2,'Subjects:Part - I ',1,0,'C',1);
         }
-        
+
         $pdf->SetFillColor(255,255,255);
-        
+
         //$pdf->Cell($boxWidth,0.2, $data['sub1Ap1'] != 1 ? '':   '    '. GetSubNameHere($data['sub1']) ,0,'L',1);
         // DebugBreak();
         $pdf->Image("assets/img/crossed.jpg",4.8,4.73, 1.3,0.15, "jpeg");  
@@ -1195,7 +1078,7 @@ class Admission_11th_pvt extends CI_Controller {
         $pdf->MultiCell(1.1,0.2, 'Thumb Impression',0,'C'); 
 
 
-        
+
 
 
         $pdf->SetFillColor(255,255,255);
@@ -1203,100 +1086,100 @@ class Admission_11th_pvt extends CI_Controller {
         $pdf->SetXY($xx,4.0+$Y);
         if($data["grp_cd"] == 9)
         {
-        $pdf->Cell($boxWidth,0.2,$data['sub1Ap1'] != 1 ? '':   '    '.'1. PAPER-I',1,0,'L',1);
+            $pdf->Cell($boxWidth,0.2,$data['sub1Ap1'] != 1 ? '':   '    '.'1. PAPER-I',1,0,'L',1);
         }
         else
         {
-        $pdf->Cell($boxWidth,0.2,$data['sub1Ap1'] != 1 ? '':   '    '.'1. '.$data['sub1_name'],1,0,'L',1);
+            $pdf->Cell($boxWidth,0.2,$data['sub1Ap1'] != 1 ? '':   '    '.'1. '.$data['sub1_name'],1,0,'L',1);
         }
-        
-        
+
+
         $pdf->SetFont('Arial','',7);
         $pdf->SetXY($xx,4.2+$Y);
         if($data["grp_cd"] == 9)
         {
-        $pdf->Cell($boxWidth,0.2,$data['sub2Ap1'] != 1 ? '':   '    '.'2. PAPER-II',1,0,'L',1);
+            $pdf->Cell($boxWidth,0.2,$data['sub2Ap1'] != 1 ? '':   '    '.'2. PAPER-II',1,0,'L',1);
         }
         else
         {
-        $pdf->Cell($boxWidth,0.2,$data['sub2Ap1'] != 1 ? '':   '    '.'2. '. $data['sub2_name'],1,0,'L',1);
+            $pdf->Cell($boxWidth,0.2,$data['sub2Ap1'] != 1 ? '':   '    '.'2. '. $data['sub2_name'],1,0,'L',1);
         }
-        
+
 
         $pdf->SetFont('Arial','',7);
         $pdf->SetXY($xx,4.4+$Y);
-         if($data["grp_cd"] == 9)
+        if($data["grp_cd"] == 9)
         {
-        $pdf->Cell($boxWidth,0.2,$data['sub3Ap1'] != 1 ? '':   '    '.'3. PAPER-III',1,0,'L',1);
+            $pdf->Cell($boxWidth,0.2,$data['sub3Ap1'] != 1 ? '':   '    '.'3. PAPER-III',1,0,'L',1);
         }
         else
         {
-        $pdf->Cell($boxWidth,0.2,$data['sub3Ap1'] != 1 ? '':   '    '.'3. '. $data['sub3_name'],1,0,'L',1);
+            $pdf->Cell($boxWidth,0.2,$data['sub3Ap1'] != 1 ? '':   '    '.'3. '. $data['sub3_name'],1,0,'L',1);
         }
-        
+
 
         $pdf->SetFont('Arial','',7);
         $pdf->SetXY($xx,4.6+$Y);
         if($data["grp_cd"] == 9)
         {
-        $pdf->Cell($boxWidth,0.2,$data['sub4Ap1'] != 1 ? '':   '    '.'4. PAPER-IV',1,0,'L',1);
+            $pdf->Cell($boxWidth,0.2,$data['sub4Ap1'] != 1 ? '':   '    '.'4. PAPER-IV',1,0,'L',1);
         }
         else
         {
-        $pdf->Cell($boxWidth,0.2,$data['sub4Ap1'] != 1 ? '':   '    '.'4. '. $data['sub4_name'],1,0,'L',1);
+            $pdf->Cell($boxWidth,0.2,$data['sub4Ap1'] != 1 ? '':   '    '.'4. '. $data['sub4_name'],1,0,'L',1);
         }
-        
+
 
         $pdf->SetFont('Arial','',7);
         $pdf->SetXY($xx,4.8+$Y);
-         if($data["grp_cd"] == 9)
+        if($data["grp_cd"] == 9)
         {
-        $pdf->Cell($boxWidth,0.2,$data['sub5Ap1'] != 1 ? '':   '    '.'5. PAPER-V',1,0,'L',1);
+            $pdf->Cell($boxWidth,0.2,$data['sub5Ap1'] != 1 ? '':   '    '.'5. PAPER-V',1,0,'L',1);
         }
         else
         {
-        $pdf->Cell($boxWidth,0.2,$data['sub5Ap1'] != 1 ? '':   '    '.'5. '. $data['sub5_name'],1,0,'L',1);
+            $pdf->Cell($boxWidth,0.2,$data['sub5Ap1'] != 1 ? '':   '    '.'5. '. $data['sub5_name'],1,0,'L',1);
         }
-        
+
 
         $pdf->SetFont('Arial','',7);
         $pdf->SetXY($xx,5.0+$Y);
-         if($data["grp_cd"] == 9)
+        if($data["grp_cd"] == 9)
         {
-        $pdf->Cell($boxWidth,0.2,$data['sub6Ap1'] != 1 ? '':   '    '.'6. PAPER-VI',1,0,'L',1);
+            $pdf->Cell($boxWidth,0.2,$data['sub6Ap1'] != 1 ? '':   '    '.'6. PAPER-VI',1,0,'L',1);
         }
         else
         {
-        $pdf->Cell($boxWidth,0.2,$data['sub6Ap1'] != 1 ? '':   '    '.'6. '. $data['sub6_name'],1,0,'L',1);
+            $pdf->Cell($boxWidth,0.2,$data['sub6Ap1'] != 1 ? '':   '    '.'6. '. $data['sub6_name'],1,0,'L',1);
         }
-        
+
 
         $pdf->SetFont('Arial','',7);                                                                     
         $pdf->SetXY($xx,5.2+$Y);
-         if($data["grp_cd"] == 5)
+        if($data["grp_cd"] == 5)
         {
-        $pdf->Cell($boxWidth,0.2,$data['sub7Ap1'] != 1 ? '':   '    '.'7. '. $data['sub7_name'],1,0,'L',1);
+            $pdf->Cell($boxWidth,0.2,$data['sub7Ap1'] != 1 ? '':   '    '.'7. '. $data['sub7_name'],1,0,'L',1);
         }
-        
-        
-        
 
-       
+
+
+
+
         $pdf->SetXY(0.7,5.49+$Y);
         $pdf->SetFont('Arial','B',10);
         $pdf->Cell(0,0.1,"Affidavit:-",0,'L');
         $pdf->SetXY(0.7,5.6+$Y);
         $pdf->SetFont('Arial','',8);
         $pdf->MultiCell(7.3,0.15, "I have read this admission form/instructions. The data/information on this form and in online system is same as last entered/modified/provided by me and it's correctness is only my responsibility. I understand that only the information/data provided in the online system along with the photograph and some other handwritten details on this form will be used for further processing. I accept all the terms and conditions in this regard.",0,'L'); 
-       
-        
-        
+
+
+
         // DebugBreak();
         $stampx = 3.4;
         $stampy = 5.2;
 
         $pdf->Image("assets/img/admission_form.jpg",4.07,2.33, 3.98,0.40, "jpeg");                
-       
+
         $candidatex = 0.7;
 
         $pdf->SetXY($candidatex,6.2+$Y);
@@ -1307,7 +1190,7 @@ class Admission_11th_pvt extends CI_Controller {
         $pdf->Cell(0,0,"Candidate's Signature in English____________________",0,'R');
 
         $Y =  $Y +.28;
-        
+
         $pdf->SetXY($stampx,5.80+$Y);
         $pdf->SetFont('Arial','b',8);
         $pdf->Cell(0,0.1,"Stamp/Signature",0,'R');
@@ -1323,20 +1206,20 @@ class Admission_11th_pvt extends CI_Controller {
         $pdf->SetXY($stampx,6.45+$Y);
         $pdf->SetFont('Arial','',8);
         $pdf->Cell(0,0.1,"CNIC",0,'R');
-        
+
         $pdf->SetXY(6.5,5.82+$Y);
         $pdf->Cell(1.5,.8,'',1,0,'C',0); 
 
         $pdf->SetFont('Arial','B',16);
         $pdf->SetXY(6.6,6.4+$Y);
         $pdf->MultiCell(0,0.2, 'O.W.O',0,'C'); 
-        
-        
+
+
         $boxWidth = 2.0;
         $Y =  $Y -.28;
         $Y  = $Y +.33;
-        
-        
+
+
         $pdf->SetXY($myx,6.6+$Y);
         $pdf->SetFillColor(0,0,0);
         $pdf->SetTextColor(255,255,255);
@@ -1358,9 +1241,9 @@ class Admission_11th_pvt extends CI_Controller {
         Barcode::rotate(-$len / 2, ($bardata['height'] / 2) + $fontSize + $marge, $angle, $xt, $yt);    */
 
         //$pdf->PrintBarcode(5.75,5.9,(int)$Barcode,.3,.0199);
-        
-        
-        
+
+
+
         $pdf->SetXY($myx+2,6.70+$Y);
         $pdf->SetTextColor(0,0,0);
         $pdf->SetFont('Arial','BI',7);
@@ -1373,11 +1256,11 @@ class Admission_11th_pvt extends CI_Controller {
         $pdf->SetXY(6.7, 6.70+$Y);
         $pdf->SetFont('Arial','b',$FontSize);
         $pdf->Cell( 0,0,"Bank Challan No. ".$data['FormNo'],0,'L');
-        
-        
+
+
         $pdf->SetXY($myx,6.85+$Y);
         $pdf->SetTextColor(0,0,0);
-        
+
         $Y  = $Y -0.20;
         $pdf->SetXY($myx, 7.09+$Y);
         $pdf->SetFont('Arial','',$FontSize);
@@ -1414,17 +1297,17 @@ class Admission_11th_pvt extends CI_Controller {
         $pdf->SetXY(6.3, 7.09+$Y); 
         $pdf->SetFont('Arial','b',$FontSize);
         $pdf->Cell( 0,0,$mydata_final['regFee'].'/-',0,'L');
-                  // DebugBreak();
+        // DebugBreak();
         if($data['grp_cd']==9)
         {
-        $pdf->SetXY(6.8, 7.09+$Y);
-        $pdf->SetFont('Arial','',$FontSize);
-        $pdf->Cell( 0,0,"Cert Fee ",0,'L');
-        $pdf->SetXY(7.4, 7.09+$Y); 
-        $pdf->SetFont('Arial','b',$FontSize);
-        $pdf->Cell( 0,0,@$data['CertFee'].'/-',0,'L');
+            $pdf->SetXY(6.8, 7.09+$Y);
+            $pdf->SetFont('Arial','',$FontSize);
+            $pdf->Cell( 0,0,"Cert Fee ",0,'L');
+            $pdf->SetXY(7.4, 7.09+$Y); 
+            $pdf->SetFont('Arial','b',$FontSize);
+            $pdf->Cell( 0,0,@$data['CertFee'].'/-',0,'L');
         }
-        
+
 
         $pdf->SetXY($myx, 7.25+$Y);
         $pdf->SetFont('Arial','b',$FontSize);
@@ -1446,7 +1329,7 @@ class Admission_11th_pvt extends CI_Controller {
         $obj    = new NumbertoWord();
         $obj->toWords($total,"Only.","");
         $feeInWords = ucwords($obj->words);
-      
+
         $pdf->SetXY(3.38, 7.25+$Y);
         $pdf->SetFont('Arial','B',8);
         $pdf->Cell( 0,0,$feeInWords,"",0,'L');
@@ -1456,7 +1339,7 @@ class Admission_11th_pvt extends CI_Controller {
         $pdf->Cell( 0,0,"Manager/Cashier:____________________ ",0,'L');
 
         //$pdf->SetXY(0,5.0+3.0+$Y);
-       // $pdf->SetFont('Arial','',10);
+        // $pdf->SetFont('Arial','',10);
 
         $pdf->Image("assets/img/cutter.jpg",0.14,7.1, 8.02,0.09, "jpeg");  
 
@@ -1464,15 +1347,15 @@ class Admission_11th_pvt extends CI_Controller {
 
         $Y= 7.25;
         //
-       
+
         $pdf->SetFont('Arial','B',9);
         $pdf->SetXY(.2,$Y);
         $pdf->Cell(0, 0.2, $heading, 0.25, "C");
-       
+
         $pdf->SetFont('Arial','B',8.8);
         $pdf->SetXY($myx-.01,.3+$Y);
         $pdf->Cell(0,0,'Board Copy (Along with Scroll) ',0,0,'L',0); 
-       
+
         $pdf->SetXY($myx,.43+$Y);
         $pdf->SetFillColor(0,0,0);
         $pdf->SetTextColor(255,255,255);
@@ -1490,10 +1373,10 @@ class Admission_11th_pvt extends CI_Controller {
         $pdf->SetXY(6.7, .53+$Y);
         $pdf->SetFont('Arial','b',$FontSize);
         $pdf->Cell( 0,0,"Bank Challan No. ".$data['FormNo'],0,'L');
-        
-        
-        
-        
+
+
+
+
         $pdf->SetXY($myx, .73+$Y);
         $pdf->SetFont('Arial','',$FontSize);
         $pdf->Cell( 0,0,"Form No. ",0,'L');
@@ -1521,9 +1404,9 @@ class Admission_11th_pvt extends CI_Controller {
         $pdf->SetXY(5.6, .73+$Y); 
         $pdf->SetFont('Arial','b',$FontSize);
         $pdf->Cell( 0,0,$data["Fname"],0,'L');
-        
-        
-        
+
+
+
         $pdf->SetXY($myx, .93+$Y);
         $pdf->SetFont('Arial','',$FontSize);
         $pdf->Cell( 0,0,"Admission Fee ",0,'L');
@@ -1562,12 +1445,12 @@ class Admission_11th_pvt extends CI_Controller {
 
         if($data['grp_cd']==9)
         {
-        $pdf->SetXY(6.8, .93+$Y);
-        $pdf->SetFont('Arial','',$FontSize);
-        $pdf->Cell( 0,0,"Cert Fee ",0,'L');
-        $pdf->SetXY(7.4,.93+$Y); 
-        $pdf->SetFont('Arial','b',$FontSize);
-        $pdf->Cell( 0,0,$data['CertFee'].'/-',0,'L');
+            $pdf->SetXY(6.8, .93+$Y);
+            $pdf->SetFont('Arial','',$FontSize);
+            $pdf->Cell( 0,0,"Cert Fee ",0,'L');
+            $pdf->SetXY(7.4,.93+$Y); 
+            $pdf->SetFont('Arial','b',$FontSize);
+            $pdf->Cell( 0,0,$data['CertFee'].'/-',0,'L');
         }
 
 
@@ -1590,25 +1473,25 @@ class Admission_11th_pvt extends CI_Controller {
         $pdf->SetXY(5.92, 1.3+$Y);
         $pdf->SetFont('Arial','b',$FontSize);
         $pdf->Cell( 0,0,"Manager/Cashier:____________________ ",0,'L');
-        
+
 
 
         $pdf->Image("assets/img/cutter.jpg",0.14,8.7, 8.02,0.09, "jpeg");  
-        
+
         $pdf->SetFont('Arial','B',9);
         $pdf->SetXY(.2,1.58+$Y);
         $pdf->Cell(0, 0.2, $heading, 0.25, "C");
-        
+
         $pdf->SetFont('Arial','B',8.8);
         $pdf->SetXY($myx-.01,1.89+$Y);
         $pdf->Cell(0,0,'Bank Copy ',0,0,'L',0); 
-        
-         $pdf->SetXY($myx,1.99+$Y);
+
+        $pdf->SetXY($myx,1.99+$Y);
         $pdf->SetFillColor(0,0,0);
         $pdf->SetTextColor(255,255,255);
         $pdf->SetFont('Arial','B',7);
         $pdf->Cell($boxWidth,0.2,'Due Date: '.$endDate,1,0,'C',1); 
-       
+
         $pdf->SetXY($myx+2,2.1+$Y);
         $pdf->SetTextColor(0,0,0);
         $pdf->SetFont('Arial','BI',7);
@@ -1621,7 +1504,7 @@ class Admission_11th_pvt extends CI_Controller {
         $pdf->SetXY(6.7, 2.1+$Y);
         $pdf->SetFont('Arial','b',$FontSize);
         $pdf->Cell( 0,0,"Bank Challan No. ".$data['FormNo'],0,'L');
-        
+
         $pdf->SetXY($myx, 2.3+$Y);
         $pdf->SetFont('Arial','',$FontSize);
         $pdf->Cell( 0,0,"Form No. ",0,'L');
@@ -1644,7 +1527,7 @@ class Admission_11th_pvt extends CI_Controller {
         $pdf->SetXY(5.6, 2.3+$Y); 
         $pdf->SetFont('Arial','b',$FontSize);
         $pdf->Cell( 0,0,$data["Fname"],0,'L');
-        
+
         $pdf->SetXY($myx, 2.5+$Y);
         $pdf->SetFont('Arial','b',$FontSize);
         $pdf->Cell( 0,0,"Total Amount Rs.",0,'L');
@@ -1665,24 +1548,24 @@ class Admission_11th_pvt extends CI_Controller {
         $pdf->SetFont('Arial','b',$FontSize);
         $pdf->Cell( 0,0,"Manager/Cashier:____________________ ",0,'L');
         $pdf->Image('assets/img/BankCopy.jpg',.80,9.8, 4.95,0.25, "jpeg");   
-        
+
         $pdf->Image("assets/img/cutter.jpg",0.14,10.1, 8.02,0.09, "jpeg"); 
-        
-        
+
+
         $pdf->SetFont('Arial','B',9);
         $pdf->SetXY(.2,3+$Y);
         $pdf->Cell(0, 0.2, $heading, 0.25, "C");
-        
+
         $pdf->SetFont('Arial','B',8.8);
         $pdf->SetXY($myx-.01,3.28+$Y);
         $pdf->Cell(0,0,'Candidate Copy ',0,0,'L',0); 
-        
+
         $pdf->SetXY($myx,3.38+$Y);
         $pdf->SetFillColor(0,0,0);
         $pdf->SetTextColor(255,255,255);
         $pdf->SetFont('Arial','B',7);
         $pdf->Cell($boxWidth,0.2,'Due Date: '.$endDate,1,0,'C',1); 
-        
+
         $pdf->SetXY($myx+2,3.50+$Y);
         $pdf->SetTextColor(0,0,0);
         $pdf->SetFont('Arial','BI',7);
@@ -1695,7 +1578,7 @@ class Admission_11th_pvt extends CI_Controller {
         $pdf->SetXY(6.7, 3.50+$Y);
         $pdf->SetFont('Arial','b',$FontSize);
         $pdf->Cell( 0,0,"Bank Challan No. ".$data['FormNo'],0,'L');
-        
+
         $pdf->SetXY($myx, 3.65+$Y);
         $pdf->SetFont('Arial','',$FontSize);
         $pdf->Cell( 0,0,"Form No. ",0,'L');
@@ -1718,7 +1601,7 @@ class Admission_11th_pvt extends CI_Controller {
         $pdf->SetXY(5.6, 3.65+$Y); 
         $pdf->SetFont('Arial','b',$FontSize);
         $pdf->Cell( 0,0,$data["Fname"],0,'L');
-        
+
         $pdf->SetXY($myx, 3.75+$Y);
         $pdf->SetFont('Arial','b',$FontSize);
         $pdf->Cell( 0,0,"Total Amount Rs.",0,'L');
@@ -1736,20 +1619,105 @@ class Admission_11th_pvt extends CI_Controller {
         $pdf->SetXY(5.92,4.1+$Y);
         $pdf->SetFont('Arial','b',$FontSize);
         $pdf->Cell( 0,0,"Manager/Cashier:____________________ ",0,'L');
-        
+
         $pdf->Image('assets/img/CandidateCopy.jpg',0.27,11.07, 5.6,0.43, "jpeg");  
-        
-        
+
+
         //$filename="Admission_Forms_". $form_No."_"   .  ".pdf";    
         $pdf->Output();
         //$pdf->Output($filename,'D');
 
+    }
+    function feecalculate($data)
+    {
+        //DebugBreak();
+        $isper = 0;
 
+        $User_info_data = array('Inst_Id'=>999999, 'date' => date('Y-m-d'),'isPratical'=>$isper);
+        $user_info  =  $this->Admission_11th_Pvt_model->getuser_info($User_info_data); 
+        $isfine = 0;
+        $Total_fine = 0;
+        $processFee = 295;
+        $admfee = 800;
+        $admfeecmp = 1500;
+        // Declare Science & Arts Fee's According to Fee Table .  Note: this will assign to Triple date fee. After triple date it will not asign fees.
+        if(!empty($user_info['rule_fee'])) 
+        {    $endDate =date('Y-m-d', strtotime($user_info['rule_fee'][0]['End_Date'])); 
+            $singleDate = $endDate;
+            if($user_info['rule_fee'][0]['isPrSub']==1)
+            {
+                $admfee = $user_info['rule_fee'][0]['PVT_Amount'];
+                $processFee = $user_info['rule_fee'][0]['Processing_Fee'];;
+                $admfeecmp = $user_info['rule_fee'][0]['Comp_Pvt_Amount'];
+            } 
+            else if($user_info['rule_fee'][0]['isPrSub']== 0 )
+            {
+                $admfee = $user_info['rule_fee'][0]['PVT_Amount'];
+                $processFee = $user_info['rule_fee'][0]['Processing_Fee'];;
+                $admfeecmp = $user_info['rule_fee'][0]['Comp_Pvt_Amount'];
+            }
+        }
+        else
+        {
+            $date = new DateTime(TripleDateFee);
+            $singleDate =  $date->format('Y-m-d');                                                                     
+            $User_info_data = array('Inst_Id'=>999999, 'date' => $singleDate,'isPratical'=>$isper);
+            $user_info  =  $this->Admission_11th_Pvt_model->getuser_info($User_info_data);
+            if($user_info['rule_fee'][0]['isPrSub'] == 1)
+            {
+                $admfee = $user_info['rule_fee'][0]['PVT_Amount'];
+                $processFee = $user_info['rule_fee'][0]['Processing_Fee'];;
+                $admfeecmp = $user_info['rule_fee'][0]['Comp_Pvt_Amount'];
 
+            } 
+            else if( $user_info['rule_fee'][0]['isPrSub'] == 0 )
+            {
+                $admfee = $user_info['rule_fee'][0]['PVT_Amount'];
+                $processFee = $user_info['rule_fee'][0]['Processing_Fee'];;
+                $admfeecmp = $user_info['rule_fee'][0]['Comp_Pvt_Amount'];
 
+            }
 
+            $TripleDate = date('Y-m-d',strtotime(TripleDateFee)); 
+            $now = date('Y-m-d'); // or your date as well
+            $days = (strtotime($TripleDate) - strtotime($now)) / (60 * 60 * 24);
+            $fine = 500;
+            $days = abs($days);
+            $endDate = date('d-m-Y');
+            $admfee =  ($admfee*3); 
+            $$admfeecmp =  ($admfeecmp*3); 
+            $Total_fine = $days*$fine;
 
+        }  // DebugBreak();
+        $finalFee = '';
+        if($data['cat11'] !=  NULL && $data['cat12'] != NULL)
+        {
+            $finalFee = $admfeecmp;
+        }
+        else
+        {
+            $finalFee = $admfee;
+        }
+        if($data['Spec']>0 && (strtotime(date('Y-m-d')) >= strtotime(TripleDateFee)) )
+        {
+            $regfee =  1000;
+            if($data['Spec'] ==  2)
+            {
+                $regfee = 0; 
+            }
+            $data['AdmFee'] = $finalFee;
+            $data['AdmTotalFee'] = $processFee+$Total_fine+$data['regFee'];
+            $AllStdFee = array('FormNo'=>$data['formNo'],'regFee'=>0,'AdmProcessFee'=>$processFee,'AdmFee'=>$finalFee,'AdmFine'=>$Total_fine,'AdmTotalFee'=>$data['AdmTotalFee']);
+        }
+        else
+        {
+            $data['AdmFee'] = $finalFee;
+            $data['AdmTotalFee'] = $processFee+$Total_fine+$data['regFee']+$finalFee;
+            $AllStdFee = array('formNo'=>$data['FormNo'],'regFee'=>1000,'AdmProcessFee'=>$processFee,'AdmFee'=>$finalFee,'AdmFine'=>$Total_fine,'AdmTotalFee'=>$data['AdmTotalFee']);
+        }
 
+        $info =   $this->Admission_11th_Pvt_model->Update_AdmissionFeePvt($AllStdFee);
+        return $info;
     }
     public function formdownloaded(){
 
@@ -1759,11 +1727,11 @@ class Admission_11th_pvt extends CI_Controller {
         $dob = $this->uri->segment(4);
         $this->load->library('session');
         $myarray = array('msg'=>$msg,'dob'=>$dob);
-         $this->load->view('common/commonheader11th.php');
+        $this->load->view('common/commonheader11th.php');
         $this->load->view('Admission/11th/FormDownloaded.php',$myarray);
         $this->load->view('common/commonfooter.php');
     }
-   
+
     private function set_barcode($code)
     {
         //DebugBreak()  ;
@@ -1779,9 +1747,7 @@ class Admission_11th_pvt extends CI_Controller {
         return $code.'.png';
 
     }
-  
-  
-   
+
     public function getzone(){
         // DebugBreak();
         $data = array(
@@ -1794,10 +1760,9 @@ class Admission_11th_pvt extends CI_Controller {
         echo json_encode($value);
 
     }
-
     public function uploadpic()
     {
-        
+
         ############ Configuration ##############
         $config["generate_image_file"]            = true;
         $config["generate_thumbnails"]            = false;
@@ -1831,7 +1796,7 @@ class Admission_11th_pvt extends CI_Controller {
             //output images
             foreach($responses["images"] as $response){
                 echo ' <input type="hidden" class="span2 hidden" id="picname" name="picname" value="'.$response.'">
-                        <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="'.$config["upload_url"].$response.'"  alt="Candidate Image">';
+                <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="'.$config["upload_url"].$response.'"  alt="Candidate Image">';
             }
 
         }catch(Exception $e){
@@ -1853,7 +1818,7 @@ class Admission_11th_pvt extends CI_Controller {
         echo json_encode($value);
 
     } 
-     public function commonheader($data)
+    public function commonheader($data)
     {
         $this->load->view('common/header.php',$data);
         $this->load->view('common/menu.php',$data);
@@ -1862,7 +1827,7 @@ class Admission_11th_pvt extends CI_Controller {
     {
         $this->load->view('common/footer9th.php',$data);
     }
-   
+
     function convertImage($originalImage, $outputImage, $quality,$ext)
     {
 
@@ -1882,9 +1847,9 @@ class Admission_11th_pvt extends CI_Controller {
 
         return 1;
     }
-     
-   
 
- 
-  
+
+
+
+
 }
