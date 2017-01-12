@@ -43,10 +43,11 @@
         <td colspan="8" align="center"><h2 style="margin:0;padding:0;">BOARD OF INTERMEDIATE AND SECONDARY EDUCATION, GUJRANWALA</h2></td>
     </tr>
     <tr>
-        <td colspan="8"><div style="font-size:16px;font-weight:bold;text-align:center;">REVENUE FORM SHOWING DETAILS OF ADMISSION <br />
-                12th Class (SESSION <?php
-                                         echo Year;
-                                     ?>)
+        <td colspan="8"><div style="font-size:16px;font-weight:bold;text-align:center;">REVENUE FORM SHOWING DETAILS OF ADMISSION INTER <?php if(Session=='1')
+                    echo 'ANNUAL';
+                else if(Session =='2')
+                    echo 'SUPPLY';?> 
+                <?php  echo Year; ?>
             </div> 
         </td>
     </tr>
