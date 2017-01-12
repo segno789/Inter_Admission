@@ -7,12 +7,15 @@
                         <div class="title">
                             Form Printing Matric Admission Form<a data-original-title="" id="notifications">s</a>
                         </div>
-                                           </div>
+                    </div>
                     <div class="widget-body">
                         <div class="control-group">
                             <h4 class="title">
                                 Reports:
                             </h4>
+                            <label class="control-label label label-important" style="font-size: large;"> 
+                                Instructions: 1-Please Use A-4 Size (80 gram) Paper to Print All Documents/Reports.
+                            </label>
                         </div>
                         <hr>
                         <div class="control-group">
@@ -39,113 +42,113 @@
                             </label>
                             <div class="controls controls-row">
                                 <select id="std_group"   class="dropdown span3"  name="std_group">
-                            <?php        
-                                    $subgroups =  split(',',$grp_cdi);
-                            echo "<option value='0' >SELECT GROUP</option>";
-                            for($i =0 ; $i<count($subgroups); $i++)
-                            {
-                                           
-                                            if($subgroups[$i] == 1)
-                                            {
-                                                if($grp == 1)
-                                                {
-                                                    echo "<option value='1' selected='selected'>PRE-MEDICAL</option>";  
-                                                }
-                                                else 
-                                                {
-                                                    echo "<option value='1' >PRE-MEDICAL</option>";    
-                                                }
-                                            }
-                                            else if($subgroups[$i] == 2)
-                                            {
-                                                if($grp == 2)
-                                                {
-                                                    echo "<option value='2' selected='selected'>PRE-ENGINEERING</option>";
-                                                }
-                                                else
-                                                {
-                                                   echo "<option value='2'>PRE-ENGINEERING</option>"; 
-                                                }
-                                                  
-                                            }
-                                            else if($subgroups[$i] == 3)
-                                            {
-                                                 if($grp == 3)
-                                                {
-                                                    echo "<option value='3' selected='selected'>HUMANITIES</option>";  
-                                                }
-                                                else
-                                                {
-                                                  echo "<option value='3'>HUMANITIES</option>";  
-                                                }
-                                                
-                                            }
-                                            else if($subgroups[$i] == 4)
-                                            {
-                                                 if($grp == 4)
-                                                {
-                                                  echo "<option value='4' selected='selected'>GENERAL SCIENCE</option>";  
-                                                }
-                                                else
-                                                {
-                                                  echo "<option value='4'>GENERAL SCIENCE</option>";   
-                                                }
-                                                
-                                            }
-                                            else if($subgroups[$i] == 5)
-                                            {
-                                                 if($grp == 5)
-                                                {
-                                                   echo "<option value='5' selected='selected'>COMMERCE</option>";  
-                                                }
-                                                else
-                                                {
-                                                   echo "<option value='5'>COMMERCE</option>";  
-                                                }
-                                               
-                                            }
-                                        } 
-                            
-                            echo "</select>" ?>
-                                    
-                                    
-                                    
+                                <?php        
+                                $subgroups =  split(',',$grp_cdi);
+                                echo "<option value='0' >SELECT GROUP</option>";
+                                for($i =0 ; $i<count($subgroups); $i++)
+                                {
+
+                                    if($subgroups[$i] == 1)
+                                    {
+                                        if($grp == 1)
+                                        {
+                                            echo "<option value='1' selected='selected'>PRE-MEDICAL</option>";  
+                                        }
+                                        else 
+                                        {
+                                            echo "<option value='1' >PRE-MEDICAL</option>";    
+                                        }
+                                    }
+                                    else if($subgroups[$i] == 2)
+                                    {
+                                        if($grp == 2)
+                                        {
+                                            echo "<option value='2' selected='selected'>PRE-ENGINEERING</option>";
+                                        }
+                                        else
+                                        {
+                                            echo "<option value='2'>PRE-ENGINEERING</option>"; 
+                                        }
+
+                                    }
+                                    else if($subgroups[$i] == 3)
+                                    {
+                                        if($grp == 3)
+                                        {
+                                            echo "<option value='3' selected='selected'>HUMANITIES</option>";  
+                                        }
+                                        else
+                                        {
+                                            echo "<option value='3'>HUMANITIES</option>";  
+                                        }
+
+                                    }
+                                    else if($subgroups[$i] == 4)
+                                    {
+                                        if($grp == 4)
+                                        {
+                                            echo "<option value='4' selected='selected'>GENERAL SCIENCE</option>";  
+                                        }
+                                        else
+                                        {
+                                            echo "<option value='4'>GENERAL SCIENCE</option>";   
+                                        }
+
+                                    }
+                                    else if($subgroups[$i] == 5)
+                                    {
+                                        if($grp == 5)
+                                        {
+                                            echo "<option value='5' selected='selected'>COMMERCE</option>";  
+                                        }
+                                        else
+                                        {
+                                            echo "<option value='5'>COMMERCE</option>";  
+                                        }
+
+                                    }
+                                } 
+
+                                echo "</select>" ?>
+
+
+
                             </div>
                         </div>
                         <div style="display: none;" id="formnowise_selected" >
-                        <div class="control-group" >
-                        <div class="controls controls-row">
-                        <label class="control-label span1">Starting Form No.</label>
-                        <input type="text" id="strt_formNo"> 
-                        </div>
-                        </div>
-                         <div class="control-group" >
-                        <div class="controls controls-row">
-                        <label class="control-label span1">Ending Form No.</label>
-                        <input type="text" id="ending_formNo"> 
-                        </div>
-                        </div>
-                        </div>
-                      </div>
-                        <div class="control-group">
-                            <div class="controls controls-row">
-                               <!-- <input type="submit" name="get_report" id="get_report"class="btn btn-large btn-info" value="Final Print of Return">
-                                <input type="submit" name="get_Proof" class="btn btn-large btn-info " id="get_Proof" value="Get Proof Print of Return">-->
-                                <input type="submit" name="get_Proof_reg" id="get_Proof_reg" class="btn btn-large btn-info "  value="Get Proof Print Registration From">
+                            <div class="control-group" >
+                                <div class="controls controls-row">
+                                    <label class="control-label span1">Starting Form No.</label>
+                                    <input type="text" id="strt_formNo"> 
+                                </div>
+                            </div>
+                            <div class="control-group" >
+                                <div class="controls controls-row">
+                                    <label class="control-label span1">Ending Form No.</label>
+                                    <input type="text" id="ending_formNo"> 
+                                </div>
                             </div>
                         </div>
-                        <div class="control-group">
-                            <div class="controls control-group">
-                                <label class="control-label label label-important" style="font-size: large;"> 
-                                    Instructions: 1-Please Use A-4 Size (80 gram) Paper to Print All Documents/Reports.
-                                </label>
-                            </div>
-                        </div>
-
                     </div>
+                    <div class="control-group">
+                        <div class="controls controls-row">
+                            <!-- <input type="submit" name="get_report" id="get_report"class="btn btn-large btn-info" value="Final Print of Return">
+                            <input type="submit" name="get_Proof" class="btn btn-large btn-info " id="get_Proof" value="Get Proof Print of Return">-->
+                            </br>
+                            <input style="margin-left: 6.2%; width: 23%; "  type="submit" name="get_Proof_reg" id="get_Proof_reg" class="btn btn-large btn-info "  value="Get Proof Print Admission Forms">
+
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls control-group">
+
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 

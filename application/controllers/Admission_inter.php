@@ -2008,6 +2008,9 @@ class Admission_inter extends CI_Controller {
         $data = array(
             'isselected' => '11',
         );
+        
+        //DebugBreak();
+        
         $msg = $this->uri->segment(3);
         $spl_cd = $this->uri->segment(4);
         $grp_selected = $this->uri->segment(5);
