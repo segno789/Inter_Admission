@@ -20,7 +20,7 @@
                  SSC Roll No. :
             </label>
             <div class="controls controls-row">
-                <input type="text"  id="oldRno" class="span3" name="oldRno" maxlength="6" required="required"  value="" maxlength="10">
+                <input type="text"  id="oldRno" class="span3" name="oldRno" maxlength="6"   value="" maxlength="10" required>
                 <label class="control-label span1" style="margin-left:11%;">
                     SSC Year :
                 </label>
@@ -144,6 +144,18 @@ function CancelAlert()
     }
  function proceed11th()
 {
+    
+    
+    if( $('#oldRno').val() == '')
+    {
+         alertify.error("Please enter the SSC Roll No.");
+        return false;
+    }
+    else if( $('#oldRno').val() <400000 && $('#oldYear').val() >=2014 && $('#sec_board').val() == 1 )
+    {
+         alertify.error("Please enter only 10th Roll No.");
+        return false;
+    }
         $.ajax({
             type: "POST",
             url: "<?php echo base_url(); ?>" + "Admission_11th_pvt/Get_students_record/",
@@ -154,10 +166,10 @@ function CancelAlert()
             success: function(data)
             {
                 var obj = JSON.parse(data) ;
-                console.log(obj)
+
                 if(obj.excep == 'success')
                 {
-                   $('#ReturnStatus').submit();
+                    $('#ReturnStatus').submit();
                 }
                 else
                 {

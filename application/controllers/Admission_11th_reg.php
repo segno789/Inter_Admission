@@ -21,12 +21,18 @@ class Admission_11th_reg extends CI_Controller {
     {
         parent::__construct();
         $this->load->helper('url');
+         $this->clear_cache(); 
         //this condition checks the existence of session if user is not accessing  
         //login method as it can be accessed without user session
         $this->load->library('session');
         if( !$this->session->userdata('logged_in') && $this->router->method != 'login' ) {
             redirect('login');
         }
+    }
+    function clear_cache()
+    {
+        $this->output->set_header("Cache-Control: no-store, no-cache, must-revalidate, no-transform, max-age=0, post-check=0, pre-check=0");
+        $this->output->set_header("Pragma: no-cache");
     }
     public function index()
     {
@@ -2496,7 +2502,6 @@ public function NewEnrolment_Delete($formno)
   public function ChallanForm_Adm11hth_Regular()
     { 
 
-    DebugBreak();
      $Grp_cd = $this->uri->segment(3);
      $this->load->library('session');
         $this->load->library('NumbertoWord');
