@@ -657,6 +657,14 @@ class Admission_inter_model extends CI_Model
             return false;
         }
     }
+     public function Update_AdmissionFee($data)
+    {
+         if(empty($data))
+        {
+           return  false;
+        }
+        $this->db->update_batch('Admission_online..IAAdm',$data,'formNo');
+    }
 
 }
 ?>
