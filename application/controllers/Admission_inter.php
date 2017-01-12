@@ -2107,7 +2107,8 @@ class Admission_inter extends CI_Controller {
         $q1 = $user_info['fee'];
         $total_std = 0;
         $total_cert = 0;
-        
+      $n = 0;
+         $AllStdFee = array();
         foreach($q1 as $k=>$v) 
         {
             $ids[] = $v["FormNo"];
@@ -2118,10 +2119,10 @@ class Admission_inter extends CI_Controller {
             {
                 $Adm_fee = 0;
                 $TotalLatefee = $TotalLatefee + $LAdm_fee;
-                //  $total_certFee = $total_certFee+$certFee;
+                //  $total_certFee = $total_certFee+$cert_fee;
                 //$Adm_ProcessingFee; 
                 // $Totalprocessing_fee = $Totalprocessing_fee + $Adm_ProcessingFee;
-
+ 
                if($v['cat11'] == 2)
                 {
                     if(($v['grp_cd']==1 ||$v['grp_cd']==2 || $v['grp_cd']==4) || (array_search($v['sub4'],$practical_Sub) || array_search($v['sub5'],$practical_Sub) || array_search($v['sub6'],$practical_Sub) ||  array_search($v['sub7A'],$practical_Sub)))
@@ -2132,11 +2133,13 @@ class Admission_inter extends CI_Controller {
                     {
                         $Adm_fee = $Adm_Fee_withArts_10th_Only;
                     }
-                    $AllStdFee[$n] = array('formNo'=> $v["FormNo"],'AdmFee'=>$Adm_fee,'certFee'=>$certFee,'AdmFine'=>$LAdm_fee,'AdmProcessFee'=>$Adm_ProcessingFee,'AdmTotalFee'=>$Adm_fee+$LAdm_fee+$Adm_ProcessingFee+$certFee);
+                    $AllStdFee[$n] = array('formNo'=> $v["FormNo"],'AdmFee'=>$Adm_fee,'CertificateFee'=>$cert_fee,'AdmFine'=>$LAdm_fee,'AdmProcessFee'=>$Adm_ProcessingFee,'AdmTotalFee'=>$Adm_fee+$LAdm_fee+$Adm_ProcessingFee+$cert_fee);
                 }
                 else
                 {
-                    $AllStdFee[$n] = array('formNo'=> $v["FormNo"],'AdmFee'=>$Adm_fee,'certFee'=>$certFee,'AdmFine'=>$LAdm_fee,'AdmProcessFee'=>$Adm_ProcessingFee,'AdmTotalFee'=>$Adm_fee+$LAdm_fee+$Adm_ProcessingFee+$certFee);
+                   
+                    $AllStdFee[$n] = array('formNo'=> $v["FormNo"],'AdmFee'=>@$Adm_fee,'CertificateFee'=>@$cert_fee,'AdmFine'=>@$LAdm_fee,'AdmProcessFee'=>@$Adm_ProcessingFee,'AdmTotalFee'=>$Adm_fee+$LAdm_fee+$Adm_ProcessingFee+$cert_fee);
+                   //  echo '<pre>'; print_r($v["FormNo"]);echo '</pre>'; exit();
                 }
 
 
@@ -2170,7 +2173,7 @@ class Admission_inter extends CI_Controller {
                     $Adm_fee = $Adm_Fee_withSci_10th_Only;
                     $TotalLatefee = $TotalLatefee + $LAdm_fee;
 
-                    $AllStdFee[$n] = array('formNo'=> $v["FormNo"],'AdmFee'=>$Adm_fee,'certFee'=>$certFee,'AdmFine'=>$LAdm_fee,'AdmProcessFee'=>$Adm_ProcessingFee,'AdmTotalFee'=>$Adm_fee+$LAdm_fee+$Adm_ProcessingFee+$certFee);
+                    $AllStdFee[$n] = array('formNo'=> $v["FormNo"],'AdmFee'=>$Adm_fee,'CertificateFee'=>$cert_fee,'AdmFine'=>$LAdm_fee,'AdmProcessFee'=>$Adm_ProcessingFee,'AdmTotalFee'=>$Adm_fee+$LAdm_fee+$Adm_ProcessingFee+$cert_fee);
 
 
 
@@ -2180,21 +2183,21 @@ class Admission_inter extends CI_Controller {
                 {
                     $Adm_fee = $Adm_Fee_withSci_Composite;
                     $TotalLatefee = $TotalLatefee + $LAdm_fee;
-                    $AllStdFee[$n] = array('formNo'=> $v["FormNo"],'AdmFee'=>$Adm_fee,'certFee'=>$certFee,'AdmFine'=>$LAdm_fee,'AdmProcessFee'=>$Adm_ProcessingFee,'AdmTotalFee'=>$Adm_fee+$LAdm_fee+$Adm_ProcessingFee+$certFee);
+                    $AllStdFee[$n] = array('formNo'=> $v["FormNo"],'AdmFee'=>$Adm_fee,'CertificateFee'=>$cert_fee,'AdmFine'=>$LAdm_fee,'AdmProcessFee'=>$Adm_ProcessingFee,'AdmTotalFee'=>$Adm_fee+$LAdm_fee+$Adm_ProcessingFee+$cert_fee);
                     // $Totalprocessing_fee = $Totalprocessing_fee + $Adm_ProcessingFee;  
                 }
                 else if($ispractical == 0 && $is9th ==0)
                 {
                     $Adm_fee = $Adm_Fee_withArts_10th_Only;
                     $TotalLatefee = $TotalLatefee + $LAdm_fee;
-                    $AllStdFee[$n] = array('formNo'=> $v["FormNo"],'AdmFee'=>$Adm_fee,'certFee'=>$certFee,'AdmFine'=>$LAdm_fee,'AdmProcessFee'=>$Adm_ProcessingFee,'AdmTotalFee'=>$Adm_fee+$LAdm_fee+$Adm_ProcessingFee+$certFee);
+                    $AllStdFee[$n] = array('formNo'=> $v["FormNo"],'AdmFee'=>$Adm_fee,'CertificateFee'=>$cert_fee,'AdmFine'=>$LAdm_fee,'AdmProcessFee'=>$Adm_ProcessingFee,'AdmTotalFee'=>$Adm_fee+$LAdm_fee+$Adm_ProcessingFee+$cert_fee);
                     // $Totalprocessing_fee = $Totalprocessing_fee + $Adm_ProcessingFee;  
                 }
                 else if($ispractical == 0 && $is9th !=0)
                 {
                     $Adm_fee = $Adm_Fee_withArts_Composite;
                     $TotalLatefee = $TotalLatefee + $LAdm_fee;
-                    $AllStdFee[$n] = array('formNo'=> $v["FormNo"],'AdmFee'=>$Adm_fee,'certFee'=>$certFee,'AdmFine'=>$LAdm_fee,'AdmProcessFee'=>$Adm_ProcessingFee,'AdmTotalFee'=>$Adm_fee+$LAdm_fee+$Adm_ProcessingFee+$certFee); 
+                    $AllStdFee[$n] = array('formNo'=> $v["FormNo"],'AdmFee'=>$Adm_fee,'CertificateFee'=>$cert_fee,'AdmFine'=>$LAdm_fee,'AdmProcessFee'=>$Adm_ProcessingFee,'AdmTotalFee'=>$Adm_fee+$LAdm_fee+$Adm_ProcessingFee+$cert_fee); 
                     //  $Totalprocessing_fee = $Totalprocessing_fee + $Adm_ProcessingFee;  
                 }
                 //$AdmFee
@@ -2202,10 +2205,10 @@ class Admission_inter extends CI_Controller {
             $TotalAdmFee = $TotalAdmFee + $Adm_fee;
             $TotalLatefee = $TotalLatefee + $LAdm_fee;
             $Totalprocessing_fee = $Totalprocessing_fee + $Adm_ProcessingFee;
-            $total_certFee = $total_certFee+$certFee;
+            $total_certFee = $total_certFee+$cert_fee;
             $n++;
         } 
-        
+         
         $mydata_final = $this->Admission_inter_model->Update_AdmissionFee($AllStdFee);
 
         $today = date("Y-m-d H:i:s");
@@ -2246,7 +2249,7 @@ class Admission_inter extends CI_Controller {
         $TotalLatefee = 0;
         $Totalprocessing_fee = 0;
         $netTotal = 0;
-        $cert_fee = 550;
+      
 
         $practical_Sub = array(
             'LibSC'=>'8',
@@ -2277,12 +2280,11 @@ class Admission_inter extends CI_Controller {
         $Adm_Fee_withArts_Composite = $AdmFee[1]['Comp_Amount'];
         $Adm_Fee_withArts_10th_Only = $AdmFee[1]['Amount'];
         $Adm_ProcessingFee = $AdmFee[0]['Processing_Fee'];
-
+         $n = 0;
         $q1 = $user_info['fee'];
         $total_std = 0;
         $total_cert = 0;
-       foreach($q1 as $k=>$v) 
-        {
+       {
             $ids[] = $v["FormNo"];
             $total_std++;
             $ispractical = 0;
@@ -2291,10 +2293,10 @@ class Admission_inter extends CI_Controller {
             {
                 $Adm_fee = 0;
                 $TotalLatefee = $TotalLatefee + $LAdm_fee;
-                //  $total_certFee = $total_certFee+$certFee;
+                //  $total_certFee = $total_certFee+$cert_fee;
                 //$Adm_ProcessingFee; 
                 // $Totalprocessing_fee = $Totalprocessing_fee + $Adm_ProcessingFee;
-
+ 
                if($v['cat11'] == 2)
                 {
                     if(($v['grp_cd']==1 ||$v['grp_cd']==2 || $v['grp_cd']==4) || (array_search($v['sub4'],$practical_Sub) || array_search($v['sub5'],$practical_Sub) || array_search($v['sub6'],$practical_Sub) ||  array_search($v['sub7A'],$practical_Sub)))
@@ -2305,11 +2307,13 @@ class Admission_inter extends CI_Controller {
                     {
                         $Adm_fee = $Adm_Fee_withArts_10th_Only;
                     }
-                    $AllStdFee[$n] = array('formNo'=> $v["FormNo"],'AdmFee'=>$Adm_fee,'certFee'=>$certFee,'AdmFine'=>$LAdm_fee,'AdmProcessFee'=>$Adm_ProcessingFee,'AdmTotalFee'=>$Adm_fee+$LAdm_fee+$Adm_ProcessingFee+$certFee);
+                    $AllStdFee[$n] = array('formNo'=> $v["FormNo"],'AdmFee'=>$Adm_fee,'CertificateFee'=>$cert_fee,'AdmFine'=>$LAdm_fee,'AdmProcessFee'=>$Adm_ProcessingFee,'AdmTotalFee'=>$Adm_fee+$LAdm_fee+$Adm_ProcessingFee+$cert_fee);
                 }
                 else
                 {
-                    $AllStdFee[$n] = array('formNo'=> $v["FormNo"],'AdmFee'=>$Adm_fee,'certFee'=>$certFee,'AdmFine'=>$LAdm_fee,'AdmProcessFee'=>$Adm_ProcessingFee,'AdmTotalFee'=>$Adm_fee+$LAdm_fee+$Adm_ProcessingFee+$certFee);
+                   
+                    $AllStdFee[$n] = array('formNo'=> $v["FormNo"],'AdmFee'=>@$Adm_fee,'CertificateFee'=>@$cert_fee,'AdmFine'=>@$LAdm_fee,'AdmProcessFee'=>@$Adm_ProcessingFee,'AdmTotalFee'=>$Adm_fee+$LAdm_fee+$Adm_ProcessingFee+$cert_fee);
+                   //  echo '<pre>'; print_r($v["FormNo"]);echo '</pre>'; exit();
                 }
 
 
@@ -2343,7 +2347,7 @@ class Admission_inter extends CI_Controller {
                     $Adm_fee = $Adm_Fee_withSci_10th_Only;
                     $TotalLatefee = $TotalLatefee + $LAdm_fee;
 
-                    $AllStdFee[$n] = array('formNo'=> $v["FormNo"],'AdmFee'=>$Adm_fee,'certFee'=>$certFee,'AdmFine'=>$LAdm_fee,'AdmProcessFee'=>$Adm_ProcessingFee,'AdmTotalFee'=>$Adm_fee+$LAdm_fee+$Adm_ProcessingFee+$certFee);
+                    $AllStdFee[$n] = array('formNo'=> $v["FormNo"],'AdmFee'=>$Adm_fee,'CertificateFee'=>$cert_fee,'AdmFine'=>$LAdm_fee,'AdmProcessFee'=>$Adm_ProcessingFee,'AdmTotalFee'=>$Adm_fee+$LAdm_fee+$Adm_ProcessingFee+$cert_fee);
 
 
 
@@ -2353,21 +2357,21 @@ class Admission_inter extends CI_Controller {
                 {
                     $Adm_fee = $Adm_Fee_withSci_Composite;
                     $TotalLatefee = $TotalLatefee + $LAdm_fee;
-                    $AllStdFee[$n] = array('formNo'=> $v["FormNo"],'AdmFee'=>$Adm_fee,'certFee'=>$certFee,'AdmFine'=>$LAdm_fee,'AdmProcessFee'=>$Adm_ProcessingFee,'AdmTotalFee'=>$Adm_fee+$LAdm_fee+$Adm_ProcessingFee+$certFee);
+                    $AllStdFee[$n] = array('formNo'=> $v["FormNo"],'AdmFee'=>$Adm_fee,'CertificateFee'=>$cert_fee,'AdmFine'=>$LAdm_fee,'AdmProcessFee'=>$Adm_ProcessingFee,'AdmTotalFee'=>$Adm_fee+$LAdm_fee+$Adm_ProcessingFee+$cert_fee);
                     // $Totalprocessing_fee = $Totalprocessing_fee + $Adm_ProcessingFee;  
                 }
                 else if($ispractical == 0 && $is9th ==0)
                 {
                     $Adm_fee = $Adm_Fee_withArts_10th_Only;
                     $TotalLatefee = $TotalLatefee + $LAdm_fee;
-                    $AllStdFee[$n] = array('formNo'=> $v["FormNo"],'AdmFee'=>$Adm_fee,'certFee'=>$certFee,'AdmFine'=>$LAdm_fee,'AdmProcessFee'=>$Adm_ProcessingFee,'AdmTotalFee'=>$Adm_fee+$LAdm_fee+$Adm_ProcessingFee+$certFee);
+                    $AllStdFee[$n] = array('formNo'=> $v["FormNo"],'AdmFee'=>$Adm_fee,'CertificateFee'=>$cert_fee,'AdmFine'=>$LAdm_fee,'AdmProcessFee'=>$Adm_ProcessingFee,'AdmTotalFee'=>$Adm_fee+$LAdm_fee+$Adm_ProcessingFee+$cert_fee);
                     // $Totalprocessing_fee = $Totalprocessing_fee + $Adm_ProcessingFee;  
                 }
                 else if($ispractical == 0 && $is9th !=0)
                 {
                     $Adm_fee = $Adm_Fee_withArts_Composite;
                     $TotalLatefee = $TotalLatefee + $LAdm_fee;
-                    $AllStdFee[$n] = array('formNo'=> $v["FormNo"],'AdmFee'=>$Adm_fee,'certFee'=>$certFee,'AdmFine'=>$LAdm_fee,'AdmProcessFee'=>$Adm_ProcessingFee,'AdmTotalFee'=>$Adm_fee+$LAdm_fee+$Adm_ProcessingFee+$certFee); 
+                    $AllStdFee[$n] = array('formNo'=> $v["FormNo"],'AdmFee'=>$Adm_fee,'CertificateFee'=>$cert_fee,'AdmFine'=>$LAdm_fee,'AdmProcessFee'=>$Adm_ProcessingFee,'AdmTotalFee'=>$Adm_fee+$LAdm_fee+$Adm_ProcessingFee+$cert_fee); 
                     //  $Totalprocessing_fee = $Totalprocessing_fee + $Adm_ProcessingFee;  
                 }
                 //$AdmFee
@@ -2375,7 +2379,7 @@ class Admission_inter extends CI_Controller {
             $TotalAdmFee = $TotalAdmFee + $Adm_fee;
             $TotalLatefee = $TotalLatefee + $LAdm_fee;
             $Totalprocessing_fee = $Totalprocessing_fee + $Adm_ProcessingFee;
-            $total_certFee = $total_certFee+$certFee;
+            $total_certFee = $total_certFee+$cert_fee;
             $n++;
         } 
         
