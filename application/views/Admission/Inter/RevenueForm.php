@@ -145,7 +145,7 @@
         <th class="th">&nbsp;</th>
         <!--    <th class="th">&nbsp;</th> -->
         <th class="th">Total :</th>
-        <th class="th"><?php echo  $data['batch_info'][0]["Total_RegistrationFee"];;?></th>
+        <th class="th"><?php echo $data['batch_info'][0]["Total_RegistrationFee"];;?></th>
         <th class="th"><?php echo $data['batch_info'][0]["Total_LateRegistrationFee"];;?></th>
         <th class="th"><?php echo $data['batch_info'][0]["Total_ProcessingFee"];?></th>
         <th class="th"><?php echo $data['batch_info'][0]["TotalCertificateFee"];?></th>
