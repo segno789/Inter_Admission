@@ -2050,7 +2050,7 @@ class Admission_inter extends CI_Controller {
         $this->load->view('Admission/inter/CreateBatch.php',$RegStdData);
         $this->load->view('common/commonfooter_inter_regular.php');
     }
-    public function Make_Batch_Group_wise()
+     public function Make_Batch_Group_wise()
     {
         //DebugBreak();
 
@@ -2114,9 +2114,10 @@ class Admission_inter extends CI_Controller {
         // DebugBreak();
         $q1 = $user_info['fee'];
         $total_std = 0;
-        $total_cert = 0;
+        $total_certFee = 0;
       $n = 0;
          $AllStdFee = array();
+          $Adm_fee = 0;
         foreach($q1 as $k=>$v) 
         {
             $ids[] = $v["FormNo"];
@@ -2131,7 +2132,7 @@ class Admission_inter extends CI_Controller {
                 //$Adm_ProcessingFee; 
                 // $Totalprocessing_fee = $Totalprocessing_fee + $Adm_ProcessingFee;
  
-                if($v['cat11'] == 2)
+               if($v['cat11'] == 2)
                 {
                     if(($v['grp_cd']==1 ||$v['grp_cd']==2 || $v['grp_cd']==4) || (array_search($v['sub4'],$practical_Sub) || array_search($v['sub5'],$practical_Sub) || array_search($v['sub6'],$practical_Sub) ||  array_search($v['sub7A'],$practical_Sub)))
                     {
@@ -2216,11 +2217,12 @@ class Admission_inter extends CI_Controller {
             $total_certFee = $total_certFee+$cert_fee;
             $n++;
         } 
-         
+        
         $mydata_final = $this->Admission_inter_model->Update_AdmissionFee($AllStdFee);
-
+ $tot_fee = $TotalAdmFee+$TotalLatefee+$Totalprocessing_fee+$total_certFee;
+  $forms_id   = implode(",",$ids); 
         $today = date("Y-m-d H:i:s");
-        $data = array('inst_cd'=>$Inst_Id,'total_fee'=>$tot_fee,'proces_fee'=>$Adm_ProcessingFee,'reg_fee'=>$Adm_fee,'fine'=>$LAdm_fee,'TotalRegFee'=>$TotalAdmFee,'TotalLatefee'=>$TotalLatefee,'Totalprocessing_fee'=>$Totalprocessing_fee,'forms_id'=>$forms_id,'todaydate'=>$today,'total_std'=>$total_std,'cert_fee'=>$cert_fee,'total_cert'=>$total_cert);
+        $data = array('inst_cd'=>$Inst_Id,'total_fee'=>$tot_fee,'proces_fee'=>$Adm_ProcessingFee,'reg_fee'=>$Adm_fee,'fine'=>$LAdm_fee,'TotalRegFee'=>$TotalAdmFee,'TotalLatefee'=>$TotalLatefee,'Totalprocessing_fee'=>$Totalprocessing_fee,'forms_id'=>$forms_id,'todaydate'=>$today,'total_std'=>$total_std,'cert_fee'=>$cert_fee,'total_cert'=>$total_certFee);
         $this->Admission_inter_model->Batch_Insertion($data); 
         redirect('Admission_inter/BatchList');
         return;                                                                                                                     
@@ -2257,7 +2259,7 @@ class Admission_inter extends CI_Controller {
         $TotalLatefee = 0;
         $Totalprocessing_fee = 0;
         $netTotal = 0;
-      
+       $cert_fee = 550;
 
         $practical_Sub = array(
             'LibSC'=>'8',
@@ -2280,7 +2282,6 @@ class Admission_inter extends CI_Controller {
             'CST'=>'98',
 
         );
-
         $ispractical = 0;
         $AdmFee =$rule_fee;
         $Adm_Fee_withSci_Composite = $AdmFee[0]['Comp_Amount'];
@@ -2288,11 +2289,13 @@ class Admission_inter extends CI_Controller {
         $Adm_Fee_withArts_Composite = $AdmFee[1]['Comp_Amount'];
         $Adm_Fee_withArts_10th_Only = $AdmFee[1]['Amount'];
         $Adm_ProcessingFee = $AdmFee[0]['Processing_Fee'];
-         $n = 0;
         $q1 = $user_info['fee'];
         $total_std = 0;
-        $total_cert = 0;
-        foreach($q1 as $k=>$v) 
+        $total_certFee = 0;
+        $n = 0;
+        $AllStdFee = array();
+        $Adm_fee = 0;
+          foreach($q1 as $k=>$v) 
         {
             $ids[] = $v["FormNo"];
             $total_std++;
@@ -2306,7 +2309,7 @@ class Admission_inter extends CI_Controller {
                 //$Adm_ProcessingFee; 
                 // $Totalprocessing_fee = $Totalprocessing_fee + $Adm_ProcessingFee;
  
-                if($v['cat11'] == 2)
+               if($v['cat11'] == 2)
                 {
                     if(($v['grp_cd']==1 ||$v['grp_cd']==2 || $v['grp_cd']==4) || (array_search($v['sub4'],$practical_Sub) || array_search($v['sub5'],$practical_Sub) || array_search($v['sub6'],$practical_Sub) ||  array_search($v['sub7A'],$practical_Sub)))
                     {
@@ -2391,22 +2394,15 @@ class Admission_inter extends CI_Controller {
             $total_certFee = $total_certFee+$cert_fee;
             $n++;
         } 
-
+        
         $mydata_final = $this->Admission_inter_model->Update_AdmissionFee($AllStdFee);
-
-
-        // $netTotal = (int)$netTotal +$Adm_fee + $LAdm_fee+$Adm_ProcessingFee+$total_certFee;
-
-
-
-        $forms_id   = implode(",",$ids);        
-        $tot_fee     = $Totalprocessing_fee+$TotalAdmFee+$TotalLatefee+$total_certFee;
-
+ $tot_fee = $TotalAdmFee+$TotalLatefee+$Totalprocessing_fee+$total_certFee;
+  $forms_id   = implode(",",$ids); 
         $today = date("Y-m-d H:i:s");
         $data = array('inst_cd'=>$Inst_Id,'total_fee'=>$tot_fee,'proces_fee'=>$Adm_ProcessingFee,'reg_fee'=>$Adm_fee,'fine'=>$LAdm_fee,'TotalRegFee'=>$TotalAdmFee,'TotalLatefee'=>$TotalLatefee,'Totalprocessing_fee'=>$Totalprocessing_fee,'forms_id'=>$forms_id,'todaydate'=>$today,'total_std'=>$total_std,'cert_fee'=>$cert_fee,'total_cert'=>$total_certFee);
         $this->Admission_inter_model->Batch_Insertion($data); 
         redirect('Admission_inter/BatchList');
-        return;
+        return;                           
     }
     public function FormPrinting()
     {
