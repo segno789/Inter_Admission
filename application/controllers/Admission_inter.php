@@ -4,13 +4,13 @@ class Admission_inter extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->helper('url');   
- $this->clear_cache(); 
+        $this->clear_cache(); 
         $this->load->library('session');
         if( !$this->session->userdata('logged_in') && $this->router->method != 'login' ) {
             redirect('login');
         }
     }
-     function clear_cache()
+    function clear_cache()
     {
         $this->output->set_header("Cache-Control: no-store, no-cache, must-revalidate, no-transform, max-age=0, post-check=0, pre-check=0");
         $this->output->set_header("Pragma: no-cache");
@@ -197,7 +197,15 @@ class Admission_inter extends CI_Controller {
         $turn=1;     
         $pdf=new PDF_Rotate("P","in","A4");
         $pdf->AliasNbPages();
-        $pdf->SetTitle("Challan Form | Admission inter 2016 Supplemantry Batch Form Fee");
+        
+        $sessionpdf = '';
+        if(Session == 1)
+        $sessionpdf = "ANNUAL";
+        else if(Session == 2)
+        $sessionpdf = "SUPPLYMENTRY";
+        
+        
+        $pdf->SetTitle("Challan Form | Admission inter ".Year." ".$sessionpdf." Batch Form Fee");
         $pdf->SetMargins(0.5,0.5,0.5);
         $pdf->AddPage();
         $generatingpdf=false;
@@ -225,7 +233,7 @@ class Admission_inter extends CI_Controller {
         //-------------------- PRINT BARCODE
 
 
-        $temp = $challanNo.'@'.$user['Inst_Id'].'@'.$Batch_Id.'@12@2016@2';
+        $temp = $challanNo.'@'.$user['Inst_Id'].'@'.$Batch_Id.'@12@'.Year.'@'.Session.'';
 
         //DebugBreak();
         $temp =  $this->set_barcode($temp);
@@ -725,7 +733,7 @@ class Admission_inter extends CI_Controller {
         $pdf->SetFont('Arial','B',$font);
         $pdf->SetXY($x-58, $Y+185);
         $pdf->MultiCell(80,2.9,$user['inst_Name'],0,"L");
-                                                                
+
         $font = 12;
         $pdf->SetFont('Arial','B',$font);
         $pdf->SetXY($x-30, $Y+204);
@@ -2123,7 +2131,7 @@ class Admission_inter extends CI_Controller {
                 //$Adm_ProcessingFee; 
                 // $Totalprocessing_fee = $Totalprocessing_fee + $Adm_ProcessingFee;
  
-               if($v['cat11'] == 2)
+                if($v['cat11'] == 2)
                 {
                     if(($v['grp_cd']==1 ||$v['grp_cd']==2 || $v['grp_cd']==4) || (array_search($v['sub4'],$practical_Sub) || array_search($v['sub5'],$practical_Sub) || array_search($v['sub6'],$practical_Sub) ||  array_search($v['sub7A'],$practical_Sub)))
                     {
@@ -2284,7 +2292,8 @@ class Admission_inter extends CI_Controller {
         $q1 = $user_info['fee'];
         $total_std = 0;
         $total_cert = 0;
-       {
+        foreach($q1 as $k=>$v) 
+        {
             $ids[] = $v["FormNo"];
             $total_std++;
             $ispractical = 0;
@@ -2297,7 +2306,7 @@ class Admission_inter extends CI_Controller {
                 //$Adm_ProcessingFee; 
                 // $Totalprocessing_fee = $Totalprocessing_fee + $Adm_ProcessingFee;
  
-               if($v['cat11'] == 2)
+                if($v['cat11'] == 2)
                 {
                     if(($v['grp_cd']==1 ||$v['grp_cd']==2 || $v['grp_cd']==4) || (array_search($v['sub4'],$practical_Sub) || array_search($v['sub5'],$practical_Sub) || array_search($v['sub6'],$practical_Sub) ||  array_search($v['sub7A'],$practical_Sub)))
                     {
@@ -2382,11 +2391,11 @@ class Admission_inter extends CI_Controller {
             $total_certFee = $total_certFee+$cert_fee;
             $n++;
         } 
-        
+
         $mydata_final = $this->Admission_inter_model->Update_AdmissionFee($AllStdFee);
 
 
-       // $netTotal = (int)$netTotal +$Adm_fee + $LAdm_fee+$Adm_ProcessingFee+$total_certFee;
+        // $netTotal = (int)$netTotal +$Adm_fee + $LAdm_fee+$Adm_ProcessingFee+$total_certFee;
 
 
 
@@ -3238,13 +3247,13 @@ class Admission_inter extends CI_Controller {
             $pdf->SetFont('Arial','',7);    
             $pdf->Text($col5+.05,$ln[$countofrecords]+0.4,$data["sub5_abr"].','.$data["sub6_abr"].','.$data["sub7_abr"]);
 
-           /* if($user['gender']==1)
+            /* if($user['gender']==1)
             {
-                $pdf->Image(base_url().$data['picpath'],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG"); 
+            $pdf->Image(base_url().$data['picpath'],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG"); 
             }
             else
             {
-                $pdf->Image(DIRPATH12TH.$data['PicPath'],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG"); 
+            $pdf->Image(DIRPATH12TH.$data['PicPath'],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG"); 
             }*/
             $pdf->Image(DIRPATH12TH.$data['picpath'],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG"); 
             ++$SR;
@@ -3381,6 +3390,8 @@ class Admission_inter extends CI_Controller {
             $pdf->Image(base_url()."assets/img/12.jpg",7.49,0.39, 0.36,0.36, "JPG");    
 
 
+
+
             if(Session==1)
             {
                 $pdf->SetFont('Arial','',8);
@@ -3468,6 +3479,10 @@ class Admission_inter extends CI_Controller {
             $pdf->SetXY(4.5+$x,1.6+$Y);
 
             $pdf->Cell(0.5,0.5,$data["BForm"],0,'L');
+
+
+            $pdf->SetFont('Arial','B',14);
+            $pdf->TextWithRotation($x-0.2,2.85+$Y, $data['FormNo'],90,0);
 
             //--------------------------- FATHER NAME 
 
