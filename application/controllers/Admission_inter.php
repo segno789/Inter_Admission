@@ -197,15 +197,15 @@ class Admission_inter extends CI_Controller {
         $turn=1;     
         $pdf=new PDF_Rotate("P","in","A4");
         $pdf->AliasNbPages();
-        
+
         $sessionpdf = '';
         if(Session == 1)
-        $sessionpdf = "ANNUAL";
+            $sessionpdf = "ANNUAL";
         else if(Session == 2)
-        $sessionpdf = "SUPPLYMENTRY";
-        
-        
-        $pdf->SetTitle("Challan Form | Admission inter ".Year." ".$sessionpdf." Batch Form Fee");
+            $sessionpdf = "SUPPLYMENTRY";
+
+
+            $pdf->SetTitle("Challan Form | Admission inter ".Year." ".$sessionpdf." Batch Form Fee");
         $pdf->SetMargins(0.5,0.5,0.5);
         $pdf->AddPage();
         $generatingpdf=false;
@@ -232,8 +232,7 @@ class Admission_inter extends CI_Controller {
 
         //-------------------- PRINT BARCODE
 
-
-        $temp = $challanNo.'@'.$user['Inst_Id'].'@'.$Batch_Id.'@12@'.Year.'@'.Session.'';
+        $temp = $challanNo.'@'.$user['Inst_Id'];//.'@'.$Batch_Id.'@12@'.Year.'@'.Session.'';
 
         //DebugBreak();
         $temp =  $this->set_barcode($temp);
@@ -243,10 +242,6 @@ class Admission_inter extends CI_Controller {
         $corcnt = 0;
         for ($j=1;$j<=4;$j++) 
         {
-
-
-
-
             $yy = 0.04;
             if($turn==1){$dyy=0.2;} 
             else {
@@ -563,7 +558,7 @@ class Admission_inter extends CI_Controller {
 
         $result[0] = $result['data'][0];
 
-        $pdf->Image("assets/img/forwardingletter11th_branch.png",5,6, 200,280, "PNG");
+        $pdf->Image("assets/img/forwarding_exam_branch.png",5,6, 200,280, "PNG");
 
         $bardata = Barcode::fpdf($pdf, $black, $bx, $by, $angle, $type, array('code'=>$Barcode), $width, $height);
 
@@ -571,13 +566,13 @@ class Admission_inter extends CI_Controller {
         Barcode::rotate(-$len / 2, ($bardata['height'] / 2) + $fontSize + $marge, $angle, $xt, $yt);
 
         $pdf->SetFont('Arial','B',11.5);
-        $pdf->SetXY(61.5, 44);
+        $pdf->SetXY(87, 44);
         $pdf->Cell(0,0,$data['iyear'],0,0,'L',0);
 
 
-        $Y = 72;
+        $Y = 75;
         $font = 12;
-        $x = 13; 
+        $x = 25; 
         for($i =0 ; $i<7 ; $i++)
         {
 
@@ -612,7 +607,7 @@ class Admission_inter extends CI_Controller {
             else if($i == 0)
             {
                 $pdf->SetFont('Arial','B',$font-3);
-                $pdf->SetXY($x-5, $Y-6.5);
+                $pdf->SetXY($x-10, $Y-6.5);
                 $pdf->Cell(0,0,$result[0]['Total_Fee'].'/-',0,0,'L',0);
             }
             if($i==1)
@@ -631,36 +626,36 @@ class Admission_inter extends CI_Controller {
         }
 
         $pdf->SetFont('Arial','B',$font);
-        $pdf->SetXY($x-115, $Y+42);
+        $pdf->SetXY($x-120, $Y+37);
         $pdf->Cell(0,0,$result[0]['Total_Fee'].'/-',0,0,'L',0);
 
         $pdf->SetFont('Arial','B',$font);
-        $pdf->SetXY($x-59, $Y+42);
+        $pdf->SetXY($x-68, $Y+37);
         $pdf->Cell(0,0,$result[0]['Total_SpeCandidate'],0,0,'L',0);
 
         // DebugBreak();
         $pdf->SetFont('Arial','B',$font);
-        $pdf->SetXY($x-30, $Y+172);
+        $pdf->SetXY($x-30, $Y+163);
         $pdf->Cell(0,0,$user['Inst_Id'],0,0,'L',0);
         $font = 9;
         $pdf->SetFont('Arial','B',$font);
-        $pdf->SetXY($x-68, $Y+178);
+        $pdf->SetXY($x-68, $Y+170);
         $pdf->MultiCell(80,2.9,$user['inst_Name'],0,"L");
         $font = 12;
         $pdf->SetFont('Arial','B',$font);
-        $pdf->SetXY($x-30, $Y+198);
+        $pdf->SetXY($x-40, $Y+190);
         $pdf->Cell(0,0,$user['phone'],0,0,'L',0);
 
         $pdf->SetFont('Arial','B',$font);
-        $pdf->SetXY($x-30, $Y+206);
+        $pdf->SetXY($x-40, $Y+199);
         $pdf->Cell(0,0,$user['cell'],0,0,'L',0);
         //Matric Branch Copy
 
-        $Y = 64;
+        $Y = 68;
         $font = 12;
-        $x = 10; 
+        $x = 25; 
         $pdf->AddPage('P',"A4");
-        $pdf->Image("assets/img/forwardingletter_finance.png",5,6, 200,280, "PNG");
+        $pdf->Image("assets/img/forwarding_fin_p2.png",5,6, 200,280, "PNG");
         for($i =0 ; $i<7 ; $i++)
         {
             $pdf->SetFont('Arial','B',$font);
@@ -696,7 +691,7 @@ class Admission_inter extends CI_Controller {
             else if($i == 0)
             {
                 $pdf->SetFont('Arial','B',$font-3);
-                $pdf->SetXY($x, $Y-2);
+                $pdf->SetXY($x-12, $Y-2);
                 $pdf->Cell(0,0,$result[0]['Total_Fee'].'/-',0,0,'L',0);
             }
             if($i==1)
@@ -718,29 +713,29 @@ class Admission_inter extends CI_Controller {
             }
         }
         $pdf->SetFont('Arial','B',$font);
-        $pdf->SetXY($x-115, $Y+47);
+        $pdf->SetXY($x-125, $Y+43);
         $pdf->Cell(0,0,$result[0]['Total_Fee'].'/-',0,0,'L',0);
 
         $pdf->SetFont('Arial','B',$font);
-        $pdf->SetXY($x-59, $Y+47);
+        $pdf->SetXY($x-65, $Y+42);
         $pdf->Cell(0,0,$result[0]['Total_SpeCandidate'],0,0,'L',0);
 
         $pdf->SetFont('Arial','B',$font);
-        $pdf->SetXY($x-20, $Y+178);
+        $pdf->SetXY($x-30, $Y+175);
         $pdf->Cell(0,0,$user['Inst_Id'],0,0,'L',0);
 
         $font = 9;
         $pdf->SetFont('Arial','B',$font);
-        $pdf->SetXY($x-58, $Y+185);
+        $pdf->SetXY($x-68, $Y+179);
         $pdf->MultiCell(80,2.9,$user['inst_Name'],0,"L");
 
         $font = 12;
         $pdf->SetFont('Arial','B',$font);
-        $pdf->SetXY($x-30, $Y+204);
+        $pdf->SetXY($x-40, $Y+200);
         $pdf->Cell(0,0,$user['phone'],0,0,'L',0);
 
         $pdf->SetFont('Arial','B',$font);
-        $pdf->SetXY($x-30, $Y+213);
+        $pdf->SetXY($x-40, $Y+208);
         $pdf->Cell(0,0,$user['cell'],0,0,'L',0);
 
         $bardata = Barcode::fpdf($pdf, $black, $bx+2, $by+5, $angle, $type, array('code'=>$Barcode), $width, $height);
