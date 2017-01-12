@@ -53,7 +53,7 @@
     </tr>
     <tr>
         <td colspan="8"><div style="font-size:16px;font-weight:bold;text-align:center;">REVENUE FORM SHOWING DETAILS OF ADMISSIONS <br />
-                <?php echo class_for_11th_Adm ?> Class (SESSION <?php echo CURRENT_SESS ?>)
+                <?php echo class_for_11th_Adm ?> Class ( ADMISSION <?php echo Year ?>)
             </div> 
         </td>
     </tr>

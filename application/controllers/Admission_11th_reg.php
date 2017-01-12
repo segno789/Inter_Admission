@@ -30,7 +30,7 @@ class Admission_11th_reg extends CI_Controller {
     }
     public function index()
     {
-        // DebugBreak(); 
+      // DebugBreak(); 
 
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -43,7 +43,7 @@ class Admission_11th_reg extends CI_Controller {
         $inst_cd = '';
         //$isset = $this->Admission_11th_reg_model->iszoneset($Inst_Id);
         //DebugBreak();
-        if($Inst_Id == $inst_cd)
+       if($Inst_Id == $inst_cd)
         {
             $this->load->view('Admission/Matric/errorPage.php',$userinfo);
             $this->load->view('common/footer.php'); 
@@ -51,7 +51,7 @@ class Admission_11th_reg extends CI_Controller {
         else{
             $userinfo['isselected'] = 14;
             $userinfo['isdashbord'] = 1;
-            //  $userinfo['zone'] = $isset[0]['zone_cd'];
+          //  $userinfo['zone'] = $isset[0]['zone_cd'];
             $count = $this->Admission_11th_reg_model->Dashboard($Inst_Id);
             $this->load->view('common/menu.php',$userinfo);
             $info = array('count'=>$count,'Inst_id'=>$Inst_Id,'Inst_name'=>$Inst_name);
@@ -73,7 +73,7 @@ class Admission_11th_reg extends CI_Controller {
 
         if($isres == 1)
         {
-            redirect('Admission_9th_reg');
+         redirect('Admission_9th_reg');
         }
 
 
@@ -93,7 +93,7 @@ class Admission_11th_reg extends CI_Controller {
         if(empty($result['data'])){
 
             return; }
-        $temp = $user['Inst_Id'].'@11@'.CURRENT_SESS;
+        $temp = $user['Inst_Id'].'@11@'.CURRENT_SESS1;
         $image =  $this->set_barcode($temp);
         // $pdf->Image(base_url().'assets/pdfs/'.'/'.$image,6.3,0.5, 1.8, 0.20, "PNG");
         //$studeninfo['data']['info'][0]['barcode'] = $image;
@@ -150,7 +150,7 @@ class Admission_11th_reg extends CI_Controller {
         $pdf->Cell(0, 0.25, "__________", 0.25, "C");
 
 
-        $pdf->SetFont('Arial','B',10);
+         $pdf->SetFont('Arial','B',10);
         $pdf->SetXY(0.4+$x,1.6+$y);
 
         $pdf->Cell(0, 0.25, "Dated:______________________", 0.25, "C");
@@ -161,7 +161,7 @@ class Admission_11th_reg extends CI_Controller {
         $pdf->SetXY(0.4+$x,1.3+$y);
         $pdf->Cell(0, 0.25, "TEH:__________________", 0.25, "C");
 
-        $pdf->SetFont('Arial','',10);
+         $pdf->SetFont('Arial','',10);
         $pdf->SetXY(2.1+$x,1.3+$y);
         $pdf->Cell(0, 0.25, " DISTT:_____________________", 0.25, "C");     */
 
@@ -307,7 +307,7 @@ class Admission_11th_reg extends CI_Controller {
         $pdf->Cell($boxWidth-1.7,0.2,$result['data'][0]['wlateFee5'],1,0,'C',1); */
         $pdf->Cell($boxWidth-1.5,0.2,$result['data'][0]['grpFee5'],1,0,'C',1);
 
-        /* $pdf->SetXY($xx,5+$yy);
+       /* $pdf->SetXY($xx,5+$yy);
         $pdf->SetFont('Arial','',7);
         $pdf->Cell($boxWidth-2.2,0.2,'6',1,0,'C',1);
         $pdf->Cell($boxWidth-0.7,0.2,'ETICHS FOR NON MUSLIMS',1,0,'L',1);
@@ -395,7 +395,7 @@ class Admission_11th_reg extends CI_Controller {
         $pdf->MultiCell(8.5,0.2,"Signature & Stamp of Principal",0,"L",0)    ; 
 
         $pdf->SetFont('Arial','B',8);
-        $pdf->SetXY(0.9,11.45+$y);     
+         $pdf->SetXY(0.9,11.45+$y);     
         $pdf->MultiCell(8.5,0.2,'Print Date: '. date('d-m-Y H:i:s a'),0,"L",0)    ;  
 
         $pdf->Output('123'.'.pdf', 'I');
@@ -534,7 +534,7 @@ class Admission_11th_reg extends CI_Controller {
     }
     public function NewEnrolment_update()
     {
-        ///DebugBreak();
+         ///DebugBreak();
 
         $this->load->model('Admission_11th_reg_model');
         $this->load->library('session');
@@ -552,7 +552,7 @@ class Admission_11th_reg extends CI_Controller {
 
         $seltedOption = @$_POST['isformwise']; // if it is one then submit of selected forms, if it is 2 then submit group wise, if it is 3 then it is cancel selected admissions.
         $_POST['Inst_Id'] = $Inst_Id;
-        // $isset = $this->Admission_11th_reg_model->iszoneset($Inst_Id);
+       // $isset = $this->Admission_11th_reg_model->iszoneset($Inst_Id);
         //$_POST['zone_cd'] = $isset[0]['zone_cd'];
         $logedIn = $this->Admission_11th_reg_model->Update_NewEnorlement($_POST);
         $this->session->set_flashdata('error', 'success');
@@ -577,10 +577,10 @@ public function NewEnrolment_Delete($formno)
         redirect('Admission_11th_reg/EditForms');
         return;
     }
-    public function financeReoprt()
+     public function financeReoprt()
     {
         //DebugBreak();
-        $this->load->library('session');
+    $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $user = $Logged_In_Array['logged_in'];
         $this->load->model('Admission_11th_reg_model');
@@ -588,7 +588,7 @@ public function NewEnrolment_Delete($formno)
         $result = array('data'=>$this->Admission_11th_reg_model->forwarding_pdf_Finance_final($fetch_data),'inst_Name'=>$user['inst_Name']);    
         if(empty($result['data']))
         {
-            //   return; 
+     //   return; 
         }
         $temp = $user['Inst_Id'].'@'.Year.'@'.Session;
         //$image =  $this->set_barcode($temp);
@@ -617,11 +617,13 @@ public function NewEnrolment_Delete($formno)
         $Barcode = $temp;
 
         $result[0] = $result['data'][0];
-        // DebugBreak();
+         // DebugBreak();
         $pdf->Image("assets/img/forwardingletter11th_branch.png",5,6, 200,280, "PNG");
-        // $pdf->Image("assets/img/M2.jpg",100, 2.8, 10, 10, "jpg");
+       // $pdf->Image("assets/img/M2.jpg",100, 2.8, 10, 10, "jpg");
         $bardata = Barcode::fpdf($pdf, $black, $bx, $by, $angle, $type, array('code'=>$Barcode), $width, $height);
-
+        $pdf->SetFont('Arial','B',8);
+        $pdf->SetXY(150.6, 40);
+        $pdf->Cell(0,0,'Print Date: '. date('d-m-Y H:i:s a'),0,0,'L',0);//MultiCell(8.5,0.2,'Print Date: '. date('d-m-Y H:i:s a'),0,"L",0)    ;  
         $len = $pdf->GetStringWidth($bardata['hri']);
         Barcode::rotate(-$len / 2, ($bardata['height'] / 2) + $fontSize + $marge, $angle, $xt, $yt);
 
@@ -631,7 +633,7 @@ public function NewEnrolment_Delete($formno)
 
 
 
-        //  DebugBreak();
+      //  DebugBreak();
         //Finance Page
         $Y = 72;
         $font = 12;
@@ -645,37 +647,37 @@ public function NewEnrolment_Delete($formno)
             if($i == 6)
             {
                 $pdf->SetXY($x-10, $Y-7.5);
-                $pdf->Cell(0,0,$result[0]['Total_sci'],0,0,'L',0);
+            $pdf->Cell(0,0,$result[0]['Total_sci'],0,0,'L',0);
             }
             else if($i == 5)
             {
-                $pdf->Cell(0,0,$result[0]['Total_Arts'],0,0,'L',0);
+            $pdf->Cell(0,0,$result[0]['Total_Arts'],0,0,'L',0);
             }
             else if($i == 4)
             {      $pdf->SetXY($x-10, $Y-7.5);
-                $pdf->Cell(0,0,$result[0]['Total_ArtsPr'],0,0,'L',0);
+            $pdf->Cell(0,0,$result[0]['Total_ArtsPr'],0,0,'L',0);
             }
             else if($i == 3)
             {        $pdf->SetXY($x-10, $Y-7.5);
-                $pdf->Cell(0,0,$result[0]['Total_ReApSc'],0,0,'L',0);
+            $pdf->Cell(0,0,$result[0]['Total_ReApSc'],0,0,'L',0);
             }
             else if($i == 2)
             {           $pdf->SetXY($x-5, $Y-7.5);
-                $pdf->Cell(0,0,$result[0]['Total_ReApArts'],0,0,'L',0);
+            $pdf->Cell(0,0,$result[0]['Total_ReApArts'],0,0,'L',0);
             }
-            else if($i == 1)
+             else if($i == 1)
             {
-                $pdf->Cell(0,0,$result[0]['Total_ReApArtsPr'],0,0,'L',0);
+            $pdf->Cell(0,0,$result[0]['Total_ReApArtsPr'],0,0,'L',0);
             }
             else if($i == 0)
             {
                 $pdf->SetFont('Arial','B',$font-3);
                 $pdf->SetXY($x-5, $Y-6.5);
-                $pdf->Cell(0,0,$result[0]['Total_Fee'].'/-',0,0,'L',0);
+            $pdf->Cell(0,0,$result[0]['Total_Fee'].'/-',0,0,'L',0);
             }
-            if($i==1)
+             if($i==1)
             {
-                $x= $x+26; 
+            $x= $x+26; 
             }
             else if($i<6)
             {
@@ -683,7 +685,7 @@ public function NewEnrolment_Delete($formno)
 
                 if($i==4)
                 {
-                    $x= $x-5; 
+                $x= $x-5; 
                 }
             }
 
@@ -691,122 +693,126 @@ public function NewEnrolment_Delete($formno)
 
         }
 
-        $pdf->SetFont('Arial','B',$font);
-        $pdf->SetXY($x-115, $Y+42);
-        $pdf->Cell(0,0,$result[0]['Total_Fee'].'/-',0,0,'L',0);
+            $pdf->SetFont('Arial','B',$font);
+            $pdf->SetXY($x-115, $Y+42);
+            $pdf->Cell(0,0,$result[0]['Total_Fee'].'/-',0,0,'L',0);
 
-        $pdf->SetFont('Arial','B',$font);
-        $pdf->SetXY($x-59, $Y+42);
-        $pdf->Cell(0,0,$result[0]['Total_SpeCandidate'],0,0,'L',0);
+            $pdf->SetFont('Arial','B',$font);
+            $pdf->SetXY($x-59, $Y+42);
+            $pdf->Cell(0,0,$result[0]['Total_SpeCandidate'],0,0,'L',0);
 
-        // DebugBreak();
-        $pdf->SetFont('Arial','B',$font);
-        $pdf->SetXY($x-30, $Y+172);
-        $pdf->Cell(0,0,$user['Inst_Id'],0,0,'L',0);
-        $font = 9;
-        $pdf->SetFont('Arial','B',$font);
-        $pdf->SetXY($x-68, $Y+178);
-        $pdf->MultiCell(80,2.9,$user['inst_Name'],0,"L");
-        $font = 12;
-        $pdf->SetFont('Arial','B',$font);
-        $pdf->SetXY($x-30, $Y+198);
-        $pdf->Cell(0,0,$user['phone'],0,0,'L',0);
+       // DebugBreak();
+            $pdf->SetFont('Arial','B',$font);
+            $pdf->SetXY($x-30, $Y+172);
+            $pdf->Cell(0,0,$user['Inst_Id'],0,0,'L',0);
+            $font = 9;
+            $pdf->SetFont('Arial','B',$font);
+            $pdf->SetXY($x-68, $Y+178);
+            $pdf->MultiCell(80,2.9,$user['inst_Name'],0,"L");
+            $font = 12;
+            $pdf->SetFont('Arial','B',$font);
+            $pdf->SetXY($x-30, $Y+198);
+            $pdf->Cell(0,0,$user['phone'],0,0,'L',0);
 
-        $pdf->SetFont('Arial','B',$font);
-        $pdf->SetXY($x-30, $Y+206);
-        $pdf->Cell(0,0,$user['cell'],0,0,'L',0);
+            $pdf->SetFont('Arial','B',$font);
+            $pdf->SetXY($x-30, $Y+206);
+            $pdf->Cell(0,0,$user['cell'],0,0,'L',0);
         /////Matric Branch Copy
 
 
         $Y = 64;
         $font = 12;
         $x = 10; 
-        $pdf->AddPage('P',"A4");
-        $pdf->Image("assets/img/forwardingletter_finance.png",5,6, 200,280, "PNG");
-        for($i =0 ; $i<7 ; $i++)
+         $pdf->AddPage('P',"A4");
+        
+          $pdf->Image("assets/img/forwardingletter_finance.png",5,6, 200,280, "PNG");
+          for($i =0 ; $i<7 ; $i++)
         {
             $pdf->SetFont('Arial','B',$font);
             $pdf->SetXY($x-1.5, $Y-2);
-            if($i == 6)
+             if($i == 6)
             {
                 $pdf->SetXY($x-8, $Y-2);
-                $pdf->Cell(0,0,$result[0]['Total_sci'],0,0,'L',0);
+            $pdf->Cell(0,0,$result[0]['Total_sci'],0,0,'L',0);
             }
             else if($i == 5)
             {
-                $pdf->Cell(0,0,$result[0]['Total_Arts'],0,0,'L',0);
+            $pdf->Cell(0,0,$result[0]['Total_Arts'],0,0,'L',0);
             }
             else if($i == 4)
             {
-                $pdf->Cell(0,0,$result[0]['Total_ArtsPr'],0,0,'L',0);
+            $pdf->Cell(0,0,$result[0]['Total_ArtsPr'],0,0,'L',0);
             }
             else if($i == 3)
             {
 
-                $pdf->Cell(0,0,$result[0]['Total_ReApSc'],0,0,'L',0);
+            $pdf->Cell(0,0,$result[0]['Total_ReApSc'],0,0,'L',0);
             }
             else if($i == 2)
             {
 
-                $pdf->Cell(0,0,$result[0]['Total_ReApArts'],0,0,'L',0);
+            $pdf->Cell(0,0,$result[0]['Total_ReApArts'],0,0,'L',0);
             }
-            else if($i == 1)
+             else if($i == 1)
             {
 
-                $pdf->Cell(0,0,$result[0]['Total_ReApArtsPr'],0,0,'L',0);
+            $pdf->Cell(0,0,$result[0]['Total_ReApArtsPr'],0,0,'L',0);
             }
             else if($i == 0)
             {
                 $pdf->SetFont('Arial','B',$font-3);
                 $pdf->SetXY($x, $Y-2);
-                $pdf->Cell(0,0,$result[0]['Total_Fee'].'/-',0,0,'L',0);
+            $pdf->Cell(0,0,$result[0]['Total_Fee'].'/-',0,0,'L',0);
             }
             if($i==1)
             {
-                $x= $x+26; 
+            $x= $x+26; 
             }
             else if($i<6)
             {
-                if($i == 3)
-                {
-                    $x= $x+24; 
-                }
+            if($i == 3)
+            {
+                $x= $x+24; 
+            }
 
-                else
-                {
+            else
+            {
 
-                    $x= $x+20; 
+                $x= $x+20; 
 
 
-                }
+            }
 
             }
         }
-        $pdf->SetFont('Arial','B',$font);
-        $pdf->SetXY($x-115, $Y+47);
-        $pdf->Cell(0,0,$result[0]['Total_Fee'].'/-',0,0,'L',0);
+         $pdf->SetFont('Arial','B',8);
+        $pdf->SetXY(150.6, 45);
+        $pdf->Cell(0,0,'Print Date: '. date('d-m-Y H:i:s a'),0,0,'L',0);
+            $pdf->SetFont('Arial','B',$font);
+            $pdf->SetXY($x-115, $Y+47);
+            $pdf->Cell(0,0,$result[0]['Total_Fee'].'/-',0,0,'L',0);
 
-        $pdf->SetFont('Arial','B',$font);
-        $pdf->SetXY($x-59, $Y+47);
-        $pdf->Cell(0,0,$result[0]['Total_SpeCandidate'],0,0,'L',0);
+            $pdf->SetFont('Arial','B',$font);
+            $pdf->SetXY($x-59, $Y+47);
+            $pdf->Cell(0,0,$result[0]['Total_SpeCandidate'],0,0,'L',0);
 
-        $pdf->SetFont('Arial','B',$font);
-        $pdf->SetXY($x-20, $Y+178);
-        $pdf->Cell(0,0,$user['Inst_Id'],0,0,'L',0);
+            $pdf->SetFont('Arial','B',$font);
+            $pdf->SetXY($x-20, $Y+178);
+            $pdf->Cell(0,0,$user['Inst_Id'],0,0,'L',0);
 
-        $font = 9;
-        $pdf->SetFont('Arial','B',$font);
-        $pdf->SetXY($x-58, $Y+185);
-        $pdf->MultiCell(80,2.9,$user['inst_Name'],0,"L");
+            $font = 9;
+            $pdf->SetFont('Arial','B',$font);
+            $pdf->SetXY($x-58, $Y+185);
+            $pdf->MultiCell(80,2.9,$user['inst_Name'],0,"L");
 
-        $font = 12;
-        $pdf->SetFont('Arial','B',$font);
-        $pdf->SetXY($x-30, $Y+204);
-        $pdf->Cell(0,0,$user['phone'],0,0,'L',0);
+            $font = 12;
+            $pdf->SetFont('Arial','B',$font);
+            $pdf->SetXY($x-30, $Y+204);
+            $pdf->Cell(0,0,$user['phone'],0,0,'L',0);
 
-        $pdf->SetFont('Arial','B',$font);
-        $pdf->SetXY($x-30, $Y+213);
-        $pdf->Cell(0,0,$user['cell'],0,0,'L',0);
+            $pdf->SetFont('Arial','B',$font);
+            $pdf->SetXY($x-30, $Y+213);
+            $pdf->Cell(0,0,$user['cell'],0,0,'L',0);
 
 
         //$pdf->Image("assets/img/M3.jpg",100, 2.8, 10, 10, "jpg");
@@ -1080,7 +1086,7 @@ public function NewEnrolment_Delete($formno)
     public function return_pdf()
     {
 
-        //DebugBreak();
+         //DebugBreak();
         $Condition = $this->uri->segment(4);
         /*
         $Condition  1 == Batch Id wise printing.
@@ -1139,7 +1145,7 @@ public function NewEnrolment_Delete($formno)
             return;
 
         }
-        $temp = $user['Inst_Id'].'11@2017';
+        $temp = $user['Inst_Id'].'@11@'.CURRENT_SESS1;
         $image =  $this->set_barcode($temp);
         // $pdf->Image(base_url().'assets/pdfs/'.'/'.$image,6.3,0.5, 1.8, 0.20, "PNG");
         //$studeninfo['data']['info'][0]['barcode'] = $image;
@@ -1154,11 +1160,11 @@ public function NewEnrolment_Delete($formno)
         $pdf->AliasNbPages();
         /*if($Condition==4 or $Condition == 5)
         {
-        $pdf->SetTitle('Proof Print of Return');   
+            $pdf->SetTitle('Proof Print of Return');   
         }
         else
         {
-        $pdf->SetTitle('Final Print of Return');
+            $pdf->SetTitle('Final Print of Return');
         }     */
 
 
@@ -1195,9 +1201,9 @@ public function NewEnrolment_Delete($formno)
                 //                 $pdf->Rotate(35,190,'W a t e r m a r k   d e m o',45);
 
 
-                /* if($Condition==4 or $Condition == 5)
+               /* if($Condition==4 or $Condition == 5)
                 {
-                $pdf->Image( base_url().'assets/img/PROOF_READ.jpg' ,1,3.5 , 6,4 , "JPG");     
+                    $pdf->Image( base_url().'assets/img/PROOF_READ.jpg' ,1,3.5 , 6,4 , "JPG");     
                 }   */
 
                 $pdf->SetFont('Arial','U',14);
@@ -1219,25 +1225,25 @@ public function NewEnrolment_Delete($formno)
                 $pdf->SetXY(6.9,0.8);
                 $pdf->Cell(0, 0.25,  'Gender: '. ($data['sex']==1?"MALE":"FEMALE" ), 0.25, "C");
                 $grp_name = $data["RegGrp"];
-                switch ($grp_name) {
-                    case '1':
-                        $grp_name = 'PRE-MEDICAL';
-                        break;
-                    case '2':
-                        $grp_name = 'PRE-ENGINEERING';
-                        break;
-                    case '3':
-                        $grp_name = 'HUMANITIES';
-                        break;
-                    case '4':
-                        $grp_name = 'GENERAL SCIENCE';
-                        break;
-                    case '5':
-                        $grp_name = 'COMMERCE';
-                        break;
-                    default:
-                        $grp_name = "No GROUP SELECTED.";
-                }
+                  switch ($grp_name) {
+                                                        case '1':
+                                                            $grp_name = 'PRE-MEDICAL';
+                                                            break;
+                                                        case '2':
+                                                            $grp_name = 'PRE-ENGINEERING';
+                                                            break;
+                                                        case '3':
+                                                            $grp_name = 'HUMANITIES';
+                                                            break;
+                                                        case '4':
+                                                            $grp_name = 'GENERAL SCIENCE';
+                                                            break;
+                                                        case '5':
+                                                            $grp_name = 'COMMERCE';
+                                                            break;
+                                                        default:
+                                                            $grp_name = "No GROUP SELECTED.";
+                                                            }
                 $pdf->SetFont('Arial','',10);
                 $pdf->SetXY(2.5,0.8);
                 $pdf->Cell(0, 0.25,  'Group: '.$grp_name, 0.25, "C");
@@ -1277,7 +1283,7 @@ public function NewEnrolment_Delete($formno)
                 $pdf->Text($col3+.1,$title+.2,"Bay Form No"); 
                 $pdf->Text($col3+.1,$title+.4,"Father CNIC");
 
-                // $pdf->Text($col4+.1,$title+.2,"Date Of Birth");
+               // $pdf->Text($col4+.1,$title+.2,"Date Of Birth");
                 $pdf->Text($col4+.1,$title+.31,"Relegion");
                 $pdf->Text($col4+.1,$title+.45,"Old RNo-Year");
 
@@ -1303,7 +1309,7 @@ public function NewEnrolment_Delete($formno)
             $pdf->Text($col3+.1,$ln[$countofrecords]+0.2,$data["BForm"]);
             $pdf->Text($col3+.1,$ln[$countofrecords]+0.4,$data["FNIC"]);
 
-            //  $pdf->Text($col4+.1,$ln[$countofrecords]+0.2,$dob);
+          //  $pdf->Text($col4+.1,$ln[$countofrecords]+0.2,$dob);
             $pdf->Text($col4+.1,$ln[$countofrecords]+0.4,$data["rel"]==1?"Muslim":"Non-Muslim");
 
             if($data["IsReAdm"] == '1' )
@@ -1317,7 +1323,7 @@ public function NewEnrolment_Delete($formno)
             $pdf->Text($col5+.05,$ln[$countofrecords]+0.2,  $data["sub1_abr"].','.$data["sub2_abr"].','.$data["sub3_abr"].','.$data["sub4_abr"]);
             $pdf->SetFont('Arial','',7);    
             $pdf->Text($col5+.05,$ln[$countofrecords]+0.4,$data["sub5_abr"].','.$data["sub6_abr"].','.$data["sub7_abr"]);
-            // DebugBreak();
+           // DebugBreak();
 
             $pdf->Image(DIRPATH11th.'/'.$data["coll_cd"].'/'.$data["PicPath"],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG"); 
 
@@ -1349,33 +1355,33 @@ public function NewEnrolment_Delete($formno)
     }
     public function GetTehName($id)
     {
-        $retVal = "";
+       $retVal = "";
         if($id == 1) $retVal = "KAMOKE";
         else if($id == 2)  $retVal = "GUJRANWALA";
             else if($id == 3)  $retVal = "WAZIRABAD";
                 else if($id == 4)  $retVal = "NOWSHERA VIRKAN";
                     else if($id == 9)  $retVal = "PINDI BHATTIAN";
                         else if($id == 10)  $retVal = "MANDI BAHA-UD-DIN";
-                            else if($id == 11)  $retVal = "PHALIA";
-                                else if($id == 8)  $retVal = "HAFIZABAD";
-                                    else if($id == 12)  $retVal = "MALAKWAL";
-                                        else if($id == 13)  $retVal = "NAROWAL";
-                                            else if($id == 14)  $retVal = "SHAKARGARH";
-                                                else if($id == 5)  $retVal = "GUJRAT";
-                                                    else if($id == 6)  $retVal = "KHARIAN";
-                                                        else if($id == 7)  $retVal = "SARAI ALAMGIR";
-                                                            else if($id == 15)  $retVal = "SIALKOT";
-                                                                else if($id == 16)  $retVal = "PASRUR";
-                                                                    else if($id == 17)  $retVal = "DASKA";
-                                                                        else if($id == 18)  $retVal = "SAMBRIAL";
-                                                                            else if($id == 19)  $retVal = "ZAFARWAL";
-                                                                                else if($id == 20)  $retVal = "GUJAR KHAN";
-                                                                                    else if($id == 21)  $retVal = "JHANG";
-                                                                                        else if($id == 22)  $retVal = "BURNALA";
-                                                                                            else if($id == 23)  $retVal = "GUJAR KHAN";
-                                                                                                else if($id == 24)  $retVal = "JEHLUM";
+                        else if($id == 11)  $retVal = "PHALIA";
+                        else if($id == 8)  $retVal = "HAFIZABAD";
+                        else if($id == 12)  $retVal = "MALAKWAL";
+                        else if($id == 13)  $retVal = "NAROWAL";
+                        else if($id == 14)  $retVal = "SHAKARGARH";
+                        else if($id == 5)  $retVal = "GUJRAT";
+                        else if($id == 6)  $retVal = "KHARIAN";
+                        else if($id == 7)  $retVal = "SARAI ALAMGIR";
+                        else if($id == 15)  $retVal = "SIALKOT";
+                        else if($id == 16)  $retVal = "PASRUR";
+                        else if($id == 17)  $retVal = "DASKA";
+                        else if($id == 18)  $retVal = "SAMBRIAL";
+                        else if($id == 19)  $retVal = "ZAFARWAL";
+                        else if($id == 20)  $retVal = "GUJAR KHAN";
+                        else if($id == 21)  $retVal = "JHANG";
+                        else if($id == 22)  $retVal = "BURNALA";
+                        else if($id == 23)  $retVal = "GUJAR KHAN";
+                        else if($id == 24)  $retVal = "JEHLUM";
 
-                                                                                                    return $retVal; 
+                            return $retVal; 
     }
     public function GetZoneName($zone_cd)
     {
@@ -1420,7 +1426,7 @@ public function NewEnrolment_Delete($formno)
         $temp = $user['Inst_Id'].'@11@'.Session;
         $image =  $this->set_barcode($temp);
         // --------------------------------------- Fee Calculation Section ------------------------------------------------
-        // DebugBreak();
+       // DebugBreak();
         $User_info_data = array('Inst_Id'=>$user['Inst_Id'], 'date' => date('Y-m-d'));
         $user_info  =  $this->Admission_11th_reg_model->getuser_info($User_info_data); 
         $isfine = 0;
@@ -1491,7 +1497,7 @@ public function NewEnrolment_Delete($formno)
                 $ArtsProcFee =$user_info['rule_fee'][0]['Processing_Fee'];
                 // For ReAdmission Fee
                 $ArtsAdmFee_ReAdm = $user_info['rule_fee'][0]['Amount'];
-                // $ArtsAdmFee_ReAdm = $user_info['rule_fee'][0]['Processing_Fee'];
+               // $ArtsAdmFee_ReAdm = $user_info['rule_fee'][0]['Processing_Fee'];
             }
             else if($user_info['rule_fee'][1]['isPrSub']== 0 )
             {
@@ -1563,42 +1569,42 @@ public function NewEnrolment_Delete($formno)
                     //$ArtsAdmFee_ReAdm = $user_info['rule_fee'][1]['Processing_Fee'];
                 }
             }
-            /* else
+           /* else
             {
 
-            if($user_info['rule_fee'][0]['isPrSub']==1)
-            {
-            $SciAdmFee = 0;
-            $SciProcFee = $user_info['rule_fee'][0]['Processing_Fee'];
-            // For ReAdmission Fee
-            $SciAdmFee_ReAdm = $user_info['rule_fee'][0]['Amount'];
-            $SciProcFee_ReAdm = $user_info['rule_fee'][0]['Processing_Fee'];
+                if($user_info['rule_fee'][0]['isPrSub']==1)
+                {
+                    $SciAdmFee = 0;
+                    $SciProcFee = $user_info['rule_fee'][0]['Processing_Fee'];
+                    // For ReAdmission Fee
+                    $SciAdmFee_ReAdm = $user_info['rule_fee'][0]['Amount'];
+                    $SciProcFee_ReAdm = $user_info['rule_fee'][0]['Processing_Fee'];
 
-            } else if( $user_info['rule_fee'][1]['isPrSub']== 1 )
-            {
-            $SciAdmFee = 0;
-            $SciProcFee = $user_info['rule_fee'][1]['Processing_Fee'];
-            // For ReAdmission Fee
-            $SciAdmFee_ReAdm = $user_info['rule_fee'][1]['Amount'];
-            $SciProcFee_ReAdm = $user_info['rule_fee'][1]['Processing_Fee'];
+                } else if( $user_info['rule_fee'][1]['isPrSub']== 1 )
+                {
+                    $SciAdmFee = 0;
+                    $SciProcFee = $user_info['rule_fee'][1]['Processing_Fee'];
+                    // For ReAdmission Fee
+                    $SciAdmFee_ReAdm = $user_info['rule_fee'][1]['Amount'];
+                    $SciProcFee_ReAdm = $user_info['rule_fee'][1]['Processing_Fee'];
 
-            }
-            if($user_info['rule_fee'][0]['isPrSub']==0)
-            {
-            $ArtsAdmFee = 0;
-            $ArtsProcFee =$user_info['rule_fee'][0]['Processing_Fee'];
-            // For ReAdmission Fee
-            $ArtsAdmFee_ReAdm = $user_info['rule_fee'][0]['Amount'];
-            //$ArtsAdmFee_ReAdm = $user_info['rule_fee'][0]['Processing_Fee'];
-            }
-            else if($user_info['rule_fee'][1]['isPrSub']== 0 )
-            {
-            $ArtsAdmFee = 0;
-            $ArtsProcFee = $user_info['rule_fee'][1]['Processing_Fee'];
-            // For ReAdmission Fee
-            $ArtsAdmFee_ReAdm = $user_info['rule_fee'][1]['Amount'];
-            //$ArtsAdmFee_ReAdm = $user_info['rule_fee'][1]['Processing_Fee'];
-            }
+                }
+                if($user_info['rule_fee'][0]['isPrSub']==0)
+                {
+                    $ArtsAdmFee = 0;
+                    $ArtsProcFee =$user_info['rule_fee'][0]['Processing_Fee'];
+                    // For ReAdmission Fee
+                    $ArtsAdmFee_ReAdm = $user_info['rule_fee'][0]['Amount'];
+                    //$ArtsAdmFee_ReAdm = $user_info['rule_fee'][0]['Processing_Fee'];
+                }
+                else if($user_info['rule_fee'][1]['isPrSub']== 0 )
+                {
+                    $ArtsAdmFee = 0;
+                    $ArtsProcFee = $user_info['rule_fee'][1]['Processing_Fee'];
+                    // For ReAdmission Fee
+                    $ArtsAdmFee_ReAdm = $user_info['rule_fee'][1]['Amount'];
+                    //$ArtsAdmFee_ReAdm = $user_info['rule_fee'][1]['Processing_Fee'];
+                }
             } */
 
 
@@ -1609,41 +1615,41 @@ public function NewEnrolment_Delete($formno)
         // Govt. Institutes no Adm Fee for Single Date.
         $date = new DateTime(SingleDateFee);
         $singleDate =  $date->format('Y-m-d'); 
-        /* if(date('Y-m-d') <= $singleDate && $user_info['info'][0]['IsGovernment'] == 1)
+       /* if(date('Y-m-d') <= $singleDate && $user_info['info'][0]['IsGovernment'] == 1)
         {    
-        if($user_info['rule_fee'][0]['isPrSub']==1)
-        {
-        $SciAdmFee = 0;
-        $SciProcFee = $user_info['rule_fee'][0]['Processing_Fee'];
-        // For ReAdmission Fee
-        $SciAdmFee_ReAdm = $user_info['rule_fee'][0]['Amount'];
-        $SciProcFee_ReAdm = $user_info['rule_fee'][0]['Processing_Fee'];
+            if($user_info['rule_fee'][0]['isPrSub']==1)
+            {
+                $SciAdmFee = 0;
+                $SciProcFee = $user_info['rule_fee'][0]['Processing_Fee'];
+                // For ReAdmission Fee
+                $SciAdmFee_ReAdm = $user_info['rule_fee'][0]['Amount'];
+                $SciProcFee_ReAdm = $user_info['rule_fee'][0]['Processing_Fee'];
 
-        } else if( $user_info['rule_fee'][1]['isPrSub']== 1 )
-        {
-        $SciAdmFee = 0;
-        $SciProcFee = $user_info['rule_fee'][1]['Processing_Fee'];
-        // For ReAdmission Fee
-        $SciAdmFee_ReAdm = $user_info['rule_fee'][1]['Amount'];
-        $SciProcFee_ReAdm = $user_info['rule_fee'][1]['Processing_Fee'];
+            } else if( $user_info['rule_fee'][1]['isPrSub']== 1 )
+            {
+                $SciAdmFee = 0;
+                $SciProcFee = $user_info['rule_fee'][1]['Processing_Fee'];
+                // For ReAdmission Fee
+                $SciAdmFee_ReAdm = $user_info['rule_fee'][1]['Amount'];
+                $SciProcFee_ReAdm = $user_info['rule_fee'][1]['Processing_Fee'];
 
-        }
-        if($user_info['rule_fee'][0]['isPrSub']==0)
-        {
-        $ArtsAdmFee = 0;
-        $ArtsProcFee =$user_info['rule_fee'][0]['Processing_Fee'];
-        // For ReAdmission Fee
-        $ArtsAdmFee_ReAdm = $user_info['rule_fee'][0]['Amount'];
-        // $ArtsAdmFee_ReAdm = $user_info['rule_fee'][0]['Processing_Fee'];
-        }
-        else if($user_info['rule_fee'][1]['isPrSub']== 0 )
-        {
-        $ArtsAdmFee = 0;
-        $ArtsProcFee = $user_info['rule_fee'][1]['Processing_Fee'];
-        // For ReAdmission Fee
-        $ArtsAdmFee_ReAdm = $user_info['rule_fee'][1]['Amount'];
-        // $ArtsAdmFee_ReAdm = $user_info['rule_fee'][1]['Processing_Fee'];
-        } 
+            }
+            if($user_info['rule_fee'][0]['isPrSub']==0)
+            {
+                $ArtsAdmFee = 0;
+                $ArtsProcFee =$user_info['rule_fee'][0]['Processing_Fee'];
+                // For ReAdmission Fee
+                $ArtsAdmFee_ReAdm = $user_info['rule_fee'][0]['Amount'];
+               // $ArtsAdmFee_ReAdm = $user_info['rule_fee'][0]['Processing_Fee'];
+            }
+            else if($user_info['rule_fee'][1]['isPrSub']== 0 )
+            {
+                $ArtsAdmFee = 0;
+                $ArtsProcFee = $user_info['rule_fee'][1]['Processing_Fee'];
+                // For ReAdmission Fee
+                $ArtsAdmFee_ReAdm = $user_info['rule_fee'][1]['Amount'];
+               // $ArtsAdmFee_ReAdm = $user_info['rule_fee'][1]['Processing_Fee'];
+            } 
 
         }   */
 
@@ -1663,7 +1669,7 @@ public function NewEnrolment_Delete($formno)
         $AllStdFee = array();
         foreach($data['data']['stdinfo'] as $key=>$vals)
         { $n++;
-            // DebugBreak();
+       // DebugBreak();
             // Check sub6 , sub7 and sub8 practical subj or not.
             //if( $this->practicalsubjects($vals->sub6)|| $this->practicalsubjects($vals->sub7)|| $this->practicalsubjects($vals->sub8))
             if( $vals->grp_cd == 1 || $vals->grp_cd == 2 || $vals->grp_cd == 4)
@@ -1790,31 +1796,31 @@ public function NewEnrolment_Delete($formno)
 
             //First Page ---class instantiation    
             //$pdf = new FPDF_BARCODE("P","in","A4");      
-            $pdf->SetAutoPageBreak(true )      ;
+               $pdf->SetAutoPageBreak(true )      ;
             $pdf->AddPage();
             $Y = 0.4;
 
             //--------------------------- Subject Group
             $grp_name = $data["grp_cd"];
             switch ($grp_name) {
-                case '1':
-                    $grp_name = 'PRE-MEDICAL';
-                    break;
-                case '2':
-                    $grp_name = 'PRE-ENGINEERING';
-                    break;
-                case '3':
-                    $grp_name = 'HUMANITIES';
-                    break;
-                case '4':
-                    $grp_name = 'GENERAL SCIENCE';
-                    break;
-                case '5':
-                    $grp_name = 'COMMERCE';
-                    break;
-                default:
-                    $grp_name = "No GROUP SELECTED.";
-            }
+                                                        case '1':
+                                                            $grp_name = 'PRE-MEDICAL';
+                                                            break;
+                                                        case '2':
+                                                            $grp_name = 'PRE-ENGINEERING';
+                                                            break;
+                                                        case '3':
+                                                            $grp_name = 'HUMANITIES';
+                                                            break;
+                                                        case '4':
+                                                            $grp_name = 'GENERAL SCIENCE';
+                                                            break;
+                                                        case '5':
+                                                            $grp_name = 'COMMERCE';
+                                                            break;
+                                                        default:
+                                                            $grp_name = "No GROUP SELECTED.";
+                                                            }
 
             $pdf->SetFillColor(0,0,0);
             $pdf->SetDrawColor(0,0,0); 
@@ -1890,7 +1896,7 @@ public function NewEnrolment_Delete($formno)
             $pdf->Image(DIRPATH11th.'/'.$user['Inst_Id'].'/'.$data["PicPath"],6.0+$x,2.4+$Y , 1.30, 1.30, "JPG");
             //$pdf->Image(DIRPATH11th.'/'.$data["Sch_cd"].'/'.$data["PicPath"],6.0+$x,2.4+$Y , 1.30, 1.30, "JPG");
             //DebugBreak();
-            /* if($user['gender']==1)
+           /* if($user['gender']==1)
             {
             $pdf->Image(DIRPATH11th.'2510010001.jpg',6.0+$x,2.4+$Y , 1.30, 1.30, "JPG");
             }
@@ -1898,7 +1904,7 @@ public function NewEnrolment_Delete($formno)
             {
             $pdf->Image(DIRPATH11th.'130659.jpg',6.0+$x,2.4+$Y , 1.30, 1.30, "JPG");
             }*/
-            $pdf->SetFont('Arial','B',23);
+             $pdf->SetFont('Arial','B',23);
             $pdf->TextWithRotation($x-0.2,2.8+$Y, $data['FormNo'],90,0);
             //--------------------------- 1st line 
             $pdf->SetXY(0.5, 2+$Y);
@@ -1939,11 +1945,11 @@ public function NewEnrolment_Delete($formno)
             $locality = "";
             if(@$data['ruralOrurban']==1)
             {
-                $locality = "URBAN";
+            $locality = "URBAN";
             }
             else
             {
-                $locality = "RURAL";
+            $locality = "RURAL";
             }
             $pdf->SetXY(0.5,2.6+$Y);
             $pdf->SetFont('Arial','',8);
@@ -1975,14 +1981,14 @@ public function NewEnrolment_Delete($formno)
             $pdf->SetXY(1.6,2.9+$Y);
             $pdf->Cell(0.5,0.5,@$data["rel"]==1?"MUSLIM":"NON-MUSLIM",0,'L');
 
-            /* if(@$data["RegPvt"]==1)
+           /* if(@$data["RegPvt"]==1)
             {
-            $pdf->SetXY(3.1+$x,2.9+$Y);
-            $pdf->SetFont('Arial','',8);
-            $pdf->Cell(0.5,0.5,"Locality:",0,'R');
-            $pdf->SetFont('Arial','B',8);
-            $pdf->SetXY(4.4+$x,2.9+$Y);
-            $pdf->Cell(0.5,0.5,@$data["RuralORUrban"]==1?"RURAL":"URBAN",0,'L');
+                $pdf->SetXY(3.1+$x,2.9+$Y);
+                $pdf->SetFont('Arial','',8);
+                $pdf->Cell(0.5,0.5,"Locality:",0,'R');
+                $pdf->SetFont('Arial','B',8);
+                $pdf->SetXY(4.4+$x,2.9+$Y);
+                $pdf->Cell(0.5,0.5,@$data["RuralORUrban"]==1?"RURAL":"URBAN",0,'L');
             }      */
 
 
@@ -2061,26 +2067,26 @@ public function NewEnrolment_Delete($formno)
 
 
 
-            //  DebugBreak();
+           //  DebugBreak();
 
-            //    //__TEHSIL
-            $pdf->SetXY(0.5,4.3+$Y);
-            $pdf->SetFont('Arial','',8);
-            $pdf->Cell(0.5,0.5,"District:",0,'R');
-            $pdf->SetFont('Arial','B',8);
-            $pdf->SetXY(0.90,4.3+$Y);
-            $pdf->Cell( 0.5,0.5, $this->GetDistName($user["dist"]),0,'L'); 
-
-
-            ////----- DISTRICT   
+                //    //__TEHSIL
+                $pdf->SetXY(0.5,4.3+$Y);
+                $pdf->SetFont('Arial','',8);
+                $pdf->Cell(0.5,0.5,"District:",0,'R');
+                $pdf->SetFont('Arial','B',8);
+                $pdf->SetXY(0.90,4.3+$Y);
+                $pdf->Cell( 0.5,0.5, $this->GetDistName($user["dist"]),0,'L'); 
 
 
-            $pdf->SetXY(2.1,4.3+$Y);
-            $pdf->SetFont('Arial','',8);
-            $pdf->Cell(0.5,0.5,"Tehsil:",0,'L');
-            $pdf->SetFont('Arial','B',8);
-            $pdf->SetXY(2.5,4.3+$Y);
-            $pdf->Cell( 0.5,0.5,$this->GetTehName($user['teh']),0,'L');
+             ////----- DISTRICT   
+
+
+                $pdf->SetXY(2.1,4.3+$Y);
+                $pdf->SetFont('Arial','',8);
+                $pdf->Cell(0.5,0.5,"Tehsil:",0,'L');
+                $pdf->SetFont('Arial','B',8);
+                $pdf->SetXY(2.5,4.3+$Y);
+                $pdf->Cell( 0.5,0.5,$this->GetTehName($user['teh']),0,'L');
 
 
             //    //__ Head of Institution Cell No.
@@ -2092,7 +2098,7 @@ public function NewEnrolment_Delete($formno)
             $pdf->SetXY(4.8,4.3+$Y);
             $pdf->Cell( 0.5,0.5,$user["cell"],0,'L');
 
-            // DebugBreak();
+           // DebugBreak();
             $pdf->SetXY(5.7,4.3+$Y);
             $pdf->SetFont('Arial','',8);
             $pdf->Cell(0.5,0.5,"Zone:",0,'R');
@@ -2123,110 +2129,110 @@ public function NewEnrolment_Delete($formno)
                 $pdf->Cell(0.7,0.5+$Y,"_________________________________________________________________________________________",0,'L');
             }
 
-            $Y = $Y + 0.3  ;
+                  $Y = $Y + 0.3  ;
             //--------------------------- 7th line 
             //if(@$data["IsReAdm"]==1)
-            // {
+           // {
 
-            //------------- Old Exam Infor if any Box
-            $pdf->SetFont('Arial','B',8);
-            $pdf->SetXY(0.5,5+$Y);
-            $pdf->SetFillColor(240,240,240);
-            $pdf->Cell(7.6,0.2,'SSC EXAMINATION INFORMATION  ',1,0,'L',1);         
+                //------------- Old Exam Infor if any Box
+                $pdf->SetFont('Arial','B',8);
+                $pdf->SetXY(0.5,5+$Y);
+                $pdf->SetFillColor(240,240,240);
+                $pdf->Cell(7.6,0.2,'SSC EXAMINATION INFORMATION  ',1,0,'L',1);         
 
-            $pdf->SetXY(0.5,5.1+$Y);
-            $pdf->SetFont('Arial','',8);
-            $pdf->Cell( 0.5,0.5,"Roll No:",0,'L');
+                $pdf->SetXY(0.5,5.1+$Y);
+                $pdf->SetFont('Arial','',8);
+                $pdf->Cell( 0.5,0.5,"Roll No:",0,'L');
 
-            $pdf->SetFont('Arial','B',8);
-            $pdf->SetXY(0.95,5.1+$Y);
-            $pdf->Cell(0.5,0.5,@$data["matRno"],0,'L');
+                $pdf->SetFont('Arial','B',8);
+                $pdf->SetXY(0.95,5.1+$Y);
+                $pdf->Cell(0.5,0.5,@$data["matRno"],0,'L');
 
-            $pdf->SetXY(1.5,5.1+$Y);
-            $pdf->SetFont('Arial','',8);
-            $pdf->Cell( 0.5,0.5,"Year:",0,'L');
-            $pdf->SetFont('Arial','B',8);
-            $pdf->SetXY(1.95,5.1+$Y);
-            $pdf->Cell(0.5,0.5,@$data["yearOfPass"],0,'L');
+                $pdf->SetXY(1.5,5.1+$Y);
+                $pdf->SetFont('Arial','',8);
+                $pdf->Cell( 0.5,0.5,"Year:",0,'L');
+                $pdf->SetFont('Arial','B',8);
+                $pdf->SetXY(1.95,5.1+$Y);
+                $pdf->Cell(0.5,0.5,@$data["yearOfPass"],0,'L');
 
-            $pdf->SetXY(2.8,5.1+$Y);
-            $pdf->SetFont('Arial','',8);
-            $pdf->Cell( 0.5,0.5,"Session:",0,'L');
-            $pdf->SetFont('Arial','B',8);
-            $pdf->SetXY(3.3,5.1+$Y);
-            $pdf->Cell(0.5,0.5,@$data["sessOfPass"]==1?"Annual":"Supplementary",0,'R');
+                 $pdf->SetXY(2.8,5.1+$Y);
+                 $pdf->SetFont('Arial','',8);
+                 $pdf->Cell( 0.5,0.5,"Session:",0,'L');
+                 $pdf->SetFont('Arial','B',8);
+                 $pdf->SetXY(3.3,5.1+$Y);
+                 $pdf->Cell(0.5,0.5,@$data["sessOfPass"]==1?"Annual":"Supplementary",0,'R');
 
-            // DebugBreak();
-            $pdf->SetXY(4.5,5.1+$Y);
-            $pdf->SetFont('Arial','',8);
-            $pdf->Cell( 0.5,0.5,"Board:",0,'L');
-            $pdf->SetFont('Arial','B',8);
-            $pdf->SetXY(4.95,5.1+$Y);
-            $pdf->Cell(0.5,0.5,@$data["matBrd_name"],0,'L');
-            $Y = $Y + 0.5  ;
+               // DebugBreak();
+                $pdf->SetXY(4.5,5.1+$Y);
+                $pdf->SetFont('Arial','',8);
+                $pdf->Cell( 0.5,0.5,"Board:",0,'L');
+                $pdf->SetFont('Arial','B',8);
+                $pdf->SetXY(4.95,5.1+$Y);
+                $pdf->Cell(0.5,0.5,@$data["matBrd_name"],0,'L');
+                     $Y = $Y + 0.5  ;
 
-            //------------- Old Exam Infor if any Box
-            $pdf->SetFont('Arial','B',8);
-            $pdf->SetXY(0.5,5+$Y);
-            $pdf->SetFillColor(240,240,240);
-            $pdf->Cell(7.6,0.2,'PREVIOUS INTERMEDIATE (PART-I/II) EXAMINATION INFORMATION  ',1,0,'L',1);         
+                //------------- Old Exam Infor if any Box
+                $pdf->SetFont('Arial','B',8);
+                $pdf->SetXY(0.5,5+$Y);
+                $pdf->SetFillColor(240,240,240);
+                $pdf->Cell(7.6,0.2,'PREVIOUS INTERMEDIATE (PART-I/II) EXAMINATION INFORMATION  ',1,0,'L',1);         
 
-            $pdf->SetXY(0.5,5.1+$Y);
-            $pdf->SetFont('Arial','',8);
-            $pdf->Cell( 0.5,0.5,"Roll No:",0,'L');
-            //DebugBreak();
-            $pdf->SetFont('Arial','B',8);
-            $pdf->SetXY(0.95,5.1+$Y);
-            if(isset($data["oldRno_reg"]) && $data["oldRno_reg"] != 0)
-            {
+                $pdf->SetXY(0.5,5.1+$Y);
+                $pdf->SetFont('Arial','',8);
+                $pdf->Cell( 0.5,0.5,"Roll No:",0,'L');
+                 //DebugBreak();
+                $pdf->SetFont('Arial','B',8);
+                $pdf->SetXY(0.95,5.1+$Y);
+                if(isset($data["oldRno_reg"]) && $data["oldRno_reg"] != 0)
+                {
                 $pdf->Cell(0.5,0.5,@$data["oldRno_reg"],0,'L');
-            }
-            else
-            {
+                }
+                else
+                {
                 $pdf->Cell(0.5,0.5,'',0,'L');
-            }
+                }
 
 
-            $pdf->SetXY(1.5,5.1+$Y);
-            $pdf->SetFont('Arial','',8);
-            $pdf->Cell( 0.5,0.5,"Year:",0,'L');
-            $pdf->SetFont('Arial','B',8);
-            $pdf->SetXY(1.95,5.1+$Y);
-            if(isset($data["oldYear_reg"]) && $data["oldYear_reg"] != 0)
-            {
+                $pdf->SetXY(1.5,5.1+$Y);
+                $pdf->SetFont('Arial','',8);
+                $pdf->Cell( 0.5,0.5,"Year:",0,'L');
+                $pdf->SetFont('Arial','B',8);
+                $pdf->SetXY(1.95,5.1+$Y);
+                 if(isset($data["oldYear_reg"]) && $data["oldYear_reg"] != 0)
+                {
                 $pdf->Cell(0.5,0.5,@$data["oldYear_reg"],0,'L');
-            }
-            else
-            {
+                }
+                else
+                {
                 $pdf->Cell(0.5,0.5,'',0,'L');
-            }
+                }
 
 
-            $pdf->SetXY(2.8,5.1+$Y);
-            $pdf->SetFont('Arial','',8);
-            $pdf->Cell( 0.5,0.5,"Session:",0,'L');
-            $pdf->SetFont('Arial','B',8);
-            $pdf->SetXY(3.3,5.1+$Y);
-            if(isset($data["oldSess_reg"]) && $data["oldSess_reg"] != 0)
-            {
+                 $pdf->SetXY(2.8,5.1+$Y);
+                 $pdf->SetFont('Arial','',8);
+                 $pdf->Cell( 0.5,0.5,"Session:",0,'L');
+                 $pdf->SetFont('Arial','B',8);
+                 $pdf->SetXY(3.3,5.1+$Y);
+                 if(isset($data["oldSess_reg"]) && $data["oldSess_reg"] != 0)
+                {
                 $pdf->Cell(0.5,0.5,@$data["oldSess_reg"]==1?"Annual":"Supplementary",0,'R');
-            }
-            else
-            {
+                }
+                else
+                {
                 $pdf->Cell(0.5,0.5,'',0,'R');
-            }
+                }
 
 
 
-            /* $pdf->SetXY(4.5,5.1+$Y);
-            $pdf->SetFont('Arial','',8);
-            $pdf->Cell( 0.5,0.5,"Board:",0,'L');
-            $pdf->SetFont('Arial','B',8);
-            $pdf->SetXY(4.9,5.1+$Y);
-            $pdf->Cell(0.5,0.5,@$data["InterBrd_name"],0,'R');   */
+                /* $pdf->SetXY(4.5,5.1+$Y);
+                 $pdf->SetFont('Arial','',8);
+                 $pdf->Cell( 0.5,0.5,"Board:",0,'L');
+                 $pdf->SetFont('Arial','B',8);
+                 $pdf->SetXY(4.9,5.1+$Y);
+                 $pdf->Cell(0.5,0.5,@$data["InterBrd_name"],0,'R');   */
 
 
-            // }
+           // }
 
 
 
@@ -2282,7 +2288,7 @@ public function NewEnrolment_Delete($formno)
             //====================================subjects
             $x = 1;     
 
-            $pdf->SetFont('Arial','',6);
+             $pdf->SetFont('Arial','',6);
             $pdf->SetXY(6.5,6.25+$Y);
             $pdf->SetFillColor(240,240,240);
             $pdf->Cell(1.3,1.4,'Paste Recent Photograph',1,0,'C',1);
@@ -2333,14 +2339,14 @@ public function NewEnrolment_Delete($formno)
             $pdf->SetXY(0.5,6.25+$Y);
             $pdf->SetFillColor(260,260,260);
             $pdf->Cell(4.6,0.2,@$data['sub6Ap1'] != 1 ? '':   '6. '. (@$data['sub6_NAME']),1,0,'L',1);
-            //DebugBreak();
+              //DebugBreak();
             if(@$data['sub7Ap1']!=0)
             {
-                $Y = $Y+0.2;
-                $pdf->SetFont('Arial','',10);
-                $pdf->SetXY(0.5,6.25+$Y);
-                $pdf->SetFillColor(260,260,260);
-                $pdf->Cell(4.6,0.2,@$data['sub7Ap1'] != 1 ? '':   '7. '. (@$data['sub7_NAME']),1,0,'L',1);
+              $Y = $Y+0.2;
+            $pdf->SetFont('Arial','',10);
+            $pdf->SetXY(0.5,6.25+$Y);
+            $pdf->SetFillColor(260,260,260);
+            $pdf->Cell(4.6,0.2,@$data['sub7Ap1'] != 1 ? '':   '7. '. (@$data['sub7_NAME']),1,0,'L',1);
             }
 
 
@@ -2402,7 +2408,7 @@ public function NewEnrolment_Delete($formno)
 
 
             //---------------------------------------------------------------------------
-            /* $pdf->SetXY(2.6,8.9+$Y);
+           /* $pdf->SetXY(2.6,8.9+$Y);
             $pdf->Cell(1.8,0.8,'',1,0,'C',0); 
 
             $pdf->SetXY(2.6,9.2+$Y);
@@ -2487,26 +2493,26 @@ public function NewEnrolment_Delete($formno)
         return 1;
     }
 
-    public function ChallanForm_Adm11hth_Regular()
+  public function ChallanForm_Adm11hth_Regular()
     { 
 
-        //DebugBreak();
-        $Grp_cd = $this->uri->segment(3);
-        $this->load->library('session');
+   // DebugBreak();
+     $Grp_cd = $this->uri->segment(3);
+     $this->load->library('session');
         $this->load->library('NumbertoWord');
         $Logged_In_Array = $this->session->all_userdata();
         $user = $Logged_In_Array['logged_in'];
-        $this->load->model('Admission_11th_reg_model');
-        $fetch_data = array('Inst_cd'=>$user['Inst_Id'],'Grp_cd'=>$Grp_cd,'option'=>6);
-        // --------------------------------------- Fee Calculation Section ------------------------------------------------
-        //  DebugBreak();
+         $this->load->model('Admission_11th_reg_model');
+          $fetch_data = array('Inst_cd'=>$user['Inst_Id'],'Grp_cd'=>$Grp_cd,'option'=>6);
+           // --------------------------------------- Fee Calculation Section ------------------------------------------------
+      //  DebugBreak();
         $challanDueDate = date('Y-m-d'); 
         $User_info_data = array('Inst_Id'=>$user['Inst_Id'], 'date' => date('Y-m-d'));
         if($Grp_cd == 9)
         {
-            // Check and Generate Challan No. Overall 
-            $user_info  =  $this->Admission_11th_reg_model->challan_all($User_info_data); 
-            $fetch_data = array('Inst_cd'=>$user['Inst_Id'],'Grp_cd'=>$Grp_cd,'option'=>9);
+        // Check and Generate Challan No. Overall 
+        $user_info  =  $this->Admission_11th_reg_model->challan_all($User_info_data); 
+           $fetch_data = array('Inst_cd'=>$user['Inst_Id'],'Grp_cd'=>$Grp_cd,'option'=>9);
         }
         $user_info  =  $this->Admission_11th_reg_model->getuser_info($User_info_data); 
         $isfine = 0;
@@ -2523,8 +2529,8 @@ public function NewEnrolment_Delete($formno)
                 $SciProcFee_ReAdm = $user_info['rule_fee'][0]['Processing_Fee'];
 
                 // Set Challan DATE
-                $date_temp = new DateTime($user_info['rule_fee'][0]['End_Date']);
-                $singleDate_temp =  $date_temp->format('d-m-Y'); 
+                 $date_temp = new DateTime($user_info['rule_fee'][0]['End_Date']);
+                 $singleDate_temp =  $date_temp->format('d-m-Y'); 
                 $challanDueDate = $singleDate_temp;
 
 
@@ -2536,9 +2542,9 @@ public function NewEnrolment_Delete($formno)
                 $SciAdmFee_ReAdm = $user_info['rule_fee'][1]['Amount'];
                 $SciProcFee_ReAdm = $user_info['rule_fee'][1]['Processing_Fee'];
 
-                // Set Challan DATE
-                $date_temp = new DateTime($user_info['rule_fee'][1]['End_Date']);
-                $singleDate_temp =  $date_temp->format('d-m-Y'); 
+                 // Set Challan DATE
+                 $date_temp = new DateTime($user_info['rule_fee'][1]['End_Date']);
+                 $singleDate_temp =  $date_temp->format('d-m-Y'); 
                 $challanDueDate = $singleDate_temp;
 
             }
@@ -2548,11 +2554,11 @@ public function NewEnrolment_Delete($formno)
                 $ArtsProcFee =$user_info['rule_fee'][0]['Processing_Fee'];
                 // For ReAdmission Fee
                 $ArtsAdmFee_ReAdm = $user_info['rule_fee'][0]['Amount'];
-                // $ArtsAdmFee_ReAdm = $user_info['rule_fee'][0]['Processing_Fee'];
+               // $ArtsAdmFee_ReAdm = $user_info['rule_fee'][0]['Processing_Fee'];
 
-                // Set Challan DATE
-                $date_temp = new DateTime($user_info['rule_fee'][0]['End_Date']);
-                $singleDate_temp =  $date_temp->format('d-m-Y'); 
+                 // Set Challan DATE
+                 $date_temp = new DateTime($user_info['rule_fee'][0]['End_Date']);
+                 $singleDate_temp =  $date_temp->format('d-m-Y'); 
                 $challanDueDate = $singleDate_temp;
             }
             else if($user_info['rule_fee'][1]['isPrSub']== 0 )
@@ -2563,9 +2569,9 @@ public function NewEnrolment_Delete($formno)
                 $ArtsAdmFee_ReAdm = $user_info['rule_fee'][1]['Amount'];
                 //$ArtsAdmFee_ReAdm = $user_info['rule_fee'][1]['Processing_Fee'];
 
-                // Set Challan DATE
-                $date_temp = new DateTime($user_info['rule_fee'][1]['End_Date']);
-                $singleDate_temp =  $date_temp->format('d-m-Y'); 
+                 // Set Challan DATE
+                 $date_temp = new DateTime($user_info['rule_fee'][1]['End_Date']);
+                 $singleDate_temp =  $date_temp->format('d-m-Y'); 
                 $challanDueDate = $singleDate_temp;
             }
         }
@@ -2583,9 +2589,9 @@ public function NewEnrolment_Delete($formno)
                 $SciAdmFee_ReAdm = $user_info['rule_fee'][0]['Amount'];
                 $SciProcFee_ReAdm = $user_info['rule_fee'][0]['Processing_Fee'];
 
-                // Set Challan DATE
-                $date_temp = new DateTime($user_info['rule_fee'][0]['End_Date']);
-                $singleDate_temp =  $date_temp->format('d-m-Y'); 
+                 // Set Challan DATE
+                 $date_temp = new DateTime($user_info['rule_fee'][0]['End_Date']);
+                 $singleDate_temp =  $date_temp->format('d-m-Y'); 
                 $challanDueDate = $singleDate_temp;
 
             } else if( $user_info['rule_fee'][1]['isPrSub']== 1 )
@@ -2596,9 +2602,9 @@ public function NewEnrolment_Delete($formno)
                 $SciAdmFee_ReAdm = $user_info['rule_fee'][1]['Amount'];
                 $SciProcFee_ReAdm = $user_info['rule_fee'][1]['Processing_Fee'];
 
-                // Set Challan DATE
-                $date_temp = new DateTime($user_info['rule_fee'][1]['End_Date']);
-                $singleDate_temp =  $date_temp->format('d-m-Y'); 
+                 // Set Challan DATE
+                 $date_temp = new DateTime($user_info['rule_fee'][1]['End_Date']);
+                 $singleDate_temp =  $date_temp->format('d-m-Y'); 
                 $challanDueDate = $singleDate_temp;
 
             }
@@ -2608,11 +2614,11 @@ public function NewEnrolment_Delete($formno)
                 $ArtsProcFee =$user_info['rule_fee'][0]['Processing_Fee'];
                 // For ReAdmission Fee
                 $ArtsAdmFee_ReAdm = $user_info['rule_fee'][0]['Amount'];
-                // $ArtsAdmFee_ReAdm = $user_info['rule_fee'][0]['Processing_Fee'];
+               // $ArtsAdmFee_ReAdm = $user_info['rule_fee'][0]['Processing_Fee'];
 
-                // Set Challan DATE
-                $date_temp = new DateTime($user_info['rule_fee'][0]['End_Date']);
-                $singleDate_temp =  $date_temp->format('d-m-Y'); 
+                 // Set Challan DATE
+                 $date_temp = new DateTime($user_info['rule_fee'][0]['End_Date']);
+                 $singleDate_temp =  $date_temp->format('d-m-Y'); 
                 $challanDueDate = $singleDate_temp;
             }
             else if($user_info['rule_fee'][1]['isPrSub']== 0 )
@@ -2623,9 +2629,9 @@ public function NewEnrolment_Delete($formno)
                 $ArtsAdmFee_ReAdm = $user_info['rule_fee'][1]['Amount'];
                 //$ArtsAdmFee_ReAdm = $user_info['rule_fee'][1]['Processing_Fee'];
 
-                // Set Challan DATE
-                $date_temp = new DateTime($user_info['rule_fee'][1]['End_Date']);
-                $singleDate_temp =  $date_temp->format('d-m-Y'); 
+                 // Set Challan DATE
+                 $date_temp = new DateTime($user_info['rule_fee'][1]['End_Date']);
+                 $singleDate_temp =  $date_temp->format('d-m-Y'); 
                 $challanDueDate = $singleDate_temp;
             }
 
@@ -2642,10 +2648,10 @@ public function NewEnrolment_Delete($formno)
             $SciAdmFee_ReAdm =  ($SciAdmFee_ReAdm*3); 
             $ArtsAdmFee_ReAdm = ($ArtsAdmFee_ReAdm*3);
 
-            // Set Challan DATE
-            // $date_temp = new DateTime($user_info['rule_fee'][0]['End_Date']);
-            //   $singleDate_temp =  $date_temp->format('d-m-Y'); 
-            $challanDueDate = date('d-m-Y');
+             // Set Challan DATE
+                // $date_temp = new DateTime($user_info['rule_fee'][0]['End_Date']);
+              //   $singleDate_temp =  $date_temp->format('d-m-Y'); 
+                $challanDueDate = date('d-m-Y');
 
 
 
@@ -2669,10 +2675,10 @@ public function NewEnrolment_Delete($formno)
                     $SciAdmFee_ReAdm = $user_info['rule_fee'][0]['Amount'];
                     $SciProcFee_ReAdm = $user_info['rule_fee'][0]['Processing_Fee'];
 
-                    // Set Challan DATE
-                    $date_temp = new DateTime($user_info['info'][0]['feedingDate']);
-                    $singleDate_temp =  $date_temp->format('d-m-Y'); 
-                    $challanDueDate = SingleDateFee9th;
+                     // Set Challan DATE
+                 $date_temp = new DateTime($user_info['info'][0]['feedingDate']);
+                 $singleDate_temp =  $date_temp->format('d-m-Y'); 
+                $challanDueDate = SingleDateFee9th;
 
                 } else if( $user_info['rule_fee'][1]['isPrSub']== 1 )
                 {
@@ -2682,10 +2688,10 @@ public function NewEnrolment_Delete($formno)
                     $SciAdmFee_ReAdm = $user_info['rule_fee'][1]['Amount'];
                     $SciProcFee_ReAdm = $user_info['rule_fee'][1]['Processing_Fee'];
 
-                    // Set Challan DATE
-                    $date_temp = new DateTime($user_info['info'][0]['feedingDate']);
-                    $singleDate_temp =  $date_temp->format('d-m-Y'); 
-                    $challanDueDate = SingleDateFee9th;
+                       // Set Challan DATE
+                 $date_temp = new DateTime($user_info['info'][0]['feedingDate']);
+                 $singleDate_temp =  $date_temp->format('d-m-Y'); 
+                $challanDueDate = SingleDateFee9th;
 
                 }
                 if($user_info['rule_fee'][0]['isPrSub']==0)
@@ -2696,10 +2702,10 @@ public function NewEnrolment_Delete($formno)
                     $ArtsAdmFee_ReAdm = $user_info['rule_fee'][0]['Amount'];
                     //$ArtsAdmFee_ReAdm = $user_info['rule_fee'][0]['Processing_Fee'];
 
-                    // Set Challan DATE
-                    $date_temp = new DateTime($user_info['info'][0]['feedingDate']);
-                    $singleDate_temp =  $date_temp->format('d-m-Y'); 
-                    $challanDueDate = SingleDateFee9th;
+                       // Set Challan DATE
+                 $date_temp = new DateTime($user_info['info'][0]['feedingDate']);
+                 $singleDate_temp =  $date_temp->format('d-m-Y'); 
+                $challanDueDate = SingleDateFee9th;
                 }
                 else if($user_info['rule_fee'][1]['isPrSub']== 0 )
                 {
@@ -2709,10 +2715,10 @@ public function NewEnrolment_Delete($formno)
                     $ArtsAdmFee_ReAdm = $user_info['rule_fee'][1]['Amount'];
                     //$ArtsAdmFee_ReAdm = $user_info['rule_fee'][1]['Processing_Fee'];
 
-                    // Set Challan DATE
-                    $date_temp = new DateTime($user_info['info'][0]['feedingDate']);
-                    $singleDate_temp =  $date_temp->format('d-m-Y'); 
-                    $challanDueDate = SingleDateFee;
+                       // Set Challan DATE
+                 $date_temp = new DateTime($user_info['info'][0]['feedingDate']);
+                 $singleDate_temp =  $date_temp->format('d-m-Y'); 
+                $challanDueDate = SingleDateFee;
                 }
             }
 
@@ -2725,61 +2731,61 @@ public function NewEnrolment_Delete($formno)
         // Govt. Institutes no Adm Fee for Single Date.
         $date = new DateTime(SingleDateFee);
         $singleDate =  $date->format('Y-m-d'); 
-        /* if(date('Y-m-d') <= $singleDate && $user_info['info'][0]['IsGovernment'] == 1)
+       /* if(date('Y-m-d') <= $singleDate && $user_info['info'][0]['IsGovernment'] == 1)
         {    
-        if($user_info['rule_fee'][0]['isPrSub']==1)
-        {
-        $SciAdmFee = 0;
-        $SciProcFee = $user_info['rule_fee'][0]['Processing_Fee'];
-        // For ReAdmission Fee
-        $SciAdmFee_ReAdm = $user_info['rule_fee'][0]['Amount'];
-        $SciProcFee_ReAdm = $user_info['rule_fee'][0]['Processing_Fee'];
+            if($user_info['rule_fee'][0]['isPrSub']==1)
+            {
+                $SciAdmFee = 0;
+                $SciProcFee = $user_info['rule_fee'][0]['Processing_Fee'];
+                // For ReAdmission Fee
+                $SciAdmFee_ReAdm = $user_info['rule_fee'][0]['Amount'];
+                $SciProcFee_ReAdm = $user_info['rule_fee'][0]['Processing_Fee'];
 
-        // Set Challan DATE
-        $date_temp = new DateTime($user_info['rule_fee'][0]['End_Date']);
-        $singleDate_temp =  $date_temp->format('d-m-Y'); 
-        $challanDueDate = $singleDate_temp;
+                // Set Challan DATE
+                 $date_temp = new DateTime($user_info['rule_fee'][0]['End_Date']);
+                 $singleDate_temp =  $date_temp->format('d-m-Y'); 
+                $challanDueDate = $singleDate_temp;
 
-        } else if( $user_info['rule_fee'][1]['isPrSub']== 1 )
-        {
-        $SciAdmFee = 0;
-        $SciProcFee = $user_info['rule_fee'][1]['Processing_Fee'];
-        // For ReAdmission Fee
-        $SciAdmFee_ReAdm = $user_info['rule_fee'][1]['Amount'];
-        $SciProcFee_ReAdm = $user_info['rule_fee'][1]['Processing_Fee'];
+            } else if( $user_info['rule_fee'][1]['isPrSub']== 1 )
+            {
+                $SciAdmFee = 0;
+                $SciProcFee = $user_info['rule_fee'][1]['Processing_Fee'];
+                // For ReAdmission Fee
+                $SciAdmFee_ReAdm = $user_info['rule_fee'][1]['Amount'];
+                $SciProcFee_ReAdm = $user_info['rule_fee'][1]['Processing_Fee'];
 
-        // Set Challan DATE
-        $date_temp = new DateTime($user_info['rule_fee'][1]['End_Date']);
-        $singleDate_temp =  $date_temp->format('d-m-Y'); 
-        $challanDueDate = $singleDate_temp;
+                // Set Challan DATE
+                 $date_temp = new DateTime($user_info['rule_fee'][1]['End_Date']);
+                 $singleDate_temp =  $date_temp->format('d-m-Y'); 
+                $challanDueDate = $singleDate_temp;
 
-        }
-        if($user_info['rule_fee'][0]['isPrSub']==0)
-        {
-        $ArtsAdmFee = 0;
-        $ArtsProcFee =$user_info['rule_fee'][0]['Processing_Fee'];
-        // For ReAdmission Fee
-        $ArtsAdmFee_ReAdm = $user_info['rule_fee'][0]['Amount'];
-        // $ArtsAdmFee_ReAdm = $user_info['rule_fee'][0]['Processing_Fee'];
+            }
+            if($user_info['rule_fee'][0]['isPrSub']==0)
+            {
+                $ArtsAdmFee = 0;
+                $ArtsProcFee =$user_info['rule_fee'][0]['Processing_Fee'];
+                // For ReAdmission Fee
+                $ArtsAdmFee_ReAdm = $user_info['rule_fee'][0]['Amount'];
+               // $ArtsAdmFee_ReAdm = $user_info['rule_fee'][0]['Processing_Fee'];
 
-        // Set Challan DATE
-        $date_temp = new DateTime($user_info['rule_fee'][0]['End_Date']);
-        $singleDate_temp =  $date_temp->format('d-m-Y'); 
-        $challanDueDate = $singleDate_temp;
-        }
-        else if($user_info['rule_fee'][1]['isPrSub']== 0 )
-        {
-        $ArtsAdmFee = 0;
-        $ArtsProcFee = $user_info['rule_fee'][1]['Processing_Fee'];
-        // For ReAdmission Fee
-        $ArtsAdmFee_ReAdm = $user_info['rule_fee'][1]['Amount'];
-        // $ArtsAdmFee_ReAdm = $user_info['rule_fee'][1]['Processing_Fee'];
+                // Set Challan DATE
+                 $date_temp = new DateTime($user_info['rule_fee'][0]['End_Date']);
+                 $singleDate_temp =  $date_temp->format('d-m-Y'); 
+                $challanDueDate = $singleDate_temp;
+            }
+            else if($user_info['rule_fee'][1]['isPrSub']== 0 )
+            {
+                $ArtsAdmFee = 0;
+                $ArtsProcFee = $user_info['rule_fee'][1]['Processing_Fee'];
+                // For ReAdmission Fee
+                $ArtsAdmFee_ReAdm = $user_info['rule_fee'][1]['Amount'];
+               // $ArtsAdmFee_ReAdm = $user_info['rule_fee'][1]['Processing_Fee'];
 
-        // Set Challan DATE
-        $date_temp = new DateTime($user_info['rule_fee'][1]['End_Date']);
-        $singleDate_temp =  $date_temp->format('d-m-Y'); 
-        $challanDueDate = $singleDate_temp;
-        } 
+                // Set Challan DATE
+                 $date_temp = new DateTime($user_info['rule_fee'][1]['End_Date']);
+                 $singleDate_temp =  $date_temp->format('d-m-Y'); 
+                $challanDueDate = $singleDate_temp;
+            } 
 
         }   */
 
@@ -2796,7 +2802,7 @@ public function NewEnrolment_Delete($formno)
         foreach($data['data']['stdinfo'] as $key=>$vals)
         { $n++;
             // Check sub6 , sub7 and sub8 practical subj or not.
-            //  if( $this->practicalsubjects($vals->sub6)|| $this->practicalsubjects($vals->sub7)|| $this->practicalsubjects($vals->sub8))
+          //  if( $this->practicalsubjects($vals->sub6)|| $this->practicalsubjects($vals->sub7)|| $this->practicalsubjects($vals->sub8))
             if( $vals->grp_cd==1 || $vals->grp_cd == 2 || $vals->grp_cd == 4)
             {
                 if($vals->IsReAdm==1)
@@ -2828,39 +2834,39 @@ public function NewEnrolment_Delete($formno)
                 }
             }
         }
-        //  DebugBreak();
+      //  DebugBreak();
         $mydata_final = array( 'data'=>$this->Admission_11th_reg_model->Update_AdmissionFee($AllStdFee,$user['Inst_Id'],0,$fetch_data['option'],0,0),'AllFeeData'=>$AllStdFee,'Inst_cd'=>$user['Inst_Id'],'Inst_Name'=>$user['inst_Name']);
 
-        //$grp_cd = $this->uri->segment(3);
-        // $fetch_data = array('Inst_cd'=>$user['Inst_Id'],'formno'=>$formno);
+         //$grp_cd = $this->uri->segment(3);
+       // $fetch_data = array('Inst_cd'=>$user['Inst_Id'],'formno'=>$formno);
         //  DebugBreak();
         //$result = $this->Admission_matric_model->Print_challan_Form($fetch_data);
         $this->load->library('PDF_Rotate');
 
         $ctid=1;  //correction type of id starts from one and multiples by 2 for next type of correction id
-        //  DebugBreak();
-        $mydata_final = $mydata_final['data'][0];
-        if($Grp_cd == 9)
-        {
-            $data_challanNo = $data['data']['stdinfo'][0]->challan_overall;
-        }
-        else
-        {
-            $data_challanNo = $data['data']['stdinfo'][0]->challanno;
-        }
-        $challanDueDate;
+         //  DebugBreak();
+           $mydata_final = $mydata_final['data'][0];
+           if($Grp_cd == 9)
+           {
+           $data_challanNo = $data['data']['stdinfo'][0]->challan_overall;
+           }
+           else
+           {
+           $data_challanNo = $data['data']['stdinfo'][0]->challanno;
+           }
+           $challanDueDate;
 
-        $feestructure[]    =  $mydata_final['sum_procFee'];    
-        $displayfeetitle[] =  'Total Processing Fee';    
+            $feestructure[]    =  $mydata_final['sum_procFee'];    
+            $displayfeetitle[] =  'Total Processing Fee';    
 
-        $feestructure[]     = $mydata_final['sum_AdmFee'];    
-        $displayfeetitle[] =  'Total Admission Fee';   
+            $feestructure[]     = $mydata_final['sum_AdmFee'];    
+            $displayfeetitle[] =  'Total Admission Fee';   
 
-        /*$feestructure[]=$result[0]['TotalCertFee']; 
-        $displayfeetitle[] =  'Total Certificate Fee'; */  
+            /*$feestructure[]=$result[0]['TotalCertFee']; 
+            $displayfeetitle[] =  'Total Certificate Fee'; */  
 
-        $feestructure[]=@$mydata_final['sum_lateFee'];
-        $displayfeetitle[] =  'Total Late Admission Fee'; 
+            $feestructure[]=@$mydata_final['sum_lateFee'];
+            $displayfeetitle[] =  'Total Late Admission Fee'; 
 
         $turn=1;     
         $pdf=new PDF_Rotate("P","in","A4");
@@ -2871,7 +2877,7 @@ public function NewEnrolment_Delete($formno)
         }
         else
         {
-            $ses = "Supplemantry";
+           $ses = "Supplemantry";
         }
         $pdf->SetTitle("Challan Form | Admission 11th ".Year." ".$ses." Challan Form");
         $pdf->SetMargins(0.5,0.5,0.5);
@@ -2881,16 +2887,16 @@ public function NewEnrolment_Delete($formno)
         $challanMSG=array(1=>"(May be deposited in any HBL Branch)",2=>"(To be sent to the Admission Branch Via BISE One Window)", 3=>"(To be retained with HBL)", 4=>"(To be sent to the Board via HBL Branch aloongwith scroll)"  );
         $challanNo = $data_challanNo; 
 
-        // DebugBreak();
-        /* if(date('Y-m-d',strtotime(SINGLE_LAST_DATE11))>=date('Y-m-d'))
+       // DebugBreak();
+       /* if(date('Y-m-d',strtotime(SINGLE_LAST_DATE11))>=date('Y-m-d'))
         {
-        $rule_fee   =  $this->Admission_matric_model->getrulefee(); 
-        $challanDueDate  = date('d-m-Y',strtotime($rule_fee[0]['End_Date'] )) ;
+            $rule_fee   =  $this->Admission_matric_model->getrulefee(); 
+            $challanDueDate  = date('d-m-Y',strtotime($rule_fee[0]['End_Date'] )) ;
         }
         else
         {
-        $rule_fee   =  $this->Admission_matric_model->getrulefee(); 
-        $challanDueDate  = date('d-m-Y',strtotime($rule_fee[0]['End_Date'] )) ;
+            $rule_fee   =  $this->Admission_matric_model->getrulefee(); 
+            $challanDueDate  = date('d-m-Y',strtotime($rule_fee[0]['End_Date'] )) ;
         }              */
 
         $obj    = new NumbertoWord();
@@ -2903,11 +2909,11 @@ public function NewEnrolment_Delete($formno)
         // $temp = $user['Inst_Id'].'11-2017-19';
         //$image =  $this->set_barcode($temp);
 
-        $temp = $challanNo.'@11@.'.Year.'@'.Session;
+        $temp = $challanNo.'@11@'.Year.'@'.Session;
         //  $image =  $this->set_barcode($temp);
         //DebugBreak();
         $temp =  $this->set_barcode($temp);
-        //  $pdf->Image("assets/img/M6.jpg",7.5, .2, .3, .3, "jpg");
+       //  $pdf->Image("assets/img/M6.jpg",7.5, .2, .3, .3, "jpg");
         $yy = 0.05;
         $dyy = 0.1;
         $corcnt = 0;
@@ -2955,7 +2961,7 @@ public function NewEnrolment_Delete($formno)
 
             $pdf->SetXY($w+1.4,$y+$dy+0.15);
             $pdf->SetFont('Arial','I',7);
-            $pdf->Cell(0, $y, 'Admission Session '.CURRENT_SESS.' 11th', 0.25, "L");
+            $pdf->Cell(0, $y, 'Admission  '.Year.' 11th', 0.25, "L");
 
             $y += 0.25;
             $pdf->SetFont('Arial','B',10);
@@ -2987,7 +2993,7 @@ public function NewEnrolment_Delete($formno)
             $pdf->SetFont('Arial','B',8);
 
             //if(intval($result[0]['sex'])==1){$sodo="S/O ";}else{$sodo="D/O ";}
-            // $pdf->Cell(0.5,0.25,$user['Inst_Id'].'-'.$user['inst_Name'],0,2,'L');
+           // $pdf->Cell(0.5,0.25,$user['Inst_Id'].'-'.$user['inst_Name'],0,2,'L');
             // $pdf->Cell(0.5,0.25,,0,2,'L');
             $pdf->SetX(4);
             $pdf->SetFont('Arial','I',6.5);
