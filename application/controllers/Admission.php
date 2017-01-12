@@ -5,8 +5,13 @@ class Admission extends CI_Controller {
     {
         parent::__construct();
         $this->load->helper('url');   
+        $this->clear_cache();
     }
-
+function clear_cache()
+    {
+        $this->output->set_header("Cache-Control: no-store, no-cache, must-revalidate, no-transform, max-age=0, post-check=0, pre-check=0");
+        $this->output->set_header("Pragma: no-cache");
+    }
     public function index()
     {
         //DebugBreak();
@@ -1091,7 +1096,9 @@ class Admission extends CI_Controller {
 
         //--------------------------- 3rd line 
 
-
+        //$pdf->SetXY(.5,1.75+$Y);
+        $pdf->SetFont('Arial','B',$FontSize+15);
+        $pdf->TextWithRotation(.45,2.9+$Y, $data['formNo'],90,0); 
 
         $pdf->SetXY(0.5, 2.0+$Y);
         $pdf->SetFont('Arial','',$FontSize);
@@ -1361,7 +1368,7 @@ class Admission extends CI_Controller {
         $pdf->SetXY(3.5,3.2+$Y);
         $pdf->Cell(4,0.50,'',1,0,'C',0);   */
 
-        $pdf->Image('assets/img/admission_form.jpg',5.07,2.6, 2.38,0.20, "jpeg");
+        $pdf->Image('assets/img/admission_form.jpg',5.07,2.6, 2.78,0.30, "jpeg");
 
         $pdf->SetXY(3.2,5.75+$Y);
         $pdf->SetFont('Arial','b',8);
@@ -1762,7 +1769,7 @@ class Admission extends CI_Controller {
         $pdf->SetXY(1.0,10.2+$Y);
         $pdf->Cell( 0.5,0.5,$data['formNo'],0,'L');
 
-
+        
 
 
 
@@ -4747,7 +4754,7 @@ class Admission extends CI_Controller {
         $config["thumbnail_prefix"]                = "thumb_"; //Normal thumb Prefix
         $config["destination_folder"]            = GET_PRIVATE_IMAGE_PATH.'12th\\'; //upload directory ends with / (slash)
         $config["thumbnail_destination_folder"]    = ''; //upload directory ends with / (slash)
-        $config["upload_url"]                     = "../uploads/2016/private/12th/"; 
+        $config["upload_url"]                     = "../uplaods/2016/private/12th/"; 
         $config["quality"]                         = 90; //jpeg quality
         $config["random_file_name"]                = true; //randomize each file name
 

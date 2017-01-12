@@ -632,7 +632,7 @@
                                 <!--</select>
                                 </div>-->
                             </div>
-
+                            <div id="instruction" style="display: none; width:600px"></div>
                             <div class="form-actions no-margin">
                                 <input type="hidden"   value=""  name="formNo">
                                 <input type="hidden"   value="<?php  echo $isReAdm; ?>"  name="IsReAdm">
