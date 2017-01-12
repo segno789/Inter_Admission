@@ -192,7 +192,15 @@ class Admission_inter extends CI_Controller {
         $turn=1;     
         $pdf=new PDF_Rotate("P","in","A4");
         $pdf->AliasNbPages();
-        $pdf->SetTitle("Challan Form | Admission inter 2016 Supplemantry Batch Form Fee");
+
+
+
+        if(Session == 1) 
+            $sessionpdf =  'ANNUAL';
+        else
+            $sessionpdf = 'Supply';
+
+        $pdf->SetTitle("Challan Form | Admission inter '".Year."' '".$sessionpdf."' Batch Form Fee");
         $pdf->SetMargins(0.5,0.5,0.5);
         $pdf->AddPage();
         $generatingpdf=false;
@@ -220,7 +228,7 @@ class Admission_inter extends CI_Controller {
         //-------------------- PRINT BARCODE
 
 
-        $temp = $challanNo.'@'.$user['Inst_Id'].'@'.$Batch_Id.'@12@2016@2';
+        $temp = $challanNo.'@'.$user['Inst_Id'].'@'.$Batch_Id.'@12@'.Year.'@'.Session;
 
         //DebugBreak();
         $temp =  $this->set_barcode($temp);
@@ -230,10 +238,6 @@ class Admission_inter extends CI_Controller {
         $corcnt = 0;
         for ($j=1;$j<=4;$j++) 
         {
-
-
-
-
             $yy = 0.04;
             if($turn==1){$dyy=0.2;} 
             else {
@@ -533,8 +537,8 @@ class Admission_inter extends CI_Controller {
 
         $fontSize = 10; 
         $marge    = .95;   // between barcode and hri in pixel
-        $bx        = 175.6;  // barcode center
-        $by        = 34.75;  // barcode center
+        $bx        = 175;  // barcode center
+        $by        = 40;  // barcode center
         $height   = 5.7;   // barcode height in 1D ; module size in 2D
         $width    = .26;  // barcode height in 1D ; not use in 2D
         $angle    = 0;   // rotation in degrees
@@ -550,21 +554,27 @@ class Admission_inter extends CI_Controller {
 
         $result[0] = $result['data'][0];
 
-        $pdf->Image("assets/img/forwardingletter11th_branch.png",5,6, 200,280, "PNG");
+        $pdf->Image("assets/img/forwarding_exam_branch.png",5,6, 200,280, "PNG");
 
         $bardata = Barcode::fpdf($pdf, $black, $bx, $by, $angle, $type, array('code'=>$Barcode), $width, $height);
+
+
+        $pdf->SetFont('Arial','B',8);
+        $pdf->SetXY(147, 47);
+        $pdf->Cell(0,0,'Print Date: '. date('d-m-Y H:i:s a'),0,0,'L',0);
+
 
         $len = $pdf->GetStringWidth($bardata['hri']);
         Barcode::rotate(-$len / 2, ($bardata['height'] / 2) + $fontSize + $marge, $angle, $xt, $yt);
 
         $pdf->SetFont('Arial','B',11.5);
-        $pdf->SetXY(61.5, 44);
+        $pdf->SetXY(87, 44);
         $pdf->Cell(0,0,$data['iyear'],0,0,'L',0);
 
 
-        $Y = 72;
+        $Y = 77;
         $font = 12;
-        $x = 13; 
+        $x = 25; 
         for($i =0 ; $i<7 ; $i++)
         {
 
@@ -599,7 +609,7 @@ class Admission_inter extends CI_Controller {
             else if($i == 0)
             {
                 $pdf->SetFont('Arial','B',$font-3);
-                $pdf->SetXY($x-5, $Y-6.5);
+                $pdf->SetXY($x-10, $Y-7.3);
                 $pdf->Cell(0,0,$result[0]['Total_Fee'].'/-',0,0,'L',0);
             }
             if($i==1)
@@ -618,11 +628,11 @@ class Admission_inter extends CI_Controller {
         }
 
         $pdf->SetFont('Arial','B',$font);
-        $pdf->SetXY($x-115, $Y+42);
+        $pdf->SetXY($x-125, $Y+35);
         $pdf->Cell(0,0,$result[0]['Total_Fee'].'/-',0,0,'L',0);
 
         $pdf->SetFont('Arial','B',$font);
-        $pdf->SetXY($x-59, $Y+42);
+        $pdf->SetXY($x-68, $Y+35);
         $pdf->Cell(0,0,$result[0]['Total_SpeCandidate'],0,0,'L',0);
 
         // DebugBreak();
@@ -643,18 +653,18 @@ class Admission_inter extends CI_Controller {
         $pdf->Cell(0,0,$user['cell'],0,0,'L',0);
         //Matric Branch Copy
 
-        $Y = 64;
+        $Y = 70;
         $font = 12;
-        $x = 10; 
+        $x = 12; 
         $pdf->AddPage('P',"A4");
-        $pdf->Image("assets/img/forwardingletter_finance.png",5,6, 200,280, "PNG");
+        $pdf->Image("assets/img/forwarding_fin_p2.png",5,6, 200,280, "PNG");
         for($i =0 ; $i<7 ; $i++)
         {
             $pdf->SetFont('Arial','B',$font);
             $pdf->SetXY($x-1.5, $Y-2);
             if($i == 6)
             {
-                $pdf->SetXY($x-8, $Y-2);
+                $pdf->SetXY($x+5, $Y-2);
                 $pdf->Cell(0,0,$result[0]['Total_sci'],0,0,'L',0);
             }
             else if($i == 5)
@@ -705,11 +715,11 @@ class Admission_inter extends CI_Controller {
             }
         }
         $pdf->SetFont('Arial','B',$font);
-        $pdf->SetXY($x-115, $Y+47);
+        $pdf->SetXY($x-115, $Y+41);
         $pdf->Cell(0,0,$result[0]['Total_Fee'].'/-',0,0,'L',0);
 
         $pdf->SetFont('Arial','B',$font);
-        $pdf->SetXY($x-59, $Y+47);
+        $pdf->SetXY($x-59, $Y+41);
         $pdf->Cell(0,0,$result[0]['Total_SpeCandidate'],0,0,'L',0);
 
         $pdf->SetFont('Arial','B',$font);
@@ -720,7 +730,7 @@ class Admission_inter extends CI_Controller {
         $pdf->SetFont('Arial','B',$font);
         $pdf->SetXY($x-58, $Y+185);
         $pdf->MultiCell(80,2.9,$user['inst_Name'],0,"L");
-                                                                
+
         $font = 12;
         $pdf->SetFont('Arial','B',$font);
         $pdf->SetXY($x-30, $Y+204);
@@ -730,7 +740,12 @@ class Admission_inter extends CI_Controller {
         $pdf->SetXY($x-30, $Y+213);
         $pdf->Cell(0,0,$user['cell'],0,0,'L',0);
 
-        $bardata = Barcode::fpdf($pdf, $black, $bx+2, $by+5, $angle, $type, array('code'=>$Barcode), $width, $height);
+        $bardata = Barcode::fpdf($pdf, $black, $bx, $by-1, $angle, $type, array('code'=>$Barcode), $width, $height);
+
+
+        $pdf->SetFont('Arial','B',8);
+        $pdf->SetXY(147, 47);
+        $pdf->Cell(0,0,'Print Date: '. date('d-m-Y H:i:s a'),0,0,'L',0);
 
         $len = $pdf->GetStringWidth($bardata['hri']);
         Barcode::rotate(-$len / 2, ($bardata['height'] / 2) + $fontSize + $marge, $angle, $xt, $yt);
@@ -2060,8 +2075,11 @@ class Admission_inter extends CI_Controller {
             return;
         }
 
+
+        //DebugBreak();
+
         $processing_fee = 0;
-        $Adm_fee           = 0;
+        $AdmFee           = 0;
         $LAdm_fee          = 0;
         $TotalAdmFee = 0;
         $TotalLatefee = 0;
@@ -2090,8 +2108,9 @@ class Admission_inter extends CI_Controller {
             'CLOTHING & TEXTILE (Home-Economics Group)'=>'75',
             'HOME MANAGEMNET (Home-Economics Group)'=>'76'
         );
-        // DebugBreak();
+        //DebugBreak();
         $ispractical = 0;
+
         $AdmFee = $this->Admission_inter_model->getrulefee($ispractical);
         $Adm_Fee_withSci_Composite = $AdmFee[0]['Comp_Amount'];
         $Adm_Fee_withSci_10th_Only = $AdmFee[0]['Amount'];
@@ -2101,15 +2120,18 @@ class Admission_inter extends CI_Controller {
         // DebugBreak();
         $q1 = $user_info['fee'];
         $total_std = 0;
-        $total_cert = 0;
+        $total_cert = 0;  
+
+
         foreach($q1 as $k=>$v) 
         {
             $ids[] = $v["FormNo"];
             $total_std++;
             //$ispractical = 0;
             $is9th = 0;
-            if($v["Spec"] == 1 || $v["Spec"] ==  2)
+            if($v["Spec"] > 0)
             {
+                $AdmFee = 0;
                 $Adm_fee = 0;
                 $TotalLatefee = $TotalLatefee + $LAdm_fee;
                 $Adm_ProcessingFee; 
@@ -2121,7 +2143,7 @@ class Admission_inter extends CI_Controller {
                 {
                     $ispractical = 1;    
                 }
-                
+
                 if(array_search($v['sub4'],$practical_Sub) || array_search($v['sub5'],$practical_Sub) || array_search($v['sub5a'],$practical_Sub) || array_search($v['sub6a'],$practical_Sub) || array_search($v['sub6'],$practical_Sub) || array_search($v['sub7a'],$practical_Sub))
                 {
                     $ispractical =1;
@@ -2180,7 +2202,10 @@ class Admission_inter extends CI_Controller {
         $netTotal = (int)$netTotal +$Adm_fee + $LAdm_fee+$Adm_ProcessingFee+ $total_cert;;
 
         $forms_id   = implode(",",$ids);        
-        $tot_fee     = $Totalprocessing_fee+$TotalAdmFee+$TotalLatefee+$total_cert;
+
+        //DebugBreak();
+
+        $tot_fee = $Totalprocessing_fee+$TotalAdmFee+$TotalLatefee+$total_cert;
 
         $today = date("Y-m-d H:i:s");
         $data = array('inst_cd'=>$Inst_Id,'total_fee'=>$tot_fee,'proces_fee'=>$Adm_ProcessingFee,'reg_fee'=>$Adm_fee,'fine'=>$LAdm_fee,'TotalRegFee'=>$TotalAdmFee,'TotalLatefee'=>$TotalLatefee,'Totalprocessing_fee'=>$Totalprocessing_fee,'forms_id'=>$forms_id,'todaydate'=>$today,'total_std'=>$total_std,'cert_fee'=>$cert_fee,'total_cert'=>$total_cert);
@@ -3408,6 +3433,12 @@ class Admission_inter extends CI_Controller {
             $pdf->SetXY(4.5+$x,1.6+$Y);
 
             $pdf->Cell(0.5,0.5,$data["BForm"],0,'L');
+
+
+            //DebugBreak();
+
+            $pdf->SetFont('Arial','B',14);
+            $pdf->TextWithRotation($x-0.2,2.9+$Y, $data['FormNo'],90,0);
 
             //--------------------------- FATHER NAME 
 

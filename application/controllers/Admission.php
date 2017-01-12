@@ -934,6 +934,7 @@ class Admission extends CI_Controller {
             default:
                 $grp_name = "NO GROUP SELECTED.";
         }
+                                                                                                                                                                                                                                                             
 
         //--------------------------- 1st line 
         /* $pdf->SetXY(0.5,1.55+$Y);
@@ -2114,12 +2115,12 @@ class Admission extends CI_Controller {
         $isexit = is_file($picpath);
         if(!$isexit)
         {
-            $error_msg.= '<span style="font-size: 16pt; color:red;">' . 'Your Picture is missing.</span>';
+        $error_msg.= '<span style="font-size: 16pt; color:red;">' . 'Your Picture is missing.</span>';
         }
         else
         {
-            $type = pathinfo($picpath, PATHINFO_EXTENSION);
-            $data[0]['picpathImg'] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
+        $type = pathinfo($picpath, PATHINFO_EXTENSION);
+        $data[0]['picpathImg'] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
         }                */
 
         $specialcase = $data['0']['Spl_Name'];

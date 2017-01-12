@@ -484,6 +484,8 @@ class Admission_inter_model extends CI_Model
         $total_std = $data['total_std'];
         $cert_fee = $data['cert_fee'];
         $total_cert = $data['total_cert'];
+               
+        
         $query = $this->db->query("Admission_online..Batch_Create_12th $inst_cd,$reg_fee,$fine,$processing_fee,$total_std,$total_fee,$TotalRegFee,$Totalprocessing_fee,$TotalLatefee,'$todaydate','$forms_id',$cert_fee,$total_cert");
     }
     public function Batch_List($data)
@@ -595,7 +597,6 @@ class Admission_inter_model extends CI_Model
         $rowcount = $query_1->num_rows();
         if($rowcount > 0){
             $query_1 = $query_1->result_array();
-
             return $result = array('stdinfo'=>$result_1, 'batch_info'=>$query_1);
         }
         else
