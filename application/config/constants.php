@@ -27,7 +27,7 @@ define('REGULAR_INSERT_TABLE', 'Admission_online..IAAdm');
 
 define('Session','1');
 define('Year','2017');  
-define('lastdate','30-01-2017');
+define('lastdate','13-02-2017');
 define('GET_REGULAR_IMAGE_PATH', 'D:/xampp/htdocs/Inter_Admission\Uploads\2016\Regular\\');
 define('GET_PRIVATE_IMAGE_PATH', 'D:/xampp/htdocs/Inter_Admission\Uploads\2016\private\\');
 define('GET_PRIVATE_IMAGE_PATH_COPY', '');
@@ -47,16 +47,16 @@ define('formnovalid','600000');
 define('formnovalid_Languages','400000');
 define('return_pdf_isPicture','1');
 define('CURRENT_SESS','2017-2019');
-define('corr_bank_chall_class','INTER SUPPLY');
+define('corr_bank_chall_class','INTER ANNUAL');
 define('session_year','2017-2019');
 define('TITLEHSSC','Online HSSC Annual Admission 2017');
 
 define('currdate','date("d-m-Y");');
 define('TripleDateFeeinter', '13-10-2017');
 
-define('SingleDateFee', '30-01-2017');
-define('DoubleDateFee', '01-02-2017');
-define('TripleDateFee', '10-03-2017');
+define('SingleDateFee', '13-02-2017');
+define('DoubleDateFee', '27-02-2017');
+define('TripleDateFee', '07-03-2017');
 
 define ('class_for_11th_Adm','11th');                                
 

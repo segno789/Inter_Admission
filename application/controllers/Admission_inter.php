@@ -510,17 +510,17 @@ class Admission_inter extends CI_Controller {
 
     public function financeReoprt()
     {
-        DebugBreak();
+        //DebugBreak();
 
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $user = $Logged_In_Array['logged_in'];
-        $this->load->model('Admission_11th_reg_model');
+        $this->load->model('Admission_inter_model');
         $fetch_data = array('Inst_cd'=>$user['Inst_Id']);
-        $result = array('data'=>$this->Admission_11th_reg_model->forwarding_pdf_Finance_final($fetch_data),'inst_Name'=>$user['inst_Name']);    
+        $result = array('data'=>$this->Admission_inter_model->forwarding_pdf_Finance_final($fetch_data),'inst_Name'=>$user['inst_Name']);    
         if(empty($result['data']))
         {
-
+            //do nothing
         }
         $temp = $user['Inst_Id'].'@'.Year.'@'.Session;
 
@@ -720,7 +720,7 @@ class Admission_inter extends CI_Controller {
         $pdf->SetFont('Arial','B',$font);
         $pdf->SetXY($x-58, $Y+185);
         $pdf->MultiCell(80,2.9,$user['inst_Name'],0,"L");
-
+                                                                
         $font = 12;
         $pdf->SetFont('Arial','B',$font);
         $pdf->SetXY($x-30, $Y+204);
@@ -2008,9 +2008,9 @@ class Admission_inter extends CI_Controller {
         $data = array(
             'isselected' => '11',
         );
-        
+
         //DebugBreak();
-        
+
         $msg = $this->uri->segment(3);
         $spl_cd = $this->uri->segment(4);
         $grp_selected = $this->uri->segment(5);
@@ -2121,6 +2121,7 @@ class Admission_inter extends CI_Controller {
                 {
                     $ispractical = 1;    
                 }
+                
                 if(array_search($v['sub4'],$practical_Sub) || array_search($v['sub5'],$practical_Sub) || array_search($v['sub5a'],$practical_Sub) || array_search($v['sub6a'],$practical_Sub) || array_search($v['sub6'],$practical_Sub) || array_search($v['sub7a'],$practical_Sub))
                 {
                     $ispractical =1;
@@ -2421,6 +2422,9 @@ class Admission_inter extends CI_Controller {
 
         $pdf->SetFont('Arial','',10);
         $pdf->SetXY(1.5,0.4);
+
+
+
         $pdf->Cell(0, 0.25, "FORWARDING LETTER SHOWING DETAILS OF ".corr_bank_chall_class." ADMISSION, ".session_year, 0.25, "C");
 
         $pdf->SetFont('Arial','',10);
@@ -3214,7 +3218,6 @@ class Admission_inter extends CI_Controller {
 
     public function Print_Admission_inter_Form_Proofreading_Groupwise()
     {
-
         //DebugBreak();
 
         $Condition = $this->uri->segment(4);
