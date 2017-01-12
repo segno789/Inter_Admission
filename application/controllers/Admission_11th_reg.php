@@ -612,7 +612,9 @@ class Admission_11th_reg extends CI_Controller {
         $pdf->Image("assets/img/forwardingletter11th_branch.png",5,6, 200,280, "PNG");
        // $pdf->Image("assets/img/M2.jpg",100, 2.8, 10, 10, "jpg");
         $bardata = Barcode::fpdf($pdf, $black, $bx, $by, $angle, $type, array('code'=>$Barcode), $width, $height);
-
+        $pdf->SetFont('Arial','B',8);
+        $pdf->SetXY(150.6, 40);
+        $pdf->Cell(0,0,'Print Date: '. date('d-m-Y H:i:s a'),0,0,'L',0);//MultiCell(8.5,0.2,'Print Date: '. date('d-m-Y H:i:s a'),0,"L",0)    ;  
         $len = $pdf->GetStringWidth($bardata['hri']);
         Barcode::rotate(-$len / 2, ($bardata['height'] / 2) + $fontSize + $marge, $angle, $xt, $yt);
         
@@ -713,6 +715,7 @@ class Admission_11th_reg extends CI_Controller {
         $font = 12;
         $x = 10; 
          $pdf->AddPage('P',"A4");
+        
           $pdf->Image("assets/img/forwardingletter_finance.png",5,6, 200,280, "PNG");
           for($i =0 ; $i<7 ; $i++)
         {
@@ -773,6 +776,9 @@ class Admission_11th_reg extends CI_Controller {
             
             }
         }
+         $pdf->SetFont('Arial','B',8);
+        $pdf->SetXY(150.6, 45);
+        $pdf->Cell(0,0,'Print Date: '. date('d-m-Y H:i:s a'),0,0,'L',0);
             $pdf->SetFont('Arial','B',$font);
             $pdf->SetXY($x-115, $Y+47);
             $pdf->Cell(0,0,$result[0]['Total_Fee'].'/-',0,0,'L',0);
