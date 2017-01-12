@@ -293,7 +293,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url(); ?>Admission_11th_reg/EditForms">
+                        <a href="<?php echo base_url(); ?>Admission_11th_reg/StudentsData_cancelAdm">
                             Cancel Admission
                         </a>
                     </li>

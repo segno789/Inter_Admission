@@ -2496,7 +2496,7 @@ public function NewEnrolment_Delete($formno)
   public function ChallanForm_Adm11hth_Regular()
     { 
 
-    //DebugBreak();
+    DebugBreak();
      $Grp_cd = $this->uri->segment(3);
      $this->load->library('session');
         $this->load->library('NumbertoWord');
@@ -2961,7 +2961,7 @@ public function NewEnrolment_Delete($formno)
 
             $pdf->SetXY($w+1.4,$y+$dy+0.15);
             $pdf->SetFont('Arial','I',7);
-            $pdf->Cell(0, $y, 'Admission Session '.CURRENT_SESS.' 11th', 0.25, "L");
+            $pdf->Cell(0, $y, 'Admission  '.Year.' 11th', 0.25, "L");
 
             $y += 0.25;
             $pdf->SetFont('Arial','B',10);

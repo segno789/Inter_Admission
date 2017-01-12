@@ -55,8 +55,8 @@ define('currdate','date("d-m-Y");');
 define('TripleDateFeeinter', '13-10-2017');
 
 define('SingleDateFee', '30-01-2017');
-define('DoubleDateFee', '15-02-2017');
-define('TripleDateFee', '20-02-2017');
+define('DoubleDateFee', '01-02-2017');
+define('TripleDateFee', '10-03-2017');
 
 define ('class_for_11th_Adm','11th');                                
 

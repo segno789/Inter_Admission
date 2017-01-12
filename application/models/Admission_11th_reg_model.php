@@ -379,13 +379,13 @@ class Admission_11th_reg_model extends CI_Model
         {
         $this->db->select('Sum(AdmFee) as sum_AdmFee,sum(AdmProcessFee) as sum_procFee,sum(AdmFine) as sum_admfine,sum(AdmTotalFee) as sum_TotalFee',False);
         $this->db->group_by("coll_cd");
-        $query = $this->db->get_where('Registration..IA_P1_Reg_Adm2016', array('coll_cd' => $inst_cd)); 
+        $query = $this->db->get_where('Registration..IA_P1_Reg_Adm2016', array('coll_cd' => $inst_cd ,'IsAdmission'=>1,'batch_id >'=>0,'isdeleted <>'=>1)); 
         }
           else if($isformwise == 6)
         {
         $this->db->select('Sum(AdmFee) as sum_AdmFee,sum(AdmProcessFee) as sum_procFee,sum(AdmFine) as sum_admfine,sum(AdmTotalFee) as sum_TotalFee',False);
         $this->db->group_by("coll_cd");
-        $query = $this->db->get_where('Registration..IA_P1_Reg_Adm2016', array('coll_cd' => $inst_cd)); 
+        $query = $this->db->get_where('Registration..IA_P1_Reg_Adm2016', array('coll_cd' => $inst_cd,'IsAdmission'=>1,'batch_id >'=>0,'isdeleted <>'=>1)); 
         }
        else if($isformwise == 4)
         {
