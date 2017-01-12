@@ -14,31 +14,31 @@
                     <div class="widget-body">
                         <h1    style="text-align: center;"><font color="#000000" size="+1" >Note:-Last Date of Online Admission for 11th  without late fee is <b class="blink_text"> <?php echo SingleDateFee ;?></b></font></h1>
                         <h4>Welcome to Board of Intermediate &amp; Secondary Education, GUJRANWALA</br></br> &nbsp; Dashboard</h4>
-                          <?php 
-                          
-                          //DebugBreak();
-                          if(@$isfeedingallow == 1) {?>
-                      
-                       
-                        <!--  <div class="shortcutHome">
-                        <a href="GetInfo.php"><img src="<?php echo base_url();?>assets/img/enrolment.png"><br>Re-Admission</a>
-                        </div>  -->    
-                       
-                       
-                      <!--  <div class="shortcutHome">
+                        <?php 
+
+                        //DebugBreak();
+                        if(@$isfeedingallow == 1) {?>
+
+
+                            <!--  <div class="shortcutHome">
+                            <a href="GetInfo.php"><img src="<?php echo base_url();?>assets/img/enrolment.png"><br>Re-Admission</a>
+                            </div>  -->    
+
+
+                            <!--  <div class="shortcutHome">
 
 
                             <a href="<?php echo base_url(); ?>index.php/Registration/CreateBatch"><img src="<?php echo base_url();?>assets/img/batch_list.png"><br>Create Batch</a> 
 
-                        </div>       -->
-                          <?php }?>
-                           <div class="shortcutHome">
+                            </div>       -->
+                            <?php }?>
+                        <div class="shortcutHome">
                             <a href="<?php echo base_url();?>index.php/Admission_11th_reg/studentsData"><img src="<?php echo base_url();?>assets/img/enrolment.png"><br>Make-Admission</a>
                         </div> 
-                         <div class="shortcutHome">
+                        <div class="shortcutHome">
                             <a href="<?php echo base_url(); ?>index.php/Admission_11th_reg/studentsData_cancelAdm"><img src="<?php echo base_url();?>assets/img/edit_form.png"><br>Cancel Form</a>
                         </div>
-                          <div class="shortcutHome">
+                        <div class="shortcutHome">
                             <a href="<?php echo base_url(); ?>index.php/Admission_11th_reg/FormPrinting"><img src="<?php echo base_url();?>assets/img/reports.png"><br>Form Printing </a>
                         </div> 
                         <div class="shortcutHome">
@@ -48,65 +48,65 @@
                         <div class="shortcutHome">
                             <a href="<?php echo base_url(); ?>/index.php/login/logout"><img src="<?php echo base_url();?>assets/img/logout_icon.png"><br>Logout</a>
                         </div>
-                         <div class="shortcutHome">
+                        <div class="shortcutHome">
                             <img src="<?php echo base_url(); ?>/assets/img/image_guideline.jpg" alt="" style="    margin-top: -20px;width: 450px;float: right;margin-right: 22px;">
                         </div>
                         <div class="clear"></div>
                         <div style="width: 800px;margin-top: -293px;">
-                        <div id="smallRight" style="    float: left;margin-left: 20px;    margin-right: 380px;">
-                            <h4>Information</h4>
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <td style="border: none;padding: 4px;">Logged ID :</td>
-                                        <td style="border: none;padding: 4px;"><b><?php  echo $Inst_id ?></b></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border: none;padding: 4px;">Name :</td>
-                                        <td style="border: none;padding: 4px;width:190px;"><b><?php
-                                                echo $Inst_name     
-                                            ?></b></td>
-                                    </tr>
-                                    <tr>
+                            <div id="smallRight" style="    float: left;margin-left: 20px;    margin-right: 380px;">
+                                <h4>Information</h4>
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td style="border: none;padding: 4px;">Logged ID :</td>
+                                            <td style="border: none;padding: 4px;"><b><?php  echo $Inst_id ?></b></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border: none;padding: 4px;">Name :</td>
+                                            <td style="border: none;padding: 4px;width:190px;"><b><?php
+                                                    echo $Inst_name     
+                                                ?></b></td>
+                                        </tr>
+                                        <tr>
 
-                                </tbody>
-                            </table>
-                        </div>
-                        <div id="smallRight">
-                            <h4>Current Report</h4>
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <td style="border: none;padding: 4px;">Total Entries:</td>
-                                        <td style="border: none;padding: 4px;">
-                                            <b><?php
-                                        
-                                                echo      $count[0]['Total_Entries'];
-                                        ?></b>                                </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td style="border: none;padding: 4px;">Total Make Addmission:</td>
-                                        <td style="border: none;padding: 4px;"><b>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div id="smallRight">
+                                <h4>Current Report</h4>
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td style="border: none;padding: 4px;">Total Entries:</td>
+                                            <td style="border: none;padding: 4px;">
                                                 <b><?php
-                                                    echo     $count[0]['Total_Make_Adm'];
-                                                ?></b>                                
-                                            </b></td>
-                                    </tr>
+
+                                                    echo      $count[0]['Total_Entries'];
+                                            ?></b>                                </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td style="border: none;padding: 4px;">Total Make Addmission:</td>
+                                            <td style="border: none;padding: 4px;"><b>
+                                                    <b><?php
+                                                        echo     $count[0]['Total_Make_Adm'];
+                                                    ?></b>                                
+                                                </b></td>
+                                        </tr>
 
 
 
-                                    <tr>
-                                        <td style="border: none;padding: 4px;">&nbsp;</td>
-                                        <td style="border: none;padding: 4px;">&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border: none;padding: 4px;">&nbsp;</td>
-                                        <td style="border: none;padding: 4px;">&nbsp;</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                                        <tr>
+                                            <td style="border: none;padding: 4px;">&nbsp;</td>
+                                            <td style="border: none;padding: 4px;">&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border: none;padding: 4px;">&nbsp;</td>
+                                            <td style="border: none;padding: 4px;">&nbsp;</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                         <div class="clear"></div>
                         <div style="  margin-top: -190px;margin-left: 20px;font-size: 16px;">
@@ -114,10 +114,10 @@
                             <br/>
                             <br/>
                             <!--<a href="http://www.bisegrw.com/download/online/registration/Training_Manual_11th_Registration_Central_Software_Urdu.pdf" target="_blank" class="guidlines blink_text" style="font-size: 18px;">Download 11th Registration Training Manual. </a> <br/>-->
-                             <a href="<?=base_url()?>Admission_11th_reg/forwarding_pdf/"  class="guidlines blink_text" style="font-size: 18px;">Download Farwarding letter. </a> <br/>
-                             <a href="<?php echo base_url(); ?>Admission_11th_reg/financeReoprt" target="_blank" class="guidlines blink_text" style="font-size: 18px;">Download Finance Farwarding letter. </a> <br/>
-                             <a href="<?=base_url()?>Admission_11th_reg/ChallanForm_Adm11hth_Regular/9"  class="guidlines blink_text" style="font-size: 18px;">Download Challan Form. </a> <br/>
-                          <!--  <a href="<?php //echo base_url(); ?>/assets/img//Image_error.pdf" class="guidlines blink_text" target="_blank" style="font-size: 18px;">Instruction for Error occured due to Image uploading. </a>-->
+                            <a href="<?=base_url()?>Admission_11th_reg/forwarding_pdf/"  class="guidlines blink_text" style="font-size: 18px;">Download Forwarding letter. </a> <br/>
+                            <a href="<?php echo base_url(); ?>Admission_11th_reg/financeReoprt" target="_blank" class="guidlines blink_text" style="font-size: 18px;">Download Finance Forwarding letter. </a> <br/>
+                            <a href="<?=base_url()?>Admission_11th_reg/ChallanForm_Adm11hth_Regular/9"  class="guidlines blink_text" style="font-size: 18px;">Download Challan Form. </a> <br/>
+                            <!--  <a href="<?php //echo base_url(); ?>/assets/img//Image_error.pdf" class="guidlines blink_text" target="_blank" style="font-size: 18px;">Instruction for Error occured due to Image uploading. </a>-->
                             <br /><br />
                             <strong>NOTE:</strong> <br/>
                             1. Please upload photo of student carefully and with good quality as this picture will be used in his/her matriculation Roll Number Slip/Result Card/certificate.<br /> 

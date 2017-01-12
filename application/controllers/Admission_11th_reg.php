@@ -31,7 +31,7 @@ class Admission_11th_reg extends CI_Controller {
     public function index()
     {
       // DebugBreak(); 
-        
+
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
@@ -70,13 +70,13 @@ class Admission_11th_reg extends CI_Controller {
         $this->load->model('Admission_11th_reg_model');
         $Inst_Id = $userinfo['Inst_Id'];
         $isres = $this->Admission_11th_reg_model->Incomplete_inst($_POST,$Inst_Id);
-        
+
         if($isres == 1)
         {
          redirect('Admission_9th_reg');
         }
-       
-        
+
+
     }
     public function forwarding_pdf()
     {
@@ -148,14 +148,14 @@ class Admission_11th_reg extends CI_Controller {
         $pdf->SetFont('Arial','B',10);
         $pdf->SetXY(0.9+$x,0.7+$y);
         $pdf->Cell(0, 0.25, "__________", 0.25, "C");
-        
-        
+
+
          $pdf->SetFont('Arial','B',10);
         $pdf->SetXY(0.4+$x,1.6+$y);
-        
+
         $pdf->Cell(0, 0.25, "Dated:______________________", 0.25, "C");
-        
-       
+
+
 
         /*$pdf->SetFont('Arial','',10);
         $pdf->SetXY(0.4+$x,1.3+$y);
@@ -164,22 +164,22 @@ class Admission_11th_reg extends CI_Controller {
          $pdf->SetFont('Arial','',10);
         $pdf->SetXY(2.1+$x,1.3+$y);
         $pdf->Cell(0, 0.25, " DISTT:_____________________", 0.25, "C");     */
-        
-        
+
+
         $pdf->SetFont('Arial','',10);
         $pdf->SetXY(0.4+$x,1.2+$y);
         $pdf->Cell(0, 0.25, "NO:_________________________", 0.25, "C");
-        
+
         $pdf->SetFont('Arial','B',10);
         $pdf->SetXY(4.9+$x,1.2+$y);            
         $pdf->Cell(0, 0.25, "Institute Landline No:___________________", 0.25, "C");
-        
+
         $pdf->SetFont('Arial','B',10);
         $pdf->SetXY(4.9+$x,1.6+$y);
-        
+
         $pdf->Cell(0, 0.25, "Mobile No:____________________________", 0.25, "C");
 
-      
+
 
         $y = $y-0.8;
         $pdf->SetFont('Arial','B',10);
@@ -306,7 +306,7 @@ class Admission_11th_reg extends CI_Controller {
         /* $pdf->Cell($boxWidth-1.8,0.2,$result['data'][0]['lateFee5'],1,0,'C',1);
         $pdf->Cell($boxWidth-1.7,0.2,$result['data'][0]['wlateFee5'],1,0,'C',1); */
         $pdf->Cell($boxWidth-1.5,0.2,$result['data'][0]['grpFee5'],1,0,'C',1);
-        
+
        /* $pdf->SetXY($xx,5+$yy);
         $pdf->SetFont('Arial','',7);
         $pdf->Cell($boxWidth-2.2,0.2,'6',1,0,'C',1);
@@ -341,7 +341,7 @@ class Admission_11th_reg extends CI_Controller {
         $pdf->SetXY(0.9,8.0+$y);    
         $pdf->MultiCell(8.5,0.2,"Proposed Exam. Centre:______________________________________________________________________",0,"L",0)    ;
 
-       
+
 
         $pdf->SetFont('Arial','B',10);
         $pdf->SetXY(0.9,8.35+$y); 
@@ -352,7 +352,7 @@ class Admission_11th_reg extends CI_Controller {
         $pdf->SetXY(0.9,8.7+$y);    
         $pdf->MultiCell(8.5,0.2,"Zone Code:_________________________________________________________________________________",0,"L",0)    ;   
 
-       
+
         $pdf->SetFont('Arial','B',10);
         $pdf->SetXY(0.9,9.4+$y);    
         $pdf->MultiCell(6.6,0.2,"Yours Obediently,",0,"R",0)    ;   
@@ -381,15 +381,15 @@ class Admission_11th_reg extends CI_Controller {
         $pdf->SetXY(0.9,11.15+$y);    
         $pdf->MultiCell(8.5,0.2,"5.____________________________",0,"L",0)    ;  
 
-        
+
         $pdf->SetFont('Arial','B',10);
         $pdf->SetXY(5.4,9.95+$y);    
         $pdf->MultiCell(8.5,0.2,"NAME.____________________________",0,"L",0)    ; 
-        
+
         $pdf->SetFont('Arial','B',10);
         $pdf->SetXY(5.4,10.25+$y);    
         $pdf->MultiCell(8.5,0.2,"CNIC NO.__________________________",0,"L",0)    ; 
-        
+
         $pdf->SetFont('Arial','UB',10);
         $pdf->SetXY(5.4,11.05+$y);    
         $pdf->MultiCell(8.5,0.2,"Signature & Stamp of Principal",0,"L",0)    ; 
@@ -483,10 +483,10 @@ class Admission_11th_reg extends CI_Controller {
         $this->load->view('common/footer11th.php');
 
     }
- 
 
-  
-  
+
+
+
     public function NewEnrolment_EditForm()
     {    
 
@@ -567,7 +567,16 @@ class Admission_11th_reg extends CI_Controller {
 
         $this->load->view('common/footer11th.php');
     }
-   
+public function NewEnrolment_Delete($formno)
+    {
+        // DebugBreak();
+        $this->load->model('Admission_11th_reg_model');
+        $RegStdData = array('data'=>$this->Admission_11th_reg_model->Delete_NewEnrolement($formno));
+        $this->load->library('session');
+        $this->session->set_flashdata('error', '2');
+        redirect('Admission_11th_reg/EditForms');
+        return;
+    }
      public function financeReoprt()
     {
         //DebugBreak();
@@ -583,11 +592,11 @@ class Admission_11th_reg extends CI_Controller {
         }
         $temp = $user['Inst_Id'].'@'.Year.'@'.Session;
         //$image =  $this->set_barcode($temp);
-        
+
         $this->load->library('PDFFWithOutPage');
         $pdf=new PDFFWithOutPage();   
         $pdf->SetAutoPageBreak(true,2);
-        
+
         $pdf->AddPage('P',"A4");
 
         $fontSize = 10; 
@@ -601,12 +610,12 @@ class Admission_11th_reg extends CI_Controller {
         $code     = '222020';     // barcode (CP852 encoding for Polish and other Central European languages)
         $type     = 'code128';
         $black    = '000000'; // color in hex
-        
+
         $data['iyear'] = Year;
         $data['sess'] = Session;
-        
+
         $Barcode = $temp;
-        
+
         $result[0] = $result['data'][0];
          // DebugBreak();
         $pdf->Image("assets/img/forwardingletter11th_branch.png",5,6, 200,280, "PNG");
@@ -617,13 +626,13 @@ class Admission_11th_reg extends CI_Controller {
         $pdf->Cell(0,0,'Print Date: '. date('d-m-Y H:i:s a'),0,0,'L',0);//MultiCell(8.5,0.2,'Print Date: '. date('d-m-Y H:i:s a'),0,"L",0)    ;  
         $len = $pdf->GetStringWidth($bardata['hri']);
         Barcode::rotate(-$len / 2, ($bardata['height'] / 2) + $fontSize + $marge, $angle, $xt, $yt);
-        
+
         $pdf->SetFont('Arial','B',11.5);
         $pdf->SetXY(61.5, 44);
         $pdf->Cell(0,0,$data['iyear'],0,0,'L',0);
-        
-        
-        
+
+
+
       //  DebugBreak();
         //Finance Page
         $Y = 72;
@@ -631,7 +640,7 @@ class Admission_11th_reg extends CI_Controller {
         $x = 13; 
         for($i =0 ; $i<7 ; $i++)
         {
-       
+
             $pdf->SetFont('Arial','B',$font);
             $pdf->SetXY($x-2, $Y-7.5);
             //$result[0]['Total_sci']
@@ -673,25 +682,25 @@ class Admission_11th_reg extends CI_Controller {
             else if($i<6)
             {
                 $x= $x+22; 
-                
+
                 if($i==4)
                 {
                 $x= $x-5; 
                 }
             }
-            
-            
-            
+
+
+
         }
-        
+
             $pdf->SetFont('Arial','B',$font);
             $pdf->SetXY($x-115, $Y+42);
             $pdf->Cell(0,0,$result[0]['Total_Fee'].'/-',0,0,'L',0);
-            
+
             $pdf->SetFont('Arial','B',$font);
             $pdf->SetXY($x-59, $Y+42);
             $pdf->Cell(0,0,$result[0]['Total_SpeCandidate'],0,0,'L',0);
-        
+
        // DebugBreak();
             $pdf->SetFont('Arial','B',$font);
             $pdf->SetXY($x-30, $Y+172);
@@ -704,13 +713,13 @@ class Admission_11th_reg extends CI_Controller {
             $pdf->SetFont('Arial','B',$font);
             $pdf->SetXY($x-30, $Y+198);
             $pdf->Cell(0,0,$user['phone'],0,0,'L',0);
-            
+
             $pdf->SetFont('Arial','B',$font);
             $pdf->SetXY($x-30, $Y+206);
             $pdf->Cell(0,0,$user['cell'],0,0,'L',0);
         /////Matric Branch Copy
-        
-        
+
+
         $Y = 64;
         $font = 12;
         $x = 10; 
@@ -736,17 +745,17 @@ class Admission_11th_reg extends CI_Controller {
             }
             else if($i == 3)
             {
-            
+
             $pdf->Cell(0,0,$result[0]['Total_ReApSc'],0,0,'L',0);
             }
             else if($i == 2)
             {
-                
+
             $pdf->Cell(0,0,$result[0]['Total_ReApArts'],0,0,'L',0);
             }
              else if($i == 1)
             {
-                 
+
             $pdf->Cell(0,0,$result[0]['Total_ReApArtsPr'],0,0,'L',0);
             }
             else if($i == 0)
@@ -765,15 +774,15 @@ class Admission_11th_reg extends CI_Controller {
             {
                 $x= $x+24; 
             }
-            
+
             else
             {
-            
+
                 $x= $x+20; 
-            
-            
+
+
             }
-            
+
             }
         }
          $pdf->SetFont('Arial','B',8);
@@ -782,42 +791,42 @@ class Admission_11th_reg extends CI_Controller {
             $pdf->SetFont('Arial','B',$font);
             $pdf->SetXY($x-115, $Y+47);
             $pdf->Cell(0,0,$result[0]['Total_Fee'].'/-',0,0,'L',0);
-            
+
             $pdf->SetFont('Arial','B',$font);
             $pdf->SetXY($x-59, $Y+47);
             $pdf->Cell(0,0,$result[0]['Total_SpeCandidate'],0,0,'L',0);
-            
+
             $pdf->SetFont('Arial','B',$font);
             $pdf->SetXY($x-20, $Y+178);
             $pdf->Cell(0,0,$user['Inst_Id'],0,0,'L',0);
-            
+
             $font = 9;
             $pdf->SetFont('Arial','B',$font);
             $pdf->SetXY($x-58, $Y+185);
             $pdf->MultiCell(80,2.9,$user['inst_Name'],0,"L");
-            
+
             $font = 12;
             $pdf->SetFont('Arial','B',$font);
             $pdf->SetXY($x-30, $Y+204);
             $pdf->Cell(0,0,$user['phone'],0,0,'L',0);
-            
+
             $pdf->SetFont('Arial','B',$font);
             $pdf->SetXY($x-30, $Y+213);
             $pdf->Cell(0,0,$user['cell'],0,0,'L',0);
-            
-        
+
+
         //$pdf->Image("assets/img/M3.jpg",100, 2.8, 10, 10, "jpg");
         $bardata = Barcode::fpdf($pdf, $black, $bx+2, $by+5, $angle, $type, array('code'=>$Barcode), $width, $height);
 
         $len = $pdf->GetStringWidth($bardata['hri']);
         Barcode::rotate(-$len / 2, ($bardata['height'] / 2) + $fontSize + $marge, $angle, $xt, $yt);
-        
+
         $pdf->SetFont('Arial','B',11.5);
         $pdf->SetXY(85.5, 42);
         $pdf->Cell(0,0,$data['iyear'],0,0,'L',0);
-        
-       
-         
+
+
+
         $pdf->Output('financeReoprt.pdf', 'I'); 
     }
     public function EditForms()
@@ -858,7 +867,7 @@ class Admission_11th_reg extends CI_Controller {
 
 
     }
-  
+
     public function ProofReading()
     {
         $data = array(
@@ -996,7 +1005,7 @@ class Admission_11th_reg extends CI_Controller {
         return;
 
     }
-  
+
     public function FormPrinting()
     {
 
@@ -1315,7 +1324,7 @@ class Admission_11th_reg extends CI_Controller {
             $pdf->SetFont('Arial','',7);    
             $pdf->Text($col5+.05,$ln[$countofrecords]+0.4,$data["sub5_abr"].','.$data["sub6_abr"].','.$data["sub7_abr"]);
            // DebugBreak();
-          
+
             $pdf->Image(DIRPATH11th.'/'.$data["coll_cd"].'/'.$data["PicPath"],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG"); 
 
             ++$SR;
@@ -1371,7 +1380,7 @@ class Admission_11th_reg extends CI_Controller {
                         else if($id == 22)  $retVal = "BURNALA";
                         else if($id == 23)  $retVal = "GUJAR KHAN";
                         else if($id == 24)  $retVal = "JEHLUM";
-                       
+
                             return $retVal; 
     }
     public function GetZoneName($zone_cd)
@@ -1383,7 +1392,7 @@ class Admission_11th_reg extends CI_Controller {
 
 
     }
-  
+
     public function revenue_pdf()
     {
         // DebugBreak();
@@ -1779,7 +1788,7 @@ class Admission_11th_reg extends CI_Controller {
 
         $type     = 'code128';
         $black    = '000000'; // color in hex
-//         DebugBreak();
+        //         DebugBreak();
         $result = $result['data'] ;
         //if(!empty($result)):
         foreach ($result as $key=>$data) 
@@ -1864,7 +1873,7 @@ class Admission_11th_reg extends CI_Controller {
             $pdf->SetXY(5.88,0.99+$Y);
             $pdf->Cell(0.5,0.5, "(For office use only)",0,'L');
 
-             
+
 
 
             if(@$data["regPvt"]==1)
@@ -1873,7 +1882,7 @@ class Admission_11th_reg extends CI_Controller {
                 $pdf->SetFont('Arial','B',10);
                 $pdf->Cell( 0.5,0.5,'('.$user['Inst_Id'].')'.'-'.$user['inst_Name'],0,'R');
             }
-             
+
             //------------- Personal Infor Box
             //====================================================================================================================
 
@@ -2030,14 +2039,14 @@ class Admission_11th_reg extends CI_Controller {
             $pdf->Cell(0.5,0.5,@$data["markOfIden"],0,'R');
 
             //DebugBreak();
-            
+
             /*$pdf->SetXY(5.5+$x,3.6+$Y);
             $pdf->SetFont('Arial','',8);
             $pdf->Cell( 0.5,0.5,"Locality:",0,'L');*/
             $pdf->SetFont('Arial','b',8);
             $pdf->SetXY(6.4+$x,3.6+$Y);
             $pdf->Cell(0.5,0.5,@$data["sex"]==1?"MALE":"FEMALE",0,'R');
-            
+
             $pdf->SetXY(3.1+$x,3.5+$Y);
             $pdf->SetFont('Arial','',8);
             $pdf->Cell( 0.5,0.5,"Admission:",0,'L');
@@ -2056,10 +2065,10 @@ class Admission_11th_reg extends CI_Controller {
             $pdf->Cell(7.6,0.2,'CONTACT INFORMATION',1,0,'L',1);
             //--------------------------- 8th line 
 
-          
-           
+
+
            //  DebugBreak();
-            
+
                 //    //__TEHSIL
                 $pdf->SetXY(0.5,4.3+$Y);
                 $pdf->SetFont('Arial','',8);
@@ -2067,18 +2076,18 @@ class Admission_11th_reg extends CI_Controller {
                 $pdf->SetFont('Arial','B',8);
                 $pdf->SetXY(0.90,4.3+$Y);
                 $pdf->Cell( 0.5,0.5, $this->GetDistName($user["dist"]),0,'L'); 
-                
-           
+
+
              ////----- DISTRICT   
-           
-                
+
+
                 $pdf->SetXY(2.1,4.3+$Y);
                 $pdf->SetFont('Arial','',8);
                 $pdf->Cell(0.5,0.5,"Tehsil:",0,'L');
                 $pdf->SetFont('Arial','B',8);
                 $pdf->SetXY(2.5,4.3+$Y);
                 $pdf->Cell( 0.5,0.5,$this->GetTehName($user['teh']),0,'L');
-                
+
 
             //    //__ Head of Institution Cell No.
 
@@ -2096,8 +2105,8 @@ class Admission_11th_reg extends CI_Controller {
             $pdf->SetFont('Arial','B',8);
             $pdf->SetXY(6.0,4.3+$Y);
             $pdf->Cell( 0.5,0.5,strtoupper(@$data["zone_name"]),0,'L');
-            
-            
+
+
             //__Address
             $pdf->SetXY(0.5,4.6+$Y);
             $pdf->SetFont('Arial','',8);
@@ -2124,35 +2133,35 @@ class Admission_11th_reg extends CI_Controller {
             //--------------------------- 7th line 
             //if(@$data["IsReAdm"]==1)
            // {
-                 
+
                 //------------- Old Exam Infor if any Box
                 $pdf->SetFont('Arial','B',8);
                 $pdf->SetXY(0.5,5+$Y);
                 $pdf->SetFillColor(240,240,240);
                 $pdf->Cell(7.6,0.2,'SSC EXAMINATION INFORMATION  ',1,0,'L',1);         
-                
+
                 $pdf->SetXY(0.5,5.1+$Y);
                 $pdf->SetFont('Arial','',8);
                 $pdf->Cell( 0.5,0.5,"Roll No:",0,'L');
-                 
+
                 $pdf->SetFont('Arial','B',8);
                 $pdf->SetXY(0.95,5.1+$Y);
                 $pdf->Cell(0.5,0.5,@$data["matRno"],0,'L');
-            
+
                 $pdf->SetXY(1.5,5.1+$Y);
                 $pdf->SetFont('Arial','',8);
                 $pdf->Cell( 0.5,0.5,"Year:",0,'L');
                 $pdf->SetFont('Arial','B',8);
                 $pdf->SetXY(1.95,5.1+$Y);
                 $pdf->Cell(0.5,0.5,@$data["yearOfPass"],0,'L');
-                        
+
                  $pdf->SetXY(2.8,5.1+$Y);
                  $pdf->SetFont('Arial','',8);
                  $pdf->Cell( 0.5,0.5,"Session:",0,'L');
                  $pdf->SetFont('Arial','B',8);
                  $pdf->SetXY(3.3,5.1+$Y);
                  $pdf->Cell(0.5,0.5,@$data["sessOfPass"]==1?"Annual":"Supplementary",0,'R');
-                
+
                // DebugBreak();
                 $pdf->SetXY(4.5,5.1+$Y);
                 $pdf->SetFont('Arial','',8);
@@ -2161,13 +2170,13 @@ class Admission_11th_reg extends CI_Controller {
                 $pdf->SetXY(4.95,5.1+$Y);
                 $pdf->Cell(0.5,0.5,@$data["matBrd_name"],0,'L');
                      $Y = $Y + 0.5  ;
-                
+
                 //------------- Old Exam Infor if any Box
                 $pdf->SetFont('Arial','B',8);
                 $pdf->SetXY(0.5,5+$Y);
                 $pdf->SetFillColor(240,240,240);
                 $pdf->Cell(7.6,0.2,'PREVIOUS INTERMEDIATE (PART-I/II) EXAMINATION INFORMATION  ',1,0,'L',1);         
-                
+
                 $pdf->SetXY(0.5,5.1+$Y);
                 $pdf->SetFont('Arial','',8);
                 $pdf->Cell( 0.5,0.5,"Roll No:",0,'L');
@@ -2182,8 +2191,8 @@ class Admission_11th_reg extends CI_Controller {
                 {
                 $pdf->Cell(0.5,0.5,'',0,'L');
                 }
-                
-            
+
+
                 $pdf->SetXY(1.5,5.1+$Y);
                 $pdf->SetFont('Arial','',8);
                 $pdf->Cell( 0.5,0.5,"Year:",0,'L');
@@ -2197,8 +2206,8 @@ class Admission_11th_reg extends CI_Controller {
                 {
                 $pdf->Cell(0.5,0.5,'',0,'L');
                 }
-                
-                        
+
+
                  $pdf->SetXY(2.8,5.1+$Y);
                  $pdf->SetFont('Arial','',8);
                  $pdf->Cell( 0.5,0.5,"Session:",0,'L');
@@ -2212,17 +2221,17 @@ class Admission_11th_reg extends CI_Controller {
                 {
                 $pdf->Cell(0.5,0.5,'',0,'R');
                 }
-                 
-                 
-                 
+
+
+
                 /* $pdf->SetXY(4.5,5.1+$Y);
                  $pdf->SetFont('Arial','',8);
                  $pdf->Cell( 0.5,0.5,"Board:",0,'L');
                  $pdf->SetFont('Arial','B',8);
                  $pdf->SetXY(4.9,5.1+$Y);
                  $pdf->Cell(0.5,0.5,@$data["InterBrd_name"],0,'R');   */
-                            
-               
+
+
            // }
 
 
@@ -2278,53 +2287,53 @@ class Admission_11th_reg extends CI_Controller {
 
             //====================================subjects
             $x = 1;     
-            
+
              $pdf->SetFont('Arial','',6);
             $pdf->SetXY(6.5,6.25+$Y);
             $pdf->SetFillColor(240,240,240);
             $pdf->Cell(1.3,1.4,'Paste Recent Photograph',1,0,'C',1);
-            
+
             $pdf->SetFont('Arial','B',6);
             $pdf->SetXY(6.48,7.49+$Y);
             //$pdf->SetFillColor(260,260,260);
             $pdf->Cell(0.5,0.5,'Photo must be cross attested',0,'C');   
-            
-            
+
+
             $pdf->SetFont('Arial','B',12);
             $pdf->SetXY(0.5,6.25+$Y);
             $pdf->SetFillColor(240,240,240);
             $pdf->Cell(4.6,0.2,'Subjects: Part-I',1,0,'C',1); 
-            
+
             $Y = $Y+0.2;
             $pdf->SetFont('Arial','',10);
             $pdf->SetXY(0.5,6.25+$Y);
             $pdf->SetFillColor(260,260,260);
             $pdf->Cell(4.6,0.2,@$data['sub1Ap1'] != 1 ? '':   '1. '. (@$data['sub1_NAME']),1,0,'L',1); 
-              
+
             $Y = $Y+0.2;
             $pdf->SetFont('Arial','',10);
             $pdf->SetXY(0.5,6.25+$Y);
             $pdf->SetFillColor(260,260,260);
             $pdf->Cell(4.6,0.2,@$data['sub2Ap1'] != 1 ? '':   '2. '. (@$data['sub2_NAME']),1,0,'L',1); 
-            
+
             $Y = $Y+0.2;
             $pdf->SetFont('Arial','',10);
             $pdf->SetXY(0.5,6.25+$Y);
             $pdf->SetFillColor(260,260,260);
             $pdf->Cell(4.6,0.2,@$data['sub3Ap1'] != 1 ? '':   '3. '. (@$data['sub3_NAME']),1,0,'L',1);
-            
+
             $Y = $Y+0.2;
             $pdf->SetFont('Arial','',10);
             $pdf->SetXY(0.5,6.25+$Y);
             $pdf->SetFillColor(260,260,260);
             $pdf->Cell(4.6,0.2,@$data['sub4Ap1'] != 1 ? '':   '4. '. (@$data['sub4_NAME']),1,0,'L',1);
-            
+
             $Y = $Y+0.2;
             $pdf->SetFont('Arial','',10);
             $pdf->SetXY(0.5,6.25+$Y);
             $pdf->SetFillColor(260,260,260);
             $pdf->Cell(4.6,0.2,@$data['sub5Ap1'] != 1 ? '':   '5. '. (@$data['sub5_NAME']),1,0,'L',1);
-            
+
             $Y = $Y+0.2;
             $pdf->SetFont('Arial','',10);
             $pdf->SetXY(0.5,6.25+$Y);
@@ -2339,10 +2348,10 @@ class Admission_11th_reg extends CI_Controller {
             $pdf->SetFillColor(260,260,260);
             $pdf->Cell(4.6,0.2,@$data['sub7Ap1'] != 1 ? '':   '7. '. (@$data['sub7_NAME']),1,0,'L',1);
             }
-            
-           
-          
-         
+
+
+
+
 
             //------ Picture Box on right side with subjects list    
             if(@$data["regPvt"]==2)
@@ -2370,7 +2379,7 @@ class Admission_11th_reg extends CI_Controller {
             $pdf->Cell(2,0.45,'',1,0,'C',0); 
             $pdf->SetXY(0.5,9.15+$Y);
             $pdf->Cell(0,0,"Candidate's signature in Urdu",'',0,'L',0); 
-            
+
             $pdf->SetFont('Arial','',6);
             $pdf->SetXY(2.9,8.76+$Y);
             $pdf->Cell(4.8,1.550,'',1,0,'C',0); 
@@ -2386,7 +2395,7 @@ class Admission_11th_reg extends CI_Controller {
             $pdf->Cell(4,0.45,"EMIS Code(If Government Institute):_________________________                      ________________________________",'',0,'L',0); 
             $pdf->SetXY(2.9,10.0+$Y);
             $pdf->Cell(4,0.45,"                                                                                                                                                         Stamp/Signature",'',0,'L',0); 
-            
+
             $pdf->SetXY(0.5,9.2+$Y);
             $pdf->Cell(2,0.45,'',1,0,'C',0); 
             $pdf->SetXY(0.5,9.6+$Y);
@@ -2483,10 +2492,10 @@ class Admission_11th_reg extends CI_Controller {
 
         return 1;
     }
-     
+
   public function ChallanForm_Adm11hth_Regular()
     { 
-    
+
     //DebugBreak();
      $Grp_cd = $this->uri->segment(3);
      $this->load->library('session');
@@ -2518,12 +2527,12 @@ class Admission_11th_reg extends CI_Controller {
                 // For ReAdmission Fee
                 $SciAdmFee_ReAdm = $user_info['rule_fee'][0]['Amount'];
                 $SciProcFee_ReAdm = $user_info['rule_fee'][0]['Processing_Fee'];
-                
+
                 // Set Challan DATE
                  $date_temp = new DateTime($user_info['rule_fee'][0]['End_Date']);
                  $singleDate_temp =  $date_temp->format('d-m-Y'); 
                 $challanDueDate = $singleDate_temp;
-                
+
 
             } else if( $user_info['rule_fee'][1]['isPrSub']== 1 )
             {
@@ -2532,12 +2541,12 @@ class Admission_11th_reg extends CI_Controller {
                 // For ReAdmission Fee
                 $SciAdmFee_ReAdm = $user_info['rule_fee'][1]['Amount'];
                 $SciProcFee_ReAdm = $user_info['rule_fee'][1]['Processing_Fee'];
-                
+
                  // Set Challan DATE
                  $date_temp = new DateTime($user_info['rule_fee'][1]['End_Date']);
                  $singleDate_temp =  $date_temp->format('d-m-Y'); 
                 $challanDueDate = $singleDate_temp;
-                 
+
             }
             if($user_info['rule_fee'][0]['isPrSub']==0)
             {
@@ -2546,7 +2555,7 @@ class Admission_11th_reg extends CI_Controller {
                 // For ReAdmission Fee
                 $ArtsAdmFee_ReAdm = $user_info['rule_fee'][0]['Amount'];
                // $ArtsAdmFee_ReAdm = $user_info['rule_fee'][0]['Processing_Fee'];
-                
+
                  // Set Challan DATE
                  $date_temp = new DateTime($user_info['rule_fee'][0]['End_Date']);
                  $singleDate_temp =  $date_temp->format('d-m-Y'); 
@@ -2559,7 +2568,7 @@ class Admission_11th_reg extends CI_Controller {
                 // For ReAdmission Fee
                 $ArtsAdmFee_ReAdm = $user_info['rule_fee'][1]['Amount'];
                 //$ArtsAdmFee_ReAdm = $user_info['rule_fee'][1]['Processing_Fee'];
-                
+
                  // Set Challan DATE
                  $date_temp = new DateTime($user_info['rule_fee'][1]['End_Date']);
                  $singleDate_temp =  $date_temp->format('d-m-Y'); 
@@ -2579,7 +2588,7 @@ class Admission_11th_reg extends CI_Controller {
                 // For ReAdmission Fee
                 $SciAdmFee_ReAdm = $user_info['rule_fee'][0]['Amount'];
                 $SciProcFee_ReAdm = $user_info['rule_fee'][0]['Processing_Fee'];
-                
+
                  // Set Challan DATE
                  $date_temp = new DateTime($user_info['rule_fee'][0]['End_Date']);
                  $singleDate_temp =  $date_temp->format('d-m-Y'); 
@@ -2592,7 +2601,7 @@ class Admission_11th_reg extends CI_Controller {
                 // For ReAdmission Fee
                 $SciAdmFee_ReAdm = $user_info['rule_fee'][1]['Amount'];
                 $SciProcFee_ReAdm = $user_info['rule_fee'][1]['Processing_Fee'];
-                
+
                  // Set Challan DATE
                  $date_temp = new DateTime($user_info['rule_fee'][1]['End_Date']);
                  $singleDate_temp =  $date_temp->format('d-m-Y'); 
@@ -2606,7 +2615,7 @@ class Admission_11th_reg extends CI_Controller {
                 // For ReAdmission Fee
                 $ArtsAdmFee_ReAdm = $user_info['rule_fee'][0]['Amount'];
                // $ArtsAdmFee_ReAdm = $user_info['rule_fee'][0]['Processing_Fee'];
-                
+
                  // Set Challan DATE
                  $date_temp = new DateTime($user_info['rule_fee'][0]['End_Date']);
                  $singleDate_temp =  $date_temp->format('d-m-Y'); 
@@ -2619,7 +2628,7 @@ class Admission_11th_reg extends CI_Controller {
                 // For ReAdmission Fee
                 $ArtsAdmFee_ReAdm = $user_info['rule_fee'][1]['Amount'];
                 //$ArtsAdmFee_ReAdm = $user_info['rule_fee'][1]['Processing_Fee'];
-                
+
                  // Set Challan DATE
                  $date_temp = new DateTime($user_info['rule_fee'][1]['End_Date']);
                  $singleDate_temp =  $date_temp->format('d-m-Y'); 
@@ -2638,7 +2647,7 @@ class Admission_11th_reg extends CI_Controller {
             // For ReAdmission 
             $SciAdmFee_ReAdm =  ($SciAdmFee_ReAdm*3); 
             $ArtsAdmFee_ReAdm = ($ArtsAdmFee_ReAdm*3);
-            
+
              // Set Challan DATE
                 // $date_temp = new DateTime($user_info['rule_fee'][0]['End_Date']);
               //   $singleDate_temp =  $date_temp->format('d-m-Y'); 
@@ -2665,7 +2674,7 @@ class Admission_11th_reg extends CI_Controller {
                     // For ReAdmission Fee
                     $SciAdmFee_ReAdm = $user_info['rule_fee'][0]['Amount'];
                     $SciProcFee_ReAdm = $user_info['rule_fee'][0]['Processing_Fee'];
-                    
+
                      // Set Challan DATE
                  $date_temp = new DateTime($user_info['info'][0]['feedingDate']);
                  $singleDate_temp =  $date_temp->format('d-m-Y'); 
@@ -2683,7 +2692,7 @@ class Admission_11th_reg extends CI_Controller {
                  $date_temp = new DateTime($user_info['info'][0]['feedingDate']);
                  $singleDate_temp =  $date_temp->format('d-m-Y'); 
                 $challanDueDate = SingleDateFee9th;
-                
+
                 }
                 if($user_info['rule_fee'][0]['isPrSub']==0)
                 {
@@ -2692,7 +2701,7 @@ class Admission_11th_reg extends CI_Controller {
                     // For ReAdmission Fee
                     $ArtsAdmFee_ReAdm = $user_info['rule_fee'][0]['Amount'];
                     //$ArtsAdmFee_ReAdm = $user_info['rule_fee'][0]['Processing_Fee'];
-                    
+
                        // Set Challan DATE
                  $date_temp = new DateTime($user_info['info'][0]['feedingDate']);
                  $singleDate_temp =  $date_temp->format('d-m-Y'); 
@@ -2705,14 +2714,14 @@ class Admission_11th_reg extends CI_Controller {
                     // For ReAdmission Fee
                     $ArtsAdmFee_ReAdm = $user_info['rule_fee'][1]['Amount'];
                     //$ArtsAdmFee_ReAdm = $user_info['rule_fee'][1]['Processing_Fee'];
-                    
+
                        // Set Challan DATE
                  $date_temp = new DateTime($user_info['info'][0]['feedingDate']);
                  $singleDate_temp =  $date_temp->format('d-m-Y'); 
                 $challanDueDate = SingleDateFee;
                 }
             }
-           
+
 
 
 
@@ -2731,7 +2740,7 @@ class Admission_11th_reg extends CI_Controller {
                 // For ReAdmission Fee
                 $SciAdmFee_ReAdm = $user_info['rule_fee'][0]['Amount'];
                 $SciProcFee_ReAdm = $user_info['rule_fee'][0]['Processing_Fee'];
-                
+
                 // Set Challan DATE
                  $date_temp = new DateTime($user_info['rule_fee'][0]['End_Date']);
                  $singleDate_temp =  $date_temp->format('d-m-Y'); 
@@ -2744,7 +2753,7 @@ class Admission_11th_reg extends CI_Controller {
                 // For ReAdmission Fee
                 $SciAdmFee_ReAdm = $user_info['rule_fee'][1]['Amount'];
                 $SciProcFee_ReAdm = $user_info['rule_fee'][1]['Processing_Fee'];
-                
+
                 // Set Challan DATE
                  $date_temp = new DateTime($user_info['rule_fee'][1]['End_Date']);
                  $singleDate_temp =  $date_temp->format('d-m-Y'); 
@@ -2758,7 +2767,7 @@ class Admission_11th_reg extends CI_Controller {
                 // For ReAdmission Fee
                 $ArtsAdmFee_ReAdm = $user_info['rule_fee'][0]['Amount'];
                // $ArtsAdmFee_ReAdm = $user_info['rule_fee'][0]['Processing_Fee'];
-                
+
                 // Set Challan DATE
                  $date_temp = new DateTime($user_info['rule_fee'][0]['End_Date']);
                  $singleDate_temp =  $date_temp->format('d-m-Y'); 
@@ -2771,7 +2780,7 @@ class Admission_11th_reg extends CI_Controller {
                 // For ReAdmission Fee
                 $ArtsAdmFee_ReAdm = $user_info['rule_fee'][1]['Amount'];
                // $ArtsAdmFee_ReAdm = $user_info['rule_fee'][1]['Processing_Fee'];
-                
+
                 // Set Challan DATE
                  $date_temp = new DateTime($user_info['rule_fee'][1]['End_Date']);
                  $singleDate_temp =  $date_temp->format('d-m-Y'); 
@@ -2782,7 +2791,7 @@ class Admission_11th_reg extends CI_Controller {
 
         // --------------------------------------- Fee Calculation Section END------------------------------------------------
 
-        
+
         // DebugBreak();
         $data = array('data'=>$this->Admission_11th_reg_model->revenue_pdf($fetch_data),'inst_Name'=>$user['inst_Name'],'inst_cd'=>$user['Inst_Id'],"SciAdmFee"=>@$SciAdmFee,"ArtsAdmFee"=>@$ArtsAdmFee,"SciProcFee"=>@$SciProcFee,"ArtsProcFee"=>@$ArtsProcFee);
         //
@@ -2846,19 +2855,19 @@ class Admission_11th_reg extends CI_Controller {
            $data_challanNo = $data['data']['stdinfo'][0]->challanno;
            }
            $challanDueDate;
-           
+
             $feestructure[]    =  $mydata_final['sum_procFee'];    
             $displayfeetitle[] =  'Total Processing Fee';    
-       
+
             $feestructure[]     = $mydata_final['sum_AdmFee'];    
             $displayfeetitle[] =  'Total Admission Fee';   
-              
+
             /*$feestructure[]=$result[0]['TotalCertFee']; 
             $displayfeetitle[] =  'Total Certificate Fee'; */  
-            
+
             $feestructure[]=@$mydata_final['sum_lateFee'];
             $displayfeetitle[] =  'Total Late Admission Fee'; 
-       
+
         $turn=1;     
         $pdf=new PDF_Rotate("P","in","A4");
         $pdf->AliasNbPages();
@@ -2899,7 +2908,7 @@ class Admission_11th_reg extends CI_Controller {
         //  $pdf->SetDrawColor(0,0,0);
         // $temp = $user['Inst_Id'].'11-2017-19';
         //$image =  $this->set_barcode($temp);
-        
+
         $temp = $challanNo.'@11@.'.Year.'@'.Session;
         //  $image =  $this->set_barcode($temp);
         //DebugBreak();
@@ -2911,9 +2920,9 @@ class Admission_11th_reg extends CI_Controller {
         for ($j=1;$j<=4;$j++) 
         {
 
-            
-            
-            
+
+
+
             $yy = 0.04;
             if($turn==1){$dyy=0.2;} 
             else {
@@ -3057,7 +3066,7 @@ class Admission_11th_reg extends CI_Controller {
             else if($corcnt ==5){
                 $y += .2;
             }
-            
+
             else if($corcnt ==6){
                 $y += .16;
             }
@@ -3096,5 +3105,5 @@ class Admission_11th_reg extends CI_Controller {
 
         //  $pdf->Output($data["Sch_cd"].'.pdf', 'I');
     }
-     
+
 }

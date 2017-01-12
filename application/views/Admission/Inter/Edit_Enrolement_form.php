@@ -28,7 +28,7 @@
                                     $image_path_selected = DIRPATH12TH.$data[0]['picpath']; 
 
                                     $type = pathinfo($image_path_selected, PATHINFO_EXTENSION);
-                                    $image_path_selected = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($image_path_selected));
+                                    @$image_path_selected = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($image_path_selected));
 
                                     ?>
 
@@ -574,14 +574,29 @@
                                     <label class="control-label span1" >
 
                                     </label>
-                                    <select id="sub1" class="span3 dropdown" name="sub1">
-                                        <?php if($data[0]['sub1pf1']==2){ ?>
-                                            <option value="<?php   echo $data[0]['sub1'];?>" <?php if($data[0]['sub1Ap1']==1 ) {echo "selected='selected'";} ?>><?php
-                                                echo array_search($data[0]['sub1'],$subarray);
-                                            ?></option>
-                                            <?php } ?>
-                                        <option value="0"  <?php  if(@$data[0]['sub1Ap1']==1) echo "selected='selected'"; ?> >NONE</option>
-                                    </select> 
+
+                                    <select id="sub1"  name="sub1" class="span3 dropdown">
+                                        <?php if($data[0]['sub1pf1']== 2){
+
+                                            if($data[0]['sub1Ap1']==1) 
+                                            {
+                                                echo '<option value='.$data[0]['sub1'].'>'.array_search($data[0]['sub1'],$subarray).'</option>'; 
+                                                echo '<option value="0">NONE</option>';
+                                            }
+                                            else if($data[0]['sub1Ap1']==0){
+                                                echo '<option value="0">NONE</option>';
+                                                echo '<option value='.$data[0]['sub1'].'>'.array_search($data[0]['sub1'],$subarray).'</option>'; 
+                                            }                               
+                                            else{
+                                                echo '<option value='.$data[0]['sub1'].'>'.array_search($data[0]['sub1'],$subarray).'</option>'; 
+                                                echo '<option value="0">NONE</option>';
+                                            }                             
+                                        }
+                                        else{
+                                            echo '<option value="0">NONE</option>';
+                                        }                      
+                                        ?>
+                                    </select>
 
                                     <select id="sub1p2" class="span3 dropdown" name="sub1p2">
                                         <option value="<?php echo $data[0]['sub1'];?>"><?php
@@ -594,12 +609,27 @@
 
                                     </label>
                                     <select id="sub2"  name="sub2" class="span3 dropdown">
-                                        <?php if($data[0]['sub2pf1']==2){ ?>
-                                            <option value="<?php echo $data[0]['sub2'];?>" <?php if($data[0]['sub2Ap1']==1 ) {echo "selected='selected'";} ?> ><?php
-                                                echo array_search($data[0]['sub2'],$subarray);
-                                            ?> </option>
-                                            <?php } ?>
-                                        <option value="0"  <?php if(@$data[0]['sub2Ap1']==1) echo "selected='selected'"; ?> >NONE</option>
+                                        <?php if($data[0]['sub2pf1']== 2){
+
+                                            if($data[0]['sub2Ap1']==1) 
+                                            {
+                                                echo '<option value='.$data[0]['sub2'].'>'.array_search($data[0]['sub2'],$subarray).'</option>'; 
+                                                echo '<option value="0">NONE</option>';
+                                            }
+                                            else if($data[0]['sub2Ap1']==0){
+                                                echo '<option value="0">NONE</option>';
+                                                echo '<option value='.$data[0]['sub2'].'>'.array_search($data[0]['sub2'],$subarray).'</option>'; 
+                                            }                               
+                                            else{
+                                                echo '<option value='.$data[0]['sub2'].'>'.array_search($data[0]['sub2'],$subarray).'</option>'; 
+                                                echo '<option value="0">NONE</option>';
+                                            }                             
+                                        }  
+
+                                        else{
+                                            echo '<option value="0">NONE</option>';
+                                        }                    
+                                        ?>
                                     </select>
                                     <select id="sub2p2" class="span3 dropdown" name="sub2p2">
                                         <option value="<?php echo $data[0]['sub2'];?>"><?php
@@ -614,13 +644,29 @@
                                     <label class="control-label span1" >
 
                                     </label>
-                                    <select id="sub3" class="span3 dropdown" name="sub3">
-                                        <?php if($data[0]['sub3pf1']==2){ ?>
-                                            <option value="<?php echo $data[0]['sub3'];?>" <?php if(@$data[0]['sub3Ap1']==1 ) {echo "selected='selected'";} ?>><?php
-                                                echo array_search($data[0]['sub3'],$subarray);
-                                            ?> </option>
-                                            <?php } ?>
-                                        <option value="0"  <?php if($data[0]['sub3Ap1']==1) echo "selected='selected'"; ?> >NONE</option>
+                                    <select id="sub3"  name="sub3" class="span3 dropdown">
+                                        <?php if($data[0]['sub3pf1']== 2){
+
+                                            if($data[0]['sub3Ap1']==1) 
+                                            {
+                                                echo '<option value='.$data[0]['sub3'].'>'.array_search($data[0]['sub3'],$subarray).'</option>'; 
+                                                echo '<option value="0">NONE</option>';
+                                            }
+                                            else if($data[0]['sub3Ap1']==0){
+                                                echo '<option value="0">NONE</option>';
+                                                echo '<option value='.$data[0]['sub3'].'>'.array_search($data[0]['sub3'],$subarray).'</option>'; 
+                                            }                               
+                                            else{
+                                                echo '<option value='.$data[0]['sub3'].'>'.array_search($data[0]['sub3'],$subarray).'</option>'; 
+                                                echo '<option value="0">NONE</option>';
+                                            }                             
+                                        }     
+
+                                        else{
+                                            echo '<option value="0">NONE</option>';
+                                        }
+
+                                        ?>
                                     </select> 
                                     <select id="sub3p2" class="span3 dropdown" name="sub3p2">
                                         <option value="<?php echo $data[0]['sub8'];?>"><?php
@@ -633,12 +679,27 @@
 
                                     </label>
                                     <select id="sub4"  name="sub4" class="span3 dropdown">
-                                        <?php if($data[0]['sub4pf1']==2){ ?>
-                                            <option value="<?php echo $data[0]['sub4'];?>" <?php if(@$data[0]['sub4Ap1']==1 ) {echo "selected='selected'";} ?>><?php
-                                                echo array_search($data[0]['sub4'],$subarray);
-                                            ?> </option>
-                                            <?php } ?>
-                                        <option value="0"  <?php if($data[0]['sub4Ap1']==1) echo "selected='selected'"; ?> >NONE</option>
+                                        <?php if($data[0]['sub4pf1']== 2){
+
+                                            if($data[0]['sub4Ap1']==1) 
+                                            {
+                                                echo '<option value='.$data[0]['sub4'].'>'.array_search($data[0]['sub4'],$subarray).'</option>'; 
+                                                echo '<option value="0">NONE</option>';
+                                            }
+                                            else if($data[0]['sub4Ap1']==0){
+                                                echo '<option value="0">NONE</option>';
+                                                echo '<option value='.$data[0]['sub4'].'>'.array_search($data[0]['sub4'],$subarray).'</option>'; 
+                                            }                               
+                                            else{
+                                                echo '<option value='.$data[0]['sub4'].'>'.array_search($data[0]['sub4'],$subarray).'</option>'; 
+                                                echo '<option value="0">NONE</option>';
+                                            }                             
+                                        }
+
+                                        else{
+                                            echo '<option value="0">NONE</option>';
+                                        }                      
+                                        ?>
                                     </select>
                                     <select id="sub4p2" class="span3 dropdown" name="sub4p2">
                                         <option value="<?php echo $data[0]['sub4'];?>"><?php
@@ -651,15 +712,27 @@
                                     <label class="control-label span1" >
 
                                     </label>
-                                    <select id="sub5" class="span3 dropdown" name="sub5" >
-                                        <?php if($data[0]['sub5pf1']==2){ ?>
-                                            <option value="<?php echo $data[0]['sub5'];?>" <?php if(@$data[0]['sub5Ap1']==1 ) {echo "selected='selected'";} ?>><?php
-                                                echo array_search($data[0]['sub5'],$subarray);
-                                            ?> </option>
-                                            <?php }  ?>
-                                        <option value="0" >NONE</option>
+                                    <select id="sub5"  name="sub5" class="span3 dropdown">
+                                        <?php if($data[0]['sub5pf1']== 2){
 
-
+                                            if($data[0]['sub5Ap1']==1) 
+                                            {
+                                                echo '<option value='.$data[0]['sub5'].'>'.array_search($data[0]['sub5'],$subarray).'</option>'; 
+                                                echo '<option value="0">NONE</option>';
+                                            }
+                                            else if($data[0]['sub5Ap1']==0){
+                                                echo '<option value="0">NONE</option>';
+                                                echo '<option value='.$data[0]['sub5'].'>'.array_search($data[0]['sub5'],$subarray).'</option>'; 
+                                            }                               
+                                            else{
+                                                echo '<option value='.$data[0]['sub5'].'>'.array_search($data[0]['sub5'],$subarray).'</option>'; 
+                                                echo '<option value="0">NONE</option>';
+                                            }                             
+                                        }
+                                        else{
+                                            echo '<option value="0">NONE</option>';
+                                        }                      
+                                        ?>
                                     </select> 
                                     <select id="sub5p2" class="span3 dropdown" name="sub5p2" selected="selected">
                                         <option value="<?php  echo $data[0]['sub5'];?>"><?php
@@ -671,13 +744,27 @@
                                     <label class="control-label span1" >
 
                                     </label>
-                                    <select id="sub6"  name="sub6" class="span3 dropdown" selected="selected">
-                                        <?php if($data[0]['sub6pf1']==2){ ?>
-                                            <option value="<?php echo $data[0]['sub6'];?>" <?php if(@$data[0]['sub6Ap1']==1 ) {echo "selected='selected'";} ?>><?php
-                                                echo array_search($data[0]['sub6'],$subarray);
-                                            ?></option>
-                                            <?php } ?>
-                                        <option value="0" >NONE</option>
+                                    <select id="sub6"  name="sub6" class="span3 dropdown">
+                                        <?php if($data[0]['sub6pf1']== 2){
+
+                                            if($data[0]['sub6Ap1']==1) 
+                                            {
+                                                echo '<option value='.$data[0]['sub6'].'>'.array_search($data[0]['sub6'],$subarray).'</option>'; 
+                                                echo '<option value="0">NONE</option>';
+                                            }
+                                            else if($data[0]['sub6Ap1']==0){
+                                                echo '<option value="0">NONE</option>';
+                                                echo '<option value='.$data[0]['sub6'].'>'.array_search($data[0]['sub6'],$subarray).'</option>'; 
+                                            }                               
+                                            else{
+                                                echo '<option value='.$data[0]['sub6'].'>'.array_search($data[0]['sub6'],$subarray).'</option>'; 
+                                                echo '<option value="0">NONE</option>';
+                                            }                             
+                                        }   
+                                        else{
+                                            echo '<option value="0">NONE</option>';
+                                        }                   
+                                        ?>
                                     </select>
                                     <select id="sub6p2"  name="sub6p2" class="span3 dropdown" selected="selected">
                                         <option value="<?php echo $data[0]['sub6'];?>"><?php
@@ -686,24 +773,36 @@
                                     </select>
                                 </div>
                                 <?php 
-                                if($grp_cd==5)
+                                //DebugBreak();
+                                $grp_cd = $data[0]['grp_cd'];
+
+                                if($grp_cd ==5)
                                 { ?>
                                     <div class="control row controls-row">
                                         <label class="control-label span1" >
 
                                         </label>
-                                        <select id="sub7" class="span3 dropdown" name="sub7" selected="selected">
-                                            <?php 
+                                        <select id="sub7"  name="sub7" class="span3 dropdown">
+                                            <?php if($data[0]['sub7pf1']== 2){
 
-
-
-
-                                            if($data[0]['sub7pf1']==2){ ?>
-                                                <option value="<?php echo $data[0]['sub7'];?>" <?php if(@$data[0]['sub7Ap1']==1 ) {echo "selected='selected'";} ?>><?php
-                                                    echo array_search($data[0]['sub7'],$subarray);
-                                                ?></option>
-                                                <?php } ?>
-                                            <option value="0"  <?php if($data[0]['sub7Ap1']==1) echo "selected='selected'"; ?> >NONE</option>
+                                                if($data[0]['sub7Ap1']==1) 
+                                                {
+                                                    echo '<option value='.$data[0]['sub7'].'>'.array_search($data[0]['sub7'],$subarray).'</option>'; 
+                                                    echo '<option value="0">NONE</option>';
+                                                }
+                                                else if($data[0]['sub2Ap1']==0){
+                                                    echo '<option value="0">NONE</option>';
+                                                    echo '<option value='.$data[0]['sub7'].'>'.array_search($data[0]['sub7'],$subarray).'</option>'; 
+                                                }                               
+                                                else{
+                                                    echo '<option value='.$data[0]['sub7'].'>'.array_search($data[0]['sub7'],$subarray).'</option>'; 
+                                                    echo '<option value="0">NONE</option>';
+                                                }                             
+                                            }   
+                                            else{
+                                                echo '<option value="0">NONE</option>';
+                                            }                   
+                                            ?>
                                         </select> 
                                         <select id="sub7p2" class="span3 dropdown" name="sub7p2" selected="selected">
 
@@ -713,18 +812,13 @@
                                             <?php }?>
                                     </select> 
                                 </div> 
-                                <div class="control row controls-row">
-                                    <label class="control-label span1" >
 
-                                    </label>
-
-                                </div>
 
                             </div>
                             <div class="form-actions no-margin">
                                 <input type="hidden"   value="<?php  echo  $data[0]['FormNo']; ?>"  name="formNo">
                                 <input type="hidden"   value="<?php  echo  $isReAdm; ?>"  name="IsReAdm">
-                                <input type="hidden"   value="<?php  echo $data[0]['oldRno']; ?>"  name="OldRno"> <!--$data[0]['rno']; -->
+                                <input type="hidden"   value="<?php  echo $data[0]['oldRno']; ?>"  name="OldRno">
 
                                 <input type="hidden"   value="<?php echo   $data[0]['Iyear'];  ?>"  name="Oldyear">
                                 <input type="hidden"   value="<?php echo   $data[0]['sess'];  ?>"  name="Oldsess">
@@ -732,7 +826,7 @@
                                 <input type="hidden"   value="<?php echo   $gender;  ?>"  name="sex">
                                 <input type="hidden"   value="<?php  echo  $data['0']['name']; ?>"  name="cand_name_hidden">
                                 <input type="hidden"   value="<?php  echo  $data['0']['Fname']; ?>"  name="father_name_hidden">
-                                <!--  <input type="hidden"   value="<?php  //echo  $date->format('d-m-Y');  ?>"  name="dob_hidden">-->
+
                                 <input type="hidden"   value="<?php  echo  $grp; ?>"  name="std_group_hidden">
                                 <input type="hidden"   value="<?php  echo  $data[0]['sub1']; ?>"  name="sub1_hidden">
                                 <input type="hidden"   value="<?php  echo  $data[0]['sub2']; ?>"  name="sub2_hidden">
@@ -825,9 +919,16 @@
                         </script>
 
                     </div>  
-
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
+
