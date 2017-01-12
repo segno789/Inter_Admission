@@ -58,12 +58,11 @@ class Admission_inter_model extends CI_Model
     }
     public function get_zone()
     {
-        $query = $this->db->get_where('matric_new..tblZones', array('myear' => '2016','class'=>12,'sess'=>2));
+        $query = $this->db->get_where('matric_new..tblZones', array('myear' => '2017','class'=>12,'sess'=>1));
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
             return $query->result_array();
-
         }
     }
     public function Dashboard($inst_cd)
@@ -74,7 +73,6 @@ class Admission_inter_model extends CI_Model
         if($rowcount > 0)
         {
             return $query->result_array();
-
         }
         else
         {
@@ -221,8 +219,7 @@ class Admission_inter_model extends CI_Model
             }
         }
     }
-
-
+                                                   
     public function forwarding_pdf_Finance_final($fetch_data)
     {
         //DebugBreak();

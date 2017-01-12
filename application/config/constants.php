@@ -46,9 +46,9 @@ define('formprint_sp_matric_annual','Admission_online..sp_form_data');    // for
 define('formnovalid','600000');
 define('formnovalid_Languages','400000');
 define('return_pdf_isPicture','1');
-define('CURRENT_SESS','2017-2019');
+define('CURRENT_SESS','2017');
 define('corr_bank_chall_class','INTER ANNUAL');
-define('session_year','2017-2019');
+define('session_year','2017');
 define('TITLEHSSC','Online HSSC Annual Admission 2017');
 
 define('currdate','date("d-m-Y");');
