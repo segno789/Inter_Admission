@@ -93,7 +93,7 @@ class Admission_11th_reg extends CI_Controller {
         if(empty($result['data'])){
 
             return; }
-        $temp = $user['Inst_Id'].'@11@'.CURRENT_SESS;
+        $temp = $user['Inst_Id'].'@11@'.CURRENT_SESS1;
         $image =  $this->set_barcode($temp);
         // $pdf->Image(base_url().'assets/pdfs/'.'/'.$image,6.3,0.5, 1.8, 0.20, "PNG");
         //$studeninfo['data']['info'][0]['barcode'] = $image;
@@ -1145,7 +1145,7 @@ public function NewEnrolment_Delete($formno)
             return;
 
         }
-        $temp = $user['Inst_Id'].'11@2017';
+        $temp = $user['Inst_Id'].'@11@'.CURRENT_SESS1;
         $image =  $this->set_barcode($temp);
         // $pdf->Image(base_url().'assets/pdfs/'.'/'.$image,6.3,0.5, 1.8, 0.20, "PNG");
         //$studeninfo['data']['info'][0]['barcode'] = $image;
@@ -2496,7 +2496,7 @@ public function NewEnrolment_Delete($formno)
   public function ChallanForm_Adm11hth_Regular()
     { 
 
-    DebugBreak();
+   // DebugBreak();
      $Grp_cd = $this->uri->segment(3);
      $this->load->library('session');
         $this->load->library('NumbertoWord');
@@ -2909,7 +2909,7 @@ public function NewEnrolment_Delete($formno)
         // $temp = $user['Inst_Id'].'11-2017-19';
         //$image =  $this->set_barcode($temp);
 
-        $temp = $challanNo.'@11@.'.Year.'@'.Session;
+        $temp = $challanNo.'@11@'.Year.'@'.Session;
         //  $image =  $this->set_barcode($temp);
         //DebugBreak();
         $temp =  $this->set_barcode($temp);
