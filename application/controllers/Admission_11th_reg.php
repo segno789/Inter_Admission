@@ -567,7 +567,16 @@ class Admission_11th_reg extends CI_Controller {
 
         $this->load->view('common/footer11th.php');
     }
-
+public function NewEnrolment_Delete($formno)
+    {
+        // DebugBreak();
+        $this->load->model('Admission_11th_reg_model');
+        $RegStdData = array('data'=>$this->Admission_11th_reg_model->Delete_NewEnrolement($formno));
+        $this->load->library('session');
+        $this->session->set_flashdata('error', '2');
+        redirect('Admission_11th_reg/EditForms');
+        return;
+    }
     public function financeReoprt()
     {
         //DebugBreak();
