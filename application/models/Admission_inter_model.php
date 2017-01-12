@@ -221,6 +221,26 @@ class Admission_inter_model extends CI_Model
             }
         }
     }
+
+
+    public function forwarding_pdf_Finance_final($fetch_data)
+    {
+        //DebugBreak();
+        
+        $Inst_cd = $fetch_data['Inst_cd'];
+        $query = $this->db->query("Admission_online..sp_ForwardingLetter_Finance_12thADM $Inst_cd");
+        $rowcount = $query->num_rows();
+        if($rowcount > 0)
+        {
+            return $query->result_array();
+        }
+        else
+        {
+            return  false;
+        }
+    }
+
+
     public function EditEnrolement($inst_cd)
     {                                     
         $query = $this->db->query("Exec Admission_online..sp_get_regInfo_all_inter $inst_cd,12,2017,1");    
