@@ -181,7 +181,7 @@ class Admission_inter_model extends CI_Model
         $oldyear =  $data['Iyear'];
         $oldsess =  $data['sess'];
 
-        DebugBreak();
+        //DebugBreak();
         
         $CollGrade = $data['CollGrade'];
 

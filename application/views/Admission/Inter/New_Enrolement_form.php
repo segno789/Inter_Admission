@@ -166,7 +166,7 @@
                                     College Grade:
                                 </label>
                                 <div class="controls controls-row">
-                                    <input class="span3" type="text" id="CollGrade" style="text-transform: uppercase;" name="CollGrade" value="" required="required">
+                                    <input class="span3" type="text" id="CollGrade" style="text-transform: uppercase;" name="CollGrade" value="" required="required" maxlength="2">
                                 </div>
                             </div>
 

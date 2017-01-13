@@ -7,7 +7,7 @@ class Admission extends CI_Controller {
         $this->load->helper('url');   
         $this->clear_cache();
     }
-function clear_cache()
+    function clear_cache()
     {
         $this->output->set_header("Cache-Control: no-store, no-cache, must-revalidate, no-transform, max-age=0, post-check=0, pre-check=0");
         $this->output->set_header("Pragma: no-cache");
@@ -939,7 +939,7 @@ function clear_cache()
             default:
                 $grp_name = "NO GROUP SELECTED.";
         }
-                                                                                                                                                                                                                                                             
+
 
         //--------------------------- 1st line 
         /* $pdf->SetXY(0.5,1.55+$Y);
@@ -1769,7 +1769,7 @@ function clear_cache()
         $pdf->SetXY(1.0,10.2+$Y);
         $pdf->Cell( 0.5,0.5,$data['formNo'],0,'L');
 
-        
+
 
 
 
@@ -2994,6 +2994,8 @@ function clear_cache()
             'certfee'=>$Certificate
         );
 
+        //DebugBreak();
+
         $logedIn = $this->Admission_model->NewEnrolment_insert_Fresh($data);
         $info =  '';
         foreach($logedIn[0] as $key=>$val)
@@ -3015,12 +3017,10 @@ function clear_cache()
                 $info['formno'] = '';
             }
         }
-        echo  json_encode($info);  
-
+        echo  json_encode($info);
     }
 
-    public function NewEnrolment_insert()  
-    {
+    public function NewEnrolment_insert(){
         $this->load->model('Admission_model');
         $this->load->library('session');
         $Inst_Id = 999999;
@@ -3406,7 +3406,7 @@ function clear_cache()
         echo  json_encode($info);
     }
 
-    public function NewEnrolment_insert_Languages() {
+    public function NewEnrolment_insert_Languages(){
         //DebugBreak();
         $this->load->model('Admission_model');
         $this->load->library('session');
@@ -3646,8 +3646,7 @@ function clear_cache()
         $value = array('center'=> $this->Admission_model->getcenter($data)) ;
         echo json_encode($value);
     }
-
-
+          
     public function frmvalidation_Fresh(){
 
         $allinputdata['excep'] = '';
@@ -3859,8 +3858,6 @@ function clear_cache()
         {
             $allinputdata['excep'] =  'Success';
         }
-
-
 
         echo json_encode($allinputdata);    
     }
@@ -4742,8 +4739,7 @@ function clear_cache()
         echo json_encode($allinputdata);
     }
 
-    public function uploadpic()
-    {
+    public function uploadpic()  {
 
         ############ Configuration ##############
         $config["generate_image_file"]            = true;

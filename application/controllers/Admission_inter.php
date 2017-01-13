@@ -909,6 +909,7 @@ class Admission_inter extends CI_Controller {
         $Speciality = $this->input->post('speciality');
         $grp_cd = $this->input->post('std_group');
 
+        //DebugBreak();
 
         $data = array(
             'name' =>$this->input->post('cand_name'),
@@ -971,14 +972,18 @@ class Admission_inter extends CI_Controller {
             'schm'=>1,
             'picpath'=>@$_POST['pic'],
             'oldFormNo'=>@$_POST['formNo'],
+            
+            'CollGrade'=>@$_POST['CollGrade'],
 
+            
+            
             'pvtinfo_dist'=>$userinfo['dist'],
             'pvtinfo_teh'=>$userinfo['teh'],
             'pvtZone'=>$userinfo['zone'],
 
         );                  
 
-        //DebugBreak();
+        
         //$this->frmvalidation('NewEnrolment_EditForm_inter',$data,0);
 
         $data['isupdate']=1;
