@@ -1220,6 +1220,8 @@ class Admission_inter extends CI_Controller {
             'sess'=>@$_POST['Oldsess'],
             'Iyear'=>@$_POST['Oldyear'],
             'Brd_cd'=>@$_POST['Oldbrd'],
+            
+            'CollGrade'=>@$_POST['CollGrade'],
 
             'schm' => @$_POST['oldschm'],
 

@@ -181,6 +181,9 @@ class Admission_inter_model extends CI_Model
         $oldyear =  $data['Iyear'];
         $oldsess =  $data['sess'];
 
+        DebugBreak();
+        
+        $CollGrade = $data['CollGrade'];
 
         $schm =  $data['schm'];
 
@@ -202,7 +205,7 @@ class Admission_inter_model extends CI_Model
             $oldrno =  $data['oldRno'];
         }
 
-        $query = $this->db->query("Admission_online..sp_insert_IAAdm_regular '$formno',12,2017,1,'$name','$fname','$BForm','$FNIC','$CellNo',$medium,'$Inst_Rno','".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$sub8,1,'".$PicPath."',$oldrno,$oldyear,$oldsess,$IsHafiz,$Inst_cd,$UrbanRural,$cat11,$cat12,$sub1ap2,$sub2ap2,$sub4ap2,$sub5ap2,$sub6ap2,$sub7ap2,$sub8ap2,$Brd_cd,$sub5a,$sub6a,$sub7a,$pvtinfo_dist,$pvtinfo_teh,$pvtZone,$isupdate,$isNewPic,$schm");
+        $query = $this->db->query("Admission_online..sp_insert_IAAdm_regular '$formno',12,2017,1,'$name','$fname','$BForm','$FNIC','$CellNo',$medium,'".$CollGrade."',$Inst_Rno,'".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$sub8,1,'".$PicPath."',$oldrno,$oldyear,$oldsess,$IsHafiz,$Inst_cd,$UrbanRural,$cat11,$cat12,$sub1ap2,$sub2ap2,$sub4ap2,$sub5ap2,$sub6ap2,$sub7ap2,$sub8ap2,$Brd_cd,$sub5a,$sub6a,$sub7a,$pvtinfo_dist,$pvtinfo_teh,$pvtZone,$isupdate,$isNewPic,$schm");
 
         $rowcount = $query->num_rows();
         if($rowcount > 0)
@@ -219,11 +222,11 @@ class Admission_inter_model extends CI_Model
             }
         }
     }
-                                                   
+
     public function forwarding_pdf_Finance_final($fetch_data)
     {
         //DebugBreak();
-        
+
         $Inst_cd = $fetch_data['Inst_cd'];
         $query = $this->db->query("Admission_online..sp_ForwardingLetter_Finance_12thADM $Inst_cd");
         $rowcount = $query->num_rows();
@@ -484,8 +487,8 @@ class Admission_inter_model extends CI_Model
         $total_std = $data['total_std'];
         $cert_fee = $data['cert_fee'];
         $total_cert = $data['total_cert'];
-               
-        
+
+
         $query = $this->db->query("Admission_online..Batch_Create_12th $inst_cd,$reg_fee,$fine,$processing_fee,$total_std,$total_fee,$TotalRegFee,$Totalprocessing_fee,$TotalLatefee,'$todaydate','$forms_id',$cert_fee,$total_cert");
     }
     public function Batch_List($data)
@@ -658,11 +661,11 @@ class Admission_inter_model extends CI_Model
             return false;
         }
     }
-     public function Update_AdmissionFee($data)
+    public function Update_AdmissionFee($data)
     {
-         if(empty($data))
+        if(empty($data))
         {
-           return  false;
+            return  false;
         }
         $this->db->update_batch('Admission_online..IAAdm',$data,'formNo');
     }
