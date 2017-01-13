@@ -2064,7 +2064,7 @@ class Admission extends CI_Controller {
 
     public function Pre_Inter_Data() 
     {       
-        //DebugBreak();     
+        DebugBreak();     
 
         $this->load->library('session');
         $mrollno='';
@@ -2100,6 +2100,8 @@ class Admission extends CI_Controller {
             if(isset($_POST["isaloom"])) $isaloom = 1;else $isaloom = 0;
         }
 
+               
+        
         $data['sscrno']=$mrollno;
         $data['hsscrno']=$hsscrno;
         $data['hsscclass']=$oldClass;
@@ -2164,12 +2166,6 @@ class Admission extends CI_Controller {
             $error_msg.='<span style="font-size: 16pt; color:red;">' . '   Against Roll No  = ' . '</span>';
             $error_msg.='<span style="font-size: 16pt; color:red;">' . $nxtrno . '</span>';
         }
-
-
-        /*  if (!file_exists($picpathdb)){
-        $error_msg.='<span style="font-size: 16pt; color:red;"> Your Image is MISSING </span>';
-
-        } */
 
         else if ($matric_rno == 0)
         {
@@ -2635,7 +2631,7 @@ class Admission extends CI_Controller {
 
     public function NewEnrolment_insert_Fresh() {
 
-      
+
 
         $this->load->model('Admission_model');
 
