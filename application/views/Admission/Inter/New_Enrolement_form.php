@@ -153,12 +153,23 @@
 
                             <div class="control-group">
                                 <label class="control-label span1" >
-                                    Mark Of Identification :
+                                    Identification Mark:
                                 </label>
                                 <div class="controls controls-row">
                                     <input class="span3" type="text" id="MarkOfIden" style="text-transform: uppercase;" name="MarkOfIden" value="<?php echo  $data['0']['markOfIden']; ?>" required="required" maxlength="60" >
+                                </div> 
+                            </div>
+                          
+                          
+                            <div class="control-group">
+                                <label class="control-label span1" >
+                                    College Grade:
+                                </label>
+                                <div class="controls controls-row">
+                                    <input class="span3" type="text" id="CollGrade" style="text-transform: uppercase;" name="CollGrade" value="" required="required">
                                 </div>
                             </div>
+
                             <div class="control-group">
                                 <label class="control-label span1" >
                                     Nationality :
@@ -716,10 +727,10 @@
                                         </select> 
                                         <select id="sub7p2" class="span3 dropdown" name="sub7p2" selected="selected">
 
-                                         <option value="<?php echo '0';?>"><?php
+                                            <option value="<?php echo '0';?>"><?php
                                                 echo array_search(0,$subarray);
                                             ?></option>
-                                        
+
                                             <option value="<?php echo '95';?>"><?php
                                                 echo array_search(95,$subarray);
                                             ?></option>
