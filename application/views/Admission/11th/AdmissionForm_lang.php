@@ -125,7 +125,7 @@
 
                                 ?>
                                 <div class="controls controls-row">
-                                    <input class="span3" type="text" id="dob" name="dob" placeholder="DOB" value="<?php echo @$date1;   ?>" required="required"  >
+                                    <input class="span3" type="text" id="dob" name="dob" placeholder="DOB" value="<?php echo @$date1;   ?>" required="required" readonly="readonly"  >
 
                                     <label class="control-label span2" >
                                         Mobile Number :
@@ -646,7 +646,7 @@
                                 <!--</select>
                                 </div>-->
                             </div>
-
+                            <div id="instruction" style="display: none; width:600px"></div>
                             <div class="form-actions no-margin">
                                 <input type="hidden"   value=""  name="formNo">
                                 <input type="hidden"   value="<?php  echo @$isReAdm; ?>"  name="IsReAdm">

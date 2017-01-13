@@ -574,12 +574,12 @@ if(isset($files)){
 
         //var ispic
         // alert('sub6 '+sub6p1+ ' and '+ sub6p2);
-       /* if(picname == "" ||  picname == undefined){
+       if(picname == "" ||  picname == undefined){
 
             alertify.error("Please Uplaod Picture")
             $('#picname').focus(); 
             return status;
-        }   */
+        }   
         if(name == "" ||  name == undefined){
             $('#ErrMsg').show();  
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
@@ -596,7 +596,15 @@ if(isset($files)){
             $('#father_name').focus(); 
             return status;
         }   
-
+        else if(FNic == bFormNo   )
+        {
+            $('#ErrMsg').show(); 
+            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+            // $('#ErrMsg').html("<b>Please Enter your Father's CNIC</b>"); 
+            alertify.error("Please Enter your bay-Form") 
+            $('#bay_form').focus();  
+            return status; 
+        }
         else if((bFormNo == "" || bFormNo == 0 || bFormNo == undefined))
         {
             $('#ErrMsg').show(); 

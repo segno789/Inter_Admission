@@ -498,7 +498,7 @@ class Admission_11th_pvt extends CI_Controller {
             'lang_specialSub' =>$this->input->post('lang_specialSub'),
 
         );
-
+DebugBreak();
         $logedIn = $this->Admission_11th_Pvt_model->Insert_NewEnorlement_lang($data);//, $fname);//$_POST['username'],$_POST['password']);
         //$error = $logedIn[0]['error'];
 
@@ -1776,7 +1776,7 @@ class Admission_11th_pvt extends CI_Controller {
         $config["quality"]                         = 90; //jpeg quality
         $config["random_file_name"]                = true; //randomize each file name
 
-
+//DebugBreak();
         if(!isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
             exit;  //try detect AJAX request, simply exist if no Ajax
         }
