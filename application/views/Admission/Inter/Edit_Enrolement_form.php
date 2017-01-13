@@ -146,9 +146,6 @@
                                             echo  "<option value='0' >None</option>  <option value='1' >Deaf &amp; Dumb</option> <option value='2' selected='selected'>Board Employee</option>";                                           
                                         }
                                         ?>
-
-
-
                                     </select>
                                 </div>
                             </div>
@@ -161,6 +158,21 @@
                                     <input class="span3" type="text" id="MarkOfIden" style="text-transform: uppercase;" name="MarkOfIden" value="<?php echo  $data['0']['markOfIden']; ?>" required="required" maxlength="60" >
                                 </div>
                             </div>
+                            
+                            
+                            
+                            
+                              <div class="control-group">
+                                <label class="control-label span1" >
+                                    College Grade :
+                                </label>
+                                <div class="controls controls-row">
+                                    <input class="span3" type="text" id="CollGrade" style="text-transform: uppercase;" name="CollGrade" value="<?php echo  $data['0']['CollGrade']; ?>" required="required" maxlength="2" >
+                                </div>
+                            </div>
+                            
+                            
+                            
                             <div class="control-group">
                                 <label class="control-label span1" >
                                     Nationality :
