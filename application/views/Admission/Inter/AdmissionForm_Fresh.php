@@ -18,11 +18,18 @@ header("Pragma: no-cache");
                     <div class="widget-body" >
                         <form class="form-horizontal no-margin" action="<?php  echo base_url(); ?>Admission/NewEnrolment_insert_Fresh" method="post" enctype="multipart/form-data" name="myform" id="myform" onsubmit="return checks(this);">
                             <div class="control-group">
-                                <div class="controls controls-row">
+                                <div class="controls controls-row" id="output">
                                     <label class="control-label span2" >
                                     </label> 
-                                    <img id="image_upload_preview" style="width:140px; height: 140px;" src="" alt="Candidate Image" />
-                                    <!--<input type="hidden" id="pic" name="pic" value="<?php echo  $data['0']['picpath']; ?>" />    -->
+
+                                    <?php if(@$data[0]['picpath'] != '')  
+                                    {?>
+
+                                        <img id="image_upload_preview" name="image_upload_preview" style="width:140px; height: 140px;" src="<?php echo @$data[0]['picpathImg'];?>" alt="Candidate Image" />
+                                        <input type="hidden" id="pic" name="pic" value="<?php echo  @$data['0']['picpath']; ?>" />    
+                                        <?php } else{?>
+                                        <img src="<?php echo base_url(); ?>assets/img/upalodimage.jpg" alt="" >
+                                        <?php }?>
                                 </div>
                             </div>
                             <div class="controls controls-row">
@@ -994,8 +1001,8 @@ header("Pragma: no-cache");
 
                             });
 
-                        
-                          function checks()
+
+                            function checks()
                             {
 
 

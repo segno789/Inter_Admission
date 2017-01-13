@@ -2118,17 +2118,17 @@ class Admission extends CI_Controller {
 
         //DebugBreak();
 
-        /*$picpath = DIRPATH12TH.'\\'.@$data[0]['picpath'];
+        $picpath = DIRPATH12TH.'\\'.@$data[0]['picpath'];
         $isexit = is_file($picpath);
         if(!$isexit)
         {
-        $error_msg.= '<span style="font-size: 16pt; color:red;">' . 'Your Picture is missing.</span>';
+            $error_msg.= '<span style="font-size: 16pt; color:red;">' . 'Your Picture is missing.</span>';
         }
         else
         {
-        $type = pathinfo($picpath, PATHINFO_EXTENSION);
-        $data[0]['picpathImg'] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
-        }                */
+            $type = pathinfo($picpath, PATHINFO_EXTENSION);
+            $data[0]['picpathImg'] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
+        }                
 
         $specialcase = $data['0']['Spl_Name'];
         $specialcode = $data['0']['spl_cd'];
@@ -2269,7 +2269,7 @@ class Admission extends CI_Controller {
             'SSC_Year' => $_POST["oldYear"],
             'SSC_Session' => $_POST["oldSess"],
             'SSC_Board' => $_POST["oldBrd_cd"]
-        );
+        );                                 
         $error_msg = '';
         $this->load->model('Admission_model');
 
@@ -2305,6 +2305,20 @@ class Admission extends CI_Controller {
                 redirect('Admission/matric_default');
             }
 
+
+            $picpath = DIRPATH12TH.'\\'.@$data[0]['picpath'];
+            $isexit = is_file($picpath);
+            if(!$isexit)
+            {
+                $error_msg.= '<span style="font-size: 16pt; color:red;">' . 'Your Picture is missing.</span>';
+            }
+            else
+            {
+                $type = pathinfo($picpath, PATHINFO_EXTENSION);
+                $data[0]['picpathImg'] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
+            } 
+
+
             $board    = $data[0]['SSC_Board'];
             $oldclass    = $data[0]['SSC_CLASS'];
 
@@ -2317,87 +2331,6 @@ class Admission extends CI_Controller {
             $this->load->view('Admission/Inter/AdmissionForm_Fresh.php', array('data'=>$data));
             $this->load->view('common/commonfooter.php');
         }
-    }
-    public function Get_students_record()
-    {
-        $mrollno = $_POST["txtMatRno"];
-        $board   =  $_POST["oldBrd_cd"];
-        $year    =  $_POST["oldYear"];
-        $session =$_POST["oldSess"];
-
-        $data = array('mrollno'=>"$mrollno",'board'=>$board,'year'=>$year,'session'=>$session);
-        $this->load->model('Admission_11th_Pvt_model');
-
-        $error['excep'] = '';
-
-        if($board == 1)
-        {
-            if(!ctype_digit($mrollno))
-            {
-                $error['excep'] = 'SSC ROLL NO. IS INCORRECT';
-
-            }
-            $RegStdData = array('data'=>$this->Admission_11th_Pvt_model->Pre_Matric_data($data),'isReAdm'=>0,'Oldrno'=>0,'Inst_Rno'=>'','excep'=>'','isHafiz'=>'');  
-
-            $spl_cd = $RegStdData['data'][0]['spl_cd'];
-            $msg = $RegStdData['data'][0]['Mesg'];
-            $SpacialCase = $RegStdData['data'][0]['SpacialCase'];
-            $status = $RegStdData['data'][0]['status'];
-
-            if($RegStdData['data'] == -1)
-            {
-                $error['excep'] = 'NO DATA FOUND AGAINST YOUR RECORD';
-
-            }
-            else if($RegStdData['data'][0]['SSC_RNo'] == '' || $RegStdData['data'][0]['SSC_RNo'] == 0 || strlen ($RegStdData['data'][0]['SSC_RNo']) != 6)
-            {
-                $error['excep'] =  'SSC ROLL NO. IS INCORRECT';
-
-            }
-            else if($msg != '')
-            {
-                $error['excep'] =  $msg;
-
-
-            }
-            else if($status != 1)
-            {
-                $error['excep'] =  'You are FAILED in matric ';
-
-            }  
-            else if($spl_cd != null && $spl_cd != 34)
-            {
-                $error['excep'] = 'You can not appear due to '.$SpacialCase;
-
-            }
-
-
-        }
-        else if(@$RegStdData['data'] == False and $board != 1)
-        {
-            $error['excep'] = '';
-            $RegStdData['data'][0]['SSC_RNo'] = $_POST["txtMatRno"];
-            $RegStdData['data'][0]['SSC_Year'] = $_POST["oldYear"];
-            $RegStdData['data'][0]['SSC_Sess'] = $_POST["oldSess"];
-            $RegStdData['data'][0]['SSC_brd_cd'] = $_POST["oldBrd_cd"];
-            $RegStdData['data'][0]['sub1']=1;
-            $RegStdData['isReAdm']=0;
-            // DebugBreak();
-            $mylen = strlen(trim($RegStdData['data'][0]['SSC_RNo']));
-            if(trim($RegStdData['data'][0]['SSC_RNo']," ") == '' ||  trim($RegStdData['data'][0]['SSC_RNo']) == '0' || $mylen < 4 )
-            {
-                $error['excep'] = 'SSC ROLL NO. IS INCORRECT';
-
-            }
-
-        }  
-
-        if($error['excep'] == '')
-        {
-            $error['excep'] =  'success'; 
-        }  
-        echo   json_encode($error)  ;
-
     }
 
     public function NewEnrolment_insert_Fresh_OtherBoard(){
@@ -2716,7 +2649,7 @@ class Admission extends CI_Controller {
 
     public function NewEnrolment_insert_Fresh() {
 
-        //DebugBreak();
+        DebugBreak();
 
         $this->load->model('Admission_model');
 
@@ -3646,7 +3579,7 @@ class Admission extends CI_Controller {
         $value = array('center'=> $this->Admission_model->getcenter($data)) ;
         echo json_encode($value);
     }
-          
+
     public function frmvalidation_Fresh(){
 
         $allinputdata['excep'] = '';

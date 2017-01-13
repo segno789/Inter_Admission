@@ -278,7 +278,7 @@
                                         </div>
 
                                         <div style="vertical-align:bottom;margin-top: 20px;">
-                                            <input type="submit" value="Proceed" id="proceed" name="proceed" class="jbtn jmedium jblack" onclick="return proceed12th()">
+                                            <input type="submit" value="Proceed" id="proceed" name="proceed" class="jbtn jmedium jblack">
                                             <input type="button" value="Cancel" onclick="return CancelAlert();"  class="jbtn jmedium jblack">
                                         </div>
                                     </form>
@@ -302,39 +302,6 @@
 
 <script type="text/javascript">
 
-    function proceed12th()
-    {
-        $.ajax({
-            type: "POST",
-            url: "<?php echo base_url(); ?>" + "Admission/Get_students_record/",
-            dataType: 'html',
-            data: $( '#getPervRec' ).serialize(),
-            beforeSend: function() {  $('.mPageloader').show(); },
-            complete: function() { $('.mPageloader').hide();},
-            success: function(data)
-            {
-                var obj = JSON.parse(data) ;
-                if(obj.excep == 'success')
-                {
-                    $('#getPervRec').submit();
-                }
-                else
-                {
-                    alertify.error(obj.excep);
-                }
-
-            },
-            error: function(request, status, error){
-                $('.mPageloader').hide();
-                alertify.error(request.responseText);
-            }
-        });
-
-        return false;
-
-    }
-
-
     function CancelAlert()
     {
         var msg = "Are You Sure You want to Cancel this Form ?"
@@ -345,7 +312,6 @@
             }
         });
     }
-
 
     function validatenumber(evt) {
         var theEvent = evt || window.event;
