@@ -59,22 +59,22 @@ header("Pragma: no-cache");
                     <div class="widget-body" >
                         <form class="form-horizontal no-margin" action="<?php  echo base_url(); ?>Admission/NewEnrolment_insert_Fresh" method="post" enctype="multipart/form-data" name="myform" id="myform" onsubmit="return checks(this);">
                             <div class="control-group">
+                                <h4 class="span4"></h4>
+                                <label class="control-label span2" style="width: 411px;margin-left: -199px;">
+                                    <img src="<?php echo base_url(); ?>assets/img/upalodimage.jpg" alt="" >
+                                </label>
                                 <div class="controls controls-row" id="output">
-                                    <label class="control-label span2" >
-                                    </label> 
+                                    <input type="hidden" class="span2 hidden" id="picname" name="picname" value="">
+                                    <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="<?php echo base_url(); ?>assets/img/profile.png" alt="Candidate Image">
 
-                                    <?php if(@$data[0]['picpath'] != '')  
-                                    {?>
-
-                                        <img id="image_upload_preview" name="image_upload_preview" style="width:140px; height: 140px;" src="<?php echo @$data[0]['picpathImg'];?>" alt="Candidate Image" />
-                                        <input type="hidden" id="pic" name="pic" value="<?php echo  @$data['0']['picpath']; ?>" />    
-                                        <?php } else{?>
-                                        <img src="<?php echo base_url(); ?>assets/img/upalodimage.jpg" alt="" >
-                                        <?php }?>
                                 </div>
                             </div>
-                            <div class="controls controls-row">
-                               <div id="progress-wrp"><div class="progress-bar"></div ><div class="status">0%</div></div>
+
+                            <div class="control-group">
+                                <label id="ErrMsg" class="control-label span2" style=" text-align: left;"><?php ?></label>
+
+                                <div class="controls controls-row">
+                                    <div id="progress-wrp"><div class="progress-bar"></div ><div class="status">0%</div></div>
                                     <input class="span3 hidden"  type="text" placeholder="" >  
                                     <label class="control-label span2">
                                         Image :  
@@ -83,6 +83,7 @@ header("Pragma: no-cache");
 
                                 </div>
                             </div>
+
                             <div class="control-group">
                                 <label class="control-label span1" >
                                     Candidate Name:
@@ -1088,7 +1089,8 @@ header("Pragma: no-cache");
 
                                                     success: function(data) {
 
-                                                        //console.log(data);
+                                                        debugger;
+                                                        console.log(data);
 
                                                         var obj = JSON.parse(data) ;
                                                         if(obj.error ==  1)

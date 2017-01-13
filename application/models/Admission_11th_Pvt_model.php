@@ -257,7 +257,7 @@ class Admission_11th_Pvt_model extends CI_Model
         if($iOldSess ==  false)
             $iOldSess =  0;
         //  $pic_base_65 = $data['Image'];
-          DebugBreak();
+         // DebugBreak();
         //  DebugBreak();
         // $sync= $this->load->database('sync', TRUE);
  

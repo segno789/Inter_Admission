@@ -61,8 +61,9 @@ header("Pragma: no-cache");
                         <form class="form-horizontal no-margin" method="post" enctype="multipart/form-data" name="myform" id="myform">
                             <div class="control-group">
                                 <div class="controls controls-row" id="output">
-                                    <label class="control-label span2" >
-                                    </label> 
+                                     <label class="control-label span2" style="width: 411px;margin-left: -199px;">
+                                            <img src="<?php echo base_url(); ?>assets/img/upalodimage.jpg" alt="" >
+                                        </label>
 
                                     <?php if($data[0]['picpath'] != '')  
                                     {?>
@@ -70,18 +71,34 @@ header("Pragma: no-cache");
                                         <img id="image_upload_preview" name="image_upload_preview" style="width:140px; height: 140px;" src="<?php echo @$data[0]['picpathImg'];?>" alt="Candidate Image" />
                                         <input type="hidden" id="pic" name="pic" value="<?php echo  @$data['0']['picpath']; ?>" />    
                                         <?php } else{?>
-                                        <img src="<?php echo base_url(); ?>assets/img/upalodimage.jpg" alt="" >
+                                        
+                                        <input type="hidden" class="span2 hidden" id="picname" name="picname" value="">
+                                        <img id="previewImg" style="width:80px; height: 80px;    margin-left: 275px;" class="span2" src="<?php echo base_url(); ?>assets/img/profile.png" alt="Candidate Image">
                                         <?php }?>
                                 </div>
                             </div>
-                            <div class="controls controls-row">
+                            <div class="control-group">
 
-                                <?php  if(@$data[0]['picpath'] == '')  
-                                {
-                                    echo '<input type="file" style="margin-left:10%; margin-bottom:1%;" class="span4" id="image" name="__files[]">';
-                                }
-                                ?>
 
+                                <div class="controls controls-row">
+
+                                    <?php  if(@$data[0]['picpath'] == '')  
+                                    {?>
+                                        <label id="ErrMsg" class="control-label span2" style=" text-align: left;"><?php ?></label>
+
+                                        <div class="controls controls-row">
+                                            <div id="progress-wrp"><div class="progress-bar"></div ><div class="status">0%</div></div>
+                                            <input class="span3 hidden"  type="text" placeholder="" >  
+                                            <label class="control-label span2">
+                                                Image :  
+                                            </label> 
+                                            <input type="file" class="span4" id="image" name="__files[]">
+
+                                        </div>
+                                        <?php }
+                                    ?>
+
+                                </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label span1" >

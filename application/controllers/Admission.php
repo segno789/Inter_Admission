@@ -2635,7 +2635,7 @@ class Admission extends CI_Controller {
 
     public function NewEnrolment_insert_Fresh() {
 
-        DebugBreak();
+      
 
         $this->load->model('Admission_model');
 
@@ -2905,7 +2905,7 @@ class Admission extends CI_Controller {
             'AdmProcessFee'=>$AdmFee[0]['Processing_Fee'],
             'AdmFee'=>$AdmFeeCatWise,
             'AdmTotalFee'=>$TotalAdmFee,
-            'exam_type'=>$_POST['exam_type'],
+            'exam_type'=>@$_POST['exam_type'],
             'picpath'=>@$_POST['pic'],
             'brd_name'=>@$_POST['oldboard'],
             'AdmFine'=>$dueDate,
@@ -2913,7 +2913,7 @@ class Admission extends CI_Controller {
             'certfee'=>$Certificate
         );
 
-        //DebugBreak();
+        DebugBreak();
 
         $logedIn = $this->Admission_model->NewEnrolment_insert_Fresh($data);
         $info =  '';
@@ -2923,8 +2923,8 @@ class Admission extends CI_Controller {
             {
                 if($logedIn[0]['tempath'] != '')
                 {
-                    $oldpath =  GET_PRIVATE_IMAGE_PATH.'\12th'.$logedIn[0]['tempath'];
-                    $newpath =  GET_PRIVATE_IMAGE_PATH.'\12th'.$val.'.jpg';
+                    $oldpath =  GET_PRIVATE_IMAGE_PATH.'\12th\\'.$logedIn[0]['tempath'];
+                    $newpath =  GET_PRIVATE_IMAGE_PATH.'\12th\\'.$val.'.jpg';
                     $err = rename($oldpath,$newpath); 
                 }
                 $info['error'] = 1;
@@ -4692,8 +4692,8 @@ class Admission extends CI_Controller {
 
             //output images
             foreach($responses["images"] as $response){
-                echo ' <input type="hidden" class="span2 hidden" id="picname" name="picname" value="'.$response.'">
-                <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="'.$config["upload_url"].$response.'"  alt="Candidate Image">';
+                echo '<input type="hidden" class="span2 hidden" id="picname" name="picname" value="'.$response.'">
+                <img id="previewImg" style="width:80px; height: 80px; " class="span2" src="'.$config["upload_url"].$response.'"  alt="Candidate Image">';
             }
 
         }catch(Exception $e){
