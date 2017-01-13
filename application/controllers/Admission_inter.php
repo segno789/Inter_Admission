@@ -542,7 +542,7 @@ class Admission_inter extends CI_Controller {
         $fontSize = 10; 
         $marge    = .95;   // between barcode and hri in pixel
         $bx        = 175.6;  // barcode center
-        $by        = 34.75;  // barcode center
+        $by        = 35.95;  // barcode center
         $height   = 5.7;   // barcode height in 1D ; module size in 2D
         $width    = .26;  // barcode height in 1D ; not use in 2D
         $angle    = 0;   // rotation in degrees
@@ -564,7 +564,22 @@ class Admission_inter extends CI_Controller {
 
         $len = $pdf->GetStringWidth($bardata['hri']);
         Barcode::rotate(-$len / 2, ($bardata['height'] / 2) + $fontSize + $marge, $angle, $xt, $yt);
-
+        
+        $pdf->SetFont('Arial','B',8);
+        $pdf->SetXY(150.6, 42);
+        $pdf->Cell(0,0,'Printing Date: '. date('d-m-Y H:i:s a'),0,0,'L',0);
+        
+        if($data['sess'] ==  1)
+        {
+           $pdf->Image("assets/img/Annual.jpg",96,39, 9,8, "JPG"); 
+        }
+        
+        else if($data['sess'] == 2)
+        {
+            $pdf->Image("assets/img/Supply.jpg",96,39, 9,8, "JPG");
+        }
+        
+        
         $pdf->SetFont('Arial','B',11.5);
         $pdf->SetXY(87, 44);
         $pdf->Cell(0,0,$data['iyear'],0,0,'L',0);
@@ -738,15 +753,29 @@ class Admission_inter extends CI_Controller {
         $pdf->SetXY($x-40, $Y+208);
         $pdf->Cell(0,0,$user['cell'],0,0,'L',0);
 
-        $bardata = Barcode::fpdf($pdf, $black, $bx+2, $by+5, $angle, $type, array('code'=>$Barcode), $width, $height);
+        $bardata = Barcode::fpdf($pdf, $black, $bx+2, $by, $angle, $type, array('code'=>$Barcode), $width, $height);
 
         $len = $pdf->GetStringWidth($bardata['hri']);
         Barcode::rotate(-$len / 2, ($bardata['height'] / 2) + $fontSize + $marge, $angle, $xt, $yt);
 
+         $pdf->SetFont('Arial','B',8);
+        $pdf->SetXY(150.6, 42);
+        $pdf->Cell(0,0,'Printing Date: '. date('d-m-Y H:i:s a'),0,0,'L',0);
+        
         $pdf->SetFont('Arial','B',11.5);
         $pdf->SetXY(85.5, 42);
         $pdf->Cell(0,0,$data['iyear'],0,0,'L',0);
 
+        if($data['sess'] ==  1)
+        {
+           $pdf->Image("assets/img/Annual.jpg",95,37, 10,8, "JPG"); 
+        }
+        
+        else if($data['sess'] == 2)
+        {
+            $pdf->Image("assets/img/Supply.jpg",95,37, 10,8, "JPG");
+        }
+        
         $pdf->Output('financeReoprt.pdf', 'I'); 
     }
 
