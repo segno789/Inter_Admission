@@ -4,7 +4,48 @@ header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 ?>
+<style type="">
 
+
+    .form-wrap #output{
+        margin: 10px 0;
+    }
+
+    .form-wrap .images {
+        width: 100%;
+        display: block;
+        border: 1px solid #e8e8e8;
+        padding: 5px;
+        margin: 5px 0;
+    }/* progress bar */
+    #progress-wrp {
+        border: 1px solid #0099CC;
+        padding: 1px;
+        position: relative;
+        border-radius: 3px;
+        margin-left: 650px;
+        margin-bottom: 16px;
+        text-align: left;
+        background: #fff;
+        width:250px;
+        box-shadow: inset 1px 3px 6px rgba(0, 0, 0, 0.12);
+    }
+    #progress-wrp .progress-bar{
+        height: 20px;
+        border-radius: 3px;
+        background-color: #f39ac7;
+        width: 0;
+        box-shadow: inset 1px 1px 10px rgba(0, 0, 0, 0.11);
+    }
+    #progress-wrp .status{
+        top:3px;
+        left:50%;
+        position:absolute;
+        display:inline-block;
+        color: #000000;
+    }
+
+</style>
 <div class="dashboard-wrapper class wysihtml5-supported">
     <div class="left-sidebar">
         <div class="row-fluid">
@@ -26,7 +67,14 @@ header("Pragma: no-cache");
                                 </div>
                             </div>
                             <div class="controls controls-row">
-                                <input type='file' id="inputFile" name="inputFile" onchange="return ValidateFileUpload(this);"/>
+                               <div id="progress-wrp"><div class="progress-bar"></div ><div class="status">0%</div></div>
+                                    <input class="span3 hidden"  type="text" placeholder="" >  
+                                    <label class="control-label span2">
+                                        Image :  
+                                    </label> 
+                                    <input type="file" class="span4" id="image" name="__files[]">
+
+                                </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label span1" >
