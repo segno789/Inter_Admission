@@ -159,8 +159,8 @@
                                     <input class="span3" type="text" id="MarkOfIden" style="text-transform: uppercase;" name="MarkOfIden" value="<?php echo  $data['0']['markOfIden']; ?>" required="required" maxlength="60" >
                                 </div> 
                             </div>
-                          
-                          
+
+
                             <div class="control-group">
                                 <label class="control-label span1" >
                                     College Grade:
@@ -215,7 +215,7 @@
                                 </label>
                                 <div class="controls controls-row">
                                     <?php
-                                    // //DebugBreak();
+
                                     if($isReAdm == 1)
                                     {
                                         echo " <label class='radio inline span1'><input type='radio' id='hafiz1' value='1'  name='hafiz'> No</label>
@@ -223,17 +223,9 @@
                                     }
                                     else
                                     {
-                                        // $hafiz = $data[0]['Ishafiz'];
-                                        //if ($hafiz == 1)
-                                        //{
                                         echo " <label class='radio inline span1'><input type='radio' id='hafiz1' value='1' checked='checked' name='hafiz'> No</label>
                                         <label class='radio inline span1'><input type='radio' id='hafiz2' value='2' name='hafiz'> Yes</label>";
-                                        //}
-                                        /*else if(!isset($hafiz))
-                                        {
-                                        echo " <label class='radio inline span1'><input type='radio' id='hafiz1' value='1'  name='hafiz'> No</label>
-                                        <label class='radio inline span1'><input type='radio' id='hafiz2' value='2' checked='checked' name='hafiz'> Yes</label>";
-                                        }*/
+
                                     }    
                                     ?>
 
@@ -253,7 +245,6 @@
                                         </label><label class='radio inline span1'><input type='radio' id='religion1' class='rel_class' value='2' checked='checked' name='religion'> Non Muslim</label>" ;
                                     }
                                     ?>
-
                                 </div>
                             </div>
                             <div class="control-group">
@@ -273,9 +264,7 @@
                                     echo " <label class='radio inline span1'><input type='radio' value='1' id='UrbanRural' name='UrbanRural'> Urban
                                     </label><label class='radio inline span2'><input type='radio'  id='UrbanRural' value='2'  checked='checked'  name='UrbanRural'>  Rural </label>";
                                 }
-
                                 ?>
-
                             </div>
                             <div class="control-group">
                                 <label class="control-label span1" >
