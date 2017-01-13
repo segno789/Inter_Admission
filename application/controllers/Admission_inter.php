@@ -2516,7 +2516,7 @@ class Admission_inter extends CI_Controller {
 
 
 
-        $pdf->Cell(0, 0.25, "FORWARDING LETTER SHOWING DETAILS OF ".corr_bank_chall_class." ADMISSION, ".session_year, 0.25, "C");
+        $pdf->Cell(0, 0.25, "FORWARDING LETTER SHOWING DETAILS OF ".corr_bank_chall_class." ADMISSION, ".Year, 0.25, "C");
 
         $pdf->SetFont('Arial','',10);
         $pdf->SetXY(2.6,2.4);
@@ -2578,7 +2578,7 @@ class Admission_inter extends CI_Controller {
         $pdf->SetFont('Arial','',10);
         $pdf->SetXY(0.9+$x,4.3+$y);
 
-        $pdf->MultiCell(6.5, 0.2, "  I am forwarding registration forms along with the relevent enclosures of Candidates Group appearing from my Institute in the ensuring ".corr_bank_chall_class." ".session_year." Admission are
+        $pdf->MultiCell(6.5, 0.2, "  I am forwarding registration forms along with the relevent enclosures of Candidates Group appearing from my Institute in the ensuring ".corr_bank_chall_class." ".Year." Admission are
             ", 0,"J",0);
 
         $x = 1; 
