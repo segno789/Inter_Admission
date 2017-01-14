@@ -179,7 +179,8 @@ header("Pragma: no-cache");
                                         <label class='radio inline span1'><input type='radio' id='gender2' value='2'  checked='checked'  disabled='disabled'  name='gender'> Female </label> " ;
                                     }
                                     ?>
-                                    <input type="hidden" name="gend" value="<?php echo $gender; ?>">
+                                    <input type="hidden" name="gend" value="<?php echo $gender; ?>">                                    
+                                    
                                 </div>
                             </div>
                             <div class="control-group">

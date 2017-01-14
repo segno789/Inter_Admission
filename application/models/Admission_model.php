@@ -219,15 +219,19 @@ class Admission_model extends CI_Model
         else{
             $picpath = $data['picpath'];     
         }
-                                   
+
         $dist_cd =  $data['dist'];
         $teh_cd =  $data['teh'];
         $zone_cd =  $data['zone'];
         $oldrno =  $data['rno'];
         $oldyear =  $data['Iyear'];
         $oldsess =  $data['sess'];
-        $AdmFine =  $data['AdmFine'];
-        $Brd_cd =  $data['Brd_cd'];
+        $AdmFine =  $data['AdmFine']; 
+
+
+
+        $Brd_cd =  $data['Brd_cd'];  
+
         $old_class =  $data['oldClass'];
 
         $schm = $data['schm'];
@@ -249,9 +253,123 @@ class Admission_model extends CI_Model
         }
 
         $TotalAdmFee =  $AdmFee + $AdmProcFee+$AdmFine;
-        
+
         $query = $this->db->query(Insert_sp." '$formno',12,2017,1,'$name','$fname','$BForm','$FNIC','$CellNo',$medium,'".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$sub8,1,'".$picpath."',$oldrno,$oldyear,$oldsess,$old_class,$IsHafiz,$Inst_cd,$UrbanRural,$cat11,$cat12,$sub1ap2,$sub2ap2,$sub4ap2,$sub5ap2,$sub6ap2,$sub7ap2,$sub8ap2,$dist_cd,$teh_cd,$zone_cd,$Brd_cd,$AdmProcFee,$AdmFee,$TotalAdmFee,$sub5a,$sub6a,$sub7a,$AdmFine,$IsNewPic,$certFee,'$temppath',$schm");
+
+        $rowcount = $query->num_rows();
+        if($rowcount > 0)
+        {
+            return $query->result_array();
+        }
+        else
+        {
+            return -1;
+        }
+    }
+
+    public function NewEnrolment_insert_Fresh_11thOtherBoard($data){ 
+
+        //DebugBreak();
+
+        $name = strtoupper($data['name']);
+        $fname =strtoupper($data['Fname']);
+        $BForm = $data['BForm'];
+        $FNIC = $data['FNIC'];
+        $CellNo = $data['MobNo'];
+        $medium = $data['medium'];
+        $Inst_Rno = strtoupper($data['Inst_Rno']);
+        $MarkOfIden =strtoupper(@$data['markOfIden']);
+        $Speciality = $data['Speciality'];
+        $nat = $data['nat'];
+        $sex = $data['sex'];
+        $IsHafiz = $data['IsHafiz'];
+        $rel = $data['rel'];        
+        $addr =strtoupper($data['addr']) ;
+
+        $grp_cd = $data['grp_cd'];
+
+        $sub1= $data['sub1'];
+        $sub2 = $data['sub2'];
+        $sub3 = $data['sub3'];
+        $sub4 = $data['sub4'];
+        $sub5 = $data['sub5'];
+        $sub6 = $data['sub6'];
+        $sub7 = $data['sub7'];
+        $sub8 = $data['sub8'];
+        $sub5a = $data['sub5a'];
+        $sub6a = $data['sub6a'];
+        $sub7a = $data['sub7a'];
+
+        $sub1ap1 = $data['sub1ap1'];
+        $sub2ap1 = $data['sub2ap1'];
+        $sub3ap1 = $data['sub3ap1'];
+        $sub4ap1 = $data['sub4ap1'];
+        $sub5ap1 = $data['sub5ap1'];
+        $sub6ap1 = $data['sub6ap1'];
+        $sub7ap1 = $data['sub7ap1'];
+        $sub8ap1 = @$data['sub8ap2'];
+
+        $UrbanRural = $data['RuralORUrban'];
+        $Inst_cd = "999999";
+        $formno = $data['FormNo'];
+        $sub1ap2 =  $data['sub1ap2'];
+        $sub2ap2 =  $data['sub2ap2'];
+        $sub3ap2 =  $data['sub3ap2'];
+        $sub4ap2 =  $data['sub4ap2'];
+        $sub5ap2 =  $data['sub5ap2'];
+        $sub6ap2 =  $data['sub6ap2'];
+        $sub7ap2 =  $data['sub7ap2'];
+        $sub8ap2 =  $data['sub8ap2'];
+
+        $cat11 = $data['cat11'];     
+        $cat12 = $data['cat12'];     
+
+
+        if(@$_POST['pic'] == ''){
+            $picpath = $data['picpath']['upload_data']['full_path'];
+        }
+        else{
+            $picpath = $data['picpath'];     
+        }
+
+        $dist_cd =  $data['dist'];
+        $teh_cd =  $data['teh'];
+        $zone_cd =  $data['zone'];
+        $oldrno =  $data['rno'];
+        $oldyear =  $data['Iyear'];
+        $oldsess =  $data['sess'];
+        $AdmFine =  $data['AdmFine']; 
+
+        //DebugBreak();
+
+        $Brd_cd =  $data['Brd_cd'];  
+
+        $old_class =  $data['oldClass'];
+
+        $schm = $data['schm'];
+
+        $AdmProcFee =  $data['AdmProcessFee'];
+        $AdmFee =  $data['AdmFee'];
+        $certFee =  $data['certfee'];
+
+        $picpath = $data['picpath'];
+
+        if($picpath == '')
+        {
+            $IsNewPic = 1;
+            $temppath = $data['picname'];
+        }
+        else{
+            $IsNewPic = 0; 
+            $temppath = '';
+        }
+
+        $TotalAdmFee =  $AdmFee + $AdmProcFee+$AdmFine;
+
         
+
+        $query = $this->db->query(Insert_sp." '$formno',12,2017,1,'$name','$fname','$BForm','$FNIC','$CellNo',$medium,'".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$sub8,1,'".$picpath."',$oldrno,$oldyear,$oldsess,$old_class,$IsHafiz,$Inst_cd,$UrbanRural,$cat11,$cat12,$sub1ap2,$sub2ap2,$sub4ap2,$sub5ap2,$sub6ap2,$sub7ap2,$sub8ap2,$dist_cd,$teh_cd,$zone_cd,$Brd_cd,$AdmProcFee,$AdmFee,$TotalAdmFee,$sub5a,$sub6a,$sub7a,$AdmFine,$IsNewPic,$certFee,'$temppath',$schm");
+
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
