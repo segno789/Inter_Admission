@@ -3659,7 +3659,7 @@ class Admission extends CI_Controller {
             $allinputdata['excep'] = 'Please Select Your Nationality';
         }
 
-        else if((@$_POST['gender'] != '1') and (@$_POST['gender'] != '2'))
+        else if((@$_POST['gend'] != '1') and (@$_POST['gend'] != '2'))
         {
 
             $allinputdata['excep'] = 'Please Select Your Gender';
