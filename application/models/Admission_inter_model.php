@@ -183,7 +183,7 @@ class Admission_inter_model extends CI_Model
 
         //DebugBreak();
         
-        $CollGrade = $data['CollGrade'];
+        $CollGrade = strtoupper($data['CollGrade']);
 
         $schm =  $data['schm'];
 

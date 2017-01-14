@@ -564,22 +564,22 @@ class Admission_inter extends CI_Controller {
 
         $len = $pdf->GetStringWidth($bardata['hri']);
         Barcode::rotate(-$len / 2, ($bardata['height'] / 2) + $fontSize + $marge, $angle, $xt, $yt);
-        
+
         $pdf->SetFont('Arial','B',8);
         $pdf->SetXY(150.6, 42);
         $pdf->Cell(0,0,'Printing Date: '. date('d-m-Y H:i:s a'),0,0,'L',0);
-        
+
         if($data['sess'] ==  1)
         {
-           $pdf->Image("assets/img/Annual.jpg",96,39, 9,8, "JPG"); 
+            $pdf->Image("assets/img/Annual.jpg",96,39, 9,8, "JPG"); 
         }
-        
+
         else if($data['sess'] == 2)
         {
             $pdf->Image("assets/img/Supply.jpg",96,39, 9,8, "JPG");
         }
-        
-        
+
+
         $pdf->SetFont('Arial','B',11.5);
         $pdf->SetXY(87, 44);
         $pdf->Cell(0,0,$data['iyear'],0,0,'L',0);
@@ -758,24 +758,24 @@ class Admission_inter extends CI_Controller {
         $len = $pdf->GetStringWidth($bardata['hri']);
         Barcode::rotate(-$len / 2, ($bardata['height'] / 2) + $fontSize + $marge, $angle, $xt, $yt);
 
-         $pdf->SetFont('Arial','B',8);
+        $pdf->SetFont('Arial','B',8);
         $pdf->SetXY(150.6, 42);
         $pdf->Cell(0,0,'Printing Date: '. date('d-m-Y H:i:s a'),0,0,'L',0);
-        
+
         $pdf->SetFont('Arial','B',11.5);
         $pdf->SetXY(85.5, 42);
         $pdf->Cell(0,0,$data['iyear'],0,0,'L',0);
 
         if($data['sess'] ==  1)
         {
-           $pdf->Image("assets/img/Annual.jpg",95,37, 10,8, "JPG"); 
+            $pdf->Image("assets/img/Annual.jpg",95,37, 10,8, "JPG"); 
         }
-        
+
         else if($data['sess'] == 2)
         {
             $pdf->Image("assets/img/Supply.jpg",95,37, 10,8, "JPG");
         }
-        
+
         $pdf->Output('financeReoprt.pdf', 'I'); 
     }
 
@@ -997,6 +997,9 @@ class Admission_inter extends CI_Controller {
             'sess'=>@$_POST['Oldsess'],
             'Iyear'=>@$_POST['Oldyear'],
             'Brd_cd'=>@$_POST['Oldbrd'],
+
+            'CollGrade'=>@$_POST['CollGrade'],
+
             'schm'=>1,
             'picpath'=>@$_POST['pic'],
             'oldFormNo'=>@$_POST['formNo'],
@@ -1007,8 +1010,8 @@ class Admission_inter extends CI_Controller {
 
         );                  
 
-        //DebugBreak();
-        //$this->frmvalidation('NewEnrolment_EditForm_inter',$data,0);
+        
+        $this->frmvalidation('NewEnrolment_EditForm_inter',$data,0);
 
         $data['isupdate']=1;
         $logedIn = $this->Admission_inter_model->Insert_NewEnorlement($data);
@@ -1249,7 +1252,7 @@ class Admission_inter extends CI_Controller {
             'sess'=>@$_POST['Oldsess'],
             'Iyear'=>@$_POST['Oldyear'],
             'Brd_cd'=>@$_POST['Oldbrd'],
-            
+
             'CollGrade'=>@$_POST['CollGrade'],
 
             'schm' => @$_POST['oldschm'],
@@ -1270,6 +1273,8 @@ class Admission_inter extends CI_Controller {
 
         $data['isupdate']=0;
         $logedIn = $this->Admission_inter_model->Insert_NewEnorlement($data);
+
+
 
         if( !isset($logedIn))
         {  
@@ -1526,7 +1531,7 @@ class Admission_inter extends CI_Controller {
 
 
             $User_info_data = array('Inst_Id'=>$Inst_Id,'RollNo'=>@$_POST['OldRno'],'spl_case'=>17);
-            $user_info  =  $this->Admission_inter_model->readmission_check($User_info_data); //$db->first("SELECT * FROM  Admission_online..tblinstitutes_all WHERE Inst_Cd = " .$user->inst_cd);
+            $user_info  =  $this->Admission_inter_model->readmission_check($User_info_data);
 
             if($user_info == false)
             {
@@ -1751,10 +1756,6 @@ class Admission_inter extends CI_Controller {
             'regoldyear' =>( $allinputdata['regoldyear']),
             'isreadm'=>($allinputdata['isreadm']),
             'cat09'=>$cat09
-
-
-
-
         );
         $this->frmvalidation('NewEnrolment_EditForm/',$data,1);
         $logedIn = $this->Admission_inter_model->Update_NewEnorlement($data);//, $fname);//$_POST['username'],$_POST['password']);
@@ -2076,7 +2077,7 @@ class Admission_inter extends CI_Controller {
         $this->load->view('Admission/inter/CreateBatch.php',$RegStdData);
         $this->load->view('common/commonfooter_inter_regular.php');
     }
-     public function Make_Batch_Group_wise()
+    public function Make_Batch_Group_wise()
     {
         //DebugBreak();
 
@@ -2141,9 +2142,9 @@ class Admission_inter extends CI_Controller {
         $q1 = $user_info['fee'];
         $total_std = 0;
         $total_certFee = 0;
-      $n = 0;
-         $AllStdFee = array();
-          $Adm_fee = 0;
+        $n = 0;
+        $AllStdFee = array();
+        $Adm_fee = 0;
         foreach($q1 as $k=>$v) 
         {
             $ids[] = $v["FormNo"];
@@ -2157,8 +2158,8 @@ class Admission_inter extends CI_Controller {
                 //  $total_certFee = $total_certFee+$cert_fee;
                 //$Adm_ProcessingFee; 
                 // $Totalprocessing_fee = $Totalprocessing_fee + $Adm_ProcessingFee;
- 
-               if($v['cat11'] == 2)
+
+                if($v['cat11'] == 2)
                 {
                     if(($v['grp_cd']==1 ||$v['grp_cd']==2 || $v['grp_cd']==4) || (array_search($v['sub4'],$practical_Sub) || array_search($v['sub5'],$practical_Sub) || array_search($v['sub6'],$practical_Sub) ||  array_search($v['sub7A'],$practical_Sub)))
                     {
@@ -2172,9 +2173,9 @@ class Admission_inter extends CI_Controller {
                 }
                 else
                 {
-                   
+
                     $AllStdFee[$n] = array('formNo'=> $v["FormNo"],'AdmFee'=>@$Adm_fee,'CertificateFee'=>@$cert_fee,'AdmFine'=>@$LAdm_fee,'AdmProcessFee'=>@$Adm_ProcessingFee,'AdmTotalFee'=>$Adm_fee+$LAdm_fee+$Adm_ProcessingFee+$cert_fee);
-                   //  echo '<pre>'; print_r($v["FormNo"]);echo '</pre>'; exit();
+                    //  echo '<pre>'; print_r($v["FormNo"]);echo '</pre>'; exit();
                 }
 
 
@@ -2243,10 +2244,10 @@ class Admission_inter extends CI_Controller {
             $total_certFee = $total_certFee+$cert_fee;
             $n++;
         } 
-        
+
         $mydata_final = $this->Admission_inter_model->Update_AdmissionFee($AllStdFee);
- $tot_fee = $TotalAdmFee+$TotalLatefee+$Totalprocessing_fee+$total_certFee;
-  $forms_id   = implode(",",$ids); 
+        $tot_fee = $TotalAdmFee+$TotalLatefee+$Totalprocessing_fee+$total_certFee;
+        $forms_id   = implode(",",$ids); 
         $today = date("Y-m-d H:i:s");
         $data = array('inst_cd'=>$Inst_Id,'total_fee'=>$tot_fee,'proces_fee'=>$Adm_ProcessingFee,'reg_fee'=>$Adm_fee,'fine'=>$LAdm_fee,'TotalRegFee'=>$TotalAdmFee,'TotalLatefee'=>$TotalLatefee,'Totalprocessing_fee'=>$Totalprocessing_fee,'forms_id'=>$forms_id,'todaydate'=>$today,'total_std'=>$total_std,'cert_fee'=>$cert_fee,'total_cert'=>$total_certFee);
         $this->Admission_inter_model->Batch_Insertion($data); 
@@ -2285,7 +2286,7 @@ class Admission_inter extends CI_Controller {
         $TotalLatefee = 0;
         $Totalprocessing_fee = 0;
         $netTotal = 0;
-       $cert_fee = 550;
+        $cert_fee = 550;
 
         $practical_Sub = array(
             'LibSC'=>'8',
@@ -2321,7 +2322,7 @@ class Admission_inter extends CI_Controller {
         $n = 0;
         $AllStdFee = array();
         $Adm_fee = 0;
-          foreach($q1 as $k=>$v) 
+        foreach($q1 as $k=>$v) 
         {
             $ids[] = $v["FormNo"];
             $total_std++;
@@ -2334,8 +2335,8 @@ class Admission_inter extends CI_Controller {
                 //  $total_certFee = $total_certFee+$cert_fee;
                 //$Adm_ProcessingFee; 
                 // $Totalprocessing_fee = $Totalprocessing_fee + $Adm_ProcessingFee;
- 
-               if($v['cat11'] == 2)
+
+                if($v['cat11'] == 2)
                 {
                     if(($v['grp_cd']==1 ||$v['grp_cd']==2 || $v['grp_cd']==4) || (array_search($v['sub4'],$practical_Sub) || array_search($v['sub5'],$practical_Sub) || array_search($v['sub6'],$practical_Sub) ||  array_search($v['sub7A'],$practical_Sub)))
                     {
@@ -2349,9 +2350,9 @@ class Admission_inter extends CI_Controller {
                 }
                 else
                 {
-                   
+
                     $AllStdFee[$n] = array('formNo'=> $v["FormNo"],'AdmFee'=>@$Adm_fee,'CertificateFee'=>@$cert_fee,'AdmFine'=>@$LAdm_fee,'AdmProcessFee'=>@$Adm_ProcessingFee,'AdmTotalFee'=>$Adm_fee+$LAdm_fee+$Adm_ProcessingFee+$cert_fee);
-                   //  echo '<pre>'; print_r($v["FormNo"]);echo '</pre>'; exit();
+                    //  echo '<pre>'; print_r($v["FormNo"]);echo '</pre>'; exit();
                 }
 
 
@@ -2420,10 +2421,10 @@ class Admission_inter extends CI_Controller {
             $total_certFee = $total_certFee+$cert_fee;
             $n++;
         } 
-        
+
         $mydata_final = $this->Admission_inter_model->Update_AdmissionFee($AllStdFee);
- $tot_fee = $TotalAdmFee+$TotalLatefee+$Totalprocessing_fee+$total_certFee;
-  $forms_id   = implode(",",$ids); 
+        $tot_fee = $TotalAdmFee+$TotalLatefee+$Totalprocessing_fee+$total_certFee;
+        $forms_id   = implode(",",$ids); 
         $today = date("Y-m-d H:i:s");
         $data = array('inst_cd'=>$Inst_Id,'total_fee'=>$tot_fee,'proces_fee'=>$Adm_ProcessingFee,'reg_fee'=>$Adm_fee,'fine'=>$LAdm_fee,'TotalRegFee'=>$TotalAdmFee,'TotalLatefee'=>$TotalLatefee,'Totalprocessing_fee'=>$Totalprocessing_fee,'forms_id'=>$forms_id,'todaydate'=>$today,'total_std'=>$total_std,'cert_fee'=>$cert_fee,'total_cert'=>$total_certFee);
         $this->Admission_inter_model->Batch_Insertion($data); 
