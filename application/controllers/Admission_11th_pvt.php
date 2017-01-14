@@ -498,7 +498,7 @@ class Admission_11th_pvt extends CI_Controller {
             'lang_specialSub' =>$this->input->post('lang_specialSub'),
 
         );
-DebugBreak();
+
         $logedIn = $this->Admission_11th_Pvt_model->Insert_NewEnorlement_lang($data);//, $fname);//$_POST['username'],$_POST['password']);
         //$error = $logedIn[0]['error'];
 
@@ -566,7 +566,6 @@ DebugBreak();
     }
     public function checkFormNo_then_download()
     {
-        //         DebugBreak();
         $formno_seg = $this->uri->segment(3);
         // $dob_seg = $this->uri->segment(4);
         if($formno_seg !=0 ){ //&& $dob_seg != ''
@@ -1305,7 +1304,7 @@ DebugBreak();
             $pdf->Cell( 0,0,"Cert Fee ",0,'L');
             $pdf->SetXY(7.4, 7.09+$Y); 
             $pdf->SetFont('Arial','b',$FontSize);
-            $pdf->Cell( 0,0,@$data['CertFee'].'/-',0,'L');
+            $pdf->Cell( 0,0,@$mydata_final['CertFee'].'/-',0,'L');
         }
 
 
@@ -1313,7 +1312,7 @@ DebugBreak();
         $pdf->SetFont('Arial','b',$FontSize);
         $pdf->Cell( 0,0,"Total Amount Rs.",0,'L');
         //DebugBreak();
-        $total = @$mydata_final['AdmFee']+@$mydata_final['regFee']+@$mydata_final['AdmProcessFee']+@$mydata_final['AdmFine'] ;
+        $total = @$mydata_final['AdmTotalFee'] ;
         $pdf->SetXY(1.8, 7.25+$Y);
         $pdf->SetFont('Arial','b',8);
         $pdf->Cell( 0,0,$total.'/-',0,'L');
@@ -1450,7 +1449,7 @@ DebugBreak();
             $pdf->Cell( 0,0,"Cert Fee ",0,'L');
             $pdf->SetXY(7.4,.93+$Y); 
             $pdf->SetFont('Arial','b',$FontSize);
-            $pdf->Cell( 0,0,$data['CertFee'].'/-',0,'L');
+            $pdf->Cell( 0,0,@$mydata_final['CertFee'].'/-',0,'L');
         }
 
 
@@ -1630,7 +1629,7 @@ DebugBreak();
     }
     function feecalculate($data)
     {
-        //DebugBreak();
+       // DebugBreak();
         $isper = 0;
 
         $User_info_data = array('Inst_Id'=>999999, 'date' => date('Y-m-d'),'isPratical'=>$isper);
@@ -1685,7 +1684,7 @@ DebugBreak();
             $days = abs($days);
             $endDate = date('d-m-Y');
             $admfee =  ($admfee*3); 
-            $$admfeecmp =  ($admfeecmp*3); 
+            $admfeecmp =  ($admfeecmp*3); 
             $Total_fine = $days*$fine;
 
         }  // DebugBreak();
@@ -1698,22 +1697,31 @@ DebugBreak();
         {
             $finalFee = $admfee;
         }
-        if($data['Spec']>0 && (strtotime(date('Y-m-d')) >= strtotime(TripleDateFee)) )
+        $cert_fee = 0;
+        if($data['IsLangexam'] == 1)
         {
-            $regfee =  1000;
-            if($data['Spec'] ==  2)
-            {
-                $regfee = 0; 
-            }
-            $data['AdmFee'] = $finalFee;
-            $data['AdmTotalFee'] = $processFee+$Total_fine+$data['regFee'];
-            $AllStdFee = array('FormNo'=>$data['formNo'],'regFee'=>0,'AdmProcessFee'=>$processFee,'AdmFee'=>$finalFee,'AdmFine'=>$Total_fine,'AdmTotalFee'=>$data['AdmTotalFee']);
+            $cert_fee = 550;
+        }
+         $regfee =  1000;
+        
+        if($data['Spec']>0 && (strtotime(date('Y-m-d')) <= strtotime(SingleDateFee)) )
+        {
+            $regfee = 0; 
+            $data['regFee'] = 0;
+            $data['AdmFee'] = 0;
+            $data['AdmTotalFee'] = $processFee+$Total_fine+$data['regFee']+$cert_fee;
+            $AllStdFee = array('formNo'=>$data['FormNo'],'regFee'=>0,'AdmProcessFee'=>$processFee,'AdmFee'=>$data['AdmFee'],'AdmFine'=>$Total_fine,'AdmTotalFee'=>$data['AdmTotalFee'],'CertFee'=>$cert_fee);
         }
         else
         {
+            if($data['oldRno_reg'] != '' && $data['IsLangexam'] == 1)
+            {
+                $cert_fee = 0;
+                $regfee = 0;
+            }
             $data['AdmFee'] = $finalFee;
-            $data['AdmTotalFee'] = $processFee+$Total_fine+$data['regFee']+$finalFee;
-            $AllStdFee = array('formNo'=>$data['FormNo'],'regFee'=>1000,'AdmProcessFee'=>$processFee,'AdmFee'=>$finalFee,'AdmFine'=>$Total_fine,'AdmTotalFee'=>$data['AdmTotalFee']);
+            $data['AdmTotalFee'] = $processFee+$Total_fine+$regfee+$finalFee+$cert_fee;
+            $AllStdFee = array('formNo'=>$data['FormNo'],'regFee'=>$regfee,'AdmProcessFee'=>$processFee,'AdmFee'=>$finalFee,'AdmFine'=>$Total_fine,'AdmTotalFee'=>$data['AdmTotalFee'],'CertFee'=>$cert_fee);
         }
 
         $info =   $this->Admission_11th_Pvt_model->Update_AdmissionFeePvt($AllStdFee);
@@ -1776,7 +1784,7 @@ DebugBreak();
         $config["quality"]                         = 90; //jpeg quality
         $config["random_file_name"]                = true; //randomize each file name
 
-//DebugBreak();
+
         if(!isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
             exit;  //try detect AJAX request, simply exist if no Ajax
         }
