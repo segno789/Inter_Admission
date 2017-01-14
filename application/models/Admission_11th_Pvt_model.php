@@ -225,6 +225,7 @@ class Admission_11th_Pvt_model extends CI_Model
         $IsReAdm = $data['IsReAdm'];
         $lang_cat = $data['lang_cat'];
         $lang_specialSub = $data['lang_specialSub'];
+        $picname = $data['picname'];
        $Inst_Rno = '';
        $aloom_grp_final = 0;
        ///   For ADEEB Arabic and Urdu.
