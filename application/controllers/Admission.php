@@ -2064,7 +2064,7 @@ class Admission extends CI_Controller {
 
     public function Pre_Inter_Data() 
     {       
-        DebugBreak();     
+        //DebugBreak();     
 
         $this->load->library('session');
         $mrollno='';
@@ -2089,10 +2089,11 @@ class Admission extends CI_Controller {
         }
         else
         {
+            $this->load->model('Admission_model');
             $data = array('data'=>"");
             $mrollno = $_POST["txtMatRno"];
             $hsscrno = $_POST["oldRno"];
-            $oldClass= $_POST["oldClass"];
+            $oldClass = $_POST["oldClass"];
             $iyear    = $_POST["oldYear"];
             $session = $_POST["oldSess"];
             $board   = $_POST["oldBrd_cd"];
@@ -2100,8 +2101,25 @@ class Admission extends CI_Controller {
             if(isset($_POST["isaloom"])) $isaloom = 1;else $isaloom = 0;
         }
 
-               
-        
+        if(@$board != 1 && @$oldClass == 11){
+
+            $data[0]['SSC_RNO'] = $mrollno;
+            $data[0]['RNO']     = $hsscrno;
+            $data[0]['Year']    = $iyear;
+            $data[0]['Session'] = $session;
+            $data[0]['Class'] = $oldClass;
+            $data[0]['Board'] = $board;
+
+            $brd_name=$this->Admission_model->Brd_Name($board);
+            $data[0]['brd_name']= $brd_name[0]['Brd_Abr'] ;
+
+            $this->load->view('common/commonheader.php');        
+            $this->load->view('Admission/Inter/OtherBoard_Pre_11th.php', array('data'=>$data));
+            $this->load->view('common/commonfooter.php');
+            return;
+        }
+
+
         $data['sscrno']=$mrollno;
         $data['hsscrno']=$hsscrno;
         $data['hsscclass']=$oldClass;
@@ -2109,7 +2127,7 @@ class Admission extends CI_Controller {
         $data['session']=$session;
         $data['board']=$board;
         $data['isaloom']= $isaloom;
-        $this->load->model('Admission_model');
+
         $data = $this->Admission_model->Pre_Inter_data($data);
 
         $error_msg = '';
@@ -2325,7 +2343,7 @@ class Admission extends CI_Controller {
 
         $Inst_Id = 999999;
 
-        $formno = '';//$this->Admission_model->GetFormNo();
+        $formno = '';
 
         $allinputdata = array('cand_name'=>@$_POST['cand_name'],
             'father_name'=>@$_POST['father_name'],
@@ -2579,9 +2597,9 @@ class Admission extends CI_Controller {
             'zone'=>@$_POST['pvtZone'],
 
 
-            'rno'=>@$_POST['oldSSC_Rno'],
-            'Iyear'=>@$_POST['oldSSC_Year'],
-            'sess'=>@$_POST['oldSSC_Session'],
+            'rno'=>@$_POST['oldrno'],
+            'Iyear'=>@$_POST['oldyear'],
+            'sess'=>$oldsess,
             'Brd_cd'=>@$_POST['oldSSC_Board'],
             'oldClass'=>10,
 
@@ -2593,7 +2611,7 @@ class Admission extends CI_Controller {
             'AdmProcessFee'=>$AdmFee[0]['Processing_Fee'],
             'AdmFee'=>$AdmFeeCatWise,
             'AdmTotalFee'=>$TotalAdmFee,
-            'exam_type'=>$_POST['exam_type'],
+          
             'picpath'=>@$_POST['pic'],
             'brd_name'=>@$_POST['oldboard'],
             'AdmFine'=>$dueDate,
@@ -2602,8 +2620,10 @@ class Admission extends CI_Controller {
         );
 
 
-
+        //DebugBreak();
+        
         $logedIn = $this->Admission_model->NewEnrolment_insert_Fresh_OtherBoard($data);
+
 
         $info =  '';
         foreach($logedIn[0] as $key=>$val)
@@ -2612,8 +2632,8 @@ class Admission extends CI_Controller {
             {
                 if($logedIn[0]['tempath'] != '')
                 {
-                    $oldpath =  GET_PRIVATE_IMAGE_PATH.'\12th'.$logedIn[0]['tempath'];
-                    $newpath =  GET_PRIVATE_IMAGE_PATH.'\12th'.$val.'.jpg';
+                    $oldpath =  GET_PRIVATE_IMAGE_PATH.'\12th\\'.$logedIn[0]['tempath'];
+                    $newpath =  GET_PRIVATE_IMAGE_PATH.'\12th\\'.$val.'.jpg';
                     $err = rename($oldpath,$newpath); 
                 }
                 $info['error'] = 1;
@@ -2626,7 +2646,6 @@ class Admission extends CI_Controller {
             }
         }
         echo  json_encode($info);
-
     }
 
     public function NewEnrolment_insert_Fresh() {
@@ -2909,7 +2928,7 @@ class Admission extends CI_Controller {
             'certfee'=>$Certificate
         );
 
-        DebugBreak();
+        //DebugBreak();
 
         $logedIn = $this->Admission_model->NewEnrolment_insert_Fresh($data);
         $info =  '';
@@ -3640,8 +3659,9 @@ class Admission extends CI_Controller {
             $allinputdata['excep'] = 'Please Select Your Nationality';
         }
 
-        else if((@$_POST['gend'] != '1') and (@$_POST['gend'] != '2'))
+        else if((@$_POST['gender'] != '1') and (@$_POST['gender'] != '2'))
         {
+
             $allinputdata['excep'] = 'Please Select Your Gender';
         }
 
@@ -3686,35 +3706,38 @@ class Admission extends CI_Controller {
         }
         //validate part I subjects
 
-        else if(@$_POST['sub1']==0)
+
+
+        else if(@$_POST['sub1']==0 && @$_POST['Class'] != 11 && @$_POST['Board'] == 1)
         {
             $allinputdata['excep'] = 'Please Select Part-I Subject 1';
 
         }
-        else if(@$_POST['sub2']==0)
+        else if(@$_POST['sub2']==0 && @$_POST['Class'] != 11 && @$_POST['Board'] == 1)
         {
             $allinputdata['excep'] = 'Please Select Part-I Subject 2';
 
         }
-        else if(@$_POST['sub3']==0)
+        else if(@$_POST['sub3']==0 && @$_POST['Class'] != 11 && @$_POST['Board'] == 1)
         {
             $allinputdata['excep'] = 'Please Select Part-I Subject 3';
 
         }
-        else if(@$_POST['sub4']==0)
+        else if(@$_POST['sub4']==0 && @$_POST['Class'] != 11 && @$_POST['Board'] == 1)
         {
             $allinputdata['excep'] = 'Please Select Part-I Subject 4';
         }
-        else if(@$_POST['sub5']==0)
+        else if(@$_POST['sub5']==0 && @$_POST['Class'] != 11 && @$_POST['Board'] == 1)
         {
             $allinputdata['excep'] = 'Please Select Part-I Subject 5';
 
         }
-        else if(@$_POST['sub6']==0)
+        else if(@$_POST['sub6']==0 && @$_POST['Class'] != 11 && @$_POST['Board'] == 1)
         {
             $allinputdata['excep'] = 'Please Select Part-I Subject 6';
         }
-        else if(@$_POST['sub7'] == 0 && @$_POST['std_group'] == 5){
+        else if(@$_POST['sub7'] == 0 && @$_POST['std_group'] == 5 && @$_POST['Class'] != 11 && @$_POST['Board'] == 1)
+        {
 
             $allinputdata['excep'] = 'Please Select Part-I Subject 7';
         }

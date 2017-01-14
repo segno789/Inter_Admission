@@ -26,6 +26,8 @@ class Login extends CI_Controller {
     }
     public function index()
     {
+        //DebugBreak();
+        
         $this->load->helper('url');
         $data = array(
             'user_status' => ''                     
@@ -189,6 +191,8 @@ class Login extends CI_Controller {
 
     function logout()
     {
+        //DebugBreak();
+        
         $this->load->helper('url');
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();

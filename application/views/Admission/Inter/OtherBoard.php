@@ -144,13 +144,13 @@ header("Pragma: no-cache");
                                     Nationality :
                                 </label>
                                 <div class="controls controls-row">  
-                                    "<label class='radio inline span1'><input type='radio' value='1' id='nationality'  name='nationality'> Pakistani</label>
+                                    "<label class='radio inline span1'><input type='radio' value='1' id='nationality' checked="checked"  name='nationality'> Pakistani</label>
                                     <label class='radio inline span2'><input type='radio'  id='nationality1' value='2' name='nationality'>  Non Pakistani</label>" ;
 
                                     <label class="control-label span3" style="margin-left: -100px;" for="gender1">
                                         Gender :
                                     </label> 
-                                    <label class='radio inline span1'><input type='radio' id='gender1' value='1'  name='gender'> Male</label> 
+                                    <label class='radio inline span1'><input type='radio' id='gender1' value='1' checked="checked"  name='gender'> Male</label> 
                                     <label class='radio inline span1'><input type='radio' id='gender2' value='2'  name='gender'> Female </label>
                                 </div>
                             </div>
@@ -159,13 +159,13 @@ header("Pragma: no-cache");
                                     Hafiz-e-Quran :
                                 </label>
                                 <div class="controls controls-row">
-                                    <label class='radio inline span1'><input type='radio' id='hafiz1' value='1'  name='hafiz'> No</label>
+                                    <label class='radio inline span1'><input type='radio' id='hafiz1' value='1' checked="checked"  name='hafiz'> No</label>
                                     <label class='radio inline span1'><input type='radio' id='hafiz2' value='2'  name='hafiz'> Yes</label>    
                                     <label class="control-label span3" >
                                         Religion :
                                     </label> 
 
-                                    <label class='radio inline span1'><input type='radio' id='religion' class='rel_class' value='1' name='religion'> Muslim
+                                    <label class='radio inline span1'><input type='radio' id='religion' class='rel_class' value='1' checked="checked" name='religion'> Muslim
                                     </label><label class='radio inline span1'><input type='radio' id='religion1' class='rel_class'  value='2' name='religion'> Non Muslim</label>
 
                                 </div>
@@ -176,8 +176,8 @@ header("Pragma: no-cache");
                             </label>
                             <div class="controls controls-row">  
 
-                                <label class='radio inline span1'><input type='radio' value='1' id='UrbanRural1' name='UrbanRural'> Urban
-                                </label><label class='radio inline span2'><input type='radio'  id='UrbanRural2' value='2' name='UrbanRural'>  Rural </label>
+                                <label class='radio inline span1'><input type='radio' value='1' id='UrbanRural1' checked="checked" name='UrbanRural'>Urban</label>
+                                <label class='radio inline span2'><input type='radio'  id='UrbanRural2' value='2' name='UrbanRural'>  Rural </label>
 
                             </div>
                             <div class="control-group" style="margin-top: 50px;">
@@ -1001,8 +1001,9 @@ header("Pragma: no-cache");
 
                             });
 
-                            function checks()
+         function checks()
                             {
+
 
                                 var status  =  check_NewEnrol_validation();
                                 if(status == 0)
@@ -1011,12 +1012,16 @@ header("Pragma: no-cache");
                                 }
                                 else
                                 {
+
+                                    //debugger;
+
                                     $.ajax({
 
                                         type: "POST",
                                         url: "<?php  echo site_url('Admission/frmvalidation_Fresh'); ?>",
                                         data: $("#myform").serialize() ,
                                         datatype : 'html',
+
                                         success: function(data)
                                         {
                                             var obj = JSON.parse (data);
@@ -1027,9 +1032,16 @@ header("Pragma: no-cache");
                                                     url: "<?php echo base_url(); ?>" + "Admission/NewEnrolment_insert_Fresh_OtherBoard/",
                                                     data: $("#myform").serialize() ,
                                                     datatype : 'html',
+
                                                     beforeSend: function() {  $('.mPageloader').show(); },
                                                     complete: function() { $('.mPageloader').hide();},
+
+
                                                     success: function(data) {
+
+                                                        console.log(data);
+                                                        
+
                                                         var obj = JSON.parse(data) ;
                                                         if(obj.error ==  1)
                                                         {
@@ -1037,31 +1049,25 @@ header("Pragma: no-cache");
                                                         }
                                                         else
                                                         {
-                                                            $('.mPageloader').hide();
                                                             alertify.error(obj.error);
                                                             return false; 
                                                         }
-
                                                     },
                                                     error: function(request, status, error){
-                                                        $('.mPageloader').hide();
+
                                                         alertify.error(request.responseText);
                                                     }
                                                 });
-
                                                 return false
                                             }
-
                                             else
                                             {
-                                                $('.mPageloader').hide();
                                                 alertify.error(obj.excep);
                                                 return false;     
                                             }
                                         }
                                     });
-
-                                    return false;     
+                                    return false;   
                                 } 
                             }
 
