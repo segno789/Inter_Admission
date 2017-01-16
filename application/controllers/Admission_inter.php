@@ -593,12 +593,12 @@ class Admission_inter extends CI_Controller {
 
         if($data['sess'] ==  1)
         {
-            $pdf->Image("assets/img/Annual.jpg",96,39, 9,8, "JPG"); 
+            $pdf->Image("assets/img/Annual.jpg",97,39, 10,8, "JPG"); 
         }
 
         else if($data['sess'] == 2)
         {
-            $pdf->Image("assets/img/Supply.jpg",96,39, 9,8, "JPG");
+            $pdf->Image("assets/img/Supply.jpg",97,39, 10,8, "JPG");
         }        
 
         $pdf->SetFont('Arial','B',11.5);
@@ -818,12 +818,12 @@ class Admission_inter extends CI_Controller {
 
         if($data['sess'] ==  1)
         {
-            $pdf->Image("assets/img/Annual.jpg",95,37, 10,8, "JPG"); 
+            $pdf->Image("assets/img/Annual.jpg",97,40, 10,8, "JPG"); 
         }
 
         else if($data['sess'] == 2)
         {
-            $pdf->Image("assets/img/Supply.jpg",95,37, 10,8, "JPG");
+            $pdf->Image("assets/img/Supply.jpg",97,40, 10,8, "JPG");
         }       
 
         $pdf->Output('financeReoprt.pdf', 'I'); 
