@@ -3508,12 +3508,9 @@ class Admission extends CI_Controller {
         }
        
 
-        if(($examtype ==  1 || $examtype == 3 || $_POST['oldyear'] <= 2014 || $Speciality>0)  && Session == 1)
-        {
-            $Certificate =  550;
-        }
-
-        $today = date("d-m-Y");   $dueDate = 0;
+        
+        $today = date("d-m-Y");   
+        $dueDate = 0;
 
         
 
@@ -3526,6 +3523,10 @@ class Admission extends CI_Controller {
         }
         else if($oldsess == 'Supplementary'){
             $oldsess =  2;    
+        }
+        if(($examtype ==  1 || $examtype == 3 || $_POST['oldyear'] <= 2014 || $Speciality>0 || ( $_POST['oldrno']>300000 && $oldsess == 1))  && Session == 1)
+        {
+            $Certificate =  550;
         }
 
         $addre =  str_replace("'", "", $this->input->post('address'));
