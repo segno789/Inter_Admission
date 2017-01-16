@@ -2693,8 +2693,6 @@ class Admission extends CI_Controller {
         echo  json_encode($info);
     }
 
-
-
     public function NewEnrolment_insert_Fresh_11thOtherBoard()
     {
 
@@ -2758,6 +2756,7 @@ class Admission extends CI_Controller {
 
         $grp_cd = $this->input->post('std_group');
 
+        $is11th =  0;
         if(@$_POST['sub1'] != 0)
         {
             $sub1ap1 = 1; 
@@ -2862,12 +2861,23 @@ class Admission extends CI_Controller {
 
         $Speciality = $this->input->post('speciality');
 
+        if($is11th ==  1)
+        {
+           $cat11 = 2;
+        }
+        else
+        {
+             $cat11 = 0;
+        }
+        
+          $cat12 = 1;
+        
         // $AdmFee = $this->Admission_model->getrulefee($ispractical);
 
         $AdmFeeCatWise = '1700';
         $Certificate = 550;
         $regfee = 1000;
-        $cat11 = 1; $cat12 = 1;
+       
         $today = date("d-m-Y");
         $dueDate = 0;
         $TotalAdmFee = 0;  
@@ -2979,7 +2989,6 @@ class Admission extends CI_Controller {
         }
         echo  json_encode($info);
     }
-
 
     public function NewEnrolment_insert_Fresh() 
     {
