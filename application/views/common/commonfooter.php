@@ -174,7 +174,12 @@
         $("#pvtinfo_teh").change(function(){
             var tehId =  $("#pvtinfo_teh").val();
 
-            gender =  $("input[name=gender]").val() ;
+      //  debugger;
+            gender =  $("input[name=gender]:checked").val();
+            if( gender == undefined )
+            {
+                gender = $("#gend").val();
+            }
             if(gender == "" || gender == 0 || gender == undefined  || gender.length == undefined)
             {
                 alertify.error("Select Gender First");
@@ -219,7 +224,11 @@
 
 
             var tehId =  $("#pvtZone").val();
-            var gender = $("input[name=gender]").val() ;
+             var  gender =  $("input[name=gender]:checked").val();
+            if( gender == undefined )
+            {
+                gender = $("#gend").val();
+            }
             if(gender == "" || gender == 0 || gender == undefined  || gender.length == undefined)
             {
                 alertify.error("Select Gender First");
@@ -265,7 +274,7 @@
     function check_NewEnrol_validation_Fresh()
     {
 
-        var inputimage = $("#inputFile").val();  
+        var inputimage = $("#picname").val();  
         var name =  $('#cand_name').val();
         var fName = $('#father_name').val();
         var bFormNo = $('#bay_form').val();
@@ -278,6 +287,7 @@
         var address = $('#address').val();
         var MarkOfIdent = $('#MarkOfIden').val();
         var medium= $('#medium option:selected').val();
+         var gend = $("input[name=gender]:checked").val();
 
         //part I and part II subjects
         var sub1 = 0;var sub2 = 0;var sub3 = 0;var sub4= 0;var sub5 = 0;var sub6 = 0;var sub7 = 0;var sub8 = 0;
@@ -295,7 +305,7 @@
 
         if(inputimage == ''){
             alertify.error("Please upload your Image First.")
-            $("#inputFile").focus();
+            $("#image").focus();
             return status;
         }
         else if(name == "" ||  name == undefined){
@@ -308,6 +318,7 @@
             $('#father_name').focus(); 
             return status;
         }   
+        
         else if(FNic == ""  ){
             alertify.error("Please Enter your Father's CNIC") 
             $('#father_cnic').focus();  
@@ -331,7 +342,7 @@
             $('#mob_number').focus();   
             return status;  
         }
-
+        
         else if (!$('input[name=nationality]:checked').val() ) {   
             alertify.error("Please Check Nationality") 
             $('#nationality').focus();   
@@ -496,6 +507,7 @@
 
         var name =  $('#cand_name').val();
         var dist_cd= $('#pvtinfo_dist option:selected').val();
+        var gend = $("#gend").val();
         var teh_cd= $('#pvtinfo_teh').val();
         var zone_cd= $('#pvtZone').val();
         var pp_cent= $('#pp_cent').val();           
@@ -523,6 +535,7 @@
         var src = $img.attr("src");
         var grppre = $("#grppre").val();
         var selected_group_conversion ;
+        var exam_type = $("#exam_type").val();
         var exam_type = $("#exam_type").val();
         if(grp_cd ==1 || grp_cd == 5 || grp_cd ==7)
         {
@@ -581,6 +594,13 @@
 
             alertify.error("Please Enter your Mobile No.") 
             $('#mob_number').focus();   
+            return status;  
+        }
+         else if(gend == "" || gend== undefined)
+        {
+            alertify.error("Please Select Your Gender.");
+            //$('#ErrMsg').html("<b>Please Select Your Gender.</b>"); 
+            $("input[name=gender]:checked").focus();   
             return status;  
         }
         else if(MarkOfIdent == "" || MarkOfIdent == 0 || MarkOfIdent == undefined){

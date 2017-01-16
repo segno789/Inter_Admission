@@ -336,6 +336,7 @@
     function  check_NewEnrol_validation(){
 
         var name =  $('#cand_name').val();
+        var gend = $("input[name=gender]:checked").val();
         var dist_cd= $('#pvtinfo_dist').val();
         var teh_cd= $('#pvtinfo_teh').val();
         var zone_cd= $('#pvtZone').val();
@@ -355,7 +356,7 @@
         var address = $('#address').val();
         var image = $('#image').val();
         var MarkOfIdent = $('#MarkOfIden').val();
-        var gend = $("input[name=gender]:checked").val();
+      
         var status = 0;
         // alert('sub6 '+sub6p1+ ' and '+ sub6p2);
         if(name == "" ||  name == undefined){

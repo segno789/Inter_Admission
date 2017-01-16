@@ -66,6 +66,11 @@
 
                                         $type = pathinfo($image_path_selected, PATHINFO_EXTENSION);
                                         @$image_path_selected = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($image_path_selected));
+                                        $disable = '<button type="button" class="btn btn-info" value="'.$vals["rno"].'" onclick="NewForm('.$vals["rno"].')">Save Form</button>';
+                                         if($vals['MissingNOC']>0)
+                                         {
+                                             $disable = '<p style="color:red">Your NOC is missing. Please contact to Online Registration Branch at B.I.S.E</p>'; 
+                                         }
                                          
                                         switch ($grp_name) {
                                             case '1':
@@ -96,10 +101,7 @@
                                         <td>'.$vals["Fname"].'</td>
                                         <td>'.$grp_name.'</td>
                                         <td><img id="previewImg" style="width:40px; height: 40px;" src="'.$image_path_selected.'" alt="Candidate Image"></td>';
-                                        echo'<td>
-                                        <button type="button" class="btn btn-info" value="'.$vals["rno"].'" onclick="NewForm('.$vals["rno"].')">Save Form</button>
-
-                                        </td>
+                                        echo'<td>'.$disable.'</td>
                                         </tr>';
                                         endforeach;
                                     }

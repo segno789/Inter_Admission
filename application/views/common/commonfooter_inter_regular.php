@@ -393,7 +393,8 @@
             $("#pvtinfo_teh").append('<option value="17">DASKA</option>');
             $("#pvtinfo_teh").append('<option value="18">SAMBRIAL</option>');
         }
-        $("#pvtinfo_teh").change(function(){
+        $("#pvtinfo_teh").change(function()
+        {
 
             // alert("hello");
             var tehId =  $("#pvtinfo_teh").val();
@@ -461,70 +462,7 @@
             }
 
         })
-        var tehId = teh_cd;// $("#pvtinfo_teh").val();
-        //alert("hello "+tehId);
-        if(tehId == 0){
-            //alert("Select Tehsil First");
-        }
-        else{
-
-            jQuery.ajax({
-                ////debugger;
-                type: "POST",
-                url: "<?php echo base_url(); ?>" + "Admission/getzone/",
-                dataType: 'json',
-                data: {tehCode: tehId},
-                beforeSend: function() {  $('.mPageloader').show(); },
-                complete: function() { $('.mPageloader').hide();},
-                success: function(json) {
-                    var listitems;
-                    //alert('Hi i am success');
-                    // console.log("I am console");
-                    // console.log(url);
-                    $('#pvtZone').empty();
-                    $('#pvtZone').append('<option value="0">SELECT ZONE</option>');
-                    $.each(json, function (key, data) {
-
-                        //console.log(key)
-
-                        $.each(data, function (index, data) {
-
-                            // console.log('Zone Name :', data.zone_name , ' Zone Code : ' ,data.zone_cd)
-                            listitems +='<option value=' + data.zone_cd + '>' + data.zone_name + '</option>';
-                            //$('#pvtZone').append('<option value=' + data.zone_cd + '>' + data.zone_name + '</option>');
-                            //console.log('Zone Name :', data.zone_cd)
-                            //console.log('Zone Name :', data)
-                        })
-                    })
-                    $('#pvtZone').append(listitems);
-                    $("#pvtZone").val(zone_cd);
-                    /*console.log(data.length);
-                    for (var i = 0; i < data.length; i++) {
-
-                    console.log(" Thesil : "+ data[i].zone_name);
-                    // var checkBox = "<input type='checkbox' data-price='" + data[i].Price + "' name='" + data[i].Name + "' value='" + data[i].ID + "'/>" + data[i].Name + "<br/>";
-                    // $(checkBox).appendTo('#modifiersDiv');
-                    }*/
-                    //if (json)
-                    //{
-                    //var obj = jQuery.parseJSON(json);
-                    //  console.log(json.teh[0].zone_name);
-                    //alert( obj['teh']['Class']);
-                    //   alert(res.Sess);
-                    //   alert(res.Class);
-                    //   //debugger;
-                    //   Show Entered Value
-                    //   jQuery("div#result").show();
-                    //   jQuery("div#value").html(res.username);
-                    //   jQuery("div#value_pwd").html(res.pwd);
-                    //}
-
-                },
-                error: function(request, status, error){
-                    alert(request.responseText);
-                }
-            });
-        }
+        
         $("#pvtZone").change(function(){
             //debugger;
             // alert("hello"); getcenter

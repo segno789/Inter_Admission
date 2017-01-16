@@ -79,7 +79,7 @@ header("Pragma: no-cache");
                                     <label class="control-label span2">
                                         Image :  
                                     </label> 
-                                    <input type="file" class="span4" id="image" name="__files[]">
+                                    <input type="file"  class="span4" id="image" name="__files[]">
 
                                 </div>
                             </div>
@@ -150,8 +150,10 @@ header("Pragma: no-cache");
                                     <label class="control-label span3" style="margin-left: -100px;" for="gender1">
                                         Gender :
                                     </label> 
-                                    <label class='radio inline span1' style="color: red;"><input type='radio' id='gender1' value='1'  name='gender'> Male</label> 
-                                    <label class='radio inline span1' style="color: red;"><input type='radio' id='gender2' value='2'  name='gender'> Female </label>
+                                    <label class='radio inline span1' style="color: red;">
+                                    <input type='radio' id='gender1' value='1'  name='gender'> Male</label> 
+                                    <label class='radio inline span1' style="color: red;">
+                                    <input type='radio' id='gender2' value='2'  name='gender'> Female </label>
                                 </div>
                             </div>
                             <div class="control-group">
@@ -1005,7 +1007,7 @@ header("Pragma: no-cache");
                             {
 
 
-                                var status  =  check_NewEnrol_validation();
+                                var status  =  check_NewEnrol_validation_Fresh();
                                 if(status == 0)
                                 {
                                     return false;    

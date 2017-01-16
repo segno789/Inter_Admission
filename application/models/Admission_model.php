@@ -726,8 +726,9 @@ $regfee = 0;
 
         $tehcd = $data['tehCode'];
         $gend = $data['gend'];
-        $query = $this->db->get_where('matric_new..tblZones', array('mYear' => Year,'Class' => 12,'Sess'=>Session, 'teh_cd' => $tehcd));
-
+        $where = " mYear = ".Year."  AND class = 12 AND  sess = ".Session." and Flag= 0 AND teh_cd =  $tehcd  AND  (Gender = $gend OR Gender = 3) ";      
+        $query = $this->db->query("SELECT * FROM matric_new..tblZones WHERE $where");
+       
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
