@@ -961,44 +961,19 @@ class Admission extends CI_Controller {
         {
 
             $pdf->Cell( 0.5,0.7,strtoupper($grp_name." GROUP  (11th: ".$chkcat09."  12th:".$chkcat10.")"),0,'L');
-            //$pdf->SetFont('Arial','B',10);
-            // $pdf->SetXY(2.5,1.55+$Y);
-            //$pdf->Cell( 0.5,0.5,"(11th: ",0,'L');
-            // $pdf->SetXY(3.0,1.55+$Y);
-            // $pdf->SetFont('Arial','B',10);
-            //$pdf->Cell( 0.5,0.5, ,0,'L'); 
-            //  $pdf->SetXY(4.0,1.55+$Y);
-            //  $pdf->SetFont('Arial','B',10);
-            //$pdf->Cell( 0.5,0.5,"",0,'L');
-            //  $pdf->SetXY(4.4,1.55+$Y);
-            //  $pdf->SetFont('Arial','B',10);
-            //$pdf->Cell( 0.5,0.5,$chkcat10.")",0,'L');
-
         }
         else if($chkcat09 != -1)
         {
 
-            $pdf->Cell( 0.5,0.7,strtoupper($grp_name." GROUP  (11th: ".$chkcat09.")"),0,'L');
-            //  $pdf->SetFont('Arial','B',10);
-            //  $pdf->SetXY(2.5,1.55+$Y);
-            //   $pdf->Cell( 0.5,0.5,"(11th: ",0,'L');
-            //  $pdf->SetXY(3.0,1.55+$Y);
-            //  $pdf->SetFont('Arial','B',10);
-            // $pdf->Cell(0.5,0.5, $chkcat09.')',0,'L');
+            $pdf->Cell( 0.5,0.7,strtoupper($grp_name." GROUP  (11th: ".$chkcat09.")"),0,'L');            
         }
         else if($chkcat10 != -1)
         {
 
             $pdf->Cell( 0.5,0.7,strtoupper($grp_name." GROUP  (12th: ".$chkcat10.")"),0,'L');
-            // $pdf->SetFont('Arial','B',10);
-            // $pdf->SetXY(2.5,1.55+$Y);
-            //  $pdf->Cell( 0.5,0.5,"(12th: ",0,'L');
-            // $pdf->SetXY(3.0,1.55+$Y);
-            // $pdf->SetFont('Arial','B',10);
-            // $pdf->Cell(0.5,0.5,$chkcat10.')',0,'L');  
         }
         $LastSess = 0 ;
-        //  //DebugBreak();
+        
         if($data["SessOfLastAp"] == 1 or $data["SessOfLastAp"] == 2  )
         {
             $LastSess =  $data["SessOfLastAp"]==1?"A":"S";
@@ -1016,69 +991,7 @@ class Admission extends CI_Controller {
         $cand_Notif = $data['Prev_result2'];
         $cand_Nofif_part1 =$data['Prev_result1'];
         $str = '';
-        /*        if($data['cat11']==2 || $data['cat12']==2)
-        {
-
-        if($data['Prev_chance']==1)
-        {
-        if($data['cat11']==2 && $data['cat12']==2)
-        {
-
-        $str = "A-18 [P-I $cand_Nofif_part1,P-II $cand_Notif]";    
-        }
-        else if($data['cat11']==2 && $data['cat12'] !=2)
-        {
-        $str = "A-18 [P-I $cand_Nofif_part1]";        
-        }
-        else if($data['cat11'] !=2 && $data['cat12']==2)
-        {
-        $str = "A-18 [P-II $cand_Notif]";        
-        }
-
-        }
-        else
-        if($data['Prev_chance']==2)
-        {
-        if($data['cat11']==2 && $data['cat12']==2)
-        {
-
-        $str = "S-17 [P-I $cand_Nofif_part1,P-II $cand_Notif]";    
-        }
-        else if($data['cat11']==2 && $data['cat12'] !=2)
-        {
-        $str = "S-17 [P-I $cand_Nofif_part1]";        
-        }
-        else if($data['cat11'] !=2 && $data['cat12']==2)
-        {
-        $str = "S-17 [P-II $cand_Notif]";        
-        }
-        }
-        else
-        if($data['Prev_chance']==3)
-        {
-        if($data['cat11']==2 && $data['cat12']==2)
-        {
-
-        $str = " A-17 [P-I $cand_Nofif_part1,P-II $cand_Notif]";    
-        }
-        else if($data['cat11']==2 && $data['cat12'] !=2)
-        {
-        $str = "A-17 [P-I $cand_Nofif_part1]";        
-        }
-        else if($data['cat11'] !=2 && $data['cat12']==2)
-        {
-        $str = "A-17 [P-II $cand_Notif]";        
-        }
-        }
-        if($data['Prev_chance']==4)
-        {
-        $str ="";
-        }    
-        }*/
-        //if()
-
-        // 
-
+     
         $pdf->SetXY(0.5,1.7+$Y);
         $pdf->SetFont('Arial','',$FontSize);
         $pdf->Cell( 0.5,0.5,"Name:",0,'L');
@@ -1096,7 +1009,6 @@ class Admission extends CI_Controller {
 
         //--------------------------- 3rd line 
 
-        //$pdf->SetXY(.5,1.75+$Y);
         $pdf->SetFont('Arial','B',$FontSize+15);
         $pdf->TextWithRotation(.45,2.9+$Y, $data['formNo'],90,0); 
 
@@ -1110,10 +1022,9 @@ class Admission extends CI_Controller {
         $pdf->SetXY(0.5, 2.15+$Y);
         $pdf->SetFont('Arial','',$FontSize);
         $pdf->Cell( 0.5,0.5,"SSC Info:",0,'L');
-        //$pdf->SetFont('Arial','B',$FontSize);
+     
         $pdf->SetXY(1.5,2.15+$Y);
         $pdf->Cell(0.5,0.5,$data["matRno"]." ( $MLastSess, ".$data['yearOfPass'].', '.$data['MBrd_Abbr']." )",0,'L');
-
 
         $pdf->SetXY(3.5+$x,1.85+$Y);
         $pdf->SetFont('Arial','',$FontSize);
@@ -1122,7 +1033,6 @@ class Admission extends CI_Controller {
         $pdf->SetFont('Arial','B',$FontSize);
         $pdf->SetXY(4.5+$x,1.85+$Y);
         $pdf->Cell(0.5,0.5,$data["FNIC"],0,'L');
-        // //DebugBreak();
         //--------------------------- BAY FORM NO line 
         $pdf->SetXY(3.5+$x, 1.70+$Y);
         $pdf->SetFont('Arial','',$FontSize);
@@ -1136,14 +1046,7 @@ class Admission extends CI_Controller {
         $pdf->SetFont('Arial','B',$FontSize);
         $pdf->SetXY(4.5+$x,2.0+$Y);
         $pdf->Cell(0.5,0.5,$data["MobNo"],0,'L');
-        //--------------------------- Dob line 
-        /*$pdf->SetXY(0.5,2.15+$Y);
-        $pdf->SetFont('Arial','',$FontSize);
-        $pdf->Cell( 0.5,0.5,"Date Of Birth:",0,'L');
-        $pdf->SetFont('Arial','B',$FontSize);
-        $pdf->SetXY(1.5,2.15+$Y);
-        $pdf->Cell(0.5,0.5,date("d-m-Y", strtotime($data["Dob"])),0,'L');*/
-
+               
         //--------------------------- Gender Nationality Dob
 
         //  DebugBreak();
@@ -1579,7 +1482,7 @@ class Admission extends CI_Controller {
 
         $pdf->SetXY(2.59, 7.09+$Y); 
         $pdf->SetFont('Arial','b',$FontSize);
-        $pdf->Cell( 0.5,0.5,$Updated_AdmFee,0,'L');
+        $pdf->Cell( 0.5,0.5,$data['AdmFine'],0,'L');
 
         $pdf->SetXY(3.2, 7.09+$Y);
         $pdf->SetFont('Arial','',$FontSize);
@@ -2137,7 +2040,7 @@ class Admission extends CI_Controller {
 
         //DebugBreak();
 
-        $picpath = DIRPATH12TH.'\\'.@$data[0]['picpath'];
+       /* $picpath = DIRPATH12TH.'\\'.@$data[0]['picpath'];
         $isexit = is_file($picpath);
         if(!$isexit)
         {
@@ -2147,7 +2050,7 @@ class Admission extends CI_Controller {
         {
             $type = pathinfo($picpath, PATHINFO_EXTENSION);
             $data[0]['picpathImg'] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
-        }                
+        }              */  
 
         $specialcase = $data['0']['Spl_Name'];
         $specialcode = $data['0']['spl_cd'];
@@ -2928,7 +2831,7 @@ class Admission extends CI_Controller {
         );
 
 
-        DebugBreak();
+        //DebugBreak();
 
         $logedIn = $this->Admission_model->NewEnrolment_insert_Fresh_11thOtherBoard($data);
 
