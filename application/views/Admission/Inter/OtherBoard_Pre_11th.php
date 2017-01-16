@@ -57,7 +57,7 @@ header("Pragma: no-cache");
                         </div>
                     </div>
                     <div class="widget-body" >
-                        <form class="form-horizontal no-margin" action="<?php  echo base_url(); ?>Admission/NewEnrolment_insert_Fresh_OtherBoard" method="post" enctype="multipart/form-data" name="myform" id="myform" onsubmit="return checks(this);">
+                        <form class="form-horizontal no-margin" action="<?php  echo base_url(); ?>Admission/NewEnrolment_insert_Fresh_11thOtherBoard" method="post" enctype="multipart/form-data" name="myform" id="myform" onsubmit="return checks(this);">
                             <div class="control-group">
                                 <h4 class="span4"></h4>
                                 <label class="control-label span2" style="width: 411px;margin-left: -199px;">
@@ -144,9 +144,9 @@ header("Pragma: no-cache");
                                     Nationality :
                                 </label>
                                 <div class="controls controls-row">  
-                                    "<label class='radio inline span1'><input type='radio' value='1' id='nationality' checked="checked"  name='nationality'> Pakistani</label>
-                                    <label class='radio inline span2'><input type='radio'  id='nationality1' value='2' name='nationality'>  Non Pakistani</label>" ;
-                                      
+                                    <label class='radio inline span1'><input type='radio' value='1' id='nationality' checked='checked' name='nationality'>Pakistani</label>
+                                    <label class='radio inline span2'><input type='radio'  id='nationality1' value='2' name='nationality'>Non Pakistani</label>
+
                                     <label class="control-label span3" style="margin-left: -100px;" for="gender1">
                                         Gender :
                                     </label> 
@@ -177,7 +177,7 @@ header("Pragma: no-cache");
                             <div class="controls controls-row">  
 
                                 <label class='radio inline span1'><input type='radio' value='1' id='UrbanRural1' checked="checked" name='UrbanRural'>Urban</label>
-                                <label class='radio inline span2'><input type='radio'  id='UrbanRural2' value='2' name='UrbanRural'>  Rural </label>
+                                <label class='radio inline span2'><input type='radio'  id='UrbanRural2' value='2' name='UrbanRural'>Rural</label>
 
                             </div>
                             <div class="control-group" style="margin-top: 50px;">
@@ -195,22 +195,22 @@ header("Pragma: no-cache");
                             </div>
                             <div class="control-group">
                                 <label class="control-label span1" >
-                                    SSC Roll No :
+                                    Roll No :
                                 </label>
                                 <div class="controls controls-row">
-                                    <input class="span3" type="text" readonly="readonly" id="oldrno" style="text-transform: uppercase;" name="oldrno" value="<?php  echo  $data['0']['SSC_RNO']; ?>" required="required" maxlength="60" >
+                                    <input class="span3" type="text" readonly="readonly" id="oldrno" style="text-transform: uppercase;" name="oldrno" value="<?php  echo  $data['0']['RNO']; ?>" required="required" maxlength="60" >
                                     <label class="control-label span2" >
-                                        SSC Year:
+                                        Year:
                                     </label> 
-                                    <input type="text" class="span3" name="oldyear" id = "oldyear" readonly="readonly" value="<?php  echo $data['0']['SSC_Year']; ?>"/> 
+                                    <input type="text" class="span3" name="oldyear" id = "oldyear" readonly="readonly" value="<?php  echo $data['0']['Year']; ?>"/> 
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label span1" >
-                                    Session :
+                                    Session:
                                 </label>
                                 <div class="controls controls-row">
-                                    <input type="text" class="span3" id="oldsess" name="oldsess" readonly="readonly" value="<?php echo $data['0']['SSC_Session'] == 1 ? "Annual" :"Supplementary"; ?>"/> 
+                                    <input type="text" class="span3" id="oldsess" name="oldsess" readonly="readonly" value="<?php echo $data['0']['Session'] == 1 ? "Annual" :"Supplementary"; ?>"/> 
                                     <label class="control-label span2" >
                                         Board:
                                     </label> 
@@ -395,51 +395,19 @@ header("Pragma: no-cache");
                                 <div class="clearfix">   
                                 </div>
                             </div> 
-                        </form>
-                        
-                        <input type="hidden" name="oldSSC_Rno" id="oldSSC_Rno" value="<?php  echo @$data['SSC_RNO'];?>"/>
-                        <input type="hidden" name="oldSSC_Year" id="oldSSC_Year" value="<?php  echo @$data['SSC_Year'];?>"/>
-                        <input type="hidden" name="oldSSC_Session" id="oldSSC_Session" value="<?php  echo @$data['SSC_Session'];?>"/>
-                        <input type="hidden" name="oldSSC_Board" id="oldSSC_Board" value="<?php echo @$data['SSC_Board'];?>"/>
 
+                        </form>
+
+                        <input type="hidden" name="oldHSSC_Rno" id="oldHSSC_Rno" value="<?php  echo @$data[0]['RNO'];?>"/>
+                        <input type="hidden" name="oldSSC_Rno" id="oldSSC_Rno" value="<?php  echo @$data[0]['SSC_RNO'];?>"/>
+                        <input type="hidden" name="Class" id="Class" value="<?php  echo @$data[0]['Class'];?>"/>
+                        <input type="hidden" name="oldSSC_Board" id="oldSSC_Board" value="<?php  echo @$data[0]['Board'];?>"/>
+
+                        <input type="hidden" name="oldHSSC_Year" id="oldHSSC_Year" value="<?php  echo @$data[0]['Year'];?>"/>
 
 
                         <script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
                         <script type="text/javascript">
-                            /*   function ValidateFileUpload() {
-                            var fuData = document.getElementById('inputFile');
-                            var FileUploadPath = fuData.value;
-                            if (FileUploadPath == '') {
-                            alert("Please upload an image");
-                            jQuery('#image_upload_preview').removeAttr('src');
-                            } 
-                            else {
-                            var Extension = FileUploadPath.substring(
-                            FileUploadPath.lastIndexOf('.') + 1).toLowerCase();
-                            if (Extension == "jpeg" || Extension == "jpg") {
-                            if (fuData.files && fuData.files[0]) {
-                            var reader = new FileReader();
-                            reader.onload = function(e) {
-                            $('#image_upload_preview').attr('src', e.target.result);
-                            }
-                            reader.readAsDataURL(fuData.files[0]);
-                            }
-                            } 
-                            else {
-                            $('#inputFile').removeAttr('value');
-                            jQuery('#image_upload_preview').removeAttr('src');
-                            alert("Image only allows file types of JPEG. ");
-                            return false;
-                            }
-                            }
-                            var file_size = $('#inputFile')[0].files[0].size;
-                            if(file_size>20480) {                                    
-                            $('#inputFile').removeAttr('value');
-                            jQuery('#image_upload_preview').removeAttr('src');
-                            alert("File size can be between 20KB"); 
-                            return false;
-                            } 
-                            }*/
 
                             $(document).ready(function(){
                                 $.fancybox("#instruction");
@@ -450,6 +418,18 @@ header("Pragma: no-cache");
                                 Empty_All_Dropdowns();
                                 ClearAllDropDowns();
                             });
+
+                            function ClearDropDownsP1(){
+
+                                $("#sub1").append('<option value="0">NONE</option>');
+                                $("#sub2").append('<option value="0">NONE</option>');
+                                $("#sub3").append('<option value="0">NONE</option>');
+                                $("#sub4").append('<option value="0">NONE</option>');
+                                $("#sub5").append('<option value="0">NONE</option>');
+                                $("#sub6").append('<option value="0">NONE</option>');
+                                $("#sub7").append('<option value="0">NONE</option>');
+                                $("#sub8").append('<option value="0">NONE</option>');
+                            }
 
                             function ClearAllDropDowns() {
 
@@ -560,32 +540,40 @@ header("Pragma: no-cache");
 
                                 Empty_All_Dropdowns();
 
+                                ClearDropDownsP1();
+
                                 $("#sub1").append('<option value="1">ENGLISH</option>');
+
                                 $("#sub1p2").append('<option value="1">ENGLISH</option>');
 
 
                                 $("#sub2").append('<option value="2">URDU</option>');
+
                                 $("#sub2p2").append('<option value="2">URDU</option>');
 
                                 $("#sub3").append('<option value="92">ISLAMIC EDUCATION</option>');
+
                                 $("#sub3p2").append('<option value="91">PAKISTAN STUDIES</option>');
 
 
                                 $.each(huminities_without_practical,function(val,text){
 
                                     $("#sub4").append(new Option(text,val));
+
                                     $("#sub4p2").append(new Option(text,val));
                                 });
 
                                 $.each(huminities_without_practical,function(val,text){
 
                                     $("#sub5").append(new Option(text,val));
+
                                     $("#sub5p2").append(new Option(text,val));
                                 });
 
                                 $.each(huminities_without_practical,function(val,text){
 
                                     $("#sub6").append(new Option(text,val));
+
                                     $("#sub6p2").append(new Option(text,val));
                                 });
 
@@ -595,6 +583,8 @@ header("Pragma: no-cache");
 
                             function LoadCommerceSubjects(){
                                 Empty_All_Dropdowns();
+
+                                ClearDropDownsP1();
 
                                 $('#sub7').show();$('#sub7p2').show();
                                 $('#sub8').hide(); $('#sub8p2').hide();
@@ -643,25 +633,18 @@ header("Pragma: no-cache");
                                 }     
 
                                 else if(sel_group == 3){
+
                                     LoadHumanitiesSubjects();
                                 }
 
                                 else if (sel_group == 5){
+
                                     LoadCommerceSubjects();
                                 }
                             });
 
-                            function CancelAlert(){
-                                var msg = "Are You Sure You want to Cancel this Form ?"
-                                alertify.confirm(msg, function (e) {
-                                    if (e) {
-                                        window.location.href ='<?php echo base_url(); ?>index.php/Admission/index';
-                                    } else {
-                                    }
-                                });
-                            }
-
                             $("#sub4").change(function(){
+
                                 var id4 =$("#sub4").val();
                                 var id4p2 =$("#sub4p2").val();
                                 var id5 =$("#sub5").val();
@@ -705,72 +688,58 @@ header("Pragma: no-cache");
                                 }
 
                             });
+
                             $("#sub4p2").change(function(){
+
                                 var id4 =$("#sub4").val();
                                 var id4p2 =$("#sub4p2").val();
                                 var id5 =$("#sub5").val();
                                 var id5p2 =$("#sub5p2").val();
                                 var id6 =$("#sub6").val();
                                 var id6p2 =$("#sub6p2").val();
-                                $("#sub4").val(id4p2);
-                                if((id4p2 != 0) && (id5p2 == id4p2)){
-                                    alertify.error('Please Choose Different Subject');
-                                    $("#sub4").val('0');
+
+
+                                if(id4p2 == id5p2 || id4p2 == id6p2){
+                                    alertify.error('Please Choose Different Subject. You Are NOT Allowed to Choose Same Subject');
                                     $("#sub4p2").val('0'); 
                                 }
-                                else if((id4p2 != 0) && (id6p2 == id4p2)){
-                                    alertify.error('Please Choose Different Subject');
-                                    $("#sub4").val('0');
-                                    $("#sub4p2").val('0'); 
-                                }
-                                // Double history and language //
+
+                                // Double history and language
                                 else if( (id5p2 == '55' || id5p2 == '56' || id5p2 == '57' || id5p2 == '58') && (id4p2 == '55' || id4p2 == '56' || id4p2 == '57' || id4p2 == '58') ){
                                     alertify.error('Please Choose Different Subject. You Are NOT Allowed to Choose the Double History');
-                                    $("#sub4").val('0');
+
                                     $("#sub4p2").val('0'); 
                                 }
                                 else if( (id6p2 == '55' || id6p2 == '56' || id6p2 == '57' || id6p2 == '58') && (id4p2 == '55' || id4p2 == '56' || id4p2 == '57' || id4p2 == '58') ){
                                     alertify.error('Please Choose Different Subject. You Are NOT Allowed to Choose the Double History');
-                                    $("#sub4").val('0');
+
                                     $("#sub4p2").val('0'); 
                                 }
 
                                 else if( (id4p2 == '24' || id4p2 == '27' || id4p2 == '32' || id4p2 == '34' || id4p2 == '37') && (id4p2 == '24' || id4p2 == '27' || id4p2 == '32' || id4p2 == '34' || id4p2 == '37') ){
                                     alertify.error('Please Choose Different Subject. You Are NOT Allowed to Choose the Double Language');
-                                    $("#sub4").val('0');
+
                                     $("#sub4p2").val('0'); 
                                 }
                                 else if( (id4p2 == '24' || id4p2 == '27' || id4p2 == '32' || id4p2 == '34' || id4p2 == '37') && (id4p2 == '24' || id4p2 == '27' || id4p2 == '32' || id4p2 == '34' || id4p2 == '37') ){
                                     alertify.error('Please Choose Different Subject. You Are NOT Allowed to Choose the Double Language');
-                                    $("#sub4").val('0');
+
                                     $("#sub4p2").val('0'); 
                                 }
                             });
-                            // sub 5 change event 
+
                             $("#sub5").change(function(){
+
+                                //debugger;
+
                                 var id4 =$("#sub4").val();
                                 var id4p2 =$("#sub4p2").val();
                                 var id5 =$("#sub5").val();
-                                var id5p2 =$("#sub5p2").val();
+                                var id5p2 =$("#sub5p2").val(id5);
                                 var id6 =$("#sub6").val();
                                 var id6p2 =$("#sub6p2").val();
                                 var grp_cd = $('#std_group').val();
-                                if(grp_cd == 5)
-                                {
-                                    if(id5 == 0)
-                                    {
-                                        $("#sub5p2").val(0);
-                                    }
-                                    else
-                                    {
-                                        $("#sub5p2").val(94);   
-                                    }
 
-                                }
-                                else
-                                {
-                                    $("#sub5p2").val(id5); 
-                                }
 
                                 if((id5 !=0) && (id4 == id5)){
                                     alertify.error('Please Choose Different Subject');
@@ -809,68 +778,44 @@ header("Pragma: no-cache");
                                 }
 
                             });
+
                             $("#sub5p2").change(function(){
+
                                 var id4 =$("#sub4").val();
                                 var id4p2 =$("#sub4p2").val();
-                                var id5 =$("#sub5").val();
+                                var id5 =$("#sub5").val(id5p2);
                                 var id5p2 =$("#sub5p2").val();
                                 var id6 =$("#sub6").val();
                                 var id6p2 =$("#sub6p2").val();
-                                $("#sub5").val(id5p2);
                                 var grp_cd = $('#std_group').val();
-                                if(grp_cd == 5)
-                                {
-                                    if(id5p2 == 0)
-                                    {
-                                        $("#sub5").val(0);
-                                    }
-                                    else
-                                    {
-                                        $("#sub5").val(71);   
-                                    }
 
-                                }
-                                else
-                                {
-                                    $("#sub5").val(id5p2);
-                                }
-                                if((id5p2 !=0) && (id4p2 == id5p2)){
-                                    alertify.error('Please Choose Different Subject');
-                                    $("#sub5").val('0');
+                                if(id5p2 == id4p2 || id5p2 == id6p2){
+                                    alertify.error('Please Choose Different Subject. You Are NOT Allowed to Choose Same Subject');
                                     $("#sub5p2").val('0');
                                 }
-                                else if((id5p2 !=0) && (id6p2 == id5p2)){
-                                    alertify.error('Please Choose Different Subject');
-                                    $("#sub5").val('0');
-                                    $("#sub5p2").val('0');
-                                }
-                                // Double language //
+                                // Double language 
                                 else if( (id4p2 == '24' || id4p2 == '27' || id4p2 == '32' || id4p2 == '34' || id4p2 == '37') && (id5p2 == '24' || id5p2 == '27' || id5p2 == '32' || id5p2 == '34' || id5p2 == '37') ){
-                                    alertify.error('Please Choose Different Subject');
-                                    $("#sub5").val('0');
+                                    alertify.error('Please Choose Different Subject. You Are NOT Allowed to Choose the Double Language');
                                     $("#sub5p2").val('0');
                                 }
                                 else if( (id6p2 == '24' || id6p2 == '27' || id6p2 == '32' || id6p2 == '34' || id6p2 == '37') && (id5p2 == '24' || id5p2 == '27' || id5p2 == '32' || id5p2 == '34' || id5p2 == '37') ){
-                                    alertify.error('Please Choose Different Subject');
-                                    $("#sub5").val('0');
+                                    alertify.error('Please Choose Different Subject. You Are NOT Allowed to Choose the Double Language');
                                     $("#sub5p2").val('0');
                                 }
 
-                                // Double History //
+                                // Double History 
                                 else if( (id4p2 == '55' || id4p2 == '56' || id4p2 == '57' || id4p2 == '58') && (id5p2 == '55' || id5p2 == '56' || id5p2 == '57' || id5p2 == '58') ){
                                     alertify.error('Please Choose Different Subject. You Are NOT Allowed to Choose the Double History');
-                                    $("#sub5").val('0');
                                     $("#sub5p2").val('0');
                                 }
 
                                 else if( (id6p2 == '55' || id6p2 == '56' || id6p2 == '57' || id6p2 == '58')&& (id5p2 == '55' || id5p2 == '56' || id5p2 == '57' || id5p2 == '58') ){
                                     alertify.error('Please Choose Different Subject. You Are NOT Allowed to Choose the Double Language');
-                                    $("#sub5").val('0');
                                     $("#sub5p2").val('0');
                                 }
 
                             });
-                            // sub 6 change event
+
                             $("#sub6").change(function(){
 
                                 var id4 =$("#sub4").val();
@@ -878,25 +823,8 @@ header("Pragma: no-cache");
                                 var id5 =$("#sub5").val();
                                 var id5p2 =$("#sub5p2").val();
                                 var id6 =$("#sub6").val();
-                                var id6p2 =$("#sub6p2").val();
+                                var id6p2 =$("#sub6p2").val(id6);
                                 var grp_cd = $('#std_group').val();
-                                if(grp_cd == 5)
-                                {
-                                    if(id6 == 0)
-                                    {
-                                        $("#sub6p2").val(0);
-                                    }
-                                    else
-                                    {
-                                        $("#sub6p2").val(97);   
-                                    }
-
-                                }
-                                else
-                                {
-                                    $("#sub6p2").val(id6);   
-                                }
-
 
                                 if((id6 !=0) && (id4 == id6)){
                                     alertify.error('Please Choose Different Subject');
@@ -936,74 +864,57 @@ header("Pragma: no-cache");
                                 }
 
                             });
+
                             $("#sub6p2").change(function(){
 
                                 var id4 =$("#sub4").val();
                                 var id4p2 =$("#sub4p2").val();
                                 var id5 =$("#sub5").val();
                                 var id5p2 =$("#sub5p2").val();
-                                var id6 =$("#sub6").val();
+                                var id6 =$("#sub6").val(id6p2);
                                 var id6p2 =$("#sub6p2").val();
-
                                 var grp_cd = $('#std_group').val();
-                                if(grp_cd == 5)
-                                {
-                                    if(id6p2 == 0)
-                                    {
-                                        $("#sub6").val(0);
-                                    }
-                                    else
-                                    {
-                                        $("#sub6").val(80);
-                                    }
 
-                                }
-                                else
-                                {
-                                    $("#sub6").val(id6p2);  
-                                }
-                                if((id6p2 !=0) && (id4p2 == id6p2)){
-                                    alertify.error('Please Choose Different Subject');
-                                    $("#sub6").val('0');
-                                    $("#sub6p2").val('0');
-                                }
-                                else if((id6p2 !=0) && (id5p2 == id6p2)){
-                                    alertify.error('Please Choose Different Subject');
-                                    $("#sub6").val('0');
+                                if(id6p2 == id4p2 || id6p2 == id5p2){
+                                    alertify.error('Please Choose Different Subject. You Are NOT Allowed to Choose Same Subject');
                                     $("#sub6p2").val('0');
                                 }
 
-                                // Double language //
+                                // Double language 
                                 else if( (id4p2 == '24' || id4p2 == '27' || id4p2 == '32' || id4p2 == '34' || id4p2 == '37') && (id6p2 == '24' || id6p2 == '27' || id6p2 == '32' || id6p2 == '34' || id6p2 == '37') ){
                                     alertify.error('Please Choose Different Subject. You Are NOT Allowed to Choose the Double Language');
-                                    $("#sub6").val('0');
                                     $("#sub6p2").val('0');
                                 }
 
                                 else if( (id5p2 == '24' || id5p2 == '27' || id5p2 == '32' || id5p2 == '34' || id5p2 == '37') && (id6p2 == '24' || id6p2 == '27' || id6p2 == '32' || id6p2 == '34' || id6p2 == '37') ){
                                     alertify.error('Please Choose Different Subject. You Are NOT Allowed to Choose the Double Language');
-                                    $("#sub6").val('0');
                                     $("#sub6p2").val('0');
                                 }
 
                                 // Double History //
                                 else if( (id4p2 == '55' || id4p2 == '56' || id4p2 == '57' || id4p2 == '58') && (id6p2 == '55' || id6p2 == '56' || id6p2 == '57' || id6p2 == '58') ){
                                     alertify.error('Please Choose Different Subject. You Are NOT Allowed to Choose the Double History');
-                                    $("#sub6").val('0');
                                     $("#sub6p2").val('0');
                                 }
 
                                 else if( (id5p2 == '55' || id5p2 == '56' || id5p2 == '57' || id5p2 == '58') && (id6p2 == '55' || id6p2 == '56' || id6p2 == '57' || id6p2 == '58') ){
                                     alertify.error('Please Choose Different Subject. You Are NOT Allowed to Choose the Double History');
-                                    $("#sub6").val('0');
                                     $("#sub6p2").val('0');
-                                } 
-
+                                }
                             });
 
-         function checks()
-                            {
+                            function CancelAlert(){
+                                var msg = "Are You Sure You want to Cancel this Form ?"
+                                alertify.confirm(msg, function (e) {
+                                    if (e) {
+                                        window.location.href ='<?php echo base_url(); ?>index.php/Admission/index';
+                                    } else {
+                                    }
+                                });
+                            }
 
+                            function checks()
+                            {
 
                                 var status  =  check_NewEnrol_validation();
                                 if(status == 0)
@@ -1012,16 +923,12 @@ header("Pragma: no-cache");
                                 }
                                 else
                                 {
-
-                                    //debugger;
-
                                     $.ajax({
 
                                         type: "POST",
                                         url: "<?php  echo site_url('Admission/frmvalidation_Fresh'); ?>",
                                         data: $("#myform").serialize() ,
                                         datatype : 'html',
-
                                         success: function(data)
                                         {
                                             var obj = JSON.parse (data);
@@ -1029,19 +936,12 @@ header("Pragma: no-cache");
                                             {
                                                 $.ajax({
                                                     type: "POST",
-                                                    url: "<?php echo base_url(); ?>" + "Admission/NewEnrolment_insert_Fresh_OtherBoard/",
+                                                    url: "<?php echo base_url(); ?>" + "Admission/NewEnrolment_insert_Fresh_11thOtherBoard/",
                                                     data: $("#myform").serialize() ,
                                                     datatype : 'html',
-
                                                     beforeSend: function() {  $('.mPageloader').show(); },
                                                     complete: function() { $('.mPageloader').hide();},
-
-
                                                     success: function(data) {
-
-                                                        console.log(data);
-                                                        
-
                                                         var obj = JSON.parse(data) ;
                                                         if(obj.error ==  1)
                                                         {
@@ -1049,29 +949,33 @@ header("Pragma: no-cache");
                                                         }
                                                         else
                                                         {
+                                                            $('.mPageloader').hide();
                                                             alertify.error(obj.error);
                                                             return false; 
                                                         }
+
                                                     },
                                                     error: function(request, status, error){
-
+                                                        $('.mPageloader').hide();
                                                         alertify.error(request.responseText);
                                                     }
                                                 });
+
                                                 return false
                                             }
+
                                             else
                                             {
+                                                $('.mPageloader').hide();
                                                 alertify.error(obj.excep);
                                                 return false;     
                                             }
                                         }
                                     });
-                                    return false;   
+
+                                    return false;     
                                 } 
                             }
-
-                           
 
                         </script>
 

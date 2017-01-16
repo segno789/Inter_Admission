@@ -2214,6 +2214,7 @@ header("Pragma: no-cache");
                                     if(rel == 1 && (sel_group != grp_cd)){
                                         $('#sub3').empty();
                                         $("#sub3").append('<option value="92">ISLAMIC EDUCATION</option>'); 
+                                        
                                     }
                                 });                
 

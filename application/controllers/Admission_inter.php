@@ -3721,7 +3721,7 @@ class Admission_inter extends CI_Controller {
             //__Address
             $pdf->SetXY(0.5,4.570+$Y);
             $pdf->SetFont('Arial','',8);
-            $pdf->Cell( 0.5,0.5,"Address:",0,'L');
+            $pdf->Cell( 0.5,0.5,"Address(Urdu):",0,'L');
             $pdf->SetFont('Arial','b',8);
             $pdf->SetXY(1.15,4.57+$Y);
             $pdf->Cell(0.5,0.5,'__________________________________________________________________________________________________',0,'L');     
