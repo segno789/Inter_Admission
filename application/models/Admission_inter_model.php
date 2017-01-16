@@ -182,7 +182,7 @@ class Admission_inter_model extends CI_Model
         $oldsess =  $data['sess'];
 
         //DebugBreak();
-        
+
         $CollGrade = strtoupper($data['CollGrade']);
 
         $schm =  $data['schm'];
@@ -433,6 +433,22 @@ class Admission_inter_model extends CI_Model
             return  false;
         }
     }
+
+    public function DistName($dist_cd){
+
+        $query = $this->db->query("select admission_online.dbo.DistName($dist_cd) as DistName");
+        $rowcount = $query->num_rows();
+         if($rowcount > 0)
+        {
+            return $query->result_array();
+        }
+        else
+        {
+            return  false;
+        }
+    }
+
+
     public function getrulefee(){
         $date =  date('Y-m-d') ;
         //DebugBreak();
@@ -464,12 +480,7 @@ class Admission_inter_model extends CI_Model
             return  false;
         }
     }
-    /* public function getreulefee($ruleID)
-    {
-    $ruleID = 1;
-    $q2         = $this->db->get_where('Registration..RuleFee_Reg_Nineth',array('Rule_Fee_ID'=>$ruleID));
-    $resultarr = $q2->result_array();
-    }*/
+    
     public function Batch_Insertion($data)
     {
         //DebugBreak();
