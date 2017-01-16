@@ -192,7 +192,8 @@ class Admission_inter extends CI_Controller {
         $displayfeetitle[] =  'Total Late Admission Fee';   
 
         $feestructure[]    =  $result[0]['TotalCertificateFee']; 
-        $displayfeetitle[] =  'Total Certificate Fee';   
+        $displayfeetitle[] =  'Total Certificate Fee';
+
 
         $turn=1;     
         $pdf=new PDF_Rotate("P","in","A4");
@@ -206,14 +207,21 @@ class Admission_inter extends CI_Controller {
 
 
             $pdf->SetTitle("Challan Form | Admission inter ".Year." ".$sessionpdf." Batch Form Fee");
+
         $pdf->SetMargins(0.5,0.5,0.5);
         $pdf->AddPage();
+
         $generatingpdf=false;
         $challanCopy=array(1=>"Depositor Copy",  2=>"Admission Branch Copy",3=>"Bank Copy", 4=>"Board Copy",);
-        $challanMSG=array(1=>"(May be deposited in any HBL Branch)",2=>"(To be sent to the Admission Branch Via BISE One Window)", 3=>"(To be retained with HBL)", 4=>"(To be sent to the Board via HBL Branch aloongwith scroll)"  );
+
+        $challanMSG=array(1=>"(May be deposited only in Authorized HBL Branch)",2=>"(To be sent to the Admission Branch Via BISE One Window)", 3=>"(To be retained with HBL)", 4=>"(Along with scroll)"  );
         $challanNo = $result[0]['Challan_No']; 
 
-        // DebugBreak();
+        //DebugBreak();
+
+        $DistName =  $this->Admission_inter_model->DistName($dist_cd = $user['dist']);
+        $DistName = $DistName[0]['DistName'];
+
         if(date('Y-m-d',strtotime(SingleDateFee))>=date('Y-m-d'))
         {
             $rule_fee   =  $this->Admission_inter_model->getrulefee(); 
@@ -270,7 +278,7 @@ class Admission_inter extends CI_Controller {
             $pdf->Cell(0.5, $y, $challanCopy[$j], 0.25, "L");
             $w = $pdf->GetStringWidth($challanCopy[$j]);
             $pdf->SetXY($w+1.2,$y+$dy);
-            $pdf->SetFont('Arial','I',7);
+            $pdf->SetFont('Arial','B',7);
             $pdf->Cell(0, $y, $challanMSG[$j], 0.25, "L");
 
             $pdf->SetXY($w+1.4,$y+$dy+0.15);
@@ -302,7 +310,7 @@ class Admission_inter extends CI_Controller {
             $pdf->SetFont('Arial','B',10);
             $pdf->Cell( 0.5,0.3,"Bank Challan No:".$challanNo."           Batch No.".$result[0]['Batch_ID'],0,2,'L');
             $pdf->SetFont('Arial','U',9);
-            $pdf->Cell(0.5,0.25, "Particulars Of Depositor",0,2,'L');
+            $pdf->Cell(0.5,0.25, "Particulars of Depositor",0,2,'L');
             $pdf->SetX(4.0);
             $pdf->SetFont('Arial','B',8);
 
@@ -317,6 +325,8 @@ class Admission_inter extends CI_Controller {
             $x = 0.55;
             $y += 0.2;
 
+
+
             //------------- Fee Statement
 
             $ctid=1;
@@ -329,11 +339,12 @@ class Admission_inter extends CI_Controller {
                 $pdf->SetFont('Arial','',9);
                 $pdf->SetXY(0.5,$y+$dy);
                 $pdf->Cell( 0.5,0.5,$displayfeetitle[$k],0,'L');
+
                 $pdf->SetFont('Arial','B',10);
                 $pdf->SetXY(3,$y+$dy);
                 $pdf->Cell(0.8,0.5,$feestructure[$k],0,'C');
                 $y += 0.18;
-                $corcnt = $k;
+                $corcnt = $k;                    
             }
 
             //------------- Total Amount
@@ -369,6 +380,16 @@ class Admission_inter extends CI_Controller {
             $pdf->SetXY(3,$y+$dy);
             $pdf->Cell(0.8,0.5,$result[0]['Amount'],0,'C');
 
+            $pdf->SetFont('Arial','',8);
+            $pdf->SetXY($y+2.55,$dy+1.3);            
+            $pdf->Cell( 0.1,0.1,"District: ",0,'L');
+
+            $pdf->SetFont('Arial','BUI',7);
+            $pdf->SetXY($y+3.1,$dy+1.3);            
+            $pdf->Cell( 0.1,0.1,$DistName,0,'L');
+
+            $pdf->Image(base_url().'assets/img/12.jpg' ,7.5,1.18-$y+$dy, 0.40,0.4, "JPG");   
+
             //------------- Signature
             $y += 0.2;
             $pdf->SetFont('Arial','',10);
@@ -379,9 +400,10 @@ class Admission_inter extends CI_Controller {
 
             if ($turn>1){
                 $y += 0.4;
-                $pdf->Image( base_url().'assets/img/cut_line.png' ,0.3,$y+$dy, 7.5,0.15, "PNG");   
+                $pdf->Image( base_url().'assets/img/cut_line.png' ,0.3,$y+$dy, 7.5,0.15, "PNG");       
             }            
-        }  
+        } 
+
         if ($generatingpdf==true)
         {
             $pdf->Output('challanform.pdf','I');
@@ -541,8 +563,8 @@ class Admission_inter extends CI_Controller {
 
         $fontSize = 10; 
         $marge    = .95;   // between barcode and hri in pixel
-        $bx        = 175.6;  // barcode center
-        $by        = 35.95;  // barcode center
+        $bx        = 175;  // barcode center
+        $by        = 30;  // barcode center
         $height   = 5.7;   // barcode height in 1D ; module size in 2D
         $width    = .26;  // barcode height in 1D ; not use in 2D
         $angle    = 0;   // rotation in degrees
@@ -558,7 +580,7 @@ class Admission_inter extends CI_Controller {
 
         $result[0] = $result['data'][0];
 
-        $pdf->Image("assets/img/forwarding_exam_branch.png",5,6, 200,280, "PNG");
+        $pdf->Image("assets/img/forwarding_exam_branch.jpg",5,6, 200,280, "JPG");
 
         $bardata = Barcode::fpdf($pdf, $black, $bx, $by, $angle, $type, array('code'=>$Barcode), $width, $height);
 
@@ -577,8 +599,7 @@ class Admission_inter extends CI_Controller {
         else if($data['sess'] == 2)
         {
             $pdf->Image("assets/img/Supply.jpg",96,39, 9,8, "JPG");
-        }
-
+        }        
 
         $pdf->SetFont('Arial','B',11.5);
         $pdf->SetXY(87, 44);
@@ -586,42 +607,58 @@ class Admission_inter extends CI_Controller {
 
 
         $Y = 75;
-        $font = 12;
+        $font = 9;
         $x = 25; 
         for($i =0 ; $i<7 ; $i++)
         {
 
             $pdf->SetFont('Arial','B',$font);
-            $pdf->SetXY($x-2, $Y-7.5);
+            $pdf->SetXY($x+1, $Y-7.5);
 
             if($i == 6)
             {
-                $pdf->SetXY($x-10, $Y-7.5);
                 $pdf->Cell(0,0,$result[0]['Total_sci'],0,0,'L',0);
+                $pdf->SetXY($x-8, $Y-7.5);
+                $pdf->Cell(0,0,$result[0]['Total_sci_Re'],0,0,'L',0);
             }
             else if($i == 5)
             {
+                $pdf->SetXY($x+2, $Y-7.5);
                 $pdf->Cell(0,0,$result[0]['Total_Arts'],0,0,'L',0);
+                $pdf->SetXY($x-10, $Y-7.5);
+                $pdf->Cell(0,0,$result[0]['Total_Arts_Re'],0,0,'L',0);
             }
             else if($i == 4)
-            {      $pdf->SetXY($x-10, $Y-7.5);
+            {   
+                $pdf->SetXY($x-3.5, $Y-7.5);    
                 $pdf->Cell(0,0,$result[0]['Total_ArtsPr'],0,0,'L',0);
+                $pdf->SetXY($x-15, $Y-7.5);
+                $pdf->Cell(0,0,$result[0]['Total_ArtsPr_Re'],0,0,'L',0);
             }
             else if($i == 3)
-            {        $pdf->SetXY($x-10, $Y-7.5);
+            {   
+                $pdf->SetXY($x-3, $Y-7.5);  
                 $pdf->Cell(0,0,$result[0]['Total_ReApSc'],0,0,'L',0);
+                $pdf->SetXY($x-15, $Y-7.5);
+                $pdf->Cell(0,0,$result[0]['Total_ReApSc_Re'],0,0,'L',0);
             }
             else if($i == 2)
-            {           $pdf->SetXY($x-5, $Y-7.5);
+            {     
+                $pdf->SetXY($x-2, $Y-7.5);
                 $pdf->Cell(0,0,$result[0]['Total_ReApArts'],0,0,'L',0);
+                $pdf->SetXY($x-15, $Y-7.5);
+                $pdf->Cell(0,0,$result[0]['Total_ReApArts_Re'],0,0,'L',0);
             }
             else if($i == 1)
             {
                 $pdf->Cell(0,0,$result[0]['Total_ReApArtsPr'],0,0,'L',0);
+                $pdf->SetXY($x-15, $Y-7.5);
+                $pdf->Cell(0,0,$result[0]['Total_ReApArtsPr_Re'],0,0,'L',0);
+
             }
             else if($i == 0)
             {
-                $pdf->SetFont('Arial','B',$font-3);
+                $pdf->SetFont('Arial','B',$font);
                 $pdf->SetXY($x-10, $Y-6.5);
                 $pdf->Cell(0,0,$result[0]['Total_Fee'].'/-',0,0,'L',0);
             }
@@ -650,63 +687,78 @@ class Admission_inter extends CI_Controller {
 
         // DebugBreak();
         $pdf->SetFont('Arial','B',$font);
-        $pdf->SetXY($x-30, $Y+163);
+        $pdf->SetXY($x-30, $Y+168);
         $pdf->Cell(0,0,$user['Inst_Id'],0,0,'L',0);
         $font = 9;
         $pdf->SetFont('Arial','B',$font);
-        $pdf->SetXY($x-68, $Y+170);
+        $pdf->SetXY($x-68, $Y+180);
         $pdf->MultiCell(80,2.9,$user['inst_Name'],0,"L");
         $font = 12;
         $pdf->SetFont('Arial','B',$font);
-        $pdf->SetXY($x-40, $Y+190);
+        $pdf->SetXY($x-40, $Y+193.5);
         $pdf->Cell(0,0,$user['phone'],0,0,'L',0);
 
         $pdf->SetFont('Arial','B',$font);
-        $pdf->SetXY($x-40, $Y+199);
-        $pdf->Cell(0,0,$user['cell'],0,0,'L',0);
-        //Matric Branch Copy
+        $pdf->SetXY($x-40, $Y+202);
+        $pdf->Cell(0,0,$user['cell'],0,0,'L',0);    
 
-        $Y = 68;
-        $font = 12;
+        $Y = 75;
+        $font = 9;
         $x = 25; 
+
         $pdf->AddPage('P',"A4");
-        $pdf->Image("assets/img/forwarding_fin_p2.png",5,6, 200,280, "PNG");
+        $pdf->Image("assets/img/forwarding_fin_p2.jpg",5,6, 200,280, "JPG");
+
         for($i =0 ; $i<7 ; $i++)
         {
+
             $pdf->SetFont('Arial','B',$font);
-            $pdf->SetXY($x-1.5, $Y-2);
+            $pdf->SetXY($x+2, $Y-7.5);
+
             if($i == 6)
             {
-                $pdf->SetXY($x-8, $Y-2);
                 $pdf->Cell(0,0,$result[0]['Total_sci'],0,0,'L',0);
+                $pdf->SetXY($x-7, $Y-7.5);
+                $pdf->Cell(0,0,$result[0]['Total_sci_Re'],0,0,'L',0);
             }
             else if($i == 5)
             {
                 $pdf->Cell(0,0,$result[0]['Total_Arts'],0,0,'L',0);
+                $pdf->SetXY($x-10, $Y-7.5);
+                $pdf->Cell(0,0,$result[0]['Total_Arts_Re'],0,0,'L',0);
             }
             else if($i == 4)
-            {
+            {     
+                $pdf->SetXY($x-1, $Y-7.5);
                 $pdf->Cell(0,0,$result[0]['Total_ArtsPr'],0,0,'L',0);
+                $pdf->SetXY($x-15, $Y-7.5);
+                $pdf->Cell(0,0,$result[0]['Total_ArtsPr_Re'],0,0,'L',0);
             }
             else if($i == 3)
-            {
-
+            {     
+                $pdf->SetXY($x-1, $Y-7.5);
                 $pdf->Cell(0,0,$result[0]['Total_ReApSc'],0,0,'L',0);
+                $pdf->SetXY($x-15, $Y-7.5);
+                $pdf->Cell(0,0,$result[0]['Total_ReApSc_Re'],0,0,'L',0);
             }
             else if($i == 2)
-            {
-
+            {   
+                $pdf->SetXY($x-1, $Y-7.5);  
                 $pdf->Cell(0,0,$result[0]['Total_ReApArts'],0,0,'L',0);
+                $pdf->SetXY($x-15, $Y-7.5);
+                $pdf->Cell(0,0,$result[0]['Total_ReApArts_Re'],0,0,'L',0);
             }
             else if($i == 1)
             {
-
                 $pdf->Cell(0,0,$result[0]['Total_ReApArtsPr'],0,0,'L',0);
+                $pdf->SetXY($x-15, $Y-7.5);
+                $pdf->Cell(0,0,$result[0]['Total_ReApArtsPr_Re'],0,0,'L',0);
+
             }
             else if($i == 0)
             {
-                $pdf->SetFont('Arial','B',$font-3);
-                $pdf->SetXY($x-12, $Y-2);
+                $pdf->SetFont('Arial','B',$font);
+                $pdf->SetXY($x-10, $Y-6.5);
                 $pdf->Cell(0,0,$result[0]['Total_Fee'].'/-',0,0,'L',0);
             }
             if($i==1)
@@ -715,33 +767,31 @@ class Admission_inter extends CI_Controller {
             }
             else if($i<6)
             {
-                if($i == 3)
-                {
-                    $x= $x+24; 
-                }
+                $x= $x+22; 
 
-                else
+                if($i==4)
                 {
-                    $x= $x+20; 
+                    $x= $x-5; 
                 }
-
             }
         }
+
         $pdf->SetFont('Arial','B',$font);
-        $pdf->SetXY($x-125, $Y+43);
+        $pdf->SetXY($x-125, $Y+38);
         $pdf->Cell(0,0,$result[0]['Total_Fee'].'/-',0,0,'L',0);
 
         $pdf->SetFont('Arial','B',$font);
-        $pdf->SetXY($x-65, $Y+42);
+        $pdf->SetXY($x-68, $Y+38);
         $pdf->Cell(0,0,$result[0]['Total_SpeCandidate'],0,0,'L',0);
 
         $pdf->SetFont('Arial','B',$font);
-        $pdf->SetXY($x-30, $Y+175);
+        $pdf->SetXY($x-30, $Y+168);
         $pdf->Cell(0,0,$user['Inst_Id'],0,0,'L',0);
 
         $font = 9;
         $pdf->SetFont('Arial','B',$font);
-        $pdf->SetXY($x-68, $Y+179);
+        $pdf->SetXY($x-75, $Y+180);
+
         $pdf->MultiCell(80,2.9,$user['inst_Name'],0,"L");
 
         $font = 12;
@@ -753,7 +803,7 @@ class Admission_inter extends CI_Controller {
         $pdf->SetXY($x-40, $Y+208);
         $pdf->Cell(0,0,$user['cell'],0,0,'L',0);
 
-        $bardata = Barcode::fpdf($pdf, $black, $bx+2, $by, $angle, $type, array('code'=>$Barcode), $width, $height);
+        $bardata = Barcode::fpdf($pdf, $black, $bx, $by, $angle, $type, array('code'=>$Barcode), $width, $height);
 
         $len = $pdf->GetStringWidth($bardata['hri']);
         Barcode::rotate(-$len / 2, ($bardata['height'] / 2) + $fontSize + $marge, $angle, $xt, $yt);
@@ -763,7 +813,7 @@ class Admission_inter extends CI_Controller {
         $pdf->Cell(0,0,'Printing Date: '. date('d-m-Y H:i:s a'),0,0,'L',0);
 
         $pdf->SetFont('Arial','B',11.5);
-        $pdf->SetXY(85.5, 42);
+        $pdf->SetXY(85.5, 45);
         $pdf->Cell(0,0,$data['iyear'],0,0,'L',0);
 
         if($data['sess'] ==  1)
@@ -774,7 +824,7 @@ class Admission_inter extends CI_Controller {
         else if($data['sess'] == 2)
         {
             $pdf->Image("assets/img/Supply.jpg",95,37, 10,8, "JPG");
-        }
+        }       
 
         $pdf->Output('financeReoprt.pdf', 'I'); 
     }
@@ -1010,7 +1060,7 @@ class Admission_inter extends CI_Controller {
 
         );                  
 
-        
+
         $this->frmvalidation('NewEnrolment_EditForm_inter',$data,0);
 
         $data['isupdate']=1;

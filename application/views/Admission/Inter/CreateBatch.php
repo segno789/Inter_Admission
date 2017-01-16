@@ -174,10 +174,7 @@
 
                                 }
                             } 
-                            /* <option value='1'>SCIENCE GROUP WITH BIOLOGY</option>
-                            <option value='7'>SCIENCE GROUP WITH COMPUTER SCIENCE</option>
-                            <option value='2'>HUMANTIES</option>
-                            <option value='5'>DEAF AND DUMB</option>*/
+
                             echo "</select>
                             </div>
                             </div>
