@@ -548,6 +548,7 @@ class Admission_11th_reg extends CI_Controller {
         $userinfo = $Logged_In_Array['logged_in'];
         $userinfo['isselected'] = 14;
         $Inst_Id = $userinfo['Inst_Id'];
+        $zone = $userinfo['zone'];
         $this->commonheader($userinfo);
         if (!isset($Inst_Id))
         {   $this->load->view('login/login.php');
@@ -558,6 +559,7 @@ class Admission_11th_reg extends CI_Controller {
 
         $seltedOption = @$_POST['isformwise']; // if it is one then submit of selected forms, if it is 2 then submit group wise, if it is 3 then it is cancel selected admissions.
         $_POST['Inst_Id'] = $Inst_Id;
+        $_POST['zone_cd'] = $zone;
        // $isset = $this->Admission_11th_reg_model->iszoneset($Inst_Id);
         //$_POST['zone_cd'] = $isset[0]['zone_cd'];
         $logedIn = $this->Admission_11th_reg_model->Update_NewEnorlement($_POST);

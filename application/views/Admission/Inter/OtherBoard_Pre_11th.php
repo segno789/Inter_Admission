@@ -57,7 +57,7 @@ header("Pragma: no-cache");
                         </div>
                     </div>
                     <div class="widget-body" >
-                        <form class="form-horizontal no-margin" action="<?php  echo base_url(); ?>Admission/NewEnrolment_insert_Fresh_11thOtherBoard" method="post" enctype="multipart/form-data" name="myform" id="myform" onsubmit="return checks(this);">
+                        <form class="form-horizontal no-margin" action="<?php  echo base_url(); ?>Admission/NewEnrolment_insert_Fresh_11thOtherBoard" method="post" enctype="multipart/form-data" name="myform" id="myform" >
                             <div class="control-group">
                                 <h4 class="span4"></h4>
                                 <label class="control-label span2" style="width: 411px;margin-left: -199px;">
@@ -387,7 +387,7 @@ header("Pragma: no-cache");
 
 
                             <div class="span6">
-                                <button type="submit" name="btnsubmitUpdateEnrol" id="btnSaveFresh" class="btn btn-large btn-info offset2">
+                                <button type="submit" onclick="return checks(this)" name="btnsubmitUpdateEnrol" id="btnSaveFresh" class="btn btn-large btn-info offset2">
                                     Save Form
                                 </button>
                                 <a href="<?php echo base_url(); ?>assets/img/Instruction.jpg" download="FileName" class="btn btn-large btn-info" >Download Instruction</a>
