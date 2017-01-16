@@ -86,7 +86,17 @@ class Admission extends CI_Controller {
             redirect('Admission');
             return;
         }
+        //DebugBreak();
         $data = $data[0];
+        
+        
+         $retfee = $this->feecalculate($data);
+        
+        $data['AdmFine'] = $retfee[0]['AdmFine'];
+        $data['AdmFee'] = $retfee[0]['AdmFee'];
+        $data['AdmTotalFee'] = $retfee[0]['AdmTotalFee'];
+        
+        
         $this->load->library('pdf_rotate');
         $pdf = new pdf_rotate('P','in',"A4");
         $lmargin =1.5;
@@ -897,7 +907,15 @@ class Admission extends CI_Controller {
 
         //$pdf->Image(PRIVATE_IMAGE_PATH.$data['PicPath'],6.5, 1.15+$Y, 0.95, 1.0, "JPG");
 
-        $pdf->Image(DIRPATH12TH.$data['picpath'],6.5, 1.30+$Y, 0.95, 1.0, "JPG");
+        if($data ['IsNewPic'] == 0)
+        {
+              $pdf->Image(DIRPATH12TH.$data['picpath'],6.5, 1.30+$Y, 0.95, 1.0, "JPG");
+        }
+      
+      else  if($data ['IsNewPic'] == 1)
+      {
+          $pdf->Image(GET_PRIVATE_IMAGE_PATH.'/12th/'.$data['picpath'],6.5, 1.30+$Y, 0.95, 1.0, "JPG");
+      }
 
         $pdf->Image("assets/img/logo2.png",0.4, 0.2, 0.65, 0.65, "PNG");
         $pdf->SetFont('Arial','',8);
@@ -1376,7 +1394,7 @@ class Admission extends CI_Controller {
         $pdf->Cell( 0.5,0.5,"Registration Fee ",0,'L');
         $pdf->SetXY(7.59, 7.09+$Y); 
         $pdf->SetFont('Arial','b',$FontSize);
-        $pdf->Cell( 0.5,0.5,'0/-',0,'L');
+        $pdf->Cell( 0.5,0.5,$data['regfee'].'/-',0,'L');
 
         $pdf->SetXY(0.2, 7.19+$Y);
         $pdf->SetFont('Arial','b',$FontSize);
@@ -1503,7 +1521,7 @@ class Admission extends CI_Controller {
         $pdf->Cell( 0.5,0.5,"Registration Fee ",0,'L');
         $pdf->SetXY(7.59, 7.09+$Y); 
         $pdf->SetFont('Arial','b',$FontSize);
-        $pdf->Cell( 0.5,0.5,'0/-',0,'L');
+        $pdf->Cell( 0.5,0.5,$data['regfee'].'/-',0,'L');
 
         $pdf->SetXY(0.2, 7.19+$Y);
         $pdf->SetFont('Arial','b',$FontSize);
@@ -1677,7 +1695,20 @@ class Admission extends CI_Controller {
 
 
         //  $pdf->Image(PRIVATE_IMAGE_PATH.'download.jpg',6.5, 10.3+$Y, 0.95, 1.0, "JPG");
-        $pdf->Image(DIRPATH12TH.$data['PicPath'],6.5, 10.3+$Y, 0.95, 1.0, "JPG");
+       
+        
+        if($data ['IsNewPic'] == 0)
+        {
+            $pdf->Image(DIRPATH12TH.$data['PicPath'],6.5, 10.3+$Y, 0.95, 1.0, "JPG");
+        }
+
+        else  if($data ['IsNewPic'] == 1)
+        {
+            $pdf->Image(GET_PRIVATE_IMAGE_PATH.'/12th/'.$data['PicPath'],6.5, 10.3+$Y, 0.95, 1.0, "JPG");
+            //$pdf->Image(GET_PRIVATE_IMAGE_PATH.'/12th/'.$data['picpath'],6.5, 1.30+$Y, 0.95, 1.0, "JPG");
+        }
+        
+        
         $pdf->SetFont('Arial','',8);
 
 
@@ -1740,6 +1771,147 @@ class Admission extends CI_Controller {
 
     }
 
+     function feecalculate($data)
+    {
+      // DebugBreak();
+       
+         $practical_Sub = array(
+
+            'LIBRARY SCIENCE'=>'8',
+            'GEOGRAPHY'=>'12',
+            'PSYCHOLOGY'=>'16',
+            'STATISTICS'=>'18',
+            'OUTLINES OF HOME ECONOMICS'=>'21',
+            'FINE ARTS'=>'23',
+            'COMMERCIAL PRACTICE'=>'38',
+            'HEALTH & PHYSICAL EDUCATION'=>'42',
+            'BIOLOGY'=>'46',
+            'PHYSICS'=>'47',
+            'CHEMISTRY'=>'48',
+            'COMPUTER SCIENCE'=>'83',
+            'NURSING'=>'79',
+            'AGRICULTURE'=>'90',
+            'TYPING'=>'96',
+            'COMPUTER STUDIES'=>'98',
+            'CLOTHING & TEXTILE (Home-Economics Group)'=>'75',
+            'HOME MANAGEMNET (Home-Economics Group)'=>'76'
+        );
+        $isper = 0;
+    if( $data['grp_cd'] == 1 || $data['grp_cd'] == 2 || $data['grp_cd'] == 4 ||   array_search($data['sub4'],$practical_Sub) || array_search($data['sub5'],$practical_Sub) || array_search($data['sub5A'],$practical_Sub) || array_search($data['sub6'],$practical_Sub)  || array_search($data['sub6A'],$practical_Sub) ||  array_search($data['sub7'],$practical_Sub) || array_search($data['sub7A'],$practical_Sub))
+    {
+         $isper = 1;
+    }
+       
+       
+
+        $User_info_data = array('Inst_Id'=>999999, 'date' => date('Y-m-d'),'isPratical'=>$isper);
+        $user_info  =  $this->Admission_model->getuser_info($User_info_data); 
+        $isfine = 0;
+        $Total_fine = 0;
+        $processFee = 295;
+        $admfee = 900;
+        $admfeecmp = 1700;
+        // Declare Science & Arts Fee's According to Fee Table .  Note: this will assign to Triple date fee. After triple date it will not asign fees.
+        if(!empty($user_info['rule_fee'])) 
+        {    $endDate =date('Y-m-d', strtotime($user_info['rule_fee'][0]['End_Date'])); 
+            $singleDate = $endDate;
+            if($user_info['rule_fee'][0]['isPrSub']==1)
+            {
+                $admfee = $user_info['rule_fee'][0]['PVT_Amount'];
+                $processFee = $user_info['rule_fee'][0]['Processing_Fee'];;
+                $admfeecmp = $user_info['rule_fee'][0]['Comp_Pvt_Amount'];
+            } 
+            else if($user_info['rule_fee'][0]['isPrSub']== 0 )
+            {
+                $admfee = $user_info['rule_fee'][0]['PVT_Amount'];
+                $processFee = $user_info['rule_fee'][0]['Processing_Fee'];;
+                $admfeecmp = $user_info['rule_fee'][0]['Comp_Pvt_Amount'];
+            }
+        }
+        else
+        {
+            $date = new DateTime(TripleDateFee);
+            $singleDate =  $date->format('Y-m-d');                                                                     
+            $User_info_data = array('Inst_Id'=>999999, 'date' => $singleDate,'isPratical'=>$isper);
+            $user_info  =  $this->Admission_model->getuser_info($User_info_data);
+            if($user_info['rule_fee'][0]['isPrSub'] == 1)
+            {
+                $admfee = $user_info['rule_fee'][0]['PVT_Amount'];
+                $processFee = $user_info['rule_fee'][0]['Processing_Fee'];;
+                $admfeecmp = $user_info['rule_fee'][0]['Comp_Pvt_Amount'];
+
+            } 
+            else if( $user_info['rule_fee'][0]['isPrSub'] == 0 )
+            {
+                $admfee = $user_info['rule_fee'][0]['PVT_Amount'];
+                $processFee = $user_info['rule_fee'][0]['Processing_Fee'];;
+                $admfeecmp = $user_info['rule_fee'][0]['Comp_Pvt_Amount'];
+
+            }
+
+           
+            
+            $TripleDate = date('Y-m-d',strtotime(TripleDateFee)); 
+            $now = date('Y-m-d'); // or your date as well
+            $days = (strtotime($TripleDate) - strtotime($now)) / (60 * 60 * 24);
+            $fine = 500;
+            $days = abs($days);
+            $endDate = date('d-m-Y');
+            $admfee =  ($admfee*3); 
+            $admfeecmp =  ($admfeecmp*3); 
+            $Total_fine = $days*$fine;
+
+        }  // DebugBreak();
+        $finalFee = '';
+        if($data['cat11'] !=  NULL && $data['cat12'] != NULL)
+        {
+            $finalFee = $admfeecmp;
+        }
+        else
+        {
+            $finalFee = $admfee;
+        }
+        
+        
+        
+         if($data['Spec']>0 && (strtotime(date('Y-m-d')) <= strtotime(SingleDateFee)) )
+        {
+            $regfee =  1000;
+            if($data['Spec'] >  0)
+            {
+                $regfee = 0; 
+            }
+            if($data['CertificateFee'] == NULL)
+            {
+                $data['CertificateFee'] =0;
+            }
+            if($data['regfee'] == NULL)
+            {
+                $data['regfee'] = 0;
+            }
+            $data['AdmFee'] = $finalFee;
+            $data['AdmTotalFee'] = $processFee+$Total_fine+$data['regfee']+$data['CertificateFee'];
+            $AllStdFee = array('formNo'=>$data['FormNo'],'AdmFee'=>0,'AdmFine'=>$Total_fine,'AdmTotalFee'=> $data['AdmTotalFee']);
+        }
+        else
+        {
+            $data['AdmFee'] = $finalFee;
+            if($data['CertificateFee'] == NULL)
+            {
+                $data['CertificateFee'] =0;
+            }
+            if($data['regfee'] == NULL)
+            {
+                $data['regfee'] = 0;
+            }
+            $data['AdmTotalFee'] = $processFee+$Total_fine+$data['regfee']+$data['CertificateFee']+$finalFee;
+            $AllStdFee = array('formNo'=>$data['FormNo'],'AdmFee'=>$finalFee,'AdmFine'=>$Total_fine,'AdmTotalFee'=>$data['AdmTotalFee']);
+        }
+
+        $info =   $this->Admission_model->Update_AdmissionFeePvt($AllStdFee);
+        return $info;
+       
+    }
     function GetDueDate()
     {
         //DebugBreak();
@@ -2040,7 +2212,7 @@ class Admission extends CI_Controller {
 
         //DebugBreak();
 
-       /* $picpath = DIRPATH12TH.'\\'.@$data[0]['picpath'];
+       $picpath = DIRPATH12TH.'\\'.@$data[0]['picpath'];
         $isexit = is_file($picpath);
         if(!$isexit)
         {
@@ -2050,7 +2222,7 @@ class Admission extends CI_Controller {
         {
             $type = pathinfo($picpath, PATHINFO_EXTENSION);
             $data[0]['picpathImg'] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
-        }              */  
+        }               
 
         $specialcase = $data['0']['Spl_Name'];
         $specialcode = $data['0']['spl_cd'];
@@ -2235,7 +2407,8 @@ class Admission extends CI_Controller {
         }
     }
 
-    public function NewEnrolment_insert_Fresh_OtherBoard(){
+    public function NewEnrolment_insert_Fresh_OtherBoard()
+    {
 
         //DebugBreak();
 
@@ -2401,39 +2574,13 @@ class Admission extends CI_Controller {
 
         $Speciality = $this->input->post('speciality');
 
-        $AdmFee = $this->Admission_model->getrulefee($ispractical);
-
         $AdmFeeCatWise = '1700';
         $Certificate = 550;
-
-        $cat11 = 1; $cat12 = 1;
-
-        if($Speciality>0)
-        {
-            if($Speciality ==2 && Session ==2 )
-            {
-                $AdmFeeCatWise = $AdmFeeCatWise;    
-            }
-            else
-            {
-                $AdmFeeCatWise = 0;    
-            }
-        }
-        else
-        {
-            $AdmFeeCatWise = $AdmFeeCatWise;
-        }
-        $today = date("d-m-Y");
+        $regfee =  1000;
+        $TotalAdmFee = 0;
         $dueDate = 0;
-        if(strtotime($today) > strtotime(TripleDateFeeinter) )
-        {
-            $now = time(); // or your date as well
-            $your_date = strtotime(TripleDateFeeinter);
-            $datediff = $now - $your_date;
-            $days = floor($datediff/(60*60*24));
-            $dueDate = $days*500;
-        }
-        $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise + $dueDate;  
+        $cat11 = 1; $cat12 = 1;
+       
 
         $oldsess = @$_POST['oldsess'];
 
@@ -2504,17 +2651,17 @@ class Admission extends CI_Controller {
             'sess'=>$oldsess,
             'Brd_cd'=>@$_POST['oldSSC_Board'],
             'oldClass'=>10,
-                  
+
             'schm'=>4,
-            'AdmProcessFee'=>$AdmFee[0]['Processing_Fee'],
+            'AdmProcessFee'=>295,
             'AdmFee'=>$AdmFeeCatWise,
             'AdmTotalFee'=>$TotalAdmFee,
-
             'picpath'=>@$_POST['pic'],
             'brd_name'=>@$_POST['oldboard'],
             'AdmFine'=>$dueDate,
             'picname'=>@$_POST['picname'],
-            'certfee'=>$Certificate
+            'regfee'=>$regfee,
+            'certfee'=>$Certificate,
         );
 
 
@@ -2546,9 +2693,10 @@ class Admission extends CI_Controller {
         echo  json_encode($info);
     }
 
-    
-    
-        public function NewEnrolment_insert_Fresh_11thOtherBoard(){
+
+
+    public function NewEnrolment_insert_Fresh_11thOtherBoard()
+    {
 
         //DebugBreak();
 
@@ -2714,39 +2862,15 @@ class Admission extends CI_Controller {
 
         $Speciality = $this->input->post('speciality');
 
-        $AdmFee = $this->Admission_model->getrulefee($ispractical);
+        // $AdmFee = $this->Admission_model->getrulefee($ispractical);
 
         $AdmFeeCatWise = '1700';
         $Certificate = 550;
-
+        $regfee = 1000;
         $cat11 = 1; $cat12 = 1;
-
-        if($Speciality>0)
-        {
-            if($Speciality ==2 && Session ==2 )
-            {
-                $AdmFeeCatWise = $AdmFeeCatWise;    
-            }
-            else
-            {
-                $AdmFeeCatWise = 0;    
-            }
-        }
-        else
-        {
-            $AdmFeeCatWise = $AdmFeeCatWise;
-        }
         $today = date("d-m-Y");
         $dueDate = 0;
-        if(strtotime($today) > strtotime(TripleDateFeeinter) )
-        {
-            $now = time(); // or your date as well
-            $your_date = strtotime(TripleDateFeeinter);
-            $datediff = $now - $your_date;
-            $days = floor($datediff/(60*60*24));
-            $dueDate = $days*500;
-        }
-        $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise + $dueDate;  
+        $TotalAdmFee = 0;  
 
         $oldsess = @$_POST['oldsess'];
 
@@ -2810,24 +2934,21 @@ class Admission extends CI_Controller {
             'dist'=>@$_POST['pvtinfo_dist'],
             'teh'=>@$_POST['pvtinfo_teh'],
             'zone'=>@$_POST['pvtZone'],
-
-
             'rno'=>@$_POST['oldrno'],
             'Iyear'=>@$_POST['oldyear'],
             'sess'=>$oldsess,
             'Brd_cd'=>@$_POST['oldSSC_Board'],
             'oldClass'=>@$_POST['Class'],
-                  
             'schm'=>4,
-            'AdmProcessFee'=>$AdmFee[0]['Processing_Fee'],
+            'AdmProcessFee'=>295,
             'AdmFee'=>$AdmFeeCatWise,
             'AdmTotalFee'=>$TotalAdmFee,
-
             'picpath'=>@$_POST['pic'],
             'brd_name'=>@$_POST['oldboard'],
             'AdmFine'=>$dueDate,
             'picname'=>@$_POST['picname'],
-            'certfee'=>$Certificate
+            'regfee'=>$regfee,
+            'certfee'=>$Certificate,
         );
 
 
@@ -2858,9 +2979,10 @@ class Admission extends CI_Controller {
         }
         echo  json_encode($info);
     }
-    
-    
-    public function NewEnrolment_insert_Fresh() {
+
+
+    public function NewEnrolment_insert_Fresh() 
+    {
 
         $this->load->model('Admission_model');
 
@@ -3027,35 +3149,15 @@ class Admission extends CI_Controller {
 
         $AdmFeeCatWise = '1700';
         $Certificate = 550;
+        $regfee = 1000;
 
         $cat11 = 1; $cat12 = 1;
 
-        if($Speciality>0)
-        {
-            if($Speciality ==2 && Session ==2 )
-            {
-                $AdmFeeCatWise = $AdmFeeCatWise;    
-            }
-            else
-            {
-                $AdmFeeCatWise = 0;    
-            }
-        }
-        else
-        {
-            $AdmFeeCatWise = $AdmFeeCatWise;
-        }
+       
         $today = date("d-m-Y");
         $dueDate = 0;
-        if(strtotime($today) > strtotime(TripleDateFeeinter) )
-        {
-            $now = time(); // or your date as well
-            $your_date = strtotime(TripleDateFeeinter);
-            $datediff = $now - $your_date;
-            $days = floor($datediff/(60*60*24));
-            $dueDate = $days*500;
-        }
-        $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise + $dueDate;  
+      
+        $TotalAdmFee =0;  
 
         $oldsess = @$_POST['oldsess'];
 
@@ -3127,7 +3229,7 @@ class Admission extends CI_Controller {
             'Brd_cd'=>@$_POST['oldboardid'],
             'oldclass'=>10,
             'schm'=>4,
-            'AdmProcessFee'=>$AdmFee[0]['Processing_Fee'],
+            'AdmProcessFee'=>295,
             'AdmFee'=>$AdmFeeCatWise,
             'AdmTotalFee'=>$TotalAdmFee,
             'exam_type'=>@$_POST['exam_type'],
@@ -3135,7 +3237,8 @@ class Admission extends CI_Controller {
             'brd_name'=>@$_POST['oldboard'],
             'AdmFine'=>$dueDate,
             'picname'=>@$_POST['picname'],
-            'certfee'=>$Certificate
+            'regfee'=>$regfee,
+            'certfee'=>$Certificate,
         );
 
         //DebugBreak();
@@ -3164,7 +3267,8 @@ class Admission extends CI_Controller {
         echo  json_encode($info);
     }
 
-    public function NewEnrolment_insert(){
+    public function NewEnrolment_insert()
+    {
         $this->load->model('Admission_model');
         $this->load->library('session');
         $Inst_Id = 999999;
@@ -3393,38 +3497,16 @@ class Admission extends CI_Controller {
             $ispractical =1;
         }
         //DebugBreak();
-        $AdmFee = $this->Admission_model->getrulefee($ispractical);
+      //  $AdmFee = $this->Admission_model->getrulefee($ispractical);
 
         $AdmFeeCatWise = '1700';
         $Certificate = 0;
-        $regfee = '';
-        if($cat11 != 0 && $cat12 != 0)
-        {
-            $AdmFeeCatWise = $AdmFee[0]['Comp_Pvt_Amount'];
-        }
-        else if(($cat11 == 0 && $cat12 != 0) || ($cat11 != 0 && $cat12 == 0))
-        {
-            $AdmFeeCatWise = $AdmFee[0]['PVT_Amount'];
-        }
-        else if($cat11 == 0 && $cat12 == 0)
+        $regfee = 0;
+       if($cat11 == 0 && $cat12 == 0)
         {
             return;
         }
-        if($Speciality>0)
-        {
-            if($Speciality == 2 && Session == 2)
-            {
-                $AdmFeeCatWise = $AdmFeeCatWise;    
-            }
-            else
-            {
-                $AdmFeeCatWise = 0;    
-            }
-        }
-        else
-        {
-            $AdmFeeCatWise = $AdmFeeCatWise;
-        }
+       
 
         if(($examtype ==  1 || $examtype == 3 || $_POST['oldyear'] <= 2014 || $Speciality>0)  && Session == 1)
         {
@@ -3433,17 +3515,9 @@ class Admission extends CI_Controller {
 
         $today = date("d-m-Y");   $dueDate = 0;
 
-        if(strtotime($today) > strtotime(TripleDateFeeinter) )
-        {
-            $now = time(); // or your date as well
-            $your_date = strtotime(TripleDateFeeinter);
-            $datediff = $now - $your_date;
-            $days = floor($datediff/(60*60*24));
+        
 
-            $dueDate = $days*500;
-        }  
-
-        $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise + $dueDate + $Certificate;  
+        $TotalAdmFee = 0;  
 
         $oldsess = @$_POST['oldsess'];
 
@@ -3513,7 +3587,7 @@ class Admission extends CI_Controller {
             'Brd_cd'=>@$_POST['oldboardid'],
             'class'=>@$_POST['oldclass'],
             'schm'=>$this->input->post('oldschm'),
-            'AdmProcessFee'=>$AdmFee[0]['Processing_Fee'],
+            'AdmProcessFee'=>295,
             'AdmFee'=>$AdmFeeCatWise,
             'AdmTotalFee'=>$TotalAdmFee,
             'exam_type'=>$_POST['exam_type'],
@@ -3521,7 +3595,8 @@ class Admission extends CI_Controller {
             'brd_name'=>@$_POST['oldboard'],
             'AdmFine'=>$dueDate,
             'picname'=>@$_POST['picname'],
-            'certfee'=>$Certificate
+            'certfee'=>$Certificate,
+            'regfee'=>$regfee
         );
 
         //DebugBreak();
@@ -3550,7 +3625,8 @@ class Admission extends CI_Controller {
         echo  json_encode($info);
     }
 
-    public function NewEnrolment_insert_Languages(){
+    public function NewEnrolment_insert_Languages()
+    {
         //DebugBreak();
         $this->load->model('Admission_model');
         $this->load->library('session');

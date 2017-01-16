@@ -1677,6 +1677,12 @@ class Admission_11th_pvt extends CI_Controller {
 
             }
 
+            if($data['IsLangexam'] == 1)
+            {
+                $admfee = 900;
+                $admfeecmp = 1700;
+            }
+            
             $TripleDate = date('Y-m-d',strtotime(TripleDateFee)); 
             $now = date('Y-m-d'); // or your date as well
             $days = (strtotime($TripleDate) - strtotime($now)) / (60 * 60 * 24);

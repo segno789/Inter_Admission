@@ -150,8 +150,8 @@ header("Pragma: no-cache");
                                     <label class="control-label span3" style="margin-left: -100px;" for="gender1">
                                         Gender :
                                     </label> 
-                                    <label class='radio inline span1'><input type='radio' id='gender1' value='1' checked="checked"  name='gender'> Male</label> 
-                                    <label class='radio inline span1'><input type='radio' id='gender2' value='2'  name='gender'> Female </label>
+                                    <label class='radio inline span1' style="color: red;"><input type='radio' id='gender1' value='1'  name='gender'> Male</label> 
+                                    <label class='radio inline span1' style="color: red;"><input type='radio' id='gender2' value='2'  name='gender'> Female </label>
                                 </div>
                             </div>
                             <div class="control-group">

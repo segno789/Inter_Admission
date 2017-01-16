@@ -624,7 +624,7 @@ public function NewEnrolment_Delete($formno)
 
         $result[0] = $result['data'][0];
          // DebugBreak();
-        $pdf->Image("assets/img/forwardingletter11th_branch.png",5,6, 200,280, "PNG");
+        $pdf->Image("assets/img/forwardingletter11th_branch.JPG",5,6, 200,280, "JPG");
        // $pdf->Image("assets/img/M2.jpg",100, 2.8, 10, 10, "jpg");
         $bardata = Barcode::fpdf($pdf, $black, $bx, $by, $angle, $type, array('code'=>$Barcode), $width, $height);
         $pdf->SetFont('Arial','B',8);
@@ -634,7 +634,7 @@ public function NewEnrolment_Delete($formno)
         Barcode::rotate(-$len / 2, ($bardata['height'] / 2) + $fontSize + $marge, $angle, $xt, $yt);
 
         $pdf->SetFont('Arial','B',11.5);
-        $pdf->SetXY(61.5, 44);
+        $pdf->SetXY(85.5, 44);
         $pdf->Cell(0,0,$data['iyear'],0,0,'L',0);
 
 
@@ -678,7 +678,7 @@ public function NewEnrolment_Delete($formno)
             else if($i == 0)
             {
                 $pdf->SetFont('Arial','B',$font-3);
-                $pdf->SetXY($x-5, $Y-6.5);
+                $pdf->SetXY($x-4, $Y-7);
             $pdf->Cell(0,0,$result[0]['Total_Fee'].'/-',0,0,'L',0);
             }
              if($i==1)
@@ -700,7 +700,7 @@ public function NewEnrolment_Delete($formno)
         }
 
             $pdf->SetFont('Arial','B',$font);
-            $pdf->SetXY($x-115, $Y+42);
+            $pdf->SetXY($x-115, $Y+41);
             $pdf->Cell(0,0,$result[0]['Total_Fee'].'/-',0,0,'L',0);
 
             $pdf->SetFont('Arial','B',$font);
@@ -731,7 +731,7 @@ public function NewEnrolment_Delete($formno)
         $x = 10; 
          $pdf->AddPage('P',"A4");
         
-          $pdf->Image("assets/img/forwardingletter_finance.png",5,6, 200,280, "PNG");
+          $pdf->Image("assets/img/forwardingletter_finance.JPG",5,6, 200,280, "JPG");
           for($i =0 ; $i<7 ; $i++)
         {
             $pdf->SetFont('Arial','B',$font);
@@ -767,7 +767,7 @@ public function NewEnrolment_Delete($formno)
             else if($i == 0)
             {
                 $pdf->SetFont('Arial','B',$font-3);
-                $pdf->SetXY($x, $Y-2);
+                $pdf->SetXY($x-4, $Y-2);
             $pdf->Cell(0,0,$result[0]['Total_Fee'].'/-',0,0,'L',0);
             }
             if($i==1)
@@ -803,21 +803,21 @@ public function NewEnrolment_Delete($formno)
             $pdf->Cell(0,0,$result[0]['Total_SpeCandidate'],0,0,'L',0);
 
             $pdf->SetFont('Arial','B',$font);
-            $pdf->SetXY($x-20, $Y+178);
+            $pdf->SetXY($x-20, $Y+185);
             $pdf->Cell(0,0,$user['Inst_Id'],0,0,'L',0);
 
             $font = 9;
             $pdf->SetFont('Arial','B',$font);
-            $pdf->SetXY($x-58, $Y+185);
+            $pdf->SetXY($x-58, $Y+190);
             $pdf->MultiCell(80,2.9,$user['inst_Name'],0,"L");
 
             $font = 12;
             $pdf->SetFont('Arial','B',$font);
-            $pdf->SetXY($x-30, $Y+204);
+            $pdf->SetXY($x-30, $Y+210);
             $pdf->Cell(0,0,$user['phone'],0,0,'L',0);
 
             $pdf->SetFont('Arial','B',$font);
-            $pdf->SetXY($x-30, $Y+213);
+            $pdf->SetXY($x-30, $Y+218);
             $pdf->Cell(0,0,$user['cell'],0,0,'L',0);
 
 
@@ -828,7 +828,7 @@ public function NewEnrolment_Delete($formno)
         Barcode::rotate(-$len / 2, ($bardata['height'] / 2) + $fontSize + $marge, $angle, $xt, $yt);
 
         $pdf->SetFont('Arial','B',11.5);
-        $pdf->SetXY(85.5, 42);
+        $pdf->SetXY(85.5, 40);
         $pdf->Cell(0,0,$data['iyear'],0,0,'L',0);
 
 
@@ -1673,6 +1673,8 @@ public function NewEnrolment_Delete($formno)
         }
         $n=0;
         $AllStdFee = array();
+        $SciProcFee = 195;
+        $ArtsProcFee = 195;
         foreach($data['data']['stdinfo'] as $key=>$vals)
         { $n++;
        // DebugBreak();
@@ -2667,7 +2669,7 @@ public function NewEnrolment_Delete($formno)
         $lastdate  = date('Y-m-d',strtotime($user_info['info'][0]['feedingDate'])) ;
         if($user_info['info'][0]['feedingDate'] != null && (date('Y-m-d')<=$lastdate) )
         {
-            if($user_info['info'][0]['IsGovernment'] == 2)
+            if($user_info['info'][0]['IsGovernment'] == 2 || $user_info['info'][0]['IsGovernment'] == 1 )
             {
                 $date = new DateTime(SingleDateFee9th);
                 $singleDate =  $date->format('Y-m-d'); 
@@ -2686,7 +2688,8 @@ public function NewEnrolment_Delete($formno)
                  $singleDate_temp =  $date_temp->format('d-m-Y'); 
                 $challanDueDate = SingleDateFee9th;
 
-                } else if( $user_info['rule_fee'][1]['isPrSub']== 1 )
+                } 
+                else if( $user_info['rule_fee'][1]['isPrSub']== 1 )
                 {
                     $SciAdmFee = $user_info['rule_fee'][1]['Amount'];
                     $SciProcFee = $user_info['rule_fee'][1]['Processing_Fee'];
@@ -2797,7 +2800,8 @@ public function NewEnrolment_Delete($formno)
 
         // --------------------------------------- Fee Calculation Section END------------------------------------------------
 
-
+$ArtsProcFee =  195;
+$SciProcFee =  195;
         // DebugBreak();
         $data = array('data'=>$this->Admission_11th_reg_model->revenue_pdf($fetch_data),'inst_Name'=>$user['inst_Name'],'inst_cd'=>$user['Inst_Id'],"SciAdmFee"=>@$SciAdmFee,"ArtsAdmFee"=>@$ArtsAdmFee,"SciProcFee"=>@$SciProcFee,"ArtsProcFee"=>@$ArtsProcFee);
         //
@@ -2890,7 +2894,7 @@ public function NewEnrolment_Delete($formno)
         $pdf->AddPage();
         $generatingpdf=false;
         $challanCopy=array(1=>"Depositor Copy",  2=>"Finance Income Section Copy",3=>"Bank Copy", 4=>"Board Copy",);
-        $challanMSG=array(1=>"(May be deposited in any HBL Branch)",2=>"(To be sent to the Admission Branch Via BISE One Window)", 3=>"(To be retained with HBL)", 4=>"(To be sent to the Board via HBL Branch aloongwith scroll)"  );
+        $challanMSG=array(1=>"(May be deposited only authorized HBL Branch)",2=>"(To be sent to the Admission Branch)", 3=>"(To be retained with HBL)", 4=>"(Along with Scroll)"  );
         $challanNo = $data_challanNo; 
 
        // DebugBreak();
@@ -2939,7 +2943,8 @@ public function NewEnrolment_Delete($formno)
             $pdf->SetXY(1.0,$yy+$dyy);
             //   DebugBreak();
             $pdf->Cell(2.45, 0.4, "BOARD OF INTERMEDIATE AND SECONDARY EDUCATION, GUJRANWALA", 0.25, "L");
-            $pdf->Image(base_url()."assets/img/icon2.png",0.30,$yy+$dyy, 0.50,0.50, "PNG", "http://www.bisegrw.com");
+            $pdf->Image(base_url()."assets/img/icon2.png",0.30,$yy+$dyy, 0.65,0.60, "PNG", "http://www.bisegrw.com");
+             $pdf->Image("assets/img/11th.png",7.5,$yy+$dyy+.58, 0.40,0.40, "PNG");   
             //  $pdf->Image(BARCODE_PATH.$Barcode,3.2, 1.15+$yy ,1.8,0.20,"PNG");
             $pdf->Image(base_url().BARCODE_PATH.$temp,5.8, $yy+$dyy+0.30 ,1.9,0.22,"PNG");
             $challanTitle = $challanCopy[$j];
@@ -2962,7 +2967,7 @@ public function NewEnrolment_Delete($formno)
             $pdf->Cell(0.5, $y, $challanCopy[$j], 0.25, "L");
             $w = $pdf->GetStringWidth($challanCopy[$j]);
             $pdf->SetXY($w+1.2,$y+$dy);
-            $pdf->SetFont('Arial','I',7);
+            $pdf->SetFont('Arial','BI',9);
             $pdf->Cell(0, $y, $challanMSG[$j], 0.25, "L");
 
             $pdf->SetXY($w+1.4,$y+$dy+0.15);
@@ -3006,9 +3011,14 @@ public function NewEnrolment_Delete($formno)
             // DebugBreak();
             //$pdf->Cell(0.5,0.3,"Institute Code: ".$user['Inst_Id'].'-'.$user['inst_Name'],0,2,'L');
             $pdf->MultiCell(4, .1, "Institute Code: ".$user['Inst_Id'].'-'.$user['inst_Name'],0);
+            
+            $pdf->SetXY(4,$y+.9+$dy);
+            $pdf->SetFont('Arial','B',8);
+            $pdf->MultiCell(4,0.1,"District: ".$this->GetDistName($user['dist']),0,2,'L');
+
             $pdf->SetXY(4,$y+1.15+$dy);
-            $pdf->SetFont('Arial','B',7);
-            $pdf->Cell(0.5,0.3,"Amount in Words: ".$feeInWords,0,2,'L');
+            $pdf->SetFont('Arial','B',8);
+            $pdf->MultiCell(4,0.12,"Amount in Words: ".$feeInWords,0,2,'L');
 
             $x = 0.55;
             $y += 0.2;
