@@ -55,7 +55,7 @@ class Admission_11th_Pvt_model extends CI_Model
         // $this->db->update_batch('Registration..MA_P1_Reg_Adm2016',$data,'formNo');
         // DebugBreak();
 
-        $this->db->select('regFee,AdmFee,AdmProcessFee,AdmFine,AdmTotalFee');
+        $this->db->select('regFee,AdmFee,AdmProcessFee,AdmFine,AdmTotalFee,CertFee');
         $query = $this->db->get_where('Registration..IA_P1_Reg_Adm2016', array('formNo'=>$data['formNo'])); 
 
         //$query = $this->db->get("Registration..MA_P1_Reg_Adm2016");    
@@ -225,6 +225,7 @@ class Admission_11th_Pvt_model extends CI_Model
         $IsReAdm = $data['IsReAdm'];
         $lang_cat = $data['lang_cat'];
         $lang_specialSub = $data['lang_specialSub'];
+        $picname = $data['picname'];
        $Inst_Rno = '';
        $aloom_grp_final = 0;
        ///   For ADEEB Arabic and Urdu.

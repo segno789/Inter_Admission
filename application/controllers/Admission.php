@@ -3791,7 +3791,8 @@ class Admission extends CI_Controller {
         echo json_encode($value);
     }
 
-    public function frmvalidation_Fresh(){
+    public function frmvalidation_Fresh()
+    {
 
         $allinputdata['excep'] = '';
 
