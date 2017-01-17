@@ -1655,6 +1655,13 @@ class Admission_11th_pvt extends CI_Controller {
                 $processFee = $user_info['rule_fee'][0]['Processing_Fee'];;
                 $admfeecmp = $user_info['rule_fee'][0]['Comp_Pvt_Amount'];
             }
+            
+             if($data['IsLangexam'] == 1)
+            {
+                $admfee = 900;
+                $admfeecmp = 1700;
+            }
+            
         }
         else
         {

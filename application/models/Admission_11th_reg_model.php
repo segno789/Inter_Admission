@@ -322,7 +322,7 @@ class Admission_11th_reg_model extends CI_Model
             for ($i = 0; $i < count($_POST["chk"]); $i++) 
             {
                 $sm_data[] = array(
-                    'IsAdmission'=>1,'cDate'=> date('Y-m-d H:i:s'),'formNo'=>$_POST["chk"][$i],
+                    'IsAdmission'=>1,'zone_cd'=>$data['zone_cd'],'cDate'=> date('Y-m-d H:i:s'),'formNo'=>$_POST["chk"][$i],
                    // 'zone_cd'=>$_POST["zone_cd"]
                 );
             }
@@ -331,7 +331,7 @@ class Admission_11th_reg_model extends CI_Model
         }
         else if(@$_POST['isformwise']==2)
         {
-            $data=array('IsAdmission'=>1,'cDate'=> date('Y-m-d H:i:s'));
+            $data=array('IsAdmission'=>1,'zone_cd'=>$data['zone_cd'],'cDate'=> date('Y-m-d H:i:s'));
             $this->db->where('Reggrp',$_POST['make_adm11th_groups']);
              $this->db->where('coll_cd',$_POST['Inst_Id']);
             $this->db->update('Registration..IA_P1_Reg_Adm2016',$data);
