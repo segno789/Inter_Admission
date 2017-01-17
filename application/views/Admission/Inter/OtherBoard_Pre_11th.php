@@ -917,6 +917,7 @@ header("Pragma: no-cache");
                             {
 
                                 var status  =  check_NewEnrol_validation_Fresh();
+                                
                                 if(status == 0)
                                 {
                                     return false;    
