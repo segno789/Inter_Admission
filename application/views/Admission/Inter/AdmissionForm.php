@@ -434,7 +434,6 @@ header("Pragma: no-cache");
                                         }
 
                                         else
-
                                             if($exam_type == 4 || $exam_type == 5 || $exam_type == 6 || $exam_type == 2 )
                                             {
 
