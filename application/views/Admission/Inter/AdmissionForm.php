@@ -123,11 +123,11 @@ header("Pragma: no-cache");
 
                                     $bform = $data['0']['BForm'];
 
-                                    if($bform =='' || $bform == '00000-0000000-0'){
+                                    if($bform == ""){
                                         echo '<input class="span3" type="text" id="bay_form" name="bay_form"  placeholder="34101-1111111-1" value=""  required="required" >';
                                     }
                                     else{
-                                        echo'<input class="span3" type="text" id="bay_form" name="bay_form"  placeholder="34101-1111111-1" value='.@$data[0][BForm].' readonly="readonly"  required="required" >';
+                                        echo'<input class="span3" type="text" id="bay_form" name="bay_form"  placeholder="34101-1111111-1" value='.@$data[0][BForm].' required="required" >';
                                     }
                                     ?>
                                     <label class="control-label span2" for="father_cnic">
@@ -136,7 +136,8 @@ header("Pragma: no-cache");
 
                                     <?php
                                     $fnic = $data['0']['FNIC'];
-                                    if($fnic == '' || $fnic == '00000-0000000-0'){
+                                    if($fnic== "" || $fnic== '00000-0000000-0' || $fnic== '11111-1111111-1' || $fnic== '22222-2222222-2' || 
+                                        $fnic== '33333-3333333-3' || $fnic== '44444-4444444-4' || $fnic== '55555-5555555-5' || $fnic== '66666-6666666-6' ||                                             $fnic== '77777-7777777-7' || $fnic== '88888-8888888-8' || $fnic== '99999-9999999-9'){
                                         echo'<input class="span3" id="father_cnic" name="father_cnic" type="text" placeholder="34101-1111111-1"  value=""  required="required">';        
                                     }
                                     else{
@@ -393,39 +394,50 @@ header("Pragma: no-cache");
                                         $grp_cd = $data[0]['grp_cd'];
                                         $chance = $data[0]['chance'];
                                         $exam_type = $data[0]['exam_type'];
+                                        
                                         $status = $data[0]['status'];
                                         $class = $data[0]['class'];
-                                        $IsRegular = @$data[0]['IsRegular'];
+                                        $IsRegular = @$data[0]['regPvt'];
                                         $coll_cd = $data[0]['coll_cd']; 
                                         $cat11  = $data[0]['cat11'];
                                         if($cat11==4)
                                         {
                                             echo "<option value='9' selected='selected'>KAHSA</option>";   
                                         }
-                                        else
-                                            if($exam_type == 1   || $exam_type == 3 || $exam_type == 9 || $exam_type == 11 || $exam_type == 16 || $exam_type == 14 || $exam_type == 15)
-                                            {
-                                                if($grp_cd == 1){
-                                                    echo "<option value='1' selected='selected'>PRE-MEDICAL</option>";       
-                                                }
-                                                else if ($grp_cd == 2){
-                                                    echo "<option value='2' selected='selected'>PRE-ENGINEERING</option>";
-                                                }
 
-                                                else if ($grp_cd == 3){
-                                                    echo "<option value='3' selected='selected'>HUMANITIES</option>";
-                                                }
-                                                else if($grp_cd == 4){
-                                                    echo "<option value='4'>GENERAL SCIENCE</option>";
-                                                }
-                                                else if($grp_cd == 5){
-                                                    echo "<option value='5'>COMMERCE</option>";            
-                                                } 
+
+                                        else if($exam_type == 3 && $class == 11 && $IsRegular == 1){
+                                            
+                                            echo "<option value='0' selected='selected'>NONE</option>"; 
+                                            echo "<option value='3'>HUMANITIES</option>"; 
+                                            echo "<option value='5'>COMMERCE</option>";
+                                        }
+
+                                        else if($exam_type == 1   || $exam_type == 3 || $exam_type == 9 || $exam_type == 11 || $exam_type == 16 || $exam_type == 14 || $exam_type == 15)
+                                        {
+                                            if($grp_cd == 1){
+                                                echo "<option value='1' selected='selected'>PRE-MEDICAL</option>";       
+                                            }
+                                            else if ($grp_cd == 2){
+                                                echo "<option value='2' selected='selected'>PRE-ENGINEERING</option>";
+                                            }
+
+                                            else if ($grp_cd == 3){
+                                                echo "<option value='3' selected='selected'>HUMANITIES</option>";
+                                            }
+                                            else if($grp_cd == 4){
+                                                echo "<option value='4'>GENERAL SCIENCE</option>";
+                                            }
+                                            else if($grp_cd == 5){
+                                                echo "<option value='5'>COMMERCE</option>";            
+                                            } 
                                         }
 
                                         else
 
-                                            if($exam_type == 4 || $exam_type == 5 || $exam_type == 6 ||  $exam_type == 2){
+                                            if($exam_type == 4 || $exam_type == 5 || $exam_type == 6 || $exam_type == 2 )
+                                            {
+
                                                 if($grp_cd == 1){
                                                     echo "<option value='1' selected='selected'>PRE-MEDICAL</option>";      
                                                     echo "<option value='3'>HUMANITIES</option>";
@@ -1446,6 +1458,9 @@ header("Pragma: no-cache");
                                     $("#sub8").hide();
                                     $("#sub8p2").hide();
                                 }
+                                
+                                
+                                
                                 function sub_grp_load_exam_type3(){
 
                                     Empty_All_Dropdowns();
@@ -2187,7 +2202,12 @@ header("Pragma: no-cache");
                                         echo 'sub_grp_load_MarksImp_FULL();'; 
 
                                     }
-                                    else if($exam_type == 3 ){
+                                    else if($exam_type == 3 && $IsRegular == 1 && $class == 11){
+                                        echo'Empty_All_Dropdowns();';
+                                        echo'ClearALLDropDowns();';
+                                    }
+                                    
+                                      else if($exam_type == 3 ){
                                         echo'sub_grp_load_exam_type3();';
                                     }
 

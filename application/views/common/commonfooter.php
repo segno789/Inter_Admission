@@ -390,6 +390,13 @@
             $('#address').focus(); 
             return status;    
         }
+
+        /* else if (! $('#oldResult11th').val() && oldClass11thother == 11){
+        alertify.error("Please Fill Your Old Result ") 
+        $('#oldResult11th').focus();   
+        return status;        
+        }*/
+
         else  if (dist_cd < 1){
             alertify.error('Please select District '); 
             $("#pvtinfo_dist").focus();
@@ -569,82 +576,85 @@
             $('#father_name').focus(); 
             return status;
         }   
-        else if(FNic == ""  ){
-            $('#ErrMsg').show(); 
-            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-            alertify.error("Please Enter your Father's CNIC") 
-            $('#father_cnic').focus();  
-            return status; 
-        }
-        else if(bFormNo == ""  ){
-            $('#ErrMsg').show(); 
-            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-            alertify.error("Please Enter your B-form") 
-            $('#bay_form').focus();  
-            return status; 
-        }
 
-        else if(FNic == bFormNo  )
-        {
+        else if(bFormNo == "" || bFormNo == '00000-0000000-0' || bFormNo == '11111-1111111-1' || bFormNo == '22222-2222222-2' || bFormNo == '33333-3333333-3' ||             bFormNo == '44444-4444444-4' || bFormNo == '55555-5555555-5' || bFormNo == '66666-6666666-6' || bFormNo == '77777-7777777-7' ||
+            bFormNo == '88888-8888888-8' || bFormNo == '99999-9999999-9'){
+                $('#ErrMsg').show(); 
+                $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+                alertify.error("Please Enter Valid B-form") 
+                $('#bay_form').focus();  
+                return status; 
+            }
 
-            alertify.error("B-form Number and Father CNIC cannot be same.") 
-            $('#bay_form').focus();   
-            return status; 
-        }
-        else if(mobNo == "" || mobNo == 0 || mobNo == undefined){
-            $('#ErrMsg').show(); 
-            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+            else if(FNic== "" || FNic== '00000-0000000-0' || FNic== '11111-1111111-1' || FNic== '22222-2222222-2' || FNic== '33333-3333333-3' ||                                 FNic== '44444-4444444-4' || FNic== '55555-5555555-5' || FNic== '66666-6666666-6' || FNic== '77777-7777777-7' ||
+                FNic== '88888-8888888-8' || FNic== '99999-9999999-9'){
+                    $('#ErrMsg').show(); 
+                    $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+                    alertify.error("Please Enter Valid Father's-CNIC") 
+                    $('#bay_form').focus();  
+                    return status; 
+                }
 
-            alertify.error("Please Enter your Mobile No.") 
-            $('#mob_number').focus();   
-            return status;  
-        }
+                else if(FNic == bFormNo  )
+                {
+                    alertify.error("B-form Number and Father CNIC cannot be same.") 
+                    $('#bay_form').focus();   
+                    return status; 
+                }
+                else if(mobNo == "" || mobNo == 0 || mobNo == undefined){
+                    $('#ErrMsg').show(); 
+                    $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
       
-        else if (!$('input[name=gender]:checked').val() ) {   
-            alertify.error("Please Check Gender") 
-            $('#gender1').focus();   
-            return status;        
-        }
+                    alertify.error("Please Enter your Mobile No.") 
+                    $('#mob_number').focus();   
+                    return status;  
+                }
 
-        else if(MarkOfIdent == "" || MarkOfIdent == 0 || MarkOfIdent == undefined){
-            $('#ErrMsg').show(); 
-            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+                else if (!$('input[name=gender]:checked').val() ) {   
+                    alertify.error("Please Check Gender") 
+                    $('#gender1').focus();   
+                    return status;        
+                }
 
-            alertify.error("Please Enter your Mark of Indentification") 
-            $('#MarkOfIden').focus();   
-            return status;  
-        }
-        else if(address == "" || address == 0 || address.length ==undefined ){
-            $('#ErrMsg').show(); 
-            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-            $('#ErrMsg').html("<b>Please Enter your Address</b>"); 
-            alertify.error("Please Enter your Address")
-            $('#address').focus(); 
-            return status;    
-        }
-        else  if (dist_cd < 1){
-            alertify.error('Please select District '); 
-            $("#pvtinfo_dist").focus();
-            return status;  
-        }
-        else if (teh_cd < 1) {
+                else if(MarkOfIdent == "" || MarkOfIdent == 0 || MarkOfIdent == undefined){
+                    $('#ErrMsg').show(); 
+                    $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
 
-            alertify.error('Please select Tehsil');                          
-            $("#pvtinfo_teh").focus();
-            return status;  
-        }
-        else if (zone_cd < 1){
-            alertify.error('Please select Zone. ');                          
-            $("#pvtZone").focus();
-            return status;  
-        }
-        else if (grp_cd == 0){
-            $('#ErrMsg').show(); 
-            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-            alertify.error('Please Select your Study Group '); 
-            $("#std_group").focus();
-            return status;  
-        }
+                    alertify.error("Please Enter your Mark of Indentification") 
+                    $('#MarkOfIden').focus();   
+                    return status;  
+                }
+                else if(address == "" || address == 0 || address.length ==undefined ){
+                    $('#ErrMsg').show(); 
+                    $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+                    $('#ErrMsg').html("<b>Please Enter your Address</b>"); 
+                    alertify.error("Please Enter your Address")
+                    $('#address').focus(); 
+                    return status;    
+                }
+                else  if (dist_cd < 1){
+                    alertify.error('Please select District '); 
+                    $("#pvtinfo_dist").focus();
+                    return status;  
+                }
+                else if (teh_cd < 1) {
+
+                    alertify.error('Please select Tehsil');                          
+                    $("#pvtinfo_teh").focus();
+                    return status;  
+                }
+                else if (zone_cd < 1){
+                    alertify.error('Please select Zone. ');                          
+                    $("#pvtZone").focus();
+                    return status;  
+                }
+                else if (grp_cd == 0){
+                    $('#ErrMsg').show(); 
+                    $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+                    alertify.error('Please Select your Study Group '); 
+                    $("#std_group").focus();
+                    return status;  
+                }
 
         status = 1;
         return status;
