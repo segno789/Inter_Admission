@@ -677,13 +677,19 @@ class Admission_inter extends CI_Controller {
             }
         }
 
+        $totfee = $result[0]['Total_Fee_Spec'] + $result[0]['Total_SpeCandidate'];
+        
         $pdf->SetFont('Arial','B',$font);
         $pdf->SetXY($x-120, $Y+37);
-        $pdf->Cell(0,0,$result[0]['Total_Fee'].'/-',0,0,'L',0);
+        $pdf->Cell(0,0,$totfee.'/-',0,0,'L',0);
 
         $pdf->SetFont('Arial','B',$font);
-        $pdf->SetXY($x-68, $Y+37);
+        $pdf->SetXY($x-63, $Y+37);
         $pdf->Cell(0,0,$result[0]['Total_SpeCandidate'],0,0,'L',0);
+
+        $pdf->SetFont('Arial','B',$font);
+        $pdf->SetXY($x-78, $Y+37);
+        $pdf->Cell(0,0,$result[0]['Total_Fee_Spec'].'/-' ,0,0,'L',0);
 
         // DebugBreak();
         $pdf->SetFont('Arial','B',$font);
@@ -778,11 +784,19 @@ class Admission_inter extends CI_Controller {
 
         $pdf->SetFont('Arial','B',$font);
         $pdf->SetXY($x-125, $Y+38);
-        $pdf->Cell(0,0,$result[0]['Total_Fee'].'/-',0,0,'L',0);
+        $pdf->Cell(0,0,$totfee.'/-',0,0,'L',0);
+
 
         $pdf->SetFont('Arial','B',$font);
-        $pdf->SetXY($x-68, $Y+38);
+        $pdf->SetXY($x-63, $Y+38);
         $pdf->Cell(0,0,$result[0]['Total_SpeCandidate'],0,0,'L',0);
+
+
+        $pdf->SetFont('Arial','B',$font);
+        $pdf->SetXY($x-78, $Y+38);
+        $pdf->Cell(0,0,$result[0]['Total_Fee_Spec'].'/-' ,0,0,'L',0);
+
+
 
         $pdf->SetFont('Arial','B',$font);
         $pdf->SetXY($x-30, $Y+168);

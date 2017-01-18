@@ -76,26 +76,7 @@ class Admission_inter_model extends CI_Model
         $this->db->insert('tblInstitutes_all_Info', $data); 
         return true;
     }
-     public function getuser_info($User_info_data)
-    {
-        //  DebugBreak();
-        $Inst_cd = $User_info_data['Inst_Id'];
-        $date = $User_info_data['date'];
-
-        $query = $this->db->get_where('Admission_online..tblinstitutes_all',  array('Inst_cd' => $Inst_cd));
-        $rowcount = $query->num_rows();
-        if($rowcount > 0)
-        {
-
-            $query2 = $this->db->get_where('Admission_Online..RuleFeeAdm', array('class' => 12,'sess' => Session, 'Start_Date <='=>$date,'End_Date >='=>$date,'isPrSub'=>0));
-            $resultarr = array("info"=>$query->result_array(),"rule_fee"=>$query2->result_array());
-            return  $resultarr;
-        }
-        else
-        {
-            return  false;
-        }
-    }
+   
     public function get_zone()
     {
         $query = $this->db->get_where('matric_new..tblZones', array('myear' => '2017','class'=>12,'sess'=>1));
