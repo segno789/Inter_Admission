@@ -2204,6 +2204,12 @@ class Admission extends CI_Controller {
 
         $data = $this->Admission_model->Pre_Inter_data($data);
 
+        //DebugBreak();
+
+        if($data[0]['sub8'] == '' && $data[0]['class'] == 11){
+            $data[0]['sub8'] = 91;    
+        }
+
         $error_msg = '';
 
         if(!$data){
