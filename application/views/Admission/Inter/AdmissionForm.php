@@ -193,11 +193,11 @@ header("Pragma: no-cache");
                                     Mark Of Identification :
                                 </label>
                                 <div class="controls controls-row">                                                           
-                                    <input class="span3" type="text" id="MarkOfIden" style="text-transform: uppercase;" name="MarkOfIden" value="<?php  echo $data['0']['markOfIden']; ?>" required="required" maxlength="60" >
+                                    <input class="span3" type="text" id="MarkOfIden" style="text-transform: uppercase;" name="MarkOfIden" value="<?php echo @$data['0']['markOfIden']; ?>" required="required" maxlength="60" >
                                     <label class="control-label span2" >
                                         Mobile Number :
                                     </label> 
-                                    <input class="span3" id="mob_number" name="mob_number" type="text" placeholder="0300-123456789" value="<?php  echo $data['0']['MobNo']; ?>" required="required">
+                                    <input class="span3" id="mob_number" name="mob_number" type="text" placeholder="0300-123456789" value="<?php  echo @$data['0']['MobNo']; ?>" required="required">
                                 </div>
                             </div>
                             <div class="control-group">
@@ -2650,7 +2650,7 @@ header("Pragma: no-cache");
 
                                                     success: function(data) {
 
-                                                        //console.log(data);
+                                                        console.log(data);
 
                                                         var obj = JSON.parse(data) ;
                                                         if(obj.error ==  1)

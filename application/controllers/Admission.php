@@ -2212,21 +2212,26 @@ class Admission extends CI_Controller {
 
         //DebugBreak();
 
-        /* $picpath = DIRPATH12TH.'\\'.@$data[0]['picpath'];
+        $picpath = DIRPATH12TH.'\\'.@$data[0]['picpath'];
         $isexit = is_file($picpath);
         if(!$isexit)
         {
-        $error_msg.= '<span style="font-size: 16pt; color:red;">' . 'Your Picture is missing.</span>';
+            $error_msg.= '<span style="font-size: 16pt; color:red;">' . 'Your Picture is missing.</span>';
         }
         else
         {
-        $type = pathinfo($picpath, PATHINFO_EXTENSION);
-        $data[0]['picpathImg'] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
-        }     */
+            $type = pathinfo($picpath, PATHINFO_EXTENSION);
+            $data[0]['picpathImg'] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
+        } 
 
         $specialcase = $data['0']['Spl_Name'];
         $specialcode = $data['0']['spl_cd'];
         $exam_type =   $data['0']['exam_type'];
+
+        //DebugBreak();
+
+        @$isParctialsub =   $data['0']['sn'];
+
         if($specialcode != '' && $specialcode != 34 ){
 
             $error_msg.='<span style="font-size: 16pt; color:red;">' . '   Your Admission cannot be procceed due to     ' . '</span>';
@@ -2295,7 +2300,7 @@ class Admission extends CI_Controller {
             redirect('Admission/matric_default');
         } 
 
-        else if($data[0]['class'] == 11 && $data[0]['regPvt']==1 && ($data[0]['status']==1  || $exam_type ==1))
+        else if($data[0]['class'] == 11 && $data[0]['regPvt']==1 && ($data[0]['status']==1  || $exam_type ==1 ) &&  $isParctialsub == 1)
         {
             $error_msg.='<span style="font-size: 16pt; color:red;">' . 'You can not appear as a Private Candidate. Please contact your Institute.</span>';
             $this->load->library('session');
@@ -3255,6 +3260,7 @@ class Admission extends CI_Controller {
         //DebugBreak();
 
         $logedIn = $this->Admission_model->NewEnrolment_insert_Fresh($data);
+
         $info =  '';
         foreach($logedIn[0] as $key=>$val)
         {
@@ -3611,9 +3617,12 @@ class Admission extends CI_Controller {
             'regfee'=>$regfee
         );
 
-        //DebugBreak();
+
 
         $logedIn = $this->Admission_model->Insert_NewEnorlement($data);
+
+        //DebugBreak();
+
         $info =  '';
         foreach($logedIn[0] as $key=>$val)
         {
@@ -3621,8 +3630,8 @@ class Admission extends CI_Controller {
             {
                 if($logedIn[0]['tempath'] != '')
                 {
-                    $oldpath = GET_PRIVATE_IMAGE_PATH.'\12th'.$logedIn[0]['tempath'];
-                    $newpath =  GET_PRIVATE_IMAGE_PATH.'\12th'.$val.'.jpg';
+                    $oldpath =  GET_PRIVATE_IMAGE_PATH.'\12th\\'.$logedIn[0]['tempath'];
+                    $newpath =  GET_PRIVATE_IMAGE_PATH.'\12th\\'.$val.'.jpg';
                     $err = rename($oldpath,$newpath); 
                 }
                 $info['error'] = 1;
