@@ -88,15 +88,15 @@ class Admission extends CI_Controller {
         }
         //DebugBreak();
         $data = $data[0];
-        
-        
-         $retfee = $this->feecalculate($data);
-        
+
+
+        $retfee = $this->feecalculate($data);
+
         $data['AdmFine'] = $retfee[0]['AdmFine'];
         $data['AdmFee'] = $retfee[0]['AdmFee'];
         $data['AdmTotalFee'] = $retfee[0]['AdmTotalFee'];
-        
-        
+
+
         $this->load->library('pdf_rotate');
         $pdf = new pdf_rotate('P','in',"A4");
         $lmargin =1.5;
@@ -909,13 +909,13 @@ class Admission extends CI_Controller {
 
         if($data ['IsNewPic'] == 0)
         {
-              $pdf->Image(DIRPATH12TH.$data['picpath'],6.5, 1.30+$Y, 0.95, 1.0, "JPG");
+            $pdf->Image(DIRPATH12TH.$data['picpath'],6.5, 1.30+$Y, 0.95, 1.0, "JPG");
         }
-      
-      else  if($data ['IsNewPic'] == 1)
-      {
-          $pdf->Image(GET_PRIVATE_IMAGE_PATH.'/12th/'.$data['picpath'],6.5, 1.30+$Y, 0.95, 1.0, "JPG");
-      }
+
+        else  if($data ['IsNewPic'] == 1)
+        {
+            $pdf->Image(GET_PRIVATE_IMAGE_PATH.'/12th/'.$data['picpath'],6.5, 1.30+$Y, 0.95, 1.0, "JPG");
+        }
 
         $pdf->Image("assets/img/logo2.png",0.4, 0.2, 0.65, 0.65, "PNG");
         $pdf->SetFont('Arial','',8);
@@ -991,7 +991,7 @@ class Admission extends CI_Controller {
             $pdf->Cell( 0.5,0.7,strtoupper($grp_name." GROUP  (12th: ".$chkcat10.")"),0,'L');
         }
         $LastSess = 0 ;
-        
+
         if($data["SessOfLastAp"] == 1 or $data["SessOfLastAp"] == 2  )
         {
             $LastSess =  $data["SessOfLastAp"]==1?"A":"S";
@@ -1009,7 +1009,7 @@ class Admission extends CI_Controller {
         $cand_Notif = $data['Prev_result2'];
         $cand_Nofif_part1 =$data['Prev_result1'];
         $str = '';
-     
+
         $pdf->SetXY(0.5,1.7+$Y);
         $pdf->SetFont('Arial','',$FontSize);
         $pdf->Cell( 0.5,0.5,"Name:",0,'L');
@@ -1040,7 +1040,7 @@ class Admission extends CI_Controller {
         $pdf->SetXY(0.5, 2.15+$Y);
         $pdf->SetFont('Arial','',$FontSize);
         $pdf->Cell( 0.5,0.5,"SSC Info:",0,'L');
-     
+
         $pdf->SetXY(1.5,2.15+$Y);
         $pdf->Cell(0.5,0.5,$data["matRno"]." ( $MLastSess, ".$data['yearOfPass'].', '.$data['MBrd_Abbr']." )",0,'L');
 
@@ -1064,7 +1064,7 @@ class Admission extends CI_Controller {
         $pdf->SetFont('Arial','B',$FontSize);
         $pdf->SetXY(4.5+$x,2.0+$Y);
         $pdf->Cell(0.5,0.5,$data["MobNo"],0,'L');
-               
+
         //--------------------------- Gender Nationality Dob
 
         //  DebugBreak();
@@ -1695,8 +1695,8 @@ class Admission extends CI_Controller {
 
 
         //  $pdf->Image(PRIVATE_IMAGE_PATH.'download.jpg',6.5, 10.3+$Y, 0.95, 1.0, "JPG");
-       
-        
+
+
         if($data ['IsNewPic'] == 0)
         {
             $pdf->Image(DIRPATH12TH.$data['PicPath'],6.5, 10.3+$Y, 0.95, 1.0, "JPG");
@@ -1707,8 +1707,8 @@ class Admission extends CI_Controller {
             $pdf->Image(GET_PRIVATE_IMAGE_PATH.'/12th/'.$data['PicPath'],6.5, 10.3+$Y, 0.95, 1.0, "JPG");
             //$pdf->Image(GET_PRIVATE_IMAGE_PATH.'/12th/'.$data['picpath'],6.5, 1.30+$Y, 0.95, 1.0, "JPG");
         }
-        
-        
+
+
         $pdf->SetFont('Arial','',8);
 
 
@@ -1771,11 +1771,11 @@ class Admission extends CI_Controller {
 
     }
 
-     function feecalculate($data)
+    function feecalculate($data)
     {
-      // DebugBreak();
-       
-         $practical_Sub = array(
+        // DebugBreak();
+
+        $practical_Sub = array(
 
             'LIBRARY SCIENCE'=>'8',
             'GEOGRAPHY'=>'12',
@@ -1797,12 +1797,12 @@ class Admission extends CI_Controller {
             'HOME MANAGEMNET (Home-Economics Group)'=>'76'
         );
         $isper = 0;
-    if( $data['grp_cd'] == 1 || $data['grp_cd'] == 2 || $data['grp_cd'] == 4 ||   array_search($data['sub4'],$practical_Sub) || array_search($data['sub5'],$practical_Sub) || array_search($data['sub5A'],$practical_Sub) || array_search($data['sub6'],$practical_Sub)  || array_search($data['sub6A'],$practical_Sub) ||  array_search($data['sub7'],$practical_Sub) || array_search($data['sub7A'],$practical_Sub))
-    {
-         $isper = 1;
-    }
-       
-       
+        if( $data['grp_cd'] == 1 || $data['grp_cd'] == 2 || $data['grp_cd'] == 4 ||   array_search($data['sub4'],$practical_Sub) || array_search($data['sub5'],$practical_Sub) || array_search($data['sub5A'],$practical_Sub) || array_search($data['sub6'],$practical_Sub)  || array_search($data['sub6A'],$practical_Sub) ||  array_search($data['sub7'],$practical_Sub) || array_search($data['sub7A'],$practical_Sub))
+        {
+            $isper = 1;
+        }
+
+
 
         $User_info_data = array('Inst_Id'=>999999, 'date' => date('Y-m-d'),'isPratical'=>$isper);
         $user_info  =  $this->Admission_model->getuser_info($User_info_data); 
@@ -1849,8 +1849,8 @@ class Admission extends CI_Controller {
 
             }
 
-           
-            
+
+
             $TripleDate = date('Y-m-d',strtotime(TripleDateFee)); 
             $now = date('Y-m-d'); // or your date as well
             $days = (strtotime($TripleDate) - strtotime($now)) / (60 * 60 * 24);
@@ -1871,10 +1871,10 @@ class Admission extends CI_Controller {
         {
             $finalFee = $admfee;
         }
-        
-        
-        
-         if($data['Spec']>0 && (strtotime(date('Y-m-d')) <= strtotime(SingleDateFee)) )
+
+
+
+        if($data['Spec']>0 && (strtotime(date('Y-m-d')) <= strtotime(SingleDateFee)) )
         {
             $regfee =  1000;
             if($data['Spec'] >  0)
@@ -1910,7 +1910,7 @@ class Admission extends CI_Controller {
 
         $info =   $this->Admission_model->Update_AdmissionFeePvt($AllStdFee);
         return $info;
-       
+
     }
     function GetDueDate()
     {
@@ -2193,7 +2193,7 @@ class Admission extends CI_Controller {
             $this->load->view('common/commonfooter.php');
             return;
         }
-                                              
+
         $data['sscrno']=$mrollno;
         $data['hsscrno']=$hsscrno;
         $data['hsscclass']=$oldClass;
@@ -2212,17 +2212,17 @@ class Admission extends CI_Controller {
 
         //DebugBreak();
 
-       $picpath = DIRPATH12TH.'\\'.@$data[0]['picpath'];
+        /* $picpath = DIRPATH12TH.'\\'.@$data[0]['picpath'];
         $isexit = is_file($picpath);
         if(!$isexit)
         {
-            $error_msg.= '<span style="font-size: 16pt; color:red;">' . 'Your Picture is missing.</span>';
+        $error_msg.= '<span style="font-size: 16pt; color:red;">' . 'Your Picture is missing.</span>';
         }
         else
         {
-            $type = pathinfo($picpath, PATHINFO_EXTENSION);
-            $data[0]['picpathImg'] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
-        }               
+        $type = pathinfo($picpath, PATHINFO_EXTENSION);
+        $data[0]['picpathImg'] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
+        }     */
 
         $specialcase = $data['0']['Spl_Name'];
         $specialcode = $data['0']['spl_cd'];
@@ -2294,7 +2294,8 @@ class Admission extends CI_Controller {
             $this->session->set_flashdata('matric_error',$mydata );
             redirect('Admission/matric_default');
         } 
-        else if($data[0]['class'] == 11 &&$data[0]['regPvt']==1)
+
+        else if($data[0]['class'] == 11 && $data[0]['regPvt']==1 && ($data[0]['status']==1  || $exam_type ==1))
         {
             $error_msg.='<span style="font-size: 16pt; color:red;">' . 'You can not appear as a Private Candidate. Please contact your Institute.</span>';
             $this->load->library('session');
@@ -2580,7 +2581,7 @@ class Admission extends CI_Controller {
         $TotalAdmFee = 0;
         $dueDate = 0;
         $cat11 = 1; $cat12 = 1;
-       
+
 
         $oldsess = @$_POST['oldsess'];
 
@@ -2863,21 +2864,21 @@ class Admission extends CI_Controller {
 
         if($is11th ==  1)
         {
-           $cat11 = 2;
+            $cat11 = 2;
         }
         else
         {
-             $cat11 = 0;
+            $cat11 = 0;
         }
-        
-          $cat12 = 1;
-        
+
+        $cat12 = 1;
+
         // $AdmFee = $this->Admission_model->getrulefee($ispractical);
 
         $AdmFeeCatWise = '1700';
         $Certificate = 550;
         $regfee = 1000;
-       
+
         $today = date("d-m-Y");
         $dueDate = 0;
         $TotalAdmFee = 0;  
@@ -3163,10 +3164,10 @@ class Admission extends CI_Controller {
 
         $cat11 = 1; $cat12 = 1;
 
-       
+
         $today = date("d-m-Y");
         $dueDate = 0;
-      
+
         $TotalAdmFee =0;  
 
         $oldsess = @$_POST['oldsess'];
@@ -3507,22 +3508,22 @@ class Admission extends CI_Controller {
             $ispractical =1;
         }
         //DebugBreak();
-      //  $AdmFee = $this->Admission_model->getrulefee($ispractical);
+        //  $AdmFee = $this->Admission_model->getrulefee($ispractical);
 
         $AdmFeeCatWise = '1700';
         $Certificate = 0;
         $regfee = 0;
-       if($cat11 == 0 && $cat12 == 0)
+        if($cat11 == 0 && $cat12 == 0)
         {
             return;
         }
-       
 
-        
+
+
         $today = date("d-m-Y");   
         $dueDate = 0;
 
-        
+
 
         $TotalAdmFee = 0;  
 
@@ -3957,8 +3958,8 @@ class Admission extends CI_Controller {
             $allinputdata['excep'] = 'Please Select Your Nationality';
         }
 
-        
-        
+
+
         else if((@$_POST['gend'] != '1') and (@$_POST['gend'] != '2'))
         {
             //DebugBreak();
