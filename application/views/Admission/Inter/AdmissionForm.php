@@ -123,7 +123,8 @@ header("Pragma: no-cache");
 
                                     $bform = $data['0']['BForm'];
 
-                                    if($bform =='' || $bform == '00000-0000000-0'){
+                                    if($bform== "" || $bform== '00000-0000000-0' || $bform== '11111-1111111-1' || $bform== '22222-2222222-2' || 
+                                        $bform== '33333-3333333-3' || $bform== '44444-4444444-4' || $bform== '55555-5555555-5' || $bform== '66666-6666666-6' ||                                         $bform== '77777-7777777-7' || $bform== '88888-8888888-8' || $bform== '99999-9999999-9'){
                                         echo '<input class="span3" type="text" id="bay_form" name="bay_form"  placeholder="34101-1111111-1" value=""  required="required" >';
                                     }
                                     else{
@@ -136,7 +137,8 @@ header("Pragma: no-cache");
 
                                     <?php
                                     $fnic = $data['0']['FNIC'];
-                                    if($fnic == '' || $fnic == '00000-0000000-0'){
+                                    if($fnic== "" || $fnic== '00000-0000000-0' || $fnic== '11111-1111111-1' || $fnic== '22222-2222222-2' || 
+                                        $fnic== '33333-3333333-3' || $fnic== '44444-4444444-4' || $fnic== '55555-5555555-5' || $fnic== '66666-6666666-6' ||                                             $fnic== '77777-7777777-7' || $fnic== '88888-8888888-8' || $fnic== '99999-9999999-9'){
                                         echo'<input class="span3" id="father_cnic" name="father_cnic" type="text" placeholder="34101-1111111-1"  value=""  required="required">';        
                                     }
                                     else{
