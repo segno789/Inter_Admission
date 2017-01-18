@@ -26,8 +26,6 @@ class Login extends CI_Controller {
     }
     public function index()
     {
-        //DebugBreak();
-        
         $this->load->helper('url');
         $data = array(
             'user_status' => ''                     
@@ -46,9 +44,28 @@ class Login extends CI_Controller {
             //  DebugBreak();   
             if($logedIn != false)
             {  
+                
+            
 
+                if( $logedIn['isactive'] == 1)
+                {
+                    $data = array(
+                        'user_status' => 4,                     
+                        'remarks' => $logedIn['flusers']['Remarks']                     
+                    );
+                    
+                   
+                    if(( ($logedIn['tbl_inst']['edu_lvl'] == 2 || $logedIn['tbl_inst']['edu_lvl'] == 3)&& $logedIn['flusers']['class'] ==11))
+                    {
+                        $this->load->view('login/login.php',$data);
+                        return ;
+                    }
+                    
+                     echo '<pre>'; print_r($logedIn);die;       
+                }
+                
 
-                if($logedIn['flusers']['status'] == 0)
+              else  if($logedIn['flusers']['status'] == 0)
                 {
                     $data = array(
                         'user_status' => 3                     
@@ -191,8 +208,6 @@ class Login extends CI_Controller {
 
     function logout()
     {
-        //DebugBreak();
-        
         $this->load->helper('url');
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();

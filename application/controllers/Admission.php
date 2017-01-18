@@ -1889,9 +1889,17 @@ class Admission extends CI_Controller {
             {
                 $data['regfee'] = 0;
             }
-            $data['AdmFee'] = $finalFee;
+            if($data['oldRno']>30000)
+            {
+                $data['AdmFee'] = 0;
+            }
+            else
+            {
+                $data['AdmFee'] = $finalFee;  
+            }
+           
             $data['AdmTotalFee'] = $processFee+$Total_fine+$data['regfee']+$data['CertificateFee'];
-            $AllStdFee = array('formNo'=>$data['FormNo'],'AdmFee'=>0,'AdmFine'=>$Total_fine,'AdmTotalFee'=> $data['AdmTotalFee']);
+            $AllStdFee = array('formNo'=>$data['FormNo'],'AdmFee'=>$data['AdmFee'],'AdmFine'=>$Total_fine,'AdmTotalFee'=> $data['AdmTotalFee']);
         }
         else
         {
@@ -2214,7 +2222,7 @@ class Admission extends CI_Controller {
 
        $picpath = DIRPATH12TH.'\\'.@$data[0]['picpath'];
         $isexit = is_file($picpath);
-        if(!$isexit)
+        if(!($isexit) && $error_msg == '')
         {
             $error_msg.= '<span style="font-size: 16pt; color:red;">' . 'Your Picture is missing.</span>';
         }
@@ -2259,7 +2267,7 @@ class Admission extends CI_Controller {
             $error_msg.='<span style="font-size: 16pt; color:red;">' . $nxtrno . '</span>';
         }
 
-        else if ($matric_rno == 0)
+        else if ($matric_rno == 0 && $error_msg == '')
         {
             $error_msg.='<span style="font-size: 16pt; color:red;"> Matric Roll No is Invalid</span>';
         }
@@ -3533,7 +3541,7 @@ class Admission extends CI_Controller {
         else if($oldsess == 'Supplementary'){
             $oldsess =  2;    
         }
-        if(($examtype ==  1 || $examtype == 3 || $_POST['oldyear'] <= 2014 || $Speciality>0 || ( $_POST['oldrno']>300000 && $oldsess == 1))  && Session == 1)
+        if(($examtype ==  1 || $examtype == 3 || $_POST['oldyear'] <= 2014 || ( $_POST['oldrno']>300000 && $oldsess == 1))  && Session == 1)
         {
             $Certificate =  550;
         }

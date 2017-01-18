@@ -2860,11 +2860,11 @@ $SciProcFee =  195;
            $mydata_final = $mydata_final['data'][0];
            if($Grp_cd == 9)
            {
-           $data_challanNo = $data['data']['stdinfo'][0]->challan_overall;
+           $data_challanNo = @$data['data']['stdinfo'][0]->challan_overall;
            }
            else
            {
-           $data_challanNo = $data['data']['stdinfo'][0]->challanno;
+           $data_challanNo = @$data['data']['stdinfo'][0]->challanno;
            }
            $challanDueDate;
 
