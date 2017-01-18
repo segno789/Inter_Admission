@@ -267,7 +267,7 @@ class Admission_model extends CI_Model
             return -1;
         }
     }
-     public function getuser_info($User_info_data)
+    public function getuser_info($User_info_data)
     {
         //  DebugBreak();
         $Inst_cd = $User_info_data['Inst_Id'];
@@ -288,7 +288,7 @@ class Admission_model extends CI_Model
             return  false;
         }
     }
- public function Update_AdmissionFeePvt($data)
+    public function Update_AdmissionFeePvt($data)
     {
         $data['cdate']= date('Y-m-d H:i:s');
         $this->db->where('formNo',$data['formNo']);
@@ -381,6 +381,8 @@ class Admission_model extends CI_Model
 
         //DebugBreak();
 
+        $oldResult11th = $data['oldResult11th'];
+
         $Brd_cd =  $data['Brd_cd'];  
 
         $old_class =  $data['oldClass'];
@@ -392,7 +394,7 @@ class Admission_model extends CI_Model
         $certFee =  $data['certfee'];
 
         $picpath = $data['picpath'];
-         $regfee =  $data['regfee'];
+        $regfee =  $data['regfee'];
         if($picpath == '')
         {
             $IsNewPic = 1;
@@ -405,7 +407,7 @@ class Admission_model extends CI_Model
 
         $TotalAdmFee =  $AdmFee + $AdmProcFee+$AdmFine;
 
-        
+
 
         $query = $this->db->query(Insert_sp." '$formno',12,2017,1,'$name','$fname','$BForm','$FNIC','$CellNo',$medium,'".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$sub8,1,'".$picpath."',$oldrno,$oldyear,$oldsess,$old_class,$IsHafiz,$Inst_cd,$UrbanRural,$cat11,$cat12,$sub1ap2,$sub2ap2,$sub4ap2,$sub5ap2,$sub6ap2,$sub7ap2,$sub8ap2,$dist_cd,$teh_cd,$zone_cd,$Brd_cd,$AdmProcFee,$AdmFee,$TotalAdmFee,$sub5a,$sub6a,$sub7a,$AdmFine,$IsNewPic,$certFee,'$temppath',$schm,$regfee");
 
@@ -501,7 +503,7 @@ class Admission_model extends CI_Model
         $AdmProcFee =  $data['AdmProcessFee'];
         $AdmFee =  $data['AdmFee'];
         $certFee =  $data['certfee'];
-         $regfee =  $data['regfee'];
+        $regfee =  $data['regfee'];
         $picpath = $data['picpath'];
 
         if($picpath == '')
@@ -621,7 +623,7 @@ class Admission_model extends CI_Model
         $AdmProcFee =  $data['AdmProcessFee'];
         $AdmFee =  $data['AdmFee'];
         $certFee =  $data['certfee'];
-$regfee = 0;
+        $regfee = 0;
         $TotalAdmFee =  $data['AdmTotalFee'];
 
         //DebugBreak();
@@ -635,10 +637,7 @@ $regfee = 0;
         }
         else
         {
-            // $this->savepics($formno,11,2016,1,$data['Image']) ;
-
             return -1;
-            // return $error;
         }
     }
     public function Insert_NewEnorlement_Languages($data)
@@ -728,7 +727,7 @@ $regfee = 0;
         $gend = $data['gend'];
         $where = " mYear = ".Year."  AND class = 12 AND  sess = ".Session." and Flag= 0 AND teh_cd =  $tehcd  AND  (Gender = $gend OR Gender = 3) ";      
         $query = $this->db->query("SELECT * FROM matric_new..tblZones WHERE $where");
-       
+
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {

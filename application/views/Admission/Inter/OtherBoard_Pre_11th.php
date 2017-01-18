@@ -218,6 +218,15 @@ header("Pragma: no-cache");
                                 </div>
                             </div>
 
+                          <!--  <div class="control-group">
+                                <label class="control-label span1" >
+                                    Old Result:
+                                </label>
+                                <div class="controls controls-row">
+                                    <input type="text" class="span3" id="oldResult11th" name="oldResult11th" value="" placeholder="Enter Your Old Result"/> 
+                                </div>
+                            </div>-->
+
                             <hr>
 
                             <div class="control-group">
@@ -917,7 +926,7 @@ header("Pragma: no-cache");
                             {
 
                                 var status  =  check_NewEnrol_validation_Fresh();
-                                
+
                                 if(status == 0)
                                 {
                                     return false;    
