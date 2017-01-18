@@ -1054,6 +1054,8 @@ header("Pragma: no-cache");
 
                             function checks()
                             {
+
+
                                 var status  =  check_NewEnrol_validation_Fresh();
                                 if(status == 0)
                                 {
@@ -1061,7 +1063,9 @@ header("Pragma: no-cache");
                                 }
                                 else
                                 {
+
                                     //debugger;
+
                                     $.ajax({
 
                                         type: "POST",

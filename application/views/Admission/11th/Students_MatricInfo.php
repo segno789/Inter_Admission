@@ -40,6 +40,11 @@
                         <option value="<?php echo date("Y",strtotime("-3 year")); ?>" ><?php echo date("Y",strtotime("-3 year")); ?></option>  
                         <option value="<?php echo date("Y",strtotime("-4 year")); ?>" ><?php echo date("Y",strtotime("-4 year")); ?></option>  
                         <option value="<?php echo date("Y",strtotime("-5 year")); ?>" ><?php echo date("Y",strtotime("-5 year")); ?></option>  
+                        <option value="<?php echo date("Y",strtotime("-6 year")); ?>" ><?php echo date("Y",strtotime("-6 year")); ?></option>  
+                        <option value="<?php echo date("Y",strtotime("-7 year")); ?>" ><?php echo date("Y",strtotime("-7 year")); ?></option>  
+                        <option value="<?php echo date("Y",strtotime("-8 year")); ?>" ><?php echo date("Y",strtotime("-8 year")); ?></option>  
+                        <option value="<?php echo date("Y",strtotime("-9 year")); ?>" ><?php echo date("Y",strtotime("-9 year")); ?></option>  
+                        <option value="<?php echo date("Y",strtotime("-10 year")); ?>" ><?php echo date("Y",strtotime("-10 year")); ?></option>  
                         <?php }
                     else{?>
                         <option value="<?php echo $prev_year; ?>" ><?php echo $prev_year; ?></option>  
@@ -47,6 +52,11 @@
                         <option value="<?php echo date("Y",strtotime("-3 year")); ?>" ><?php echo date("Y",strtotime("-3 year")); ?></option>  
                         <option value="<?php echo date("Y",strtotime("-4 year")); ?>" ><?php echo date("Y",strtotime("-4 year")); ?></option>  
                         <option value="<?php echo date("Y",strtotime("-5 year")); ?>" ><?php echo date("Y",strtotime("-5 year")); ?></option>  
+                        <option value="<?php echo date("Y",strtotime("-6 year")); ?>" ><?php echo date("Y",strtotime("-6 year")); ?></option>  
+                        <option value="<?php echo date("Y",strtotime("-7 year")); ?>" ><?php echo date("Y",strtotime("-7 year")); ?></option>  
+                        <option value="<?php echo date("Y",strtotime("-8 year")); ?>" ><?php echo date("Y",strtotime("-8 year")); ?></option>  
+                        <option value="<?php echo date("Y",strtotime("-9 year")); ?>" ><?php echo date("Y",strtotime("-9 year")); ?></option>  
+                        <option value="<?php echo date("Y",strtotime("-10 year")); ?>" ><?php echo date("Y",strtotime("-10 year")); ?></option>  
                         <?php }    
                     ?>
 

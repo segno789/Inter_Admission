@@ -62,10 +62,23 @@
                                         $formno = !empty($vals["formNo"])?$vals["formNo"]:"N/A";
                                         $grp_name = $vals["grp_cd"];
                                         $sub7 = $vals["sub7"];
-                                        $image_path_selected = DIRPATH12TH.$vals['picpath']; 
+                                        
 
-                                        $type = pathinfo($image_path_selected, PATHINFO_EXTENSION);
-                                        @$image_path_selected = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($image_path_selected));
+                                        
+                                        
+                                        if($vals["IntBrd_cd"] ==  1)
+                                        {
+                                            $image_path_selected = DIRPATH12TH.$vals['picpath']; 
+                                            $type = pathinfo($image_path_selected, PATHINFO_EXTENSION);
+                                           
+                                        }
+                                        else 
+                                        {
+                                            $image_path_selected =  DIRPATHOTHER.'/'.$vals["coll_cd"].'/'.$vals["picpath"]; 
+                                            $type = pathinfo($image_path_selected, PATHINFO_EXTENSION); 
+                                        }
+
+                                         @$image_path_selected = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($image_path_selected)); 
                                         $disable = '<button type="button" class="btn btn-info" value="'.$vals["rno"].'" onclick="NewForm('.$vals["rno"].')">Save Form</button>';
                                          if($vals['MissingNOC']>0)
                                          {
