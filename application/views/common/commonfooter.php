@@ -288,7 +288,10 @@
         var MarkOfIdent = $('#MarkOfIden').val();
         var medium= $('#medium option:selected').val();
         var gend = $("input[name=gender]:checked").val();
-        
+
+
+        var oldresult11th = $('#oldResult11th').val();
+
         var oldClass11thother = $('#Class').val();
 
         //part I and part II subjects
@@ -370,8 +373,6 @@
             return status;        
         }
 
-
-
         else if (!$('input[name=UrbanRural]:checked').val() ) {   
             alertify.error("Please Check Locality ") 
             $('#UrbanRural1').focus();   
@@ -390,6 +391,13 @@
             $('#address').focus(); 
             return status;    
         }
+
+       /* else if (! $('#oldResult11th').val() && oldClass11thother == 11){
+            alertify.error("Please Fill Your Old Result ") 
+            $('#oldResult11th').focus();   
+            return status;        
+        }*/
+
         else  if (dist_cd < 1){
             alertify.error('Please select District '); 
             $("#pvtinfo_dist").focus();
@@ -599,7 +607,7 @@
             $('#mob_number').focus();   
             return status;  
         }
-      
+
         else if (!$('input[name=gender]:checked').val() ) {   
             alertify.error("Please Check Gender") 
             $('#gender1').focus();   

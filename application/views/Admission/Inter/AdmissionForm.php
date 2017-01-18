@@ -61,9 +61,9 @@ header("Pragma: no-cache");
                         <form class="form-horizontal no-margin" method="post" enctype="multipart/form-data" name="myform" id="myform">
                             <div class="control-group">
                                 <div class="controls controls-row" id="output">
-                                     <label class="control-label span2" style="width: 411px;margin-left: -199px;">
-                                            <img src="<?php echo base_url(); ?>assets/img/upalodimage.jpg" alt="" >
-                                        </label>
+                                    <label class="control-label span2" style="width: 411px;margin-left: -199px;">
+                                        <img src="<?php echo base_url(); ?>assets/img/upalodimage.jpg" alt="" >
+                                    </label>
 
                                     <?php if($data[0]['picpath'] != '')  
                                     {?>
@@ -71,7 +71,7 @@ header("Pragma: no-cache");
                                         <img id="image_upload_preview" name="image_upload_preview" style="width:140px; height: 140px;" src="<?php echo @$data[0]['picpathImg'];?>" alt="Candidate Image" />
                                         <input type="hidden" id="pic" name="pic" value="<?php echo  @$data['0']['picpath']; ?>" />    
                                         <?php } else{?>
-                                        
+
                                         <input type="hidden" class="span2 hidden" id="picname" name="picname" value="">
                                         <img id="previewImg" style="width:80px; height: 80px;    margin-left: 275px;" class="span2" src="<?php echo base_url(); ?>assets/img/profile.png" alt="Candidate Image">
                                         <?php }?>
@@ -1447,7 +1447,7 @@ header("Pragma: no-cache");
                                     $("#sub8p2").hide();
                                 }
                                 function sub_grp_load_exam_type3(){
-                                    
+
                                     Empty_All_Dropdowns();
 
                                     $('#sub7').hide();
@@ -1530,7 +1530,7 @@ header("Pragma: no-cache");
                                     if(grp_cd == '5')
                                     {
                                         Empty_All_DropdownsPII();
-                                        
+
                                         $('#sub7').show();
                                         $('#sub7p2').show();  
 
@@ -1539,7 +1539,7 @@ header("Pragma: no-cache");
                                         $("#sub3p2").append(new Option('<?php  echo  array_search($data[0]['sub8'],$subarray); ?>',sub8));
                                         $("#sub4p2").append(new Option('<?php  echo  array_search($data[0]['sub4'],$subarray); ?>',sub4));
 
-                                        $("#sub5p2").append(new Option('<?php  echo  array_search($data[0]['sub5A'],$subarray); ?>',sub5A));
+                                        $("#sub5p2").append(new Option('<?php echo  array_search($data[0]['sub5A'],$subarray); ?>',sub5A));
                                         $("#sub6p2").append(new Option('<?php  echo  array_search($data[0]['sub6A'],$subarray); ?>',sub6A));
                                         $("#sub7p2").append(new Option('<?php  echo  array_search($data[0]['sub7A'],$subarray); ?>',sub7A)); 
                                     }
@@ -2214,7 +2214,7 @@ header("Pragma: no-cache");
                                     if(rel == 1 && (sel_group != grp_cd)){
                                         $('#sub3').empty();
                                         $("#sub3").append('<option value="92">ISLAMIC EDUCATION</option>'); 
-                                        
+
                                     }
                                 });                
 

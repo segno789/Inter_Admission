@@ -2959,6 +2959,7 @@ class Admission extends CI_Controller {
             'picname'=>@$_POST['picname'],
             'regfee'=>$regfee,
             'certfee'=>$Certificate,
+            'oldResult11th'=>@$_POST['oldResult11th']
         );
 
 
