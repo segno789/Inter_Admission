@@ -300,10 +300,12 @@ if(isset($files)){
                     beforeSend: function() {  $('.mPageloader').show(); },
                     complete: function() { $('.mPageloader').hide();},
                     success: function(json) {
+                       
                         var listitems='';
                         $.each(json.center, function (key, data) {
                             listitems +='<label style="text-align: left; margin-top: -23px;">'+data.CENT_CD + '-' + data.CENT_NAME+'</label><br>';
                         })
+                         console.log(listitems)
                         $('#instruction').html('<h1 style="    margin-bottom: 28px;">Selected Zone Centre List </h1>'+listitems); 
                         $.fancybox("#instruction");
                     },
@@ -397,7 +399,7 @@ if(isset($files)){
         27 : 'English Literature',  
         34: 'Persian',  
         17: 'Civics',  
-        18: 'Statistics',  
+      //  18: 'Statistics',  
         19: 'Mathematics',  
         20 : 'Islamic Studies',  
         21: 'Outlines Of Home Economics',  
@@ -406,7 +408,7 @@ if(isset($files)){
         43: 'Education',  
         45 : 'Sociology',  
         8: 'Library Science',  
-        83 : 'Computer Science',  
+      //  83 : 'Computer Science',  
         44: 'Geology',  
         90 : 'Agriculture',  
         79 : 'Nursing' 

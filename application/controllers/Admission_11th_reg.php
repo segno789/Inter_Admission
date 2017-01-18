@@ -1677,12 +1677,43 @@ public function NewEnrolment_Delete($formno)
         $AllStdFee = array();
         $SciProcFee = 195;
         $ArtsProcFee = 195;
+        
+        $practical_Sub = array(
+            'LibSC'=>'8',
+            'GEO'=>'12',
+            'PSY'=>'16',
+            'ST'=>'18',
+            'H-ECO'=>'21',
+            'F/ART'=>'23',
+            'CP'=>'38',
+            'HPD'=>'42',
+            'BIO'=>'46',
+            'PHY'=>'47',
+            'CH'=>'48',
+            'Cl/T'=>'75',
+            'HM'=>'76',
+            'NUR'=>'79',
+            'CSc'=>'83',
+            'AGRI'=>'90',
+            'TYP'=>'96',
+            'CST'=>'98',
+
+        );
+        
+ 
         foreach($data['data']['stdinfo'] as $key=>$vals)
         { $n++;
+        
+       // echo '<pre>'; print_r($vals);
+           //    die;
+        
        // DebugBreak();
             // Check sub6 , sub7 and sub8 practical subj or not.
             //if( $this->practicalsubjects($vals->sub6)|| $this->practicalsubjects($vals->sub7)|| $this->practicalsubjects($vals->sub8))
-            if( $vals->grp_cd == 1 || $vals->grp_cd == 2 || $vals->grp_cd == 4)
+          
+       
+          
+            if( $vals->grp_cd == 1 || $vals->grp_cd == 2 || $vals->grp_cd == 4 || (array_search($vals->sub4,$practical_Sub) || array_search($vals->sub5,$practical_Sub) || array_search($vals->sub6,$practical_Sub) ||  array_search($vals->sub7,$practical_Sub)))
             {
                 if($vals->IsReAdm==1)
                 {
@@ -2804,6 +2835,27 @@ public function NewEnrolment_Delete($formno)
 
 $ArtsProcFee =  195;
 $SciProcFee =  195;
+    $practical_Sub = array(
+            'LibSC'=>'8',
+            'GEO'=>'12',
+            'PSY'=>'16',
+            'ST'=>'18',
+            'H-ECO'=>'21',
+            'F/ART'=>'23',
+            'CP'=>'38',
+            'HPD'=>'42',
+            'BIO'=>'46',
+            'PHY'=>'47',
+            'CH'=>'48',
+            'Cl/T'=>'75',
+            'HM'=>'76',
+            'NUR'=>'79',
+            'CSc'=>'83',
+            'AGRI'=>'90',
+            'TYP'=>'96',
+            'CST'=>'98',
+
+        );
         // DebugBreak();
         $data = array('data'=>$this->Admission_11th_reg_model->revenue_pdf($fetch_data),'inst_Name'=>$user['inst_Name'],'inst_cd'=>$user['Inst_Id'],"SciAdmFee"=>@$SciAdmFee,"ArtsAdmFee"=>@$ArtsAdmFee,"SciProcFee"=>@$SciProcFee,"ArtsProcFee"=>@$ArtsProcFee);
         //
@@ -2815,7 +2867,7 @@ $SciProcFee =  195;
         { $n++;
             // Check sub6 , sub7 and sub8 practical subj or not.
           //  if( $this->practicalsubjects($vals->sub6)|| $this->practicalsubjects($vals->sub7)|| $this->practicalsubjects($vals->sub8))
-            if( $vals->grp_cd==1 || $vals->grp_cd == 2 || $vals->grp_cd == 4)
+            if( $vals->grp_cd==1 || $vals->grp_cd == 2 || $vals->grp_cd == 4 ||  (array_search($vals->sub4,$practical_Sub) || array_search($vals->sub5,$practical_Sub) || array_search($vals->sub6,$practical_Sub) ||  array_search($vals->sub7,$practical_Sub)))
             {
                 if($vals->IsReAdm==1)
                 {
