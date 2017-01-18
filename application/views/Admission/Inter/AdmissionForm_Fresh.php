@@ -1054,18 +1054,14 @@ header("Pragma: no-cache");
 
                             function checks()
                             {
-
-
-                                var status  =  check_NewEnrol_validation();
+                                var status  =  check_NewEnrol_validation_Fresh();
                                 if(status == 0)
                                 {
                                     return false;    
                                 }
                                 else
                                 {
-
                                     //debugger;
-
                                     $.ajax({
 
                                         type: "POST",
