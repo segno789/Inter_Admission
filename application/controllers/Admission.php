@@ -2218,21 +2218,18 @@ class Admission extends CI_Controller {
 
         //DebugBreak();
 
-        if(!base_url()== 'http://localhost:8083/Inter_Admission')
-        {
-            $picpath = DIRPATH12TH.'\\'.@$data[0]['picpath'];
-            $isexit = is_file($picpath);
-            if(!$isexit)
-            {
-                $error_msg.= '<span style="font-size: 16pt; color:red;">' . 'Your Picture is missing.</span>';
-            }
-            else
-            {
-                $type = pathinfo($picpath, PATHINFO_EXTENSION);
-                $data[0]['picpathImg'] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
-            } 
-        }
 
+        $picpath = DIRPATH12TH.'\\'.@$data[0]['picpath'];
+        $isexit = is_file($picpath);
+        if(!$isexit)
+        {
+            $error_msg.= '<span style="font-size: 16pt; color:red;">' . 'Your Picture is missing.</span>';
+        }
+        else
+        {
+            $type = pathinfo($picpath, PATHINFO_EXTENSION);
+            $data[0]['picpathImg'] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
+        } 
 
 
         $specialcase = $data['0']['Spl_Name'];
@@ -4473,9 +4470,9 @@ class Admission extends CI_Controller {
             {
                 $sel_sub_p1_count = 1;    
             }
-          /*  if($sel_sub_p1_count == 0)
+            /*  if($sel_sub_p1_count == 0)
             {
-                $allinputdata['excep'] = 'Please Select at least one Part-I Subject.';
+            $allinputdata['excep'] = 'Please Select at least one Part-I Subject.';
             }*/
             if(@$_POST['sub1p2'] == 0)
             {
