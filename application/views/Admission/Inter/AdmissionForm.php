@@ -2251,6 +2251,8 @@ header("Pragma: no-cache");
 
 
                                 $('#std_group').change(function(){
+                                    
+                                    
                                     if(sel_group == grp_cd  && exam_type != 2) 
                                     {
                                         sub_grp_load();    

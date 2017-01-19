@@ -2218,18 +2218,22 @@ class Admission extends CI_Controller {
 
         //DebugBreak();
 
+        if(!base_url()== 'http://localhost:8083/Inter_Admission')
+        {
+            $picpath = DIRPATH12TH.'\\'.@$data[0]['picpath'];
+            $isexit = is_file($picpath);
+            if(!$isexit)
+            {
+                $error_msg.= '<span style="font-size: 16pt; color:red;">' . 'Your Picture is missing.</span>';
+            }
+            else
+            {
+                $type = pathinfo($picpath, PATHINFO_EXTENSION);
+                $data[0]['picpathImg'] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
+            } 
+        }
 
-        $picpath = DIRPATH12TH.'\\'.@$data[0]['picpath'];
-        $isexit = is_file($picpath);
-        if(!$isexit)
-        {
-            $error_msg.= '<span style="font-size: 16pt; color:red;">' . 'Your Picture is missing.</span>';
-        }
-        else
-        {
-            $type = pathinfo($picpath, PATHINFO_EXTENSION);
-            $data[0]['picpathImg'] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
-        }
+
 
         $specialcase = $data['0']['Spl_Name'];
         $specialcode = $data['0']['spl_cd'];
