@@ -164,8 +164,15 @@ class Admission_11th_pvt extends CI_Controller {
                 }
                 else if($msg != '')
                 {
-                    $error['excep'] =  $msg;
-
+                    if($RegStdData['data'][0]['class'] ==  11 && $RegStdData['data'][0]['status'] != 1)
+                    {
+                        $error['excep'] = '';
+                    }
+                    else
+                    {
+                         $error['excep'] =  $msg;
+                    }
+                   
 
                 }
                 else if($status != 1)
@@ -1629,11 +1636,10 @@ class Admission_11th_pvt extends CI_Controller {
     }
     function feecalculate($data)
     {
-       // DebugBreak();
+       DebugBreak();
         $isper = 0;
 
         $practical_Sub = array(
-
             'LIBRARY SCIENCE'=>'8',
             'GEOGRAPHY'=>'12',
             'PSYCHOLOGY'=>'16',
@@ -1654,7 +1660,7 @@ class Admission_11th_pvt extends CI_Controller {
             'HOME MANAGEMNET (Home-Economics Group)'=>'76'
         );
         $isper = 0;
-    if( $data['grp_cd'] == 1 || $data['grp_cd'] == 2 || $data['grp_cd'] == 4 ||   array_search($data['sub4'],$practical_Sub) || array_search($data['sub5'],$practical_Sub) || array_search($data['sub5A'],$practical_Sub) || array_search($data['sub6'],$practical_Sub)  || array_search($data['sub6A'],$practical_Sub) ||  array_search($data['sub7'],$practical_Sub) || array_search($data['sub7A'],$practical_Sub))
+    if( $data['grp_cd'] == 1 || $data['grp_cd'] == 2 || $data['grp_cd'] == 4 ||   array_search($data['sub4'],$practical_Sub) || array_search($data['sub5'],$practical_Sub) || array_search($data['sub6'],$practical_Sub) ||  array_search($data['sub7'],$practical_Sub))
     {
          $isper = 1;
     }

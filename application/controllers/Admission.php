@@ -2226,16 +2226,20 @@ class Admission extends CI_Controller {
 
         //DebugBreak();
 
-        $picpath = DIRPATH12TH.'\\'.@$data[0]['picpath'];
+         $picpath = DIRPATH12TH.'\\'.@$data[0]['picpath'];
         $isexit = is_file($picpath);
-        if(!($isexit) && $error_msg == '')
+        if(!($isexit) && $error_msg == '' && $iyear >2014)
         {
             $error_msg.= '<span style="font-size: 16pt; color:red;">' . 'Your Picture is missing.</span>';
         }
         else
         {
-            $type = pathinfo($picpath, PATHINFO_EXTENSION);
+            if($iyear >2014)
+            {
+                 $type = pathinfo($picpath, PATHINFO_EXTENSION);
             $data[0]['picpathImg'] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
+            }
+           
         } 
 
         $specialcase = $data['0']['Spl_Name'];
@@ -5045,6 +5049,57 @@ class Admission extends CI_Controller {
             echo '<div class="error">';
             echo $e->getMessage();
             echo '</div>';
+        }
+    }
+    public function deleteExtarfiles()
+    {
+        $dirPath = 'F:\xampp\htdocs\Inter_Admission\uplaods\2016\private\11th';
+        $copypath = 'F:\xampp\htdocs\Inter_Admission\uplaods\2016\private\11th_temp';
+        //DebugBreak();
+        if (is_dir($dirPath)) {
+            $objects = scandir($dirPath);
+
+
+            $i = 0;
+
+            foreach ($objects as $object) {
+                if ($object != "." && $object !="..") {
+
+                    if (filetype($dirPath . DIRECTORY_SEPARATOR . $object) == "dir") {
+                        $this->deleteExtarfiles($dirPath . DIRECTORY_SEPARATOR . $object);
+                    } else {
+
+                        
+                        $filepath = $dirPath . DIRECTORY_SEPARATOR . $object;
+                        $copydir = $copypath . DIRECTORY_SEPARATOR . $object;
+                        //$filepath = explode('.',$filepath);
+                        $subtem =  substr($object,0,4);
+                        if($subtem ==  'temp')
+                        {
+                            //DebugBreak();
+                            $fcrttime =  date('d-m-Y',filemtime($filepath));
+                            $crttime  = date('d-m-Y'); 
+                            if($fcrttime <$crttime)
+                            {
+                                $i+=1;
+                                copy($filepath,$copydir);
+                                unlink($dirPath . DIRECTORY_SEPARATOR . $object); 
+                                echo $i.') File Moved '.$copydir.'</br>';   
+                            }
+                           
+                        }
+                        /*echo '<pre>';print_r($subtem);die;
+                        if(strtolower(@$filepath[1])!= 'jpg')
+                        {
+                        unlink($dirPath . DIRECTORY_SEPARATOR . $object); 
+                        }*/
+
+                    }
+                }
+            }
+            reset($objects);
+            //rmdir(@$dirPath);
+            //rmdir(@$dirPath);
         }
     }
 }
