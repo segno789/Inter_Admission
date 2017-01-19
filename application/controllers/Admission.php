@@ -4298,15 +4298,11 @@ class Admission extends CI_Controller {
                     if(@$_POST['sub1p2'] == 0)
                     {
                         $allinputdata['excep'] = 'Please Select Part-II Subject 1';
-
-
                     }
                     else if(@$_POST['sub2p2'] == 0)
                     {
                         $allinputdata['excep'] = 'Please Select Part-II Subject 2';
-
                     }
-
 
                     else if(@$_POST['sub4p2'] == 0 && @$_POST['std_group'] != 4)
                     {
@@ -4477,10 +4473,10 @@ class Admission extends CI_Controller {
             {
                 $sel_sub_p1_count = 1;    
             }
-            if($sel_sub_p1_count == 0)
+          /*  if($sel_sub_p1_count == 0)
             {
                 $allinputdata['excep'] = 'Please Select at least one Part-I Subject.';
-            }
+            }*/
             if(@$_POST['sub1p2'] == 0)
             {
                 $allinputdata['excep'] = 'Please Select Part-II Subject 1';
