@@ -394,7 +394,7 @@ header("Pragma: no-cache");
                                         $grp_cd = $data[0]['grp_cd'];
                                         $chance = $data[0]['chance'];
                                         $exam_type = $data[0]['exam_type'];
-                                        
+
                                         $status = $data[0]['status'];
                                         $class = $data[0]['class'];
                                         $IsRegular = @$data[0]['regPvt'];
@@ -407,7 +407,7 @@ header("Pragma: no-cache");
 
 
                                         else if($exam_type == 3 && $class == 11 && $IsRegular == 1){
-                                            
+
                                             echo "<option value='0' selected='selected'>NONE</option>"; 
                                             echo "<option value='3'>HUMANITIES</option>"; 
                                             echo "<option value='5'>COMMERCE</option>";
@@ -1090,6 +1090,8 @@ header("Pragma: no-cache");
 
                                 function humanities_subjects(){
 
+                                    //debugger;
+
                                     Empty_All_Dropdowns();
 
                                     $("#sub1").append('<option value="1">ENGLISH</option>');
@@ -1160,7 +1162,8 @@ header("Pragma: no-cache");
 
 
 
-                                var grp_cd ="<?php echo @$data[0]['grp_cd']; ?>";
+                                
+                                var grp_cd ="<?php if(@$data[0]['exam_type']=="3"){ echo 0; } else{echo  @$data[0]['grp_cd'];}  ?>";
                                 var sub1 ="<?php echo @$data[0]['sub1']; ?>";
                                 var sub2 = "<?php echo @$data[0]['sub2']; ?>";
                                 var sub3 ="<?php echo @$data[0]['sub3']; ?>";
@@ -1457,9 +1460,9 @@ header("Pragma: no-cache");
                                     $("#sub8").hide();
                                     $("#sub8p2").hide();
                                 }
-                                
-                                
-                                
+
+
+
                                 function sub_grp_load_exam_type3(){
 
                                     Empty_All_Dropdowns();
@@ -2205,8 +2208,8 @@ header("Pragma: no-cache");
                                         echo'Empty_All_Dropdowns();';
                                         echo'ClearALLDropDowns();';
                                     }
-                                    
-                                      else if($exam_type == 3 ){
+
+                                    else if($exam_type == 3 ){
                                         echo'sub_grp_load_exam_type3();';
                                     }
 
@@ -2249,12 +2252,14 @@ header("Pragma: no-cache");
 
                                 $('#std_group').change(function(){
 
+                                    //debugger;
+
                                     var sel_group = $('#std_group').val();    
 
                                     if(sel_group == grp_cd  && exam_type != 2) 
                                     {
                                         sub_grp_load();    
-                                    }     
+                                    }  
 
                                     else if(sel_group == 0){
                                         ClearALLDropDowns();
