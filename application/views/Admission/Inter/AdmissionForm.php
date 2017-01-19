@@ -257,7 +257,7 @@ header("Pragma: no-cache");
                                     if($rel == 1)
                                     {
                                         echo
-                                        "<label class='radio inline span1'><input type='radio' id='religion' class='rel_class' value='1' checked='checked' name='religion'> Muslim
+                                        "<label class='radio inline span1'><input type='radio' id='religion' class='rel_class' value='1'  checked='checked' name='religion'> Muslim
                                         </label><label class='radio inline span1'><input type='radio' id='religion1' class='rel_class'  value='2' name='religion'> Non Muslim</label>" ;
                                     }
                                     else if ($rel == 2)
@@ -1162,7 +1162,7 @@ header("Pragma: no-cache");
 
 
 
-                                
+
                                 var grp_cd ="<?php if(@$data[0]['exam_type']=="3"){ echo 0; } else{echo  @$data[0]['grp_cd'];}  ?>";
                                 var sub1 ="<?php echo @$data[0]['sub1']; ?>";
                                 var sub2 = "<?php echo @$data[0]['sub2']; ?>";
@@ -1299,7 +1299,6 @@ header("Pragma: no-cache");
                                         $("#sub4").empty();
                                         $("#sub4").append(new Option('<?php  echo  array_search($data[0]['sub4'],$subarray); ?>',sub4));
                                         $("#sub4 option[value='" + sub4 + "']").attr("selected","selected");
-
                                     }
                                     else
                                     {
@@ -1311,7 +1310,6 @@ header("Pragma: no-cache");
                                         $("#sub4p2").empty();
                                         $("#sub4p2").append(new Option('<?php  echo  array_search($data[0]['sub4'],$subarray); ?>',sub4));
                                         $("#sub4p2 option[value='" + sub4 + "']").attr("selected","selected");
-
                                     }
                                     else
                                     {
@@ -1324,7 +1322,6 @@ header("Pragma: no-cache");
 
                                         $("#sub5").append(new Option('<?php  echo  array_search($data[0]['sub5'],$subarray); ?>',sub5));
                                         $("#sub5 option[value='" + sub5 + "']").attr("selected","selected");
-
                                     }
                                     else
                                     {
@@ -1498,7 +1495,7 @@ header("Pragma: no-cache");
                                         $("#sub3").append('<option value="0">NONE</option>');            
                                     }
 
-                                    if((sub3pf1 == "2") || (sub3st1 == "2")){
+                                    if((sub4pf1 == "2") || (sub4st1 == "2")){
                                         $("#sub4").append(new Option('<?php  echo  array_search($data[0]['sub4'],$subarray); ?>',sub4));      
                                         $("#sub4").append('<option value="0">NONE</option>');      
                                     }
@@ -2229,33 +2226,31 @@ header("Pragma: no-cache");
                                 ?>
 
                                 /*.CHNAGE WORKS*/
+                                var sel_group = $('#std_group').val();    
 
                                 $( "#religion" ).change(function() {
                                     var rel = $( "#religion" ).val();
-                                    var sel_group = $('#std_group').val();    
-                                    if(rel == 1 && (sel_group != grp_cd)){
-                                        $('#sub3').empty();
-                                        $("#sub3").append('<option value="92">ISLAMIC EDUCATION</option>'); 
 
-                                    }
-                                });                
-
-                                $( "#religion1" ).change(function() {
-                                    var rel = $( "#religion1" ).val();
-                                    var sel_group = $('#std_group').val();    
-                                    if(rel == 2 && (sel_group != grp_cd)){
+                                    if(rel == 1){
                                         $('#sub3').empty();
-                                        $("#sub3").append('<option value="51">ETHICS</option>'); 
+                                        $("#sub3").append('<option value="0">NONE</option>'); 
                                         $("#sub3").append('<option value="92">ISLAMIC EDUCATION</option>'); 
                                     }
                                 });
 
+                                $( "#religion1" ).change(function() {
+                                    var rel1 = $( "#religion1" ).val();
+
+                                    if(rel1 == 2){
+                                        $('#sub3').empty();
+                                        $("#sub3").append('<option value="0">NONE</option>'); 
+                                        $("#sub3").append('<option value="92">ISLAMIC EDUCATION</option>'); 
+                                        $("#sub3").append('<option value="93">CIVICS FOR NON MUSLIM</option>'); 
+                                    }
+                                });
+
+
                                 $('#std_group').change(function(){
-
-                                    //debugger;
-
-                                    var sel_group = $('#std_group').val();    
-
                                     if(sel_group == grp_cd  && exam_type != 2) 
                                     {
                                         sub_grp_load();    

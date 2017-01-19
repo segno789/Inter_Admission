@@ -2218,6 +2218,7 @@ class Admission extends CI_Controller {
 
         //DebugBreak();
 
+
         $picpath = DIRPATH12TH.'\\'.@$data[0]['picpath'];
         $isexit = is_file($picpath);
         if(!$isexit)
@@ -3511,16 +3512,10 @@ class Admission extends CI_Controller {
 
         $ispractical = 0;
 
-        /*if($per_grp == 1 || $pre_grp == 2 || $pre_grp == 4  || $grp_cd == 1 || $grp_cd == 2 || $grp_cd == 4)
-        {
-        $ispractical =1;
-        }*/
         if(array_search(@$_POST['sub4'],$practical_Sub) || array_search(@$_POST['sub5'],$practical_Sub) || array_search(@$_POST['sub6'],$practical_Sub) || array_search(@$_POST['sub7'],$practical_Sub) || array_search(@$_POST['sub7p2'],$practical_Sub) || array_search(@$_POST['sub4p2'],$practical_Sub) || array_search(@$_POST['sub5p2'],$practical_Sub) || array_search(@$_POST['sub6p2'],$practical_Sub))
         {
             $ispractical =1;
         }
-        //DebugBreak();
-        //  $AdmFee = $this->Admission_model->getrulefee($ispractical);
 
         $AdmFeeCatWise = '1700';
         $Certificate = 0;
