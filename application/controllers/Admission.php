@@ -2226,7 +2226,13 @@ class Admission extends CI_Controller {
 
         //DebugBreak();
 
+<<<<<<< .mine
          $picpath = DIRPATH12TH.'\\'.@$data[0]['picpath'];
+
+=======
+
+        $picpath = DIRPATH12TH.'\\'.@$data[0]['picpath'];
+>>>>>>> .theirs
         $isexit = is_file($picpath);
         if(!($isexit) && $error_msg == '' && $iyear >2014)
         {
@@ -2238,9 +2244,16 @@ class Admission extends CI_Controller {
             {
                  $type = pathinfo($picpath, PATHINFO_EXTENSION);
             $data[0]['picpathImg'] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
+<<<<<<< .mine
             }
            
         } 
+=======
+        } 
+
+
+>>>>>>> .theirs
+
 
         $specialcase = $data['0']['Spl_Name'];
         $specialcode = $data['0']['spl_cd'];
@@ -3522,16 +3535,10 @@ class Admission extends CI_Controller {
 
         $ispractical = 0;
 
-        /*if($per_grp == 1 || $pre_grp == 2 || $pre_grp == 4  || $grp_cd == 1 || $grp_cd == 2 || $grp_cd == 4)
-        {
-        $ispractical =1;
-        }*/
         if(array_search(@$_POST['sub4'],$practical_Sub) || array_search(@$_POST['sub5'],$practical_Sub) || array_search(@$_POST['sub6'],$practical_Sub) || array_search(@$_POST['sub7'],$practical_Sub) || array_search(@$_POST['sub7p2'],$practical_Sub) || array_search(@$_POST['sub4p2'],$practical_Sub) || array_search(@$_POST['sub5p2'],$practical_Sub) || array_search(@$_POST['sub6p2'],$practical_Sub))
         {
             $ispractical =1;
         }
-        //DebugBreak();
-        //  $AdmFee = $this->Admission_model->getrulefee($ispractical);
 
         $AdmFeeCatWise = '1700';
         $Certificate = 0;
@@ -4310,15 +4317,11 @@ class Admission extends CI_Controller {
                     if(@$_POST['sub1p2'] == 0)
                     {
                         $allinputdata['excep'] = 'Please Select Part-II Subject 1';
-
-
                     }
                     else if(@$_POST['sub2p2'] == 0)
                     {
                         $allinputdata['excep'] = 'Please Select Part-II Subject 2';
-
                     }
-
 
                     else if(@$_POST['sub4p2'] == 0 && @$_POST['std_group'] != 4)
                     {
@@ -4489,10 +4492,10 @@ class Admission extends CI_Controller {
             {
                 $sel_sub_p1_count = 1;    
             }
-            if($sel_sub_p1_count == 0)
+            /*  if($sel_sub_p1_count == 0)
             {
-                $allinputdata['excep'] = 'Please Select at least one Part-I Subject.';
-            }
+            $allinputdata['excep'] = 'Please Select at least one Part-I Subject.';
+            }*/
             if(@$_POST['sub1p2'] == 0)
             {
                 $allinputdata['excep'] = 'Please Select Part-II Subject 1';
