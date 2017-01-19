@@ -1897,7 +1897,7 @@ class Admission extends CI_Controller {
             {
                 $data['AdmFee'] = $finalFee;  
             }
-           
+
             $data['AdmTotalFee'] = $processFee+$Total_fine+$data['regfee']+$data['CertificateFee'];
             $AllStdFee = array('formNo'=>$data['FormNo'],'AdmFee'=>$data['AdmFee'],'AdmFine'=>$Total_fine,'AdmTotalFee'=> $data['AdmTotalFee']);
         }
@@ -2224,15 +2224,12 @@ class Admission extends CI_Controller {
             $error_msg.='<span style="font-size: 16pt; color:red;">No Any Student Found Against Your Criteria</span>';
         }
 
-        //DebugBreak();
-
-<<<<<<< .mine
-         $picpath = DIRPATH12TH.'\\'.@$data[0]['picpath'];
-
-=======
 
         $picpath = DIRPATH12TH.'\\'.@$data[0]['picpath'];
->>>>>>> .theirs
+
+
+        $picpath = DIRPATH12TH.'\\'.@$data[0]['picpath'];
+
         $isexit = is_file($picpath);
         if(!($isexit) && $error_msg == '' && $iyear >2014)
         {
@@ -2242,18 +2239,11 @@ class Admission extends CI_Controller {
         {
             if($iyear >2014)
             {
-                 $type = pathinfo($picpath, PATHINFO_EXTENSION);
-            $data[0]['picpathImg'] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
-<<<<<<< .mine
+                $type = pathinfo($picpath, PATHINFO_EXTENSION);
+                $data[0]['picpathImg'] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
+
             }
-           
         } 
-=======
-        } 
-
-
->>>>>>> .theirs
-
 
         $specialcase = $data['0']['Spl_Name'];
         $specialcode = $data['0']['spl_cd'];
@@ -5072,7 +5062,7 @@ class Admission extends CI_Controller {
                         $this->deleteExtarfiles($dirPath . DIRECTORY_SEPARATOR . $object);
                     } else {
 
-                        
+
                         $filepath = $dirPath . DIRECTORY_SEPARATOR . $object;
                         $copydir = $copypath . DIRECTORY_SEPARATOR . $object;
                         //$filepath = explode('.',$filepath);
@@ -5089,7 +5079,7 @@ class Admission extends CI_Controller {
                                 unlink($dirPath . DIRECTORY_SEPARATOR . $object); 
                                 echo $i.') File Moved '.$copydir.'</br>';   
                             }
-                           
+
                         }
                         /*echo '<pre>';print_r($subtem);die;
                         if(strtolower(@$filepath[1])!= 'jpg')
