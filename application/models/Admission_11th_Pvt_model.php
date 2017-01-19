@@ -30,13 +30,14 @@ class Admission_11th_Pvt_model extends CI_Model
         //  DebugBreak();
         $Inst_cd = $User_info_data['Inst_Id'];
         $date = $User_info_data['date'];
+        $isPratical = $User_info_data['isPratical'];
 
         $query = $this->db->get_where('Admission_online..tblinstitutes_all',  array('Inst_cd' => $Inst_cd));
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
 
-            $query2 = $this->db->get_where('Admission_Online..RuleFeeAdm', array('class' => 12,'sess' => 1, 'Start_Date <='=>$date,'End_Date >='=>$date,'isPrSub'=>0));
+            $query2 = $this->db->get_where('Admission_Online..RuleFeeAdm', array('class' => 12,'sess' => 1, 'Start_Date <='=>$date,'End_Date >='=>$date,'isPrSub'=>$isPratical));
             $resultarr = array("info"=>$query->result_array(),"rule_fee"=>$query2->result_array());
             return  $resultarr;
         }
