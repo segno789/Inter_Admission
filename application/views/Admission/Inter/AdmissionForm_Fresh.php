@@ -69,7 +69,6 @@ header("Pragma: no-cache");
 
                                 </div>
                             </div>
-
                             <div class="control-group">
                                 <label id="ErrMsg" class="control-label span2" style=" text-align: left;"><?php ?></label>
 
@@ -90,11 +89,11 @@ header("Pragma: no-cache");
                                 </label>
                                 <div class="controls controls-row">
 
-                                    <input class="span3"  type="text" id="cand_name" style="text-transform: uppercase;" name="cand_name" placeholder="Candidate Name" maxlength="60" readonly="readonly"  value="<?php echo $data[0]['name']; ?>">
+                                    <input class="span3"  type="text" id="cand_name" style="text-transform: uppercase;" name="cand_name" placeholder="Candidate Name" maxlength="60" readonly="readonly"  value="<?php echo @$data[0]['name']; ?>">
                                     <label class="control-label span2" for="lblfather_name">
                                         Father's Name :
                                     </label> 
-                                    <input class="span3" id="father_name" name="father_name" style="text-transform: uppercase;" type="text" placeholder="Father's Name" maxlength="60" readonly="readonly" value="<?php echo  $data['0']['fname']; ?>" required="required">
+                                    <input class="span3" id="father_name" name="father_name" style="text-transform: uppercase;" type="text" placeholder="Father's Name" maxlength="60" readonly="readonly" value="<?php echo  @$data['0']['fname']; ?>" required="required">
                                 </div>
                             </div>
                             <div class="control-group">
@@ -146,14 +145,14 @@ header("Pragma: no-cache");
                                 </label>
                                 <div class="controls controls-row">  
                                     <?php
-                                    $nat = $data[0]['IsPakistani'];
-                                    if($nat == 1)
+                                    @$nat = @$data[0]['IsPakistani'];
+                                    if(@$nat == 1)
                                     {
                                         echo 
                                         "<label class='radio inline span1'><input type='radio' value='1' id='nationality' checked='checked' name='nationality'> Pakistani</label>
                                         <label class='radio inline span2'><input type='radio'  id='nationality1' value='2' name='nationality'> Non Pakistani</label>";
                                     }
-                                    else if ($nat == 2)
+                                    else if (@$nat == 2)
                                     {
                                         echo  "<label class='radio inline span1'><input type='radio' value='1' id='nationality'  name='nationality'> Pakistani
                                         </label><label class='radio inline span2'><input type='radio'  id='nationality1' checked='checked' value='2' name='nationality'>  Non Pakistani</label>" ;
@@ -164,23 +163,22 @@ header("Pragma: no-cache");
                                     </label> 
                                     <?php
 
-                                    $gender = $data[0]['Gender'];
+                                    @$gender = @$data[0]['Gender'];
 
-                                    if($gender == 1)
+                                    if(@$gender == 1)
                                     {
                                         echo 
                                         "<label class='radio inline span1'><input type='radio' id='gender1' value='1' checked='checked'  disabled='disabled' name='gender'> Male</label> 
                                         <label class='radio inline span1'><input type='radio' id='gender2' value='2'  name='gender'  disabled='disabled'> Female </label> " ;
                                     }
-                                    else if ($gender == 2)
+                                    else if (@$gender == 2)
                                     {
                                         echo 
                                         "<label class='radio inline span1'><input type='radio' id='gender1' value='1'  disabled='disabled' name='gender'> Male</label> 
                                         <label class='radio inline span1'><input type='radio' id='gender2' value='2'  checked='checked'  disabled='disabled'  name='gender'> Female </label> " ;
                                     }
                                     ?>
-                                    <input type="hidden" name="gend" value="<?php echo $gender; ?>">                                    
-                                    
+                                    <input type="hidden" name="gend" value="<?php echo @$gender; ?>">                                    
                                 </div>
                             </div>
                             <div class="control-group">
@@ -194,14 +192,14 @@ header("Pragma: no-cache");
                                         Religion :
                                     </label> 
                                     <?php
-                                    $rel = $data[0]['IsMuslim'];
-                                    if($rel == 1)
+                                    @$rel = @$data[0]['IsMuslim'];
+                                    if(@$rel == 1)
                                     {
                                         echo
                                         "<label class='radio inline span1'><input type='radio' id='religion' class='rel_class' value='1' checked='checked' name='religion'> Muslim
                                         </label><label class='radio inline span1'><input type='radio' id='religion1' class='rel_class'  value='2' name='religion'> Non Muslim</label>" ;
                                     }
-                                    else if ($rel == 2)
+                                    else if (@$rel == 2)
                                     {
                                         echo
                                         "<label class='radio inline span1'><input type='radio' id='religion' class='rel_class' value='1' name='religion'> Muslim
@@ -216,13 +214,13 @@ header("Pragma: no-cache");
                             </label>
                             <div class="controls controls-row">  
                                 <?php
-                                $resid = $data[0]['isRural'];
-                                if($resid == 1 )
+                                @$resid = @$data[0]['isRural'];
+                                if(@$resid == 1 )
                                 {
                                     echo " <label class='radio inline span1'><input type='radio' value='1' id='UrbanRural' checked='checked' name='UrbanRural'> Urban
                                     </label><label class='radio inline span2'><input type='radio'  id='UrbanRural' value='2' name='UrbanRural'>  Rural </label>";
                                 }
-                                else if($resid == 2)
+                                else if(@$resid == 2)
                                 {
                                     echo " <label class='radio inline span1'><input type='radio' value='1' id='UrbanRural' name='UrbanRural'> Urban
                                     </label><label class='radio inline span2'><input type='radio'  id='UrbanRural' value='2'  checked='checked'  name='UrbanRural'>  Rural </label>";
@@ -240,7 +238,7 @@ header("Pragma: no-cache");
                                 </label>
                                 <div class="controls controls-row">
                                     <textarea style="height:150px; text-transform: uppercase;"  id="address" class="span8" name="address" required="required"><?php
-                                        echo $data[0]['addr'];
+                                        echo @$data[0]['addr'];
                                     ?></textarea>
                                 </div>
                             </div>
