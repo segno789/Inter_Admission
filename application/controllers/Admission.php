@@ -2223,7 +2223,7 @@ class Admission extends CI_Controller {
         if(!$data){
             $error_msg.='<span style="font-size: 16pt; color:red;">No Any Student Found Against Your Criteria</span>';
         }
-        
+
         $picpath = DIRPATH12TH.'\\'.@$data[0]['picpath'];
 
         $isexit = is_file($picpath);
@@ -2402,7 +2402,6 @@ class Admission extends CI_Controller {
             $this->load->view('Admission/Inter/OtherBoard.php', array('data'=>$data));
             $this->load->view('common/commonfooter.php'); 
         }
-
         else if( $_POST["oldBrd_cd"] == 1)
         {
 
