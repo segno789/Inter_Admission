@@ -5041,8 +5041,12 @@ class Admission extends CI_Controller {
     }
     public function deleteExtarfiles()
     {
-        $dirPath = 'F:\xampp\htdocs\Inter_Admission\uplaods\2016\private\11th';
-        $copypath = 'F:\xampp\htdocs\Inter_Admission\uplaods\2016\private\11th_temp';
+        
+         $clsfolder = $this->uri->segment(3);
+         //echo $clsfolder ;die;
+        
+        $dirPath = 'C:\inetpub\vhosts\bisegrw.com\hssc.bisegrw.com\uplaods\2016\private\\'.$clsfolder.'th';
+        $copypath = 'C:\inetpub\vhosts\bisegrw.com\hssc.bisegrw.com\uplaods\2016\private\\'.$clsfolder.'th_temp';
         //DebugBreak();
         if (is_dir($dirPath)) {
             $objects = scandir($dirPath);
