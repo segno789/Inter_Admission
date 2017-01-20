@@ -5,7 +5,7 @@
                 <div class="widget">
                     <div class="widget-header">
                         <div class="title" style="float: none !important;">
-                            <label class="welcome_note myEngheading" style="float: left;">Please Provide Your Previous Exam Information</label>
+                            <label class="welcome_note myEngheading" style="float: left;">1- Please Provide Your Previous Exam Information</label>
                             <label class="myUrduheading" style="float: right;"> براۓ مہربانی سابقہ امتحان کی معلومات فراہم کریں </label>
                         </div>
                     </div>
@@ -161,7 +161,7 @@
                                             <div class="span12">
                                                 <div class="widget-header">
                                                     <div class="title" style="float: none !important;">
-                                                        <label class="welcome_note myEngheading" style="float: left;">Please Provide Your Matric Exam Information.(For Fresh in Both Part Appearing Students)</label>
+                                                        <label class="welcome_note myEngheading" style="float: left;">2- Please Provide Your Matric Exam Information.(For Fresh in Both Part Appearing Students)</label>
                                                         <label class="myUrduheading" style="float: right;"> براۓ مہربانی سابقہ امتحان کی معلومات فراہم کریں </label>
                                                     </div>
                                                 </div>    
