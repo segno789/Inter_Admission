@@ -2406,7 +2406,25 @@ class Admission extends CI_Controller {
         {
 
             $data = $this->Admission_model->Pre_Matric_data($data);
-            if(!$data)
+
+            @$sessions = @$data[0]['HSSC_Sess'];
+
+            if(@$sessions == '1')
+            {
+                @$sessions = 'Inter Annual';
+            }
+            else{
+                @$sessions = 'Inter Supplementary';
+            }
+
+            if(@$data[0]['Inter'] == 1){
+                $error_msg.='<span style="font-size: 16pt; color:red;">You have Already Appeared in '.$sessions.', '.@$data[0]['HSSC_Year'].', against Roll No = '.@$data[0]['HSSC_RNo'].'</span>';
+                $mydata = array('data'=>$_POST,'norec'=>$error_msg);
+                $this->session->set_flashdata('matric_error',$mydata );
+                redirect('Admission/matric_default');
+            }
+
+            else if(!$data)
             {
                 $error_msg.='<span style="font-size: 16pt; color:red;">No Any Student Found Against Your Criteria</span>';
                 $mydata = array('data'=>$_POST,'norec'=>$error_msg);
@@ -2414,8 +2432,9 @@ class Admission extends CI_Controller {
                 redirect('Admission/matric_default');
             }
 
-            $board    = $data[0]['SSC_Board'];
-            $oldclass    = $data[0]['SSC_CLASS'];
+
+            @$board    = $data[0]['SSC_Board'];
+            @$oldclass    = $data[0]['SSC_CLASS'];
 
             $brd_name=$this->Admission_model->Brd_Name($board);
             $data[0]['brd_name']= $brd_name[0]['Brd_Abr'] ;
@@ -2425,6 +2444,7 @@ class Admission extends CI_Controller {
             $this->load->view('common/commonheader.php');        
             $this->load->view('Admission/Inter/AdmissionForm_Fresh.php', array('data'=>$data));
             $this->load->view('common/commonfooter.php');
+
         }
     }
 

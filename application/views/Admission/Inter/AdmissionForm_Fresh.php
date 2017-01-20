@@ -132,11 +132,11 @@ header("Pragma: no-cache");
                                     Mark Of Identification :
                                 </label>
                                 <div class="controls controls-row">
-                                    <input class="span3" type="text" id="MarkOfIden" style="text-transform: uppercase;" name="MarkOfIden" value="<?php echo  $data['0']['markOfIden']; ?>" required="required" maxlength="60" >
+                                    <input class="span3" type="text" id="MarkOfIden" style="text-transform: uppercase;" name="MarkOfIden" value="<?php echo  @$data['0']['markOfIden']; ?>" required="required" maxlength="60" >
                                     <label class="control-label span2" >
                                         Mobile Number :
                                     </label> 
-                                    <input class="span3" id="mob_number" name="mob_number" type="text" placeholder="0300-123456789" value="<?php echo  $data['0']['MobNo']; ?> " required="required">
+                                    <input class="span3" id="mob_number" name="mob_number" type="text" placeholder="0300-123456789" value="<?php echo  @$data['0']['MobNo']; ?> " required="required">
                                 </div>
                             </div>
                             <div class="control-group">
@@ -145,7 +145,7 @@ header("Pragma: no-cache");
                                 </label>
                                 <div class="controls controls-row">  
                                     <?php
-                                    @$nat = @$data[0]['IsPakistani'];
+                                    @$nat = $data[0]['IsPakistani'];
                                     if(@$nat == 1)
                                     {
                                         echo 
@@ -157,13 +157,20 @@ header("Pragma: no-cache");
                                         echo  "<label class='radio inline span1'><input type='radio' value='1' id='nationality'  name='nationality'> Pakistani
                                         </label><label class='radio inline span2'><input type='radio'  id='nationality1' checked='checked' value='2' name='nationality'>  Non Pakistani</label>" ;
                                     }
+
+                                    else{
+                                        echo 
+                                        "<label class='radio inline span1'><input type='radio' value='1' id='nationality' checked='checked' name='nationality'> Pakistani</label>
+                                        <label class='radio inline span2'><input type='radio'  id='nationality1' value='2' name='nationality'> Non Pakistani</label>";
+                                    }
+
                                     ?>
                                     <label class="control-label span3" style="margin-left: -100px;" for="gender1">
                                         Gender :
                                     </label> 
                                     <?php
 
-                                    @$gender = @$data[0]['Gender'];
+                                    @$gender = $data[0]['Gender'];
 
                                     if(@$gender == 1)
                                     {
@@ -176,6 +183,12 @@ header("Pragma: no-cache");
                                         echo 
                                         "<label class='radio inline span1'><input type='radio' id='gender1' value='1'  disabled='disabled' name='gender'> Male</label> 
                                         <label class='radio inline span1'><input type='radio' id='gender2' value='2'  checked='checked'  disabled='disabled'  name='gender'> Female </label> " ;
+                                    }
+
+                                    else{
+                                        echo 
+                                        "<label class='radio inline span1'><input type='radio' id='gender1' value='1' name='gender'> Male</label> 
+                                        <label class='radio inline span1'><input type='radio' id='gender2' value='2'  name='gender'> Female </label>" ;
                                     }
                                     ?>
                                     <input type="hidden" name="gend" value="<?php echo @$gender; ?>">                                    
@@ -204,6 +217,11 @@ header("Pragma: no-cache");
                                         echo
                                         "<label class='radio inline span1'><input type='radio' id='religion' class='rel_class' value='1' name='religion'> Muslim
                                         </label><label class='radio inline span1'><input type='radio' id='religion1' class='rel_class' value='2' checked='checked' name='religion'> Non Muslim</label>" ;
+                                    }
+                                    else{
+                                        echo
+                                        "<label class='radio inline span1'><input type='radio' id='religion' class='rel_class' value='1' checked='checked' name='religion'> Muslim
+                                        </label><label class='radio inline span1'><input type='radio' id='religion1' class='rel_class' value='2'  name='religion'> Non Muslim</label>" ; 
                                     }
                                     ?>
                                 </div>
@@ -251,7 +269,7 @@ header("Pragma: no-cache");
                                     SSC Roll No :
                                 </label>
                                 <div class="controls controls-row">
-                                    <input class="span3" type="text" readonly="readonly" id="oldrno" style="text-transform: uppercase;" name="oldrno" value="<?php  echo  $data['0']['SSC_RNO']; ?>" required="required" maxlength="60" >
+                                    <input class="span3" type="text" readonly="readonly" id="oldrno" style="text-transform: uppercase;" name="oldrno" value="<?php  echo  @$data['0']['SSC_RNO']; ?>" required="required" maxlength="60" >
                                     <label class="control-label span2" >
                                         SSC Year:
                                     </label> 
@@ -263,11 +281,11 @@ header("Pragma: no-cache");
                                     Session :
                                 </label>
                                 <div class="controls controls-row">
-                                    <input type="text" class="span3" id="oldsess" name="oldsess" readonly="readonly" value="<?php echo $data['0']['SSC_Session'] == 1 ? "Annual" :"Supplementary"; ?>"/> 
+                                    <input type="text" class="span3" id="oldsess" name="oldsess" readonly="readonly" value="<?php echo @$data['0']['SSC_Session'] == 1 ? "Annual" :"Supplementary"; ?>"/> 
                                     <label class="control-label span2" >
                                         Board:
                                     </label> 
-                                    <input type="text" class="span3" id="oldboard" name="oldboard" readonly="readonly" value="<?php echo $data[0]['brd_name'];?>"/>     
+                                    <input type="text" class="span3" id="oldboard" name="oldboard" readonly="readonly" value="<?php echo @$data[0]['brd_name'];?>"/>     
                                 </div>
                             </div>
                             <hr>

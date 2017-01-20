@@ -168,7 +168,7 @@ class ImageResize {
 	
 	//save image to destination
 	private function save_image(){
-        DebugBreak();
+        //DebugBreak();
 		if(!file_exists($this->save_dir)){ //try and create folder if none exist
 			if(!mkdir($this->save_dir, 0755, true)){
 				throw new Exception($this->save_dir . ' - directory doesn\'t exist!');
