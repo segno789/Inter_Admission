@@ -102,7 +102,7 @@
                             </div>
 
                             <div class="control-group">
-                                <label class="control-label span1" >
+                                <label class="control-label span1" id="doblable" >
                                     Date of Birth:(dd-mm-yyyy)
                                 </label>
                                 <?php
@@ -119,7 +119,7 @@
                                 <div class="controls controls-row">
                                     <input class="span3" type="text" id="dob" name="dob" placeholder="DOB" value="<?php echo @$date1;   ?>" readonly='readonly' required="required"  >
 
-                                    <label class="control-label span2" >
+                                    <label class="control-label span2" id="moblabel" >
                                         Mobile Number :
                                     </label> 
                                     <input class="span3" id="mob_number" name="mob_number" type="text" placeholder="0300-123456789" value=<?php echo  @$data['0']['MobNo']; ?> required="required">
@@ -158,7 +158,7 @@
                                 <div class="controls controls-row">  
                                     <?php
 
-                                    // DebugBreak();
+                                   //  DebugBreak();
                                     $nat = @$data[0]['IsPakistani'];
                                     $matric_sub1 = @$data[0]['sub1'];
 

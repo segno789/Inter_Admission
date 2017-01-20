@@ -253,6 +253,7 @@ class Admission_11th_pvt extends CI_Controller {
 
     public function NewEnrolment_insert()
     {
+        DebugBreak();
         $this->load->model('Admission_11th_Pvt_model');
         $this->load->library('session');
         $error = array();
@@ -433,6 +434,7 @@ class Admission_11th_pvt extends CI_Controller {
 
         $sub7 = 0;   
         $sub7ap1 = 0; 
+      //  DebugBreak();
         $nationality_hidden =@$_POST['nationality'];
         $gender = $this->input->post('ogender');
         //  DebugBreak();

@@ -185,6 +185,11 @@ if(isset($files)){
 
 
     $(document).ready(function () {
+        
+        
+ $.fancybox("#instruction");
+   
+        
      $("#oldExamInfo_lang").hide();
         $("#pvtinfo_dist").change(function(){
             var distId =  $("#pvtinfo_dist").val();

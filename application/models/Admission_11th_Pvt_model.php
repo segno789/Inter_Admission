@@ -144,7 +144,11 @@ class Admission_11th_Pvt_model extends CI_Model
                 $fname =strtoupper($info[0]['Fname']);
                 $BForm = $info[0]['bFormNo'];
                 $FNIC = $info[0]['FNIC'];
-                $Dob = $info[0]['dob'];
+                $Dob = @$info[0]['dob'];
+                if($Dob == '')
+                {
+                    $Dob = '';
+                }
             }
             else
             {
