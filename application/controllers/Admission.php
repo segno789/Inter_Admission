@@ -2224,7 +2224,7 @@ class Admission extends CI_Controller {
             $error_msg.='<span style="font-size: 16pt; color:red;">No Any Student Found Against Your Criteria</span>';
         }
 
-       /* $picpath = DIRPATH12TH.'\\'.@$data[0]['picpath'];
+        $picpath = DIRPATH12TH.'\\'.@$data[0]['picpath'];
 
         $isexit = is_file($picpath);
         if(!($isexit) && $error_msg == '' && $iyear >2014)
@@ -2238,7 +2238,7 @@ class Admission extends CI_Controller {
                 $type = pathinfo($picpath, PATHINFO_EXTENSION);
                 $data[0]['picpathImg'] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
             }
-        } */
+        }
 
         $specialcase = $data['0']['Spl_Name'];
         $specialcode = $data['0']['spl_cd'];
