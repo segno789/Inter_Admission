@@ -395,22 +395,27 @@ header("Pragma: no-cache");
                                         $chance = $data[0]['chance'];
                                         $exam_type = $data[0]['exam_type'];
 
+                                        //DebugBreak();
+
                                         $status = $data[0]['status'];
                                         $class = $data[0]['class'];
                                         $IsRegular = @$data[0]['regPvt'];
                                         $coll_cd = $data[0]['coll_cd']; 
                                         $cat11  = $data[0]['cat11'];
+
+                                        @$isParctialsub =   $data['0']['sn'];
+
                                         if($cat11==4)
                                         {
                                             echo "<option value='9' selected='selected'>KAHSA</option>";   
                                         }
 
 
-                                        else if($exam_type == 3 && $class == 11 && $IsRegular == 1){
+                                        else if($exam_type == 3 && $class == 11 && $IsRegular == 1 && $isParctialsub == 2){
 
-                                            echo "<option value='0' selected='selected'>NONE</option>"; 
-                                            echo "<option value='3'>HUMANITIES</option>"; 
-                                            echo "<option value='5'>COMMERCE</option>";
+                                            echo "<option value='0' selected='selected'>NONE</option>";
+                                            echo "<option value='3'>HUMANITIES</option>";
+                                            echo "<option value='5'>COMMERCE</option>";      
                                         }
 
                                         else if($exam_type == 1   || $exam_type == 3 || $exam_type == 9 || $exam_type == 11 || $exam_type == 16 || $exam_type == 14 || $exam_type == 15)
@@ -2242,11 +2247,11 @@ header("Pragma: no-cache");
                                         echo 'sub_grp_load_MarksImp_FULL();'; 
 
                                     }
-                                    else if($exam_type == 3 && $IsRegular == 1 && $class == 11){
+                                    else if($exam_type == 3 && $IsRegular == 1 && $class == 11 && $isParctialsub == 2){
                                         echo'Empty_All_Dropdowns();';
                                         echo'ClearALLDropDowns();';
                                     }
-
+                                 
                                     else if($exam_type == 3 ){
                                         echo'sub_grp_load_exam_type3();';
                                     }

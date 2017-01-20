@@ -2238,7 +2238,7 @@ class Admission extends CI_Controller {
                 $type = pathinfo($picpath, PATHINFO_EXTENSION);
                 $data[0]['picpathImg'] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
             }
-        } 
+        }
 
         $specialcase = $data['0']['Spl_Name'];
         $specialcode = $data['0']['spl_cd'];
@@ -2436,11 +2436,8 @@ class Admission extends CI_Controller {
         $this->load->model('Admission_model');
 
         $this->load->library('session');
-
         $Inst_Id = 999999;
-
         $formno = '';
-
         $allinputdata = array('cand_name'=>@$_POST['cand_name'],
             'father_name'=>@$_POST['father_name'],
             'bay_form'=>@$_POST['bay_form'],
