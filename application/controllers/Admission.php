@@ -2419,7 +2419,7 @@ class Admission extends CI_Controller {
 
             if(@$data[0]['Inter'] == 1){
                 $error_msg.='<span style="font-size: 16pt; color:red;">You have Already Appeared in '.$sessions.', '.@$data[0]['HSSC_Year'].', against Roll No = '.@$data[0]['HSSC_RNo'].'</span> </br> <span style="font-size: 14pt; color:red;">Please Apply for Admission providing Your Previous Exam Information(Section 1)</span>';
-                
+
                 $mydata = array('data'=>$_POST,'norec'=>$error_msg);
                 $this->session->set_flashdata('matric_error',$mydata );
                 redirect('Admission/matric_default');
