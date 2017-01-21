@@ -2224,20 +2224,23 @@ class Admission extends CI_Controller {
             $error_msg.='<span style="font-size: 16pt; color:red;">No Any Student Found Against Your Criteria</span>';
         }
 
-        $picpath = DIRPATH12TH.'\\'.@$data[0]['picpath'];
+        if(! base_url() == 'http://localhost:8083/Inter_Admission')
+        {
+            $picpath = DIRPATH12TH.'\\'.@$data[0]['picpath'];
 
-        $isexit = is_file($picpath);
-        if(!($isexit) && $error_msg == '' && $iyear >2014)
-        {
-            $error_msg.= '<span style="font-size: 16pt; color:red;">' . 'Your Picture is missing.</span>';
-        }
-        else
-        {
-            if($iyear >2014)
+            $isexit = is_file($picpath);
+            if(!($isexit) && $error_msg == '' && $iyear >2014)
             {
-                $type = pathinfo($picpath, PATHINFO_EXTENSION);
-                $data[0]['picpathImg'] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
+                $error_msg.= '<span style="font-size: 16pt; color:red;">' . 'Your Picture is missing.</span>';
             }
+            else
+            {
+                if($iyear >2014)
+                {
+                    $type = pathinfo($picpath, PATHINFO_EXTENSION);
+                    $data[0]['picpathImg'] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
+                }
+            }   
         }
 
         $specialcase = $data['0']['Spl_Name'];
@@ -3480,7 +3483,6 @@ class Admission extends CI_Controller {
             $sub2 =  $_POST['sub2p2'];    
         }
 
-
         $cattype = @$_POST['cattype_hidden'];
         $examtype = @$_POST['exam_type'];
         $marksImp = @$_POST['ddlMarksImproveoptions'];
@@ -3512,6 +3514,16 @@ class Admission extends CI_Controller {
             $cat11 = @$cat['cat11'];
             $cat12 = @$cat['cat12'];
         }
+
+        DebugBreak();
+        
+        @$fullAppear = @$_POST['fullAppear'];
+        if(@$fullAppear == 'on')
+        {
+            $cat11 = 1;
+            $cat12 = 1;
+        }
+        
         $Speciality = $this->input->post('speciality');
 
         $practical_Sub = array(
@@ -3549,8 +3561,6 @@ class Admission extends CI_Controller {
         {
             return;
         }
-
-
 
         $today = date("d-m-Y");   
         $dueDate = 0;

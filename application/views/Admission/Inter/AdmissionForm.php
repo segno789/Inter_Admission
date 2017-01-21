@@ -632,6 +632,25 @@ header("Pragma: no-cache");
 
                             <div class="control-group">
                                 <div class="control row controls-row">
+
+                                    <label class="control-label span3" id="fullAppear1" style="text-decoration: underline; font-weight: bold;" >
+                                        <?php
+                                        if(@$exam_type == 4 || @$exam_type == 5 || @$exam_type == 6){
+                                            echo'<input type="checkbox" id="fullAppear" name="fullAppear"/> Full Appear In Both Parts';
+                                        }
+                                        else{
+                                            echo'';
+                                        }
+                                        ?>
+                                    </label>
+
+                                </div>
+                            </div>
+
+
+                            <div class="control-group">
+                                <div class="control row controls-row">
+
                                     <label class="control-label span3 " id="lblpart1cat" name="lblpart1cat" style="text-decoration: underline; font-weight: bold;" >
                                         <?php
                                         if(($exam_type == 7 || $exam_type == 8 || $exam_type == 9 || $exam_type == 13 || $exam_type == 16 || $exam_type == 14 ) && $cattype == 1){
@@ -656,17 +675,6 @@ header("Pragma: no-cache");
                                         }
                                         else{
                                             echo'PART-II Subjects';
-                                        }
-                                        ?>
-                                    </label>
-
-                                    <label class="control-label span2 " style="text-decoration: underline; font-weight: bold;" >
-                                        <?php
-                                        if(@$exam_type == 4 || @$exam_type == 5 || @$exam_type == 6){
-                                            echo'<input type="checkbox" id="fullAppear" value=""/> Full Appear In Both Parts';
-                                        }
-                                        else{
-                                            echo'';
                                         }
                                         ?>
                                     </label>
@@ -1610,6 +1618,7 @@ header("Pragma: no-cache");
                                         $("#sub7").append('<option value="0">NONE</option>');            
                                     }
 
+                                    //debugger;
                                     $("#sub1p2").append(new Option('<?php  echo  array_search($data[0]['sub1'],$subarray); ?>',sub1));
                                     $("#sub2p2").append(new Option('<?php  echo  array_search($data[0]['sub2'],$subarray); ?>',sub2));
                                     $("#sub3p2").append(new Option('<?php  echo  array_search($data[0]['sub8'],$subarray); ?>',sub8));
@@ -1621,8 +1630,11 @@ header("Pragma: no-cache");
                                     $("#sub7p2").hide();
                                     $("#sub8").hide();
                                     $("#sub8p2").hide();                                   
-                                    
-                                    if(grp_cd == '5' || (grp_cd == 0 && exam_type == 3))
+
+
+                                    grp_cd ="<?php echo  @$data[0]['grp_cd'];?>";
+
+                                    if(grp_cd == '5')
                                     {
                                         Empty_All_DropdownsPII();
                                         $('#sub7').show();
@@ -2328,10 +2340,16 @@ header("Pragma: no-cache");
 
                                     $("#fullAppear").attr("checked", false);
 
+                                    $("#fullAppear1").hide();
+
                                     var sel_group = $('#std_group').val();    
 
                                     if(sel_group == grp_cd  && exam_type != 2) 
                                     {
+                                        if(exam_type == 4 || exam_type == 5 || exam_type == 6){
+                                            $("#fullAppear1").show();    
+                                        }
+
                                         sub_grp_load();    
                                     }     
 
