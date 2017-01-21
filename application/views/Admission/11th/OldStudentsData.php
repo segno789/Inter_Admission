@@ -165,65 +165,8 @@
                                                     </th>   -->
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <?php
-                                                // DebugBreak();
-                                                if($data != false)
-                                                {
-                                                    $n=0;  
-                                                    $grp_name='';                             
-                                                    foreach($data as $key=>$vals):
-                                                        $n++;
-                                                        $formno = !empty($vals["FormNo"])?$vals["FormNo"]:"N/A";
-                                                        $grp_name = $vals["grp_cd"];
-                                                        $sub7 = $vals["sub8"];
-                                                       
-                                                        switch ($grp_name) {
-                                                        case '1':
-                                                            $grp_name = 'PRE-MEDICAL';
-                                                            break;
-                                                        case '2':
-                                                            $grp_name = 'PRE-ENGINEERING';
-                                                            break;
-                                                        case '3':
-                                                            $grp_name = 'HUMANITIES';
-                                                            break;
-                                                        case '4':
-                                                            $grp_name = 'GENERAL SCIENCE';
-                                                            break;
-                                                        case '5':
-                                                            $grp_name = 'COMMERCE';
-                                                            break;
-                                                        default:
-                                                            $grp_name = "No GROUP SELECTED.";
-                                                            }
-                                                       //  DebugBreak();
-                                                        $picpath =  DIRPATH11th.'/'.$Inst_Id.'/'.$vals["PicPath"];
-                                                       // echo $picpath;
-                                                        $type = pathinfo($picpath, PATHINFO_EXTENSION);
-                                                        $vals["PicPath"] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
-                                                        
-                                                        //  DebugBreak();
-                                                        echo '<tr  >
-                                                        <td>'.$n.'</td>
-                                                        <td>'.$vals["FormNo"].'</td>
-                                                        <td>'.$vals["name"].'</td>
-                                                        <td>'.$vals["Fname"].'</td>
-                                                        <td>'.$grp_name.'</td>
-                                                        <td>'.$vals["sub1_abr"].','.$vals["sub2_abr"].','.$vals["sub3_abr"].','.$vals["sub4_abr"].','.$vals["sub5_abr"].','.$vals["sub6_abr"].','.$vals["sub7_abr"].'</td>
-                                                        <td><img id="previewImg" style="width:40px; height: 40px;" src="'.$vals["PicPath"] .'" alt="Candidate Image"></td>
-                                                        <td> <button type="button" class="btn btn-info" value="'.$formno.'" onclick="NewForm('.$formno.')">View Form</button></td>
-                                                        <td><input style="width: 24px; height: 24px;" type="checkbox" name="chk[]" value="'.$formno.'" /></td> </tr>';
-                                                        /*<td><img id="previewImg" style="width:40px; height: 40px;" src="/'.IMAGE_PATH.$Inst_Id.'/'.$vals['PicPath'].'" alt="Candidate Image"></td>';*/
-                                                        /* echo'<td>
-                                                        <button type="button" class="btn btn-info" value="'.$formno.'" onclick="NewForm('.$formno.')">Save Form</button>
-
-                                                        </td>
-                                                        </tr>';  */
-                                                        endforeach;
-                                                }
-                                                ?>
-                                            </tbody>
+                                         <tbody>
+            </tbody>
                                         </table>
 
                                         <input type="hidden" id="isformwise" name="isformwise" value="0"> 
