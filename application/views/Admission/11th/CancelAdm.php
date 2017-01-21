@@ -82,6 +82,10 @@
                                                             $grp_name = "No GROUP SELECTED.";
                                                             }
 
+                                                            $picpath =  DIRPATH11th.'/'.$Inst_Id.'/'.$vals["PicPath"];
+                                                            // echo $picpath;
+                                                            $type = pathinfo($picpath, PATHINFO_EXTENSION);
+                                                            $vals["PicPath"] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
                                                         //  DebugBreak();
                                                         echo '<tr  >
                                                         <td>'.$n.'</td>
@@ -91,7 +95,7 @@
                                                         <td>'.date("d-m-Y", strtotime($vals["Dob"])).'</td>
                                                         <td>'.$grp_name.'</td>
                                                         <td>'.$vals["sub1_abr"].','.$vals["sub2_abr"].','.$vals["sub3_abr"].','.$vals["sub4_abr"].','.$vals["sub5_abr"].','.$vals["sub6_abr"].','.$vals["sub7_abr"].'</td>
-                                                        <td><img id="previewImg" style="width:40px; height: 40px;" src="'.DIRPATH11th.$Inst_Id.'/'.$vals["PicPath"].'?'.rand(10000,1000000).'" alt="Candidate Image"></td>
+                                                        <td><img id="previewImg" style="width:40px; height: 40px;" src="'.$vals["PicPath"].'" alt="Candidate Image"></td>
                                                         <td><input style="width: 24px; height: 24px;" type="checkbox" name="chk[]" value="'.$formno.'" /></td> </tr>';
                                                         /*<td><img id="previewImg" style="width:40px; height: 40px;" src="/'.IMAGE_PATH.$Inst_Id.'/'.$vals['PicPath'].'" alt="Candidate Image"></td>';*/
                                                         /* echo'<td>

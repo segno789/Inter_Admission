@@ -157,7 +157,7 @@ class Admission_11th_pvt extends CI_Controller {
                     $error['excep'] = 'NO DATA FOUND AGAINST YOUR RECORD';
 
                 }
-                else if($RegStdData['data'][0]['SSC_RNo'] == '' || $RegStdData['data'][0]['SSC_RNo'] == 0 || strlen ($RegStdData['data'][0]['SSC_RNo']) != 6)
+                else if($RegStdData['data'][0]['SSC_RNo'] == '' || $RegStdData['data'][0]['SSC_RNo'] == 0 )
                 {
                     $error['excep'] =  'SSC ROLL NO. IS INCORRECT';
 

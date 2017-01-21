@@ -11,7 +11,7 @@
                         </div>
 
                     </div>
-                    <div class="widget-body">
+                    <div class="widget-body" style="    width: 60%;float: left;">
                         <h1    style="text-align: center;"><font color="#000000" size="+1" >Note:-Last Date of Online Admission for 11th  without late fee is <b class="blink_text"> <?php echo SingleDateFee ;?></b></font></h1>
                         <h4>Welcome to Board of Intermediate &amp; Secondary Education, GUJRANWALA</br></br> &nbsp; Dashboard</h4>
                         <?php 
@@ -48,11 +48,8 @@
                         <div class="shortcutHome">
                             <a href="<?php echo base_url(); ?>/index.php/login/logout"><img src="<?php echo base_url();?>assets/img/logout_icon.png"><br>Logout</a>
                         </div>
-                        <div class="shortcutHome">
-                            <img src="<?php echo base_url(); ?>/assets/img/image_guideline.jpg" alt="" style="    margin-top: -20px;width: 450px;float: right;margin-right: 22px;">
-                        </div>
                         <div class="clear"></div>
-                        <div style="width: 800px;margin-top: -293px;">
+                        <div style="width: 800px;">
                             <div id="smallRight" style="    float: left;margin-left: 20px;    margin-right: 380px;">
                                 <h4>Information</h4>
                                 <table>
@@ -109,7 +106,7 @@
                             </div>
                         </div>
                         <div class="clear"></div>
-                        <div style="  margin-top: -190px;margin-left: 20px;font-size: 16px;">
+                        <div style="  margin-top: -80px;margin-left: 20px;font-size: 16px;">
                             <!--    ( <a href="#" class="guidlines">Read Instruction's Guide</a>  ) -->
                             <br/>
                             <br/>
@@ -128,7 +125,10 @@
                             any problem of student's data , Board also contact to student on his mobile number.  <br/>
                             5.Picture size must be less than  20 kb, and use only Passport size with small letter ".jpg" extention image.
                         </div>
-                    </div>      
+                    </div>     
+                    <div class="shortcutHome" style="width: 27%;float: left;">
+                            <img src="<?php echo base_url(); ?>/assets/img/reg_interP1.jpg" alt="" style="    float: right;">
+                        </div> 
                     <div class="clear"></div>  
 
                 </div>

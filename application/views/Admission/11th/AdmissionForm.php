@@ -632,7 +632,9 @@
                                 <!--</select>
                                 </div>-->
                             </div>
-                            <div id="instruction" style="display: none; width:600px"></div>
+                            <div id="instruction" style="display: none; width:600px">
+                              <img src="<?php  echo base_url().'assets/img/Instruction11th.jpg'; ?>" border="0" width="950" height="773" alt="Instruction_alooma.jpg (152,412 bytes)">
+                            </div>
                             <div class="form-actions no-margin">
                                 <input type="hidden"   value=""  name="formNo">
                                 <input type="hidden"   value="<?php  echo $isReAdm; ?>"  name="IsReAdm">
