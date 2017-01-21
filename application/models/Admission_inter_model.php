@@ -38,7 +38,7 @@ class Admission_inter_model extends CI_Model
             return  false;
         }
     }
-      public function getuser_info($User_info_data)
+    public function getuser_info($User_info_data)
     {
         //  DebugBreak();
         $Inst_cd = $User_info_data['Inst_Id'];
@@ -76,7 +76,7 @@ class Admission_inter_model extends CI_Model
         $this->db->insert('tblInstitutes_all_Info', $data); 
         return true;
     }
-   
+
     public function get_zone()
     {
         $query = $this->db->get_where('matric_new..tblZones', array('myear' => '2017','class'=>12,'sess'=>1));
@@ -149,26 +149,25 @@ class Admission_inter_model extends CI_Model
         $IsHafiz = $data['Ishafiz'];
         $rel = $data['rel'];
         $addr =strtoupper($data['addr']) ;
-        /* if(($data['grp_cd'] == 1) or ($data['grp_cd'] == 7) or ($data['grp_cd'] == 8) )
-        {
-        $grp_cd = 1;    
-        }
-        else if($data['grp_cd'] == 2 )
-        {
-        $grp_cd = 2;        
-        }
-        else if($data['grp_cd'] == 5 )
-        {
-        $grp_cd = 5;        
-        }*/
+
+        //DebugBreak();
+        $grp_cd = $data['grp_cd'];
+
         $sub1= $data['sub1p2'];
         $sub2 = $data['sub2p2'];
         $sub3 = $data['sub3'];
-
-        $sub3p2 = $data['sub3p2'];
-
+        $sub3p2 = $data['sub3p2'];        
         $sub4 = $data['sub4p2'];
-        $sub5 = $data['sub5p2'];
+
+        if($grp_cd == 5)
+        {
+            $sub5 = $data['sub5'];
+        }
+        else
+        {
+            $sub5 = $data['sub5p2'];
+        }
+
         $sub6 = $data['sub6p2'];
         $sub7 = $data['sub7p2'];
         $sub8 = $data['sub8'];
@@ -186,8 +185,7 @@ class Admission_inter_model extends CI_Model
         $UrbanRural = $data['ruralOrurban'];
         $Inst_cd = $data['Inst_cd'];
         $formno = $data['FormNo'];
-        //$RegGrp = $data['grp_cd'];
-        $grp_cd = $data['grp_cd'];
+
         $cat11 =  $data['cat11'];
         $cat12 =  $data['cat12'];
         $sub1ap2 =  $data['sub1ap2'];
@@ -459,7 +457,7 @@ class Admission_inter_model extends CI_Model
 
         $query = $this->db->query("select admission_online.dbo.DistName($dist_cd) as DistName");
         $rowcount = $query->num_rows();
-         if($rowcount > 0)
+        if($rowcount > 0)
         {
             return $query->result_array();
         }
@@ -501,7 +499,7 @@ class Admission_inter_model extends CI_Model
             return  false;
         }
     }
-    
+
     public function Batch_Insertion($data)
     {
         //DebugBreak();
