@@ -815,7 +815,7 @@ class Admission_11th_reg_model extends CI_Model
         //DebugBreak();
 
         $Inst_cd = $fetch_data['Inst_cd'];
-        $this->db->select('formNo,name, Fname, grp_cd, IsReAdm,regFee,RegProcessFee,RegFineFee,RegTotalFee,Spec,challan_overall,challanno');
+        $this->db->select('sub4,sub5,sub6,sub7,formNo,name, Fname, grp_cd, IsReAdm,regFee,RegProcessFee,RegFineFee,RegTotalFee,Spec,challan_overall,challanno');
         $this->db->from('Registration..IA_P1_Reg_Adm2016');
         if($fetch_data['option']==4)
         {
