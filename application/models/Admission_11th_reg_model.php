@@ -452,21 +452,23 @@ class Admission_11th_reg_model extends CI_Model
         $inst_cd = $myinfo['Inst_cd'];
         $spl_cd = $myinfo['spl_cd'];
         $grp_selected = $myinfo['grp_selected'];
+        $offest = $myinfo['offest'];
+        $limit = $myinfo['limit'];
         $sess = Session;
         $Year = Year-1;
         if($grp_selected == FALSE)
         {
-            $query = $this->db->query("Registration..sp_get_regInfo_11th_Make_adm $inst_cd,11,$Year,$sess");    
+            $query = $this->db->query("Registration..sp_get_regInfo_11th_Make_adm_temp $inst_cd,11,$Year,$sess,$offest,$limit");    
         }
         else
         {
-            $query = $this->db->query("Registration..sp_get_regInfo_Groupwise_11th_Make_adm $inst_cd,11,$Year,$sess,$grp_selected");    
+            $query = $this->db->query("Registration..sp_get_regInfo_Groupwise_11th_Make_adm $inst_cd,11,$Year,$sess,$grp_selected,");    
         }
 
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
-            return $query->result_array();
+            return $query->result();
 
         }
         else
@@ -970,7 +972,7 @@ class Admission_11th_reg_model extends CI_Model
     }
     public function bay_form_fnic($bayformno,$fnic)
     {
-        $query = $this->db->get_where('Registration..MA_P1_Reg_Adm2016',  array('BForm' => $bayformno,'FNIC' => $fnic,'IsDeleted'=>0));
+        $query = $this->db->get_where('Registration..IA_P1_Reg_Adm2016',  array('BForm' => $bayformno,'FNIC' => $fnic,'IsDeleted'=>0));
         $rowcount = $query->num_rows();
         if ($rowcount > 0){
             return true;

@@ -160,9 +160,7 @@
                                                         View Form
                                                     </th>
                                                     <th  style="width:10%" scope="col" align="center"><a href="javascript:void(0);" style="color:red;" class="check">Check All</a></th>
-                                                    <!--<th style="width:10%" class="hidden-phone" >
-                                                    Download
-                                                    </th>   -->
+                                              
                                                 </tr>
                                             </thead>
                                          <tbody>

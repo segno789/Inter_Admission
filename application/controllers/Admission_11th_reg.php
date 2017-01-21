@@ -3177,7 +3177,7 @@ $SciProcFee =  195;
     public function ajax_list()
     {
       // 
-      DebugBreak();
+     
       $msg = $this->uri->segment(3);
       $spl_cd = $this->uri->segment(4);
       $grp_selected = $this->uri->segment(5);
@@ -3187,7 +3187,7 @@ $SciProcFee =  195;
       $Inst_Id = $userinfo['Inst_Id'];
 
       $this->load->model('Admission_11th_reg_model');
-      $myinfo = array('Inst_cd'=>$userinfo['Inst_Id'],'spl_cd'=>$spl_cd,'grp_cd'=>$userinfo['grp_cd'],'grp_selected'=>$grp_selected);
+      $myinfo = array('Inst_cd'=>$userinfo['Inst_Id'],'spl_cd'=>$spl_cd,'grp_cd'=>$userinfo['grp_cd'],'grp_selected'=>$grp_selected,'offest'=>$_POST['start'],'limit'=>$_POST['length']);
 
       $list = $this->Admission_11th_reg_model->Make_adm($myinfo);
       $data = array();
@@ -3196,21 +3196,50 @@ $SciProcFee =  195;
       foreach ($list as $customers) {
           $no++;
           $row = array();
+       // DebugBreak();
+          $grp_name = $customers->grp_cd;
+          $sub7 =     $customers->sub8;
+
+          switch ($grp_name) {
+              case '1':
+                  $grp_name = 'PRE-MEDICAL';
+                  break;
+              case '2':
+                  $grp_name = 'PRE-ENGINEERING';
+                  break;
+              case '3':
+                  $grp_name = 'HUMANITIES';
+                  break;
+              case '4':
+                  $grp_name = 'GENERAL SCIENCE';
+                  break;
+              case '5':
+                  $grp_name = 'COMMERCE';
+                  break;
+              default:
+                  $grp_name = "No GROUP SELECTED.";
+          }
+          $picpath =  DIRPATH11th.'/'.$Inst_Id.'/'.$customers->PicPath;
+          // echo $picpath;
+          $type = pathinfo($picpath, PATHINFO_EXTENSION);
+          $vals["PicPath"] = '';//'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
           $row[] = $no;
+          $row[] = $customers->FormNo;
           $row[] = $customers->name;
           $row[] = $customers->Fname;
-          $row[] = $customers->MobNo;
-          $row[] = $customers->addr;
-          //$row[] = $customers->city;
-          //$row[] = $customers->country;
+          $row[] = $grp_name;
+          $row[] = $customers->sub1_abr.','.$customers->sub2_abr.','.$customers->sub3_abr.','.$customers->sub4_abr.','.$customers->sub5_abr.','.$customers->sub6_abr.','.@$customers->sub7_abr;
+          $row[] = '<img id="previewImg" style="width:40px; height: 40px;" src="'.$vals["PicPath"] .'" alt="Candidate Image">';
+          $row[] = '<button type="button" class="btn btn-info" value="'.$customers->FormNo.'" onclick="NewForm('.$customers->FormNo.')">View Form</button>';
+          $row[] = '<input style="width: 24px; height: 24px;" type="checkbox" name="chk[]" value="'.$customers->FormNo.'" />';
 
           $data[] = $row;
       }
       //DebugBreak();
       $output = array(
           "draw" => $_POST['draw'],
-          "recordsTotal" => $this->customers->count_all($Inst_Id),
-          "recordsFiltered" => $this->customers->count_all($Inst_Id),//$this->customers->count_filtered(211036),
+          "recordsTotal" => $this->Admission_11th_reg_model->count_all($Inst_Id),
+          "recordsFiltered" => $this->Admission_11th_reg_model->count_all($Inst_Id),//$this->customers->count_filtered(211036),
           "data" => $data,
       );
       //output to json format
