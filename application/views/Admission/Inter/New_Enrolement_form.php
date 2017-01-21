@@ -390,7 +390,7 @@
                                 <div class="controls controls-row">
                                     <select id="std_group" class="dropdown span6"  name="std_group" disabled="disabled">
                                         <?php
-                                        DebugBreak();
+                                        
                                         $grp = $data[0]['grp_cd'];
 
                                         $sub7 = $data[0]["sub7"];

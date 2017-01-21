@@ -769,6 +769,8 @@
                                     <select id="sub6"  name="sub6" class="span3 dropdown">
                                         <?php if($data[0]['sub6pf1']== 2){
 
+                                            //DebugBreak();
+                                            
                                             if($data[0]['sub6Ap1']==1) 
                                             {
                                                 echo '<option value='.$data[0]['sub6'].'>'.array_search($data[0]['sub6'],$subarray).'</option>'; 

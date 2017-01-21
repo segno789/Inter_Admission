@@ -159,17 +159,19 @@ class Admission_inter_model extends CI_Model
         $sub3p2 = $data['sub3p2'];        
         $sub4 = $data['sub4p2'];
 
-        if($grp_cd == 5)
+        if(@$grp_cd == 5)
         {
-            $sub5 = $data['sub5'];
+            @$sub5 = $data['sub5'];
+            @$sub6 = $data['sub6'];
+            @$sub7 = $data['sub7'];
         }
         else
         {
-            $sub5 = $data['sub5p2'];
+            @$sub5 = $data['sub5p2'];
+            @$sub6 = $data['sub6p2'];
+            @$sub7 = $data['sub7p2'];
         }
 
-        $sub6 = $data['sub6p2'];
-        $sub7 = $data['sub7p2'];
         $sub8 = $data['sub8'];
         $sub5a =$data['sub5p2'];
         $sub6a =$data['sub6p2'];
