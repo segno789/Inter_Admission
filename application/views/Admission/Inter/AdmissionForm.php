@@ -1182,6 +1182,7 @@ header("Pragma: no-cache");
                                 var sub2 = "<?php echo @$data[0]['sub2']; ?>";
                                 var sub3 ="<?php echo @$data[0]['sub3']; ?>";
                                 var sub4 = "<?php echo @$data[0]['sub4']; ?>";
+
                                 var sub5 = "<?php echo @$data[0]['sub5']; ?>";
 
                                 var sub5A = "<?php echo @$data[0]['sub5A']; ?>";
@@ -1294,6 +1295,7 @@ header("Pragma: no-cache");
                                         $("#sub2p2").empty();
                                         $("#sub2p2").append('<option value="0">NONE</option>');
                                     }
+                                    //Subject 3
                                     if((sub3pf1 == "3") || (sub3st1 == "2"))
                                     {
                                         $("#sub3").empty();
@@ -1316,6 +1318,7 @@ header("Pragma: no-cache");
                                         $("#sub3p2").empty();
                                         $("#sub3p2").append('<option value="0">NONE</option>');
                                     }
+                                    //Subject 4
                                     if((sub4pf1 == "3") || (sub4st1 == "2"))
                                     {
                                         $("#sub4").empty();
@@ -1340,6 +1343,7 @@ header("Pragma: no-cache");
                                         $("#sub4p2").empty();
                                         $("#sub4p2").append('<option value="0">NONE</option>');
                                     }
+                                    //Subject 5
                                     if((sub5pf1 == "3") || (sub5st1 == "2"))
                                     {
                                         $("#sub5").empty();
@@ -1353,6 +1357,18 @@ header("Pragma: no-cache");
                                         $("#sub5").append('<option value="0">NONE</option>');
                                     }
 
+                                    if((sub5pf2 == "3") || (sub5st2 == "2"))
+                                    {
+                                        $("#sub5p2").empty();
+                                        $("#sub5p2").append(new Option('<?php  echo  array_search($data[0]['sub5'],$subarray); ?>', '<?php echo $data[0]['sub5']?>'));
+                                        $("#sub5p2 option[value='" + sub5 + "']").attr("selected","selected");
+                                    }
+                                    else
+                                    {
+                                        $("#sub5p2").empty();
+                                        $("#sub5p2").append('<option value="0">NONE</option>');
+                                    }
+                                    //Subject 6
                                     if((sub6pf1 == "3") || (sub6st1 == "2"))
                                     {
                                         $("#sub6").empty();
@@ -1363,6 +1379,17 @@ header("Pragma: no-cache");
                                     {
                                         $("#sub6").empty();
                                         $("#sub6").append('<option value="0">NONE</option>');
+                                    }
+                                    if((sub6pf2 == "3") || (sub6st2 == "2"))
+                                    {
+                                        $("#sub6p2").empty();
+                                        $("#sub6p2").append(new Option('<?php  echo  array_search($data[0]['sub6'],$subarray); ?>', '<?php echo $data[0]['sub6']?>'));
+                                        $("#sub6p2 option[value='" + sub6 + "']").attr("selected","selected");
+                                    }
+                                    else
+                                    {
+                                        $("#sub6p2").empty();
+                                        $("#sub6p2").append('<option value="0">NONE</option>');
                                     }
 
                                     if(grp_cd == 5)
@@ -1414,34 +1441,6 @@ header("Pragma: no-cache");
                                             $("#sub7p2").empty();
                                             $("#sub7p2").append('<option value="0">NONE</option>');
                                         }  
-                                    }
-
-                                    else
-                                    {
-                                        if((sub5pf2 == "3") || (sub5st2 == "2"))
-                                        {
-                                            $("#sub5p2").empty();
-                                            $("#sub5p2").append(new Option('<?php  echo  array_search($data[0]['sub5'],$subarray); ?>',sub5));
-                                            $("#sub5p2 option[value='" + sub5 + "']").attr("selected","selected");
-                                        }
-                                        else
-                                        {
-                                            $("#sub5p2").empty();
-                                            $("#sub5p2").append('<option value="0">NONE</option>');
-                                        }
-
-
-                                        if((sub6pf2 == "3") || (sub6st2 == "2"))
-                                        {
-                                            $("#sub6p2").empty();
-                                            $("#sub6p2").append(new Option('<?php  echo  array_search($data[0]['sub6'],$subarray); ?>',sub6));
-                                            $("#sub6p2 option[value='" + sub6 + "']").attr("selected","selected");
-                                        }
-                                        else
-                                        {
-                                            $("#sub6p2").empty();
-                                            $("#sub6p2").append('<option value="0">NONE</option>');
-                                        }
                                     }
                                 }
 
@@ -1734,12 +1733,26 @@ header("Pragma: no-cache");
                                     {
                                         $("#sub5").append('<option value="0">NONE</option>');
                                     }
+                                    
+                                    
+                                    if((sub5pf2 == "3") || (sub5st2 == "2"))
+                                    {
+
+                                        $("#sub5p2").append(new Option('<?php  echo  array_search($data[0]['sub5'],$subarray); ?>','<?php echo $data[0]['sub5']?>'));
+                                    }
+                                    else
+                                    {
+                                        $("#sub5").append('<option value="0">NONE</option>');
+                                    }
+                                    
+                                    
+                                    
+                                    
                                     if((sub5pf2 == "3") || (sub5st2 == "2"))
                                     {
                                         if(grp_cd ==5)
                                         {
                                             $("#sub5p2").append(new Option('<?php  echo  array_search($data[0]['sub5A'],$subarray); ?>','<?php echo $data[0]['sub5A']?>'));
-
                                         }
                                         else
                                         {
@@ -2763,7 +2776,7 @@ header("Pragma: no-cache");
                                                     data: $("#myform").serialize() ,
                                                     datatype : 'html',
 
-                                                    
+
                                                     beforeSend: function() {  $('.mPageloader').show(); },
                                                     complete: function() { $('.mPageloader').hide();},
 
