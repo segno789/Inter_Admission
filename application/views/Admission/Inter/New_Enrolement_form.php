@@ -265,8 +265,8 @@
                             </label>
                             <div class="controls controls-row">  
                                 <?php
-                               // DebugBreak();
-                            //    DebugBreak();
+                                // DebugBreak();
+                                //    DebugBreak();
                                 $resid = $data[0]['ruralOrurban'];
                                 if($resid == 0  || $resid == 1 )
                                 {
@@ -390,20 +390,12 @@
                                 <div class="controls controls-row">
                                     <select id="std_group" class="dropdown span6"  name="std_group" disabled="disabled">
                                         <?php
-                                        // DebugBreak();
+                                        DebugBreak();
                                         $grp = $data[0]['grp_cd'];
-                                        //  $grp_name = $vals["grp_cd"];
+
                                         $sub7 = $data[0]["sub7"];
-                                        /*     if($grp==1 && $sub7==78)
-                                        {
-                                        $grp = 7;
-                                        }
-                                        if($grp == 1 && $sub7 == 43){
-                                        $grp = 8;
-                                        }
-                                        if($grp == 1 && $sub7 == 8){
-                                        $grp = 1;
-                                        }*/
+
+
                                         $subgroups =  split(',',$grp_cdi);
                                         echo "<option value='0' >SELECT GROUP</option>";
                                         if($isReAdm == 1 )
@@ -453,7 +445,6 @@
                                                     {
                                                         echo "<option value='3'>HUMANITIES</option>";  
                                                     }
-
                                                 }
                                                 else if($subgroups[$i] == 4)
                                                 {
@@ -465,7 +456,6 @@
                                                     {
                                                         echo "<option value='4'>GENERAL SCIENCE</option>";   
                                                     }
-
                                                 }
                                                 else if($subgroups[$i] == 5)
                                                 {

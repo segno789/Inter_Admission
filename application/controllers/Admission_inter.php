@@ -416,7 +416,7 @@ class Admission_inter extends CI_Controller {
     }
     public function StudentsData()
     {    
-        DebugBreak();
+        //DebugBreak();
 
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -1337,7 +1337,6 @@ class Admission_inter extends CI_Controller {
 
         $data['isupdate']=0;
         $logedIn = $this->Admission_inter_model->Insert_NewEnorlement($data);
-
 
 
         if( !isset($logedIn))
