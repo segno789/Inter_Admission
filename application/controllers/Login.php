@@ -47,7 +47,7 @@ class Login extends CI_Controller {
                 
             
 
-                if( $logedIn['isactive'] == 1)
+                if( @$logedIn['isactive'] == 1)
                 {
                     $data = array(
                         'user_status' => 4,                     
@@ -61,7 +61,7 @@ class Login extends CI_Controller {
                         return ;
                     }
                     
-                     echo '<pre>'; print_r($logedIn);die;       
+                   //  echo '<pre>'; print_r($logedIn);die;       
                 }
                 
 
@@ -71,6 +71,7 @@ class Login extends CI_Controller {
                         'user_status' => 3                     
                     );
                     $this->load->view('login/login.php',$data);
+                    return ;
                 }  
                 else  if($logedIn['tbl_inst']['edu_lvl']== 1)
                 {
@@ -78,6 +79,7 @@ class Login extends CI_Controller {
                         'user_status' => 2                     
                     );
                     $this->load->view('login/login.php',$data);
+                    return ;
                 }  
                 if($logedIn['tbl_inst']['edu_lvl'] == 1)
                 {
@@ -155,10 +157,10 @@ class Login extends CI_Controller {
 
                     // DebugBreak();
                     $sess_array = array(
-                        'Inst_Id' => $logedIn['flusers']['inst_cd'] ,
+                        'Inst_Id' => $logedIn['tbl_inst']['Inst_cd'] ,
                         'pass' => $logedIn['flusers']['pass'] ,
                         'edu_lvl' => $logedIn['tbl_inst']['edu_lvl'],
-                        'inst_Name' => $logedIn['flusers']['inst_name'],
+                        'inst_Name' => $logedIn['tbl_inst']['Name'],
                         'gender' => $logedIn['tbl_inst']['Gender'],
                         'isrural' => $logedIn['tbl_inst']['IsRural'],
                         'grp_cd' => $logedIn['tbl_inst']['allowed_mGrp'],

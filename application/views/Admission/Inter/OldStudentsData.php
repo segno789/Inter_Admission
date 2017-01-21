@@ -52,7 +52,7 @@
                                     <?php
 
                                     $image_path_selected = '';
-
+                                 //   DebugBreak();
                                     if($data != false)
                                     {
                                         $n=0;  
@@ -62,8 +62,6 @@
                                         $formno = !empty($vals["formNo"])?$vals["formNo"]:"N/A";
                                         $grp_name = $vals["grp_cd"];
                                         $sub7 = $vals["sub7"];
-                                        
-
                                         
                                         
                                         if($vals["IntBrd_cd"] ==  1)

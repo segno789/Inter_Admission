@@ -1636,7 +1636,7 @@ class Admission_11th_pvt extends CI_Controller {
     }
     function feecalculate($data)
     {
-       DebugBreak();
+       // DebugBreak();
         $isper = 0;
 
         $practical_Sub = array(
