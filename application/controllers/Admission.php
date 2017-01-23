@@ -2226,7 +2226,6 @@ class Admission extends CI_Controller {
 
 
         $picpath = DIRPATH12TH.'\\'.@$data[0]['picpath'];
-
         $isexit = is_file($picpath);
         if(!($isexit) && $error_msg == '' && $iyear >2014)
         {
@@ -2239,128 +2238,130 @@ class Admission extends CI_Controller {
                 $type = pathinfo($picpath, PATHINFO_EXTENSION);
                 $data[0]['picpathImg'] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
             }
-            
-            $specialcase = $data['0']['Spl_Name'];
-            $specialcode = $data['0']['spl_cd'];
-            $exam_type =   $data['0']['exam_type'];
+        }
 
-            //DebugBreak();
 
-            @$isParctialsub =   $data['0']['sn'];
+        $specialcase = $data['0']['Spl_Name'];
+        $specialcode = $data['0']['spl_cd'];
+        $exam_type =   $data['0']['exam_type'];
 
-            if($specialcode != '' && $specialcode != 34 ){
+        //DebugBreak();
 
-                $error_msg.='<span style="font-size: 16pt; color:red;">' . '   Your Admission cannot be procceed due to     ' . '</span>';
-                $error_msg.='<span style="font-size: 16pt; color:red;">' . $specialcase . '</span>';
-            }
+        @$isParctialsub =   $data['0']['sn'];
 
-            $nxtrnosess = $data['0']['NextRno_Sess_Year'];
-            $matric_rno = @$data['0']['matRno'];
-            $inter_rno = $data['0']['rno'];
+        if($specialcode != '' && $specialcode != 34 ){
 
-            if ($nxtrnosess != '') {
+            $error_msg.='<span style="font-size: 16pt; color:red;">' . '   Your Admission cannot be procceed due to     ' . '</span>';
+            $error_msg.='<span style="font-size: 16pt; color:red;">' . $specialcase . '</span>';
+        }
 
-                $error_msg.= '<div style="color:red;"><h2>You have already appeared in</h2></div>';
-                $parts = explode(",", $nxtrnosess);
-                $nxtrno = $parts[0];
-                $nxtsess = $parts[1];
-                $nxtyear = $parts[2];
-                if($nxtsess == '1')
-                {
-                    $nxtsess = 'Inter Annual';
-                }
-                else{
-                    $nxtsess = 'Inter Supplementary';
-                }
-                $error_msg.='<span style="font-size: 16pt; color:red;">' . $nxtsess . '</span>';
-                $error_msg.='<span style="font-size: 16pt; color:red;">' . ',    ' . '</span>';
-                $error_msg.='<span style="font-size: 16pt; color:red;">' . $nxtyear . '</span>';
-                $error_msg.='<span style="font-size: 16pt; color:red;">' . '   Against Roll No  = ' . '</span>';
-                $error_msg.='<span style="font-size: 16pt; color:red;">' . $nxtrno . '</span>';
-            }
+        $nxtrnosess = $data['0']['NextRno_Sess_Year'];
+        $matric_rno = @$data['0']['matRno'];
+        $inter_rno = $data['0']['rno'];
 
-            else if ($matric_rno == 0 && $error_msg == '')
+        if ($nxtrnosess != '') {
+
+            $error_msg.= '<div style="color:red;"><h2>You have already appeared in</h2></div>';
+            $parts = explode(",", $nxtrnosess);
+            $nxtrno = $parts[0];
+            $nxtsess = $parts[1];
+            $nxtyear = $parts[2];
+            if($nxtsess == '1')
             {
-                $error_msg.='<span style="font-size: 16pt; color:red;"> Matric Roll No is Invalid</span>';
+                $nxtsess = 'Inter Annual';
             }
-
-            if($error_msg !='')
-            {
-                $this->load->library('session');
-                $mydata = array('data'=>$_POST,'error_msg'=>$error_msg,'exam_type'=>0);
-                $this->session->set_flashdata('matric_error',$mydata);
-                redirect('Admission/matric_default');
+            else{
+                $nxtsess = 'Inter Supplementary';
             }
-            else if(($exam_type == 16) && !isset($CatType))
+            $error_msg.='<span style="font-size: 16pt; color:red;">' . $nxtsess . '</span>';
+            $error_msg.='<span style="font-size: 16pt; color:red;">' . ',    ' . '</span>';
+            $error_msg.='<span style="font-size: 16pt; color:red;">' . $nxtyear . '</span>';
+            $error_msg.='<span style="font-size: 16pt; color:red;">' . '   Against Roll No  = ' . '</span>';
+            $error_msg.='<span style="font-size: 16pt; color:red;">' . $nxtrno . '</span>';
+        }
+
+        else if ($matric_rno == 0 && $error_msg == '')
+        {
+            $error_msg.='<span style="font-size: 16pt; color:red;"> Matric Roll No is Invalid</span>';
+        }
+
+        if($error_msg !='')
+        {
+            $this->load->library('session');
+            $mydata = array('data'=>$_POST,'error_msg'=>$error_msg,'exam_type'=>0);
+            $this->session->set_flashdata('matric_error',$mydata);
+            redirect('Admission/matric_default');
+        }
+        else if(($exam_type == 16) && !isset($CatType))
+        {
+            $this->load->library('session');
+            $mydata = array('data'=>$_POST,'error_msg'=>$error_msg,'exam_type'=>$exam_type);
+            $this->session->set_flashdata('matric_error',$mydata );
+            redirect('Admission/matric_default');
+        }
+        else if(($exam_type == 17))
+        {
+            $error_msg.='<span style="font-size: 16pt; color:red;">' . 'You can not Marks Improve.</span>';
+            $this->load->library('session');
+            $mydata = array('data'=>$_POST,'error_msg'=>$error_msg,'exam_type'=>0);
+            $this->session->set_flashdata('matric_error',$mydata );
+            redirect('Admission/matric_default');
+        }
+        else if(($exam_type == 18))
+        {
+            $error_msg.='<span style="font-size: 16pt; color:red;">' . 'Your Result is not cleared.</span>';
+            $this->load->library('session');
+            $mydata = array('data'=>$_POST,'error_msg'=>$error_msg,'exam_type'=>0);
+            $this->session->set_flashdata('matric_error',$mydata );
+            redirect('Admission/matric_default');
+        } 
+
+        else if($data[0]['class'] == 11 && $data[0]['regPvt']==1 && ($data[0]['status']==1  || $exam_type ==1 ) &&  $isParctialsub == 1)
+        {
+            $error_msg.='<span style="font-size: 16pt; color:red;">' . 'You can not appear as a Private Candidate. Please contact your Institute.</span>';
+            $this->load->library('session');
+            $mydata = array('data'=>$_POST,'error_msg'=>$error_msg,'exam_type'=>0);
+            $this->session->set_flashdata('matric_error',$mydata );
+            redirect('Admission/matric_default');
+        }
+
+        else
+        {
+            if($exam_type == 14)
             {
-                $this->load->library('session');
-                $mydata = array('data'=>$_POST,'error_msg'=>$error_msg,'exam_type'=>$exam_type);
-                $this->session->set_flashdata('matric_error',$mydata );
-                redirect('Admission/matric_default');
+                @$_POST["CatType"]= 1;  
             }
-            else if(($exam_type == 17))
+            if($exam_type == 15)
             {
-                $error_msg.='<span style="font-size: 16pt; color:red;">' . 'You can not Marks Improve.</span>';
-                $this->load->library('session');
-                $mydata = array('data'=>$_POST,'error_msg'=>$error_msg,'exam_type'=>0);
-                $this->session->set_flashdata('matric_error',$mydata );
-                redirect('Admission/matric_default');
+                @$_POST["CatType"]= 2;  
             }
-            else if(($exam_type == 18))
+            $brd_name=$this->Admission_model->Brd_Name($board);
+            $data[0]['brd_name']=$brd_name[0]['Brd_Abr'] ;
+            $data['sscrno']=$mrollno;
+            $data['old_class_']=$oldClass;
+            $data['hsscrno']=$hsscrno;
+            $data['iYear']=$iyear;
+            $data['session']=$session;
+            $data['board']=$board;
+            $data['Insert_server_error']=$Insert_server_error;
+
+            //DebugBreak();     
+
+            $data['oldschm']= $data['0']['schm'];
+
+            $this->load->view('common/commonheader.php');        
+            $data['isaloom'] = $isaloom;
+            if(($isaloom == 1))
             {
-                $error_msg.='<span style="font-size: 16pt; color:red;">' . 'Your Result is not cleared.</span>';
-                $this->load->library('session');
-                $mydata = array('data'=>$_POST,'error_msg'=>$error_msg,'exam_type'=>0);
-                $this->session->set_flashdata('matric_error',$mydata );
-                redirect('Admission/matric_default');
-            } 
-
-            else if($data[0]['class'] == 11 && $data[0]['regPvt']==1 && ($data[0]['status']==1  || $exam_type ==1 ) &&  $isParctialsub == 1)
-            {
-                $error_msg.='<span style="font-size: 16pt; color:red;">' . 'You can not appear as a Private Candidate. Please contact your Institute.</span>';
-                $this->load->library('session');
-                $mydata = array('data'=>$_POST,'error_msg'=>$error_msg,'exam_type'=>0);
-                $this->session->set_flashdata('matric_error',$mydata );
-                redirect('Admission/matric_default');
-            }
-
-            else
-            {
-                if($exam_type == 14)
-                {
-                    @$_POST["CatType"]= 1;  
-                }
-                if($exam_type == 15)
-                {
-                    @$_POST["CatType"]= 2;  
-                }
-                $brd_name=$this->Admission_model->Brd_Name($board);
-                $data[0]['brd_name']=$brd_name[0]['Brd_Abr'] ;
-                $data['sscrno']=$mrollno;
-                $data['old_class_']=$oldClass;
-                $data['hsscrno']=$hsscrno;
-                $data['iYear']=$iyear;
-                $data['session']=$session;
-                $data['board']=$board;
-                $data['Insert_server_error']=$Insert_server_error;
-
-                //DebugBreak();     
-
-                $data['oldschm']= $data['0']['schm'];
-
-                $this->load->view('common/commonheader.php');        
-                $data['isaloom'] = $isaloom;
-                if(($isaloom == 1))
-                {
-                    $this->load->view('Admission/Inter/LanguagesForm.php',  array('data'=>$data));
-                    $this->load->view('common/commonfooter.php');
-                    return;
-                }       
-                $this->load->view('Admission/Inter/AdmissionForm.php',  array('data'=>$data));
+                $this->load->view('Admission/Inter/LanguagesForm.php',  array('data'=>$data));
                 $this->load->view('common/commonfooter.php');
-            }
+                return;
+            }       
+            $this->load->view('Admission/Inter/AdmissionForm.php',  array('data'=>$data));
+            $this->load->view('common/commonfooter.php');
         }
     }
+
     public function Pre_Matric_data()
     {
         //DebugBreak();                     
