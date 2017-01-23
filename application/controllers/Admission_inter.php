@@ -1003,6 +1003,8 @@ class Admission_inter extends CI_Controller {
         $grp_cd = $this->input->post('std_group');
 
 
+        //DebugBreak();
+        
         $data = array(
             'name' =>$this->input->post('cand_name'),
             'Fname' =>$this->input->post('father_name'),
@@ -1060,7 +1062,9 @@ class Admission_inter extends CI_Controller {
             'oldRno'=>@$_POST['OldRno'],
             'sess'=>@$_POST['Oldsess'],
             'Iyear'=>@$_POST['Oldyear'],
+
             'Brd_cd'=>@$_POST['Oldbrd'],
+            'IntBrd_cd'=>@$_POST['IntBrd_cd'],
 
             'CollGrade'=>@$_POST['CollGrade'],
 
@@ -1315,7 +1319,10 @@ class Admission_inter extends CI_Controller {
             'rno'=>@$_POST['OldRno'],
             'sess'=>@$_POST['Oldsess'],
             'Iyear'=>@$_POST['Oldyear'],
+
+
             'Brd_cd'=>@$_POST['Oldbrd'],
+            'IntBrd_cd'=>@$_POST['IntBrd_cd'],
 
             'CollGrade'=>@$_POST['CollGrade'],
 
@@ -1424,7 +1431,7 @@ class Admission_inter extends CI_Controller {
     }
     public function NewEnrolment_NewForm_inter()
     {    
-        //DebugBreak();
+        DebugBreak();
 
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
