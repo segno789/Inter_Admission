@@ -25,9 +25,22 @@
 
                                     <?php
 
-                                    $image_path_selected = DIRPATH12TH.$data[0]['picpath']; 
+                                    
+                                    if($data[0]["IntBrd_cd"] ==  1)
+                                    {
+                                        $image_path_selected = DIRPATH12TH.$data[0]['picpath']; 
 
-                                    $type = pathinfo($image_path_selected, PATHINFO_EXTENSION);
+                                        $type = pathinfo(@$image_path_selected, PATHINFO_EXTENSION);
+                                    }
+                                    else
+                                    {
+                                        $image_path_selected =  DIRPATHOTHER.'/'.$data[0]["coll_cd"].'/'.$data[0]["picpath"]; 
+                                        
+                                        // echo  $data[0]["picpath"] ; die;
+                                        
+                                       // 
+                                        $type = pathinfo($image_path_selected, PATHINFO_EXTENSION); 
+                                    }
                                     @$image_path_selected = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($image_path_selected));
 
                                     ?>

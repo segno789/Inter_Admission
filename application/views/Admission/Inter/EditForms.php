@@ -78,8 +78,22 @@
                                         default:
                                             $grp_name = "No Group Selected.";
                                     }
-                                       $image_path_selected = DIRPATH12TH.$vals['picpath']; 
-                                    $type = pathinfo($image_path_selected, PATHINFO_EXTENSION);
+                                      // $image_path_selected = DIRPATH12TH.$vals['picpath']; 
+                                 //   $type = pathinfo($image_path_selected, PATHINFO_EXTENSION);
+                                    if($vals["IntBrd_cd"] ==  1)
+                                        {
+                                            $image_path_selected = DIRPATH12TH.$vals['picpath']; 
+                                            $type = pathinfo($image_path_selected, PATHINFO_EXTENSION);
+                                           
+                                        }
+                                        else 
+                                        {
+                                            $image_path_selected =  DIRPATHOTHER.'/'.$vals["coll_cd"].'/'.$vals["picpath"]; 
+                                           
+                                            $type = pathinfo($image_path_selected, PATHINFO_EXTENSION); 
+                                        }
+
+                                   
                                     @$image_path_selected = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($image_path_selected));
                                     echo '<tr  >
                                     <td>'.$n.'</td>

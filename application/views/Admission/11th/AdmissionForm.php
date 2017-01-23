@@ -93,7 +93,7 @@
                                     Bay Form No :
                                 </label>
                                 <div class="controls controls-row">
-                                    <input class="span3" type="text" id="bay_form" name="bay_form"  placeholder="Bay Form No." value="<?php echo  @$data['0']['bFormNo']; ?>" required="required" <?php if(@$data['0']['bFormNo'] !=''  && @$brd_cd == 1) echo "readonly='readonly'";  ?>>
+                                    <input class="span3" type="text" id="bay_form" name="bay_form"  placeholder="Bay Form No." value="<?php echo  @$data['0']['bFormNo']; ?>" required="required" >
                                     <label class="control-label span2" for="father_cnic">
                                         Father's CNIC :
                                     </label> 

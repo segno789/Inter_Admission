@@ -52,16 +52,22 @@
                                     <?php
 
                                     $image_path_selected = '';
-                                 //   DebugBreak();
+
                                     if($data != false)
                                     {
                                         $n=0;  
                                         $grp_name='';                             
                                         foreach($data as $key=>$vals):
+                                        
+                                       
+                                     //   echo  '<pre>'; print_r($vals);exit();
+                                        
                                         $n++;
                                         $formno = !empty($vals["formNo"])?$vals["formNo"]:"N/A";
                                         $grp_name = $vals["grp_cd"];
                                         $sub7 = $vals["sub7"];
+                                        
+
                                         
                                         
                                         if($vals["IntBrd_cd"] ==  1)
@@ -73,6 +79,7 @@
                                         else 
                                         {
                                             $image_path_selected =  DIRPATHOTHER.'/'.$vals["coll_cd"].'/'.$vals["picpath"]; 
+                                            
                                             $type = pathinfo($image_path_selected, PATHINFO_EXTENSION); 
                                         }
 
