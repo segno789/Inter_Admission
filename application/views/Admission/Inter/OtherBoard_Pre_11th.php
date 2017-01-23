@@ -952,6 +952,10 @@ header("Pragma: no-cache");
                                                     beforeSend: function() {  $('.mPageloader').show(); },
                                                     complete: function() { $('.mPageloader').hide();},
                                                     success: function(data) {
+                                                        
+                                                         console.log(data);
+                                                        
+                                                        
                                                         var obj = JSON.parse(data) ;
                                                         if(obj.error ==  1)
                                                         {

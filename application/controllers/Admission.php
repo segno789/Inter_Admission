@@ -3039,7 +3039,7 @@ class Admission extends CI_Controller {
 
         $Inst_Id = 999999;
 
-        $formno = '';//$this->Admission_model->GetFormNo();
+        $formno = '';
 
         $allinputdata = array('cand_name'=>@$_POST['cand_name'],
             'father_name'=>@$_POST['father_name'],
@@ -3051,7 +3051,7 @@ class Admission extends CI_Controller {
             'MarkOfIden'=>@$_POST['MarkOfIden'],
             'medium'=>@$_POST['medium'],
             'nationality'=>@$_POST['nationality'],
-            'gender'=>@$_POST['gend'],
+            'gender'=>@$_POST['gender'],
             'hafiz'=>@$_POST['hafiz'],
             'religion'=>@$_POST['religion'],
             'std_group'=>@$_POST['std_group'],
