@@ -854,6 +854,10 @@
                                 <input type="hidden"   value="<?php echo   $data[0]['Iyear'];  ?>"  name="Oldyear">
                                 <input type="hidden"   value="<?php echo   $data[0]['sess'];  ?>"  name="Oldsess">
                                 <input type="hidden"   value="<?php echo   $data[0]['Brd_cd'];  ?>"  name="Oldbrd">
+                                
+                                
+                                <input type="hidden"   value="<?php echo   $data[0]['IntBrd_cd'];  ?>"  name="IntBrd_cd">
+                                
                                 <input type="hidden"   value="<?php echo   $gender;  ?>"  name="sex">
                                 <input type="hidden"   value="<?php  echo  $data['0']['name']; ?>"  name="cand_name_hidden">
                                 <input type="hidden"   value="<?php  echo  $data['0']['Fname']; ?>"  name="father_name_hidden">
