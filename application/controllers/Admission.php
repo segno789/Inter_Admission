@@ -2212,8 +2212,6 @@ class Admission extends CI_Controller {
 
         $data = $this->Admission_model->Pre_Inter_data($data);
 
-        //DebugBreak();
-
         if($data[0]['sub8'] == '' && $data[0]['class'] == 11){
             $data[0]['sub8'] = 91;    
         }
@@ -2222,6 +2220,10 @@ class Admission extends CI_Controller {
 
         if(!$data){
             $error_msg.='<span style="font-size: 16pt; color:red;">No Any Student Found Against Your Criteria</span>';
+            $this->load->library('session');
+            $mydata = array('data'=>$_POST,'error_msg'=>$error_msg);
+            $this->session->set_flashdata('matric_error',$mydata );
+            redirect('Admission/matric_default');
         }
 
 
@@ -2230,6 +2232,10 @@ class Admission extends CI_Controller {
         if(!($isexit) && $error_msg == '' && $iyear >2014)
         {
             $error_msg.= '<span style="font-size: 16pt; color:red;">' . 'Your Picture is missing.</span>';
+            $this->load->library('session');
+            $mydata = array('data'=>$_POST,'error_msg'=>$error_msg ,'exam_type'=>0);
+            $this->session->set_flashdata('matric_error',$mydata );
+            redirect('Admission/matric_default');
         }
         else
         {
@@ -2240,19 +2246,20 @@ class Admission extends CI_Controller {
             }
         }
 
-
         $specialcase = $data['0']['Spl_Name'];
         $specialcode = $data['0']['spl_cd'];
         $exam_type =   $data['0']['exam_type'];
-
-        //DebugBreak();
-
         @$isParctialsub =   $data['0']['sn'];
 
         if($specialcode != '' && $specialcode != 34 ){
 
             $error_msg.='<span style="font-size: 16pt; color:red;">' . '   Your Admission cannot be procceed due to     ' . '</span>';
             $error_msg.='<span style="font-size: 16pt; color:red;">' . $specialcase . '</span>';
+
+            $this->load->library('session');
+            $mydata = array('data'=>$_POST,'error_msg'=>$error_msg ,'exam_type'=>0);
+            $this->session->set_flashdata('matric_error',$mydata );
+            redirect('Admission/matric_default');
         }
 
         $nxtrnosess = $data['0']['NextRno_Sess_Year'];
@@ -2283,6 +2290,10 @@ class Admission extends CI_Controller {
         else if ($matric_rno == 0 && $error_msg == '')
         {
             $error_msg.='<span style="font-size: 16pt; color:red;"> Matric Roll No is Invalid</span>';
+            $this->load->library('session');
+            $mydata = array('data'=>$_POST,'error_msg'=>$error_msg,'exam_type'=>0);
+            $this->session->set_flashdata('matric_error',$mydata );
+            redirect('Admission/matric_default');
         }
 
         if($error_msg !='')
