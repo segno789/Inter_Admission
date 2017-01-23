@@ -379,9 +379,7 @@ class Admission_model extends CI_Model
         $oldsess =  $data['sess'];
         $AdmFine =  $data['AdmFine']; 
 
-        //DebugBreak();
-
-        $oldResult11th = $data['oldResult11th'];
+        //$oldResult11th = $data['oldResult11th'];
 
         $Brd_cd =  $data['Brd_cd'];  
 
