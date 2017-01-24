@@ -2537,7 +2537,7 @@ public function NewEnrolment_Delete($formno)
   public function ChallanForm_Adm11hth_Regular()
     { 
 
-   // DebugBreak();
+//    DebugBreak();
      $Grp_cd = $this->uri->segment(3);
      $this->load->library('session');
         $this->load->library('NumbertoWord');
@@ -2912,11 +2912,11 @@ $SciProcFee =  195;
            $mydata_final = $mydata_final['data'][0];
            if($Grp_cd == 9)
            {
-           $data_challanNo = @$data['data']['stdinfo'][0]->challan_overall;
+           $data_challanNo = @$data['data']['stdinfo'][0]->challan_overall_1;
            }
            else
            {
-           $data_challanNo = @$data['data']['stdinfo'][0]->challanno;
+           $data_challanNo = @$data['data']['stdinfo'][0]->challan_overall_1;
            }
            $challanDueDate;
 
