@@ -158,11 +158,11 @@
                                     <input class="span3" type="text" id="MarkOfIden" style="text-transform: uppercase;" name="MarkOfIden" value="<?php echo  $data['0']['markOfIden']; ?>" required="required" maxlength="60" >
                                 </div>
                             </div>
-                            
-                            
-                            
-                            
-                              <div class="control-group">
+
+
+
+
+                            <div class="control-group">
                                 <label class="control-label span1" >
                                     College Grade :
                                 </label>
@@ -170,9 +170,9 @@
                                     <input class="span3" type="text" id="CollGrade" style="text-transform: uppercase;" name="CollGrade" value="<?php echo  $data['0']['CollGrade']; ?>" required="required" maxlength="2" >
                                 </div>
                             </div>
-                            
-                            
-                            
+
+
+
                             <div class="control-group">
                                 <label class="control-label span1" >
                                     Nationality :
@@ -727,6 +727,8 @@
                                     <select id="sub5"  name="sub5" class="span3 dropdown">
                                         <?php if($data[0]['sub5pf1']== 2){
 
+                                            //DebugBreak();
+
                                             if($data[0]['sub5Ap1']==1) 
                                             {
                                                 echo '<option value='.$data[0]['sub5'].'>'.array_search($data[0]['sub5'],$subarray).'</option>'; 
@@ -747,9 +749,17 @@
                                         ?>
                                     </select> 
                                     <select id="sub5p2" class="span3 dropdown" name="sub5p2" selected="selected">
-                                        <option value="<?php  echo $data[0]['sub5'];?>"><?php
-                                            echo array_search($data[0]['sub5'],$subarray);
-                                        ?></option>
+
+                                        <?php
+                                        
+                                        if($grp == 5)
+                                        {
+                                            echo '<option value='.$data[0]['sub5A'].'>'.array_search($data[0]['sub5A'],$subarray).'</option>'; 
+                                        }
+                                        else{
+                                            echo '<option value='.$data[0]['sub5'].'>'.array_search($data[0]['sub5'],$subarray).'</option>'; 
+                                        }
+                                        ?>
                                     </select> 
                                 </div>
                                 <div class="control row controls-row">
@@ -759,6 +769,8 @@
                                     <select id="sub6"  name="sub6" class="span3 dropdown">
                                         <?php if($data[0]['sub6pf1']== 2){
 
+                                            //DebugBreak();
+                                            
                                             if($data[0]['sub6Ap1']==1) 
                                             {
                                                 echo '<option value='.$data[0]['sub6'].'>'.array_search($data[0]['sub6'],$subarray).'</option>'; 
@@ -779,9 +791,16 @@
                                         ?>
                                     </select>
                                     <select id="sub6p2"  name="sub6p2" class="span3 dropdown" selected="selected">
-                                        <option value="<?php echo $data[0]['sub6'];?>"><?php
-                                            echo array_search($data[0]['sub6'],$subarray);
-                                        ?></option>
+                                        <?php
+                                        
+                                        if($grp == 5)
+                                        {
+                                            echo '<option value='.$data[0]['sub6A'].'>'.array_search($data[0]['sub6A'],$subarray).'</option>'; 
+                                        }
+                                        else{
+                                            echo '<option value='.$data[0]['sub6'].'>'.array_search($data[0]['sub6'],$subarray).'</option>'; 
+                                        }
+                                        ?>
                                     </select>
                                 </div>
                                 <?php 
@@ -818,8 +837,8 @@
                                         </select> 
                                         <select id="sub7p2" class="span3 dropdown" name="sub7p2" selected="selected">
 
-                                            <option value="<?php echo $data[0]['sub7'];?>"><?php
-                                                echo array_search($data[0]['sub7'],$subarray);
+                                            <option value="<?php echo $data[0]['sub7A'];?>"><?php
+                                                echo array_search($data[0]['sub7A'],$subarray);
                                             ?></option>
                                             <?php }?>
                                     </select> 
@@ -835,6 +854,10 @@
                                 <input type="hidden"   value="<?php echo   $data[0]['Iyear'];  ?>"  name="Oldyear">
                                 <input type="hidden"   value="<?php echo   $data[0]['sess'];  ?>"  name="Oldsess">
                                 <input type="hidden"   value="<?php echo   $data[0]['Brd_cd'];  ?>"  name="Oldbrd">
+                                
+                                
+                                <input type="hidden"   value="<?php echo   $data[0]['IntBrd_cd'];  ?>"  name="IntBrd_cd">
+                                
                                 <input type="hidden"   value="<?php echo   $gender;  ?>"  name="sex">
                                 <input type="hidden"   value="<?php  echo  $data['0']['name']; ?>"  name="cand_name_hidden">
                                 <input type="hidden"   value="<?php  echo  $data['0']['Fname']; ?>"  name="father_name_hidden">

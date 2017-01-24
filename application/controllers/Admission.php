@@ -2212,8 +2212,6 @@ class Admission extends CI_Controller {
 
         $data = $this->Admission_model->Pre_Inter_data($data);
 
-        //DebugBreak();
-
         if($data[0]['sub8'] == '' && $data[0]['class'] == 11){
             $data[0]['sub8'] = 91;    
         }
@@ -2222,14 +2220,22 @@ class Admission extends CI_Controller {
 
         if(!$data){
             $error_msg.='<span style="font-size: 16pt; color:red;">No Any Student Found Against Your Criteria</span>';
+            $this->load->library('session');
+            $mydata = array('data'=>$_POST,'error_msg'=>$error_msg);
+            $this->session->set_flashdata('matric_error',$mydata );
+            redirect('Admission/matric_default');
         }
 
-        $picpath = DIRPATH12TH.'\\'.@$data[0]['picpath'];
 
+        $picpath = DIRPATH12TH.'\\'.@$data[0]['picpath'];
         $isexit = is_file($picpath);
         if(!($isexit) && $error_msg == '' && $iyear >2014)
         {
             $error_msg.= '<span style="font-size: 16pt; color:red;">' . 'Your Picture is missing.</span>';
+            $this->load->library('session');
+            $mydata = array('data'=>$_POST,'error_msg'=>$error_msg ,'exam_type'=>0);
+            $this->session->set_flashdata('matric_error',$mydata );
+            redirect('Admission/matric_default');
         }
         else
         {
@@ -2243,15 +2249,17 @@ class Admission extends CI_Controller {
         $specialcase = $data['0']['Spl_Name'];
         $specialcode = $data['0']['spl_cd'];
         $exam_type =   $data['0']['exam_type'];
-
-        //DebugBreak();
-
         @$isParctialsub =   $data['0']['sn'];
 
         if($specialcode != '' && $specialcode != 34 ){
 
             $error_msg.='<span style="font-size: 16pt; color:red;">' . '   Your Admission cannot be procceed due to     ' . '</span>';
             $error_msg.='<span style="font-size: 16pt; color:red;">' . $specialcase . '</span>';
+
+            $this->load->library('session');
+            $mydata = array('data'=>$_POST,'error_msg'=>$error_msg ,'exam_type'=>0);
+            $this->session->set_flashdata('matric_error',$mydata );
+            redirect('Admission/matric_default');
         }
 
         $nxtrnosess = $data['0']['NextRno_Sess_Year'];
@@ -2265,7 +2273,6 @@ class Admission extends CI_Controller {
             $nxtrno = $parts[0];
             $nxtsess = $parts[1];
             $nxtyear = $parts[2];
-
             if($nxtsess == '1')
             {
                 $nxtsess = 'Inter Annual';
@@ -2283,6 +2290,10 @@ class Admission extends CI_Controller {
         else if ($matric_rno == 0 && $error_msg == '')
         {
             $error_msg.='<span style="font-size: 16pt; color:red;"> Matric Roll No is Invalid</span>';
+            $this->load->library('session');
+            $mydata = array('data'=>$_POST,'error_msg'=>$error_msg,'exam_type'=>0);
+            $this->session->set_flashdata('matric_error',$mydata );
+            redirect('Admission/matric_default');
         }
 
         if($error_msg !='')
@@ -2361,6 +2372,7 @@ class Admission extends CI_Controller {
             $this->load->view('common/commonfooter.php');
         }
     }
+
     public function Pre_Matric_data()
     {
         //DebugBreak();                     
@@ -3038,7 +3050,7 @@ class Admission extends CI_Controller {
 
         $Inst_Id = 999999;
 
-        $formno = '';//$this->Admission_model->GetFormNo();
+        $formno = '';
 
         $allinputdata = array('cand_name'=>@$_POST['cand_name'],
             'father_name'=>@$_POST['father_name'],
@@ -3050,7 +3062,7 @@ class Admission extends CI_Controller {
             'MarkOfIden'=>@$_POST['MarkOfIden'],
             'medium'=>@$_POST['medium'],
             'nationality'=>@$_POST['nationality'],
-            'gender'=>@$_POST['gend'],
+            'gender'=>@$_POST['gender'],
             'hafiz'=>@$_POST['hafiz'],
             'religion'=>@$_POST['religion'],
             'std_group'=>@$_POST['std_group'],
@@ -3480,7 +3492,6 @@ class Admission extends CI_Controller {
             $sub2 =  $_POST['sub2p2'];    
         }
 
-
         $cattype = @$_POST['cattype_hidden'];
         $examtype = @$_POST['exam_type'];
         $marksImp = @$_POST['ddlMarksImproveoptions'];
@@ -3512,6 +3523,14 @@ class Admission extends CI_Controller {
             $cat11 = @$cat['cat11'];
             $cat12 = @$cat['cat12'];
         }
+
+        @$fullAppear = @$_POST['fullAppear'];
+        if(@$fullAppear == 'on')
+        {
+            $cat11 = 1;
+            $cat12 = 1;
+        }
+
         $Speciality = $this->input->post('speciality');
 
         $practical_Sub = array(
@@ -3549,8 +3568,6 @@ class Admission extends CI_Controller {
         {
             return;
         }
-
-
 
         $today = date("d-m-Y");   
         $dueDate = 0;
@@ -5058,10 +5075,10 @@ class Admission extends CI_Controller {
     }
     public function deleteExtarfiles()
     {
-        
-         $clsfolder = $this->uri->segment(3);
-         //echo $clsfolder ;die;
-        
+
+        $clsfolder = $this->uri->segment(3);
+        //echo $clsfolder ;die;
+
         $dirPath = 'C:\inetpub\vhosts\bisegrw.com\hssc.bisegrw.com\uplaods\2016\private\\'.$clsfolder.'th';
         $copypath = 'C:\inetpub\vhosts\bisegrw.com\hssc.bisegrw.com\uplaods\2016\private\\'.$clsfolder.'th_temp';
         //DebugBreak();

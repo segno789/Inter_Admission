@@ -678,7 +678,7 @@ class Admission_inter extends CI_Controller {
         }
 
         $totfee = $result[0]['Total_Fee_Spec'] + $result[0]['Total_SpeCandidate'];
-        
+
         $pdf->SetFont('Arial','B',$font);
         $pdf->SetXY($x-120, $Y+37);
         $pdf->Cell(0,0,$totfee.'/-',0,0,'L',0);
@@ -1003,6 +1003,8 @@ class Admission_inter extends CI_Controller {
         $grp_cd = $this->input->post('std_group');
 
 
+        //DebugBreak();
+        
         $data = array(
             'name' =>$this->input->post('cand_name'),
             'Fname' =>$this->input->post('father_name'),
@@ -1060,7 +1062,9 @@ class Admission_inter extends CI_Controller {
             'oldRno'=>@$_POST['OldRno'],
             'sess'=>@$_POST['Oldsess'],
             'Iyear'=>@$_POST['Oldyear'],
+
             'Brd_cd'=>@$_POST['Oldbrd'],
+            'IntBrd_cd'=>@$_POST['IntBrd_cd'],
 
             'CollGrade'=>@$_POST['CollGrade'],
 
@@ -1315,7 +1319,10 @@ class Admission_inter extends CI_Controller {
             'rno'=>@$_POST['OldRno'],
             'sess'=>@$_POST['Oldsess'],
             'Iyear'=>@$_POST['Oldyear'],
+
+
             'Brd_cd'=>@$_POST['Oldbrd'],
+            'IntBrd_cd'=>@$_POST['IntBrd_cd'],
 
             'CollGrade'=>@$_POST['CollGrade'],
 
@@ -1337,7 +1344,6 @@ class Admission_inter extends CI_Controller {
 
         $data['isupdate']=0;
         $logedIn = $this->Admission_inter_model->Insert_NewEnorlement($data);
-
 
 
         if( !isset($logedIn))
@@ -1425,7 +1431,7 @@ class Admission_inter extends CI_Controller {
     }
     public function NewEnrolment_NewForm_inter()
     {    
-        //DebugBreak();
+        DebugBreak();
 
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -3476,9 +3482,6 @@ class Admission_inter extends CI_Controller {
             $pdf->Image(base_url()."assets/img/logo2.png",0.05,0.2, 0.75,0.75, "PNG");
             $pdf->Image(base_url()."assets/img/12.jpg",7.49,0.39, 0.36,0.36, "JPG");    
 
-
-
-
             if(Session==1)
             {
                 $pdf->SetFont('Arial','',8);
@@ -3501,9 +3504,6 @@ class Admission_inter extends CI_Controller {
                 $pdf->SetFont("Arial",'',8);
                 $pdf->Cell(0, 0.25, $ProofReed   ,0,'C');
             }
-
-
-
 
             $pdf->SetFont('Arial','B',10);
             $pdf->SetXY(3.2,0.55);
@@ -3937,6 +3937,9 @@ class Admission_inter extends CI_Controller {
             $pdf->SetXY($xx,4.6+$yy);
             $pdf->Cell($boxWidth,0.2,$data['sub4Ap1'] != 1 ? '':   '    '.'4. '. $data['sub4_NAME'],1,0,'L',1);
 
+            @$group_code = @$data['grp_cd'];
+
+
             $pdf->SetFont('Arial','',7);
             $pdf->SetXY($xx,4.8+$yy);
             $pdf->Cell($boxWidth,0.2,$data['sub5Ap1'] != 1 ? '':   '    '.'5. '.  $data['sub5_NAME'],1,0,'L',1);
@@ -3947,12 +3950,8 @@ class Admission_inter extends CI_Controller {
 
             $pdf->SetFont('Arial','',7);                                                                     
             $pdf->SetXY($xx,5.2+$yy);
-            $pdf->Cell($boxWidth,0.2,$data['sub7Ap1'] != 1 ? '':   '    '.'7. '.  $data['sub7_NAME'],1,0,'L',1);
+            $pdf->Cell($boxWidth,0.2,$data['sub7Ap1'] != 1 ? '':   '    '.'7. '.  $data['sub7_NAME'],1,0,'L',1); 
 
-            /*$pdf->SetFont('Arial','',7);
-            $pdf->SetXY($xx,5.4+$yy);
-            $pdf->Cell($boxWidth,0.2,$data['sub8Ap2'] != 1 ? '':   '    '.'8. '. $this->GetSubNameHere($data['sub8']),1,0,'L',1);
-            */
             $xangle = 4.0;
 
             $pdf->SetFont('Arial','B',8);
@@ -3967,10 +3966,6 @@ class Admission_inter extends CI_Controller {
             $pdf->SetXY($xangle,4.2+$yy);
             $pdf->Cell($boxWidth,0.2,$data['sub2Ap2'] != 1 ? '':  '    '.'2. '.  $data['sub2_NAME'],1,0,'L',1);
 
-            /* $pdf->SetFont('Arial','',7);
-            $pdf->SetXY($xangle,4.4+$yy);
-            $pdf->Cell($boxWidth,0.2,$data['sub3Ap1'] != 1 ? '':  '    '.'3. '.  $this->GetSubNameHere($data['sub3']),1,0,'L',1);*/
-
             $pdf->SetFont('Arial','',7);
             $pdf->SetXY($xangle,4.4+$yy);
             $pdf->Cell($boxWidth,0.2,$data['sub8Ap2'] != 1 ? '':  '    '.'3. '.  $data['sub8_NAME'],1,0,'L',1);
@@ -3979,17 +3974,36 @@ class Admission_inter extends CI_Controller {
             $pdf->SetXY($xangle,4.6+$yy);
             $pdf->Cell($boxWidth,0.2,$data['sub4Ap2'] != 1 ? '':  '    '.'4. '. $data['sub4_NAME'],1,0,'L',1);
 
-            $pdf->SetFont('Arial','',7);
-            $pdf->SetXY($xangle,4.8+$yy);
-            $pdf->Cell($boxWidth,0.2,$data['sub5Ap2'] != 1 ? '':  '    '.'5. '.  $data['sub5_NAME'],1,0,'L',1);
 
-            $pdf->SetFont('Arial','',7);
-            $pdf->SetXY($xangle,5.0+$yy);
-            $pdf->Cell($boxWidth,0.2,$data['sub6Ap2'] != 1 ? '':  '    '.'6. '. $data['sub6_NAME'],1,0,'L',1);
 
-            $pdf->SetFont('Arial','',7);
-            $pdf->SetXY($xangle,5.2+$yy);
-            $pdf->Cell($boxWidth,0.2,$data['sub7Ap2'] != 1 ? '':  '    '.'7. '. $data['sub7_NAME'],1,0,'L',1);
+            if(@$group_code == 5)
+            {
+                $pdf->SetFont('Arial','',7);
+                $pdf->SetXY($xangle,4.8+$yy);
+                $pdf->Cell($boxWidth,0.2,$data['sub5Ap2'] != 1 ? '':  '    '.'5. '.  $data['sub5A_NAME'],1,0,'L',1);
+
+                $pdf->SetFont('Arial','',7);
+                $pdf->SetXY($xangle,5.0+$yy);
+                $pdf->Cell($boxWidth,0.2,$data['sub6Ap2'] != 1 ? '':  '    '.'6. '. $data['sub6A_NAME'],1,0,'L',1);
+
+                $pdf->SetFont('Arial','',7);
+                $pdf->SetXY($xangle,5.2+$yy);
+                $pdf->Cell($boxWidth,0.2,$data['sub7Ap2'] != 1 ? '':  '    '.'7. '. $data['sub7A_NAME'],1,0,'L',1);
+            }
+            else
+            {
+                $pdf->SetFont('Arial','',7);
+                $pdf->SetXY($xangle,4.8+$yy);
+                $pdf->Cell($boxWidth,0.2,$data['sub5Ap2'] != 1 ? '':  '    '.'5. '.  $data['sub5_NAME'],1,0,'L',1);
+
+                $pdf->SetFont('Arial','',7);
+                $pdf->SetXY($xangle,5.0+$yy);
+                $pdf->Cell($boxWidth,0.2,$data['sub6Ap2'] != 1 ? '':  '    '.'6. '. $data['sub6_NAME'],1,0,'L',1);
+
+                $pdf->SetFont('Arial','',7);
+                $pdf->SetXY($xangle,5.2+$yy);
+                $pdf->Cell($boxWidth,0.2,$data['sub7Ap2'] != 1 ? '':  '    '.'7. '. $data['sub7_NAME'],1,0,'L',1);
+            }
 
             $x = 1;
             //--------------------------- Subjects
