@@ -1431,7 +1431,7 @@ class Admission_inter extends CI_Controller {
     }
     public function NewEnrolment_NewForm_inter()
     {    
-        DebugBreak();
+      //  DebugBreak();
 
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -3348,7 +3348,15 @@ class Admission_inter extends CI_Controller {
             {
             $pdf->Image(DIRPATH12TH.$data['PicPath'],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG"); 
             }*/
-            $pdf->Image(DIRPATH12TH.$data['picpath'],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG"); 
+            if($data["IntBrd_cd"] ==  1)
+            {
+                $pdf->Image(DIRPATH12TH.$data['picpath'],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG"); 
+
+            }
+            else
+            {
+                 $pdf->Image(DIRPATHOTHER.'/'.$data["coll_cd"].'/'.$data['picpath'],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG");
+            }
             ++$SR;
 
             $pdf->SetFont('Arial','',8);
@@ -3535,7 +3543,18 @@ class Admission_inter extends CI_Controller {
             //------ Picture Box on Centre      
             $pdf->SetXY(6.6, 1.55+$Y );
             $pdf->Cell(1.0,1.0,'',1,0,'C',0);
-            $pdf->Image(DIRPATH12TH.$data["picpath"],6.5, 1.55+$Y, 1.25, 1.0, "JPG");
+            
+             if($data["IntBrd_cd"] ==  1)
+            {
+                 $pdf->Image(DIRPATH12TH.$data["picpath"],6.5, 1.55+$Y, 1.25, 1.0, "JPG");
+            }
+            else
+            {
+                 $pdf->Image(DIRPATHOTHER.'/'.$user['Inst_Id'].'/'.$data['picpath'],6.5, 1.55+$Y, 1.25, 1.0, "JPG");
+            }
+            
+            
+           
 
 
             $pdf->SetFont('Arial','',8);

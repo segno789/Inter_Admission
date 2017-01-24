@@ -2,12 +2,6 @@
 
 class Admission_11th_reg_model extends CI_Model 
 {
-    
-    var $table = 'Registration..IA_P1_Reg_Adm2016';
-    var $column_order = array('formno','name','fname','mobno','addr'); //set column field database for datatable orderable
-    var $column_search = array('formno','name','fname'); //set column field database for datatable searchable 
-    var $order = array('formno' => 'asc'); // default order 
-    
     public function __construct()    
     {
 
@@ -452,23 +446,21 @@ class Admission_11th_reg_model extends CI_Model
         $inst_cd = $myinfo['Inst_cd'];
         $spl_cd = $myinfo['spl_cd'];
         $grp_selected = $myinfo['grp_selected'];
-        $offest = $myinfo['offest'];
-        $limit = $myinfo['limit'];
         $sess = Session;
         $Year = Year-1;
         if($grp_selected == FALSE)
         {
-            $query = $this->db->query("Registration..sp_get_regInfo_11th_Make_adm_temp $inst_cd,11,$Year,$sess,$offest,$limit");    
+            $query = $this->db->query("Registration..sp_get_regInfo_11th_Make_adm $inst_cd,11,$Year,$sess");    
         }
         else
         {
-            $query = $this->db->query("Registration..sp_get_regInfo_Groupwise_11th_Make_adm $inst_cd,11,$Year,$sess,$grp_selected,");    
+            $query = $this->db->query("Registration..sp_get_regInfo_Groupwise_11th_Make_adm $inst_cd,11,$Year,$sess,$grp_selected");    
         }
 
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
-            return $query->result();
+            return $query->result_array();
 
         }
         else
@@ -972,7 +964,7 @@ class Admission_11th_reg_model extends CI_Model
     }
     public function bay_form_fnic($bayformno,$fnic)
     {
-        $query = $this->db->get_where('Registration..IA_P1_Reg_Adm2016',  array('BForm' => $bayformno,'FNIC' => $fnic,'IsDeleted'=>0));
+        $query = $this->db->get_where('Registration..MA_P1_Reg_Adm2016',  array('BForm' => $bayformno,'FNIC' => $fnic,'IsDeleted'=>0));
         $rowcount = $query->num_rows();
         if ($rowcount > 0){
             return true;
@@ -981,71 +973,5 @@ class Admission_11th_reg_model extends CI_Model
             return false;
         }
     }
-    private function _get_datatables_query()
-    {
-
-        $this->db->from($this->table);
-
-        $i = 0;
-
-        foreach ($this->column_search as $item) // loop column 
-        {
-            if($_POST['search']['value']) // if datatable send POST for search
-            {
-
-                if($i===0) // first loop
-                {
-                    $this->db->group_start(); // open bracket. query Where with OR clause better with bracket. because maybe can combine with other WHERE with AND.
-                    $this->db->like($item, $_POST['search']['value']);
-                }
-                else
-                {
-                    $this->db->or_like($item, $_POST['search']['value']);
-                }
-
-                if(count($this->column_search) - 1 == $i) //last loop
-                    $this->db->group_end(); //close bracket
-            }
-            $i++;
-        }
-
-        if(isset($_POST['order'])) // here order processing
-        {
-            $this->db->order_by($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
-        } 
-        else if(isset($this->order))
-        {
-            $order = $this->order;
-            $this->db->order_by(key($order), $order[key($order)]);
-        }
-    }
-
-    function get_datatables($inst_cd)
-    {
-        $this->_get_datatables_query();
-        $this->db->where('coll_cd ', $inst_cd);
-        if($_POST['length'] != -1)
-            $this->db->limit($_POST['length'], $_POST['start']);
-        $query = $this->db->get();
-        return $query->result();
-    }
-    function count_filtered($inst_cd)
-    {
-        // DebugBreak();
-        $this->_get_datatables_query();
-        $this->db->where('coll_cd ', $inst_cd);
-        $query = $this->db->get();
-        return $query->num_rows();
-    }
-
-    public function count_all($inst_cd)
-    {
-        $this->db->where('coll_cd ', $inst_cd);
-        $this->db->from($this->table);
-        return $this->db->count_all_results();
-    }
-
-    
-    
 }
 ?>
