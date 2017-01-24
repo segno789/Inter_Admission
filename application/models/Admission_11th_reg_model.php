@@ -542,7 +542,7 @@ class Admission_11th_reg_model extends CI_Model
         $query = $this->db->get_where('Registration..MA_P1_Reg_Adm2016',  array('formNo' => $formno,'class'=>9,'iyear'=>$year,'sess'=>1));     
         } */
         $year = $year-1;
-        $query = $this->db->get_where('Registration..IA_P1_Reg_Adm2016_temp',  array('formNo' => $formno,'class'=>11,'iyear'=>$year,'sess'=>Session));     
+        $query = $this->db->get_where('Registration..IA_P1_Reg_Adm2016',  array('formNo' => $formno,'class'=>11,'iyear'=>$year,'sess'=>Session));     
        // DebugBreak();
         $rowcount = $query->num_rows();
         if($rowcount > 0)
@@ -815,7 +815,7 @@ class Admission_11th_reg_model extends CI_Model
         //DebugBreak();
 
         $Inst_cd = $fetch_data['Inst_cd'];
-        $this->db->select('sub4,sub5,sub6,sub7,formNo,name, Fname, grp_cd, IsReAdm,regFee,RegProcessFee,RegFineFee,RegTotalFee,Spec,challan_overall,challanno');
+        $this->db->select('sub4,sub5,sub6,sub7,formNo,name, Fname, grp_cd, IsReAdm,regFee,RegProcessFee,RegFineFee,RegTotalFee,Spec,challan_overall_1,challanno');
         $this->db->from('Registration..IA_P1_Reg_Adm2016');
         if($fetch_data['option']==4)
         {
@@ -947,11 +947,11 @@ class Admission_11th_reg_model extends CI_Model
     
         // DebugBreak();
         
-        $this->db->select('challan_overall');
+        $this->db->select('challan_overall_1');
        //  $this->db->where('challan_overall',False);
        $inst_cd =  $info['Inst_Id'];
        // $this->db->order_by("challan_overall", "DESC");
-        $formno = $this->db->get_where('Registration..IA_P1_Reg_Adm2016', array('coll_cd' => $inst_cd,'challan_overall '=>0));
+        $formno = $this->db->get_where('Registration..IA_P1_Reg_Adm2016', array('coll_cd' => $inst_cd,'challan_overall_1 '=>'0'));
         $rowcount = $formno->num_rows();
 
         if($rowcount > 0 )
