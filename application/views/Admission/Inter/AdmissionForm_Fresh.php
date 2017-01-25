@@ -350,6 +350,7 @@ header("Pragma: no-cache");
                                         <option value="0" selected="selected">NONE</option>
                                         <option value="3">HUMANITIES</option>
                                         <option value="5">COMMERCE</option>
+                                        <option value="30">KHASA</option>
                                     </select>                                            
                                 </div>
                             </div>
@@ -625,6 +626,10 @@ header("Pragma: no-cache");
                             function LoadHumanitiesSubjects(){
 
                                 Empty_All_Dropdowns();
+                                $('#sub3').show();
+                                $('#sub3p2').show();
+                                $('#sub6').show();
+                                $('#sub6p2').show();
 
                                 $("#sub1").append('<option value="1">ENGLISH</option>');
                                 $("#sub1p2").append('<option value="1">ENGLISH</option>');
@@ -661,6 +666,10 @@ header("Pragma: no-cache");
 
                             function LoadCommerceSubjects(){
                                 Empty_All_Dropdowns();
+                                $('#sub3').show();
+                                $('#sub3p2').show();
+                                $('#sub6').show();
+                                $('#sub6p2').show();
 
                                 $('#sub7').show();$('#sub7p2').show();
                                 $('#sub8').hide(); $('#sub8p2').hide();
@@ -698,6 +707,48 @@ header("Pragma: no-cache");
 
                             }
 
+                            function LoadKhasaSubjects(){
+
+                                Empty_All_Dropdowns();
+
+                                $("#sub1").append('<option value="1">ENGLISH</option>');
+                                $("#sub1p2").append('<option value="1">ENGLISH</option>');
+
+
+                                $("#sub2").append('<option value="2">URDU</option>');
+                                $("#sub2p2").append('<option value="2">URDU</option>');
+
+                                /*$("#sub3").append('<option value="92">ISLAMIC EDUCATION</option>');
+                                $("#sub3p2").append('<option value="91">PAKISTAN STUDIES</option>');*/
+                                
+                                $('#sub3').hide();
+                                $('#sub3p2').hide();
+
+
+                                $.each(huminities_without_practical,function(val,text){
+
+                                    $("#sub4").append(new Option(text,val));
+                                    $("#sub4p2").append(new Option(text,val));
+                                });
+
+                                $.each(huminities_without_practical,function(val,text){
+
+                                    $("#sub5").append(new Option(text,val));
+                                    $("#sub5p2").append(new Option(text,val));
+                                });
+
+                                /*$.each(huminities_without_practical,function(val,text){
+
+                                    $("#sub6").append(new Option(text,val));
+                                    $("#sub6p2").append(new Option(text,val));
+                                });*/
+                                $('#sub6').hide();
+                                $('#sub6p2').hide();
+
+                                $('#sub7').hide();$('#sub7p2').hide();
+                                $('#sub8').hide(); $('#sub8p2').hide();
+                            }
+                            
                             $('#std_group').change(function(){
 
                                 var sel_group = $('#std_group').val();    
@@ -714,6 +765,9 @@ header("Pragma: no-cache");
 
                                 else if (sel_group == 5){
                                     LoadCommerceSubjects();
+                                }  
+                                else if (sel_group == 30){
+                                    LoadKhasaSubjects();
                                 }
                             });
 
@@ -1071,7 +1125,7 @@ header("Pragma: no-cache");
                             function checks()
                             {
 
-
+                                debugger;
                                 var status  =  check_NewEnrol_validation_Fresh();
                                 if(status == 0)
                                 {

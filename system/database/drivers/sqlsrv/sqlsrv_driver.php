@@ -140,7 +140,7 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 		{
 			unset($connection['UID'], $connection['PWD']);
 		}
-
+                                           
 		$this->conn_id = sqlsrv_connect($this->hostname, $connection);
 
 		// Determine how identifiers are escaped
