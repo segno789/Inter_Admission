@@ -1648,13 +1648,13 @@ class Admission extends CI_Controller {
         // //DebugBreak();
         $pdf->Image('assets/img/cutter.jpg',0.2,9.1, 8.3,0.09, "jpeg");  
 
-        $Y = $Y + .3;
+        $Y = $Y - 0.09;
         //
 
 
         $pdf->SetXY(0.2,9.6+$Y);
         $pdf->SetFont('Arial','b',$FontSize);
-        $pdf->Cell( 0,0,strtoupper("BOARD OF INTERMEDIATE AND SECONDARY EDUCATION GUJRANWALA , INTERMEDIATE (PART-II & COMPOSITE) ".$session." Examination ,".Year." "),0,'C');
+        $pdf->Cell( 0.5,0.5,strtoupper("BOARD OF INTERMEDIATE AND SECONDARY EDUCATION GUJRANWALA , INTERMEDIATE (PART-II & COMPOSITE) ".$session." Examination ,".Year." "),0,'C');
 
         $bx = 6.8;
         $by = 9.5;
@@ -1663,46 +1663,32 @@ class Admission extends CI_Controller {
         $pdf->SetXY(3.2,9.8+$Y);
         $pdf->SetTextColor(0,0,0);
         $pdf->SetFont('Arial','BI',7);
-        $pdf->Cell(0,0,"Printing Date: " .date('d-M-Y h:i A'),0,'L');
+        $pdf->Cell(0.2,0.5,"Printing Date: " .date('d-M-Y h:i A'),0,'L');
 
         $pdf->SetXY(0.2,9.69+$Y);
         $pdf->SetFillColor(0,0,0);                                     
         $pdf->SetFont('Arial','BI',7);
-        $pdf->Cell(0,0,"Candidate Copy",0,'L');
+        $pdf->Cell(0.2,0.5,"Candidate Copy",0,'L');
 
 
-        $pdf->SetXY(0.2,10.38+$Y);
+        $pdf->SetXY(0.2,10.0+$Y);
         $pdf->SetFillColor(0,0,0);
         $pdf->SetTextColor(255,255,255);
         $pdf->SetFont('Arial','B',7);
         $pdf->Cell($boxWidth,0.2,'Due Date: '.$this->GetDueDate(),1,0,'C',1); 
 
-        
-        
-        
-        $pdf->Image(BARCODE_PATH.$image,5.15, 10.40+$Y  ,2.4,0.24,"PNG");
+        $pdf->Image(BARCODE_PATH.$image,5.15, 10.0+$Y  ,2.4,0.24,"PNG");
 
-        $pdf->Image("assets/img/12.jpg",7.58,10.5+$Y, 0.30,0.30, "JPG");  
+        $pdf->Image("assets/img/12.jpg",7.58,9.8+$Y, 0.30,0.30, "JPG");  
 
-
-        $pdf->SetXY(0.5, 10.75+$Y);
-        $pdf->SetFont('Arial','b',8);
-        $pdf->Cell( 0,0,"CMD Account No. 00427900072103",0,'L');
-
-
-        $pdf->SetXY(3.5, 10.60+$Y);
-        $pdf->SetTextColor(0,0,0);
-        $pdf->SetFont('Arial','b',9.3);
-        $pdf->Cell( 0,0,"Bank Challan No.  ".$data['formNo'],0,'L');
-        
-        $pdf->SetXY(0.5,10.65+$Y);
+        $pdf->SetXY(0.5,10.2+$Y);
         $pdf->SetTextColor(0,0,0);
         $pdf->SetFont('Arial','',$FontSize);
-        $pdf->Cell( 0,0,"Form No:",0,'L');
+        $pdf->Cell( 0.5,0.5,"Form No:",0,'L');
 
         $pdf->SetFont('Arial','B',$FontSize);
-        $pdf->SetXY(1.0,10.65+$Y);
-        $pdf->Cell( 0,0,$data['formNo'],0,'L');
+        $pdf->SetXY(1.0,10.2+$Y);
+        $pdf->Cell( 0.5,0.5,$data['formNo'],0,'L');
 
 
 
@@ -1713,12 +1699,12 @@ class Admission extends CI_Controller {
 
         if($data ['IsNewPic'] == 0)
         {
-            $pdf->Image(DIRPATH12TH.$data['PicPath'],6.5, 10.65+$Y, 0.95, 1.0, "JPG");
+            $pdf->Image(DIRPATH12TH.$data['PicPath'],6.5, 10.3+$Y, 0.95, 1.0, "JPG");
         }
 
         else  if($data ['IsNewPic'] == 1)
         {
-            $pdf->Image(GET_PRIVATE_IMAGE_PATH.'/12th/'.$data['PicPath'],6.5, 10.65+$Y, 0.95, 1.0, "JPG");
+            $pdf->Image(GET_PRIVATE_IMAGE_PATH.'/12th/'.$data['PicPath'],6.5, 10.3+$Y, 0.95, 1.0, "JPG");
             //$pdf->Image(GET_PRIVATE_IMAGE_PATH.'/12th/'.$data['picpath'],6.5, 1.30+$Y, 0.95, 1.0, "JPG");
         }
 
@@ -1726,49 +1712,58 @@ class Admission extends CI_Controller {
         $pdf->SetFont('Arial','',8);
 
 
-        $pdf->SetXY(0.5,10.75+$Y);
+        $pdf->SetXY(0.5,10.35+$Y);
         $pdf->SetTextColor(0,0,0);
         $pdf->SetFont('Arial','',$FontSize);
-        $pdf->Cell( 0,0,"Name:",0,'L');
+        $pdf->Cell( 0.5,0.5,"Name:",0,'L');
         $pdf->SetFont('Arial','B',$FontSize);
-        $pdf->SetXY(1.0,10.75+$Y);
-        $pdf->Cell(0,0,$data["name"],0,'L');
+        $pdf->SetXY(1.0,10.35+$Y);
+        $pdf->Cell(0.5,0.5,$data["name"],0,'L');
         //--------------------------- FATHER NAME 
 
-        $pdf->SetXY(3.2, 10.75+$Y);
+        $pdf->SetXY(3.2, 10.35+$Y);
         $pdf->SetFont('Arial','',$FontSize);
-        $pdf->Cell( 0,0,"Father's Name:",0,'L');
+        $pdf->Cell( 0.5,0.5,"Father's Name:",0,'L');
         $pdf->SetFont('Arial','B',$FontSize);
-        $pdf->SetXY(4.0,10.75+$Y);
-        $pdf->Cell(0,0,$data["Fname"],0,'L');
+        $pdf->SetXY(4.0,10.35+$Y);
+        $pdf->Cell(0.5,0.5,$data["Fname"],0,'L');
 
 
-        $pdf->SetXY(0.5, 10.85+$Y);
+        $pdf->SetXY(0.5, 10.49+$Y);
         $pdf->SetFont('Arial','b',$FontSize);
-        $pdf->Cell( 0,0,"Total Amount Rs.",0,'L');
+        $pdf->Cell( 0.5,0.5,"Total Amount Rs.",0,'L');
 
-        $pdf->SetXY(1.35, 10.85+$Y);
+        $pdf->SetXY(1.35, 10.49+$Y);
         $pdf->SetFont('Arial','b',8);
         /*$pdf->Cell( 0.5,0.5,$data['AdmTotalFee'].'/-',0,'L');*/
-        $pdf->Cell( 0,0,$data['AdmTotalFee'].'/-',0,'L');
+        $pdf->Cell( 0.5,0.5,$data['AdmTotalFee'].'/-',0,'L');
 
-        $pdf->SetXY(1.95, 10.85+$Y);
-        $pdf->SetFont('Arial','',$FontSize);
-        $pdf->Cell( 0,0,"Amount in Words: ".ucwords($obj->words),0,'L');
-        
-        $pdf->SetXY(0.5, 10.98+$Y);
-        $pdf->SetFont('Arial','',$FontSize);
-        $pdf->Cell( 0,0,"Zone Code:",0,'L');
 
-        $pdf->SetXY(1.48, 10.98+$Y);
+        $pdf->SetXY(0.5, 10.59+$Y);
+        $pdf->SetFont('Arial','',$FontSize);
+        $pdf->Cell( 0.5,0.5,"Zone Code:",0,'L');
+
+        $pdf->SetXY(1.48, 10.59+$Y);
         $pdf->SetFont('Arial','B',8);
-        $pdf->Cell( 0,0,$data['Zone_cd']."-".$data['zone_name'],0,'L');
+        $pdf->Cell( 0.5,0.5,$data['Zone_cd']."-".$data['zone_name'],0,'L');
 
-        $pdf->Image('assets/img/CandidateCopy.jpg',0.27,10.95, 6.10,0.60, "jpeg");  
+        $pdf->Image('assets/img/CandidateCopy.jpg',0.27,10.86, 7.58,0.60, "jpeg");  
 
-        $pdf->SetXY(3.4, 10.98+$Y);
+
+        $pdf->SetXY(0.5, 10.05+$Y);
+        $pdf->SetFont('Arial','b',8);
+        $pdf->Cell( 0.5,0.5,"CMD Account No. 00427900072103",0,'L');
+
+
+        $pdf->SetXY(3.5, 10.05+$Y);
+        $pdf->SetTextColor(0,0,0);
+        $pdf->SetFont('Arial','b',9.3);
+        $pdf->Cell( 0.5,0.5,"Bank Challan No.  ".$data['formNo'],0,'L');
+
+
+        $pdf->SetXY(3.4, 10.7+$Y);
         $pdf->SetFont('Arial','b',$FontSize);
-        $pdf->Cell( 0,0,"Manager/Cashier:___________________________ ",0,'L');
+        $pdf->Cell( 0.5,0.5,"Manager/Cashier:___________________________ ",0,'L');
 
 
         $filename="Admission_Forms_".$data['formNo']."_"   .  ".pdf";
@@ -2217,6 +2212,8 @@ class Admission extends CI_Controller {
 
         $data = $this->Admission_model->Pre_Inter_data($data);
 
+        //DebugBreak();
+
         if($data[0]['sub8'] == '' && $data[0]['class'] == 11){
             $data[0]['sub8'] = 91;    
         }
@@ -2225,10 +2222,6 @@ class Admission extends CI_Controller {
 
         if(!$data){
             $error_msg.='<span style="font-size: 16pt; color:red;">No Any Student Found Against Your Criteria</span>';
-            $this->load->library('session');
-            $mydata = array('data'=>$_POST,'error_msg'=>$error_msg);
-            $this->session->set_flashdata('matric_error',$mydata );
-            redirect('Admission/matric_default');
         }
 
 
@@ -2237,10 +2230,6 @@ class Admission extends CI_Controller {
         if(!($isexit) && $error_msg == '' && $iyear >2014)
         {
             $error_msg.= '<span style="font-size: 16pt; color:red;">' . 'Your Picture is missing.</span>';
-            $this->load->library('session');
-            $mydata = array('data'=>$_POST,'error_msg'=>$error_msg ,'exam_type'=>0);
-            $this->session->set_flashdata('matric_error',$mydata );
-            redirect('Admission/matric_default');
         }
         else
         {
@@ -2251,20 +2240,19 @@ class Admission extends CI_Controller {
             }
         }
 
+
         $specialcase = $data['0']['Spl_Name'];
         $specialcode = $data['0']['spl_cd'];
         $exam_type =   $data['0']['exam_type'];
+
+        //DebugBreak();
+
         @$isParctialsub =   $data['0']['sn'];
 
         if($specialcode != '' && $specialcode != 34 ){
 
             $error_msg.='<span style="font-size: 16pt; color:red;">' . '   Your Admission cannot be procceed due to     ' . '</span>';
             $error_msg.='<span style="font-size: 16pt; color:red;">' . $specialcase . '</span>';
-
-            $this->load->library('session');
-            $mydata = array('data'=>$_POST,'error_msg'=>$error_msg ,'exam_type'=>0);
-            $this->session->set_flashdata('matric_error',$mydata );
-            redirect('Admission/matric_default');
         }
 
         $nxtrnosess = $data['0']['NextRno_Sess_Year'];
@@ -2295,10 +2283,6 @@ class Admission extends CI_Controller {
         else if ($matric_rno == 0 && $error_msg == '')
         {
             $error_msg.='<span style="font-size: 16pt; color:red;"> Matric Roll No is Invalid</span>';
-            $this->load->library('session');
-            $mydata = array('data'=>$_POST,'error_msg'=>$error_msg,'exam_type'=>0);
-            $this->session->set_flashdata('matric_error',$mydata );
-            redirect('Admission/matric_default');
         }
 
         if($error_msg !='')
@@ -3250,7 +3234,7 @@ class Admission extends CI_Controller {
             'Speciality' => ($Speciality),
             'nat' =>$this->input->post('nationality'),
             'sex' =>$this->input->post('gend'),
-              'gender'=>@$_POST['gender'],
+                  'gender'=>@$_POST['gender'],
             'IsHafiz' =>$this->input->post('hafiz'),
             'rel' =>$this->input->post('religion'),
             'addr' =>$addre,
@@ -3340,7 +3324,7 @@ class Admission extends CI_Controller {
         $this->load->library('session');
         $Inst_Id = 999999;
 
-        DebugBreak();
+        //DebugBreak();
 
         $formno = '';//$this->Admission_model->GetFormNo();
 
@@ -3594,7 +3578,7 @@ class Admission extends CI_Controller {
         {
             $Certificate =  550;
         }
-DebugBreak();
+
         $addre =  str_replace("'", "", $this->input->post('address'));
         $MarkOfIden =  str_replace("'", "", $this->input->post('MarkOfIden'));
         $data = array(

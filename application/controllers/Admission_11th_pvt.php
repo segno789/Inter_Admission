@@ -571,7 +571,7 @@ class Admission_11th_pvt extends CI_Controller {
         return $dueDate;
 
     }
-    public function checkFormNo_then_download()
+     public function checkFormNo_then_download()
     {
         $formno_seg = $this->uri->segment(3);
         // $dob_seg = $this->uri->segment(4);
