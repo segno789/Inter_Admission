@@ -283,6 +283,7 @@ header("Pragma: no-cache");
                                         <option value="0" selected="selected">NONE</option>
                                         <option value="3">HUMANITIES</option>
                                         <option value="5">COMMERCE</option>
+                                        
                                     </select>                                            
                                 </div>
                             </div>
@@ -633,7 +634,9 @@ header("Pragma: no-cache");
                                 $("#sub7p2").append('<option value="95">BANKING</option>');
 
                             }
-
+                            
+                                                       
+                          
                             $('#std_group').change(function(){
 
                                 var sel_group = $('#std_group').val();    
@@ -649,6 +652,9 @@ header("Pragma: no-cache");
                                 }
 
                                 else if (sel_group == 5){
+                                    LoadCommerceSubjects();
+                                }
+                                else if (sel_group == 30){
                                     LoadCommerceSubjects();
                                 }
                             });

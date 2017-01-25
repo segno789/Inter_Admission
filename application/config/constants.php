@@ -28,8 +28,8 @@ define('REGULAR_INSERT_TABLE', 'Admission_online..IAAdm');
 define('Session','1');
 define('Year','2017');  
 define('lastdate','13-02-2017');
-define('GET_REGULAR_IMAGE_PATH', 'F:/xampp/htdocs/Inter_Admission\uplaods\2016\Regular\\');
-define('GET_PRIVATE_IMAGE_PATH', 'F:\xampp\htdocs\Inter_Admission\uplaods\2016\private\\');
+define('GET_REGULAR_IMAGE_PATH', 'C:/xampp/htdocs/Inter_Admission\uplaods\2016\Regular\\');
+define('GET_PRIVATE_IMAGE_PATH', 'C:\xampp\htdocs\Inter_Admission\uplaods\2016\private\\');
 define('GET_PRIVATE_IMAGE_PATH_COPY', '');
 
 define('DIRPATH11th','F:/xampp/htdocs/Inter_Admission/Uploads/IS2016/regular/'); 

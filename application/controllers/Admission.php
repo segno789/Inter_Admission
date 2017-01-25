@@ -957,7 +957,11 @@ class Admission extends CI_Controller {
             default:
                 $grp_name = "NO GROUP SELECTED.";
         }
-
+       if($data["grp_cd"] == 3 && $data['cat11'] == 4 && $data['cat12'] == 4)
+       {
+              $grp_name = 'KHASA';                                                   
+       }
+       
 
         //--------------------------- 1st line 
         /* $pdf->SetXY(0.5,1.55+$Y);
@@ -2239,7 +2243,7 @@ class Admission extends CI_Controller {
                 $data[0]['picpathImg'] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
             }
         }
-
+          
 
         $specialcase = $data['0']['Spl_Name'];
         $specialcode = $data['0']['spl_cd'];
@@ -3088,8 +3092,15 @@ class Admission extends CI_Controller {
         $sub1ap1 = 0;$sub2ap1 = 0;$sub3ap1 = 0;$sub4ap1 = 0;$sub5ap1 = 0;$sub6ap1 = 0;$sub7ap1 = 0;
         $sub1ap2 = 0;$sub2ap2 = 0;$sub3ap2 = 0;$sub4ap2 = 0;$sub5ap2 = 0;$sub6ap2 = 0;$sub7ap2 = 0;$sub8ap2 = 0;
 
-        $grp_cd = $this->input->post('std_group');
-
+        $grp_cd = $this->input->post('std_group');         
+        if($grp_cd == 30){
+            $grp_cd = 3;                        
+             $cat11 = 4; $cat12 = 4;
+        }
+        else
+        {
+         $cat11 = 1; $cat12 = 1;   
+        }
         if(@$_POST['sub1'] != 0)
         {
             $sub1ap1 = 1; 
@@ -3200,7 +3211,7 @@ class Admission extends CI_Controller {
         $Certificate = 550;
         $regfee = 1000;
 
-        $cat11 = 1; $cat12 = 1;
+       
 
 
         $today = date("d-m-Y");
@@ -3324,7 +3335,7 @@ class Admission extends CI_Controller {
         $this->load->library('session');
         $Inst_Id = 999999;
 
-        //DebugBreak();
+       // DebugBreak();
 
         $formno = '';//$this->Admission_model->GetFormNo();
 
@@ -3499,7 +3510,10 @@ class Admission extends CI_Controller {
         $_POST['category'] = $cattype;
 
         //$this->frmvalidation('Pre_Inter_Data',$data_error,0);
-
+        if($examtype == 3 && (@$_POST['pregrp'] != @$_POST['std_group']))
+        {
+               $examtype = 2;
+        }
         $cat = $this->makecat($cattype,$examtype,$marksImp,$is11th);
         $per_grp = @$_POST['pregrp'];
         if($grp_cd == 9)
@@ -3865,7 +3879,7 @@ class Admission extends CI_Controller {
     }
 
     public function formdownloaded(){
-
+             
         $msg = $this->uri->segment(3);
         $dob = $this->uri->segment(4);
         $this->load->model('Admission_model');
@@ -4064,7 +4078,7 @@ class Admission extends CI_Controller {
             $allinputdata['excep'] = 'Please Select Part-I Subject 2';
 
         }
-        else if(@$_POST['sub3']==0 && @$_POST['Class'] != 11 && @$_POST['Board'] == 1)
+        else if(@$_POST['sub3']==0 && @$_POST['Class'] != 11 && @$_POST['Board'] == 1  && @$_POST['std_group'] != 30) 
         {
             $allinputdata['excep'] = 'Please Select Part-I Subject 3';
 
@@ -4078,7 +4092,7 @@ class Admission extends CI_Controller {
             $allinputdata['excep'] = 'Please Select Part-I Subject 5';
 
         }
-        else if(@$_POST['sub6']==0 && @$_POST['Class'] != 11 && @$_POST['Board'] == 1)
+        else if(@$_POST['sub6']==0 && @$_POST['Class'] != 11 && @$_POST['Board'] == 1  && @$_POST['std_group'] != 30)
         {
             $allinputdata['excep'] = 'Please Select Part-I Subject 6';
         }
@@ -4099,7 +4113,7 @@ class Admission extends CI_Controller {
             $allinputdata['excep'] = 'Please Select Part-II Subject 2';
         }
 
-        else if(@$_POST['sub3p2'] == 0)
+        else if(@$_POST['sub3p2'] == 0  && @$_POST['std_group'] != 30)
         {
             $allinputdata['excep'] = 'Please Select Part-II Subject 3';
         }
@@ -4111,7 +4125,7 @@ class Admission extends CI_Controller {
         {
             $allinputdata['excep'] = 'Please Select Part-II Subject 5';
         }
-        else if(@$_POST['sub6p2'] == 0)
+        else if(@$_POST['sub6p2'] == 0  && @$_POST['std_group'] != 30)
         {
             $allinputdata['excep'] = 'Please Select Part-II Subject 6';
         }

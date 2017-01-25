@@ -430,8 +430,8 @@
             $("#sub2").focus();
             return status;  
         }
-
-        else if(sub3 == 0 && oldClass11thother != 11){
+        
+        else if(sub3 == 0 && oldClass11thother != 11 && grp_cd != 30){
             alertify.error('Please Select Part I, Subjects 3.  '); 
             $("#sub3").focus();
             return status;  
@@ -450,7 +450,7 @@
             return status;  
         }
 
-        else if(sub6 == 0 && oldClass11thother != 11){
+        else if(sub6 == 0 && oldClass11thother != 11  && grp_cd != 30){
             alertify.error('Please Select Part I, Subjects 6.  '); 
             $("#sub6").focus();
             return status;  
@@ -474,7 +474,7 @@
             return status;  
         }
 
-        else if(sub3p2 == 0 ){
+        else if(sub3p2 == 0  && grp_cd != 30){
             alertify.error('Please Select Part II, Subjects 3.  '); 
             $("#sub3p2").focus();
             return status;  
@@ -492,13 +492,13 @@
             return status;  
         }
 
-        else if(sub6p2 == 0 ){
+        else if(sub6p2 == 0 && grp_cd != 30){
             alertify.error('Please Select Part II, Subjects 6.  '); 
             $("#sub6p2").focus();
             return status;  
         }
 
-        else if(sub7p2 == 0 && grp_cd == 5 ){
+        else if(sub7p2 == 0 && grp_cd == 5){
             alertify.error('Please Select Part II, Subjects 7.  '); 
             $("#sub7p2").focus();
             return status;  
