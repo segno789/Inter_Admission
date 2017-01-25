@@ -663,7 +663,7 @@ class Admission_11th_pvt extends CI_Controller {
         $pdf->Image(BARCODE_PATH.$image,3.3, 0.6  ,2,0.25,"PNG");
         //$pdf->Image(BARCODE_PATH.$image,5.7, 6.0  ,2,0.25,"PNG");
         $pdf->Image(BARCODE_PATH.$image,5.7, 7.44  ,2,0.25,"PNG");
-        $pdf->Image(BARCODE_PATH.$image,5.7, 9.01  ,2,0.25,"PNG");
+        $pdf->Image(BARCODE_PATH.$image,5.7, 8.83  ,2,0.25,"PNG");
         $pdf->Image(BARCODE_PATH.$image,5.7, 10.43 ,2,0.25,"PNG");
 
         //$pdf->PrintBarcode(3.75,0.6,(int)$Barcode,.3,.0199);
@@ -693,8 +693,8 @@ class Admission_11th_pvt extends CI_Controller {
         {      
             $pdf->Image("assets/img/11th.png",7.6,0.19,  0.40,0.40, "PNG");
             $pdf->Image("assets/img/11th.png",7.7,7.40,  0.30,0.30, "PNG");      
-            $pdf->Image("assets/img/11th.png",7.7,8.98,  0.30,0.30, "PNG");   
-            $pdf->Image("assets/img/11th.png",7.7,10.40,  0.30,0.30, "PNG");   
+            $pdf->Image("assets/img/11th.png",7.7,8.80,  0.30,0.30, "PNG");   
+            $pdf->Image("assets/img/11th.png",7.7,10.42,  0.30,0.30, "PNG");   
         }
         else
         {
@@ -1351,7 +1351,7 @@ class Admission_11th_pvt extends CI_Controller {
 
         //$pdf->Cell(0,0.5,"-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------",0,'L');
 
-        $Y= 7.25;
+        $Y= 8.65;
         //
 
         $pdf->SetFont('Arial','B',9);
@@ -1482,8 +1482,9 @@ class Admission_11th_pvt extends CI_Controller {
 
 
 
-        $pdf->Image("assets/img/cutter.jpg",0.14,8.7, 8.02,0.09, "jpeg");  
+        $pdf->Image("assets/img/cutter.jpg",0.14,8.5, 8.02,0.09, "jpeg");  
 
+           $Y= 5.65;
         $pdf->SetFont('Arial','B',9);
         $pdf->SetXY(.2,1.58+$Y);
         $pdf->Cell(0, 0.2, $heading, 0.25, "C");
@@ -1553,11 +1554,11 @@ class Admission_11th_pvt extends CI_Controller {
         $pdf->SetXY(5.92, 2.7+$Y);
         $pdf->SetFont('Arial','b',$FontSize);
         $pdf->Cell( 0,0,"Manager/Cashier:____________________ ",0,'L');
-        $pdf->Image('assets/img/BankCopy.jpg',.80,9.8, 4.95,0.25, "jpeg");   
+        $pdf->Image('assets/img/BankCopy.jpg',.80,8.23, 4.95,0.25, "jpeg");  
 
         $pdf->Image("assets/img/cutter.jpg",0.14,10.1, 8.02,0.09, "jpeg"); 
 
-
+    $Y= 7.27;
         $pdf->SetFont('Arial','B',9);
         $pdf->SetXY(.2,3+$Y);
         $pdf->Cell(0, 0.2, $heading, 0.25, "C");

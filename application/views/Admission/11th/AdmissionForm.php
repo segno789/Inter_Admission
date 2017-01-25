@@ -201,13 +201,13 @@
 
                                     if($gender == 1 )
                                     {
-                                        echo " <label class='radio inline span1'><input type='radio' id='gender1' value='1' checked='checked'  disabled='disabled' name='gender'> Male</label> 
-                                        <label class='radio inline span1'><input type='radio' id='gender2' value='2'  name='gender'  disabled='disabled'> Female </label> " ;
+                                        echo " <label class='radio inline span1'><input type='radio' id='gender1' value='1' checked='checked'  disabled='disabled' name='gender1'> Male</label> 
+                                        <label class='radio inline span1'><input type='radio' id='gender2' value='2'  name='gender1'  disabled='disabled'> Female </label> " ;
                                     }
                                     else if ($gender == 2)
                                     {
-                                        echo " <label class='radio inline span1'><input type='radio' id='gender1' value='1'  disabled='disabled' name='gender'> Male</label> 
-                                        <label class='radio inline span1'><input type='radio' id='gender2' value='2'  checked='checked'  disabled='disabled'  name='gender'> Female </label> " ;
+                                        echo " <label class='radio inline span1'><input type='radio' id='gender1' value='1'  disabled='disabled' name='gender1'> Male</label> 
+                                        <label class='radio inline span1'><input type='radio' id='gender2' value='2'  checked='checked'  disabled='disabled'  name='gender1'> Female </label> " ;
                                     }
                                     else
                                     {
