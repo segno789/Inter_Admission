@@ -678,7 +678,7 @@ class Admission_inter extends CI_Controller {
         }
 
         //DebugBreak();
-        
+
         $totfee = $result[0]['Total_Fee'] + $result[0]['Total_Fee_Spec'];
 
         $pdf->SetFont('Arial','B',$font);
@@ -1433,12 +1433,14 @@ class Admission_inter extends CI_Controller {
     }
     public function NewEnrolment_NewForm_inter()
     {    
-        DebugBreak();
+        //DebugBreak();
 
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
         $Inst_Id = $userinfo['Inst_Id'];
+
+
 
         $this->load->view('common/header.php',$userinfo);
         $isReAdm = 0;
@@ -1450,16 +1452,19 @@ class Admission_inter extends CI_Controller {
 
         if($this->session->flashdata('NewEnrolment_error')){
 
-            //DebugBreak();
-
             $RegStdata = $this->session->flashdata('NewEnrolment_error');   
             $isReAdm = 0;
             $RegStdData['isReAdm']=$isReAdm;
             $RegStdData['Oldrno']=0;
             $formno = $this->uri->segment(3);
+            @$IntBrd_cd = $this->uri->segment(4);       
+
             $year = 2016; 
             $error_msg = $RegStdata['excep'];
-            $RegStdData = array('data'=>$this->Admission_inter_model->EditEnrolement_data($formno,$year,$Inst_Id),'isReAdm'=>$isReAdm,'Oldrno'=>0,'error_msg'=>$error_msg);
+
+
+
+            $RegStdData = array('data'=>$this->Admission_inter_model->EditEnrolement_data($formno,$year,$Inst_Id,$IntBrd_cd),'isReAdm'=>$isReAdm,'Oldrno'=>0,'error_msg'=>$error_msg);
 
         }
         else{
@@ -1475,8 +1480,11 @@ class Admission_inter extends CI_Controller {
                 $year = 2016;    
             }
             $formno = $this->uri->segment(3);
+
+            @$IntBrd_cd = $this->uri->segment(4);
+
             $error_msg = '';
-            $RegStdData = array('data'=>$this->Admission_inter_model->EditEnrolement_data($formno,$year,$Inst_Id),'isReAdm'=>$isReAdm,'Oldrno'=>0,'error_msg'=>$error_msg);
+            $RegStdData = array('data'=>$this->Admission_inter_model->EditEnrolement_data($formno,$year,$Inst_Id,$IntBrd_cd),'isReAdm'=>$isReAdm,'Oldrno'=>0,'error_msg'=>$error_msg);
         }
         $this->load->view('common/menu.php',$data);
         $this->load->view('Admission/inter/New_Enrolement_form.php',$RegStdData);   
