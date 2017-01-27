@@ -677,6 +677,8 @@ class Admission_inter extends CI_Controller {
             }
         }
 
+        //DebugBreak();
+        
         $totfee = $result[0]['Total_Fee'] + $result[0]['Total_Fee_Spec'];
 
         $pdf->SetFont('Arial','B',$font);
