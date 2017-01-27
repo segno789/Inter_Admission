@@ -677,7 +677,7 @@ class Admission_inter extends CI_Controller {
             }
         }
 
-        $totfee = $result[0]['Total_Fee_Spec'] + $result[0]['Total_SpeCandidate'];
+        $totfee = $result[0]['Total_Fee'] + $result[0]['Total_Fee_Spec'];
 
         $pdf->SetFont('Arial','B',$font);
         $pdf->SetXY($x-120, $Y+37);
@@ -1004,7 +1004,7 @@ class Admission_inter extends CI_Controller {
 
 
         //DebugBreak();
-        
+
         $data = array(
             'name' =>$this->input->post('cand_name'),
             'Fname' =>$this->input->post('father_name'),
@@ -3663,7 +3663,8 @@ class Admission_inter extends CI_Controller {
 
 
             //====================================================================================================================            
-            //DebugBreak();
+
+
             $Y = $Y-0.5;
             //------------- Old Exam Infor if any Box
             $pdf->SetFont('Arial','B',8);
@@ -3685,12 +3686,23 @@ class Admission_inter extends CI_Controller {
             $pdf->SetXY(3.25,3.6+$Y);
             $pdf->Cell(0.5,0.5,$data["yearOfPass"],0,'L');
 
+            @$oldsess = $data["sessOfPass"];
+            if(@$oldsess == 1){
+                $oldsess ='Annual';
+            }
+            else if(@$oldsess == 2){
+                $oldsess = 'Supplementary';
+            }
+            else{
+                echo'';
+            }
+
             $pdf->SetXY(3.8,3.6+$Y);
             $pdf->SetFont('Arial','',8);
             $pdf->Cell( 0.5,0.5,"Session:",0,'L');
             $pdf->SetFont('Arial','B',8);
             $pdf->SetXY(4.3,3.6+$Y);
-            $pdf->Cell(0.5,0.5,$data["sessOfPass"]==1?"Annual":"Supplementary",0,'R');
+            $pdf->Cell(0.5,0.5,$oldsess,0,'R');
 
             $pdf->SetXY(5.3,3.6+$Y);
             $pdf->SetFont('Arial','',8);

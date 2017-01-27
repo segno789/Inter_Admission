@@ -395,7 +395,7 @@ header("Pragma: no-cache");
                                         $chance = $data[0]['chance'];
                                         $exam_type = $data[0]['exam_type'];
 
-                                      //  DebugBreak();
+                                        //  DebugBreak();
 
                                         $status = $data[0]['status'];
                                         $class = $data[0]['class'];
@@ -423,12 +423,12 @@ header("Pragma: no-cache");
                                             if($grp_cd == 1){
                                                 echo "<option value='1' selected='selected'>PRE-MEDICAL</option>"; 
                                                 echo "<option value='3'>HUMANITIES</option>";
-                                                    echo "<option value='5'>COMMERCE</option>";       
+                                                echo "<option value='5'>COMMERCE</option>";       
                                             }
                                             else if ($grp_cd == 2){
                                                 echo "<option value='2' selected='selected'>PRE-ENGINEERING</option>";
                                                 echo "<option value='3'>HUMANITIES</option>";
-                                                    echo "<option value='5'>COMMERCE</option>"; 
+                                                echo "<option value='5'>COMMERCE</option>"; 
                                             }
 
                                             else if ($grp_cd == 3){
@@ -438,12 +438,12 @@ header("Pragma: no-cache");
                                             else if($grp_cd == 4){
                                                 echo "<option value='4' selected='selected'>GENERAL SCIENCE</option>";
                                                 echo "<option value='3'>HUMANITIES</option>";
-                                                    echo "<option value='5'>COMMERCE</option>"; 
+                                                echo "<option value='5'>COMMERCE</option>"; 
                                             }
                                             else if($grp_cd == 5){
                                                 echo "<option value='5' selected='selected'>COMMERCE</option>";
                                                 echo "<option value='3'>HUMANITIES</option>";
-                                                               
+
                                             } 
                                         }
 
@@ -1742,8 +1742,8 @@ header("Pragma: no-cache");
                                     {
                                         $("#sub5").append('<option value="0">NONE</option>');
                                     }
-                                    
-                                    
+
+
                                     if((sub5pf2 == "3") || (sub5st2 == "2"))
                                     {
 
@@ -1753,10 +1753,10 @@ header("Pragma: no-cache");
                                     {
                                         $("#sub5").append('<option value="0">NONE</option>');
                                     }
-                                    
-                                    
-                                    
-                                    
+
+
+
+
                                     if((sub5pf2 == "3") || (sub5st2 == "2"))
                                     {
                                         if(grp_cd ==5)
@@ -2359,7 +2359,7 @@ header("Pragma: no-cache");
                                 });
 
                                 $('#std_group').change(function(){
-                                       debugger;
+                                    debugger;
                                     $("#fullAppear").attr("checked", false);
 
                                     $("#fullAppear1").hide();
