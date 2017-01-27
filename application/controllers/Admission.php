@@ -1895,14 +1895,25 @@ class Admission extends CI_Controller {
             }
             if($data['oldRno']>30000)
             {
-                $data['AdmFee'] = 0;
+                if($data['cat11'] == 2)
+                {
+                    $data['AdmFee'] =  $admfee;
+                }
+                else
+                {
+                     $data['AdmFee'] = 0; 
+                }
+              
             }
             else
             {
                 $data['AdmFee'] = $finalFee;  
             }
 
-            $data['AdmTotalFee'] = $processFee+$Total_fine+$data['regfee']+$data['CertificateFee'];
+            
+           
+            
+            $data['AdmTotalFee'] = $processFee+$Total_fine+$data['regfee']+$data['CertificateFee']+$data['AdmFee'];
             $AllStdFee = array('formNo'=>$data['FormNo'],'AdmFee'=>$data['AdmFee'],'AdmFine'=>$Total_fine,'AdmTotalFee'=> $data['AdmTotalFee']);
         }
         else
@@ -3588,7 +3599,7 @@ class Admission extends CI_Controller {
         else if($oldsess == 'Supplementary'){
             $oldsess =  2;    
         }
-        if(($examtype ==  1 || $examtype == 3 || $_POST['oldyear'] <= 2014 || ( $_POST['oldrno']>300000 && $oldsess == 1))  && Session == 1)
+        if(((($examtype ==  1 || $examtype == 3) && @$_POST['oldclass'] == 11  ) || $_POST['oldyear'] <= 2014 || ( $_POST['oldrno']>300000 && $oldsess == 1))  && Session == 1)
         {
             $Certificate =  550;
         }
