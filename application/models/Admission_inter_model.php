@@ -209,9 +209,9 @@ class Admission_inter_model extends CI_Model
         $schm =  $data['schm'];
 
         $Brd_cd =  $data['Brd_cd'];
-        
+
         @$IntBrd_cd = @$data['IntBrd_cd'];
-        
+
         $pvtinfo_dist = $data['pvtinfo_dist'];
         $pvtinfo_teh = $data['pvtinfo_teh'];
         $pvtZone = $data['pvtZone'];                                                                                                                                                                                                                                                                                                                                                                                                                                 
@@ -308,11 +308,12 @@ class Admission_inter_model extends CI_Model
         $query = $this->db->query("Admission_online..ReleaseBatch_INSERT $Inst_cd,$batchid,'$reason','$branch',$challan,$amount,'$date'");
         return true;
     }
-    public function EditEnrolement_data($formno,$year,$inst_cd)
+
+    public function EditEnrolement_data($formno,$year,$inst_cd,$IntBrd_cd)
     {
         //DebugBreak();
 
-        $query = $this->db->get_where('Admission_online..tblAdmissionDataForHSSC',  array('rno' => $formno,'class'=>11,'iyear'=>$year,'sess'=>1));     
+        $query = $this->db->get_where('Admission_online..tblAdmissionDataForHSSC',  array('rno' => $formno,'class'=>11,'iyear'=>$year,'sess'=>1,'IntBrd_cd'=>$IntBrd_cd));     
 
         $rowcount = $query->num_rows();
         if($rowcount > 0)

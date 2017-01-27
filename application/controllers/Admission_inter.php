@@ -677,7 +677,9 @@ class Admission_inter extends CI_Controller {
             }
         }
 
-        $totfee = $result[0]['Total_Fee_Spec'] + $result[0]['Total_SpeCandidate'];
+        //DebugBreak();
+
+        $totfee = $result[0]['Total_Fee'] + $result[0]['Total_Fee_Spec'];
 
         $pdf->SetFont('Arial','B',$font);
         $pdf->SetXY($x-120, $Y+37);
@@ -1004,7 +1006,7 @@ class Admission_inter extends CI_Controller {
 
 
         //DebugBreak();
-        
+
         $data = array(
             'name' =>$this->input->post('cand_name'),
             'Fname' =>$this->input->post('father_name'),
@@ -1431,12 +1433,14 @@ class Admission_inter extends CI_Controller {
     }
     public function NewEnrolment_NewForm_inter()
     {    
-      //  DebugBreak();
+        //DebugBreak();
 
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
         $Inst_Id = $userinfo['Inst_Id'];
+
+
 
         $this->load->view('common/header.php',$userinfo);
         $isReAdm = 0;
@@ -1448,16 +1452,19 @@ class Admission_inter extends CI_Controller {
 
         if($this->session->flashdata('NewEnrolment_error')){
 
-            //DebugBreak();
-
             $RegStdata = $this->session->flashdata('NewEnrolment_error');   
             $isReAdm = 0;
             $RegStdData['isReAdm']=$isReAdm;
             $RegStdData['Oldrno']=0;
             $formno = $this->uri->segment(3);
+            @$IntBrd_cd = $this->uri->segment(4);       
+
             $year = 2016; 
             $error_msg = $RegStdata['excep'];
-            $RegStdData = array('data'=>$this->Admission_inter_model->EditEnrolement_data($formno,$year,$Inst_Id),'isReAdm'=>$isReAdm,'Oldrno'=>0,'error_msg'=>$error_msg);
+
+
+
+            $RegStdData = array('data'=>$this->Admission_inter_model->EditEnrolement_data($formno,$year,$Inst_Id,$IntBrd_cd),'isReAdm'=>$isReAdm,'Oldrno'=>0,'error_msg'=>$error_msg);
 
         }
         else{
@@ -1473,8 +1480,11 @@ class Admission_inter extends CI_Controller {
                 $year = 2016;    
             }
             $formno = $this->uri->segment(3);
+
+            @$IntBrd_cd = $this->uri->segment(4);
+
             $error_msg = '';
-            $RegStdData = array('data'=>$this->Admission_inter_model->EditEnrolement_data($formno,$year,$Inst_Id),'isReAdm'=>$isReAdm,'Oldrno'=>0,'error_msg'=>$error_msg);
+            $RegStdData = array('data'=>$this->Admission_inter_model->EditEnrolement_data($formno,$year,$Inst_Id,$IntBrd_cd),'isReAdm'=>$isReAdm,'Oldrno'=>0,'error_msg'=>$error_msg);
         }
         $this->load->view('common/menu.php',$data);
         $this->load->view('Admission/inter/New_Enrolement_form.php',$RegStdData);   
@@ -3348,15 +3358,7 @@ class Admission_inter extends CI_Controller {
             {
             $pdf->Image(DIRPATH12TH.$data['PicPath'],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG"); 
             }*/
-            if($data["IntBrd_cd"] ==  1)
-            {
-                $pdf->Image(DIRPATH12TH.$data['picpath'],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG"); 
-
-            }
-            else
-            {
-                 $pdf->Image(DIRPATHOTHER.'/'.$data["coll_cd"].'/'.$data['picpath'],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG");
-            }
+            $pdf->Image(DIRPATH12TH.$data['picpath'],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG"); 
             ++$SR;
 
             $pdf->SetFont('Arial','',8);
@@ -3543,18 +3545,7 @@ class Admission_inter extends CI_Controller {
             //------ Picture Box on Centre      
             $pdf->SetXY(6.6, 1.55+$Y );
             $pdf->Cell(1.0,1.0,'',1,0,'C',0);
-            
-             if($data["IntBrd_cd"] ==  1)
-            {
-                 $pdf->Image(DIRPATH12TH.$data["picpath"],6.5, 1.55+$Y, 1.25, 1.0, "JPG");
-            }
-            else
-            {
-                 $pdf->Image(DIRPATHOTHER.'/'.$user['Inst_Id'].'/'.$data['picpath'],6.5, 1.55+$Y, 1.25, 1.0, "JPG");
-            }
-            
-            
-           
+            $pdf->Image(DIRPATH12TH.$data["picpath"],6.5, 1.55+$Y, 1.25, 1.0, "JPG");
 
 
             $pdf->SetFont('Arial','',8);
@@ -3682,7 +3673,8 @@ class Admission_inter extends CI_Controller {
 
 
             //====================================================================================================================            
-            //DebugBreak();
+
+
             $Y = $Y-0.5;
             //------------- Old Exam Infor if any Box
             $pdf->SetFont('Arial','B',8);
@@ -3704,12 +3696,23 @@ class Admission_inter extends CI_Controller {
             $pdf->SetXY(3.25,3.6+$Y);
             $pdf->Cell(0.5,0.5,$data["yearOfPass"],0,'L');
 
+            @$oldsess = $data["sessOfPass"];
+            if(@$oldsess == 1){
+                $oldsess ='Annual';
+            }
+            else if(@$oldsess == 2){
+                $oldsess = 'Supplementary';
+            }
+            else{
+                echo'';
+            }
+
             $pdf->SetXY(3.8,3.6+$Y);
             $pdf->SetFont('Arial','',8);
             $pdf->Cell( 0.5,0.5,"Session:",0,'L');
             $pdf->SetFont('Arial','B',8);
             $pdf->SetXY(4.3,3.6+$Y);
-            $pdf->Cell(0.5,0.5,$data["sessOfPass"]==1?"Annual":"Supplementary",0,'R');
+            $pdf->Cell(0.5,0.5,$oldsess,0,'R');
 
             $pdf->SetXY(5.3,3.6+$Y);
             $pdf->SetFont('Arial','',8);
