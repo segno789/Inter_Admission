@@ -2086,6 +2086,12 @@ class Admission extends CI_Controller {
                 $cate['cat11'] = 0;
                 $cate['cat12'] = 2;
             }
+
+            else if($exam_type == 4){
+                $cate['cat11'] = 1;
+                $cate['cat12'] = 1;
+            }
+
             else if($exam_type == 5){
                 $cate['cat11'] = 2;
                 $cate['cat12'] = 0;
@@ -2238,25 +2244,25 @@ class Admission extends CI_Controller {
             redirect('Admission/matric_default');
         }
 
-
+        /*
         $picpath = DIRPATH12TH.'\\'.@$data[0]['picpath'];
         $isexit = is_file($picpath);
         if(!($isexit) && $error_msg == '' && $iyear >2014)
         {
-            $error_msg.= '<span style="font-size: 16pt; color:red;">' . 'Your Picture is missing.</span>';
-            $this->load->library('session');
-            $mydata = array('data'=>$_POST,'error_msg'=>$error_msg ,'exam_type'=>0);
-            $this->session->set_flashdata('matric_error',$mydata );
-            redirect('Admission/matric_default');
+        $error_msg.= '<span style="font-size: 16pt; color:red;">' . 'Your Picture is missing.</span>';
+        $this->load->library('session');
+        $mydata = array('data'=>$_POST,'error_msg'=>$error_msg ,'exam_type'=>0);
+        $this->session->set_flashdata('matric_error',$mydata );
+        redirect('Admission/matric_default');
         }
         else
         {
-            if($iyear >2014)
-            {
-                $type = pathinfo($picpath, PATHINFO_EXTENSION);
-                $data[0]['picpathImg'] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
-            }
+        if($iyear >2014)
+        {
+        $type = pathinfo($picpath, PATHINFO_EXTENSION);
+        $data[0]['picpathImg'] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
         }
+        }*/
 
         $specialcase = $data['0']['Spl_Name'];
         $specialcode = $data['0']['spl_cd'];
@@ -3535,10 +3541,11 @@ class Admission extends CI_Controller {
             'oldClass'=>$this->input->post('oldClass'),
         );
 
-        $_POST['category'] = $cattype;
 
-        //$this->frmvalidation('Pre_Inter_Data',$data_error,0);
-        if($examtype == 3 && (@$_POST['pregrp'] != @$_POST['std_group']))
+        //DebugBreak();
+
+        $_POST['category'] = $cattype;
+        if(($examtype == 3 || $examtype == 4 || $examtype == 5) && (@$_POST['pregrp'] != @$_POST['std_group']))
         {
             $examtype = 2;
         }
@@ -3557,6 +3564,7 @@ class Admission extends CI_Controller {
         }
 
         @$fullAppear = @$_POST['fullAppear'];
+
         if(@$fullAppear == 'on')
         {
             $cat11 = 1;
