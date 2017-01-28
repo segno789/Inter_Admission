@@ -957,11 +957,11 @@ class Admission extends CI_Controller {
             default:
                 $grp_name = "NO GROUP SELECTED.";
         }
-       if($data["grp_cd"] == 3 && $data['cat11'] == 4 && $data['cat12'] == 4)
-       {
-              $grp_name = 'KHASA';                                                   
-       }
-       
+        if($data["grp_cd"] == 3 && $data['cat11'] == 4 && $data['cat12'] == 4)
+        {
+            $grp_name = 'KHASA';                                                   
+        }
+
 
         //--------------------------- 1st line 
         /* $pdf->SetXY(0.5,1.55+$Y);
@@ -1045,8 +1045,16 @@ class Admission extends CI_Controller {
         $pdf->SetFont('Arial','',$FontSize);
         $pdf->Cell( 0.5,0.5,"SSC Info:",0,'L');
 
-        $pdf->SetXY(1.5,2.15+$Y);
-        $pdf->Cell(0.5,0.5,$data["matRno"]." ( $MLastSess, ".$data['yearOfPass'].', '.$data['MBrd_Abbr']." )",0,'L');
+        if(@$data["matRno"] == 1)
+        {
+            $pdf->SetXY(1.5,2.15+$Y);
+            $pdf->Cell(0.5,0.5,'',0,'L');    
+        }
+        else
+        {
+            $pdf->SetXY(1.5,2.15+$Y);
+            $pdf->Cell(0.5,0.5,$data["matRno"]." ( $MLastSess, ".$data['yearOfPass'].', '.$data['MBrd_Abbr']." )",0,'L');            
+        }
 
         $pdf->SetXY(3.5+$x,1.85+$Y);
         $pdf->SetFont('Arial','',$FontSize);
@@ -2249,7 +2257,7 @@ class Admission extends CI_Controller {
                 $data[0]['picpathImg'] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
             }
         }
-          
+
         $specialcase = $data['0']['Spl_Name'];
         $specialcode = $data['0']['spl_cd'];
         $exam_type =   $data['0']['exam_type'];
@@ -2524,6 +2532,16 @@ class Admission extends CI_Controller {
         $sub1ap2 = 0;$sub2ap2 = 0;$sub3ap2 = 0;$sub4ap2 = 0;$sub5ap2 = 0;$sub6ap2 = 0;$sub7ap2 = 0;$sub8ap2 = 0;
 
         $grp_cd = $this->input->post('std_group');
+
+
+        if($grp_cd == 30){
+            $grp_cd = 3;                        
+            $cat11 = 4; $cat12 = 4;
+        }
+        else
+        {
+            $cat11 = 1; $cat12 = 1;   
+        }
 
         if(@$_POST['sub1'] != 0)
         {
@@ -3106,11 +3124,11 @@ class Admission extends CI_Controller {
         $grp_cd = $this->input->post('std_group');         
         if($grp_cd == 30){
             $grp_cd = 3;                        
-             $cat11 = 4; $cat12 = 4;
+            $cat11 = 4; $cat12 = 4;
         }
         else
         {
-         $cat11 = 1; $cat12 = 1;   
+            $cat11 = 1; $cat12 = 1;   
         }
         if(@$_POST['sub1'] != 0)
         {
@@ -3222,7 +3240,7 @@ class Admission extends CI_Controller {
         $Certificate = 550;
         $regfee = 1000;
 
-       
+
 
 
         $today = date("d-m-Y");
@@ -3345,7 +3363,7 @@ class Admission extends CI_Controller {
         $this->load->library('session');
         $Inst_Id = 999999;
 
-       // DebugBreak();
+        // DebugBreak();
 
         $formno = '';//$this->Admission_model->GetFormNo();
 
@@ -3522,7 +3540,7 @@ class Admission extends CI_Controller {
         //$this->frmvalidation('Pre_Inter_Data',$data_error,0);
         if($examtype == 3 && (@$_POST['pregrp'] != @$_POST['std_group']))
         {
-               $examtype = 2;
+            $examtype = 2;
         }
         $cat = $this->makecat($cattype,$examtype,$marksImp,$is11th);
         $per_grp = @$_POST['pregrp'];
@@ -3889,7 +3907,7 @@ class Admission extends CI_Controller {
     }
 
     public function formdownloaded(){
-             
+
         $msg = $this->uri->segment(3);
         $dob = $this->uri->segment(4);
         $this->load->model('Admission_model');
@@ -4024,12 +4042,9 @@ class Admission extends CI_Controller {
             $allinputdata['excep'] = 'Please Select Your Nationality';
         }
 
-
-
         else if((@$_POST['gend'] != '1') and (@$_POST['gend'] != '2'))
         {
-            //DebugBreak();
-            if(@$_POST['oldSSC_Board'] == 1){
+            if(@$_POST['oldSSC_Board'] == 1 && @$_POST['oldyear'] != 100){
                 $allinputdata['excep'] = 'Please Select Your Gender';    
             }
             else{
