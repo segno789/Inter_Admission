@@ -62,7 +62,8 @@ class Admission extends CI_Controller {
         return $code.'.png';
     }
 
-    public function checkFormNo_then_download()
+         
+ public function checkFormNo_then_download()
     {
 
         //DebugBreak();
@@ -957,11 +958,11 @@ class Admission extends CI_Controller {
             default:
                 $grp_name = "NO GROUP SELECTED.";
         }
-       if($data["grp_cd"] == 3 && $data['cat11'] == 4 && $data['cat12'] == 4)
+
+          if($data["grp_cd"] == 3 && $data['cat11'] == 4 && $data['cat12'] == 4)
        {
               $grp_name = 'KHASA';                                                   
        }
-       
 
         //--------------------------- 1st line 
         /* $pdf->SetXY(0.5,1.55+$Y);
@@ -1433,136 +1434,9 @@ class Admission extends CI_Controller {
 
         $pdf->Image('assets/img/cutter.jpg',0.2,6.50, 9.2,0.09, "jpeg"); 
 
-        $Y = $Y + 1.68;
+        $Y = $Y -.15;
 
-        $pdf->SetXY(0.2,6.1+$Y);
-        $pdf->SetFillColor(0,0,0);                                     
-        $pdf->SetFont('Arial','BI',7);
-        $pdf->Cell(0.2,0.5,"Board Copy: (Along with Scroll)",0,'L');
-
-        $pdf->SetXY(0.2,6.0+$Y);
-        $pdf->SetFont('Arial','b',$FontSize);
-        $pdf->Cell( 0.5,0.5,strtoupper("BOARD OF INTERMEDIATE AND SECONDARY EDUCATION GUJRANWALA , INTERMEDIATE (PART-II & COMPOSITE) ".$session." Examination ,".Year.""),0,'C');
-
-        $pdf->SetXY(0.2,6.4+$Y);
-        $pdf->SetFillColor(0,0,0);
-        $pdf->SetTextColor(255,255,255);
-        $pdf->SetFont('Arial','B',7);
-        $pdf->Cell($boxWidth,0.2,'Due Date: '.$this->GetDueDate(),1,0,'C',1); 
-
-        $bx = 6.8;
-        $by = 6.1;
-        $pdf->Image("assets/img/12.jpg",7.58,6.2+$Y, 0.30,0.30, "JPG");  
-
-        $pdf->Image(BARCODE_PATH.$image,5.15, 6.8  ,2.4,0.24,"PNG");
-
-        $pdf->SetXY(2.8,6.16+$Y);
-        $pdf->SetTextColor(0,0,0);
-        $pdf->SetFont('Arial','BI',7);
-        $pdf->Cell(0.2,0.5,"Printing Date: " .date('d-M-Y h:i A'),0,'L');
-
-        $pdf->SetXY(2.8,6.26+$Y);
-        $pdf->SetFont('Arial','b',$FontSize);
-        $pdf->Cell( 0.5,0.5,"CMD Account No. 00427900072103",0,'L');
-
-        $pdf->SetXY(0.2,6.46+$Y);
-        $pdf->SetTextColor(0,0,0);
-        $pdf->SetFont('Arial','',$FontSize);
-        $pdf->Cell( 0.5,0.5,"Name:",0,'L');
-        $pdf->SetFont('Arial','B',$FontSize);
-        $pdf->SetXY(0.5,6.46+$Y);
-        $pdf->Cell(0.5,0.5,$data["name"],0,'L');
-        //--------------------------- FATHER NAME 
-
-        $pdf->SetXY(2.8,6.46+$Y);
-        $pdf->SetFont('Arial','',$FontSize);
-        $pdf->Cell( 0.5,0.5,"Father's Name:",0,'L');
-        $pdf->SetFont('Arial','B',$FontSize);
-        $pdf->SetXY(3.5,6.46+$Y);
-        $pdf->Cell(0.5,0.5,$data["Fname"],0,'L');
-
-        $pdf->SetXY(6.2,6.46+$Y);
-        $pdf->SetFont('Arial','b',$FontSize+1.3);
-        $pdf->Cell( 0.5,0.5,"Bank Challan No.  ".$data['formNo'],0,'L');
-
-        $Y = $Y - 0.5;
-        $pdf->SetXY(0.2, 7.09+$Y);
-        $pdf->SetFont('Arial','',$FontSize);
-        $pdf->Cell( 0.5,0.5,"Admission Fee ",0,'L');
-
-
-        $pdf->SetXY(1.2, 7.09+$Y); 
-        $pdf->SetFont('Arial','b',$FontSize);
-        /*$pdf->Cell( 0.5,0.5, $data['AdmFee'].'/-',0,'L'); */ 
-        $pdf->Cell( 0.5,0.5,$data['AdmFee'] .'/-',0,'L'); 
-
-
-        $pdf->SetXY(1.8, 7.09+$Y);
-        $pdf->SetFont('Arial','',$FontSize);
-        $pdf->Cell( 0.5,0.5,"Late Fee ",0,'L');
-
-
-        $pdf->SetXY(2.59, 7.09+$Y); 
-        $pdf->SetFont('Arial','b',$FontSize);
-        $pdf->Cell( 0.5,0.5,$data['AdmFine'],0,'L');
-
-        $pdf->SetXY(3.2, 7.09+$Y);
-        $pdf->SetFont('Arial','',$FontSize);
-        $pdf->Cell( 0.5,0.5,"Processing + Form Fee ",0,'L');
-        $pdf->SetXY(4.6, 7.09+$Y); 
-        $pdf->SetFont('Arial','b',$FontSize);
-        $pdf->Cell( 0.5,0.5,$data['AdmProcessFee'].'/-',0,'L');
-
-        $pdf->SetXY(5.42, 7.09+$Y);
-        $pdf->SetFont('Arial','',$FontSize);
-        $pdf->Cell( 0.5,0.5,"Certificate Fee ",0,'L');
-        $pdf->SetXY(6.3, 7.09+$Y); 
-        $pdf->SetFont('Arial','b',$FontSize);
-        $pdf->Cell( 0.5,0.5,$data['CertificateFee'].'/-',0,'L');
-
-        $pdf->SetXY(6.8, 7.09+$Y);
-        $pdf->SetFont('Arial','',$FontSize);
-        $pdf->Cell( 0.5,0.5,"Registration Fee ",0,'L');
-        $pdf->SetXY(7.59, 7.09+$Y); 
-        $pdf->SetFont('Arial','b',$FontSize);
-        $pdf->Cell( 0.5,0.5,$data['regfee'].'/-',0,'L');
-
-        $pdf->SetXY(0.2, 7.19+$Y);
-        $pdf->SetFont('Arial','b',$FontSize);
-        $pdf->Cell( 0.5,0.5,"Total Amount Rs.",0,'L');
-
-        $pdf->SetXY(1.2, 7.19+$Y);
-        $pdf->SetFont('Arial','b',8);
-        /*$pdf->Cell( 0.5,0.5,$data['AdmTotalFee'].'/-',0,'L');*/
-        $pdf->Cell( 0.5,0.5,$data['AdmTotalFee'].'/-',0,'L');
-
-
-        $pdf->SetXY(1.8, 7.19+$Y);
-        $pdf->SetFont('Arial','',$FontSize);
-        $pdf->Cell( 0.5,0.5,"Amount in Words:",0,'L');
-
-
-        $pdf->SetXY(2.6, 7.19+$Y);
-        $pdf->SetFont('Arial','B',7);
-        $pdf->Cell( 0.5,0.5,ucwords($obj->words),0,'L');
-
-
-        $pdf->SetXY(5.3, 7.29+$Y);
-        $pdf->SetFont('Arial','b',$FontSize);
-        $pdf->Cell( 0.5,0.5,"Manager/Cashier:___________________________ ",0,'L');
-
-        $pdf->SetXY(3.2, 7.3+$Y);
-        $pdf->SetFont('Arial','b',$FontSize+0.5);
-        $pdf->Cell( 0.5,0.5,"Form No:".$data['formNo'],0,'L');
-
-        $pdf->SetXY(0,5.0+3.0+$Y);
-        $pdf->SetFont('Arial','',10);
-
-        $pdf->Image('assets/img/cutter.jpg',0.2,7.70, 9.2,0.09, "jpeg");  
-
-        $Y = $Y - 0.39;
-
-        $pdf->SetXY(0.2,8.1+$Y);
+        $pdf->SetXY(0.2,7.8+$Y);
         $pdf->SetFont('Arial','b',$FontSize);
         $pdf->Cell( 0.5,0.5,strtoupper("BOARD OF INTERMEDIATE AND SECONDARY EDUCATION GUJRANWALA , INTERMEDIATE (PART-II & COMPOSITE) ".$session." Examination ,".Year.""),0,'C');
 
@@ -1570,129 +1444,276 @@ class Admission extends CI_Controller {
         $bx = 6.8;
         $by = 8.1;
 
-        $pdf->SetXY(3.2,8.3+$Y);
+        $pdf->SetXY(3.2,8.35+$Y);
         $pdf->SetTextColor(0,0,0);
         $pdf->SetFont('Arial','BI',7);
-        $pdf->Cell(0.2,0.5,"Printing Date: " .date('d-M-Y h:i A'),0,'L');
+        $pdf->Cell(0,0,"Printing Date: " .date('d-M-Y h:i A'),0,'L');
 
         $pdf->SetXY(0.2,8.20+$Y);
         $pdf->SetFillColor(0,0,0);                                     
         $pdf->SetFont('Arial','BI',7);
-        $pdf->Cell(0.2,0.5,"Bank Copy:  (To be retained with HBL) ",0,'L');
+        $pdf->Cell(0,0,"Bank Copy:  (To be retained with HBL) ",0,'L');
 
 
-        $pdf->SetXY(0.2,8.5+$Y);
+        $pdf->SetXY(0.2,8.28+$Y);
         $pdf->SetFillColor(0,0,0);
         $pdf->SetTextColor(255,255,255);
         $pdf->SetFont('Arial','B',7);
         $pdf->Cell($boxWidth,0.2,'Due Date: '.$this->GetDueDate(),1,0,'C',1); 
 
-        $pdf->Image(BARCODE_PATH.$image,5.15, 8.5+$Y  ,2.4,0.24,"PNG");
+        $pdf->Image(BARCODE_PATH.$image,5.15, 8.2+$Y  ,2.4,0.24,"PNG");
 
-        $pdf->Image("assets/img/12.jpg",7.58,8.3+$Y, 0.30,0.30, "jpg");  
+        $pdf->Image("assets/img/12.jpg",7.58,8+$Y, 0.30,0.30, "jpg");  
 
-        $pdf->SetXY(0.5,8.65+$Y);
+        $pdf->SetXY(0.5,8.66+$Y);
         $pdf->SetTextColor(0,0,0);
         $pdf->SetFont('Arial','',$FontSize);
-        $pdf->Cell( 0.5,0.5,"Name:",0,'L');
+        $pdf->Cell( 0,0,"Name:",0,'L');
         $pdf->SetFont('Arial','B',$FontSize);
-        $pdf->SetXY(1.0,8.65+$Y);
-        $pdf->Cell(0.5,0.5,$data["name"],0,'L');
+        $pdf->SetXY(1.0,8.66+$Y);
+        $pdf->Cell(0,0,$data["name"],0,'L');
         //--------------------------- FATHER NAME 
 
-        $pdf->SetXY(3.2, 8.65+$Y);
+        $pdf->SetXY(3.2, 8.66+$Y);
         $pdf->SetFont('Arial','',$FontSize);
-        $pdf->Cell( 0.5,0.5,"Father's Name:",0,'L');
+        $pdf->Cell( 0,0,"Father's Name:",0,'L');
         $pdf->SetFont('Arial','B',$FontSize);
-        $pdf->SetXY(4.2,8.65+$Y);
-        $pdf->Cell(0.5,0.5,$data["Fname"],0,'L');
+        $pdf->SetXY(4.2,8.66+$Y);
+        $pdf->Cell(0,0,$data["Fname"],0,'L');
 
 
         $pdf->SetXY(0.5, 8.79+$Y);
         $pdf->SetFont('Arial','b',$FontSize);
-        $pdf->Cell( 0.5,0.5,"Total Amount Rs.",0,'L');
+        $pdf->Cell( 0,0,"Total Amount Rs.",0,'L');
 
         $pdf->SetXY(1.35, 8.79+$Y);
         $pdf->SetFont('Arial','b',8);
         /*        $pdf->Cell( 0.5,0.5,$data['AdmTotalFee'].'/-',0,'L');*/
-        $pdf->Cell( 0.5,0.5,$data['AdmTotalFee'].'/-',0,'L');
+        $pdf->Cell( 0,0,$data['AdmTotalFee'].'/-',0,'L');
 
 
         $pdf->SetXY(1.85, 8.79+$Y);
         $pdf->SetFont('Arial','',$FontSize);
-        $pdf->Cell( 0.5,0.5,"Amount in Words:",0,'L');
+        $pdf->Cell( 0,0,"Amount in Words:",0,'L');
 
         $pdf->SetXY(2.68, 8.79+$Y);
         $pdf->SetFont('Arial','B',7);
-        $pdf->Cell( 0.5,0.5,ucwords($obj->words),0,'L');
+        $pdf->Cell( 0,0,ucwords($obj->words),0,'L');
 
-        $pdf->Image('assets/img/BankCopy.jpg',0.25,8.80, 7.4,0.25, "jpeg");   
+        $pdf->Image('assets/img/BankCopy.jpg',0.25,7.6, 7.4,0.25, "jpeg");   
 
         $pdf->SetXY(0.5, 8.55+$Y);
         $pdf->SetFont('Arial','b',8);
-        $pdf->Cell( 0.5,0.5,"CMD Account No. 00427900072103",0,'L');
+        $pdf->Cell( 0,0,"CMD Account No. 00427900072103",0,'L');
 
 
         $pdf->SetXY(3.2, 8.55+$Y);
         $pdf->SetTextColor(0,0,0);
         $pdf->SetFont('Arial','b',9.3);
-        $pdf->Cell( 0.5,0.5,"Bank Challan No.  ".$data['formNo'],0,'L');
+        $pdf->Cell( 0,0,"Bank Challan No.  ".$data['formNo'],0,'L');
 
         $pdf->SetXY(3.2, 8.9+$Y);
         $pdf->SetFont('Arial','b',$FontSize+0.5);
-        $pdf->Cell( 0.5,0.5,"Form No:".$data['formNo'],0,'L');
+        $pdf->Cell( 0,0,"Form No:".$data['formNo'],0,'L');
 
         $pdf->SetXY(5.3, 8.9+$Y);
         $pdf->SetFont('Arial','b',$FontSize);
-        $pdf->Cell( 0.5,0.5,"Manager/Cashier:___________________________ ",0,'L');
+        $pdf->Cell( 0,0,"Manager/Cashier:___________________________ ",0,'L');
 
 
         $pdf->SetXY(0,5.0+3.0+$Y);
         $pdf->SetFont('Arial','',10);
-        // //DebugBreak();
-        $pdf->Image('assets/img/cutter.jpg',0.2,9.1, 8.3,0.09, "jpeg");  
+        
+       
 
-        $Y = $Y - 0.09;
-        //
+        $pdf->Image('assets/img/cutter.jpg',0.2,7.9, 9.2,0.09, "jpeg");  
 
+        $Y = $Y +3.5;
 
-        $pdf->SetXY(0.2,9.6+$Y);
-        $pdf->SetFont('Arial','b',$FontSize);
-        $pdf->Cell( 0.5,0.5,strtoupper("BOARD OF INTERMEDIATE AND SECONDARY EDUCATION GUJRANWALA , INTERMEDIATE (PART-II & COMPOSITE) ".$session." Examination ,".Year." "),0,'C');
-
-        $bx = 6.8;
-        $by = 9.5;
-
-
-        $pdf->SetXY(3.2,9.8+$Y);
-        $pdf->SetTextColor(0,0,0);
-        $pdf->SetFont('Arial','BI',7);
-        $pdf->Cell(0.2,0.5,"Printing Date: " .date('d-M-Y h:i A'),0,'L');
-
-        $pdf->SetXY(0.2,9.69+$Y);
+         $pdf->SetXY(0.2,6.1+$Y);
         $pdf->SetFillColor(0,0,0);                                     
         $pdf->SetFont('Arial','BI',7);
-        $pdf->Cell(0.2,0.5,"Candidate Copy",0,'L');
+        $pdf->Cell(0,0,"Board Copy: (Along with Scroll)",0,'L');
 
+        $pdf->SetXY(0.2,6.0+$Y);
+        $pdf->SetFont('Arial','b',$FontSize);
+        $pdf->Cell( 0,0,strtoupper("BOARD OF INTERMEDIATE AND SECONDARY EDUCATION GUJRANWALA , INTERMEDIATE (PART-II & COMPOSITE) ".$session." Examination ,".Year.""),0,'C');
 
-        $pdf->SetXY(0.2,10.0+$Y);
+        $pdf->SetXY(0.2,6.2+$Y);
         $pdf->SetFillColor(0,0,0);
         $pdf->SetTextColor(255,255,255);
         $pdf->SetFont('Arial','B',7);
         $pdf->Cell($boxWidth,0.2,'Due Date: '.$this->GetDueDate(),1,0,'C',1); 
 
-        $pdf->Image(BARCODE_PATH.$image,5.15, 10.0+$Y  ,2.4,0.24,"PNG");
+        $bx = 6.8;
+        $by = 6.1;
+        $pdf->Image("assets/img/12.jpg",7.58,6+$Y, 0.30,0.30, "JPG");  
 
-        $pdf->Image("assets/img/12.jpg",7.58,9.8+$Y, 0.30,0.30, "JPG");  
+        $FontSize+=1;
+        $pdf->Image(BARCODE_PATH.$image,5.15, 8.24  ,2.4,0.24,"PNG");
 
-        $pdf->SetXY(0.5,10.2+$Y);
+        $pdf->SetXY(2.8,6.28+$Y);
+        $pdf->SetTextColor(0,0,0);
+        $pdf->SetFont('Arial','BI',7);
+        $pdf->Cell(0,0,"Printing Date: " .date('d-M-Y h:i A'),0,'L');
+
+        $pdf->SetXY(.2,6.60+$Y);
+        $pdf->SetFont('Arial','b',$FontSize);
+        $pdf->Cell( 0,0,"CMD Account No. 00427900072103",0,'L');
+
+        
+        
+          $pdf->SetXY(2.8,6.60+$Y);
+        $pdf->SetFont('Arial','b',$FontSize+1.3);
+        $pdf->Cell( 0,0,"Bank Challan No.  ".$data['formNo'],0,'L');
+
+        
+        $pdf->SetXY(0.2,6.8+$Y);
         $pdf->SetTextColor(0,0,0);
         $pdf->SetFont('Arial','',$FontSize);
-        $pdf->Cell( 0.5,0.5,"Form No:",0,'L');
+        $pdf->Cell( 0,0,"Name:",0,'L');
+        $pdf->SetFont('Arial','B',$FontSize);
+        $pdf->SetXY(0.6,6.8+$Y);
+        $pdf->Cell(0,0,$data["name"],0,'L');
+        //--------------------------- FATHER NAME 
+
+        $pdf->SetXY(2.8,6.8+$Y);
+        $pdf->SetFont('Arial','',$FontSize);
+        $pdf->Cell( 0,0,"Father's Name:",0,'L');
+        $pdf->SetFont('Arial','B',$FontSize);
+        $pdf->SetXY(3.7,6.8+$Y);
+        $pdf->Cell(0,0,$data["Fname"],0,'L');
+
+      
+        $Y = $Y - 0.34;
+        $pdf->SetXY(0.2, 7.35+$Y);
+        $pdf->SetFont('Arial','',$FontSize);
+        $pdf->Cell( 0,0,"Admission Fee ",0,'L');
+
+
+        $pdf->SetXY(1.2, 7.35+$Y); 
+        $pdf->SetFont('Arial','b',$FontSize);
+        $pdf->Cell( 0,0,$data['AdmFee'] .'/-',0,'L'); 
+
+
+        $pdf->SetXY(1.8, 7.35+$Y);
+        $pdf->SetFont('Arial','',$FontSize);
+        $pdf->Cell( 0,0,"Late Fee ",0,'L');
+
+
+        $pdf->SetXY(2.59, 7.35+$Y); 
+        $pdf->SetFont('Arial','b',$FontSize);
+        $pdf->Cell( 0,0,$data['AdmFine'],0,'L');
+
+        $pdf->SetXY(3.2, 7.35+$Y);
+        $pdf->SetFont('Arial','',$FontSize);
+        $pdf->Cell( 0,0,"Processing + Form Fee ",0,'L');
+        $pdf->SetXY(4.6, 7.35+$Y); 
+        $pdf->SetFont('Arial','b',$FontSize);
+        $pdf->Cell( 0,0,$data['AdmProcessFee'].'/-',0,'L');
+
+        $pdf->SetXY(5.42, 7.35+$Y);
+        $pdf->SetFont('Arial','',$FontSize);
+        $pdf->Cell( 0,0,"Certificate Fee ",0,'L');
+        $pdf->SetXY(6.3, 7.35+$Y); 
+        $pdf->SetFont('Arial','b',$FontSize);
+        $pdf->Cell( 0,0,$data['CertificateFee'].'/-',0,'L');
+
+        $pdf->SetXY(6.8, 7.35+$Y);
+        $pdf->SetFont('Arial','',$FontSize);
+        $pdf->Cell( 0,0,"Registration Fee ",0,'L');
+        $pdf->SetXY(7.64, 7.35+$Y); 
+        $pdf->SetFont('Arial','b',$FontSize);
+        $pdf->Cell( 0,0,$data['regfee'].'/-',0,'L');
+
+        $pdf->SetXY(0.2, 7.55+$Y);
+        $pdf->SetFont('Arial','b',$FontSize);
+        $pdf->Cell( 0,0,"Total Amount Rs.",0,'L');
+
+        $pdf->SetXY(1.2, 7.55+$Y);
+        $pdf->SetFont('Arial','b',8);
+        $pdf->Cell( 0,0,$data['AdmTotalFee'].'/-',0,'L');
+
+
+        $pdf->SetXY(1.8, 7.55+$Y);
+        $pdf->SetFont('Arial','',$FontSize);
+        $pdf->Cell( 0,0,"Amount in Words:",0,'L');
+
+
+        $pdf->SetXY(2.7, 7.55+$Y);
+        $pdf->SetFont('Arial','B',7);
+        $pdf->Cell( 0,0,ucwords($obj->words),0,'L');
+
+
+        $pdf->SetXY(5.3, 7.70+$Y);
+        $pdf->SetFont('Arial','b',$FontSize);
+        $pdf->Cell( 0,0,"Manager/Cashier:___________________________ ",0,'L');
+
+        $pdf->SetXY(3.2, 7.75+$Y);
+        $pdf->SetFont('Arial','b',$FontSize+0.5);
+        $pdf->Cell( 0,0,"Form No:".$data['formNo'],0,'L');
+
+        
+        // //DebugBreak();
+        $pdf->Image('assets/img/cutter.jpg',0.2,9.70, 8.3,0.09, "jpeg");  
+$FontSize-=1;
+        $Y = $Y -3.64;
+        
+        $Y = $Y +1.75;
+        //
+
+
+        $pdf->SetXY(0.2,10.05+$Y);
+        $pdf->SetFont('Arial','b',$FontSize);
+        $pdf->Cell( 0,0,strtoupper("BOARD OF INTERMEDIATE AND SECONDARY EDUCATION GUJRANWALA , INTERMEDIATE (PART-II & COMPOSITE) ".$session." Examination ,".Year." "),0,'C');
+
+        $bx = 6.8;
+        $by = 9.5;
+
+
+        $pdf->SetXY(3.2,10.35+$Y);
+        $pdf->SetTextColor(0,0,0);
+        $pdf->SetFont('Arial','BI',7);
+        $pdf->Cell(0,0,"Printing Date: " .date('d-M-Y h:i A'),0,'L');
+
+        $pdf->SetXY(0.2,10.15+$Y);
+        $pdf->SetFillColor(0,0,0);                                     
+        $pdf->SetFont('Arial','BI',7);
+        $pdf->Cell(0,0,"Candidate Copy",0,'L');
+
+
+        $pdf->SetXY(0.2,10.24+$Y);
+        $pdf->SetFillColor(0,0,0);
+        $pdf->SetTextColor(255,255,255);
+        $pdf->SetFont('Arial','B',7);
+        $pdf->Cell($boxWidth,0.2,'Due Date: '.$this->GetDueDate(),1,0,'C',1); 
+
+        
+        
+        
+        $pdf->Image(BARCODE_PATH.$image,5.15, 10.30+$Y  ,2.4,0.24,"PNG");
+
+        $pdf->Image("assets/img/12.jpg",7.58,10.20+$Y, 0.30,0.30, "JPG");  
+
+        $pdf->SetTextColor(0,0,0);
+        $pdf->SetXY(.5, 10.48+$Y);
+        $pdf->SetFont('Arial','b',8);
+        $pdf->Cell( 0,.1,"CMD Account No. 00427900072103",0,'L');
+
+
+        $pdf->SetXY(3.5, 10.60+$Y);
+        $pdf->SetTextColor(0,0,0);
+        $pdf->SetFont('Arial','b',9.3);
+        $pdf->Cell( 0,0,"Bank Challan No.  ".$data['formNo'],0,'L');
+        
+        $pdf->SetXY(0.5,10.65+$Y);
+        
+        $pdf->SetFont('Arial','',$FontSize);
+        $pdf->Cell( 0,0,"Form No:",0,'L');
 
         $pdf->SetFont('Arial','B',$FontSize);
-        $pdf->SetXY(1.0,10.2+$Y);
-        $pdf->Cell( 0.5,0.5,$data['formNo'],0,'L');
+        $pdf->SetXY(1.0,10.65+$Y);
+        $pdf->Cell( 0,0,$data['formNo'],0,'L');
 
 
 
@@ -1703,12 +1724,12 @@ class Admission extends CI_Controller {
 
         if($data ['IsNewPic'] == 0)
         {
-            $pdf->Image(DIRPATH12TH.$data['PicPath'],6.5, 10.3+$Y, 0.95, 1.0, "JPG");
+            $pdf->Image(DIRPATH12TH.$data['PicPath'],6.5, 10.65+$Y, 0.95, 1.0, "JPG");
         }
 
         else  if($data ['IsNewPic'] == 1)
         {
-            $pdf->Image(GET_PRIVATE_IMAGE_PATH.'/12th/'.$data['PicPath'],6.5, 10.3+$Y, 0.95, 1.0, "JPG");
+            $pdf->Image(GET_PRIVATE_IMAGE_PATH.'/12th/'.$data['PicPath'],6.5, 10.65+$Y, 0.95, 1.0, "JPG");
             //$pdf->Image(GET_PRIVATE_IMAGE_PATH.'/12th/'.$data['picpath'],6.5, 1.30+$Y, 0.95, 1.0, "JPG");
         }
 
@@ -1716,65 +1737,55 @@ class Admission extends CI_Controller {
         $pdf->SetFont('Arial','',8);
 
 
-        $pdf->SetXY(0.5,10.35+$Y);
+        $pdf->SetXY(0.5,10.75+$Y);
         $pdf->SetTextColor(0,0,0);
         $pdf->SetFont('Arial','',$FontSize);
-        $pdf->Cell( 0.5,0.5,"Name:",0,'L');
+        $pdf->Cell( 0,0,"Name:",0,'L');
         $pdf->SetFont('Arial','B',$FontSize);
-        $pdf->SetXY(1.0,10.35+$Y);
-        $pdf->Cell(0.5,0.5,$data["name"],0,'L');
+        $pdf->SetXY(1.0,10.75+$Y);
+        $pdf->Cell(0,0,$data["name"],0,'L');
         //--------------------------- FATHER NAME 
 
-        $pdf->SetXY(3.2, 10.35+$Y);
+        $pdf->SetXY(3.2, 10.75+$Y);
         $pdf->SetFont('Arial','',$FontSize);
-        $pdf->Cell( 0.5,0.5,"Father's Name:",0,'L');
+        $pdf->Cell( 0,0,"Father's Name:",0,'L');
         $pdf->SetFont('Arial','B',$FontSize);
-        $pdf->SetXY(4.0,10.35+$Y);
-        $pdf->Cell(0.5,0.5,$data["Fname"],0,'L');
+        $pdf->SetXY(4.0,10.75+$Y);
+        $pdf->Cell(0,0,$data["Fname"],0,'L');
 
 
-        $pdf->SetXY(0.5, 10.49+$Y);
+        $pdf->SetXY(0.5, 10.85+$Y);
         $pdf->SetFont('Arial','b',$FontSize);
-        $pdf->Cell( 0.5,0.5,"Total Amount Rs.",0,'L');
+        $pdf->Cell( 0,0,"Total Amount Rs.",0,'L');
 
-        $pdf->SetXY(1.35, 10.49+$Y);
+        $pdf->SetXY(1.35, 10.85+$Y);
         $pdf->SetFont('Arial','b',8);
         /*$pdf->Cell( 0.5,0.5,$data['AdmTotalFee'].'/-',0,'L');*/
-        $pdf->Cell( 0.5,0.5,$data['AdmTotalFee'].'/-',0,'L');
+        $pdf->Cell( 0,0,$data['AdmTotalFee'].'/-',0,'L');
 
-
-        $pdf->SetXY(0.5, 10.59+$Y);
+        $pdf->SetXY(1.95, 10.85+$Y);
         $pdf->SetFont('Arial','',$FontSize);
-        $pdf->Cell( 0.5,0.5,"Zone Code:",0,'L');
+        $pdf->Cell( 0,0,"Amount in Words: ".ucwords($obj->words),0,'L');
+        
+        $pdf->SetXY(0.5, 10.98+$Y);
+        $pdf->SetFont('Arial','',$FontSize);
+        $pdf->Cell( 0,0,"Zone Code:",0,'L');
 
-        $pdf->SetXY(1.48, 10.59+$Y);
+        $pdf->SetXY(1.48, 10.98+$Y);
         $pdf->SetFont('Arial','B',8);
-        $pdf->Cell( 0.5,0.5,$data['Zone_cd']."-".$data['zone_name'],0,'L');
+        $pdf->Cell( 0,0,$data['Zone_cd']."-".$data['zone_name'],0,'L');
 
-        $pdf->Image('assets/img/CandidateCopy.jpg',0.27,10.86, 7.58,0.60, "jpeg");  
+        $pdf->Image('assets/img/CandidateCopy.jpg',0.27,10.95, 6.10,0.60, "jpeg");  
 
-
-        $pdf->SetXY(0.5, 10.05+$Y);
-        $pdf->SetFont('Arial','b',8);
-        $pdf->Cell( 0.5,0.5,"CMD Account No. 00427900072103",0,'L');
-
-
-        $pdf->SetXY(3.5, 10.05+$Y);
-        $pdf->SetTextColor(0,0,0);
-        $pdf->SetFont('Arial','b',9.3);
-        $pdf->Cell( 0.5,0.5,"Bank Challan No.  ".$data['formNo'],0,'L');
-
-
-        $pdf->SetXY(3.4, 10.7+$Y);
+        $pdf->SetXY(3.4, 10.98+$Y);
         $pdf->SetFont('Arial','b',$FontSize);
-        $pdf->Cell( 0.5,0.5,"Manager/Cashier:___________________________ ",0,'L');
+        $pdf->Cell( 0,0,"Manager/Cashier:___________________________ ",0,'L');
 
 
         $filename="Admission_Forms_".$data['formNo']."_"   .  ".pdf";
         $pdf->Output($filename, 'I');
 
     }
-
     function feecalculate($data)
     {
         // DebugBreak();
@@ -2399,7 +2410,7 @@ class Admission extends CI_Controller {
         $error_msg = '';
         $this->load->model('Admission_model');
 
-        if( $_POST["oldBrd_cd"] != 1){
+        if( $_POST["oldBrd_cd"] != 1 || $_POST["oldYear"] ==100){
 
             //Getting values
             $oldyear    = $data['SSC_Year'];

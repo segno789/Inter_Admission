@@ -477,7 +477,7 @@ class Admission_11th_reg extends CI_Controller {
         $this->load->model('Admission_11th_reg_model');
         $myinfo = array('Inst_cd'=>$user['Inst_Id']);
         $data = array(
-            'data' => $this->Admission_11th_reg_model->Cancel_adm($myinfo),
+           // 'data' => $this->Admission_11th_reg_model->Cancel_adm($myinfo),
             'isselected' => '14',
 
         );
@@ -3174,6 +3174,45 @@ $SciProcFee =  195;
         //  }
 
         //  $pdf->Output($data["Sch_cd"].'.pdf', 'I');
+    }
+    public function ajax_list()
+    {
+      $this->load->model('Admission_11th_reg_model');
+      
+        $this->load->library('session');
+        $Logged_In_Array = $this->session->all_userdata();
+        $user = $Logged_In_Array['logged_in'];
+
+
+       // $this->Admission_11th_reg_model->Cancel_adm($myinfo),
+        
+        
+        $list = $this->Admission_11th_reg_model->get_datatables($user['Inst_Id']);
+        $data = array();
+        $no = $_POST['start'];
+
+        foreach ($list as $customers) {
+            $no++;
+            $row = array();
+            $row[] = $no;
+            $row[] = $customers->name;
+            $row[] = $customers->Fname;
+            $row[] = $customers->MobNo;
+            $row[] = $customers->addr;
+            //$row[] = $customers->city;
+            //$row[] = $customers->country;
+
+            $data[] = $row;
+        }
+        //DebugBreak();
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->Admission_11th_reg_model->count_all($user['Inst_Id']),
+            "recordsFiltered" => $this->Admission_11th_reg_model->count_all($user['Inst_Id']),//$this->customers->count_filtered(211036),
+            "data" => $data,
+        );
+        //output to json format
+        echo json_encode($output);
     }
 
 }
