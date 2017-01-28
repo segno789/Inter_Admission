@@ -718,9 +718,6 @@ header("Pragma: no-cache");
                                 $("#sub2").append('<option value="2">URDU</option>');
                                 $("#sub2p2").append('<option value="2">URDU</option>');
 
-                                /*$("#sub3").append('<option value="92">ISLAMIC EDUCATION</option>');
-                                $("#sub3p2").append('<option value="91">PAKISTAN STUDIES</option>');*/
-                                
                                 $('#sub3').hide();
                                 $('#sub3p2').hide();
 
@@ -737,18 +734,13 @@ header("Pragma: no-cache");
                                     $("#sub5p2").append(new Option(text,val));
                                 });
 
-                                /*$.each(huminities_without_practical,function(val,text){
-
-                                    $("#sub6").append(new Option(text,val));
-                                    $("#sub6p2").append(new Option(text,val));
-                                });*/
                                 $('#sub6').hide();
                                 $('#sub6p2').hide();
 
                                 $('#sub7').hide();$('#sub7p2').hide();
                                 $('#sub8').hide(); $('#sub8p2').hide();
                             }
-                            
+
                             $('#std_group').change(function(){
 
                                 var sel_group = $('#std_group').val();    

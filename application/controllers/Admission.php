@@ -964,6 +964,7 @@ class Admission extends CI_Controller {
               $grp_name = 'KHASA';                                                   
        }
 
+
         //--------------------------- 1st line 
         /* $pdf->SetXY(0.5,1.55+$Y);
         $pdf->SetFont('Arial','',$FontSize);
@@ -1046,8 +1047,16 @@ class Admission extends CI_Controller {
         $pdf->SetFont('Arial','',$FontSize);
         $pdf->Cell( 0.5,0.5,"SSC Info:",0,'L');
 
-        $pdf->SetXY(1.5,2.15+$Y);
-        $pdf->Cell(0.5,0.5,$data["matRno"]." ( $MLastSess, ".$data['yearOfPass'].', '.$data['MBrd_Abbr']." )",0,'L');
+        if(@$data["matRno"] == 1)
+        {
+            $pdf->SetXY(1.5,2.15+$Y);
+            $pdf->Cell(0.5,0.5,'',0,'L');    
+        }
+        else
+        {
+            $pdf->SetXY(1.5,2.15+$Y);
+            $pdf->Cell(0.5,0.5,$data["matRno"]." ( $MLastSess, ".$data['yearOfPass'].', '.$data['MBrd_Abbr']." )",0,'L');            
+        }
 
         $pdf->SetXY(3.5+$x,1.85+$Y);
         $pdf->SetFont('Arial','',$FontSize);
@@ -2100,6 +2109,12 @@ $FontSize-=1;
                 $cate['cat11'] = 0;
                 $cate['cat12'] = 2;
             }
+
+            else if($exam_type == 4){
+                $cate['cat11'] = 1;
+                $cate['cat12'] = 1;
+            }
+
             else if($exam_type == 5){
                 $cate['cat11'] = 2;
                 $cate['cat12'] = 0;
@@ -2250,22 +2265,26 @@ $FontSize-=1;
             $error_msg.='<span style="font-size: 16pt; color:red;">No Any Student Found Against Your Criteria</span>';
         }
 
-
+        /*
         $picpath = DIRPATH12TH.'\\'.@$data[0]['picpath'];
         $isexit = is_file($picpath);
         if(!($isexit) && $error_msg == '' && $iyear >2014)
         {
-            $error_msg.= '<span style="font-size: 16pt; color:red;">' . 'Your Picture is missing.</span>';
+        $error_msg.= '<span style="font-size: 16pt; color:red;">' . 'Your Picture is missing.</span>';
+        $this->load->library('session');
+        $mydata = array('data'=>$_POST,'error_msg'=>$error_msg ,'exam_type'=>0);
+        $this->session->set_flashdata('matric_error',$mydata );
+        redirect('Admission/matric_default');
         }
         else
         {
-            if($iyear >2014)
-            {
-                $type = pathinfo($picpath, PATHINFO_EXTENSION);
-                $data[0]['picpathImg'] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
-            }
+        if($iyear >2014)
+        {
+        $type = pathinfo($picpath, PATHINFO_EXTENSION);
+        $data[0]['picpathImg'] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
         }
-          
+        }*/
+
 
         $specialcase = $data['0']['Spl_Name'];
         $specialcode = $data['0']['spl_cd'];
@@ -2535,6 +2554,16 @@ $FontSize-=1;
         $sub1ap2 = 0;$sub2ap2 = 0;$sub3ap2 = 0;$sub4ap2 = 0;$sub5ap2 = 0;$sub6ap2 = 0;$sub7ap2 = 0;$sub8ap2 = 0;
 
         $grp_cd = $this->input->post('std_group');
+
+
+        if($grp_cd == 30){
+            $grp_cd = 3;                        
+            $cat11 = 4; $cat12 = 4;
+        }
+        else
+        {
+            $cat11 = 1; $cat12 = 1;   
+        }
 
         if(@$_POST['sub1'] != 0)
         {
@@ -3117,11 +3146,11 @@ $FontSize-=1;
         $grp_cd = $this->input->post('std_group');         
         if($grp_cd == 30){
             $grp_cd = 3;                        
-             $cat11 = 4; $cat12 = 4;
+            $cat11 = 4; $cat12 = 4;
         }
         else
         {
-         $cat11 = 1; $cat12 = 1;   
+            $cat11 = 1; $cat12 = 1;   
         }
         if(@$_POST['sub1'] != 0)
         {
@@ -3233,7 +3262,7 @@ $FontSize-=1;
         $Certificate = 550;
         $regfee = 1000;
 
-       
+
 
 
         $today = date("d-m-Y");
@@ -3357,7 +3386,7 @@ $FontSize-=1;
         $this->load->library('session');
         $Inst_Id = 999999;
 
-       // DebugBreak();
+        // DebugBreak();
 
         $formno = '';//$this->Admission_model->GetFormNo();
 
@@ -3529,12 +3558,13 @@ $FontSize-=1;
             'oldClass'=>$this->input->post('oldClass'),
         );
 
-        $_POST['category'] = $cattype;
 
-        //$this->frmvalidation('Pre_Inter_Data',$data_error,0);
-        if($examtype == 3 && (@$_POST['pregrp'] != @$_POST['std_group']))
+        //DebugBreak();
+
+        $_POST['category'] = $cattype;
+        if(($examtype == 3 || $examtype == 4 || $examtype == 5) && (@$_POST['pregrp'] != @$_POST['std_group']))
         {
-               $examtype = 2;
+            $examtype = 2;
         }
         $cat = $this->makecat($cattype,$examtype,$marksImp,$is11th);
         $per_grp = @$_POST['pregrp'];
@@ -3551,6 +3581,7 @@ $FontSize-=1;
         }
 
         @$fullAppear = @$_POST['fullAppear'];
+
         if(@$fullAppear == 'on')
         {
             $cat11 = 1;
@@ -3901,7 +3932,7 @@ $FontSize-=1;
     }
 
     public function formdownloaded(){
-             
+
         $msg = $this->uri->segment(3);
         $dob = $this->uri->segment(4);
         $this->load->model('Admission_model');
@@ -4036,12 +4067,9 @@ $FontSize-=1;
             $allinputdata['excep'] = 'Please Select Your Nationality';
         }
 
-
-
         else if((@$_POST['gend'] != '1') and (@$_POST['gend'] != '2'))
         {
-            //DebugBreak();
-            if(@$_POST['oldSSC_Board'] == 1){
+            if(@$_POST['oldSSC_Board'] == 1 && @$_POST['oldyear'] != 100){
                 $allinputdata['excep'] = 'Please Select Your Gender';    
             }
             else{

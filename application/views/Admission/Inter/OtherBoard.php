@@ -146,14 +146,14 @@ header("Pragma: no-cache");
                                 <div class="controls controls-row">  
                                     "<label class='radio inline span1'><input type='radio' value='1' id='nationality' checked="checked"  name='nationality'> Pakistani</label>
                                     <label class='radio inline span2'><input type='radio'  id='nationality1' value='2' name='nationality'>  Non Pakistani</label>" ;
-                                      
+
                                     <label class="control-label span3" style="margin-left: -100px;" for="gender1">
                                         Gender :
                                     </label> 
                                     <label class='radio inline span1' style="color: red;">
-                                    <input type='radio' id='gender1' value='1'  name='gender'> Male</label> 
+                                        <input type='radio' id='gender1' value='1'  name='gender'> Male</label> 
                                     <label class='radio inline span1' style="color: red;">
-                                    <input type='radio' id='gender2' value='2'  name='gender'> Female </label>
+                                        <input type='radio' id='gender2' value='2'  name='gender'> Female </label>
                                 </div>
                             </div>
                             <div class="control-group">
@@ -283,7 +283,7 @@ header("Pragma: no-cache");
                                         <option value="0" selected="selected">NONE</option>
                                         <option value="3">HUMANITIES</option>
                                         <option value="5">COMMERCE</option>
-                                        
+                                        <option value="30">KHASA</option>
                                     </select>                                            
                                 </div>
                             </div>
@@ -399,7 +399,7 @@ header("Pragma: no-cache");
                                 </div>
                             </div> 
                         </form>
-                        
+
                         <input type="hidden" name="oldSSC_Rno" id="oldSSC_Rno" value="<?php  echo @$data['SSC_RNO'];?>"/>
                         <input type="hidden" name="oldSSC_Year" id="oldSSC_Year" value="<?php  echo @$data['SSC_Year'];?>"/>
                         <input type="hidden" name="oldSSC_Session" id="oldSSC_Session" value="<?php  echo @$data['SSC_Session'];?>"/>
@@ -409,40 +409,6 @@ header("Pragma: no-cache");
 
                         <script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
                         <script type="text/javascript">
-                            /*   function ValidateFileUpload() {
-                            var fuData = document.getElementById('inputFile');
-                            var FileUploadPath = fuData.value;
-                            if (FileUploadPath == '') {
-                            alert("Please upload an image");
-                            jQuery('#image_upload_preview').removeAttr('src');
-                            } 
-                            else {
-                            var Extension = FileUploadPath.substring(
-                            FileUploadPath.lastIndexOf('.') + 1).toLowerCase();
-                            if (Extension == "jpeg" || Extension == "jpg") {
-                            if (fuData.files && fuData.files[0]) {
-                            var reader = new FileReader();
-                            reader.onload = function(e) {
-                            $('#image_upload_preview').attr('src', e.target.result);
-                            }
-                            reader.readAsDataURL(fuData.files[0]);
-                            }
-                            } 
-                            else {
-                            $('#inputFile').removeAttr('value');
-                            jQuery('#image_upload_preview').removeAttr('src');
-                            alert("Image only allows file types of JPEG. ");
-                            return false;
-                            }
-                            }
-                            var file_size = $('#inputFile')[0].files[0].size;
-                            if(file_size>20480) {                                    
-                            $('#inputFile').removeAttr('value');
-                            jQuery('#image_upload_preview').removeAttr('src');
-                            alert("File size can be between 20KB"); 
-                            return false;
-                            } 
-                            }*/
 
                             $(document).ready(function(){
                                 $.fancybox("#instruction");
@@ -634,9 +600,42 @@ header("Pragma: no-cache");
                                 $("#sub7p2").append('<option value="95">BANKING</option>');
 
                             }
-                            
-                                                       
-                          
+
+                            function LoadKhasaSubjects(){
+
+                                Empty_All_Dropdowns();
+
+                                $("#sub1").append('<option value="1">ENGLISH</option>');
+                                $("#sub1p2").append('<option value="1">ENGLISH</option>');
+
+
+                                $("#sub2").append('<option value="2">URDU</option>');
+                                $("#sub2p2").append('<option value="2">URDU</option>');
+
+                                $('#sub3').hide();
+                                $('#sub3p2').hide();
+
+
+                                $.each(huminities_without_practical,function(val,text){
+
+                                    $("#sub4").append(new Option(text,val));
+                                    $("#sub4p2").append(new Option(text,val));
+                                });
+
+                                $.each(huminities_without_practical,function(val,text){
+
+                                    $("#sub5").append(new Option(text,val));
+                                    $("#sub5p2").append(new Option(text,val));
+                                });
+
+                                $('#sub6').hide();
+                                $('#sub6p2').hide();
+
+                                $('#sub7').hide();$('#sub7p2').hide();
+                                $('#sub8').hide(); $('#sub8p2').hide();
+                            }
+
+
                             $('#std_group').change(function(){
 
                                 var sel_group = $('#std_group').val();    
@@ -655,7 +654,7 @@ header("Pragma: no-cache");
                                     LoadCommerceSubjects();
                                 }
                                 else if (sel_group == 30){
-                                    LoadCommerceSubjects();
+                                    LoadKhasaSubjects();
                                 }
                             });
 
@@ -1009,7 +1008,7 @@ header("Pragma: no-cache");
 
                             });
 
-         function checks()
+                            function checks()
                             {
 
 
@@ -1048,7 +1047,7 @@ header("Pragma: no-cache");
                                                     success: function(data) {
 
                                                         console.log(data);
-                                                        
+
 
                                                         var obj = JSON.parse(data) ;
                                                         if(obj.error ==  1)
@@ -1079,7 +1078,7 @@ header("Pragma: no-cache");
                                 } 
                             }
 
-                           
+
 
                         </script>
 
