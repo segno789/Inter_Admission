@@ -3367,7 +3367,7 @@ class Admission extends CI_Controller {
         $this->load->library('session');
         $Inst_Id = 999999;
 
-        DebugBreak();
+        //DebugBreak();
 
         $formno = '';//$this->Admission_model->GetFormNo();
 
