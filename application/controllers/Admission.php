@@ -2658,8 +2658,6 @@ class Admission extends CI_Controller {
         $regfee =  1000;
         $TotalAdmFee = 0;
         $dueDate = 0;
-        $cat11 = 1; $cat12 = 1;
-
 
         $oldsess = @$_POST['oldsess'];
 
@@ -3369,7 +3367,7 @@ class Admission extends CI_Controller {
         $this->load->library('session');
         $Inst_Id = 999999;
 
-        // DebugBreak();
+        DebugBreak();
 
         $formno = '';//$this->Admission_model->GetFormNo();
 
