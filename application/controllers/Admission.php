@@ -2284,6 +2284,7 @@ $FontSize-=1;
                 $data[0]['picpathImg'] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
             }
         }
+        }
 
 
         $specialcase = $data['0']['Spl_Name'];
@@ -2674,8 +2675,6 @@ $FontSize-=1;
         $regfee =  1000;
         $TotalAdmFee = 0;
         $dueDate = 0;
-        $cat11 = 1; $cat12 = 1;
-
 
         $oldsess = @$_POST['oldsess'];
 
@@ -3386,7 +3385,7 @@ $FontSize-=1;
         $this->load->library('session');
         $Inst_Id = 999999;
 
-        // DebugBreak();
+        //DebugBreak();
 
         $formno = '';//$this->Admission_model->GetFormNo();
 
