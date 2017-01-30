@@ -36,6 +36,8 @@ if(isset($files)){
 
         // Load data for the table's content from an Ajax source
         "ajax": {
+              beforeSend: function() {  $('.mPageloader').show(); },
+                    complete: function() { $('.mPageloader').hide();},
             "url": "<?php echo site_url('Admission_11th_reg/ajax_list')?>",
             "type": "POST"
         },

@@ -1017,33 +1017,39 @@ class Admission_11th_reg_model extends CI_Model
 
     function get_datatables($inst_cd)
     {
-        //    DebugBreak();
+           DebugBreak();
         $this->_get_datatables_query();
         // $this->db->where('coll_cd ', $inst_cd);
         //  if($_POST['length'] != -1)
         //    $this->db->limit($_POST['length'], $_POST['start']);
         $limit = $_POST['length'];
         $start = $_POST['start'];
-        $query = $this->db->query("Registration..sp_get_regInfo_11th_Cancel_adm_temp $inst_cd,11,2016,1,$limit,$start");    
+        $keyword = $_POST['search']['value'];
+        $query = $this->db->query("Registration..sp_get_regInfo_11th_Make_adm_temp $inst_cd,11,2016,1,$start,$limit");    
         //   $rowcount = $query->num_rows();
 
 
-        $query = $this->db->get();
+       // $query = $this->db->get();
         return $query->result();
     }
     function count_filtered($inst_cd)
     {
         // DebugBreak();
         $this->_get_datatables_query();
+      //  $this->db->query("Registration..sp_get_regInfo_11th_Make_adm_temp $inst_cd,11,2016,1,$start,$limit");
         $this->db->where(array('coll_cd '=>$inst_cd, 'isdeleted'=>0));
         $query = $this->db->get();
         return $query->num_rows();
     }
     public function count_all($inst_cd)
     {
-        $this->db->where(array('coll_cd '=>$inst_cd, 'isdeleted'=>0));
-        $this->db->from($this->table);
-        return $this->db->count_all_results();
+       // DebugBreak();
+       
+       
+       $query = $this->db->query("SELECT count(*) as total FROM ". $this->table." WHERE coll_cd = $inst_cd and isdeleted =0" );
+       $rowcount = $query->result_array();       
+
+       return $rowcount[0]['total'];
     }
 }
 ?>
