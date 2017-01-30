@@ -2284,7 +2284,7 @@ $FontSize-=1;
                 $data[0]['picpathImg'] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
             }
         }
-        }
+        
 
 
         $specialcase = $data['0']['Spl_Name'];
