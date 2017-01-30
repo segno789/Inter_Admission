@@ -82,10 +82,11 @@
                                                             $grp_name = "No GROUP SELECTED.";
                                                             }
 
-                                                            $picpath =  DIRPATH11th.'/'.$Inst_Id.'/'.$vals["PicPath"];
+                                                           /* $picpath =  DIRPATH11th.'/'.$Inst_Id.'/'.$vals["PicPath"];
                                                             // echo $picpath;
                                                             $type = pathinfo($picpath, PATHINFO_EXTENSION);
-                                                            $vals["PicPath"] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
+                                                            $vals["PicPath"] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));*/
+                                                              $vals["PicPath"] =  '../OldPics/colleges'.'/'.$Inst_Id.'/'.$vals["PicPath"]."?".rand(10000,1000000);
                                                         //  DebugBreak();
                                                         echo '<tr  >
                                                         <td>'.$n.'</td>

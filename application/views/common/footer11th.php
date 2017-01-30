@@ -11,13 +11,12 @@
 <script src="<?php echo base_url(); ?>assets/js/bootstrap.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/jquery.scrollUp.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/wysiwyg/bootstrap-wysihtml5.js"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.dataTables.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.mask.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.validate.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/alertify.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.fancybox.pack.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/jquery-ui.js"></script>
-
 
 <?php 
 if(isset($files)){
@@ -27,38 +26,21 @@ if(isset($files)){
 }
 ?> 
 <script type="">
+var oTable =  '';
     $(document).ready(function () {
-        table = $('#data-table').dataTable({ 
-        "iDisplayLength": 25,
-        "processing": true, //Feature control the processing indicator.
-        "serverSide": true, //Feature control DataTables' server-side processing mode.
-        "order": [], //Initial no order.
-
-        // Load data for the table's content from an Ajax source
-        "ajax": {
-              beforeSend: function() {  $('.mPageloader').show(); },
-                    complete: function() { $('.mPageloader').hide();},
-            "url": "<?php echo site_url('Admission_11th_reg/ajax_list')?>",
-            "type": "POST"
-        },
-
-        //Set column definition initialisation properties.
-        "columnDefs": [
-        { 
-            "targets": [ 0 ], //first column / numbering column
-            "orderable": false, //set not orderable
-        },
-        ],
-
-    });
+        
+         oTable = $('#data-table').dataTable({
+            "sPaginationType": "full_numbers",
+            "cache": true
+        });
         $('#data-tablereg').dataTable({
             "sPaginationType": "full_numbers",
-            "cache": false
+            "cache": true
         });
 
     });
 
-
+ $('.mPageloader').hide();
 
 </script>
 <script type="">
@@ -875,9 +857,18 @@ if(isset($files)){
          alertify.confirm(msg, function (e) {
 
                     if (e) {
+                    
                     $("#isformwise").val("1");
+                    
+                     $("input[name='chk[]:checked']").remove();
+                        $("input:checked", oTable.fnGetNodes()).each(function(){
+                            $('<input type="checkbox"  class="checkedID" name="chk[]" ' + 'value="' +
+                                $(this).val() + '" type="hidden" checked="checked" />')
+                            .css("display", "none")
+                            .appendTo('#form_make_adm');
+                        });
                     $('#form_make_adm').submit();
-                       // window.location.href = '<?=base_url()?>index.php/Admission_9th_reg/NewEnrolment_update/'
+                       
                     } 
 
 

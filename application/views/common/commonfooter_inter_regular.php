@@ -32,7 +32,7 @@
     $(document).ready(function(){
         $('#data-table').dataTable({
             "sPaginationType": "full_numbers",
-            "cache": false
+            "cache": true
         });
 
         $("#bay_form,#father_cnic").mask("99999-9999999-9",{placeholder:"_"});
