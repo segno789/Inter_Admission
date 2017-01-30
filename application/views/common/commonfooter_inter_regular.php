@@ -656,7 +656,7 @@
         window.location.href = '<?=base_url()?>Admission_inter/NewEnrolment_EditForm_inter/'+formrno
     }
 
-    function NewForm(formrno)
+    function NewForm(formrno,IntBrd_cd)
     {
         // //debugger;
         $('#sub1').empty();
@@ -667,7 +667,7 @@
         $('#sub6').empty();
         $('#sub7').empty();
         $('#sub8').empty();
-        window.location.href = '<?=base_url()?>Admission_inter/NewEnrolment_NewForm_inter/'+formrno
+        window.location.href = '<?=base_url()?>Admission_inter/NewEnrolment_NewForm_inter/'+formrno+'/'+IntBrd_cd
     }
     function DeleteForm(formrno)
     {

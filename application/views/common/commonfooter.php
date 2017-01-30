@@ -390,13 +390,7 @@
             $('#address').focus(); 
             return status;    
         }
-
-        /* else if (! $('#oldResult11th').val() && oldClass11thother == 11){
-        alertify.error("Please Fill Your Old Result ") 
-        $('#oldResult11th').focus();   
-        return status;        
-        }*/
-
+      
         else  if (dist_cd < 1){
             alertify.error('Please select District '); 
             $("#pvtinfo_dist").focus();

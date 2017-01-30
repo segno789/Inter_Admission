@@ -395,7 +395,7 @@ header("Pragma: no-cache");
                                         $chance = $data[0]['chance'];
                                         $exam_type = $data[0]['exam_type'];
 
-                                      //  DebugBreak();
+                                        //  DebugBreak();
 
                                         $status = $data[0]['status'];
                                         $class = $data[0]['class'];
@@ -423,12 +423,12 @@ header("Pragma: no-cache");
                                             if($grp_cd == 1){
                                                 echo "<option value='1' selected='selected'>PRE-MEDICAL</option>"; 
                                                 echo "<option value='3'>HUMANITIES</option>";
-                                                    echo "<option value='5'>COMMERCE</option>";       
+                                                echo "<option value='5'>COMMERCE</option>";       
                                             }
                                             else if ($grp_cd == 2){
                                                 echo "<option value='2' selected='selected'>PRE-ENGINEERING</option>";
                                                 echo "<option value='3'>HUMANITIES</option>";
-                                                    echo "<option value='5'>COMMERCE</option>"; 
+                                                echo "<option value='5'>COMMERCE</option>"; 
                                             }
 
                                             else if ($grp_cd == 3){
@@ -438,12 +438,12 @@ header("Pragma: no-cache");
                                             else if($grp_cd == 4){
                                                 echo "<option value='4' selected='selected'>GENERAL SCIENCE</option>";
                                                 echo "<option value='3'>HUMANITIES</option>";
-                                                    echo "<option value='5'>COMMERCE</option>"; 
+                                                echo "<option value='5'>COMMERCE</option>"; 
                                             }
                                             else if($grp_cd == 5){
                                                 echo "<option value='5' selected='selected'>COMMERCE</option>";
                                                 echo "<option value='3'>HUMANITIES</option>";
-                                                               
+
                                             } 
                                         }
 
@@ -475,7 +475,9 @@ header("Pragma: no-cache");
                                                     echo "<option value='3'>HUMANITIES</option>";  
                                                 }
                                                 else if($grp_cd == 7){
-                                                    echo "<option value='7' selected='selected'>Home Economics</option>";
+                                                    echo "<option value='7' selected='selected'>HOME ECONOMICS</option>";
+                                                    echo "<option value='3'>HUMANITIES</option>";
+                                                    echo "<option value='5'>COMMERCE</option>";  
                                                 }
                                         }
 
@@ -865,6 +867,7 @@ header("Pragma: no-cache");
                             }
 
                             $(document).ready(function(){
+
                                 $.fancybox("#instruction");
                                 function hide_sub7_sub8(){
 
@@ -1054,7 +1057,6 @@ header("Pragma: no-cache");
                                     $("#sub7").append('<option value="39">PRINCIPLES OF COMMERCE</option>');
 
                                     $("#sub7p2").append('<option value="95">BANKING</option>');
-                                    /*$("#sub7p2").append('<option value="98">COMPUTER STUDIES</option>');*/
                                 }
 
                                 var huminities_sub_practical = {
@@ -1164,10 +1166,6 @@ header("Pragma: no-cache");
 
                                     $("#sub2").append('<option value="2">URDU</option>');
                                     $("#sub2p2").append('<option value="2">URDU</option>');
-
-                                    /* $("#sub3").append('<option value="92">ISLAMIC EDUCATION</option>');
-                                    $("#sub3p2").append('<option value="91">PAKISTAN STUDIES</option>');  */
-
 
                                     $.each(huminities_without_practical,function(val,text){
 
@@ -1502,7 +1500,6 @@ header("Pragma: no-cache");
                                         $("#sub7p2").append(new Option('<?php  echo  array_search($data[0]['sub7A'],$subarray); ?>',sub7A));
                                         $("#sub7p2 option[value='" + sub7A + "']").attr("selected","selected");
                                     }
-
                                 }
 
                                 function sub_grp_load_exam_type1(){
@@ -1662,15 +1659,8 @@ header("Pragma: no-cache");
 
                                     Empty_All_Dropdowns();
                                     hide_sub7_sub8();
+                                    ClearDropDownsP1();
 
-                                    if((sub1pf1 == "3") || (sub1st1 == "2"))
-                                    {
-                                        $("#sub1").append('<option value="0">NONE</option>');
-                                    }
-                                    else
-                                    {   
-                                        $("#sub1").append('<option value="0">NONE</option>');
-                                    }
                                     if((sub1pf2 == "3") || (sub1st2 == "2"))
                                     {
                                         $("#sub1p2").append(new Option('<?php  echo  array_search($data[0]['sub1'],$subarray); ?>',sub1));
@@ -1680,33 +1670,17 @@ header("Pragma: no-cache");
                                         $("#sub1p2").append('<option value="0">NONE</option>');
                                     }
                                     // Subject 2 
-                                    if((sub2pf1 == "3") || (sub2st1 == "2"))
-                                    {
 
-                                        $("#sub2").append('<option value="0">NONE</option>');
-                                    }
-                                    else
-                                    {
-                                        $("#sub2").append('<option value="0">NONE</option>');
-                                    }
                                     if((sub2pf2 == "3") || (sub2st2 == "2"))
                                     {
                                         $("#sub2p2").append(new Option('<?php  echo  array_search($data[0]['sub2'],$subarray); ?>',sub2));
                                     }
                                     else
                                     {
-                                        $("#sub2p2").empty();
                                         $("#sub2p2").append('<option value="0">NONE</option>');
                                     }
-                                    if((sub3pf1 == "3") || (sub3st1 == "2"))
-                                    {
+                                    // Subject 3 
 
-                                        $("#sub3").append('<option value="0">NONE</option>');
-                                    }
-                                    else
-                                    {
-                                        $("#sub3").append('<option value="0">NONE</option>');
-                                    }
                                     if((sub8pf2 == "3") || (sub8st2 == "2"))
                                     {
                                         $("#sub3p2").append(new Option('<?php  echo  array_search($data[0]['sub8'],$subarray); ?>',sub8));
@@ -1715,15 +1689,8 @@ header("Pragma: no-cache");
                                     {
                                         $("#sub3p2").append('<option value="0">NONE</option>');
                                     }
-                                    if((sub4pf1 == "3") || (sub4st1 == "2"))
-                                    {
+                                    // Subject 4 
 
-                                        $("#sub4").append('<option value="0">NONE</option>');
-                                    }
-                                    else
-                                    {
-                                        $("#sub4").append('<option value="0">NONE</option>');
-                                    }
                                     if((sub4pf2 == "3") || (sub4st2 == "2"))
                                     {
                                         $("#sub4p2").append(new Option('<?php  echo  array_search($data[0]['sub4'],$subarray); ?>',sub4));
@@ -1733,17 +1700,8 @@ header("Pragma: no-cache");
                                     {
                                         $("#sub4p2").append('<option value="0">NONE</option>');
                                     }
-                                    if((sub5pf1 == "3") || (sub5st1 == "2"))
-                                    {
+                                    // Subject 5 
 
-                                        $("#sub5").append('<option value="0">NONE</option>');
-                                    }
-                                    else
-                                    {
-                                        $("#sub5").append('<option value="0">NONE</option>');
-                                    }
-                                    
-                                    
                                     if((sub5pf2 == "3") || (sub5st2 == "2"))
                                     {
 
@@ -1751,12 +1709,22 @@ header("Pragma: no-cache");
                                     }
                                     else
                                     {
-                                        $("#sub5").append('<option value="0">NONE</option>');
+                                        $("#sub5p2").append('<option value="0">NONE</option>');
                                     }
-                                    
-                                    
-                                    
-                                    
+                                    // Subject 6 
+
+                                    if((sub6pf2 == "3") || (sub6st2 == "2"))
+                                    {
+
+                                        $("#sub6p2").append(new Option('<?php  echo  array_search($data[0]['sub6'],$subarray); ?>','<?php echo $data[0]['sub6']?>'));
+                                    }
+                                    else
+                                    {
+                                        $("#sub6p2").append('<option value="0">NONE</option>');
+                                    }
+
+
+
                                     if((sub5pf2 == "3") || (sub5st2 == "2"))
                                     {
                                         if(grp_cd ==5)
@@ -2142,7 +2110,7 @@ header("Pragma: no-cache");
 
                                     Empty_All_Dropdowns();
                                     hide_sub7_sub8();
-                                    debugger;
+
                                     if((sub1pf1 == "2" || sub1pf2 == "2") )
                                     {
                                         $("#sub1").append(new Option('<?php  echo  array_search($data[0]['sub1'],$subarray); ?>',sub1));
@@ -2299,6 +2267,8 @@ header("Pragma: no-cache");
 
                                 <?php
 
+                                //DebugBreak();
+
                                 if($cat11 == 4)
                                 {
                                     echo 'Aama_Khasa();';
@@ -2359,7 +2329,7 @@ header("Pragma: no-cache");
                                 });
 
                                 $('#std_group').change(function(){
-                                       debugger;
+
                                     $("#fullAppear").attr("checked", false);
 
                                     $("#fullAppear1").hide();
@@ -2444,24 +2414,23 @@ header("Pragma: no-cache");
                                     var sub1_p1 = $("#sub1").val();
                                     $("#sub1p2").val(sub1_p1);
 
-                                })
+                                });
                                 $("#sub1p2").change(function (){
                                     var sub1_p1 = $("#sub1p2").val();
                                     $("#sub1").val(sub1_p1);
 
-                                })
+                                });
                                 // Sub2 change event
                                 $("#sub2").change(function (){
                                     var sub1_p1 = $("#sub2").val();
                                     $("#sub2p2").val(sub1_p1);
 
-                                })
+                                });
                                 $("#sub2p2").change(function (){
                                     var sub1_p1 = $("#sub2p2").val();
                                     $("#sub2").val(sub1_p1);
 
-                                })
-
+                                });
                                 // sub 4 change event 
                                 $("#sub4").change(function(){
 
@@ -2553,17 +2522,29 @@ header("Pragma: no-cache");
                                 $("#sub5").change(function(){
 
                                     //debugger;
-
                                     var id4 =$("#sub4").val();
                                     var id4p2 =$("#sub4p2").val();
                                     var id5 =$("#sub5").val();
                                     var id5p2 =$("#sub5p2").val(id5);
                                     var id6 =$("#sub6").val();
                                     var id6p2 =$("#sub6p2").val();
+
                                     var grp_cd = $('#std_group').val();
+                                    var sel_cat = $('#ddlMarksImproveoptions').val();    
 
+                                    if(sel_cat == 4 && grp_cd == 5 && id5 != 0){
+                                        $("#sub5p2").empty();
+                                        $("#sub5p2").append('<option value="94">COMMERCIAL GEOGRAPHY</option>'); 
+                                        $("#sub5p2").append('<option value="0">NONE</option>'); 
+                                    }
 
-                                    if((id5 !=0) && (id4 == id5)){
+                                    else if(sel_cat == 4 && grp_cd == 5 && id5 == 0){
+                                        $("#sub5p2").empty();
+                                        $("#sub5p2").append('<option value="0">NONE</option>'); 
+                                        $("#sub5p2").append('<option value="94">COMMERCIAL GEOGRAPHY</option>'); 
+                                    }
+
+                                    else if((id5 !=0) && (id4 == id5)){
                                         alertify.error('Please Choose Different Subject');
                                         $("#sub5").val('0');
                                         $("#sub5p2").val('0');
@@ -2600,7 +2581,6 @@ header("Pragma: no-cache");
                                     }
 
                                 });
-
                                 $("#sub5p2").change(function(){
 
                                     //debugger;
@@ -2611,11 +2591,23 @@ header("Pragma: no-cache");
                                     var id5p2 =$("#sub5p2").val();
                                     var id6 =$("#sub6").val();
                                     var id6p2 =$("#sub6p2").val();
-
                                     $("#sub5").val(id5p2);
                                     var grp_cd = $('#std_group').val();
+                                    var sel_cat = $('#ddlMarksImproveoptions').val();  
 
-                                    if((id5p2 !=0) && (id4p2 == id5p2)){
+                                    if(sel_cat == 4 && grp_cd == 5 && id5p2 != 0){
+                                        $("#sub5").empty();
+                                        $("#sub5").append('<option value="71">PRINCIPLES OF ECONOMICS</option>'); 
+                                        $("#sub5").append('<option value="0">NONE</option>'); 
+                                    }
+
+                                    else if(sel_cat == 4 && grp_cd == 5 && id5p2 == 0){
+                                        $("#sub5").empty();
+                                        $("#sub5").append('<option value="0">NONE</option>'); 
+                                        $("#sub5").append('<option value="71">PRINCIPLES OF ECONOMICS</option>'); 
+                                    }
+
+                                    else if((id5p2 !=0) && (id4p2 == id5p2)){
                                         alertify.error('Please Choose Different Subject');
                                         $("#sub5").val('0');
                                         $("#sub5p2").val('0');
@@ -2660,9 +2652,23 @@ header("Pragma: no-cache");
                                     var id5p2 =$("#sub5p2").val();
                                     var id6 =$("#sub6").val();
                                     var id6p2 =$("#sub6p2").val(id6);
-                                    var grp_cd = $('#std_group').val();
 
-                                    if((id6 !=0) && (id4 == id6)){
+                                    var grp_cd = $('#std_group').val();
+                                    var sel_cat = $('#ddlMarksImproveoptions').val();    
+
+                                    if(sel_cat == 4 && grp_cd == 5 && id6 != 0){
+                                        $("#sub6p2").empty();
+                                        $("#sub6p2").append('<option value="97">BUSINESS STATISTICS</option>'); 
+                                        $("#sub6p2").append('<option value="0">NONE</option>'); 
+                                    }
+
+                                    else if(sel_cat == 4 && grp_cd == 5 && id6 == 0){
+                                        $("#sub6p2").empty();
+                                        $("#sub6p2").append('<option value="0">NONE</option>'); 
+                                        $("#sub6p2").append('<option value="97">BUSINESS STATISTICS</option>'); 
+                                    }
+
+                                    else if((id6 !=0) && (id4 == id6)){
                                         alertify.error('Please Choose Different Subject');
                                         $("#sub6").val('0');
                                         $("#sub6p2").val('0');
@@ -2700,7 +2706,6 @@ header("Pragma: no-cache");
                                     }
 
                                 });
-
                                 $("#sub6p2").change(function(){
 
                                     var id4 =$("#sub4").val();
@@ -2713,8 +2718,21 @@ header("Pragma: no-cache");
                                     $("#sub6").val(id6p2);
 
                                     var grp_cd = $('#std_group').val();
+                                    var sel_cat = $('#ddlMarksImproveoptions').val();  
 
-                                    if((id6p2 !=0) && (id4p2 == id6p2)){
+                                    if(sel_cat == 4 && grp_cd == 5 && id6p2 != 0){
+                                        $("#sub6").empty();
+                                        $("#sub6").append('<option value="80">BUSINESS MATH</option>'); 
+                                        $("#sub6").append('<option value="0">NONE</option>'); 
+                                    }
+
+                                    else if(sel_cat == 4 && grp_cd == 5 && id6p2 == 0){
+                                        $("#sub6").empty();
+                                        $("#sub6").append('<option value="0">NONE</option>'); 
+                                        $("#sub6").append('<option value="80">BUSINESS MATH</option>'); 
+                                    }
+
+                                    else if((id6p2 !=0) && (id4p2 == id6p2)){
                                         alertify.error('Please Choose Different Subject');
                                         $("#sub6").val('0');
                                         $("#sub6p2").val('0');
@@ -2751,12 +2769,45 @@ header("Pragma: no-cache");
                                         $("#sub6p2").val('0');
                                     }
                                 });
+
+                                $("#sub7").change(function(){
+
+                                    var id7 =$("#sub7").val();
+                                    var grp_cd = $('#std_group').val();
+                                    var sel_cat = $('#ddlMarksImproveoptions').val();    
+
+                                    if(sel_cat == 4 && grp_cd == 5 && id7 != 0){
+                                        $("#sub7p2").empty();
+                                        $("#sub7p2").append('<option value="95">BANKING</option>'); 
+                                        $("#sub7p2").append('<option value="0">NONE</option>'); 
+                                    }
+
+                                    else if(sel_cat == 4 && grp_cd == 5 && id7 == 0){
+                                        $("#sub7p2").empty();
+                                        $("#sub7p2").append('<option value="0">NONE</option>'); 
+                                        $("#sub7p2").append('<option value="95">BANKING</option>'); 
+                                    }
+                                });
+                                $("#sub7p2").change(function(){
+                                    var id7p2 =$("#sub7p2").val();
+                                    var grp_cd = $('#std_group').val();
+                                    var sel_cat = $('#ddlMarksImproveoptions').val();    
+
+                                    if(sel_cat == 4 && grp_cd == 5 && id7p2 != 0){
+                                        $("#sub7").empty();
+                                        $("#sub7").append('<option value="39">PRINCIPLES OF COMMERCE</option>'); 
+                                        $("#sub7").append('<option value="0">NONE</option>'); 
+                                    }
+                                    else if(sel_cat == 4 && grp_cd == 5 && id7p2 == 0){
+                                        $("#sub7").empty();
+                                        $("#sub7").append('<option value="0">NONE</option>'); 
+                                        $("#sub7").append('<option value="39">PRINCIPLES OF COMMERCE</option>'); 
+                                    }
+                                });
                             });
 
                             function checks()
                             {
-
-
                                 var status  =  check_NewEnrol_validation();
                                 if(status == 0)
                                 {
@@ -2764,11 +2815,8 @@ header("Pragma: no-cache");
                                 }
                                 else
                                 {
-
                                     //debugger;
-
                                     $.ajax({
-
                                         type: "POST",
                                         url: "<?php  echo site_url('Admission/frmvalidation'); ?>",
                                         data: $("#myform").serialize() ,

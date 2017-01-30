@@ -33,8 +33,8 @@
                                     }
                                     else
                                     {
-                                        $image_path_selected =  DIRPATHOTHER.'/'.$data[0]["coll_cd"].'/'.$data[0]["picpath"]; 
-                                        $type = pathinfo($image_path_selected, PATHINFO_EXTENSION); 
+                                        @$image_path_selected =  DIRPATHOTHER.'/'.$data[0]["coll_cd"].'/'.$data[0]["picpath"]; 
+                                        @$type = pathinfo($image_path_selected, PATHINFO_EXTENSION); 
                                     }
                                     // echo $picpath;
                                     @$image_path_selected = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($image_path_selected));      
