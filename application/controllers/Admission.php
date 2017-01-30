@@ -996,13 +996,24 @@ class Admission extends CI_Controller {
 
             $pdf->Cell( 0.5,0.7,strtoupper($grp_name." GROUP  (12th: ".$chkcat10.")"),0,'L');
         }
-        $LastSess = 0 ;
+        $LastSess = '';
 
         if($data["SessOfLastAp"] == 1 or $data["SessOfLastAp"] == 2  )
         {
             $LastSess =  $data["SessOfLastAp"]==1?"A":"S";
         }     
         $MLastSess='';
+
+        $yearOfPass = $data['yearOfPass'];
+
+        if($yearOfPass == 100)
+        {
+            $yearOfPass = 'Before 2000';
+        }
+        else{
+            $yearOfPass = $data['yearOfPass'];
+        }
+
         if($data["sessOfPass"] == 1 or $data["sessOfPass"] == 2  )
         {
             $MLastSess =  $data["sessOfPass"]==1?"A":"S";
@@ -1047,6 +1058,14 @@ class Admission extends CI_Controller {
         $pdf->SetFont('Arial','',$FontSize);
         $pdf->Cell( 0.5,0.5,"SSC Info:",0,'L');
 
+        if($data['yearOfPass'] == 100)
+        {
+            $data['yearOfPass'] = 'Before 2000';
+        }
+        else{
+            $data['yearOfPass'];
+        }
+
         if(@$data["matRno"] == 1)
         {
             $pdf->SetXY(1.5,2.15+$Y);
@@ -1055,7 +1074,7 @@ class Admission extends CI_Controller {
         else
         {
             $pdf->SetXY(1.5,2.15+$Y);
-            $pdf->Cell(0.5,0.5,$data["matRno"]." ( $MLastSess, ".$data['yearOfPass'].', '.$data['MBrd_Abbr']." )",0,'L');            
+            $pdf->Cell(0.5,0.5,$data["matRno"]." ( $MLastSess,".$data["yearOfPass"].", ".$data["MBrd_Abbr"]." )",0,'L');            
         }
 
         $pdf->SetXY(3.5+$x,1.85+$Y);
@@ -2265,7 +2284,7 @@ $FontSize-=1;
             $error_msg.='<span style="font-size: 16pt; color:red;">No Any Student Found Against Your Criteria</span>';
         }
 
-        
+
         $picpath = DIRPATH12TH.'\\'.@$data[0]['picpath'];
         $isexit = is_file($picpath);
         if(!($isexit) && $error_msg == '' && $iyear >2014)
