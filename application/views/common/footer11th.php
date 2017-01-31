@@ -17,7 +17,7 @@
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/alertify.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.fancybox.pack.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/jquery-ui.js"></script>
-
+    
 <?php 
 if(isset($files)){
     foreach($files as $file){
@@ -26,19 +26,59 @@ if(isset($files)){
 }
 ?> 
 <script type="">
+
     $(document).ready(function () {
-        $('#data-table').dataTable({
+    
+ var  data_table_1 =    $('#data-table').DataTable({
             "sPaginationType": "full_numbers",
             "cache": false
         });
-        $('#data-tablereg').dataTable({
+    var data_table_2 =    $('#data-tablereg').dataTable({
             "sPaginationType": "full_numbers",
             "cache": false
         });
 
-    });
+   
 
-
+           
+       $("#checkAll").click(function(){
+        
+        //alert();
+        // $('input:checkbox').not(this).prop('checked', this.checked);
+        //data_table_1 //=    $('#data-table').DataTable({});
+       // debugger;
+        if($(this).is(":checked"))
+        {
+                $('input', data_table_1.fnGetNodes()).each( function() {
+        $('input', data_table_1.fnGetNodes()).attr('checked','checked');})
+        }
+        else
+        {
+               $('input', data_table_1.fnGetNodes()).each( function() {
+        $('input', data_table_1.fnGetNodes()).removeAttr('checked');})
+        }
+                
+        
+        
+        
+       //var rows = data_table_1.rows({ 'search': 'applied' }).nodes();
+      //$('input[type="checkbox"]', rows).prop('checked', this.checked);
+     //$('#data-table tbody input[type="checkbox"]').prop('checked', this.checked);
+     // $(':checkbox', data_table_2.rows().nodes()).prop('checked', this.checked);
+       })
+      $('#data-table tbody').on('change', 'input[type="checkbox"]', function(){
+      // If checkbox is not checked
+      if(!this.checked){
+         var el = $('#checkAll').get(0);
+         // If "Select all" control is checked and has 'indeterminate' property
+         if(el && el.checked && ('indeterminate' in el)){
+            // Set visual state of "Select all" control 
+            // as 'indeterminate'
+            el.indeterminate = true;
+         }
+      }
+   });
+   });
 
 </script>
 <script type="">
@@ -918,6 +958,7 @@ if(isset($files)){
                 }
             }); 
        }
+
        function issubmit_all()
        {
         if($("#make_adm11th_groups").val() == ""  || $("#make_adm11th_groups").val() == 0)

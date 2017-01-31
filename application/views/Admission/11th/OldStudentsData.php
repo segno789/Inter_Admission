@@ -159,7 +159,7 @@
                                                     <th style="width:6%" class="hidden-phone">
                                                         View Form
                                                     </th>
-                                                    <th  style="width:10%" scope="col" align="center"><a href="javascript:void(0);" style="color:red;" class="check">Check All</a></th>
+                                                    <th  style="width:10%" scope="col" align="center"><input style="width: 24px; height: 24px;" type="checkbox" id="checkAll"><span style="color:red;" class="check">Check All</span></th>
                                                     <!--<th style="width:10%" class="hidden-phone" >
                                                     Download
                                                     </th>   -->

@@ -1539,7 +1539,7 @@ public function NewEnrolment_Delete($formno)
         {
             if($user_info['info'][0]['IsGovernment'] == 2)
             {
-                $date = new DateTime(SingleDateFee9th);
+                $date = new DateTime(SingleDateFee);
                 $singleDate =  $date->format('Y-m-d'); 
                 $User_info_data = array('Inst_Id'=>$user['Inst_Id'], 'date' => $singleDate);
                 $user_info  =  $this->Admission_11th_reg_model->getuser_info($User_info_data); 
