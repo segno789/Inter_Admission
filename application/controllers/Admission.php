@@ -2288,7 +2288,9 @@ class Admission extends CI_Controller {
         $exam_type =   $data['0']['exam_type'];
         @$isParctialsub =   $data['0']['sn'];
 
-        if($specialcode != '' && $specialcode != 34 ){
+        //DebugBreak();
+
+        if($specialcode != '' && $specialcode != 34 && $specialcode != 119){
 
             $error_msg.='<span style="font-size: 16pt; color:red;">' . '   Your Admission cannot be procceed due to     ' . '</span>';
             $error_msg.='<span style="font-size: 16pt; color:red;">' . $specialcase . '</span>';

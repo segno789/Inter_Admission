@@ -404,8 +404,16 @@ header("Pragma: no-cache");
                                         $cat11  = $data[0]['cat11'];
 
                                         @$isParctialsub =   $data['0']['sn'];
+                                        @$spl_cd = $data['0']['spl_cd'];
 
-                                        if($cat11==4)
+                                        if($spl_cd == 119)
+                                        {
+                                            echo "<option value='0' selected='selected'>NONE</option>";
+                                            echo "<option value='3'>HUMANITIES</option>";
+                                            echo "<option value='5'>COMMERCE</option>";   
+                                        }
+
+                                        else if($cat11==4)
                                         {
                                             echo "<option value='9' selected='selected'>KAHSA</option>";   
                                         }
@@ -2255,7 +2263,12 @@ header("Pragma: no-cache");
 
                                 //DebugBreak();
 
-                                if($cat11 == 4)
+                                if($spl_cd == 119){
+                                    echo'Empty_All_Dropdowns();';
+                                    echo'ClearALLDropDowns();';
+                                }
+
+                                else if($cat11 == 4)
                                 {
                                     echo 'Aama_Khasa();';
                                 }
