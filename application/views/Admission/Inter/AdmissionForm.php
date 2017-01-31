@@ -1164,9 +1164,7 @@ header("Pragma: no-cache");
                                     $('#sub8').hide(); $('#sub8p2').hide();
                                 }
 
-
-                                function AamKhasa_subj()
-                                {
+                                function AamKhasa_subj(){
                                     Empty_All_Dropdowns();
 
                                     $("#sub1").append('<option value="1">ENGLISH</option>');
