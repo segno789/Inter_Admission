@@ -1722,73 +1722,59 @@ header("Pragma: no-cache");
                                     {
                                         $("#sub6p2").append('<option value="0">NONE</option>');
                                     }
-
-
-
-                                    if((sub5pf2 == "3") || (sub5st2 == "2"))
+                                    if(grp_cd == 5)
                                     {
-                                        if(grp_cd ==5)
+                                        if((sub5pf2 == "3") || (sub5st2 == "2"))
                                         {
-                                            $("#sub5p2").append(new Option('<?php  echo  array_search($data[0]['sub5A'],$subarray); ?>','<?php echo $data[0]['sub5A']?>'));
+                                            $("#sub5p2").empty();
+                                            $("#sub5p2").append(new Option('<?php  echo  array_search($data[0]['sub5A'],$subarray); ?>', '<?php echo $data[0]['sub5A']?>'));
+                                            $("#sub5p2 option[value='" + sub5A + "']").attr("selected","selected");
                                         }
                                         else
                                         {
-                                            $("#sub5p2").append(new Option('<?php  echo  array_search($data[0]['sub5A'],$subarray); ?>',sub5A));
-
+                                            $("#sub5p2").empty();
+                                            $("#sub5p2").append('<option value="0">NONE</option>');
                                         }
-                                    }
-                                    else
-                                    {
-                                        $("#sub5p2").append('<option value="0">NONE</option>');
-                                    }
-                                    if((sub6pf1 == "3") || (sub6st1 == "2"))
-                                    {
 
-                                        $("#sub6").append('<option value="0">NONE</option>');
-                                    }
-                                    else
-                                    {
-                                        $("#sub6").append('<option value="0">NONE</option>');
-                                    }
-                                    if((sub6pf2 == "3") || (sub6st2 == "2"))
-                                    {
-                                        if(grp_cd ==5)
+                                        if((sub6pf2 == "3") || (sub6st2 == "2"))
                                         {
-                                            $("#sub6p2").append(new Option('<?php  echo  array_search($data[0]['sub6A'],$subarray); ?>','<?php echo $data[0]['sub6A']?>'));
-
+                                            $("#sub6p2").empty();
+                                            $("#sub6p2").append(new Option('<?php  echo  array_search($data[0]['sub6A'],$subarray); ?>', '<?php echo $data[0]['sub6A']?>'));
+                                            $("#sub6p2 option[value='" + sub6A + "']").attr("selected","selected");
                                         }
                                         else
                                         {
-                                            $("#sub6p2").append(new Option('<?php  echo  array_search($data[0]['sub6A'],$subarray); ?>',sub6A));
-
+                                            $("#sub6p2").empty();
+                                            $("#sub6p2").append('<option value="0">NONE</option>');
                                         }
-                                    }
-                                    else
-                                    {
-                                        $("#sub6p2").append('<option value="0">NONE</option>');
-                                    }
 
-                                    if(sub7 != ''){
-                                        $('#sub7').show();
-                                        $('#sub7p2').show();
                                         if((sub7pf1 == "3") || (sub7st1 == "2"))
                                         {
-
-                                            $("#sub7").append('<option value="0">NONE</option>');
+                                            $("#sub7").empty();
+                                            $("#sub7").append(new Option('<?php  echo  array_search($data[0]['sub7'],$subarray); ?>',sub7));
+                                            $("#sub7 option[value='" + sub7 + "']").attr("selected","selected");
                                         }
                                         else
                                         {
+                                            $("#sub7").empty();
                                             $("#sub7").append('<option value="0">NONE</option>');
-                                        }
+                                        } 
+
                                         if((sub7pf2 == "3") || (sub7st2 == "2"))
                                         {
-                                            $("#sub7p2").append(new Option('<?php  echo  array_search($data[0]['sub7A'],$subarray); ?>','<?php echo $data[0]['sub7A']?>'));
+                                            $("#sub7p2").empty();
+                                            $("#sub7p2").append(new Option('<?php  echo  array_search($data[0]['sub7A'],$subarray); ?>', '<?php echo $data[0]['sub7A']?>'));
+                                            $("#sub7p2 option[value='" + sub7A + "']").attr("selected","selected");
                                         }
                                         else
                                         {
+                                            $("#sub7p2").empty();
                                             $("#sub7p2").append('<option value="0">NONE</option>');
-                                        }   
+                                        }  
                                     }
+
+
+
                                 }
 
                                 function sub_grp_load_exam_type5(){
