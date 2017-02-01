@@ -1164,9 +1164,39 @@ header("Pragma: no-cache");
                                     $('#sub8').hide(); $('#sub8p2').hide();
                                 }
 
+                                function humanities_subjects_full(){
 
-                                function AamKhasa_subj()
-                                {
+                                    Empty_All_Dropdowns();
+
+                                    $("#sub1").append('<option value="1">ENGLISH</option>');
+                                    $("#sub1p2").append('<option value="1">ENGLISH</option>');
+
+                                    $("#sub2").append('<option value="2">URDU</option>');
+                                    $("#sub2p2").append('<option value="2">URDU</option>');
+
+                                    $("#sub3").append('<option value="92">ISLAMIC EDUCATION</option>');
+                                    $("#sub3p2").append('<option value="91">PAKISTAN STUDIES</option>');
+
+                                    $.each(huminities_complete_subjects,function(val,text){
+
+                                        $("#sub4").append(new Option(text,val));
+                                        $("#sub4p2").append(new Option(text,val));
+
+
+                                        $("#sub5").append(new Option(text,val));
+                                        $("#sub5p2").append(new Option(text,val));
+
+
+                                        $("#sub6").append(new Option(text,val));
+                                        $("#sub6p2").append(new Option(text,val));
+
+                                    });
+
+                                    $('#sub7').hide();$('#sub7p2').hide();
+                                    $('#sub8').hide(); $('#sub8p2').hide();
+                                }
+
+                                function AamKhasa_subj(){
                                     Empty_All_Dropdowns();
 
                                     $("#sub1").append('<option value="1">ENGLISH</option>');
@@ -2313,7 +2343,6 @@ header("Pragma: no-cache");
                                     if(rel == 1) {
                                         $('#sub3').empty();
                                         $("#sub3").append('<option value="92">ISLAMIC EDUCATION</option>'); 
-
                                     }
                                 });                
 
@@ -2335,32 +2364,45 @@ header("Pragma: no-cache");
 
                                     var sel_group = $('#std_group').val();    
 
-                                    if(sel_group == grp_cd  && exam_type != 2) 
+                                    if(sel_group == grp_cd && exam_type != 2) 
                                     {
-                                        if(exam_type == 4 || exam_type == 5 || exam_type == 6 ){
+                                        if(exam_type == 4 || exam_type == 5 || exam_type == 6)
+                                        {
                                             $("#fullAppear1").show();    
                                         }
+                                        if(grp_cd != 3)
+                                        {
+                                            sub_grp_load();    
+                                        }
+                                        else if(grp_cd == 3)
+                                        {
+                                            humanities_subjects();
+                                            $("#fullAppear").attr("checked", true);
+                                        }
 
-                                        sub_grp_load();    
-                                    }     
-
-                                    else if(sel_group == 0){
+                                    }
+                                    else if(sel_group == 0)
+                                    {
                                         ClearALLDropDowns();
                                     }
-
-                                    else if (sel_group == 1){
+                                    else if (sel_group == 1)
+                                    {
                                         pre_medical_subjects();
                                     }
-                                    else if(sel_group == 2){
+                                    else if(sel_group == 2)
+                                    {
                                         pre_engineering_subjects();
                                     }
-                                    else if(sel_group == 3){
+                                    else if(sel_group == 3)
+                                    {
                                         humanities_subjects();
                                     }
-                                    else if(sel_group == 4){
+                                    else if(sel_group == 4)
+                                    {
                                         general_science_subjects();
                                     }
-                                    else if(sel_group == 5){
+                                    else if(sel_group == 5)
+                                    {
                                         commerce_subjects();
                                     } 
                                 });
@@ -2371,9 +2413,13 @@ header("Pragma: no-cache");
 
                                     if ($(this).is(':checked')) {
 
-                                        if(sel_group == grp_cd) 
+                                        if(sel_group == grp_cd && sel_group != 3) 
                                         {
                                             sub_grp_load_All_Previous();
+                                        }
+                                        else if(sel_group == grp_cd && sel_group == 3) 
+                                        {
+                                            humanities_subjects();
                                         }
                                     }
 

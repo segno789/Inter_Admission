@@ -87,10 +87,10 @@ class Admission extends CI_Controller {
             redirect('Admission');
             return;
         }
+
         //DebugBreak();
+
         $data = $data[0];
-
-
         $retfee = $this->feecalculate($data);
 
         $data['AdmFine'] = $retfee[0]['AdmFine'];
@@ -1839,13 +1839,12 @@ $FontSize-=1;
             'CLOTHING & TEXTILE (Home-Economics Group)'=>'75',
             'HOME MANAGEMNET (Home-Economics Group)'=>'76'
         );
+
         $isper = 0;
         if( $data['grp_cd'] == 1 || $data['grp_cd'] == 2 || $data['grp_cd'] == 4 ||   array_search($data['sub4'],$practical_Sub) || array_search($data['sub5'],$practical_Sub) || array_search($data['sub5A'],$practical_Sub) || array_search($data['sub6'],$practical_Sub)  || array_search($data['sub6A'],$practical_Sub) ||  array_search($data['sub7'],$practical_Sub) || array_search($data['sub7A'],$practical_Sub))
         {
             $isper = 1;
         }
-
-
 
         $User_info_data = array('Inst_Id'=>999999, 'date' => date('Y-m-d'),'isPratical'=>$isper);
         $user_info  =  $this->Admission_model->getuser_info($User_info_data); 
@@ -1864,7 +1863,7 @@ $FontSize-=1;
                 $processFee = $user_info['rule_fee'][0]['Processing_Fee'];;
                 $admfeecmp = $user_info['rule_fee'][0]['Comp_Pvt_Amount'];
             } 
-            else if($user_info['rule_fee'][0]['isPrSub']== 0 )
+            else if($user_info['rule_fee'][0]['isPrSub']== 0)
             {
                 $admfee = $user_info['rule_fee'][0]['PVT_Amount'];
                 $processFee = $user_info['rule_fee'][0]['Processing_Fee'];;
@@ -1889,10 +1888,7 @@ $FontSize-=1;
                 $admfee = $user_info['rule_fee'][0]['PVT_Amount'];
                 $processFee = $user_info['rule_fee'][0]['Processing_Fee'];;
                 $admfeecmp = $user_info['rule_fee'][0]['Comp_Pvt_Amount'];
-
             }
-
-
 
             $TripleDate = date('Y-m-d',strtotime(TripleDateFee)); 
             $now = date('Y-m-d'); // or your date as well
@@ -1904,9 +1900,16 @@ $FontSize-=1;
             $admfeecmp =  ($admfeecmp*3); 
             $Total_fine = $days*$fine;
 
-        }  // DebugBreak();
+        }
+
         $finalFee = '';
-        if($data['cat11'] !=  NULL && $data['cat12'] != NULL)
+
+        if($data['cat11'] ==  7 && $data['cat12'] == 7 && $data['sub8Ap2'] == 1 && ($data['sub3Ap1']== '' || $data['sub3Ap1']== 0 || $data['sub3Ap1'] == null))
+        {
+            $finalFee = $admfee;
+        }
+
+        else if($data['cat11'] !=  NULL && $data['cat12'] != NULL)
         {
             $finalFee = $admfeecmp;
         }
@@ -1914,8 +1917,6 @@ $FontSize-=1;
         {
             $finalFee = $admfee;
         }
-
-
 
         if($data['Spec']>0 && (strtotime(date('Y-m-d')) <= strtotime(SingleDateFee)) )
         {
