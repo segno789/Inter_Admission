@@ -1459,7 +1459,8 @@ class Admission_inter extends CI_Controller {
             $formno = $this->uri->segment(3);
             @$IntBrd_cd = $this->uri->segment(4);       
 
-            $year = 2016; 
+            @$year = $this->uri->segment(5);    
+
             $error_msg = $RegStdata['excep'];
 
 
@@ -1473,11 +1474,11 @@ class Admission_inter extends CI_Controller {
             $error['excep'] = '';
             if($this->session->flashdata('IsReAdm')){
                 $isReAdm = 1;
-                $year = 2016;
+                @$year = $this->uri->segment(5);
             }
             else{
                 $isReAdm = 0;
-                $year = 2016;    
+                @$year = $this->uri->segment(5);  
             }
             $formno = $this->uri->segment(3);
 
