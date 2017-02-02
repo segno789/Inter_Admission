@@ -77,7 +77,7 @@
                                             }
 
                                             @$image_path_selected = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($image_path_selected)); 
-                                            $disable = '<button type="button" class="btn btn-info" value="'.$vals["rno"].'" onclick="NewForm('.$vals["rno"].','.$vals["IntBrd_cd"].')">Save Form</button>';
+                                            $disable = '<button type="button" class="btn btn-info" value="'.$vals["rno"].'" onclick="NewForm('.$vals["rno"].','.$vals["IntBrd_cd"].','.$vals["Iyear"].')">Save Form</button>';
                                             if($vals['MissingNOC']>0)
                                             {
                                                 $disable = '<p style="color:red">Your NOC is missing. Please contact to Online Registration Branch at B.I.S.E</p>'; 
