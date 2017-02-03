@@ -2308,8 +2308,12 @@ header("Pragma: no-cache");
                                     }
                                     else if($exam_type == 2){
 
-                                        echo 'sub_grp_load_MarksImp_FULL();'; 
-
+                                        if($grp_cd == 3){
+                                            echo'humanities_subjects();';
+                                        }
+                                        else{
+                                            echo 'sub_grp_load_MarksImp_FULL();';     
+                                        }
                                     }
                                     else if($exam_type == 3 && $IsRegular == 1 && $class == 11 && $isParctialsub == 2){
                                         echo'Empty_All_Dropdowns();';
