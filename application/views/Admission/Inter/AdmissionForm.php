@@ -2383,7 +2383,6 @@ header("Pragma: no-cache");
                                             humanities_subjects();
                                             $("#fullAppear").attr("checked", true);
                                         }
-
                                     }
                                     else if(sel_group == 0)
                                     {
