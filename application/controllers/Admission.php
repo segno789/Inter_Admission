@@ -961,17 +961,10 @@ class Admission extends CI_Controller {
         {
             $grp_name = 'KHASA';                                                   
         }
-
-
-        //--------------------------- 1st line 
-        /* $pdf->SetXY(0.5,1.55+$Y);
-        $pdf->SetFont('Arial','',$FontSize);
-        $pdf->Cell( 0.5,0.5,"Form No:",0,'L');
-
-        $pdf->SetFont('Arial','B',$FontSize);
-        $pdf->SetXY(1.5,1.55+$Y);
-        $pdf->Cell( 0.5,0.5,$data['formNo'],0,'L');*/
-
+        else if($data["grp_cd"] == 3 && $data['cat11'] == 8 && $data['cat12'] == 8)
+        {
+            $grp_name = 'HOMEOPATHIC';                                                   
+        }
 
         $chkcat09 = ($data['mi_type']!= 2?$this->getCatName($data['cat11']):'Aditional') ;
 
