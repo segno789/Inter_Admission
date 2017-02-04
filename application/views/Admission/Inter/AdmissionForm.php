@@ -2290,8 +2290,35 @@ header("Pragma: no-cache");
                                 }
 
                                 <?php
-
                                 //DebugBreak();
+                                
+                                $practical_Sub = array(
+
+                                    'LIBRARY SCIENCE'=>'8',
+                                    'GEOGRAPHY'=>'12',
+                                    'PSYCHOLOGY'=>'16',
+                                    'STATISTICS'=>'18',
+                                    'OUTLINES OF HOME ECONOMICS'=>'21',
+                                    'FINE ARTS'=>'23',
+                                    'COMMERCIAL PRACTICE'=>'38',
+                                    'HEALTH & PHYSICAL EDUCATION'=>'42',
+                                    'BIOLOGY'=>'46',
+                                    'PHYSICS'=>'47',
+                                    'CHEMISTRY'=>'48',
+                                    'COMPUTER SCIENCE'=>'83',
+                                    'NURSING'=>'79',
+                                    'AGRICULTURE'=>'90',
+                                    'TYPING'=>'96',
+                                    'COMPUTER STUDIES'=>'98',
+                                    'CLOTHING & TEXTILE (Home-Economics Group)'=>'75',
+                                    'HOME MANAGEMNET (Home-Economics Group)'=>'76'
+                                );
+
+                                $isper = 0;
+                                if(array_search($data[0]['sub4'],$practical_Sub) || array_search($data[0]['sub5'],$practical_Sub) || array_search($data[0]['sub5A'],$practical_Sub) || array_search($data[0]['sub6'],$practical_Sub)  || array_search($data[0]['sub6A'],$practical_Sub) ||  array_search($data[0]['sub7'],$practical_Sub) || array_search($data[0]['sub7A'],$practical_Sub))
+                                {
+                                    $isper = 1;
+                                }
 
                                 if($spl_cd == 119){
                                     echo'Empty_All_Dropdowns();';
@@ -2308,8 +2335,12 @@ header("Pragma: no-cache");
                                     }
                                     else if($exam_type == 2){
 
-                                        if($grp_cd == 3){
+                                        if($grp_cd == 3 && $isper == 0){
                                             echo'humanities_subjects();';
+                                        }
+
+                                        else if($grp_cd == 3 && $isper == 1){
+                                            echo'humanities_subjects_full();';
                                         }
                                         else{
                                             echo 'sub_grp_load_MarksImp_FULL();';     
