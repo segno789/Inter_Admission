@@ -138,7 +138,7 @@ class Admission_11th_pvt extends CI_Controller {
         }
         else
         {
-            if($board == 1)
+            if($board == 1 && $_POST["oldYear"] != -1)
             {
                 if(!ctype_digit($mrollno))
                 {
@@ -188,6 +188,24 @@ class Admission_11th_pvt extends CI_Controller {
 
 
             }
+             else if(@$RegStdData['data'] == False and $board == 1 and $_POST["oldYear"] == -1)
+            {
+                $error['excep'] = '';
+                $RegStdData['data'][0]['SSC_RNo'] = $_POST["oldRno"];
+                $RegStdData['data'][0]['SSC_Year'] = 'Before 2000';
+                $RegStdData['data'][0]['SSC_Sess'] = $_POST["oldSess"];
+                $RegStdData['data'][0]['SSC_brd_cd'] = $_POST["oldBrd_cd"];
+                $RegStdData['data'][0]['sub1']=1;
+                $RegStdData['isReAdm']=0;
+                // DebugBreak();
+                $mylen = strlen(trim($RegStdData['data'][0]['SSC_RNo']));
+                if(trim($RegStdData['data'][0]['SSC_RNo']," ") == '' ||  trim($RegStdData['data'][0]['SSC_RNo']) == '0' || $mylen < 4 )
+                {
+                    $error['excep'] = 'SSC ROLL NO. IS INCORRECT';
+
+                }
+
+            }  
             else if(@$RegStdData['data'] == False and $board != 1)
             {
                 $error['excep'] = '';

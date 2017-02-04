@@ -50,6 +50,9 @@
                         <option value="<?php echo date("Y",strtotime("-13 year")); ?>" ><?php echo date("Y",strtotime("-13 year")); ?></option>  
                         <option value="<?php echo date("Y",strtotime("-14 year")); ?>" ><?php echo date("Y",strtotime("-14 year")); ?></option>  
                         <option value="<?php echo date("Y",strtotime("-15 year")); ?>" ><?php echo date("Y",strtotime("-15 year")); ?></option>  
+                        <option value="<?php echo date("Y",strtotime("-16 year")); ?>" ><?php echo date("Y",strtotime("-16 year")); ?></option>  
+                        <option value="<?php echo date("Y",strtotime("-17 year")); ?>" ><?php echo date("Y",strtotime("-17 year")); ?></option>  
+                        <option value="-1" >Before 2000</option>  
                         <?php }
                     else{?>
                         <option value="<?php echo $prev_year; ?>" ><?php echo $prev_year; ?></option>  
@@ -67,6 +70,9 @@
                          <option value="<?php echo date("Y",strtotime("-13 year")); ?>" ><?php echo date("Y",strtotime("-13 year")); ?></option>  
                         <option value="<?php echo date("Y",strtotime("-14 year")); ?>" ><?php echo date("Y",strtotime("-14 year")); ?></option>  
                         <option value="<?php echo date("Y",strtotime("-15 year")); ?>" ><?php echo date("Y",strtotime("-15 year")); ?></option>  
+                        <option value="<?php echo date("Y",strtotime("-16 year")); ?>" ><?php echo date("Y",strtotime("-16 year")); ?></option>  
+                        <option value="<?php echo date("Y",strtotime("-17 year")); ?>" ><?php echo date("Y",strtotime("-17 year")); ?></option>  
+                         <option value="-1" >Before 2000</option>  
                         <?php }    
                     ?>
 
