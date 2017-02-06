@@ -1892,14 +1892,11 @@ class Admission extends CI_Controller {
 
         }
 
+        //DebugBreak();
+
         $finalFee = '';
-
-        if($data['cat11'] ==  7 && $data['cat12'] == 7 && $data['sub8Ap2'] == 1 && ($data['sub3Ap1']== '' || $data['sub3Ap1']== 0 || $data['sub3Ap1'] == null))
-        {
-            $finalFee = $admfee;
-        }
-
-        else if($data['cat11'] !=  NULL && $data['cat12'] != NULL)
+        
+        if($data['cat11'] !=  NULL && $data['cat12'] != NULL)
         {
             $finalFee = $admfeecmp;
         }
