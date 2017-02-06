@@ -1637,7 +1637,7 @@ header("Pragma: no-cache");
                                     }
 
                                     if((sub5pf1 == "2") || (sub5st1 == "2")){
-                                        $("#sub5").append(new Option('<?php  echo  array_search($data[0]['sub5'],$subarray); ?>',sub5));      
+                                        $("#sub5").append(new Option('<?php echo  array_search($data[0]['sub5'],$subarray); ?>',sub5));      
                                         $("#sub5").append('<option value="0">NONE</option>');      
                                     }
 

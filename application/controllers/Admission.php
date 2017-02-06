@@ -928,6 +928,9 @@ class Admission extends CI_Controller {
         $HeightLine2=2.0;
         $Y = -0.7;
         //--------------------------- Subject Group
+
+        //DebugBreak();
+
         $grp_name = $data["grp_cd"];
         switch ($grp_name) {
             case '1':
@@ -987,6 +990,12 @@ class Admission extends CI_Controller {
 
             $pdf->Cell( 0.5,0.7,strtoupper($grp_name." GROUP  (12th: ".$chkcat10.")"),0,'L');
         }
+
+        else if($data['cat11'] == 8 && $data['cat12']== 8)
+        {
+            $pdf->Cell( 0.5,0.7,strtoupper($grp_name." GROUP  "),0,'L');
+        }
+
         $LastSess = '';
 
         if($data["SessOfLastAp"] == 1 or $data["SessOfLastAp"] == 2  )
