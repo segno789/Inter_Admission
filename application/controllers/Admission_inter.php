@@ -3315,10 +3315,12 @@ class Admission_inter extends CI_Controller {
                 $pdf->Text($col3+.1,$title+.4,"Father CNIC");
 
 
-                $pdf->Text($col4+.1,$title+.21,"Religion");
-                $pdf->Text($col4+.1,$title+.45,"Old RNo-Year");
+                $pdf->Text($col4+.1,$title+.21,"Old RNo-Year");
+                $pdf->Text($col4+.1,$title+.40,"Religion");
 
-                $pdf->Text($col5+.1,$title+.3,"Subjects");
+                $pdf->Text($col5+.1,$title+.2,"Subjects P-II");
+                $pdf->Text($col5+.1,$title+.40,"Subjects P-I");
+
 
                 $pdf->Text($col6+.1,$title+.3,"Picture");
             }
@@ -3347,18 +3349,26 @@ class Admission_inter extends CI_Controller {
 
             $pdf->SetFont('Arial','B',7);    
 
-            $pdf->Text($col5+.05,$ln[$countofrecords]+0.2,  $data["sub1_abr"].','.$data["sub2_abr"].','.$data["sub3_abr"].','.$data["sub4_abr"]);
-            $pdf->SetFont('Arial','',7);    
-            $pdf->Text($col5+.05,$ln[$countofrecords]+0.4,$data["sub5_abr"].','.$data["sub6_abr"].','.$data["sub7_abr"]);
 
-            /* if($user['gender']==1)
+            //DebugBreak();
+
+            if($data['grp_cd'] == 5)
             {
-            $pdf->Image(base_url().$data['picpath'],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG"); 
+                $sub5A_abr = $data["sub5A_abr"];
+                $sub6A_abr = $data["sub6A_abr"];
+                $sub7A_abr = $data["sub7A_abr"];
             }
-            else
-            {
-            $pdf->Image(DIRPATH12TH.$data['PicPath'],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG"); 
-            }*/
+
+            if($data['sub1Ap1'] == 1){$sub1_abr = $data["sub1_abr"].',';} else if($data['sub2Ap1'] == 1){$sub2_abr = $data["sub2_abr"].',';}
+                else if($data['sub3Ap1'] == 1){$sub3_abr = $data["sub3_abr"].',';} else if($data['sub4Ap1'] == 1){$sub4_abr = $data["sub4_abr"].',';}
+                    else if($data['sub5Ap1'] == 1){$sub5_abr = $data["sub5_abr"].',';} else if($data['sub6Ap1'] == 1){$sub6_abr = $data["sub6_abr"].',';}
+                        else if($data['sub7Ap1'] == 1){$sub7_abr = $data["sub7_abr"].',';}
+
+                            $pdf->Text($col5+.05,$ln[$countofrecords]+0.2,  $data["sub1_abr"].','.$data["sub2_abr"].','.$data["sub8_abr"].','.$data["sub4_abr"].','.$data["sub5_abr"].',' .@$sub5A_abr .$data["sub6_abr"].',' .@$sub6A_abr .$data["sub7_abr"].',' .@$sub7A_abr);
+            $pdf->SetFont('Arial','B',7);    
+            $pdf->Text($col5+.05,$ln[$countofrecords]+0.4,@$sub1_abr .@$sub2_abr. @$sub3_abr. @$sub4_abr. @$sub5_abr. @$sub6_abr. @$sub7_abr);
+
+
             
             
             if($data["IntBrd_cd"]==1)

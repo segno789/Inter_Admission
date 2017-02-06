@@ -968,6 +968,10 @@ class Admission extends CI_Controller {
        }
         else if($data["grp_cd"] == 3 && $data['cat11'] == 9 && $data['cat12'] == 9)
         {
+            $grp_name = 'KHASA';                                                   
+        }
+        else if($data["grp_cd"] == 3 && $data['cat11'] == 9 && $data['cat12'] == 9)
+        {
             $grp_name = 'HOMEOPATHIC';                                                   
         }
 
