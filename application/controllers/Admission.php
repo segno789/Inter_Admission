@@ -961,7 +961,12 @@ class Admission extends CI_Controller {
             default:
                 $grp_name = "NO GROUP SELECTED.";
         }
-        else if($data["grp_cd"] == 3 && $data['cat11'] == 8 && $data['cat12'] == 8)
+        
+          if($data["grp_cd"] == 3 && $data['cat11'] == 4 && $data['cat12'] == 4)
+       {
+              $grp_name = 'KHASA';                                                   
+       }
+        else if($data["grp_cd"] == 3 && $data['cat11'] == 9 && $data['cat12'] == 9)
         {
             $grp_name = 'HOMEOPATHIC';                                                   
         }
@@ -988,7 +993,7 @@ class Admission extends CI_Controller {
             $pdf->Cell( 0.5,0.7,strtoupper($grp_name." GROUP  (12th: ".$chkcat10.")"),0,'L');
         }
 
-        else if($data['cat11'] == 8 && $data['cat12']== 8)
+        else if($data['cat11'] == 9 && $data['cat12']== 9)
         {
             $pdf->Cell( 0.5,0.7,strtoupper($grp_name." GROUP  "),0,'L');
         }
