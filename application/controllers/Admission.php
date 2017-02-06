@@ -929,6 +929,9 @@ class Admission extends CI_Controller {
         $HeightLine2=2.0;
         $Y = -0.7;
         //--------------------------- Subject Group
+
+        //DebugBreak();
+
         $grp_name = $data["grp_cd"];
         switch ($grp_name) {
             case '1':
@@ -958,22 +961,10 @@ class Admission extends CI_Controller {
             default:
                 $grp_name = "NO GROUP SELECTED.";
         }
-
-          if($data["grp_cd"] == 3 && $data['cat11'] == 4 && $data['cat12'] == 4)
-       {
-              $grp_name = 'KHASA';                                                   
-       }
-
-
-        //--------------------------- 1st line 
-        /* $pdf->SetXY(0.5,1.55+$Y);
-        $pdf->SetFont('Arial','',$FontSize);
-        $pdf->Cell( 0.5,0.5,"Form No:",0,'L');
-
-        $pdf->SetFont('Arial','B',$FontSize);
-        $pdf->SetXY(1.5,1.55+$Y);
-        $pdf->Cell( 0.5,0.5,$data['formNo'],0,'L');*/
-
+        else if($data["grp_cd"] == 3 && $data['cat11'] == 8 && $data['cat12'] == 8)
+        {
+            $grp_name = 'HOMEOPATHIC';                                                   
+        }
 
         $chkcat09 = ($data['mi_type']!= 2?$this->getCatName($data['cat11']):'Aditional') ;
 
@@ -996,6 +987,12 @@ class Admission extends CI_Controller {
 
             $pdf->Cell( 0.5,0.7,strtoupper($grp_name." GROUP  (12th: ".$chkcat10.")"),0,'L');
         }
+
+        else if($data['cat11'] == 8 && $data['cat12']== 8)
+        {
+            $pdf->Cell( 0.5,0.7,strtoupper($grp_name." GROUP  "),0,'L');
+        }
+
         $LastSess = '';
 
         if($data["SessOfLastAp"] == 1 or $data["SessOfLastAp"] == 2  )
