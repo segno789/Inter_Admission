@@ -79,7 +79,7 @@ class Admission_11th_pvt extends CI_Controller {
         $session =$_POST["oldSess"];
         $this->load->model('Admission_11th_Pvt_model');
         $data = array('mrollno'=>"$mrollno",'board'=>$board,'year'=>$year,'session'=>$session);
-        if($board == 1)
+        if($board == 1 && $year !=-1)
         {
             if(!ctype_digit($mrollno))
             {
@@ -87,6 +87,7 @@ class Admission_11th_pvt extends CI_Controller {
 
             }
             $RegStdData = array('data'=>$this->Admission_11th_Pvt_model->Pre_Matric_data($data),'isReAdm'=>0,'Oldrno'=>0,'Inst_Rno'=>'','excep'=>'','isHafiz'=>'');  
+            $RegStdData['data'][0]['SSC_brd_cd'] = $board;
         }
         else
         {
@@ -147,6 +148,7 @@ class Admission_11th_pvt extends CI_Controller {
                 }
                 $RegStdData = array('data'=>$this->Admission_11th_Pvt_model->Pre_Matric_data($data),'isReAdm'=>0,'Oldrno'=>0,'Inst_Rno'=>'','excep'=>'','isHafiz'=>'');  
 
+                $RegStdData['data'][0]['SSC_brd_cd'] = $board;
                 $spl_cd = $RegStdData['data'][0]['spl_cd'];
                 $msg = $RegStdData['data'][0]['Mesg'];
                 $SpacialCase = $RegStdData['data'][0]['SpacialCase'];
@@ -321,7 +323,7 @@ class Admission_11th_pvt extends CI_Controller {
         }
 
         // DebugBreak();
-        if(@$_POST['OldBrd'] == 1)
+        if(@$_POST['OldBrd'] == 1 && $this->input->post('OldYear') != -1)
         {
             $nationality_hidden = @$_POST['nationality_hidden'];
             $gender = $this->input->post('gender');
@@ -922,6 +924,8 @@ class Admission_11th_pvt extends CI_Controller {
         // DebugBreak();
         $data["sessOfPass"]==1? $sess = "ANNUAL":$sess = "SUPPLY";
         $data['oldSess_reg'] ==1? $sess_lang = "ANNUAL":$sess_lang = "SUPPLY";
+        if($data['yearOfPass'] ==  -1)
+        $data['yearOfPass'] =  'Before 2000';
         $ssc_info  = $data["matRno"].' ('.$sess.', '.$data['yearOfPass'].', '.$data['Brd_Abbr'].' )';
         if($data['IsReAdm']==1 && $data['IsLangexam']==1)
         {
@@ -999,13 +1003,13 @@ class Admission_11th_pvt extends CI_Controller {
 
 
         // Adeeb urdu
-        if($data["grp_cd"] == 9 && $data['Lang_cat']==5 )
+        if($data["grp_cd"] == 9 && $data['Lang_cat']==6 )
         {
             $pdf->Image("assets/img/examaloomsharkia.JPG",3.83,2.75,  2.0,0.40, "JPG");
             $pdf->Image("assets/img/adeeburdu.JPG",2.73,2.75,  1.0,0.40, "JPG");
         }
         // Adeeb Arabic
-        else if ($data["grp_cd"] == 9 && $data['Lang_cat']==6 )
+        else if ($data["grp_cd"] == 9 && $data['Lang_cat']==5 )
         {
             $pdf->Image("assets/img/examaloomsharkia.JPG",3.83,2.75,  2.0,0.40, "JPG");
             $pdf->Image("assets/img/adeebarbic.JPG",2.73,2.75,  1.0,0.40, "JPG");

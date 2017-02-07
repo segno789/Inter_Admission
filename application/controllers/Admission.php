@@ -3287,6 +3287,7 @@ $FontSize-=1;
         $regfee = 1000;
 
 
+        
 
 
         $today = date("d-m-Y");
@@ -3320,7 +3321,7 @@ $FontSize-=1;
             'Speciality' => ($Speciality),
             'nat' =>$this->input->post('nationality'),
             'sex' =>$this->input->post('gend'),
-                  'gender'=>@$_POST['gender'],
+            'gender'=>@$_POST['gender'],
             'IsHafiz' =>$this->input->post('hafiz'),
             'rel' =>$this->input->post('religion'),
             'addr' =>$addre,
@@ -3665,7 +3666,7 @@ $FontSize-=1;
         else if($oldsess == 'Supplementary'){
             $oldsess =  2;    
         }
-        if(((($examtype ==  1 || $examtype == 3) && @$_POST['oldclass'] == 11  ) || $_POST['oldyear'] <= 2014 || ( $_POST['oldrno']>300000 && $oldsess == 1))  && Session == 1)
+        if(((($examtype ==  1 || $examtype == 3) && @$_POST['oldclass'] == 11  ) || $_POST['oldyear'] <= 2013 || ( $_POST['oldrno']>300000 && $oldsess == 1))  && Session == 1)
         {
             $Certificate =  550;
         }
