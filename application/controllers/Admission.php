@@ -86,10 +86,10 @@ class Admission extends CI_Controller {
             redirect('Admission');
             return;
         }
+
         //DebugBreak();
+
         $data = $data[0];
-
-
         $retfee = $this->feecalculate($data);
 
         $data['AdmFine'] = $retfee[0]['AdmFine'];
@@ -928,6 +928,9 @@ class Admission extends CI_Controller {
         $HeightLine2=2.0;
         $Y = -0.7;
         //--------------------------- Subject Group
+
+        //DebugBreak();
+
         $grp_name = $data["grp_cd"];
         switch ($grp_name) {
             case '1':
@@ -961,17 +964,10 @@ class Admission extends CI_Controller {
         {
             $grp_name = 'KHASA';                                                   
         }
-
-
-        //--------------------------- 1st line 
-        /* $pdf->SetXY(0.5,1.55+$Y);
-        $pdf->SetFont('Arial','',$FontSize);
-        $pdf->Cell( 0.5,0.5,"Form No:",0,'L');
-
-        $pdf->SetFont('Arial','B',$FontSize);
-        $pdf->SetXY(1.5,1.55+$Y);
-        $pdf->Cell( 0.5,0.5,$data['formNo'],0,'L');*/
-
+        else if($data["grp_cd"] == 3 && $data['cat11'] == 9 && $data['cat12'] == 9)
+        {
+            $grp_name = 'HOMEOPATHIC';                                                   
+        }
 
         $chkcat09 = ($data['mi_type']!= 2?$this->getCatName($data['cat11']):'Aditional') ;
 
@@ -994,6 +990,12 @@ class Admission extends CI_Controller {
 
             $pdf->Cell( 0.5,0.7,strtoupper($grp_name." GROUP  (12th: ".$chkcat10.")"),0,'L');
         }
+
+        else if($data['cat11'] == 9 && $data['cat12']== 9)
+        {
+            $pdf->Cell( 0.5,0.7,strtoupper($grp_name." GROUP  "),0,'L');
+        }
+
         $LastSess = '';
 
         if($data["SessOfLastAp"] == 1 or $data["SessOfLastAp"] == 2  )
@@ -1827,13 +1829,12 @@ class Admission extends CI_Controller {
             'CLOTHING & TEXTILE (Home-Economics Group)'=>'75',
             'HOME MANAGEMNET (Home-Economics Group)'=>'76'
         );
+
         $isper = 0;
         if( $data['grp_cd'] == 1 || $data['grp_cd'] == 2 || $data['grp_cd'] == 4 ||   array_search($data['sub4'],$practical_Sub) || array_search($data['sub5'],$practical_Sub) || array_search($data['sub5A'],$practical_Sub) || array_search($data['sub6'],$practical_Sub)  || array_search($data['sub6A'],$practical_Sub) ||  array_search($data['sub7'],$practical_Sub) || array_search($data['sub7A'],$practical_Sub))
         {
             $isper = 1;
         }
-
-
 
         $User_info_data = array('Inst_Id'=>999999, 'date' => date('Y-m-d'),'isPratical'=>$isper);
         $user_info  =  $this->Admission_model->getuser_info($User_info_data); 
@@ -1852,7 +1853,7 @@ class Admission extends CI_Controller {
                 $processFee = $user_info['rule_fee'][0]['Processing_Fee'];;
                 $admfeecmp = $user_info['rule_fee'][0]['Comp_Pvt_Amount'];
             } 
-            else if($user_info['rule_fee'][0]['isPrSub']== 0 )
+            else if($user_info['rule_fee'][0]['isPrSub']== 0)
             {
                 $admfee = $user_info['rule_fee'][0]['PVT_Amount'];
                 $processFee = $user_info['rule_fee'][0]['Processing_Fee'];;
@@ -1877,10 +1878,7 @@ class Admission extends CI_Controller {
                 $admfee = $user_info['rule_fee'][0]['PVT_Amount'];
                 $processFee = $user_info['rule_fee'][0]['Processing_Fee'];;
                 $admfeecmp = $user_info['rule_fee'][0]['Comp_Pvt_Amount'];
-
             }
-
-
 
             $TripleDate = date('Y-m-d',strtotime(TripleDateFee)); 
             $now = date('Y-m-d'); // or your date as well
@@ -1892,8 +1890,12 @@ class Admission extends CI_Controller {
             $admfeecmp =  ($admfeecmp*3); 
             $Total_fine = $days*$fine;
 
-        }  // DebugBreak();
+        }
+
+        //DebugBreak();
+
         $finalFee = '';
+        
         if($data['cat11'] !=  NULL && $data['cat12'] != NULL)
         {
             $finalFee = $admfeecmp;
@@ -1902,8 +1904,6 @@ class Admission extends CI_Controller {
         {
             $finalFee = $admfee;
         }
-
-
 
         if($data['Spec']>0 && (strtotime(date('Y-m-d')) <= strtotime(SingleDateFee)) )
         {
@@ -2288,7 +2288,9 @@ class Admission extends CI_Controller {
         $exam_type =   $data['0']['exam_type'];
         @$isParctialsub =   $data['0']['sn'];
 
-        if($specialcode != '' && $specialcode != 34 ){
+        //DebugBreak();
+
+        if($specialcode != '' && $specialcode != 34 && $specialcode != 119){
 
             $error_msg.='<span style="font-size: 16pt; color:red;">' . '   Your Admission cannot be procceed due to     ' . '</span>';
             $error_msg.='<span style="font-size: 16pt; color:red;">' . $specialcase . '</span>';

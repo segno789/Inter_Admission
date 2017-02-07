@@ -642,15 +642,23 @@ header("Pragma: no-cache");
 
                                 if(sel_group == 0) 
                                 {
+                                    $('#sub3').show();
+                                    $('#sub3p2').show();
                                     Empty_All_Dropdowns();
                                     ClearAllDropDowns();
                                 }     
 
                                 else if(sel_group == 3){
+                                    $('#sub3').show();
+                                    $('#sub3p2').show();
                                     LoadHumanitiesSubjects();
                                 }
 
                                 else if (sel_group == 5){
+                                    $('#sub3').show();
+                                    $('#sub3p2').show();
+                                    $('#sub6').show();
+                                    $('#sub6p2').show();
                                     LoadCommerceSubjects();
                                 }
                                 else if (sel_group == 30){

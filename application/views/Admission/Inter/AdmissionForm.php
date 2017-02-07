@@ -404,8 +404,16 @@ header("Pragma: no-cache");
                                         $cat11  = $data[0]['cat11'];
 
                                         @$isParctialsub =   $data['0']['sn'];
+                                        @$spl_cd = $data['0']['spl_cd'];
 
-                                        if($cat11==4)
+                                        if($spl_cd == 119)
+                                        {
+                                            echo "<option value='0' selected='selected'>NONE</option>";
+                                            echo "<option value='3'>HUMANITIES</option>";
+                                            echo "<option value='5'>COMMERCE</option>";   
+                                        }
+
+                                        else if($cat11==4)
                                         {
                                             echo "<option value='9' selected='selected'>KAHSA</option>";   
                                         }
@@ -1156,9 +1164,39 @@ header("Pragma: no-cache");
                                     $('#sub8').hide(); $('#sub8p2').hide();
                                 }
 
+                                function humanities_subjects_full(){
 
-                                function AamKhasa_subj()
-                                {
+                                    Empty_All_Dropdowns();
+
+                                    $("#sub1").append('<option value="1">ENGLISH</option>');
+                                    $("#sub1p2").append('<option value="1">ENGLISH</option>');
+
+                                    $("#sub2").append('<option value="2">URDU</option>');
+                                    $("#sub2p2").append('<option value="2">URDU</option>');
+
+                                    $("#sub3").append('<option value="92">ISLAMIC EDUCATION</option>');
+                                    $("#sub3p2").append('<option value="91">PAKISTAN STUDIES</option>');
+
+                                    $.each(huminities_complete_subjects,function(val,text){
+
+                                        $("#sub4").append(new Option(text,val));
+                                        $("#sub4p2").append(new Option(text,val));
+
+
+                                        $("#sub5").append(new Option(text,val));
+                                        $("#sub5p2").append(new Option(text,val));
+
+
+                                        $("#sub6").append(new Option(text,val));
+                                        $("#sub6p2").append(new Option(text,val));
+
+                                    });
+
+                                    $('#sub7').hide();$('#sub7p2').hide();
+                                    $('#sub8').hide(); $('#sub8p2').hide();
+                                }
+
+                                function AamKhasa_subj(){
                                     Empty_All_Dropdowns();
 
                                     $("#sub1").append('<option value="1">ENGLISH</option>');
@@ -1599,7 +1637,7 @@ header("Pragma: no-cache");
                                     }
 
                                     if((sub5pf1 == "2") || (sub5st1 == "2")){
-                                        $("#sub5").append(new Option('<?php  echo  array_search($data[0]['sub5'],$subarray); ?>',sub5));      
+                                        $("#sub5").append(new Option('<?php echo  array_search($data[0]['sub5'],$subarray); ?>',sub5));      
                                         $("#sub5").append('<option value="0">NONE</option>');      
                                     }
 
@@ -1722,73 +1760,59 @@ header("Pragma: no-cache");
                                     {
                                         $("#sub6p2").append('<option value="0">NONE</option>');
                                     }
-
-
-
-                                    if((sub5pf2 == "3") || (sub5st2 == "2"))
+                                    if(grp_cd == 5)
                                     {
-                                        if(grp_cd ==5)
+                                        if((sub5pf2 == "3") || (sub5st2 == "2"))
                                         {
-                                            $("#sub5p2").append(new Option('<?php  echo  array_search($data[0]['sub5A'],$subarray); ?>','<?php echo $data[0]['sub5A']?>'));
+                                            $("#sub5p2").empty();
+                                            $("#sub5p2").append(new Option('<?php  echo  array_search($data[0]['sub5A'],$subarray); ?>', '<?php echo $data[0]['sub5A']?>'));
+                                            $("#sub5p2 option[value='" + sub5A + "']").attr("selected","selected");
                                         }
                                         else
                                         {
-                                            $("#sub5p2").append(new Option('<?php  echo  array_search($data[0]['sub5A'],$subarray); ?>',sub5A));
-
+                                            $("#sub5p2").empty();
+                                            $("#sub5p2").append('<option value="0">NONE</option>');
                                         }
-                                    }
-                                    else
-                                    {
-                                        $("#sub5p2").append('<option value="0">NONE</option>');
-                                    }
-                                    if((sub6pf1 == "3") || (sub6st1 == "2"))
-                                    {
 
-                                        $("#sub6").append('<option value="0">NONE</option>');
-                                    }
-                                    else
-                                    {
-                                        $("#sub6").append('<option value="0">NONE</option>');
-                                    }
-                                    if((sub6pf2 == "3") || (sub6st2 == "2"))
-                                    {
-                                        if(grp_cd ==5)
+                                        if((sub6pf2 == "3") || (sub6st2 == "2"))
                                         {
-                                            $("#sub6p2").append(new Option('<?php  echo  array_search($data[0]['sub6A'],$subarray); ?>','<?php echo $data[0]['sub6A']?>'));
-
+                                            $("#sub6p2").empty();
+                                            $("#sub6p2").append(new Option('<?php  echo  array_search($data[0]['sub6A'],$subarray); ?>', '<?php echo $data[0]['sub6A']?>'));
+                                            $("#sub6p2 option[value='" + sub6A + "']").attr("selected","selected");
                                         }
                                         else
                                         {
-                                            $("#sub6p2").append(new Option('<?php  echo  array_search($data[0]['sub6A'],$subarray); ?>',sub6A));
-
+                                            $("#sub6p2").empty();
+                                            $("#sub6p2").append('<option value="0">NONE</option>');
                                         }
-                                    }
-                                    else
-                                    {
-                                        $("#sub6p2").append('<option value="0">NONE</option>');
-                                    }
 
-                                    if(sub7 != ''){
-                                        $('#sub7').show();
-                                        $('#sub7p2').show();
                                         if((sub7pf1 == "3") || (sub7st1 == "2"))
                                         {
-
-                                            $("#sub7").append('<option value="0">NONE</option>');
+                                            $("#sub7").empty();
+                                            $("#sub7").append(new Option('<?php  echo  array_search($data[0]['sub7'],$subarray); ?>',sub7));
+                                            $("#sub7 option[value='" + sub7 + "']").attr("selected","selected");
                                         }
                                         else
                                         {
+                                            $("#sub7").empty();
                                             $("#sub7").append('<option value="0">NONE</option>');
-                                        }
+                                        } 
+
                                         if((sub7pf2 == "3") || (sub7st2 == "2"))
                                         {
-                                            $("#sub7p2").append(new Option('<?php  echo  array_search($data[0]['sub7A'],$subarray); ?>','<?php echo $data[0]['sub7A']?>'));
+                                            $("#sub7p2").empty();
+                                            $("#sub7p2").append(new Option('<?php  echo  array_search($data[0]['sub7A'],$subarray); ?>', '<?php echo $data[0]['sub7A']?>'));
+                                            $("#sub7p2 option[value='" + sub7A + "']").attr("selected","selected");
                                         }
                                         else
                                         {
+                                            $("#sub7p2").empty();
                                             $("#sub7p2").append('<option value="0">NONE</option>');
-                                        }   
+                                        }  
                                     }
+
+
+
                                 }
 
                                 function sub_grp_load_exam_type5(){
@@ -2266,10 +2290,44 @@ header("Pragma: no-cache");
                                 }
 
                                 <?php
-
                                 //DebugBreak();
 
-                                if($cat11 == 4)
+                                $practical_Sub = array(
+
+                                    'LIBRARY SCIENCE'=>'8',
+                                    'GEOGRAPHY'=>'12',
+                                    'PSYCHOLOGY'=>'16',
+                                    'STATISTICS'=>'18',
+                                    'OUTLINES OF HOME ECONOMICS'=>'21',
+                                    'FINE ARTS'=>'23',
+                                    'COMMERCIAL PRACTICE'=>'38',
+                                    'HEALTH & PHYSICAL EDUCATION'=>'42',
+                                    'BIOLOGY'=>'46',
+                                    'PHYSICS'=>'47',
+                                    'CHEMISTRY'=>'48',
+                                    'COMPUTER SCIENCE'=>'83',
+                                    'NURSING'=>'79',
+                                    'AGRICULTURE'=>'90',
+                                    'TYPING'=>'96',
+                                    'COMPUTER STUDIES'=>'98',
+                                    'CLOTHING & TEXTILE (Home-Economics Group)'=>'75',
+                                    'HOME MANAGEMNET (Home-Economics Group)'=>'76'
+                                );
+
+                                $isper = 0;
+                                if(array_search($data[0]['sub4'],$practical_Sub) || array_search($data[0]['sub5'],$practical_Sub) || array_search($data[0]['sub5A'],$practical_Sub) || array_search($data[0]['sub6'],$practical_Sub)  || array_search($data[0]['sub6A'],$practical_Sub) ||  array_search($data[0]['sub7'],$practical_Sub) || array_search($data[0]['sub7A'],$practical_Sub))
+                                {
+                                    $isper = 1;
+                                }
+
+
+
+                                if($spl_cd == 119){
+                                    echo'Empty_All_Dropdowns();';
+                                    echo'ClearALLDropDowns();';
+                                }
+
+                                else if($cat11 == 4)
                                 {
                                     echo 'Aama_Khasa();';
                                 }
@@ -2279,8 +2337,16 @@ header("Pragma: no-cache");
                                     }
                                     else if($exam_type == 2){
 
-                                        echo 'sub_grp_load_MarksImp_FULL();'; 
+                                        if($grp_cd == 3 && $isper == 0){
+                                            echo'humanities_subjects();';
+                                        }
 
+                                        else if($grp_cd == 3 && $isper == 1){
+                                            echo'humanities_subjects_full();';
+                                        }
+                                        else{
+                                            echo 'sub_grp_load_MarksImp_FULL();';     
+                                        }
                                     }
                                     else if($exam_type == 3 && $IsRegular == 1 && $class == 11 && $isParctialsub == 2){
                                         echo'Empty_All_Dropdowns();';
@@ -2314,7 +2380,6 @@ header("Pragma: no-cache");
                                     if(rel == 1) {
                                         $('#sub3').empty();
                                         $("#sub3").append('<option value="92">ISLAMIC EDUCATION</option>'); 
-
                                     }
                                 });                
 
@@ -2328,7 +2393,9 @@ header("Pragma: no-cache");
                                     }
                                 });
 
-                                $('#std_group').change(function(){
+                                var isper = <?php echo @$isper ?>
+
+                                $('#std_group').change(function(){                                  
 
                                     $("#fullAppear").attr("checked", false);
 
@@ -2336,32 +2403,49 @@ header("Pragma: no-cache");
 
                                     var sel_group = $('#std_group').val();    
 
-                                    if(sel_group == grp_cd  && exam_type != 2) 
+                                    if(sel_group == grp_cd && exam_type != 2) 
                                     {
-                                        if(exam_type == 4 || exam_type == 5 || exam_type == 6 ){
+                                        if(exam_type == 4 || exam_type == 5 || exam_type == 6)
+                                        {
                                             $("#fullAppear1").show();    
                                         }
-
-                                        sub_grp_load();    
-                                    }     
-
-                                    else if(sel_group == 0){
+                                        if(grp_cd != 3)
+                                        {
+                                            sub_grp_load();
+                                        }                                       
+                                        else if(grp_cd == 3 && isper == 0)
+                                        {
+                                            humanities_subjects();
+                                            $("#fullAppear").attr("checked", true);
+                                        }
+                                        else if(grp_cd == 3 && isper == 1)
+                                        {
+                                            humanities_subjects_full();
+                                            $("#fullAppear").attr("checked", true);
+                                        }
+                                    }
+                                    else if(sel_group == 0)
+                                    {
                                         ClearALLDropDowns();
                                     }
-
-                                    else if (sel_group == 1){
+                                    else if (sel_group == 1)
+                                    {
                                         pre_medical_subjects();
                                     }
-                                    else if(sel_group == 2){
+                                    else if(sel_group == 2)
+                                    {
                                         pre_engineering_subjects();
                                     }
-                                    else if(sel_group == 3){
+                                    else if(sel_group == 3)
+                                    {
                                         humanities_subjects();
                                     }
-                                    else if(sel_group == 4){
+                                    else if(sel_group == 4)
+                                    {
                                         general_science_subjects();
                                     }
-                                    else if(sel_group == 5){
+                                    else if(sel_group == 5)
+                                    {
                                         commerce_subjects();
                                     } 
                                 });
@@ -2372,9 +2456,17 @@ header("Pragma: no-cache");
 
                                     if ($(this).is(':checked')) {
 
-                                        if(sel_group == grp_cd) 
+                                        if(sel_group == grp_cd && sel_group != 3) 
                                         {
                                             sub_grp_load_All_Previous();
+                                        }
+                                        else if(sel_group == grp_cd && sel_group == 3 && isper == 0) 
+                                        {
+                                            humanities_subjects();
+                                        }
+                                        else if(sel_group == grp_cd && sel_group == 3 && isper == 1) 
+                                        {
+                                            humanities_subjects_full();
                                         }
                                     }
 
