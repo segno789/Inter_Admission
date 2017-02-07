@@ -1889,9 +1889,7 @@ class Admission extends CI_Controller {
             $admfee =  ($admfee*3); 
             $admfeecmp =  ($admfeecmp*3); 
             $Total_fine = $days*$fine;
-
         }
-
         //DebugBreak();
 
         $finalFee = '';  
@@ -2261,24 +2259,24 @@ class Admission extends CI_Controller {
         }
 
 
-        /*   $picpath = DIRPATH12TH.'\\'.@$data[0]['picpath'];
+        $picpath = DIRPATH12TH.'\\'.@$data[0]['picpath'];
         $isexit = is_file($picpath);
         if(!($isexit) && $error_msg == '' && $iyear >2014)
         {
-        $error_msg.= '<span style="font-size: 16pt; color:red;">' . 'Your Picture is missing.</span>';
-        $this->load->library('session');
-        $mydata = array('data'=>$_POST,'error_msg'=>$error_msg ,'exam_type'=>0);
-        $this->session->set_flashdata('matric_error',$mydata );
-        redirect('Admission/matric_default');
+            $error_msg.= '<span style="font-size: 16pt; color:red;">' . 'Your Picture is missing.</span>';
+            $this->load->library('session');
+            $mydata = array('data'=>$_POST,'error_msg'=>$error_msg ,'exam_type'=>0);
+            $this->session->set_flashdata('matric_error',$mydata );
+            redirect('Admission/matric_default');
         }
         else
         {
-        if($iyear >2014)
-        {
-        $type = pathinfo($picpath, PATHINFO_EXTENSION);
-        $data[0]['picpathImg'] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
+            if($iyear >2014)
+            {
+                $type = pathinfo($picpath, PATHINFO_EXTENSION);
+                $data[0]['picpathImg'] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
+            }
         }
-        }*/
 
         $specialcase = $data['0']['Spl_Name'];
         $specialcode = $data['0']['spl_cd'];
