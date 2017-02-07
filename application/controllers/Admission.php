@@ -1905,14 +1905,15 @@ $FontSize-=1;
             $admfee =  ($admfee*3); 
             $admfeecmp =  ($admfeecmp*3); 
             $Total_fine = $days*$fine;
-
         }
-
         //DebugBreak();
 
-        $finalFee = '';
-        
-        if($data['cat11'] !=  NULL && $data['cat12'] != NULL)
+        $finalFee = '';  
+        if($data['cat11'] ==  7 && $data['cat12'] != 7 || ($data['cat11'] !=  7 && $data['cat12'] == 7))
+        {
+            $finalFee = $admfee;
+        }
+        else if($data['cat11'] !=  NULL && $data['cat12'] != NULL)
         {
             $finalFee = $admfeecmp;
         }
@@ -1921,9 +1922,11 @@ $FontSize-=1;
             $finalFee = $admfee;
         }
 
-        if($data['Spec']>0 && (strtotime(date('Y-m-d')) <= strtotime(SingleDateFee)) )
+        if($data['Spec']> 0 && (strtotime(date('Y-m-d')) <= strtotime(SingleDateFee)) )
         {
             $regfee =  1000;
+            $data['AdmFee'] = 0;
+
             if($data['Spec'] >  0)
             {
                 $regfee = 0; 
@@ -1970,13 +1973,13 @@ $FontSize-=1;
             {
                 $data['regfee'] = 0;
             }
+
             $data['AdmTotalFee'] = $processFee+$Total_fine+$data['regfee']+$data['CertificateFee']+$finalFee;
             $AllStdFee = array('formNo'=>$data['FormNo'],'AdmFee'=>$finalFee,'AdmFine'=>$Total_fine,'AdmTotalFee'=>$data['AdmTotalFee']);
+
         }
-
-        $info =   $this->Admission_model->Update_AdmissionFeePvt($AllStdFee);
+        $info = $this->Admission_model->Update_AdmissionFeePvt($AllStdFee);
         return $info;
-
     }
     function GetDueDate()
     {
@@ -3653,9 +3656,6 @@ $FontSize-=1;
 
         $today = date("d-m-Y");   
         $dueDate = 0;
-
-
-
         $TotalAdmFee = 0;  
 
         $oldsess = @$_POST['oldsess'];
@@ -3741,8 +3741,6 @@ $FontSize-=1;
             'certfee'=>$Certificate,
             'regfee'=>$regfee
         );
-
-
 
         $logedIn = $this->Admission_model->Insert_NewEnorlement($data);
 
