@@ -1908,9 +1908,11 @@ class Admission extends CI_Controller {
             $finalFee = $admfee;
         }
 
-        if($data['Spec']>0 && (strtotime(date('Y-m-d')) <= strtotime(SingleDateFee)) )
+        if($data['Spec']> 0 && (strtotime(date('Y-m-d')) <= strtotime(SingleDateFee)) )
         {
             $regfee =  1000;
+            $data['AdmFee'] = 0;
+
             if($data['Spec'] >  0)
             {
                 $regfee = 0; 
@@ -1923,21 +1925,12 @@ class Admission extends CI_Controller {
             {
                 $data['regfee'] = 0;
             }
-            if($data['oldRno']>30000)
-            {
-                $data['AdmFee'] = 0;
-            }
-            else
-            {
-                $data['AdmFee'] = $finalFee;  
-            }
 
             $data['AdmTotalFee'] = $processFee+$Total_fine+$data['regfee']+$data['CertificateFee'];
             $AllStdFee = array('formNo'=>$data['FormNo'],'AdmFee'=>$data['AdmFee'],'AdmFine'=>$Total_fine,'AdmTotalFee'=> $data['AdmTotalFee']);
         }
         else
         {
-
             $data['AdmFee'] = $finalFee;
             if($data['CertificateFee'] == NULL)
             {
@@ -1947,13 +1940,7 @@ class Admission extends CI_Controller {
             {
                 $data['regfee'] = 0;
             }
-<<<<<<< .mine
 
-
-=======
-
-
->>>>>>> .theirs
             $data['AdmTotalFee'] = $processFee+$Total_fine+$data['regfee']+$data['CertificateFee']+$finalFee;
             $AllStdFee = array('formNo'=>$data['FormNo'],'AdmFee'=>$finalFee,'AdmFine'=>$Total_fine,'AdmTotalFee'=>$data['AdmTotalFee']);
 
@@ -2274,24 +2261,24 @@ class Admission extends CI_Controller {
         }
 
 
-        $picpath = DIRPATH12TH.'\\'.@$data[0]['picpath'];
+        /*   $picpath = DIRPATH12TH.'\\'.@$data[0]['picpath'];
         $isexit = is_file($picpath);
         if(!($isexit) && $error_msg == '' && $iyear >2014)
         {
-            $error_msg.= '<span style="font-size: 16pt; color:red;">' . 'Your Picture is missing.</span>';
-            $this->load->library('session');
-            $mydata = array('data'=>$_POST,'error_msg'=>$error_msg ,'exam_type'=>0);
-            $this->session->set_flashdata('matric_error',$mydata );
-            redirect('Admission/matric_default');
+        $error_msg.= '<span style="font-size: 16pt; color:red;">' . 'Your Picture is missing.</span>';
+        $this->load->library('session');
+        $mydata = array('data'=>$_POST,'error_msg'=>$error_msg ,'exam_type'=>0);
+        $this->session->set_flashdata('matric_error',$mydata );
+        redirect('Admission/matric_default');
         }
         else
         {
-            if($iyear >2014)
-            {
-                $type = pathinfo($picpath, PATHINFO_EXTENSION);
-                $data[0]['picpathImg'] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
-            }
+        if($iyear >2014)
+        {
+        $type = pathinfo($picpath, PATHINFO_EXTENSION);
+        $data[0]['picpathImg'] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
         }
+        }*/
 
         $specialcase = $data['0']['Spl_Name'];
         $specialcode = $data['0']['spl_cd'];
@@ -3640,9 +3627,6 @@ class Admission extends CI_Controller {
 
         $today = date("d-m-Y");   
         $dueDate = 0;
-
-
-
         $TotalAdmFee = 0;  
 
         $oldsess = @$_POST['oldsess'];
@@ -3653,7 +3637,7 @@ class Admission extends CI_Controller {
         else if($oldsess == 'Supplementary'){
             $oldsess =  2;    
         }
-        if(($examtype ==  1 || $examtype == 3 || $_POST['oldyear'] < 2015 || ( $_POST['oldrno']>300000 && $oldsess == 1))  && Session == 1)
+        if(($examtype ==  1 || $examtype == 3 || $_POST['oldyear'] <= 2014 || ( $_POST['oldrno']>300000 && $oldsess == 1))  && Session == 1)
         {
             $Certificate =  550;
         }
@@ -3728,7 +3712,7 @@ class Admission extends CI_Controller {
             'certfee'=>$Certificate,
             'regfee'=>$regfee
         );
-                                 
+
         $logedIn = $this->Admission_model->Insert_NewEnorlement($data);
 
         //DebugBreak();
