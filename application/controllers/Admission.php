@@ -1895,10 +1895,10 @@ class Admission extends CI_Controller {
         //DebugBreak();
 
         $finalFee = '';
-        
+
         if($data['cat11'] !=  NULL && $data['cat12'] != NULL)
         {
-            $finalFee = $admfeecmp;
+            $finalFee = $admfee;
         }
         else
         {
@@ -1943,13 +1943,13 @@ class Admission extends CI_Controller {
             {
                 $data['regfee'] = 0;
             }
+
             $data['AdmTotalFee'] = $processFee+$Total_fine+$data['regfee']+$data['CertificateFee']+$finalFee;
             $AllStdFee = array('formNo'=>$data['FormNo'],'AdmFee'=>$finalFee,'AdmFine'=>$Total_fine,'AdmTotalFee'=>$data['AdmTotalFee']);
+
         }
-
-        $info =   $this->Admission_model->Update_AdmissionFeePvt($AllStdFee);
+        $info = $this->Admission_model->Update_AdmissionFeePvt($AllStdFee);
         return $info;
-
     }
     function GetDueDate()
     {
