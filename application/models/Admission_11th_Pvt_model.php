@@ -272,7 +272,7 @@ class Admission_11th_Pvt_model extends CI_Model
      
       //  $this->db->trans_complete();
 
-       
+        
        
 
         $rowcount = $query->num_rows();

@@ -1894,11 +1894,14 @@ class Admission extends CI_Controller {
 
         //DebugBreak();
 
-        $finalFee = '';
-
-        if($data['cat11'] !=  NULL && $data['cat12'] != NULL)
+        $finalFee = '';  
+        if($data['cat11'] ==  7 && $data['cat12'] != 7 || ($data['cat11'] !=  7 && $data['cat12'] == 7))
         {
             $finalFee = $admfee;
+        }
+        else if($data['cat11'] !=  NULL && $data['cat12'] != NULL)
+        {
+            $finalFee = $admfeecmp;
         }
         else
         {
@@ -1934,6 +1937,7 @@ class Admission extends CI_Controller {
         }
         else
         {
+
             $data['AdmFee'] = $finalFee;
             if($data['CertificateFee'] == NULL)
             {
@@ -1943,7 +1947,13 @@ class Admission extends CI_Controller {
             {
                 $data['regfee'] = 0;
             }
+<<<<<<< .mine
 
+
+=======
+
+
+>>>>>>> .theirs
             $data['AdmTotalFee'] = $processFee+$Total_fine+$data['regfee']+$data['CertificateFee']+$finalFee;
             $AllStdFee = array('formNo'=>$data['FormNo'],'AdmFee'=>$finalFee,'AdmFine'=>$Total_fine,'AdmTotalFee'=>$data['AdmTotalFee']);
 
@@ -3643,7 +3653,7 @@ class Admission extends CI_Controller {
         else if($oldsess == 'Supplementary'){
             $oldsess =  2;    
         }
-        if(($examtype ==  1 || $examtype == 3 || $_POST['oldyear'] <= 2014 || ( $_POST['oldrno']>300000 && $oldsess == 1))  && Session == 1)
+        if(($examtype ==  1 || $examtype == 3 || $_POST['oldyear'] < 2015 || ( $_POST['oldrno']>300000 && $oldsess == 1))  && Session == 1)
         {
             $Certificate =  550;
         }
@@ -3718,9 +3728,7 @@ class Admission extends CI_Controller {
             'certfee'=>$Certificate,
             'regfee'=>$regfee
         );
-
-
-
+                                 
         $logedIn = $this->Admission_model->Insert_NewEnorlement($data);
 
         //DebugBreak();

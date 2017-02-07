@@ -116,7 +116,7 @@ class Admission_11th_pvt extends CI_Controller {
     }
     public function Get_students_record()
     {
-
+            DebugBreak();
         $mrollno = $_POST["oldRno"];
 
         $board   =  $_POST["oldBrd_cd"];
