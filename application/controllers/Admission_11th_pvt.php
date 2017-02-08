@@ -981,13 +981,13 @@ class Admission_11th_pvt extends CI_Controller {
 
 
         // Adeeb urdu
-        if($data["grp_cd"] == 9 && $data['Lang_cat']==5 )
+        if($data["grp_cd"] == 9 && $data['Lang_cat']==6 )
         {
             $pdf->Image("assets/img/examaloomsharkia.JPG",3.83,2.75,  2.0,0.40, "JPG");
             $pdf->Image("assets/img/adeeburdu.JPG",2.73,2.75,  1.0,0.40, "JPG");
         }
         // Adeeb Arabic
-        else if ($data["grp_cd"] == 9 && $data['Lang_cat']==6 )
+        else if ($data["grp_cd"] == 9 && $data['Lang_cat']==5 )
         {
             $pdf->Image("assets/img/examaloomsharkia.JPG",3.83,2.75,  2.0,0.40, "JPG");
             $pdf->Image("assets/img/adeebarbic.JPG",2.73,2.75,  1.0,0.40, "JPG");
