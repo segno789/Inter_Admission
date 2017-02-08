@@ -1889,9 +1889,7 @@ class Admission extends CI_Controller {
             $admfee =  ($admfee*3); 
             $admfeecmp =  ($admfeecmp*3); 
             $Total_fine = $days*$fine;
-
         }
-
         //DebugBreak();
 
         $finalFee = '';  
@@ -1908,9 +1906,11 @@ class Admission extends CI_Controller {
             $finalFee = $admfee;
         }
 
-        if($data['Spec']>0 && (strtotime(date('Y-m-d')) <= strtotime(SingleDateFee)) )
+        if($data['Spec']> 0 && (strtotime(date('Y-m-d')) <= strtotime(SingleDateFee)) )
         {
             $regfee =  1000;
+            $data['AdmFee'] = 0;
+
             if($data['Spec'] >  0)
             {
                 $regfee = 0; 
@@ -1923,21 +1923,12 @@ class Admission extends CI_Controller {
             {
                 $data['regfee'] = 0;
             }
-            if($data['oldRno']>30000)
-            {
-                $data['AdmFee'] = 0;
-            }
-            else
-            {
-                $data['AdmFee'] = $finalFee;  
-            }
 
             $data['AdmTotalFee'] = $processFee+$Total_fine+$data['regfee']+$data['CertificateFee'];
             $AllStdFee = array('formNo'=>$data['FormNo'],'AdmFee'=>$data['AdmFee'],'AdmFine'=>$Total_fine,'AdmTotalFee'=> $data['AdmTotalFee']);
         }
         else
         {
-
             $data['AdmFee'] = $finalFee;
             if($data['CertificateFee'] == NULL)
             {
@@ -1948,15 +1939,12 @@ class Admission extends CI_Controller {
                 $data['regfee'] = 0;
             }
 
-
             $data['AdmTotalFee'] = $processFee+$Total_fine+$data['regfee']+$data['CertificateFee']+$finalFee;
             $AllStdFee = array('formNo'=>$data['FormNo'],'AdmFee'=>$finalFee,'AdmFine'=>$Total_fine,'AdmTotalFee'=>$data['AdmTotalFee']);
 
         }
-
-        $info =   $this->Admission_model->Update_AdmissionFeePvt($AllStdFee);
+        $info = $this->Admission_model->Update_AdmissionFeePvt($AllStdFee);
         return $info;
-
     }
     function GetDueDate()
     {
@@ -3637,9 +3625,6 @@ class Admission extends CI_Controller {
 
         $today = date("d-m-Y");   
         $dueDate = 0;
-
-
-
         $TotalAdmFee = 0;  
 
         $oldsess = @$_POST['oldsess'];
@@ -3650,7 +3635,7 @@ class Admission extends CI_Controller {
         else if($oldsess == 'Supplementary'){
             $oldsess =  2;    
         }
-        if(($examtype ==  1 || $examtype == 3 || $_POST['oldyear'] < 2015 || ( $_POST['oldrno']>300000 && $oldsess == 1))  && Session == 1)
+        if(($examtype ==  1 || $examtype == 3 || $_POST['oldyear'] <= 2014 || ( $_POST['oldrno']>300000 && $oldsess == 1))  && Session == 1)
         {
             $Certificate =  550;
         }
@@ -3725,7 +3710,7 @@ class Admission extends CI_Controller {
             'certfee'=>$Certificate,
             'regfee'=>$regfee
         );
-                                 
+
         $logedIn = $this->Admission_model->Insert_NewEnorlement($data);
 
         //DebugBreak();
