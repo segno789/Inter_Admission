@@ -66,18 +66,21 @@
 
                                             if($vals["IntBrd_cd"] ==  1)
                                             {
-                                                $image_path_selected = DIRPATH12TH.$vals['picpath']; 
-                                                $type = pathinfo($image_path_selected, PATHINFO_EXTENSION);
+                                                //$image_path_selected = DIRPATH12TH.$vals['picpath']; 
+                                                $image_path_selected = '../'.$vals['picpath']."?".rand(10000,1000000); 
+                                               // $type = pathinfo($image_path_selected, PATHINFO_EXTENSION);
+                                              //  $image_path_selected 
 
                                             }
                                             else 
                                             {
                                                 @$image_path_selected =  DIRPATHOTHER.'/'.$vals["coll_cd"].'/'.$vals["picpath"]; 
                                                 @$type = pathinfo($image_path_selected, PATHINFO_EXTENSION); 
+                                                 @$image_path_selected = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($image_path_selected)); 
                                             }
 
-                                            @$image_path_selected = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($image_path_selected)); 
-                                            $disable = '<button type="button" class="btn btn-info" value="'.$vals["rno"].'" onclick="NewForm('.$vals["rno"].','.$vals["IntBrd_cd"].')">Save Form</button>';
+                                           
+                                            $disable = '<button type="button" class="btn btn-info" value="'.$vals["rno"].'" onclick="NewForm('.$vals["rno"].','.$vals["IntBrd_cd"].','.$vals["Iyear"].')">Save Form</button>';
                                             if($vals['MissingNOC']>0)
                                             {
                                                 $disable = '<p style="color:red">Your NOC is missing. Please contact to Online Registration Branch at B.I.S.E</p>'; 

@@ -50,7 +50,7 @@
                                 </thead>
                                 <tbody>
                                     <?php
-                                  //  //DebugBreak();
+                                   
                                     if($data != false)
                                     {
                                     $n=0;  
@@ -58,7 +58,7 @@
                                     foreach($data as $key=>$vals):
                                     $n++;
                                     $formno = !empty($vals["FormNo"])?$vals["FormNo"]:"N/A";
-                                    $grp_name = $vals["RegGrp"];
+                                    $grp_name = $vals["grp_cd"];
                                     switch ($grp_name) {
                                         case '1':
                                             $grp_name = 'PRE-MEDICAL';
@@ -78,7 +78,25 @@
                                         default:
                                             $grp_name = "No Group Selected.";
                                     }
+                                      // $image_path_selected = DIRPATH12TH.$vals['picpath']; 
+                                 //   $type = pathinfo($image_path_selected, PATHINFO_EXTENSION);
+                                    if($vals["IntBrd_cd"] ==  1)
+                                        {
+                                           /* $image_path_selected = DIRPATH12TH.$vals['picpath']; 
+                                            $type = pathinfo($image_path_selected, PATHINFO_EXTENSION);*/  
+                                            $image_path_selected = '../'.$vals['picpath']."?".rand(10000,1000000); 
+                                           
+                                        }
+                                        else 
+                                        {
+                                            $image_path_selected =  DIRPATHOTHER.'/'.$vals["coll_cd"].'/'.$vals["picpath"]; 
+                                           
+                                            $type = pathinfo($image_path_selected, PATHINFO_EXTENSION); 
+                                              @$image_path_selected = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($image_path_selected));
+                                        }
 
+                                   
+                                  
                                     echo '<tr  >
                                     <td>'.$n.'</td>
                                     <td>'.$formno.'</td>
@@ -87,7 +105,7 @@
                                     
                                     <td>'.$grp_name.'</td>
                                    <td>'.$vals["sub1_abr"].','.$vals["sub2_abr"].','.$vals["sub8_abr"].','.$vals["sub4_abr"].','.$vals["sub5_abr"].','.$vals["sub6_abr"].','.$vals["sub7_abr"].'</td>
-                                     <td><img id="previewImg" style="width:40px; height: 40px;" src="'.base_url().REGULAR_IMAGE_PATH.$Inst_Id.'/'.$vals['picpath'].'?'.rand(10000,1000000).'" alt="Candidate Image"></td>';
+                                     <td><img id="previewImg" style="width:40px; height: 40px;" src="'.$image_path_selected.'" alt="Candidate Image"></td>';
                                     
                                     echo'<td>
                                     <button type="button" class="btn btn-info" value="'.$formno.'" onclick="EditForm('.$formno.')">Edit Form</button>

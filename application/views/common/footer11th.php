@@ -26,19 +26,33 @@ if(isset($files)){
 }
 ?> 
 <script type="">
+var oTable =  '';
     $(document).ready(function () {
-        $('#data-table').dataTable({
+       oTable = $('#data-table').dataTable({
             "sPaginationType": "full_numbers",
-            "cache": false
+            "cache": true
         });
         $('#data-tablereg').dataTable({
             "sPaginationType": "full_numbers",
-            "cache": false
+            "cache": true
         });
+ $("#checkAll").click(function(){
 
+     if($(this).is(":checked"))
+     {
+         $('input', oTable.fnGetNodes()).each( function() {
+             $('input', oTable.fnGetNodes()).attr('checked','checked');})
+     }
+     else
+     {
+         $('input', oTable.fnGetNodes()).each( function() {
+             $('input', oTable.fnGetNodes()).removeAttr('checked');})
+     }
+
+ })
     });
 
-
+ $('.mPageloader').hide();
 
 </script>
 <script type="">
@@ -856,7 +870,18 @@ if(isset($files)){
 
                     if (e) {
                     $("#isformwise").val("1");
+                    
+                     $("input[name='chk[]:checked']").remove();
+                        $("input:checked", oTable.fnGetNodes()).each(function(){
+                            $('<input type="checkbox"  class="checkedID" name="chk[]" ' + 'value="' +
+                                $(this).val() + '" type="hidden" checked="checked" />')
+                            .css("display", "none")
+                            .appendTo('#form_make_adm');
+                        });
                     $('#form_make_adm').submit();
+                    
+                    
+                   // $('#form_make_adm').submit();
                        // window.location.href = '<?=base_url()?>index.php/Admission_9th_reg/NewEnrolment_update/'
                     } 
 

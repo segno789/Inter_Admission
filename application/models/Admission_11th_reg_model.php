@@ -2,16 +2,13 @@
 
 class Admission_11th_reg_model extends CI_Model 
 {
-    var $table = 'Registration..IA_P1_Reg_Adm2016';
-    var $column_order = array('formno','name','fname','mobno','addr'); //set column field database for datatable orderable
-    var $column_search = array('formno','name','fname'); //set column field database for datatable searchable 
-    var $order = array('formno' => 'asc'); // default order 
     public function __construct()    
     {
 
-      
-
         $this->load->database(); 
+
+
+
     }
     public function Incomplete_inst_info_INSERT($allinfo)
     {
@@ -975,81 +972,6 @@ class Admission_11th_reg_model extends CI_Model
         else{
             return false;
         }
-    }
-    private function _get_datatables_query()
-    {
-
-        $this->db->from($this->table);
-
-        $i = 0;
-
-        foreach ($this->column_search as $item) // loop column 
-        {
-            if($_POST['search']['value']) // if datatable send POST for search
-            {
-
-                if($i===0) // first loop
-                {
-                    $this->db->group_start(); // open bracket. query Where with OR clause better with bracket. because maybe can combine with other WHERE with AND.
-                    $this->db->like($item, $_POST['search']['value']);
-                }
-                else
-                {
-                    $this->db->or_like($item, $_POST['search']['value']);
-                }
-
-                if(count($this->column_search) - 1 == $i) //last loop
-                    $this->db->group_end(); //close bracket
-            }
-            $i++;
-        }
-
-        if(isset($_POST['order'])) // here order processing
-        {
-            $this->db->order_by($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
-        } 
-        else if(isset($this->order))
-        {
-            $order = $this->order;
-            $this->db->order_by(key($order), $order[key($order)]);
-        }
-    }
-
-    function get_datatables($inst_cd)
-    {
-           DebugBreak();
-        $this->_get_datatables_query();
-        // $this->db->where('coll_cd ', $inst_cd);
-        //  if($_POST['length'] != -1)
-        //    $this->db->limit($_POST['length'], $_POST['start']);
-        $limit = $_POST['length'];
-        $start = $_POST['start'];
-        $keyword = $_POST['search']['value'];
-        $query = $this->db->query("Registration..sp_get_regInfo_11th_Make_adm_temp $inst_cd,11,2016,1,$start,$limit");    
-        //   $rowcount = $query->num_rows();
-
-
-       // $query = $this->db->get();
-        return $query->result();
-    }
-    function count_filtered($inst_cd)
-    {
-        // DebugBreak();
-        $this->_get_datatables_query();
-      //  $this->db->query("Registration..sp_get_regInfo_11th_Make_adm_temp $inst_cd,11,2016,1,$start,$limit");
-        $this->db->where(array('coll_cd '=>$inst_cd, 'isdeleted'=>0));
-        $query = $this->db->get();
-        return $query->num_rows();
-    }
-    public function count_all($inst_cd)
-    {
-       // DebugBreak();
-       
-       
-       $query = $this->db->query("SELECT count(*) as total FROM ". $this->table." WHERE coll_cd = $inst_cd and isdeleted =0" );
-       $rowcount = $query->result_array();       
-
-       return $rowcount[0]['total'];
     }
 }
 ?>

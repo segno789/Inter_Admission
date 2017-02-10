@@ -4,7 +4,48 @@ header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 ?>
+<style type="">
 
+
+    .form-wrap #output{
+        margin: 10px 0;
+    }
+
+    .form-wrap .images {
+        width: 100%;
+        display: block;
+        border: 1px solid #e8e8e8;
+        padding: 5px;
+        margin: 5px 0;
+    }/* progress bar */
+    #progress-wrp {
+        border: 1px solid #0099CC;
+        padding: 1px;
+        position: relative;
+        border-radius: 3px;
+        margin-left: 650px;
+        margin-bottom: 16px;
+        text-align: left;
+        background: #fff;
+        width:250px;
+        box-shadow: inset 1px 3px 6px rgba(0, 0, 0, 0.12);
+    }
+    #progress-wrp .progress-bar{
+        height: 20px;
+        border-radius: 3px;
+        background-color: #f39ac7;
+        width: 0;
+        box-shadow: inset 1px 1px 10px rgba(0, 0, 0, 0.11);
+    }
+    #progress-wrp .status{
+        top:3px;
+        left:50%;
+        position:absolute;
+        display:inline-block;
+        color: #000000;
+    }
+
+</style>
 <div class="dashboard-wrapper class wysihtml5-supported">
     <div class="left-sidebar">
         <div class="row-fluid">
@@ -16,29 +57,43 @@ header("Pragma: no-cache");
                         </div>
                     </div>
                     <div class="widget-body" >
-                        <form class="form-horizontal no-margin" action="<?php  echo base_url(); ?>Admission/NewEnrolment_insert_Fresh" method="post" enctype="multipart/form-data" name="myform" id="myform" onsubmit="return checks(this);">
+                        <form class="form-horizontal no-margin" action="<?php  echo base_url(); ?>Admission/NewEnrolment_insert_Fresh" method="post" enctype="multipart/form-data" name="myform" id="myform">
                             <div class="control-group">
-                                <div class="controls controls-row">
-                                    <label class="control-label span2" >
-                                    </label> 
-                                    <img id="image_upload_preview" style="width:140px; height: 140px;" src="" alt="Candidate Image" />
-                                    <!--<input type="hidden" id="pic" name="pic" value="<?php echo  $data['0']['picpath']; ?>" />    -->
+                                <h4 class="span4"></h4>
+                                <label class="control-label span2" style="width: 411px;margin-left: -199px;">
+                                    <img src="<?php echo base_url(); ?>assets/img/upalodimage.jpg" alt="" >
+                                </label>
+                                <div class="controls controls-row" id="output">
+                                    <input type="hidden" class="span2 hidden" id="picname" name="picname" value="">
+                                    <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="<?php echo base_url(); ?>assets/img/profile.png" alt="Candidate Image">
+
                                 </div>
                             </div>
-                            <div class="controls controls-row">
-                                <input type='file' id="inputFile" name="inputFile" onchange="return ValidateFileUpload(this);"/>
+                            <div class="control-group">
+                                <label id="ErrMsg" class="control-label span2" style=" text-align: left;"><?php ?></label>
+
+                                <div class="controls controls-row">
+                                    <div id="progress-wrp"><div class="progress-bar"></div ><div class="status">0%</div></div>
+                                    <input class="span3 hidden"  type="text" placeholder="" >  
+                                    <label class="control-label span2">
+                                        Image :  
+                                    </label> 
+                                    <input type="file" class="span4" id="image" name="__files[]">
+
+                                </div>
                             </div>
+
                             <div class="control-group">
                                 <label class="control-label span1" >
                                     Candidate Name:
                                 </label>
                                 <div class="controls controls-row">
 
-                                    <input class="span3"  type="text" id="cand_name" style="text-transform: uppercase;" name="cand_name" placeholder="Candidate Name" maxlength="60" readonly="readonly"  value="<?php echo $data[0]['name']; ?>">
+                                    <input class="span3"  type="text" id="cand_name" style="text-transform: uppercase;" name="cand_name" placeholder="Candidate Name" maxlength="60" readonly="readonly"  value="<?php echo @$data[0]['name']; ?>">
                                     <label class="control-label span2" for="lblfather_name">
                                         Father's Name :
                                     </label> 
-                                    <input class="span3" id="father_name" name="father_name" style="text-transform: uppercase;" type="text" placeholder="Father's Name" maxlength="60" readonly="readonly" value="<?php echo  $data['0']['fname']; ?>" required="required">
+                                    <input class="span3" id="father_name" name="father_name" style="text-transform: uppercase;" type="text" placeholder="Father's Name" maxlength="60" readonly="readonly" value="<?php echo  @$data['0']['fname']; ?>" required="required">
                                 </div>
                             </div>
                             <div class="control-group">
@@ -77,11 +132,11 @@ header("Pragma: no-cache");
                                     Mark Of Identification :
                                 </label>
                                 <div class="controls controls-row">
-                                    <input class="span3" type="text" id="MarkOfIden" style="text-transform: uppercase;" name="MarkOfIden" value="<?php echo  $data['0']['markOfIden']; ?>" required="required" maxlength="60" >
+                                    <input class="span3" type="text" id="MarkOfIden" style="text-transform: uppercase;" name="MarkOfIden" value="<?php echo  @$data['0']['markOfIden']; ?>" required="required" maxlength="60" >
                                     <label class="control-label span2" >
                                         Mobile Number :
                                     </label> 
-                                    <input class="span3" id="mob_number" name="mob_number" type="text" placeholder="0300-123456789" value="<?php echo  $data['0']['MobNo']; ?> " required="required">
+                                    <input class="span3" id="mob_number" name="mob_number" type="text" placeholder="0300-123456789" value="<?php echo  @$data['0']['MobNo']; ?> " required="required">
                                 </div>
                             </div>
                             <div class="control-group">
@@ -90,40 +145,53 @@ header("Pragma: no-cache");
                                 </label>
                                 <div class="controls controls-row">  
                                     <?php
-                                    $nat = $data[0]['IsPakistani'];
-                                    if($nat == 1)
+                                    @$nat = $data[0]['IsPakistani'];
+                                    if(@$nat == 1)
                                     {
                                         echo 
                                         "<label class='radio inline span1'><input type='radio' value='1' id='nationality' checked='checked' name='nationality'> Pakistani</label>
                                         <label class='radio inline span2'><input type='radio'  id='nationality1' value='2' name='nationality'> Non Pakistani</label>";
                                     }
-                                    else if ($nat == 2)
+                                    else if (@$nat == 2)
                                     {
                                         echo  "<label class='radio inline span1'><input type='radio' value='1' id='nationality'  name='nationality'> Pakistani
                                         </label><label class='radio inline span2'><input type='radio'  id='nationality1' checked='checked' value='2' name='nationality'>  Non Pakistani</label>" ;
                                     }
+
+                                    else{
+                                        echo 
+                                        "<label class='radio inline span1'><input type='radio' value='1' id='nationality' checked='checked' name='nationality'> Pakistani</label>
+                                        <label class='radio inline span2'><input type='radio'  id='nationality1' value='2' name='nationality'> Non Pakistani</label>";
+                                    }
+
                                     ?>
                                     <label class="control-label span3" style="margin-left: -100px;" for="gender1">
                                         Gender :
                                     </label> 
                                     <?php
 
-                                    $gender = $data[0]['Gender'];
+                                    @$gender = $data[0]['Gender'];
 
-                                    if($gender == 1)
+                                    if(@$gender == 1)
                                     {
                                         echo 
                                         "<label class='radio inline span1'><input type='radio' id='gender1' value='1' checked='checked'  disabled='disabled' name='gender'> Male</label> 
                                         <label class='radio inline span1'><input type='radio' id='gender2' value='2'  name='gender'  disabled='disabled'> Female </label> " ;
                                     }
-                                    else if ($gender == 2)
+                                    else if (@$gender == 2)
                                     {
                                         echo 
                                         "<label class='radio inline span1'><input type='radio' id='gender1' value='1'  disabled='disabled' name='gender'> Male</label> 
                                         <label class='radio inline span1'><input type='radio' id='gender2' value='2'  checked='checked'  disabled='disabled'  name='gender'> Female </label> " ;
                                     }
+
+                                    else{
+                                        echo 
+                                        "<label class='radio inline span1'><input type='radio' id='gender1' value='1' name='gender'> Male</label> 
+                                        <label class='radio inline span1'><input type='radio' id='gender2' value='2'  name='gender'> Female </label>" ;
+                                    }
                                     ?>
-                                    <input type="hidden" name="gend" value="<?php echo $gender; ?>">
+                                    <input type="hidden" name="gend" value="<?php echo @$gender; ?>">                                    
                                 </div>
                             </div>
                             <div class="control-group">
@@ -137,18 +205,23 @@ header("Pragma: no-cache");
                                         Religion :
                                     </label> 
                                     <?php
-                                    $rel = $data[0]['IsMuslim'];
-                                    if($rel == 1)
+                                    @$rel = @$data[0]['IsMuslim'];
+                                    if(@$rel == 1)
                                     {
                                         echo
                                         "<label class='radio inline span1'><input type='radio' id='religion' class='rel_class' value='1' checked='checked' name='religion'> Muslim
                                         </label><label class='radio inline span1'><input type='radio' id='religion1' class='rel_class'  value='2' name='religion'> Non Muslim</label>" ;
                                     }
-                                    else if ($rel == 2)
+                                    else if (@$rel == 2)
                                     {
                                         echo
                                         "<label class='radio inline span1'><input type='radio' id='religion' class='rel_class' value='1' name='religion'> Muslim
                                         </label><label class='radio inline span1'><input type='radio' id='religion1' class='rel_class' value='2' checked='checked' name='religion'> Non Muslim</label>" ;
+                                    }
+                                    else{
+                                        echo
+                                        "<label class='radio inline span1'><input type='radio' id='religion' class='rel_class' value='1' checked='checked' name='religion'> Muslim
+                                        </label><label class='radio inline span1'><input type='radio' id='religion1' class='rel_class' value='2'  name='religion'> Non Muslim</label>" ; 
                                     }
                                     ?>
                                 </div>
@@ -159,13 +232,13 @@ header("Pragma: no-cache");
                             </label>
                             <div class="controls controls-row">  
                                 <?php
-                                $resid = $data[0]['isRural'];
-                                if($resid == 1 )
+                                @$resid = @$data[0]['isRural'];
+                                if(@$resid == 1 )
                                 {
                                     echo " <label class='radio inline span1'><input type='radio' value='1' id='UrbanRural' checked='checked' name='UrbanRural'> Urban
                                     </label><label class='radio inline span2'><input type='radio'  id='UrbanRural' value='2' name='UrbanRural'>  Rural </label>";
                                 }
-                                else if($resid == 2)
+                                else if(@$resid == 2)
                                 {
                                     echo " <label class='radio inline span1'><input type='radio' value='1' id='UrbanRural' name='UrbanRural'> Urban
                                     </label><label class='radio inline span2'><input type='radio'  id='UrbanRural' value='2'  checked='checked'  name='UrbanRural'>  Rural </label>";
@@ -183,7 +256,7 @@ header("Pragma: no-cache");
                                 </label>
                                 <div class="controls controls-row">
                                     <textarea style="height:150px; text-transform: uppercase;"  id="address" class="span8" name="address" required="required"><?php
-                                        echo $data[0]['addr'];
+                                        echo @$data[0]['addr'];
                                     ?></textarea>
                                 </div>
                             </div>
@@ -196,7 +269,7 @@ header("Pragma: no-cache");
                                     SSC Roll No :
                                 </label>
                                 <div class="controls controls-row">
-                                    <input class="span3" type="text" readonly="readonly" id="oldrno" style="text-transform: uppercase;" name="oldrno" value="<?php  echo  $data['0']['SSC_RNO']; ?>" required="required" maxlength="60" >
+                                    <input class="span3" type="text" readonly="readonly" id="oldrno" style="text-transform: uppercase;" name="oldrno" value="<?php  echo  @$data['0']['SSC_RNO']; ?>" required="required" maxlength="60" >
                                     <label class="control-label span2" >
                                         SSC Year:
                                     </label> 
@@ -208,11 +281,11 @@ header("Pragma: no-cache");
                                     Session :
                                 </label>
                                 <div class="controls controls-row">
-                                    <input type="text" class="span3" id="oldsess" name="oldsess" readonly="readonly" value="<?php echo $data['0']['SSC_Session'] == 1 ? "Annual" :"Supplementary"; ?>"/> 
+                                    <input type="text" class="span3" id="oldsess" name="oldsess" readonly="readonly" value="<?php echo @$data['0']['SSC_Session'] == 1 ? "Annual" :"Supplementary"; ?>"/> 
                                     <label class="control-label span2" >
                                         Board:
                                     </label> 
-                                    <input type="text" class="span3" id="oldboard" name="oldboard" readonly="readonly" value="<?php echo $data[0]['brd_name'];?>"/>     
+                                    <input type="text" class="span3" id="oldboard" name="oldboard" readonly="readonly" value="<?php echo @$data[0]['brd_name'];?>"/>     
                                 </div>
                             </div>
                             <hr>
@@ -277,6 +350,7 @@ header("Pragma: no-cache");
                                         <option value="0" selected="selected">NONE</option>
                                         <option value="3">HUMANITIES</option>
                                         <option value="5">COMMERCE</option>
+                                        <option value="30">KHASA</option>
                                     </select>                                            
                                 </div>
                             </div>
@@ -383,7 +457,7 @@ header("Pragma: no-cache");
 
 
                             <div class="span6">
-                                <button type="submit" name="btnsubmitUpdateEnrol" id="btnSaveFresh" class="btn btn-large btn-info offset2">
+                                <button type="submit" onclick="return checks(this)" name="btnsubmitUpdateEnrol" id="btnSaveFresh" class="btn btn-large btn-info offset2">
                                     Save Form
                                 </button>
                                 <a href="<?php echo base_url(); ?>assets/img/Instruction.jpg" download="FileName" class="btn btn-large btn-info" >Download Instruction</a>
@@ -552,6 +626,10 @@ header("Pragma: no-cache");
                             function LoadHumanitiesSubjects(){
 
                                 Empty_All_Dropdowns();
+                                $('#sub3').show();
+                                $('#sub3p2').show();
+                                $('#sub6').show();
+                                $('#sub6p2').show();
 
                                 $("#sub1").append('<option value="1">ENGLISH</option>');
                                 $("#sub1p2").append('<option value="1">ENGLISH</option>');
@@ -588,6 +666,10 @@ header("Pragma: no-cache");
 
                             function LoadCommerceSubjects(){
                                 Empty_All_Dropdowns();
+                                $('#sub3').show();
+                                $('#sub3p2').show();
+                                $('#sub6').show();
+                                $('#sub6p2').show();
 
                                 $('#sub7').show();$('#sub7p2').show();
                                 $('#sub8').hide(); $('#sub8p2').hide();
@@ -625,6 +707,40 @@ header("Pragma: no-cache");
 
                             }
 
+                            function LoadKhasaSubjects(){
+
+                                Empty_All_Dropdowns();
+
+                                $("#sub1").append('<option value="1">ENGLISH</option>');
+                                $("#sub1p2").append('<option value="1">ENGLISH</option>');
+
+
+                                $("#sub2").append('<option value="2">URDU</option>');
+                                $("#sub2p2").append('<option value="2">URDU</option>');
+
+                                $('#sub3').hide();
+                                $('#sub3p2').hide();
+
+
+                                $.each(huminities_without_practical,function(val,text){
+
+                                    $("#sub4").append(new Option(text,val));
+                                    $("#sub4p2").append(new Option(text,val));
+                                });
+
+                                $.each(huminities_without_practical,function(val,text){
+
+                                    $("#sub5").append(new Option(text,val));
+                                    $("#sub5p2").append(new Option(text,val));
+                                });
+
+                                $('#sub6').hide();
+                                $('#sub6p2').hide();
+
+                                $('#sub7').hide();$('#sub7p2').hide();
+                                $('#sub8').hide(); $('#sub8p2').hide();
+                            }
+
                             $('#std_group').change(function(){
 
                                 var sel_group = $('#std_group').val();    
@@ -641,6 +757,9 @@ header("Pragma: no-cache");
 
                                 else if (sel_group == 5){
                                     LoadCommerceSubjects();
+                                }  
+                                else if (sel_group == 30){
+                                    LoadKhasaSubjects();
                                 }
                             });
 
@@ -995,21 +1114,27 @@ header("Pragma: no-cache");
                             });
 
 
-                            function checks(){
+                            function checks()
+                            {
 
-                                var status  =  check_NewEnrol_validation();
+                                debugger;
+                                var status  =  check_NewEnrol_validation_Fresh();
                                 if(status == 0)
                                 {
                                     return false;    
                                 }
                                 else
                                 {
+
+                                    //debugger;
+
                                     $.ajax({
 
                                         type: "POST",
-                                        url: "<?php  echo site_url('Admission/frmvalidation'); ?>",
+                                        url: "<?php  echo site_url('Admission/frmvalidation_Fresh'); ?>",
                                         data: $("#myform").serialize() ,
                                         datatype : 'html',
+
                                         success: function(data)
                                         {
                                             var obj = JSON.parse (data);
@@ -1020,9 +1145,16 @@ header("Pragma: no-cache");
                                                     url: "<?php echo base_url(); ?>" + "Admission/NewEnrolment_insert_Fresh/",
                                                     data: $("#myform").serialize() ,
                                                     datatype : 'html',
+
                                                     beforeSend: function() {  $('.mPageloader').show(); },
                                                     complete: function() { $('.mPageloader').hide();},
+
+
                                                     success: function(data) {
+
+                                                        debugger;
+                                                        console.log(data);
+
                                                         var obj = JSON.parse(data) ;
                                                         if(obj.error ==  1)
                                                         {
@@ -1030,33 +1162,27 @@ header("Pragma: no-cache");
                                                         }
                                                         else
                                                         {
-                                                            $('.mPageloader').hide();
                                                             alertify.error(obj.error);
                                                             return false; 
                                                         }
-
                                                     },
                                                     error: function(request, status, error){
-                                                        $('.mPageloader').hide();
+
                                                         alertify.error(request.responseText);
                                                     }
                                                 });
-
                                                 return false
                                             }
-
                                             else
                                             {
-                                                $('.mPageloader').hide();
                                                 alertify.error(obj.excep);
                                                 return false;     
                                             }
                                         }
                                     });
-
-                                    return false;     
+                                    return false;   
                                 } 
-                            }
+                            }                        
 
 
                         </script>

@@ -117,7 +117,7 @@ class Admission_11th_pvt extends CI_Controller {
     }
     public function Get_students_record()
     {
-            DebugBreak();
+
         $mrollno = $_POST["oldRno"];
 
         $board   =  $_POST["oldBrd_cd"];
@@ -332,6 +332,15 @@ class Admission_11th_pvt extends CI_Controller {
         {
             $nationality_hidden =@$_POST['nationality'];
             $gender = $this->input->post('ogender');
+        }
+        
+        if($nationality_hidden == '')
+        {
+             $nationality_hidden =1;
+        }
+        if($gender == '')
+        {
+              $gender = $this->input->post('ogender');
         }
         //nationality_hidden
         $addre =  str_replace("'", "", $this->input->post('address'));
@@ -1785,7 +1794,7 @@ class Admission_11th_pvt extends CI_Controller {
         }
         else
         {
-            if($data['oldRno_reg'] != '' && $data['IsLangexam'] == 1)
+            if(($data['oldRno_reg'] != '' ||  $data['oldRno'] != '' ) && $data['IsLangexam'] == 1)
             {
                 $cert_fee = 0;
                 $regfee = 0;

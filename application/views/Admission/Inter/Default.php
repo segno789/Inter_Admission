@@ -54,7 +54,7 @@
                             <div style="vertical-align:bottom;margin-top: 20px; font-weight: bold;">
                                 <input type="button" value="Next" id="proceed" name="proceed" class="jbtn jmedium jblack">
                                 </br>
-                                <!--<img src="<?=base_url()?>assets/img/inqurey.jpg" alt="" style="width: 60%;"> -->
+                                <img src="<?=base_url()?>assets/img/inqurey.jpg" alt="" style="width: 60%;"> 
                                 <!-- <input type="button" value="Cancel" onclick="window.location='#';" class="jbtn jmedium jblack"> -->
                             </div>
                         </form>
@@ -69,7 +69,7 @@
                                             <label class="welcome_note myEngheading">Download Your Already Feeded Form</label>
                                         </td>
                                         <td width="50%" >
-                                            <label class=myUrduheading>آن لائن داخلہ فارم یہاں سے ڈونلوڈ کیجیے</label>
+                                           <label class=myUrduheading><img src="../assets/img/downloadimg.png" style="    height: 50px;" alt=""></label>
                                         </td>
                                     </tr>
                                 </table>
@@ -88,27 +88,21 @@
                                         <th> <br />
                                         </th>
                                         <td><span style="vertical-align:bottom;margin-top: 20px;">
-                                            <input type="button" value="Download" name="btndwnForm" id="btndwnForm" class="jbtn jmedium jblack" />
+                                            <input type="button" value="Download" name="btndwnForm" id="btndwnForm12" class="jbtn jmedium jblack" />
                                         </span> </td>
                                     </tr>
                                 </table>
-
                             </form>
-
                             <hr />
                             <table width="100%">
                                 <tr><td width="50%">
                                         <label class="myEngParagraph">In case of any problem regarding Admissions, please send us email on </label>
-                                    </td> <td width="50%"> <label class="myUrduParagraph">براے مہربانی آن لائن داخلہ فارم مے کسی مسلے کی صورت مے دیے گیے ای میل ایڈریس پر میل کیجیے </label></td></tr></table>
+                                    </td> <td width="50%"> <label class="myUrduParagraph"><img src="../assets/img/inqirey.png" alt=""> </label></td></tr></table>
                             <div style=";">
-                                <br/> <span style="font-weight:bold; font-size:24px; font-family:Verdana, Geneva, sans-serif; color:#F00" > complaint4bisegrw@gmail.com </span>
+                                <br/><span style="font-weight:bold; font-size:24px; font-family:Verdana, Geneva, sans-serif; color:#F00" > complaint4bisegrw@gmail.com </span>
                             </div>
                         </div>
                     </div>
-
-                </div>
-
-                <div class="clearfix">
                 </div>
             </div>
         </div>

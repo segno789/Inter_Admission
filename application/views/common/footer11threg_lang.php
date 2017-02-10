@@ -185,6 +185,11 @@ if(isset($files)){
 
 
     $(document).ready(function () {
+        
+        
+ $.fancybox("#instruction");
+   
+        
      $("#oldExamInfo_lang").hide();
         $("#pvtinfo_dist").change(function(){
             var distId =  $("#pvtinfo_dist").val();
@@ -574,12 +579,12 @@ if(isset($files)){
 
         //var ispic
         // alert('sub6 '+sub6p1+ ' and '+ sub6p2);
-       /* if(picname == "" ||  picname == undefined){
+       if(picname == "" ||  picname == undefined){
 
             alertify.error("Please Uplaod Picture")
             $('#picname').focus(); 
             return status;
-        }   */
+        }   
         if(name == "" ||  name == undefined){
             $('#ErrMsg').show();  
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
@@ -596,7 +601,15 @@ if(isset($files)){
             $('#father_name').focus(); 
             return status;
         }   
-
+        else if(FNic == bFormNo   )
+        {
+            $('#ErrMsg').show(); 
+            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+            // $('#ErrMsg').html("<b>Please Enter your Father's CNIC</b>"); 
+            alertify.error("Please Enter your bay-Form") 
+            $('#bay_form').focus();  
+            return status; 
+        }
         else if((bFormNo == "" || bFormNo == 0 || bFormNo == undefined))
         {
             $('#ErrMsg').show(); 
@@ -692,7 +705,7 @@ if(isset($files)){
             $("#std_group").focus();
             return status;  
         }
-        else   if ($("#sub3").find('option:selected').val() < 1) 
+/*        else   if ($("#sub3").find('option:selected').val() < 1) 
         {
             // $('#ErrMsg').show(); 
             alertify.error('Please select your Study Group '); 
@@ -742,7 +755,7 @@ if(isset($files)){
             //alert('Plesae select 8th Subject ');                          
             $("#sub7").focus();
             return status;  
-        }
+        }*/
 
 
         
@@ -1066,7 +1079,26 @@ if(isset($files)){
         }
      
     })
-
+    $("#lang_cat").change(function(){
+   // debugger;
+        var myv =  $("#lang_cat").val();
+    if( myv== 1)
+    {
+         $("#lang_specialSub").empty();
+          $("#lang_specialSub").prepend("<option  value='24'> ARABIC </option>");
+          $("#lang_specialSub").prepend("<option  value='2'> URDU </option>");
+         
+    }
+    if(myv== 3)
+    {
+      $("#lang_specialSub").empty();
+          $("#lang_specialSub").prepend("<option  value='24'> ARABIC </option>");
+          $("#lang_specialSub").prepend("<option  value='2'> URDU </option>");
+          $("#lang_specialSub").prepend("<option  value='32'> PUNJABI </option>");
+          //$("#lang_specialSub").prepend("<option  value='34'> PERSIAN </option>");
+          
+    }
+    })
     var NationalityVal = $("input[name=nationality]:checked").val();
 
     function Hum_Deaf_Subjects_NewEnrolement(sub6,sub7,sub8)

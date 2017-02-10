@@ -133,9 +133,9 @@ class Admission_11th_Pvt_model extends CI_Model
         //  $pic_base_65 = $data['Image'];
         //  DebugBreak();
         //  DebugBreak();
-        if($OldBrd == 1)
+        if($OldBrd == 1 && $OldYear != -1)
         {            
-            $query = $this->db->query("Registration..Prev_Get_Student_Matric $OldRno,$OldYear,$OldSess,$OldBrd");
+            $query = $this->db->query("Registration..Prev_Get_Student_Matric_PVT $OldRno,$OldYear,$OldSess,$OldBrd");
             $rowcount = $query->num_rows();
             if($rowcount > 0)
             {
@@ -272,7 +272,7 @@ class Admission_11th_Pvt_model extends CI_Model
      
       //  $this->db->trans_complete();
 
-        
+       
        
 
         $rowcount = $query->num_rows();
@@ -330,7 +330,7 @@ class Admission_11th_Pvt_model extends CI_Model
         $iyear =$data['year'];
         $brd = $data['board'];
         // DebugBreak();
-        $query = $this->db->query("Registration..Prev_Get_Student_Matric $rno,$iyear,$sess,$brd");
+        $query = $this->db->query("Registration..Prev_Get_Student_Matric_PVT $rno,$iyear,$sess,$brd");
 
         $rowcount = $query->num_rows();
         if($rowcount > 0)

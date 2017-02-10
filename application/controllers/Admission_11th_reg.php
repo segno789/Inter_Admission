@@ -540,7 +540,7 @@ class Admission_11th_reg extends CI_Controller {
     }
     public function NewEnrolment_update()
     {
-         DebugBreak();
+         ///DebugBreak();
 
         $this->load->model('Admission_11th_reg_model');
         $this->load->library('session');
@@ -2145,7 +2145,7 @@ public function NewEnrolment_Delete($formno)
             $pdf->Cell(0.5,0.5,"Zone:",0,'R');
             $pdf->SetFont('Arial','B',8);
             $pdf->SetXY(6.0,4.3+$Y);
-            $pdf->Cell( 0.5,0.5,strtoupper(@$data["zone_name"]),0,'L');
+            $pdf->Cell( 0.5,0.5,@$data["zone_cd"]."-".strtoupper(@$data["zone_name"]),0,'L');
 
 
             //__Address

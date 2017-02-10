@@ -28,11 +28,15 @@
                         <!--Intimation-->
                         <p style="color: wheat;text-align: center;font-size: 18px;margin-left: 28px;/* float: left; */margin-top: -129px;">Board of Intermediate &amp; Secondary Education, Gujranwala <br><br>     
                             <?php 
+                            $sess = '';
                             if(Session =='1')
-                                echo 'Annual';
+                                $sess =  'Annual';
                             else if(Session =='2')
-                                echo 'Supply';
+                                $sess = 'Supply';
 
+                                
+                            echo  'Online HSSC '.$sess.' Admission '.Year   
+                                
                             ?> 
                       
                     </div>
@@ -54,11 +58,10 @@
                                             <?php 
 
 
-                                            if($user_status == 1)
+                                           /// if($user_status == 1)
 
                                                 // DebugBreak();
                                                 if($user_status == 1)
-
                                                 {
                                                     echo "<b style='color: #f63131;    font-size: 15px;'>Your UserId/Password is not correct.Please use correct information</b>";
                                                 }
@@ -72,8 +75,12 @@
                                                 }
                                                 else if($user_status == 4)
                                                 {
-                                                    echo "<b style='color: #f63131;    font-size: 13px;'> Your Registration Returns (2014-2016) not submitted. Please contact to Online Registration Branch B.I.S.E. Gujranwala.</b>";
+                                                    echo "<b style='color: #f63131;    font-size: 13px;'>".@$remarks."</b>";
                                                 }
+                                               /* else if($user_status == 4)
+                                                {
+                                                    echo "<b style='color: #f63131;    font-size: 13px;'> Your Registration Returns (2014-2016) not submitted. Please contact to Online Registration Branch B.I.S.E. Gujranwala.</b>";
+                                                }*/
                                                 else if($user_status == 5)
                                                 {
                                                     echo "<b style='color: #f63131;    font-size: 13px;'> Plaese wait some maintaince.</b>";

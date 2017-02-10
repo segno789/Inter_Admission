@@ -333,7 +333,186 @@
             return true;
         } 
     }
-    
+    function  check_NewEnrol_validation(){
+
+        var name =  $('#cand_name').val();
+        var dist_cd= $('#pvtinfo_dist').val();
+        var teh_cd= $('#pvtinfo_teh').val();
+        var zone_cd= $('#pvtZone').val();
+        //  var pp_cent= $('#pp_cent').val();           
+        var sub6p1 = $('#sub5').val();
+        var sub6p2 = $('#sub6').val();           
+        var sub7p1 = $('#sub7').val();
+        var sub7p2 = $('#sub8').val();                      
+        var ex_type = $('#exam_type').val();
+        var mobNo = $('#mob_number').val();
+        var bFormNo = $('#bay_form').val();
+        var grp_cd = $('#std_group').val();
+        var brd_cd = $('#brd_cd').val();
+        var fName = $('#father_name').val();
+        var FNic = $('#father_cnic').val();
+        var dob = $('#dob').val();
+        var address = $('#address').val();
+        var image = $('#image').val();
+        var MarkOfIdent = $('#MarkOfIden').val();
+        var gend = $("input[name=gender]:checked").val();
+        var status = 0;
+        // alert('sub6 '+sub6p1+ ' and '+ sub6p2);
+        if(name == "" ||  name == undefined){
+            alertify.error("Please Enter your  Name.");
+
+            $('#cand_name').focus(); 
+            return status;
+        }
+        else if(fName == "" || fName == undefined){
+            alertify.error("Please Enter your  Father's Name.");
+
+            $('#father_name').focus(); 
+            return status;
+        }   
+
+        else if(bFormNo == "" || bFormNo == 0 || bFormNo == undefined)
+        {
+            alertify.error("Please Enter your  bay-Form.");
+            $('#bay_form').focus();  
+            return status; 
+        }
+        else if(FNic == "" || FNic.length == undefined )
+        {
+            alertify.error("Please Enter your  Father's CNIC.");
+
+            $('#father_cnic').focus();  
+            return status; 
+        }
+        else if(FNic == bFormNo  )
+        {
+
+            alertify.error("B-form Number and Father CNIC cannot be same.") 
+            $('#bay_form').focus();   
+            return status; 
+        }
+        else if(dob == "" || dob.length == undefined)
+        {
+            alertify.error("Please Enter your  Date of Birth.");
+
+            $('#dob').focus(); 
+            return status;  
+        }
+
+        else if(mobNo == "" || mobNo == 0 || mobNo == undefined)
+        {
+            alertify.error("Please Enter your Mobile No.");
+
+            $('#mob_number').focus();   
+            return status;  
+        }
+        else if(gend == "" || gend== undefined)
+        {
+            alertify.error("Please Select Your Gender.");
+            //$('#ErrMsg').html("<b>Please Select Your Gender.</b>"); 
+            $("input[name=gender]:checked").focus();   
+            return status;  
+        }
+        else if(MarkOfIdent == "" || MarkOfIdent == 0 || MarkOfIdent == undefined)
+        {
+            alertify.error("Please Enter your Mark of Indentification.");
+            //$('#ErrMsg').html("<b>Please Enter your Mark of Indentification</b>"); 
+            $('#MarkOfIden').focus();   
+            return status;  
+        }
+        else if(address == "" || address == 0 || address.length ==undefined )
+        {
+            alertify.error("Please Enter your Address.");
+            //$('#ErrMsg').html("<b>Please Enter your Address</b>"); 
+            $('#address').focus(); 
+            return status;    
+        }
+
+        else  if (dist_cd < 1) 
+        {
+
+            alertify.error("Please select District.");
+
+            $("#pvtinfo_dist").focus();
+
+            return status;  
+        }
+
+        else   if (teh_cd < 1) {
+            alertify.error("Please select Tehsil.");
+            //alert('Please select Tehsil');                          
+            $("#pvtinfo_teh").focus();
+            return status;  
+        }
+        else  if (zone_cd < 1) {
+            alertify.error("Please select Zone.");
+            // alert('Please select Zone. ');                          
+            $("#pvtZone").focus();
+            return status;  
+        }
+
+
+        else   if ($("#std_group").find('option:selected').val() < 1) 
+        {
+            alertify.error("Please Enter your Study Group.");
+
+            // alert('Study Group not selected ');                          
+            $("#std_group").focus();
+            return status;  
+        }
+        else   if ($("#sub3").find('option:selected').val() < 1) 
+        {
+            alertify.error("Plesae select  Subject.");
+
+            $("#sub3").focus();
+
+            return status;  
+        }
+        else   if ($("#sub5").find('option:selected').val() < 1) 
+        {
+            alertify.error("Plesae select  Subject.");
+
+            $("#sub5").focus();
+
+            return status;  
+        }
+
+        else   if ($("#sub6").find('option:selected').val() < 1) 
+        {
+            alertify.error("Plesae select 6th Subject.");
+
+
+            // alert('Plesae select 6th Subject  ');                          
+            $("#sub6").focus();
+            return status;  
+        }
+
+        else   if ($("#sub7").find('option:selected').val() < 1) 
+        {
+            alertify.error("Plesae select 7th Subject.");
+
+
+            // alert('Plesae select 6th Subject  ');                          
+
+            $("#sub7").focus();
+            return status;  
+        }
+
+        else   if ($("#sub8").find('option:selected').val() < 1) 
+        {
+            alertify.error("Plesae select 8th Subject.");
+
+            $("#sub8").focus();
+            return status;  
+        }
+
+        status = 1;
+        return status;
+
+
+
+
+    }
     $(document).on("focusin", "#dob", function() {
         $(this).prop('readonly', true);  
     });

@@ -32,7 +32,7 @@
     $(document).ready(function(){
         $('#data-table').dataTable({
             "sPaginationType": "full_numbers",
-            "cache": false
+            "cache": true
         });
 
         $("#bay_form,#father_cnic").mask("99999-9999999-9",{placeholder:"_"});
@@ -656,7 +656,7 @@
         window.location.href = '<?=base_url()?>Admission_inter/NewEnrolment_EditForm_inter/'+formrno
     }
 
-    function NewForm(formrno,IntBrd_cd)
+    function NewForm(formrno,IntBrd_cd,year)
     {
         // //debugger;
         $('#sub1').empty();
@@ -667,7 +667,7 @@
         $('#sub6').empty();
         $('#sub7').empty();
         $('#sub8').empty();
-        window.location.href = '<?=base_url()?>Admission_inter/NewEnrolment_NewForm_inter/'+formrno+'/'+IntBrd_cd
+        window.location.href = '<?=base_url()?>Admission_inter/NewEnrolment_NewForm_inter/'+formrno+'/'+IntBrd_cd+'/'+year
     }
     function DeleteForm(formrno)
     {

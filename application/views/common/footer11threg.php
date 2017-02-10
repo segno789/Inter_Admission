@@ -173,6 +173,9 @@ if(isset($files)){
 
 
     $(document).ready(function () {
+        
+ $.fancybox("#instruction");
+   
         $("#pvtinfo_dist").change(function(){
             var distId =  $("#pvtinfo_dist").val();
             $('#pvtinfo_teh').empty();
@@ -226,6 +229,12 @@ if(isset($files)){
             else
             {
                 gender =  $("input[name=gender]").val() ;
+                
+                if(gender ==  undefined || gender =='')
+                {
+                     gender = $("input[name=ogender]:checked").val();
+                }
+                
             }
             
              if(gender == "" || gender == 0 || gender == undefined  || gender.length == undefined)
@@ -269,7 +278,6 @@ if(isset($files)){
         })
         $("#pvtZone").change(function(){
 
-            debugger;
             var tehId =  $("#pvtZone").val();
              var gender = '';
 
@@ -280,6 +288,10 @@ if(isset($files)){
             else
             {
                 gender =  $("input[name=gender]").val() ;
+                if(gender ==  undefined || gender =='')
+                {
+                     gender = $("input[name=ogender]:checked").val();
+                }
             }
             
              if(gender == "" || gender == 0 || gender == undefined  || gender.length == undefined)
@@ -300,10 +312,12 @@ if(isset($files)){
                     beforeSend: function() {  $('.mPageloader').show(); },
                     complete: function() { $('.mPageloader').hide();},
                     success: function(json) {
+                       
                         var listitems='';
                         $.each(json.center, function (key, data) {
                             listitems +='<label style="text-align: left; margin-top: -23px;">'+data.CENT_CD + '-' + data.CENT_NAME+'</label><br>';
                         })
+                         console.log(listitems)
                         $('#instruction').html('<h1 style="    margin-bottom: 28px;">Selected Zone Centre List </h1>'+listitems); 
                         $.fancybox("#instruction");
                     },
@@ -353,6 +367,12 @@ if(isset($files)){
         $( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate:new Date(2002, 8, 1),minDate:new Date(1980, 0, 1)}).val();
 
     }
+    else
+    {
+        $( "#dob" ).hide();
+        $( "#doblable" ).hide();
+        $( "#moblabel" ).attr("style",'margin-left:426px;');
+    }
     // $( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true }).val();
     $( "#batch_real_PaidDate" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, 'setDate': new Date() }).val(); //, startDate:new Date()
     var myOptions = {
@@ -388,28 +408,28 @@ if(isset($files)){
         57 : 'History Of Muslim India',  
         55 : 'History Of Pakistan',  
         11: 'Economics',  
-        12 : 'Geography',  
+     //   12 : 'Geography',  
         14: 'Philosophy',  
-        16 : 'Psychology',  
+     //   16 : 'Psychology',  
         32: 'Punjabi',  
         37 : 'Urdu Advance',  
         24: 'Arabic',  
         27 : 'English Literature',  
         34: 'Persian',  
         17: 'Civics',  
-        18: 'Statistics',  
+      //  18: 'Statistics',  
         19: 'Mathematics',  
         20 : 'Islamic Studies',  
-        21: 'Outlines Of Home Economics',  
-        23: 'Fine Arts',  
-        42: 'Health And Physical Education',  
+    //    21: 'Outlines Of Home Economics',  
+       // 23: 'Fine Arts',  
+      //  42: 'Health And Physical Education',  
         43: 'Education',  
         45 : 'Sociology',  
-        8: 'Library Science',  
-        83 : 'Computer Science',  
+       // 8: 'Library Science',  
+      //  83 : 'Computer Science',  
         44: 'Geology',  
-        90 : 'Agriculture',  
-        79 : 'Nursing' 
+       // 90 : 'Agriculture',  
+      //  79 : 'Nursing' 
 
     }
     var sub7_Hum = 
@@ -419,20 +439,20 @@ if(isset($files)){
         26: 'CIVICS',
         25: 'ECONOMICS',
         14: 'PHYSIOLOGY & HYGIENE',
-        24: 'GEOGRAPHY',
+      //  24: 'GEOGRAPHY',
         21: 'HISTORY OF PAKISTAN',
         35: 'ENGLISH LITERATURE',
         34: 'URDU LITERATURE',
         19: 'ADVANCED ISLAMIC STUDIES',
         87: 'ENVIRONMENTAL STUDIES',
-        33: 'COMMERCIAL GEOGRAPHY',
+       // 33: 'COMMERCIAL GEOGRAPHY',
         22: 'ARABIC',
         23: 'PERSIAN',
         36: 'PUNJABI',
         20: 'ISLAMIC HISTORY / MUSLIM HISTORY',
         83: 'POULTRY FARMING',
         40: 'HEALTH & PHYSICAL EDUCATION',
-        78: 'COMPUTER SCIENCE',
+    //    78: 'COMPUTER SCIENCE',
         15 : 'GEOMETRICAL & TECHNICAL DRAWING',
         43 : 'ELECTRICAL WIRING',
         48 : 'WOOD WORK (FURNITURE MAKING)',
@@ -538,6 +558,12 @@ if(isset($files)){
         {
             gender =  $("input[name=gender]").val() ;
         }
+        
+        if(gender == '' || gender ==  undefined)
+        {
+            gender = $("input[name=ogender]:checked").val();
+        }
+        
         var address = $('#address').val();
         var image = $('#image').val();
         var MarkOfIdent = $('#MarkOfIden').val();
@@ -602,7 +628,14 @@ if(isset($files)){
             $('#father_cnic').focus();  
             return status; 
         }
-         else if(dob == "" || dob.length == undefined)
+          else if(FNic == bFormNo  )
+        {
+
+            alertify.error("B-form Number and Father CNIC cannot be same.") 
+            $('#bay_form').focus();   
+            return status; 
+        }
+         else if((dob == "" || dob.length == undefined) && isotherboard != 1)
         {
             $('#ErrMsg').show(); 
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
