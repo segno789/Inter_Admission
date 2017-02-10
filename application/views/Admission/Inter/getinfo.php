@@ -5,7 +5,7 @@
                 <div class="widget">
                     <div class="widget-header">
                         <div class="title" style="float: none !important;">
-                            <label class="welcome_note myEngheading" style="float: left;">1- Please Provide Your Previous Exam Information</label>
+                            <label class="welcome_note myEngheading" style="float: left;">Please Provide Your Previous Exam Information</label>
                             <label class="myUrduheading" style="float: right;"> براۓ مہربانی سابقہ امتحان کی معلومات فراہم کریں </label>
                         </div>
                     </div>
@@ -112,11 +112,11 @@
                                                     </select>
                                                 </td>
                                             </tr>
-                                            <!--    <tr>
-                                            <td colspan="4">
-                                            <label style="font-size: 23px;"> <input type="checkbox" name="isaloom" id="isaloom" style="width: 24px; height: 24px;">  <u>Aloom-e-Sharkia Examination</u> </label>
-                                            </td>
-                                            </tr> -->
+                                            <tr>
+                                                <td colspan="4">
+                                                    <label style="font-size: 23px;"> <input type="checkbox" name="isaloom" id="isaloom" style="width: 24px; height: 24px;">  <u>Aloom-e-Sharkia Examination</u> </label>
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                     <?php
@@ -161,7 +161,7 @@
                                             <div class="span12">
                                                 <div class="widget-header">
                                                     <div class="title" style="float: none !important;">
-                                                        <label class="welcome_note myEngheading" style="float: left;">2- Please Provide Your Matric Exam Information.(For Fresh in Both Part Appearing Students)</label>
+                                                        <label class="welcome_note myEngheading" style="float: left;">Please Provide Your Matric Exam Information.(For Fresh in Both Part Appearing Students)</label>
                                                         <label class="myUrduheading" style="float: right;"> براۓ مہربانی سابقہ امتحان کی معلومات فراہم کریں </label>
                                                     </div>
                                                 </div>    
@@ -273,16 +273,19 @@
                                             </tbody>
                                         </table>
 
+
+
                                         <div>
                                             <?php echo @$spl_cd['norec']; ?>
                                         </div>
 
                                         <div style="vertical-align:bottom;margin-top: 20px;">
-                                            <input type="submit" value="Proceed" id="proceed" name="proceed" class="jbtn jmedium jblack">
+                                            <input type="submit" value="Proceed" id="proceed" name="proceed" class="jbtn jmedium jblack" onclick="return proceed12th()">
                                             <input type="button" value="Cancel" onclick="return CancelAlert();"  class="jbtn jmedium jblack">
                                         </div>
                                     </form>
                                     <?php }?>
+
                             </div>
 
                         </div>
@@ -302,6 +305,39 @@
 
 <script type="text/javascript">
 
+    function proceed12th()
+    {
+        $.ajax({
+            type: "POST",
+            url: "<?php echo base_url(); ?>" + "Admission/Get_students_record/",
+            dataType: 'html',
+            data: $( '#getPervRec' ).serialize(),
+            beforeSend: function() {  $('.mPageloader').show(); },
+            complete: function() { $('.mPageloader').hide();},
+            success: function(data)
+            {
+                var obj = JSON.parse(data) ;
+                if(obj.excep == 'success')
+                {
+                    $('#getPervRec').submit();
+                }
+                else
+                {
+                    alertify.error(obj.excep);
+                }
+
+            },
+            error: function(request, status, error){
+                $('.mPageloader').hide();
+                alertify.error(request.responseText);
+            }
+        });
+
+        return false;
+
+    }
+
+
     function CancelAlert()
     {
         var msg = "Are You Sure You want to Cancel this Form ?"
@@ -313,21 +349,27 @@
         });
     }
 
+
     function validatenumber(evt) {
         var theEvent = evt || window.event;
         var key = theEvent.keyCode || theEvent.which;
         key = String.fromCharCode( key );
-        var regex = /^[0-9\b]+$/;    // allow only numbers [0-9]
+        var regex = /^[0-9\b]+$/;    // allow only numbers [0-9] 
         if( !regex.test(key) ) {
             theEvent.returnValue = false;
             if(theEvent.preventDefault) theEvent.preventDefault();
+
         }
     }
+
 
     function maskdob(){
 
         $(document.getElementById("txtDob")).mask("99-99-9999", { placeholder: "DD-MM-YYYY" });
     }
+
+
+
     function validateForm() {
         var x = document.forms["ReturnStatus"]["txtMatRno"].value;
         var y = document.forms["ReturnStatus"]["oldRno"].value;
@@ -340,5 +382,7 @@
             return false;
         }
     } 
+
+
 </script>
 

@@ -43,11 +43,8 @@
         <td colspan="8" align="center"><h2 style="margin:0;padding:0;">BOARD OF INTERMEDIATE AND SECONDARY EDUCATION, GUJRANWALA</h2></td>
     </tr>
     <tr>
-        <td colspan="8"><div style="font-size:16px;font-weight:bold;text-align:center;">REVENUE FORM SHOWING DETAILS OF ADMISSION INTER <?php if(Session=='1')
-                    echo 'ANNUAL';
-                else if(Session =='2')
-                    echo 'SUPPLY';?> 
-                <?php  echo Year; ?>
+        <td colspan="8"><div style="font-size:16px;font-weight:bold;text-align:center;">REVENUE FORM SHOWING DETAILS OF ADMISSION <br />
+                12th Class (SESSION 2016-2018)
             </div> 
         </td>
     </tr>
@@ -58,7 +55,7 @@
         <td colspan="8" style="font-size:12px;"><strong>Institute Name:</strong> <?php echo  $inst_Name;?></td>
     </tr>
     <tr>
-        <td colspan="8" style="font-size:12px;"><img style="margin-left: 605px;height: 25px;     width: 104px;" src="<?php  echo base_url().BARCODE_PATH.$barcode; ?>" /></td>
+        <td colspan="8" style="font-size:12px;"><img style="margin-left: 605px;height: 25px;     width: 104px;" src="<?php  echo '/'.BARCODE_PATH.$barcode; ?>" /></td>
     </tr>
     <tr>
         <td colspan="8" align="center">
@@ -145,7 +142,7 @@
         <th class="th">&nbsp;</th>
         <!--    <th class="th">&nbsp;</th> -->
         <th class="th">Total :</th>
-        <th class="th"><?php echo $data['batch_info'][0]["Total_RegistrationFee"];;?></th>
+        <th class="th"><?php echo  $data['batch_info'][0]["Total_RegistrationFee"];;?></th>
         <th class="th"><?php echo $data['batch_info'][0]["Total_LateRegistrationFee"];;?></th>
         <th class="th"><?php echo $data['batch_info'][0]["Total_ProcessingFee"];?></th>
         <th class="th"><?php echo $data['batch_info'][0]["TotalCertificateFee"];?></th>

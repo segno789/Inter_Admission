@@ -39,7 +39,7 @@
             <div class="circle4"></div>
         </div>
     </div>
-</div>         
+</div>
 <div id="header">
     <div class="inHeaderLogin">
         <a href="" title="BISE Gujranwala" rel="home"><img style="margin-top: 9px;text-align:left;width:150px;float: left;margin-left: 22%; " src="<?php echo base_url(); ?>assets/img/logo.jpg" alt="Logo BISE GRW"></a>

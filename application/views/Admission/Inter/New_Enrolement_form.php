@@ -390,7 +390,7 @@
                                 <div class="controls controls-row">
                                     <select id="std_group" class="dropdown span6"  name="std_group" disabled="disabled">
                                         <?php
-
+                                        
                                         $grp = $data[0]['grp_cd'];
 
                                         $sub7 = $data[0]["sub7"];
@@ -754,9 +754,9 @@
                                 <input type="hidden"   value="<?php echo   $data[0]['Iyear'];  ?>"  name="Oldyear">
                                 <input type="hidden"   value="<?php echo   $data[0]['sess'];  ?>"  name="Oldsess">
                                 <input type="hidden"   value="<?php echo   $data[0]['Brd_cd'];  ?>"  name="Oldbrd">
-
+                                
                                 <input type="hidden"   value="<?php echo   $data[0]['IntBrd_cd'];  ?>"  name="IntBrd_cd">
-
+                                
                                 <input type="hidden"   value="<?php echo   $gender;  ?>"  name="sex">
                                 <input type="hidden"   value="<?php  echo  $data['0']['name']; ?>"  name="cand_name_hidden">
                                 <input type="hidden"   value="<?php  echo  $data['0']['Fname']; ?>"  name="father_name_hidden">
@@ -791,16 +791,6 @@
 
                         </form>
                         <script type="text/javascript">
-
-
-                            $('#address').on('keypress', function (event) {
-                                var regex = new RegExp("^[a-zA-Z0-9]+$");
-                                var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
-                                if (!regex.test(key)) {
-                                    event.preventDefault();
-                                    return false;
-                                }
-                            });
 
                             function checks(){
 

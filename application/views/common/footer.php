@@ -29,7 +29,7 @@ if(isset($files)){
 <script type="">
     $(document).ready(function () {
                   
-      $( "#txtDob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate:new Date(2001, 7, 1),minDate:new Date(1970, 0, 1)}).val();
+      $( "#txtDob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate:new Date(2001, 7, 1),minDate:new Date(1980, 0, 1)}).val();
        
         $('#data-table').dataTable({
             "sPaginationType": "full_numbers",
