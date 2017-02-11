@@ -4338,7 +4338,7 @@ class Admission_inter extends CI_Controller {
             return;
 
         }
-        else if((@$_POST['std_group_hidden'] == 7)&& ((@$_POST['sub5p2']!=6) || (@$_POST['sub6p2']!=7)||(@$_POST['sub7p2']!=78)))
+        else if((@$_POST['std_group_hidden'] == 7)&& ((@$_POST['sub5p2']!= 72) || (@$_POST['sub6p2']!=75) ))
         {
 
             $allinputdata['excep'] = 'Subjects not according to Group';
@@ -4519,13 +4519,13 @@ class Admission_inter extends CI_Controller {
             return;
 
         }
-        else if(@$_POST['sub7p2']==0 && @$_POST['std_group_hidden']==7)
+  /*      else if(@$_POST['sub7p2']==0 && @$_POST['std_group_hidden']==7)
         {
             $allinputdata['excep'] = 'Please Select Part-II Subject 7';
             $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
             redirect('Admission_inter/'.$viewName);
             return;
 
-        }
+        }*/
     }
 }
