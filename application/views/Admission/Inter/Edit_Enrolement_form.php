@@ -25,7 +25,7 @@
 
                                     <?php
 
-                                    
+
                                     if($data[0]["IntBrd_cd"] ==  1)
                                     {
                                         $image_path_selected = DIRPATH12TH.$data[0]['picpath']; 
@@ -35,10 +35,10 @@
                                     else
                                     {
                                         $image_path_selected =  DIRPATHOTHER.'/'.$data[0]["coll_cd"].'/'.$data[0]["picpath"]; 
-                                        
+
                                         // echo  $data[0]["picpath"] ; die;
-                                        
-                                       // 
+
+                                        // 
                                         $type = pathinfo($image_path_selected, PATHINFO_EXTENSION); 
                                     }
                                     @$image_path_selected = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($image_path_selected));
@@ -492,6 +492,19 @@
                                                     }
 
                                                 }
+
+                                                else if($subgroups[$i] == 7)
+                                                {
+                                                    if($grp == 7)
+                                                    {
+                                                        echo "<option value='7' selected='selected'>HOME ECONOMICS</option>";  
+                                                    }
+                                                    else
+                                                    {
+                                                        echo "<option value='7'>HOME ECONOMICS</option>";  
+                                                    }
+                                                }
+
                                             } 
                                         }
                                         $subarray = array(
@@ -764,7 +777,7 @@
                                     <select id="sub5p2" class="span3 dropdown" name="sub5p2" selected="selected">
 
                                         <?php
-                                        
+
                                         if($grp == 5)
                                         {
                                             echo '<option value='.$data[0]['sub5A'].'>'.array_search($data[0]['sub5A'],$subarray).'</option>'; 
@@ -783,7 +796,7 @@
                                         <?php if($data[0]['sub6pf1']== 2){
 
                                             //DebugBreak();
-                                            
+
                                             if($data[0]['sub6Ap1']==1) 
                                             {
                                                 echo '<option value='.$data[0]['sub6'].'>'.array_search($data[0]['sub6'],$subarray).'</option>'; 
@@ -805,7 +818,7 @@
                                     </select>
                                     <select id="sub6p2"  name="sub6p2" class="span3 dropdown" selected="selected">
                                         <?php
-                                        
+
                                         if($grp == 5)
                                         {
                                             echo '<option value='.$data[0]['sub6A'].'>'.array_search($data[0]['sub6A'],$subarray).'</option>'; 
@@ -867,10 +880,10 @@
                                 <input type="hidden"   value="<?php echo   $data[0]['Iyear'];  ?>"  name="Oldyear">
                                 <input type="hidden"   value="<?php echo   $data[0]['sess'];  ?>"  name="Oldsess">
                                 <input type="hidden"   value="<?php echo   $data[0]['Brd_cd'];  ?>"  name="Oldbrd">
-                                
-                                
+
+
                                 <input type="hidden"   value="<?php echo   $data[0]['IntBrd_cd'];  ?>"  name="IntBrd_cd">
-                                
+
                                 <input type="hidden"   value="<?php echo   $gender;  ?>"  name="sex">
                                 <input type="hidden"   value="<?php  echo  $data['0']['name']; ?>"  name="cand_name_hidden">
                                 <input type="hidden"   value="<?php  echo  $data['0']['Fname']; ?>"  name="father_name_hidden">

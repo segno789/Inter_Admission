@@ -3358,7 +3358,7 @@ class Admission_inter extends CI_Controller {
                 $sub6A_abr = $data["sub6A_abr"];
                 $sub7A_abr = $data["sub7A_abr"];
             }
-$sub1_abr = '';$sub2_abr = '';$sub3_abr = '';$sub4_abr = '';$sub5_abr = '';$sub6_abr = '';$sub7_abr = '';
+            $sub1_abr = '';$sub2_abr = '';$sub3_abr = '';$sub4_abr = '';$sub5_abr = '';$sub6_abr = '';$sub7_abr = '';
             if($data['sub1Ap1'] == 1){$sub1_abr = $data["sub1_abr"].',';} else if($data['sub2Ap1'] == 1){$sub2_abr = $data["sub2_abr"].',';}
                 else if($data['sub3Ap1'] == 1){$sub3_abr = $data["sub3_abr"].',';} else if($data['sub4Ap1'] == 1){$sub4_abr = $data["sub4_abr"].',';}
                     else if($data['sub5Ap1'] == 1){$sub5_abr = $data["sub5_abr"].',';} else if($data['sub6Ap1'] == 1){$sub6_abr = $data["sub6_abr"].',';}
@@ -3369,22 +3369,22 @@ $sub1_abr = '';$sub2_abr = '';$sub3_abr = '';$sub4_abr = '';$sub5_abr = '';$sub6
             $pdf->Text($col5+.05,$ln[$countofrecords]+0.4,@$sub1_abr .@$sub2_abr. @$sub3_abr. @$sub4_abr. @$sub5_abr. @$sub6_abr. @$sub7_abr);
 
 
-            
-            
+
+
             if($data["IntBrd_cd"]==1)
-           
+
             {
                 $pdf->Image(DIRPATH12TH.$data['picpath'],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG"); 
             }
-           else
-           {
-               $pdf->Image(DIRPATHOTHER.'/'.$user['Inst_Id'].'/'.$data["picpath"],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG"); 
-              
-           }
+            else
+            {
+                $pdf->Image(DIRPATHOTHER.'/'.$user['Inst_Id'].'/'.$data["picpath"],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG"); 
 
-            
-            
-            
+            }
+
+
+
+
             ++$SR;
 
             $pdf->SetFont('Arial','',8);
@@ -3571,17 +3571,17 @@ $sub1_abr = '';$sub2_abr = '';$sub3_abr = '';$sub4_abr = '';$sub5_abr = '';$sub6
             //------ Picture Box on Centre      
             $pdf->SetXY(6.6, 1.55+$Y );
             $pdf->Cell(1.0,1.0,'',1,0,'C',0);
-            
-           
+
+
             if($data["IntBrd_cd"]==1)
-           
+
             {
-                 $pdf->Image(DIRPATH12TH.$data["picpath"],6.5, 1.55+$Y, 1.25, 1.0, "JPG");
+                $pdf->Image(DIRPATH12TH.$data["picpath"],6.5, 1.55+$Y, 1.25, 1.0, "JPG");
             }
-           else
-           {
-               $pdf->Image(DIRPATHOTHER.'/'.$user['Inst_Id'].'/'.$data["picpath"],6.5, 1.55+$Y, 1.25, 1.0, "JPG");
-           }
+            else
+            {
+                $pdf->Image(DIRPATHOTHER.'/'.$user['Inst_Id'].'/'.$data["picpath"],6.5, 1.55+$Y, 1.25, 1.0, "JPG");
+            }
 
 
             $pdf->SetFont('Arial','',8);
@@ -3899,8 +3899,10 @@ $sub1_abr = '';$sub2_abr = '';$sub3_abr = '';$sub4_abr = '';$sub5_abr = '';$sub6
                         $pdf->Cell(0.5,0.5,"GENERAL SCIENCE",0,'L');
                         else      if ($data["grp_cd"]=='5')
                             $pdf->Cell(0.5,0.5,"COMMERCE",0,'L');             
-                            //-----catagories
-                            $pdf->SetFont('Arial','UB',8);
+                            else      if ($data["grp_cd"]=='7')
+                                $pdf->Cell(0.5,0.5," HOME ECONOMICS",0,'L');             
+                                //-----catagories
+                                $pdf->SetFont('Arial','UB',8);
             $pdf->SetXY(0.5,5.3+$Y);
             $pdf->Cell( 0.5,0.5,"Exam Type:",0,'L');
 
