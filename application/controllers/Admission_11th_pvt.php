@@ -79,7 +79,7 @@ class Admission_11th_pvt extends CI_Controller {
         $session =$_POST["oldSess"];
         $this->load->model('Admission_11th_Pvt_model');
         $data = array('mrollno'=>"$mrollno",'board'=>$board,'year'=>$year,'session'=>$session);
-        if($board == 1)
+        if($board == 1 && $year !=-1)
         {
             if(!ctype_digit($mrollno))
             {
@@ -87,6 +87,7 @@ class Admission_11th_pvt extends CI_Controller {
 
             }
             $RegStdData = array('data'=>$this->Admission_11th_Pvt_model->Pre_Matric_data($data),'isReAdm'=>0,'Oldrno'=>0,'Inst_Rno'=>'','excep'=>'','isHafiz'=>'');  
+            $RegStdData['data'][0]['SSC_brd_cd'] = $board;
         }
         else
         {
@@ -116,7 +117,7 @@ class Admission_11th_pvt extends CI_Controller {
     }
     public function Get_students_record()
     {
-            DebugBreak();
+
         $mrollno = $_POST["oldRno"];
 
         $board   =  $_POST["oldBrd_cd"];
@@ -138,7 +139,7 @@ class Admission_11th_pvt extends CI_Controller {
         }
         else
         {
-            if($board == 1)
+            if($board == 1 && $_POST["oldYear"] != -1)
             {
                 if(!ctype_digit($mrollno))
                 {
@@ -147,6 +148,7 @@ class Admission_11th_pvt extends CI_Controller {
                 }
                 $RegStdData = array('data'=>$this->Admission_11th_Pvt_model->Pre_Matric_data($data),'isReAdm'=>0,'Oldrno'=>0,'Inst_Rno'=>'','excep'=>'','isHafiz'=>'');  
 
+                $RegStdData['data'][0]['SSC_brd_cd'] = $board;
                 $spl_cd = $RegStdData['data'][0]['spl_cd'];
                 $msg = $RegStdData['data'][0]['Mesg'];
                 $SpacialCase = $RegStdData['data'][0]['SpacialCase'];
@@ -157,7 +159,7 @@ class Admission_11th_pvt extends CI_Controller {
                     $error['excep'] = 'NO DATA FOUND AGAINST YOUR RECORD';
 
                 }
-                else if($RegStdData['data'][0]['SSC_RNo'] == '' || $RegStdData['data'][0]['SSC_RNo'] == 0 || strlen ($RegStdData['data'][0]['SSC_RNo']) != 6)
+                else if($RegStdData['data'][0]['SSC_RNo'] == '' || $RegStdData['data'][0]['SSC_RNo'] == 0 )
                 {
                     $error['excep'] =  'SSC ROLL NO. IS INCORRECT';
 
@@ -188,6 +190,24 @@ class Admission_11th_pvt extends CI_Controller {
 
 
             }
+             else if(@$RegStdData['data'] == False and $board == 1 and $_POST["oldYear"] == -1)
+            {
+                $error['excep'] = '';
+                $RegStdData['data'][0]['SSC_RNo'] = $_POST["oldRno"];
+                $RegStdData['data'][0]['SSC_Year'] = 'Before 2000';
+                $RegStdData['data'][0]['SSC_Sess'] = $_POST["oldSess"];
+                $RegStdData['data'][0]['SSC_brd_cd'] = $_POST["oldBrd_cd"];
+                $RegStdData['data'][0]['sub1']=1;
+                $RegStdData['isReAdm']=0;
+                // DebugBreak();
+                $mylen = strlen(trim($RegStdData['data'][0]['SSC_RNo']));
+                if(trim($RegStdData['data'][0]['SSC_RNo']," ") == '' ||  trim($RegStdData['data'][0]['SSC_RNo']) == '0' || $mylen < 4 )
+                {
+                    $error['excep'] = 'SSC ROLL NO. IS INCORRECT';
+
+                }
+
+            }  
             else if(@$RegStdData['data'] == False and $board != 1)
             {
                 $error['excep'] = '';
@@ -303,7 +323,7 @@ class Admission_11th_pvt extends CI_Controller {
         }
 
         // DebugBreak();
-        if(@$_POST['OldBrd'] == 1)
+        if(@$_POST['OldBrd'] == 1 && $this->input->post('OldYear') != -1)
         {
             $nationality_hidden = @$_POST['nationality_hidden'];
             $gender = $this->input->post('gender');
@@ -312,6 +332,15 @@ class Admission_11th_pvt extends CI_Controller {
         {
             $nationality_hidden =@$_POST['nationality'];
             $gender = $this->input->post('ogender');
+        }
+        
+        if($nationality_hidden == '')
+        {
+             $nationality_hidden =1;
+        }
+        if($gender == '')
+        {
+              $gender = $this->input->post('ogender');
         }
         //nationality_hidden
         $addre =  str_replace("'", "", $this->input->post('address'));
@@ -572,7 +601,7 @@ class Admission_11th_pvt extends CI_Controller {
         return $dueDate;
 
     }
-    public function checkFormNo_then_download()
+     public function checkFormNo_then_download()
     {
         $formno_seg = $this->uri->segment(3);
         // $dob_seg = $this->uri->segment(4);
@@ -664,7 +693,7 @@ class Admission_11th_pvt extends CI_Controller {
         $pdf->Image(BARCODE_PATH.$image,3.3, 0.6  ,2,0.25,"PNG");
         //$pdf->Image(BARCODE_PATH.$image,5.7, 6.0  ,2,0.25,"PNG");
         $pdf->Image(BARCODE_PATH.$image,5.7, 7.44  ,2,0.25,"PNG");
-        $pdf->Image(BARCODE_PATH.$image,5.7, 9.01  ,2,0.25,"PNG");
+        $pdf->Image(BARCODE_PATH.$image,5.7, 8.83  ,2,0.25,"PNG");
         $pdf->Image(BARCODE_PATH.$image,5.7, 10.43 ,2,0.25,"PNG");
 
         //$pdf->PrintBarcode(3.75,0.6,(int)$Barcode,.3,.0199);
@@ -694,8 +723,8 @@ class Admission_11th_pvt extends CI_Controller {
         {      
             $pdf->Image("assets/img/11th.png",7.6,0.19,  0.40,0.40, "PNG");
             $pdf->Image("assets/img/11th.png",7.7,7.40,  0.30,0.30, "PNG");      
-            $pdf->Image("assets/img/11th.png",7.7,8.98,  0.30,0.30, "PNG");   
-            $pdf->Image("assets/img/11th.png",7.7,10.40,  0.30,0.30, "PNG");   
+            $pdf->Image("assets/img/11th.png",7.7,8.80,  0.30,0.30, "PNG");   
+            $pdf->Image("assets/img/11th.png",7.7,10.42,  0.30,0.30, "PNG");   
         }
         else
         {
@@ -905,6 +934,8 @@ class Admission_11th_pvt extends CI_Controller {
         // DebugBreak();
         $data["sessOfPass"]==1? $sess = "ANNUAL":$sess = "SUPPLY";
         $data['oldSess_reg'] ==1? $sess_lang = "ANNUAL":$sess_lang = "SUPPLY";
+        if($data['yearOfPass'] ==  -1)
+        $data['yearOfPass'] =  'Before 2000';
         $ssc_info  = $data["matRno"].' ('.$sess.', '.$data['yearOfPass'].', '.$data['Brd_Abbr'].' )';
         if($data['IsReAdm']==1 && $data['IsLangexam']==1)
         {
@@ -1352,7 +1383,7 @@ class Admission_11th_pvt extends CI_Controller {
 
         //$pdf->Cell(0,0.5,"-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------",0,'L');
 
-        $Y= 7.25;
+        $Y= 8.65;
         //
 
         $pdf->SetFont('Arial','B',9);
@@ -1483,8 +1514,9 @@ class Admission_11th_pvt extends CI_Controller {
 
 
 
-        $pdf->Image("assets/img/cutter.jpg",0.14,8.7, 8.02,0.09, "jpeg");  
+        $pdf->Image("assets/img/cutter.jpg",0.14,8.5, 8.02,0.09, "jpeg");  
 
+           $Y= 5.65;
         $pdf->SetFont('Arial','B',9);
         $pdf->SetXY(.2,1.58+$Y);
         $pdf->Cell(0, 0.2, $heading, 0.25, "C");
@@ -1554,11 +1586,11 @@ class Admission_11th_pvt extends CI_Controller {
         $pdf->SetXY(5.92, 2.7+$Y);
         $pdf->SetFont('Arial','b',$FontSize);
         $pdf->Cell( 0,0,"Manager/Cashier:____________________ ",0,'L');
-        $pdf->Image('assets/img/BankCopy.jpg',.80,9.8, 4.95,0.25, "jpeg");   
+        $pdf->Image('assets/img/BankCopy.jpg',.80,8.23, 4.95,0.25, "jpeg");  
 
         $pdf->Image("assets/img/cutter.jpg",0.14,10.1, 8.02,0.09, "jpeg"); 
 
-
+    $Y= 7.27;
         $pdf->SetFont('Arial','B',9);
         $pdf->SetXY(.2,3+$Y);
         $pdf->Cell(0, 0.2, $heading, 0.25, "C");
@@ -1732,8 +1764,8 @@ class Admission_11th_pvt extends CI_Controller {
             $fine = 500;
             $days = abs($days);
             $endDate = date('d-m-Y');
-            $admfee =  ($admfee*3); 
-            $admfeecmp =  ($admfeecmp*3); 
+            $admfee =  ($admfee); 
+            $admfeecmp =  ($admfeecmp); 
             $Total_fine = $days*$fine;
 
         }  // DebugBreak();
@@ -1763,7 +1795,7 @@ class Admission_11th_pvt extends CI_Controller {
         }
         else
         {
-            if($data['oldRno_reg'] != '' && $data['IsLangexam'] == 1)
+            if(($data['oldRno_reg'] != '' ||  $data['oldRno'] != '' ) && $data['IsLangexam'] == 1)
             {
                 $cert_fee = 0;
                 $regfee = 0;

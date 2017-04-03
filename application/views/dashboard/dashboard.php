@@ -19,114 +19,100 @@
                                         </div>
                                     </a>
                                 </div>
-                                 <div class="metro-nav-block nav-block-blue">
-                                   
-                                        <a  href="<?=base_url()?>Admission_11th_reg" >
+                                <?php 
+                                if($appconfig['isreg'] == 1) {?>
+                                    <div class="metro-nav-block nav-block-orange">
+
+                                        <a  href="<?=base_url();?>Registration_11th" >
+                                            <div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>
+                                            <div class="brand">
+                                                11th Registration
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                    <?php } 
+
+                                if($appconfig['isadmP1'] == 1) {?>
+                                    <div class="metro-nav-block nav-block-blue">
+
+                                        <a  href="<?=base_url();?>Admission_11th_reg" >
                                             <div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>
                                             <div class="brand">
                                                 11th Admission
                                             </div>
                                         </a>
-                                </div>
-                                <div class="metro-nav-block nav-block-green">
-                                    
-                                       <a  href="<?=base_url()?>Admission_Inter" >
+                                    </div>
+                                    <?php }?>
+
+                                <?php if($appconfig['isadmP2'] == 1) {?>
+                                    <div class="metro-nav-block nav-block-green">
+
+                                        <a  href="<?=base_url();?>Admission_inter" >
                                             <div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>
                                             <div class="brand">
                                                 12th Admission
                                             </div>
                                         </a>
-                                   
-                                </div>
-                           
-                               <!-- <div class="metro-nav-block nav-block-blue double">
-                                    <form action="http://hssc.bisegrw.com/login" id="adm9form" method="post" target="_blank">
-                                        <input type="hidden" type="hidden" name="username" id='username' value="<?=  $Inst_Id?>">
-                                        <input type="hidden" type="hidden" name="password" id='password' value="<?= $pass?>">
-                                        <a  target="_blank" onclick="document.getElementById('adm9form').submit();" >
+                                    </div>
+                                    <?php }
+
+                                if($appconfig['isadmP2S'] == 1){
+                                    ?>
+
+                                    <div class="metro-nav-block nav-block-yellow">
+
+                                        <a  href="<?=base_url();?>Admission_inter" >
                                             <div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>
                                             <div class="brand">
-                                                11th Admission
+                                                12th Supply Admission
                                             </div>
                                         </a>
-                                    </form>
->>>>>>> bceabbfc92c0294b076ecff6df94b0ff8e1efff4
-                                </div>       -->
-                               <!-- <div class="metro-nav-block nav-block-red">
-                                    <form action="http://slips.bisegrw.com/" id="slips9thform" method="post" target="_blank">
-                                        <input type="hidden" type="hidden" name="username" id='username' value="<?=  $Inst_Id?>">
-                                        <input type="hidden" type="hidden" name="password" id='password' value="<?= $pass?>">
-                                        <a  target="_blank" onclick="document.getElementById('slips9thform').submit();" >
-                                            <div class="fs1" aria-hidden="true" data-icon="&#xe05c;"></div>
-                                            <div class="brand">
-                                                11th Roll Number Slips
-                                            </div>
-                                        </a>
-                                    </form>
-                                </div>-->
-                               <!-- <div class="metro-nav-block nav-block-green">
-                                    <form action="http://results.bisegrw.com/" id="res9form" method="post" target="_blank">
-                                        <input type="hidden" type="hidden" name="username" id='username' value="<?=  $Inst_Id?>">
-                                        <input type="hidden" type="hidden" name="password" id='password' value="<?= $pass?>">
-                                        <a  target="_blank" onclick="document.getElementById('res9form').submit();" >
-                                            <div class="fs1" aria-hidden="true" data-icon="&#xe05c;"></div>
-                                            <div class="brand">
-                                                11th Result Cards
-                                            </div>
-                                        </a>
-                                    </form>
-<<<<<<< HEAD
-                                </div>
-                                <div class="metro-nav-block nav-block-green">
+                                    </div>
 
 
-                                    <form action="<?php  echo base_url(); ?>/index.php/Admission_inter" id="adm10form" method="post" target="_blank">
-                                        <input type="hidden" type="hidden" name="username" id='username' value="<?=  $Inst_Id?>">
-                                        <input type="hidden" type="hidden" name="password" id='password' value="<?= $pass?>">
-                                        <a  target="_blank" onclick="document.getElementById('adm10form').submit();" >
-                                            <div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>
-                                            <div class="brand">
-                                                12th Admission
-                                            </div>
-                                        </a>
-                                    </form>
-                                </div>
-=======
-                                </div>-->
-                             
+                                    <?php } if($appconfig['isslipP2'] == 1) {?>
+                                    <div class="metro-nav-block nav-block-red">
 
-                                <!--<div class="metro-nav-block nav-block-red double">
-                                    <form action="http://slips.bisegrw.com/" id="slip10form" method="post" target="_blank">
-                                        <input type="hidden" type="hidden" name="username" id='username' value="<?=  $Inst_Id?>">
-                                        <input type="hidden" type="hidden" name="password" id='password' value="<?= $pass?>">
-                                        <a  target="_blank" onclick="document.getElementById('slip10form').submit();" >
+                                        <a  href="<?=base_url();?>RollNoSlip/InterStd" >
                                             <div class="fs1" aria-hidden="true" data-icon="&#xe05c;"></div>
                                             <div class="brand">
                                                 12th Roll Number Slips
                                             </div>
                                         </a>
-                                    </form>
-<<<<<<< HEAD
-                                </div>
+                                    </div>
+                                    <?php } 
+                                if($appconfig['isslipP1'] == 1){
+                                    ?>
+                                    <div class="metro-nav-block nav-block-red">
 
-=======
-                                </div>-->
+                                        <a  href"<?=base_url();?>RollNoSlip/EleventhStd" >
+                                        <div class="fs1" aria-hidden="true" data-icon="&#xe05c;"></div>
+                                        <div class="brand">
+                                            11th Roll Number Slips
+                                        </div>
+                                        </a>
+                                    </div>
+                                    <?php }
 
-<!--
->>>>>>> bceabbfc92c0294b076ecff6df94b0ff8e1efff4
-                                <div class="metro-nav-block nav-block-blue">
-                                    <form action="http://results.bisegrw.com/" id="res10form" method="post" target="_blank">
-                                        <input type="hidden" type="hidden" name="username" id='username' value="<?=  $Inst_Id?>">
-                                        <input type="hidden" type="hidden" name="password" id='password' value="<?= $pass?>">
-                                        <a  target="_blank" onclick="document.getElementById('res10form').submit();" >
+                                if($appconfig['isslipP2S'] == 1) {
+                                    ?>
+
+                                    <div class="metro-nav-block nav-block-yellow">
+
+                                        <a  href="<?=base_url();?>RollNoSlip/InterStd" >
                                             <div class="fs1" aria-hidden="true" data-icon="&#xe05c;"></div>
                                             <div class="brand">
-                                                12th Result Cards
+                                                12th Supply Roll Number Slips
                                             </div>
                                         </a>
-                                    </form>
-                                </div>
--->
+                                    </div>
+
+                                    <?php }?>
+
+                               
+                               
+                               
                             </div>
                         </div>
                     </div>

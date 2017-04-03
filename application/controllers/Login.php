@@ -36,16 +36,16 @@ class Login extends CI_Controller {
         {   
             //DebugBreak();
 
-            $this->load->model('login_model'); 
-            $logedIn = $this->login_model->auth($_POST['username'],$_POST['password']);
+
             $this->load->model('login_model'); 
             $logedIn = $this->login_model->auth($_POST['username'],$_POST['password']);
             $isgroup = -1;
+            $appConfig = $this->login_model->getappconfig();
             //  DebugBreak();   
             if($logedIn != false)
             {  
-                
-            
+
+
 
                 if( @$logedIn['isactive'] == 1)
                 {
@@ -53,19 +53,19 @@ class Login extends CI_Controller {
                         'user_status' => 4,                     
                         'remarks' => $logedIn['flusers']['Remarks']                     
                     );
-                    
-                   
+
+
                     if(( ($logedIn['tbl_inst']['edu_lvl'] == 2 || $logedIn['tbl_inst']['edu_lvl'] == 3)&& $logedIn['flusers']['class'] ==11))
                     {
                         $this->load->view('login/login.php',$data);
                         return ;
                     }
-                    
-                   //  echo '<pre>'; print_r($logedIn);die;       
-                }
-                
 
-              else  if($logedIn['flusers']['status'] == 0)
+                    //  echo '<pre>'; print_r($logedIn);die;       
+                }
+
+
+                else  if($logedIn['flusers']['status'] == 0)
                 {
                     $data = array(
                         'user_status' => 3                     
@@ -81,14 +81,7 @@ class Login extends CI_Controller {
                     $this->load->view('login/login.php',$data);
                     return ;
                 }  
-                if($logedIn['tbl_inst']['edu_lvl'] == 1)
-                {
-                    if($logedIn['tbl_inst']['IsGovernment'] ==2 and ($logedIn['tbl_inst']['allowed_mGrp'] == '1,2' || $logedIn['tbl_inst']['allowed_mGrp'] == '2,1' || $logedIn['tbl_inst']['allowed_mGrp'] == '1' || $logedIn['tbl_inst']['allowed_mGrp'] == '2' || $logedIn['tbl_inst']['allowed_mGrp'] == '1,7' || $logedIn['tbl_inst']['allowed_mGrp'] == '7,1'))
-                    {
-                        $logedIn['tbl_inst']['allowed_mGrp'] = '1,2,7';
-                    }
-                }
-                else if($logedIn['tbl_inst']['edu_lvl'] == 2)
+                if($logedIn['tbl_inst']['edu_lvl'] == 2)
                 {
                     if(($logedIn['tbl_inst']['allowed_iGrp'] == NULL || $logedIn['tbl_inst']['allowed_iGrp'] == 0 || $logedIn['tbl_inst']['allowed_iGrp'] == '') && $logedIn['tbl_inst']['IsGovernment'] ==2)
                     {
@@ -110,11 +103,6 @@ class Login extends CI_Controller {
                         );
                         $this->load->view('login/login.php',$data);
                     }
-                    if($logedIn['tbl_inst']['IsGovernment'] ==2 and ($logedIn['tbl_inst']['allowed_mGrp'] == '1,2' || $logedIn['tbl_inst']['allowed_mGrp'] == '2,1' || $logedIn['tbl_inst']['allowed_mGrp'] == '1' || $logedIn['tbl_inst']['allowed_mGrp'] == '2' || $logedIn['tbl_inst']['allowed_mGrp'] == '1,7' || $logedIn['tbl_inst']['allowed_mGrp'] == '7,1'))
-                    {
-                        $logedIn['tbl_inst']['allowed_mGrp'] = '1,2,7';
-                    }
-
 
 
                 }
@@ -122,28 +110,17 @@ class Login extends CI_Controller {
                 {
                     // $this->load->model('RollNoSlip_model');
                     $isdeaf = 0;
-                    if($logedIn['tbl_inst']['edu_lvl'] == 1)
+                    if($logedIn['tbl_inst']['edu_lvl'] == 2)
                     {
                         if($logedIn['tbl_inst']['IsGovernment'] ==1)
                         {
-                            $logedIn['tbl_inst']['allowed_mGrp'] = '1,2,5,7,8';
-                            $logedIn['tbl_inst']['allowed_iGrp'] = '';
-                        }  
-                    }
-                    else if($logedIn['tbl_inst']['edu_lvl'] == 2)
-                    {
-                        if($logedIn['tbl_inst']['IsGovernment'] ==1)
-                        {
-                            $logedIn['tbl_inst']['allowed_mGrp'] = '';
                             $logedIn['tbl_inst']['allowed_iGrp'] = '1,2,3,4,5,6';
                         }
-
                     }
                     else if($logedIn['tbl_inst']['edu_lvl'] == 3)
                     {
                         if($logedIn['tbl_inst']['IsGovernment'] ==1)
                         {
-                            $logedIn['tbl_inst']['allowed_mGrp'] = '1,2,5,7,8';
                             $logedIn['tbl_inst']['allowed_iGrp'] = '1,2,3,4,5,6';
                         }
 
@@ -163,7 +140,6 @@ class Login extends CI_Controller {
                         'inst_Name' => $logedIn['tbl_inst']['Name'],
                         'gender' => $logedIn['tbl_inst']['Gender'],
                         'isrural' => $logedIn['tbl_inst']['IsRural'],
-                        'grp_cd' => $logedIn['tbl_inst']['allowed_mGrp'],
                         'grp_cdi' => $logedIn['tbl_inst']['allowed_iGrp'],
                         'isgovt' => $logedIn['tbl_inst']['IsGovernment'],
                         'email' => $logedIn['tbl_inst']['email'],
@@ -179,6 +155,7 @@ class Login extends CI_Controller {
                         'isfeedingallow' => $isfeeding   ,
                         'isinterfeeding' => $isinterfeeding ,
                         'lastdate' => $lastdate ,  
+                        'appconfig' => $appConfig,
                     );
                     $this->load->library('session');
                     $this->session->set_userdata('logged_in', $sess_array); 

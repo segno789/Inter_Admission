@@ -468,6 +468,18 @@
                                                         echo "<option value='5'>COMMERCE</option>";  
                                                     }
                                                 }
+
+                                                else if($subgroups[$i] == 7)
+                                                {
+                                                    if($grp == 7)
+                                                    {
+                                                        echo "<option value='7' selected='selected'>HOME ECONOMICS</option>";  
+                                                    }
+                                                    else
+                                                    {
+                                                        echo "<option value='7'>HOME ECONOMICS</option>";  
+                                                    }
+                                                }
                                             } 
                                         }
                                         $subarray = array(
@@ -791,16 +803,6 @@
 
                         </form>
                         <script type="text/javascript">
-
-
-                            $('#address').on('keypress', function (event) {
-                                var regex = new RegExp("^[a-zA-Z0-9]+$");
-                                var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
-                                if (!regex.test(key)) {
-                                    event.preventDefault();
-                                    return false;
-                                }
-                            });
 
                             function checks(){
 

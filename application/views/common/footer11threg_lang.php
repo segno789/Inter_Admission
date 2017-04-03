@@ -523,9 +523,7 @@ if(isset($files)){
         }
     })
 
-       $("#isAlreadyApplied").change(function(){
-       
-       })
+
     function  check_NewEnrol_validation_11th()
     {
         // 
@@ -707,8 +705,7 @@ if(isset($files)){
             $("#std_group").focus();
             return status;  
         }
-        //else if ()
-       /* else   if ($("#sub3").find('option:selected').val() < 1 && $("#isAlreadyApplied").is('checked')==false) 
+/*        else   if ($("#sub3").find('option:selected').val() < 1) 
         {
             // $('#ErrMsg').show(); 
             alertify.error('Please select your Study Group '); 
@@ -717,7 +714,7 @@ if(isset($files)){
 
             return status;  
         }
-        else   if ($("#sub4").find('option:selected').val() < 1 && $("#isAlreadyApplied").attr('checked')==false) 
+        else   if ($("#sub4").find('option:selected').val() < 1) 
         {
             $('#ErrMsg').show(); 
             alertify.error('Please select Subject '); 
@@ -727,7 +724,7 @@ if(isset($files)){
             return status;  
         }
 
-        else   if ($("#sub5").find('option:selected').val() < 1 && $("#isAlreadyApplied").attr('checked')==false) 
+        else   if ($("#sub5").find('option:selected').val() < 1) 
         {
             $('#ErrMsg').show(); 
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
@@ -738,7 +735,7 @@ if(isset($files)){
             return status;  
         }
 
-        else   if ($("#sub6").find('option:selected').val() < 1 && $("#isAlreadyApplied").attr('checked')==false) 
+        else   if ($("#sub6").find('option:selected').val() < 1) 
         {
             $('#ErrMsg').show(); 
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });

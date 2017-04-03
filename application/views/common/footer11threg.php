@@ -229,6 +229,12 @@ if(isset($files)){
             else
             {
                 gender =  $("input[name=gender]").val() ;
+                
+                if(gender ==  undefined || gender =='')
+                {
+                     gender = $("input[name=ogender]:checked").val();
+                }
+                
             }
             
              if(gender == "" || gender == 0 || gender == undefined  || gender.length == undefined)
@@ -272,7 +278,6 @@ if(isset($files)){
         })
         $("#pvtZone").change(function(){
 
-            debugger;
             var tehId =  $("#pvtZone").val();
              var gender = '';
 
@@ -283,6 +288,10 @@ if(isset($files)){
             else
             {
                 gender =  $("input[name=gender]").val() ;
+                if(gender ==  undefined || gender =='')
+                {
+                     gender = $("input[name=ogender]:checked").val();
+                }
             }
             
              if(gender == "" || gender == 0 || gender == undefined  || gender.length == undefined)
@@ -549,6 +558,12 @@ if(isset($files)){
         {
             gender =  $("input[name=gender]").val() ;
         }
+        
+        if(gender == '' || gender ==  undefined)
+        {
+            gender = $("input[name=ogender]:checked").val();
+        }
+        
         var address = $('#address').val();
         var image = $('#image').val();
         var MarkOfIdent = $('#MarkOfIden').val();

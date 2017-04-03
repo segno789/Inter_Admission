@@ -5470,7 +5470,7 @@ margin: 20px 20px 0 0; }
 .top-nav {
 margin-bottom: 0px; }
 .top-nav ul li {
-    width: 125px;
+    width: 132px;
     float: left;
 margin-right: 1px; }
 .top-nav ul li a {
@@ -5499,7 +5499,7 @@ font-size: 11px; }
 .top-nav ul li a:hover {
 color: #3693cf; }
 .top-nav ul li .selected {
-    width: 107px;
+    width: 115px;
     -webkit-border-radius: 4px 4px 0 0;
     -moz-border-radius: 4px 4px 0 0;
     border-radius: 4px 4px 0 0;

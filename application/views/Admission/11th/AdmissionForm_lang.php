@@ -638,15 +638,11 @@
                                 <select id="sub7" class="span3 dropdown" name="sub7" selected="selected" style="display: none;">
 
                                 </select> 
-                                <!--     <select id="sub8"  name="sub8" class="span3 dropdown">-->
-                                <!-- <option value="<?php  if($isReAdm != 1) { echo @$data[0]['sub8'];} else{echo "";}    ?>" selected="selected"><?php  if($isReAdm != 1) {
-                                    // DebugBreak();
-                                    echo array_search(@$data[0]['sub8'],$subarray);}  else {echo "";};
-                                ?></option>-->
-                                <!--</select>
-                                </div>-->
+                             
                             </div>
-                            <div id="instruction" style="display: none; width:600px"></div>
+                            <div id="instruction" style="display:none; width:700px" >
+                                <img src="<?php  echo base_url().'assets/img/Instruction_alooma.jpg'; ?>" border="0" width="950" height="773" alt="Instruction_alooma.jpg (152,412 bytes)">
+                            </div>
                             <div class="form-actions no-margin">
                                 <input type="hidden"   value=""  name="formNo">
                                 <input type="hidden"   value="<?php  echo @$isReAdm; ?>"  name="IsReAdm">
@@ -675,8 +671,6 @@
 <script type="text/javascript">
 
 
-
-   
 
 
     function CancelAlert()

@@ -77,15 +77,16 @@
                             </div>
                             <?php
                             @$brd_cd =  @$data[0]['SSC_brd_cd'];
+                            @$SSC_Year =  @$data[0]['SSC_Year'];
                             ?>
                             <div class="control-group">
                                 <label class="control-label span1" >Candidate Name:</label>
                                 <div class="controls controls-row">
-                                    <input class="span3"  type="text" id="cand_name"  style="text-transform: uppercase;" name="cand_name" placeholder="Candidate Name" maxlength="60"  value="<?php  echo  @$data['0']['name']; ?>" <?php if($isReAdm==0 && @$brd_cd == 1) {echo "readonly='readonly'";  } ?>  >
+                                    <input class="span3"  type="text" id="cand_name"  style="text-transform: uppercase;" name="cand_name" placeholder="Candidate Name" maxlength="60"  value="<?php  echo  @$data['0']['name']; ?>" <?php if($isReAdm==0 && @$brd_cd == 1 && @$SSC_Year != -1) {echo "readonly='readonly'";  } ?>  >
                                     <label class="control-label span2" for="lblfather_name">
                                         Father's Name :
                                     </label> 
-                                    <input class="span3" id="father_name" name="father_name"  style="text-transform: uppercase;" type="text" placeholder="Father's Name" maxlength="60" value="<?php echo  @$data['0']['Fname']; ?>" <?php if($isReAdm==0  && @$brd_cd == 1) echo "readonly='readonly'";  ?> required="required">
+                                    <input class="span3" id="father_name" name="father_name"  style="text-transform: uppercase;" type="text" placeholder="Father's Name" maxlength="60" value="<?php echo  @$data['0']['Fname']; ?>" <?php if($isReAdm==0  && @$brd_cd == 1 && @$SSC_Year != -1) echo "readonly='readonly'";  ?> required="required">
                                 </div>
                             </div>
                             <div class="control-group">
@@ -93,7 +94,7 @@
                                     Bay Form No :
                                 </label>
                                 <div class="controls controls-row">
-                                    <input class="span3" type="text" id="bay_form" name="bay_form"  placeholder="Bay Form No." value="<?php echo  @$data['0']['bFormNo']; ?>" required="required" <?php if(@$data['0']['bFormNo'] !=''  && @$brd_cd == 1) echo "readonly='readonly'";  ?>>
+                                    <input class="span3" type="text" id="bay_form" name="bay_form"  placeholder="Bay Form No." value="<?php echo  @$data['0']['bFormNo']; ?>" required="required" >
                                     <label class="control-label span2" for="father_cnic">
                                         Father's CNIC :
                                     </label> 
@@ -162,7 +163,7 @@
                                     $nat = @$data[0]['IsPakistani'];
                                     $matric_sub1 = @$data[0]['sub1'];
 
-                                    if(@$brd_cd ==1 )
+                                    if(@$brd_cd ==1 && @$SSC_Year != -1)
                                     {
                                         if($nat == 1 || $nat == 0)
                                         {
@@ -201,13 +202,13 @@
 
                                     if($gender == 1 )
                                     {
-                                        echo " <label class='radio inline span1'><input type='radio' id='gender1' value='1' checked='checked'  disabled='disabled' name='gender'> Male</label> 
-                                        <label class='radio inline span1'><input type='radio' id='gender2' value='2'  name='gender'  disabled='disabled'> Female </label> " ;
+                                        echo " <label class='radio inline span1'><input type='radio' id='gender1' value='1' checked='checked'  disabled='disabled' name='gender1'> Male</label> 
+                                        <label class='radio inline span1'><input type='radio' id='gender2' value='2'  name='gender1'  disabled='disabled'> Female </label> " ;
                                     }
                                     else if ($gender == 2)
                                     {
-                                        echo " <label class='radio inline span1'><input type='radio' id='gender1' value='1'  disabled='disabled' name='gender'> Male</label> 
-                                        <label class='radio inline span1'><input type='radio' id='gender2' value='2'  checked='checked'  disabled='disabled'  name='gender'> Female </label> " ;
+                                        echo " <label class='radio inline span1'><input type='radio' id='gender1' value='1'  disabled='disabled' name='gender1'> Male</label> 
+                                        <label class='radio inline span1'><input type='radio' id='gender2' value='2'  checked='checked'  disabled='disabled'  name='gender1'> Female </label> " ;
                                     }
                                     else
                                     {
@@ -355,7 +356,7 @@
                                     <label class="control-label span2" for="lblfather_name">
                                         Year :
                                     </label> 
-                                    <input class="span3" id="old_ssc_year" name="old_ssc_year" readonly="readonly" style="text-transform: uppercase;" type="text" placeholder="" maxlength="60" value="<?php echo   @$data[0]['SSC_Year']; ?>" required="required">
+                                    <input class="span3" id="old_ssc_year" name="old_ssc_year" readonly="readonly" style="text-transform: uppercase;" type="text" placeholder="" maxlength="60" value="<?php if (@$data[0]['SSC_Year'] == -1) echo  'Before 2000' ; else echo   @$data[0]['SSC_Year']; ?>" required="required">
                                 </div>
                             </div>
                             <div class="control-group">
@@ -632,7 +633,9 @@
                                 <!--</select>
                                 </div>-->
                             </div>
-                            <div id="instruction" style="display: none; width:600px"></div>
+                            <div id="instruction" style="display: none; width:600px">
+                              <img src="<?php  echo base_url().'assets/img/Instruction11th.jpg'; ?>" border="0" width="950" height="773" alt="Instruction_alooma.jpg (152,412 bytes)">
+                            </div>
                             <div class="form-actions no-margin">
                                 <input type="hidden"   value=""  name="formNo">
                                 <input type="hidden"   value="<?php  echo $isReAdm; ?>"  name="IsReAdm">

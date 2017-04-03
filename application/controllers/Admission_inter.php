@@ -2183,7 +2183,18 @@ class Admission_inter extends CI_Controller {
 
         $processing_fee = 0;
         $Adm_fee           = 0;
-        $LAdm_fee          = 0;
+        
+        $TripleDate = date('Y-m-d',strtotime(TripleDateFee)); 
+        $now = date('Y-m-d'); // or your date as well
+        $days = (strtotime($TripleDate) - strtotime($now)) / (60 * 60 * 24);
+        $fine = 500;
+        $days = abs($days);
+        $endDate = date('d-m-Y');
+        if($days>0)
+            $LAdm_fee = $days*$fine;
+        else
+            $LAdm_fee          = 0;
+
         $TotalAdmFee = 0;
         $TotalLatefee = 0;
         $Totalprocessing_fee = 0;
@@ -2320,7 +2331,7 @@ class Admission_inter extends CI_Controller {
                 //$AdmFee
             }
             $TotalAdmFee = $TotalAdmFee + $Adm_fee;
-            $TotalLatefee = $TotalLatefee + $LAdm_fee;
+       //     $TotalLatefee = $TotalLatefee + $LAdm_fee;
             $Totalprocessing_fee = $Totalprocessing_fee + $Adm_ProcessingFee;
             $total_certFee = $total_certFee+$cert_fee;
             $n++;
@@ -2362,7 +2373,16 @@ class Admission_inter extends CI_Controller {
 
         $processing_fee = 0;
         $Adm_fee           = 0;
-        $LAdm_fee          = 0;
+        $TripleDate = date('Y-m-d',strtotime(TripleDateFee)); 
+        $now = date('Y-m-d'); // or your date as well
+        $days = (strtotime($TripleDate) - strtotime($now)) / (60 * 60 * 24);
+        $fine = 500;
+        $days = abs($days);
+        $endDate = date('d-m-Y');
+        if($days>0)
+            $LAdm_fee = $days*$fine;
+        else
+            $LAdm_fee          = 0;
         $TotalAdmFee = 0;
         $TotalLatefee = 0;
         $Totalprocessing_fee = 0;
@@ -2497,7 +2517,7 @@ class Admission_inter extends CI_Controller {
                 //$AdmFee
             }
             $TotalAdmFee = $TotalAdmFee + $Adm_fee;
-            $TotalLatefee = $TotalLatefee + $LAdm_fee;
+          //  $TotalLatefee = $TotalLatefee + $LAdm_fee;
             $Totalprocessing_fee = $Totalprocessing_fee + $Adm_ProcessingFee;
             $total_certFee = $total_certFee+$cert_fee;
             $n++;
@@ -3358,18 +3378,36 @@ class Admission_inter extends CI_Controller {
                 $sub6A_abr = $data["sub6A_abr"];
                 $sub7A_abr = $data["sub7A_abr"];
             }
-
-            if($data['sub1Ap1'] == 1){$sub1_abr = $data["sub1_abr"].',';} else if($data['sub2Ap1'] == 1){$sub2_abr = $data["sub2_abr"].',';}
-                else if($data['sub3Ap1'] == 1){$sub3_abr = $data["sub3_abr"].',';} else if($data['sub4Ap1'] == 1){$sub4_abr = $data["sub4_abr"].',';}
-                    else if($data['sub5Ap1'] == 1){$sub5_abr = $data["sub5_abr"].',';} else if($data['sub6Ap1'] == 1){$sub6_abr = $data["sub6_abr"].',';}
-                        else if($data['sub7Ap1'] == 1){$sub7_abr = $data["sub7_abr"].',';}
+            $sub1_abr = '';$sub2_abr = '';$sub3_abr = '';$sub4_abr = '';$sub5_abr = '';$sub6_abr = '';$sub7_abr = '';
+            if($data['sub1Ap1'] == 1){$sub1_abr = $data["sub1_abr"].',';}  
+            if($data['sub2Ap1'] == 1){$sub2_abr = $data["sub2_abr"].',';}
+            if($data['sub3Ap1'] == 1){$sub3_abr = $data["sub3_abr"].',';}  
+            if($data['sub4Ap1'] == 1){$sub4_abr = $data["sub4_abr"].',';}
+            if($data['sub5Ap1'] == 1){$sub5_abr = $data["sub5_abr"].',';}  
+            if($data['sub6Ap1'] == 1){$sub6_abr = $data["sub6_abr"].',';}
+            if($data['sub7Ap1'] == 1){$sub7_abr = $data["sub7_abr"].',';}
 
                             $pdf->Text($col5+.05,$ln[$countofrecords]+0.2,  $data["sub1_abr"].','.$data["sub2_abr"].','.$data["sub8_abr"].','.$data["sub4_abr"].','.$data["sub5_abr"].',' .@$sub5A_abr .$data["sub6_abr"].',' .@$sub6A_abr .$data["sub7_abr"].',' .@$sub7A_abr);
             $pdf->SetFont('Arial','B',7);    
             $pdf->Text($col5+.05,$ln[$countofrecords]+0.4,@$sub1_abr .@$sub2_abr. @$sub3_abr. @$sub4_abr. @$sub5_abr. @$sub6_abr. @$sub7_abr);
 
 
-            $pdf->Image(DIRPATH12TH.$data['picpath'],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG"); 
+
+
+            if($data["IntBrd_cd"]==1)
+
+            {
+                $pdf->Image(DIRPATH12TH.$data['picpath'],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG"); 
+            }
+            else
+            {
+                $pdf->Image(DIRPATHOTHER.'/'.$user['Inst_Id'].'/'.$data["picpath"],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG"); 
+
+            }
+
+
+
+
             ++$SR;
 
             $pdf->SetFont('Arial','',8);
@@ -3556,7 +3594,17 @@ class Admission_inter extends CI_Controller {
             //------ Picture Box on Centre      
             $pdf->SetXY(6.6, 1.55+$Y );
             $pdf->Cell(1.0,1.0,'',1,0,'C',0);
-            $pdf->Image(DIRPATH12TH.$data["picpath"],6.5, 1.55+$Y, 1.25, 1.0, "JPG");
+
+
+            if($data["IntBrd_cd"]==1)
+
+            {
+                $pdf->Image(DIRPATH12TH.$data["picpath"],6.5, 1.55+$Y, 1.25, 1.0, "JPG");
+            }
+            else
+            {
+                $pdf->Image(DIRPATHOTHER.'/'.$user['Inst_Id'].'/'.$data["picpath"],6.5, 1.55+$Y, 1.25, 1.0, "JPG");
+            }
 
 
             $pdf->SetFont('Arial','',8);
@@ -3874,8 +3922,10 @@ class Admission_inter extends CI_Controller {
                         $pdf->Cell(0.5,0.5,"GENERAL SCIENCE",0,'L');
                         else      if ($data["grp_cd"]=='5')
                             $pdf->Cell(0.5,0.5,"COMMERCE",0,'L');             
-                            //-----catagories
-                            $pdf->SetFont('Arial','UB',8);
+                            else      if ($data["grp_cd"]=='7')
+                                $pdf->Cell(0.5,0.5," HOME ECONOMICS",0,'L');             
+                                //-----catagories
+                                $pdf->SetFont('Arial','UB',8);
             $pdf->SetXY(0.5,5.3+$Y);
             $pdf->Cell( 0.5,0.5,"Exam Type:",0,'L');
 
@@ -4311,7 +4361,7 @@ class Admission_inter extends CI_Controller {
             return;
 
         }
-        else if((@$_POST['std_group_hidden'] == 7)&& ((@$_POST['sub5p2']!=6) || (@$_POST['sub6p2']!=7)||(@$_POST['sub7p2']!=78)))
+        else if((@$_POST['std_group_hidden'] == 7)&& ((@$_POST['sub5p2']!= 60) || (@$_POST['sub6p2']!=61)  ))
         {
 
             $allinputdata['excep'] = 'Subjects not according to Group';
@@ -4492,13 +4542,13 @@ class Admission_inter extends CI_Controller {
             return;
 
         }
-        else if(@$_POST['sub7p2']==0 && @$_POST['std_group_hidden']==7)
+  /*      else if(@$_POST['sub7p2']==0 && @$_POST['std_group_hidden']==7)
         {
             $allinputdata['excep'] = 'Please Select Part-II Subject 7';
             $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
             redirect('Admission_inter/'.$viewName);
             return;
 
-        }
+        }*/
     }
 }

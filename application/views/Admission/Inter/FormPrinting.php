@@ -107,6 +107,20 @@
                                         }
 
                                     }
+
+                                    else if($subgroups[$i] == 7)
+                                    {
+                                        if($grp == 5)
+                                        {
+                                            echo "<option value='7' selected='selected'> HOME ECONOMICS</option>";  
+                                        }
+                                        else
+                                        {
+                                            echo "<option value='7'> HOME ECONOMICS</option>";  
+                                        }
+
+                                    }
+
                                 } 
 
                                 echo "</select>" ?>

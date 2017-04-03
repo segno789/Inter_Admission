@@ -426,7 +426,28 @@ header("Pragma: no-cache");
                                             echo "<option value='5'>COMMERCE</option>";      
                                         }
 
-                                        else if($exam_type == 1   || $exam_type == 3 || $exam_type == 9 || $exam_type == 11 || $exam_type == 16 || $exam_type == 14 || $exam_type == 15)
+                                        else if($exam_type == 14 || $exam_type == 15 || $exam_type == 16)
+                                        {
+                                            if($grp_cd == 1)
+                                            {
+                                                echo "<option value='1' selected='selected'>PRE-MEDICAL</option>"; 
+                                            }
+                                            else if($grp_cd == 2)
+                                            {
+                                                echo "<option value='2' selected='selected'>PRE-ENGINEERING</option>"; 
+                                            }
+                                            else if($grp_cd == 3)
+                                            {
+                                                echo "<option value='3' selected='selected'>HUMANITIES</option>"; 
+                                            }
+                                            else if($grp_cd == 4)
+                                            {
+                                                echo "<option value='3' selected='selected'>GENERAL SCIENCE</option>"; 
+                                            }
+                                        }
+
+                                        /*else if($exam_type == 1   || $exam_type == 3 || $exam_type == 9 || $exam_type == 11 || $exam_type == 16 || $exam_type == 14 || $exam_type == 15)*/
+                                        else if($exam_type == 1   || $exam_type == 3 || $exam_type == 9 || $exam_type == 11)
                                         {
                                             if($grp_cd == 1){
                                                 echo "<option value='1' selected='selected'>PRE-MEDICAL</option>"; 
@@ -1637,7 +1658,7 @@ header("Pragma: no-cache");
                                     }
 
                                     if((sub5pf1 == "2") || (sub5st1 == "2")){
-                                        $("#sub5").append(new Option('<?php echo  array_search($data[0]['sub5'],$subarray); ?>',sub5));      
+                                        $("#sub5").append(new Option('<?php  echo  array_search($data[0]['sub5'],$subarray); ?>',sub5));      
                                         $("#sub5").append('<option value="0">NONE</option>');      
                                     }
 
@@ -2289,6 +2310,13 @@ header("Pragma: no-cache");
                                     $('#sub3p2').empty();
                                 }
 
+                                function Aama_Khasa()
+                                {
+                                    Empty_All_Dropdowns();
+                                    hide_sub7_sub8();
+                                    AamKhasa_subj();
+                                }
+
                                 <?php
                                 //DebugBreak();
 
@@ -2319,8 +2347,6 @@ header("Pragma: no-cache");
                                 {
                                     $isper = 1;
                                 }
-
-
 
                                 if($spl_cd == 119){
                                     echo'Empty_All_Dropdowns();';
@@ -2393,9 +2419,7 @@ header("Pragma: no-cache");
                                     }
                                 });
 
-                                var isper = <?php echo @$isper ?>
-
-                                $('#std_group').change(function(){                                  
+                                $('#std_group').change(function(){
 
                                     $("#fullAppear").attr("checked", false);
 
@@ -2411,16 +2435,11 @@ header("Pragma: no-cache");
                                         }
                                         if(grp_cd != 3)
                                         {
-                                            sub_grp_load();
-                                        }                                       
-                                        else if(grp_cd == 3 && isper == 0)
+                                            sub_grp_load();    
+                                        }
+                                        else if(grp_cd == 3)
                                         {
                                             humanities_subjects();
-                                            $("#fullAppear").attr("checked", true);
-                                        }
-                                        else if(grp_cd == 3 && isper == 1)
-                                        {
-                                            humanities_subjects_full();
                                             $("#fullAppear").attr("checked", true);
                                         }
                                     }
@@ -2460,13 +2479,9 @@ header("Pragma: no-cache");
                                         {
                                             sub_grp_load_All_Previous();
                                         }
-                                        else if(sel_group == grp_cd && sel_group == 3 && isper == 0) 
+                                        else if(sel_group == grp_cd && sel_group == 3) 
                                         {
                                             humanities_subjects();
-                                        }
-                                        else if(sel_group == grp_cd && sel_group == 3 && isper == 1) 
-                                        {
-                                            humanities_subjects_full();
                                         }
                                     }
 

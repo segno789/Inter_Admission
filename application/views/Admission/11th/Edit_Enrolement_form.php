@@ -5,7 +5,7 @@
                 <div class="widget">
                     <div class="widget-header">
                         <div class="title">
-                            Event registration for<a id="redgForm" data-original-title="">m</a>
+                            Event admission for<a id="redgForm" data-original-title="">m</a>
                         </div>
                       
                     </div>
@@ -18,21 +18,27 @@
                                 <div class="controls controls-row">
                                     <input type="hidden" class="span2 hidden" id="isReAdm" name="isReAdm" value="0">
                                      <label class="control-label span2" style="width: 411px;margin-left: -199px;" >
-                                      <img src="<?=base_url()?>assets/img/upalodimage.jpg" alt="" >
+                                      
                                     </label> 
-                                    <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="<?php  if($isReAdm==1) {} else{echo base_url().IMAGE_PATH.$Inst_Id.'/'.$data[0]['PicPath'].'?'.rand(10000,1000000); } ?>" alt="Candidate Image">
+                                    <?php 
+                                    $picpath =  DIRPATH11th.'/'.$Inst_Id.'/'.$data[0]['PicPath'];
+                                    // echo $picpath;
+                                    $type = pathinfo($picpath, PATHINFO_EXTENSION);
+                                    $data[0]['PicPath'] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
+                                    ?>
+                                    <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="<?php  echo $data[0]['PicPath'];?>" alt="Candidate Image">
                                 </div>
                             </div>
                             <div class="control-group">
                                 
                                  <label id="ErrMsg" class="control-label span2" style=" text-align: left;"><?php ?></label>
-                                <div class="controls controls-row">
+                               <!-- <div class="controls controls-row">
                                     <input class="span3 hidden"  type="text" placeholder="" >  
                                     <label class="control-label span2">
                                         Image :  
                                     </label> 
                                     <input type="file" disabled='disabled' class="span4" id="image" name="image" onchange="readURL_corr(this)">
-                                </div>
+                                </div>-->
                             </div>
                             <div class="control-group">
                                 <label class="control-label span1" >
@@ -272,7 +278,8 @@
                                     <select id="std_group" class="dropdown span6"  disabled='disabled' name="std_group">
                                    <?php
                                         // DebugBreak();
-                                        $grp = $data[0]['RegGrp'];
+                                        $grp = $data[0]['grp_cd'];
+                                     //   echo  '<pre>'; print_r($grp);die;
                                         $subgroups =  explode(',',@$grp_cdi);
                                         echo "<option value='0' >SELECT GROUP</option>";
                                         if($isReAdm == 1 )

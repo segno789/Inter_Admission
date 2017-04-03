@@ -1478,7 +1478,7 @@ public function NewEnrolment_Delete($formno)
         }
         else
         {
-            $date = new DateTime(SingleDateFee9th);
+            $date = new DateTime(SingleDateFee);
             $singleDate =  $date->format('Y-m-d');                                                                     
             $User_info_data = array('Inst_Id'=>$user['Inst_Id'], 'date' => $singleDate);
             $user_info  =  $this->Admission_11th_reg_model->getuser_info($User_info_data);
@@ -2618,7 +2618,7 @@ public function NewEnrolment_Delete($formno)
         }
         else
         {
-            $date = new DateTime(SingleDateFee9th);
+            $date = new DateTime(SingleDateFee);
             $singleDate =  $date->format('Y-m-d');                                                                     
             $User_info_data = array('Inst_Id'=>$user['Inst_Id'], 'date' => $singleDate);
             $user_info  =  $this->Admission_11th_reg_model->getuser_info($User_info_data);
@@ -2676,7 +2676,7 @@ public function NewEnrolment_Delete($formno)
                 $challanDueDate = $singleDate_temp;
             }
 
-            $TripleDate = date('Y-m-d',strtotime(TripleDateFee9th)); 
+            $TripleDate = date('Y-m-d',strtotime(TripleDateFee)); 
             $now = date('Y-m-d'); // or your date as well
             $days = (strtotime($TripleDate) - strtotime($now)) / (60 * 60 * 24);
             $fine = 500;
@@ -2704,7 +2704,7 @@ public function NewEnrolment_Delete($formno)
         {
             if($user_info['info'][0]['IsGovernment'] == 2 || $user_info['info'][0]['IsGovernment'] == 1 )
             {
-                $date = new DateTime(SingleDateFee9th);
+                $date = new DateTime(SingleDateFee);
                 $singleDate =  $date->format('Y-m-d'); 
                 $User_info_data = array('Inst_Id'=>$user['Inst_Id'], 'date' => $singleDate);
                 $user_info  =  $this->Admission_11th_reg_model->getuser_info($User_info_data); 
@@ -2719,7 +2719,7 @@ public function NewEnrolment_Delete($formno)
                      // Set Challan DATE
                  $date_temp = new DateTime($user_info['info'][0]['feedingDate']);
                  $singleDate_temp =  $date_temp->format('d-m-Y'); 
-                $challanDueDate = SingleDateFee9th;
+                $challanDueDate = SingleDateFee;
 
                 } 
                 else if( $user_info['rule_fee'][1]['isPrSub']== 1 )
@@ -2733,7 +2733,7 @@ public function NewEnrolment_Delete($formno)
                        // Set Challan DATE
                  $date_temp = new DateTime($user_info['info'][0]['feedingDate']);
                  $singleDate_temp =  $date_temp->format('d-m-Y'); 
-                $challanDueDate = SingleDateFee9th;
+                $challanDueDate = SingleDateFee;
 
                 }
                 if($user_info['rule_fee'][0]['isPrSub']==0)
@@ -2747,7 +2747,7 @@ public function NewEnrolment_Delete($formno)
                        // Set Challan DATE
                  $date_temp = new DateTime($user_info['info'][0]['feedingDate']);
                  $singleDate_temp =  $date_temp->format('d-m-Y'); 
-                $challanDueDate = SingleDateFee9th;
+                $challanDueDate = SingleDateFee;
                 }
                 else if($user_info['rule_fee'][1]['isPrSub']== 0 )
                 {

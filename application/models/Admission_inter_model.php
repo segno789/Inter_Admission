@@ -475,7 +475,10 @@ class Admission_inter_model extends CI_Model
 
 
     public function getrulefee(){
-        $date =  date('Y-m-d') ;
+        
+        
+       // $date =  date('Y-m-d') ;
+        $date =  '2017-03-07' ;
         //DebugBreak();
         $query = $this->db->get_where('Admission_Online..RuleFeeAdm', array('class' => 12,'sess' => Session, 'Start_Date <='=>$date,'End_Date >='=>$date));
         $rowcount = $query->num_rows();
