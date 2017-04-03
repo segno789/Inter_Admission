@@ -118,7 +118,6 @@ class Admission_11th_pvt extends CI_Controller {
     public function Get_students_record()
     {
 
-        DebugBreak();
         $mrollno = $_POST["oldRno"];
 
         $board   =  $_POST["oldBrd_cd"];
@@ -1764,8 +1763,8 @@ class Admission_11th_pvt extends CI_Controller {
             $fine = 500;
             $days = abs($days);
             $endDate = date('d-m-Y');
-            $admfee =  ($admfee*3); 
-            $admfeecmp =  ($admfeecmp*3); 
+            $admfee =  ($admfee); 
+            $admfeecmp =  ($admfeecmp); 
             $Total_fine = $days*$fine;
 
         }  // DebugBreak();

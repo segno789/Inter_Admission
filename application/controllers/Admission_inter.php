@@ -2183,7 +2183,18 @@ class Admission_inter extends CI_Controller {
 
         $processing_fee = 0;
         $Adm_fee           = 0;
-        $LAdm_fee          = 0;
+        
+        $TripleDate = date('Y-m-d',strtotime(TripleDateFee)); 
+        $now = date('Y-m-d'); // or your date as well
+        $days = (strtotime($TripleDate) - strtotime($now)) / (60 * 60 * 24);
+        $fine = 500;
+        $days = abs($days);
+        $endDate = date('d-m-Y');
+        if($days>0)
+            $LAdm_fee = $days*$fine;
+        else
+            $LAdm_fee          = 0;
+
         $TotalAdmFee = 0;
         $TotalLatefee = 0;
         $Totalprocessing_fee = 0;
@@ -2320,7 +2331,7 @@ class Admission_inter extends CI_Controller {
                 //$AdmFee
             }
             $TotalAdmFee = $TotalAdmFee + $Adm_fee;
-            $TotalLatefee = $TotalLatefee + $LAdm_fee;
+       //     $TotalLatefee = $TotalLatefee + $LAdm_fee;
             $Totalprocessing_fee = $Totalprocessing_fee + $Adm_ProcessingFee;
             $total_certFee = $total_certFee+$cert_fee;
             $n++;
@@ -2362,7 +2373,16 @@ class Admission_inter extends CI_Controller {
 
         $processing_fee = 0;
         $Adm_fee           = 0;
-        $LAdm_fee          = 0;
+        $TripleDate = date('Y-m-d',strtotime(TripleDateFee)); 
+        $now = date('Y-m-d'); // or your date as well
+        $days = (strtotime($TripleDate) - strtotime($now)) / (60 * 60 * 24);
+        $fine = 500;
+        $days = abs($days);
+        $endDate = date('d-m-Y');
+        if($days>0)
+            $LAdm_fee = $days*$fine;
+        else
+            $LAdm_fee          = 0;
         $TotalAdmFee = 0;
         $TotalLatefee = 0;
         $Totalprocessing_fee = 0;
@@ -2497,7 +2517,7 @@ class Admission_inter extends CI_Controller {
                 //$AdmFee
             }
             $TotalAdmFee = $TotalAdmFee + $Adm_fee;
-            $TotalLatefee = $TotalLatefee + $LAdm_fee;
+          //  $TotalLatefee = $TotalLatefee + $LAdm_fee;
             $Totalprocessing_fee = $Totalprocessing_fee + $Adm_ProcessingFee;
             $total_certFee = $total_certFee+$cert_fee;
             $n++;
@@ -3359,10 +3379,13 @@ class Admission_inter extends CI_Controller {
                 $sub7A_abr = $data["sub7A_abr"];
             }
             $sub1_abr = '';$sub2_abr = '';$sub3_abr = '';$sub4_abr = '';$sub5_abr = '';$sub6_abr = '';$sub7_abr = '';
-            if($data['sub1Ap1'] == 1){$sub1_abr = $data["sub1_abr"].',';} else if($data['sub2Ap1'] == 1){$sub2_abr = $data["sub2_abr"].',';}
-                else if($data['sub3Ap1'] == 1){$sub3_abr = $data["sub3_abr"].',';} else if($data['sub4Ap1'] == 1){$sub4_abr = $data["sub4_abr"].',';}
-                    else if($data['sub5Ap1'] == 1){$sub5_abr = $data["sub5_abr"].',';} else if($data['sub6Ap1'] == 1){$sub6_abr = $data["sub6_abr"].',';}
-                        else if($data['sub7Ap1'] == 1){$sub7_abr = $data["sub7_abr"].',';}
+            if($data['sub1Ap1'] == 1){$sub1_abr = $data["sub1_abr"].',';}  
+            if($data['sub2Ap1'] == 1){$sub2_abr = $data["sub2_abr"].',';}
+            if($data['sub3Ap1'] == 1){$sub3_abr = $data["sub3_abr"].',';}  
+            if($data['sub4Ap1'] == 1){$sub4_abr = $data["sub4_abr"].',';}
+            if($data['sub5Ap1'] == 1){$sub5_abr = $data["sub5_abr"].',';}  
+            if($data['sub6Ap1'] == 1){$sub6_abr = $data["sub6_abr"].',';}
+            if($data['sub7Ap1'] == 1){$sub7_abr = $data["sub7_abr"].',';}
 
                             $pdf->Text($col5+.05,$ln[$countofrecords]+0.2,  $data["sub1_abr"].','.$data["sub2_abr"].','.$data["sub8_abr"].','.$data["sub4_abr"].','.$data["sub5_abr"].',' .@$sub5A_abr .$data["sub6_abr"].',' .@$sub6A_abr .$data["sub7_abr"].',' .@$sub7A_abr);
             $pdf->SetFont('Arial','B',7);    
@@ -4338,7 +4361,7 @@ class Admission_inter extends CI_Controller {
             return;
 
         }
-        else if((@$_POST['std_group_hidden'] == 7)&& ((@$_POST['sub5p2']!= 72) || (@$_POST['sub6p2']!=75) ))
+        else if((@$_POST['std_group_hidden'] == 7)&& ((@$_POST['sub5p2']!= 60) || (@$_POST['sub6p2']!=61)  ))
         {
 
             $allinputdata['excep'] = 'Subjects not according to Group';

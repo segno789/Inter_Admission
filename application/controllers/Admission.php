@@ -1912,8 +1912,8 @@ class Admission extends CI_Controller {
             $fine = 500;
             $days = abs($days);
             $endDate = date('d-m-Y');
-            $admfee =  ($admfee*3); 
-            $admfeecmp =  ($admfeecmp*3); 
+            $admfee =  ($admfee); 
+            $admfeecmp =  ($admfeecmp); 
             $Total_fine = $days*$fine;
         }
         //DebugBreak();
@@ -2323,7 +2323,7 @@ class Admission extends CI_Controller {
 
         //DebugBreak();
 
-        if($specialcode != '' && $specialcode != 34 && $specialcode != 119){
+        if($specialcode != '' && $specialcode != 34 && $specialcode != 119 && $specialcode != 9){
 
             $error_msg.='<span style="font-size: 16pt; color:red;">' . '   Your Admission cannot be procceed due to     ' . '</span>';
             $error_msg.='<span style="font-size: 16pt; color:red;">' . $specialcase . '</span>';
