@@ -707,6 +707,7 @@ if(isset($files)){
             $("#std_group").focus();
             return status;  
         }
+        //else if ()
        /* else   if ($("#sub3").find('option:selected').val() < 1 && $("#isAlreadyApplied").is('checked')==false) 
         {
             // $('#ErrMsg').show(); 

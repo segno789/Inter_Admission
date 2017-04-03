@@ -166,11 +166,11 @@ class Admission_11th_pvt extends CI_Controller {
                 {
                     if($RegStdData['data'][0]['class'] ==  11 && $RegStdData['data'][0]['status'] != 1)
                     {
-                        $error['excep'] = '';
+                        $error['excep'] = $msg;
                     }
                     else
                     {
-                         $error['excep'] =  $msg;
+                         $error['excep'] = '';
                     }
                    
 
@@ -392,6 +392,7 @@ class Admission_11th_pvt extends CI_Controller {
     }
     public function NewEnrolment_insert_lang()
     {
+    //DebugBreak();
         $this->load->model('Admission_11th_Pvt_model');
         $this->load->library('session');
         $error = array();

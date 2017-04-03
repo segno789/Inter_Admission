@@ -1908,8 +1908,9 @@ class Admission extends CI_Controller {
 
         if($data['Spec']> 0 && (strtotime(date('Y-m-d')) <= strtotime(SingleDateFee)) )
         {
+        DebugBreak();
             $regfee =  1000;
-            $data['AdmFee'] = 0;
+            //$data['AdmFee'] = 0;
 
             if($data['Spec'] >  0)
             {
@@ -1923,6 +1924,16 @@ class Admission extends CI_Controller {
             {
                 $data['regfee'] = 0;
             }
+            if($data['cat11']==2 && $data['cat12']==1 )
+            {
+                $data['AdmFee'] = 800;
+            }
+            else if( $data['cat11']==1 && $data['cat12']==2 )
+            {
+                $data['AdmFee'] = 800;
+            }
+
+
 
             $data['AdmTotalFee'] = $processFee+$Total_fine+$data['regfee']+$data['CertificateFee'];
             $AllStdFee = array('formNo'=>$data['FormNo'],'AdmFee'=>$data['AdmFee'],'AdmFine'=>$Total_fine,'AdmTotalFee'=> $data['AdmTotalFee']);

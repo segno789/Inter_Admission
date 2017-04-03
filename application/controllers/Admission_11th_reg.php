@@ -1403,7 +1403,7 @@ public function NewEnrolment_Delete($formno)
 
     public function revenue_pdf()
     {
-        // DebugBreak();
+        DebugBreak();
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $user = $Logged_In_Array['logged_in'];
@@ -2145,7 +2145,7 @@ public function NewEnrolment_Delete($formno)
             $pdf->Cell(0.5,0.5,"Zone:",0,'R');
             $pdf->SetFont('Arial','B',8);
             $pdf->SetXY(6.0,4.3+$Y);
-            $pdf->Cell( 0.5,0.5,strtoupper(@$data["zone_name"]),0,'L');
+            $pdf->Cell( 0.5,0.5,@$data["zone_cd"]."-".strtoupper(@$data["zone_name"]),0,'L');
 
 
             //__Address
