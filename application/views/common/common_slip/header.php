@@ -31,8 +31,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- bootstrap css -->
-    <script type="text/javascript" src="http://html5shiv.googlecode.com/svn/trunk/html5.js">
-    </script>
+   
     <link href="<?php echo base_url(); ?>assets/css/icomoon/style.css" rel="stylesheet">
     <!--[if lte IE 7]>
     <script src="css/icomoon-font/lte-ie7.js">
@@ -70,6 +69,7 @@
             <div class="circle4"></div>
         </div>
     </div>
+    
 </div>
 
 <header>
