@@ -18,7 +18,7 @@ define('BARCODE_PATH', 'assets/pdfs/');
 
 define('noimage','assets/img/no_image.jpg'); 
 
-define('DIRPATH12TH','D:\xampp\htdocs\Share Images\\'); 
+define('DIRPATH12TH','F:\xampp\htdocs\Share Images\\'); 
 define('PRIVATE_IMAGE_PATH', 'uploads/private/');
 define('PRIVATE_IMAGE_PATH_FRESH', 'uploads/Fresh');
 define('REGULAR_IMAGE_PATH', 'uploads/regular/');
@@ -74,3 +74,12 @@ define('CURRENT_SESS1','2017');
 
 define('formprint_sp_11th','Registration..sp_form_data_11thAdm');
 define('class_for_9th_Adm','11th');
+
+
+//================ RollNumber Slips variables ========================
+define('mClass1','12'); 
+define('mSession','1'); 
+define('mSession1','1'); 
+define('mClass2','11'); 
+define('mYear','2017'); 
+define('PVT_TITLE_INTER','Download Roll Number Slip For H.S.S.C Annual 2017'); 

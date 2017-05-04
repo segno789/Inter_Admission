@@ -7,11 +7,16 @@ class RollNoSlip extends CI_Controller {
 
         parent::__construct();
         $this->load->helper('url');
-
+         $this->clear_cache(); 
         $this->load->library('session');
         if( !$this->session->userdata('logged_in') && $this->router->method != 'login' ) {
             redirect('login');
         }
+    }
+    function clear_cache()
+    {
+        $this->output->set_header("Cache-Control: no-store, no-cache, must-revalidate, no-transform, max-age=0, post-check=0, pre-check=0");
+        $this->output->set_header("Pragma: no-cache");
     }
     public function index()
     {
@@ -23,26 +28,27 @@ class RollNoSlip extends CI_Controller {
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
-        $this->load->view('common/header.php',$userinfo);
+        $this->load->view('common/common_slip/header.php',$userinfo);
         $this->load->view('common/menu.php',$data);
-        $this->load->view('RollNoSlip/Index.php');
-        $this->load->view('common/footer.php');
+        $this->load->view('RollNoSlip/dashbaord.php');
+        $this->load->view('common/common_slip/footer.php');
     }
-
+    public function calcualateBar()
+    {
+        
+    }
     private function set_barcode($code)
     {
-
         $this->load->library('zend');
         //load in folder Zend
         $this->zend->load('Zend/Barcode');
-
         $file = Zend_Barcode::draw('code128','image', array('text' => $code,'drawText'=>false), array());
         //$code = $code;
         $store_image = imagepng($file,"./assets/pdfs/{$code}.png");
         return $code.'.png';
-
     }
-    public function EleventhStd(){
+    public function EleventhStd()
+    {
         $this->load->helper('url');
         $data = array(
             'isselected' => '4',
@@ -58,43 +64,42 @@ class RollNoSlip extends CI_Controller {
         }
 
         $userinfo = $Logged_In_Array['logged_in'];
-        $this->load->view('common/header.php',$userinfo);
+        $this->load->view('common/common_slip/header.php',$userinfo);
         $this->load->view('common/menu.php',$data);
         $this->load->view('RollNoSlip/11thGrid.php',$NinthStdData);
-        $this->load->view('common/footer.php');
+        $this->load->view('common/common_slip/footer.php');
     }
-    public function InterStd(){
+    public function InterStd()
+    {
         $this->load->helper('url');
         $data = array(
             'isselected' => '4',
         );
-        //DebugBreak();
+        //  DebugBreak();
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $user = $Logged_In_Array['logged_in'];
         $this->load->model('RollNoSlip_model');
         // DebugBreak();
-        if($user['isdeaf'] == 0)
-        {
-            $TenthStdData = array('data'=>$this->RollNoSlip_model->get12thStdData($user['Inst_Id'])); 
-        }
+
+        $TenthStdData = array('data'=>$this->RollNoSlip_model->get12thStdData($user['Inst_Id'])); 
 
 
         $userinfo = $Logged_In_Array['logged_in'];
-        $this->load->view('common/header.php',$userinfo);
+        $this->load->view('common/common_slip/header.php',$userinfo);
         $this->load->view('common/menu.php',$data);
         $this->load->view('RollNoSlip/InterGrid.php',$TenthStdData);
-        $this->load->view('common/footer.php');
+        $this->load->view('common/common_slip/footer.php');
     }
     public function InterRollNo()
     {
-        //DebugBreak();
+        // DebugBreak();
         $this->load->helper('url');
         $rno = $this->uri->segment(3);
         $isdownlaod = $this->uri->segment(4);
-        $sess=2;
-        $class =12;
-        $year=2016;
+        $sess=mSession;
+        $class =mClass1;
+        $year=mYear;
 
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -112,8 +117,8 @@ class RollNoSlip extends CI_Controller {
 
 
 
-        $this->load->library('PDFF');
-        $pdf=new PDFF('P','in',"A4");   
+        $this->load->library('PDFFWithOutPage');
+        $pdf=new PDFFWithOutPage('P','in',"A4");   
         $pdf->SetAutoPageBreak(true,2);
 
         $pdf->AddPage();
@@ -134,52 +139,41 @@ class RollNoSlip extends CI_Controller {
     }
     public function InterRollNoGroupwise()
     {
-        //DebugBreak()  ;
+     //  DebugBreak()  ;
         $this->load->helper('url');
         //Load the library
         $this->load->library('html2pdf');
         $grp_cd = $this->uri->segment(3);
         $isdownlaod = $this->uri->segment(4);
-        $sess=1;
-        $class =12;
-        $year=2017;
+        $sess=mSession;
+        $class =mClass1;
+        $year=mYear;
 
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $user = $Logged_In_Array['logged_in'];
 
-        $this->load->library('PDFF');
-        $pdf=new PDFF('P','in',"A4");   
+        $this->load->library('PDFFWithOutPage');
+        $pdf=new PDFFWithOutPage('P','in',"A4");   
         $pdf->SetAutoPageBreak(true,2);
 
         $Inst_Id = $user['Inst_Id'];
 
         $this->load->model('RollNoSlip_model');
         $sub_cd = '';
-        /* if($grp_cd == 1)
-        {
-        $sub_cd = 8;
-        $grp_cd =1;
-        }
-        else if($grp_cd == 7)
-        {
-        $sub_cd = 78;
-        $grp_cd =1;
-        }
-        else if($grp_cd == 8)
-        {
-        $sub_cd = 43;
-        $grp_cd = 1;
-        }*/
+      
         $studeninfo = array('data'=>$this->RollNoSlip_model->get12thrslipWith_Grp_CD($class,$year,$sess,$grp_cd,$Inst_Id));
         $template_pdf = '';
-        $totalslips = count($studeninfo['data']['slip']);
+        $totalslips = count(@$studeninfo['data']['slip']);
         $studentslip  = array();
         $tempdata  = array();
         $isexist = 0;
-        for($i =0 ; $i <count($studeninfo['data']['info']); $i++)
+        $totalslip =  count($studeninfo['data']['info']);
+        $remainslip = '';
+        $countslip = 0;
+      
+        for($i =0 ; $i <$totalslip; $i++)
         {
-
             $rno = $studeninfo['data']['info'][$i]['Rno'];
             $tempdata['info'] = array();
             $temp = "$rno@$class@$sess@$year@$Inst_Id";
@@ -187,32 +181,32 @@ class RollNoSlip extends CI_Controller {
             $studeninfo['data']['info'][$i]['barcode'] = $image;
             $tempdata['info'] = $studeninfo['data']['info'][$i];
             $isexist = 0;
-            for($j =0 ; $j <$totalslips; $j++)
+            /*  for($j =0 ; $j <$totalslips; $j++)
             {
 
-                if($rno == $studeninfo['data']['slip'][$j]['rno'])
-                {
-
-                    $tempdata['info']['slips'][] = $studeninfo['data']['slip'][$j];
-                    $isexist= 1;
-                }
-            }
-            // DebugBreak();
-            if($isexist==1)
+            if($rno == $studeninfo['data']['slip'][$j]['rno'])
             {
-                $pdf->SetTitle('Roll Number Slips Inter Part-2'); 
-                $pdf->AddPage();
-                if($isexist == 0)
-                {
 
-                    $tempdata['info']['slips'] = $this->RollNoSlip_model->get12datesheetonly($rno,$class,$year,$sess);
-                }
-                //DebugBreak();
-                $this->makepdf_Inter($pdf,$tempdata['info']);
-
-
+            $tempdata['info']['slips'][] = $studeninfo['data']['slip'][$j];
+            $isexist= 1;
             }
+            }*/
+             
+            /* if($isexist==1)
+            {
+
+
+
+            }*/
+            $pdf->SetTitle('Roll Number Slips Inter Part-2'); 
+            $pdf->AddPage();
+            if($isexist == 0)
+            {
+                $tempdata['info']['slips'] = $this->RollNoSlip_model->get12datesheetonly($rno,$class,$year,$sess);
+            }
+            $this->makepdf_Inter($pdf,$tempdata['info']);
         }
+      
         if($isdownlaod ==1)
             $pdf->Output($Inst_Id.'.pdf', 'D');
         else if($isdownlaod ==2)
@@ -223,9 +217,9 @@ class RollNoSlip extends CI_Controller {
         $this->load->helper('url');
         $rno = $this->uri->segment(3);
         $isdownlaod = $this->uri->segment(4);
-        $sess=1;
-        $class =11;
-        $year=2016;
+        $sess=mSession1;
+        $class =mClass2;
+        $year=mYear;
 
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -249,8 +243,8 @@ class RollNoSlip extends CI_Controller {
 
 
 
-        $this->load->library('PDFF');
-        $pdf=new PDFF('P','in',"A4");   
+        $this->load->library('PDFFWithOutPage');
+        $pdf=new PDFFWithOutPage('P','in',"A4");   
         $pdf->SetAutoPageBreak(true,2);
 
         $pdf->AddPage();
@@ -272,16 +266,16 @@ class RollNoSlip extends CI_Controller {
         $this->load->library('html2pdf');
         $grp_cd = $this->uri->segment(3);
         $isdownlaod = $this->uri->segment(4);
-        $sess=1;
-        $class =11;
-        $year=2016;
+        $sess=mSession1;
+        $class =mClass2;
+        $year=mYear;
 
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $user = $Logged_In_Array['logged_in'];
 
-        $this->load->library('PDFF');
-        $pdf=new PDFF('P','in',"A4");   
+        $this->load->library('PDFFWithOutPage');
+        $pdf=new PDFFWithOutPage('P','in',"A4");   
         $pdf->SetAutoPageBreak(true,2);
 
         $Inst_Id = $user['Inst_Id'];
@@ -305,31 +299,27 @@ class RollNoSlip extends CI_Controller {
             $studeninfo['data']['info'][$i]['barcode'] = $image;
             $tempdata['info'] = $studeninfo['data']['info'][$i];
             $isexist = 0;
-            for($j =0 ; $j <$totalslips; $j++)
+            /* for($j =0 ; $j <$totalslips; $j++)
             {
 
-                if($rno == $studeninfo['data']['slip'][$j]['rno'] )
-                {
-                    //  DebugBreak();
-                    $tempdata['info']['slips'][] = $studeninfo['data']['slip'][$j];
-                    $isexist= 1;
-                }
+            if($rno == $studeninfo['data']['slip'][$j]['rno'] )
+            {
+            //  DebugBreak();
+            $tempdata['info']['slips'][] = $studeninfo['data']['slip'][$j];
+            $isexist= 1;
             }
+            }*/
             // DebugBreak();
-            if($isexist==1)
+            $pdf->AddPage();
+            $pdf->SetTitle('Roll Number Slips Inter Part-1'); 
+            if($isexist == 0)
             {
-                $pdf->AddPage();
-                $pdf->SetTitle('Roll Number Slips Inter Part-1'); 
-                if($isexist == 0)
-                {
 
-                    $tempdata['info']['slips'] = $this->RollNoSlip_model->get11datesheetonly($rno,$class,$year,$sess);
-                }
-                //DebugBreak();
-                $this->makepdf11thclass($pdf,$tempdata['info']);
-
-
+                $tempdata['info']['slips'] = $this->RollNoSlip_model->get11datesheetonly($rno,$class,$year,$sess);
             }
+            //DebugBreak();
+            $this->makepdf11thclass($pdf,$tempdata['info']);
+
         }
         if($isdownlaod ==1)
             $pdf->Output($Inst_Id.'.pdf', 'D');
@@ -339,7 +329,8 @@ class RollNoSlip extends CI_Controller {
     private function makepdf_Inter($pdf,$info)
     {
         // DebugBreak();
-        if($info['Session'] ==1) $Session= 'ANNUAL'; else $Session='SUPPLY';
+        if(mSession ==1) $Session= 'ANNUAL'; else $Session='SUPPLY';
+        $year = mYear;
         if($info['errmessage'] == null) $errmessage = '(PROVISIONALLY)'; else{ $errmessage = ' (PROVISIONALLY OBJECTION SLIP)';};
 
         if($info['grp_cd'] == 1)  $grp_cd = 'PRE-MEDICAL';
@@ -354,14 +345,9 @@ class RollNoSlip extends CI_Controller {
                                         else if($info['grp_cd'] == 10) $grp_cd='KHASA';
                                             else if($info['grp_cd'] == 11) $grp_cd='FAZAL';
 
-                                                if($info['Scheme']==1){
-            $scheme = 'NEW';
-        }
-        else if($info['Scheme']==2){
-            $scheme = 'OLD';
-        }
-        if($info['Gender']==1) $Gender= 'MALE'; else if($info['Gender']==2) $Gender= 'FEMALE';
-            $filepath = base_url().'assets/'.$info['picpath'];
+
+                                                if($info['Gender']==1) $Gender= 'MALE'; else if($info['Gender']==2) $Gender= 'FEMALE';
+            $filepath = DIRPATH12TH.$info['picpath'];
         //$filepath = 'assets/img/download.jpg';
 
         // $a = getimagesize($filepath);
@@ -387,9 +373,9 @@ class RollNoSlip extends CI_Controller {
         // $pdf->SetFont('Arial','R',10);
         $pdf->SetFont('Arial','',9);
         $pdf->SetXY(26.2,10.9);
-        $pdf->Cell(0, 0.2, "ROLL NUMBER SLIP (WITH DATE SHEET) FOR INTER PART-II $Session EXAMINATION, 2016 ", 0.25, "C");  //.$info["Year"]
+        $pdf->Cell(0, 0.2, "ROLL NUMBER SLIP (WITH DATE SHEET) FOR INTER PART-II $Session EXAMINATION, $year ", 0.25, "C");  //.$info["Year"]
 
-        $pdf->Image("assets/img/icon2.png",5.0,3.0, 20.65,18.65, "PNG");
+        $pdf->Image("assets/img/icon2.png",5.0,3.5, 20.65,18.65, "PNG");
 
         $pdf->SetFont('Arial','B',9);
         $pdf->SetXY(68,15.2);
@@ -438,11 +424,16 @@ class RollNoSlip extends CI_Controller {
         $pdf->SetXY($xvalue,26.1);
         $pdf->Cell(0, 0.2, $grp_cd, 0.25, "C");
 
-        /* $pdf->SetFont('Arial','',10);
-        $pdf->SetXY(133.0,31.1);
-        $pdf->Cell(29.5,6.2,'',1,0,'C',0); 
-        $pdf->SetXY(133.0,34.1);
-        $pdf->Cell(0, 0.2, "SCHEME = ".$scheme , 0.25, "C");*/
+        if($info['Scheme']==3)
+        {
+            $scheme = 'OLD';
+            $pdf->SetFont('Arial','',10);
+            $pdf->SetXY(133.0,29.1);
+            $pdf->Cell(29.5,6.2,'',1,0,'C',0); 
+            $pdf->SetXY(135.0,32.1);
+            $pdf->Cell(0, 0.2, $scheme." SCHEME" , 0.25, "C");
+        }
+
 
         $pdf->SetFont('Arial','B',9);
         $pdf->SetXY(172.2,13.2);
@@ -463,47 +454,41 @@ class RollNoSlip extends CI_Controller {
 
         $pdf->SetFont('Arial','B',9);
         $pdf->SetXY(10.2,21.2);
-        $pdf->Cell(0, 0.2, "ROLL NO.               :", 0.25, "C");
+        $pdf->Cell(0, 0.2, "ROLL NO.", 0.25, "C");
 
 
         $pdf->SetFont('Arial','B',10);
-        $pdf->SetXY(40.9,14.2+ $Y);
+        $pdf->SetXY(28.8,14.2+ $Y);
         $pdf->Cell(14.5,6.2,'',1,0,'C',0); 
-        $pdf->SetXY(40.8,17.4+ $Y);
-        $pdf->Cell(0, 0.2, $info['Rno'], 0.25, "C");
+        $pdf->SetXY(26.4,17.4+ $Y);
+        $pdf->Cell(0, 0.2, ':  '.$info['Rno'], 0.25, "C");
 
         $pdf->SetFont('Arial','',9);
         $pdf->SetXY(10.2,23.2 + + $Y);
-        $pdf->Cell(0, 0.2, "NAME                      :", 0.25, "C");
+        $pdf->Cell(0, 0.2, "NAME", 0.25, "C");
 
 
         $pdf->SetFont('Arial','',9);
-        $pdf->SetXY(40.2,23.2+ $Y);
-        $pdf->Cell(0, 0.2, strtoupper($info['Name']), 0.25, "C");
+        $pdf->SetXY(27.2,23.2+ $Y);
+        $pdf->Cell(0, 0.2, ':'.strtoupper($info['Name']), 0.25, "C");
 
         $pdf->SetFont('Arial','',9);
-        $pdf->SetXY(10.2,28.2+ $Y);
-        $pdf->Cell(0, 0.2, "FATHER'S NAME    :", 0.25, "C");
+        $pdf->SetXY(10.2,27.2+ $Y);
+        $pdf->MultiCell(20, 3,"FATHER'S NAME",0); //
+        //  $pdf->Cell(0, 0.2, "", 0.25, "C");
 
         $pdf->SetFont('Arial','',9);
-        $pdf->SetXY(40.2,28.2+ $Y);
-        $pdf->Cell(0, 0.2, strtoupper($info['FathersName']), 0.25, "C");
+        $pdf->SetXY(27.2,28.2+ $Y);
+        $pdf->Cell(0, 0.2, ':'.strtoupper($info['FathersName']), 0.25, "C");
 
-        /*    $pdf->SetFont('Arial','',9);
-        $pdf->SetXY(10.2,33.2+ $Y);
-        $pdf->Cell(0, 0.2, "DATE OF BIRTH     :", 0.25, "C");
-
-        $pdf->SetFont('Arial','',9);
-        $pdf->SetXY(40.2,33.2+ $Y);
-        $pdf->Cell(0, 0.2, $info['DOB'], 0.25, "C");*/
 
         $pdf->SetFont('Arial','B',9);
-        $pdf->SetXY(10.2,38.2+ $Y);
-        $pdf->Cell(0, 0.2, "CENTRE                  :", 0.25, "C");
+        $pdf->SetXY(10.2,36.2+ $Y);
+        $pdf->Cell(0, 0.2, "CENTRE ", 0.25, "C");
         // DebugBreak();
         $pdf->SetFont('Arial','B',9);
-        $pdf->SetXY(40.2,36.2+ $Y);
-        $pdf->MultiCell(130, 5,$info['cent_cd'].'-'.$info['Cent_Name'],0); //
+        $pdf->SetXY(27.2,33.2+ $Y);
+        $pdf->MultiCell(130, 4,':'.$info['cent_cd'].'-'.$info['Cent_Name'],0); //
         if($info['errmessage'] == null) 
         {
 
@@ -514,6 +499,7 @@ class RollNoSlip extends CI_Controller {
             $countter = 0;
             $countter9 = 0;
             $noteimageheight =66; 
+            $Y =  $Y -2;
             if(@$info['slips'][0]['subp2count']>0) {
 
                 $xx= 46.2+ $Y;
@@ -521,7 +507,7 @@ class RollNoSlip extends CI_Controller {
                 $pdf->SetFont('Arial','B',8);
                 $pdf->SetXY(10.2,50.2+ $Y);
                 $pdf->SetFillColor(240,240,240);
-                $pdf->Cell($boxWidth,5,'THEORY = PART - II',1,0,'C',1);
+                $pdf->Cell($boxWidth,5,'THEORY PART - II',1,0,'C',1);
                 $pdf->SetFillColor(255,255,255);
 
                 $pdf->SetFont('Arial','B',8);
@@ -582,7 +568,7 @@ class RollNoSlip extends CI_Controller {
                 $pdf->SetFont('Arial','B',8);
                 $pdf->SetXY(10.2,62.2+ $Y);
                 $pdf->SetFillColor(240,240,240);
-                $pdf->Cell($boxWidth,5,'THEORY = PART - I',1,0,'C',1);
+                $pdf->Cell($boxWidth,5,'THEORY PART - I',1,0,'C',1);
                 $pdf->SetFillColor(255,255,255);
                 $Y = $Y + 12;
                 $pdf->SetFont('Arial','B',8);
@@ -648,8 +634,8 @@ class RollNoSlip extends CI_Controller {
             }
 
             // INSTRUCTION PICTURE 
-            $pdf->SetXY(40.2,21.2);
-            $pdf->Image("assets/img/Note_inter.jpg",165.0,50.1, 40.65,$noteimageheight, "JPG");  
+            // $pdf->SetXY(40.2,20.2);
+            $pdf->Image("assets/img/Note_inter.jpg",165.0,50.1, 40.65,$noteimageheight-3, "JPG");  
 
             //  DebugBreak();
             // PRACTICAL BOX
@@ -657,7 +643,7 @@ class RollNoSlip extends CI_Controller {
             $prcount = 0;
             $pathtml = '';
             $partsubhtml = '';
-
+          //   $info['slips'][$tprcount]['prcount'] = 3;
             if(@$info['slips'][$tprcount]['prcount'] > 0)
             {
                 $Y = $Y + 1;
@@ -666,7 +652,7 @@ class RollNoSlip extends CI_Controller {
                 $pdf->SetFont('Arial','B',8);
                 $pdf->SetXY(10.2,65.2+ $Y);
                 $pdf->SetFillColor(240,240,240);
-                $pdf->Cell($boxWidth,5,'PRACTICAL = PART - II',1,0,'C',1);
+                $pdf->Cell($boxWidth,5,'PRACTICAL PART - II',1,0,'C',1);
                 $pdf->SetFillColor(255,255,255);
                 $Y = $Y + 15;
                 $pdf->SetFont('Arial','B',8);
@@ -695,63 +681,83 @@ class RollNoSlip extends CI_Controller {
                 $isthird = 0;
                 $pdf->SetWidths(array(8,54,94,15,14,10));
                 $pdf->SetFont('Arial','',7);
+
+
                 for($l = 0; $l<$info['slips'][$tprcount]['prcount']; $l++) //
                 { 
                     $prcount++;
                     if($l ==0)
                     {
                         $Y = $Y +5;
+                      
                     }
                     else
                     {
+                      //  DebugBreak();
+                        $per = $l-1;
                         $lablen = strlen(@$info['slips'][$l+$tprcount]['lab_Name']); //
+                        $perlablen = strlen(@$info['slips'][$per+$tprcount]['lab_Name']); //
                         // DebugBreak();
-                        if($lablen>60 && $lablen<110)
+                        if($lablen<110)
                         {
-                            if($issecond == 0 and $isthird ==0 and $l ==2)
-                                $Y = $Y + 5.0;
-                            else
+                            if($perlablen <=61)
+                            {
+                                $Y = $Y + 5.0; 
+                            }
+
+                            else  if($perlablen >61 && $perlablen<110)
                             {
                                 $Y = $Y + 10.0; 
+                                $issecond = 1;
                             }
-                            $issecond = 1;
+                            else
+                            {
+                                $Y = $Y + 15.0; 
+                                $isthird =1;   
+                            }
+
                         }
                         else if($lablen>110)
                         {
-                            $Y = $Y + 15.0; 
-                            $isthird =1; 
-                        }
-                        else
-                        {
-                            if($issecond == 1)
+
+                            if($perlablen <=61)
                             {
-                                $Y = $Y + 5.0;
+                                $Y = $Y + 5.0; 
                             }
-                            if($isthird ==1 )
+
+                            else  if($perlablen >61 && $perlablen<110)
                             {
-                                $Y = $Y + 15.0; 
+                                $Y = $Y + 10.0; 
+                                $issecond = 1;
                             }
                             else
                             {
-                                $Y = $Y +5.0;    
+                                $Y = $Y + 15.0; 
+                                $isthird =1;   
                             }
+                              $isthird =1;   
+
                         }
+                       
 
                     }
 
-                    if($info['slips'][$l+$tprcount]['sub_Name'] == 'FINE ARTS')
+                    if(@$info['slips'][$l+$tprcount]['sub_Name'] == 'FINE ARTS' && $info['slips'][$l+$tprcount]['Date2'] == '19-07-2017')
                     {
-                        $info['slips'][$l+$tprcount]['Date2'] = '28,29,30-  11-2016';
+                        $info['slips'][$l+$tprcount]['Date2'] = '19,21,24 -07-2017';
+                    }
+                     else if(@$info['slips'][$l+$tprcount]['sub_Name'] == 'FINE ARTS' && $info['slips'][$l+$tprcount]['Date2'] == '20-07-2017')
+                    {
+                        $info['slips'][$l+$tprcount]['Date2'] = '20,22,25 -07-2017';
                     }
 
                     $pdf->SetXY(10.2,55.2+ $Y);
-                    $pdf->Row(array($prcount,$info['slips'][$l+$tprcount]['sub_Name'],$info['slips'][$l+$tprcount]['lab_Name'],str_replace('2015','2016',$info['slips'][$l+$tprcount]['Date2']),$info['slips'][$l+$tprcount]['TIME'],$info['slips'][$l+$tprcount]['batch']));
-
-                    /* $pdf->Row(array('1','COMPUTER STUDIES','196-GOVT. COLLEGE GUJRANWALA',str_replace('2015','2016','11-06-2016'),'11:30 AM','II'));*/
+                      $pdf->Row(array($prcount,$info['slips'][$l+$tprcount]['sub_Name'],$info['slips'][$l+$tprcount]['lab_Name'],$info['slips'][$l+$tprcount]['Date2'],$info['slips'][$l+$tprcount]['TIME'],$info['slips'][$l+$tprcount]['batch']));
 
                 }
             }
 
+         //   DebugBreak();
             if($isthird ==1)
                 $Y = $Y+10;
             else 
@@ -763,28 +769,32 @@ class RollNoSlip extends CI_Controller {
 
 
             $pdf->SetFont('Arial','',9);
-            $pdf->SetXY(10.2,65.2 + $Y);
-            $pdf->Cell(0, 0.2, "Official Name:", 0.25, "C");
+            $pdf->SetXY(10.2,62.2 + $Y);
+            $pdf->MultiCell(16, 3,"Official's Name:",0); //
+            // $pdf->Cell(0, 0.2, "Official Name:", 0.25, "C");
 
             $pdf->SetFont('Arial','BU',7);
-            $pdf->SetXY(30.2,65.2 + $Y);
-            $pdf->Cell(0, 0.2, $info['emp_cd'].'-'.$info['emp_name'], 0.25, "C");
+            $pdf->SetXY(25.2,65.2 + $Y);
+            $pdf->MultiCell(50, 3,$info['emp_cd'].'-'.$info['emp_name'],0); //
+            //    $pdf->Cell(0, 0.2, , 0.25, "C");
 
             $pdf->SetFont('Arial','',9);
-            $pdf->SetXY(90.2,65.2 + $Y);
-            $pdf->Cell(0, 0.2, "Candidate's Signature: ", 0.25, "C");
+            $pdf->SetXY(80.2,61.2 + $Y);
+            $pdf->MultiCell(22, 3,"Candidate's Signature: ",0); 
+            //  $pdf->Cell(0, 0.2, , 0.25, "C");
 
             $pdf->SetFont('Arial','',9);
-            $pdf->SetXY(125.2,65.2 + $Y);
+            $pdf->SetXY(100.2,65.2 + $Y);
             $pdf->Cell(0, 0.2, "___________________ ", 0.25, "C");
 
             $pdf->SetFont('Arial','',9);
-            $pdf->SetXY(165.2,65.2 + $Y);
-            $pdf->Cell(0, 0.2, "Printing Date:", 0.25, "C");
+            $pdf->SetXY(145.2,61.2 + $Y);
+            $pdf->MultiCell(20, 3,"Printing Date&Time:",0); 
+            //   $pdf->Cell(0, 0.2, ":", 0.25, "C");
 
             $pdf->SetFont('Arial','U',9);
-            $pdf->SetXY(185.2,65.2 + $Y);
-            $pdf->Cell(0, 0.2, date('d-m-Y'), 0.25, "C");
+            $pdf->SetXY(165.2,65.2 + $Y);
+            $pdf->Cell(0, 0.2, date('d-m-Y H:i A'), 0.25, "C");
 
             if($isthird == 0 && $ispart1 == 0)
             {
@@ -1571,10 +1581,13 @@ class RollNoSlip extends CI_Controller {
             $pdf->Image("assets/img/headsign.jpg",10.0,254, 72,24, "JPG");  
             //  $pdf->Image("assets/img/headsign.jpg",10.0,267, 82,15, "JPG");  
 
-            $pdf->Image("assets/img/CE_Signature.png",170.0,255, 32,32, "PNG"); 
+            $pdf->SetFont('Arial','B',9);
+            $pdf->SetXY(42,76+ $Y);
+            $pdf->Cell( 0,0, 'Bind - Sr No: '.$info['BindNo'].' - '.$info['SrNo'], 0, 0, 'C', false );
+            $pdf->Image("assets/img/CE_Signature.png",165.0,255, 32,32, "PNG"); 
 
             $pdf->SetFont('Arial','',8);
-            $pdf->SetXY(160,289);
+            $pdf->SetXY(155,289);
             $pdf->Cell(0, 0.2, "CONTROLLER OF EXAMINATIONS", 0.25, "C");
 
 
@@ -1588,36 +1601,53 @@ class RollNoSlip extends CI_Controller {
 
             $pdf->SetFont('Arial','',8);
             $pdf->SetXY(10,289);
-            $pdf->Cell(0, 0.2, "Zone                  :", 0.25, "C");
+            $pdf->Cell(0, 0.2, "Zone:", 0.25, "C");
 
             $pdf->SetFont('Arial','',8);
-            $pdf->SetXY(32,288);
+            $pdf->SetXY(18,287.8);
             $pdf->MultiCell(90, 3, $info['Zone_Code']."-".$info['Zone_Name'], 0, "L",0);
             // $pdf->MultiCell(90, 3, '561-NAROWAL', 0, "L",0);
 
             $pdf->SetFont('Arial','',8);
-            $pdf->SetXY(80,289);
-            $pdf->Cell(0, 0.2, "Teh    :", 0.25, "C");
+            $pdf->SetXY(65,289);
+            $pdf->Cell(0, 0.2, "Teh:", 0.25, "C");
 
             $pdf->SetFont('Arial','',8);
-            $pdf->SetXY(90,289);
+            $pdf->SetXY(71,289);
             $pdf->Cell(0, 0.2,$info['teh_name'], 0.25, "C");
 
             $pdf->SetFont('Arial','',8);
-            $pdf->SetXY(120,289);
-            $pdf->Cell(0, 0.2, "Distt  :", 0.25, "C");
+            $pdf->SetXY(105,289);
+            $pdf->Cell(0, 0.2, "Distt:", 0.25, "C");
 
             $pdf->SetFont('Arial','',8);
-            $pdf->SetXY(130,289);
+            $pdf->SetXY(112,289);
             $pdf->Cell(0, 0.2,$info['dist_name'], 0.25, "C");                 
         }
         else
         {
-            $message = 'Slip is not issued due to '.$info['errmessage'];
-            $pdf->SetFont('Arial','B',16);
-            $pdf->SetXY(40,60);
+            if($info['errmessage'] == 'RLE')
+            {
+                $info['errmessage'] = 'Slip is not issued due to Eligibility. Please Contact to Inter Part-II Branch at B.I.S.E Gujranwala.';
+            }
+            else if($info['errmessage'] == 'NOT ISSUE SLIP')
+            {
+                $info['errmessage'] = 'NOT ISSUE SLIP. Please Contact to Inter Part-II Branch at B.I.S.E Gujranwala.';
+            }
+
+            else if($info['errmessage'] == 'RL FEE')
+            {
+                $info['errmessage'] = 'Your dues are pending, Please contact to Finance Income Branch at B.I.S.E. Gujranwala.';
+            }
+            else
+            {
+                $info['errmessage'].= '. Please Contact to Inter Part-II Branch at B.I.S.E Gujranwala.';
+            }
+              $message = $info['errmessage'];
+            $pdf->SetFont('Arial','B',14);
+            $pdf->SetXY(20,60);
             $pdf->SetTextColor(255 ,0,0);
-            $pdf->Cell(0, 0.2,$message, 0.25, "C");   
+            $pdf->MultiCell(170, 6, $message, 0, "L",0);
         }
 
     }
@@ -1625,6 +1655,7 @@ class RollNoSlip extends CI_Controller {
     private function makepdf11thclass($pdf,$info)
     {
 
+           $year = mYear;
         if($info['Session'] ==1) $Session= 'ANNUAL'; else $Session='SUPPLY';
         if($info['errmessage'] == null) $errmessage = '(PROVISIONALLY)'; else{ $errmessage = ' (PROVISIONALLY OBJECTION SLIP)';};
 
@@ -1641,7 +1672,7 @@ class RollNoSlip extends CI_Controller {
                                         else if($info['grp_cd'] == 10) $grp_cd='KHASA';
                                             else if($info['grp_cd'] == 11) $grp_cd='FAZAL';
                                                 if($info['Gender']==1) $Gender= 'MALE'; else if($info['Gender']==2) $Gender= 'FEMALE';
-            $filepath = 'assets/'.$info['picpath'];
+             $filepath = DIRPATH12TH.$info['picpath'];
         //  $filepath = 'assets/img/download.jpg'; 
 
 
@@ -1664,7 +1695,7 @@ class RollNoSlip extends CI_Controller {
         // $pdf->SetFont('Arial','R',10);
         $pdf->SetFont('Arial','',10);
         $pdf->SetXY(26.2,10.9);
-        $pdf->Cell(0, 0.2, "ROLL NUMBER SLIP (WITH DATE SHEET) FOR 11th $Session EXAMINATION 2016, ", 0.25, "C");  //.$info["Year"]
+        $pdf->Cell(0, 0.2, "ROLL NUMBER SLIP (WITH DATE SHEET) FOR 11th $Session EXAMINATION, $year ", 0.25, "C");  //.$info["Year"]
 
         $pdf->Image("assets/img/icon2.png",5.0,3.0, 20.65,18.65, "PNG");
 
@@ -1713,11 +1744,11 @@ class RollNoSlip extends CI_Controller {
         $pdf->SetXY($xvalue,26.1);
         $pdf->Cell(0, 0.2, $grp_cd, 0.25, "C");
 
-        $pdf->SetFont('Arial','',10);
+        /*$pdf->SetFont('Arial','',10);
         $pdf->SetXY(133.0,31.1);
         $pdf->Cell(29.5,6.2,'',1,0,'C',0); 
         $pdf->SetXY(133.0,34.1);
-        $pdf->Cell(0, 0.2, "SCHEME = NEW", 0.25, "C");
+        $pdf->Cell(0, 0.2, "SCHEME = NEW", 0.25, "C");*/
 
         $pdf->SetFont('Arial','B',9);
         $pdf->SetXY(172.2,13.2);
@@ -1790,6 +1821,7 @@ class RollNoSlip extends CI_Controller {
             $noteimageheight =62; 
             // DebugBreak();
             // THEOROR PART I SUBJECT TABLE
+           
             if(@$info['slips'][$countter]['subp1count'] > 0)
             {
                 $boxWidth = 150.0;
@@ -2667,10 +2699,17 @@ class RollNoSlip extends CI_Controller {
             $pdf->Image("assets/img/headsign.jpg",10.0,234, 72,24, "JPG");  
             //  $pdf->Image("assets/img/headsign.jpg",10.0,267, 82,15, "JPG");  
 
-            $pdf->Image("assets/img/CE_Signature.png",170.0,245, 26,26, "PNG"); 
+             $pdf->Image("assets/img/isnt1_converted.png",45.0, $Y+63, 160.65,9, "png");  
+            //  $pdf->Image("assets/img/headsign.jpg",10.0,267, 82,15, "JPG");  
+
+            $pdf->SetFont('Arial','B',9);
+            $pdf->SetXY(42,76+ $Y);
+            $pdf->Cell( 0,0, 'Bind - Sr No: '.$info['BindNo'].' - '.$info['SrNo'], 0, 0, 'C', false );
+            
+            $pdf->Image("assets/img/CE_Signature.png",163.0,241, 32,32, "PNG"); 
 
             $pdf->SetFont('Arial','',8);
-            $pdf->SetXY(160,274);
+            $pdf->SetXY(152,274);
             $pdf->Cell(0, 0.2, "CONTROLLER OF EXAMINATIONS", 0.25, "C");
 
 
@@ -2684,26 +2723,26 @@ class RollNoSlip extends CI_Controller {
 
             $pdf->SetFont('Arial','',8);
             $pdf->SetXY(10,274);
-            $pdf->Cell(0, 0.2, "Zone                  :", 0.25, "C");
+            $pdf->Cell(0, 0.2, "Zone:", 0.25, "C");
 
             $pdf->SetFont('Arial','',8);
-            $pdf->SetXY(32,273);
+            $pdf->SetXY(18,273);
             $pdf->MultiCell(90, 3, $info['Zone_Code'].'-'.$info['Zone_Name'], 0, "L",0); //$info['Zone_Code']..$info['Zone_Name']
 
             $pdf->SetFont('Arial','',8);
-            $pdf->SetXY(80,274);
-            $pdf->Cell(0, 0.2, "Teh    :", 0.25, "C");
+            $pdf->SetXY(65,274);
+            $pdf->Cell(0, 0.2, "Teh:", 0.25, "C");
 
             $pdf->SetFont('Arial','',8);
-            $pdf->SetXY(90,274);
+            $pdf->SetXY(71,274);
             $pdf->Cell(0, 0.2,$info['teh_name'], 0.25, "C");
 
             $pdf->SetFont('Arial','',8);
-            $pdf->SetXY(120,274);
-            $pdf->Cell(0, 0.2, "Distt  :", 0.25, "C");
+            $pdf->SetXY(108,274);
+            $pdf->Cell(0, 0.2, "Distt:", 0.25, "C");
 
             $pdf->SetFont('Arial','',8);
-            $pdf->SetXY(130,274);
+            $pdf->SetXY(115,274);
             $pdf->Cell(0, 0.2,$info['dist_name'], 0.25, "C");            
         }
         else

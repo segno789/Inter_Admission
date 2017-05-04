@@ -35,9 +35,25 @@ class Login extends CI_Controller {
         if(@$_POST['username'] != '' && @$_POST['password'] != '')
         {   
             //DebugBreak();
+  $this->load->model('login_model'); 
+             $isdefualter = $this->login_model->chekdefultar($_POST['username']);
+            if( $isdefualter != -1)
+            {
+               // echo '<pre>'; print_r($isdefualter);
+             //   exit();
+                $data = array(
+                    'user_status' => 4,                     
+                    'remarks' => $isdefualter['Remarks']                     
+                );
 
 
-            $this->load->model('login_model'); 
+                $this->load->view('login/login.php',$data);
+                return ;
+            }
+            
+            
+
+          
             $logedIn = $this->login_model->auth($_POST['username'],$_POST['password']);
             $isgroup = -1;
             $appConfig = $this->login_model->getappconfig();

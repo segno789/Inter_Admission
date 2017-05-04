@@ -54,6 +54,8 @@
  * NOTE: If you change these, also change the error_reporting() code below
  */
  date_default_timezone_set('Asia/Karachi');
+  ini_set('memory_limit', '1024M');
+  ini_set('max_execution_time', 1000);
 	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
 
 /*

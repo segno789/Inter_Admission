@@ -119,16 +119,22 @@
                 <ul >
                     <li><a href="<?php echo base_url(); ?>RollNoSlip"   data-original-title="" >Roll No. Slips: </a></li>
 
+                    <?php if($appconfig['isslipP1'] == 1 ) {?>
                     <li>
                         <a href="<?php echo base_url(); ?>RollNoSlip/EleventhStd">
                             11th Roll No. Slip
                         </a>
-                    </li>-
+                    </li>
+                    <?php } 
+                    
+                    if($appconfig['isslipP2'] == 1 || $appconfig['isslipP2S'] == 1){
+                    ?>
                     <li>
                         <a href="<?php echo base_url(); ?>RollNoSlip/InterStd">
                             12th Roll No. Slip
                         </a>
                     </li>
+                    <?php }?>
                     <li>
                         <a onclick="return logout();">Logout</a>
                     </li>

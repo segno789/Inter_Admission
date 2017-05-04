@@ -84,15 +84,18 @@
                                     <?php } 
                                 if($appconfig['isslipP1'] == 1){
                                     ?>
+                                    
                                     <div class="metro-nav-block nav-block-red">
 
-                                        <a  href"<?=base_url();?>RollNoSlip/EleventhStd" >
-                                        <div class="fs1" aria-hidden="true" data-icon="&#xe05c;"></div>
-                                        <div class="brand">
-                                            11th Roll Number Slips
-                                        </div>
+                                        <a  href="<?=base_url();?>RollNoSlip/EleventhStd" >
+                                            <div class="fs1" aria-hidden="true" data-icon="&#xe05c;"></div>
+                                            <div class="brand">
+                                                 11th Roll Number Slips
+                                            </div>
                                         </a>
                                     </div>
+                                    
+                                
                                     <?php }
 
                                 if($appconfig['isslipP2S'] == 1) {
