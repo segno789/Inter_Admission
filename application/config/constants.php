@@ -60,9 +60,9 @@ define('TITLEHSSC','Online HSSC Annual Admission 2017');
 define('currdate','date("d-m-Y");');
 define('TripleDateFeeinter', '13-10-2017');
 define('RE_ADMISSION_TBL11', 'matric_new..vwIA1P16');
-define('SingleDateFee', '13-02-2017');
-define('DoubleDateFee', '27-02-2017');
-define('TripleDateFee', '07-03-2017');
+define('SingleDateFee', '13-08-2017');
+define('DoubleDateFee', '27-09-2017');
+define('TripleDateFee', '07-10-2017');
 
 define ('class_for_11th_Adm','11th');                                
 

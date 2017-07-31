@@ -157,9 +157,58 @@ class Login extends CI_Controller {
                         }
 
                     }
+                    
                     $isfeeding = 1;
                     $isinterfeeding = 1;
                     $lastdate = SingleDateFee;
+                     if($logedIn['SpecPermission']==1)
+                    {
+                        $lastdate=  $logedIn['spec_info']['FeedingDate'];
+                        if(date('Y-m-d',strtotime($lastdate))>=date('Y-m-d'))
+                        {
+                            $isfeeding = 1;
+                        }
+                        else {
+                            if(date('Y-m-d',strtotime(SINGLE_LAST_DATE))>=date('Y-m-d') || date('Y-m-d',strtotime(DOUBLE_LAST_DATE))>=date('Y-m-d'))
+                            {
+                                $isfeeding = 1    ;
+                                $lastdate = SINGLE_LAST_DATE;
+                                $logedIn['SpecPermission'] = 0;
+                            }
+                            else
+                            {
+                                $isfeeding = 0;   
+                            }
+
+                        }
+
+                    }
+                    else
+                    {
+                        if(date('Y-m-d',strtotime(SINGLE_LAST_DATE))>=date('Y-m-d') || date('Y-m-d',strtotime(DOUBLE_LAST_DATE))>=date('Y-m-d'))
+                        {
+                            $isfeeding = 1    ;
+                        }
+                        else if($logedIn['tbl_inst']['feedingDate'] != null)
+                        {
+                            $lastdate  = date('Y-m-d',strtotime($logedIn['tbl_inst']['feedingDate'])) ;
+                            if(date('Y-m-d')<=$lastdate)
+                            {
+
+                                $isfeeding = 1; 
+                            }
+                            else 
+                            {    $lastdate = SINGLE_LAST_DATE;
+                                $isfeeding = -1;
+                            }
+                        }
+                    }
+                    if($_POST['username'] == 399901 || $_POST['username'] == 399903 )
+                    {
+                        //$appConfig['isadmP1'] = 1;
+                        $appConfig['isreg'] = 1;
+                        $isfeeding = 1; 
+                    }
                     //  DebugBreak();
 
 
