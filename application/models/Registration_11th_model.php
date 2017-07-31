@@ -185,7 +185,8 @@ class Registration_11th_model extends CI_Model
               return  false;
           }
       }
-        $query = $this->db->query("Registration..IA_P1_Reg_Adm2016_sp_insert_New '$formno',11,2016,1,'$name','$fname','$BForm','$FNIC','$Dob','$CellNo',$medium,'$Inst_Rno','".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,1,'$OldRno',$OldYear,$OldSess,$OldBrd,$iOldRno,$iOldYear,$iOldSess,$IsHafiz,$Inst_cd,$UrbanRural,$RegGrp,$IsReAdm,'$pic_base_64'");
+      $year = Year;
+        $query = $this->db->query("Registration..IA_P1_Reg_Adm2016_sp_insert_New '$formno',11,$year,1,'$name','$fname','$BForm','$FNIC','$Dob','$CellNo',$medium,'$Inst_Rno','".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,1,'$OldRno',$OldYear,$OldSess,$OldBrd,$iOldRno,$iOldYear,$iOldSess,$IsHafiz,$Inst_cd,$UrbanRural,$RegGrp,$IsReAdm,'$pic_base_64'");
         //$query = $this->db->insert('msadmissions2015', $data);//,'Fname' => $father_name,'BForm'=>$bay_form,'FNIC'=>$father_cnic,'Dob'=>$dob,'CellNo'=>$mob_number));
         
          $rowcount = $query->num_rows();
@@ -206,7 +207,7 @@ class Registration_11th_model extends CI_Model
     }
   public function bay_form_fnic($bayformno,$fnic)
     {
-        $query = $this->db->get_where('Registration..tblreg11th',  array('BForm' => $bayformno,'FNIC' => $fnic,'IsDeleted'=>0));
+        $query = $this->db->get_where(Regtbl,  array('BForm' => $bayformno,'FNIC' => $fnic,'IsDeleted'=>0));
         $rowcount = $query->num_rows();
         if ($rowcount > 0){
             return true;
@@ -261,7 +262,7 @@ class Registration_11th_model extends CI_Model
         $iyear =$data['year'];
         $brd = $data['board'];
       //  DebugBreak();
-        $query = $this->db->get_where('Registration..tblreg11th', array('matRno' => "$rno", 'yearOfPass'=>$iyear,'sessOfPass'=>$sess,'Brd_cd'=>$brd,'IsDeleted'=>0));
+        $query = $this->db->get_where(Regtbl, array('matRno' => "$rno", 'yearOfPass'=>$iyear,'sessOfPass'=>$sess,'Brd_cd'=>$brd,'IsDeleted'=>0));
         // DebugBreak();
         $rowcount = $query->num_rows();
         if($rowcount > 0)
@@ -279,7 +280,7 @@ class Registration_11th_model extends CI_Model
         $iyear =$data['year'];
         $brd = $data['board'];
       //  DebugBreak();
-        $query = $this->db->get_where('Registration..tblreg11th', array('oldRno_reg' => "$rno", 'oldYear_reg'=>$iyear,'oldSess_reg'=>$sess,'IsDeleted'=>0));
+        $query = $this->db->get_where(Regtbl, array('oldRno_reg' => "$rno", 'oldYear_reg'=>$iyear,'oldSess_reg'=>$sess,'IsDeleted'=>0));
         // DebugBreak();
         $rowcount = $query->num_rows();
         if($rowcount > 0)
@@ -382,7 +383,8 @@ class Registration_11th_model extends CI_Model
         $isreadm = $data['isreadm'];
         $pic_base_64 = $data['Image'];
        //  DebugBreak();
-        $query = $this->db->query("Registration..IA_P1_Reg_Adm2016_sp_Update '$formno',11,2016,1,'$name','$fname','$BForm','$FNIC','$Dob','$CellNo',$medium,'$Inst_Rno','$MarkOfIden',$Speciality,$nat,$rel,'$addr',$RegGrp,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$IsHafiz,$Inst_cd,$UrbanRural,'$pic_base_64'");
+       $year = Year;
+        $query = $this->db->query("Registration..IA_P1_Reg_Adm2016_sp_Update '$formno',11,$year,1,'$name','$fname','$BForm','$FNIC','$Dob','$CellNo',$medium,'$Inst_Rno','$MarkOfIden',$Speciality,$nat,$rel,'$addr',$RegGrp,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$IsHafiz,$Inst_cd,$UrbanRural,'$pic_base_64'");
         //$query = $this->db->insert('msadmissions2015', $data);//,'Fname' => $father_name,'BForm'=>$bay_form,'FNIC'=>$father_cnic,'Dob'=>$dob,'CellNo'=>$mob_number));
         return true;
     }
@@ -392,8 +394,8 @@ class Registration_11th_model extends CI_Model
         // DebugBreak();
         //$query = $this->db->get_where('matric_new..tblbiodata', array('sch_cd' => $inst_cd,'class' => 10, 'iyear' => 2016, 'regpvt'=>1,));
         //sp_get_regInfo_spl_case
-
-        $query = $this->db->query("Registration..sp_get_regInfo_11th_New $inst_cd,11,2016,1");    
+         $year = Year;
+        $query = $this->db->query("Registration..sp_get_regInfo_11th_New $inst_cd,11,$year,1");    
 
 
 
@@ -445,7 +447,7 @@ class Registration_11th_model extends CI_Model
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
-            $q2         = $this->db->get_where('Registration..RuleFee_Reg_Eleventh',array('Rule_Fee_ID'=>1));
+            $q2         = $this->db->get_where(Feetbl,array('Rule_Fee_ID'=>1));
             $resultarr = array("info"=>$query->result_array(),"rule_fee"=>$q2->result_array());
             return  $resultarr;
         }
@@ -472,11 +474,12 @@ class Registration_11th_model extends CI_Model
     {
 
         //  DebugBreak();
-        if($year == 2015){
-            $query = $this->db->get_where('matric_new..tblbiodata', array('sch_cd' => $inst_cd,'class' =>11, 'iyear' => 2016, 'regpvt'=>1,'formNo'=>$formno));     
+         $year_const = Year;
+        if($year == ($year_const-1)){
+            $query = $this->db->get_where('matric_new..tblbiodata', array('sch_cd' => $inst_cd,'class' =>11, 'iyear' => $year_const, 'regpvt'=>1,'formNo'=>$formno));     
         }
         else{
-            $query = $this->db->get_where('Registration..tblreg11th',  array('formNo' => $formno,'class'=>11,'iyear'=>$year,'sess'=>1));     
+            $query = $this->db->get_where(Regtbl,  array('formNo' => $formno,'class'=>11,'iyear'=>$year,'sess'=>1));     
         }
 
 
@@ -494,7 +497,7 @@ class Registration_11th_model extends CI_Model
     {
         $data=array('isDeleted'=>1);
         $this->db->where('formNo',$formno);
-        $this->db->update('Registration..tblreg11th',$data);
+        $this->db->update(Regtbl,$data);
         return true;
 
     }
@@ -503,7 +506,7 @@ class Registration_11th_model extends CI_Model
          //DebugBreak();
         $this->db->select('formno');
         $this->db->order_by("formno", "DESC");
-        $formno = $this->db->get_where('Registration..tblreg11th', array('coll_cd' => $Inst_Id));
+        $formno = $this->db->get_where(Regtbl, array('coll_cd' => $Inst_Id));
         $rowcount = $formno->num_rows();
 if($rowcount == 0 )
         {
@@ -546,10 +549,10 @@ if($rowcount == 0 )
 
             if($spl_cd == "0")
             {
-                $q1         = $this->db->get_where('Registration..tblreg11th',array('Coll_cd'=>$Inst_cd,'IsDeleted'=>0,'Batch_ID'=>0,'RegGrp'=>$RegGrp));    
+                $q1         = $this->db->get_where(Regtbl,array('Coll_cd'=>$Inst_cd,'IsDeleted'=>0,'Batch_ID'=>0,'RegGrp'=>$RegGrp));    
             }
             else{
-                $q1         = $this->db->get_where('Registration..tblreg11th',array('Coll_cd'=>$Inst_cd,'IsDeleted'=>0,'Batch_ID'=>0,'Spec'=>$spl_cd));    
+                $q1         = $this->db->get_where(Regtbl,array('Coll_cd'=>$Inst_cd,'IsDeleted'=>0,'Batch_ID'=>0,'Spec'=>$spl_cd));    
             }
 
             $result_1 ;
@@ -561,7 +564,7 @@ if($rowcount == 0 )
             else{
                 return false;
             }
-            $q2         = $this->db->get_where('Registration..RuleFee_Reg_Eleventh',array('Rule_Fee_ID'=>1));
+            $q2         = $this->db->get_where(Feetbl,array('Rule_Fee_ID'=>1));
             $resultarr = array("info"=>$query->result_array(),"fee"=>$result_1,"rule_fee"=>$q2->result_array());
             return  $resultarr;
         }
@@ -607,7 +610,7 @@ if($rowcount == 0 )
         if($rowcount > 0)
         {
 
-            $q1         = $this->db->query("select * from Registration..tblreg11th where Coll_cd =$Inst_cd and isdeleted = 0 and  FormNo in($forms_id)");
+            $q1         = $this->db->query("select * from ".Regtbl." where Coll_cd =$Inst_cd and isdeleted = 0 and  FormNo in($forms_id)");
             // $this->db->from('Registration..IA_P1_Reg_Adm2016');
             //$this->db->where(array('Sch_cd'=>$Inst_cd,'IsDeleted'=>0,'Batch_ID'=>0));
             // $this->db->where_in('formNo',$forms_id);
@@ -621,7 +624,7 @@ if($rowcount == 0 )
             {
                 $result_1 = $q1->result_array();
             }
-            $q2         = $this->db->get_where('Registration..RuleFee_Reg_Eleventh',array('Rule_Fee_ID'=>1));
+            $q2         = $this->db->get_where(Feetbl,array('Rule_Fee_ID'=>1));
             $resultarr = array("info"=>$query->result_array(),"fee"=>$result_1,"rule_fee"=>$q2->result_array());
             return  $resultarr;
         }
@@ -633,7 +636,7 @@ if($rowcount == 0 )
     public function getreulefee($ruleID)
     {
        // $ruleID = 1;
-        $q2         = $this->db->get_where('Registration..RuleFee_Reg_Eleventh',array('Rule_Fee_ID'=>$ruleID));
+        $q2         = $this->db->get_where(Feetbl,array('Rule_Fee_ID'=>$ruleID));
         $resultarr = $q2->result_array();
         return $resultarr ;
     }
@@ -664,7 +667,7 @@ if($rowcount == 0 )
             $challan_no = $chalno[0]['Batch_ID'];
             if($challan_no > 0)
             {
-                $this->db->update_batch('Registration..tblreg11th',$AllUser,'formNo');
+                $this->db->update_batch(Regtbl,$AllUser,'formNo');
                 return 1;
             }
             else
@@ -682,13 +685,13 @@ if($rowcount == 0 )
     {
         //DebugBreak();
         $inst_cd = $data['Inst_Id'];
-        $q2         = $this->db->get_where('Registration..tblregbatch11th',array('Inst_Cd'=>$inst_cd,'Is_Delete'=>0));
+        $q2         = $this->db->get_where(Batchtbl,array('Inst_Cd'=>$inst_cd,'Is_Delete'=>0));
         $result = $q2->result_array();
         return $result;
     }
     public function return_pdf($fetch_data)
     {
-        // DebugBreak();
+        //DebugBreak();
         $Inst_cd = $fetch_data['Inst_cd'];
         $Batch_Id = $fetch_data['Batch_Id'];
         $query = $this->db->query("Registration..sp_get_reg_return_formInfo_11th_New $Inst_cd,$Batch_Id");
@@ -707,11 +710,11 @@ if($rowcount == 0 )
         // DebugBreak();
         $data=array('Amount'=>$Alldata['data']['Amount'],'Total_RegistrationFee'=>$Alldata['data']['Total_RegistrationFee'],'Total_ProcessingFee'=>$Alldata['data']['Total_ProcessingFee'],'Total_LateRegistrationFee'=>$Alldata['data']['Total_LateRegistrationFee'],'cdate'=>date('Y-m-d H:i:s'));
         $this->db->where('Batch_Id',$Alldata['data']['batch_info'][0]['Batch_ID']);
-        $this->db->update('Registration..tblregbatch11th',$data);
+        $this->db->update(Batchtbl,$data);
         
         $data=array('RegTotalFee'=>$Alldata['data']['Amount'],'regFee'=>$Alldata['rulefee'][0]['Reg_Fee'],'RegProcessFee'=>$Alldata['rulefee'][0]['Processing_Fee'],'RegFineFee'=>$Alldata['rulefee'][0]['Fine']);
         $this->db->where('Batch_Id',$Alldata['data']['batch_info'][0]['Batch_ID']);
-        $this->db->update('Registration..tblReg11th',$data);
+        $this->db->update(Regtbl,$data);
         return true;
 
     }
@@ -720,7 +723,7 @@ if($rowcount == 0 )
         $Inst_cd = $fetch_data['Inst_cd'];
         $Grp_cd = $fetch_data['grp_cd'];
         $Batch_Id = $fetch_data['Batch_Id'];
-        $query = $this->db->query("Registration..sp_get_reg_Print_Form_Eleventh $Inst_cd,$Grp_cd,$Batch_Id");
+        $query = $this->db->query("Registration..sp_get_reg_Print_Form_Eleventh_New $Inst_cd,$Grp_cd,$Batch_Id");
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
@@ -757,7 +760,7 @@ if($rowcount == 0 )
         $Batch_Id = $fetch_data['Batch_Id'];
 
         $this->db->select('FormNo,name, Fname, IsReAdm,regFee,RegProcessFee,RegFineFee,RegTotalFee,yearOfPass,sessOfPass');
-        $this->db->from('Registration..tblreg11th');
+        $this->db->from(Regtbl);
         $this->db->order_by("FormNo", "asc");
         $this->db->where(array('Coll_cd' => $Inst_cd,'Batch_ID'=>$Batch_Id));
         $result_1 = $this->db->get()->result();
@@ -766,7 +769,7 @@ if($rowcount == 0 )
         //if($rowcount > 0)
         //{
         //$q = $query->result_array();
-        $query_1 = $this->db->get_where('Registration..tblregbatch11th',  array('Inst_Cd' => $Inst_cd,'Batch_ID'=>$Batch_Id));
+        $query_1 = $this->db->get_where(Batchtbl,  array('Inst_Cd' => $Inst_cd,'Batch_ID'=>$Batch_Id));
         $rowcount = $query_1->num_rows();
         if($rowcount > 0){
             $query_1 = $query_1->result_array();
@@ -832,7 +835,7 @@ if($rowcount == 0 )
     }
     public function bay_form_comp($bayformno)
     {
-        $query = $this->db->get_where('Registration..tblreg11th',  array('BForm' => $bayformno,'IsDeleted'=>0));
+        $query = $this->db->get_where(Regtbl,  array('BForm' => $bayformno,'IsDeleted'=>0));
         $rowcount = $query->num_rows();
         if ($rowcount > 0){
             return true;
@@ -843,7 +846,7 @@ if($rowcount == 0 )
     }
     public function bay_form_fnic_dob_comp($bayformno,$fnic,$dob)
     {
-        $query = $this->db->get_where('Registration..tblreg11th',  array('BForm' => $bayformno,'FNIC' => $fnic,'Dob' => $dob,'IsDeleted'=>0));
+        $query = $this->db->get_where(Regtbl,  array('BForm' => $bayformno,'FNIC' => $fnic,'Dob' => $dob,'IsDeleted'=>0));
         $rowcount = $query->num_rows();
         if ($rowcount > 0){
             return true;
@@ -857,7 +860,8 @@ if($rowcount == 0 )
 
         //$this->db->select('zone_cd','zone_name');
         //$this->db->order_by("formno", "DESC"); myear = 2016 and class = 10 and sess = 1 
-        $query = $this->db->get_where('matric_new..tblZones', array('myear' => '2016','class'=>12,'sess'=>1));
+        
+        $query = $this->db->get_where('matric_new..tblZones', array('myear' =>Year,'class'=>12,'sess'=>Session));
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
@@ -886,7 +890,7 @@ if($rowcount == 0 )
             'strRegNo'=>'2-1-'.$maxnumber.'-16',
         );
         $this->db->where('formno',$fromno);
-        $res =  $this->db->update("Registration..tblreg11th", $data2);
+        $res =  $this->db->update(Regtbl, $data2);
 
         if ($res === FALSE) {
             return -1; // Or do whatever you gotta do here to raise an error

@@ -360,9 +360,9 @@
                                             <th style="width:10%" class="hidden-phone">
                                                 Selected Subjects
                                             </th>
-                                            <th style="width:5%" class="hidden-phone">
+                                          <!--  <th style="width:5%" class="hidden-phone">
                                                 Picture
-                                            </th>
+                                            </th> -->
                                             <?php
                                             if($spl_cd ==FALSE || $spl_cd =="3" )
                                             {
@@ -424,7 +424,15 @@
                                                     default:
                                                         $grp_name = "No Group Selected.";
                                                 }
-
+                                                @$mystring = "";
+                                                  if($vals["sub7_abr"]!= "")
+                                                {
+                                                 $mystring = ','.$vals["sub7_abr"];
+                                                }
+                                                if($vals["sub8_abr"]!= "")
+                                                {
+                                                 $mystring += ','.$vals["sub8_abr"];
+                                                }
                                                 echo '<tr  >
                                                 <td>'.$n.'</td>
                                                 <td>'.$formno.'</td>
@@ -432,9 +440,10 @@
                                                 <td>'.$vals["Fname"].'</td>
                                                  <td>'.$vals["BForm"].'</td>
                                                 <td>'.$grp_name.'</td>
-                                                <td>'.$vals["sub1_abr"].','.$vals["sub2_abr"].','.$vals["sub3_abr"].','.$vals["sub4_abr"].','.$vals["sub5_abr"].','.$vals["sub6_abr"].','.$vals["sub7_abr"].','.$vals["sub8_abr"].'</td>
-                                                <td><img id="previewImg" style="width:40px; height: 40px;" src="/'.IMAGE_PATH11.$Inst_Id.'/'.$vals['PicPath'].'?'.rand(10000,1000000).'" alt="Candidate Image"></td>';
-
+                                                <td>'.$vals["sub1_abr"].','.$vals["sub2_abr"].','.$vals["sub3_abr"].','.$vals["sub4_abr"].','.$vals["sub5_abr"].','.$vals["sub6_abr"].$mystring.'</td>';
+                                                
+                                                
+                                                /*<td><img id="previewImg" style="width:40px; height: 40px;" src="/'.IMAGE_PATH11.$Inst_Id.'/'.$vals['PicPath'].'?'.rand(10000,1000000).'" alt="Candidate Image"></td>*/
                                                 if($spl_cd ==FALSE || $spl_cd =="3" )
                                                     echo'<td>
                                                     <input type="checkbox" name="chk[]" value="'.$formno.'" style="width: 25px;    height: 28px;"/></td></tr>';
