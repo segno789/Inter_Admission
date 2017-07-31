@@ -14,24 +14,25 @@ define('FOPEN_READ_WRITE_CREATE',				'a+b');
 define('FOPEN_WRITE_CREATE_STRICT',				'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 define('BARCODE_PATH', 'assets/pdfs/');
-
-
+define('assets', 'assets/img/');
+define('SINGLE_LAST_DATE', '2017-08-14');
+define('DOUBLE_LAST_DATE', '2017-06-12');
 define('noimage','assets/img/no_image.jpg'); 
-
+define('IMAGE_PATH11', 'uploads/2016/');
 define('DIRPATH12TH','F:\xampp\htdocs\Share Images\\'); 
 define('PRIVATE_IMAGE_PATH', 'uploads/private/');
 define('PRIVATE_IMAGE_PATH_FRESH', 'uploads/Fresh');
 define('REGULAR_IMAGE_PATH', 'uploads/regular/');
 
 define('REGULAR_INSERT_TABLE', 'Admission_online..IAAdm');
-
+define ('sessReg','2017-2019');
 define('Session','1');
 define('Year','2017');  
 define('lastdate','13-02-2017');
 define('GET_REGULAR_IMAGE_PATH', 'F:/xampp/htdocs/Inter_Admission\uplaods\2016\Regular\\');
 define('GET_PRIVATE_IMAGE_PATH', 'F:\xampp\htdocs\Inter_Admission\uplaods\2016\private\\');
 define('GET_PRIVATE_IMAGE_PATH_COPY', '');
-
+define('SINGLE_LAST_DATE11', '2016-05-14');
 define('DIRPATH11th','F:/xampp/htdocs/Inter_Admission/Uploads/IS2016/regular/'); 
 
 
@@ -55,7 +56,7 @@ define('TITLEHSSC','Online HSSC Annual Admission 2017');
 
 define('currdate','date("d-m-Y");');
 define('TripleDateFeeinter', '13-10-2017');
-
+define('RE_ADMISSION_TBL11', 'matric_new..vwIA1P16');
 define('SingleDateFee', '13-02-2017');
 define('DoubleDateFee', '27-02-2017');
 define('TripleDateFee', '07-03-2017');

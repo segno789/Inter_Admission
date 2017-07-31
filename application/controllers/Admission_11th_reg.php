@@ -1403,7 +1403,7 @@ public function NewEnrolment_Delete($formno)
 
     public function revenue_pdf()
     {
-        // DebugBreak();
+        //DebugBreak();
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $user = $Logged_In_Array['logged_in'];
@@ -1576,6 +1576,8 @@ public function NewEnrolment_Delete($formno)
                     $ArtsAdmFee_ReAdm = $user_info['rule_fee'][1]['Amount'];
                     //$ArtsAdmFee_ReAdm = $user_info['rule_fee'][1]['Processing_Fee'];
                 }
+                
+                $Total_fine = 0;
             }
            /* else
             {
