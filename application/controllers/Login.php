@@ -56,6 +56,7 @@ class Login extends CI_Controller {
           
             $logedIn = $this->login_model->auth($_POST['username'],$_POST['password']);
             $isgroup = -1;
+           
             $appConfig = $this->login_model->getappconfig();
                       
                if($logedIn['tbl_inst']['feedingDate'] != null || $logedIn['SpecPermission']==1)
@@ -69,7 +70,8 @@ class Login extends CI_Controller {
                     $appConfig['isadmP1'] = 1;
                 }
 
-            }         
+            }  
+             $appConfig['isreg'] = 1;       
            // DebugBreak();   
            // $appConfig['isreg']=1;
           //  $appConfig['isreg']=1;

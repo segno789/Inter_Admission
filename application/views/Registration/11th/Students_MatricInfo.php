@@ -30,8 +30,8 @@
 
 
 
-                    $current_year = date("Y")-1;
-                    $prev_year = date("Y",strtotime("-2 year"));
+                    $current_year = date("Y");
+                    $prev_year = date("Y",strtotime("-1 year"));
 
                     if($gender== 1){ ?>
                         <option value="<?php echo $current_year;  ?>"><?php echo $current_year;  ?></option>
