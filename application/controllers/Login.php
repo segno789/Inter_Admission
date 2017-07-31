@@ -71,7 +71,6 @@ class Login extends CI_Controller {
                 }
 
             }  
-             $appConfig['isreg'] = 1;       
            // DebugBreak();   
            // $appConfig['isreg']=1;
           //  $appConfig['isreg']=1;
@@ -168,18 +167,18 @@ class Login extends CI_Controller {
                         $lastdate=  $logedIn['spec_info']['FeedingDate'];
                         if(date('Y-m-d',strtotime($lastdate))>=date('Y-m-d'))
                         {
-                            $isfeeding = 1;
+                            $isinterfeeding = 1;
                         }
                         else {
                             if(date('Y-m-d',strtotime(SINGLE_LAST_DATE))>=date('Y-m-d') || date('Y-m-d',strtotime(DOUBLE_LAST_DATE))>=date('Y-m-d'))
                             {
-                                $isfeeding = 1    ;
+                                $isinterfeeding = 1    ;
                                 $lastdate = SINGLE_LAST_DATE;
                                 $logedIn['SpecPermission'] = 0;
                             }
                             else
                             {
-                                $isfeeding = 0;   
+                                $isinterfeeding = 0;   
                             }
 
                         }
@@ -189,7 +188,7 @@ class Login extends CI_Controller {
                     {
                         if(date('Y-m-d',strtotime(SINGLE_LAST_DATE))>=date('Y-m-d') || date('Y-m-d',strtotime(DOUBLE_LAST_DATE))>=date('Y-m-d'))
                         {
-                            $isfeeding = 1    ;
+                            $isinterfeeding = 1    ;
                         }
                         else if($logedIn['tbl_inst']['feedingDate'] != null)
                         {
@@ -197,11 +196,11 @@ class Login extends CI_Controller {
                             if(date('Y-m-d')<=$lastdate)
                             {
 
-                                $isfeeding = 1; 
+                                $isinterfeeding = 1; 
                             }
                             else 
                             {    $lastdate = SINGLE_LAST_DATE;
-                                $isfeeding = -1;
+                                $isinterfeeding = -1;
                             }
                         }
                     }
@@ -209,7 +208,7 @@ class Login extends CI_Controller {
                     {
                         //$appConfig['isadmP1'] = 1;
                         $appConfig['isreg'] = 1;
-                        $isfeeding = 1; 
+                        $isinterfeeding = 1; 
                     }
                     //  DebugBreak();
 

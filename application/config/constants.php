@@ -80,6 +80,14 @@ define('formprint_sp_11th','Registration..sp_form_data_11thAdm');
 define('class_for_9th_Adm','11th');
 
 
+//========================11th Registration===================================
+define('IMAGE_PATH11', 'uploads/2017/reg/');
+define('IMAGE_PATH211', 'uploads/2016_backup/');
+define('BARCODE_PATH11', 'uploads/pdfs/');
+define('SINGLE_LAST_DATE11', '2016-11-08');
+define('DOUBLE_LAST_DATE11', '2016-11-08');
+
+
 //================ RollNumber Slips variables ========================
 define('mClass1','12'); 
 define('mSession','1'); 
