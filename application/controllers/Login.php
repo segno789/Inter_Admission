@@ -35,7 +35,7 @@ class Login extends CI_Controller {
         if(@$_POST['username'] != '' && @$_POST['password'] != '')
         {   
             //DebugBreak();
-  $this->load->model('login_model'); 
+             $this->load->model('login_model'); 
              $isdefualter = $this->login_model->chekdefultar($_POST['username']);
             if( $isdefualter != -1)
             {
@@ -57,7 +57,23 @@ class Login extends CI_Controller {
             $logedIn = $this->login_model->auth($_POST['username'],$_POST['password']);
             $isgroup = -1;
             $appConfig = $this->login_model->getappconfig();
-            //  DebugBreak();   
+                      
+               if($logedIn['tbl_inst']['feedingDate'] != null || $logedIn['SpecPermission']==1)
+            {
+                $lastdate  = date('Y-m-d',strtotime($logedIn['tbl_inst']['feedingDate'])) ;
+                $spec_lastdate = date('Y-m-d',strtotime($logedIn['spec_info']['FeedingDate']));
+
+                if(date('Y-m-d')<=$lastdate || date('Y-m-d')<=$spec_lastdate)
+                {
+
+                    $appConfig['isadmP1'] = 1;
+                }
+
+            }         
+           // DebugBreak();   
+           // $appConfig['isreg']=1;
+          //  $appConfig['isreg']=1;
+            
             if($logedIn != false)
             {  
 
@@ -141,14 +157,14 @@ class Login extends CI_Controller {
                         }
 
                     }
-                    $isfeeding = -1;
-                    $isinterfeeding = -1;
+                    $isfeeding = 1;
+                    $isinterfeeding = 1;
                     $lastdate = SingleDateFee;
                     //  DebugBreak();
 
 
 
-                    // DebugBreak();
+                     //DebugBreak();
                     $sess_array = array(
                         'Inst_Id' => $logedIn['tbl_inst']['Inst_cd'] ,
                         'pass' => $logedIn['flusers']['pass'] ,
@@ -166,6 +182,8 @@ class Login extends CI_Controller {
                         'zone' => $logedIn['tbl_inst']['iZone_cd'],
                         'emis' => $logedIn['tbl_inst']['emis_code'],
                         'isInserted' => $logedIn['isInserted'],
+                        'isSpecial' => $logedIn['SpecPermission'],   
+                        'isSpecial_Fee' => $logedIn['spec_info'],
                         'isdeaf' => $isdeaf,
                         'isboardoperator' => 0  ,
                         'isfeedingallow' => $isfeeding   ,
