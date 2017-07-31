@@ -1639,7 +1639,7 @@ class Registration_11th extends CI_Controller {
             redirect('Registration/FormPrinting');
             return; 
         }
-        $temp = $user['Inst_Id'].'@11@2017-19';
+        $temp = $user['Inst_Id'].'@11@'.sessReg;
         $image =  $this->set_barcode($temp);
         $this->load->library('PDF_RotateWithOutPage');
         $pdf = new PDF_RotateWithOutPage('P','in',"A4");
@@ -2874,7 +2874,7 @@ class Registration_11th extends CI_Controller {
     public function return_pdf()
     {
 
-      //  DebugBreak();
+      // DebugBreak();
 
         $Condition = $this->uri->segment(4);
         /*
@@ -2934,7 +2934,7 @@ class Registration_11th extends CI_Controller {
             return;
 
         }
-        $temp = $user['Inst_Id'].'@11@2016-18';
+        $temp = $user['Inst_Id'].'@11@'.sessReg;
         $image =  $this->set_barcode($temp);
         // $pdf->Image(base_url().'assets/pdfs/'.'/'.$image,6.3,0.5, 1.8, 0.20, "PNG");
         //$studeninfo['data']['info'][0]['barcode'] = $image;
@@ -3036,9 +3036,9 @@ class Registration_11th extends CI_Controller {
                     default:
                         $grp_name = "No Group Selected.";
                 }
-                $pdf->SetFont('Arial','',10);
+                /*$pdf->SetFont('Arial','',10);
                 $pdf->SetXY(2.5,0.8);
-                $pdf->Cell(0, 0.25,  'Group: '.$grp_name, 0.25, "C");
+                $pdf->Cell(0, 0.25,  'Group: '.$grp_name, 0.25, "C"); */
 
 
                 $pdf->rect($lmargin,1,$rmargin,10.5);                //the main rectangle box
@@ -3135,18 +3135,20 @@ class Registration_11th extends CI_Controller {
             //            $pdf->Text($col5+.05,$ln[$countofrecords]+0.2,GroupName($data["Grp_Cd"]));
             if(return_pdf_isPicture == 1)
             {
-                $pdf->Text($col5+.05,$ln[$countofrecords]+0.2,  $data["sub1_abr"].','.$data["sub2_abr"].','.$data["sub3_abr"].','.$data["sub4_abr"]);
+                $pdf->Text($col5+.05,$ln[$countofrecords]+0.15,  $grp_name);
+                $pdf->Text($col5+.05,$ln[$countofrecords]+0.35,  $data["sub1_abr"].','.$data["sub2_abr"].','.$data["sub3_abr"]);
                 $pdf->SetFont('Arial','',7);    
-                $pdf->Text($col5+.05,$ln[$countofrecords]+0.4,$data["sub5_abr"].','.$data["sub6_abr"].','.$data["sub7_abr"]); //.','.$data["sub8_abr"]
+                $pdf->Text($col5+.05,$ln[$countofrecords]+0.55,$data["sub4_abr"].','.$data["sub5_abr"].','.$data["sub6_abr"].','.$data["sub7_abr"]); //.','.$data["sub8_abr"]
 
                 //$pdf->Image(IMAGE_PATH11.$data["coll_cd"].'/'.$data["PicPath"],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG");    
                 $pdf->Image(base_url().IMAGE_PATH11.$data["coll_cd"].'/'.$data["PicPath"],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG");    
             }
             else
             {
-                $pdf->Text($col5+.05,$ln[$countofrecords]+0.2,  $data["sub1_abr"].','.$data["sub2_abr"].','.$data["sub3_abr"].','.$data["sub4_abr"]);
+                $pdf->Text($col5+.05,$ln[$countofrecords]+0.15,  $grp_name);
+                $pdf->Text($col5+.05,$ln[$countofrecords]+0.35,  $data["sub1_abr"].','.$data["sub2_abr"].','.$data["sub3_abr"]);
                 $pdf->SetFont('Arial','',7);    
-                $pdf->Text($col5+.05,$ln[$countofrecords]+0.4,$data["sub5_abr"].','.$data["sub6_abr"].','.$data["sub7_abr"]); //.','.$data["sub8_abr"]
+                $pdf->Text($col5+.05,$ln[$countofrecords]+0.55,$data["sub4_abr"].','.$data["sub5_abr"].','.$data["sub6_abr"].','.$data["sub7_abr"]); //.','.$data["sub8_abr"]
                 //$pdf->Image(IMAGE_PATH11.$data["Sch_cd"].'/'.$data["PicPath"],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG");    
             }
 
@@ -3902,7 +3904,7 @@ class Registration_11th extends CI_Controller {
         // $temp = $user['Inst_Id'].'11-2017-19';
         //$image =  $this->set_barcode($temp);
 
-        $temp = $challanNo.'@'.$user['Inst_Id'].'@'.$Batch_Id.'@11@2016@1';
+        $temp = $challanNo.'@'.$user['Inst_Id'].'@'.$Batch_Id.'@11@'.Year.'@1';
         //  $image =  $this->set_barcode($temp);
         //DebugBreak();
         $temp =  $this->set_barcode($temp);

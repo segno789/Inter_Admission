@@ -21,7 +21,7 @@
                                     <label class="control-label span2" >
 
                                     </label> 
-                                    <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="<?php   if($isReAdm==1) {} else{echo '/'.IMAGE_PATH11.$Inst_Id.'/'.$data[0]['PicPath'].'?'.rand(10000,1000000); } ?>" alt="Candidate Image">
+                                    <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="<?php   if($isReAdm==1) {} else{echo base_url().IMAGE_PATH11.$Inst_Id.'/'.$data[0]['PicPath'].'?'.rand(10000,1000000); } ?>" alt="Candidate Image">
                                 </div>
                             </div>
                             <div class="control-group">
