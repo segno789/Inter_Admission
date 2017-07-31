@@ -31,13 +31,14 @@ class Registration_11th extends CI_Controller {
     public function index()
     {
         //  DebugBreak(); 
-        $msg = $this->uri->segment(3);
+        //$msg = $this->uri->segment(3);
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
         $userinfo['isselected'] = 6;
         $Inst_Id = $userinfo['Inst_Id'];
-        $isgovt = $userinfo['isgovt'];
+        $Inst_name = $userinfo['inst_Name'];
+        /*$isgovt = $userinfo['isgovt'];
         $emis = $userinfo['emis'];
         $email = $userinfo['email'];
         $phone = $userinfo['phone'];
@@ -53,8 +54,8 @@ class Registration_11th extends CI_Controller {
         $field_status['cell'] = 0;
         $field_status['dist'] = 0;
         $field_status['teh'] = 0;
-        $field_status['zone'] = 0;
-
+        $field_status['zone'] = 0;  */
+       /*
         if($isgovt == 1)
         {
             // if(strlen($emis)> 1)
@@ -178,15 +179,15 @@ class Registration_11th extends CI_Controller {
 
             }
             else
-            {
+            {*/
                 $this->load->view('common/menu.php',$userinfo);
                 $this->load->model('Registration_11th_model');
                 $count = $this->Registration_11th_model->Dashboard($Inst_Id);
                 $info = array('count'=>$count,'Inst_id'=>$Inst_Id,'Inst_name'=>$Inst_name);
                 $this->load->view('Registration/11th/Dashboard.php',$info);
                 $this->load->view('common/common_reg/footer.php');    
-            } 
-        }
+            //} 
+        //}
 
 
     }
@@ -280,7 +281,7 @@ class Registration_11th extends CI_Controller {
                 //  DebugBreak();
                 $formno = $user_info[0]['FormNo'];
                 $OldRno = $user_info[0]['rno'];
-                $year = 2016;
+                $year = Year;
 
                 $RegStdData = array('isReAdm'=>'1','Oldrno'=>$OldRno);
                 $RegStdData['data'][0]=$user_info[0];
@@ -296,7 +297,7 @@ class Registration_11th extends CI_Controller {
         else  if($oldBrd_cd >  1)
         {    $formno = '';
             $OldRno = $RollNo;
-            $year = 2016;
+            $year = Year;
 
             $RegStdData = array('isReAdm'=>'1','Oldrno'=>$OldRno);
             $RegStdData['data'][0]  =  '';
@@ -584,7 +585,7 @@ class Registration_11th extends CI_Controller {
 
             if($this->session->flashdata('IsReAdm')){
                 $isReAdm = 1;
-                $year = 2016;
+                $year = Year;
             }
             else{
                 $isReAdm = 0;
@@ -1151,11 +1152,11 @@ class Registration_11th extends CI_Controller {
 
             if($this->session->flashdata('IsReAdm')){
                 $isReAdm = 1;
-                $year = 2015;
+                $year = Year-1;
             }
             else{
                 $isReAdm = 0;
-                $year = 2016;    
+                $year = Year;    
             }
 
             $RegStdData = array('data'=>$this->Registration_11th_model->EditEnrolement_data($formno,$year,$Inst_Id),'isReAdm'=>$isReAdm,'Oldrno'=>0);
@@ -2177,7 +2178,7 @@ class Registration_11th extends CI_Controller {
             return;
 
         }
-        $temp = $user['Inst_Id'].'@11@2016-18';
+        $temp = $user['Inst_Id'].'@11@'.sessReg;
         $image =  $this->set_barcode($temp);
         // $pdf->Image(base_url().'assets/pdfs/'.'/'.$image,6.3,0.5, 1.8, 0.20, "PNG");
         //$studeninfo['data']['info'][0]['barcode'] = $image;
@@ -2200,7 +2201,7 @@ class Registration_11th extends CI_Controller {
                 $data['strRegNo'] = $this->Registration_11th_model->generateStrNo($data['sex'],$data['formNo']) ;
             }
 
-            $temp = str_replace("-","",$data['strRegNo']).'@11@2016-18';
+            $temp = str_replace("-","",$data['strRegNo']).'@11@'.sessReg;
             $image =  $this->set_barcode($temp);
 
             $generatingpdf=true;
@@ -2596,7 +2597,7 @@ class Registration_11th extends CI_Controller {
                     }
                     else
                     {
-                        if($v["yearOfPass"] == 2016 && $v["sessOfPass"] ==2)
+                        if($v["yearOfPass"] == Year && $v["sessOfPass"] ==2)
                         {
                             if(date('Y-m-d', strtotime($v["edate"] ))<= $lastdate) 
                             {
@@ -2625,7 +2626,7 @@ class Registration_11th extends CI_Controller {
                 }
                 else
                 {
-                    if($v["yearOfPass"] == 2016 && $v["sessOfPass"] ==2)
+                    if($v["yearOfPass"] == Year && $v["sessOfPass"] ==2)
                     {
                         if(date('Y-m-d', strtotime($v["edate"] ))<= $lastdate) 
                         {
@@ -2787,7 +2788,7 @@ class Registration_11th extends CI_Controller {
                     }
                     else
                     {     
-                        if($v["yearOfPass"] == 2016 && $v["sessOfPass"] ==2)
+                        if($v["yearOfPass"] == Year && $v["sessOfPass"] ==2)
                         {
                             if(date('Y-m-d', strtotime($v["edate"] ))<= $lastdate) 
                             {
@@ -2819,7 +2820,7 @@ class Registration_11th extends CI_Controller {
                 }
                 else
                 {     
-                    if($v["yearOfPass"] == 2016 && $v["sessOfPass"] ==2)
+                    if($v["yearOfPass"] == Year && $v["sessOfPass"] ==2)
                     {
                         if(date('Y-m-d', strtotime($v["edate"] ))<= $lastdate) 
                         {
@@ -3432,7 +3433,7 @@ class Registration_11th extends CI_Controller {
             $pdf->SetFillColor(0,0,0);
             $pdf->SetDrawColor(0,0,0); 
 
-            $temp = $data['FormNo'].'@11@2016@1';
+            $temp = $data['FormNo'].'@11@'.Year.'@1';
             $image =  $this->set_barcode($temp);
             $pdf->Image(BARCODE_PATH.$image,6.0, 1.2  ,1.8,0.20,"PNG");
             $pdf->SetFont('Arial','U',16);
