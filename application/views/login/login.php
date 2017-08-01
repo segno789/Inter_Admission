@@ -1,144 +1,112 @@
-<html lang="en"><!--
-    <![endif]--><head>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>LOGIN | BISEGRW</title>
+
         <meta charset="utf-8">
-        <title>
-            BISE GRW - BOARD OF INTERMEDIATE AND SECONDARY EDUCATION GUJRANWALA
-        </title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="">
-        <meta name="author" content="">
-        <!-- bootstrap css -->
+        <link rel="icon" href="<?php echo base_url(); ?>assets/img/headericon.png" type="image/png">        
 
-        <link href="<?php echo base_url(); ?>assets/css/icomoon/styleprivateslip.css" rel="stylesheet">
-        <link href="<?php echo base_url(); ?>assets/css/icomoon/style.css" rel="stylesheet">
-        <link href="<?php echo base_url(); ?>assets/css/main.css" rel="stylesheet"> <!-- Important. For Theming change primary-color variable in main.css  -->
-        <!--[if lte IE 7]>
-        <script src="css/icomoon-font/lte-ie7.js">
-        </script>
-        <![endif]-->
-
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
-    <body style="background-color: white !important;">
-
-        <div class="container-fluid">
-            <div class="left-sidebar">
-                <div id="header" style="width: 50%;">
-                    <div class="inHeaderLogin" style="/* width: 50%; */">
-                        <a href="" rel="home" data-original-title="BISE Gujranwala" style=""><img style="margin-top: 9px;text-align:left;width:150px;/* float: left; */margin-left: 14px;" src="<?php echo base_url(); ?>assets/img/icon.png" alt="Logo BISE GRW"></a>
-                        <!--Intimation-->
-                        <p style="color: wheat;text-align: center;font-size: 18px;margin-left: 28px;/* float: left; */margin-top: -129px;">Board of Intermediate &amp; Secondary Education, Gujranwala <br><br>     
-                            <?php 
-                            $sess = '';
-                            if(Session =='1')
-                                $sess =  'Annual';
-                            else if(Session =='2')
-                                $sess = 'Supply';
-
-                                
-                            echo  'Online HSSC '.$sess.' Admission '.Year   
-                                
-                            ?> 
-                      
-                    </div>
+    <body>
+        <form class="form-horizontal" method="POST">
+            <div class="container"> 
+                <div class="row-fluid">
+                    <h2 style="background:#003a6a !important; color: wheat; text-align: center;" class="jumbotron">
+                        <img src="<?php echo base_url(); ?>assets/img/BISEGRW_Icon.png" class="img-circle" width="125px" height="125px" alt="Logo">
+                        Board of Intermediate & Secondary Education, Gujranwala
+                        <br>
+                        <?php 
+                        $sess = '';
+                        if(Session =='1')
+                            $sess =  'Annual';
+                        else if(Session =='2')
+                            $sess = 'Supply';
+                            echo  '<p style="text-align:center;">Online HSSC '.$sess.' Registration '.Year.'</p>';   
+                        ?>
+                    </h2>
                 </div>
 
-                <div class="row-fluid" >
+                <?php 
 
-                    <div class="span12">
-                        <div class="sign-in-container">
-                            <form action="#" class="login-wrapper" method="post">
-                                <div class="header">
-                                    <div class="row-fluid">
-                                        <div class="span12">
-                                            <h3>Login</h3>
+                @$msg = "";
 
-                                        </div>
-                                        <div class="span12">
-                                            <p>Fill out the form below to login.</p>
-                                            <?php 
+                if($user_status == 1)
+                {
+                    $msg = "Your UserId or Password is not correct.Please use correct information";
+                }
+                else if($user_status == 2)
+                {
+                    $msg = "Only Colleges/Higher Schools are allowed to login.";
+                }
+                else if($user_status == 3)
+                {
+                    $msg = "Currently your account is inActive.";
+                }
+                else if($user_status == 4)
+                {
+                    $msg = @$remarks;
+                }
 
+                else if($user_status == 5)
+                {
+                    $msg = "Plaese wait some maintaince.";
+                }
+                else if($user_status == 6)
+                {
+                    $msg = "Your Institution Students are not Enrolled in Matric Annual 2016.";
+                }
+                else if($user_status == 7)
+                {
+                    $msg = "Your subject Groups are not filled.Please Contact to Affiliations Branch at B.I.S.E Gujranwala.";
+                }
 
-                                           /// if($user_status == 1)
-
-                                                // DebugBreak();
-                                                if($user_status == 1)
-                                                {
-                                                    echo "<b style='color: #f63131;    font-size: 15px;'>Your UserId/Password is not correct.Please use correct information</b>";
-                                                }
-                                                else if($user_status == 2)
-                                                {
-                                                    echo "<b style='color: #f63131;    font-size: 15px;'>Only Colleges/Higher Schools are allowed to login.</b>";
-                                                }
-                                                else if($user_status == 3)
-                                                {
-                                                    echo "<b style='color: #f63131;    font-size: 15px;'>Currently your account is inActive.</b>";
-                                                }
-                                                else if($user_status == 4)
-                                                {
-                                                    echo "<b style='color: #f63131;    font-size: 13px;'>".@$remarks."</b>";
-                                                }
-                                               /* else if($user_status == 4)
-                                                {
-                                                    echo "<b style='color: #f63131;    font-size: 13px;'> Your Registration Returns (2014-2016) not submitted. Please contact to Online Registration Branch B.I.S.E. Gujranwala.</b>";
-                                                }*/
-                                                else if($user_status == 5)
-                                                {
-                                                    echo "<b style='color: #f63131;    font-size: 13px;'> Plaese wait some maintaince.</b>";
-                                                }
-                                                else if($user_status == 6)
-                                                {
-                                                    echo "<b style='color: #f63131;    font-size: 13px;'>  Your Institution Students are not Enrolled in Matric Annual 2016.</b>";
-                                                }
-                                                else if($user_status == 7)
-                                                {
-                                                    echo "<b style='color: #f63131;    font-size: 13px;'>  Your subject Groups are not filled.Please Contact to Affiliations Branch at B.I.S.E Gujranwala.</b>";
-                                                }
-
-                                            ?>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="content">
-                                    <div class="row-fluid">
-                                        <div class="span12">
-                                            <input class="input span12 email" id="" name="username" placeholder="Institute Code" required="required" maxlength="6" type="text">
-                                        </div>
-                                    </div>
-                                    <div class="row-fluid">
-                                        <div class="span12">
-                                            <input class="input span12 password" id="" name="password" placeholder="Password" required="required" type="password">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="actions">
-                                    <input  class="btn-large pull-right btn-info" name="btnLogin" type="submit" value="Login" style="height: 50px; width: 100px;" >
-                                    <!-- <a class="link" href="#">Forgot Password?</a>-->
-                                    <div class="clearfix"></div>
-                                </div>
-                            </form>
-                        </div>
+                if($msg != '')
+                {
+                    ?>
+                    <div class="alert alert-danger fade in alert-dismissable">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+                        <strong><?php echo $msg; ?></strong>
+                    </div>
+                    <?php
+                }
+                ?>
+                <div class="form-group">
+                    <label class="control-label col-md-4" for="username">Institute Code:</label>
+                    <div class="col-md-5">
+                        <input class="form-control" id="username" name="username" placeholder="Enter Institute Code" required="required" maxlength="6" type="text" autofocus>
                     </div>
                 </div>
-
-                <div id="header" style=" width:50%; position: fixed;left: 50%;bottom: -30px;transform: translate(-50%, -50%);margin: 0 auto;">
-                    <div class="inFooterLogin">
-                        <div id="copyright" style="color: wheat;font-size: 16px;padding-top: 20px;text-align: center;">
-                            &copy; 2017 <a href="http://www.bisegrw.com" style="color: wheat;">www.bisegrw.com</a> | Powered by Bisegrw  Development Team 
-                        </div>
+                <div class="form-group">
+                    <label class="control-label col-md-4" for="password">Password:</label>
+                    <div class="col-md-5"> 
+                        <input class="form-control" id="password" name="password" placeholder="Enter Password" required="required" type="password">
                     </div>
-                </div> 
+                </div>
+                <div class="form-group"> 
+                    <div class="col-md-offset-4 col-md-5">
+                        <button type="submit" name="btnLogin" type="submit" class="btn btn-primary btn-block">Login</button>
+                    </div>
+                </div>
             </div>
-            <!--/.fluid-container-->
+
+        </form>
+
+        <div class="navbar-fixed-bottom row-fluid">
+            <div class="navbar-inner">
+                <div class="container" style="text-align: center; background:#003a6a; color: wheat; border-radius:5px; margin-bottom: 6px; height: 40px;">
+                    &copy; 2017 BISE Gujranwala, All Rights Reserved. 
+                </div>
+            </div>
         </div>
-        <script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
-        <script src="<?php echo base_url(); ?>assets/js/bootstrap.js"></script>
-        <script type="text/javascript">
-            $('a').tooltip('hide');
-            $('.popover-pop').popover('hide');
-            //Collapse
-            $('#myCollapsible').collapse({
-                toggle: false
-            })
-        </script>
+
+
+
+
+
+
+
     </body>
 </html>
