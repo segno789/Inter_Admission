@@ -1707,14 +1707,14 @@ class Registration_11th extends CI_Controller {
 
         $pdf->SetFont('Arial','BU',10);
         $pdf->SetXY(0.9,8.35+$y);    
-        $pdf->MultiCell(9,0.2,"Challan No(s): ".$result['data'][0]['Challan_No'],0,"L",0); 
+        $pdf->MultiCell(7,0.2,"Challan No(s): ".$result['data'][0]['Challan_No'],0,"L",0); 
 
         $pdf->SetFont('Arial','B',10);
-        $pdf->SetXY(0.9,8.65+$y);    
+        $pdf->SetXY(0.9,8.85+$y);    
         $pdf->MultiCell(10,0.2,"Paid Date:____________________________",0,"L",0); 
 
         $pdf->SetFont('Arial','B',10);
-        $pdf->SetXY(0.9,8.95+$y);    
+        $pdf->SetXY(0.9,9.25+$y);    
         $pdf->MultiCell(10,0.2,"Bank Branch Name:__________________________________________________________________",0,"L",0); 
 
         /*  $pdf->SetFont('Arial','B',10);

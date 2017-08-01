@@ -301,7 +301,7 @@
 
                             <hr>
                             <div class="control-group">
-                                <h4 class="span4">Exam Information :</h4>
+                                <h4 class="span4">Matric Exam Information :</h4>
                                 <div class="controls controls-row">
                                     <input type="hidden" class="span2 hidden" id="isReAdm" name="isReAdm" value="0">
                                     <label class="control-label span2">
@@ -312,7 +312,7 @@
                             </div>
                             <div class="control-group">
                                 <label class="control-label span1" >
-                                    Old Roll No :
+                                    Matric Roll No :
                                 </label>
                                 <div class="controls controls-row">
                                     <input class="span3"  type="text" id="old_rno_ssc"  style="text-transform: uppercase;" name="old_rno_ssc" placeholder="" maxlength="60"  value="<?php  echo  @$data[0]['SSC_RNo']; ?>" <?php if($isReAdm==0) {echo "readonly='readonly'";  } ?>  >
