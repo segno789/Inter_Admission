@@ -12,7 +12,7 @@
 
                     </div>
                     <div class="widget-body">
-                        <h1    style="text-align: center;"><font color="#000000" size="+1" >Note:-Last Date of Online Registartion for 11th  with late fee is <b class="blink_text"><?php echo date("d F, Y", strtotime($lastdate)); ?></b></font></h1>
+                        <h1    style="text-align: center;"><font color="#000000" size="+1" >Note:-Last Date of Online Registartion for 11th  with late fee is <b class="blink_text"><?php  echo date("d F, Y", strtotime($lastdate)); ?></b></font></h1>
                         <h4>Welcome to Board of Intermediate &amp; Secondary Education, GUJRANWALA</br></br> &nbsp; Dashboard</h4>
 
                          <?php  if($isinterfeeding == 1) {?>
@@ -20,7 +20,7 @@
                             <a href="<?php echo base_url(); ?>Registration_11th/Students_matricInfo"><img src="<?php echo base_url();?>assets/img/enrolment.png"><br>New-Registration</a>
                         </div>
                         <!--  <div class="shortcutHome">
-                        <a href="GetInfo.php"><img src="<?php echo base_url();?>assets/img/enrolment.png"><br>Re-Admission</a>
+                        <a href="GetInfo.php"><img src="<?php //echo base_url();?>assets/img/enrolment.png"><br>Re-Admission</a>
                         </div>  -->    
                         <div class="shortcutHome">
                             <a href="<?php echo base_url(); ?>Registration_11th/EditForms"><img src="<?php echo base_url();?>assets/img/edit_form.png"><br>Edit Form</a>
@@ -110,7 +110,7 @@
                             <!--    ( <a href="#" class="guidlines">Read Instruction's Guide</a>  ) -->
                             <br/>
                       
-                            <a href="<?php echo base_url(); ?>/assets/img/ForwardingLetterInter.pdf" target="_blank" class="guidlines blink_text" style="font-size: 18px;">Download Blank Farwarding letter . </a> <br/>
+                         <!--   <a href="<?php //echo base_url(); ?>/assets/img/ForwardingLetterInter.pdf" target="_blank" class="guidlines blink_text" style="font-size: 18px;">Download Blank Farwarding letter . </a> <br/>-->
                             <a href="<?php echo base_url(); ?>Registration_11th/forwarding_pdf" target="_blank" class="guidlines blink_text" style="font-size: 18px;">Download Farwarding letter. </a> <br/>
                       <br />
                             <strong>NOTE:</strong> <br/>

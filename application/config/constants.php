@@ -25,6 +25,9 @@ define('PRIVATE_IMAGE_PATH_FRESH', 'uploads/Fresh');
 define('REGULAR_IMAGE_PATH', 'uploads/regular/');
 
 define('REGULAR_INSERT_TABLE', 'Admission_online..IAAdm');
+
+
+//---------------- REGISTRATION 11TH ------------------------------
 define ('sessReg','2017-2019');
 define('Session','1');
 define('Year','2017');
