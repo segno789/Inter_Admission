@@ -1,193 +1,67 @@
-<?php
+<?php   //  
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Registration_11th extends CI_Controller {
-    /**
-    * Index Page for this controller.
-    *
-    * Maps to the following URL
-    *         http://example.com/index.php/welcome
-    *    - or -
-    *         http://example.com/index.php/welcome/index
-    *    - or -
-    * Since this controller is set as the default controller in
-    * config/routes.php, it's displayed at http://example.com/
-    *
-    * So any other public methods not prefixed with an underscore will
-    * map to /index.php/welcome/<method_name>
-    * @see http://codeigniter.com/user_guide/general/urls.html
-    */
+    
     function __construct()
     {
         parent::__construct();
         $this->load->helper('url');
-        //this condition checks the existence of session if user is not accessing  
-        //login method as it can be accessed without user session
+    
         $this->load->library('session');
         if( !$this->session->userdata('logged_in') && $this->router->method != 'login' ) {
             redirect('login');
         }
+        $this->load->library('Browsercache');
+        $this->browsercache->dontCache();
+        $this->clear_cache();
+        $this->clear_all_cache();
+    }
+     public function clear_all_cache()
+{
+    $CI =& get_instance();
+$path = $CI->config->item('cache_path');
+
+    $cache_path = ($path == '') ? APPPATH.'cache/' : $path;
+
+    $handle = opendir($cache_path);
+    while (($file = readdir($handle))!== FALSE) 
+    {
+        //Leave the directory protection alone
+        if ($file != '.htaccess' && $file != 'index.html')
+        {
+           @unlink($cache_path.'/'.$file);
+        }
+    }
+    closedir($handle);
+}
+     function clear_cache()
+    {
+        $this->output->set_header("Cache-Control: no-store, no-cache, must-revalidate, no-transform, max-age=0, post-check=0, pre-check=0");
+        $this->output->set_header("Pragma: no-cache");
     }
     public function index()
     {
-        //  DebugBreak(); 
-        //$msg = $this->uri->segment(3);
+    
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
         $userinfo['isselected'] = 6;
         $Inst_Id = $userinfo['Inst_Id'];
         $Inst_name = $userinfo['inst_Name'];
-        /*$isgovt = $userinfo['isgovt'];
-        $emis = $userinfo['emis'];
-        $email = $userinfo['email'];
-        $phone = $userinfo['phone'];
-        $cell = $userinfo['cell'];
-        $dist = $userinfo['dist'];
-        $teh = $userinfo['teh'];
-        $zone = $userinfo['zone'];
+       
         $isInserted = $userinfo['isInserted'];
-        $field_status = array();
-        $field_status['emis'] = 0;
-        $field_status['email'] = 0;
-        $field_status['phone'] = 0;
-        $field_status['cell'] = 0;
-        $field_status['dist'] = 0;
-        $field_status['teh'] = 0;
-        $field_status['zone'] = 0;  */
-       /*
-        if($isgovt == 1)
-        {
-            // if(strlen($emis)> 1)
-            // {
-            $field_status['emis'] = 1;
-            // }
-            if(strlen($email) > 5){
-                $field_status['email'] = 1;
-            }
-            if(strlen($phone) > 3){
-                $field_status['phone'] = 1;
-            }
-            if(strlen(($cell)>5)){
-                $field_status['cell'] = 1;
-            }
-            if(($dist > 0)){
-                $field_status['dist'] = 1;
-            }
-            if(($teh > 0)){
-                $field_status['teh'] = 1;
-            }
-            if(($zone > 0)){
-                $field_status['zone'] = 1;
-            }
-        }
-        else
-        {
-            $field_status['emis'] = 1;
-            // if(strlen($email) > 5){
-            //   $field_status['email'] = 1;
-            // }
-            if(strlen($phone) > 3){
-                $field_status['phone'] = 1;
-            }
-            if(strlen(($cell)>5)){
-                $field_status['cell'] = 1;
-            }
-            if(($dist > 0)){
-                $field_status['dist'] = 1;
-            }
-            if(($teh > 0)){
-                $field_status['teh'] = 1;
-            }
-            if(($zone > 0)){
-                $field_status['zone'] = 1;
-            }
-        }
+        
+
+      
         $Inst_name = $userinfo['inst_Name'];
         $this->load->view('common/header.php',$userinfo);
-        // DebugBreak();
-        if($msg == 7)
-        {
-            $this->load->view('common/menu.php',$userinfo);
-            $this->load->model('Registration_model');
-            $count = $this->Registration_model->Dashboard($Inst_Id);
-            $info = array('count'=>$count,'Inst_id'=>$Inst_Id,'Inst_name'=>$Inst_name);
-            $this->load->view('Registration/11th/Dashboard.php',$info);
-            $this->load->view('common/common_reg/footer11threg.php');  
-        }
-        else
-        {
-            if( ($field_status['emis'] == 0) || ($field_status['email'] == 0) || ($field_status['phone'] == 0) || ($field_status['cell'] == 0) || ($field_status['dist'] == 0) || ($field_status['teh'] == 0)|| ($field_status['zone'] == 0))
-            {
-                // $this->session->set_userdata("status",$this->session->flashdata('status'));
-                if($this->session->flashdata('status'))
-                {
-                    $this->load->view('common/menu.php',$userinfo);
-                    $this->load->model('Registration_11th_model');
-                    $count = $this->Registration_11th_model->Dashboard($Inst_Id);
-                    $info = array('count'=>$count,'Inst_id'=>$Inst_Id,'Inst_name'=>$Inst_name);
-                    $this->load->view('Registration/11th/Dashboard.php',$info);
-                    $this->load->view('common/common_reg/footer.php');  
-
-                }
-                else{
-                    if($isInserted < 1)
-                    {
-                        $this->load->model('Registration_11th_model');
-                        $count = $this->Registration_11th_model->Dashboard($Inst_Id);
-                        // DebugBreak();
-                        if($field_status['zone'] == 0)
-                        {
-                            $zone = $this->Registration_11th_model->get_zone();
-                        }
-                        //DebugBreak();
-                        if($this->session->flashdata('incomplete'))
-                        {
-                            $all_PreData = $this->session->flashdata('incomplete'); 
-                            $fillvalues['emis'] = $all_PreData['emis'];
-                            $fillvalues['email'] = $all_PreData['email'];
-                            $fillvalues['phone'] = $all_PreData['phone'];
-                            $fillvalues['cell'] = $all_PreData['cell'];
-                            $fillvalues['dist'] = $all_PreData['dist'];
-                            $fillvalues['teh'] = $all_PreData['teh'];
-                            $fillvalues['zone'] = $all_PreData['zone'];
-                            $errors = $all_PreData['error'];
-                        }
-                        else{
-                            $errors ="";
-                            $fillvalues="";
-                        }
-                        //$this->session->set_flashdata('incomplete',$allinfo);
-                        $info = array('count'=>$count,'Inst_id'=>$Inst_Id,'Inst_name'=>$Inst_name,'field_status'=>$field_status,'zone'=>$zone,'error'=>$errors,'fill_values'=>$fillvalues);
-                        //$this->load->view('Registration/Registration.php',$info);
-                        $this->load->view('Registration/11th/Incomplete_inst_info.php',$info);
-                        $this->load->view('common/common_reg/footer.php');
-                    }
-                    else
-                    {
-                        $this->load->view('common/menu.php',$userinfo);
-                        $this->load->model('Registration_11th_model');
-                        $count = $this->Registration_11th_model->Dashboard($Inst_Id);
-                        $info = array('count'=>$count,'Inst_id'=>$Inst_Id,'Inst_name'=>$Inst_name);
-                        $this->load->view('Registration/11th/Dashboard.php',$info);
-                        $this->load->view('common/common_reg/footer.php');    
-
-                    } 
-                }
-
-                //$this->load->view('common/common_reg/menu.php',$userinfo);
-
-            }
-            else
-            {*/
-                $this->load->view('common/menu.php',$userinfo);
-                $this->load->model('Registration_11th_model');
-                $count = $this->Registration_11th_model->Dashboard($Inst_Id);
-                $info = array('count'=>$count,'Inst_id'=>$Inst_Id,'Inst_name'=>$Inst_name);
-                $this->load->view('Registration/11th/Dashboard.php',$info);
-                $this->load->view('common/common_reg/footer.php');    
-            //} 
-        //}
+        $this->load->view('common/menu.php',$userinfo);
+        $this->load->model('Registration_11th_model');
+        $count = $this->Registration_11th_model->Dashboard($Inst_Id);
+        $info = array('count'=>$count,'Inst_id'=>$Inst_Id,'Inst_name'=>$Inst_name);
+        $this->load->view('Registration/11th/Dashboard.php',$info);
+        $this->load->view('common/common_reg/footer.php');  
 
 
     }
@@ -196,7 +70,7 @@ class Registration_11th extends CI_Controller {
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
-        // DebugBreak();
+        
         $data = array(
             'isselected' => '6',
         );
@@ -213,19 +87,10 @@ class Registration_11th extends CI_Controller {
         $this->load->view('Registration/11th/ReAdmission.php',$myinfo);
         $this->load->view('common/common_reg/footer.php');
 
-    }
+    }  
+
     public function ReAdmission_check()
     {
-        // DebugBreak();
-        $RollNo = @$_POST['oldRno'];
-        $oldBrd_cd = @$_POST['oldBrd_cd'];
-        $oldSess = @$_POST['oldSess'];
-        $oldYear = @$_POST['oldYear'];
-
-        
-        //$this->uri->segment(3);
-        //$Spl_case = $this->uri->segment(4);
-
         $this->load->model('Registration_11th_model');
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -247,12 +112,12 @@ class Registration_11th extends CI_Controller {
             $instName=$this->Registration_11th_model->InstName($feeding_inst_cd);
             $this->session->set_flashdata('error', 'This Candidate is already registered in '.$feeding_inst_cd.'-'.$instName.'.');
             redirect('Registration_11th/ReAdmission');
-                return;
+            return;
         }    
-        
-       else if($oldBrd_cd ==  1)
+
+        else if($oldBrd_cd ==  1)
         {
-            $user_info  =  $this->Registration_11th_model->readmission_check($User_info_data); //$db->first("SELECT * FROM  Admission_online..tblinstitutes_all WHERE Inst_Cd = " .$user->inst_cd);
+            $user_info  =  $this->Registration_11th_model->readmission_check($User_info_data);
 
             if($user_info == false)
             {
@@ -278,7 +143,6 @@ class Registration_11th extends CI_Controller {
             }
             else
             {
-                //  DebugBreak();
                 $formno = $user_info[0]['FormNo'];
                 $OldRno = $user_info[0]['rno'];
                 $year = Year;
@@ -288,7 +152,6 @@ class Registration_11th extends CI_Controller {
                 $RegStdData['data'][0]['CellNo'] = $RegStdData['data'][0]['MobNo'];
                 $RegStdData['data'][0]['oldbr'] = 1;
                 $filledinfo['error'] = "";
-                //$this->session->set_flashdata('isReAdm','1');
                 $this->load->view('common/menu.php',$data);
                 $this->load->view('Registration/11th/ReAdm_Form.php',$RegStdData);   
                 $this->commonfooter(array("files"=>array("jquery.maskedinput.js","validate.NewEnrolment.js"))); 
@@ -309,7 +172,6 @@ class Registration_11th extends CI_Controller {
             $RegStdData['data'][0]['sex'] = $Insgender;
 
             $filledinfo['error'] = "";
-            //$this->session->set_flashdata('isReAdm','1');
             $this->load->view('common/menu.php',$data);
             $this->load->view('Registration/11th/ReAdm_Form.php',$RegStdData);   
             $this->commonfooter(array("files"=>array("jquery.maskedinput.js","validate.NewEnrolment.js"))); 
@@ -320,15 +182,14 @@ class Registration_11th extends CI_Controller {
         }
 
     }
-    public function Incomplete_inst_info_INSERT(){
-        //DebugBreak();
-        // $test = $_POST['info_zone'];
-        /*@$_POST['Info_email'];
+    public function Incomplete_inst_info_INSERT()
+    {
+        @$_POST['Info_email'];
         @$_POST['info_phone'];
         @$_POST['info_cellNo'];
         @$_POST['info_dist'];
         @$_POST['info_teh'];
-        @$_POST['info_zone'];*/
+        @$_POST['info_zone'];
         $this->load->model('Registration_11th_model');
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -389,25 +250,17 @@ class Registration_11th extends CI_Controller {
             $allinfo['info_zone']= $userinfo['zone'];
         }
         else
-        {//info_zone
+        {
             $allinfo['info_zone'] =$_POST['info_zone'];
         }
-        // DebugBreak();
+       
         $filledinfo = array('emis'=>$_POST['Info_emis'],'email'=>$_POST['Info_email'],'phone'=>$_POST['info_phone'],'cell'=>$_POST['info_cellNo'],'dist'=>$_POST['info_dist'],'teh'=>$_POST['info_teh'],'zone'=>$_POST['info_zone']);
-        //  if( ($allinfo['Info_emis'] == 0 || $allinfo['Info_emis'] == '') && $userinfo['isgovt']==1  ){
-
-        //  $filledinfo['error'] = "Please Provide EMIS CODE";
-        //  $this->session->set_flashdata('incomplete',$filledinfo);
-        //$this->load->view('Registration/9th/Incomplete_inst_info.php',$error);
-        //   redirect('Registration/index/');
-        //   return;
-
-        //  }
+       
         if(trim(empty($allinfo['info_email'])) )
         {
             $filledinfo['error'] = "Please Provide Institute Email Address";
             $this->session->set_flashdata('incomplete',$filledinfo);
-            //$this->load->view('Registration/9th/Incomplete_inst_info.php',$error);
+           
             redirect('Registration_11th/index/');
             return;
 
@@ -416,7 +269,7 @@ class Registration_11th extends CI_Controller {
         {
             $filledinfo['error'] = "Please Provide Institute Phone Number";
             $this->session->set_flashdata('incomplete',$filledinfo);
-            //$this->load->view('Registration/9th/Incomplete_inst_info.php',$error);
+          
             redirect('Registration_11th/index/');
             return;
 
@@ -425,7 +278,7 @@ class Registration_11th extends CI_Controller {
         {
             $filledinfo['error'] = "Please Provide Institute Mobile Number";
             $this->session->set_flashdata('incomplete',$filledinfo);
-            //$this->load->view('Registration/9th/Incomplete_inst_info.php',$error);
+          
             redirect('Registration_11th/index/');
             return;
 
@@ -435,7 +288,7 @@ class Registration_11th extends CI_Controller {
 
             $filledinfo['error'] = "Please Provide Institute District";
             $this->session->set_flashdata('incomplete',$filledinfo);
-            //$this->load->view('Registration/9th/Incomplete_inst_info.php',$error);
+          
             redirect('Registration_11th/index/');
             return;
         }
@@ -444,7 +297,7 @@ class Registration_11th extends CI_Controller {
 
             $filledinfo['error'] = "Please Provide Institute Tehsil";
             $this->session->set_flashdata('incomplete',$filledinfo);
-            //$this->load->view('Registration/9th/Incomplete_inst_info.php',$error);
+         
             redirect('Registration_11th/index/');
             return;
         }
@@ -513,7 +366,7 @@ class Registration_11th extends CI_Controller {
 
     }
     public function Students_matricInfo(){
-        // DebugBreak();   //Students_matricInfo matric_error
+        //DebugBreak();   //Students_matricInfo matric_error
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
@@ -538,7 +391,7 @@ class Registration_11th extends CI_Controller {
     }
     public function Get_students_record()
     {
-        //  DebugBreak();
+         // DebugBreak();
 
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -625,8 +478,24 @@ class Registration_11th extends CI_Controller {
                 $inst_userinfo_gender = $userinfo['gender'];
             }
             else{
+             
                 $RegStdData = array('data'=>'','isReAdm'=>$isReAdm,'Oldrno'=>0,'Inst_Rno'=>'','excep'=>'');
+                $RegStdData = array('data'=>$this->Registration_11th_model->Pre_Matric_data($data),'isReAdm'=>$isReAdm,'Oldrno'=>0,'Inst_Rno'=>'','excep'=>'','isHafiz'=>'');  
+                  if($RegStdData['data']!=False)
+                  {
+                $RegStdData['data'][0]['excep']='';
+                $RegStdData['data'][0]['isHafiz']=0;
+                $RegStdData['data'][0]['markOfIden']='';
+                $RegStdData['data'][0]['SSC_brd_cd'] = $board;
 
+                $spl_cd = $RegStdData['data'][0]['spl_cd'];
+                $msg = $RegStdData['data'][0]['Mesg'];
+                $SpacialCase = $RegStdData['data'][0]['SpacialCase'];
+                $status = $RegStdData['data'][0]['status'];
+                $cand_gender = $RegStdData['data'][0]['Gender'];
+                $inst_userinfo_gender = $userinfo['gender'];  
+                  }
+                
 
             }
 
@@ -649,6 +518,7 @@ class Registration_11th extends CI_Controller {
                 redirect('Registration_11th/Students_matricInfo');
                 return;
             }
+             
 
         }
 
@@ -1098,7 +968,7 @@ class Registration_11th extends CI_Controller {
         $user = $Logged_In_Array['logged_in'];
         $this->load->model('Registration_11th_model');
         //  $error['grp_cd'] = $user['grp_cd'];
-       // DebugBreak();
+        // DebugBreak();
         $RegStdData = array('data'=>$this->Registration_11th_model->EditEnrolement($user['Inst_Id']),'grp_cd'=>$user['grp_cdi']);
         $total = count($RegStdData)+1;
         //DebugBreak();
@@ -1577,7 +1447,7 @@ class Registration_11th extends CI_Controller {
     }
     public function CreateBatch()
     {
-      //  DebugBreak();
+        //  DebugBreak();
         $data = array(
             'isselected' => '6',
 
@@ -1633,7 +1503,7 @@ class Registration_11th extends CI_Controller {
             $fetch_data = array('Inst_cd'=>$user['Inst_Id'],'Batch_Id'=>$Batch_Id);
             $result = array('data'=>$this->Registration_11th_model->forwarding_pdf_final($fetch_data),'inst_Name'=>$user['inst_Name']);
         }
-       // $result = array('data'=>$this->Registration_11th_model->forwarding_pdf_final($fetch_data),'inst_Name'=>$user['inst_Name']);    
+        // $result = array('data'=>$this->Registration_11th_model->forwarding_pdf_final($fetch_data),'inst_Name'=>$user['inst_Name']);    
         if(empty($result['data']))
         {
             $this->session->set_flashdata('error', $Condition);
@@ -1703,16 +1573,16 @@ class Registration_11th extends CI_Controller {
         $pdf->SetFont('Arial','B',10);
         $pdf->SetXY(0.9+$x,2.2+$y);
         $pdf->Cell(0, 0.25, "Dated:_________________________________", 0.25, "C");
-        
+
         $pdf->SetFont('Arial','B',10);
         $pdf->SetXY(4.9+$x,1.8+$y);
         $pdf->Cell(0, 0.25, "Landline No:_________________________", 0.25, "C");
-        
+
         $pdf->SetFont('Arial','B',10);
         $pdf->SetXY(4.9+$x,2.2+$y);
         $pdf->Cell(0, 0.25, "Mobile No:___________________________", 0.25, "C");
-        
-        
+
+
 
         //$y = $y+0.8;
         $pdf->SetFont('Arial','B',10);
@@ -1820,10 +1690,10 @@ class Registration_11th extends CI_Controller {
         // $pdf->Cell($boxWidth-1.8,0.2,$result['data'][0]['lateFee5'],1,0,'C',1);
         // $pdf->Cell($boxWidth-1.7,0.2,$result['data'][0]['wlateFee5'],1,0,'C',1);
         $pdf->Cell($boxWidth-1.5,$boxhieght,$result['data'][0]['grpFee5'],1,0,'C',1);
-           $yy = $boxhieght+$yy;
+        $yy = $boxhieght+$yy;
         $pdf->SetXY($xx,$yy);
 
-      /*  $pdf->SetFont('Arial','',$fontsize);
+        /*  $pdf->SetFont('Arial','',$fontsize);
         $pdf->Cell($boxWidth-2.2,$boxhieght,'5',1,0,'C',1);
         $pdf->Cell($boxWidth-0.7,$boxhieght,'DEAF & DUMB',1,0,'L',1);
         $pdf->SetFont('Arial','',10);
@@ -1864,17 +1734,17 @@ class Registration_11th extends CI_Controller {
 
         $pdf->SetFont('Arial','BU',10);
         $pdf->SetXY(0.9,8.35+$y);    
-        $pdf->MultiCell(9,0.2,"Challan No(s): ".$result['data'][0]['Challan_No'],0,"L",0); 
+        $pdf->MultiCell(7,0.2,"Challan No(s): ".$result['data'][0]['Challan_No'],0,"L",0); 
 
         $pdf->SetFont('Arial','B',10);
-        $pdf->SetXY(0.9,8.65+$y);    
+        $pdf->SetXY(0.9,8.85+$y);    
         $pdf->MultiCell(10,0.2,"Paid Date:____________________________",0,"L",0); 
 
         $pdf->SetFont('Arial','B',10);
-        $pdf->SetXY(0.9,8.95+$y);    
+        $pdf->SetXY(0.9,9.25+$y);    
         $pdf->MultiCell(10,0.2,"Bank Branch Name:__________________________________________________________________",0,"L",0); 
 
-      /*  $pdf->SetFont('Arial','B',10);
+        /*  $pdf->SetFont('Arial','B',10);
         $pdf->SetXY(0.9,9.49+$y);    
         $pdf->Cell(1.6,0.2,"(Other remarks if any)",0,"R",0);
 
@@ -1890,7 +1760,7 @@ class Registration_11th extends CI_Controller {
         $pdf->SetFont('Arial','B',10);
         $pdf->SetXY(0.9,10.15+$y);    
         $pdf->MultiCell(8.5,0.2,"____________________________________________________________________________________",0,"L",0)    ;   
-                                                                                                                                           */
+        */
 
 
         // DebugBreak();
@@ -1900,7 +1770,7 @@ class Registration_11th extends CI_Controller {
         $pdf->SetXY(0.9,10+$y);    
         $pdf->MultiCell(10,0.2,"",0,"L",0); */
 
-      //  $y = $y+0.9;
+        //  $y = $y+0.9;
 
         $pdf->SetFont('Arial','B',10);
         $pdf->SetXY(0.9,9.65+$y);    
@@ -1936,7 +1806,7 @@ class Registration_11th extends CI_Controller {
         $pdf->SetFont('Arial','B',8);
         $pdf->SetXY(1.0,11.69+$y); 
         $pdf->Cell(0,0,'Print Date: '. date('d-m-Y H:i:s a'),0,0,'L',0);
-           
+
         /*$yy = $boxhieght+$yy;
         $pdf->SetXY($xx,$yy);
         $pdf->SetFont('Arial','B',11);
@@ -1951,13 +1821,13 @@ class Registration_11th extends CI_Controller {
         $pdf->SetFont('Arial','',10);
         $pdf->SetXY(0.9,6.6+$y);    
         $pdf->MultiCell(6.5,0.2," Name of the candidates who have not completed the required number of attendances up to the date of the submission of their forms are being submitted provisionally and are mentioned overleaf. Final report regarding their eligibility will be sent to you in due course as instructed in the book of instructions and information.
-            ",0,"J",0)    ;
+        ",0,"J",0)    ;
 
         $pdf->SetFont('Arial','',10);
         $pdf->SetXY(0.85,7.4+$y);    
         $pdf->MultiCell(6.5,0.2," I certify that the forms have been filled in strictly according to the instructions and the certificate printed on the registration forms have been signed by me. I also certify that I have initialled all corrections made in the registration forms.
 
-            ",0,"J",0)    ;
+        ",0,"J",0)    ;
 
         $pdf->SetFont('Arial','B',10);
         $pdf->SetXY(0.9,8.0+$y);    
@@ -2119,7 +1989,7 @@ class Registration_11th extends CI_Controller {
     public function Reg_Cards_Printing_11th_PDF()
     {
 
-        // DebugBreak();
+       // DebugBreak();
         $Condition = $this->uri->segment(4);
         /*
         $Condition  1 == Batch Id wise printing.
@@ -2496,8 +2366,8 @@ class Registration_11th extends CI_Controller {
             $User_info_data = array('Inst_Id'=>$Inst_Id,'forms_id'=>$forms_id);
             $user_info  =  $this->Registration_11th_model->user_info_Formwise($User_info_data); //$db->first("SELECT * 
         }
-        
-       /* $User_info_data = array('Inst_Id'=>$Inst_Id,'RegGrp'=>$RegGrp,'spl_case'=>$Spl_case);
+
+        /* $User_info_data = array('Inst_Id'=>$Inst_Id,'RegGrp'=>$RegGrp,'spl_case'=>$Spl_case);
         $user_info  =  $this->Registration_11th_model->user_info($User_info_data); //$db->first("SELECT * FROM  Admission_online..tblinstitutes_all WHERE Inst_Cd = " .$user->inst_cd);   */
         if($user_info == false)
         {
@@ -2517,7 +2387,8 @@ class Registration_11th extends CI_Controller {
         /*====================  Counting Fee  ==============================*/    
         //DebugBreak();
         $rule_fee = $user_info['rule_fee'];
-        if($user_info['info'][0]['affiliation_date'] != null)
+        $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date']));
+        if($user_info['info'][0]['affiliation_date'] != null && date('Y-m-d',strtotime($user_info['info'][0]['feedingDate']))>$lastdate)
         {
             $lastdate  = date('Y-m-d',strtotime($user_info['info'][0]['feedingDate'])) ;
             if(date('Y-m-d')<=$lastdate)
@@ -2531,7 +2402,7 @@ class Registration_11th extends CI_Controller {
         }
         else 
         {
-            $rule_fee  =  $this->Registration_11th_model->getreulefee(2); 
+            $rule_fee  =  $this->Registration_11th_model->getreulefee(1); 
             $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
 
 
@@ -2553,16 +2424,16 @@ class Registration_11th extends CI_Controller {
         $q1 = $user_info['fee'];
         $total_std = 0;
         $total_record=0;
-         $AllUser = array();
+        $AllUser = array();
         foreach($q1 as $k=>$v) 
         {
             $ids[] = $v["FormNo"];
             $total_std++;
             if(date('Y-m-d', strtotime($v["edate"] ))<= $lastdate) 
             {
-                if($v["Spec"] == 1 || $v["Spec"] ==  2)
+                if($v["Spec"] > 0)
                 {
-                    $reg_fee = $rule_fee[0]['Reg_Fee'];
+                    $reg_fee = 0;//$rule_fee[0]['Reg_Fee'];
                     if($v['IsReAdm']==1)
                     {
                         $TotalLatefee = $TotalLatefee + $reLreg_fee;
@@ -2610,8 +2481,8 @@ class Registration_11th extends CI_Controller {
 
                         }
                         else
-                       
-                         $TotalLatefee = $TotalLatefee + $Lreg_fee; 
+
+                            $TotalLatefee = $TotalLatefee + $Lreg_fee; 
                     }
                     $Totalprocessing_fee = $Totalprocessing_fee + $processing_fee;
                 } 
@@ -2637,20 +2508,20 @@ class Registration_11th extends CI_Controller {
                             $Lreg_fee = $rule_fee[0]['Fine'];  
                         }
                     }
-                   
+
 
                     $TotalLatefee = $TotalLatefee + $Lreg_fee;
                 }
                 $Totalprocessing_fee = $Totalprocessing_fee + $processing_fee;
             } // end of Else
-              if(date('Y-m-d')<=$lastdate)
-                        {
-                            $Lreg_fee = 0;
-                            $TotalLatefee=0;
-                            $reLreg_fee=0;
-                        }
+            if(date('Y-m-d')<=$lastdate)
+            {
+                $Lreg_fee = 0;
+                $TotalLatefee=0;
+                $reLreg_fee=0;
+            }
             $netTotal = (int)$netTotal +$reg_fee + $Lreg_fee+$processing_fee;
-              $netTotal = (int)$netTotal +$reg_fee + $Lreg_fee+$processing_fee;
+            $netTotal = (int)$netTotal +$reg_fee + $Lreg_fee+$processing_fee;
             $AllUser[$total_record]['regFee'] = $reg_fee;
             $AllUser[$total_record]['RegFineFee'] = $Lreg_fee;
             $AllUser[$total_record]['RegProcessFee'] = $processing_fee;
@@ -2658,9 +2529,9 @@ class Registration_11th extends CI_Controller {
             //DebugBreak();
             $AllUser[$total_record]['formNo'] = $v["FormNo"];
             $total_record++;
-           /* if($total_std > 360)
+            /* if($total_std > 360)
             {
-                break;
+            break;
             }        */
 
         }
@@ -2678,7 +2549,7 @@ class Registration_11th extends CI_Controller {
     }
     public function Make_Batch_Formwise()
     {
-         // DebugBreak();
+       //  DebugBreak();
         if(!empty($_POST["chk"]))
         {
 
@@ -2696,7 +2567,7 @@ class Registration_11th extends CI_Controller {
         $userinfo['isselected'] = 6;
         $Inst_Id = $userinfo['Inst_Id'];
         $page_name  = "Create Batch";
-        
+
         $User_info_data = array('Inst_Id'=>$Inst_Id,'forms_id'=>$forms_id);
         $user_info  =  $this->Registration_11th_model->user_info_Formwise($User_info_data); //$db->first("SELECT * FROM  Admission_online..tblinstitutes_all WHERE Inst_Cd = " .$user->inst_cd);
         $is_gov            =  $user_info['info'][0]['IsGovernment'];  //getValue("IsGovernment", " Admission_online..tblinstitutes_all", "Inst_cd =".$user->inst_cd);
@@ -2735,7 +2606,7 @@ class Registration_11th extends CI_Controller {
         }
         else 
         {
-            $rule_fee  =  $this->Registration_11th_model->getreulefee(2); 
+            $rule_fee  =  $this->Registration_11th_model->getreulefee(1); 
             $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
 
 
@@ -2801,7 +2672,7 @@ class Registration_11th extends CI_Controller {
                         }
                         else
                         {
-                        
+
                             $Lreg_fee = $rule_fee[0]['Fine'];
                         }
 
@@ -2842,12 +2713,12 @@ class Registration_11th extends CI_Controller {
                 $Totalprocessing_fee = $Totalprocessing_fee + $processing_fee;
             } // end of Else
 
-             if(date('Y-m-d')<=$lastdate)
-                        {
-                            $Lreg_fee = 0;
-                            $TotalLatefee=0;
-                            $reLreg_fee=0;
-                        }
+            if(date('Y-m-d')<=$lastdate)
+            {
+                $Lreg_fee = 0;
+                $TotalLatefee=0;
+                $reLreg_fee=0;
+            }
             $netTotal = (int)$netTotal +$reg_fee + $Lreg_fee+$processing_fee;
             if($total_std > 360)
             {
@@ -2858,12 +2729,12 @@ class Registration_11th extends CI_Controller {
 
         $forms_id   = implode(",",$ids); 
         /* if(date('Y-m-d')<=$lastdate)
-                        {
-                            $Lreg_fee = 0;
-                            $TotalLatefee=0;
-                            $reLreg_fee=0;
-                        }  */
-                            
+        {
+        $Lreg_fee = 0;
+        $TotalLatefee=0;
+        $reLreg_fee=0;
+        }  */
+
         $tot_fee     = $Totalprocessing_fee+$TotalRegFee+$TotalLatefee;
         // $challan_No = 0;
         $today = date("Y-m-d H:i:s");
@@ -2875,7 +2746,7 @@ class Registration_11th extends CI_Controller {
     public function return_pdf()
     {
 
-      // DebugBreak();
+         //DebugBreak();
 
         $Condition = $this->uri->segment(4);
         /*
@@ -3172,7 +3043,7 @@ class Registration_11th extends CI_Controller {
     }
     public function revenue_pdf()
     {
-         // DebugBreak();
+       // DebugBreak();
         $Batch_Id = $this->uri->segment(3);
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -3182,8 +3053,8 @@ class Registration_11th extends CI_Controller {
         $temp = $user['Inst_Id'].'@11@'.sessReg;
         $image =  $this->set_barcode($temp);
         //$data = array('data'=>$this->Registration_11th_model->revenue_pdf($fetch_data),'inst_Name'=>$user['inst_Name'],'inst_cd'=>$user['Inst_Id'],'barcode'=>$image);
-        
-         $User_info_data = array('Inst_Id'=>$user['Inst_Id'],'RegGrp'=>@$RegGrp,'spl_case'=>@$Spl_case);
+
+        $User_info_data = array('Inst_Id'=>$user['Inst_Id'],'RegGrp'=>@$RegGrp,'spl_case'=>@$Spl_case);
         $user_info  =  $this->Registration_11th_model->getuser_info($User_info_data); 
 
 
@@ -3199,8 +3070,8 @@ class Registration_11th extends CI_Controller {
             $rule_fee[0]['Rule_Fee_ID']   = 0; 
             $rule_fee[0]['isfine'] = 1; 
             $lastdate  = date('Y-m-d',strtotime($user['isSpecial_Fee']['FeedingDate'])) ;
-            
-             $data = array('data'=>$this->Registration_11th_model->revenue_pdf($fetch_data),'inst_Name'=>$user['inst_Name'],'inst_cd'=>$user['Inst_Id'],'barcode'=>$image,"rulefee"=>$rule_fee);
+
+            $data = array('data'=>$this->Registration_11th_model->revenue_pdf($fetch_data),'inst_Name'=>$user['inst_Name'],'inst_cd'=>$user['Inst_Id'],'barcode'=>$image,"rulefee"=>$rule_fee);
         }
         else
 
@@ -3239,23 +3110,23 @@ class Registration_11th extends CI_Controller {
             $isfine = 1;
             }   */
 
-         $data = array('data'=>$this->Registration_11th_model->revenue_pdf($fetch_data),'inst_Name'=>$user['inst_Name'],'inst_cd'=>$user['Inst_Id'],'barcode'=>$image,"rulefee"=>$rule_fee);
-         if($rule_fee[0]['isfine'] == 1)
-           {
+            $data = array('data'=>$this->Registration_11th_model->revenue_pdf($fetch_data),'inst_Name'=>$user['inst_Name'],'inst_cd'=>$user['Inst_Id'],'barcode'=>$image,"rulefee"=>$rule_fee);
+            if($rule_fee[0]['isfine'] == 1)
+            {
                 //DebugBreak();
-              $count = $data['data']['batch_info'][0]["COUNT"];
-              $data['data']["Total_RegistrationFee"] =  $count*$rule_fee[0]['Reg_Fee'] ;
-              $data['data']["Total_ProcessingFee"] =  $count*$rule_fee[0]['Reg_Processing_Fee'] ;
-              $data['data']["Total_LateRegistrationFee"] =  $count*$rule_fee[0]['Fine'] ;
-              $data['data']["Amount"] = $data['data']["Total_RegistrationFee"]+ $data['data']["Total_ProcessingFee"]+$data['data']["Total_LateRegistrationFee"] ;
-              
-              array('myd'=>$this->Registration_11th_model->UpdateBatchFee($data));
-           } 
+                $count = $data['data']['batch_info'][0]["COUNT"];
+                $data['data']["Total_RegistrationFee"] =  $count*$rule_fee[0]['Reg_Fee'] ;
+                $data['data']["Total_ProcessingFee"] =  $count*$rule_fee[0]['Reg_Processing_Fee'] ;
+                $data['data']["Total_LateRegistrationFee"] =  $count*$rule_fee[0]['Fine'] ;
+                $data['data']["Amount"] = $data['data']["Total_RegistrationFee"]+ $data['data']["Total_ProcessingFee"]+$data['data']["Total_LateRegistrationFee"] ;
+
+                array('myd'=>$this->Registration_11th_model->UpdateBatchFee($data));
+            } 
 
 
         }
-         
-        
+
+
         $this->load->view('Registration/11th/RevenueForm.php',$data);
     }
     public function BatchRelease()
@@ -3363,7 +3234,7 @@ class Registration_11th extends CI_Controller {
     public function Print_Registration_Form_Proofreading_Groupwise()
     {
 
-         // DebugBreak();
+        // DebugBreak();
         $Condition = $this->uri->segment(4);
 
         $this->load->library('session');
@@ -3777,7 +3648,7 @@ class Registration_11th extends CI_Controller {
             $pdf->SetXY(5.6,  9.2+$y);
             $pdf->Cell(8,0.24,'Print Date: '. date('d-m-Y h:i:s a'),0,'L','');
 
-             $pdf->SetXY(0.6,  9.2);
+            $pdf->SetXY(0.6,  9.2);
             $pdf->Cell(8,0.24,'Candidate\'s Signature ',0,'L','');
             //======================================================================================
         }
@@ -3884,17 +3755,17 @@ class Registration_11th extends CI_Controller {
             $rule_fee   =  $this->Registration_11th_model->getreulefee(2); 
             $challanDueDate  = date('d-m-Y',strtotime($rule_fee[0]['End_Date'] )) ;
         }
-         if($rule_fee[0]['isfine'] == 1)
-           {
-               // DebugBreak();
-              $count = $result[0]["COUNT"];
-              $data['data']["Total_RegistrationFee"] =  $count*$rule_fee[0]['Reg_Fee'] ;
-              $data['data']["Total_ProcessingFee"] =  $count*$rule_fee[0]['Reg_Processing_Fee'] ;
-              $data['data']["Total_LateRegistrationFee"] =  $count*$rule_fee[0]['Fine'] ;
-              $data['data']["Amount"] = $data['data']["Total_RegistrationFee"]+ $data['data']["Total_ProcessingFee"]+$data['data']["Total_LateRegistrationFee"] ;
-              $data['data']['batch_info'][0]['Batch_ID'] = $result[0]['Batch_ID'];
-              array('myd'=>$this->Registration_model->UpdateBatchFee($data));
-           } 
+        if($rule_fee[0]['isfine'] == 1)
+        {
+            // DebugBreak();
+            $count = $result[0]["COUNT"];
+            $data['data']["Total_RegistrationFee"] =  $count*$rule_fee[0]['Reg_Fee'] ;
+            $data['data']["Total_ProcessingFee"] =  $count*$rule_fee[0]['Reg_Processing_Fee'] ;
+            $data['data']["Total_LateRegistrationFee"] =  $count*$rule_fee[0]['Fine'] ;
+            $data['data']["Amount"] = $data['data']["Total_RegistrationFee"]+ $data['data']["Total_ProcessingFee"]+$data['data']["Total_LateRegistrationFee"] ;
+            $data['data']['batch_info'][0]['Batch_ID'] = $result[0]['Batch_ID'];
+            array('myd'=>$this->Registration_model->UpdateBatchFee($data));
+        } 
         $obj    = new NumbertoWord();
         $obj->toWords($result[0]['Amount'],"Only.","");
         // $pdf->Cell( 0.5,0.5,ucwords($obj->words),0,'L');
@@ -4101,9 +3972,9 @@ class Registration_11th extends CI_Controller {
 
         //  $pdf->Output($data["Sch_cd"].'.pdf', 'I');
     }
-     public function ChallanForm_Reg11th_Regular()
+    public function ChallanForm_Reg11th_Regular()
     {
-       //  DebugBreak();
+       // DebugBreak();
         $Batch_Id = $this->uri->segment(3);
         $this->load->library('session');
         $this->load->library('NumbertoWord');
@@ -4195,28 +4066,28 @@ class Registration_11th extends CI_Controller {
                 $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
             }
             //  DebugBreak();
-           /* if(ISREADMISSION == 1)
+            /* if(ISREADMISSION == 1)
             {
-                $rule_fee  =  $this->Registration_11th_model->getreulefee(1);
-                $rule_fee[0]['isfine'] = 1; 
-                $isfine = 1;
+            $rule_fee  =  $this->Registration_11th_model->getreulefee(1);
+            $rule_fee[0]['isfine'] = 1; 
+            $isfine = 1;
             }   */
-           //  $data = array('data'=>$this->Registration_model->revenue_pdf($fetch_data),'inst_Name'=>$user['inst_Name'],'inst_cd'=>$user['Inst_Id'],'barcode'=>$image,"rulefee"=>$rule_fee);
-         if($rule_fee[0]['isfine'] == 1)
-           {
-              //  DebugBreak();
-              $count = $result[0]["COUNT"];
-              $data['data']["Total_RegistrationFee"] =  $count*$rule_fee[0]['Reg_Fee'] ;
-              $data['data']["Total_ProcessingFee"] =  $count*$rule_fee[0]['Reg_Processing_Fee'] ;
-              $data['data']["Total_LateRegistrationFee"] =  $count*$rule_fee[0]['Fine'] ;
-              $data['data']["Amount"] = $data['data']["Total_RegistrationFee"]+ $data['data']["Total_ProcessingFee"]+$data['data']["Total_LateRegistrationFee"] ;
-              $data['data']['batch_info'][0]['Batch_ID'] = $result[0]['Batch_ID'];
-              $data['rulefee'][0]['Reg_Fee']  =  $rule_fee[0]['Reg_Fee'];
-              $data['rulefee'][0]['Processing_Fee']  =  $rule_fee[0]['Processing_Fee'];
-              $data['rulefee'][0]['Fine']  =  $rule_fee[0]['Fine'];
-              $data['rulefee'][0]['Amount']  =  $rule_fee[0]['Amount'];
-              array('myd'=>$this->Registration_11th_model->UpdateBatchFee($data));
-           } 
+            //  $data = array('data'=>$this->Registration_model->revenue_pdf($fetch_data),'inst_Name'=>$user['inst_Name'],'inst_cd'=>$user['Inst_Id'],'barcode'=>$image,"rulefee"=>$rule_fee);
+            if($rule_fee[0]['isfine'] == 1)
+            {
+                //  DebugBreak();
+                $count = $result[0]["COUNT"];
+                $data['data']["Total_RegistrationFee"] =  $count*$rule_fee[0]['Reg_Fee'] ;
+                $data['data']["Total_ProcessingFee"] =  $count*$rule_fee[0]['Reg_Processing_Fee'] ;
+                $data['data']["Total_LateRegistrationFee"] =  $count*$rule_fee[0]['Fine'] ;
+                $data['data']["Amount"] = $data['data']["Total_RegistrationFee"]+ $data['data']["Total_ProcessingFee"]+$data['data']["Total_LateRegistrationFee"] ;
+                $data['data']['batch_info'][0]['Batch_ID'] = $result[0]['Batch_ID'];
+                $data['rulefee'][0]['Reg_Fee']  =  $rule_fee[0]['Reg_Fee'];
+                $data['rulefee'][0]['Processing_Fee']  =  $rule_fee[0]['Processing_Fee'];
+                $data['rulefee'][0]['Fine']  =  $rule_fee[0]['Fine'];
+                $data['rulefee'][0]['Amount']  =  $rule_fee[0]['Amount'];
+                array('myd'=>$this->Registration_11th_model->UpdateBatchFee($data));
+            } 
 
 
 

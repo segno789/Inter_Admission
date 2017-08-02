@@ -642,7 +642,7 @@ if($rowcount == 0 )
     }
       public function Batch_Insertion($data,$AllUser)
     {
-        // DebugBreak();
+       // DebugBreak();
 
         $inst_cd = $data['inst_cd'];
         $total_fee = $data['total_fee'];
