@@ -12,6 +12,33 @@ class Registration_11th extends CI_Controller {
         if( !$this->session->userdata('logged_in') && $this->router->method != 'login' ) {
             redirect('login');
         }
+        $this->load->library('Browsercache');
+        $this->browsercache->dontCache();
+        $this->clear_cache();
+        $this->clear_all_cache();
+    }
+     public function clear_all_cache()
+{
+    $CI =& get_instance();
+$path = $CI->config->item('cache_path');
+
+    $cache_path = ($path == '') ? APPPATH.'cache/' : $path;
+
+    $handle = opendir($cache_path);
+    while (($file = readdir($handle))!== FALSE) 
+    {
+        //Leave the directory protection alone
+        if ($file != '.htaccess' && $file != 'index.html')
+        {
+           @unlink($cache_path.'/'.$file);
+        }
+    }
+    closedir($handle);
+}
+     function clear_cache()
+    {
+        $this->output->set_header("Cache-Control: no-store, no-cache, must-revalidate, no-transform, max-age=0, post-check=0, pre-check=0");
+        $this->output->set_header("Pragma: no-cache");
     }
     public function index()
     {
@@ -1962,7 +1989,7 @@ class Registration_11th extends CI_Controller {
     public function Reg_Cards_Printing_11th_PDF()
     {
 
-        // DebugBreak();
+       // DebugBreak();
         $Condition = $this->uri->segment(4);
         /*
         $Condition  1 == Batch Id wise printing.
@@ -2307,7 +2334,7 @@ class Registration_11th extends CI_Controller {
     {
         $RegGrp = $this->uri->segment(3);
         $Spl_case = $this->uri->segment(4);
-       //  DebugBreak();
+       // DebugBreak();
         $this->load->model('Registration_11th_model');
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -2404,9 +2431,9 @@ class Registration_11th extends CI_Controller {
             $total_std++;
             if(date('Y-m-d', strtotime($v["edate"] ))<= $lastdate) 
             {
-                if($v["Spec"] == 1 || $v["Spec"] ==  2)
+                if($v["Spec"] > 0)
                 {
-                    $reg_fee = $rule_fee[0]['Reg_Fee'];
+                    $reg_fee = 0;//$rule_fee[0]['Reg_Fee'];
                     if($v['IsReAdm']==1)
                     {
                         $TotalLatefee = $TotalLatefee + $reLreg_fee;
@@ -2719,7 +2746,7 @@ class Registration_11th extends CI_Controller {
     public function return_pdf()
     {
 
-        // DebugBreak();
+         //DebugBreak();
 
         $Condition = $this->uri->segment(4);
         /*
@@ -3016,7 +3043,7 @@ class Registration_11th extends CI_Controller {
     }
     public function revenue_pdf()
     {
-        // DebugBreak();
+       // DebugBreak();
         $Batch_Id = $this->uri->segment(3);
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -3947,7 +3974,7 @@ class Registration_11th extends CI_Controller {
     }
     public function ChallanForm_Reg11th_Regular()
     {
-       //  DebugBreak();
+       // DebugBreak();
         $Batch_Id = $this->uri->segment(3);
         $this->load->library('session');
         $this->load->library('NumbertoWord');
