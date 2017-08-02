@@ -393,7 +393,7 @@ $path = $CI->config->item('cache_path');
     {
         
         
-        DebugBreak();
+       // DebugBreak();
         
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
