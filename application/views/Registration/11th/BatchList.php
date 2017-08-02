@@ -87,7 +87,7 @@
                      <div class="control-group">
                      <div class="controls controls-row">
                     <!-- <a href="<?php echo base_url(); ?>/assets/img/ForwardingLetterInter.pdf" class="link offset5 blink_text" style="font-size: x-large;" target="_blank" >Download Farwarding letter.<br> </a> -->
-                     <a href="<?php echo base_url(); ?>Registration_11th/forwarding_pdf" class="link offset5 blink_text" style="font-size: x-large;" target="_blank" >Download Farwarding letter.<br> </a>
+                     <a href="<?php echo base_url(); ?>Registration_11th/forwarding_pdf" class="link offset5 blink_text" style="font-size: x-large;" target="_blank" >Download Forwarding letter.<br> </a>
                      </div>
                      </div>
                      
