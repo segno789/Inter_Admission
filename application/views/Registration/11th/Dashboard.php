@@ -111,7 +111,7 @@
                             <br/>
                       
                          <!--   <a href="<?php //echo base_url(); ?>/assets/img/ForwardingLetterInter.pdf" target="_blank" class="guidlines blink_text" style="font-size: 18px;">Download Blank Farwarding letter . </a> <br/>-->
-                            <a href="<?php echo base_url(); ?>Registration_11th/forwarding_pdf" target="_blank" class="guidlines blink_text" style="font-size: 18px;">Download Farwarding letter. </a> <br/>
+                            <a href="<?php echo base_url(); ?>Registration_11th/forwarding_pdf" target="_blank" class="guidlines blink_text" style="font-size: 18px;">Download Forwarding letter. </a> <br/>
                       <br />
                             <strong>NOTE:</strong> <br/>
                             1. Please upload photo of student carefully and with good quality as this picture will be used in his/her INTER Roll Number Slip/Result Card/certificate.<br /> 
