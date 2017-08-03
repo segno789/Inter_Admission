@@ -1,18 +1,14 @@
-<html>
-    <body>
-        <div class="container-fluid">
-        <div class="dashboard-container">
+<div class="container-fluid">
+    <div class="dashboard-container">
         <div class="top-nav">
             <ul>
-
                 <li>
                     <a href="<?php echo base_url(); ?>dashboard" class="<?php if($isselected == '1') {echo 'selected';}?>" >
-                        <div class="fs1" aria-hidden="true" data-icon="&#xe0a0;"> </div>
+                        <div class="fs1" aria-hidden="true" data-icon="&#xe0a0;"></div>
                         Dashboard
                     </a>
                 </li>
-
-                <?php // DebugBreak();
+                <?php
                 if($appconfig['isreg'] == 1 ){?>
 
                     <li>
@@ -21,7 +17,6 @@
                             11th Registration
                         </a>
                     </li>
-
                     <?php } 
                 if($appconfig['isadmP1'] == 1){
                     ?>
@@ -32,8 +27,8 @@
                         </a>
                     </li>
                     <?php } 
-                      if($appconfig['isadmP2'] == 1 || $appconfig['isadmP2S'] == 1){
-                    
+                if($appconfig['isadmP2'] == 1 || $appconfig['isadmP2S'] == 1){
+
                     ?>
                     <li>
                         <a href="<?php echo base_url(); ?>Admission_inter" class="<?php if( $isselected == '11') {echo 'selected';}?>" >
@@ -42,7 +37,7 @@
                         </a>
                     </li>
                     <?php }
-                 if( $appconfig['isslipP1'] == 1 || $appconfig['isslipP2'] == 1 || $appconfig['isslipP2S'] == 1){?>
+                if( $appconfig['isslipP1'] == 1 || $appconfig['isslipP2'] == 1 || $appconfig['isslipP2S'] == 1){?>
 
                     <li>
                         <a style="width: 115px;" href="<?php echo base_url(); ?>RollNoSlip" class="<?php if($isselected == '4') {echo 'selected';}?>" >
@@ -50,39 +45,28 @@
                             Roll No. Slips
                         </a>
                     </li>
-
                     <?php } ?>
-
-
-
-
             </ul>
             <div class="clearfix">
             </div>
         </div>
         <div class="sub-nav">
-
-
             <?php
             if($isselected == '1') { 
                 ?>
                 <ul >
                     <li><a href="<?php echo base_url(); ?>dashboard"  data-original-title="" class="<?php if($isselected == '1') {echo 'heading';}?>">Dashboard</a></li>
                     <li>
-                        <a onclick="return logout();">Logout</a>
+                        <a href="#" onclick="return logout();">Logout</a>
                     </li>
-
                 </ul>
                 <?php
             }
-
             ?>
-
             <?php   // 11th admission
             if($isselected == '14'){
                 ?>
                 <ul >
-
                     <li><a href="<?php echo base_url(); ?>Admission_11th_reg"   data-original-title="" >Admission</a></li>
                     <li>
                         <a href="<?php echo base_url(); ?>Admission_11th_reg/StudentsData">
@@ -106,7 +90,7 @@
                         </a>
                     </li>
                     <li>
-                        <a onclick="return logout();">Logout</a>
+                        <a href="#" onclick="return logout();">Logout</a>
                     </li>
 
                 </ul>
@@ -120,32 +104,29 @@
                     <li><a href="<?php echo base_url(); ?>RollNoSlip"   data-original-title="" >Roll No. Slips: </a></li>
 
                     <?php if($appconfig['isslipP1'] == 1 ) {?>
-                    <li>
-                        <a href="<?php echo base_url(); ?>RollNoSlip/EleventhStd">
-                            11th Roll No. Slip
-                        </a>
-                    </li>
-                    <?php } 
-                    
+                        <li>
+                            <a href="<?php echo base_url(); ?>RollNoSlip/EleventhStd">
+                                11th Roll No. Slip
+                            </a>
+                        </li>
+                        <?php } 
+
                     if($appconfig['isslipP2'] == 1 || $appconfig['isslipP2S'] == 1){
-                    ?>
+                        ?>
+                        <li>
+                            <a href="<?php echo base_url(); ?>RollNoSlip/InterStd">
+                                12th Roll No. Slip
+                            </a>
+                        </li>
+                        <?php }?>
                     <li>
-                        <a href="<?php echo base_url(); ?>RollNoSlip/InterStd">
-                            12th Roll No. Slip
-                        </a>
-                    </li>
-                    <?php }?>
-                    <li>
-                        <a onclick="return logout();">Logout</a>
+                        <a href="#" onclick="return logout();">Logout</a>
                     </li>
 
 
                 </ul>
                 <?php
             }
-
-
-
             // Inter Registration
             if($isselected == '6') { 
                 ?>
@@ -160,11 +141,6 @@
                                 Old Students 
                             </a>
                         </li>
-                        <!-- <li>
-                        <a href="<?php echo base_url(); ?>Registration_11th/ReAdmission">
-                        Re-Admissions
-                        </a>
-                        </li>-->
 
                         <li>
                             <a href="<?php echo base_url(); ?>Registration_11th/EditForms">
@@ -194,21 +170,13 @@
                         </a>
                     </li>
                     <li>
-                        <a style="cursor: default" onclick="return logout();">Logout</a>
+                        <a href="#" onclick="return logout();">Logout</a>
                     </li>
-                    <!--  <li>
-                    <a href="<?php echo base_url(); ?>Registration/ProofReading">
-                    Proof Reading
-                    </a>
-                    </li>-->
                 </ul>
                 <?php
             }
             ?>
-
-
             <?php
-
 
             //  Inter Admission
             if($isselected == '11') { 
@@ -220,11 +188,6 @@
                             Old Students 
                         </a>
                     </li>
-                    <!-- <li>
-                    <a href="<?php echo base_url(); ?>Admission_matric/ReAdmission">
-                    Re-Admissions
-                    </a>
-                    </li>-->
 
                     <li>
                         <a href="<?php echo base_url(); ?>Admission_inter/EditForms">
@@ -247,13 +210,13 @@
                         </a>
                     </li>   
                     <li>
-                        <a style="cursor: pointer" onclick="return logout();">Logout</a>
+                        <a href="#" onclick="return logout();">Logout</a>
                     </li>
                 </ul>
                 <?php }
             ?>
 
-            <div class="btn-group pull-right">
+           <!-- <div class="btn-group pull-right">
                 <button class="btn btn-primary">
                     Main Menu
                 </button>
@@ -283,12 +246,10 @@
                         </a>
                     </li>
                     <li>
-                        <a onclick="return logout();" data-original-title="">
-                            Logout
-                        </a>
+                        <a href="#" onclick="return logout();">Logout</a>
                     </li>
                 </ul>
-            </div>
+            </div>-->
         </div>
-    </body>
-</html>
+    </div>
+</div>

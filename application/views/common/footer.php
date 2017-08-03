@@ -1,11 +1,10 @@
-<footer>
-    <p>
-        &copy; <?php echo Year; ?> BISE Gujranwala All Rights Reserved.
-    </p>
-</footer>
 
-<!--Add the following script at the bottom of the web page (before </body></html>)-->
-<!--<script type="text/javascript" async="async" defer="defer" data-cfasync="false" src="https://mylivechat.com/chatinline.aspx?hccid=93646887"></script>-->
+
+<div class="navbar-fixed-bottom row-fluid">
+    <div class="navbar-inner" style="text-align: center; background:#003a6a; color: wheat; margin-bottom: 4px; width: 100%; height: 40px;">
+        &copy; 2017 BISE Gujranwala, All Rights Reserved.
+    </div>
+</div>
 
 <script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/bootstrap.js"></script>
@@ -18,7 +17,6 @@
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.fancybox.pack.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/jquery-ui.js"></script>
 
-
 <?php 
 if(isset($files)){
     foreach($files as $file){
@@ -28,9 +26,9 @@ if(isset($files)){
 ?> 
 <script type="">
     $(document).ready(function () {
-                  
-      $( "#txtDob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate:new Date(2001, 7, 1),minDate:new Date(1970, 0, 1)}).val();
-       
+
+        $( "#txtDob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate:new Date(2001, 7, 1),minDate:new Date(1970, 0, 1)}).val();
+
         $('#data-table').dataTable({
             "sPaginationType": "full_numbers",
             "cache": false
@@ -39,15 +37,9 @@ if(isset($files)){
             "sPaginationType": "full_numbers",
             "cache": false
         });
-
     });
-
-
-
 </script>
-<script type="">
-
-
+<script type="text/javascript">
     function isValidEmailAddress(emailAddress) {
         var pattern = /^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([ \t]*\r\n)?[ \t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([ \t]*\r\n)?[ \t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
         return pattern.test(emailAddress);
@@ -263,9 +255,9 @@ if(isset($files)){
     //$( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true }).val();
 
     $( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate: new Date(2003, 7,1),yearRange: '1970:2003'}).val();
-    
-    
-    
+
+
+
 
     $( "#batch_real_PaidDate" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, startDate:new Date() }).val();
     var myOptions = {
@@ -600,7 +592,7 @@ if(isset($files)){
     {
         window.location.href = '<?=base_url()?>/index.php/Registration/revenue_pdf/'+Batch_ID
     }
-   
+
     function ReleaseForm(Batch_ID)
     {
         window.location.href = '<?=base_url()?>/index.php/Registration/BatchRelease/'+Batch_ID
@@ -786,12 +778,12 @@ if(isset($files)){
         var success_BatchRelease = "<?php  echo @$errors['BatchRelease_excep']; ?>";
         var BatchRelease_Op = "<?php  echo @$errors_RB_update; ?>";
         var BatchRestore_Op = "<?php  echo @$errors_RB_restore; ?>";
-       
+
         var sel_app_cls ="<?php  echo @$spl_cd['data']['oldClass']; ?>";
         var sel_app_year="<?php  echo @$spl_cd['data']['oldYear']; ?>";
         var sel_app_sess ="<?php echo @$spl_cd['data']['oldSess']; ?>";
         var sel_app_brd ="<?php  echo @$spl_cd['data']['oldBrd_cd']; ?>";
-      
+
         if(sel_app_brd !="")
         {
             $("#sec_board").val(sel_app_brd);
@@ -808,7 +800,7 @@ if(isset($files)){
         {
             $("#oldClass").val(sel_app_cls);
         }
-      
+
         if(BatchRelease_Op != "")
         {
             if(BatchRelease_Op == "success")
@@ -842,9 +834,9 @@ if(isset($files)){
             alertify.error(error_BatchRelease);
         }  
 
-       /* var error = "<?php // echo @$error; ?>";
+        /* var error = "<?php // echo @$error; ?>";
         if(error != ""){
-            alertify.error(error);
+        alertify.error(error);
         }*/
         //  console.log("Jquery working....");
         var msg = "<?php echo @$msg;?>";
@@ -1468,13 +1460,13 @@ if(isset($files)){
             return status;
         }   
 
-      /*  else if(bFormNo == "" || bFormNo == 0 || bFormNo == undefined)
+        /*  else if(bFormNo == "" || bFormNo == 0 || bFormNo == undefined)
         {
-            $('#ErrMsg').show(); 
-            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-            $('#ErrMsg').html("<b>Please Enter your bay-Form</b>"); 
-            $('#bay_form').focus();  
-            return status; 
+        $('#ErrMsg').show(); 
+        $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+        $('#ErrMsg').html("<b>Please Enter your bay-Form</b>"); 
+        $('#bay_form').focus();  
+        return status; 
         }*/
         else if(FNic == "" || FNic.length == undefined )
         {
@@ -1799,14 +1791,11 @@ if(isset($files)){
         });
     }
 </script>
-<script type="">
+<script type="text/javascript">
     var error = '<?php echo @$error_msg; ?>';
     if(error > 0){
         alertify.error("Currently there is not student against this subject group.!") ;
     }
-
-
-
 </script>
 
 </body>

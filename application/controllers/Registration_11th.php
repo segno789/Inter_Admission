@@ -1,6 +1,5 @@
-<?php   //  
+<?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
 class Registration_11th extends CI_Controller {
     
     function __construct()
@@ -15,7 +14,6 @@ class Registration_11th extends CI_Controller {
     }
     public function index()
     {
-    
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
@@ -24,9 +22,7 @@ class Registration_11th extends CI_Controller {
         $Inst_name = $userinfo['inst_Name'];
        
         $isInserted = $userinfo['isInserted'];
-        
-
-      
+         
         $Inst_name = $userinfo['inst_Name'];
         $this->load->view('common/header.php',$userinfo);
         $this->load->view('common/menu.php',$userinfo);
@@ -35,8 +31,6 @@ class Registration_11th extends CI_Controller {
         $info = array('count'=>$count,'Inst_id'=>$Inst_Id,'Inst_name'=>$Inst_name);
         $this->load->view('Registration/11th/Dashboard.php',$info);
         $this->load->view('common/common_reg/footer.php');  
-
-
     }
     public function ReAdmission()
     {
