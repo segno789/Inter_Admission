@@ -1107,7 +1107,12 @@ debugger;
         $.each(sub6_Hum, function(val, text) {
             $('#sub6').append( new Option(text,val) );
         });
-        
+         if(gender==1)
+         {
+         $("#sub4 option[value='21']").remove();
+         $("#sub5 option[value='21']").remove();
+         $("#sub6 option[value='21']").remove();
+         }
          if(sub4_reg != '')
          {
             $("#sub4 option[value='"+sub4_reg+"']").attr("selected","selected"); 
@@ -1200,7 +1205,7 @@ debugger;
         }*/
     })
     $("#sub5").change(function(){
-        console.log('Hi i am sub7 dropdown :) ');
+      //  console.log('Hi i am sub7 dropdown :) ');
         var sub4 = $("#sub4").val();
         var sub5 = $("#sub5").val();
         var sub6 = $("#sub6").val();

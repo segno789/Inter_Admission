@@ -483,7 +483,7 @@
                                             'COMPUTER STUDIES' => '98',
                                             'BOOK KEEPING & ACCOUNTANCY' => '99'
 
-                                        );
+                                        );  
                                         //$result =  array_search($data[0]['sub4'],$subarray);
 
 
