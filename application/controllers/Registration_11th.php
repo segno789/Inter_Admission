@@ -2220,7 +2220,7 @@ $path = $CI->config->item('cache_path');
                 case '5':
                     $grp_name = 'Commerce';
                     break;
-                case '6':
+                case '7':
                     $grp_name = 'Home Economics';
                     break;
                 default:
@@ -2904,7 +2904,7 @@ $path = $CI->config->item('cache_path');
                     case '5':
                         $grp_name = 'Commerce';
                         break;
-                    case '6':
+                    case '7':
                         $grp_name = 'Home Economics';
                         break;
                     default:
@@ -3593,7 +3593,7 @@ $path = $CI->config->item('cache_path');
                 case '5':
                     $grp_name = 'Commerce';
                     break;
-                case '6':
+                case '7':
                     $grp_name = 'Home Economics';
                     break;
                 default:

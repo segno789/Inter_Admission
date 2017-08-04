@@ -1478,7 +1478,7 @@ debugger;
         {
             load_Commerce();
         }
-        else if(grp_cd == "6")
+        else if(grp_cd == "7")
         {
             load_HomeEco();
         }
@@ -1932,7 +1932,7 @@ debugger;
         {
             load_Commerce();
         }
-        else if(grp_cd == "6")
+        else if(grp_cd == "7")
         {
             load_HomeEco();
         }

@@ -12,7 +12,7 @@
 
                     </div>
                     <div class="widget-body">
-                        <h1    style="text-align: center;"><font color="#000000" size="+1" >Note:-Last Date of Online Registration for 11th  with late fee is <b class="blink_text"><?php  echo date("d F, Y", strtotime(lastdate)); ?></b></font></h1>
+                        <h1    style="text-align: center;"><font color="#000000" size="+1" >Note:-Last Date of Online Registration for 11th  with single fee is <b class="blink_text"><?php  echo date("d F, Y", strtotime(lastdate)); ?></b></font></h1>
                         <h4>Welcome to Board of Intermediate &amp; Secondary Education, GUJRANWALA</br></br> &nbsp; Dashboard</h4>
 
                          <?php  if($isinterfeeding == 1) {?>

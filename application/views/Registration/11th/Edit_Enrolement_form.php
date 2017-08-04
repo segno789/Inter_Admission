@@ -284,7 +284,7 @@
                                             <option value='3'>Humanities</option>
                                             <option value='4'>General Science</option>
                                             <option value='5'>Commerce</option>
-                                            <option value='6'>Home Economics</option>
+                                            <option value='7'>Home Economics</option>
                                             ";  
                                         }
                                         if($isReAdm != 1)
@@ -350,15 +350,15 @@
                                                     }
 
                                                 }
-                                                else if($subgroups[$i] == 6)
+                                                else if($subgroups[$i] == 7)
                                                 {
-                                                    if($grp == 6)
+                                                    if($grp == 7)
                                                     {
-                                                        echo "<option value='6' selected='selected'>Home Economics</option>";  
+                                                        echo "<option value='7' selected='selected'>Home Economics</option>";  
                                                     }
                                                     else
                                                     {
-                                                        echo "<option value='6'>Home Economics</option>";  
+                                                        echo "<option value='7'>Home Economics</option>";  
                                                     }
 
                                                 }
