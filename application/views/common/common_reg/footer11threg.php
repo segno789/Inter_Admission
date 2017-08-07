@@ -794,6 +794,20 @@ debugger;
         var Inst_Rno = $('#Inst_Rno').val();
         var status = 0;
         var mat_Year = $('#old_ssc_year').val();
+        
+        /*
+        $("#sub4").append(new Option('Mathematics',19));
+        $("#sub5").append(new Option('Physics',47));
+        $("#sub5").append(new Option('Economics',11));
+        $("#sub5").append(new Option('Statistics',18));
+        $("#sub5 option[value='47']").attr("selected","selected");
+        $("#sub6").append(new Option('Computer Science',83));
+        $("#sub6").append(new Option('Economics',11));
+        $("#sub6").append(new Option('Statistics',18));*/
+        
+        var gen_sci_sub = [19,47,11,18];
+        
+        
       debugger;
          var NationalityVal = $("input[name=nationality]:checked").val();
          if(NationalityVal==2)
@@ -953,9 +967,25 @@ debugger;
             $('#dob').focus(); 
             return status;  
         }           
-       
+        else if($("#std_group").find('option:selected').val()==3 &&($.inArray(($("#sub4").val(),gen_sci_sub) && $.inArray(($("#sub5").val(),gen_sci_sub)&& $.inArray(($("#sub6").val(),gen_sci_sub))))))
+        {
+            $('#ErrMsg').show(); 
+            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+            //$('#ErrMsg').html("<b>Please Enter your Date of Birth</b>"); 
+            alertify.error("This Subject Combination is for General Science Group. Please Choose General Science group") ;
+            $('#std_group').focus(); 
+            return status;  
+        }
        /*else if(NationalityVal != 2 || NationalityVal != 1){
-            $('#ErrMsg').show();  
+            $('#ErrMsg').show();                
+        $("#sub4").append(new Option('Mathematics',19));
+        $("#sub5").append(new Option('Physics',47));
+        $("#sub5").append(new Option('Economics',11));
+        $("#sub5").append(new Option('Statistics',18));
+        $("#sub5 option[value='47']").attr("selected","selected");
+        $("#sub6").append(new Option('Computer Science',83));
+        $("#sub6").append(new Option('Economics',11));
+        $("#sub6").append(new Option('Statistics',18));
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
             // $('#ErrMsg').html("<b>Please Enter your  Name </b>");    
             alertify.error("Please Select Your Nationality");
