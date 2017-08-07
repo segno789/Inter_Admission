@@ -216,11 +216,11 @@
                 <?php }
             ?>
 
-           <!-- <div class="btn-group pull-right">
+            <div class="btn-group pull-right">
                 <button class="btn btn-primary">
                     Main Menu
                 </button>
-                <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">
+                <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle" onclick="$('.btn-group').addClass('btn-group open');">
                     <span class="caret">
                     </span>
                 </button>
@@ -249,7 +249,7 @@
                         <a href="#" onclick="return logout();">Logout</a>
                     </li>
                 </ul>
-            </div>-->
+            </div>
         </div>
     </div>
 </div>

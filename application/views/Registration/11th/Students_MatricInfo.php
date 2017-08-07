@@ -8,18 +8,18 @@
                     </div>
                 </div>
                 <div class="widget-body">
-                    <div class="form-control">
+                 
                         <div class="row-fluid">
                             <div class="span4"></div>
                             <div class="span2">
                                 <label class="control-label">
-                                    SSC Roll No. :
+                                    SSC Roll No
                                 </label>
-                                <input type="text" class="form-control" id="oldRno" name="oldRno" maxlength="6" required="required">
+                                <input style="height: 30px; width:220px;" type="text" class="form-control" id="oldRno" name="oldRno" maxlength="6" required="required" >
                             </div>
                             <div class="span2">
                                 <label class="control-label">
-                                    SSC Year :
+                                    SSC Year
                                 </label>
                                 <select id="oldYear" name="oldYear" class="form-control">
                                     <?php
@@ -47,13 +47,12 @@
                             </div>
                             <div class="span4"></div>
                         </div>
-                    </div>
-                    <div class="form-control">
+                 
                         <div class="row-fluid">
                             <div class="span4"></div>
                             <div class="span2">
                                 <label class="control-label">
-                                    SSC Session :
+                                    SSC Session
                                 </label>
                                 <select id="oldSess" class="control-label" name="oldSess">
                                     <option value="1" >Annual</option>
@@ -62,7 +61,7 @@
                             </div>
                             <div class="span2">
                                 <label class="control-label">
-                                    SSC Board:
+                                    SSC Board
                                 </label>
                                 <select id="sec_board" class="control-label" name="oldBrd_cd">
                                     <option value="1">BISE, GUJRANWALA</option>
@@ -102,18 +101,18 @@
                             </div>
                             <div class="span4"></div>
                         </div>
-                    </div>
+                  
                     <hr>
-                    <div class="form-control">
+                   
                         <div class="row-fluid">
                             <div class="span5"></div>
-                            <div class="span1">
+                            <div class="span3">
                                 <input type="submit" value="Proceed" id="proceed" name="proceed" class="btn btn-large btn-info">
+                                <input type="button" value="Cancel" onclick="return Dashboard();" class="btn btn-large btn-danger">
                             </div>
-                            <input type="button" value="Cancel" onclick="return Dashboard();" class="btn btn-large btn-danger">
-                            <div class="span6"></div>
+                            <div class="span4"></div>
                         </div>
-                    </div>
+                    
                 </div>
             </div> 
         </div>

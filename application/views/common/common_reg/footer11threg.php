@@ -1,7 +1,6 @@
-<div class="navbar-fixed-bottom row-fluid">
-    <div class="navbar-inner" style="text-align: center; background:#003a6a; color: wheat; margin-bottom: 4px; width: 100%; height: 40px;">
-        &copy; 2017 BISE Gujranwala, All Rights Reserved.
-    </div>
+
+<div class="footer" style="text-align: center; background:#3187bf; color: wheat; height: 40px; margin-bottom: 5px; padding: 0;">
+    &copy; 2017 BISE Gujranwala, All Rights Reserved.
 </div>
 
 
@@ -23,7 +22,7 @@ if(isset($files)){
     }
 }
 ?> 
-<script type="">
+<script type="text/javascript">
     $(document).ready(function () {
         $('#data-table').dataTable({
             "sPaginationType": "full_numbers",
@@ -1994,7 +1993,7 @@ debugger;
         var MarkOfIdent = $('#MarkOfIden').val();
         var Inst_Rno = $('#Inst_Rno').val();
         var status = 0;
-        debugger;
+        
         // alert('sub6 '+sub6p1+ ' and '+ sub6p2);
         if(name == "" ||  name == undefined){
             $('#ErrMsg').show();  

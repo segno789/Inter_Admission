@@ -15,16 +15,12 @@
 
                             <div class="control-group">
                                 <h4 class="span4">Personal Information :</h4>
-                                <label class="control-label span2" style="width: 411px;margin-left: -199px;">
-                                
-                                    <img src="<?php echo base_url(); ?>assets/img/upalodimage.jpg" alt="" >
+                                <label class="control-label span4">
+                                    <img class="img-responsive" src="<?php echo base_url(); ?>assets/img/upalodimage.jpg" alt="" >
                                 </label>
                                 <div class="controls controls-row">
                                     <input type="hidden" class="span2 hidden" id="isReAdm" name="isReAdm" value="0">
-
-
-                                    <!--                                    '/'.IMAGE_PATH.$Inst_Id.'/'.@$data[0]['PicPath']-->
-                                    <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="<?php echo base_url(); ?>assets/img/profile.png" alt="Candidate Image">
+                                    <img id="previewImg" style="width:130px; height: 130px;" class="span2" src="<?php echo base_url(); ?>assets/img/profile.png" alt="Candidate Image">
                                 </div>
                             </div>
                             <div class="control-group">
@@ -65,7 +61,6 @@
                                     <input class="span3" id="father_cnic" name="father_cnic" type="text" placeholder="34101-1111111-1" value="<?php echo  @$data['0']['FNIC']; ?>" <?php if($isReAdm==0  && @$brd_cd == 1) echo "readonly='readonly'";  ?> required="required">
                                 </div>
                             </div>
-
                             <div class="control-group">
                                 <label class="control-label span1" >
                                     Date of Birth:(dd-mm-yyyy)
@@ -79,7 +74,6 @@
                                 else{
                                     $date1 ='';
                                 }
-
                                 ?>
                                 <div class="controls controls-row">
                                     <input class="span3" type="text" id="dob" name="dob" placeholder="DOB" value="<?php echo @$date1;   ?>" readonly='readonly' required="required"  >
@@ -127,35 +121,35 @@
                                 <div class="controls controls-row">  
                                     <?php
 
-                                  //  DebugBreak();
+                                    //  DebugBreak();
                                     $nat = @$data[0]['IsPakistani'];
                                     $matric_sub1 = @$data[0]['sub1'];
-                                    
-                                        if(@$brd_cd ==1 )
+
+                                    if(@$brd_cd ==1 )
+                                    {
+                                        if($nat == 1 || $nat == 0)
                                         {
-                                            if($nat == 1 || $nat == 0)
-                                            {
-                                                echo  " <label class='radio inline span1'><input  disabled='disabled' type='radio' value='1' id='nationality' checked='checked' name='nationality' readonly='readonly'> Pakistani
-                                                </label><label  class='radio inline span2'><input disabled='disabled' type='radio'  id='nationality1' value='2' name='nationality' readonly='readonly'>  Non Pakistani</label>" ;
-                                            }
-                                            else if ($nat == 2)
-                                            {
-                                                echo  "<label class='radio inline span1'><input  disabled='disabled' type='radio' value='1' id='nationality'  name='nationality' readonly='readonly'> Pakistani
-                                                </label><label  class='radio inline span2'><input disabled='disabled' type='radio'  id='nationality1' checked='checked' value='2' name='nationality' readonly='readonly'>  Non Pakistani</label>" ;
-                                            }
-                                            else{
-                                                echo  " <label  class='radio inline span1'><input disabled='disabled' type='radio' value='1' id='nationality' checked='checked' name='nationality' readonly='readonly'> Pakistani
-                                                </label><label  class='radio inline span2'><input disabled='disabled' type='radio'  id='nationality1' value='2'  name='nationality' readonly='readonly'>  Non Pakistani</label>" ;
-                                            }
+                                            echo  " <label class='radio inline span1'><input  disabled='disabled' type='radio' value='1' id='nationality' checked='checked' name='nationality' readonly='readonly'> Pakistani
+                                            </label><label  class='radio inline span2'><input disabled='disabled' type='radio'  id='nationality1' value='2' name='nationality' readonly='readonly'>  Non Pakistani</label>" ;
                                         }
-                                        else
+                                        else if ($nat == 2)
                                         {
-                                            echo  " <label  class='radio inline span1'><input type='radio' value='1' id='nationality' checked='checked' name='nationality'> Pakistani
-                                            </label><label  class='radio inline span2'><input type='radio'  id='nationality1' value='2' name='nationality'>  Non Pakistani</label>" ;
-                                            $nat = 1;
-                                        }  
-                                    
-                                   
+                                            echo  "<label class='radio inline span1'><input  disabled='disabled' type='radio' value='1' id='nationality'  name='nationality' readonly='readonly'> Pakistani
+                                            </label><label  class='radio inline span2'><input disabled='disabled' type='radio'  id='nationality1' checked='checked' value='2' name='nationality' readonly='readonly'>  Non Pakistani</label>" ;
+                                        }
+                                        else{
+                                            echo  " <label  class='radio inline span1'><input disabled='disabled' type='radio' value='1' id='nationality' checked='checked' name='nationality' readonly='readonly'> Pakistani
+                                            </label><label  class='radio inline span2'><input disabled='disabled' type='radio'  id='nationality1' value='2'  name='nationality' readonly='readonly'>  Non Pakistani</label>" ;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        echo  " <label  class='radio inline span1'><input type='radio' value='1' id='nationality' checked='checked' name='nationality'> Pakistani
+                                        </label><label  class='radio inline span2'><input type='radio'  id='nationality1' value='2' name='nationality'>  Non Pakistani</label>" ;
+                                        $nat = 1;
+                                    }  
+
+
 
                                     ?>
 
@@ -261,7 +255,7 @@
                             <div class="controls controls-row">  
                                 <?php
                                 //DebugBreak();
-                              // $isrural;
+                                // $isrural;
                                 $resid = @$data[0]['isRural'];
                                 if($brd_cd == 1)
                                 {
@@ -392,7 +386,7 @@
                                     <select id="std_group" class="dropdown span6"  name="std_group">
                                         <?php
 
-                                      //  DebugBreak();
+                                        //  DebugBreak();
                                         $grp = @$data[0]['RegGrp'];
                                         $subgroups =  split(',',$grp_cdi);
                                         echo "<option value='0' >SELECT GROUP</option>";
@@ -419,39 +413,39 @@
                                                     }
                                                     else
                                                     {
-                                                    echo "<option value='1' >Pre-Medical</option>";        
+                                                        echo "<option value='1' >Pre-Medical</option>";        
                                                     }
 
-                                                    
+
 
                                                 }
                                                 else if($subgroups[$i] == 2)
                                                 {
                                                     if (($grp == 2) && (@$data['0']['excep'] != ""))
                                                     {
-                                                         echo "<option value='2' selected='selected'>Pre-Engineering</option>";  
+                                                        echo "<option value='2' selected='selected'>Pre-Engineering</option>";  
                                                     }
                                                     else
                                                     {
-                                                     echo "<option value='2'>Pre-Engineering</option>";        
+                                                        echo "<option value='2'>Pre-Engineering</option>";        
                                                     }
 
-                                                  
+
 
 
                                                 }
                                                 else if($subgroups[$i] == 3)
                                                 {
 
-                                                     if (($grp == 3) && (@$data['0']['excep'] != ""))
+                                                    if (($grp == 3) && (@$data['0']['excep'] != ""))
                                                     {
                                                         echo "<option value='3' selected='selected'>Humanities</option>";  
                                                     }
                                                     else
                                                     {
-                                                     echo "<option value='3'>Humanities</option>";          
+                                                        echo "<option value='3'>Humanities</option>";          
                                                     }
-                                                   
+
 
 
                                                 }
@@ -463,10 +457,10 @@
                                                     }
                                                     else
                                                     {
-                                                     echo "<option value='4'>General Science</option>";         
+                                                        echo "<option value='4'>General Science</option>";         
                                                     }
 
-                                                    
+
 
                                                 }
                                                 else if($subgroups[$i] == 5)
@@ -477,25 +471,25 @@
                                                     }
                                                     else
                                                     {
-                                                     echo "<option value='5'>Commerce</option>";          
+                                                        echo "<option value='5'>Commerce</option>";          
                                                     }
 
-                                                   
+
 
 
                                                 }
                                                 else if($subgroups[$i] == 6)
                                                 {
-                                                     if (($grp == 6 && (@$data['0']['excep'] != "")))
+                                                    if (($grp == 6 && (@$data['0']['excep'] != "")))
                                                     {
-                                                       echo "<option value='6' selected='selected'>Home Economics</option>";     
+                                                        echo "<option value='6' selected='selected'>Home Economics</option>";     
                                                     }
                                                     else
                                                     {
-                                                     echo "<option value='6'>Home Economics</option>";         
+                                                        echo "<option value='6'>Home Economics</option>";         
                                                     }
 
-                                                    
+
 
 
                                                 }
@@ -667,7 +661,7 @@
                                 </div>
                             </div>
                             <div class="control-group">
-                                <label class="control-label span12" style="width: 366px; font-weight: bold;" >
+                                <label style="font-weight: bolder;" class="control-label span1">
                                     Choose Subjects(Elective Subjects are Enabled Only)   
                                 </label> 
 
@@ -679,7 +673,7 @@
                                 <div class="controls controls-row">
                                     <select id="sub1" class="span3 dropdown" name="sub1">
 
-                                  
+
                                     </select> 
                                     <select id="sub2"  name="sub2" class="span3 dropdown">
 
@@ -797,3 +791,4 @@
         </div>
     </div>
 </div>
+

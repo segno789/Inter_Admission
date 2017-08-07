@@ -1,10 +1,7 @@
 
-<div class="navbar-fixed-bottom row-fluid">
-    <div class="navbar-inner" style="text-align: center; background:#003a6a; color: wheat; margin-bottom: 4px; width: 100%; height: 40px;">
-        &copy; 2017 BISE Gujranwala, All Rights Reserved.
-    </div>
+<div class="footer" style="text-align: center; background:#3187bf; color: wheat; height: 40px; margin-bottom: 5px; padding: 0;">
+    &copy; 2017 BISE Gujranwala, All Rights Reserved.
 </div>
-
 
 <script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/bootstrap.js"></script>
@@ -30,8 +27,8 @@ if(isset($files)){
         window.location.href = '<?=base_url()?>/migration/release_stdForm/'+formrno;
     }
 
-    function  check_migration_validation(){
-
+    function  check_migration_validation()
+    {
         var grp_cd = $('#migrateto').val();
         var status = 0;
 
@@ -2740,7 +2737,7 @@ if(isset($files)){
     {
         alertify.success("Updated Successfully");
     }
-    
+
     else  if(restore_msg!="")
     {
         alertify.success(restore_msg);
@@ -2770,7 +2767,7 @@ if(isset($files)){
             alertify.error("A Problem occur, Please Try Again later.");
         }
     } 
-    
+
     if(BatchRestore_Op != "")
     {
         if(BatchRelease_Op == "success")
@@ -2793,7 +2790,7 @@ if(isset($files)){
     }  
 
     var Gender = $("input[name=gender]:checked").val();
-    
+
     if(Gender == "2")
     {
 
@@ -2807,7 +2804,10 @@ if(isset($files)){
     {
         alertify.error("Currently there is not student against this subject group.!") ;
     }
+
 </script>
+
+
 
 </body>
 </html>

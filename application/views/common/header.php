@@ -1,7 +1,7 @@
 <html>
 <head>
     <title>
-       Registration | BISEGRW
+        Registration | BISEGRW
     </title>
     <link rel="icon" href="<?php echo base_url(); ?>assets/img/headericon.png" type="image/png">        
     <link href="<?php echo base_url(); ?>assets/css/icomoon/style.css" rel="stylesheet">
@@ -9,7 +9,9 @@
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/jquery-ui.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/style.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/alertify.core.css">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/jquery.fancybox.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/jquery.fancybox.css">    
+
+
     <script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/js/bootstrap.js"></script>
     <script src="<?php echo base_url(); ?>assets/js/jquery.scrollUp.js"></script>
@@ -22,6 +24,7 @@
     <script src="<?php echo base_url(); ?>assets/js/jquery-ui.js"></script>
 </head>
 <body>
+
 <div class="mPageloader">
     <div class="CSSspinner2 large">
         <div class="spinner-container container1">
@@ -55,7 +58,7 @@
             echo $Inst_Id.' - '.$inst_Name;  
             ?>
         </button>
-        <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">
+        <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle" onclick="$('.btn-group').addClass('btn-group open');">
             <span class="caret">
             </span>
         </button>

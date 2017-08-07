@@ -1,12 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Registration_11th extends CI_Controller {
-    
+
     function __construct()
     {
         parent::__construct();
         $this->load->helper('url');
-    
+
         $this->load->library('session');
         if( !$this->session->userdata('logged_in') && $this->router->method != 'login' ) {
             redirect('login');
@@ -16,25 +16,25 @@ class Registration_11th extends CI_Controller {
         $this->clear_cache();
         $this->clear_all_cache();
     }
-     public function clear_all_cache()
-{
-    $CI =& get_instance();
-$path = $CI->config->item('cache_path');
-
-    $cache_path = ($path == '') ? APPPATH.'cache/' : $path;
-
-    $handle = opendir($cache_path);
-    while (($file = readdir($handle))!== FALSE) 
+    public function clear_all_cache()
     {
-        //Leave the directory protection alone
-        if ($file != '.htaccess' && $file != 'index.html')
+        $CI =& get_instance();
+        $path = $CI->config->item('cache_path');
+
+        $cache_path = ($path == '') ? APPPATH.'cache/' : $path;
+
+        $handle = opendir($cache_path);
+        while (($file = readdir($handle))!== FALSE) 
         {
-           @unlink($cache_path.'/'.$file);
+            //Leave the directory protection alone
+            if ($file != '.htaccess' && $file != 'index.html')
+            {
+                @unlink($cache_path.'/'.$file);
+            }
         }
+        closedir($handle);
     }
-    closedir($handle);
-}
-     function clear_cache()
+    function clear_cache()
     {
         $this->output->set_header("Cache-Control: no-store, no-cache, must-revalidate, no-transform, max-age=0, post-check=0, pre-check=0");
         $this->output->set_header("Pragma: no-cache");
@@ -47,9 +47,9 @@ $path = $CI->config->item('cache_path');
         $userinfo['isselected'] = 6;
         $Inst_Id = $userinfo['Inst_Id'];
         $Inst_name = $userinfo['inst_Name'];
-       
+
         $isInserted = $userinfo['isInserted'];
-         
+
         $Inst_name = $userinfo['inst_Name'];
         $this->load->view('common/header.php',$userinfo);
         $this->load->view('common/menu.php',$userinfo);
@@ -64,7 +64,7 @@ $path = $CI->config->item('cache_path');
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
-        
+
         $data = array(
             'isselected' => '6',
         );
@@ -247,14 +247,14 @@ $path = $CI->config->item('cache_path');
         {
             $allinfo['info_zone'] =$_POST['info_zone'];
         }
-       
+
         $filledinfo = array('emis'=>$_POST['Info_emis'],'email'=>$_POST['Info_email'],'phone'=>$_POST['info_phone'],'cell'=>$_POST['info_cellNo'],'dist'=>$_POST['info_dist'],'teh'=>$_POST['info_teh'],'zone'=>$_POST['info_zone']);
-       
+
         if(trim(empty($allinfo['info_email'])) )
         {
             $filledinfo['error'] = "Please Provide Institute Email Address";
             $this->session->set_flashdata('incomplete',$filledinfo);
-           
+
             redirect('Registration_11th/index/');
             return;
 
@@ -263,7 +263,7 @@ $path = $CI->config->item('cache_path');
         {
             $filledinfo['error'] = "Please Provide Institute Phone Number";
             $this->session->set_flashdata('incomplete',$filledinfo);
-          
+
             redirect('Registration_11th/index/');
             return;
 
@@ -272,7 +272,7 @@ $path = $CI->config->item('cache_path');
         {
             $filledinfo['error'] = "Please Provide Institute Mobile Number";
             $this->session->set_flashdata('incomplete',$filledinfo);
-          
+
             redirect('Registration_11th/index/');
             return;
 
@@ -282,7 +282,7 @@ $path = $CI->config->item('cache_path');
 
             $filledinfo['error'] = "Please Provide Institute District";
             $this->session->set_flashdata('incomplete',$filledinfo);
-          
+
             redirect('Registration_11th/index/');
             return;
         }
@@ -291,7 +291,7 @@ $path = $CI->config->item('cache_path');
 
             $filledinfo['error'] = "Please Provide Institute Tehsil";
             $this->session->set_flashdata('incomplete',$filledinfo);
-         
+
             redirect('Registration_11th/index/');
             return;
         }
@@ -385,10 +385,10 @@ $path = $CI->config->item('cache_path');
     }
     public function Get_students_record()
     {
-        
-        
-       // DebugBreak();
-        
+
+
+        // DebugBreak();
+
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
@@ -474,24 +474,24 @@ $path = $CI->config->item('cache_path');
                 $inst_userinfo_gender = $userinfo['gender'];
             }
             else{
-             
+
                 $RegStdData = array('data'=>'','isReAdm'=>$isReAdm,'Oldrno'=>0,'Inst_Rno'=>'','excep'=>'');
                 $RegStdData = array('data'=>$this->Registration_11th_model->Pre_Matric_data($data),'isReAdm'=>$isReAdm,'Oldrno'=>0,'Inst_Rno'=>'','excep'=>'','isHafiz'=>'');  
-                  if($RegStdData['data']!=False)
-                  {
-                $RegStdData['data'][0]['excep']='';
-                $RegStdData['data'][0]['isHafiz']=0;
-                $RegStdData['data'][0]['markOfIden']='';
-                $RegStdData['data'][0]['SSC_brd_cd'] = $board;
+                if($RegStdData['data']!=False)
+                {
+                    $RegStdData['data'][0]['excep']='';
+                    $RegStdData['data'][0]['isHafiz']=0;
+                    $RegStdData['data'][0]['markOfIden']='';
+                    $RegStdData['data'][0]['SSC_brd_cd'] = $board;
 
-                $spl_cd = $RegStdData['data'][0]['spl_cd'];
-                $msg = $RegStdData['data'][0]['Mesg'];
-                $SpacialCase = $RegStdData['data'][0]['SpacialCase'];
-                $status = $RegStdData['data'][0]['status'];
-                $cand_gender = $RegStdData['data'][0]['Gender'];
-                $inst_userinfo_gender = $userinfo['gender'];  
-                  }
-                
+                    $spl_cd = $RegStdData['data'][0]['spl_cd'];
+                    $msg = $RegStdData['data'][0]['Mesg'];
+                    $SpacialCase = $RegStdData['data'][0]['SpacialCase'];
+                    $status = $RegStdData['data'][0]['status'];
+                    $cand_gender = $RegStdData['data'][0]['Gender'];
+                    $inst_userinfo_gender = $userinfo['gender'];  
+                }
+
 
             }
 
@@ -514,7 +514,7 @@ $path = $CI->config->item('cache_path');
                 redirect('Registration_11th/Students_matricInfo');
                 return;
             }
-             
+
 
         }
 
@@ -1985,7 +1985,7 @@ $path = $CI->config->item('cache_path');
     public function Reg_Cards_Printing_11th_PDF()
     {
 
-       // DebugBreak();
+        // DebugBreak();
         $Condition = $this->uri->segment(4);
         /*
         $Condition  1 == Batch Id wise printing.
@@ -2330,7 +2330,7 @@ $path = $CI->config->item('cache_path');
     {
         $RegGrp = $this->uri->segment(3);
         $Spl_case = $this->uri->segment(4);
-       // DebugBreak();
+        // DebugBreak();
         $this->load->model('Registration_11th_model');
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -2545,7 +2545,7 @@ $path = $CI->config->item('cache_path');
     }
     public function Make_Batch_Formwise()
     {
-       //  DebugBreak();
+        //  DebugBreak();
         if(!empty($_POST["chk"]))
         {
 
@@ -2742,7 +2742,7 @@ $path = $CI->config->item('cache_path');
     public function return_pdf()
     {
 
-         //DebugBreak();
+        //DebugBreak();
 
         $Condition = $this->uri->segment(4);
         /*
@@ -3039,7 +3039,7 @@ $path = $CI->config->item('cache_path');
     }
     public function revenue_pdf()
     {
-       // DebugBreak();
+        // DebugBreak();
         $Batch_Id = $this->uri->segment(3);
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -3970,7 +3970,7 @@ $path = $CI->config->item('cache_path');
     }
     public function ChallanForm_Reg11th_Regular()
     {
-       // DebugBreak();
+        // DebugBreak();
         $Batch_Id = $this->uri->segment(3);
         $this->load->library('session');
         $this->load->library('NumbertoWord');
@@ -4794,6 +4794,5 @@ $path = $CI->config->item('cache_path');
                         return;
 
                     }
-
     }  
 }
