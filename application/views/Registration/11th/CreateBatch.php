@@ -179,15 +179,15 @@
                                     }
 
                                 }
-                                 else if($subgroups[$i] == 6)
+                                 else if($subgroups[$i] == 7)
                                 {
-                                    if($grp_selected == 6 )
+                                    if($grp_selected == 7 )
                                     {
-                                        echo "<option value='6' selected='selected'>Home Economics</option>";  
+                                        echo "<option value='7' selected='selected'>Home Economics</option>";  
                                     }
                                     else
                                     {
-                                        echo "<option value='6'>Home Economics</option>";  
+                                        echo "<option value='7'>Home Economics</option>";  
                                     }
 
                                 }
@@ -297,15 +297,15 @@
                                     }
 
                                 }
-                                 else if($subgroups[$i] == 6)
+                                 else if($subgroups[$i] == 7)
                                 {
-                                    if($grp_selected == 6 )
+                                    if($grp_selected == 7 )
                                     {
-                                        echo "<option value='6' selected='selected'>Home Economics</option>";  
+                                        echo "<option value='7' selected='selected'>Home Economics</option>";  
                                     }
                                     else
                                     {
-                                        echo "<option value='6'>Home Economics</option>";  
+                                        echo "<option value='7'>Home Economics</option>";  
                                     }
 
                                 }
@@ -418,7 +418,7 @@
                                                     case '5':
                                                         $grp_name = 'Commerce';
                                                         break;
-                                                    case '6':
+                                                    case '7':
                                                         $grp_name = 'Home Economics';
                                                         break;
                                                     default:

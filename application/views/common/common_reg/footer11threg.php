@@ -791,6 +791,20 @@ debugger;
         var Inst_Rno = $('#Inst_Rno').val();
         var status = 0;
         var mat_Year = $('#old_ssc_year').val();
+        
+        /*
+        $("#sub4").append(new Option('Mathematics',19));
+        $("#sub5").append(new Option('Physics',47));
+        $("#sub5").append(new Option('Economics',11));
+        $("#sub5").append(new Option('Statistics',18));
+        $("#sub5 option[value='47']").attr("selected","selected");
+        $("#sub6").append(new Option('Computer Science',83));
+        $("#sub6").append(new Option('Economics',11));
+        $("#sub6").append(new Option('Statistics',18));*/
+        
+        var gen_sci_sub = [19,47,11,18];
+        
+        
       debugger;
          var NationalityVal = $("input[name=nationality]:checked").val();
          if(NationalityVal==2)
@@ -950,9 +964,25 @@ debugger;
             $('#dob').focus(); 
             return status;  
         }           
-       
+        else if($("#std_group").find('option:selected').val()==3 &&($.inArray(($("#sub4").val(),gen_sci_sub) && $.inArray(($("#sub5").val(),gen_sci_sub)&& $.inArray(($("#sub6").val(),gen_sci_sub))))))
+        {
+            $('#ErrMsg').show(); 
+            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+            //$('#ErrMsg').html("<b>Please Enter your Date of Birth</b>"); 
+            alertify.error("This Subject Combination is for General Science Group. Please Choose General Science group") ;
+            $('#std_group').focus(); 
+            return status;  
+        }
        /*else if(NationalityVal != 2 || NationalityVal != 1){
-            $('#ErrMsg').show();  
+            $('#ErrMsg').show();                
+        $("#sub4").append(new Option('Mathematics',19));
+        $("#sub5").append(new Option('Physics',47));
+        $("#sub5").append(new Option('Economics',11));
+        $("#sub5").append(new Option('Statistics',18));
+        $("#sub5 option[value='47']").attr("selected","selected");
+        $("#sub6").append(new Option('Computer Science',83));
+        $("#sub6").append(new Option('Economics',11));
+        $("#sub6").append(new Option('Statistics',18));
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
             // $('#ErrMsg').html("<b>Please Enter your  Name </b>");    
             alertify.error("Please Select Your Nationality");
@@ -1104,7 +1134,12 @@ debugger;
         $.each(sub6_Hum, function(val, text) {
             $('#sub6').append( new Option(text,val) );
         });
-        
+         if(gender==1)
+         {
+         $("#sub4 option[value='21']").remove();
+         $("#sub5 option[value='21']").remove();
+         $("#sub6 option[value='21']").remove();
+         }
          if(sub4_reg != '')
          {
             $("#sub4 option[value='"+sub4_reg+"']").attr("selected","selected"); 
@@ -1197,7 +1232,7 @@ debugger;
         }*/
     })
     $("#sub5").change(function(){
-        console.log('Hi i am sub7 dropdown :) ');
+      //  console.log('Hi i am sub7 dropdown :) ');
         var sub4 = $("#sub4").val();
         var sub5 = $("#sub5").val();
         var sub6 = $("#sub6").val();
@@ -1475,7 +1510,7 @@ debugger;
         {
             load_Commerce();
         }
-        else if(grp_cd == "6")
+        else if(grp_cd == "7")
         {
             load_HomeEco();
         }
@@ -1929,7 +1964,7 @@ debugger;
         {
             load_Commerce();
         }
-        else if(grp_cd == "6")
+        else if(grp_cd == "7")
         {
             load_HomeEco();
         }

@@ -2214,7 +2214,7 @@ class Registration_11th extends CI_Controller {
                 case '5':
                     $grp_name = 'Commerce';
                     break;
-                case '6':
+                case '7':
                     $grp_name = 'Home Economics';
                     break;
                 default:
@@ -2898,7 +2898,7 @@ class Registration_11th extends CI_Controller {
                     case '5':
                         $grp_name = 'Commerce';
                         break;
-                    case '6':
+                    case '7':
                         $grp_name = 'Home Economics';
                         break;
                     default:
@@ -3587,7 +3587,7 @@ class Registration_11th extends CI_Controller {
                 case '5':
                     $grp_name = 'Commerce';
                     break;
-                case '6':
+                case '7':
                     $grp_name = 'Home Economics';
                     break;
                 default:
@@ -4333,7 +4333,8 @@ class Registration_11th extends CI_Controller {
         $_POST['address']  = str_replace("'", "", $_POST['address'] );
         $subjectslang = array('22','23','36','34','35');
         $subjectshis = array('20','21','19');
-
+        $subjectGenSci = array('19','47','11','18');
+        
         $cntzero = substr_count(@$_POST['bay_form'],"0");
         $cntone = substr_count(@$_POST['bay_form'],"1");
         $cnttwo = substr_count(@$_POST['bay_form'],"2");
@@ -4612,7 +4613,7 @@ class Registration_11th extends CI_Controller {
             return;
 
         }
-        else if((@$_POST['std_group'] == 3)&& ((@$_POST['sub4']==47) || (@$_POST['sub5']==48)||(@$_POST['sub6']==19)|| (@$_POST['sub7']!=0)))
+        else if((@$_POST['std_group'] == 3)&& ((in_array(@$_POST['sub4'],$subjectGenSci) && in_array(@$_POST['sub5'],$subjectGenSci) && in_array(@$_POST['sub6'],$subjectGenSci)) || (@$_POST['sub7']!=0)))
         {
 
             $allinputdata['excep'] = 'Subjects not according to Group';

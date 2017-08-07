@@ -392,15 +392,15 @@
                                                     }
 
                                                 }
-                                                else if($subgroups[$i] == 6)
+                                                else if($subgroups[$i] == 7)
                                                 {
-                                                    if($grp == 6)
+                                                    if($grp == 7)
                                                     {
-                                                        echo "<option value='6' selected='selected'>Home Economics</option>";  
+                                                        echo "<option value='7' selected='selected'>Home Economics</option>";  
                                                     }
                                                     else
                                                     {
-                                                        echo "<option value='6'>Home Economics</option>";  
+                                                        echo "<option value='7'>Home Economics</option>";  
                                                     }
 
                                                 }
@@ -483,7 +483,7 @@
                                             'COMPUTER STUDIES' => '98',
                                             'BOOK KEEPING & ACCOUNTANCY' => '99'
 
-                                        );
+                                        );  
                                         //$result =  array_search($data[0]['sub4'],$subarray);
 
 
