@@ -1,11 +1,8 @@
-<footer>
-    <p>
-        &copy; BiseAdmin 2016
-    </p>
-</footer>
 
-<!--Add the following script at the bottom of the web page (before </body></html>)-->
-<!--<script type="text/javascript" async="async" defer="defer" data-cfasync="false" src="https://mylivechat.com/chatinline.aspx?hccid=93646887"></script>-->
+<div class="footer" style="text-align: center; background:#3187bf; color: wheat; height: 40px; margin-bottom: 5px; padding: 0;">
+    &copy; 2017 BISE Gujranwala, All Rights Reserved.
+</div>
+
 
 <script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/bootstrap.js"></script>
@@ -25,7 +22,7 @@ if(isset($files)){
     }
 }
 ?> 
-<script type="">
+<script type="text/javascript">
     $(document).ready(function () {
         $('#data-table').dataTable({
             "sPaginationType": "full_numbers",
@@ -263,7 +260,7 @@ if(isset($files)){
     }
 </script>
 
-<script type="">
+<script type="text/javascript">
 
     var isotherboard = '<?php echo @$data[0]['SSC_brd_cd']; ?>';
     var sub4_reg = '<?php echo @$data[0]['sub4']; ?>';
@@ -1175,7 +1172,7 @@ debugger;
     var langascd = ['24','34','32','27','37'];
     var doubleHistory = ['55','56','57','58'];
     $("#sub4").change(function(){
-        console.log('Hi i am sub7 dropdown :) ');
+        //console.log('Hi i am sub7 dropdown :) ');
         
         var sub4 = $("#sub4").val();
         var sub5 = $("#sub5").val();
@@ -1415,7 +1412,7 @@ debugger;
         var NationalityVal = $("input[name=nationality]:checked").val();
     
     
-        console.log(NationalityVal);
+        //console.log(NationalityVal);
        /* debugger;
         if(NationalityVal == "1")
         {
@@ -1812,7 +1809,7 @@ debugger;
 
     
 
-    debugger;
+    //debugger;
     function Hum_Deaf_Subjects()
     {
 
@@ -1878,16 +1875,16 @@ debugger;
             $("#sub6").val('0');
             return;
         }
-        console.log('Hi i am sub6 dropdown :) ');
+        //console.log('Hi i am sub6 dropdown :) ');
     })
 
     $("#sub7").change(function(){
-        console.log('Hi i am sub7 dropdown :) ');
+        //console.log('Hi i am sub7 dropdown :) ');
         var sub6 = $("#sub6").val();
         var sub7 = $("#sub7").val();
         var sub8 = $("#sub8").val();
 
-        console.log("sub7 = "+ sub7 + "  sub8 = "+ sub8);
+        //console.log("sub7 = "+ sub7 + "  sub8 = "+ sub8);
         if((sub7 == sub8)|| (sub7 == sub6))
         {
             alertify.error("Please choose Different Subjects" );
@@ -1905,7 +1902,7 @@ debugger;
         var sub6 = $("#sub6").val();
         var sub7 = $("#sub7").val();
         var sub8 = $("#sub8").val();
-        console.log("sub7 = "+ sub7 + "  sub8 = "+ sub8);
+        //console.log("sub7 = "+ sub7 + "  sub8 = "+ sub8);
         if((sub7 == sub8)|| (sub8 == sub6))
         {
             alertify.error("Please choose Different Subjects" );
@@ -1923,7 +1920,7 @@ debugger;
             // $("sub8")[0].selectedIndex = 0;
             return;
         }
-        console.log('Hi i am sub8 dropdown :) ');
+        //console.log('Hi i am sub8 dropdown :) ');
     })
     function remove_subjects()
     {
@@ -2044,7 +2041,7 @@ debugger;
         var MarkOfIdent = $('#MarkOfIden').val();
         var Inst_Rno = $('#Inst_Rno').val();
         var status = 0;
-        debugger;
+        
         // alert('sub6 '+sub6p1+ ' and '+ sub6p2);
         if(name == "" ||  name == undefined){
             $('#ErrMsg').show();  
@@ -2292,14 +2289,9 @@ debugger;
     str += $( this ).text() + " ";
     });
     $( "div" ).text( str );*/
-
-
-
-
-
 </script>
 
-<script type="">
+<script type="text/javascript">
     var msg_cd = "<?php  echo @$msg_status;  ?>";
     if(msg_cd == "0")
     {
@@ -2395,7 +2387,7 @@ debugger;
         });
     }
 </script>
-<script type="">
+<script type="text/javascript">
     var error = '<?php echo @$error_msg; ?>';
     if(error > 0){
         alertify.error("Currently there is not student against this subject group.!") ;
