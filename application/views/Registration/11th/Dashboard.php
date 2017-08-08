@@ -69,7 +69,8 @@
                             <a href="<?php echo base_url(); ?>Registration_11th/forwarding_pdf" target="_blank" class="guidlines blink_text" style="font-size: 18px;">Download Forwarding letter. </a> <br/>
                             <br />
                             <strong>NOTE:</strong> <br/>
-                            <ol class="list-group">
+                            
+                             <ol class="list-group " >
                                 <li class="list-group-item">Please upload photo of student carefully and with good quality as this picture will be used in his/her INTER Roll Number Slip/Result Card/certificate. <br></li>
                                 <li class="list-group-item">Fill correct Address of candiate as now governmet often demand addresses of regular candidates also from Board, for various purposes. i.e, Laptop Distribution, Soler Panel distribution, scholership etc. <br></li>
                                 <li class="list-group-item">In case of any problem regarding registration, please send us email on <span style="font-weight:bold; font-family:Verdana, Geneva, sans-serif; font-style:italic; color:#00F" > complaint4bisegrw@gmail.com </span>with your <span style="font-weight:bolder; "> User Id, Password,  Contact No.</span>  and description of problem.</li>
@@ -77,6 +78,8 @@
                                     any problem of student's data , Board also contact to student on his mobile number.  <br/></li>
                                 <li class="list-group-item">Picture size must be less than  20 kb, and use only Passport size with small letter ".jpg" extension image.</li>
                             </ol>
+                          
+                           
                         </div>
                     </div>
                 </div>

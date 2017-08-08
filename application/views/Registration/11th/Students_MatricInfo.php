@@ -101,9 +101,7 @@
                             </div>
                             <div class="span4"></div>
                         </div>
-                  
                     <hr>
-                   
                         <div class="row-fluid">
                             <div class="span5"></div>
                             <div class="span3">

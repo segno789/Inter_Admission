@@ -563,9 +563,7 @@
     }
     function logout(){
         var msg = "Are you Sure You want to LOGOUT?"
-
         alertify.confirm(msg, function (e) {
-
             if (e) {
                 // user clicked "ok"
                 window.location.href ='<?php echo base_url(); ?>index.php/login/logout';
