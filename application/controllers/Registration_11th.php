@@ -4333,7 +4333,7 @@ class Registration_11th extends CI_Controller {
         $_POST['address']  = str_replace("'", "", $_POST['address'] );
         $subjectslang = array('22','23','36','34','35');
         $subjectshis = array('20','21','19');
-        $subjectGenSci = array('19','47','11','18');
+        $subjectGenSci = array('19','47','11','18','83');
         
         $cntzero = substr_count(@$_POST['bay_form'],"0");
         $cntone = substr_count(@$_POST['bay_form'],"1");
