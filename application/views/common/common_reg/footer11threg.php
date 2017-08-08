@@ -800,12 +800,25 @@ debugger;
         $("#sub5 option[value='47']").attr("selected","selected");
         $("#sub6").append(new Option('Computer Science',83));
         $("#sub6").append(new Option('Economics',11));
-        $("#sub6").append(new Option('Statistics',18));*/
+        $("#sub6").append(new Option('Statistics',18));
+        else if($("#std_group").find('option:selected').val()==3 &&($.inArray(($("#sub4").val(),gen_sci_sub) && $.inArray(($("#sub5").val(),gen_sci_sub)&& $.inArray(($("#sub6").val(),gen_sci_sub))))))
+        */
+          debugger;
         
-        var gen_sci_sub = [19,47,11,18];
+        var gen_sci_sub = ['19','47','11','18','83'];
+        /* if(grp_cd==3 &&((jQuery.inArray(sub4,gen_sci_sub)!= '-1') && (jQuery.inArray(sub5,gen_sci_sub)!= '-1') && (jQuery.inArray(sub6,gen_sci_sub)!= '-1')))
+         {
+             $('#ErrMsg').show();  
+            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+            // $('#ErrMsg').html("<b>Please Enter your  Name </b>");    
+            alertify.error("Please Select Appropriate group.")
+            $('#cand_name').focus(); 
+            return status;
+         }  */
         
         
-      debugger;
+        
+     
          var NationalityVal = $("input[name=nationality]:checked").val();
          if(NationalityVal==2)
         {
@@ -964,7 +977,7 @@ debugger;
             $('#dob').focus(); 
             return status;  
         }           
-        else if($("#std_group").find('option:selected').val()==3 &&($.inArray(($("#sub4").val(),gen_sci_sub) && $.inArray(($("#sub5").val(),gen_sci_sub)&& $.inArray(($("#sub6").val(),gen_sci_sub))))))
+       if(grp_cd==3 &&((jQuery.inArray(sub4,gen_sci_sub)!= '-1') && (jQuery.inArray(sub5,gen_sci_sub)!= '-1') && (jQuery.inArray(sub6,gen_sci_sub)!= '-1')))
         {
             $('#ErrMsg').show(); 
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
