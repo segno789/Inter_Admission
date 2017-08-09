@@ -15,27 +15,38 @@
 
                             <div class="control-group">
                                 <h4 class="span4">Personal Information :</h4>
-                                <label class="control-label span4">
-                                    <img class="img-responsive" src="<?php echo base_url(); ?>assets/img/upalodimage.jpg" alt="" >
-                                </label>
                                 <div class="controls controls-row">
-                                    <input type="hidden" class="span2 hidden" id="isReAdm" name="isReAdm" value="0">
-                                    <img id="previewImg" style="width:130px; height: 130px;" class="span2" src="<?php echo base_url(); ?>assets/img/profile.png" alt="Candidate Image">
-                                </div>
-                            </div>
-                            <div class="control-group">
-
-                                <label id="ErrMsg" class="control-label span2" style=" text-align: left;"><?php ?></label>
-
-                                <div class="controls controls-row">
-
-                                    <input class="span3 hidden"  type="text" placeholder="" >  
-                                    <label class="control-label span2">
-                                        Image :  
+                                    <label class="control-label span6" for="image">
+                                        <img class="img-responsive" src="<?php echo base_url(); ?>assets/img/upalodimage.jpg" alt="" >
                                     </label> 
-                                    <input type="file" class="span4" id="image" name="image" onchange="readURL(this);">
+
                                 </div>
                             </div>
+
+
+                            <input type="hidden" id="isReAdm" name="isReAdm" value="0">
+
+                            <div class="control-group">
+                                <label class="control-label span1"></label>
+                                <div class="controls controls-row">
+                                    <label id="ErrMsg" class="control-label span3"><?php ?></label>
+                                    <label class="control-label span2" for="image"> </label> 
+                                    <img id="previewImg" style="width:130px; height: 130px;" class="span3" src="<?php echo base_url(); ?>assets/img/profile.png" alt="Candidate Image">
+                                </div>
+                            </div>
+
+
+                            <div class="control-group">
+                                <label class="control-label span1"></label>
+                                <div class="controls controls-row">
+                                    <label id="ErrMsg" class="control-label span3"><?php ?></label>
+                                    <label class="control-label span2" for="image">
+                                        Image :
+                                    </label> 
+                                    <input type="file" class="span3" id="image" name="image" onchange="readURL(this);">
+                                </div>
+                            </div>
+
                             <?php
                             @$brd_cd =  @$data[0]['SSC_brd_cd'];
                             ?>
