@@ -4334,7 +4334,6 @@ class Registration_11th extends CI_Controller {
         $subjectslang = array('22','23','36','34','35');
         $subjectshis = array('20','21','19');
         $subjectGenSci = array('19','47','11','18','83');
-        
         $cntzero = substr_count(@$_POST['bay_form'],"0");
         $cntone = substr_count(@$_POST['bay_form'],"1");
         $cnttwo = substr_count(@$_POST['bay_form'],"2");
@@ -4613,7 +4612,7 @@ class Registration_11th extends CI_Controller {
             return;
 
         }
-        else if((@$_POST['std_group'] == 3)&& ((in_array(@$_POST['sub4'],$subjectGenSci) && in_array(@$_POST['sub5'],$subjectGenSci) && in_array(@$_POST['sub6'],$subjectGenSci)) || (@$_POST['sub7']!=0)))
+        else if((@$_POST['std_group'] == 3)&& ((@$_POST['sub4']==19 || @$_POST['sub5']==19 || @$_POST['sub6']==19 )&&(in_array(@$_POST['sub4'],$subjectGenSci) && in_array(@$_POST['sub5'],$subjectGenSci) && in_array(@$_POST['sub6'],$subjectGenSci)) || (@$_POST['sub7']!=0)))
         {
 
             $allinputdata['excep'] = 'Subjects not according to Group';

@@ -977,7 +977,7 @@ debugger;
             $('#dob').focus(); 
             return status;  
         }           
-       if(grp_cd==3 &&((jQuery.inArray(sub4,gen_sci_sub)!= '-1') && (jQuery.inArray(sub5,gen_sci_sub)!= '-1') && (jQuery.inArray(sub6,gen_sci_sub)!= '-1')))
+       if(grp_cd==3 &&((sub4==19 || sub5 == 19 || sub6 == 19) && (jQuery.inArray(sub4,gen_sci_sub)!= '-1') && (jQuery.inArray(sub5,gen_sci_sub)!= '-1') && (jQuery.inArray(sub6,gen_sci_sub)!= '-1')))
         {
             $('#ErrMsg').show(); 
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
