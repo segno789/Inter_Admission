@@ -387,7 +387,7 @@ class Registration_11th extends CI_Controller {
     {
 
 
-        // DebugBreak();
+         DebugBreak();
 
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -4612,7 +4612,7 @@ class Registration_11th extends CI_Controller {
             return;
 
         }
-        else if((@$_POST['std_group'] == 3)&& ((in_array(@$_POST['sub4'],$subjectGenSci) && in_array(@$_POST['sub5'],$subjectGenSci) && in_array(@$_POST['sub6'],$subjectGenSci)) || (@$_POST['sub7']!=0)))
+        else if((@$_POST['std_group'] == 3)&& ((@$_POST['sub4']==19 || @$_POST['sub5']==19 || @$_POST['sub6']==19 )&&(in_array(@$_POST['sub4'],$subjectGenSci) && in_array(@$_POST['sub5'],$subjectGenSci) && in_array(@$_POST['sub6'],$subjectGenSci)) || (@$_POST['sub7']!=0)))
         {
 
             $allinputdata['excep'] = 'Subjects not according to Group';
