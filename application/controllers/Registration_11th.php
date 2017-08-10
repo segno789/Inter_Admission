@@ -506,7 +506,6 @@ class Registration_11th extends CI_Controller {
             $RegStdData['data'][0]['SSC_Sess'] = $_POST["oldSess"];
             $RegStdData['data'][0]['SSC_brd_cd'] = $_POST["oldBrd_cd"];
             $RegStdData['data'][0]['sub1']=1;
-            // DebugBreak();
             $mylen = strlen(trim($RegStdData['data'][0]['SSC_RNo']));
             if(trim($RegStdData['data'][0]['SSC_RNo']," ") == '' ||  trim($RegStdData['data'][0]['SSC_RNo']) == '0' || $mylen < 4 )
             {
