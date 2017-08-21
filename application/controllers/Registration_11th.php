@@ -448,7 +448,7 @@ class Registration_11th extends CI_Controller {
              
         
          $year_range = range( date("Y") , date("Y",strtotime("-5 year")) );
-           if(in_array($year,$year_range))
+           if(!in_array($year,$year_range))
            {
                     $this->session->set_flashdata('matric_error', 'THIS SSC YEAR IS NOT ALLOWED.');
                     redirect('Registration_11th/Students_matricInfo');
