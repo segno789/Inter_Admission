@@ -269,7 +269,7 @@ if(isset($files)){
     //
     if(isotherboard != 1)
     {
-           $( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate:new Date(2002, 8, 1),minDate:new Date(1980, 0, 1)}).val();
+           $( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate:new Date(2005, 7, 1),minDate:new Date(1980, 0, 1)}).val();
 
     }
     // $( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true }).val();
@@ -1015,8 +1015,8 @@ debugger;
         {
             // alert('hello angrez :) ');
            
-            $("#oldSess").empty().append('<option selected="selected"  value="1">JUNE 2016</option>');
-             $("#oldSess").append('<option  value="2">JANUARY 2016</option>');
+            $("#oldSess").empty().append('<option selected="selected"  value="1">JUNE 2017</option>');
+             $("#oldSess").append('<option  value="2">JANUARY 2017</option>');
 
         }
         else

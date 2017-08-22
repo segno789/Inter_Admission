@@ -15,7 +15,7 @@
                                 <label class="control-label">
                                     SSC Roll No
                                 </label>
-                                <input style="height: 30px; width:220px;" type="text" class="form-control" id="oldRno" name="oldRno" maxlength="6" required="required" >
+                                <input style="height: 30px; width:220px;" type="text" class="form-control" id="oldRno" name="oldRno" maxlength="7" required="required" >
                             </div>
                             <div class="span2">
                                 <label class="control-label">

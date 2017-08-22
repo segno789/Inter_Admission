@@ -423,7 +423,10 @@ class Registration_11th extends CI_Controller {
             // $dob     =  $_POST["dob"];
 
             $session =$_POST["oldSess"];
-
+            
+            //echo date("Y",strtotime("-1 year"));  //last year "2013"
+          //  echo date("Y"); 
+           //  if($year )
             // $oldClass= $_POST["oldClass"];
             $data = array('mrollno'=>"$mrollno",'board'=>$board,'year'=>$year,'session'=>$session);
             $this->load->model('Registration_11th_model');
@@ -442,8 +445,19 @@ class Registration_11th extends CI_Controller {
             }
 
             //             DebugBreak();
+             
+        
+         $year_range = range( date("Y") , date("Y",strtotime("-5 year")) );
+           if(!in_array($year,$year_range))
+           {
+                    $this->session->set_flashdata('matric_error', 'THIS SSC YEAR IS NOT ALLOWED.');
+                    redirect('Registration_11th/Students_matricInfo');
+                    return;
+           }
+           
             $feedingcheck=$this->Registration_11th_model->IsFeeded($data);
             $feeding_inst_cd =$feedingcheck[0]['coll_cd'];
+            
             if($feedingcheck != false)
             {
                 $instName=$this->Registration_11th_model->InstName($feeding_inst_cd);
@@ -506,7 +520,6 @@ class Registration_11th extends CI_Controller {
             $RegStdData['data'][0]['SSC_Sess'] = $_POST["oldSess"];
             $RegStdData['data'][0]['SSC_brd_cd'] = $_POST["oldBrd_cd"];
             $RegStdData['data'][0]['sub1']=1;
-            // DebugBreak();
             $mylen = strlen(trim($RegStdData['data'][0]['SSC_RNo']));
             if(trim($RegStdData['data'][0]['SSC_RNo']," ") == '' ||  trim($RegStdData['data'][0]['SSC_RNo']) == '0' || $mylen < 4 )
             {
