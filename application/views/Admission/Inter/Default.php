@@ -30,7 +30,7 @@
                 <label class="radio-inline">
                     <input type="radio" class="nationality_class"  id="candidate1" value="1" checked="checked" name="candidate">Private Candidate 
                 </label>
-                <label class="radio-inline">
+                <label class="radio-inline" id="can3">
                     <input type="radio" class="nationality_class" id="candidate3" value="2" name="candidate">Regular Candidate
                 </label>
             </div>
@@ -77,12 +77,18 @@
             </div>
         </div>
     </div>
-
 </form>
-
 <hr class="colorgraph">
-
-
 <label class="control-label">In case of any problem regarding Admissions, please send us email on</label>
 <a href="mailto:complaint4bisegrw@gmail.com" class="control-label">complaint4bisegrw@gmail.com</a>
+<script type="text/javascript">
 
+    $(window).on('resize', function(){
+        if($(window).width() < 400) {
+            $('#can3').css("margin-left: 0px");      
+        }
+        else{
+            $('#can3').css("margin-left: 10px");      
+        }
+    });
+</script>

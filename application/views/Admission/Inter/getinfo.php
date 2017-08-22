@@ -315,7 +315,7 @@
 
     </form>
     <?php }?>
-    
+
 <hr class="colorgraph">
 
 <div class="form-group">    

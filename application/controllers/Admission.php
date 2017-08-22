@@ -1652,13 +1652,14 @@ class Admission extends CI_Controller {
             $data['oldschm']= $data['0']['schm'];
 
             $this->load->view('common/commonheader.php');        
+            /*
             $data['isaloom'] = $isaloom;
             if(($isaloom == 1))
             {
-                $this->load->view('Admission/Inter/LanguagesForm.php',  array('data'=>$data));
-                $this->load->view('common/commonfooter.php');
-                return;
-            }       
+            $this->load->view('Admission/Inter/LanguagesForm.php',  array('data'=>$data));
+            $this->load->view('common/commonfooter.php');
+            return;
+            }  */     
             $this->load->view('Admission/Inter/AdmissionForm.php',  array('data'=>$data));
             $this->load->view('common/commonfooter.php');
         }
@@ -3203,21 +3204,8 @@ class Admission extends CI_Controller {
 
         //DebugBreak();
 
-        $data = array(
-            'isselected' => '3',
-        );
-        $this->load->library('session');
-        if($this->session->flashdata('matric_error'))
-        {
-            $spl_cd = array('spl_cd'=>$this->session->flashdata('matric_error'));  
-        }
-        else
-        {
-            $spl_cd = array('spl_cd'=>"");
-        }
-
         $this->load->view('common/commonheader.php');
-        $this->load->view('Admission/Inter/getinfo.php',$spl_cd);
+        $this->load->view('Admission/Inter/getinfo.php');
         $this->load->view('common/footer.php');
     }
 

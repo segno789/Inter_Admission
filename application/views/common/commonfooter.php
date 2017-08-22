@@ -1,27 +1,10 @@
-<footer>
-    <p>
-        &copy; <?php echo Year; ?> BISE Gujranwala All Rights Reserved.
-    </p>
-</footer>
-
-<!--Add the following script at the bottom of the web page (before </body></html>)-->
-<!--<script type="text/javascript" async="async" defer="defer" data-cfasync="false" src="https://mylivechat.com/chatinline.aspx?hccid=93646887"></script>-->
-
-<script src="<?php echo base_url(); ?>assets/js_matric/jquery-1.8.3.js"></script>
-<script src="<?php echo base_url(); ?>assets/js/bootstrap.js"></script>
-<script src="<?php echo base_url(); ?>assets/js_matric/jquery.validate.js"></script>
-<script src="<?php echo base_url(); ?>assets/js_matric/jquery.maskedinput.js"></script>
-<script src="<?php echo base_url(); ?>assets/js_matric/noty/jquery.noty.js"></script>
-<script src="<?php echo base_url(); ?>assets/js/wysiwyg/bootstrap-wysihtml5.js"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.dataTables.js"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/js_matric/noty/layouts/bottom.js"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/js_matric/noty/themes/default.js"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/js_matric/jquery-ui.js"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.fancybox.pack.js"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/alertify.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/js/jquery-ui.js"></script>    
 
 
+<div id="footer" class="footer">
+    &nbsp; &copy; 2017 BISE Gujranwala, All Rights Reserved. 
+</div>
+
+</div>
 </body>
 </html>
 
@@ -175,7 +158,7 @@
             var tehId =  $("#pvtinfo_teh").val();
 
             //  debugger;
-            gender =  $("input[name=gender]:checked").val();
+            gender =  $('#gender option:selected').val();
             if( gender == undefined )
             {
                 gender = $("#gend").val();
@@ -224,7 +207,7 @@
 
 
             var tehId =  $("#pvtZone").val();
-            var  gender =  $("input[name=gender]:checked").val();
+            var  gender =  $('#gender option:selected').val();
             if( gender == undefined )
             {
                 gender = $("#gend").val();
@@ -286,9 +269,11 @@
         var grp_cd = $('#std_group').val();
         var address = $('#address').val();
         var MarkOfIdent = $('#MarkOfIden').val();
-        var medium= $('#medium option:selected').val();
-        var gend = $("input[name=gender]:checked").val();
+        var medium = $('#medium option:selected').val();
+        var nationality = $('#nationality option:selected').val();
+        var gend  = $('#gender option:selected').val();
         
+
         var oldClass11thother = $('#Class').val();
 
         //part I and part II subjects
@@ -345,36 +330,36 @@
             return status;  
         }
 
-        else if (!$('input[name=nationality]:checked').val() ) {   
+
+        else if(nationality == "" || nationality < 1 ){
             alertify.error("Please Check Nationality") 
             $('#nationality').focus();   
-            return status;        
+            return status;   
         }
 
-        else if (!$('input[name=gender]:checked').val() ) {   
+        else if (!$('#gender option:selected').val() ) {   
             alertify.error("Please Check Gender") 
-            $('#gender1').focus();   
+            $('#gender').focus();   
             return status;        
         }
 
 
-        else if (!$('input[name=hafiz]:checked').val() ) {   
+        else if (!$('#hafiz option:selected').val() ) {   
             alertify.error("Please Check Hafiz-e-Quran") 
-            $('#hafiz1').focus();   
+            $('#hafiz').focus();   
             return status;        
         }
 
-        else if (!$('input[name=religion]:checked').val() ) {   
+        else if (!$('#religion option:selected').val() ) {   
             alertify.error("Please Check Religion") 
             $('#religion').focus();   
             return status;        
         }
 
 
-
-        else if (!$('input[name=UrbanRural]:checked').val() ) {   
+        else if (!$('#UrbanRural option:selected').val() ) {   
             alertify.error("Please Check Locality ") 
-            $('#UrbanRural1').focus();   
+            $('#UrbanRural').focus();   
             return status;        
         }
 
@@ -390,7 +375,7 @@
             $('#address').focus(); 
             return status;    
         }
-      
+
         else  if (dist_cd < 1){
             alertify.error('Please select District '); 
             $("#pvtinfo_dist").focus();
@@ -424,7 +409,7 @@
             $("#sub2").focus();
             return status;  
         }
-        
+
         else if(sub3 == 0 && oldClass11thother != 11 && grp_cd != 30){
             alertify.error('Please Select Part I, Subjects 3.  '); 
             $("#sub3").focus();
@@ -539,7 +524,7 @@
         var exam_type = $("#exam_type").val();
 
 
-        var gend = $("input[name=gender]:checked").val();
+        var gend = $('#gender option:selected').val();
 
         if(grp_cd ==1 || grp_cd == 5 || grp_cd ==7)
         {
@@ -598,15 +583,16 @@
                 else if(mobNo == "" || mobNo == 0 || mobNo == undefined){
                     $('#ErrMsg').show(); 
                     $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-      
+
                     alertify.error("Please Enter your Mobile No.") 
                     $('#mob_number').focus();   
                     return status;  
                 }
 
-                else if (!$('input[name=gender]:checked').val() ) {   
+                
+                else if (!$('#gender option:selected').val()) {   
                     alertify.error("Please Check Gender") 
-                    $('#gender1').focus();   
+                    $('#gender').focus();   
                     return status;        
                 }
 
