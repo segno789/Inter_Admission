@@ -1015,8 +1015,8 @@ debugger;
         {
             // alert('hello angrez :) ');
            
-            $("#oldSess").empty().append('<option selected="selected"  value="1">JUNE 2016</option>');
-             $("#oldSess").append('<option  value="2">JANUARY 2016</option>');
+            $("#oldSess").empty().append('<option selected="selected"  value="1">JUNE 2017</option>');
+             $("#oldSess").append('<option  value="2">JANUARY 2017</option>');
 
         }
         else
