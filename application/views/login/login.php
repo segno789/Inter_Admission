@@ -1,38 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
         <title>LOGIN | BISEGRW</title>
-
-        <meta charset="utf-8">
         <link rel="icon" href="<?php echo base_url(); ?>assets/img/headericon.png" type="image/png">        
-
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <body>
         <form class="form-horizontal" method="POST">
-            <div class="container"> 
-                <div class="row-fluid">
-                    <h2 style="background:#003a6a !important; color: wheat; text-align: center;" class="jumbotron">
-                        <img src="<?php echo base_url(); ?>assets/img/BISEGRW_Icon.png" class="img-circle" width="125px" height="125px" alt="Logo">
-                        Board of Intermediate & Secondary Education, Gujranwala
-                        <br>
-                        <?php 
-                        $sess = '';
-                        if(Session =='1')
-                            $sess =  'Annual';
-                        else if(Session =='2')
-                            $sess = 'Supply';
-                            echo  '<p style="text-align:center;">Online HSSC '.$sess.' Registration '.Year.'</p>';   
-                        ?>
-                    </h2>
-                </div>
-
+            <div class="container">
+                <h2 class="jumbotron" style="background:#003a6a !important; color: wheat; text-align: center;">
+                    <img src="<?php echo base_url(); ?>assets/img/BISEGRW_Icon.png" class="img-circle" width="100px" height="100px" alt="Logo">        
+                    Board of Intermediate & Secondary Education, Gujranwala
+                    <?php 
+                    $sess = '';
+                    if(Session =='1')
+                        $sess =  'Annual';
+                    else if(Session =='2')
+                        $sess = 'Supply';
+                        echo  '<p style="text-align:center;">Online HSSC '.$sess.' Registration '.Year.'</p>';   
+                    ?>
+                </h2>
                 <?php 
-
                 @$msg = "";
-
                 if($user_status == 1)
                 {
                     $msg = "Your UserId or Password is not correct.Please use correct information";
@@ -73,6 +63,9 @@
                     <?php
                 }
                 ?>
+                
+                <br class="break"><br class="break"><br class="break"><br class="break"><br class="break"><br class="break"><br class="break">
+
                 <div class="form-group">
                     <label class="control-label col-md-4" for="username">Institute Code:</label>
                     <div class="col-md-5">
@@ -91,9 +84,7 @@
                     </div>
                 </div>
             </div>
-
         </form>
-
         <div class="navbar-fixed-bottom row-fluid">
             <div class="navbar-inner">
                 <div class="container" style="text-align: center; background:#003a6a; color: wheat; border-radius:5px; margin-bottom: 6px; height: 40px;">
@@ -101,12 +92,5 @@
                 </div>
             </div>
         </div>
-
-
-
-
-
-
-
     </body>
 </html>

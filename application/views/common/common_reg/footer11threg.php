@@ -1,11 +1,8 @@
-<footer>
-    <p>
-        &copy; BiseAdmin 2016
-    </p>
-</footer>
 
-<!--Add the following script at the bottom of the web page (before </body></html>)-->
-<!--<script type="text/javascript" async="async" defer="defer" data-cfasync="false" src="https://mylivechat.com/chatinline.aspx?hccid=93646887"></script>-->
+<div class="footer" style="text-align: center; background:#3187bf; color: wheat; height: 40px; margin-bottom: 5px; padding: 0;">
+    &copy; 2017 BISE Gujranwala, All Rights Reserved.
+</div>
+
 
 <script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/bootstrap.js"></script>
@@ -25,7 +22,7 @@ if(isset($files)){
     }
 }
 ?> 
-<script type="">
+<script type="text/javascript">
     $(document).ready(function () {
         $('#data-table').dataTable({
             "sPaginationType": "full_numbers",
@@ -263,7 +260,7 @@ if(isset($files)){
     }
 </script>
 
-<script type="">
+<script type="text/javascript">
 
     var isotherboard = '<?php echo @$data[0]['SSC_brd_cd']; ?>';
     var sub4_reg = '<?php echo @$data[0]['sub4']; ?>';
@@ -272,7 +269,7 @@ if(isset($files)){
     //
     if(isotherboard != 1)
     {
-           $( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate:new Date(2002, 8, 1),minDate:new Date(1980, 0, 1)}).val();
+           $( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate:new Date(2005, 7, 1),minDate:new Date(1980, 0, 1)}).val();
 
     }
     // $( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true }).val();
@@ -794,7 +791,34 @@ debugger;
         var Inst_Rno = $('#Inst_Rno').val();
         var status = 0;
         var mat_Year = $('#old_ssc_year').val();
-      debugger;
+        
+        /*
+        $("#sub4").append(new Option('Mathematics',19));
+        $("#sub5").append(new Option('Physics',47));
+        $("#sub5").append(new Option('Economics',11));
+        $("#sub5").append(new Option('Statistics',18));
+        $("#sub5 option[value='47']").attr("selected","selected");
+        $("#sub6").append(new Option('Computer Science',83));
+        $("#sub6").append(new Option('Economics',11));
+        $("#sub6").append(new Option('Statistics',18));
+        else if($("#std_group").find('option:selected').val()==3 &&($.inArray(($("#sub4").val(),gen_sci_sub) && $.inArray(($("#sub5").val(),gen_sci_sub)&& $.inArray(($("#sub6").val(),gen_sci_sub))))))
+        */
+          debugger;
+        
+        var gen_sci_sub = ['19','47','11','18','83'];
+        /* if(grp_cd==3 &&((jQuery.inArray(sub4,gen_sci_sub)!= '-1') && (jQuery.inArray(sub5,gen_sci_sub)!= '-1') && (jQuery.inArray(sub6,gen_sci_sub)!= '-1')))
+         {
+             $('#ErrMsg').show();  
+            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+            // $('#ErrMsg').html("<b>Please Enter your  Name </b>");    
+            alertify.error("Please Select Appropriate group.")
+            $('#cand_name').focus(); 
+            return status;
+         }  */
+        
+        
+        
+     
          var NationalityVal = $("input[name=nationality]:checked").val();
          if(NationalityVal==2)
         {
@@ -953,9 +977,25 @@ debugger;
             $('#dob').focus(); 
             return status;  
         }           
-       
+       if(grp_cd==3 &&((sub4==19 || sub5 == 19 || sub6 == 19) && (jQuery.inArray(sub4,gen_sci_sub)!= '-1') && (jQuery.inArray(sub5,gen_sci_sub)!= '-1') && (jQuery.inArray(sub6,gen_sci_sub)!= '-1')))
+        {
+            $('#ErrMsg').show(); 
+            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+            //$('#ErrMsg').html("<b>Please Enter your Date of Birth</b>"); 
+            alertify.error("This Subject Combination is for General Science Group. Please Choose General Science group") ;
+            $('#std_group').focus(); 
+            return status;  
+        }
        /*else if(NationalityVal != 2 || NationalityVal != 1){
-            $('#ErrMsg').show();  
+            $('#ErrMsg').show();                
+        $("#sub4").append(new Option('Mathematics',19));
+        $("#sub5").append(new Option('Physics',47));
+        $("#sub5").append(new Option('Economics',11));
+        $("#sub5").append(new Option('Statistics',18));
+        $("#sub5 option[value='47']").attr("selected","selected");
+        $("#sub6").append(new Option('Computer Science',83));
+        $("#sub6").append(new Option('Economics',11));
+        $("#sub6").append(new Option('Statistics',18));
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
             // $('#ErrMsg').html("<b>Please Enter your  Name </b>");    
             alertify.error("Please Select Your Nationality");
@@ -975,8 +1015,8 @@ debugger;
         {
             // alert('hello angrez :) ');
            
-            $("#oldSess").empty().append('<option selected="selected"  value="1">JUNE 2016</option>');
-             $("#oldSess").append('<option  value="2">JANUARY 2016</option>');
+            $("#oldSess").empty().append('<option selected="selected"  value="1">JUNE 2017</option>');
+             $("#oldSess").append('<option  value="2">JANUARY 2017</option>');
 
         }
         else
@@ -1107,7 +1147,12 @@ debugger;
         $.each(sub6_Hum, function(val, text) {
             $('#sub6').append( new Option(text,val) );
         });
-        
+         if(gender==1)
+         {
+         $("#sub4 option[value='21']").remove();
+         $("#sub5 option[value='21']").remove();
+         $("#sub6 option[value='21']").remove();
+         }
          if(sub4_reg != '')
          {
             $("#sub4 option[value='"+sub4_reg+"']").attr("selected","selected"); 
@@ -1127,7 +1172,7 @@ debugger;
     var langascd = ['24','34','32','27','37'];
     var doubleHistory = ['55','56','57','58'];
     $("#sub4").change(function(){
-        console.log('Hi i am sub7 dropdown :) ');
+        //console.log('Hi i am sub7 dropdown :) ');
         
         var sub4 = $("#sub4").val();
         var sub5 = $("#sub5").val();
@@ -1200,7 +1245,7 @@ debugger;
         }*/
     })
     $("#sub5").change(function(){
-        console.log('Hi i am sub7 dropdown :) ');
+      //  console.log('Hi i am sub7 dropdown :) ');
         var sub4 = $("#sub4").val();
         var sub5 = $("#sub5").val();
         var sub6 = $("#sub6").val();
@@ -1367,7 +1412,7 @@ debugger;
         var NationalityVal = $("input[name=nationality]:checked").val();
     
     
-        console.log(NationalityVal);
+        //console.log(NationalityVal);
        /* debugger;
         if(NationalityVal == "1")
         {
@@ -1478,7 +1523,7 @@ debugger;
         {
             load_Commerce();
         }
-        else if(grp_cd == "6")
+        else if(grp_cd == "7")
         {
             load_HomeEco();
         }
@@ -1764,7 +1809,7 @@ debugger;
 
     
 
-    debugger;
+    //debugger;
     function Hum_Deaf_Subjects()
     {
 
@@ -1830,16 +1875,16 @@ debugger;
             $("#sub6").val('0');
             return;
         }
-        console.log('Hi i am sub6 dropdown :) ');
+        //console.log('Hi i am sub6 dropdown :) ');
     })
 
     $("#sub7").change(function(){
-        console.log('Hi i am sub7 dropdown :) ');
+        //console.log('Hi i am sub7 dropdown :) ');
         var sub6 = $("#sub6").val();
         var sub7 = $("#sub7").val();
         var sub8 = $("#sub8").val();
 
-        console.log("sub7 = "+ sub7 + "  sub8 = "+ sub8);
+        //console.log("sub7 = "+ sub7 + "  sub8 = "+ sub8);
         if((sub7 == sub8)|| (sub7 == sub6))
         {
             alertify.error("Please choose Different Subjects" );
@@ -1857,7 +1902,7 @@ debugger;
         var sub6 = $("#sub6").val();
         var sub7 = $("#sub7").val();
         var sub8 = $("#sub8").val();
-        console.log("sub7 = "+ sub7 + "  sub8 = "+ sub8);
+        //console.log("sub7 = "+ sub7 + "  sub8 = "+ sub8);
         if((sub7 == sub8)|| (sub8 == sub6))
         {
             alertify.error("Please choose Different Subjects" );
@@ -1875,7 +1920,7 @@ debugger;
             // $("sub8")[0].selectedIndex = 0;
             return;
         }
-        console.log('Hi i am sub8 dropdown :) ');
+        //console.log('Hi i am sub8 dropdown :) ');
     })
     function remove_subjects()
     {
@@ -1932,7 +1977,7 @@ debugger;
         {
             load_Commerce();
         }
-        else if(grp_cd == "6")
+        else if(grp_cd == "7")
         {
             load_HomeEco();
         }
@@ -1996,7 +2041,7 @@ debugger;
         var MarkOfIdent = $('#MarkOfIden').val();
         var Inst_Rno = $('#Inst_Rno').val();
         var status = 0;
-        debugger;
+        
         // alert('sub6 '+sub6p1+ ' and '+ sub6p2);
         if(name == "" ||  name == undefined){
             $('#ErrMsg').show();  
@@ -2244,14 +2289,9 @@ debugger;
     str += $( this ).text() + " ";
     });
     $( "div" ).text( str );*/
-
-
-
-
-
 </script>
 
-<script type="">
+<script type="text/javascript">
     var msg_cd = "<?php  echo @$msg_status;  ?>";
     if(msg_cd == "0")
     {
@@ -2347,7 +2387,7 @@ debugger;
         });
     }
 </script>
-<script type="">
+<script type="text/javascript">
     var error = '<?php echo @$error_msg; ?>';
     if(error > 0){
         alertify.error("Currently there is not student against this subject group.!") ;

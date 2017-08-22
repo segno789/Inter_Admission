@@ -39,7 +39,7 @@ define('DOUBLE_LAST_DATE', '2017-10-05');
 define('GET_REGULAR_IMAGE_PATH', 'F:/xampp/htdocs/Inter_Admission\uplaods\2016\Regular\\');
 define('GET_PRIVATE_IMAGE_PATH', 'F:\xampp\htdocs\Inter_Admission\uplaods\2016\private\\');
 define('GET_PRIVATE_IMAGE_PATH_COPY', '');
-define('SINGLE_LAST_DATE11', '2016-05-14');
+define('SINGLE_LAST_DATE11', '2016-05-15');
 define('DIRPATH11th','F:/xampp/htdocs/Inter_Admission/Uploads/IS2016/regular/'); 
 
 
