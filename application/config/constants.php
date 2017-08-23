@@ -18,7 +18,7 @@ define('assets', 'assets/img/');
 
 define('noimage','assets/img/no_image.jpg'); 
 define('IMAGE_PATH11', 'uploads/2016/');
-define('DIRPATH12TH','F:\xampp\htdocs\Share Images\\'); 
+define('DIRPATH12TH','D:\xampp\htdocs\Share Images\\'); 
 define('PRIVATE_IMAGE_PATH', 'uploads/private/');
 define('PRIVATE_IMAGE_PATH_FRESH', 'uploads/Fresh');
 define('REGULAR_IMAGE_PATH', 'uploads/regular/');
@@ -28,7 +28,7 @@ define('REGULAR_INSERT_TABLE', 'Admission_online..IAAdm');
 
 //---------------- REGISTRATION 11TH ------------------------------
 define ('sessReg','2017-2019');
-define('Session','1');
+define('Session','2');
 define('Year','2017');
 define('Regtbl','Registration..tblreg11th');
 define('Feetbl','Registration..RuleFee_Reg_Eleventh');

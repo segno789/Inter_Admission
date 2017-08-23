@@ -104,7 +104,7 @@ class Admission extends CI_Controller {
         $rmargin =7.3;
         $pdf ->SetRightMargin(80);
 
-  
+
         $pdf->AddPage();
         $x = 0.55;
         $Y = -0.20;
@@ -1512,8 +1512,6 @@ class Admission extends CI_Controller {
 
         $data = $this->Admission_model->Pre_Inter_data($data);
 
-        //DebugBreak();
-
         if($data[0]['sub8'] == '' && $data[0]['class'] == 11){
             $data[0]['sub8'] = 91;    
         }
@@ -1521,30 +1519,29 @@ class Admission extends CI_Controller {
         $error_msg = '';
 
         if(!$data){
-            $error_msg.='<span style="font-size: 16pt; color:red;">No Any Student Found Against Your Criteria</span>';
+            $error_msg.='No Any Student Found Against Your Criteria';
         }
 
+        //DebugBreak();
 
-        $picpath = DIRPATH12TH.'\\'.@$data[0]['picpath'];
+        /* $picpath = DIRPATH12TH.'\\'.@$data[0]['picpath'];
         $isexit = is_file($picpath);
         if(!($isexit) && $error_msg == '' && $iyear >2014)
         {
-            $error_msg.= '<span style="font-size: 16pt; color:red;">' . 'Your Picture is missing.</span>';
-            $this->load->library('session');
-            $mydata = array('data'=>$_POST,'error_msg'=>$error_msg ,'exam_type'=>0);
-            $this->session->set_flashdata('matric_error',$mydata );
-            redirect('Admission/matric_default');
+        $error_msg.= 'Your Picture is missing';
+        $this->load->library('session');
+        $mydata = array('data'=>$_POST,'error_msg'=>$error_msg ,'exam_type'=>0);
+        $this->session->set_flashdata('matric_error',$mydata );
+        redirect('Admission/inter_default');
         }
         else
         {
-            if($iyear >2014)
-            {
-                $type = pathinfo($picpath, PATHINFO_EXTENSION);
-                $data[0]['picpathImg'] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
-            }
+        if($iyear >2014)
+        {
+        $type = pathinfo($picpath, PATHINFO_EXTENSION);
+        $data[0]['picpathImg'] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
         }
-
-
+        }*/
 
         $specialcase = $data['0']['Spl_Name'];
         $specialcode = $data['0']['spl_cd'];
@@ -1554,12 +1551,10 @@ class Admission extends CI_Controller {
 
         @$isParctialsub =   $data['0']['sn'];
 
-        //DebugBreak();
-
         if($specialcode != '' && $specialcode != 34 && $specialcode != 119 && $specialcode != 9){
 
-            $error_msg.='<span style="font-size: 16pt; color:red;">' . '   Your Admission cannot be procceed due to     ' . '</span>';
-            $error_msg.='<span style="font-size: 16pt; color:red;">' . $specialcase . '</span>';
+            $error_msg.='Your Admission cannot be procceed due to';
+            $error_msg.= $specialcase;
         }
 
         $nxtrnosess = $data['0']['NextRno_Sess_Year'];
@@ -1568,7 +1563,7 @@ class Admission extends CI_Controller {
 
         if ($nxtrnosess != '') {
 
-            $error_msg.= '<div style="color:red;"><h2>You have already appeared in</h2></div>';
+            $error_msg.= 'You have already appeared in ';
             $parts = explode(",", $nxtrnosess);
             $nxtrno = $parts[0];
             $nxtsess = $parts[1];
@@ -1580,16 +1575,16 @@ class Admission extends CI_Controller {
             else{
                 $nxtsess = 'Inter Supplementary';
             }
-            $error_msg.='<span style="font-size: 16pt; color:red;">' . $nxtsess . '</span>';
-            $error_msg.='<span style="font-size: 16pt; color:red;">' . ',    ' . '</span>';
-            $error_msg.='<span style="font-size: 16pt; color:red;">' . $nxtyear . '</span>';
-            $error_msg.='<span style="font-size: 16pt; color:red;">' . '   Against Roll No  = ' . '</span>';
-            $error_msg.='<span style="font-size: 16pt; color:red;">' . $nxtrno . '</span>';
+            $error_msg.= $nxtsess;
+            $error_msg.=',    ';
+            $error_msg.= $nxtyear;
+            $error_msg.='   Against Roll No  = ';
+            $error_msg.=$nxtrno;
         }
 
         else if ($matric_rno == 0 && $error_msg == '')
         {
-            $error_msg.='<span style="font-size: 16pt; color:red;"> Matric Roll No is Invalid</span>';
+            $error_msg.='Matric Roll No is Invalid';
         }
 
         if($error_msg !='')
@@ -1597,39 +1592,39 @@ class Admission extends CI_Controller {
             $this->load->library('session');
             $mydata = array('data'=>$_POST,'error_msg'=>$error_msg,'exam_type'=>0);
             $this->session->set_flashdata('matric_error',$mydata);
-            redirect('Admission/matric_default');
+            redirect('Admission/inter_default');
         }
         else if(($exam_type == 16) && !isset($CatType))
         {
             $this->load->library('session');
             $mydata = array('data'=>$_POST,'error_msg'=>$error_msg,'exam_type'=>$exam_type);
             $this->session->set_flashdata('matric_error',$mydata );
-            redirect('Admission/matric_default');
+            redirect('Admission/inter_default');
         }
         else if(($exam_type == 17))
         {
-            $error_msg.='<span style="font-size: 16pt; color:red;">' . 'You can not Marks Improve.</span>';
+            $error_msg.='You can not Marks Improve';
             $this->load->library('session');
             $mydata = array('data'=>$_POST,'error_msg'=>$error_msg,'exam_type'=>0);
             $this->session->set_flashdata('matric_error',$mydata );
-            redirect('Admission/matric_default');
+            redirect('Admission/inter_default');
         }
         else if(($exam_type == 18))
         {
-            $error_msg.='<span style="font-size: 16pt; color:red;">' . 'Your Result is not cleared.</span>';
+            $error_msg.='Your Result is not cleared';
             $this->load->library('session');
             $mydata = array('data'=>$_POST,'error_msg'=>$error_msg,'exam_type'=>0);
             $this->session->set_flashdata('matric_error',$mydata );
-            redirect('Admission/matric_default');
+            redirect('Admission/inter_default');
         } 
 
         else if($data[0]['class'] == 11 && $data[0]['regPvt']==1 && ($data[0]['status']==1  || $exam_type ==1 ) &&  $isParctialsub == 1)
         {
-            $error_msg.='<span style="font-size: 16pt; color:red;">' . 'You can not appear as a Private Candidate. Please contact your Institute.</span>';
+            $error_msg.='You can not appear as a Private Candidate. Please contact your Institute';
             $this->load->library('session');
             $mydata = array('data'=>$_POST,'error_msg'=>$error_msg,'exam_type'=>0);
             $this->session->set_flashdata('matric_error',$mydata );
-            redirect('Admission/matric_default');
+            redirect('Admission/inter_default');
         }
 
         else
@@ -1657,13 +1652,14 @@ class Admission extends CI_Controller {
             $data['oldschm']= $data['0']['schm'];
 
             $this->load->view('common/commonheader.php');        
+            /*
             $data['isaloom'] = $isaloom;
             if(($isaloom == 1))
             {
-                $this->load->view('Admission/Inter/LanguagesForm.php',  array('data'=>$data));
-                $this->load->view('common/commonfooter.php');
-                return;
-            }       
+            $this->load->view('Admission/Inter/LanguagesForm.php',  array('data'=>$data));
+            $this->load->view('common/commonfooter.php');
+            return;
+            }  */     
             $this->load->view('Admission/Inter/AdmissionForm.php',  array('data'=>$data));
             $this->load->view('common/commonfooter.php');
         }
@@ -1730,7 +1726,7 @@ class Admission extends CI_Controller {
 
                 $mydata = array('data'=>$_POST,'norec'=>$error_msg);
                 $this->session->set_flashdata('matric_error',$mydata );
-                redirect('Admission/matric_default');
+                redirect('Admission/inter_default');
             }
 
             else if(!$data)
@@ -1738,7 +1734,7 @@ class Admission extends CI_Controller {
                 $error_msg.='<span style="font-size: 16pt; color:red;">No Any Student Found Against Your Criteria</span>';
                 $mydata = array('data'=>$_POST,'norec'=>$error_msg);
                 $this->session->set_flashdata('matric_error',$mydata );
-                redirect('Admission/matric_default');
+                redirect('Admission/inter_default');
             }
 
 
@@ -3204,23 +3200,12 @@ class Admission extends CI_Controller {
         $this->load->view('common/footer.php');
     }
 
-    public function matric_default(){
-        // DebugBreak();
-        $data = array(
-            'isselected' => '3',
-        );
-        $this->load->library('session');
-        if($this->session->flashdata('matric_error'))
-        {
-            $spl_cd = array('spl_cd'=>$this->session->flashdata('matric_error'));  
-        }
-        else
-        {
-            $spl_cd = array('spl_cd'=>"");
-        }
+    public function inter_default(){
+
+        //DebugBreak();
 
         $this->load->view('common/commonheader.php');
-        $this->load->view('Admission/Inter/getinfo.php',$spl_cd);
+        $this->load->view('Admission/Inter/getinfo.php');
         $this->load->view('common/footer.php');
     }
 
