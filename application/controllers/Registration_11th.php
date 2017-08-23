@@ -4373,6 +4373,14 @@ class Registration_11th extends CI_Controller {
             return;
 
         }
+        if(strlen(@$_POST['cand_name'] < 3)  || (strlen($allinputdata['name'] < 3) && $isupdate ==1)  )
+        {
+            $allinputdata['excep'] = 'Please Enter Your Correct Name';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect('Registration_11th/'.$viewName);
+            return;
+
+        }
         //(strpos($a, 'are') !== false)
         /* if ((strpos(@$_POST['cand_name'], 'MOHAMMAD') !== false)|| (strpos(@$_POST['cand_name'], 'MOHAMAD') !== false) || (strpos(@$_POST['cand_name'], 'MOHD') !== false) || (strpos(@$_POST['cand_name'], 'MUHAMAD') !== false) || (strpos(@$_POST['cand_name'], 'MOOHAMMAD') !== false)|| (strpos(@$_POST['cand_name'], 'MOOHAMAD') !== false))
         {
@@ -4383,7 +4391,24 @@ class Registration_11th extends CI_Controller {
 
         }
 
-        else*/ if (@$_POST['father_name'] == ''  || ($allinputdata['Fname'] == '' && $isupdate ==1) )
+        else*/
+         if (@$_POST['father_name'] == ''  || ($allinputdata['Fname'] == '' && $isupdate ==1) )
+        {
+            $allinputdata['excep'] = 'Please Enter Your Father Name';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect('Registration_11th/'.$viewName);
+            return;
+
+        }
+         if (strlen(@$_POST['father_name'] < 3)  || (strlen($allinputdata['Fname'] < 3) && $isupdate ==1) )
+        {
+            $allinputdata['excep'] = 'Please Enter Your Father Name';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect('Registration_11th/'.$viewName);
+            return;
+
+        }
+        if ((@$_POST['cand_name'] == @$_POST['father_name'] )  || (($allinputdata['name'] == $allinputdata['Fname'] ) && $isupdate ==1))
         {
             $allinputdata['excep'] = 'Please Enter Your Father Name';
             $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
