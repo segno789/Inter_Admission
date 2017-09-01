@@ -843,6 +843,14 @@ debugger;
             $('#cand_name').focus(); 
             return status;
         }
+        else if(name.length < 3){
+            $('#ErrMsg').show();  
+            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+            // $('#ErrMsg').html("<b>Please Enter your  Name </b>");    
+            alertify.error("Please Enter your correct Name")
+            $('#cand_name').focus(); 
+            return status;
+        }
         else if(fName == "" || fName == undefined){
             $('#ErrMsg').show(); 
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
@@ -850,8 +858,23 @@ debugger;
             alertify.error("Please Enter your Father's Name  ") 
             $('#father_name').focus(); 
             return status;
+        }
+        else if(fName.length < 3){
+            $('#ErrMsg').show();  
+            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+            // $('#ErrMsg').html("<b>Please Enter your  Name </b>");    
+            alertify.error("Please Enter your correct Father Name")
+            $('#father_name').focus(); 
+            return status;
         }   
-
+        else if(name == fName){
+            $('#ErrMsg').show();  
+            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+            // $('#ErrMsg').html("<b>Please Enter your  Name </b>");    
+            alertify.error("Please Enter your correct Name and Father Name as both can not be same")
+            $('#cand_name').focus(); 
+            return status;
+        }
         else if(parseInt(mat_Year) > 2013 && (bFormNo == "" || bFormNo == 0 || bFormNo == undefined) && isotherboard != 1)
         {
             $('#ErrMsg').show(); 

@@ -671,11 +671,12 @@
 
                                 </div>
                             </div>
+
                             <div class="control-group">
-                                <label style="font-weight: bolder;" class="control-label span1">
+                                <label style="font-weight: bolder;" class="control-label span4">
                                     Choose Subjects(Elective Subjects are Enabled Only)   
                                 </label> 
-
+                                <label style="font-weight: bolder;" class="control-label span5"></label> 
                             </div>
                             <div class="control-group">
                                 <label class="control-label span1" >

@@ -88,7 +88,10 @@ class Registration_11th_model extends CI_Model
         $isInserted = $allinputdata['isInserted'];
         $Inst_Id = $allinputdata['Inst_Id'];
         $emis = $allinputdata['emis'];
-        $query = $this->db->query("Registration..Profile_UPDATE $Inst_Id,$isInserted,$isGovt,'$Profile_email','$Profile_password','$Profile_phone','$Profile_cell','$emis'");
+        $dist = $allinputdata['Dist_cd'];
+        $Teh = $allinputdata['Teh_cd'];
+        $Zone = $allinputdata['Zone'];
+        $query = $this->db->query("Registration..Profile_UPDATE $Inst_Id,$isInserted,$isGovt,'$Profile_email','$Profile_password','$Profile_phone','$Profile_cell','$emis',$dist,$Teh,$Zone");
         return  true;
 
     }

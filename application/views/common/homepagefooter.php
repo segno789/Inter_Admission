@@ -1,25 +1,8 @@
-<footer>
-    <p>
-        &copy; <?php echo Year; ?> BISE Gujranwala All Rights Reserved.
-    </p>
-</footer>
+<div id="footer" class="footer">
+    &nbsp; &copy; 2017 BISE Gujranwala, All Rights Reserved. 
+</div>
 
-<!--Add the following script at the bottom of the web page (before </body></html>)-->
-<script type="text/javascript" async="async" defer="defer" data-cfasync="false" src="https://mylivechat.com/chatinline.aspx?hccid=93646887"></script>
-
-<script src="<?php echo base_url(); ?>assets/js_matric/jquery-1.8.3.js"></script>
-<script src="<?php echo base_url(); ?>assets/js/bootstrap.js"></script>
-<script src="<?php echo base_url(); ?>assets/js_matric/jquery.validate.js"></script>
-<script src="<?php echo base_url(); ?>assets/js_matric/jquery.maskedinput.js"></script>
-<script src="<?php echo base_url(); ?>assets/js_matric/noty/jquery.noty.js"></script>
-<script src="<?php echo base_url(); ?>assets/js/wysiwyg/bootstrap-wysihtml5.js"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.dataTables.js"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/js_matric/noty/layouts/bottom.js"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/js_matric/noty/themes/default.js"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/js_matric/jquery-ui.js"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.fancybox.pack.js"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/alertify.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/js/jquery-ui.js"></script>
+</div>
 </body>
 </html>
 
@@ -242,17 +225,17 @@
             else{
                 window.location.href='<?php  echo base_url(); ?>login'  
             }
-           
+
         })
         $("#proceed").click(function(){
             var isreg =  $('input[name=candidate]:checked', '#options').val();
             if(isreg==1){
-                window.location.href='<?php  echo base_url(); ?>Admission/matric_default';
+                window.location.href='<?php  echo base_url(); ?>Admission/inter_default';
             }
             else{
                 window.location.href='<?php  echo base_url(); ?>login'  
             }
-           
+
         })
 
         $("#btndwnForm").click(function(){
@@ -295,24 +278,24 @@
 
 
         })
-         function downloadform12(){
+        function downloadform12(){
             //debugger;
             var formno = $("#formid").val();
-           // var dob = $("#dob").val();
+            // var dob = $("#dob").val();
             if(formno == ""){
                 return false;
             }
-           
+
             window.location.href='<?php  echo base_url(); ?>Admission/checkFormNo_then_download/'+formno;  
         }
         function downloadform(){
             //debugger;
             var formno = $("#formid").val();
-           // var dob = $("#dob").val();
+            // var dob = $("#dob").val();
             if(formno == ""){
                 return false;
             }
-           
+
             window.location.href='<?php  echo base_url(); ?>Admission_11th_pvt/checkFormNo_then_download/'+formno;  
         }
 
@@ -941,47 +924,47 @@
             return status;  
         }
 
-  /*      else if ($("#sub3p2").find('option:selected').val() == 0) 
+        /*      else if ($("#sub3p2").find('option:selected').val() == 0) 
         {
-            alertify.error('Please select your Study Group ');                  
-            $("#sub3p2").focus();
-            return status;  
+        alertify.error('Please select your Study Group ');                  
+        $("#sub3p2").focus();
+        return status;  
         }
         else if ($("#sub5p2").find('option:selected').val() == 0 )
         {
-            $('#ErrMsg').show(); 
-            alertify.error('Please select Subject ');                   
-            $("#sub5p2").focus();
-            return status;  
+        $('#ErrMsg').show(); 
+        alertify.error('Please select Subject ');                   
+        $("#sub5p2").focus();
+        return status;  
         }
 
         else if ($("#sub6p2").find('option:selected').val() == 0)
         {
-            $('#ErrMsg').show(); 
-            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-            alertify.error('Please select Subject ');                          
-            $("#sub6p2").focus();
-            return status;  
+        $('#ErrMsg').show(); 
+        $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+        alertify.error('Please select Subject ');                          
+        $("#sub6p2").focus();
+        return status;  
         }
 
         else   if ($("#sub7p2").find('option:selected').val() == 0)
         {
-            $('#ErrMsg').show(); 
-            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-            alertify.error('Please select Subject ');
-            $("#sub7p2").focus();
-            return status;  
+        $('#ErrMsg').show(); 
+        $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+        alertify.error('Please select Subject ');
+        $("#sub7p2").focus();
+        return status;  
         }
 
         else if ($("#sub8p2").find('option:selected').val() == 0 )
         {
-            $('#ErrMsg').show(); 
-            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-            alertify.error('Please select Subject '); 
-            $("#sub8p2").focus();
-            return status;  
+        $('#ErrMsg').show(); 
+        $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+        alertify.error('Please select Subject '); 
+        $("#sub8p2").focus();
+        return status;  
         }*/
-        
+
         status = 1;
         return status;
     }
@@ -998,5 +981,5 @@
         });
 
     }
-   
+
 </script>
