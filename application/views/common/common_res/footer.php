@@ -34,6 +34,7 @@ if(isset($files)){
             "sPaginationType": "full_numbers",
             "cache": false
         });
+        $('.mPageloader').hide();
     });
 
 </script>

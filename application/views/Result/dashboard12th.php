@@ -80,18 +80,15 @@
                                         <th style="width:6%" class="hidden-phone">
                                             Result
                                         </th>
-                                        <th style="width:4%" class="hidden-phone">
-                                            Pciture
-                                        </th>
-                                        <th style="width:20%" class="hidden-phone">
-                                            Download
+                                        <th style="width:12%" class="hidden-phone">
+                                            Action
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    //DebugBreak();
-                                    if($data != false)
+                                   // DebugBreak();
+                                    if($data != false && $data != -1)
                                     {
                                         $n=0;  
                                         $grp_name='';                             
@@ -136,9 +133,7 @@
                                         <td>'.$vals["name"].'</td>
                                         <td>'.$vals["Fname"].'</td>
                                         <td>'.$grp_name.'</td>
-                                         <td>'.$vals["result2"].'</td>
-                                        <td style="text-align:center"> <img src="'.REGULAR_IMAGE_PATH.$vals["picpath"].'" style="height: 60px;">'.'</td>
-                                        '; 
+                                         <td>'.$vals["result2"].'</td>'; 
                                         
 
                                         echo'<td>

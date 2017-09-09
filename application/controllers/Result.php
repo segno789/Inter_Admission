@@ -33,7 +33,7 @@ class Result extends CI_Controller {
     {
         $this->load->helper('url');
 
-        //   DebugBreak();
+         // DebugBreak();
 
         $sess = $this->uri->segment(3);
         $data = array(
@@ -51,13 +51,13 @@ class Result extends CI_Controller {
         }
         else    if($sess ==  2)
         {
-            $info['data'] = $this->Result_model->getresult12std($Inst_Id,12,2016);
+            $info['data'] = $this->Result_model->getresult12std($Inst_Id,$sess,2016);
         }
 
         $this->load->view('common/header.php',$userinfo);
         $this->load->view('common/menu.php',$data);
         $this->load->view('result/dashboard12th.php',$info);
-        $this->load->view('common/footer.php'); 
+        $this->load->view('common/common_res/footer.php'); 
     }
     public function resultcard12thgroupwise()
     {
@@ -105,6 +105,8 @@ class Result extends CI_Controller {
     }
     public function resultcard12th()
     {
+        
+        //DebugBreak();
         $this->load->helper('url');
         $rno = $this->uri->segment(3);
         $isdownload = $this->uri->segment(4);
@@ -117,12 +119,12 @@ class Result extends CI_Controller {
         $this->load->model('Result_model');
         if($issess ==  1)
         {
-            $info['data'] = $this->Result_model->getResultCardByRNO($rno,1,2016);
+            $info['data'] = $this->Result_model->getResultCardByRNO($rno,12,2016,$issess);
         }
 
         else if($issess ==  2)
         {
-            $info['data'] = $this->Result_model->getResultCardByRNO($rno,12,2016);
+            $info['data'] = $this->Result_model->getResultCardByRNO($rno,12,2016,$issess);
         }
         $this->load->library('PDFFWithOutPage');
         $pdf=new PDFFWithOutPage('P','in',"A4");   
@@ -155,7 +157,7 @@ class Result extends CI_Controller {
         $this->load->view('common/header.php',$userinfo);
         $this->load->view('common/menu.php',$data);
         $this->load->view('result/dashboard11th.php',$info);
-        $this->load->view('common/footer.php'); 
+        $this->load->view('common/common_res/footer.php'); 
     }
     public function resultcard11th()
     {
@@ -239,9 +241,9 @@ class Result extends CI_Controller {
             $Session= 'Supplementary';  
         else
         {
-            $Session= 'ANNUAL';
+            $Session= 'Annual';
         }
-        $info['Year'] = 2016;     
+        $info['Year'] = 2017;     
         if($info['grp_cd'] == 1)  $grp_cd = 'PRE-MEDICAL';
         else if($info['grp_cd'] == 2) $grp_cd='PRE-ENGINEERING';
             else if($info['grp_cd'] == 3) $grp_cd='HUMANITIES';
@@ -254,9 +256,9 @@ class Result extends CI_Controller {
                                         else if($info['grp_cd'] == 10) $grp_cd='KHASA';
                                             else if($info['grp_cd'] == 11) $grp_cd='FAZAL';
 
-                                                $filepath = DIRPATH12TH.$info['picpath'];
+                                               // $filepath = DIRPATH12TH.$info['picpath'];
 
-        //  $filepath = 'assets/img/229628.jpg';
+          $filepath = 'assets/img/download.jpg';
         $ispass = '';
         if($info['status'] ==  1)
         {
@@ -369,7 +371,7 @@ class Result extends CI_Controller {
 
         $pdf->SetFont('Arial','B',11.5);
         $pdf->SetXY(47,57);
-        $pdf->Cell(0, 0.2, "INTERMEDIATE Part (I/II) (".$Session.") Examination, ".$info['Year'], 0.25, "C"); 
+        $pdf->Cell(0, 0.2, "Intermediate Part (I/II) (".$Session.") Examination, ".$info['Year'], 0.25, "C"); 
 
         $pdf->SetFont('Arial','B',12);
         $pdf->SetXY(73,64);
@@ -425,12 +427,13 @@ class Result extends CI_Controller {
         $instnfo =  $info['coll_cd'].' - '.$info['sch_name'];
 
 
+        $len =  strlen($instnfo);
         $valig = 83;
-        if(strlen($instnfo)>80)
+        if(strlen($instnfo)>80 && strlen($instnfo)<85)
         {
             $fontsize = $fontsize-1;
         }
-        if(strlen($instnfo)>95)
+        else if(strlen($instnfo)>85)
         {
             $valig =  80;
 
@@ -641,7 +644,7 @@ class Result extends CI_Controller {
                         }
                         else
                         {
-                            $subprst = $this->Get_gradePrac_Inter($subcd,$info['sub'.$subctn.'mp2'],$info['sub'.$subctn.'prpf']) ;
+                            $subprst = $this->Get_gradePrac_Inter_marks($subcd,$info['sub'.$subctn.'mp2'],$info['sub'.$subctn.'prpf']) ;
                         }
 
                     }
@@ -649,9 +652,6 @@ class Result extends CI_Controller {
                     {
                         $subprst = '';
                     }
-
-
-
                     $subtotal  = 200;
                 }
 
@@ -689,7 +689,7 @@ class Result extends CI_Controller {
                     }
                     else
                     {
-                        $subprst = $this->Get_gradePrac_Inter($subcd,$info['sub'.$subctn.'mp2'],$info['sub'.$subctn.'prpf']) ;   
+                        $subprst = $this->Get_gradePrac_Inter_marks($subcd,$info['sub'.$subctn.'mp2'],$info['sub'.$subctn.'prpf']) ;   
                     }
 
 
@@ -718,7 +718,12 @@ class Result extends CI_Controller {
                 }
 
                 $totalmarks       =  $totalmarks +$subtotal; 
-                $obtainmarkstotal = $obtainmarkstotal +$subinduTotal;
+               
+               if($subprst != '' &&  $subprst != 'A')
+               {
+                  $subinduTotal = $subprst+ $subinduTotal ; 
+               }
+                
 
                 if($subjectstaus1 == 'F' && $subP1 == '')
                 {
@@ -808,6 +813,8 @@ class Result extends CI_Controller {
         $notification = '';
         if($info['status'] == 1)
         {
+            
+            $obtainmarkstotal = $info['obt_mrk'];
             $percent = ($obtainmarkstotal/1100)*100;
             $grade = 'Grade   '.$this->get_grade($percent);
             $obtainmarkstotal = $obtainmarkstotal;
@@ -1026,9 +1033,9 @@ class Result extends CI_Controller {
         $pdf->SetFont('Arial','',10);
         $pdf->SetXY(27.8,127+ $Y);
         if($info['sess'] ==  2)
-            $pdf->Cell(0, 0.2, "   12th January, 2017", 0.25, "C") ;
+            $pdf->Cell(0, 0.2, "   12th January, 2018", 0.25, "C") ;
         else if($info['sess'] ==  1)
-            $pdf->Cell(0, 0.2, "   17th September, 2016", 0.25, "C") ;
+            $pdf->Cell(0, 0.2, "   12th September, 2017", 0.25, "C") ;
 
             $pdf->SetFont('Arial','',9);
         $pdf->SetXY(27.8,127.2+ $Y);
@@ -1053,7 +1060,7 @@ class Result extends CI_Controller {
         }
         else
         {
-            $pdf->Image("assets/img/CE_Signature.png",163.0,252, 38,36, "jpg");     
+            $pdf->Image("assets/img/CE_Signature.png",163.0,252, 38,36, "png");     
         }
 
         $pdf->SetFont('Arial','B',10);
@@ -1577,15 +1584,32 @@ private function subStatus_New($pf, $prPf)
             }
 
 
-        } else if ($PrPf == 2) {
+        } 
+        else if ($PrPf == 2) {
             $formula = "(E)";
 
         } else if ($PrPf == 3) {
             $formula = "(F)";
         }
-
         // echo ' formula = '. $formula; die();
+        return $formula;
+    }
+    
+      private function Get_gradePrac_Inter_marks($Sub_Cd,$Marks,$PrPf) 
+    {
+        $formula = ""; 
+        if ($PrPf == 1) 
+        {
+           $formula = $Marks;
 
+        } 
+        else if ($PrPf == 2) {
+            $formula = '';
+
+        } else if ($PrPf == 3) {
+            $formula = '';
+        }
+        // echo ' formula = '. $formula; die();
         return $formula;
     }
 private function get_grade($percentage) {

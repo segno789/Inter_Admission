@@ -96,9 +96,9 @@ class Result_model extends CI_Model
             return  -1;
         }
     }
-    public function getresult12std($keyword,$class,$iyear)
+    public function getresult12std($keyword,$sess,$iyear)
     {
-        $query = $this->db->query("matric_new..getRes12thStdData '$keyword',$iyear,$class,1,1");
+        $query = $this->db->query("matric_new..getRes12thStdData '$keyword',$iyear,12,1,$sess");
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
@@ -110,17 +110,10 @@ class Result_model extends CI_Model
             return  -1;
         }
     }
-    public function getResultCardByRNO($keyword,$class,$iyear)
+    public function getResultCardByRNO($keyword,$class,$iyear,$sess)
     {
-        if($class ==  9)
-        {
-            $query = $this->db->query("matric_new..spResCard9th $keyword,$iyear,$class,1,1");
-        }
-        else if($class ==  12 || $class == 11)
-        {
-            $query = $this->db->query("matric_new..spResCard12th $keyword,$iyear,$class,1,1");
-        }
-
+       
+        $query = $this->db->query("matric_new..spResCard12th $keyword,$iyear,$class,$sess,1");
 
         $rowcount = $query->num_rows();
         if($rowcount > 0)
