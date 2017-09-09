@@ -279,6 +279,36 @@ class RollNoSlip_model extends CI_Model
             return  $rowcount;
         }
     }
+    
+      public function getPVTLangthrslip($Name,$Fname,$Fnic,$rno,$formno,$class,$iyear,$sess)
+    {
+      //  DebugBreak();
+        $Name  = empty($Name) ? '' : $Name;
+        $Fname  = empty($Fname) ? '' : $Fname;
+        $Fnic  = empty($Fnic) ? '' : $Fnic;
+        $formno  = empty($formno) ? '' : $formno;
+        $rno  = empty($rno) ? 0 : $rno;
+
+
+        //DebugBreak();
+        $query = $this->db->query("Registration..InterSlipInfopvtlang '$Name','$Fname','$Fnic','$formno',$rno,$class,$iyear,$sess");
+        //$query = $this->db->get_where('matric_new..tblbiodata', array('sch_cd' => $inst_cd,'class' => 10, 'iyear' => 2016, 'regpvt'=>1,));
+        $rowcount = $query->num_rows();
+        $row = array();
+        if($rowcount > 0)
+        {
+            $row['info']  = $query->result_array();
+            $rno = $row['info'][0]['Rno'];
+          //  $query = $this->db->query("select * from Registration..InterP1Datesheet2016pvt where rno in( (select rno from Registration..InterP1Datesheet2016pvt  where rno=$rno))"); 
+            $query = $this->db->query("Registration..InterSlipslang $rno,$class,$iyear,$sess,2");
+            $row['info'][0]['slips'] = $query->result_array();
+            return $row;
+        }
+        else
+        {
+            return  $rowcount;
+        }
+    }
 
 }
 ?>

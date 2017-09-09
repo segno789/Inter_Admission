@@ -3,7 +3,8 @@
 <div id="footer" class="footer">
     &nbsp; &copy; 2017 BISE Gujranwala, All Rights Reserved. 
 </div>
-
+<script src="<?php echo base_url(); ?>assets/js/highcharts.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/exporting.js"></script>
 </div>
 </body>
 </html>
@@ -29,6 +30,139 @@ if(isset($files)){
             "cache": false
         });
     });
+    
+         var obj1 = [];
+    $(document).ready(function () {
+        
+      //  console.log(obj);
+     //   console.log(obj1);
+      drawChart3();
+      })
+      
+     
+      function drawChart3() {
+    jQuery.ajax({
+        type: "POST",
+        url: "<?php echo base_url(); ?>Dashboard/getstats/",
+        beforeSend: function() {  $('.mPageloader').show(); },
+        complete: function() { $('.mPageloader').hide();},
+        success: function(data) {
+            var parsed = $.parseJSON(data) ;
+            //    var objnew = [];
+
+            // var objnew =  parsed.data
+            // for(i = 0; )
+            Highcharts.chart('columnChart', {
+                chart: {
+                    type: 'column'
+                },
+                colors: ['#74b749', '#0daed3', '#ed6d49', '#ffb400', '#f63131'],
+                title: {
+                    text: 'Institute Information'
+                },
+                subtitle: {
+                    text: 'Source: bisegrw.com'
+                },
+                xAxis: {
+                    categories: parsed.iyear,
+                    crosshair: true
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'No. of Students'
+                    },
+                    max:3000,
+                    tickInterval: 200,
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:14px">{point.key}</span><table style="width:200px">',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0;">{series.name}: </td>' +
+                    '<td style="padding:0;"><b>{point.y}</b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.05,
+                        borderWidth: .45
+                    }
+                },
+                credits: {
+                    enabled: false
+                },
+                series: parsed.states
+            });
+          
+            
+            Highcharts.chart('area_chart', {
+                chart: {
+                    type: 'area'
+                },
+                title: {
+                    text: 'Institute Ranking'
+                },
+                subtitle: {
+                    text: 'Source: <a href="http:www.bisegrw.com">' +
+                    'bisegrw.com</a>'
+                },
+
+                credits: {
+                    enabled: false
+                },
+                xAxis: {
+                    min: 2012,
+                    max:2016,
+                    tickInterval: 1,
+                    allowDecimals: false,
+                    labels: {
+                        formatter: function () {
+                            return this.value; // clean, unformatted number for year
+                        }
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Grading'
+                    },
+                    max:10,
+                    tickInterval: .5,
+                },
+                tooltip: {
+                    pointFormat: '{series.name} is <b>{point.y}</b><br/> in {point.x}'
+                },
+                plotOptions: {
+                    area: {
+                        pointStart: 2012,
+                        marker: {
+                            enabled: false,
+                            symbol: 'circle',
+                            radius: 2,
+                            states: {
+                                hover: {
+                                    enabled: true
+                                }
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    name: 'Institute Rnaking',
+                    data:  parsed.grading
+                    } ]
+            });
+            
+                   
+               },
+               error: function(request, status, error){
+                   alert(request.responseText);
+               }
+           });
+      }
+    
+    
 </script>
 <script type="text/javascript">
     function isValidEmailAddress(emailAddress) {
