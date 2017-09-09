@@ -2867,7 +2867,7 @@ class Registration_11th extends CI_Controller {
         // // DebugBreak();();
         foreach ($result as $key=>$data) 
         {
-            //// DebugBreak();();
+//            DebugBreak();
             //// DebugBreak();();
             $i++;
             $countofrecords=$countofrecords+1;
@@ -2898,35 +2898,15 @@ class Registration_11th extends CI_Controller {
                 $pdf->SetXY(2.6,0.4);
                 $pdf->Image(BARCODE_PATH.$image,6.3,0.43, 1.8, 0.20, "PNG"); 
                 $pdf->SetFont('Arial','',9);
-                $pdf->SetXY(0.4,0.6);
-                $pdf->Cell(0, 0.25,$user['Inst_Id']. "-". $user['inst_Name'], 0.25, "C");
+                $pdf->SetXY(0.4,0.7);
+                $pdf->MultiCell(7.65,0.15, $user['Inst_Id']. "-". $user['inst_Name'],0,'L');
+                //$pdf->Cell(0, 0.25,, 0.25, "C");
 
                 $pdf->SetFont('Arial','',10);
                 $pdf->SetXY(6.9,0.8);
                 $pdf->Cell(0, 0.25,  'Gender: '. ($data['sex']==1?"MALE":"FEMALE" ), 0.25, "C");
-                $grp_name = $data["RegGrp"];
-                switch ($grp_name) {
-                    case '1':
-                        $grp_name = 'Pre-Medical';
-                        break;
-                    case '2':
-                        $grp_name = 'Pre-Engineering';
-                        break;
-                    case '3':
-                        $grp_name = 'Humanities';
-                        break;
-                    case '4':
-                        $grp_name = 'General Science';
-                        break;
-                    case '5':
-                        $grp_name = 'Commerce';
-                        break;
-                    case '7':
-                        $grp_name = 'Home Economics';
-                        break;
-                    default:
-                        $grp_name = "No Group Selected.";
-                }
+                //$grp_name = $data["RegGrp"];
+               
                 /*$pdf->SetFont('Arial','',10);
                 $pdf->SetXY(2.5,0.8);
                 $pdf->Cell(0, 0.25,  'Group: '.$grp_name, 0.25, "C"); */
@@ -2955,7 +2935,7 @@ class Registration_11th extends CI_Controller {
                 $pdf->Line($col4,$title,$col4,$ln[15]);
                 $pdf->Line($col5,$title,$col5,$ln[15]);
                 $pdf->Line($col6,$title,$col6,$ln[15]);
-
+                 
                 $pdf->SetFont('Arial','B',9);
                 $pdf->Text($lmargin+.03,$title+.3,"Sr#");    //$pdf->Text(3,3,"TEXT TO DISPLAY");
                 $pdf->Text($col1+.2,$title+.3,"Form No.");
@@ -2987,6 +2967,28 @@ class Registration_11th extends CI_Controller {
 
 
             }
+            switch ($data["RegGrp"]) {
+                    case '1':
+                        $grp_name = 'Pre-Medical';
+                        break;
+                    case '2':
+                        $grp_name = 'Pre-Engineering';
+                        break;
+                    case '3':
+                        $grp_name = 'Humanities';
+                        break;
+                    case '4':
+                        $grp_name = 'General Science';
+                        break;
+                    case '5':
+                        $grp_name = 'Commerce';
+                        break;
+                    case '7':
+                        $grp_name = 'Home Economics';
+                        break;
+                    default:
+                        $grp_name = "No Group Selected.";
+                }
             //$dob = date("d-m-Y", strtotime($data["Dob"]));
             $adm = date("d-m-Y", strtotime($data["edate"]));
 
@@ -3040,6 +3042,8 @@ class Registration_11th extends CI_Controller {
                 $pdf->Text($col5+.05,$ln[$countofrecords]+0.35,  $data["sub1_abr"].','.$data["sub2_abr"].','.$data["sub3_abr"]);
                 $pdf->SetFont('Arial','',7);    
                 $pdf->Text($col5+.05,$ln[$countofrecords]+0.55,$data["sub4_abr"].','.$data["sub5_abr"].','.$data["sub6_abr"].','.$data["sub7_abr"]); //.','.$data["sub8_abr"]
+                 $pdf->Image(base_url().IMAGE_PATH11.$data["coll_cd"].'/'.$data["PicPath"],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG"); 
+                //$pdf->Image(base_url().IMAGE_PATH11.$data["coll_cd"].'/'.$data["PicPath"],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG");
                 //$pdf->Image(IMAGE_PATH11.$data["Sch_cd"].'/'.$data["PicPath"],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG");    
             }
 
