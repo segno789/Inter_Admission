@@ -61,6 +61,7 @@ class Result extends CI_Controller {
     }
     public function resultcard12thgroupwise()
     {
+       // DebugBreak();
         $this->load->helper('url');
         $keyword = $this->uri->segment(3);
         $isdownload = $this->uri->segment(4);
@@ -75,7 +76,7 @@ class Result extends CI_Controller {
         $Inst_Id = $userinfo['Inst_Id'];
 
         $this->load->model('Result_model');
-        $info['data'] = $this->Result_model->get12thResultCardByGroupWise($keyword,$Inst_Id);
+        $info['data'] = $this->Result_model->get12thResultCardByGroupWise($keyword,$Inst_Id,12,1,2016);
         if($info['data'] != -1)
         {
             $this->load->library('PDFFWithOutPage');
@@ -100,7 +101,7 @@ class Result extends CI_Controller {
         }
         else
         {
-            redirect('result/dashboard9th/'); 
+            redirect('result/dashboard12th/'); 
         }
     }
     public function resultcard12th()

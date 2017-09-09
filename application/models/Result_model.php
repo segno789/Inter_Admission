@@ -113,7 +113,7 @@ class Result_model extends CI_Model
     public function getResultCardByRNO($keyword,$class,$iyear,$sess)
     {
        
-        $query = $this->db->query("matric_new..spResCard12th $keyword,$iyear,$class,$sess,1");
+        $query = $this->db->query("matric_new..spResCard12th $keyword,$iyear,$class,$sess,1,0");
 
         $rowcount = $query->num_rows();
         if($rowcount > 0)
@@ -156,14 +156,11 @@ class Result_model extends CI_Model
             return  -1;
         }
     }
-    public function get12thResultCardByGroupWise($keyword,$Inst_Id)
+    public function get12thResultCardByGroupWise($keyword,$Inst_Id,$class,$sess,$iyear)
     {
         // DebugBreak();
 
-        $where = "grp_cd = $keyword AND coll_cd = $Inst_Id";
-
-
-        $query = $this->db->query("SELECT * FROM matric_new..tbl12thresultcards where $where");
+       $query = $this->db->query("matric_new..spResCard12th $Inst_Id,$iyear,$class,$sess,2,$keyword");
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
