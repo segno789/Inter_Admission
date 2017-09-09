@@ -2898,8 +2898,9 @@ class Registration_11th extends CI_Controller {
                 $pdf->SetXY(2.6,0.4);
                 $pdf->Image(BARCODE_PATH.$image,6.3,0.43, 1.8, 0.20, "PNG"); 
                 $pdf->SetFont('Arial','',9);
-                $pdf->SetXY(0.4,0.6);
-                $pdf->Cell(0, 0.25,$user['Inst_Id']. "-". $user['inst_Name'], 0.25, "C");
+                $pdf->SetXY(0.4,0.7);
+                $pdf->MultiCell(7.65,0.15, $user['Inst_Id']. "-". $user['inst_Name'],0,'L');
+                //$pdf->Cell(0, 0.25,, 0.25, "C");
 
                 $pdf->SetFont('Arial','',10);
                 $pdf->SetXY(6.9,0.8);
@@ -3041,7 +3042,8 @@ class Registration_11th extends CI_Controller {
                 $pdf->Text($col5+.05,$ln[$countofrecords]+0.35,  $data["sub1_abr"].','.$data["sub2_abr"].','.$data["sub3_abr"]);
                 $pdf->SetFont('Arial','',7);    
                 $pdf->Text($col5+.05,$ln[$countofrecords]+0.55,$data["sub4_abr"].','.$data["sub5_abr"].','.$data["sub6_abr"].','.$data["sub7_abr"]); //.','.$data["sub8_abr"]
-                $pdf->Image(base_url().IMAGE_PATH11.$data["coll_cd"].'/'.$data["PicPath"],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG");
+                 $pdf->Image(base_url().IMAGE_PATH11.$data["coll_cd"].'/'.$data["PicPath"],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG"); 
+                //$pdf->Image(base_url().IMAGE_PATH11.$data["coll_cd"].'/'.$data["PicPath"],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG");
                 //$pdf->Image(IMAGE_PATH11.$data["Sch_cd"].'/'.$data["PicPath"],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG");    
             }
 
