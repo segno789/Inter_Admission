@@ -99,3 +99,12 @@ define('mSession1','1');
 define('mClass2','11'); 
 define('mYear','2017'); 
 define('PVT_TITLE_INTER','Download Roll Number Slip For H.S.S.C Annual 2017'); 
+
+
+
+//================ Result Cards ========================
+define('DIRPATH12TH','C:\inetpub\vhosts\bisegrw.com\Share Images\\'); 
+define('SESS', '1');
+define('SESSION', '1');
+define('MCLASS', '12');
+define('MYEAR', '2017');
