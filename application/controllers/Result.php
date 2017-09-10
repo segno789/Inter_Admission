@@ -35,7 +35,7 @@ class Result extends CI_Controller {
 
          // DebugBreak();
 
-        $sess = $this->uri->segment(3);
+        $sess = SESSION;//$this->uri->segment(3);
         $data = array(
             'isselected' => '4',
             'sess' => $sess
@@ -47,11 +47,11 @@ class Result extends CI_Controller {
         $this->load->model('Result_model');
         if($sess ==  1)
         {
-            $info['data'] = $this->Result_model->getresult12std($Inst_Id,$sess,2016);
+            $info['data'] = $this->Result_model->getresult12std($Inst_Id,$sess,MYEAR);
         }
         else    if($sess ==  2)
         {
-            $info['data'] = $this->Result_model->getresult12std($Inst_Id,$sess,2016);
+            $info['data'] = $this->Result_model->getresult12std($Inst_Id,$sess,MYEAR);
         }
 
         $this->load->view('common/header.php',$userinfo);
@@ -76,7 +76,7 @@ class Result extends CI_Controller {
         $Inst_Id = $userinfo['Inst_Id'];
 
         $this->load->model('Result_model');
-        $info['data'] = $this->Result_model->get12thResultCardByGroupWise($keyword,$Inst_Id,12,1,2016);
+        $info['data'] = $this->Result_model->get12thResultCardByGroupWise($keyword,$Inst_Id,12,1,MYEAR);
         if($info['data'] != -1)
         {
             $this->load->library('PDFFWithOutPage');
@@ -111,7 +111,7 @@ class Result extends CI_Controller {
         $this->load->helper('url');
         $rno = $this->uri->segment(3);
         $isdownload = $this->uri->segment(4);
-        $issess = $this->uri->segment(5);
+        $issess = SESSION;//$this->uri->segment(5);
         $data = array(
             'isselected' => '4',
 
@@ -120,12 +120,12 @@ class Result extends CI_Controller {
         $this->load->model('Result_model');
         if($issess ==  1)
         {
-            $info['data'] = $this->Result_model->getResultCardByRNO($rno,12,2016,$issess);
+            $info['data'] = $this->Result_model->getResultCardByRNO($rno,12,MYEAR,$issess);
         }
 
         else if($issess ==  2)
         {
-            $info['data'] = $this->Result_model->getResultCardByRNO($rno,12,2016,$issess);
+            $info['data'] = $this->Result_model->getResultCardByRNO($rno,12,MYEAR,$issess);
         }
         $this->load->library('PDFFWithOutPage');
         $pdf=new PDFFWithOutPage('P','in',"A4");   
@@ -152,7 +152,7 @@ class Result extends CI_Controller {
         $userinfo = $Logged_In_Array['logged_in'];
         $Inst_Id = $userinfo['Inst_Id'];
         $this->load->model('Result_model');
-        $info['data'] = $this->Result_model->getresult12std($Inst_Id,11,2016);
+        $info['data'] = $this->Result_model->getresult12std($Inst_Id,11,MYEAR);
         $info['NOCdata'] = $this->Result_model->getresultNocstd($Inst_Id);
 
         $this->load->view('common/header.php',$userinfo);
@@ -171,7 +171,7 @@ class Result extends CI_Controller {
         );        
 
         $this->load->model('Result_model');
-        $info['data'] = $this->Result_model->getResultCardByRNO($rno,11,2016);
+        $info['data'] = $this->Result_model->getResultCardByRNO($rno,11,MYEAR);
         if($info['data'] != -1)
         {
             $this->load->library('PDFFWithOutPage');
@@ -344,7 +344,7 @@ class Result extends CI_Controller {
 
         //barcode
 
-        $Barcode = $info['rno']."@12@1@2016";
+        $Barcode = $info['rno']."@12@1@MYEAR";
 
         $bardata = Barcode::fpdf($pdf, $black, $bx, $by, $angle, $type, array('code'=>$Barcode), $width, $height);
 
@@ -1076,7 +1076,7 @@ class Result extends CI_Controller {
         //DebugBreak();
         // if($info['Session'] ==1) $Session= 'ANNUAL'; else $Session='SUPPLY';
         $Session= 'ANNUAL';  
-        $info['Year'] = 2016;     
+        $info['Year'] = MYEAR;     
 
         if($info['grp_cd'] == 1)  $grp_cd = 'PRE-MEDICAL';
         else if($info['grp_cd'] == 2) $grp_cd='PRE-ENGINEERING';
@@ -1453,7 +1453,7 @@ class Result extends CI_Controller {
 
         $pdf->SetFont('Arial','',10);
         $pdf->SetXY(20.2,251.8);
-        $pdf->Cell(0, 0.2, '                    10-10-2016', 0.25, "C");
+        $pdf->Cell(0, 0.2, '                    10-10-MYEAR', 0.25, "C");
 
 
 
@@ -1664,7 +1664,7 @@ private function get_grade($percentage) {
         }
         else if($chance == 3)
         {
-            $ret = 'Supplementary Examination, 2016';
+            $ret = 'Supplementary Examination, MYEAR';
         }
         return $ret;
     }
