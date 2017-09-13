@@ -105,4 +105,4 @@ define('PVT_TITLE_INTER','Download Roll Number Slip For H.S.S.C Annual 2017');
 define('SESS', '1');
 define('SESSION', '1');
 define('MCLASS', '12');
-define('MYEAR', '2016');
+define('MYEAR', '2017');
