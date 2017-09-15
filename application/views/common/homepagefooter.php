@@ -291,9 +291,8 @@
                 alertify.log("Please wait while your form is downloading....")    
                 downloadform12();    
             }
-
-
-        })
+        });
+        
         function downloadform12(){
             //debugger;
             var formno = $("#formid").val();

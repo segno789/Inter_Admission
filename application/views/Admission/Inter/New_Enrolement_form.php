@@ -87,11 +87,13 @@
 
                                         if($med == 1)
                                         {
-                                            echo  "<option value='1' selected='selected'>Urdu</option> <option value='1'>English</option>";
+                                            echo  "<option value='1' selected='selected'>Urdu</option> 
+                                            <option value='2'>English</option>";
                                         }
                                         else
                                         {
-                                            echo  "<option value='2' >Urdu</option> <option value='2' selected='selected'>English</option>";
+                                            echo  "<option value='1'>Urdu</option>
+                                            <option value='2' selected='selected'>English</option>";
                                         }
                                         ?>
                                     </select>

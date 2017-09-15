@@ -95,7 +95,7 @@ class Login_model extends CI_Model {
     public function getappconfig() 
     {
 
-        $query = $this->db->get_where('online_BAK..tblAppConfig', array('iyear' => Year,'class' => 11));
+        $query = $this->db->get_where('admission_online..tblAppConfig_testing', array('iyear' => Year,'class' => 11));
         $rowcount = $query->num_rows();
         if($rowcount >0)
         {
