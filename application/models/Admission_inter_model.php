@@ -566,7 +566,7 @@ class Admission_inter_model extends CI_Model
         $Inst_cd = $fetch_data['Inst_cd'];
         $Grp_cd = $fetch_data['grp_cd'];
         $Batch_Id = $fetch_data['Batch_Id'];
-        $query = $this->db->query("Admission_online..sp_get_reg_Print_Form_Inter_II $Inst_cd,$Grp_cd,$Batch_Id");
+        $query = $this->db->query("exec admission_online..sp_get_reg_Print_Form_Inter_II $Inst_cd,$Grp_cd,$Batch_Id");
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
@@ -602,7 +602,7 @@ class Admission_inter_model extends CI_Model
 
         $Inst_cd = $fetch_data['Inst_cd'];
         $Batch_Id = $fetch_data['Batch_Id'];
-        $query = $this->db->query("exec Admission_online..sp_get_adm_Print_Form_12th $Inst_cd, $Batch_Id");
+        $query = $this->db->query("exec admission_online..sp_get_adm_Print_Form_12th $Inst_cd, $Batch_Id");
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {

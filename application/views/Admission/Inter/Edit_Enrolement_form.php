@@ -21,8 +21,8 @@
                                     <?php
                                     if($data[0]["IntBrd_cd"] == 1)
                                     {
-                                        $image_path_selected = DIRPATH12TH.$data[0]['picpath']; 
-                                        $type = pathinfo(@$image_path_selected, PATHINFO_EXTENSION);
+                                        @$image_path_selected = DIRPATH12TH.$data[0]['picpath']; 
+                                        @$type = pathinfo(@$image_path_selected, PATHINFO_EXTENSION);
                                     }
                                     else
                                     {
@@ -106,14 +106,23 @@
 
                                         if($spec == 0)
                                         {
-                                            echo  "<option value='0' selected='selected'>None</option><option value='1'>Deaf &amp; Dumb</option> <option value='2'>Board Employee</option>";
+                                            echo  "<option value='0' selected='selected'>None</option><option value='1'>Disabled</option>";
+                                            if(Session == 1){
+                                                echo"<option value='2'>Board Employee</option>";
+                                            }
                                         }
                                         else if($spec == 1)
                                         {
-                                            echo  "<option value='0' >None</option>  <option value='1' selected='selected'>Deaf &amp; Dumb</option> <option value='2'>Board Employee</option>";
+                                            echo  "<option value='0' >None</option>  <option value='1' selected='selected'>Disabled</option>";
+                                            if(Session == 1){
+                                                echo"<option value='2'>Board Employee</option>";
+                                            }
                                         }
                                         else if($spec == 2){
-                                            echo  "<option value='0' >None</option>  <option value='1' >Deaf &amp; Dumb</option> <option value='2' selected='selected'>Board Employee</option>";                                           
+                                            echo  "<option value='0' >None</option>  <option value='1' >Disabled</option>";                                           
+                                            if(Session == 1){
+                                                echo"<option value='2'>Board Employee</option>";
+                                            }
                                         }
                                         ?>
                                     </select>
@@ -124,7 +133,7 @@
                                     <label class="control-label span2" for="MarkOfIden">
                                         Identification Mark:
                                     </label>
-                                    <input class="span2" type="text" id="MarkOfIden" name="MarkOfIden" value="<?php echo  $data['0']['markOfIden']; ?>" required="required" maxlength="60" >
+                                    <input class="span2 text-uppercase" type="text" id="MarkOfIden" name="MarkOfIden" value="<?php echo  $data['0']['markOfIden']; ?>" required="required" maxlength="60" >
                                     <label class="control-label span2" for="CollGrade">
                                         College Grade:
                                     </label>

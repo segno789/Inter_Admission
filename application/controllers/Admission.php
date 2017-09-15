@@ -138,12 +138,9 @@ class Admission extends CI_Controller {
 
         if($data ['IsNewPic'] == 0)
         {
-            if(base_url() == 'http://slips.bisegrw.com/Inter_Admission/')
-            {
-                $type = pathinfo(@$data['picpath'], PATHINFO_EXTENSION); 
-                @$image_path_selected = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents(@$data['picpath']));
-                $pdf->Image(@$data['picpath'],6.5, 1.30+$Y, 0.95, 1.0, "JPG");    
-            }
+            $type = pathinfo(@$data['picpath'], PATHINFO_EXTENSION); 
+            @$image_path_selected = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents(@$data['picpath']));
+            $pdf->Image(@$data['picpath'],6.5, 1.30+$Y, 0.95, 1.0, "JPG");    
         }
 
         else  if($data ['IsNewPic'] == 1 && Session == 1)
@@ -476,7 +473,7 @@ class Admission extends CI_Controller {
             $data['sub6A'] =  $data['sub6']; 
             $data['sub7A'] =  $data['sub7']; 
         }
-        
+
         else if(@$data["cat12"] == 5 && $data["cat12"] == 5)
         {
             $data['sub5A'] =  $data['sub5']; 
@@ -942,12 +939,9 @@ class Admission extends CI_Controller {
 
         if($data ['IsNewPic'] == 0)
         {
-            if(base_url() == 'http://slips.bisegrw.com/Inter_Admission/')
-            {
-                $type = pathinfo(@$data['picpath'], PATHINFO_EXTENSION); 
-                @$image_path_selected = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents(@$data['picpath']));
-                $pdf->Image($image_path_selected,6.5, 10.65+$Y, 0.95, 1.0, "JPG");
-            }
+            $type = pathinfo(@$data['picpath'], PATHINFO_EXTENSION); 
+            @$image_path_selected = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents(@$data['picpath']));
+            $pdf->Image($image_path_selected,6.5, 10.65+$Y, 0.95, 1.0, "JPG");
         }
         else if($data ['IsNewPic'] == 1)
         {

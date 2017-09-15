@@ -1466,8 +1466,6 @@ class Admission_inter extends CI_Controller {
 
             $error_msg = $RegStdata['excep'];
 
-
-
             $RegStdData = array('data'=>$this->Admission_inter_model->EditEnrolement_data($formno,$year,$Inst_Id,$IntBrd_cd),'isReAdm'=>$isReAdm,'Oldrno'=>0,'error_msg'=>$error_msg);
 
         }
@@ -2571,7 +2569,6 @@ class Admission_inter extends CI_Controller {
         $error['isrural'] = $userinfo['isrural'];
         $error['error_msg'] = $error_msg;
         $this->commonheader($data);
-        /*$this->load->view('Admission/inter/FormPrinting.php',$error);*/
         $this->load->view('Admission/inter/FormPrinting.php');
         $this->load->view('common/commonfooter_inter_regular.php');
     }
@@ -2860,7 +2857,7 @@ class Admission_inter extends CI_Controller {
     public function return_pdf()
     {
 
-        //  DebugBreak();
+        // DebugBreak();
 
         $Condition = $this->uri->segment(4);
         /*
@@ -3404,22 +3401,17 @@ class Admission_inter extends CI_Controller {
             $pdf->SetFont('Arial','B',7);    
             $pdf->Text($col5+.05,$ln[$countofrecords]+0.4,@$sub1_abr .@$sub2_abr. @$sub3_abr. @$sub4_abr. @$sub5_abr. @$sub6_abr. @$sub7_abr);
 
-
-
-
             if($data["IntBrd_cd"]==1)
-
             {
-                $pdf->Image(DIRPATH12TH.$data['picpath'],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG"); 
+                $type = pathinfo(@$data[0]['picpath'], PATHINFO_EXTENSION); 
+                @$image_path_selected = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents(@$data[0]['picpath']));
+                $pdf->Image($image_path_selected,$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG");
+
             }
             else
             {
                 $pdf->Image(DIRPATHOTHER.'/'.$user['Inst_Id'].'/'.$data["picpath"],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG"); 
-
             }
-
-
-
 
             ++$SR;
 
@@ -3475,7 +3467,7 @@ class Admission_inter extends CI_Controller {
             $result = array('data'=>$this->Admission_inter_model->Print_Form_Formnowise($fetch_data),'inst_Name'=>$user['inst_Name']);
             //Print_Form_Formnowise
         }
-        if($Condition == "3")
+        else if($Condition == "3")
         {
             $Batch_Id = $this->uri->segment(3);
             $fetch_data = array('Inst_cd'=>$user['Inst_Id'],'Batch_Id'=>$Batch_Id);
@@ -3612,7 +3604,9 @@ class Admission_inter extends CI_Controller {
             if($data["IntBrd_cd"]==1)
 
             {
-                $pdf->Image(DIRPATH12TH.$data["picpath"],6.5, 1.55+$Y, 1.25, 1.0, "JPG");
+                $type = pathinfo(@$data[0]['picpath'], PATHINFO_EXTENSION); 
+                @$image_path_selected = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents(@$data[0]['picpath']));
+                $pdf->Image($image_path_selected,6.5, 1.55+$Y, 1.25, 1.0, "JPG");
             }
             else
             {
