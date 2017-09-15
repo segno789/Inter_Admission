@@ -6,7 +6,7 @@
     </div>
 </div>
 <!--FORM START-->
-<form enctype="multipart/form-data" id="ReturnStatus" name="ReturnStatus" onsubmit="return validateForm(this);" method="post" action="<?php echo base_url(); ?>Admission/Pre_Inter_data">
+<form enctype="multipart/form-data" id="ReturnStatus" name="ReturnStatus"  method="post" action="<?php echo base_url(); ?>index.php/Admission/Pre_Inter_data">
     <?php   
     if(@$spl_cd['error_msg'] != ''){
         ?>
@@ -25,10 +25,10 @@
         <div class="row">
             <div class="col-md-offset-3 col-md-3">
                 <label class="control-label" for="txtMatRno" >Matric Roll No</label>
-                <input type="text" class="form-control" onKeyPress="validatenumber(event);" maxlength="10" id="txtMatRno" required="required" name="txtMatRno" value="<?php  echo @$spl_cd['data']['txtMatRno'];  ?>" autofocus> 
+                <input type="text" class="form-control"  onKeyPress="validatenumber(event);" maxlength="6" id="txtMatRno" required="required" name="txtMatRno" value="<?php  echo @$spl_cd['data']['txtMatRno'];  ?>" autofocus> 
             </div>
             <div class="col-md-3">
-                <label class="control-label" for="oldRno" >Last Appear Inter Roll No.</label>
+                <label class="control-label" for="oldRno" >Last Appeared Inter Roll No.</label>
                 <input type="text" class="form-control" onKeyPress="validatenumber(event);" maxlength="6" id="oldRno" required="required" name="oldRno"  maxlength="6" value="<?php echo @$spl_cd['data']['oldRno']; ?>" />
             </div>
         </div>
@@ -39,8 +39,19 @@
             <div class="col-md-offset-3 col-md-3">
                 <label class="control-label" for="oldClass">Last Appearing Class</label>
                 <select id="oldClass" class="form-control" name="oldClass">
-                    <option value="11" >11th</option>
-                    <option selected="selected" value="12">12th</option>
+                    <?php
+                    if(Session == 1){
+                        echo'
+                        <option value="11" >11th</option>
+                        <option selected="selected" value="12">12th</option>
+                        ';
+                    }
+                    else if(Session == 2){
+                        echo'
+                        <option selected="selected" value="12">12th</option>
+                        ';
+                    }
+                    ?>
                 </select>
             </div>
             <div class="col-md-3">
@@ -69,10 +80,12 @@
                         <option value="100" >Before 2000</option>';
                     }
                     else if(Session == 2){
+                        @$curr_Year = Year;
+                        @$prev_year = Year - 1;
+
                         echo'
-                        <option value="2016" selected >2016</option>
-                        <option value="2015">2015</option>
-                        <option value="2014">2014</option>
+                        <option value="'.$curr_Year.'" selected>'.$curr_Year.'</option>
+                        <option value="'.$prev_year.'">'.$prev_year.'</option>
                         ';
                     }
                     ?>
@@ -94,42 +107,47 @@
                 <label class="control-label" for="sec_board" >Last Appearing Board</label>
                 <select id="sec_board" class="form-control" name="oldBrd_cd">
                     <option value="1">BISE, GUJRANWALA</option>
-                    <option value="2">BISE,  LAHORE</option>
-                    <option value="3">BISE,  RAWALPINDI</option>
-                    <option value="4">BISE,  MULTAN</option>
-                    <option value="5">BISE,  FAISALABAD</option>
-                    <option value="6">BISE,  BAHAWALPUR</option>
-                    <option value="7">BISE,  SARGODHA</option>
-                    <option value="8">BISE,  DERA GHAZI KHAN</option>
-                    <option value="9">FBISE, ISLAMABAD</option>
-                    <option value="10">BISE, MIRPUR</option>
-                    <option value="11">BISE, ABBOTTABAD</option>
-                    <option value="12">BISE, PESHAWAR</option>
-                    <option value="13">BISE, KARACHI</option>
-                    <option value="14">BISE, QUETTA</option>
-                    <option value="15">BISE, MARDAN</option>
-                    <option value="16">FBISE, ISLAMABAD</option>
-                    <option value="17">CAMBRIDGE</option>
-                    <option value="18">AIOU, ISLAMABAD</option>
-                    <option value="19">BISE, KOHAT</option>
-                    <option value="20">KARAKURUM</option>
-                    <option value="21">MALAKAN</option>
-                    <option value="22">BISE, BANNU</option>
-                    <option value="23">BISE, D.I.KHAN</option>
-                    <option value="24">AKUEB, KARACHI</option>
-                    <option value="25">BISE, HYDERABAD</option>
-                    <option value="26">BISE, LARKANA</option>
-                    <option value="27">BISE, MIRPUR(SINDH)</option>
-                    <option value="28">BISE, SUKKUR</option>
-                    <option value="29">BISE, SWAT</option>
-                    <option value="30">SBTE KARACHI</option>
-                    <option value="31">PBTE, LAHORE</option>
-                    <option value="32">AFBHE RAWALPINDI</option>
-                    <option value="33">BIE, KARACHI</option>
-                    <option value="34">BISE SAHIWAL</option>
-                    <option value="35">ISLAMIC UNIVERSITY</option>                                
+                    <?php
+                    if(Session == 1){
+                        ?>
+                        <option value="2">BISE,  LAHORE</option>
+                        <option value="3">BISE,  RAWALPINDI</option>
+                        <option value="4">BISE,  MULTAN</option>
+                        <option value="5">BISE,  FAISALABAD</option>
+                        <option value="6">BISE,  BAHAWALPUR</option>
+                        <option value="7">BISE,  SARGODHA</option>
+                        <option value="8">BISE,  DERA GHAZI KHAN</option>
+                        <option value="9">FBISE, ISLAMABAD</option>
+                        <option value="10">BISE, MIRPUR</option>
+                        <option value="11">BISE, ABBOTTABAD</option>
+                        <option value="12">BISE, PESHAWAR</option>
+                        <option value="13">BISE, KARACHI</option>
+                        <option value="14">BISE, QUETTA</option>
+                        <option value="15">BISE, MARDAN</option>
+                        <option value="16">FBISE, ISLAMABAD</option>
+                        <option value="17">CAMBRIDGE</option>
+                        <option value="18">AIOU, ISLAMABAD</option>
+                        <option value="19">BISE, KOHAT</option>
+                        <option value="20">KARAKURUM</option>
+                        <option value="21">MALAKAN</option>
+                        <option value="22">BISE, BANNU</option>
+                        <option value="23">BISE, D.I.KHAN</option>
+                        <option value="24">AKUEB, KARACHI</option>
+                        <option value="25">BISE, HYDERABAD</option>
+                        <option value="26">BISE, LARKANA</option>
+                        <option value="27">BISE, MIRPUR(SINDH)</option>
+                        <option value="28">BISE, SUKKUR</option>
+                        <option value="29">BISE, SWAT</option>
+                        <option value="30">SBTE KARACHI</option>
+                        <option value="31">PBTE, LAHORE</option>
+                        <option value="32">AFBHE RAWALPINDI</option>
+                        <option value="33">BIE, KARACHI</option>
+                        <option value="34">BISE SAHIWAL</option>
+                        <option value="35">ISLAMIC UNIVERSITY</option>                 
+                        <?php
+                    }
+                    ?>               
                 </select>
-
             </div>
         </div>
     </div>
@@ -158,7 +176,7 @@
     <div class="form-group">    
         <div class="row">
             <div class="col-md-offset-3 col-md-3">
-                <input type="submit" value="Proceed" id="proceed" name="proceed" class="btn btn-primary btn-block">
+                <input type="submit" value="Proceed" id="proceed" onclick="return validateFormInterAdm(this);" name="proceed" class="btn btn-primary btn-block">
             </div>
             <div class="col-md-3">
                 <input type="button" value="Cancel" onclick="return CancelAlert();"  class="btn btn-danger btn-block">
@@ -199,6 +217,7 @@
                     <label class="control-label" for="oldYear">SSC Year</label>
                     <select id="oldYear" class="form-control" name="oldYear">
                         <?php
+
                         if(Session == 1){
                             echo'
                             <option value="2015">2015</option>
@@ -220,7 +239,6 @@
                             <option value="100" >Before 2000</option>';
                         }
                         else if(Session == 2){
-
                             @$curr_Year = Year;
                             @$prev_year = Year - 1;
 
@@ -346,12 +364,44 @@
 
 <script type="text/javascript">
 
+
+    $(document).ready(function(){
+        var oldYear = $('#oldYear option:selected').val()
+        var sess = '<?php echo Session ?>';
+
+        if(oldYear == '<?php echo $curr_Year ?>' && sess == '2'){
+            $('#oldSess').empty();
+            $("#oldSess").append('<option value="1">ANNUAL</option>'); 
+        }
+        else{
+            $('#oldSess').empty();
+            $("#oldSess").append('<option value="1">ANNUAL</option>'); 
+            $("#oldSess").append('<option value="2">SUPPLEMENTARY</option>'); 
+        }
+    });
+
+    $('#oldYear').change(function(){
+
+        var oldYear = $('#oldYear option:selected').val()
+        var sess = '<?php echo Session ?>';
+
+        if(oldYear == '<?php echo $curr_Year ?>' && sess == '2'){
+            $('#oldSess').empty();
+            $("#oldSess").append('<option value="1">ANNUAL</option>'); 
+        }
+        else{
+            $('#oldSess').empty();
+            $("#oldSess").append('<option value="1">ANNUAL</option>'); 
+            $("#oldSess").append('<option value="2">SUPPLEMENTARY</option>'); 
+        }
+    });
+
     function CancelAlert()
     {
         var msg = "Are You Sure You want to Cancel this Form ?"
         alertify.confirm(msg, function (e) {
             if (e) {
-                window.location.href ='<?php echo base_url(); ?>Admission';
+                window.location.href ='<?php echo base_url(); ?>index.php/Admission';
             } else {
             }
         });
@@ -377,17 +427,19 @@
             ,maxDate: '12-07-2004'
     }).val();
 
-    function validateForm() {
+    function validateFormInterAdm() {
+
         var x = document.forms["ReturnStatus"]["txtMatRno"].value;
         var y = document.forms["ReturnStatus"]["oldRno"].value;
         if (x == null || x == "") {
-            alert("Matric Roll No Must be filled out");
+            alertify.error("Matric Roll No Must be filled out");
             return false;
         }
         if (y == null || y == "") {
-            alert("Last Appear Intermediate Roll No Must be filled out");
+            alertify.error("Last Appear Intermediate Roll No Must be filled out");
             return false;
         }
+        return true;
     } 
 </script>
 

@@ -33,9 +33,7 @@
                                         <th style="width:20%">
                                             Father's Name
                                         </th>
-                                        <!--  <th style="width:5%" class="hidden-phone">
-                                        DOB
-                                        </th>-->
+
                                         <th style="width:15%" class="hidden-phone">
                                             Subject Group
                                         </th>
@@ -51,8 +49,6 @@
                                 <tbody>
                                     <?php
 
-                                    $image_path_selected = '';
-                                    //   DebugBreak();
                                     if($data != false)
                                     {
                                         $n=0;  
@@ -63,25 +59,22 @@
                                             $grp_name = $vals["grp_cd"];
                                             $sub7 = $vals["sub7"];
 
-
+                                            $image_path_selected = '';
+                                            
                                             if($vals["IntBrd_cd"] ==  1)
                                             {
-                                                //$image_path_selected = DIRPATH12TH.$vals['picpath']; 
-                                                $image_path_selected = '../'.$vals['picpath']."?".rand(10000,1000000); 
-                                                // $type = pathinfo($image_path_selected, PATHINFO_EXTENSION);
-                                                //  $image_path_selected 
-
+                                                $type = pathinfo(@$data[0]['picpath'], PATHINFO_EXTENSION); 
+                                                @$image_path_selected = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents(@$data[0]['picpath']));
                                             }
-                                            else 
+                                          /*  else
                                             {
                                                 @$image_path_selected =  DIRPATHOTHER.'/'.$vals["coll_cd"].'/'.$vals["picpath"]; 
                                                 @$type = pathinfo($image_path_selected, PATHINFO_EXTENSION); 
-                                                @$image_path_selected = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($image_path_selected)); 
-                                            }
-
+                                                @$image_path_selected = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($image_path_selected));
+                                            }*/
 
                                             $disable = '<button type="button" class="btn btn-info" value="'.$vals["rno"].'" onclick="NewForm('.$vals["rno"].','.$vals["IntBrd_cd"].','.$vals["Iyear"].')">Save Form</button>';
-                                            if($vals['MissingNOC']>0)
+                                            if(@$vals['MissingNOC']>0)
                                             {
                                                 $disable = '<p style="color:red">Your NOC is missing. Please contact to Online Registration Branch at B.I.S.E</p>'; 
                                             }
@@ -120,6 +113,7 @@
                                             <td><img id="previewImg" style="width:40px; height: 40px;" src="'.$image_path_selected.'" alt="Candidate Image"></td>';
                                             echo'<td>'.$disable.'</td>
                                             </tr>';
+
                                             endforeach;
                                     }
                                     ?>

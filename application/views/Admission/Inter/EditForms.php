@@ -31,9 +31,6 @@
                                         <th style="width:20%">
                                             Father's Name
                                         </th>
-                                        <!-- <th style="width:5%" class="hidden-phone">
-                                        DOB
-                                        </th>-->
                                         <th style="width:20%" class="hidden-phone">
                                             Subject Group
                                         </th>
@@ -81,14 +78,10 @@
                                             default:
                                                 $grp_name = "No Group Selected.";
                                         }
-                                        // $image_path_selected = DIRPATH12TH.$vals['picpath']; 
-                                        //   $type = pathinfo($image_path_selected, PATHINFO_EXTENSION);
+
                                         if($vals["IntBrd_cd"] ==  1)
                                         {
-                                            /* $image_path_selected = DIRPATH12TH.$vals['picpath']; 
-                                            $type = pathinfo($image_path_selected, PATHINFO_EXTENSION);*/  
                                             $image_path_selected = '../'.$vals['picpath']."?".rand(10000,1000000); 
-
                                         }
                                         else 
                                         {
@@ -135,6 +128,3 @@
         </div>
     </div>
 </div>
-</div> 
-</div>
-

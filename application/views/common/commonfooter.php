@@ -5,14 +5,10 @@
 </div>
 
 </div>
-</body>
-</html>
 
 <script type="text/javascript">
 
     $(document).ready(function(){
-
-
         $('.mPageloader').hide();
         $("#pvtinfo_dist").change(function(){
             var distId =  $("#pvtinfo_dist").val();
@@ -205,7 +201,6 @@
 
         $("#pvtZone").change(function(){
 
-
             var tehId =  $("#pvtZone").val();
             var  gender =  $('#gender option:selected').val();
             if( gender == undefined )
@@ -233,19 +228,17 @@
                     success: function(json) {
                         var listitems='';
                         $.each(json.center, function (key, data) {
-                            listitems +='<label style="text-align: left; margin-top: -23px;">'+data.CENT_CD + '-' + data.CENT_NAME+'</label><br>';
+                            listitems +='<label class="control-label">'+data.CENT_CD + '-' + data.CENT_NAME+'</label><br>';
                         })
-                        $('#instruction').html('<h1 style="    margin-bottom: 28px;">Selected Zone Centre List </h1>'+listitems); 
+                        $('#instruction').html('<h3 align="center">Selected Zone Centre List </h3>'+listitems); 
                         $.fancybox("#instruction");
                     },
                     error: function(request, status, error){
                         alert(request.responseText);
                     }
                 });
-
             }
-
-        })
+        });
 
         var Insert_server_error= "<?php  echo @$data['Insert_server_error']; ?>";
         if(Insert_server_error !='')
@@ -272,7 +265,7 @@
         var medium = $('#medium option:selected').val();
         var nationality = $('#nationality option:selected').val();
         var gend  = $('#gender option:selected').val();
-        
+
 
         var oldClass11thother = $('#Class').val();
 
@@ -344,7 +337,7 @@
         }
 
 
-        else if (!$('#hafiz option:selected').val() ) {   
+        else if ($('#hafiz option:selected').val() == '' ) {   
             alertify.error("Please Check Hafiz-e-Quran") 
             $('#hafiz').focus();   
             return status;        
@@ -521,7 +514,9 @@
         var grppre = $("#grppre").val();
         var selected_group_conversion ;
         var exam_type = $("#exam_type").val();
-        var exam_type = $("#exam_type").val();
+
+        var isFull = $('#fullAppear').is(':checked');
+
 
 
         var gend = $('#gender option:selected').val();
@@ -542,15 +537,11 @@
             return status;
         }
         else if(name == "" ||  name == undefined){
-            $('#ErrMsg').show();  
-            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
             alertify.error("Please Enter your  Name")
             $('#cand_name').focus(); 
             return status;
         }
         else if(fName == "" || fName == undefined){
-            $('#ErrMsg').show(); 
-            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
             alertify.error("Please Enter your Father's Name  ") 
             $('#father_name').focus(); 
             return status;
@@ -558,8 +549,6 @@
 
         else if(bFormNo == "" || bFormNo == '00000-0000000-0' || bFormNo == '11111-1111111-1' || bFormNo == '22222-2222222-2' || bFormNo == '33333-3333333-3' ||             bFormNo == '44444-4444444-4' || bFormNo == '55555-5555555-5' || bFormNo == '66666-6666666-6' || bFormNo == '77777-7777777-7' ||
             bFormNo == '88888-8888888-8' || bFormNo == '99999-9999999-9'){
-                $('#ErrMsg').show(); 
-                $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
                 alertify.error("Please Enter Valid B-form") 
                 $('#bay_form').focus();  
                 return status; 
@@ -567,8 +556,6 @@
 
             else if(FNic== "" || FNic== '00000-0000000-0' || FNic== '11111-1111111-1' || FNic== '22222-2222222-2' || FNic== '33333-3333333-3' ||                                 FNic== '44444-4444444-4' || FNic== '55555-5555555-5' || FNic== '66666-6666666-6' || FNic== '77777-7777777-7' ||
                 FNic== '88888-8888888-8' || FNic== '99999-9999999-9'){
-                    $('#ErrMsg').show(); 
-                    $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
                     alertify.error("Please Enter Valid Father's-CNIC") 
                     $('#bay_form').focus();  
                     return status; 
@@ -581,15 +568,11 @@
                     return status; 
                 }
                 else if(mobNo == "" || mobNo == 0 || mobNo == undefined){
-                    $('#ErrMsg').show(); 
-                    $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-
                     alertify.error("Please Enter your Mobile No.") 
                     $('#mob_number').focus();   
                     return status;  
                 }
 
-                
                 else if (!$('#gender option:selected').val()) {   
                     alertify.error("Please Check Gender") 
                     $('#gender').focus();   
@@ -597,17 +580,11 @@
                 }
 
                 else if(MarkOfIdent == "" || MarkOfIdent == 0 || MarkOfIdent == undefined){
-                    $('#ErrMsg').show(); 
-                    $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-
                     alertify.error("Please Enter your Mark of Indentification") 
                     $('#MarkOfIden').focus();   
                     return status;  
                 }
                 else if(address == "" || address == 0 || address.length ==undefined ){
-                    $('#ErrMsg').show(); 
-                    $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-                    $('#ErrMsg').html("<b>Please Enter your Address</b>"); 
                     alertify.error("Please Enter your Address")
                     $('#address').focus(); 
                     return status;    
@@ -629,14 +606,19 @@
                     return status;  
                 }
                 else if (grp_cd == 0){
-                    $('#ErrMsg').show(); 
-                    $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
                     alertify.error('Please Select your Study Group '); 
                     $("#std_group").focus();
                     return status;  
                 }
 
-        status = 1;
+                else if (grp_cd == 3 && isFull == true){
+                    if(sub4 == 0 || sub4p2 == 0 || sub5 == 0 || sub5p2 == 0 || sub6 == 0 || sub6p2 == 0){
+                        alertify.error('Please Select all the selected subjects '); 
+                        return status;      
+                    }
+                }
+
+        status = 1;            
         return status;
     }
 
@@ -725,3 +707,5 @@
         });
     }
 </script>
+</body>
+</html>

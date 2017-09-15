@@ -1,12 +1,12 @@
-<h1 align="center">
-    <?php 
-    $sess = '';
-    if(Session == '1')
-        $sess =  'Annual';
-    else if(Session == '2')
-        $sess = 'Supplementary';
-        echo  '<p style="text-align:center;">Online Admission for HSSC Part-II '.$sess.''.',  ' .Year.' </p>';   
-?></h1>
+<!--<h1 align="center">
+<?php 
+$sess = '';
+if(Session == '1')
+    $sess =  'Annual';
+else if(Session == '2')
+    $sess = 'Supplementary';
+    echo  '<p style="text-align:center;">Online Admission for HSSC Part-II '.$sess.''.',  ' .Year.' </p>';   
+?></h1>-->
 
 <form method="post" enctype="multipart/form-data" name="myform" id="myform">
     <?php
@@ -17,15 +17,16 @@
         </div>
         <?php 
     }
-
     if($data[0]['picpath'] != '')  
     {
-        @$picpathForShow = base_url().@$data[0]['picpath'];
+        $type = pathinfo(@$data[0]['picpath'], PATHINFO_EXTENSION); 
+        @$image_path_selected = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents(@$data[0]['picpath']));
+
         ?>
         <div class="form-group">
             <div class="row">
                 <div class="col-md-offset-5 col-md-5">
-                    <img class="img-rounded" id="image_upload_preview" name="image_upload_preview" style="width:130px; height: 130px;" src="<?php echo $picpathForShow ?>" alt="CandidateImage"/>
+                    <img class="img-rounded" id="image_upload_preview" name="image_upload_preview" style="width:130px; height: 130px;" src="<?php echo $image_path_selected ?>" alt="CandidateImage"/>
                     <input type="hidden" class="hidden" id="pic" name="pic" value="<?php echo @$data['0']['picpath']; ?>" />    
                 </div>
             </div>
@@ -131,7 +132,7 @@
                 <label class="control-label" for="medium" >
                     MEDIUM:
                 </label>        
-                <select id="medium" class="form-control" name="medium">
+                <select id="medium" class="form-control text-uppercase" name="medium">
                     <?php 
                     $med = $data['0']['Medium'] ;
                     if($med == 1)
@@ -154,7 +155,7 @@
                 <label class="control-label" for="speciality">
                     Speciality:
                 </label>        
-                <select id="speciality"  class="form-control" name="speciality">
+                <select id="speciality"  class="form-control  text-uppercase" name="speciality">
                     <?php 
                     {
                         echo 
@@ -178,7 +179,7 @@
                 <label class="control-label" for="MarkOfIden" >
                     Mark Of Identification :
                 </label>        
-                <input class="form-control" type="text" id="MarkOfIden" style="text-transform: uppercase;" name="MarkOfIden" value="<?php echo @$data['0']['markOfIden']; ?>" required="required" maxlength="60" >
+                <input class="form-control text-uppercase" type="text" id="MarkOfIden" name="MarkOfIden" value="<?php echo @$data['0']['markOfIden']; ?>" required="required" maxlength="60" >
             </div>
 
             <div class="col-md-4">
@@ -197,7 +198,7 @@
                 <label class="control-label" for="nationality" >
                     Nationality :
                 </label>        
-                <select name="nationality" class="form-control" id="nationality"> 
+                <select name="nationality" class="form-control text-uppercase" id="nationality"> 
                     <?php
                     $nat = $data[0]['nat'];
                     if($nat == 1)
@@ -219,7 +220,7 @@
                 <label class="control-label" for="gender">
                     Gender :
                 </label>     
-                <select name="gender" class="form-control" id="gender" disabled="disabled"> 
+                <select name="gender" class="form-control text-uppercase" id="gender" disabled="disabled"> 
                     <?php
                     @$gender = $data[0]['sex'];
                     if($gender == 1)
@@ -245,9 +246,9 @@
                 <label class="control-label" for="hafiz" >
                     Hafiz-e-Quran :
                 </label>        
-                <select name="hafiz" class="form-control" id="hafiz"> 
-                    <option value='0'>NO</option> 
-                    <option value='1'>YES</option> 
+                <select name="hafiz" class="form-control text-uppercase" id="hafiz"> 
+                    <option value='1'>NO</option> 
+                    <option value='2'>YES</option> 
                 </select>
             </div>
 
@@ -255,12 +256,11 @@
                 <label class="control-label" for="religion">
                     Religion : 
                 </label>        
-                <select name="religion" class="form-control" id="religion"> 
+                <select name="religion" class="form-control text-uppercase" id="religion"> 
                     <?php
                     $rel = $data[0]['rel'];
                     if($rel == 1)
                     {
-
                         echo"<option value='1' selected='selected'>MUSLIM</option> 
                         <option value='2'>NON MUSLIM</option>";
                     }
@@ -275,14 +275,13 @@
         </div>
     </div>
 
-
     <div class="form-group">
         <div class="row">
             <div class="col-md-offset-2 col-md-8">
                 <label class="control-label" for="UrbanRural" >
                     Locality : 
                 </label>        
-                <select name="UrbanRural" class="form-control" id="UrbanRural"> 
+                <select name="UrbanRural" class="form-control text-uppercase" id="UrbanRural"> 
                     <?php
                     $resid = $data[0]['ruralOrurban'];
                     if($resid == 1 )
@@ -313,7 +312,7 @@
                 <label class="control-label" for="address" >
                     Address :
                 </label>        
-                <textarea  id="address" class="text-uppercase form-control" rows="5" name="address" required="required">
+                <textarea  id="address" class="text-uppercase form-control" rows="4" name="address" required="required">
                     <?php echo $data[0]['addr'];  ?>
                 </textarea>       
             </div>
@@ -321,11 +320,10 @@
     </div>
 
     <hr class="colorgraph">
-
     <div class="form-group">
         <div class="row">
             <div class="col-md-offset-5 col-md-5">
-                <h4 class="bold">Old Exam Information</h4>
+                <h4 class="bold">Old Examination Information</h4>
             </div>
         </div>
     </div>
@@ -371,7 +369,7 @@
     <div class="form-group">
         <div class="row">
             <div class="col-md-offset-5 col-md-5">
-                <h4 class="bold">Exam Proposed Center Information</h4>
+                <h4 class="bold">Examination Proposed Center Information</h4>
             </div>
         </div>
     </div>
@@ -381,7 +379,7 @@
                 <label class="control-label" for="pvtinfo_dist" >
                     District :
                 </label>        
-                <select class='form-control' id='pvtinfo_dist' name='pvtinfo_dist' required='required'>
+                <select class='form-control text-uppercase' id='pvtinfo_dist' name='pvtinfo_dist' required='required'>
                     <option value='0'>SELECT DISTRICT</option>
                     <option value='1'>GUJRANWALA</option>
                     <option value='2'>GUJRAT</option>
@@ -395,7 +393,7 @@
                 <label class="control-label" for="pvtinfo_teh">
                     Tehsil :
                 </label>        
-                <select class='form-control' id='pvtinfo_teh' name='pvtinfo_teh' required='required'>
+                <select class='form-control  text-uppercase' id='pvtinfo_teh' name='pvtinfo_teh' required='required'>
                     <option value='0'>SELECT TEHSIL</option>
                 </select>
             </div>
@@ -407,7 +405,7 @@
                 <label class="control-label" for="pvtZone" >
                     Zone :
                 </label>        
-                <select id="pvtZone" class="form-control" name="pvtZone">
+                <select id="pvtZone" class="form-control  text-uppercase" name="pvtZone">
                     <option value='0'>SELECT ZONE</option>
                 </select>
             </div>
@@ -420,7 +418,7 @@
     <div class="form-group">
         <div class="row">
             <div class="col-md-offset-5 col-md-5">
-                <h4 class="bold">Exam Information</h4>
+                <h4 class="bold">Examination Information</h4>
             </div>
         </div>
     </div>
@@ -431,7 +429,7 @@
                 <label class="control-label" for="pvtZone" >
                     Study Group :
                 </label>        
-                <select id="std_group" class="form-control"  name="std_group">
+                <select id="std_group" class="form-control  text-uppercase"  name="std_group">
                     <?php
                     $grp_cd = $data[0]['grp_cd'];
                     $chance = $data[0]['chance'];
@@ -481,7 +479,12 @@
                         }
                         else if($grp_cd == 4)
                         {
-                            echo "<option value='3' selected='selected'>GENERAL SCIENCE</option>"; 
+                            echo "<option value='4' selected='selected'>GENERAL SCIENCE</option>"; 
+                        }
+                        
+                        else if($grp_cd == 5)
+                        {
+                            echo "<option value='5' selected='selected'>COMMERCE</option>";
                         }
                     }
 
@@ -695,13 +698,17 @@
     if(@$exam_type == 4 || @$exam_type == 5 || @$exam_type == 6)
     {
         ?>
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-offset-2 col-md-8">
-                    <label class="checkbox-inline">
-                        <input type="checkbox" id="fullAppear" name="fullAppear"/><span style="font-size: larger; font-weight: bold; padding: 10px;">Full Appear In Both Parts?</span>  
-                    </label>
-                </div> 
+        <div class="isFull">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-offset-2 col-md-8">
+                        <label class="checkbox-inline">
+
+                            <input type="checkbox" id="fullAppear" name="fullAppear"/><span style="font-size: larger; font-weight: bold; padding: 10px;">Full Appear In Both Parts?</span>  
+
+                        </label>
+                    </div> 
+                </div>
             </div>
         </div>
         <?php
@@ -748,15 +755,10 @@
     <div class="form-group">
         <div class="row">
             <div class="col-md-offset-2 col-md-4">
-                <select id="sub1" class="form-control" name="sub1">
-                    <option value="2"></option>
-                </select> 
+                <select id="sub1" class="form-control" name="sub1"></select> 
             </div>
-
             <div class="col-md-4">
-                <select id="sub1p2" class="form-control" name="sub1p2">
-                    <option value="2"></option>
-                </select> 
+                <select id="sub1p2" class="form-control" name="sub1p2"></select> 
             </div>
         </div>
     </div>
@@ -886,7 +888,7 @@
                 <input type="submit" value="Save Form" id="btnsubmitUpdateEnrol" name="btnsubmitUpdateEnrol" class="btn btn-primary btn-block" onclick="return checks()">
             </div>
             <div class="col-md-2">
-                <a href="<?php echo base_url(); ?>assets/img/Instruction.jpg" download="instructions" class="btn btn-default btn-info">Download Instruction</a>
+                <a href="<?php echo base_url(); ?>assets/img/Instruction.jpg" download="instructions" class="btn btn-info btn-block">Download Instruction</a>
             </div>
             <div class="col-md-3">
                 <input type="button" class="btn btn-danger btn-block" value="Cancel" id="btnCancel" name="btnCancel" onclick="return CancelAlert();" >
@@ -934,6 +936,11 @@
     $(document).ready(function(){
 
         $.fancybox("#instruction");
+
+        $('#address').each(function(){
+            $(this).val($(this).val().trim());
+        });
+
         function hide_sub7_sub8(){
 
             $('#sub7').hide();$('#sub7p2').hide();
@@ -1021,11 +1028,11 @@
             $('#sub8').hide(); $('#sub8p2').hide();
 
 
-            $("#sub1").append('<option value="1">ENGLISH</option>');
-            $("#sub1p2").append('<option value="1">ENGLISH</option>');
+            $("#sub2").append('<option value="1">ENGLISH</option>');
+            $("#sub2p2").append('<option value="1">ENGLISH</option>');
 
-            $("#sub2").append('<option value="2">URDU</option>');
-            $("#sub2p2").append('<option value="2">URDU</option>');
+            $("#sub1").append('<option value="2">URDU</option>');
+            $("#sub1p2").append('<option value="2">URDU</option>');
 
             $("#sub3").append('<option value="92">ISLAMIC EDUCATION</option>');
             $("#sub3p2").append('<option value="91">PAKISTAN STUDIES</option>');
@@ -1047,11 +1054,11 @@
             $('#sub8').hide(); $('#sub8p2').hide();
 
 
-            $("#sub1").append('<option value="1">ENGLISH</option>');
-            $("#sub1p2").append('<option value="1">ENGLISH</option>');
+            $("#sub2").append('<option value="1">ENGLISH</option>');
+            $("#sub2p2").append('<option value="1">ENGLISH</option>');
 
-            $("#sub2").append('<option value="2">URDU</option>');
-            $("#sub2p2").append('<option value="2">URDU</option>');
+            $("#sub1").append('<option value="2">URDU</option>');
+            $("#sub1p2").append('<option value="2">URDU</option>');
 
             $("#sub3").append('<option value="92">ISLAMIC EDUCATION</option>');
             $("#sub3p2").append('<option value="91">PAKISTAN STUDIES</option>');
@@ -1073,11 +1080,11 @@
             $('#sub8').hide(); $('#sub8p2').hide();
 
 
-            $("#sub1").append('<option value="1">ENGLISH</option>');
-            $("#sub1p2").append('<option value="1">ENGLISH</option>');
+            $("#sub2").append('<option value="1">ENGLISH</option>');
+            $("#sub2p2").append('<option value="1">ENGLISH</option>');
 
-            $("#sub2").append('<option value="2">URDU</option>');
-            $("#sub2p2").append('<option value="2">URDU</option>');
+            $("#sub1").append('<option value="2">URDU</option>');
+            $("#sub1p2").append('<option value="2">URDU</option>');
 
             $("#sub3").append('<option value="92">ISLAMIC EDUCATION</option>');
             $("#sub3p2").append('<option value="91">PAKISTAN STUDIES</option>');
@@ -1099,11 +1106,11 @@
             $('#sub8').hide(); $('#sub8p2').hide();
 
 
-            $("#sub1").append('<option value="1">ENGLISH</option>');
-            $("#sub1p2").append('<option value="1">ENGLISH</option>');
+            $("#sub2").append('<option value="1">ENGLISH</option>');
+            $("#sub2p2").append('<option value="1">ENGLISH</option>');
 
-            $("#sub2").append('<option value="2">URDU</option>');
-            $("#sub2p2").append('<option value="2">URDU</option>');
+            $("#sub1").append('<option value="2">URDU</option>');
+            $("#sub1p2").append('<option value="2">URDU</option>');
 
             $("#sub3").append('<option value="92">ISLAMIC EDUCATION</option>');
             $("#sub3p2").append('<option value="91">PAKISTAN STUDIES</option>');
@@ -1193,11 +1200,11 @@
 
             Empty_All_Dropdowns();
 
-            $("#sub1").append('<option value="1">ENGLISH</option>');
-            $("#sub1p2").append('<option value="1">ENGLISH</option>');
+            $("#sub2").append('<option value="1">ENGLISH</option>');
+            $("#sub2p2").append('<option value="1">ENGLISH</option>');
 
-            $("#sub2").append('<option value="2">URDU</option>');
-            $("#sub2p2").append('<option value="2">URDU</option>');
+            $("#sub1").append('<option value="2">URDU</option>');
+            $("#sub1p2").append('<option value="2">URDU</option>');
 
             $("#sub3").append('<option value="92">ISLAMIC EDUCATION</option>');
             $("#sub3p2").append('<option value="91">PAKISTAN STUDIES</option>');
@@ -1225,11 +1232,11 @@
 
             Empty_All_Dropdowns();
 
-            $("#sub1").append('<option value="1">ENGLISH</option>');
-            $("#sub1p2").append('<option value="1">ENGLISH</option>');
+            $("#sub2").append('<option value="1">ENGLISH</option>');
+            $("#sub2p2").append('<option value="1">ENGLISH</option>');
 
-            $("#sub2").append('<option value="2">URDU</option>');
-            $("#sub2p2").append('<option value="2">URDU</option>');
+            $("#sub1").append('<option value="2">URDU</option>');
+            $("#sub1p2").append('<option value="2">URDU</option>');
 
             $("#sub3").append('<option value="92">ISLAMIC EDUCATION</option>');
             $("#sub3p2").append('<option value="91">PAKISTAN STUDIES</option>');
@@ -1256,11 +1263,11 @@
         function AamKhasa_subj(){
             Empty_All_Dropdowns();
 
-            $("#sub1").append('<option value="1">ENGLISH</option>');
-            $("#sub1p2").append('<option value="1">ENGLISH</option>');
+            $("#sub2").append('<option value="1">ENGLISH</option>');
+            $("#sub2p2").append('<option value="1">ENGLISH</option>');
 
-            $("#sub2").append('<option value="2">URDU</option>');
-            $("#sub2p2").append('<option value="2">URDU</option>');
+            $("#sub1").append('<option value="2">URDU</option>');
+            $("#sub1p2").append('<option value="2">URDU</option>');
 
             $.each(huminities_without_practical,function(val,text){
 
@@ -1342,6 +1349,8 @@
         var regpvt = "<?php echo @$data[0]['regPvt']?>";
 
         function sub_grp_load(){
+
+            Empty_All_Dropdowns();
 
             $('#sub7').hide();
             $('#sub7p2').hide();
@@ -1613,8 +1622,6 @@
             $("#sub4").append('<option value="0">NONE</option>');
             $("#sub4p2").append(new Option('<?php  echo  array_search($data[0]['sub4'],$subarray); ?>',sub4));
 
-            //debugger;
-
             if(grp_cd == 5)
             {
 
@@ -1634,16 +1641,21 @@
 
                 $("#sub6").append('<option value="0">NONE</option>');
                 $("#sub6p2").append(new Option('<?php  echo  array_search($data[0]['sub6'],$subarray); ?>',sub6));  
+                $('#sub7').empty();$('#sub7p2').empty();
+                $('#sub8').empty(); $('#sub8p2').empty();
             }                 
 
-
-            if(sub7 != '' || grp_cd == 5){
+            if(sub7 != '' || grp_cd == 5)
+            {
                 $("#sub7").append('<option value="0">NONE</option>');
                 $("#sub7p2").append(new Option('<?php  echo  array_search($data[0]['sub7A'],$subarray); ?>','<?php echo $data[0]['sub7A']?>'));    
             }
-            else{
+            else
+            {
                 $("#sub7").hide();
                 $("#sub7p2").hide();    
+                $('#sub7').empty();$('#sub7p2').empty();
+                $('#sub8').empty(); $('#sub8p2').empty();
             }
             $("#sub8").hide();
             $("#sub8p2").hide();
@@ -2222,18 +2234,23 @@
             }
 
             // subject 3 
-            if(sub3pf1 == "2" || sub8pf2 == "2")
+            if(sub3pf1 == "2")
             {
                 $("#sub3").append(new Option('<?php  echo  array_search($data[0]['sub3'],$subarray); ?>',sub3));
-                $("#sub3p2").append(new Option('<?php  echo  array_search($data[0]['sub8'],$subarray); ?>',sub8));
             }
             else
             {
-                $("#sub3p2").append('<option value="0">NONE</option>'); 
-                $("#sub3p2").append(new Option('<?php  echo  array_search($data[0]['sub8'],$subarray); ?>',sub8));
-
                 $("#sub3").append('<option value="0">NONE</option>'); 
                 $("#sub3").append(new Option('<?php  echo  array_search($data[0]['sub3'],$subarray); ?>',sub3));
+            }
+
+            if( sub8pf2 == "2"){
+                $("#sub3p2").append(new Option('<?php  echo  array_search($data[0]['sub8'],$subarray); ?>',sub8));
+            }
+
+            else{
+                $("#sub3p2").append('<option value="0">NONE</option>'); 
+                $("#sub3p2").append(new Option('<?php  echo  array_search($data[0]['sub8'],$subarray); ?>',sub8));
             }
 
             if((sub4pf1 == "2" || sub4pf2 == "2"))
@@ -2436,25 +2453,45 @@
 
         /*.CHNAGE WORKS*/
 
-        $( "#religion" ).change(function() {
-            var rel = $('#hafiz option:selected').val()
-            if(rel == 1) {
+        $("#religion").change(function() {
+
+            debugger;
+
+            var sel_group = $('#std_group').val();    
+            var rel = $('#religion option:selected').val()
+            var fullAppear = ($("#fullAppear").is(':checked'));
+
+            if(rel == 1 && (sel_group != grp_cd || exam_type == 2)) {
                 $('#sub3').empty();
                 $("#sub3").append('<option value="92">ISLAMIC EDUCATION</option>'); 
             }
 
-            else if(rel == 2){
+            if(rel == 2 && (sel_group != grp_cd || exam_type == 2)) {
                 $('#sub3').empty();
+                $("#sub3").append('<option value="92" selected = "selected">ISLAMIC EDUCATION</option>'); 
                 $("#sub3").append('<option value="93">CIVICS FOR NON MUSLIM</option>'); 
-                $("#sub3").append('<option value="92">ISLAMIC EDUCATION</option>'); 
             }
+
+            if(rel == 2 && fullAppear == true){
+                $('#sub3').empty();
+                $("#sub3").append('<option value="92" selected = "selected">ISLAMIC EDUCATION</option>'); 
+                $("#sub3").append('<option value="93">CIVICS FOR NON MUSLIM</option>');  
+            }
+
+            else if(rel == 1 && fullAppear == true){
+                $('#sub3').empty();
+                $("#sub3").append('<option value="92" selected = "selected">ISLAMIC EDUCATION</option>'); 
+            }
+
         });                
 
         $('#std_group').change(function(){
 
-            $("#fullAppear").attr("checked", false);
+            //debugger;
 
-            $("#fullAppear1").hide();
+            var rel = $('#religion option:selected').val()
+            $('#fullAppear').prop('checked', false);
+            $(".isFull").hide();
 
             var sel_group = $('#std_group').val();    
 
@@ -2462,22 +2499,24 @@
             {
                 if(exam_type == 4 || exam_type == 5 || exam_type == 6)
                 {
-                    $("#fullAppear1").show();    
+                    $(".isFull").show();   
                 }
-                if(grp_cd != 3)
+
+                if(grp_cd != 3 )
                 {
-                    sub_grp_load();    
+                    var loadGroup = 'sub_grp_load_exam_type'+exam_type;   
+                    eval(loadGroup)();
                 }
                 else if(grp_cd == 3)
                 {
-                    humanities_subjects();
-                    $("#fullAppear").attr("checked", true);
+                    sub_grp_load();    
                 }
             }
             else if(sel_group == 0)
             {
                 ClearALLDropDowns();
             }
+
             else if (sel_group == 1)
             {
                 pre_medical_subjects();
@@ -2498,6 +2537,13 @@
             {
                 commerce_subjects();
             } 
+
+            if(rel == 2 && (sel_group != grp_cd || exam_type == 2))
+            {
+                $('#sub3').empty();
+                $("#sub3").append('<option value="92" selected = "selected">ISLAMIC EDUCATION</option>'); 
+                $("#sub3").append('<option value="93">CIVICS FOR NON MUSLIM</option>'); 
+            }
         });
 
         $('#fullAppear').click(function() {
@@ -2513,6 +2559,14 @@
                 else if(sel_group == grp_cd && sel_group == 3) 
                 {
                     humanities_subjects();
+                }
+
+                var rel = $('#religion option:selected').val()
+
+                if((rel == 2) && (exam_type == 4 || exam_type == 5 ||exam_type == 6)){
+                    $('#sub3').empty();
+                    $("#sub3").append('<option value="92" selected = "selected">ISLAMIC EDUCATION</option>'); 
+                    $("#sub3").append('<option value="93">CIVICS FOR NON MUSLIM</option>'); 
                 }
             }
 
@@ -2550,18 +2604,49 @@
         // Sub1 change event
         $("#sub1").change(function (){
             var sub1_p1 = $("#sub1").val();
-            $("#sub1p2").val(sub1_p1);
+
+            var grp_cd = $('#std_group').val();
+            var pr_group = '<?php echo @$data[0]['grp_cd'] ?>';
+
+            var cat11 = '<?php echo @$data[0]['cat11'] ?>';
+            var cat12 = '<?php echo @$data[0]['cat12'] ?>';
+
+            if((exam_type != '3') && (pr_group != 3) || (cat11 == 4 && cat12 == 4)) 
+            {
+                $("#sub1p2").val(sub1_p1);
+            }
+            else if(exam_type == 3 && grp_cd == 3){
+                $("#sub1p2").val(sub1_p1);
+            }
+
+            else if(exam_type != 3  && grp_cd == 3){
+                $("#sub1p2").val(sub1_p1);
+            }
 
         });
         $("#sub1p2").change(function (){
             var sub1_p1 = $("#sub1p2").val();
             $("#sub1").val(sub1_p1);
-
         });
         // Sub2 change event
         $("#sub2").change(function (){
             var sub1_p1 = $("#sub2").val();
-            $("#sub2p2").val(sub1_p1);
+            var grp_cd = $('#std_group').val();
+            var pr_group = '<?php echo @$data[0]['grp_cd'] ?>';
+            var cat11 = '<?php echo @$data[0]['cat11'] ?>';
+            var cat12 = '<?php echo @$data[0]['cat12'] ?>';
+
+            if((exam_type != '3') && (pr_group != 3) || (cat11 == 4 && cat12 == 4)) 
+            {
+                $("#sub2p2").val(sub1_p1);    
+            }
+            else if(exam_type == 3  && grp_cd == 3){
+                $("#sub2p2").val(sub1_p1);    
+            }
+
+            else if(exam_type != 3  && grp_cd == 3){
+                $("#sub2p2").val(sub1_p1);    
+            }
 
         });
         $("#sub2p2").change(function (){
@@ -2572,13 +2657,32 @@
         // sub 4 change event 
         $("#sub4").change(function(){
 
+            //debugger;
+
             var id4 =$("#sub4").val();
             var id4p2 =$("#sub4p2").val();
             var id5 =$("#sub5").val();
             var id5p2 =$("#sub5p2").val();
             var id6 =$("#sub6").val();
             var id6p2 =$("#sub6p2").val();
-            $("#sub4p2").val(id4);
+
+            var grp_cd = $('#std_group').val();
+            var pr_group = '<?php echo @$data[0]['grp_cd'] ?>';
+            var cat11 = '<?php echo @$data[0]['cat11'] ?>';
+            var cat12 = '<?php echo @$data[0]['cat12'] ?>';
+
+
+            if((exam_type != '3') && (pr_group != 3) || (cat11 == 4 && cat12 == 4)) 
+            {
+                $("#sub4p2").val(id4);
+            }
+            else if(exam_type == 3  && grp_cd == 3){
+                $("#sub4p2").val(id4);
+            }
+
+            else if(exam_type != 3  && grp_cd == 3){
+                $("#sub4p2").val(id4);
+            }
 
             if((id4 != 0) && (id5 == id4)){
                 alertify.error('Please Choose Different Subject');
@@ -2659,15 +2763,34 @@
         // sub 5 change event 
         $("#sub5").change(function(){
 
-            //debugger;
             var id4 =$("#sub4").val();
             var id4p2 =$("#sub4p2").val();
             var id5 =$("#sub5").val();
-            var id5p2 =$("#sub5p2").val(id5);
+
+
+            var grp_cd = $('#std_group').val();
+            var pr_group = '<?php echo @$data[0]['grp_cd'] ?>';
+
+            var cat11 = '<?php echo @$data[0]['cat11'] ?>';
+            var cat12 = '<?php echo @$data[0]['cat12'] ?>';
+
+            if((exam_type != '3') && (pr_group != 3) || (cat11 == 4 && cat12 == 4)) 
+            {
+                var id5p2 =$("#sub5p2").val(id5);
+            }
+
+            else if(exam_type == 3 && grp_cd == 3){
+                var id5p2 =$("#sub5p2").val(id5);
+            }         
+
+            else if(exam_type != 3  && grp_cd == 3){
+                var id5p2 =$("#sub5p2").val(id5);
+            }
+
             var id6 =$("#sub6").val();
             var id6p2 =$("#sub6p2").val();
 
-            var grp_cd = $('#std_group').val();
+
             var sel_cat = $('#ddlMarksImproveoptions').val();    
 
             if(sel_cat == 4 && grp_cd == 5 && id5 != 0){
@@ -2789,9 +2912,25 @@
             var id5 =$("#sub5").val();
             var id5p2 =$("#sub5p2").val();
             var id6 =$("#sub6").val();
-            var id6p2 =$("#sub6p2").val(id6);
 
             var grp_cd = $('#std_group').val();
+            var pr_group = '<?php echo @$data[0]['grp_cd'] ?>';
+
+            var cat11 = '<?php echo @$data[0]['cat11'] ?>';
+            var cat12 = '<?php echo @$data[0]['cat12'] ?>';
+
+            if((exam_type != '3') && (pr_group != 3) || (cat11 == 4 && cat12 == 4)) 
+            {
+                var id6p2 =$("#sub6p2").val(id6);
+            }
+            else if(exam_type == 3 && grp_cd == 3){
+                var id6p2 =$("#sub6p2").val(id6);
+            }
+
+            else if(exam_type != 3  && grp_cd == 3){
+                var id6p2 =$("#sub6p2").val(id6);
+            }
+
             var sel_cat = $('#ddlMarksImproveoptions').val();    
 
             if(sel_cat == 4 && grp_cd == 5 && id6 != 0){
@@ -2946,6 +3085,7 @@
 
     function checks()
     {
+        //$('#btnsubmitUpdateEnrol').prop('disabled', true);
         var status  =  check_NewEnrol_validation();
         if(status == 0)
         {
@@ -2961,13 +3101,13 @@
                 datatype : 'html',
 
                 success: function(data)
-                {
+                {                    
                     var obj = JSON.parse (data);
                     if(obj.excep == 'Success')
                     {
                         $.ajax({
                             type: "POST",
-                            url: "<?php echo base_url(); ?>" + "Admission/NewEnrolment_insert/",
+                            url: "<?php echo base_url(); ?>" + "index.php/Admission/NewEnrolment_insert/",
                             data: $("#myform").serialize() ,
                             datatype : 'html',
 
@@ -2975,15 +3115,12 @@
                             beforeSend: function() {  $('.mPageloader').show(); },
                             complete: function() { $('.mPageloader').hide();},
 
-
-                            success: function(data) {
-
-                                console.log(data);
-
+                            success: function(data) 
+                            {
                                 var obj = JSON.parse(data) ;
                                 if(obj.error ==  1)
                                 {
-                                    window.location.href ='<?php echo base_url(); ?>Admission/formdownloaded/'+obj.formno; 
+                                    window.location.href ='<?php echo base_url(); ?>index.php/Admission/formdownloaded/'+obj.formno; 
                                 }
                                 else
                                 {

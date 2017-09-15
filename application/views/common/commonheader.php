@@ -181,7 +181,7 @@
         if(Session == '1')
             $sess =  'Annual';
         else if(Session == '2')
-            $sess = 'Supplementary';
+            $sess = 'Supplementary Examination';
             echo  '<p style="text-align:center;">Online Admission for HSSC Part-II '.$sess.''.',  ' .Year.' </p>';   
         ?>
     </h2>

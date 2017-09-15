@@ -9,16 +9,17 @@
     <body>
         <form class="form-horizontal" method="POST">
             <div class="container">
-                <h2 class="jumbotron" style="background:#003a6a !important; color: wheat; text-align: center;">
-                    <img src="<?php echo base_url(); ?>assets/img/BISEGRW_Icon.png" class="img-circle" width="100px" height="100px" alt="Logo">        
+                <h2 style="background:#003a6a !important; color: wheat; text-align: center;" class="jumbotron">
+                    <img src="<?php echo base_url(); ?>assets/img/BISEGRW_Icon.png" class="img-circle" width="125px" height="125px" alt="Logo">
                     Board of Intermediate & Secondary Education, Gujranwala
+                    <br>
                     <?php 
                     $sess = '';
-                    if(Session =='1')
+                    if(Session == '1')
                         $sess =  'Annual';
-                    else if(Session =='2')
-                        $sess = 'Supply';
-                        echo  '<p style="text-align:center;">Online HSSC '.$sess.' Registration '.Year.'</p>';   
+                    else if(Session == '2')
+                        $sess = 'Supplementary Examination';
+                        echo  '<p style="text-align:center;">Online Admission for HSSC Part-II '.$sess.''.',  ' .Year.' </p>';   
                     ?>
                 </h2>
                 <?php 
@@ -63,7 +64,7 @@
                     <?php
                 }
                 ?>
-                
+
                 <br class="break"><br class="break"><br class="break"><br class="break"><br class="break"><br class="break"><br class="break">
 
                 <div class="form-group">

@@ -17,13 +17,12 @@ define('BARCODE_PATH', 'assets/pdfs/');
 define('assets', 'assets/img/');
 
 define('noimage','assets/img/no_image.jpg'); 
-//define('', 'uploads/2016/');
-define('DIRPATH12TH','D:\xampp\htdocs\Share Images\\'); 
+define('DIRPATH12TH','C:\inetpub\vhosts\bisegrw.com\Share Images\\'); 
 define('PRIVATE_IMAGE_PATH', 'uploads/private/');
 define('PRIVATE_IMAGE_PATH_FRESH', 'uploads/Fresh');
 define('REGULAR_IMAGE_PATH', 'uploads/regular/');
 
-define('REGULAR_INSERT_TABLE', 'Admission_online..IAAdm');
+define('REGULAR_INSERT_TABLE', 'admission_online..ISAdm');
 
 
 //---------------- REGISTRATION 11TH ------------------------------
@@ -39,17 +38,12 @@ define('DOUBLE_LAST_DATE', '2017-10-05');
 define('GET_REGULAR_IMAGE_PATH', 'F:/xampp/htdocs/Inter_Admission\uplaods\2016\Regular\\');
 define('GET_PRIVATE_IMAGE_PATH', 'F:\xampp\htdocs\Inter_Admission\uplaods\2016\private\\');
 define('GET_PRIVATE_IMAGE_PATH_COPY', '');
-//define('SINGLE_LAST_DATE11', '2016-05-15');
 define('DIRPATH11th','F:/xampp/htdocs/Inter_Admission/Uploads/IS2016/regular/'); 
 
 
 define('Insert_sp_Languages','Admission_online..ISAdm2016_sp_insert_LANGUAGES'); // for insertion Inter supply private
 define('Insert_sp_matric_annual','Admission_online..MA_P1_Reg_Adm2016_sp_insert'); // for insertion matric Annual
 define('formprint_sp','Admission_online..sp_form_data_11th');    // for selection matric supply
-
-define('formprint_sp_12th','admission_online..sp_form_data_12th');    // for form data of 12th class
-define('INSERT_TBL','Admission_online..IAAdm'); 
-
 
 define('formprint_sp_Languages','Admission_online..sp_form_data_11th_Languages');    // for selection matric supply
 define('formprint_sp_matric_annual','Admission_online..sp_form_data');    // for selection matric Annual
@@ -61,19 +55,20 @@ define('corr_bank_chall_class','INTER ANNUAL');
 define('session_year','2017');
 define('TITLEHSSC','Online HSSC Annual Admission 2017');
 
+//----------------INTER ADMISSIONS 12TH ------------------------------
 define('currdate','date("d-m-Y");');
 define('TripleDateFeeinter', '13-10-2017');
 define('RE_ADMISSION_TBL11', 'matric_new..vwIA1P16');
-define('SingleDateFee', '10-09-2017');
-define('DoubleDateFee', '05-10-2017');
-define('TripleDateFee', '07-10-2017');
 
-define ('class_for_11th_Adm','11th');                                
+define('SingleDateFee', '2017-09-27');
+define('DoubleDateFee', '2017-10-03');
+define('TripleDateFee', '2017-10-06');
 
-define('getinfo','admission_online..sp_Admission_HSSC_Annual');
-
-define('Insert_sp','admission_online..sp_insert_IAAdm');
-
+define('getinfo','admission_online..sp_Admission_HSSC');
+define('Insert_sp','admission_online..sp_insert_ISAdm');
+define('INSERT_TBL','admission_online..ISAdm'); 
+define ('class_for_11th_Adm','11th');             
+define('formprint_sp_12th','admission_online..sp_form_data_12th');      
 define('getinfo_languages','admission_online..tblAdmissionDataLang');
 define('save_dir','D:/xampp/htdocs/Inter_Admission/Uploads/IS2016/regular/');
 
@@ -99,3 +94,12 @@ define('mSession1','1');
 define('mClass2','11'); 
 define('mYear','2017'); 
 define('PVT_TITLE_INTER','Download Roll Number Slip For H.S.S.C Annual 2017'); 
+
+
+
+//================ Result Cards ========================
+
+define('SESS', '1');
+define('SESSION', '1');
+define('MCLASS', '12');
+define('MYEAR', '2016');
