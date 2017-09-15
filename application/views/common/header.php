@@ -21,7 +21,11 @@
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/alertify.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.fancybox.pack.js"></script>
     <script src="<?php echo base_url(); ?>assets/js/jquery-ui.js"></script>
-    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.mPageloader').hide();
+        });
+    </script>
 </head>
 <body>
 

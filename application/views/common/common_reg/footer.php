@@ -68,9 +68,6 @@ if(isset($files)){
         }
     }
     $(document).ready(function () {
-
-        $('.mPageloader').hide();
-
         $('#data-table').dataTable({
             "sPaginationType": "full_numbers",
             "bAutoWidth" : false,
