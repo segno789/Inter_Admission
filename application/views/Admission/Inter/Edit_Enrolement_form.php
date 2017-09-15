@@ -1,3 +1,9 @@
+
+<style type="text/css">
+    h4{
+        text-decoration: underline;
+    }
+</style>
 <div class="dashboard-wrapper class wysihtml5-supported">
     <div class="left-sidebar">
         <div class="row-fluid">
@@ -7,125 +13,78 @@
                         <div class="title">
                             Admission form<a id="redgForm" data-original-title=""></a>
                         </div>
-
                     </div>
                     <div class="widget-body">
-
-                        <form name="myform" id="myform" class="form-horizontal no-margin" action="<?php  echo base_url(); ?>/index.php/Admission_inter/NewEnrolment_update_inter" method="post" enctype="multipart/form-data">
-
+                        <form class="form-horizontal no-margin" name="myform" id="myform" action="<?php  echo base_url(); ?>/index.php/Admission_inter/NewEnrolment_update_inter" method="post" enctype="multipart/form-data">
                             <div class="control-group">
-                                <h4 class="span4">Personal Information :</h4>
                                 <div class="controls controls-row">
-                                    <input type="hidden" class="span2 hidden" id="isReAdm" name="isReAdm" value="0">
-
-                                    <label class="control-label span2" >
-
-                                    </label> 
-                                    <!--echo '/'.IMAGE_PATH.$Inst_Id.'/'.$data[0]['PicPath'];-->
-
                                     <?php
-
-
-                                    if($data[0]["IntBrd_cd"] ==  1)
+                                    if($data[0]["IntBrd_cd"] == 1)
                                     {
                                         $image_path_selected = DIRPATH12TH.$data[0]['picpath']; 
-
                                         $type = pathinfo(@$image_path_selected, PATHINFO_EXTENSION);
                                     }
                                     else
                                     {
-                                        $image_path_selected =  DIRPATHOTHER.'/'.$data[0]["coll_cd"].'/'.$data[0]["picpath"]; 
-
-                                        // echo  $data[0]["picpath"] ; die;
-
-                                        // 
-                                        $type = pathinfo($image_path_selected, PATHINFO_EXTENSION); 
+                                        @$image_path_selected =  DIRPATHOTHER.'/'.$data[0]["coll_cd"].'/'.$data[0]["picpath"]; 
+                                        @$type = pathinfo($image_path_selected, PATHINFO_EXTENSION); 
                                     }
-                                    @$image_path_selected = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($image_path_selected));
-
+                                    @$image_path_selected = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($image_path_selected));      
                                     ?>
-
-                                    <img id="previewImg" style="width:140px; height: 140px; margin-top: 1%;" class="span2" src="<?php  echo $image_path_selected?>" alt="Candidate Image">
-                                    <input type="hidden" value="<?php  echo  $data['0']['picpath']?>" name="pic">
+                                    <img id="previewImg" class="offset4" style="height: 130px; width: 130px;" src="<?php echo @$image_path_selected;?>" alt="Candidate Image" />
+                                    <input type="hidden" value="<?php echo  $data['0']['picpath']?>" name="pic">
                                 </div>
                             </div>
                             <div class="control-group">
-
-                                <label id="ErrMsg" class="control-label span2" style=" text-align: left;"><?php ?></label>
                                 <div class="controls controls-row">
-                                    <input class="span3 hidden"  type="text" placeholder="" >  
-
-
+                                    <h4 class="span4 offset4">Personal Information</h4>
                                 </div>
                             </div>
                             <div class="control-group">
-                                <label class="control-label span1" >
-                                    Candidate Name :
-                                </label>
-
                                 <div class="controls controls-row">
-                                    <input class="span3"  type="text" id="cand_name" readonly="readonly" style="text-transform: uppercase;" name="cand_name" placeholder="Candidate Name" maxlength="60"  value="<?php   echo  $data['0']['name']; ?>" <?php if($isReAdm==1) echo "readonly='readonly'";  ?>  >
-                                    <label class="control-label span2" for="lblfather_name">
+                                    <label class="control-label span2" for="cand_name">
+                                        Candidate Name :
+                                    </label>
+                                    <input class="span2" type="text" id="cand_name" readonly="readonly" name="cand_name" placeholder="Candidate Name" maxlength="60"  value="<?php   echo  $data['0']['name']; ?>" >
+                                    <label class="control-label span2" for="father_name">
                                         Father's Name :
                                     </label> 
-                                    <input class="span3" id="father_name" name="father_name" readonly="readonly" style="text-transform: uppercase;" type="text" placeholder="Father's Name" maxlength="60" value="<?php echo  $data['0']['Fname']; ?>" <?php if($isReAdm==1) echo "readonly='readonly'";  ?> required="required">
+                                    <input class="span2" id="father_name" name="father_name" readonly="readonly" style="text-transform: uppercase;" type="text" placeholder="Father's Name" maxlength="60" value="<?php echo  $data['0']['Fname']; ?>" <?php if($isReAdm==1) echo "readonly='readonly'";  ?> required="required">
                                 </div>
-                            </div>
+                            </div>       
                             <div class="control-group">
-                                <label class="control-label span1" >
-                                    Bay Form No :
-                                </label>
                                 <div class="controls controls-row">
-                                    <input class="span3" type="text" id="bay_form" name="bay_form" placeholder="Bay Form No." value="<?php echo  $data['0']['BForm']; ?>" required="required" <?php if( $data['0']['BForm']>=10) echo "readonly='readonly'";  ?>>
+                                    <label class="control-label span2" for="bay_form">
+                                        Bay Form No :
+                                    </label>
+                                    <input class="span2" type="text" id="bay_form" name="bay_form" placeholder="Bay Form No." value="<?php echo  $data['0']['BForm']; ?>" required="required" >
                                     <label class="control-label span2" for="father_cnic">
                                         Father's CNIC :
                                     </label> 
-                                    <input class="span3" id="father_cnic" name="father_cnic" type="text" placeholder="34101-1111111-1" value="<?php echo  $data['0']['FNIC']; ?>" <?php if($data['0']['FNIC']>=10) echo "readonly='readonly'";  ?> required="required">
+                                    <input class="span2" id="father_cnic" name="father_cnic" type="text" placeholder="34101-1111111-1" value="<?php echo  $data['0']['FNIC']; ?>" readonly  required="required">
                                 </div>
                             </div>
-
                             <div class="control-group">
-                                <label class="control-label span1" >
-                                    Mobile Number :
-                                </label>
                                 <div class="controls controls-row">
-                                    <input class="span3" id="mob_number" name="mob_number" type="text" placeholder="0300-123456789" value=<?php  echo  $data['0']['MobNo']; ?> required="required">
-
-                                    <label class="control-label span2" >
+                                    <label class="control-label span2" for="mob_number">
+                                        Mobile Number :
+                                    </label>
+                                    <input class="span2" id="mob_number" name="mob_number" type="text" placeholder="0300-123456789" value="<?php  echo  $data['0']['MobNo']; ?>" required="required">
+                                    <label class="control-label span2" for="Inst_Rno">
                                         Class Roll No :
                                     </label> 
-                                    <input class="span3" id="Inst_Rno" type="text"  style="text-transform: uppercase;" name="Inst_Rno" placeholder="" value="<?php echo  $data['0']['classRno']; ?>" required="required" maxlength="8">
+                                    <input class="span2" id="Inst_Rno" type="text" name="Inst_Rno" value="<?php echo  $data['0']['classRno']; ?>" required="required">
                                 </div>
                             </div>
-                            <!--  <div class="control-group">
-                            <label class="control-label span1" >
-                            Date of Birth:(dd-mm-yyyy)
-                            </label>
-
-                            <div class="controls controls-row">
-                            <input class="span3" type="text" id="dob" name="dob" style="text-align: left;" placeholder="DOB" value="
-                            <?php
-                            /* $source = $data['0']['Dob'];
-                            $date = new DateTime($source);
-                            $trim =  trim($date->format('d-m-Y')," "); 
-                            echo $trim;*/
-                            ?>" required="required" readonly="readonly" disabled="disabled"  >
-
-                            <label class="control-label span2" >
-                            Mobile Number :
-                            </label> 
-                            <input class="span3" id="mob_number" name="mob_number" type="text" placeholder="0300-123456789" value=<?php  echo  $data['0']['MobNo']; ?> required="required">
-                            </div>
-                            </div>-->
                             <div class="control-group">
-                                <label class="control-label span1" >
-                                    MEDIUM:
-                                </label>
                                 <div class="controls controls-row">
-                                    <select id="medium" class="dropdown span3" name="medium">
-                                        <?php // //DebugBreak();
+                                    <label class="control-label span2" for="medium">
+                                        MEDIUM:
+                                    </label>
+                                    <select id="medium" class="dropdown span2" name="medium">
+                                        <?php 
                                         $med = $data['0']['med'] ;
-                                        // $med = 2; 
+
                                         if($med == 1)
                                         {
                                             echo  "<option value='1' selected='selected'>Urdu</option> <option value='1'>English</option>";
@@ -135,21 +94,17 @@
                                             echo  "<option value='2' >Urdu</option> <option value='2' selected='selected'>English</option>";
                                         }
                                         ?>
-
                                     </select>
-
-
-
-                                    <label class="control-label span2" >
+                                    <label class="control-label span2" for="speciality">
                                         Speciality:
                                     </label> 
-                                    <select id="speciality"  class="span3" name="speciality">
-                                        <?php // //DebugBreak();
+                                    <select id="speciality"  class="span2" name="speciality">
+                                        <?php 
                                         $spec = $data['0']['Spec'] ;
-                                        // $med = 2; 
+
                                         if($spec == 0)
                                         {
-                                            echo  "<option value='0' selected='selected'>None</option>  <option value='1'>Deaf &amp; Dumb</option> <option value='2'>Board Employee</option>";
+                                            echo  "<option value='0' selected='selected'>None</option><option value='1'>Deaf &amp; Dumb</option> <option value='2'>Board Employee</option>";
                                         }
                                         else if($spec == 1)
                                         {
@@ -162,261 +117,149 @@
                                     </select>
                                 </div>
                             </div>
-
                             <div class="control-group">
-                                <label class="control-label span1" >
-                                    Mark Of Identification :
-                                </label>
                                 <div class="controls controls-row">
-                                    <input class="span3" type="text" id="MarkOfIden" style="text-transform: uppercase;" name="MarkOfIden" value="<?php echo  $data['0']['markOfIden']; ?>" required="required" maxlength="60" >
+                                    <label class="control-label span2" for="MarkOfIden">
+                                        Identification Mark:
+                                    </label>
+                                    <input class="span2" type="text" id="MarkOfIden" name="MarkOfIden" value="<?php echo  $data['0']['markOfIden']; ?>" required="required" maxlength="60" >
+                                    <label class="control-label span2" for="CollGrade">
+                                        College Grade:
+                                    </label>
+                                    <input class="span2" type="text" id="CollGrade" name="CollGrade" value="<?php echo  $data['0']['CollGrade']; ?>" required="required" maxlength="2">
                                 </div>
-                            </div>
-
-
-
+                            </div> 
 
                             <div class="control-group">
-                                <label class="control-label span1" >
-                                    College Grade :
-                                </label>
-                                <div class="controls controls-row">
-                                    <input class="span3" type="text" id="CollGrade" style="text-transform: uppercase;" name="CollGrade" value="<?php echo  $data['0']['CollGrade']; ?>" required="required" maxlength="2" >
-                                </div>
-                            </div>
-
-
-
-                            <div class="control-group">
-                                <label class="control-label span1" >
-                                    Nationality :
-                                </label>
                                 <div class="controls controls-row">  
-                                    <?php
-                                    $nat = $data[0]['nat'];
-                                    if($nat == 1)
-                                    {
-                                        echo  " <label class='radio inline span1'><input type='radio' value='1' id='nationality' checked='checked' name='nationality'> Pakistani
-                                        </label><label class='radio inline span2'><input type='radio'  id='nationality1' value='2' name='nationality'>  Non Pakistani</label>" ;
-                                    }
-                                    else if ($nat == 2)
-                                    {
-                                        echo  "<label class='radio inline span1'><input type='radio' value='1' id='nationality'  name='nationality'> Pakistani
-                                        </label><label class='radio inline span2'><input type='radio'  id='nationality1' checked='checked' value='2' name='nationality'>  Non Pakistani</label>" ;
-                                    }
-                                    ?>
-
+                                    <label class="control-label span2" for="nationality">
+                                        Nationality :
+                                    </label>
+                                    <select name="nationality" class="span2" id="nationality"> 
+                                        <?php
+                                        $nat = $data[0]['nat'];
+                                        if($nat == 1)
+                                        {
+                                            echo  
+                                            "<option value='1' selected='selected'>Pakistani</option>
+                                            <option value='2'>Non Pakistani</option>";
+                                        }
+                                        else if ($nat == 2)
+                                        {
+                                            echo  
+                                            "<option value='1'>Pakistani</option> 
+                                            <option value='2' selected='selected'>Non Pakistani</option>";
+                                        }
+                                        ?>
+                                    </select>
                                     <label class="control-label span2" for="gender1">
                                         Gender :
                                     </label> 
-                                    <?php
-                                    $gender = $data[0]['sex'];
-                                    if($gender == 1)
-                                    {
-                                        echo " <label class='radio inline span1'><input type='radio' id='gender1' value='1' checked='checked'  disabled='disabled' name='gender'> Male</label> 
-                                        <label class='radio inline span1'><input type='radio' id='gender2' value='2'  name='gender'  disabled='disabled'> Female </label> " ;
-                                    }
-                                    else if ($gender == 2)
-                                    {
-                                        echo " <label class='radio inline span1'><input type='radio' id='gender1' value='1'  disabled='disabled' name='gender'> Male</label> 
-                                        <label class='radio inline span1'><input type='radio' id='gender2' value='2'  checked='checked'  disabled='disabled'  name='gender'> Female </label> " ;
-                                    }
-                                    ?>
+                                    <select name="gender" class="span2" id="gender" disabled="disabled"> 
+                                        <?php
+                                        @$gender = $data[0]['sex'];
+                                        if($gender == 1)
+                                        {
+                                            echo"<option value='1' selected='selected'>MALE</option> 
+                                            <option value='2'>FEMALE</option>";
+                                        }
+                                        else if ($gender == 2)
+                                        {
+                                            echo"<option value='1'>MALE</option> 
+                                            <option value='2' selected='selected'>FEMALE</option>";
+                                        }
+                                        ?>
+                                    </select>
                                     <input type="hidden" name="gender" value="<?php echo $gender; ?>">
                                     <input type="hidden" name="gend" value="<?php echo $gender; ?>">
                                 </div>
                             </div>
                             <div class="control-group">
-                                <label class="control-label span1" >
-                                    Hafiz-e-Quran :
-                                </label>
-                                <div class="controls controls-row">
-                                    <?php
-                                    // //DebugBreak();
-                                    if($isReAdm == 1)
-                                    {
-                                        echo " <label class='radio inline span1'><input type='radio' id='hafiz1' value='1'  name='hafiz'> No</label>
-                                        <label class='radio inline span1'><input type='radio' id='hafiz2' value='2' checked='checked' name='hafiz'> Yes</label>";
-                                    }
-                                    else
-                                    {
-                                        // $hafiz = $data[0]['Ishafiz'];
-                                        //if ($hafiz == 1)
-                                        //{
-                                        echo " <label class='radio inline span1'><input type='radio' id='hafiz1' value='1' checked='checked' name='hafiz'> No</label>
-                                        <label class='radio inline span1'><input type='radio' id='hafiz2' value='2' name='hafiz'> Yes</label>";
-                                        //}
-                                        /*else if(!isset($hafiz))
-                                        {
-                                        echo " <label class='radio inline span1'><input type='radio' id='hafiz1' value='1'  name='hafiz'> No</label>
-                                        <label class='radio inline span1'><input type='radio' id='hafiz2' value='2' checked='checked' name='hafiz'> Yes</label>";
-                                        }*/
-                                    }    
-                                    ?>
+                                <div class="controls controls-row"> 
+                                    <label class="control-label span2" >
+                                        Hafiz-e-Quran :
+                                    </label>
+                                    <select name="hafiz" class="span2" id="hafiz"> 
+                                        <option value='1'>NO</option> 
+                                        <option value='2'>YES</option> 
+                                    </select>
 
-                                    <label class="control-label span3" >
+                                    <label class="control-label span2" >
                                         Religion :
                                     </label> 
-                                    <?php
-                                    $rel = $data[0]['rel'];
-                                    if($rel == 1)
-                                    {
-                                        echo " <label class='radio inline span1'><input type='radio' id='religion' class='rel_class' value='1' checked='checked' name='religion'> Muslim
-                                        </label><label class='radio inline span1'><input type='radio' id='religion1' class='rel_class' value='2' name='religion'> Non Muslim</label>" ;
-                                    }
-                                    else if ($rel == 2)
-                                    {
-                                        echo " <label class='radio inline span1'><input type='radio' id='religion' class='rel_class' value='1'  name='religion'> Muslim
-                                        </label><label class='radio inline span1'><input type='radio' id='religion1' class='rel_class' value='2' checked='checked' name='religion'> Non Muslim</label>" ;
-                                    }
-                                    ?>
+                                    <select name="religion" class="span2" id="religion"> 
+                                        <?php
+                                        $rel = $data[0]['rel'];
+                                        if($rel == 1)
+                                        {
 
+                                            echo"<option value='1' selected='selected'>MUSLIM</option> 
+                                            <option value='2'>NON MUSLIM</option>";
+                                        }
+                                        else if ($rel == 2)
+                                        {
+                                            echo"<option value='1'>MUSLIM</option> 
+                                            <option value='2' selected='selected'>NON MUSLIM</option>";
+                                        }
+                                        ?>
+                                    </select>
                                 </div>
                             </div>
                             <div class="control-group">
-                            <label class="control-label span1" >
-                                Residency :
-                            </label>
-                            <div class="controls controls-row">  
-                                <?php
-                                $resid = $data[0]['ruralOrurban'];
-                                if($resid == 1 )
-                                {
-                                    echo " <label class='radio inline span1'><input type='radio' value='1' id='UrbanRural' checked='checked' name='UrbanRural'> Urban
-                                    </label><label class='radio inline span2'><input type='radio'  id='UrbanRural' value='2' name='UrbanRural'>  Rural </label>";
-                                }
-                                else if($resid == 2)
-                                {
-                                    echo " <label class='radio inline span1'><input type='radio' value='1' id='UrbanRural' name='UrbanRural'> Urban
-                                    </label><label class='radio inline span2'><input type='radio'  id='UrbanRural' value='2'  checked='checked'  name='UrbanRural'>  Rural </label>";
-                                }
+                                <div class="controls controls-row">  
+                                    <label class="control-label span2" >
+                                        Locality :
+                                    </label>
 
-                                ?>
-
+                                    <select name="UrbanRural" class="span6" id="UrbanRural"> 
+                                        <?php
+                                        $resid = $data[0]['ruralOrurban'];
+                                        if($resid == 1)
+                                        {
+                                            echo"<option value='1' selected='selected'>URBAN</option> 
+                                            <option value='2'>RURAL</option>";
+                                        }
+                                        else if($resid == 2)
+                                        {
+                                            echo"<option value='1'>URBAN</option> 
+                                            <option value='2' selected='selected'>RURAL</option>";
+                                        }
+                                        else
+                                        {
+                                            echo"<option value='1' selected='selected'>URBAN</option> 
+                                            <option value='2'>RURAL</option>";
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
                             </div>
                             <div class="control-group">
-                                <label class="control-label span1" >
-                                    Address :
-                                </label>
                                 <div class="controls controls-row">
-                                    <textarea style="height:150px; text-transform: uppercase;"  id="address" class="span8" name="address" required="required"><?php
+                                    <label class="control-label span2" >
+                                        Address :
+                                    </label>
+                                    <textarea rows="5"  id="address" class="span6" name="address" required="required"><?php
                                         echo $data[0]['addr'];
                                     ?></textarea>
                                 </div>
                             </div>
-
-                            <?php if(Session ==  2) {?>
-
-                                <hr>
-                                <div class="control-group">
-                                    <h4 class="span3">Exam Proposed Center Information :</h4>
-                                    <div class="controls controls-row">
-                                        <label class="control-label span2">
-                                        </label> 
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label span1" >
-                                        District :
-                                    </label>
-                                    <div class="controls controls-row">
-                                        <select class='span3' id='pvtinfo_dist' name='pvtinfo_dist' required='required'>
-                                            <option value='0'>SELECT DISTRICT</option>
-                                            <option value="<?php echo   $data[0]['dist_cd']; ?>">
-                                                <?php
-                                                // DebugBreak();
-                                                $dist =  $data[0]['dist_cd'];
-                                                switch($dist)
-                                                {
-                                                    case 1:
-                                                        echo "GUJRANWALA";
-                                                        break;
-
-                                                    case 2:
-                                                        echo "GUJRAT";
-                                                        break;
-
-                                                    case 3:
-                                                        echo "HAFIZABAD";
-                                                        break;
-
-                                                    case 4:
-                                                        echo "MANDI BAHA-UD-DIN";
-                                                        break;
-
-                                                    case 5:
-                                                        echo "NAROWAL";
-                                                        break;
-
-                                                    case 6:
-                                                        echo "SIALKOT";
-                                                        break;
-
-                                                    default:
-                                                        echo "NO DISTRICT SELECTED";
-                                                        break;
-
-
-                                                }
-
-                                            ?>    </option>
-
-                                        </select>
-                                        <label class="control-label span2" >
-                                            Tehsil:
-                                        </label> 
-                                        <select class='span3' id='pvtinfo_teh' name='pvtinfo_teh' required='required'>
-                                            <option value='0'>SELECT TEHSIL</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                <label class="control-label span1" >
-                                    Zone :
-                                </label>
-
-                                <div class="controls controls-row">
-                                    <select id="pvtZone"  class="span3" name="pvtZone">
-                                        <option value='0'>SELECT ZONE</option>
-                                    </select>
-                                </div>
-
-
-                                <?php }?>
-
-                            <div id="instruction" style="display:none; width:700px" ></div>
-
-                            <hr>
+                            <div class="pull-right"  id="instruction">
+                                <img src="<?php echo base_url(); ?>assets/img/Instruction.jpg" class="img-responsive" alt="instructions.jpg">
+                            </div>
                             <div class="control-group">
-                                <h4 class="span4">Exam Information :</h4>
                                 <div class="controls controls-row">
-                                    <input type="hidden" class="span2 hidden" id="isReAdm" name="isReAdm" value="0">
-                                    <label class="control-label span2">
-
-                                    </label> 
-
+                                    <h4 class="span4 offset4">Examination Information</h4>
                                 </div>
                             </div>
                             <div class="control-group">
-                                <label class="control-label span1" >
-                                    Study Group :
-                                </label>
                                 <div class="controls controls-row">
+                                    <label class="control-label span2" >
+                                        Study Group :
+                                    </label>
                                     <select id="std_group" class="dropdown span6"  name="std_group" disabled="disabled">
                                         <?php
-                                        // DebugBreak();
                                         $grp = $data[0]['grp_cd'];
-                                        //  $grp_name = $vals["grp_cd"];
                                         $sub7 = $data[0]["sub7"];
-                                        /*     if($grp==1 && $sub7==78)
-                                        {
-                                        $grp = 7;
-                                        }
-                                        if($grp == 1 && $sub7 == 43){
-                                        $grp = 8;
-                                        }
-                                        if($grp == 1 && $sub7 == 8){
-                                        $grp = 1;
-                                        }*/
                                         $subgroups =  split(',',$grp_cdi);
                                         echo "<option value='0' >SELECT GROUP</option>";
                                         if($isReAdm == 1 )
@@ -466,7 +309,6 @@
                                                     {
                                                         echo "<option value='3'>HUMANITIES</option>";  
                                                     }
-
                                                 }
                                                 else if($subgroups[$i] == 4)
                                                 {
@@ -478,7 +320,6 @@
                                                     {
                                                         echo "<option value='4'>GENERAL SCIENCE</option>";   
                                                     }
-
                                                 }
                                                 else if($subgroups[$i] == 5)
                                                 {
@@ -490,7 +331,6 @@
                                                     {
                                                         echo "<option value='5'>COMMERCE</option>";  
                                                     }
-
                                                 }
 
                                                 else if($subgroups[$i] == 7)
@@ -504,7 +344,6 @@
                                                         echo "<option value='7'>HOME ECONOMICS</option>";  
                                                     }
                                                 }
-
                                             } 
                                         }
                                         $subarray = array(
@@ -587,35 +426,22 @@
                                         );
                                         $result =  array_search($data[0]['sub4'],$subarray);
                                         ?>
-
                                     </select>                                            
-
                                 </div>
-                            </div>
-
-                            <div class="control-group">
-                                <label class="control-label span12" style="width: 366px; font-weight: bold;" >
-                                    Choose Subjects(Elective Subjects are Enabled Only)   
-                                </label> 
-
                             </div>
                             <div class="control-group">
                                 <div class="control row controls-row">
-                                    <label class="control-label span3 " id="lblpart1cat" name="lblpart1cat" style="text-decoration: underline; font-weight: bold;" >
+                                    <label class="control-label span1 offset4" id="lblpart1cat" name="lblpart1cat" style="text-decoration: underline; font-weight: bold;" >
                                         PART-I Subjects
                                     </label>
-                                    <label class="control-label span3 " id="lblpart2cat" name="lblpart2cat" style="text-decoration: underline; font-weight: bold;" >
+                                    <label class="control-label span2 " id="lblpart2cat" name="lblpart2cat" style="text-decoration: underline; font-weight: bold;" >
                                         PART-II Subjects
                                     </label>
                                 </div>
                                 <div class="control row controls-row">
-                                    <label class="control-label span1" >
-
-                                    </label>
-
-                                    <select id="sub1"  name="sub1" class="span3 dropdown">
+                                    <label class="control-label span1 offset3"></label>
+                                    <select id="sub1"  name="sub1" class="span2 dropdown">
                                         <?php if($data[0]['sub1pf1']== 2){
-
                                             if($data[0]['sub1Ap1']==1) 
                                             {
                                                 echo '<option value='.$data[0]['sub1'].'>'.array_search($data[0]['sub1'],$subarray).'</option>'; 
@@ -636,19 +462,16 @@
                                         ?>
                                     </select>
 
-                                    <select id="sub1p2" class="span3 dropdown" name="sub1p2">
+                                    <select id="sub1p2" class="span2 dropdown" name="sub1p2">
                                         <option value="<?php echo $data[0]['sub1'];?>"><?php
                                             echo array_search($data[0]['sub1'],$subarray);
                                         ?></option>
                                     </select> 
                                 </div>
                                 <div class="control row controls-row">
-                                    <label class="control-label span1" >
-
-                                    </label>
-                                    <select id="sub2"  name="sub2" class="span3 dropdown">
+                                    <label class="control-label span1 offset3"></label>
+                                    <select id="sub2"  name="sub2" class="span2 dropdown">
                                         <?php if($data[0]['sub2pf1']== 2){
-
                                             if($data[0]['sub2Ap1']==1) 
                                             {
                                                 echo '<option value='.$data[0]['sub2'].'>'.array_search($data[0]['sub2'],$subarray).'</option>'; 
@@ -663,28 +486,21 @@
                                                 echo '<option value="0">NONE</option>';
                                             }                             
                                         }  
-
                                         else{
                                             echo '<option value="0">NONE</option>';
                                         }                    
                                         ?>
                                     </select>
-                                    <select id="sub2p2" class="span3 dropdown" name="sub2p2">
+                                    <select id="sub2p2" class="span2 dropdown" name="sub2p2">
                                         <option value="<?php echo $data[0]['sub2'];?>"><?php
                                             echo array_search($data[0]['sub2'],$subarray);
                                         ?></option>
                                     </select> 
                                 </div>
-
-
-
                                 <div class="control row controls-row">
-                                    <label class="control-label span1" >
-
-                                    </label>
-                                    <select id="sub3"  name="sub3" class="span3 dropdown">
+                                    <label class="control-label span1 offset3"></label>
+                                    <select id="sub3"  name="sub3" class="span2 dropdown">
                                         <?php if($data[0]['sub3pf1']== 2){
-
                                             if($data[0]['sub3Ap1']==1) 
                                             {
                                                 echo '<option value='.$data[0]['sub3'].'>'.array_search($data[0]['sub3'],$subarray).'</option>'; 
@@ -699,26 +515,21 @@
                                                 echo '<option value="0">NONE</option>';
                                             }                             
                                         }     
-
                                         else{
                                             echo '<option value="0">NONE</option>';
                                         }
-
                                         ?>
                                     </select> 
-                                    <select id="sub3p2" class="span3 dropdown" name="sub3p2">
+                                    <select id="sub3p2" class="span2 dropdown" name="sub3p2">
                                         <option value="<?php echo $data[0]['sub8'];?>"><?php
                                             echo array_search($data[0]['sub8'],$subarray);
                                         ?></option>
                                     </select> 
                                 </div>
                                 <div class="control row controls-row">
-                                    <label class="control-label span1" >
-
-                                    </label>
-                                    <select id="sub4"  name="sub4" class="span3 dropdown">
+                                    <label class="control-label span1 offset3"></label>
+                                    <select id="sub4"  name="sub4" class="span2 dropdown">
                                         <?php if($data[0]['sub4pf1']== 2){
-
                                             if($data[0]['sub4Ap1']==1) 
                                             {
                                                 echo '<option value='.$data[0]['sub4'].'>'.array_search($data[0]['sub4'],$subarray).'</option>'; 
@@ -733,13 +544,12 @@
                                                 echo '<option value="0">NONE</option>';
                                             }                             
                                         }
-
                                         else{
                                             echo '<option value="0">NONE</option>';
                                         }                      
                                         ?>
                                     </select>
-                                    <select id="sub4p2" class="span3 dropdown" name="sub4p2">
+                                    <select id="sub4p2" class="span2 dropdown" name="sub4p2">
                                         <option value="<?php echo $data[0]['sub4'];?>"><?php
                                             echo array_search($data[0]['sub4'],$subarray);
                                         ?></option>
@@ -747,14 +557,9 @@
                                 </div>
 
                                 <div class="control row controls-row">
-                                    <label class="control-label span1" >
-
-                                    </label>
-                                    <select id="sub5"  name="sub5" class="span3 dropdown">
+                                    <label class="control-label span1 offset3"></label>
+                                    <select id="sub5"  name="sub5" class="span2 dropdown">
                                         <?php if($data[0]['sub5pf1']== 2){
-
-                                            //DebugBreak();
-
                                             if($data[0]['sub5Ap1']==1) 
                                             {
                                                 echo '<option value='.$data[0]['sub5'].'>'.array_search($data[0]['sub5'],$subarray).'</option>'; 
@@ -774,10 +579,8 @@
                                         }                      
                                         ?>
                                     </select> 
-                                    <select id="sub5p2" class="span3 dropdown" name="sub5p2" selected="selected">
-
+                                    <select id="sub5p2" class="span2 dropdown" name="sub5p2" selected="selected">
                                         <?php
-
                                         if($grp == 5)
                                         {
                                             echo '<option value='.$data[0]['sub5A'].'>'.array_search($data[0]['sub5A'],$subarray).'</option>'; 
@@ -789,14 +592,9 @@
                                     </select> 
                                 </div>
                                 <div class="control row controls-row">
-                                    <label class="control-label span1" >
-
-                                    </label>
-                                    <select id="sub6"  name="sub6" class="span3 dropdown">
+                                    <label class="control-label span1 offset3"></label>
+                                    <select id="sub6"  name="sub6" class="span2 dropdown">
                                         <?php if($data[0]['sub6pf1']== 2){
-
-                                            //DebugBreak();
-
                                             if($data[0]['sub6Ap1']==1) 
                                             {
                                                 echo '<option value='.$data[0]['sub6'].'>'.array_search($data[0]['sub6'],$subarray).'</option>'; 
@@ -816,9 +614,8 @@
                                         }                   
                                         ?>
                                     </select>
-                                    <select id="sub6p2"  name="sub6p2" class="span3 dropdown" selected="selected">
+                                    <select id="sub6p2"  name="sub6p2" class="span2 dropdown" selected="selected">
                                         <?php
-
                                         if($grp == 5)
                                         {
                                             echo '<option value='.$data[0]['sub6A'].'>'.array_search($data[0]['sub6A'],$subarray).'</option>'; 
@@ -830,18 +627,13 @@
                                     </select>
                                 </div>
                                 <?php 
-                                //DebugBreak();
                                 $grp_cd = $data[0]['grp_cd'];
-
                                 if($grp_cd ==5)
                                 { ?>
                                     <div class="control row controls-row">
-                                        <label class="control-label span1" >
-
-                                        </label>
-                                        <select id="sub7"  name="sub7" class="span3 dropdown">
+                                        <label class="control-label span1 offset3"></label>
+                                        <select id="sub7"  name="sub7" class="span2 dropdown">
                                             <?php if($data[0]['sub7pf1']== 2){
-
                                                 if($data[0]['sub7Ap1']==1) 
                                                 {
                                                     echo '<option value='.$data[0]['sub7'].'>'.array_search($data[0]['sub7'],$subarray).'</option>'; 
@@ -861,79 +653,64 @@
                                             }                   
                                             ?>
                                         </select> 
-                                        <select id="sub7p2" class="span3 dropdown" name="sub7p2" selected="selected">
-
+                                        <select id="sub7p2" class="span2 dropdown" name="sub7p2" selected="selected">
                                             <option value="<?php echo $data[0]['sub7A'];?>"><?php
                                                 echo array_search($data[0]['sub7A'],$subarray);
                                             ?></option>
                                             <?php }?>
                                     </select> 
                                 </div> 
-
-
                             </div>
                             <div class="form-actions no-margin">
-                                <input type="hidden"   value="<?php  echo  $data[0]['FormNo']; ?>"  name="formNo">
-                                <input type="hidden"   value="<?php  echo  $isReAdm; ?>"  name="IsReAdm">
-                                <input type="hidden"   value="<?php  echo $data[0]['oldRno']; ?>"  name="OldRno">
-
+                                <input type="hidden"   value="<?php echo  $data[0]['FormNo']; ?>"  name="formNo">
+                                <input type="hidden"   value="<?php echo  $isReAdm; ?>"  name="IsReAdm">
+                                <input type="hidden"   value="<?php echo $data[0]['oldRno']; ?>"  name="OldRno">
                                 <input type="hidden"   value="<?php echo   $data[0]['Iyear'];  ?>"  name="Oldyear">
                                 <input type="hidden"   value="<?php echo   $data[0]['sess'];  ?>"  name="Oldsess">
                                 <input type="hidden"   value="<?php echo   $data[0]['Brd_cd'];  ?>"  name="Oldbrd">
-
-
                                 <input type="hidden"   value="<?php echo   $data[0]['IntBrd_cd'];  ?>"  name="IntBrd_cd">
-
                                 <input type="hidden"   value="<?php echo   $gender;  ?>"  name="sex">
-                                <input type="hidden"   value="<?php  echo  $data['0']['name']; ?>"  name="cand_name_hidden">
-                                <input type="hidden"   value="<?php  echo  $data['0']['Fname']; ?>"  name="father_name_hidden">
-
-                                <input type="hidden"   value="<?php  echo  $grp; ?>"  name="std_group_hidden">
-                                <input type="hidden"   value="<?php  echo  $data[0]['sub1']; ?>"  name="sub1_hidden">
-                                <input type="hidden"   value="<?php  echo  $data[0]['sub2']; ?>"  name="sub2_hidden">
-                                <input type="hidden"   value="<?php  echo  $data['0']['sub3']; ?>"  name="sub3_hidden">
-                                <input type="hidden"   value="<?php  echo  $data['0']['sub4']; ?>"  name="sub4_hidden">
-                                <input type="hidden"   value="<?php  echo  $data['0']['sub5']; ?>"  name="sub5_hidden">
-                                <input type="hidden"   value="<?php  echo  $data['0']['sub6']; ?>"  name="sub6_hidden">
-                                <input type="hidden"   value="<?php  echo  $data['0']['sub7']; ?>"  name="sub7_hidden">
-                                <input type="hidden"   value="<?php  echo  $data['0']['sub8']; ?>"  name="sub8_hidden">
-                                <input type="hidden"   value="<?php  echo  $data['0']['sub1pf1']; ?>"  name="sub1pf1_hidden">
-                                <input type="hidden"   value="<?php  echo  $data['0']['sub2pf1']; ?>"  name="sub2pf1_hidden">
-                                <input type="hidden"   value="<?php  echo  $data['0']['sub3pf1']; ?>"  name="sub3pf1_hidden">
-                                <input type="hidden"   value="<?php  echo  $data['0']['sub4pf1']; ?>"  name="sub4pf1_hidden">
-                                <input type="hidden"   value="<?php  echo  $data['0']['sub5pf1']; ?>"  name="sub5pf1_hidden">
-                                <input type="hidden"   value="<?php  echo  $data['0']['sub6pf1']; ?>"  name="sub6pf1_hidden">
-                                <input type="hidden"   value="<?php  echo  $data['0']['sub7pf1']; ?>"  name="sub7pf1_hidden">
-
-                                <button type="submit" onclick="return checks()" name="btnsubmitUpdateEnrol" class="btn btn-large btn-info offset2">
-                                    Save Changes
-                                </button>
-                                <input type="button" class="btn btn-large btn-danger" value="Cancel" id="btnCancel" name="btnCancel" onclick="return CancelAlert();" >
-                                <div class="clearfix">
+                                <input type="hidden"   value="<?php echo  $data['0']['name']; ?>"  name="cand_name_hidden">
+                                <input type="hidden"   value="<?php echo  $data['0']['Fname']; ?>"  name="father_name_hidden">
+                                <input type="hidden"   value="<?php echo  $grp; ?>"  name="std_group_hidden">
+                                <input type="hidden"   value="<?php echo  $data[0]['sub1']; ?>"  name="sub1_hidden">
+                                <input type="hidden"   value="<?php echo  $data[0]['sub2']; ?>"  name="sub2_hidden">
+                                <input type="hidden"   value="<?php echo  $data['0']['sub3']; ?>"  name="sub3_hidden">
+                                <input type="hidden"   value="<?php echo  $data['0']['sub4']; ?>"  name="sub4_hidden">
+                                <input type="hidden"   value="<?php echo  $data['0']['sub5']; ?>"  name="sub5_hidden">
+                                <input type="hidden"   value="<?php echo  $data['0']['sub6']; ?>"  name="sub6_hidden">
+                                <input type="hidden"   value="<?php echo  $data['0']['sub7']; ?>"  name="sub7_hidden">
+                                <input type="hidden"   value="<?php echo  $data['0']['sub8']; ?>"  name="sub8_hidden">
+                                <input type="hidden"   value="<?php echo  $data['0']['sub1pf1']; ?>"  name="sub1pf1_hidden">
+                                <input type="hidden"   value="<?php echo  $data['0']['sub2pf1']; ?>"  name="sub2pf1_hidden">
+                                <input type="hidden"   value="<?php echo  $data['0']['sub3pf1']; ?>"  name="sub3pf1_hidden">
+                                <input type="hidden"   value="<?php echo  $data['0']['sub4pf1']; ?>"  name="sub4pf1_hidden">
+                                <input type="hidden"   value="<?php echo  $data['0']['sub5pf1']; ?>"  name="sub5pf1_hidden">
+                                <input type="hidden"   value="<?php echo  $data['0']['sub6pf1']; ?>"  name="sub6pf1_hidden">
+                                <input type="hidden"   value="<?php echo  $data['0']['sub7pf1']; ?>"  name="sub7pf1_hidden">
+                                <input type="hidden"   value="<?php echo $data['0']['schm']; ?>"  name="oldschm" id="oldschm">
+                            </div>
+                            <div class="control-group">
+                                <div class="control row controls-row">
+                                    <button type="submit" onclick="return checks()" name="btnsubmitUpdateEnrol" class="btn btn-large btn-info span3 offset3">Save Form</button>
+                                    <input type="button" class="btn btn-large btn-danger span3" value="Cancel" id="btnCancel" name="btnCancel" onclick="return CancelAlert();" >
                                 </div>
                             </div>
-
-
                         </form>
                         <script type="text/javascript">
-
-
-
+                            $(document).ready(function(){
+                                $.fancybox("#instruction");
+                            });
                             function checks(){
-
                                 var status  =  check_NewEnrol_validation_regular();
                                 if(status == 0)
                                 {
-
                                     return false;    
                                 }
                                 else
                                 {
-
                                     return true;
-                                } 
-
-
+                                }
                             }
                             function CancelAlert()
                             {
@@ -944,7 +721,6 @@
                                         window.location.href ='<?php echo base_url(); ?>index.php/Admission_inter/StudentsData';
                                     } else {
                                         // user clicked "cancel"
-
                                     }
                                 });
                             }
@@ -960,7 +736,6 @@
                                         return false;
                                     }
                                 }
-
                                 if (input.files && input.files[0]) {
                                     var reader = new FileReader();
 
@@ -969,7 +744,6 @@
                                     reader.onload = function (e) {
                                         $('#previewImg').attr('src', e.target.result);
                                     }
-
                                     reader.readAsDataURL(input.files[0]);
                                 }
                             }
@@ -978,18 +752,9 @@
                                 return (new RegExp('(' + exts.join('|').replace(/\./g, '\\.') + ')$')).test(fileName);
                             } 
                         </script>
-
                     </div>  
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-

@@ -3,8 +3,6 @@
 </div>
 
 </div>
-</body>
-</html>
 
 <script type="text/javascript">
 
@@ -202,21 +200,38 @@
         $('.mPageloader').hide();
         // $( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate: new Date(2001, 7,1),yearRange: '1970:2001'}).val();
 
-        $("#formid").keydown(function (e) {
-            // Allow: backspace, delete, tab, escape, enter and .
-            if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
-                // Allow: Ctrl+A, Command+A
-                (e.keyCode == 65 && ( e.ctrlKey === true || e.metaKey === true ) ) || 
-                // Allow: home, end, left, right, down, up
-                (e.keyCode >= 35 && e.keyCode <= 40)) {
-                // let it happen, don't do anything
-                return;
+        /* $("#formid").keydown(function (e) {
+        // Allow: backspace, delete, tab, escape, enter and .
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+        // Allow: Ctrl+A, Command+A
+        (e.keyCode == 65 && ( e.ctrlKey === true || e.metaKey === true ) ) || 
+        // Allow: home, end, left, right, down, up
+        (e.keyCode >= 35 && e.keyCode <= 40)) {
+        // let it happen, don't do anything
+        return;
+        }
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+        e.preventDefault();
+        }
+        });*/
+
+
+        $("#formid").keypress(function (e) {
+
+            var formid = $("#formid").val()    
+
+            if(formid.length >= 6 && (e.which != 13)) {
+                alertify.error('You cannot enter more than 6 digits');
+                return false;
             }
-            // Ensure that it is a number and stop the keypress
-            if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-                e.preventDefault();
+
+            else if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57) && (e.which != 13)) {
+                alertify.error('Please Use Numaric Only');
+                return false;
             }
         });
+
         $("#proceed11th").click(function(){
             var isreg =  $('input[name=candidate]:checked', '#options').val();
             if(isreg==1){
@@ -227,13 +242,14 @@
             }
 
         })
-        $("#proceed").click(function(){
+        $("#proceedDefault").click(function(){
+
             var isreg =  $('input[name=candidate]:checked', '#options').val();
             if(isreg==1){
-                window.location.href='<?php  echo base_url(); ?>Admission/inter_default';
+                window.location.href='<?php  echo base_url(); ?>index.php/Admission/inter_default';
             }
             else{
-                window.location.href='<?php  echo base_url(); ?>login'  
+                window.location.href='<?php  echo base_url(); ?>index.php/login'  
             }
 
         })
@@ -286,7 +302,7 @@
                 return false;
             }
 
-            window.location.href='<?php  echo base_url(); ?>Admission/checkFormNo_then_download/'+formno;  
+            window.location.href='<?php  echo base_url(); ?>index.php/Admission/checkFormNo_then_download/'+formno;  
         }
         function downloadform(){
             //debugger;
@@ -983,3 +999,6 @@
     }
 
 </script>
+
+</body>
+</html>

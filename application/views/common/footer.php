@@ -1,13 +1,22 @@
 
 
-<div id="footer" class="footer">
-    &nbsp; &copy; 2017 BISE Gujranwala, All Rights Reserved. 
+<div class="navbar-fixed-bottom row-fluid">
+    <div class="navbar-inner" style="text-align: center; background:#003a6a; color: wheat; margin-bottom: 4px; width: 100%; height: 40px;">
+        &copy; 2017 BISE Gujranwala, All Rights Reserved.
+    </div>
 </div>
 <script src="<?php echo base_url(); ?>assets/js/highcharts.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/exporting.js"></script>
-</div>
-</body>
-</html>
+<script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/bootstrap.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/jquery.scrollUp.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/wysiwyg/bootstrap-wysihtml5.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.mask.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/alertify.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.fancybox.pack.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/jquery-ui.js"></script>
 
 <?php 
 if(isset($files)){
@@ -16,7 +25,7 @@ if(isset($files)){
     }
 }
 ?> 
-<script type="text/javascript">
+<script type="">
     $(document).ready(function () {
 
         $( "#txtDob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate:new Date(2001, 7, 1),minDate:new Date(1970, 0, 1)}).val();
@@ -29,6 +38,7 @@ if(isset($files)){
             "sPaginationType": "full_numbers",
             "cache": false
         });
+        $('.mPageloader').hide();
     });
     
          var obj1 = [];

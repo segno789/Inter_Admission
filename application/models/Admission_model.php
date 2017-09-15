@@ -262,7 +262,8 @@ class Admission_model extends CI_Model
     }
     public function getuser_info($User_info_data)
     {
-        //  DebugBreak();
+        //DebugBreak();
+
         $Inst_cd = $User_info_data['Inst_Id'];
         $date = $User_info_data['date'];
         $isPratical = $User_info_data['isPratical'];
@@ -272,7 +273,7 @@ class Admission_model extends CI_Model
         if($rowcount > 0)
         {
 
-            $query2 = $this->db->get_where('Admission_Online..RuleFeeAdm', array('class' => 12,'sess' =>Session, 'Start_Date <='=>$date,'End_Date >='=>$date,'isPrSub'=>$isPratical));
+            $query2 = $this->db->get_where('admission_Online..RuleFeeAdm', array('class' => 12,'sess' =>Session, 'Start_Date <='=>$date,'End_Date >='=>$date,'isPrSub'=>$isPratical));
             $resultarr = array("info"=>$query->result_array(),"rule_fee"=>$query2->result_array());
             return  $resultarr;
         }
@@ -612,18 +613,21 @@ class Admission_model extends CI_Model
             $schm = @$_POST['oldschm'];    
         }
 
+
+
         $AdmFine =  $data['AdmFine'];
         $Brd_cd =  $data['Brd_cd'];
         $old_class = $data['class'];
         $AdmProcFee =  $data['AdmProcessFee'];
-        $AdmFee =  $data['AdmFee'];
+        $AdmFee =  $data['AdmFee'];    
         $certFee =  $data['certfee'];
         $regfee = 0;
         $TotalAdmFee =  $data['AdmTotalFee'];
 
-        //DebugBreak();
 
-        $query = $this->db->query(Insert_sp." '$formno',12,2017,1,'$name','$fname','$BForm','$FNIC','$CellNo',$medium,'".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$sub8,1,'".$picpath."',$oldrno,$oldyear,$oldsess,$old_class,$IsHafiz,$Inst_cd,$UrbanRural,$cat11,$cat12,$sub1ap2,$sub2ap2,$sub4ap2,$sub5ap2,$sub6ap2,$sub7ap2,$sub8ap2,$dist_cd,$teh_cd,$zone_cd,$Brd_cd,$AdmProcFee,$AdmFee,$TotalAdmFee,$sub5a,$sub6a,$sub7a,$AdmFine,$IsNewPic,$certFee,'$temppath',$schm,$regfee");
+        @$sess = Session;
+
+        $query = $this->db->query(Insert_sp." '$formno',12,2017,$sess,'$name','$fname','$BForm','$FNIC','$CellNo',$medium,'".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$sub8,1,'".$picpath."',$oldrno,$oldyear,$oldsess,$old_class,$IsHafiz,$Inst_cd,$UrbanRural,$cat11,$cat12,$sub1ap2,$sub2ap2,$sub4ap2,$sub5ap2,$sub6ap2,$sub7ap2,$sub8ap2,$dist_cd,$teh_cd,$zone_cd,$Brd_cd,$AdmProcFee,$AdmFee,$TotalAdmFee,$sub5a,$sub6a,$sub7a,$AdmFine,$IsNewPic,$certFee,'$temppath',$schm,$regfee");
 
         $rowcount = $query->num_rows();
         if($rowcount > 0)
@@ -675,12 +679,8 @@ class Admission_model extends CI_Model
         $oldrno =  $data['rno'];
         $oldyear =  $data['Iyear'];
         $oldsess =  $data['sess'];
-        //  DebugBreak();
 
         $Brd_cd =  $data['Brd_cd'];
-
-
-
         $AdmProcFee =  $data['AdmProcessFee'];
 
         $AdmFee = $data['AdmFee'];
@@ -696,13 +696,13 @@ class Admission_model extends CI_Model
     {
         //DebugBreak();
 
-        if($formno <600000)
+        if(Session == 1)
         {
-            $query = $this->db->query(formprint_sp_Languages."'$formno'");
+            $query = $this->db->query("exec admission_online..formprint_sp_12th '$formno'");    
         }
-        else
+        else if(Session == 2)
         {
-            $query = $this->db->query(formprint_sp_12th."'$formno'");
+            $query = $this->db->query("exec admission_online..sp_form_data_12th_SUPPLY '$formno'");        
         }
 
         $rowcount = $query->num_rows();
@@ -717,10 +717,11 @@ class Admission_model extends CI_Model
     }
     public function getzone($data)
     {
+        //DebugBreak();
 
         $tehcd = $data['tehCode'];
         $gend = $data['gend'];
-        $where = " mYear = ".Year."  AND class = 12 AND  sess = ".Session." and Flag= 0 AND teh_cd =  $tehcd  AND  (Gender = $gend OR Gender = 3) ";      
+        $where = " mYear = ".Year."  AND class = 12 AND sess = ".Session." AND teh_cd =  $tehcd  AND  (Gender = $gend OR Gender = 3) and Flag= 1";      
         $query = $this->db->query("SELECT * FROM matric_new..tblZones WHERE $where");
 
         $rowcount = $query->num_rows();
@@ -736,10 +737,10 @@ class Admission_model extends CI_Model
 
     public function getcenter($data)
     {
+        //DebugBreak();
         $zone = $data['zoneCode'];
         $gend = $data['gen'];
-        //DebugBreak();
-        $where = " mYear = ".Year." AND class = 12 AND  sess = ".Session." AND Zone_cd =  $zone  AND  (cent_Gen = $gend OR cent_Gen = 3) ";
+        $where = " mYear = ".Year." AND class = 12 AND  sess = ".Session." AND Zone_cd =  $zone  AND  (cent_Gen = $gend OR cent_Gen = 3)";
         $query = $this->db->query("SELECT CENT_CD,CENT_NAME FROM matric_new..tblcentre WHERE $where");
 
         $rowcount = $query->num_rows();

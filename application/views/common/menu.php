@@ -45,6 +45,17 @@
                             Roll No. Slips
                         </a>
                     </li>
+                    <?php 
+                    
+                           } 
+                if( $appconfig['isresultP2'] == 1){?>
+
+                    <li>
+                        <a style="width: 115px;" href="<?php echo base_url(); ?>Result/dashboard12th" class="<?php if($isselected == '5') {echo 'selected';}?>" >
+                            <div class="fs1" aria-hidden="true" data-icon="&#xe032;"> </div>
+                            Result Cards
+                        </a>
+                    </li>
                     <?php } ?>
             </ul>
             <div class="clearfix">
@@ -216,6 +227,31 @@
                 <?php }
             ?>
 
+            <?php
+            if($isselected == '5'){
+                ?>
+                <ul >
+                    <li><a   data-original-title="" >Result Cards: </a></li>
+
+                    <?php if($appconfig['isresultP2'] == 1 ) {?>
+                        <li>
+                            <a href="<?php echo base_url(); ?>Result/dashboard12th">
+                                12th Result Cards
+                            </a>
+                        </li>
+                        <?php }
+                      //  DebugBreak() ;
+                    if($appconfig['isresultP1'] == 1 ) {?>
+                        <li>
+                            <a href="<?php echo base_url(); ?>Result/dashboard11th">
+                                11th Result Cards
+                            </a>
+                        </li>
+                        <?php } ?>
+                </ul >
+                <?php
+            } 
+            ?> 
             <div class="btn-group pull-right">
                 <button class="btn btn-primary">
                     Main Menu
@@ -230,7 +266,7 @@
                             Dashboard
                         </a>
                     </li>
-                    <li>
+                  <!--  <li>
                         <a href="<?php echo base_url(); ?>Admission_11th_reg/StudentsData" data-original-title="">
                             11th Old Students
                         </a>
@@ -244,7 +280,7 @@
                         <a href="<?php echo base_url(); ?>Admission_11th_reg/FormPrinting" data-original-title="">
                             11th Form Printing
                         </a>
-                    </li>
+                    </li>-->
                     <li>
                         <a href="#" onclick="return logout();">Logout</a>
                     </li>
