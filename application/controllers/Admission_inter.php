@@ -18,6 +18,7 @@ class Admission_inter extends CI_Controller {
     public function index()
     {
         //DebugBreak();
+
         $msg = 7;
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -92,7 +93,9 @@ class Admission_inter extends CI_Controller {
         }
         $Inst_name = $userinfo['inst_Name'];
         $this->load->view('common/header.php',$userinfo);
+
         //DebugBreak();
+
         if($msg == 7)
         {
             $this->load->view('common/menu.php',$userinfo);
@@ -1124,7 +1127,7 @@ class Admission_inter extends CI_Controller {
             $this->load->view('login/login.php');
         }
 
-        $formno = $formno = $this->Admission_inter_model->GetFormNo($Inst_Id);
+        $formno = $this->Admission_inter_model->GetFormNo($Inst_Id);
 
         $allinputdata = array('cand_name'=>@$_POST['cand_name'],'father_name'=>@$_POST['father_name'],
             'bay_form'=>@$_POST['bay_form'],'father_cnic'=>@$_POST['father_cnic'],
@@ -1348,7 +1351,7 @@ class Admission_inter extends CI_Controller {
         $logedIn = $this->Admission_inter_model->Insert_NewEnorlement($data);
 
 
-        if( !isset($logedIn))
+        if(!isset($logedIn))
         {  
             $allinputdata = "";
             $allinputdata['excep'] = 'success';
@@ -1513,8 +1516,6 @@ class Admission_inter extends CI_Controller {
         }
         $this->load->model('Admission_inter_model');
 
-        //DebugBreak();
-
         if($this->session->flashdata('NewEnrolment_error')){
 
             $RegStdData['data'][0] = $this->session->flashdata('NewEnrolment_error');   
@@ -1523,9 +1524,8 @@ class Admission_inter extends CI_Controller {
             $RegStdData['Oldrno']=0;
             $formno = $RegStdData['data'][0]['FormNo'];
             $error_msg = $RegStdData['data'][0]['excep'];
-            $year = 2016; 
+            $year = 2017; 
             $RegStdData = array('data'=>$this->Admission_inter_model->EditEnrolement_singleForm($formno,$year,$Inst_Id),'isReAdm'=>$isReAdm,'Oldrno'=>0,'error_msg'=>$error_msg);
-
         }
         else{
             $error['excep'] = '';
@@ -2023,9 +2023,6 @@ class Admission_inter extends CI_Controller {
 
         );
         $msg = $this->uri->segment(3);
-
-
-
         if($msg == FALSE){
 
             $error_msg = $this->session->flashdata('error');    
@@ -2038,7 +2035,9 @@ class Admission_inter extends CI_Controller {
         $user = $Logged_In_Array['logged_in'];
         $this->load->model('Admission_inter_model');
 
-        $RegStdData = array('data'=>$this->Admission_inter_model->EditEnrolement($user['Inst_Id']),'grp_cd'=>$user['grp_cd']);
+        //DebugBreak();
+
+        @$RegStdData = array('data'=>$this->Admission_inter_model->EditEnrolement($user['Inst_Id']),'grp_cd'=>$user['grp_cd']);
         $RegStdData['msg_status'] = $error_msg;
         $userinfo = $Logged_In_Array['logged_in'];
         $this->load->view('common/header.php',$userinfo);
@@ -2058,9 +2057,6 @@ class Admission_inter extends CI_Controller {
 
         );
         $msg = $this->uri->segment(3);
-
-
-
         if($msg == FALSE){
 
             $error_msg = $this->session->flashdata('error');    
@@ -2087,12 +2083,10 @@ class Admission_inter extends CI_Controller {
     public function BatchList()
     {
         //DebugBreak();
-
         $data = array(
             'isselected' => '11',
 
         );
-
         $this->load->model('Admission_inter_model');
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -2147,8 +2141,11 @@ class Admission_inter extends CI_Controller {
         $Logged_In_Array = $this->session->all_userdata();
         $user = $Logged_In_Array['logged_in'];
         $this->load->model('Admission_inter_model');
-        $myinfo = array('Inst_cd'=>$user['Inst_Id'],'spl_cd'=>$spl_cd,'grp_cd'=>$user['grp_cd'],'grp_selected'=>$grp_selected);
-        $RegStdData = array('data'=>$this->Admission_inter_model->Spl_case_std_list($myinfo),'spl_cd'=>$spl_cd,'grp_selected'=>$grp_selected);
+
+        //DebugBreak();
+
+        @$myinfo = array('Inst_cd'=>$user['Inst_Id'],'spl_cd'=>$spl_cd,'grp_cd'=>$user['grp_cd'],'grp_selected'=>$grp_selected);
+        @$RegStdData = array('data'=>$this->Admission_inter_model->Spl_case_std_list($myinfo),'spl_cd'=>$spl_cd,'grp_selected'=>$grp_selected);
         $RegStdData['msg_status'] = $error_msg;
         $RegStdData['spl_cd'] =  $spl_cd;
         $userinfo = $Logged_In_Array['logged_in'];
@@ -2172,7 +2169,8 @@ class Admission_inter extends CI_Controller {
         $userinfo['isselected'] = 11;
         $Inst_Id = $userinfo['Inst_Id'];
         $page_name  = "Create Batch";
-        $User_info_data = array('Inst_Id'=>$Inst_Id,'RegGrp'=>$RegGrp,'spl_case'=>$Spl_case);
+        $rule_fee = $this->Admission_inter_model->getrulefee();
+        $User_info_data = array('Inst_Id'=>$Inst_Id,'RegGrp'=>$RegGrp,'spl_case'=>$Spl_case,'rule_fee'=>$rule_fee[0]['Rule_Fee_ID']);
         $user_info  =  $this->Admission_inter_model->user_info($User_info_data);
         if($user_info == false)
         {
@@ -2181,25 +2179,48 @@ class Admission_inter extends CI_Controller {
             return;
         }
 
-        $processing_fee = 0;
-        $Adm_fee           = 0;
-        
-        $TripleDate = date('Y-m-d',strtotime(TripleDateFee)); 
-        $now = date('Y-m-d'); // or your date as well
-        $days = (strtotime($TripleDate) - strtotime($now)) / (60 * 60 * 24);
-        $fine = 500;
-        $days = abs($days);
-        $endDate = date('d-m-Y');
-        if($days>0)
-            $LAdm_fee = $days*$fine;
+        if($rule_fee == FALSE)
+        {
+            $TripleDate = date('Y-m-d',strtotime(TripleDateFee)); 
+            $now = date('Y-m-d'); 
+            $days = (strtotime($TripleDate) - strtotime($now)) / (60 * 60 * 24);
+            $fine = 500;
+            $days = abs($days);
+            $endDate = date('d-m-Y');
+            if($days>0)
+                $LAdm_fee = $days*$fine;
+            else
+            { 
+                $LAdm_fee = 0;  
+            }
+            $rule_fee = $this->Admission_inter_model->getrulefeeSingleFee();
+            $AdmFee = $rule_fee;
+            $Adm_Fee_withSci_Composite = $AdmFee[0]['Comp_Amount']*3;
+            $Adm_Fee_withSci_10th_Only = $AdmFee[0]['Amount']*3;
+            $Adm_Fee_withArts_Composite = $AdmFee[1]['Comp_Amount']*3;
+            $Adm_Fee_withArts_10th_Only = $AdmFee[1]['Amount']*3;
+            $Adm_ProcessingFee = $AdmFee[0]['Processing_Fee'];  
+        }
         else
+        {
             $LAdm_fee          = 0;
+            $AdmFee = $rule_fee;
+            $Adm_Fee_withSci_Composite = $AdmFee[0]['Comp_Amount'];
+            $Adm_Fee_withSci_10th_Only = $AdmFee[0]['Amount'];
+            $Adm_Fee_withArts_Composite = $AdmFee[1]['Comp_Amount'];
+            $Adm_Fee_withArts_10th_Only = $AdmFee[1]['Amount'];
+            $Adm_ProcessingFee = $AdmFee[0]['Processing_Fee'];    
+        }
+
+        $processing_fee = 0;
+        $Adm_fee = 0;
 
         $TotalAdmFee = 0;
         $TotalLatefee = 0;
         $Totalprocessing_fee = 0;
         $netTotal = 0;
         $cert_fee = 550;
+
         /*====================  Counting Fee  ==============================*/    
         $practical_Sub = array(
 
@@ -2222,21 +2243,15 @@ class Admission_inter extends CI_Controller {
             'CLOTHING & TEXTILE (Home-Economics Group)'=>'75',
             'HOME MANAGEMNET (Home-Economics Group)'=>'76'
         );
-        // DebugBreak();
+
         $ispractical = 0;
-        $AdmFee = $this->Admission_inter_model->getrulefee($ispractical);
-        $Adm_Fee_withSci_Composite = $AdmFee[0]['Comp_Amount'];
-        $Adm_Fee_withSci_10th_Only = $AdmFee[0]['Amount'];
-        $Adm_Fee_withArts_Composite = $AdmFee[1]['Comp_Amount'];
-        $Adm_Fee_withArts_10th_Only = $AdmFee[1]['Amount'];
-        $Adm_ProcessingFee = $AdmFee[0]['Processing_Fee'];
-        // DebugBreak();
         $q1 = $user_info['fee'];
         $total_std = 0;
         $total_certFee = 0;
         $n = 0;
         $AllStdFee = array();
         $Adm_fee = 0;
+
         foreach($q1 as $k=>$v) 
         {
             $ids[] = $v["FormNo"];
@@ -2247,9 +2262,6 @@ class Admission_inter extends CI_Controller {
             {
                 $Adm_fee = 0;
                 $TotalLatefee = $TotalLatefee + $LAdm_fee;
-                //  $total_certFee = $total_certFee+$cert_fee;
-                //$Adm_ProcessingFee; 
-                // $Totalprocessing_fee = $Totalprocessing_fee + $Adm_ProcessingFee;
 
                 if($v['cat11'] == 2)
                 {
@@ -2267,10 +2279,8 @@ class Admission_inter extends CI_Controller {
                 {
 
                     $AllStdFee[$n] = array('formNo'=> $v["FormNo"],'AdmFee'=>@$Adm_fee,'CertificateFee'=>@$cert_fee,'AdmFine'=>@$LAdm_fee,'AdmProcessFee'=>@$Adm_ProcessingFee,'AdmTotalFee'=>$Adm_fee+$LAdm_fee+$Adm_ProcessingFee+$cert_fee);
-                    //  echo '<pre>'; print_r($v["FormNo"]);echo '</pre>'; exit();
+
                 }
-
-
             }
             else
             {
@@ -2297,41 +2307,37 @@ class Admission_inter extends CI_Controller {
                 }
                 if($ispractical == 1 && $is9th==0)
                 {
-
                     $Adm_fee = $Adm_Fee_withSci_10th_Only;
                     $TotalLatefee = $TotalLatefee + $LAdm_fee;
 
                     $AllStdFee[$n] = array('formNo'=> $v["FormNo"],'AdmFee'=>$Adm_fee,'CertificateFee'=>$cert_fee,'AdmFine'=>$LAdm_fee,'AdmProcessFee'=>$Adm_ProcessingFee,'AdmTotalFee'=>$Adm_fee+$LAdm_fee+$Adm_ProcessingFee+$cert_fee);
 
-
-
-                    // $Totalprocessing_fee = $Totalprocessing_fee + $Adm_ProcessingFee;
                 }
                 else if($ispractical == 1 && $is9th != 0)
                 {
                     $Adm_fee = $Adm_Fee_withSci_Composite;
                     $TotalLatefee = $TotalLatefee + $LAdm_fee;
                     $AllStdFee[$n] = array('formNo'=> $v["FormNo"],'AdmFee'=>$Adm_fee,'CertificateFee'=>$cert_fee,'AdmFine'=>$LAdm_fee,'AdmProcessFee'=>$Adm_ProcessingFee,'AdmTotalFee'=>$Adm_fee+$LAdm_fee+$Adm_ProcessingFee+$cert_fee);
-                    // $Totalprocessing_fee = $Totalprocessing_fee + $Adm_ProcessingFee;  
+
                 }
                 else if($ispractical == 0 && $is9th ==0)
                 {
                     $Adm_fee = $Adm_Fee_withArts_10th_Only;
                     $TotalLatefee = $TotalLatefee + $LAdm_fee;
                     $AllStdFee[$n] = array('formNo'=> $v["FormNo"],'AdmFee'=>$Adm_fee,'CertificateFee'=>$cert_fee,'AdmFine'=>$LAdm_fee,'AdmProcessFee'=>$Adm_ProcessingFee,'AdmTotalFee'=>$Adm_fee+$LAdm_fee+$Adm_ProcessingFee+$cert_fee);
-                    // $Totalprocessing_fee = $Totalprocessing_fee + $Adm_ProcessingFee;  
+
                 }
                 else if($ispractical == 0 && $is9th !=0)
                 {
                     $Adm_fee = $Adm_Fee_withArts_Composite;
                     $TotalLatefee = $TotalLatefee + $LAdm_fee;
                     $AllStdFee[$n] = array('formNo'=> $v["FormNo"],'AdmFee'=>$Adm_fee,'CertificateFee'=>$cert_fee,'AdmFine'=>$LAdm_fee,'AdmProcessFee'=>$Adm_ProcessingFee,'AdmTotalFee'=>$Adm_fee+$LAdm_fee+$Adm_ProcessingFee+$cert_fee); 
-                    //  $Totalprocessing_fee = $Totalprocessing_fee + $Adm_ProcessingFee;  
+
                 }
-                //$AdmFee
+
             }
             $TotalAdmFee = $TotalAdmFee + $Adm_fee;
-       //     $TotalLatefee = $TotalLatefee + $LAdm_fee;
+
             $Totalprocessing_fee = $Totalprocessing_fee + $Adm_ProcessingFee;
             $total_certFee = $total_certFee+$cert_fee;
             $n++;
@@ -2357,7 +2363,7 @@ class Admission_inter extends CI_Controller {
         else{
             return;
         }
-        //DebugBreak();
+
         $RegGrp = $this->uri->segment(3);
         $this->load->model('Admission_inter_model');
         $this->load->library('session');
@@ -2371,18 +2377,43 @@ class Admission_inter extends CI_Controller {
         $user_info  =  $this->Admission_inter_model->user_info_Formwise($User_info_data); 
         $is_gov =  $user_info['info'][0]['IsGovernment'];
 
-        $processing_fee = 0;
-        $Adm_fee           = 0;
-        $TripleDate = date('Y-m-d',strtotime(TripleDateFee)); 
-        $now = date('Y-m-d'); // or your date as well
-        $days = (strtotime($TripleDate) - strtotime($now)) / (60 * 60 * 24);
-        $fine = 500;
-        $days = abs($days);
-        $endDate = date('d-m-Y');
-        if($days>0)
-            $LAdm_fee = $days*$fine;
+
+        if($rule_fee == FALSE)
+        {
+            $TripleDate = date('Y-m-d',strtotime(TripleDateFee)); 
+            $now = date('Y-m-d'); 
+            $days = (strtotime($TripleDate) - strtotime($now)) / (60 * 60 * 24);
+            $fine = 500;
+            $days = abs($days);
+            $endDate = date('d-m-Y');
+            if($days>0)
+                $LAdm_fee = $days*$fine;
+            else
+            { 
+                $LAdm_fee          = 0;  
+            }
+            $rule_fee = $this->Admission_inter_model->getrulefeeSingleFee();
+            $AdmFee = $rule_fee;
+            $Adm_Fee_withSci_Composite = $AdmFee[0]['Comp_Amount']*3;
+            $Adm_Fee_withSci_10th_Only = $AdmFee[0]['Amount']*3;
+            $Adm_Fee_withArts_Composite = $AdmFee[1]['Comp_Amount']*3;
+            $Adm_Fee_withArts_10th_Only = $AdmFee[1]['Amount']*3;
+            $Adm_ProcessingFee = $AdmFee[0]['Processing_Fee'];  
+        }
         else
+        {
             $LAdm_fee          = 0;
+            $AdmFee = $rule_fee;
+            $Adm_Fee_withSci_Composite = $AdmFee[0]['Comp_Amount'];
+            $Adm_Fee_withSci_10th_Only = $AdmFee[0]['Amount'];
+            $Adm_Fee_withArts_Composite = $AdmFee[1]['Comp_Amount'];
+            $Adm_Fee_withArts_10th_Only = $AdmFee[1]['Amount'];
+            $Adm_ProcessingFee = $AdmFee[0]['Processing_Fee'];    
+        }
+
+        $processing_fee = 0;
+        $Adm_fee = 0;
+
         $TotalAdmFee = 0;
         $TotalLatefee = 0;
         $Totalprocessing_fee = 0;
@@ -2411,12 +2442,7 @@ class Admission_inter extends CI_Controller {
 
         );
         $ispractical = 0;
-        $AdmFee =$rule_fee;
-        $Adm_Fee_withSci_Composite = $AdmFee[0]['Comp_Amount'];
-        $Adm_Fee_withSci_10th_Only = $AdmFee[0]['Amount'];
-        $Adm_Fee_withArts_Composite = $AdmFee[1]['Comp_Amount'];
-        $Adm_Fee_withArts_10th_Only = $AdmFee[1]['Amount'];
-        $Adm_ProcessingFee = $AdmFee[0]['Processing_Fee'];
+
         $q1 = $user_info['fee'];
         $total_std = 0;
         $total_certFee = 0;
@@ -2433,9 +2459,6 @@ class Admission_inter extends CI_Controller {
             {
                 $Adm_fee = 0;
                 $TotalLatefee = $TotalLatefee + $LAdm_fee;
-                //  $total_certFee = $total_certFee+$cert_fee;
-                //$Adm_ProcessingFee; 
-                // $Totalprocessing_fee = $Totalprocessing_fee + $Adm_ProcessingFee;
 
                 if($v['cat11'] == 2)
                 {
@@ -2453,10 +2476,7 @@ class Admission_inter extends CI_Controller {
                 {
 
                     $AllStdFee[$n] = array('formNo'=> $v["FormNo"],'AdmFee'=>@$Adm_fee,'CertificateFee'=>@$cert_fee,'AdmFine'=>@$LAdm_fee,'AdmProcessFee'=>@$Adm_ProcessingFee,'AdmTotalFee'=>$Adm_fee+$LAdm_fee+$Adm_ProcessingFee+$cert_fee);
-                    //  echo '<pre>'; print_r($v["FormNo"]);echo '</pre>'; exit();
                 }
-
-
             }
             else
             {
@@ -2483,41 +2503,34 @@ class Admission_inter extends CI_Controller {
                 }
                 if($ispractical == 1 && $is9th==0)
                 {
-
                     $Adm_fee = $Adm_Fee_withSci_10th_Only;
                     $TotalLatefee = $TotalLatefee + $LAdm_fee;
 
                     $AllStdFee[$n] = array('formNo'=> $v["FormNo"],'AdmFee'=>$Adm_fee,'CertificateFee'=>$cert_fee,'AdmFine'=>$LAdm_fee,'AdmProcessFee'=>$Adm_ProcessingFee,'AdmTotalFee'=>$Adm_fee+$LAdm_fee+$Adm_ProcessingFee+$cert_fee);
 
-
-
-                    // $Totalprocessing_fee = $Totalprocessing_fee + $Adm_ProcessingFee;
                 }
                 else if($ispractical == 1 && $is9th != 0)
                 {
                     $Adm_fee = $Adm_Fee_withSci_Composite;
                     $TotalLatefee = $TotalLatefee + $LAdm_fee;
                     $AllStdFee[$n] = array('formNo'=> $v["FormNo"],'AdmFee'=>$Adm_fee,'CertificateFee'=>$cert_fee,'AdmFine'=>$LAdm_fee,'AdmProcessFee'=>$Adm_ProcessingFee,'AdmTotalFee'=>$Adm_fee+$LAdm_fee+$Adm_ProcessingFee+$cert_fee);
-                    // $Totalprocessing_fee = $Totalprocessing_fee + $Adm_ProcessingFee;  
                 }
                 else if($ispractical == 0 && $is9th ==0)
                 {
                     $Adm_fee = $Adm_Fee_withArts_10th_Only;
                     $TotalLatefee = $TotalLatefee + $LAdm_fee;
                     $AllStdFee[$n] = array('formNo'=> $v["FormNo"],'AdmFee'=>$Adm_fee,'CertificateFee'=>$cert_fee,'AdmFine'=>$LAdm_fee,'AdmProcessFee'=>$Adm_ProcessingFee,'AdmTotalFee'=>$Adm_fee+$LAdm_fee+$Adm_ProcessingFee+$cert_fee);
-                    // $Totalprocessing_fee = $Totalprocessing_fee + $Adm_ProcessingFee;  
                 }
                 else if($ispractical == 0 && $is9th !=0)
                 {
                     $Adm_fee = $Adm_Fee_withArts_Composite;
                     $TotalLatefee = $TotalLatefee + $LAdm_fee;
                     $AllStdFee[$n] = array('formNo'=> $v["FormNo"],'AdmFee'=>$Adm_fee,'CertificateFee'=>$cert_fee,'AdmFine'=>$LAdm_fee,'AdmProcessFee'=>$Adm_ProcessingFee,'AdmTotalFee'=>$Adm_fee+$LAdm_fee+$Adm_ProcessingFee+$cert_fee); 
-                    //  $Totalprocessing_fee = $Totalprocessing_fee + $Adm_ProcessingFee;  
+
                 }
-                //$AdmFee
+
             }
             $TotalAdmFee = $TotalAdmFee + $Adm_fee;
-          //  $TotalLatefee = $TotalLatefee + $LAdm_fee;
             $Totalprocessing_fee = $Totalprocessing_fee + $Adm_ProcessingFee;
             $total_certFee = $total_certFee+$cert_fee;
             $n++;
@@ -3387,7 +3400,7 @@ class Admission_inter extends CI_Controller {
             if($data['sub6Ap1'] == 1){$sub6_abr = $data["sub6_abr"].',';}
             if($data['sub7Ap1'] == 1){$sub7_abr = $data["sub7_abr"].',';}
 
-                            $pdf->Text($col5+.05,$ln[$countofrecords]+0.2,  $data["sub1_abr"].','.$data["sub2_abr"].','.$data["sub8_abr"].','.$data["sub4_abr"].','.$data["sub5_abr"].',' .@$sub5A_abr .$data["sub6_abr"].',' .@$sub6A_abr .$data["sub7_abr"].',' .@$sub7A_abr);
+            $pdf->Text($col5+.05,$ln[$countofrecords]+0.2,  $data["sub1_abr"].','.$data["sub2_abr"].','.$data["sub8_abr"].','.$data["sub4_abr"].','.$data["sub5_abr"].',' .@$sub5A_abr .$data["sub6_abr"].',' .@$sub6A_abr .$data["sub7_abr"].',' .@$sub7A_abr);
             $pdf->SetFont('Arial','B',7);    
             $pdf->Text($col5+.05,$ln[$countofrecords]+0.4,@$sub1_abr .@$sub2_abr. @$sub3_abr. @$sub4_abr. @$sub5_abr. @$sub6_abr. @$sub7_abr);
 
@@ -4542,12 +4555,12 @@ class Admission_inter extends CI_Controller {
             return;
 
         }
-  /*      else if(@$_POST['sub7p2']==0 && @$_POST['std_group_hidden']==7)
+        /*      else if(@$_POST['sub7p2']==0 && @$_POST['std_group_hidden']==7)
         {
-            $allinputdata['excep'] = 'Please Select Part-II Subject 7';
-            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-            redirect('Admission_inter/'.$viewName);
-            return;
+        $allinputdata['excep'] = 'Please Select Part-II Subject 7';
+        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+        redirect('Admission_inter/'.$viewName);
+        return;
 
         }*/
     }

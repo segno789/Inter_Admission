@@ -16,9 +16,6 @@
                     </h4>
                 </div>
                 <hr>
-                <div class="control-group" style="text-align: center;">
-                    <!-- <img src="<?=base_url()?>/assets/img/note_for_batch.jpg" align="middle" style="height: 69px;" alt="">-->
-                </div> 
                 <div class="control-group">
                     <label class="control-label span1">
                         Select Option:
@@ -309,9 +306,7 @@
                                             <th style="width:20%">
                                                 Father's Name
                                             </th>
-                                            <!-- <th style="width:6%" class="hidden-phone">
-                                            DOB
-                                            </th>-->
+                                            
                                             <th style="width:20%" class="hidden-phone">
                                                 Subject Group
                                             </th>

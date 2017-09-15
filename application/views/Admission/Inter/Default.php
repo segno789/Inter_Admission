@@ -1,9 +1,23 @@
+
 <div class="form-group">
     <div class="col-md-12">
-        <div class="alert alert-success">
+        <div class="alert alert-info">
             <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close"></a>
-            <strong>Last Date of Online Admissions and Submission of Hard Copy for Inter Supply Examination with (Single fee) is </strong>
-            <b style="color: maroon;"> <?php echo lastdate ?> </b>
+            <strong>Last Date of Online Admissions and Submission of Hard Copy for Inter Supply Examination with <br> Single fee </strong>
+
+            <?php  
+            $SingleDateFee = date("d-m-Y", strtotime(SingleDateFee)); 
+            $DoubleDateFee = date("d-m-Y", strtotime(DoubleDateFee)); 
+            $TripleDateFee = date("d-m-Y", strtotime(TripleDateFee)); 
+            ?>
+
+            <b style="color: green;"> <?php echo $SingleDateFee ?> </b>
+            <br>
+            <strong>Double fee</strong>
+            <b style="color: red;"> <?php echo $DoubleDateFee ?> </b>
+            <br>
+            <strong>Tripple fee</strong>
+            <b style="color: blue;"> <?php echo $TripleDateFee ?> </b>
         </div>
     </div>
 </div>
@@ -40,7 +54,7 @@
     <div class="form-group">    
         <div class="row">
             <div class="col-md-offset-3 col-md-6">
-                <input type="button" value="Proceed to Next Step" id="proceed" name="proceed" class="btn btn-primary btn-block">
+                <input type="button" value="Proceed to Next Step" id="proceedDefault" name="proceedDefault" class="btn btn-primary btn-block">
             </div>
         </div>
     </div>

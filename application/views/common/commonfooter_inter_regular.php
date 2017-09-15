@@ -1,11 +1,10 @@
-<footer>
-    <p>
-        &copy; <?php echo Year; ?> BISE Gujranwala All Rights Reserved.
-    </p>
-</footer>
 
-<!--Add the following script at the bottom of the web page (before </body></html>)-->
-<!--<script type="text/javascript" async="async" defer="defer" data-cfasync="false" src="https://mylivechat.com/chatinline.aspx?hccid=93646887"></script>-->
+
+<div class="container-fluid ">
+    <div style="text-align: center; background:#3187bf; color: white;  margin-bottom: 5px; height: 40px;">
+        &copy; 2017 BISE Gujranwala, All Rights Reserved. 
+    </div>
+</div>
 
 <script src="<?php echo base_url(); ?>assets/js_matric/jquery-1.8.3.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/bootstrap.js"></script>
@@ -20,12 +19,6 @@
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.fancybox.pack.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/alertify.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/jquery-ui.js"></script>
-
-
-
-
-</body>
-</html>
 
 <script type="text/javascript">
 
@@ -52,7 +45,7 @@
             if(spl_cd == "chance")
             {
                 alertify.error("Dear Student! You are not eligible due to NO chance in this exam!");
-            } //exam_type3
+            }
             else if(spl_cd == "exam_type3")
             {
                 alertify.error("Dear Student! You are not eligible due to FULL FAIL!");
@@ -74,12 +67,10 @@
         {
             if(error_New_Enrolement == "success" )
             {
-                // alert('Form Submitted Successfully');
                 alertify.success('Form Submitted Successfully');   
             }
             else
             {
-                // alert('ehll');
                 alertify.error(error_New_Enrolement);   
             }
 
@@ -88,12 +79,10 @@
         {
             if(error_New_Enrolement == "success" )
             {
-                //alert('Form Updated Successfully');
                 alertify.success('Form Updated Successfully');   
             }
             else
             {
-                //  alert('ehll');
                 alertify.error(error_New_Enrolement_update);   
             }
 
@@ -228,10 +217,8 @@
             73 : 'TYPE WRITING',
             74 : 'WEAVING'
         }
-        // $.fancybox("#center");
-        $('.mPageloader').hide();
-        // $( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate: new Date(2001, 7,1),yearRange: '1970:2001'}).val();
 
+        $('.mPageloader').hide();
         $("#formid").keydown(function (e) {
             // Allow: backspace, delete, tab, escape, enter and .
             if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
@@ -242,7 +229,7 @@
                 // let it happen, don't do anything
                 return;
             }
-            // Ensure that it is a number and stop the keypress
+
             if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
                 e.preventDefault();
             }
@@ -250,12 +237,11 @@
         $("#proceed").click(function(){
             var isreg =  $('input[name=candidate]:checked', '#options').val();
             if(isreg==1){
-                window.location.href='<?php  echo base_url(); ?>Admission/matric_default';
+                window.location.href='<?php  echo base_url(); ?>index.php/Admission/matric_default';
             }
             else{
-                window.location.href='<?php  echo base_url(); ?>login'  
+                window.location.href='<?php  echo base_url(); ?>index.php/login'  
             }
-            console.log(isreg);
         })
 
         $("#btndwnForm").click(function(){
@@ -283,11 +269,9 @@
                 alertify.log("Please wait while your form is downloading....")    
                 downloadform();    
             }
-
-
         })
         function downloadform(){
-            //debugger;
+
             var formno = $("#formid").val();
             var dob = $("#dob").val();
             if(formno == ""){
@@ -296,7 +280,7 @@
             if(dob == ""){
                 return false;
             }
-            window.location.href='<?php  echo base_url(); ?>Admission/checkFormNo_then_download/'+formno+'/'+dob;  
+            window.location.href='<?php  echo base_url(); ?>index.php/Admission/checkFormNo_then_download/'+formno+'/'+dob;  
         }
 
         function validateForm() {
@@ -349,15 +333,13 @@
                 $("#pvtinfo_teh").append('<option value="17">DASKA</option>');
                 $("#pvtinfo_teh").append('<option value="18">SAMBRIAL</option>');
             }
-
-
         });
         var dist_cd = '<?php echo @$data[0]['dist_cd'];  ?>';
         var teh_cd = '<?php  echo @$data[0]['teh_cd']; ?>';
         var zone_cd = '<?php echo @$data[0]['zone_cd']; ?>';
         var gender_d = '<?php echo  @$data[0]['sex']; ?>';
 
-        var distId =dist_cd;  //$("#pvtinfo_dist").val();
+        var distId = dist_cd;
         $('#pvtinfo_teh').empty();
         $('#pvtinfo_teh').append('<option value="0">SELECT TEHSIL</option>');
         $('#pvtZone').empty();
@@ -394,84 +376,47 @@
             $("#pvtinfo_teh").append('<option value="18">SAMBRIAL</option>');
         }
         $("#pvtinfo_teh").change(function()
-        {
+            {
+                var tehId =  $("#pvtinfo_teh").val();
 
-            // alert("hello");
-            var tehId =  $("#pvtinfo_teh").val();
-            //alert("hello "+tehId);
-            if(tehId == 0){
-                alert("Select Tehsil First");
-            }
-            else{
+                if(tehId == 0){
+                    alert("Select Tehsil First");
+                }
+                else{
 
-                jQuery.ajax({
-                    ////debugger;
-                    type: "POST",
-                    url: "<?php echo base_url(); ?>" + "Admission/getzone/",
-                    dataType: 'json',
-                    data: {tehCode: tehId},
-                    beforeSend: function() {  $('.mPageloader').show(); },
-                    complete: function() { $('.mPageloader').hide();},
-                    success: function(json) {
-                        var listitems;
-                        //alert('Hi i am success');
-                        // console.log("I am console");
-                        // console.log(url);
-                        $('#pvtZone').empty();
-                        $('#pvtZone').append('<option value="0">SELECT ZONE</option>');
-                        $.each(json, function (key, data) {
+                    jQuery.ajax({
+                        type: "POST",
+                        url: "<?php echo base_url(); ?>" + "index.php/Admission/getzone/",
+                        dataType: 'json',
+                        data: {tehCode: tehId},
+                        beforeSend: function() {  $('.mPageloader').show(); },
+                        complete: function() { $('.mPageloader').hide();},
+                        success: function(json) {
+                            var listitems;
+                            $('#pvtZone').empty();
+                            $('#pvtZone').append('<option value="0">SELECT ZONE</option>');
+                            $.each(json, function (key, data) {
 
-                            //console.log(key)
-
-                            $.each(data, function (index, data) {
-
-                                // console.log('Zone Name :', data.zone_name , ' Zone Code : ' ,data.zone_cd)
-                                listitems +='<option value=' + data.zone_cd + '>' + data.zone_name + '</option>';
-                                //$('#pvtZone').append('<option value=' + data.zone_cd + '>' + data.zone_name + '</option>');
-                                //console.log('Zone Name :', data.zone_cd)
-                                //console.log('Zone Name :', data)
+                                $.each(data, function (index, data) {
+                                    listitems +='<option value=' + data.zone_cd + '>' + data.zone_name + '</option>';                                    
+                                })
                             })
-                        })
-                        $('#pvtZone').append(listitems)
-                        /*console.log(data.length);
-                        for (var i = 0; i < data.length; i++) {
+                            $('#pvtZone').append(listitems)
 
-                        console.log(" Thesil : "+ data[i].zone_name);
-                        // var checkBox = "<input type='checkbox' data-price='" + data[i].Price + "' name='" + data[i].Name + "' value='" + data[i].ID + "'/>" + data[i].Name + "<br/>";
-                        // $(checkBox).appendTo('#modifiersDiv');
-                        }*/
-                        //if (json)
-                        //{
-                        //var obj = jQuery.parseJSON(json);
-                        //  console.log(json.teh[0].zone_name);
-                        //alert( obj['teh']['Class']);
-                        //   alert(res.Sess);
-                        //   alert(res.Class);
-                        //   //debugger;
-                        //   Show Entered Value
-                        //   jQuery("div#result").show();
-                        //   jQuery("div#value").html(res.username);
-                        //   jQuery("div#value_pwd").html(res.pwd);
-                        //}
-
-                    },
-                    error: function(request, status, error){
-                        alert(request.responseText);
-                    }
-                });
-            }
-
+                        },
+                        error: function(request, status, error){
+                            alert(request.responseText);
+                        }
+                    });
+                }
         })
-        
+
         $("#pvtZone").change(function(){
-            //debugger;
-            // alert("hello"); getcenter
-            //  $.fancybox("#center");
+
             var tehId =  $("#pvtZone").val();
             var gend = $("#gen").val();
-            //alert("hello "+tehId);
+
             if(tehId == 0){
-                // alert("Select Zone First");
             }
             else{
                 jQuery.ajax({
@@ -484,13 +429,11 @@
                     complete: function() { $('.mPageloader').hide();},
                     success: function(json) {
                         var listitems='';
-                        //$('#instruction').empty();
-                        $.each(json.center, function (key, data) {
 
-                            console.log(data);
-                            listitems +='<label style="text-align: left; margin-top: -23px;">'+data.CENT_CD + '-' + data.CENT_NAME+'</label><br>';
+                        $.each(json.center, function (key, data) {
+                            listitems +='<label>'+data.CENT_CD + '-' + data.CENT_NAME+'</label><br>';
                         })
-                        $('#instruction').html('<h1 style="    margin-bottom: 28px;">Selected Zone Centre List </h1>'+listitems); 
+                        $('#instruction').html('<h1>Selected Zone Centre List </h1>'+listitems); 
                         $.fancybox("#instruction");
                     },
                     error: function(request, status, error){
@@ -501,74 +444,59 @@
             }
 
         })
-        var tehId = zone_cd // $("#pvtZone").val();
-        var gend = gender_d ; //$("#gen").val();
-        //alert("hello "+tehId);
+        var tehId = zone_cd ;
+        var gend = gender_d ;
 
-        debugger;
         $("#pvtinfo_dist").val(dist_cd);
 
         $("#pvtinfo_teh").val(teh_cd);
         $("#pvtZone").val(zone_cd);
 
         $('input[type=radio][name=batch_opt]').change(function() {
-            // //debugger;
-            // alert(this.value + "  Transfer Thai Gayo");
+
             if (this.value == '1') {
-                window.location.href = '<?=base_url()?>Admission_inter/CreateBatch/'+'96/1/';
-                // alert("Allot Thai Gayo Bhai");
+                window.location.href = '<?=base_url()?>index.php/Admission_inter/CreateBatch/'+'96/1/';
             }
             else  if (this.value == '2') {
-                window.location.href = '<?=base_url()?>Admission_inter/CreateBatch/'+'97/2/';
-                //  alert("Transfer Thai Gayo");
+                window.location.href = '<?=base_url()?>index.php/Admission_inter/CreateBatch/'+'97/2/';
             }
             else  if(this.value == 3){
-                window.location.href = '<?=base_url()?>Admission_inter/CreateBatch/'+'98/3';
-                //alert("Transfer Thai Gayo");
+                window.location.href = '<?=base_url()?>index.php/Admission_inter/CreateBatch/'+'98/3';
             }
 
         });
         $( "#std_groups" ).change(function () {
-            
-            
-             if (this.value == '0') {
+
+            if (this.value == '0') {
                 // 1 biology   2 humanities   5 deaf and dumb  7 computer science  8 electrical wiring 
-                window.location.href = '<?=base_url()?>Admission_inter/CreateBatch/'+'96/3/0/';
-                //  alert("Allot Thai Gayo Bhai");
+                window.location.href = '<?=base_url()?>index.php/Admission_inter/CreateBatch/'+'96/3/0/';
             }
-            
+
             else if (this.value == '1') {
                 // 1 biology   2 humanities   5 deaf and dumb  7 computer science  8 electrical wiring 
-                window.location.href = '<?=base_url()?>Admission_inter/CreateBatch/'+'96/3/1/';
-                //  alert("Allot Thai Gayo Bhai");
+                window.location.href = '<?=base_url()?>index.php/Admission_inter/CreateBatch/'+'96/3/1/';
             }
             else  if (this.value == '2') {
-                window.location.href = '<?=base_url()?>Admission_inter/CreateBatch/'+'97/3/2/';
-                // alert("Transfer Thai Gayo");
+                window.location.href = '<?=base_url()?>index.php/Admission_inter/CreateBatch/'+'97/3/2/';
             }
 
             else  if (this.value == '3') {
-                window.location.href = '<?=base_url()?>Admission_inter/CreateBatch/'+'97/3/3/';
-                // alert("Transfer Thai Gayo");
+                window.location.href = '<?=base_url()?>index.php/Admission_inter/CreateBatch/'+'97/3/3/';
             }
 
             else  if (this.value == '4') {
-                window.location.href = '<?=base_url()?>Admission_inter/CreateBatch/'+'97/3/4/';
-                // alert("Transfer Thai Gayo");
+                window.location.href = '<?=base_url()?>index.php/Admission_inter/CreateBatch/'+'97/3/4/';
             }
 
             else  if(this.value == '5'){
-                
-                window.location.href = '<?=base_url()?>Admission_inter/CreateBatch/'+'98/3/5/';
-                // alert("Transfer Thai Gayo");
+
+                window.location.href = '<?=base_url()?>index.php/Admission_inter/CreateBatch/'+'98/3/5/';
             }
             else  if(this.value == '7'){
-                window.location.href = '<?=base_url()?>Admission_inter/CreateBatch/'+'98/3/7/';
-                //  alert("Transfer Thai Gayo");
+                window.location.href = '<?=base_url()?>index.php/Admission_inter/CreateBatch/'+'98/3/7/';
             }
             else  if(this.value == '8'){
-                window.location.href = '<?=base_url()?>Admission_inter/CreateBatch/'+'98/3/8/';
-                //  alert("Transfer Thai Gayo");
+                window.location.href = '<?=base_url()?>index.php/Admission_inter/CreateBatch/'+'98/3/8/';
             }
 
         })
@@ -585,21 +513,19 @@
                 alertify.error("Please Select Group First!") ;
             }
             else{
-                var msg = "Are You Sure you want to make Batch ?" // var msg = "<img src='<?php echo base_url(); ?>assets/img/note_for_batch.jpg' alt='logo' style='width:800px; height: auto;' />"
-                //var msg = "Are You Sure You want to Cancel this Form ? <img src='<?php echo base_url(); ?>assets/img/note_for_batch.jpg' alt='logo' style='width:30px; height: 50px;' />"
+                var msg = "Are You Sure you want to make Batch ?";
+
                 alertify.confirm(msg, function (e) {
 
                     if (e) {
-                        window.location.href = '<?=base_url()?>Admission_inter/Make_Batch_Group_wise/'+$("#std_groups").val()+'/0';
+                        window.location.href = '<?=base_url()?>index.php/Admission_inter/Make_Batch_Group_wise/'+$("#std_groups").val()+'/0';
                     } 
-
-
                 });
             }
         }
         else if(option == "1" || option == "2")
         {
-            window.location.href = '<?=base_url()?>Admission_inter/Make_Batch_Group_wise/'+'0/'+option+'/';
+            window.location.href = '<?=base_url()?>index.php/Admission_inter/Make_Batch_Group_wise/'+'0/'+option+'/';
         }
         return false;
 
@@ -610,7 +536,7 @@
 
         if( $('input[name="chk[]"]:checked').length > 0 )
         {
-            var msg = "Are you sure you want to make Batch ?" //var msg = "<img src='<?php echo base_url(); ?>assets/img/note_for_batch.jpg' alt='logo' style='width:800px; height: auto;' />"
+            var msg = "Are you sure you want to make Batch ?";
 
             alertify.confirm(msg, function (e) {
 
@@ -638,7 +564,7 @@
 
             if (e) {
                 // user clicked "ok"
-                window.location.href ='<?php echo base_url(); ?>login/logout';
+                window.location.href ='<?php echo base_url(); ?>index.php/login/logout';
             } 
         });
     }
@@ -653,12 +579,11 @@
         $('#sub6').empty();
         $('#sub7').empty();
         $('#sub8').empty();
-        window.location.href = '<?=base_url()?>Admission_inter/NewEnrolment_EditForm_inter/'+formrno
+        window.location.href = '<?=base_url()?>index.php/Admission_inter/NewEnrolment_EditForm_inter/'+formrno
     }
 
     function NewForm(formrno,IntBrd_cd,year)
     {
-        // //debugger;
         $('#sub1').empty();
         $('#sub2').empty();
         $('#sub3').empty();
@@ -667,47 +592,44 @@
         $('#sub6').empty();
         $('#sub7').empty();
         $('#sub8').empty();
-        window.location.href = '<?=base_url()?>Admission_inter/NewEnrolment_NewForm_inter/'+formrno+'/'+IntBrd_cd+'/'+year
+        window.location.href = '<?=base_url()?>index.php/Admission_inter/NewEnrolment_NewForm_inter/'+formrno+'/'+IntBrd_cd+'/'+year
     }
     function DeleteForm(formrno)
     {
-        // var msg = "<img src='<?php echo base_url(); ?>assets/img/note_for_batch.jpg' alt='logo' style='width:800px; height: auto;' />"
         var msg = "Are You Sure You want to Cancel this Form ?"
         alertify.confirm(msg, function (e) {
 
             if (e) {
                 // user clicked "ok"
-                window.location.href ='<?php echo base_url(); ?>Admission_inter/NewEnrolment_Delete/'+formrno;
+                window.location.href ='<?php echo base_url(); ?>index.php/Admission_inter/NewEnrolment_Delete/'+formrno;
             } else {
                 // user clicked "cancel"
 
             }
         });
-        // window.location.href = '<?=base_url()?>/RollNoSlip/MatricRollNo/'+formrno
     }
 
     function CutList(Batch_ID)
     {
-        window.location.href = '<?=base_url()?>Admission_inter/CutList/'+Batch_ID + '/'
+        window.location.href = '<?=base_url()?>index.php/Admission_inter/CutList/'+Batch_ID + '/'
     }
 
     function ReturnForm(Batch_ID)
     {
-        window.location.href = '<?=base_url()?>Admission_inter/Print_Admission_inter_Form_Proofreading_Groupwise/'+Batch_ID + '/3'
+        window.location.href = '<?=base_url()?>index.php/Admission_inter/Print_Admission_inter_Form_Proofreading_Groupwise/'+Batch_ID + '/3'
     }
     function RevenueForm(Batch_ID)
     {
-        window.location.href = '<?=base_url()?>Admission_inter/revenue_pdf/'+Batch_ID
+        window.location.href = '<?=base_url()?>index.php/Admission_inter/revenue_pdf/'+Batch_ID
     }
     function ReleaseForm(Batch_ID)
     {
-        window.location.href = '<?=base_url()?>Admission_inter/BatchRelease/'+Batch_ID
+        window.location.href = '<?=base_url()?>index.php/Admission_inter/BatchRelease/'+Batch_ID
 
     }
     $('#get_report').click( function(){
         var option =  $('input[type=radio][name=opt]:checked').val(); 
-        // alert(option);
-        // return;
+
         if(option == "1")
         {
             var std_group = $('#std_group').val();
@@ -734,8 +656,7 @@
     })
     $('#get_Proof').click( function(){
         var option =  $('input[type=radio][name=opt]:checked').val(); 
-        // alert(option);
-        // return;
+
         if(option == "1")
         {
             var std_group = $('#std_group').val();
@@ -762,8 +683,7 @@
     })
     $('#get_Proof_reg').click( function(){
         var option =  $('input[type=radio][name=opt]:checked').val(); 
-        // alert(option);
-        // return;
+
         if(option == "1")
         {
             var std_group = $('#std_group').val();
@@ -797,13 +717,11 @@
         else if (this.value == '2') {
             $('#grp_selected').css('display','none');
             $('#formnowise_selected').css('display','block');
-            // $('.news').css('display','block');
-            //  alert("Transfer Thai Gayo");
         }
     });
+
     function BatchRelease_INSERT()
     {
-
         var Batch_Id = $('#batch_real_Id').val();
         var reason  = $('#batch_real_reason').val();;
         var bank_branch  = $('#batch_real_bankbranch').val();;
@@ -814,83 +732,69 @@
 
         if(Batch_Id == 0)
         {
-
             alertify.error("Please Select Batch Again From Batch List.");
             $('#batch_real_Id').focus();
             return false;
-
-
         }
+
         if(reason.length < 5)
         {
-
             alertify.error("Please Give Strong Reason.(More than 5 words..)");
             $('#batch_real_reason').focus();
             return false;
-
-
         }
+
         if(bank_branch == 0)
         {
-
             alertify.error("Please Select Bank Branch.");
             $('#batch_real_bankbranch').focus();
             return false;
-
-
         }
+
         if(bank_challan == 0)
         {
-
             alertify.error("Please Give Bank Challan.");
             $('#batch_real_challanno').focus();
             return false;
-
-
         }
+
         if(paidAmount == 0)
         {
-
             alertify.error("Please Give Bank Paid Amount.");
             $('#batch_real_PaidAmount').focus();
             return false;
-
-
         }
+
         if(paidDate == '')
         {
-
             alertify.error("Please Give Bank Paid Amount.");
             $('#batch_real_PaidDate').focus();
             return false;
-
-
         }
 
-
-        window.location.href = '<?=base_url()?>Admission_inter/Batchlist_INSERT/';
+        window.location.href = '<?=base_url()?>index.php/Admission_inter/Batchlist_INSERT/';
     }
     function ReturnForm_Final_groupwise(grp_cd){
-        window.location.href = '<?=base_url()?>Admission_inter/return_pdf/'+grp_cd + '/2'
+        window.location.href = '<?=base_url()?>index.php/Admission_inter/return_pdf/'+grp_cd + '/2'
     }
     function ReturnForm_Final_Formnowise(startformno,endformno){
-        window.location.href = '<?=base_url()?>Admission_inter/return_pdf/'+startformno + '/3' +'/'+endformno +'/';
+        window.location.href = '<?=base_url()?>index.php/Admission_inter/return_pdf/'+startformno + '/3' +'/'+endformno +'/';
     }
     function ChallanForm_Adm10th_Regular(Batch_ID)
     {
         window.location.href = '<?=base_url()?>/index.php/Admission_inter/ChallanForm_Adm10th_Regular/'+Batch_ID
     }
     function ReturnForm_ProofReading_groupwise(grp_cd){
-        window.location.href =  '<?=base_url()?>Admission_inter/return_pdf/'+grp_cd + '/4'
+        window.location.href =  '<?=base_url()?>index.php/Admission_inter/return_pdf/'+grp_cd + '/4'
     }
     function ReturnForm_ProofReading_Formnowise(startformno,endformno){
-        window.location.href = '<?=base_url()?>Admission_inter/return_pdf/'+startformno + '/5' +'/'+endformno+'/';
+        window.location.href = '<?=base_url()?>index.php/Admission_inter/return_pdf/'+startformno + '/5' +'/'+endformno+'/';
     }
     function Print_Registration_Form_Proofreading_Groupwise(grp_cd){
-        window.location.href =  '<?=base_url()?>Admission_inter/Print_Admission_inter_Form_Proofreading_Groupwise/'+grp_cd + '/1'
+        window.location.href =  '<?=base_url()?>index.php/Admission_inter/Print_Admission_inter_Form_Proofreading_Groupwise/'+grp_cd + '/1'
     }
     function Print_Registration_Form_Proofreading_Formnowise(startformno,endformno){
-        window.location.href =  '<?=base_url()?>Admission_inter/Print_Admission_inter_Form_Proofreading_Groupwise/'+startformno + '/2' +'/'+endformno+'/';
+        window.location.href =  '<?=base_url()?>index.php/Admission_inter/Print_Admission_inter_Form_Proofreading_Groupwise/'+startformno + '/2' +'/'+endformno+'/';
     }
     function  check_NewEnrol_validation()
     {
@@ -932,31 +836,18 @@
         {
             selected_group_conversion =grp_cd;
         }
-        //  alert($("#pvtinfo_dist").find('option:selected').val())
-        debugger;
+
         if(src == '') {
-            $img.addClass("highlight");
-            // or
-            $img.css("border", "3px solid yellow");
-            $('#ErrMsg').show();  
-            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-            // $('#ErrMsg').html("<b>Please Enter your  Name </b>");    
             alertify.error("Please upload your Picture First.")
             $img.focus(); 
             return status;
         }
         else if(name == "" ||  name == undefined){
-            $('#ErrMsg').show();  
-            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-            // $('#ErrMsg').html("<b>Please Enter your  Name </b>");    
             alertify.error("Please Enter your  Name")
             $('#cand_name').focus(); 
             return status;
         }
         else if(fName == "" || fName == undefined){
-            $('#ErrMsg').show(); 
-            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-            // $('#ErrMsg').html("<b>Please Enter your Father's Name  </b>");   
             alertify.error("Please Enter your Father's Name  ") 
             $('#father_name').focus(); 
             return status;
@@ -964,30 +855,19 @@
 
         else if(bFormNo == "" || bFormNo == 0 || bFormNo == undefined)
         {
-            $('#ErrMsg').show(); 
-            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-            // $('#ErrMsg').html("<b>Please Enter your bay-Form</b>"); 
             alertify.error("Please Enter your bay-Form") 
             $('#bay_form').focus();  
             return status; 
         }
         else if(FNic == "" || FNic.length == undefined )
         {
-            $('#ErrMsg').show(); 
-            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-            // $('#ErrMsg').html("<b>Please Enter your Father's CNIC</b>"); 
             alertify.error("Please Enter your Father's CNIC") 
             $('#father_cnic').focus();  
             return status; 
         }
 
-
-
         else if(mobNo == "" || mobNo == 0 || mobNo == undefined)
         {
-            $('#ErrMsg').show(); 
-            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-            // $('#ErrMsg').html("<b>Please Enter your Mobile No.</b>"); 
             alertify.error("Please Enter your Mobile No.") 
             $('#mob_number').focus();   
             return status;  
@@ -995,18 +875,12 @@
 
         else if(MarkOfIdent == "" || MarkOfIdent == 0 || MarkOfIdent == undefined)
         {
-            $('#ErrMsg').show(); 
-            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-            //$('#ErrMsg').html("<b>Please Enter your Mark of Indentification</b>"); 
             alertify.error("Please Enter your Mark of Indentification") 
             $('#MarkOfIden').focus();   
             return status;  
         }
         else if(address == "" || address == 0 || address.length ==undefined )
         {
-            $('#ErrMsg').show(); 
-            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-            $('#ErrMsg').html("<b>Please Enter your Address</b>"); 
             alertify.error("Please Enter your Address")
             $('#address').focus(); 
             return status;    
@@ -1021,58 +895,47 @@
 
         else if (teh_cd < 1) 
         {
-
             alertify.error('Please select Tehsil');                          
             $("#pvtinfo_teh").focus();
             return status;  
         }
         else if (zone_cd < 1) 
         {
-
             alertify.error('Please select Zone. ');                          
             $("#pvtZone").focus();
             return status;  
         }
         else if (grp_cd == 0) 
         {
-            $('#ErrMsg').show(); 
-            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
             alertify.error('Please Select your Study Group '); 
             $("#std_group").focus();
             return status;  
         }
         else if ((sub6p1 == 19 || sub6p2 == 19) && (sub7p1 == 20 || sub7p2== 20))
         {
-            $('#ErrMsg').show(); 
             alertify.error('Please select One Subject from ADVANCED ISLAMIC STUDIES / ISLAMIC HISTORY / MUSLIM HISTORY ');                   
             $("#sub6").focus();
             return status;  
         }
         else if (selected_group_conversion != grppre || exam_type == 2) 
         {
-            debugger;
             var ddlMarksImproveoptions = $("#ddlMarksImproveoptions").val();
             if(ddlMarksImproveoptions == 1)
             {
                 if (sub6p1 == 0 )
                 {
-                    $('#ErrMsg').show(); 
                     alertify.error('Please select Subject ');                   
                     $("#sub6").focus();
                     return status;  
                 }  
-                else   if (sub7p1 == 0)
+                else if (sub7p1 == 0)
                 {
-                    $('#ErrMsg').show(); 
-                    $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
                     alertify.error('Please select Subject ');
                     $("#sub7").focus();
                     return status;  
                 }
                 else if (sub8p1 == 0 )
                 {
-                    $('#ErrMsg').show(); 
-                    $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
                     alertify.error('Please select Subject '); 
                     $("#sub8").focus();
                     return status;  
@@ -1082,24 +945,18 @@
             {
                 if (sub6p2 == 0)
                 {
-                    $('#ErrMsg').show(); 
-                    $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
                     alertify.error('Please select Subject ');                          
                     $("#sub6p2").focus();
                     return status;  
                 }
                 else   if (sub7p2 == 0)
                 {
-                    $('#ErrMsg').show(); 
-                    $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
                     alertify.error('Please select Subject ');
                     $("#sub7p2").focus();
                     return status;  
                 }
                 else if (sub8p2== 0 )
                 {
-                    $('#ErrMsg').show(); 
-                    $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
                     alertify.error('Please select Subject '); 
                     $("#sub8p2").focus();
                     return status;  
@@ -1109,7 +966,6 @@
             {
                 if (sub6p1 == 0 )
                 {
-                    $('#ErrMsg').show(); 
                     alertify.error('Please select Subject ');                   
                     $("#sub6").focus();
                     return status;  
@@ -1117,8 +973,6 @@
 
                 else if (sub6p2 == 0)
                 {
-                    $('#ErrMsg').show(); 
-                    $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
                     alertify.error('Please select Subject ');                          
                     $("#sub6p2").focus();
                     return status;  
@@ -1126,42 +980,29 @@
 
                 else   if (sub7p1 == 0)
                 {
-                    $('#ErrMsg').show(); 
-                    $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
                     alertify.error('Please select Subject ');
                     $("#sub7").focus();
                     return status;  
                 }
                 else   if (sub7p2 == 0)
                 {
-                    $('#ErrMsg').show(); 
-                    $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
                     alertify.error('Please select Subject ');
                     $("#sub7p2").focus();
                     return status;  
                 }
                 else if (sub8p1 == 0 )
                 {
-                    $('#ErrMsg').show(); 
-                    $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
                     alertify.error('Please select Subject '); 
                     $("#sub8").focus();
                     return status;  
                 }
                 else if (sub8p2== 0 )
                 {
-                    $('#ErrMsg').show(); 
-                    $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
                     alertify.error('Please select Subject '); 
                     $("#sub8p2").focus();
                     return status;  
                 }
             }
-            /* $('#ErrMsg').show(); 
-            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-            alertify.error('Please Select your Study Group '); 
-            $("#std_group").focus();
-            return status;  */
         }
         else if(exam_type==15 || exam_type == 16)
         {
@@ -1171,7 +1012,6 @@
             {
                 if (sub6p1 == 0 )
                 {
-                    $('#ErrMsg').show(); 
                     alertify.error('Please select Subject ');                   
                     $("#sub6").focus();
                     return status;  
@@ -1179,8 +1019,6 @@
 
                 else if (sub6p2 == 0)
                 {
-                    $('#ErrMsg').show(); 
-                    $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
                     alertify.error('Please select Subject ');                          
                     $("#sub6p2").focus();
                     return status;  
@@ -1188,32 +1026,24 @@
 
                 else   if (sub7p1 == 0)
                 {
-                    $('#ErrMsg').show(); 
-                    $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
                     alertify.error('Please select Subject ');
                     $("#sub7").focus();
                     return status;  
                 }
                 else   if (sub7p2 == 0)
                 {
-                    $('#ErrMsg').show(); 
-                    $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
                     alertify.error('Please select Subject ');
                     $("#sub7p2").focus();
                     return status;  
                 }
                 else if (sub8p1 == 0 )
                 {
-                    $('#ErrMsg').show(); 
-                    $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
                     alertify.error('Please select Subject '); 
                     $("#sub8").focus();
                     return status;  
                 }
                 else if (sub8p2== 0 )
                 {
-                    $('#ErrMsg').show(); 
-                    $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
                     alertify.error('Please select Subject '); 
                     $("#sub8p2").focus();
                     return status;  
@@ -1221,50 +1051,6 @@
             }
 
         }
-
-
-
-        /*      else if ($("#sub3p2").find('option:selected').val() == 0) 
-        {
-        alertify.error('Please select your Study Group ');                  
-        $("#sub3p2").focus();
-        return status;  
-        }
-        else if ($("#sub5p2").find('option:selected').val() == 0 )
-        {
-        $('#ErrMsg').show(); 
-        alertify.error('Please select Subject ');                   
-        $("#sub5p2").focus();
-        return status;  
-        }
-
-        else if ($("#sub6p2").find('option:selected').val() == 0)
-        {
-        $('#ErrMsg').show(); 
-        $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-        alertify.error('Please select Subject ');                          
-        $("#sub6p2").focus();
-        return status;  
-        }
-
-        else   if ($("#sub7p2").find('option:selected').val() == 0)
-        {
-        $('#ErrMsg').show(); 
-        $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-        alertify.error('Please select Subject ');
-        $("#sub7p2").focus();
-        return status;  
-        }
-
-        else if ($("#sub8p2").find('option:selected').val() == 0 )
-        {
-        $('#ErrMsg').show(); 
-        $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-        alertify.error('Please select Subject '); 
-        $("#sub8p2").focus();
-        return status;  
-        }*/
-
         status = 1;
         return status;
     }
@@ -1317,17 +1103,11 @@
         }
 
         if(name == "" ||  name == undefined){
-            $('#ErrMsg').show();  
-            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-            // $('#ErrMsg').html("<b>Please Enter your  Name </b>");    
             alertify.error("Please Enter your  Name")
             $('#cand_name').focus(); 
             return status;
         }
         else if(fName == "" || fName == undefined){
-            $('#ErrMsg').show(); 
-            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-            // $('#ErrMsg').html("<b>Please Enter your Father's Name  </b>");   
             alertify.error("Please Enter your Father's Name  ") 
             $('#father_name').focus(); 
             return status;
@@ -1335,30 +1115,19 @@
 
         else if(bFormNo == "" || bFormNo == 0 || bFormNo == undefined)
         {
-            $('#ErrMsg').show(); 
-            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-            // $('#ErrMsg').html("<b>Please Enter your bay-Form</b>"); 
             alertify.error("Please Enter your bay-Form") 
             $('#bay_form').focus();  
             return status; 
         }
         else if(FNic == "" || FNic.length == undefined )
         {
-            $('#ErrMsg').show(); 
-            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-            // $('#ErrMsg').html("<b>Please Enter your Father's CNIC</b>"); 
             alertify.error("Please Enter your Father's CNIC") 
             $('#father_cnic').focus();  
             return status; 
         }
 
-
-
         else if(mobNo == "" || mobNo == 0 || mobNo == undefined)
         {
-            $('#ErrMsg').show(); 
-            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-            // $('#ErrMsg').html("<b>Please Enter your Mobile No.</b>"); 
             alertify.error("Please Enter your Mobile No.") 
             $('#mob_number').focus();   
             return status;  
@@ -1366,18 +1135,12 @@
 
         else if(MarkOfIdent == "" || MarkOfIdent == 0 || MarkOfIdent == undefined)
         {
-            $('#ErrMsg').show(); 
-            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-            //$('#ErrMsg').html("<b>Please Enter your Mark of Indentification</b>"); 
             alertify.error("Please Enter your Mark of Indentification") 
             $('#MarkOfIden').focus();   
             return status;  
         }
         else if(address == "" || address == 0 || address.length ==undefined )
         {
-            $('#ErrMsg').show(); 
-            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-            $('#ErrMsg').html("<b>Please Enter your Address</b>"); 
             alertify.error("Please Enter your Address")
             $('#address').focus(); 
             return status;    
@@ -1398,7 +1161,6 @@
         }
         else if (zone_cd < 1) 
         {
-
             alertify.error('Please select Zone. ');                          
             $("#pvtZone").focus();
             return status;  
@@ -1406,17 +1168,14 @@
 
         else if (grp_cd == 0) 
         {
-            $('#ErrMsg').show(); 
-            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
             alertify.error('Please Select your Study Group '); 
             $("#std_group").focus();
             return status;  
         }
 
-        else if(grp_cd == 5){
+        else if(grp_cd == 5)
+        {
             if($("#sub7p2").val() == 0){
-                $('#ErrMsg').show(); 
-                $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
                 alertify.error('Please Select Part II, Subject 7 '); 
                 $("#sub7p2").focus();
                 return status;  
@@ -1426,16 +1185,16 @@
         status = 1;
         return status;
     }
+
     function gotodefaultpage(){
         var msg = "Are you sure you want to cancel ?"
-        alertify.confirm(msg, function (e) {
-
-            if (e) {
-                window.parent.location=<?php base_url() ?>'Admission';
-            } 
-
-
+        alertify.confirm(msg, function (e) 
+            {
+                if (e) {
+                    window.parent.location=<?php base_url() ?>'index.php/Admission';
+                }
         });
-
     }
 </script>
+</body>
+</html>

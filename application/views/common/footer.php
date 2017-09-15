@@ -1,23 +1,15 @@
 
-
-<div id="footer" class="footer">
-    &nbsp; &copy; 2017 BISE Gujranwala, All Rights Reserved. 
+<div class="container-fluid navbar-fixed-bottom">
+    <div style="text-align: center; background:#3187bf; color: white;  margin-bottom: 5px; height: 40px;">
+        &copy; 2017 BISE Gujranwala, All Rights Reserved. 
+    </div>
 </div>
 
-</div>
-</body>
-</html>
 
-<?php 
-if(isset($files)){
-    foreach($files as $file){
-        echo '<script type="text/javascript" src="'.base_url().'assets/js/'.$file.'"></script>';
-    }
-}
-?> 
 <script type="text/javascript">
     $(document).ready(function () {
 
+        $('.mPageloader').hide();
         $( "#txtDob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate:new Date(2001, 7, 1),minDate:new Date(1970, 0, 1)}).val();
 
         $('#data-table').dataTable({
@@ -163,34 +155,22 @@ if(isset($files)){
         }
         if(bank_challan == 0)
         {
-
             alertify.error("Please Give Bank Challan.");
             $('#batch_real_challanno').focus();
             return false;
-
-
         }
         if(paidAmount == 0)
         {
-
             alertify.error("Please Give Bank Paid Amount.");
             $('#batch_real_PaidAmount').focus();
             return false;
-
-
         }
         if(paidDate == '')
         {
-
             alertify.error("Please Give Bank Paid Amount.");
             $('#batch_real_PaidDate').focus();
             return false;
-
-
         }
-
-
-        //  window.location.href = '<?=base_url()?>/index.php/Registration/Batchlist_INSERT/';
     }
     function downloadslip(rno,isdownload)
     {
@@ -908,7 +888,7 @@ if(isset($files)){
                 $('#grp_selected').css('display','none');
                 $('#formnowise_selected').css('display','block');
                 // $('.news').css('display','block');
-                //  alert("Transfer Thai Gayo");
+
             }
         });
 
@@ -1581,30 +1561,19 @@ if(isset($files)){
 
         else   if ($("#sub8").find('option:selected').val() < 1) 
         {
-            $('#ErrMsg').show(); 
-            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-            $('#ErrMsg').html("<b>Plesae select 8th Subject  </b>"); 
-            //alert('Plesae select 8th Subject ');                          
             $("#sub8").focus();
             return status;  
         }
 
         status = 1;
         return status;
-
-
-
-
     }
-    /*
-    ===========================================
-    Validations
-    ===========================================
-    */
+
     var nationality = $('input:radio[name="nationality"]:checked').val();
     if(nationality == 1) {
         $("#bay_form","#father_cnic").mask("99999-9999999-9",{placeholder:"_"});
-    }else{
+    }
+    else{
         $("#bay_form","#father_cnic").mask("****************************",{placeholder:""});
     }
 
@@ -1614,9 +1583,9 @@ if(isset($files)){
             $("#bay_form").mask("99999-9999999-9",{placeholder:"_"});
             $("#sub1").empty(); 
             $("#sub1").prepend('<option selected="selected" value="1"> URDU </option>');
-            //$("#ddlList").prepend('<option selected="selected" value="0"> Select </option>');
-        }else{
-            //$("#father_cnic").mask("****************************",{placeholder:""});
+        }
+        else
+        {
             $("#father_cnic").unmask();
             $("#bay_form").unmask();
             $("#sub1").empty(); 
@@ -1630,10 +1599,8 @@ if(isset($files)){
 
             $("#sub3").empty(); 
             $("#sub3").prepend('<option selected="selected" value="3"> ISLAMIYAT (COMPULSORY) </option>');
-            //$("#ddlList").prepend('<option selected="selected" value="0"> Select </option>');
-        }else{
-            //$("#father_cnic").mask("****************************",{placeholder:""});
-
+        }
+        else{
             $("#sub3").empty(); 
             $("#sub3").prepend("<option selected='selected' value='51'> ETHICS </option>");
             $("#sub3").prepend("<option  value='3'> ISLAMIYAT (COMPULSORY) </option>");
@@ -1646,19 +1613,18 @@ if(isset($files)){
     var id           = $('#std_group').val();
 
     $('input[type=radio][name=batch_opt]').change(function() {
-        // //debugger;
-        // alert(this.value + "  Transfer Thai Gayo");
+
         if (this.value == '1') {
             window.location.href = '<?=base_url()?>/index.php/Registration/CreateBatch/'+'96/1/';
-            // alert("Allot Thai Gayo Bhai");
+
         }
         else  if (this.value == '2') {
             window.location.href = '<?=base_url()?>/index.php/Registration/CreateBatch/'+'97/2/';
-            //  alert("Transfer Thai Gayo");
+
         }
         else  if(this.value == 3){
             window.location.href = '<?=base_url()?>/index.php/Registration/CreateBatch/'+'98/3';
-            //alert("Transfer Thai Gayo");
+
         }
 
     });
@@ -1679,24 +1645,13 @@ if(isset($files)){
         }
         else  if(this.value == '7'){
             window.location.href = '<?=base_url()?>/index.php/Registration/CreateBatch/'+'98/3/7/';
-            //  alert("Transfer Thai Gayo");
+
         }
         else  if(this.value == '8'){
             window.location.href = '<?=base_url()?>/index.php/Registration/CreateBatch/'+'98/3/8/';
-            //  alert("Transfer Thai Gayo");
         }
 
     })
-    /*     }
-    $( "select option:selected" ).each(function() {
-    str += $( this ).text() + " ";
-    });
-    $( "div" ).text( str );*/
-
-
-
-
-
 </script>
 
 <script type="">
@@ -1722,17 +1677,16 @@ if(isset($files)){
             if($("#std_groups").val() == ""  || $("#std_groups").val() == 0)
             {
                 alertify.error("Please Select Group First!") ;
+                return false;
             }
             else{
                 var msg = "<img src='<?php echo base_url(); ?>assets/img/note_for_batch.jpg' alt='logo' style='width:800px; height: auto;' />"
-                //var msg = "Are You Sure You want to Cancel this Form ? <img src='<?php echo base_url(); ?>assets/img/note_for_batch.jpg' alt='logo' style='width:30px; height: 50px;' />"
+
                 alertify.confirm(msg, function (e) {
 
                     if (e) {
                         window.location.href = '<?=base_url()?>/index.php/Registration/Make_Batch_Group_wise/'+$("#std_groups").val()+'/0';
-                    } 
-
-
+                    }
                 });
             }
         }
@@ -1766,7 +1720,7 @@ if(isset($files)){
         }
         else
         {
-            alertify.error("Please Select Forms First!") ;
+            alertify.error("Please Select Forms First!");
             return false;
         }
     }

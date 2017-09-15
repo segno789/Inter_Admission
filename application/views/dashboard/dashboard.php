@@ -57,19 +57,16 @@
                                     </div>
                                     <?php }
 
-                                if($appconfig['isadmP2S'] == 1){
+                                if($appconfig['isadmP2S'] == 1){                                    
                                     ?>
-
-                                    <div class="metro-nav-block nav-block-yellow">
-
-                                        <a  href="<?=base_url();?>Admission_inter" >
+                                    <div class="metro-nav-block nav-block-green">
+                                        <a  href="<?=base_url();?>index.php/Admission_inter" >
                                             <div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>
                                             <div class="brand">
                                                 12th Supply Admission
                                             </div>
                                         </a>
                                     </div>
-
 
                                     <?php } if($appconfig['isslipP2'] == 1) {?>
                                     <div class="metro-nav-block nav-block-red">
@@ -84,18 +81,18 @@
                                     <?php } 
                                 if($appconfig['isslipP1'] == 1){
                                     ?>
-                                    
+
                                     <div class="metro-nav-block nav-block-red">
 
                                         <a  href="<?=base_url();?>RollNoSlip/EleventhStd" >
                                             <div class="fs1" aria-hidden="true" data-icon="&#xe05c;"></div>
                                             <div class="brand">
-                                                 11th Roll Number Slips
+                                                11th Roll Number Slips
                                             </div>
                                         </a>
                                     </div>
-                                    
-                                
+
+
                                     <?php }
 
                                 if($appconfig['isslipP2S'] == 1) {

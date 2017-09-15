@@ -1,7 +1,7 @@
 <html>
 <head>
     <title>
-        Registration | BISEGRW
+        BISE Gujranwala
     </title>
     <link rel="icon" href="<?php echo base_url(); ?>assets/img/headericon.png" type="image/png">        
     <link href="<?php echo base_url(); ?>assets/css/icomoon/style.css" rel="stylesheet">
@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/style.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/alertify.core.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/jquery.fancybox.css">    
-
 
     <script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/js/bootstrap.js"></script>
@@ -22,6 +21,7 @@
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/alertify.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.fancybox.pack.js"></script>
     <script src="<?php echo base_url(); ?>assets/js/jquery-ui.js"></script>
+    
 </head>
 <body>
 
