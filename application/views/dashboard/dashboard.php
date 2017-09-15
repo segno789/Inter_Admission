@@ -111,6 +111,20 @@
                                     <?php }?>
                             </div>
                         </div>
+                           <div class="row-fluid">
+
+                            <div class="span6">
+                                <div class="widget no-margin">
+                                    <div id="area_chart"></div>
+                                </div>
+                            </div>
+                            <div class="span6">
+                                <div class="widget">
+                                    <div id="columnChart"></div>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
             </div>

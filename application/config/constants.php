@@ -17,8 +17,7 @@ define('BARCODE_PATH', 'assets/pdfs/');
 define('assets', 'assets/img/');
 
 define('noimage','assets/img/no_image.jpg'); 
-define('IMAGE_PATH11', 'uploads/2016/');
-define('DIRPATH12TH','D:\xampp\htdocs\Share Images\\'); 
+define('DIRPATH12TH','C:\inetpub\vhosts\bisegrw.com\Share Images\\'); 
 define('PRIVATE_IMAGE_PATH', 'uploads/private/');
 define('PRIVATE_IMAGE_PATH_FRESH', 'uploads/Fresh');
 define('REGULAR_IMAGE_PATH', 'uploads/regular/');
@@ -39,7 +38,6 @@ define('DOUBLE_LAST_DATE', '2017-10-05');
 define('GET_REGULAR_IMAGE_PATH', 'F:/xampp/htdocs/Inter_Admission\uplaods\2016\Regular\\');
 define('GET_PRIVATE_IMAGE_PATH', 'F:\xampp\htdocs\Inter_Admission\uplaods\2016\private\\');
 define('GET_PRIVATE_IMAGE_PATH_COPY', '');
-define('SINGLE_LAST_DATE11', '2016-05-15');
 define('DIRPATH11th','F:/xampp/htdocs/Inter_Admission/Uploads/IS2016/regular/'); 
 
 
@@ -81,6 +79,14 @@ define('formprint_sp_11th','Registration..sp_form_data_11thAdm');
 define('class_for_9th_Adm','11th');
 
 
+//========================11th Registration===================================
+define('IMAGE_PATH11', 'uploads/2017/reg/');
+define('IMAGE_PATH211', 'uploads/2016_backup/');
+define('BARCODE_PATH11', 'uploads/pdfs/');
+define('SINGLE_LAST_DATE11', '2016-11-08');
+define('DOUBLE_LAST_DATE11', '2016-11-08');
+
+
 //================ RollNumber Slips variables ========================
 define('mClass1','12'); 
 define('mSession','1'); 
@@ -88,3 +94,12 @@ define('mSession1','1');
 define('mClass2','11'); 
 define('mYear','2017'); 
 define('PVT_TITLE_INTER','Download Roll Number Slip For H.S.S.C Annual 2017'); 
+
+
+
+//================ Result Cards ========================
+
+define('SESS', '1');
+define('SESSION', '1');
+define('MCLASS', '12');
+define('MYEAR', '2016');

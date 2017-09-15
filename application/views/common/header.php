@@ -53,12 +53,12 @@
         <img style="height: 60px; width: 60px; margin-top: 5px; " class="img-responsive" src="<?php echo base_url(); ?>assets/img/BISEGRW_Icon.png" alt="logo"/>
     </a>
     <div class="btn-group">
-        <button class="btn btn-primary">
+        <button class="btn btn-primary" style="    height: 30px;">
             <?php
             echo $Inst_Id.' - '.$inst_Name;  
             ?>
         </button>
-        <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle" onclick="$('.btn-group').addClass('btn-group open');">
+        <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle" onclick="$('.btn-group').addClass('btn-group open');" style="    height: 30px;">
             <span class="caret">
             </span>
         </button>

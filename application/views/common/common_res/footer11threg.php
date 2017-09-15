@@ -1,13 +1,22 @@
+<footer>
+    <p>
+        &copy; BiseAdmin 2016
+    </p>
+</footer>
 
+<!--Add the following script at the bottom of the web page (before </body></html>)-->
+<!--<script type="text/javascript" async="async" defer="defer" data-cfasync="false" src="https://mylivechat.com/chatinline.aspx?hccid=93646887"></script>-->
 
-<div id="footer" class="footer">
-    &nbsp; &copy; 2017 BISE Gujranwala, All Rights Reserved. 
-</div>
-<script src="<?php echo base_url(); ?>assets/js/highcharts.js"></script>
-<script src="<?php echo base_url(); ?>assets/js/exporting.js"></script>
-</div>
-</body>
-</html>
+<script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/bootstrap.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/jquery.scrollUp.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/wysiwyg/bootstrap-wysihtml5.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.mask.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/alertify.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.fancybox.pack.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/jquery-ui.js"></script>
 
 <?php 
 if(isset($files)){
@@ -16,11 +25,8 @@ if(isset($files)){
     }
 }
 ?> 
-<script type="text/javascript">
+<script type="">
     $(document).ready(function () {
-
-        $( "#txtDob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate:new Date(2001, 7, 1),minDate:new Date(1970, 0, 1)}).val();
-
         $('#data-table').dataTable({
             "sPaginationType": "full_numbers",
             "cache": false
@@ -30,141 +36,9 @@ if(isset($files)){
             "cache": false
         });
     });
-    
-         var obj1 = [];
-    $(document).ready(function () {
-        
-      //  console.log(obj);
-     //   console.log(obj1);
-      drawChart3();
-      })
-      
-     
-      function drawChart3() {
-    jQuery.ajax({
-        type: "POST",
-        url: "<?php echo base_url(); ?>Dashboard/getstats/",
-        beforeSend: function() {  $('.mPageloader').show(); },
-        complete: function() { $('.mPageloader').hide();},
-        success: function(data) {
-            var parsed = $.parseJSON(data) ;
-            //    var objnew = [];
 
-            // var objnew =  parsed.data
-            // for(i = 0; )
-            Highcharts.chart('columnChart', {
-                chart: {
-                    type: 'column'
-                },
-                colors: ['#74b749', '#0daed3', '#ed6d49', '#ffb400', '#f63131'],
-                title: {
-                    text: 'Institute Information'
-                },
-                subtitle: {
-                    text: 'Source: bisegrw.com'
-                },
-                xAxis: {
-                    categories: parsed.iyear,
-                    crosshair: true
-                },
-                yAxis: {
-                    min: 0,
-                    title: {
-                        text: 'No. of Students'
-                    },
-                    max:3000,
-                    tickInterval: 200,
-                },
-                tooltip: {
-                    headerFormat: '<span style="font-size:14px">{point.key}</span><table style="width:200px">',
-                    pointFormat: '<tr><td style="color:{series.color};padding:0;">{series.name}: </td>' +
-                    '<td style="padding:0;"><b>{point.y}</b></td></tr>',
-                    footerFormat: '</table>',
-                    shared: true,
-                    useHTML: true
-                },
-                plotOptions: {
-                    column: {
-                        pointPadding: 0.05,
-                        borderWidth: .45
-                    }
-                },
-                credits: {
-                    enabled: false
-                },
-                series: parsed.states
-            });
-          
-            
-            Highcharts.chart('area_chart', {
-                chart: {
-                    type: 'area'
-                },
-                title: {
-                    text: 'Institute Ranking'
-                },
-                subtitle: {
-                    text: 'Source: <a href="http:www.bisegrw.com">' +
-                    'bisegrw.com</a>'
-                },
-
-                credits: {
-                    enabled: false
-                },
-                xAxis: {
-                    min: 2012,
-                    max:2016,
-                    tickInterval: 1,
-                    allowDecimals: false,
-                    labels: {
-                        formatter: function () {
-                            return this.value; // clean, unformatted number for year
-                        }
-                    }
-                },
-                yAxis: {
-                    min: 0,
-                    title: {
-                        text: 'Grading'
-                    },
-                    max:10,
-                    tickInterval: .5,
-                },
-                tooltip: {
-                    pointFormat: '{series.name} is <b>{point.y}</b><br/> in {point.x}'
-                },
-                plotOptions: {
-                    area: {
-                        pointStart: 2012,
-                        marker: {
-                            enabled: false,
-                            symbol: 'circle',
-                            radius: 2,
-                            states: {
-                                hover: {
-                                    enabled: true
-                                }
-                            }
-                        }
-                    }
-                },
-                series: [{
-                    name: 'Institute Rnaking',
-                    data:  parsed.grading
-                    } ]
-            });
-            
-                   
-               },
-               error: function(request, status, error){
-                   alert(request.responseText);
-               }
-           });
-      }
-    
-    
 </script>
-<script type="text/javascript">
+<script type="">
     function isValidEmailAddress(emailAddress) {
         var pattern = /^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([ \t]*\r\n)?[ \t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([ \t]*\r\n)?[ \t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
         return pattern.test(emailAddress);
@@ -377,34 +251,28 @@ if(isset($files)){
 </script>
 
 <script type="">
-    //$( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true }).val();
-
-    $( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate: new Date(2003, 7,1),yearRange: '1970:2003'}).val();
-
-
-
-
-    $( "#batch_real_PaidDate" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, startDate:new Date() }).val();
+   // $( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true }).val();
+    $( "#batch_real_PaidDate" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, 'setDate': new Date() }).val(); //, startDate:new Date()
     var myOptions = {
         val1 : 'text1',
         val2 : 'text2'
     };
     var sub1_Pak_options = {
-        1 : 'Urdu'
+        2 : 'Urdu'
     }
     var sub1_NonPak_options = 
     {
-        11 : 'Geogrophy Of Pakistan',
-        1 : 'Urdu'
+        6 : 'Pakistan Culture',
+        2 : 'Urdu'
     }
     var sub3_Muslim = 
     {
-        3 :'Islamyat Compulsory'
+        92 :'Islamic Education'
     }
     var sub3_Non_Muslim = 
     {
         51 : 'ETHICS',
-        3  :'Islamyat Compulsory'
+        92  :'Islamic Education'
     }
     var sub5_Hum = 
     {
@@ -412,7 +280,35 @@ if(isset($files)){
     }
     var sub6_Hum = 
     {
-        9 : 'GENERAL SCIENCE'  
+        0: 'SELECT SUBJECT',
+        56: 'History Of Islam',  
+        58: 'History of Modern World',  
+        57 : 'History Of Muslim India',  
+        55 : 'History Of Pakistan',  
+        11: 'Economics',  
+        12 : 'Geography',  
+        14: 'Philosophy',  
+        16 : 'Psychology',  
+        32: 'Punjabi',  
+        37 : 'Urdu Advance',  
+        24: 'Arabic',  
+        27 : 'English Literature',  
+        34: 'Persian',  
+        17: 'Civics',  
+        18: 'Statistics',  
+        19: 'Mathematics',  
+        20 : 'Islamic Studies',  
+        21: 'Outlines Of Home Economics',  
+        23: 'Fine Arts',  
+        42: 'Health And Physical Education',  
+        43: 'Education',  
+        45 : 'Sociology',  
+        8: 'Library Science',  
+        83 : 'Computer Science',  
+        44: 'Geology',  
+        90 : 'Agriculture',  
+        79 : 'Nursing' 
+
     }
     var sub7_Hum = 
     {
@@ -474,50 +370,7 @@ if(isset($files)){
         91 : 'BEAUTICIAN',
         74 : 'WEAVING'
     }
-    var sub5_Deaf = 
-    {
-        66: 'ARITHMETIC'
 
-    }
-    var sub6_Deaf = 
-    {
-        0: 'NOT SELECTED',
-        72 : 'TAILORING',
-        67 : 'BAKERY',
-        68 : 'CARPET MAKING',
-        93 : 'COMPUTER SCIENCES',
-        69 : 'DRAWING',
-        70 : 'EMBORIDERY',
-        94 : 'HEALTH & PHYSICAL EDUCATION',
-        73 : 'TYPE WRITING',
-        74 : 'WEAVING'
-    }
-    var sub7_Deaf = 
-    {
-        0: 'NOT SELECTED',
-        72 : 'TAILORING',
-        67 : 'BAKERY',
-        68 : 'CARPET MAKING',
-        93 : 'COMPUTER SCIENCES',
-        69 : 'DRAWING',
-        70 : 'EMBORIDERY',
-        94 : 'HEALTH & PHYSICAL EDUCATION',
-        73 : 'TYPE WRITING',
-        74 : 'WEAVING'
-    }
-    var sub8_Deaf = 
-    {
-        0: 'NOT SELECTED',
-        72 : 'TAILORING',
-        67 : 'BAKERY',
-        68 : 'CARPET MAKING',
-        93 : 'COMPUTER SCIENCES',
-        69 : 'DRAWING',
-        70 : 'EMBORIDERY',
-        94 : 'HEALTH & PHYSICAL EDUCATION',
-        73 : 'TYPE WRITING',
-        74 : 'WEAVING'
-    }
 
     function downloadslip(rno)
     {
@@ -537,30 +390,30 @@ if(isset($files)){
         $('#sub6').empty();
         $('#sub7').empty();
         $('#sub8').empty();
-        window.location.href = '<?=base_url()?>/index.php/Registration/NewEnrolment_EditForm/'+formrno
+        window.location.href = '<?=base_url()?>/index.php/Registration_11th/NewEnrolment_EditForm/'+formrno
     }
     function ReturnForm(Batch_ID)
     {
-        window.location.href = '<?=base_url()?>/index.php/Registration/return_pdf/'+Batch_ID + '/1'
+        window.location.href = '<?=base_url()?>/index.php/Registration_11th/return_pdf/'+Batch_ID + '/1'
     }
     function ReturnForm_Final_groupwise(grp_cd){
-        window.location.href = '<?=base_url()?>/index.php/Registration/return_pdf/'+grp_cd + '/2'
+        window.location.href = '<?=base_url()?>/index.php/Registration_11th/return_pdf/'+grp_cd + '/2'
     }
     function ReturnForm_Final_Formnowise(startformno,endformno){
-        window.location.href = '<?=base_url()?>/index.php/Registration/return_pdf/'+startformno + '/3' +'/'+endformno +'/';
+        window.location.href = '<?=base_url()?>/index.php/Registration_11th/return_pdf/'+startformno + '/3' +'/'+endformno +'/';
     }
     function ReturnForm_ProofReading_groupwise(grp_cd){
-        window.location.href =  '<?=base_url()?>/index.php/Registration/return_pdf/'+grp_cd + '/4'
+        window.location.href =  '<?=base_url()?>/index.php/Registration_11th/return_pdf/'+grp_cd + '/4'
     }
     function ReturnForm_ProofReading_Formnowise(startformno,endformno){
-        window.location.href = '<?=base_url()?>/index.php/Registration/return_pdf/'+startformno + '/5' +'/'+endformno+'/';
+        window.location.href = '<?=base_url()?>/index.php/Registration_11th/return_pdf/'+startformno + '/5' +'/'+endformno+'/';
     }
 
     function Print_Registration_Form_Proofreading_Groupwise(grp_cd){
-        window.location.href =  '<?=base_url()?>/index.php/Registration/Print_Registration_Form_Proofreading_Groupwise/'+grp_cd + '/1'
+        window.location.href =  '<?=base_url()?>/index.php/Registration_11th/Print_Registration_Form_Proofreading_Groupwise/'+grp_cd + '/1'
     }
     function Print_Registration_Form_Proofreading_Formnowise(startformno,endformno){
-        window.location.href =  '<?=base_url()?>/index.php/Registration/Print_Registration_Form_Proofreading_Groupwise/'+startformno + '/2' +'/'+endformno+'/';
+        window.location.href =  '<?=base_url()?>/index.php/Registration_11th/Print_Registration_Form_Proofreading_Groupwise/'+startformno + '/2' +'/'+endformno+'/';
     }
     $('#get_report').click( function(){
         var option =  $('input[type=radio][name=opt]:checked').val(); 
@@ -715,12 +568,11 @@ if(isset($files)){
 
     function RevenueForm(Batch_ID)
     {
-        window.location.href = '<?=base_url()?>/index.php/Registration/revenue_pdf/'+Batch_ID
+        window.location.href = '<?=base_url()?>/index.php/Registration_11th/revenue_pdf/'+Batch_ID
     }
-
     function ReleaseForm(Batch_ID)
     {
-        window.location.href = '<?=base_url()?>/index.php/Registration/BatchRelease/'+Batch_ID
+        window.location.href = '<?=base_url()?>/index.php/Registration_11th/BatchRelease/'+Batch_ID
 
     }
     function ReleaseForm_UPDATE(Batch_ID,Inst_Cd)
@@ -730,7 +582,7 @@ if(isset($files)){
 
             if (e) {
                 // user clicked "ok"
-                window.location.href = '<?=base_url()?>index.php/BiseCorrection/BatchRelease_update/'+Batch_ID +'/'+Inst_Cd+'/'
+                window.location.href = '<?=base_url()?>index.php/BiseCorrection_11th/BatchRelease_update/'+Batch_ID +'/'+Inst_Cd+'/'
             } else {
                 // user clicked "cancel"
 
@@ -740,7 +592,7 @@ if(isset($files)){
     }
     function RestoreBatch(Batch_ID)
     {
-        window.location.href = '<?=base_url()?>/index.php/Registration/BatchRelease/'+Batch_ID
+        window.location.href = '<?=base_url()?>/index.php/Registration_11th/BatchRelease/'+Batch_ID
 
     }
     function RestoreBatch_UPDATE(Batch_ID,Inst_Cd)
@@ -750,7 +602,7 @@ if(isset($files)){
 
             if (e) {
                 // user clicked "ok"
-                window.location.href = '<?=base_url()?>index.php/BiseCorrection/BatchRestore_update/'+Batch_ID +'/'+Inst_Cd+'/'
+                window.location.href = '<?=base_url()?>index.php/BiseCorrection_11th/BatchRestore_update/'+Batch_ID +'/'+Inst_Cd+'/'
             } else {
                 // user clicked "cancel"
 
@@ -822,6 +674,185 @@ if(isset($files)){
 
     }
 
+    function load_PreMedical()
+    {
+        $("#sub1").empty();
+        $("#sub2").empty();
+        $("#sub3").empty();
+        $("#sub4").empty();
+        $("#sub5").empty();
+        $("#sub6").empty();
+        $("#sub7").empty();
+       $("#sub7").empty().append('<option selected="selected" value="-1">NONE</option>');
+        $("#sub8").empty().append('<option selected="selected" value="-1">NONE</option>');
+
+
+        $("#sub1").append(new Option('Urdu',2));
+        $("#sub1 option[value='2']").attr("selected","selected");
+        $("#sub2").append(new Option('English',1));
+        $("#sub2 option[value='1']").attr("selected","selected");
+        $("#sub3").append(new Option('Islamic Education',92));
+        $("#sub3 option[value='92']").attr("selected","selected");
+        $("#sub4").append(new Option('Physics',47));
+        $("#sub4 option[value='47']").attr("selected","selected");
+        $("#sub5").append(new Option('Chemistry',48));
+        $("#sub5 option[value='48']").attr("selected","selected");
+        $("#sub6").append(new Option('Biology',46));
+        $("#sub6 option[value='46']").attr("selected","selected");
+    }
+    function load_PreEngg()
+    {
+        $("#sub1").empty();
+        $("#sub2").empty();
+        $("#sub3").empty();
+        $("#sub4").empty();
+        $("#sub5").empty();
+        $("#sub6").empty();
+        $("#sub7").empty();
+       $("#sub7").empty().append('<option selected="selected" value="-1">NONE</option>');
+        $("#sub8").empty().append('<option selected="selected" value="-1">NONE</option>');
+
+        $("#sub1").append(new Option('Urdu',2));
+        $("#sub1 option[value='2']").attr("selected","selected");
+        $("#sub2").append(new Option('English',1));
+        $("#sub2 option[value='1']").attr("selected","selected");
+        $("#sub3").append(new Option('Islamic Education',92));
+        $("#sub3 option[value='92']").attr("selected","selected");
+        $("#sub4").append(new Option('Physics',47));
+        $("#sub4 option[value='47']").attr("selected","selected");
+        $("#sub5").append(new Option('Chemistry',48));
+        $("#sub5 option[value='48']").attr("selected","selected");
+        $("#sub6").append(new Option('Mathematics',19));
+        $("#sub6 option[value='19']").attr("selected","selected");
+    }
+    function load_GenSci()
+    {
+        $("#sub1").empty();
+        $("#sub2").empty();
+        $("#sub3").empty();
+        $("#sub4").empty();
+        $("#sub5").empty();
+        $("#sub6").empty();
+        $("#sub7").empty().append('<option selected="selected" value="-1">NONE</option>');
+        $("#sub8").empty().append('<option selected="selected" value="-1">NONE</option>');
+        
+        
+
+        $("#sub1").append(new Option('Urdu',2));
+        $("#sub1 option[value='2']").attr("selected","selected");
+        $("#sub2").append(new Option('English',1));
+        $("#sub2 option[value='1']").attr("selected","selected");
+        $("#sub3").append(new Option('Islamic Education',92));
+        $("#sub3 option[value='92']").attr("selected","selected");
+        $("#sub4").append(new Option('Mathematics',19));
+        $("#sub4 option[value='19']").attr("selected","selected");
+
+        $("#sub5").append(new Option('Physics',47));
+        $("#sub5").append(new Option('Economics',11));
+        $("#sub5").append(new Option('Statistics',18));
+        $("#sub5 option[value='47']").attr("selected","selected");
+
+        $("#sub6").append(new Option('Computer Science',83));
+        $("#sub6").append(new Option('Economics',11));
+        $("#sub6").append(new Option('Statistics',18));
+        $("#sub6 option[value='83']").attr("selected","selected");
+    }
+
+    function load_Commerce()
+    {
+        $("#sub1").empty();
+        $("#sub2").empty();
+        $("#sub3").empty();
+        $("#sub4").empty();
+        $("#sub5").empty();
+        $("#sub6").empty();
+        $("#sub7").empty();
+        $("#sub8").empty().append('<option selected="selected" value="-1">NONE</option>');
+
+        $("#sub1").append(new Option('Urdu',2));
+        $("#sub1 option[value='2']").attr("selected","selected");
+        $("#sub2").append(new Option('English',1));
+        $("#sub2 option[value='1']").attr("selected","selected");
+        $("#sub3").append(new Option('Islamic Education',92));
+        $("#sub3 option[value='92']").attr("selected","selected");
+
+
+        $("#sub4").append(new Option('Principles Of Accounting',70));
+        $("#sub4 option[value='70']").attr("selected","selected");
+
+        $("#sub5").append(new Option('Principles Of Economics',71));
+        $("#sub5 option[value='71']").attr("selected","selected");
+
+        $("#sub6").append(new Option('Business Math',80));
+        $("#sub6 option[value='80']").attr("selected","selected");
+
+        $("#sub7").show();
+        $("#sub7").append(new Option('Principles Of Commerce',39));
+        $("#sub7 option[value='39']").attr("selected","selected");
+    }
+
+    function load_HomeEco()
+    {
+        $("#sub1").empty();
+        $("#sub2").empty();
+        $("#sub3").empty();
+        $("#sub4").empty();
+        $("#sub5").empty();
+        $("#sub6").empty();
+        $("#sub7").empty();
+        $("#sub8").empty();
+
+        $("#sub1").append(new Option('Urdu',2));
+        $("#sub1 option[value='2']").attr("selected","selected");
+        $("#sub2").append(new Option('English',1));
+        $("#sub2 option[value='1']").attr("selected","selected");
+        $("#sub3").append(new Option('Islamic Education',92));
+        $("#sub3 option[value='92']").attr("selected","selected");
+
+
+        $("#sub4").append(new Option('Chemistry',48));
+        $("#sub4 option[value='48']").attr("selected","selected");
+
+        $("#sub5").append(new Option('Biology',46));
+        $("#sub5 option[value='46']").attr("selected","selected");
+
+        $("#sub6").append(new Option('Clothing and Textile',75));
+        $("#sub6 option[value='75']").attr("selected","selected");
+
+        $("#sub7").show();
+        $("#sub7").append(new Option('Home Management',76));
+        $("#sub7 option[value='76']").attr("selected","selected");
+    }
+
+    function load_Hum(){
+
+        $("#sub1").empty();
+        $("#sub2").empty();
+        $("#sub3").empty();
+        $("#sub4").empty();
+        $("#sub5").empty();
+        $("#sub6").empty();
+        $("#sub7").empty();
+       $("#sub7").empty().append('<option selected="selected" value="-1">NONE</option>');
+        $("#sub8").empty().append('<option selected="selected" value="-1">NONE</option>');
+        $("#sub1").append(new Option('Urdu',2));
+        $("#sub1 option[value='2']").attr("selected","selected");
+        $("#sub2").append(new Option('English',1));
+        $("#sub2 option[value='1']").attr("selected","selected");
+        $("#sub3").append(new Option('Islamic Education',92));
+        $("#sub3 option[value='92']").attr("selected","selected");
+        $.each(sub6_Hum, function(val, text) {
+            $('#sub4').append( new Option(text,val) );
+            }); 
+             $.each(sub6_Hum, function(val, text) {
+            $('#sub5').append( new Option(text,val) );
+            }); 
+             $.each(sub6_Hum, function(val, text) {
+            $('#sub6').append( new Option(text,val) );
+            }); 
+           // $("#sub6 option[value='" + sub1 + "']").attr("selected","selected");
+              
+    }
 
 
     //
@@ -885,8 +916,8 @@ if(isset($files)){
             });
         }
 
-        $("#sub5").empty();
-        $("#sub5 option[value='" + sub5 + "']").attr("selected","selected");
+        $("#sub6").empty();
+        $("#sub6 option[value='" + sub6 + "']").attr("selected","selected");
         $("#sub6").empty();
         $("#sub6 option[value='" + sub6 + "']").attr("selected","selected");
         $("#sub7").empty();
@@ -903,29 +934,6 @@ if(isset($files)){
         var success_BatchRelease = "<?php  echo @$errors['BatchRelease_excep']; ?>";
         var BatchRelease_Op = "<?php  echo @$errors_RB_update; ?>";
         var BatchRestore_Op = "<?php  echo @$errors_RB_restore; ?>";
-
-        var sel_app_cls ="<?php  echo @$spl_cd['data']['oldClass']; ?>";
-        var sel_app_year="<?php  echo @$spl_cd['data']['oldYear']; ?>";
-        var sel_app_sess ="<?php echo @$spl_cd['data']['oldSess']; ?>";
-        var sel_app_brd ="<?php  echo @$spl_cd['data']['oldBrd_cd']; ?>";
-
-        if(sel_app_brd !="")
-        {
-            $("#sec_board").val(sel_app_brd);
-        }
-        if(sel_app_sess!= "")
-        {
-            $("#oldSess").val(sel_app_sess);
-        }
-        if(sel_app_year !="")
-        {
-            $("#oldYear").val(sel_app_year);
-        }
-        if(sel_app_cls != "")
-        {
-            $("#oldClass").val(sel_app_cls);
-        }
-
         if(BatchRelease_Op != "")
         {
             if(BatchRelease_Op == "success")
@@ -959,10 +967,10 @@ if(isset($files)){
             alertify.error(error_BatchRelease);
         }  
 
-        /* var error = "<?php // echo @$error; ?>";
+        var error = "<?php echo @$error; ?>";
         if(error != ""){
-        alertify.error(error);
-        }*/
+            alertify.error(error);
+        }
         //  console.log("Jquery working....");
         var msg = "<?php echo @$msg;?>";
         //alert(msg);
@@ -980,7 +988,7 @@ if(isset($files)){
                     e.preventDefault();
                 } else {
                     var key = e.keyCode;
-                    if (!((key == 8) || (key == 32) || (key == 46) || (key >= 35 && key <= 40) || (key >= 65 && key <= 90))) {
+                    if (!((key == 8) || (key == 32) || (key == 46) || (key >= 36 && key <= 40) || (key >= 66 && key <= 90))) {
                         e.preventDefault();
                     }
                 }
@@ -992,7 +1000,7 @@ if(isset($files)){
                     e.preventDefault();
                 } else {
                     var key = e.keyCode;
-                    if (!((key == 8) || (key == 32) || (key == 46) || (key >= 35 && key <= 40) || (key >= 65 && key <= 90))) {
+                    if (!((key == 8) || (key == 32) || (key == 46) || (key >= 36 && key <= 40) || (key >= 66 && key <= 90))) {
                         e.preventDefault();
                     }
                 }
@@ -1004,7 +1012,7 @@ if(isset($files)){
                     e.preventDefault();
                 } else {
                     var key = e.keyCode;
-                    if (!((key == 8) || (key == 32) || (key == 46) || (key >= 35 && key <= 40) || (key >= 65 && key <= 90))) {
+                    if (!((key == 8) || (key == 32) || (key == 46) || (key >= 36 && key <= 40) || (key >= 65 && key <= 90))) {
                         e.preventDefault();
                     }
                 }
@@ -1048,8 +1056,9 @@ if(isset($files)){
 
         if($("#std_group").val() == "1")
         {
-            load_Bio_CS_Sub_NewEnrolement();
-            $("#sub8").append(new Option('Biology',8));
+            load_PreMedical();
+            //load_Bio_CS_Sub_NewEnrolement();
+            //$("#sub8").append(new Option('Biology',8));
         }
         else if($("#std_group").val() == "7"){
 
@@ -1141,10 +1150,10 @@ if(isset($files)){
         //       
         //       Hum_Deaf_Subjects_NewEnrolement('<?= @$sub6?>','<?= @$sub7?>','<?= @$sub8?>');
         //        Hum_Deaf_Subjects();
-        //            $.each(sub5_Hum,function(val,text){
-        //                $("#sub5").append(new Option(text,val));
+        //            $.each(sub6_Hum,function(val,text){
+        //                $("#sub6").append(new Option(text,val));
         //            });
-        //             $("#sub5 option[value='" + sub5 + "']").attr("selected","selected");
+        //             $("#sub6 option[value='" + sub6 + "']").attr("selected","selected");
         //            $.each(sub6_Hum,function(val,text){
         //                $("#sub6").append(new Option(text,val));
         //            });
@@ -1174,14 +1183,14 @@ if(isset($files)){
         //
         //            }
         //   }
-        //   else  if($("#std_group").val() == "5")
+        //   else  if($("#std_group").val() == "6")
         //   {
         //        Hum_Deaf_Subjects();
-        //            $.each(sub5_Deaf,function(val,text){
-        //                $("#sub5").append(new Option(text,val));
+        //            $.each(sub6_Deaf,function(val,text){
+        //                $("#sub6").append(new Option(text,val));
         //                
         //            });
-        //             $("#sub5 option[value='" + sub5 + "']").attr("selected","selected");
+        //             $("#sub6 option[value='" + sub6 + "']").attr("selected","selected");
         //            $.each(sub6_Deaf,function(val,text){
         //                $("#sub6").append(new Option(text,val));
         //            });
@@ -1206,7 +1215,7 @@ if(isset($files)){
 
             if (e) {
                 // user clicked "ok"
-                window.location.href ='<?php echo base_url(); ?>index.php/Registration/NewEnrolment_Delete/'+formrno;
+                window.location.href ='<?php echo base_url(); ?>index.php/Registration_11th/NewEnrolment_Delete/'+formrno;
             } else {
                 // user clicked "cancel"
 
@@ -1263,13 +1272,13 @@ if(isset($files)){
             });
         }
 
-        // Subject 5 ,6 ,7 and 8
-        $("#sub5").empty();
+        // Subject 6 ,6 ,7 and 8
+        $("#sub6").empty();
         $("#sub6").empty();
         $("#sub7").empty();
         $("#sub8").empty();
 
-        $("#sub5").append(new Option('MATHEMATICS',5));
+        $("#sub6").append(new Option('MATHEMATICS',6));
         $("#sub6").append(new Option('PHYSICS',6));
         $("#sub7").append(new Option('CHEMISTRY',7));
 
@@ -1321,7 +1330,7 @@ if(isset($files)){
             });
         }
 
-        $("#sub5").empty();
+        $("#sub6").empty();
         $("#sub6").empty();
         $("#sub7").empty();
         $("#sub8").empty();
@@ -1389,17 +1398,18 @@ if(isset($files)){
     })
     function remove_subjects()
     {
+        $("#sub1").empty();
+        $("#sub2").empty();
+        $("#sub3").empty();
+        $("#sub4").empty();
         $("#sub5").empty();
-        $("#sub5p2").empty();
         $("#sub6").empty();
-        $("#sub6p2").empty();
         $("#sub7").empty();
-        $("#sub7p2").empty();
-        $("#sub8").empty();
-        $("#sub8p2").empty();
+        $("#sub7").hide();
     }
     $("#std_group").change(function(){
-
+    
+        //debugger;
 
         var grp_cd = $("#std_group").val();
         //alert(grp_cd);
@@ -1408,105 +1418,42 @@ if(isset($files)){
         if(grp_cd == "1")
         {
 
+
             // Check Nationality and select appropriate Subject1 against candidate Nationality :)
-            load_Bio_CS_Sub();
-            $("#sub8").append(new Option('Biology',8));
+            // load_Bio_CS_Sub();
+            //  $("#sub8").append(new Option('Biology',8));
+            load_PreMedical();
 
         }
-        else if(grp_cd == "7")
+        else if(grp_cd == "2")
         {
-            load_Bio_CS_Sub();
-            $("#sub8").append(new Option('COMPUTER SCIENCE',78));
+            load_PreEngg();
+            // load_Bio_CS_Sub();
+            //   $("#sub8").append(new Option('COMPUTER SCIENCE',78));
             //    alert('hello  Sweet Heart ! I love You UMMMMAH :) ') 
         }
-        else if (grp_cd == "8")
+        else if (grp_cd == "3")
         {
-            load_Bio_CS_Sub();
-            $("#sub8").append(new Option('ELECTRICAL WIRING (OPT)',43));
+            load_Hum();
+            //    load_Bio_CS_Sub();
+            //    $("#sub8").append(new Option('ELECTRICAL WIRING (OPT)',43));
             //ELECTRICAL WIRING (OPT)
         }
 
-        else if(grp_cd == "2")
+        else if(grp_cd == "4")
         {
 
-            Hum_Deaf_Subjects();
-            $.each(sub5_Hum,function(val,text){
-                $("#sub5").append(new Option(text,val));
-            });
-            $.each(sub6_Hum,function(val,text){
-                $("#sub6").append(new Option(text,val));
-            });
-
-            $.each(sub7_Hum,function(val,text){
-
-                $("#sub7").append(new Option(text,val));
-            });
-            $.each(sub8_Hum,function(val,text){
-
-                $("#sub8").append(new Option(text,val));
-            });
-            var Elecgrp ="<?php echo @$grp_cd; ?>";
-            var isgovt ="<?php echo @$isgovt; ?>";
-            var b = ['8'];
-            var isElec = '0';
-            $.each(Elecgrp,function(i,val){
-                var result=$.inArray(val,b);
-
-                if(result!=-1)
-                {
-                    isElec = 1;
-                }
-            })
-
-            if(isgovt == 2)
-            {
-                if(isElec != 1)
-                {
-                    // $("#sub7")
-                    //$("#sub7 option[value='43']").remove();
-                    //$("#sub8 option[value='43']").remove();
-                    $("#sub7 option[value='43']").remove();
-                    $("#sub8 option[value='43']").remove();
-
-                    // $("#sub7").find('option[value=43]').remove();
-                    // alert("removed");
-                }  
-            }
-
-
-            var Gender = $("input[name=gender]:checked").val();
-            //console.log(Religion);
-            if(Gender == "2")
-            {
-
-                $("#sub8").append(new Option('ELEMENTS OF HOME ECONOMICS',13));
-                $("#sub7").append(new Option('ELEMENTS OF HOME ECONOMICS',13));
-            }
-            else
-            {
-                // alert('i am removed');
-                dropdownElement.find('sub8[value=13]').remove();
-
-
-            }
+            load_GenSci();
 
 
         }
         else if(grp_cd == "5")
         {
-            Hum_Deaf_Subjects();
-            $.each(sub5_Deaf,function(val,text){
-                $("#sub5").append(new Option(text,val));
-            });
-            $.each(sub6_Deaf,function(val,text){
-                $("#sub6").append(new Option(text,val));
-            });
-            $.each(sub7_Deaf,function(val,text){
-                $("#sub7").append(new Option(text,val));
-            });
-            $.each(sub8_Deaf,function(val,text){
-                $("#sub8").append(new Option(text,val));
-            });
+            load_Commerce();
+        }
+        else if(grp_cd == "6")
+        {
+            load_HomeEco();
         }
         else if (grp_cd == "0")
         {
@@ -1551,7 +1498,7 @@ if(isset($files)){
         var teh_cd= $('#teh').val();
         var zone_cd= $('#zone').val();
         var pp_cent= $('#pp_cent').val();           
-        var sub6p1 = $('#sub5').val();
+        var sub6p1 = $('#sub6').val();
         var sub6p2 = $('#sub6').val();           
         var sub7p1 = $('#sub7').val();
         var sub7p2 = $('#sub8').val();                      
@@ -1585,14 +1532,14 @@ if(isset($files)){
             return status;
         }   
 
-        /*  else if(bFormNo == "" || bFormNo == 0 || bFormNo == undefined)
+        else if(bFormNo == "" || bFormNo == 0 || bFormNo == undefined)
         {
-        $('#ErrMsg').show(); 
-        $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-        $('#ErrMsg').html("<b>Please Enter your bay-Form</b>"); 
-        $('#bay_form').focus();  
-        return status; 
-        }*/
+            $('#ErrMsg').show(); 
+            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+            $('#ErrMsg').html("<b>Please Enter your bay-Form</b>"); 
+            $('#bay_form').focus();  
+            return status; 
+        }
         else if(FNic == "" || FNic.length == undefined )
         {
             $('#ErrMsg').show(); 
@@ -1602,14 +1549,14 @@ if(isset($files)){
             return status; 
         }
 
-        else if(dob == "" || dob.length == undefined)
+       /* else if(dob == "" || dob.length == undefined)
         {
             $('#ErrMsg').show(); 
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
             $('#ErrMsg').html("<b>Please Enter your Date of Birth</b>"); 
             $('#dob').focus(); 
             return status;  
-        }
+        }*/
 
         else if(mobNo == "" || mobNo == 0 || mobNo == undefined)
         {
@@ -1684,11 +1631,11 @@ if(isset($files)){
 
             return status;  
         }
-        else   if ($("#sub5").find('option:selected').val() < 1) 
+        else   if ($("#sub6").find('option:selected').val() < 1) 
         {
             $('#ErrMsg').show(); 
             alert('Plesae select Subject');                          
-            $("#sub5").focus();
+            $("#sub6").focus();
 
             return status;  
         }
@@ -1702,27 +1649,6 @@ if(isset($files)){
             $("#sub6").focus();
             return status;  
         }
-
-        else   if ($("#sub7").find('option:selected').val() < 1) 
-        {
-            $('#ErrMsg').show(); 
-            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-            $('#ErrMsg').html("<b>Plesae select 7th Subject  </b>"); 
-            //alert('Plesae select 7th Subject ');                          
-            $("#sub7").focus();
-            return status;  
-        }
-
-        else   if ($("#sub8").find('option:selected').val() < 1) 
-        {
-            $('#ErrMsg').show(); 
-            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-            $('#ErrMsg').html("<b>Plesae select 8th Subject  </b>"); 
-            //alert('Plesae select 8th Subject ');                          
-            $("#sub8").focus();
-            return status;  
-        }
-
         status = 1;
         return status;
 
@@ -1769,7 +1695,7 @@ if(isset($files)){
             //$("#father_cnic").mask("****************************",{placeholder:""});
 
             $("#sub3").empty(); 
-            $("#sub3").prepend("<option selected='selected' value='51'> ETHICS </option>");
+            $("#sub3").prepend("<option selected='selected' value='61'> ETHICS </option>");
             $("#sub3").prepend("<option  value='3'> ISLAMIYAT (COMPULSORY) </option>");
         }
     });
@@ -1783,15 +1709,15 @@ if(isset($files)){
         // //debugger;
         // alert(this.value + "  Transfer Thai Gayo");
         if (this.value == '1') {
-            window.location.href = '<?=base_url()?>/index.php/Registration/CreateBatch/'+'96/1/';
+            window.location.href = '<?=base_url()?>/index.php/Registration_11th/CreateBatch/'+'96/1/';
             // alert("Allot Thai Gayo Bhai");
         }
         else  if (this.value == '2') {
-            window.location.href = '<?=base_url()?>/index.php/Registration/CreateBatch/'+'97/2/';
+            window.location.href = '<?=base_url()?>/index.php/Registration_11th/CreateBatch/'+'97/2/';
             //  alert("Transfer Thai Gayo");
         }
         else  if(this.value == 3){
-            window.location.href = '<?=base_url()?>/index.php/Registration/CreateBatch/'+'98/3';
+            window.location.href = '<?=base_url()?>/index.php/Registration_11th/CreateBatch/'+'98/3';
             //alert("Transfer Thai Gayo");
         }
 
@@ -1799,24 +1725,27 @@ if(isset($files)){
 
     $( "#std_groups" ).change(function () {
         if (this.value == '1') {
-            // 1 biology   2 humanities   5 deaf and dumb  7 computer science  8 electrical wiring 
-            window.location.href = '<?=base_url()?>/index.php/Registration/CreateBatch/'+'96/3/1/';
+            // 1 biology   2 humanities   6 deaf and dumb  7 computer science  8 electrical wiring 
+            window.location.href = '<?=base_url()?>/index.php/Registration_11th/CreateBatch/'+'96/3/1/';
             //  alert("Allot Thai Gayo Bhai");
         }
         else  if (this.value == '2') {
-            window.location.href = '<?=base_url()?>/index.php/Registration/CreateBatch/'+'97/3/2/';
+            window.location.href = '<?=base_url()?>/index.php/Registration_11th/CreateBatch/'+'97/3/2/';
             // alert("Transfer Thai Gayo");
         }
-        else  if(this.value == '5'){
-            window.location.href = '<?=base_url()?>/index.php/Registration/CreateBatch/'+'98/3/5/';
+        else  if(this.value == '3'){
+            window.location.href = '<?=base_url()?>/index.php/Registration_11th/CreateBatch/'+'98/3/3/';
             // alert("Transfer Thai Gayo");
         }
-        else  if(this.value == '7'){
-            window.location.href = '<?=base_url()?>/index.php/Registration/CreateBatch/'+'98/3/7/';
+        else  if(this.value == '4'){
+            window.location.href = '<?=base_url()?>/index.php/Registration_11th/CreateBatch/'+'98/3/4/';
             //  alert("Transfer Thai Gayo");
         }
-        else  if(this.value == '8'){
-            window.location.href = '<?=base_url()?>/index.php/Registration/CreateBatch/'+'98/3/8/';
+        else  if(this.value == '5'){
+            window.location.href = '<?=base_url()?>/index.php/Registration_11th/CreateBatch/'+'98/3/5/';
+            //  alert("Transfer Thai Gayo");
+        }else  if(this.value == '6'){
+            window.location.href = '<?=base_url()?>/index.php/Registration_11th/CreateBatch/'+'98/3/6/';
             //  alert("Transfer Thai Gayo");
         }
 
@@ -1859,11 +1788,11 @@ if(isset($files)){
             }
             else{
                 var msg = "<img src='<?php echo base_url(); ?>assets/img/note_for_batch.jpg' alt='logo' style='width:800px; height: auto;' />"
-                //var msg = "Are You Sure You want to Cancel this Form ? <img src='<?php echo base_url(); ?>assets/img/note_for_batch.jpg' alt='logo' style='width:30px; height: 50px;' />"
+                //var msg = "Are You Sure You want to Cancel this Form ? <img src='<?php echo base_url(); ?>assets/img/note_for_batch.jpg' alt='logo' style='width:30px; height: 60px;' />"
                 alertify.confirm(msg, function (e) {
 
                     if (e) {
-                        window.location.href = '<?=base_url()?>/index.php/Registration/Make_Batch_Group_wise/'+$("#std_groups").val()+'/0';
+                        window.location.href = '<?=base_url()?>/index.php/Registration_11th/Make_Batch_Group_wise/'+$("#std_groups").val()+'/0';
                     } 
 
 
@@ -1915,12 +1844,26 @@ if(isset($files)){
             } 
         });
     }
+        function Dashboard(){
+        var msg = "Are you Sure You want to Cancel?"
+
+        alertify.confirm(msg, function (e) {
+
+            if (e) {
+                // user clicked "ok"
+                window.parent.location=<?php base_url() ?>'Registration_11th';
+            } 
+        });
+    }
 </script>
-<script type="text/javascript">
+<script type="">
     var error = '<?php echo @$error_msg; ?>';
     if(error > 0){
         alertify.error("Currently there is not student against this subject group.!") ;
     }
+
+
+
 </script>
 
 </body>
