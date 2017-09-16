@@ -481,7 +481,7 @@ else if(Session == '2')
                         {
                             echo "<option value='4' selected='selected'>GENERAL SCIENCE</option>"; 
                         }
-                        
+
                         else if($grp_cd == 5)
                         {
                             echo "<option value='5' selected='selected'>COMMERCE</option>";
@@ -1166,6 +1166,27 @@ else if(Session == '2')
             58:'HISTORY OF MODREN WORLD'
         }
 
+
+        var huminities_without_practical_withoutmath = {
+
+            0:'SELECT ONE',
+            11:'ECONOMICS',
+            14:'PHILOSOPHY',
+            17:'CIVICS',
+            20:'ISLAMIC STUDIES',
+            24:'ARABIC',
+            27:'ENGLISH ELECTIVE',
+            32:'PUNJABI',
+            34:'PERSIAN',
+            37:'URDU (ADVANCE)',
+            43:'EDUCATION',
+            45:'SOCIOLOGY',
+            55:'HISTORY OF PAKISTAN',
+            56:'HISTORY OF ISLAM',
+            57:'HISTORY OF INDO-PAK',
+            58:'HISTORY OF MODREN WORLD'
+        }
+
         var huminities_complete_subjects = {
             0:'SELECT ONE',
             11:'ECONOMICS',
@@ -1210,6 +1231,40 @@ else if(Session == '2')
             $("#sub3p2").append('<option value="91">PAKISTAN STUDIES</option>');
 
             $.each(huminities_without_practical,function(val,text){
+
+                $("#sub4").append(new Option(text,val));
+                $("#sub4p2").append(new Option(text,val));
+
+
+                $("#sub5").append(new Option(text,val));
+                $("#sub5p2").append(new Option(text,val));
+
+
+                $("#sub6").append(new Option(text,val));
+                $("#sub6p2").append(new Option(text,val));
+
+            });
+
+            $('#sub7').hide();$('#sub7p2').hide();
+            $('#sub8').hide(); $('#sub8p2').hide();
+        }
+
+
+
+        function additionalsubjectswithoutmath(){
+
+            Empty_All_Dropdowns();
+
+            $("#sub2").append('<option value="1">ENGLISH</option>');
+            $("#sub2p2").append('<option value="1">ENGLISH</option>');
+
+            $("#sub1").append('<option value="2">URDU</option>');
+            $("#sub1p2").append('<option value="2">URDU</option>');
+
+            $("#sub3").append('<option value="92">ISLAMIC EDUCATION</option>');
+            $("#sub3p2").append('<option value="91">PAKISTAN STUDIES</option>');
+
+            $.each(huminities_without_practical_withoutmath,function(val,text){
 
                 $("#sub4").append(new Option(text,val));
                 $("#sub4p2").append(new Option(text,val));
@@ -2346,6 +2401,23 @@ else if(Session == '2')
             }
         }
 
+
+        function sub_grp_load_additional_engSub(){
+            additionalsubjectswithoutmath();
+            $('#sub1').hide();
+            $('#sub1p2').hide();
+            $('#sub2').hide(); 
+            $('#sub2p2').hide(); 
+            $('#sub3').hide();
+            $('#sub3p2').hide();
+            $('#sub1').empty();
+            $('#sub1p2').empty();
+            $('#sub2').empty();
+            $('#sub2p2').empty();
+            $('#sub3').empty();
+            $('#sub3p2').empty();
+        }
+
         function sub_grp_load_additional(){
 
             humanities_subjects();
@@ -2439,7 +2511,12 @@ else if(Session == '2')
             else if($exam_type == 4){
                 echo'sub_grp_load_exam_type4();';
             }
-            else if(($exam_type == 16 || $exam_type == 15) && $cattype == 2){
+
+            else if(($exam_type == 16 || $exam_type == 15) && $cattype == 2 && ($grp_cd == 2 || $grp_cd == 4)){
+                echo'sub_grp_load_additional_engSub();';
+            }
+
+            else if(($exam_type == 16 || $exam_type == 15) && $cattype == 2 && ($grp_cd != 2 || $grp_cd != 4)){
                 echo'sub_grp_load_additional();';
             }
 
