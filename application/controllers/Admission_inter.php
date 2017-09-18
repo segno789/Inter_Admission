@@ -2579,7 +2579,7 @@ class Admission_inter extends CI_Controller {
         $this->zend->load('Zend/Barcode');
         $file = Zend_Barcode::draw('code128','image', array('text' => $code,'drawText'=>false), array());
 
-        $store_image = imagepng($file,BARCODE_PATH."{$code}.png");
+        @$store_image = imagepng($file,BARCODE_PATH."{$code}.png");
         return $code.'.png';
 
     }
@@ -3285,31 +3285,30 @@ class Admission_inter extends CI_Controller {
                 $pdf->SetFont('Arial','',10);
                 $pdf->SetXY(6.9,0.8);
                 $pdf->Cell(0, 0.25,  'Gender: '. ($data['sex']==1?"MALE":"FEMALE" ), 0.25, "C");
-                $grp_name = $data["grp_cd"];
+                /*      $grp_name = $data["grp_cd"];
                 switch ($grp_name) {
-                    case '1':
-                        $grp_name = 'PRE-MEDICAL';
-                        break;
-                    case '2':
-                        $grp_name = 'PRE-ENGINEERING';
-                        break;
-                    case '3':
-                        $grp_name = 'HUMANITIES';
-                        break;
-                    case '4':
-                        $grp_name = 'GENERAL SCIENCE';
-                        break;
-                    case '5':
-                        $grp_name = 'COMMERCE';
-                        break;
-                    default:
-                        $grp_name = "No GROUP SELECTED.";
+                case '1':
+                $grp_name = 'PRE-MEDICAL';
+                break;
+                case '2':
+                $grp_name = 'PRE-ENGINEERING';
+                break;
+                case '3':
+                $grp_name = 'HUMANITIES';
+                break;
+                case '4':
+                $grp_name = 'GENERAL SCIENCE';
+                break;
+                case '5':
+                $grp_name = 'COMMERCE';
+                break;
+                default:
+                $grp_name = "No GROUP SELECTED.";
                 }
                 $pdf->SetFont('Arial','',10);
                 $pdf->SetXY(2.5,0.8);
                 $pdf->Cell(0, 0.25,  'Group: '.$grp_name, 0.25, "C");
-
-
+                */
                 $pdf->rect($lmargin,1,$rmargin,10.5);              
                 $cnt=-1;
 
@@ -3382,13 +3381,15 @@ class Admission_inter extends CI_Controller {
 
             //DebugBreak();
 
+            $sub1_abr = '';$sub2_abr = '';$sub3_abr = '';$sub4_abr = '';$sub5_abr = '';$sub6_abr = '';$sub7_abr = '';$sub5A_abr='';$sub6A_abr='';$sub7A_abr='';
+
             if($data['grp_cd'] == 5)
             {
                 $sub5A_abr = $data["sub5A_abr"];
                 $sub6A_abr = $data["sub6A_abr"];
                 $sub7A_abr = $data["sub7A_abr"];
             }
-            $sub1_abr = '';$sub2_abr = '';$sub3_abr = '';$sub4_abr = '';$sub5_abr = '';$sub6_abr = '';$sub7_abr = '';
+
             if($data['sub1Ap1'] == 1){$sub1_abr = $data["sub1_abr"].',';}  
             if($data['sub2Ap1'] == 1){$sub2_abr = $data["sub2_abr"].',';}
             if($data['sub3Ap1'] == 1){$sub3_abr = $data["sub3_abr"].',';}  
@@ -3403,10 +3404,7 @@ class Admission_inter extends CI_Controller {
 
             if($data["IntBrd_cd"]==1)
             {
-                $type = pathinfo(@$data[0]['picpath'], PATHINFO_EXTENSION); 
-                @$image_path_selected = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents(@$data[0]['picpath']));
-                $pdf->Image($image_path_selected,$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG");
-
+                $pdf->Image($data['picpath'],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG");
             }
             else
             {
@@ -3509,7 +3507,7 @@ class Admission_inter extends CI_Controller {
             $session_constant="ANNUAL";
         }
         else if(Session==2){
-            $session_constant="SUPPLYMENTARY";
+            $session_constant="SUPPLEMENTARY";
         }
         foreach ($result as $key=>$data) 
         {
@@ -3602,11 +3600,8 @@ class Admission_inter extends CI_Controller {
 
 
             if($data["IntBrd_cd"]==1)
-
             {
-                $type = pathinfo(@$data[0]['picpath'], PATHINFO_EXTENSION); 
-                @$image_path_selected = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents(@$data[0]['picpath']));
-                $pdf->Image($image_path_selected,6.5, 1.55+$Y, 1.25, 1.0, "JPG");
+                $pdf->Image($data['picpath'],6.5, 1.55+$Y, 1.25, 1.0, "JPG");
             }
             else
             {

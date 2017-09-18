@@ -21,7 +21,7 @@
                                     <?php
                                     if($data[0]["IntBrd_cd"] == 1)
                                     {
-                                        @$image_path_selected = DIRPATH12TH.$data[0]['picpath']; 
+                                        @$image_path_selected = $data[0]['picpath']; 
                                         @$type = pathinfo(@$image_path_selected, PATHINFO_EXTENSION);
                                     }
                                     else
@@ -456,10 +456,14 @@
                                             <option value="<?php  echo $data[0]['sub1'];?>"><?php
                                                 echo array_search($data[0]['sub1'],$subarray);
                                             ?></option>
-                                            <?php } ?>
-                                        <option value="0"  <?php if($data[0]['sub1pf1']==1) echo "selected='selected'"; ?> >NONE</option>
+                                            <?php }
+                                        if($data[0]['status']!=4){
+                                            ?>
+                                            <option value="0">NONE</option>
+                                            <?php
+                                        }
+                                        ?>
                                     </select> 
-
                                     <select id="sub1p2" class="span2 dropdown text-uppercase" name="sub1p2">
                                         <option value="<?php echo $data[0]['sub1'];?>"><?php
                                             echo array_search($data[0]['sub1'],$subarray);
@@ -473,8 +477,13 @@
                                             <option value="<?php echo $data[0]['sub2'];?>"><?php
                                                 echo array_search($data[0]['sub2'],$subarray);
                                             ?></option>
-                                            <?php } ?>
-                                        <option value="0"  <?php if($data[0]['sub2pf1']==1) echo "selected='selected'"; ?> >NONE</option>
+                                            <?php }
+                                        if($data[0]['status']!=4){
+                                            ?>
+                                            <option value="0">NONE</option>
+                                            <?php
+                                        }
+                                        ?>
                                     </select>
                                     <select id="sub2p2" class="span2 dropdown" name="sub2p2">
                                         <option value="<?php echo $data[0]['sub2'];?>"><?php
@@ -489,8 +498,13 @@
                                             <option value="<?php echo $data[0]['sub3'];?>"><?php
                                                 echo array_search($data[0]['sub3'],$subarray);
                                             ?></option>
-                                            <?php } ?>
-                                        <option value="0"  <?php if($data[0]['sub3pf1']==1) echo "selected='selected'"; ?> >NONE</option>
+                                            <?php }
+                                        else{
+                                            ?>
+                                            <option value="0">NONE</option>
+                                            <?php
+                                        }
+                                        ?>
                                     </select> 
                                     <select id="sub3p2" class="span2 dropdown text-uppercase" name="sub3p2">
                                         <option value="<?php echo $data[0]['sub8'];?>"><?php
@@ -505,8 +519,13 @@
                                             <option value="<?php echo $data[0]['sub4'];?>"><?php
                                                 echo array_search($data[0]['sub4'],$subarray);
                                             ?></option>
-                                            <?php } ?>
-                                        <option value="0"  <?php if($data[0]['sub4pf1']==1) echo "selected='selected'"; ?> >NONE</option>
+                                            <?php }
+                                        if($data[0]['status']!=4){
+                                            ?>
+                                            <option value="0">NONE</option>
+                                            <?php
+                                        }
+                                        ?>
                                     </select>
                                     <select id="sub4p2" class="span2 dropdown text-uppercase" name="sub4p2">
                                         <option value="<?php echo $data[0]['sub4'];?>"><?php
@@ -522,10 +541,13 @@
                                             <option value="<?php echo $data[0]['sub5'];?>"><?php
                                                 echo array_search($data[0]['sub5'],$subarray);
                                             ?></option>
-                                            <?php } ?>
-                                        <option value="0"  <?php if($data[0]['sub5pf1']==1) echo "selected='selected'"; ?> >NONE</option>
-
-
+                                            <?php }
+                                        if($data[0]['status']!=4){
+                                            ?>
+                                            <option value="0">NONE</option>
+                                            <?php
+                                        }
+                                        ?>
                                     </select> 
                                     <select id="sub5p2" class="span2 dropdown text-uppercase" name="sub5p2" selected="selected">
                                         <option value="<?php if($grp==5){ echo '94';} else echo $data[0]['sub5'];?>"><?php
@@ -538,8 +560,6 @@
                                             {
                                                 echo array_search($data[0]['sub5'],$subarray);
                                             }
-
-
                                         ?></option>
                                     </select> 
                                 </div>
@@ -550,8 +570,13 @@
                                             <option value="<?php echo $data[0]['sub6'];?>"><?php
                                                 echo array_search($data[0]['sub6'],$subarray);
                                             ?></option>
-                                            <?php } ?>
-                                        <option value="0"  <?php if($data[0]['sub6pf1']==1) echo "selected='selected'"; ?> >NONE</option>
+                                            <?php } 
+                                        if($data[0]['status']!=4){
+                                            ?>
+                                            <option value="0">NONE</option>
+                                            <?php
+                                        }
+                                        ?>
                                     </select>
                                     <select id="sub6p2"  name="sub6p2" class="span2 dropdown text-uppercase" selected="selected">
                                         <option value="<?php if($grp==5){ echo '97';} else echo $data[0]['sub6'];?>"><?php
@@ -579,8 +604,13 @@
                                                 <option value="<?php echo $data[0]['sub7'];?>"><?php
                                                     echo array_search($data[0]['sub7'],$subarray);
                                                 ?></option>
-                                                <?php } ?>
-                                            <option value="0"  <?php if($data[0]['sub7pf1']==1) echo "selected='selected'"; ?> >NONE</option>
+                                                <?php } 
+                                            if($data[0]['status']!=4){
+                                                ?>
+                                                <option value="0">NONE</option>
+                                                <?php
+                                            }
+                                            ?>
                                         </select> 
                                         <select id="sub7p2" class="span2 dropdown text-uppercase" name="sub7p2" selected="selected">
 
