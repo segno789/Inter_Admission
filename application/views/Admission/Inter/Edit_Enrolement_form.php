@@ -21,8 +21,8 @@
                                     <?php
                                     if($data[0]["IntBrd_cd"] == 1)
                                     {
-                                        $image_path_selected = DIRPATH12TH.$data[0]['picpath']; 
-                                        $type = pathinfo(@$image_path_selected, PATHINFO_EXTENSION);
+                                        @$image_path_selected = $data[0]['picpath']; 
+                                        @$type = pathinfo(@$image_path_selected, PATHINFO_EXTENSION);
                                     }
                                     else
                                     {
@@ -104,14 +104,23 @@
 
                                         if($spec == 0)
                                         {
-                                            echo  "<option value='0' selected='selected'>None</option><option value='1'>Deaf &amp; Dumb</option> <option value='2'>Board Employee</option>";
+                                            echo  "<option value='0' selected='selected'>None</option><option value='1'>Disabled</option>";
+                                            if(Session == 1){
+                                                echo"<option value='2'>Board Employee</option>";
+                                            }
                                         }
                                         else if($spec == 1)
                                         {
-                                            echo  "<option value='0' >None</option>  <option value='1' selected='selected'>Deaf &amp; Dumb</option> <option value='2'>Board Employee</option>";
+                                            echo  "<option value='0' >None</option>  <option value='1' selected='selected'>Disabled</option>";
+                                            if(Session == 1){
+                                                echo"<option value='2'>Board Employee</option>";
+                                            }
                                         }
                                         else if($spec == 2){
-                                            echo  "<option value='0' >None</option>  <option value='1' >Deaf &amp; Dumb</option> <option value='2' selected='selected'>Board Employee</option>";                                           
+                                            echo  "<option value='0' >None</option>  <option value='1' >Disabled</option>";                                           
+                                            if(Session == 1){
+                                                echo"<option value='2'>Board Employee</option>";
+                                            }
                                         }
                                         ?>
                                     </select>
@@ -122,7 +131,7 @@
                                     <label class="control-label span2" for="MarkOfIden">
                                         Identification Mark:
                                     </label>
-                                    <input class="span2" type="text" id="MarkOfIden" name="MarkOfIden" value="<?php echo  $data['0']['markOfIden']; ?>" required="required" maxlength="60" >
+                                    <input class="span2 text-uppercase" type="text" id="MarkOfIden" name="MarkOfIden" value="<?php echo  $data['0']['markOfIden']; ?>" required="required" maxlength="60" >
                                     <label class="control-label span2" for="CollGrade">
                                         College Grade:
                                     </label>
@@ -445,19 +454,28 @@
                                             if($data[0]['sub1Ap1']==1) 
                                             {
                                                 echo '<option value='.$data[0]['sub1'].'>'.array_search($data[0]['sub1'],$subarray).'</option>'; 
-                                                echo '<option value="0">NONE</option>';
+                                                if($data[0]['status']!=4){
+                                                    echo '<option value="0">NONE</option>';
+                                                }
                                             }
                                             else if($data[0]['sub1Ap1']==0){
-                                                echo '<option value="0">NONE</option>';
+
+                                                if($data[0]['status']!=4){
+                                                    echo '<option value="0">NONE</option>';
+                                                }
                                                 echo '<option value='.$data[0]['sub1'].'>'.array_search($data[0]['sub1'],$subarray).'</option>'; 
                                             }                               
                                             else{
                                                 echo '<option value='.$data[0]['sub1'].'>'.array_search($data[0]['sub1'],$subarray).'</option>'; 
-                                                echo '<option value="0">NONE</option>';
+                                                if($data[0]['status']!=4){
+                                                    echo '<option value="0">NONE</option>';
+                                                }
                                             }                             
                                         }
                                         else{
-                                            echo '<option value="0">NONE</option>';
+                                            if($data[0]['status']!=4){
+                                                echo '<option value="0">NONE</option>';
+                                            }
                                         }                      
                                         ?>
                                     </select>
@@ -475,19 +493,28 @@
                                             if($data[0]['sub2Ap1']==1) 
                                             {
                                                 echo '<option value='.$data[0]['sub2'].'>'.array_search($data[0]['sub2'],$subarray).'</option>'; 
-                                                echo '<option value="0">NONE</option>';
+
+                                                if($data[0]['status']!=4){
+                                                    echo '<option value="0">NONE</option>';
+                                                }
                                             }
                                             else if($data[0]['sub2Ap1']==0){
-                                                echo '<option value="0">NONE</option>';
+                                                if($data[0]['status']!=4){
+                                                    echo '<option value="0">NONE</option>';
+                                                }
                                                 echo '<option value='.$data[0]['sub2'].'>'.array_search($data[0]['sub2'],$subarray).'</option>'; 
                                             }                               
                                             else{
                                                 echo '<option value='.$data[0]['sub2'].'>'.array_search($data[0]['sub2'],$subarray).'</option>'; 
-                                                echo '<option value="0">NONE</option>';
+                                                if($data[0]['status']!=4){
+                                                    echo '<option value="0">NONE</option>';
+                                                }
                                             }                             
                                         }  
                                         else{
-                                            echo '<option value="0">NONE</option>';
+                                            if($data[0]['status']!=4){
+                                                echo '<option value="0">NONE</option>';
+                                            }
                                         }                    
                                         ?>
                                     </select>
@@ -504,19 +531,39 @@
                                             if($data[0]['sub3Ap1']==1) 
                                             {
                                                 echo '<option value='.$data[0]['sub3'].'>'.array_search($data[0]['sub3'],$subarray).'</option>'; 
-                                                echo '<option value="0">NONE</option>';
+                                                if($data[0]['status']!=4){
+                                                    echo '<option value="0">NONE</option>';
+                                                }
+                                                else{
+                                                    echo '<option value="0">NONE</option>';
+                                                }
                                             }
                                             else if($data[0]['sub3Ap1']==0){
-                                                echo '<option value="0">NONE</option>';
+                                                if($data[0]['status']!=4){
+                                                    echo '<option value="0">NONE</option>';
+                                                }
+                                                else{
+                                                    echo '<option value="0">NONE</option>';   
+                                                }
                                                 echo '<option value='.$data[0]['sub3'].'>'.array_search($data[0]['sub3'],$subarray).'</option>'; 
                                             }                               
                                             else{
                                                 echo '<option value='.$data[0]['sub3'].'>'.array_search($data[0]['sub3'],$subarray).'</option>'; 
-                                                echo '<option value="0">NONE</option>';
+                                                if($data[0]['status']!=4){
+                                                    echo '<option value="0">NONE</option>';
+                                                }
+                                                else{
+                                                    echo '<option value="0">NONE</option>';
+                                                }
                                             }                             
                                         }     
                                         else{
-                                            echo '<option value="0">NONE</option>';
+                                            if($data[0]['status']!=4){
+                                                echo '<option value="0">NONE</option>';
+                                            }
+                                            else{
+                                                echo '<option value="0">NONE</option>';
+                                            }
                                         }
                                         ?>
                                     </select> 
@@ -533,19 +580,27 @@
                                             if($data[0]['sub4Ap1']==1) 
                                             {
                                                 echo '<option value='.$data[0]['sub4'].'>'.array_search($data[0]['sub4'],$subarray).'</option>'; 
-                                                echo '<option value="0">NONE</option>';
+                                                if($data[0]['status']!=4){
+                                                    echo '<option value="0">NONE</option>';
+                                                }
                                             }
                                             else if($data[0]['sub4Ap1']==0){
-                                                echo '<option value="0">NONE</option>';
+                                                if($data[0]['status']!=4){
+                                                    echo '<option value="0">NONE</option>';
+                                                }
                                                 echo '<option value='.$data[0]['sub4'].'>'.array_search($data[0]['sub4'],$subarray).'</option>'; 
                                             }                               
                                             else{
                                                 echo '<option value='.$data[0]['sub4'].'>'.array_search($data[0]['sub4'],$subarray).'</option>'; 
-                                                echo '<option value="0">NONE</option>';
+                                                if($data[0]['status']!=4){
+                                                    echo '<option value="0">NONE</option>';
+                                                }
                                             }                             
                                         }
                                         else{
-                                            echo '<option value="0">NONE</option>';
+                                            if($data[0]['status']!=4){
+                                                echo '<option value="0">NONE</option>';
+                                            }
                                         }                      
                                         ?>
                                     </select>
@@ -559,23 +614,35 @@
                                 <div class="control row controls-row">
                                     <label class="control-label span1 offset3"></label>
                                     <select id="sub5"  name="sub5" class="span2 dropdown">
-                                        <?php if($data[0]['sub5pf1']== 2){
+                                        <?php 
+
+                                        //DebugBreak();
+
+                                        if($data[0]['sub5pf1']== 2){
                                             if($data[0]['sub5Ap1']==1) 
                                             {
                                                 echo '<option value='.$data[0]['sub5'].'>'.array_search($data[0]['sub5'],$subarray).'</option>'; 
-                                                echo '<option value="0">NONE</option>';
+                                                if($data[0]['status']!=4){
+                                                    echo '<option value="0">NONE</option>';
+                                                }
                                             }
                                             else if($data[0]['sub5Ap1']==0){
-                                                echo '<option value="0">NONE</option>';
+                                                if($data[0]['status']!=4){
+                                                    echo '<option value="0">NONE</option>';
+                                                }
                                                 echo '<option value='.$data[0]['sub5'].'>'.array_search($data[0]['sub5'],$subarray).'</option>'; 
                                             }                               
                                             else{
                                                 echo '<option value='.$data[0]['sub5'].'>'.array_search($data[0]['sub5'],$subarray).'</option>'; 
-                                                echo '<option value="0">NONE</option>';
+                                                if($data[0]['status']!=4){
+                                                    echo '<option value="0">NONE</option>';
+                                                }
                                             }                             
                                         }
                                         else{
-                                            echo '<option value="0">NONE</option>';
+                                            if($data[0]['status']!=4){
+                                                echo '<option value="0">NONE</option>';
+                                            }
                                         }                      
                                         ?>
                                     </select> 
@@ -598,19 +665,27 @@
                                             if($data[0]['sub6Ap1']==1) 
                                             {
                                                 echo '<option value='.$data[0]['sub6'].'>'.array_search($data[0]['sub6'],$subarray).'</option>'; 
-                                                echo '<option value="0">NONE</option>';
+                                                if($data[0]['status']!=4){
+                                                    echo '<option value="0">NONE</option>';
+                                                }
                                             }
                                             else if($data[0]['sub6Ap1']==0){
-                                                echo '<option value="0">NONE</option>';
+                                                if($data[0]['status']!=4){
+                                                    echo '<option value="0">NONE</option>';
+                                                }
                                                 echo '<option value='.$data[0]['sub6'].'>'.array_search($data[0]['sub6'],$subarray).'</option>'; 
                                             }                               
                                             else{
                                                 echo '<option value='.$data[0]['sub6'].'>'.array_search($data[0]['sub6'],$subarray).'</option>'; 
-                                                echo '<option value="0">NONE</option>';
+                                                if($data[0]['status']!=4){
+                                                    echo '<option value="0">NONE</option>';
+                                                }
                                             }                             
                                         }   
                                         else{
-                                            echo '<option value="0">NONE</option>';
+                                            if($data[0]['status']!=4){
+                                                echo '<option value="0">NONE</option>';
+                                            }
                                         }                   
                                         ?>
                                     </select>
@@ -637,19 +712,27 @@
                                                 if($data[0]['sub7Ap1']==1) 
                                                 {
                                                     echo '<option value='.$data[0]['sub7'].'>'.array_search($data[0]['sub7'],$subarray).'</option>'; 
-                                                    echo '<option value="0">NONE</option>';
+                                                    if($data[0]['status']!=4){
+                                                        echo '<option value="0">NONE</option>';
+                                                    }
                                                 }
                                                 else if($data[0]['sub2Ap1']==0){
-                                                    echo '<option value="0">NONE</option>';
+                                                    if($data[0]['status']!=4){
+                                                        echo '<option value="0">NONE</option>';
+                                                    }
                                                     echo '<option value='.$data[0]['sub7'].'>'.array_search($data[0]['sub7'],$subarray).'</option>'; 
                                                 }                               
                                                 else{
                                                     echo '<option value='.$data[0]['sub7'].'>'.array_search($data[0]['sub7'],$subarray).'</option>'; 
-                                                    echo '<option value="0">NONE</option>';
+                                                    if($data[0]['status']!=4){
+                                                        echo '<option value="0">NONE</option>';
+                                                    }
                                                 }                             
                                             }   
                                             else{
-                                                echo '<option value="0">NONE</option>';
+                                                if($data[0]['status']!=4){
+                                                    echo '<option value="0">NONE</option>';
+                                                }
                                             }                   
                                             ?>
                                         </select> 

@@ -29,7 +29,7 @@
                                             Total Forms In Batch
                                         </th>
                                         <th style="width:10%">
-                                            Total Registration Fee
+                                            Total Admission Fee
                                         </th>
                                         <th style="width:13%" class="hidden-phone">
                                             Total Processing Fee
@@ -40,7 +40,7 @@
                                         <th style="width:10%" class="hidden-phone">
                                             Total Amount
                                         </th>
-                                        <th style="width:25%" class="hidden-phone">
+                                        <th style="width:21%" class="hidden-phone">
                                             Downloads
                                         </th>
 
@@ -69,9 +69,6 @@
                                             <button type="button" class="btn btn-info" value="'.$vals['Batch_ID'].'" onclick="ReturnForm('.$vals['Batch_ID'].')">Return Forms</button>
                                             <button type="button" class="btn btn-info" value="'.$vals['Batch_ID'].'" onclick="ChallanForm_Adm10th_Regular('.$vals['Batch_ID'].')">Challan Forms</button>
                                             <button type="button" class="btn btn-info" value="'.$vals['Batch_ID'].'" onclick="RevenueForm('.$vals['Batch_ID'].')">Revenue Form</button>';
-                                            /*if($vals['flag']==0){
-                                            echo '<button type="button" class="btn btn-danger" value="'.$vals['Batch_ID'].'" onclick="ReleaseForm('.$vals['Batch_ID'].')">Release Batch</button>';   
-                                            }*/
                                             echo '
                                             </td>';
                                             endforeach;
@@ -93,13 +90,13 @@
                         </div>
 
 
-                       
-                            <!--Note: Batch List Prints Will Be Used For Registration.-->
-                            <a href="<?php echo base_url(); ?>Admission_Inter/forwarding_pdf/" target="_blank" class="guidlines blink_text" style="font-size: 18px;">Download Forwarding letter.</a>
-                            <br />
-                            <a href="<?php echo base_url(); ?>Admission_Inter/financeReoprt/" target="_blank" class="guidlines blink_text" style="font-size: 18px;">Download Finance Forwarding letter.</a>
-                            <br />  <br/>
-                       
+
+                        <!--Note: Batch List Prints Will Be Used For Registration.-->
+                        <a href="<?php echo base_url(); ?>index.php/Admission_Inter/forwarding_pdf/" target="_blank" class="guidlines blink_text" style="font-size: 18px;">Download Forwarding letter.</a>
+                        <br />
+                        <a href="<?php echo base_url(); ?>index.php/Admission_Inter/financeReoprt/" target="_blank" class="guidlines blink_text" style="font-size: 18px;">Download Finance Forwarding letter.</a>
+                        <br />  <br/>
+
                     </div>
                 </div>
             </div>

@@ -37,11 +37,7 @@
                                         <th style="width:15%" class="hidden-phone">
                                             Subject Group
                                         </th>
-
-                                        <th style="width:5%" class="hidden-phone">
-                                            Picture
-                                        </th>
-                                        <th style="width:10%" class="hidden-phone" >
+                                        <th style="width:5%" class="hidden-phone" >
                                             Download
                                         </th>
                                     </tr>
@@ -58,20 +54,6 @@
                                             $formno = !empty($vals["formNo"])?$vals["formNo"]:"N/A";
                                             $grp_name = $vals["grp_cd"];
                                             $sub7 = $vals["sub7"];
-
-                                            $image_path_selected = '';
-                                            
-                                            if($vals["IntBrd_cd"] ==  1)
-                                            {
-                                                $type = pathinfo(@$data[0]['picpath'], PATHINFO_EXTENSION); 
-                                                @$image_path_selected = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents(@$data[0]['picpath']));
-                                            }
-                                          /*  else
-                                            {
-                                                @$image_path_selected =  DIRPATHOTHER.'/'.$vals["coll_cd"].'/'.$vals["picpath"]; 
-                                                @$type = pathinfo($image_path_selected, PATHINFO_EXTENSION); 
-                                                @$image_path_selected = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($image_path_selected));
-                                            }*/
 
                                             $disable = '<button type="button" class="btn btn-info" value="'.$vals["rno"].'" onclick="NewForm('.$vals["rno"].','.$vals["IntBrd_cd"].','.$vals["Iyear"].')">Save Form</button>';
                                             if(@$vals['MissingNOC']>0)
@@ -110,7 +92,7 @@
                                             <td>'.$vals["name"].'</td>
                                             <td>'.$vals["Fname"].'</td>
                                             <td>'.$grp_name.'</td>
-                                            <td><img id="previewImg" style="width:40px; height: 40px;" src="'.$image_path_selected.'" alt="Candidate Image"></td>';
+                                            ';
                                             echo'<td>'.$disable.'</td>
                                             </tr>';
 

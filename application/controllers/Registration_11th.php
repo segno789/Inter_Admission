@@ -813,6 +813,7 @@ class Registration_11th extends CI_Controller {
         $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
         redirect('Registration_11th/'.$viewName);
         return;*/
+        //DebugBreak();
         $target_path = IMAGE_PATH11;
         // $target_path = '../uploads2/'.$Inst_Id.'/';
         if (!file_exists($target_path)){
@@ -837,7 +838,7 @@ class Registration_11th extends CI_Controller {
         $this->load->library('upload', $config);
         $check = getimagesize($_FILES["image"]["tmp_name"]);
         $this->upload->initialize($config);
-
+      
         if($check !== false) {
 
             $file_size = round($_FILES['image']['size']/1024, 2);
@@ -878,7 +879,7 @@ class Registration_11th extends CI_Controller {
                 redirect('Registration_11th/Get_students_record/');
                 return;
             }
-        }
+        } 
         $a = getimagesize($filepath);
 
 
@@ -887,7 +888,7 @@ class Registration_11th extends CI_Controller {
         {
             $this->convertImage($filepath,$filepath,100,$a['mime']);
         }
-
+         
         //  // DebugBreak();();
 
         /*$path = base_url().'Uploads/2016/Private/GridImageTemplate.jpg';
@@ -2353,7 +2354,7 @@ class Registration_11th extends CI_Controller {
     {
         $RegGrp = $this->uri->segment(3);
         $Spl_case = $this->uri->segment(4);
-        // // DebugBreak();();
+        //DebugBreak();
         $this->load->model('Registration_11th_model');
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -2421,24 +2422,33 @@ class Registration_11th extends CI_Controller {
         }
         else 
         {
+            if(date('Y-m-d',strtotime(SINGLE_LAST_DATE))>=date('Y-m-d'))
+            {
             $rule_fee  =  $this->Registration_11th_model->getreulefee(1); 
             $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
+            }
+            else
+            {
+             $rule_fee  =  $this->Registration_11th_model->getreulefee(2); 
+            $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
+            }
+            
 
 
         }
-        if($is_gov == 1)
-        {
+        /*if($is_gov == 1)
+        {*/
             $reg_fee = $rule_fee[0]['Reg_Fee'];
             $Lreg_fee = $rule_fee[0]['Fine'];
             $processing_fee = $rule_fee[0]['Reg_Processing_Fee'];
-        }
+       /* }
         else
         {
             $reg_fee = $rule_fee[0]['Reg_Fee'];
             $Lreg_fee = $rule_fee[0]['Fine'];
             $processing_fee = $rule_fee[0]['Reg_Processing_Fee'];
 
-        }
+        }*/
         //// DebugBreak();();
         $q1 = $user_info['fee'];
         $total_std = 0;
@@ -2533,12 +2543,12 @@ class Registration_11th extends CI_Controller {
                 }
                 $Totalprocessing_fee = $Totalprocessing_fee + $processing_fee;
             } // end of Else
-            if(date('Y-m-d')<=$lastdate)
+            /*if(date('Y-m-d')<=$lastdate)
             {
                 $Lreg_fee = 0;
                 $TotalLatefee=0;
                 $reLreg_fee=0;
-            }
+            }  */
             $netTotal = (int)$netTotal +$reg_fee + $Lreg_fee+$processing_fee;
             $netTotal = (int)$netTotal +$reg_fee + $Lreg_fee+$processing_fee;
             $AllUser[$total_record]['regFee'] = $reg_fee;
@@ -2568,7 +2578,7 @@ class Registration_11th extends CI_Controller {
     }
     public function Make_Batch_Formwise()
     {
-        //  // DebugBreak();();
+        // DebugBreak();
         if(!empty($_POST["chk"]))
         {
 
@@ -2765,7 +2775,7 @@ class Registration_11th extends CI_Controller {
     public function return_pdf()
     {
 
-        //// DebugBreak();();
+         //DebugBreak();
 
         $Condition = $this->uri->segment(4);
         /*

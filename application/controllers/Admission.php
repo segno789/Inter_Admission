@@ -140,7 +140,7 @@ class Admission extends CI_Controller {
         {
             $type = pathinfo(@$data['picpath'], PATHINFO_EXTENSION); 
             @$image_path_selected = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents(@$data['picpath']));
-            $pdf->Image(@$data['picpath'],6.5, 1.30+$Y, 0.95, 1.0, "JPG");   
+            $pdf->Image(@$data['picpath'],6.5, 1.30+$Y, 0.95, 1.0, "JPG");    
         }
 
         else  if($data ['IsNewPic'] == 1 && Session == 1)
@@ -938,11 +938,10 @@ class Admission extends CI_Controller {
         $pdf->Cell( 0,0,$data['formNo'],0,'L');
 
         if($data ['IsNewPic'] == 0)
-        {            
+        {
             $type = pathinfo(@$data['picpath'], PATHINFO_EXTENSION); 
             @$image_path_selected = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents(@$data['picpath']));
             $pdf->Image($image_path_selected,6.5, 10.65+$Y, 0.95, 1.0, "JPG");
-
         }
         else if($data ['IsNewPic'] == 1)
         {
@@ -2929,8 +2928,6 @@ class Admission extends CI_Controller {
         $logedIn = $this->Admission_model->Insert_NewEnorlement($data);
 
         $info =  '';
-
-
 
         foreach($logedIn[0] as $key=>$val)
         {

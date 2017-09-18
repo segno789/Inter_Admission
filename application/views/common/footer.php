@@ -1,22 +1,14 @@
 
 
-<div class="navbar-fixed-bottom row-fluid">
-    <div class="navbar-inner" style="text-align: center; background:#003a6a; color: wheat; margin-bottom: 4px; width: 100%; height: 40px;">
-        &copy; 2017 BISE Gujranwala, All Rights Reserved.
+<div class="container-fluid ">
+    <div style="text-align: center; background:#3187bf; color: white;  margin-bottom: 5px; height: 40px;">
+        &copy; 2017 BISE Gujranwala, All Rights Reserved. 
     </div>
+</div>
+
 </div>
 <script src="<?php echo base_url(); ?>assets/js/highcharts.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/exporting.js"></script>
-<script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/js/bootstrap.js"></script>
-<script src="<?php echo base_url(); ?>assets/js/jquery.scrollUp.js"></script>
-<script src="<?php echo base_url(); ?>assets/js/wysiwyg/bootstrap-wysihtml5.js"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.dataTables.js"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.mask.js"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.validate.min.js"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/alertify.min.js"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.fancybox.pack.js"></script>
-<script src="<?php echo base_url(); ?>assets/js/jquery-ui.js"></script>
 
 <?php 
 if(isset($files)){
@@ -25,7 +17,7 @@ if(isset($files)){
     }
 }
 ?> 
-<script type="">
+<script type="text/javascript">
     $(document).ready(function () {
 
         $( "#txtDob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate:new Date(2001, 7, 1),minDate:new Date(1970, 0, 1)}).val();
@@ -38,141 +30,140 @@ if(isset($files)){
             "sPaginationType": "full_numbers",
             "cache": false
         });
-        $('.mPageloader').hide();
     });
-    
-         var obj1 = [];
+
+    var obj1 = [];
     $(document).ready(function () {
-        
-      //  console.log(obj);
-     //   console.log(obj1);
-      drawChart3();
-      })
-      
-     
-      function drawChart3() {
-    jQuery.ajax({
-        type: "POST",
-        url: "<?php echo base_url(); ?>Dashboard/getstats/",
-        beforeSend: function() {  $('.mPageloader').show(); },
-        complete: function() { $('.mPageloader').hide();},
-        success: function(data) {
-            var parsed = $.parseJSON(data) ;
-            //    var objnew = [];
 
-            // var objnew =  parsed.data
-            // for(i = 0; )
-            Highcharts.chart('columnChart', {
-                chart: {
-                    type: 'column'
-                },
-                colors: ['#74b749', '#0daed3', '#ed6d49', '#ffb400', '#f63131'],
-                title: {
-                    text: 'Institute Information'
-                },
-                subtitle: {
-                    text: 'Source: bisegrw.com'
-                },
-                xAxis: {
-                    categories: parsed.iyear,
-                    crosshair: true
-                },
-                yAxis: {
-                    min: 0,
-                    title: {
-                        text: 'No. of Students'
+        //  console.log(obj);
+        //   console.log(obj1);
+        drawChart3();
+    })
+
+
+    function drawChart3() {
+        jQuery.ajax({
+            type: "POST",
+            url: "<?php echo base_url(); ?>Dashboard/getstats/",
+            beforeSend: function() {  $('.mPageloader').show(); },
+            complete: function() { $('.mPageloader').hide();},
+            success: function(data) {
+                var parsed = $.parseJSON(data) ;
+                //    var objnew = [];
+
+                // var objnew =  parsed.data
+                // for(i = 0; )
+                Highcharts.chart('columnChart', {
+                    chart: {
+                        type: 'column'
                     },
-                    max:3000,
-                    tickInterval: 200,
-                },
-                tooltip: {
-                    headerFormat: '<span style="font-size:14px">{point.key}</span><table style="width:200px">',
-                    pointFormat: '<tr><td style="color:{series.color};padding:0;">{series.name}: </td>' +
-                    '<td style="padding:0;"><b>{point.y}</b></td></tr>',
-                    footerFormat: '</table>',
-                    shared: true,
-                    useHTML: true
-                },
-                plotOptions: {
-                    column: {
-                        pointPadding: 0.05,
-                        borderWidth: .45
-                    }
-                },
-                credits: {
-                    enabled: false
-                },
-                series: parsed.states
-            });
-          
-            
-            Highcharts.chart('area_chart', {
-                chart: {
-                    type: 'area'
-                },
-                title: {
-                    text: 'Institute Ranking'
-                },
-                subtitle: {
-                    text: 'Source: <a href="http:www.bisegrw.com">' +
-                    'bisegrw.com</a>'
-                },
-
-                credits: {
-                    enabled: false
-                },
-                xAxis: {
-                    min: 2012,
-                    max:2016,
-                    tickInterval: 1,
-                    allowDecimals: false,
-                    labels: {
-                        formatter: function () {
-                            return this.value; // clean, unformatted number for year
+                    colors: ['#74b749', '#0daed3', '#ed6d49', '#ffb400', '#f63131'],
+                    title: {
+                        text: 'Institute Information'
+                    },
+                    subtitle: {
+                        text: 'Source: bisegrw.com'
+                    },
+                    xAxis: {
+                        categories: parsed.iyear,
+                        crosshair: true
+                    },
+                    yAxis: {
+                        min: 0,
+                        title: {
+                            text: 'No. of Students'
+                        },
+                        max:3000,
+                        tickInterval: 200,
+                    },
+                    tooltip: {
+                        headerFormat: '<span style="font-size:14px">{point.key}</span><table style="width:200px">',
+                        pointFormat: '<tr><td style="color:{series.color};padding:0;">{series.name}: </td>' +
+                        '<td style="padding:0;"><b>{point.y}</b></td></tr>',
+                        footerFormat: '</table>',
+                        shared: true,
+                        useHTML: true
+                    },
+                    plotOptions: {
+                        column: {
+                            pointPadding: 0.05,
+                            borderWidth: .45
                         }
-                    }
-                },
-                yAxis: {
-                    min: 0,
-                    title: {
-                        text: 'Grading'
                     },
-                    max:10,
-                    tickInterval: .5,
-                },
-                tooltip: {
-                    pointFormat: '{series.name} is <b>{point.y}</b><br/> in {point.x}'
-                },
-                plotOptions: {
-                    area: {
-                        pointStart: 2012,
-                        marker: {
-                            enabled: false,
-                            symbol: 'circle',
-                            radius: 2,
-                            states: {
-                                hover: {
-                                    enabled: true
+                    credits: {
+                        enabled: false
+                    },
+                    series: parsed.states
+                });
+
+
+                Highcharts.chart('area_chart', {
+                    chart: {
+                        type: 'area'
+                    },
+                    title: {
+                        text: 'Institute Ranking'
+                    },
+                    subtitle: {
+                        text: 'Source: <a href="http:www.bisegrw.com">' +
+                        'bisegrw.com</a>'
+                    },
+
+                    credits: {
+                        enabled: false
+                    },
+                    xAxis: {
+                        min: 2012,
+                        max:2016,
+                        tickInterval: 1,
+                        allowDecimals: false,
+                        labels: {
+                            formatter: function () {
+                                return this.value; // clean, unformatted number for year
+                            }
+                        }
+                    },
+                    yAxis: {
+                        min: 0,
+                        title: {
+                            text: 'Grading'
+                        },
+                        max:10,
+                        tickInterval: .5,
+                    },
+                    tooltip: {
+                        pointFormat: '{series.name} is <b>{point.y}</b><br/> in {point.x}'
+                    },
+                    plotOptions: {
+                        area: {
+                            pointStart: 2012,
+                            marker: {
+                                enabled: false,
+                                symbol: 'circle',
+                                radius: 2,
+                                states: {
+                                    hover: {
+                                        enabled: true
+                                    }
                                 }
                             }
                         }
-                    }
-                },
-                series: [{
-                    name: 'Institute Rnaking',
-                    data:  parsed.grading
+                    },
+                    series: [{
+                        name: 'Institute Rnaking',
+                        data:  parsed.grading
                     } ]
-            });
-            
-                   
-               },
-               error: function(request, status, error){
-                   alert(request.responseText);
-               }
-           });
-      }
-    
-    
+                });
+
+
+            },
+            error: function(request, status, error){
+                alert(request.responseText);
+            }
+        });
+    }
+
+
 </script>
 <script type="text/javascript">
     function isValidEmailAddress(emailAddress) {
@@ -1932,6 +1923,7 @@ if(isset($files)){
         alertify.error("Currently there is not student against this subject group.!") ;
     }
 </script>
+
 
 </body>
 </html>

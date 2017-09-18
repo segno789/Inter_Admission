@@ -41,7 +41,7 @@
                                 Select Group:
                             </label>
                             <div class="controls controls-row">
-                                <select id="std_group"   class="dropdown span3"  name="std_group">
+                                <select id="std_group"   class="dropdown span3 text-uppercase"  name="std_group">
                                 <?php        
                                 $subgroups =  split(',',$grp_cdi);
                                 echo "<option value='0' >SELECT GROUP</option>";
@@ -120,13 +120,8 @@
                                         }
 
                                     }
-
                                 } 
-
                                 echo "</select>" ?>
-
-
-
                             </div>
                         </div>
                         <div style="display: none;" id="formnowise_selected" >
@@ -146,8 +141,6 @@
                     </div>
                     <div class="control-group">
                         <div class="controls controls-row">
-                            <!-- <input type="submit" name="get_report" id="get_report"class="btn btn-large btn-info" value="Final Print of Return">
-                            <input type="submit" name="get_Proof" class="btn btn-large btn-info " id="get_Proof" value="Get Proof Print of Return">-->
                             </br>
                             <input style="margin-left: 6.2%; width: 23%; "  type="submit" name="get_Proof_reg" id="get_Proof_reg" class="btn btn-large btn-info "  value="Get Proof Print Admission Forms">
 
