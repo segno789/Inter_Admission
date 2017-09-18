@@ -380,13 +380,12 @@ class Admission_inter_model extends CI_Model
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
-
             if($spl_cd == "0")
             {
-                $q1         = $this->db->query("select * from Admission_online..IAAdm where coll_cd =$Inst_cd and (isdeleted = 0 or isdeleted is null) and (batch_id = 0 or batch_id is null) and grp_cd =$RegGrp");
+                $q1 = $this->db->query("select * from ".INSERT_TBL." where coll_cd =$Inst_cd and (isdeleted = 0 or isdeleted is null) and (batch_id = 0 or batch_id is null) and grp_cd =$RegGrp");
             }
             else{
-                $q1         = $this->db->query("select * from Admission_online..IAAdm where coll_cd =$Inst_cd and (isdeleted = 0 or isdeleted is null) and(batch_id = 0 or batch_id is null) and  Spec =$spl_cd");
+                $q1 = $this->db->query("select * from ".INSERT_TBL." where coll_cd =$Inst_cd and (isdeleted = 0 or isdeleted is null) and(batch_id = 0 or batch_id is null) and  Spec =$spl_cd");
             }
 
             $result_1 ;
@@ -398,7 +397,10 @@ class Admission_inter_model extends CI_Model
             else{
                 return false;
             }
-            $q2 = $this->db->get_where('Admission_Online..RuleFeeAdm',array('Rule_Fee_ID'=>1));
+            
+            $rule_fee = $User_info_data['rule_fee'];
+            
+            $q2 = $this->db->get_where('admission_online..RuleFeeAdm',array('Rule_Fee_ID'=>$rule_fee));
             $resultarr = array("info"=>$query->result_array(),"fee"=>$result_1,"rule_fee"=>$q2->result_array());
             return  $resultarr;
         }
@@ -433,18 +435,17 @@ class Admission_inter_model extends CI_Model
         //DebugBreak();
         $Inst_cd = $User_info_data['Inst_Id'];
         $forms_id = $User_info_data['forms_id'];
-        $query = $this->db->get_where('Admission_online..tblinstitutes_all',  array('Inst_cd' => $Inst_cd));
+        $query = $this->db->get_where('admission_online..tblinstitutes_all',  array('Inst_cd' => $Inst_cd));
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
-
-            $q1 = $this->db->query("select * from Admission_online..IAAdm where coll_cd =$Inst_cd and (isdeleted = 0 or isdeleted is null) and  FormNo in($forms_id)");
+            $q1 = $this->db->query("select * from ".INSERT_TBL." where coll_cd =$Inst_cd and (isdeleted = 0 or isdeleted is null) and  FormNo in($forms_id)");
             $nrowcount = $q1->num_rows();
             if($nrowcount > 0)
             {
                 $result_1 = $q1->result_array();
             }
-            $q2 = $this->db->get_where('Admission_Online..RuleFeeAdm',array('Rule_Fee_ID'=>$User_info_data['rule_fee']));
+            $q2 = $this->db->get_where('admission_online..RuleFeeAdm',array('Rule_Fee_ID'=>$User_info_data['rule_fee']));
             $resultarr = array("info"=>$query->result_array(),"fee"=>$result_1,"rule_fee"=>$q2->result_array());
             return  $resultarr;
         }
@@ -469,13 +470,24 @@ class Admission_inter_model extends CI_Model
     }
 
 
-    public function getrulefee(){
-
-
-        // $date =  date('Y-m-d') ;
-        $date =  '2017-03-07' ;
-        //DebugBreak();
-        $query = $this->db->get_where('Admission_Online..RuleFeeAdm', array('class' => 12,'sess' => Session, 'Start_Date <='=>$date,'End_Date >='=>$date));
+    public function getrulefee()
+    {
+        $date =  date('Y-m-d') ;
+        $query = $this->db->get_where('admission_online..RuleFeeAdm', array('class' => 12,'sess' => Session, 'Start_Date <='=>$date,'End_Date >='=>$date));
+        $rowcount = $query->num_rows();
+        if($rowcount > 0)
+        {
+            return $query->result_array();
+        }
+        else
+        {
+            return  false;
+        }
+    }
+    public function getrulefeeSingleFee()
+    {
+        $query = $this->db->get_where('admission_online..RuleFeeAdm', array('class' => 12,'sess' => Session,'Fee_Type'=>'Single Fee'));
+        
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
@@ -523,13 +535,13 @@ class Admission_inter_model extends CI_Model
         $total_cert = $data['total_cert'];
 
 
-        $query = $this->db->query("Admission_online..Batch_Create_12th $inst_cd,$reg_fee,$fine,$processing_fee,$total_std,$total_fee,$TotalRegFee,$Totalprocessing_fee,$TotalLatefee,'$todaydate','$forms_id',$cert_fee,$total_cert");
+        $query = $this->db->query("exec admission_online..Batch_Create_12th $inst_cd,$reg_fee,$fine,$processing_fee,$total_std,$total_fee,$TotalRegFee,$Totalprocessing_fee,$TotalLatefee,'$todaydate','$forms_id',$cert_fee,$total_cert");
     }
     public function Batch_List($data)
     {
         //DebugBreak();
         $inst_cd = $data['Inst_Id'];
-        $q2         = $this->db->get_where('Admission_online..fl_adm_batch',array('Inst_Cd'=>$inst_cd,'Is_Delete'=>0));
+        $q2 = $this->db->get_where('admission_online..fl_adm_batch',array('Inst_Cd'=>$inst_cd,'Is_Delete'=>0));
         $result = $q2->result_array();
         return $result;
     }
@@ -643,24 +655,26 @@ class Admission_inter_model extends CI_Model
     }
     public function Spl_case_std_list($myinfo)
     {
-        $inst_cd = $myinfo['Inst_cd'];
-        $spl_cd = $myinfo['spl_cd'];
-        $grp_selected = $myinfo['grp_selected'];
+        //DebugBreak();
+
+        @$inst_cd = $myinfo['Inst_cd'];
+        @$spl_cd = $myinfo['spl_cd'];
+        @$grp_selected = $myinfo['grp_selected'];
         if($grp_selected == FALSE)
         {
             if($spl_cd == FALSE || ($spl_cd == "3"))
             {
-                $query = $this->db->query("Admission_online..sp_get_regInfo_all_inter $inst_cd,12,2017,1");    
+                $query = $this->db->query("exec admission_online..sp_get_regInfo_all_inter $inst_cd,12,".Year.",".Session."");    
             }
 
             else
             {
-                $query = $this->db->query("Admission_online..sp_get_regInfo_spl_case_inter $inst_cd,12,2017,1,$spl_cd");    
+                $query = $this->db->query("exec admission_online..sp_get_regInfo_spl_case_inter $inst_cd,12,".Year.",".Session.",$spl_cd");    
             }    
         }
         else
         {
-            $query = $this->db->query("Admission_online..sp_get_regInfo_Groupwise_inter $inst_cd,12,2017,1,$grp_selected");    
+            $query = $this->db->query("exec admission_online..sp_get_regInfo_Groupwise_inter $inst_cd,12,".Year.",".Session.",$grp_selected");    
         }
 
         $rowcount = $query->num_rows();
@@ -701,8 +715,8 @@ class Admission_inter_model extends CI_Model
         {
             return  false;
         }
-        $this->db->update_batch('Admission_online..IAAdm',$data,'formNo');
-    }
 
+        $val = $this->db->update_batch('admission_online..ISAdm',$data,'formNo');
+    }
 }
 ?>
