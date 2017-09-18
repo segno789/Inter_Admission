@@ -66,10 +66,10 @@
                 <tr>
                     <td style="width:150px;"><strong>Total No. Of Candidates:</strong></td>
                     <td><?php  echo $data['batch_info'][0]["COUNT"];?></td>
-                    <td><strong>Challan No:</strong> <?php //echo $data["Challan_No"];?></td>
+                    <td><strong>Challan No:</strong> <?php echo $data['batch_info'][0]["Challan_No"];?></td>
                 </tr>
                 <tr>
-                    <td><strong>Amount Of Enrolment Fee:</strong></td>
+                    <td><strong>Amount Of Admission Fee:</strong></td>
                     <td><?php echo  $data['batch_info'][0]["Total_RegistrationFee"];?></td>
                     <td><strong>Deposit Date:</strong> ____/____/______</td>
                 </tr>

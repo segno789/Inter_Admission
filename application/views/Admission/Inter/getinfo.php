@@ -25,7 +25,7 @@
         <div class="row">
             <div class="col-md-offset-3 col-md-3">
                 <label class="control-label" for="txtMatRno" >Matric Roll No</label>
-                <input type="text" class="form-control"  onKeyPress="validatenumber(event);" maxlength="6" id="txtMatRno" required="required" name="txtMatRno" value="<?php  echo @$spl_cd['data']['txtMatRno'];  ?>" autofocus> 
+                <input type="text" class="form-control"  onKeyPress="validatenumber(event);" maxlength="7" id="txtMatRno" required="required" name="txtMatRno" value="<?php  echo @$spl_cd['data']['txtMatRno'];  ?>" autofocus> 
             </div>
             <div class="col-md-3">
                 <label class="control-label" for="oldRno" >Last Appeared Inter Roll No.</label>

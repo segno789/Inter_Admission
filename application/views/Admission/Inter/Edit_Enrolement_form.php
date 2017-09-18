@@ -21,7 +21,7 @@
                                     <?php
                                     if($data[0]["IntBrd_cd"] == 1)
                                     {
-                                        @$image_path_selected = DIRPATH12TH.$data[0]['picpath']; 
+                                        @$image_path_selected = $data[0]['picpath']; 
                                         @$type = pathinfo(@$image_path_selected, PATHINFO_EXTENSION);
                                     }
                                     else
@@ -569,7 +569,11 @@
                                 <div class="control row controls-row">
                                     <label class="control-label span1 offset3"></label>
                                     <select id="sub5"  name="sub5" class="span2 dropdown">
-                                        <?php if($data[0]['sub5pf1']== 2){
+                                        <?php 
+                                        
+                                        //DebugBreak();
+                                        
+                                        if($data[0]['sub5pf1']== 2){
                                             if($data[0]['sub5Ap1']==1) 
                                             {
                                                 echo '<option value='.$data[0]['sub5'].'>'.array_search($data[0]['sub5'],$subarray).'</option>'; 

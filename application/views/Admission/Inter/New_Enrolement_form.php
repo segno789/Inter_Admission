@@ -21,7 +21,7 @@
                                     <?php
                                     if($data[0]["IntBrd_cd"] == 1)
                                     {
-                                        @$image_path_selected = DIRPATH12TH.$data[0]['picpath']; 
+                                        @$image_path_selected = $data[0]['picpath']; 
                                         @$type = pathinfo(@$image_path_selected, PATHINFO_EXTENSION);
                                     }
                                     else

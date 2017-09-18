@@ -502,6 +502,43 @@
         })
 
     })
+
+
+
+    $("#strt_formNo").keypress(function (e) {
+
+        var interRno = $("#strt_formNo").val()    
+
+        if(interRno.length >= 10 && (e.which != 13)) {
+            alertify.error('You cannot enter more than 10 digits');
+            return false;
+        }
+
+        else if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57) && (e.which != 13)) {
+            alertify.error('Please Use Numaric Only');
+            return false;
+        }
+    });
+
+
+    $("#ending_formNo").keypress(function (e) {
+
+        var interRno = $("#ending_formNo").val()    
+
+        if(interRno.length >= 10 && (e.which != 13)) {
+            alertify.error('You cannot enter more than 6 digits');
+            return false;
+        }
+
+        else if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57) && (e.which != 13)) {
+            alertify.error('Please Use Numaric Only');
+            return false;
+        }
+    });
+
+
+
+
     function makebatch_groupwise(){
 
         // user clicked "ok"
@@ -1117,6 +1154,12 @@
         {
             alertify.error("Please Enter your bay-Form") 
             $('#bay_form').focus();  
+            return status; 
+        }
+        else if(FNic == bFormNo  )
+        {
+            alertify.error("B-form Number and Father CNIC cannot be same.") 
+            $('#bay_form').focus();   
             return status; 
         }
         else if(FNic == "" || FNic.length == undefined )
