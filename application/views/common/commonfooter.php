@@ -631,15 +631,33 @@
         var zone_cd= $('#pvtZone').val();
         var MarkOfIdent = $('#MarkOfIden').val();
         var address = $('#address').val();
-        // var pp_cent= $('#pp_cent').val();           
-        var status = 0;
+        var bay_form = $('#bay_form').val();
+        var father_cnic = $('#father_cnic').val();
         var mobNo = $('#mob_number').val();
 
-        if(mobNo == "" || mobNo == 0 || mobNo == undefined)
-        {
-            $('#ErrMsg').show(); 
-            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
 
+        var status = 0;
+
+
+
+
+        if(bay_form == "" || bay_form == 0 || bay_form == undefined)
+        {
+            alertify.error("Please Enter your Bay Form.") 
+            $('#bay_form').focus();   
+            return status;  
+        }
+
+
+        else if(father_cnic == "" || father_cnic == 0 || father_cnic == undefined)
+        {
+            alertify.error("Please Enter your Father's CNIC.") 
+            $('#father_cnic').focus();   
+            return status;  
+        }
+
+        else if(mobNo == "" || mobNo == 0 || mobNo == undefined)
+        {
             alertify.error("Please Enter your Mobile No.") 
             $('#mob_number').focus();   
             return status;  
@@ -647,18 +665,12 @@
 
         else if(MarkOfIdent == "" || MarkOfIdent == 0 || MarkOfIdent == undefined)
         {
-            $('#ErrMsg').show(); 
-            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-
             alertify.error("Please Enter your Mark of Indentification") 
             $('#MarkOfIden').focus();   
             return status;  
         }
         else if(address == "" || address == 0 || address.length ==undefined )
         {
-            $('#ErrMsg').show(); 
-            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-            $('#ErrMsg').html("<b>Please Enter your Address</b>"); 
             alertify.error("Please Enter your Address")
             $('#address').focus(); 
             return status;    
@@ -686,8 +698,6 @@
 
         else if (grp_cd == 0) 
         {
-            $('#ErrMsg').show(); 
-            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
             alertify.error('Please Select your Study Group '); 
             $("#std_group").focus();
             return status;  

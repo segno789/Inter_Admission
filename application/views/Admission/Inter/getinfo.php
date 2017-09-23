@@ -9,6 +9,7 @@
 <form enctype="multipart/form-data" id="ReturnStatus" name="ReturnStatus"  method="post" action="<?php echo base_url(); ?>index.php/Admission/Pre_Inter_data">
     <?php   
     if(@$spl_cd['error_msg'] != ''){
+        //DebugBreak();
         ?>
         <div class="form-group">
             <div class="col-md-12">
@@ -183,6 +184,134 @@
             </div>
         </div>
     </div>
+</form>
+<hr class="colorgraph">
+
+<div class="form-group">    
+    <div class="row">
+        <div class="col-md-12">
+            <h3 align="center" class="bold">2- FOR ALOOM-E-SHARKIA CANDIDATES</h3>
+        </div>
+    </div>
+</div>
+
+<form enctype="multipart/form-data" id="frmAlloom" name="frmAloom"  method="post" action="<?php echo base_url(); ?>index.php/Admission/preAloomData">
+
+    <div class="form-group">    
+        <div class="row">
+            <div class="col-md-offset-3 col-md-6">
+                <label class="control-label" for="aloomCat">Select Category</label>
+                <select id="aloomCat" class="form-control" name="aloomCat">
+                    <option value="1" selected="selected">FAZAL</option>
+                    <option value="2">ADEEB</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">   
+        <div class="row">
+            <div class="col-md-offset-3 col-md-3" id="changeCssAfter">
+                <div id="hideDivForAdeeb"> 
+                    <label class="control-label" for="txtMatRnoAloom" >Matric Roll No</label>
+                    <input type="text" class="form-control"  onKeyPress="validatenumber(event);" maxlength="7" id="txtMatRnoAloom" name="txtMatRnoAloom" value="<?php  echo @$spl_cd['data']['txtMatRnoAloom'];  ?>" > 
+                </div>
+            </div>
+            <div class="col-md-3" id="changeCssAfterHide">
+                <label class="control-label" for="oldRnoAloom" >Last Appeared Roll No.</label>
+                <input type="text" class="form-control" onKeyPress="validatenumber(event);" maxlength="6" id="oldRnoAloom" name="oldRnoAloom"  maxlength="6" value="<?php echo @$spl_cd['data']['oldRnoAloom']; ?>" />
+            </div>
+        </div>
+    </div> 
+
+
+    <div class="form-group">    
+        <div class="row">
+            <div class="col-md-offset-3 col-md-3">
+                <label class="control-label" for="sessAloom">Last Appearing Session</label>
+                <select id="sessAloom" class="form-control" name="sessAloom">
+                    <option value="1" <?php if(@$spl_cd['data']['oldRnoAloom'] == 1) echo 'selected' ?> >ANNUAL</option>
+                    <option value="2" <?php if(@$spl_cd['data']['oldRnoAloom'] == 2) echo 'selected' ?>>SUPPLEMENTARY</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label class="control-label" for="oldYearAloom">Last Appearing Year</label>
+                <select id="oldYearAloom" class="form-control" name="oldYearAloom">
+                    <?php
+                    @$curr_Year = Year;
+                    @$prev_year = Year - 1;
+                    echo'
+                    <option value="'.$curr_Year.'" selected>'.$curr_Year.'</option>
+                    <option value="'.$prev_year.'">'.$prev_year.'</option>';
+                    ?>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">    
+        <div class="row">
+            <div class="col-md-offset-3 col-md-6">
+                <label class="control-label" for="boardAloom" >Last Appearing Board</label>
+                <select id="boardAloom" class="form-control" name="boardAloom">
+                    <option value="1">BISE, GUJRANWALA</option>
+                    <?php
+                    if(Session == 1){
+                        ?>
+                        <option value="2">BISE,  LAHORE</option>
+                        <option value="3">BISE,  RAWALPINDI</option>
+                        <option value="4">BISE,  MULTAN</option>
+                        <option value="5">BISE,  FAISALABAD</option>
+                        <option value="6">BISE,  BAHAWALPUR</option>
+                        <option value="7">BISE,  SARGODHA</option>
+                        <option value="8">BISE,  DERA GHAZI KHAN</option>
+                        <option value="9">FBISE, ISLAMABAD</option>
+                        <option value="10">BISE, MIRPUR</option>
+                        <option value="11">BISE, ABBOTTABAD</option>
+                        <option value="12">BISE, PESHAWAR</option>
+                        <option value="13">BISE, KARACHI</option>
+                        <option value="14">BISE, QUETTA</option>
+                        <option value="15">BISE, MARDAN</option>
+                        <option value="16">FBISE, ISLAMABAD</option>
+                        <option value="17">CAMBRIDGE</option>
+                        <option value="18">AIOU, ISLAMABAD</option>
+                        <option value="19">BISE, KOHAT</option>
+                        <option value="20">KARAKURUM</option>
+                        <option value="21">MALAKAN</option>
+                        <option value="22">BISE, BANNU</option>
+                        <option value="23">BISE, D.I.KHAN</option>
+                        <option value="24">AKUEB, KARACHI</option>
+                        <option value="25">BISE, HYDERABAD</option>
+                        <option value="26">BISE, LARKANA</option>
+                        <option value="27">BISE, MIRPUR(SINDH)</option>
+                        <option value="28">BISE, SUKKUR</option>
+                        <option value="29">BISE, SWAT</option>
+                        <option value="30">SBTE KARACHI</option>
+                        <option value="31">PBTE, LAHORE</option>
+                        <option value="32">AFBHE RAWALPINDI</option>
+                        <option value="33">BIE, KARACHI</option>
+                        <option value="34">BISE SAHIWAL</option>
+                        <option value="35">ISLAMIC UNIVERSITY</option>                 
+                        <?php
+                    }
+                    ?>               
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">    
+        <div class="row">
+            <div class="col-md-offset-3 col-md-3">
+                <input type="submit" value="Proceed" id="proceed" onclick="return validateFormInterAdmAloom(this);" name="proceed" class="btn btn-primary btn-block">
+            </div>
+            <div class="col-md-3">
+                <input type="button" value="Cancel" onclick="return CancelAlert();"  class="btn btn-danger btn-block">
+            </div>
+        </div>
+    </div>
+
+
 </form>
 
 <?php if(Session ==  1) {?>
@@ -360,8 +489,6 @@
     </div>
 </div>
 
-
-
 <script type="text/javascript">
 
 
@@ -441,5 +568,52 @@
         }
         return true;
     } 
-</script>
 
+
+    $('#aloomCat').change(function(){
+
+        var aloomCat =  $('#aloomCat').val();
+        if(aloomCat == 2){
+            $('#hideDivForAdeeb').hide();
+            $("#changeCssAfter").removeClass("col-md-offset-3 col-md-3");
+            $("#changeCssAfterHide").removeClass("col-md-3");
+            $("#changeCssAfterHide").addClass("col-md-offset-3 col-md-6");
+        }
+        else{
+            $('#hideDivForAdeeb').show();
+            $("#changeCssAfterHide").removeClass("col-md-offset-3 col-md-3");
+            $("#changeCssAfterHide").addClass("col-md-3");
+            $("#changeCssAfter").addClass("col-md-offset-3 col-md-3");
+        }
+
+    });
+
+    function validateFormInterAdmAloom()
+    {   
+        var aloomCat = $('#aloomCat').val();
+        var txtMatRnoAloom = $('#txtMatRnoAloom').val();
+        var oldRnoAloom = $('#oldRnoAloom').val();
+
+        if(aloomCat == 1 && txtMatRnoAloom == '' )
+        {
+            alertify.error("Aloom Matric Roll No Must be filled out");
+            $('#txtMatRnoAloom').focus();
+            return false;   
+        }
+
+        else if(aloomCat == 1 && oldRnoAloom == '' )
+        {
+            alertify.error("Aloom Last Appear Intermediate Roll No Must be filled out");
+            $('#oldRnoAloom').focus();
+            return false;   
+        }
+
+        else if(aloomCat == 2 && oldRnoAloom == '' )
+        {
+            alertify.error("Aloom Last Appear Intermediate Roll No Must be filled out");
+            $('#oldRnoAloom').focus();
+            return false;   
+        }
+    }
+
+</script>
