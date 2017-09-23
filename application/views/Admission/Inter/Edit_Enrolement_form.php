@@ -87,20 +87,18 @@
 
                                         if($med == 1)
                                         {
-                                            echo  "<option value='1' selected='selected'>Urdu</option> 
-                                            <option value='2'>English</option>";
+                                            echo  "<option value='1' selected='selected'>Urdu</option> <option value='1'>English</option>";
                                         }
                                         else
                                         {
-                                            echo  "<option value='1'>Urdu</option>
-                                            <option value='2' selected='selected'>English</option>";
+                                            echo  "<option value='2' >Urdu</option> <option value='2' selected='selected'>English</option>";
                                         }
                                         ?>
                                     </select>
                                     <label class="control-label span2" for="speciality">
                                         Speciality:
                                     </label> 
-                                    <select id="speciality"  class="span2 text-uppercase" name="speciality">
+                                    <select id="speciality"  class="span2" name="speciality">
                                         <?php 
                                         $spec = $data['0']['Spec'] ;
 
@@ -146,7 +144,7 @@
                                     <label class="control-label span2" for="nationality">
                                         Nationality :
                                     </label>
-                                    <select name="nationality" class="span2 text-uppercase" id="nationality"> 
+                                    <select name="nationality" class="span2" id="nationality"> 
                                         <?php
                                         $nat = $data[0]['nat'];
                                         if($nat == 1)
@@ -166,7 +164,7 @@
                                     <label class="control-label span2" for="gender1">
                                         Gender :
                                     </label> 
-                                    <select name="gender" class="span2 text-uppercase" id="gender" disabled="disabled"> 
+                                    <select name="gender" class="span2" id="gender" disabled="disabled"> 
                                         <?php
                                         @$gender = $data[0]['sex'];
                                         if($gender == 1)
@@ -190,14 +188,15 @@
                                     <label class="control-label span2" >
                                         Hafiz-e-Quran :
                                     </label>
-                                    <select name="hafiz" class="span2 text-uppercase" id="hafiz"> 
+                                    <select name="hafiz" class="span2" id="hafiz"> 
                                         <option value='1'>NO</option> 
                                         <option value='2'>YES</option> 
                                     </select>
+
                                     <label class="control-label span2" >
                                         Religion :
                                     </label> 
-                                    <select name="religion" class="span2 text-uppercase" id="religion"> 
+                                    <select name="religion" class="span2" id="religion"> 
                                         <?php
                                         $rel = $data[0]['rel'];
                                         if($rel == 1)
@@ -221,7 +220,7 @@
                                         Locality :
                                     </label>
 
-                                    <select name="UrbanRural" class="span6 text-uppercase" id="UrbanRural"> 
+                                    <select name="UrbanRural" class="span6" id="UrbanRural"> 
                                         <?php
                                         $resid = $data[0]['ruralOrurban'];
                                         if($resid == 1)
@@ -248,7 +247,7 @@
                                     <label class="control-label span2" >
                                         Address :
                                     </label>
-                                    <textarea rows="5"  id="address" class="span6 text-uppercase" name="address" required="required"><?php
+                                    <textarea rows="5"  id="address" class="span6" name="address" required="required"><?php
                                         echo $data[0]['addr'];
                                     ?></textarea>
                                 </div>

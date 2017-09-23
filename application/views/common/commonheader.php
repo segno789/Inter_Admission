@@ -84,7 +84,6 @@
 
         input[type='radio'] { transform: scale(1.7); }
 
-
         h4 {
             text-decoration: underline;
         }

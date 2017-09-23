@@ -3,13 +3,12 @@
         <div class="top-nav">
             <ul>
                 <li>
-                    <a href="<?php echo base_url(); ?>index.php/dashboard" class="<?php if($isselected == '1') {echo 'selected';}?>" >
+                    <a href="<?php echo base_url(); ?>dashboard" class="<?php if($isselected == '1') {echo 'selected';}?>" >
                         <div class="fs1" aria-hidden="true" data-icon="&#xe0a0;"></div>
                         Dashboard
                     </a>
                 </li>
                 <?php
-                //DebugBreak();
                 if($appconfig['isreg'] == 1 ){?>
 
                     <li>
@@ -28,9 +27,8 @@
                         </a>
                     </li>
                     <?php } 
+                if($appconfig['isadmP2'] == 1 || $appconfig['isadmP2S'] == 1){
 
-                if($appconfig['isadmP2'] == 1 || $appconfig['isadmP2S'] == 1)
-                {
                     ?>
                     <li>
                         <a href="<?php echo base_url(); ?>Admission_inter" class="<?php if( $isselected == '11') {echo 'selected';}?>" >
@@ -45,6 +43,17 @@
                         <a style="width: 115px;" href="<?php echo base_url(); ?>RollNoSlip" class="<?php if($isselected == '4') {echo 'selected';}?>" >
                             <div class="fs1" aria-hidden="true" data-icon="&#xe032;"> </div>
                             Roll No. Slips
+                        </a>
+                    </li>
+                    <?php 
+                    
+                           } 
+                if( $appconfig['isresultP2'] == 1){?>
+
+                    <li>
+                        <a style="width: 115px;" href="<?php echo base_url(); ?>Result/dashboard12th" class="<?php if($isselected == '5') {echo 'selected';}?>" >
+                            <div class="fs1" aria-hidden="true" data-icon="&#xe032;"> </div>
+                            Result Cards
                         </a>
                     </li>
                     <?php } ?>
@@ -184,30 +193,30 @@
             if($isselected == '11') { 
                 ?>
                 <ul >
-                    <li><a href="<?php echo base_url(); ?>index.php/Admission_inter"   data-original-title="" class="<?php if($isselected == '11') {echo 'heading';}?>">Admission</a></li>
+                    <li><a href="<?php echo base_url(); ?>Admission_inter"   data-original-title="" class="<?php if($isselected == '11') {echo 'heading';}?>">Admission</a></li>
                     <li>
-                        <a href="<?php echo base_url(); ?>index.php/Admission_inter/StudentsData">
+                        <a href="<?php echo base_url(); ?>Admission_inter/StudentsData">
                             Old Students 
                         </a>
                     </li>
 
                     <li>
-                        <a href="<?php echo base_url(); ?>index.php/Admission_inter/EditForms">
+                        <a href="<?php echo base_url(); ?>Admission_inter/EditForms">
                             Edit Forms
                         </a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url(); ?>index.php/Admission_inter/CreateBatch">
+                        <a href="<?php echo base_url(); ?>Admission_inter/CreateBatch">
                             Create Batch
                         </a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url(); ?>index.php/Admission_inter/batchlist">
+                        <a href="<?php echo base_url(); ?>Admission_inter/batchlist">
                             Batch List
                         </a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url(); ?>index.php/Admission_inter/FormPrinting">
+                        <a href="<?php echo base_url(); ?>Admission_inter/FormPrinting">
                             Proof Form Printing
                         </a>
                     </li>   
@@ -218,6 +227,31 @@
                 <?php }
             ?>
 
+            <?php
+            if($isselected == '5'){
+                ?>
+                <ul >
+                    <li><a   data-original-title="" >Result Cards: </a></li>
+
+                    <?php if($appconfig['isresultP2'] == 1 ) {?>
+                        <li>
+                            <a href="<?php echo base_url(); ?>Result/dashboard12th">
+                                12th Result Cards
+                            </a>
+                        </li>
+                        <?php }
+                      //  DebugBreak() ;
+                    if($appconfig['isresultP1'] == 1 ) {?>
+                        <li>
+                            <a href="<?php echo base_url(); ?>Result/dashboard11th">
+                                11th Result Cards
+                            </a>
+                        </li>
+                        <?php } ?>
+                </ul >
+                <?php
+            } 
+            ?> 
             <div class="btn-group pull-right">
                 <button class="btn btn-primary">
                     Main Menu
@@ -227,39 +261,30 @@
                     </span>
                 </button>
                 <ul class="dropdown-menu pull-right">
-
-                    <li><a href="<?php echo base_url(); ?>index.php/Admission_inter"   data-original-title="" class="<?php if($isselected == '11') {echo 'heading';}?>">Admission</a></li>
                     <li>
-                        <a href="<?php echo base_url(); ?>index.php/Admission_inter/StudentsData">
-                            Old Students 
+                        <a href="<?php echo base_url(); ?>Dashboard" data-original-title="">
+                            Dashboard
                         </a>
                     </li>
-
-                    <li>
-                        <a href="<?php echo base_url(); ?>index.php/Admission_inter/EditForms">
-                            Edit Forms
+                  <!--  <li>
+                        <a href="<?php echo base_url(); ?>Admission_11th_reg/StudentsData" data-original-title="">
+                            11th Old Students
                         </a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url(); ?>index.php/Admission_inter/CreateBatch">
-                            Create Batch
+                        <a href="<?php echo base_url(); ?>Admission_11th_reg/EditForms" data-original-title="">
+                            11th Edit Forms
                         </a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url(); ?>index.php/Admission_inter/batchlist">
-                            Batch List
+                        <a href="<?php echo base_url(); ?>Admission_11th_reg/FormPrinting" data-original-title="">
+                            11th Form Printing
                         </a>
-                    </li>
-                    <li>
-                        <a href="<?php echo base_url(); ?>index.php/Admission_inter/FormPrinting">
-                            Proof Form Printing
-                        </a>
-                    </li>   
+                    </li>-->
                     <li>
                         <a href="#" onclick="return logout();">Logout</a>
                     </li>
                 </ul>
-
             </div>
         </div>
     </div>

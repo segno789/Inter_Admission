@@ -35,7 +35,7 @@ class Result extends CI_Controller {
 
          // DebugBreak();
 
-        $sess = SESSION;//$this->uri->segment(3);
+        $sess = SESSION; //$this->uri->segment(3);
         $data = array(
             'isselected' => '4',
             'sess' => $sess
@@ -90,10 +90,6 @@ class Result extends CI_Controller {
                 $this->makeResultCard12th($pdf,$info['data'][$i]);
 
             }
-
-
-
-
             if($isdownload ==  1)
                 $pdf->Output('Result.pdf', 'D'); 
             else  if($isdownload ==  2)  
@@ -257,9 +253,9 @@ class Result extends CI_Controller {
                                         else if($info['grp_cd'] == 10) $grp_cd='KHASA';
                                             else if($info['grp_cd'] == 11) $grp_cd='FAZAL';
 
-                                               // $filepath = DIRPATH12TH.$info['picpath'];
+                                                $filepath = DIRPATH12TH.$info['picpath'];
 
-          $filepath = 'assets/img/download.jpg';
+         // $filepath = 'assets/img/download.jpg';
         $ispass = '';
         if($info['status'] ==  1)
         {
@@ -371,7 +367,7 @@ class Result extends CI_Controller {
 
 
         $pdf->SetFont('Arial','B',11.5);
-        $pdf->SetXY(47,57);
+        $pdf->SetXY(60,57);
         $pdf->Cell(0, 0.2, "Intermediate Part (I/II) (".$Session.") Examination, ".$info['Year'], 0.25, "C"); 
 
         $pdf->SetFont('Arial','B',12);
@@ -393,7 +389,7 @@ class Result extends CI_Controller {
         $pdf->Cell(0, 0.2, "NAME:", 0.25, "C");
 
 
-        $pdf->SetFont('Arial','',9);
+        $pdf->SetFont('Arial','',10);
         $pdf->SetXY(20.2,71);
         $pdf->Cell(0, 0.2,"_______________________________________________________________________________________________________", 0.25, "C");
         $pdf->SetXY(50,71);
@@ -404,7 +400,7 @@ class Result extends CI_Controller {
         $pdf->SetXY(10.2,78);
         $pdf->Cell(0, 0.2, "FATHER'S NAME:", 0.25, "C");
 
-        $pdf->SetFont('Arial','',9);
+        $pdf->SetFont('Arial','',10);
         $pdf->SetXY(36.2,78);
         $pdf->Cell(0, 0.2, "______________________________________________________________________________________________", 0.25, "C");
 
@@ -580,7 +576,7 @@ class Result extends CI_Controller {
 
                     if($info['sub8st2'] == 2)
                     {
-                        $submarks = 'A';  
+                        $submarks2 = 'A';  
                     }
                     else
                     {
@@ -682,6 +678,8 @@ class Result extends CI_Controller {
                 if(($info['grp_cd'] == 5 || $info['grp_cd'] == 7)&& ($subNo == 'sub6' || $subNo == 'sub7' || $subNo == 'sub5'))
                 {
                     // DebugBreak();
+                    $subtotal = 0;
+                     $subtotal = $subtotal+ $this->get12SubMarks($subcd);
                     $subcd = $info[$subNo.'a'];
                     $subcd_sp2 = $info[$subNo.'sp2'];
                     if($subcd_sp2 ==2)
@@ -695,11 +693,11 @@ class Result extends CI_Controller {
 
 
                     $subname1 = $this->GetiSubNameHere($subcd) ;
-
+                     $subtotal= $subtotal+$this->get12SubMarks($subcd);
 
                     $isborder ='';
                     $sety = $sety1-4;
-                    $subtotal= 150;
+                   
                     if($info['grp_cd'] == 7)
                     {
                         $fontred =2;
@@ -707,7 +705,7 @@ class Result extends CI_Controller {
                 }
                 else  if($info['grp_cd'] == 5 && $subNo == 'sub4')
                 {
-                    $subtotal= 150;  
+                    $subtotal= 200;  
                 }
                 else  if($info['grp_cd'] == 7 && $subNo == 'sub4')
                 {
@@ -719,11 +717,18 @@ class Result extends CI_Controller {
                 }
 
                 $totalmarks       =  $totalmarks +$subtotal; 
+                $isnotprint = 1;
+                if($subjectstaus1 == 'F' || $subjectstaus2 == 'F')
+                {
+                   
+                    $isnotprint = 0;
+                }
                
-               if($subprst != '' &&  $subprst != 'A')
-               {
-                  $subinduTotal = $subprst+ $subinduTotal ; 
-               }
+               
+               if(($subprst != '' &&  $subprst != 'A') && $isnotprint == 1)
+                {
+                    $subinduTotal = $subprst+ $subinduTotal ; 
+                }
                 
 
                 if($subjectstaus1 == 'F' && $subP1 == '')
@@ -770,7 +775,9 @@ class Result extends CI_Controller {
                     $pdf->MultiCell(70.6,$sety,$subname1,'B','L');  
                 }
 
-
+               
+               
+                
                 $sety = $sety1;
                 $pdf->SetFont('Arial','B',$font);
                 $pdf->SetXY(93,55.2+ $Y);
@@ -1605,7 +1612,7 @@ private function subStatus_New($pf, $prPf)
 
         } 
         else if ($PrPf == 2) {
-            $formula = '';
+            $formula = $Marks;
 
         } else if ($PrPf == 3) {
             $formula = '';
@@ -1656,82 +1663,98 @@ private function get_grade($percentage) {
         $ret = '';
         if($chance == 1)
         {
-            $ret = 'Supplementary Examination, 2017';
+            $ret = 'Supplementary Examination, 2018';
         }
         else if($chance == 2)
         {
-            $ret = 'Annual Examination, 2017';
+            $ret = 'Annual Examination, 2018';
         }
         else if($chance == 3)
         {
-            $ret = 'Supplementary Examination, MYEAR';
+            $ret = 'Supplementary Examination, 2017';
         }
         return $ret;
     }
-    private function Get9thSubMarks($_sub_cd)
-    {
-    $ret_val = '';
-if($_sub_cd ==1)  $ret_val = "75";
-else if($_sub_cd ==2)  $ret_val = "75";
-else if($_sub_cd ==3)  $ret_val = "50";
-else if($_sub_cd ==4)  $ret_val = "50";
-else if($_sub_cd ==5)  $ret_val = "75";
-else if($_sub_cd ==6)  $ret_val = "60";
-else if($_sub_cd ==7)  $ret_val = "60";
-else if($_sub_cd ==8)  $ret_val = "60";
-else if($_sub_cd ==9)  $ret_val = "75";
-else if($_sub_cd ==10)  $ret_val = "50";
-else if($_sub_cd ==11)  $ret_val = "75";
-else if($_sub_cd ==12)  $ret_val = "75";
-else if($_sub_cd ==13)  $ret_val = "75";
-else if($_sub_cd ==14)  $ret_val = "75";
-else if($_sub_cd ==15)  $ret_val = "75";
-else if($_sub_cd ==16)  $ret_val = "75";
-else if($_sub_cd ==17)  $ret_val = "75";
-else if($_sub_cd ==18)  $ret_val = "40";
-else if($_sub_cd ==19)  $ret_val = "75";
-else if($_sub_cd ==20)  $ret_val = "75";
-else if($_sub_cd ==21)  $ret_val = "75";
-else if($_sub_cd ==22)  $ret_val = "75";
-else if($_sub_cd ==23)  $ret_val = "75";
-else if($_sub_cd ==24)  $ret_val = "75";
-else if($_sub_cd ==25)  $ret_val = "75";
-else if($_sub_cd ==26)  $ret_val = "75";
-else if($_sub_cd ==27)  $ret_val = "60";
-else if($_sub_cd ==29)  $ret_val = "75";
-else if($_sub_cd ==30)  $ret_val = "60";
-else if($_sub_cd ==31)  $ret_val = "75";
-else if($_sub_cd ==32)  $ret_val = "75";
-else if($_sub_cd ==33)  $ret_val = "75";
-else if($_sub_cd ==34)  $ret_val = "75";
-else if($_sub_cd ==35)  $ret_val = "75";
-else if($_sub_cd ==36)  $ret_val = "75";
-else if($_sub_cd ==37)  $ret_val = "75";
-else if($_sub_cd ==40)  $ret_val = "60";
-else if($_sub_cd ==43)  $ret_val = "40";
-else if($_sub_cd ==48)  $ret_val = "40";
+  private function get12SubMarks($_sub_cd)
+  {
+      if($_sub_cd ==1)  $ret_val = "200";
+else if($_sub_cd ==2)  $ret_val = "200";
+else if($_sub_cd ==4)  $ret_val = "200";
+else if($_sub_cd ==6)  $ret_val = "100";
+else if($_sub_cd ==7)  $ret_val = "200";
+else if($_sub_cd ==8)  $ret_val = "200";
+else if($_sub_cd ==9)  $ret_val = "200";
+else if($_sub_cd ==11)  $ret_val = "200";
+else if($_sub_cd ==12)  $ret_val = "200";
+else if($_sub_cd ==14)  $ret_val = "200";
+else if($_sub_cd ==15)  $ret_val = "200";
+else if($_sub_cd ==16)  $ret_val = "200";
+else if($_sub_cd ==17)  $ret_val = "200";
+else if($_sub_cd ==18)  $ret_val = "200";
+else if($_sub_cd ==19)  $ret_val = "200";
+else if($_sub_cd ==20)  $ret_val = "200";
+else if($_sub_cd ==21)  $ret_val = "200";
+else if($_sub_cd ==22)  $ret_val = "200";
+else if($_sub_cd ==23)  $ret_val = "200";
+else if($_sub_cd ==24)  $ret_val = "200";
+else if($_sub_cd ==26)  $ret_val = "200";
+else if($_sub_cd ==27)  $ret_val = "200";
+else if($_sub_cd ==28)  $ret_val = "200";
+else if($_sub_cd ==29)  $ret_val = "200";
+else if($_sub_cd ==30)  $ret_val = "200";
+else if($_sub_cd ==32)  $ret_val = "200";
+else if($_sub_cd ==33)  $ret_val = "200";
+else if($_sub_cd ==34)  $ret_val = "200";
+else if($_sub_cd ==35)  $ret_val = "200";
+else if($_sub_cd ==36)  $ret_val = "200";
+else if($_sub_cd ==37)  $ret_val = "200";
+else if($_sub_cd ==39)  $ret_val = "75";
+else if($_sub_cd ==42)  $ret_val = "200";
+else if($_sub_cd ==43)  $ret_val = "200";
+else if($_sub_cd ==44)  $ret_val = "200";
+else if($_sub_cd ==45)  $ret_val = "200";
+else if($_sub_cd ==46)  $ret_val = "200";
+else if($_sub_cd ==47)  $ret_val = "200";
+else if($_sub_cd ==48)  $ret_val = "200";
 else if($_sub_cd ==51)  $ret_val = "50";
-else if($_sub_cd ==66)  $ret_val = "75";
-else if($_sub_cd ==69)  $ret_val = "30";
-else if($_sub_cd ==70)  $ret_val = "30";
-else if($_sub_cd ==72)  $ret_val = "30";
-else if($_sub_cd ==73)  $ret_val = "75";
-else if($_sub_cd ==78)  $ret_val = "50";
-else if($_sub_cd ==79)  $ret_val = "40";
-else if($_sub_cd ==81)  $ret_val = "75";
-else if($_sub_cd ==82)  $ret_val = "75";
-else if($_sub_cd ==83)  $ret_val = "40";
-else if($_sub_cd ==84)  $ret_val = "75";
-else if($_sub_cd ==85)  $ret_val = "75";
-else if($_sub_cd ==86)  $ret_val = "75";
-else if($_sub_cd ==87)  $ret_val = "75";
-else if($_sub_cd ==89)  $ret_val = "40";
-else if($_sub_cd ==90)  $ret_val = "40";
-else if($_sub_cd ==92)  $ret_val = "75";
-else if($_sub_cd ==93)  $ret_val = "30";
-else if($_sub_cd ==94)  $ret_val = "30";
+else if($_sub_cd ==52)  $ret_val = "200";
+else if($_sub_cd ==53)  $ret_val = "200";
+else if($_sub_cd ==54)  $ret_val = "200";
+else if($_sub_cd ==55)  $ret_val = "200";
+else if($_sub_cd ==56)  $ret_val = "200";
+else if($_sub_cd ==57)  $ret_val = "200";
+else if($_sub_cd ==58)  $ret_val = "200";
+else if($_sub_cd ==59)  $ret_val = "200";
+else if($_sub_cd ==60)  $ret_val = "200";
+else if($_sub_cd ==61)  $ret_val = "200";
+else if($_sub_cd ==70)  $ret_val = "200";
+else if($_sub_cd ==71)  $ret_val = "75";
+else if($_sub_cd ==72)  $ret_val = "35";
+else if($_sub_cd ==73)  $ret_val = "35";
+else if($_sub_cd ==75)  $ret_val = "85";
+else if($_sub_cd ==76)  $ret_val = "85";
+else if($_sub_cd ==79)  $ret_val = "200";
+else if($_sub_cd ==80)  $ret_val = "50";
+else if($_sub_cd ==81)  $ret_val = "100";
+else if($_sub_cd ==82)  $ret_val = "100";
+else if($_sub_cd ==83)  $ret_val = "200";
+else if($_sub_cd ==84)  $ret_val = "100";
+else if($_sub_cd ==85)  $ret_val = "100";
+else if($_sub_cd ==86)  $ret_val = "100";
+else if($_sub_cd ==87)  $ret_val = "100";
+else if($_sub_cd ==88)  $ret_val = "100";
+else if($_sub_cd ==90)  $ret_val = "200";
+else if($_sub_cd ==91)  $ret_val = "50";
+else if($_sub_cd ==92)  $ret_val = "50";
+else if($_sub_cd ==93)  $ret_val = "50";
+else if($_sub_cd ==94)  $ret_val = "75";
+else if($_sub_cd ==95)  $ret_val = "75";
+else if($_sub_cd ==96)  $ret_val = "75";
+else if($_sub_cd ==97)  $ret_val = "50";
+else if($_sub_cd ==98)  $ret_val = "75";
+else if($_sub_cd ==99)  $ret_val = "200";
 return $ret_val;
-    }
+  }
       private function Get11thSubMarks($_sub_cd)
     {
        if( $_sub_cd ==1)  $ret_val =100;
