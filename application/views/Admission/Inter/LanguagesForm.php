@@ -338,7 +338,7 @@
                     $chance = $data[0]['chance'];
                     $exam_type = $data[0]['exam_type'];
                     $status = $data[0]['status'];
-                    if($exam_type == 1  || $exam_type == 3 || $exam_type == 9 || $exam_type == 11 || $exam_type == 16 || $exam_type == 14 || $exam_type == 15){
+                    
                         if($grp_cd == 1){
                             echo "<option value='1' selected='selected'>FAZAL ARABIC </option>";      
                         }
@@ -355,9 +355,9 @@
                         else if($grp_cd == 6){
                             echo "<option value='6'  selected='selected'> ADEEB URDU</option>";             
                         }
-                    }
+                    
 
-                    if( ($exam_type == 2) || $exam_type == 4 ){
+                   /* 
                         if($grp_cd == 1){
                             echo "<option value='1' selected='selected'>FAZAL ARABIC </option>";      
                             echo "<option value='2'>FAZAL URDU</option>";
@@ -392,8 +392,8 @@
                             echo "<option value='3' >FAZAL PUNJABI</option>";    
                             echo "<option value='5'>ADEEB ARABIC</option>";    
                             echo "<option value='6'  selected='selected'> ADEEB URDU</option>";    
-                        }
-                    }
+                        }*/
+
 
                     $subarray = array(
                         'NONE'=>'',

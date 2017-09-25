@@ -82,45 +82,32 @@ class Admission extends CI_Controller {
         $AfterDueDatefee = "0";
         $AdmFee=         "800";  
 
-
-
         $endDate =date('d-m-Y', strtotime($this->GetDueDate())); 
 
         $lmargin =1.5;
         $rmargin =7.3;
         $pdf->SetAutoPageBreak(true);
-        //$pdf ->SetRightMargin(5);
+
         $pdf->AddPage();
         $Y = 0;
 
         $fontSize = 8; 
-        $marge    = .4;   // between barcode and hri in pixel
-        $bx        = 3.97;  // barcode center
-        $by        = .75;  // barcode center
-        $height   = 0.35;   // barcode height in 1D ; module size in 2D
-        $width    = .0135;  // barcode height in 1D ; not use in 2D
-        $angle    = 0;   // rotation in degrees
+        $marge    = .4;   
+        $bx        = 3.97;
+        $by        = .75; 
+        $height   = 0.35; 
+        $width    = .0135;
+        $angle    = 0;
 
 
         $code     = 999999;
         $type     = 'code128';
-        $black    = '000000'; // color in hex
-
-        //$pdf->Open();
-        // $pdf->SetMargins(25.4,25.4,25.4,25.4);
-        //$pdf ->SetMargins($lmargin,1.5,5.5);
-
-
-
-
+        $black    = '000000';
 
         if(@$data["Spec"] >0)
         {
             $RegFee = 0; 
         }
-
-        // DebugBreak();
-
 
         $pdf->SetFillColor(0,0,0);
         $pdf->SetDrawColor(0,0,0); 
@@ -132,18 +119,18 @@ class Admission extends CI_Controller {
         $pdf->Image(BARCODE_PATH.$image,5.7, 8.83  ,2,0.25,"PNG");
         $pdf->Image(BARCODE_PATH.$image,5.7, 10.43 ,2,0.25,"PNG");
 
-        //$pdf->PrintBarcode(3.75,0.6,(int)$Barcode,.3,.0199);
+
+        $pdf->Image(@$data['pic_path'],6.5, 1.10+$Y, 0.95, 1.0, "JPG");   
+
         if(Session == 1)
         {
             $ses = "ANNUAL";
         }
         else{
-            $ses = "SUPPLYMENTARY";
+            $ses = "Supplementary";
         }
 
-
-        $heading = 'BOARD OF INTERMEDIATE AND SECONDARY EDUCATION, GUJRANWALA ( LANGUAGES EXAMINATION, '.Year.')';
-
+        $heading = 'BOARD OF INTERMEDIATE AND SECONDARY EDUCATION, GUJRANWALA '.strtoupper($ses).' LANGUAGES EXAMINATION, '.Year.')';
 
         $pdf->SetFont('Arial','U',12);
         $pdf->SetXY(1.2,0.2);
@@ -157,11 +144,17 @@ class Admission extends CI_Controller {
         $pdf->Image("assets/img/aloom.JPG",7.7,8.70,  0.50,0.40, "JPG");   
         $pdf->Image("assets/img/aloom.JPG",7.7,10.28,  0.50,0.40, "JPG");
 
+        if(Session == 1){
+            @$ses = 'ANNUAL';    
+        }
+        else if(Session == 2){
+            @$ses = 'SUPPLEMENTARY';        
+        }
+
 
         $pdf->SetFont('Arial','',9);
-
         $pdf->SetXY(2.0,0.4);
-        $pdf->Cell(0, 0.2, "ADMISSION & REVENUE FORM FOR LANGUAGES EXAMINATION , ".Year, 0.25, "C");
+        $pdf->Cell(0, 0.2, "ADMISSION & REVENUE FORM FOR LANGUAGES ".$ses." EXAMINATION , ".Year, 0.25, "C");
 
         $pdf->SetFont('Arial','B',12);
         $pdf->SetXY(5.8,0.80+$Y);
@@ -222,8 +215,6 @@ class Admission extends CI_Controller {
         $pdf->SetFont('Arial','B',12);
         $pdf->Cell( 0,0,"Form No: ".$data['formno'],0,'L');
 
-
-
         $col2 =  1.6;
 
         $pdf->SetXY($myx,1.75+$Y);
@@ -257,7 +248,7 @@ class Admission extends CI_Controller {
         $pdf->SetFont('Arial','B',$FontSize);
         $pdf->SetXY(4.5+$x,2.1+$Y);
         $pdf->Cell(0.1,0,$this->GetSpeciality($data["speciality"]),0,'L');
-        
+
 
         $pdf->SetXY($myx,2.27+$Y);
         $pdf->SetFont('Arial','',$FontSize);
@@ -626,7 +617,7 @@ class Admission extends CI_Controller {
         $Y= 8.65;
 
 
-        $pdf->SetFont('Arial','B',9);
+        $pdf->SetFont('Arial','',7);
         $pdf->SetXY(.2,$Y);
         $pdf->Cell(0, 0.2, $heading, 0.25, "C");
 
@@ -760,7 +751,7 @@ class Admission extends CI_Controller {
         $pdf->Image("assets/img/cutter.jpg",0.14,8.5, 8.02,0.09, "jpeg");  
 
         $Y= 5.65;
-        $pdf->SetFont('Arial','B',9);
+        $pdf->SetFont('Arial','',7);
         $pdf->SetXY(.2,1.58+$Y);
         $pdf->Cell(0, 0.2, $heading, 0.25, "C");
 
@@ -834,7 +825,7 @@ class Admission extends CI_Controller {
         $pdf->Image("assets/img/cutter.jpg",0.14,10.1, 8.02,0.09, "jpeg"); 
 
         $Y= 7.27;
-        $pdf->SetFont('Arial','B',9);
+        $pdf->SetFont('Arial','',7);
         $pdf->SetXY(.2,3+$Y);
         $pdf->Cell(0, 0.2, $heading, 0.25, "C");
 
@@ -860,6 +851,7 @@ class Admission extends CI_Controller {
         $pdf->SetXY(6.7, 3.50+$Y);
         $pdf->SetFont('Arial','b',$FontSize);
         $pdf->Cell( 0,0,"Bank Challan No. ".$data['ChallanNo'],0,'L');
+
 
         $pdf->SetXY($myx, 3.65+$Y);
         $pdf->SetFont('Arial','',$FontSize);
@@ -1984,7 +1976,7 @@ class Admission extends CI_Controller {
         }
 
         else{
-            $finalFee = $admfee;
+            $finalFee = $admfee+100;
         }
         //DebugBreak();
 

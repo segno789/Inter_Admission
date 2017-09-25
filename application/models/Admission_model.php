@@ -43,11 +43,11 @@ class Admission_model extends CI_Model
 
 
         if($aloomCat == 1){
-            $query = $this->db->query("SELECT top 1 * FROM ".getinfo_languages. " where matrno = $txtMatRnoAloom and rno = $oldRnoAloom and Sess = $sessAloom and Iyear = $oldYearAloom and Brd_cd = $boardAloom and grp_cd in (1,2,3,5,6)");    
+            $query = $this->db->query("SELECT top 1 * FROM ".getinfo_languages. " where matrno = $txtMatRnoAloom and rno = $oldRnoAloom and Sess = $sessAloom and Iyear = $oldYearAloom and Brd_cd = $boardAloom and grp_cd in (1,2,3,5,6) and status <> 1");    
         }
 
         else if($aloomCat == 2){
-            $query = $this->db->query("SELECT top 1 * FROM ".getinfo_languages. " where rno = $oldRnoAloom and Sess = $sessAloom and Iyear = $oldYearAloom and Brd_cd = $boardAloom and grp_cd in (1,2,3,5,6)");    
+            $query = $this->db->query("SELECT top 1 * FROM ".getinfo_languages. " where rno = $oldRnoAloom and Sess = $sessAloom and Iyear = $oldYearAloom and Brd_cd = $boardAloom and grp_cd in (1,2,3,5,6) and status <> 1");    
         }
 
 
@@ -60,8 +60,6 @@ class Admission_model extends CI_Model
         {
             return  false;
         }
-
-
     }
 
     public function Pre_Inter_Data($data)
@@ -700,8 +698,8 @@ class Admission_model extends CI_Model
         //DebugBreak();  
         $name = strtoupper($data['name']);
         $fname =strtoupper($data['Fname']);
-        
-        
+
+
         $bay_form =$data['bay_form'];
         $father_cnic = $data['father_cnic'];
         $medium = $data['medium'];
@@ -714,7 +712,7 @@ class Admission_model extends CI_Model
         $MarkOfIden =strtoupper(@$data['markOfIden']);
 
         $sex = $data['sex'];
-        
+
         $hafiz = $data['hafiz'];
         $religion = $data['religion'];
 

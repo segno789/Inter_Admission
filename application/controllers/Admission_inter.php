@@ -2081,6 +2081,7 @@ class Admission_inter extends CI_Controller {
     public function BatchList()
     {
         //DebugBreak();
+        
         $data = array(
             'isselected' => '11',
 
