@@ -171,37 +171,6 @@ class Admission extends CI_Controller {
         $HeightLine1= 1.75;
         $HeightLine2=2.0;
 
-        $grp_name = $data["grp_cd"];
-        switch ($grp_name) {
-            case '1':
-                $grp_name = 'PRE-MEDICAL';
-                break;
-            case '2':
-                $grp_name = 'PRE-ENGINEERING';
-                break;
-            case '3':
-                $grp_name = 'HUMANITIES';
-                break;
-            case '4':
-                $grp_name = 'GENERAL SCIENCE';
-                break;
-            case '5':
-                $grp_name = 'COMMERCE';
-                break;
-            case '6':
-                $grp_name = 'HOME ECONOMICS';
-                break;
-            case '9':
-                $grp_name = 'ALOOM-E-SHARKIA';
-                break; 
-            case '7':
-                $grp_name = 'HOME ECONOMICS';
-                break; 
-
-            default:
-                $grp_name = "NO GROUP SELECTED.";
-        }
-
         $pdf->SetXY(3.33,1.60+$Y);
         $pdf->SetFont('Arial','b',12);
 
@@ -317,12 +286,18 @@ class Admission extends CI_Controller {
         $pdf->SetXY($col2,2.98+$Y);
         $pdf->Cell(0,0.1,$lang_info,0,'R');
 
+        @$zoneName = array(
+            'gen' => $data['sex'],
+            'zoneCode' => $data['Zone_cd']
+        );
+        $zoneName = $this->Admission_model->getcenter($zoneName);
+
         $pdf->SetXY(0.7,3.12+$Y);
         $pdf->SetFont('Arial','',8);
         $pdf->Cell(0,0.1,"Proposed Exam Area:",0,'L');
         $pdf->SetFont('Arial','B',9);
         $pdf->SetXY(1.8,3.12+$Y);
-        $pdf->Cell( 0,0.1,$data['Zone_cd'],0,'L');
+        $pdf->Cell( 0,0.1,$data['Zone_cd']."-".$zoneName[0]['CENT_NAME']."",0,'L');
 
 
         $data['Lang_cat'] = $data['grp_id'];
@@ -1976,9 +1951,23 @@ class Admission extends CI_Controller {
         }
 
         else{
-            $finalFee = $admfee+100;
+
+            if(strtotime(date('Y-m-d')) <= strtotime(SingleDateFee)) {
+                $finalFee = $admfee+100;    
+            }
+
+            else if(strtotime(date('Y-m-d')) <= strtotime(DoubleDateFee)) {
+                $finalFee = $admfee+200;    
+            }
+
+            else if(strtotime(date('Y-m-d')) <= strtotime(TripleDateFee)) {
+                $finalFee = $admfee+300;    
+            }
+
+            else{
+                $finalFee = $admfee+300;    
+            }
         }
-        //DebugBreak();
 
         if($data['grp_cd'] == 9){
             $data['Spec'] = 0;
