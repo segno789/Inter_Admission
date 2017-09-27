@@ -1913,6 +1913,8 @@ else if(Session == '2')
             }
             if(grp_cd == 5)
             {
+                $('#sub7').show();;$('#sub7p2').show();
+
                 if((sub5pf2 == "3") || (sub5st2 == "2"))
                 {
                     $("#sub5p2").empty();
@@ -1961,9 +1963,6 @@ else if(Session == '2')
                     $("#sub7p2").append('<option value="0">NONE</option>');
                 }  
             }
-
-
-
         }
 
         function sub_grp_load_exam_type5(){

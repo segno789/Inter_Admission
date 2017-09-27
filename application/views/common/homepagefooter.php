@@ -15,7 +15,7 @@
 
         $( "#batch_real_PaidDate" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, startDate:new Date() }).val();
         $( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate: new Date(2002, 7,1),yearRange: '1970:2002'}).val();
-        var spl_cd = "<?php   echo @$spl_cd; ?>";
+      /*  var spl_cd = "<?php   echo @$spl_cd; ?>";
         var err ='<?php echo @$error; ?>';
         if(err != ""){
             alertify.error("Dear Student! No data found against your submitted record! Please check you informaiton again.");
@@ -35,7 +35,7 @@
                 alertify.error("Dear Student! Please  rectify  "+spl_cd+" before proceeding further from MATRIC BRANCH !"); 
             }   
 
-        } 
+        } */
         var error_New_Enrolement ='<?php   if(@$excep != ""){echo @$excep['excep'];}  ?>';
         var  error_New_Enrolement_update ='<?php   if(@$data != ""){echo @$data[0]['excep'];}  ?>';
         if(error_New_Enrolement.length > 1)
