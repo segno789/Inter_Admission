@@ -955,7 +955,7 @@ class Admission extends CI_Controller {
         {
             $type = pathinfo(@$data['picpath'], PATHINFO_EXTENSION); 
             @$image_path_selected = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents(@$data['picpath']));
-            $pdf->Image(@$data['picpath'],6.5, 1.30+$Y, 0.95, 1.0, "JPG");   
+            $pdf->Image(@$data['picpath'],6.5, 1.30+$Y, 0.95, 1.0, "JPG");
         }
 
         else  if($data ['IsNewPic'] == 1 && Session == 1)
@@ -1394,7 +1394,22 @@ class Admission extends CI_Controller {
 
         $Updated_AdmFee = $this->GetFeeWithdue($data['AdmFee']);
 
-        $newDate = date("d-m-Y", strtotime($this->GetDueDate()));
+
+
+        if((
+            $data['oldRno'] == "101383" || $data['oldRno'] == "101410" || $data['oldRno'] == "115287" ||$data['oldRno'] == "118242" ||$data['oldRno'] == "119421" ||$data['oldRno'] == "120911" ||$data['oldRno'] == "128695" ||$data['oldRno'] == "130344" ||$data['oldRno'] == "132729" ||$data['oldRno'] == "147076" || $data['oldRno'] == "159181" || $data['oldRno'] == "201227" || $data['oldRno'] == "221739" || $data['oldRno'] == "222776" || $data['oldRno'] == "223441" || $data['oldRno'] == "224183" || $data['oldRno'] == "224195" || $data['oldRno'] == "224200" || $data['oldRno'] == "224552" || $data['oldRno'] == "224605" || $data['oldRno'] == "224628" || $data['oldRno'] == "224632" || $data['oldRno'] == "224635" ||  $data['oldRno'] == "230217" ||  $data['oldRno'] == "234712" ||  $data['oldRno'] == "234728" || $data['oldRno'] == "234747" ||  $data['oldRno'] == "235146" ||  $data['oldRno'] == "235177"
+            )
+            && strtotime('2017-10-13') >= strtotime(date('Y-m-d'))
+            && $data['YearOfLastAp'] == "2017" && $data['SessOfLastAp'] == "1"
+        ){
+            $newDate = "13-10-2017";
+        }
+
+        else{
+            $newDate = date("d-m-Y", strtotime($this->GetDueDate()));
+        }
+
+
 
         $pdf->SetXY(0.2,6.4+$Y);
         $pdf->SetFillColor(0,0,0);
@@ -1851,11 +1866,23 @@ class Admission extends CI_Controller {
             {
                 $isper = 1;
             }
-
         }
+
         //DebugBreak();
 
-        $User_info_data = array('Inst_Id'=>999999, 'date' => date('Y-m-d'),'isPratical'=>$isper);
+        if((
+            $data['oldRno'] == "101383" || $data['oldRno'] == "101410" || $data['oldRno'] == "115287" ||$data['oldRno'] == "118242" ||$data['oldRno'] == "119421" ||$data['oldRno'] == "120911" ||$data['oldRno'] == "128695" ||$data['oldRno'] == "130344" ||$data['oldRno'] == "132729" ||$data['oldRno'] == "147076" || $data['oldRno'] == "159181" || $data['oldRno'] == "201227" || $data['oldRno'] == "221739" || $data['oldRno'] == "222776" || $data['oldRno'] == "223441" || $data['oldRno'] == "224183" || $data['oldRno'] == "224195" || $data['oldRno'] == "224200" || $data['oldRno'] == "224552" || $data['oldRno'] == "224605" || $data['oldRno'] == "224628" || $data['oldRno'] == "224632" || $data['oldRno'] == "224635" ||  $data['oldRno'] == "230217" ||  $data['oldRno'] == "234712" ||  $data['oldRno'] == "234728" || $data['oldRno'] == "234747" ||  $data['oldRno'] == "235146" ||  $data['oldRno'] == "235177"
+            )
+            && strtotime('2017-10-13') >= strtotime(date('Y-m-d'))
+            && $data['YearOfLastAp'] == "2017" && $data['SessOfLastAp'] == "1"
+        )
+        {
+            $User_info_data = array('Inst_Id'=>999999, 'date' => SingleDateFee,'isPratical'=>$isper);    
+        }
+        else{
+            $User_info_data = array('Inst_Id'=>999999, 'date' => date('Y-m-d'),'isPratical'=>$isper);
+        }
+
         $user_info  =  $this->Admission_model->getuser_info($User_info_data); 
         $isfine = 0;
         $Total_fine = 0;
