@@ -30,6 +30,38 @@ class Admission_model extends CI_Model
         }
     }
 
+    public function Pre_Aloom_data($data){
+
+        //DebugBreak();
+
+        $aloomCat = $data['aloomCat'];
+        $txtMatRnoAloom = $data['txtMatRnoAloom'];
+        $oldRnoAloom = $data['oldRnoAloom'];
+        $sessAloom = $data['sessAloom'];
+        $oldYearAloom = $data['oldYearAloom'];
+        $boardAloom = $data['boardAloom'];
+
+
+        if($aloomCat == 1){
+            $query = $this->db->query("SELECT top 1 * FROM ".getinfo_languages. " where matrno = $txtMatRnoAloom and rno = $oldRnoAloom and Sess = $sessAloom and Iyear = $oldYearAloom and Brd_cd = $boardAloom and grp_cd in (1,2,3,5,6) and status <> 1");    
+        }
+
+        else if($aloomCat == 2){
+            $query = $this->db->query("SELECT top 1 * FROM ".getinfo_languages. " where rno = $oldRnoAloom and Sess = $sessAloom and Iyear = $oldYearAloom and Brd_cd = $boardAloom and grp_cd in (1,2,3,5,6) and status <> 1");    
+        }
+
+
+        $rowcount = $query->num_rows();
+        if($rowcount > 0)
+        {
+            return $query->result_array();
+        }
+        else
+        {
+            return  false;
+        }
+    }
+
     public function Pre_Inter_Data($data)
     {
         //DebugBreak();
@@ -73,7 +105,7 @@ class Admission_model extends CI_Model
                 'cDate'=> date('Y-m-d H:i:s')
             );
             $this->db->where('formNo',$formno);
-            $this->db->update('Admission_Online..ISAdm2016',$data);  
+            $this->db->update('Admission_Online..ISAdm',$data);  
         }
         else if($isalooma == 1)
         {
@@ -91,8 +123,6 @@ class Admission_model extends CI_Model
     }
     public function GetFormNo_Languages()
     {
-
-
         //DebugBreak();
         $this->db->select('formno');
         $this->db->order_by("formno", "DESC");
@@ -282,6 +312,30 @@ class Admission_model extends CI_Model
             return  false;
         }
     }
+
+    public function Update_AdmissionFeePvt_Languages($data)
+    {
+
+        //DebugBreak();
+
+        $data['cdate']= date('Y-m-d H:i:s');
+        $this->db->where('formno',$data['formno']);
+        $this->db->update("admission_online..IStbllanguagesinter",$data);
+        $this->db->select('AdmFee,AdmProcessFee,Fine,AdmTotalFee');
+        $query = $this->db->get_where("admission_online..IStbllanguagesinter", array('formno'=>$data['formno'])); 
+        $rowcount = $query->num_rows();
+        if($rowcount > 0)
+        {
+            return $query->result_array();
+        }
+        else
+        {
+            return  false;
+        }
+
+    }
+
+
     public function Update_AdmissionFeePvt($data)
     {
         $data['cdate']= date('Y-m-d H:i:s');
@@ -645,11 +699,22 @@ class Admission_model extends CI_Model
         $name = strtoupper($data['name']);
         $fname =strtoupper($data['Fname']);
 
+
+        $bay_form =$data['bay_form'];
+        $father_cnic = $data['father_cnic'];
+        $medium = $data['medium'];
+        $speciality = $data['speciality'];
+        $nationality = $data['nationality'];
+        $isaloom = $data['isaloom'];
+
         $CellNo = $data['MobNo'];
 
         $MarkOfIden =strtoupper(@$data['markOfIden']);
 
         $sex = $data['sex'];
+
+        $hafiz = $data['hafiz'];
+        $religion = $data['religion'];
 
         $addr =strtoupper($data['addr']) ;
 
@@ -687,23 +752,40 @@ class Admission_model extends CI_Model
 
         $TotalAdmFee =  $AdmFee + $AdmProcFee;
 
-        // DebugBreak();
+        //DebugBreak();
 
-        $query = $this->db->query(Insert_sp_Languages." '$formno',2017,1,'$name','$fname','$CellNo','".$MarkOfIden."',$sex,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,1,$oldrno,$oldyear,$oldsess,$dist_cd,$teh_cd,$zone_cd,$Brd_cd,$AdmProcFee,$AdmFee,$TotalAdmFee");
-        return true;
+        $query = $this->db->query(Insert_sp_Languages." '$formno',".Year.",".Session.",'$name','$fname','".$bay_form."','".$father_cnic."',$medium,$speciality,$nationality,'$CellNo','".$MarkOfIden."',$sex,$hafiz,$religion,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,1,$oldrno,$oldyear,$oldsess,$dist_cd,$teh_cd,$zone_cd,$Brd_cd,$AdmProcFee,$AdmFee,$TotalAdmFee");
+
+        $rowcount = $query->num_rows();
+
+        if($rowcount > 0)
+        {
+            return $query->result_array();
+        }
+        else
+        {
+            return  false;
+        }
     }
     public function get_formno_data($formno)
     {
         //DebugBreak();
 
-        if(Session == 1)
+        if($formno < 900001)
+        {
+            $query = $this->db->query("select * from admission_online..IStbllanguagesinter where formno = '$formno'");    
+        }
+
+        else if(Session == 1 && $formno > 900000)
         {
             $query = $this->db->query("exec admission_online..formprint_sp_12th '$formno'");    
         }
-        else if(Session == 2)
+        else if(Session == 2 && $formno > 900000)
         {
             $query = $this->db->query("exec admission_online..sp_form_data_12th_SUPPLY '$formno'");        
         }
+
+
 
         $rowcount = $query->num_rows();
         if($rowcount > 0)
@@ -738,6 +820,7 @@ class Admission_model extends CI_Model
     public function getcenter($data)
     {
         //DebugBreak();
+        
         $zone = $data['zoneCode'];
         $gend = $data['gen'];
         $where = " mYear = ".Year." AND class = 12 AND  sess = ".Session." AND Zone_cd =  $zone  AND  (cent_Gen = $gend OR cent_Gen = 3)";

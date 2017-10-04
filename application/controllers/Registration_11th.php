@@ -85,6 +85,7 @@ class Registration_11th extends CI_Controller {
 
     public function ReAdmission_check()
     {
+   // DebugBreak();
         $this->load->model('Registration_11th_model');
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();

@@ -38,7 +38,7 @@ define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 define('BARCODE_PATH', 'assets/pdfs/');
 
 
-define('REGULAR_INSERT_TABLE', 'Admission_online..IAAdm');
+define('REGULAR_INSERT_TABLE', 'Admission_online..ISAdm');
 define('DIRPATH12TH','C:\inetpub\vhosts\bisegrw.com\Share Images\\'); 
 define('PRIVATE_IMAGE_PATH', 'uploads/private/');
 define('PRIVATE_IMAGE_PATH_FRESH', 'uploads/Fresh');
@@ -76,7 +76,7 @@ define('CURRENT_SESS','2017-2019');
 define('corr_bank_chall_class','INTER ANNUAL');
 define('session_year','2017-2019');
 define('TITLEHSSC','Online HSSC Annual Admission 2017');
-
+define('corr_bank_chall_class11','11th');
 
 //----------------INTER ADMISSIONS 12TH ------------------------------
 define('currdate','date("d-m-Y");');
@@ -111,7 +111,8 @@ define('DOUBLE_LAST_DATE11', '2017-06-12');
 define('SINGLE_LAST_DATE', '2017-09-15');
 define('DOUBLE_LAST_DATE', '2017-10-05');
 define('assets', 'assets/img/');
-
+define('CORR_IMAGE_PATH11', 'uploads/correction/colleges/');
+define('Correction_Last_Date11','2017-12-30');
 //================ RollNumber Slips variables ========================
 define('mClass1','12'); 
 define('mSession','1'); 
