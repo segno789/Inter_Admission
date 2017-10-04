@@ -39,7 +39,7 @@ define('BARCODE_PATH', 'assets/pdfs/');
 
 
 define('REGULAR_INSERT_TABLE', 'Admission_online..IAAdm');
-define('DIRPATH12TH','C:\inetpub\vhosts\bisegrw.com\Share Images\\'); 
+define('DIRPATH12TH','F:\xampp\htdocs\Share Images\\'); 
 define('PRIVATE_IMAGE_PATH', 'uploads/private/');
 define('PRIVATE_IMAGE_PATH_FRESH', 'uploads/Fresh');
 define('REGULAR_IMAGE_PATH', 'uploads/regular/');
