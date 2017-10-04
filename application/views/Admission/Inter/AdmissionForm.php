@@ -439,6 +439,7 @@ else if(Session == '2')
                     $IsRegular = @$data[0]['regPvt'];
                     $coll_cd = $data[0]['coll_cd']; 
                     $cat11  = $data[0]['cat11'];
+                    $cat12  = $data[0]['cat12'];
 
                     @$isParctialsub =   $data['0']['sn'];
                     @$spl_cd = $data['0']['spl_cd'];
@@ -450,11 +451,15 @@ else if(Session == '2')
                         echo "<option value='5'>COMMERCE</option>";   
                     }
 
-                    else if($cat11==4)
+                    else if($cat11==4 || $cat12 == 4)
                     {
                         echo "<option value='9' selected='selected'>KAHSA</option>";   
                     }
 
+                    else if($cat11==6 || $cat12 == 6)
+                    {
+                        echo "<option value='3' selected='selected'>HUMANITIES</option>";
+                    }
 
                     else if($exam_type == 3 && $class == 11 && $IsRegular == 1 && $isParctialsub == 2){
 
@@ -880,6 +885,8 @@ else if(Session == '2')
     <input type="hidden" name="sub5st2_hidden" id="sub1st1_hidden" value="<?php   echo  @$data[0]['sub5st2'];?>"/>
     <input type="hidden" name="sub6st2_hidden" id="sub1st1_hidden" value="<?php   echo  @$data[0]['sub6st2'];?>"/>
     <input type="hidden" name="sub7st2_hidden" id="sub1st1_hidden" value="<?php   echo  @$data[0]['sub7st2'];?>"/>
+    <input type="hidden" name="cat11_hidden" id="cat11_hidden" value="<?php echo  @$data[0]['cat11'];?>"/>
+    <input type="hidden" name="cat12_hidden" id="cat12_hidden" value="<?php echo  @$data[0]['cat12'];?>"/>
 
 
     <div class="form-group">
@@ -1315,7 +1322,27 @@ else if(Session == '2')
             $('#sub8').hide(); $('#sub8p2').hide();
         }
 
-        function AamKhasa_subj(){
+
+        function AamKhasa_subjCat6(){
+            Empty_All_Dropdowns();
+
+            $("#sub2").append('<option value="1">ENGLISH</option>');
+            $("#sub2p2").append('<option value="1">ENGLISH</option>');
+
+            $("#sub1").append('<option value="2">URDU</option>');
+            $("#sub1p2").append('<option value="2">URDU</option>');
+
+            $("#sub3").append('<option value="92">ISLAMIC EDUCATION</option>');
+            $("#sub3p2").append('<option value="91">PAKISTAN STUDIES</option>');           
+
+            $("#sub4").hide();$("#sub4p2").hide();
+            $("#sub5").hide();$("#sub5p2").hide();
+            $("#sub6").hide();$("#sub6p2").hide();
+            $('#sub7').hide();$('#sub7p2').hide();
+            $('#sub8').hide(); $('#sub8p2').hide();
+        }
+
+        function AamKhasa_subjcat4(){
             Empty_All_Dropdowns();
 
             $("#sub2").append('<option value="1">ENGLISH</option>');
@@ -1886,6 +1913,8 @@ else if(Session == '2')
             }
             if(grp_cd == 5)
             {
+                $('#sub7').show();;$('#sub7p2').show();
+
                 if((sub5pf2 == "3") || (sub5st2 == "2"))
                 {
                     $("#sub5p2").empty();
@@ -1934,9 +1963,6 @@ else if(Session == '2')
                     $("#sub7p2").append('<option value="0">NONE</option>');
                 }  
             }
-
-
-
         }
 
         function sub_grp_load_exam_type5(){
@@ -2439,7 +2465,7 @@ else if(Session == '2')
         {
             Empty_All_Dropdowns();
             hide_sub7_sub8();
-            AamKhasa_subj();
+            AamKhasa_subjcat4();
         }
 
         <?php
@@ -2478,10 +2504,16 @@ else if(Session == '2')
             echo'ClearALLDropDowns();';
         }
 
-        else if($cat11 == 4)
+        else if($cat11 == 4 || $cat12 == 4)
         {
             echo 'Aama_Khasa();';
         }
+
+        else if($cat11 == 6 || $cat12 == 6)
+        {
+            echo 'AamKhasa_subjCat6();';
+        }
+
         else
             if($exam_type == 1){ 
                 echo 'sub_grp_load_exam_type1();'; 
@@ -3338,5 +3370,3 @@ else if(Session == '2')
     });
 
 </script>
-
-
