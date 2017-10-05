@@ -20,12 +20,38 @@ class EleventhCorrection extends CI_Controller {
     {
         parent::__construct();
         $this->load->helper('url');
-        //this condition checks the existence of session if user is not accessing  
-        //login method as it can be accessed without user session
+
         $this->load->library('session');
         if( !$this->session->userdata('logged_in') && $this->router->method != 'login' ) {
             redirect('login');
         }
+        $this->load->library('Browsercache');
+        $this->browsercache->dontCache();
+        $this->clear_cache();
+        $this->clear_all_cache();
+    }
+    public function clear_all_cache()
+    {
+        $CI =& get_instance();
+        $path = $CI->config->item('cache_path');
+
+        $cache_path = ($path == '') ? APPPATH.'cache/' : $path;
+
+        $handle = opendir($cache_path);
+        while (($file = readdir($handle))!== FALSE) 
+        {
+            //Leave the directory protection alone
+            if ($file != '.htaccess' && $file != 'index.html')
+            {
+                @unlink($cache_path.'/'.$file);
+            }
+        }
+        closedir($handle);
+    }
+    function clear_cache()
+    {
+        $this->output->set_header("Cache-Control: no-store, no-cache, must-revalidate, no-transform, max-age=0, post-check=0, pre-check=0");
+        $this->output->set_header("Pragma: no-cache");
     }
    
     public function EditForms()
