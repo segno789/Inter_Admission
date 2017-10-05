@@ -566,7 +566,9 @@
 
                                         <option value="<?php echo $data[0]['sub3'] ?>" selected='selected'><?php
                                             echo array_search($data[0]['sub3'],$subarray);
-                                        ?></option></select> 
+                                        ?></option>
+                                        
+                                        </select> 
                                     <select id="sub4"  name="sub4" class="span3 dropdown" disabled="disabled">
                                         <option value="<?php if($isReAdm != 1) { echo $data[0]['sub4'];} else echo'4'; ?>" selected="selected"><?php
                                             if($isReAdm != 1) {echo array_search($data[0]['sub4'],$subarray);} else echo"Pakistan Studies";      
@@ -576,7 +578,9 @@
 
                                         <option value="<?php echo $data[0]['sub3'] ?>" selected='selected'><?php
                                             echo array_search($data[0]['sub3'],$subarray);
-                                        ?></option></select> 
+                                        ?></option>
+                                        
+                                        </select> 
                                     <select id="corr_sub4"  name="corr_sub4" class="span3 dropdown" style="display: none;">
                                         <option value="<?php if($isReAdm != 1) { echo $data[0]['sub4'];} else echo'4'; ?>" selected="selected"><?php
                                             if($isReAdm != 1) {echo array_search($data[0]['sub4'],$subarray);} else echo"Pakistan Studies";      

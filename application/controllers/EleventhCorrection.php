@@ -456,7 +456,7 @@ class EleventhCorrection extends CI_Controller {
     }
     public function Correction_EditForm($formno)
     {    
-        //  DebugBreak();
+         // DebugBreak();
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
@@ -471,11 +471,15 @@ class EleventhCorrection extends CI_Controller {
         if($this->session->flashdata('NewEnrolment_error')){
             //DebugBreak();
 
-            //$RegStdData['data'][0] = $this->session->flashdata('NewEnrolment_error');   
-           
+            
+            $year = Year;
             $RegStdData = array('data'=>$this->Registration_11th_model->EditEnrolement_data($formno,$year,$Inst_Id),'isReAdm'=>$isReAdm,'Oldrno'=>0);
             $isReAdm = 0;//$RegStdData['data'][0]['isreadm'];
             $RegStdData['isReAdm']=$isReAdm;
+           // DebugBreak();
+            $excep= $this->session->flashdata('NewEnrolment_error');   
+            $RegStdData['data'][0]['excep']= $excep['excep'];   
+            
             $RegStdData['Oldrno']=0;
 
         }

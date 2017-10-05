@@ -253,13 +253,13 @@ if(isset($files)){
             $("#corr_cand_name").focus();
             return false;
         }
-        if(corr_type == 4 && corr_bay_form=='')
+        if(corr_type == 4 && (corr_bay_form=='' || corr_bay_form=='00000-0000000-0' || corr_bay_form=='11111-1111111-1' || corr_bay_form=='22222-2222222-2' || corr_bay_form=='33333-3333333-3' || corr_bay_form=='44444-4444444-4' || corr_bay_form=='55555-5555555-5' || corr_bay_form=='66666-6666666-6' || corr_bay_form=='77777-7777777-7' || corr_bay_form=='88888-8888888-8' || corr_bay_form=='99999-9999999-9'))
         {
             alertify.error("Please write correct Bay-Form No.!");
             $("#corr_cand_name").focus();
             return false;
         }
-        if(corr_type == 5 && corr_father_cnic=='')
+        if(corr_type == 5 && (corr_father_cnic=='' || corr_father_cnic=='00000-0000000-0' || corr_father_cnic=='11111-1111111-1' || corr_father_cnic=='22222-2222222-2' || corr_father_cnic=='33333-3333333-3' || corr_father_cnic=='44444-4444444-4' || corr_father_cnic=='55555-5555555-5' || corr_father_cnic=='66666-6666666-6' || corr_father_cnic=='77777-7777777-7' || corr_father_cnic=='88888-8888888-8' || corr_father_cnic=='99999-9999999-9'))
         {
             alertify.error("Please write correct Father CNIC!");
             $("#corr_cand_name").focus();
@@ -1274,8 +1274,9 @@ if(isset($files)){
             remove_subjects();
         }
 
-        var error_New_Enrolement ='<?php   if(@$excep != ""){echo @$excep['excep'];}  ?>';
+        var error_New_Enrolement ='<?php    if(@$excep != ""){echo @$excep['excep'];}  ?>';
         var  error_New_Enrolement_update ='<?php   if(@$data != ""){echo @$data[0]['excep'];}  ?>';
+        console.log(error_New_Enrolement_update);
         if(error_New_Enrolement.length > 1)
         {
             if(error_New_Enrolement == "success" )
@@ -1893,7 +1894,9 @@ if(isset($files)){
         $("#corr_sub1 option[value='2']").attr("selected","selected");
         $("#corr_sub2").append(new Option('English',1));
         $("#corr_sub2 option[value='1']").attr("selected","selected");
-        $("#corr_sub3").append(new Option('ETHICS',51));
+         //$("#corr_sub3").prepend("<option  value='93'> CIVICS FOR NON MUSLIM </option>");
+       // $("#corr_sub3").append(new Option('ETHICS',51));
+        $("#corr_sub3").append(new Option('CIVICS FOR NON MUSLIM',93));
        
         $("#corr_sub3").append(new Option('Islamic Education',92));
         $("#corr_sub3 option[value='92']").attr("selected","selected");
@@ -2075,6 +2078,7 @@ if(isset($files)){
         $("#corr_sub7").empty().append('<option selected="selected" value="0">NONE</option>');
         $("#corr_sub8").empty().append('<option selected="selected" value="0">NONE</option>');
         var NationalityVal = $("#hid_nat").val();
+        var gender_ = $("#hid_sex").val();
         if(NationalityVal==2)
         {
             $("#corr_sub1").prepend("<option selected='selected' value='6'>PAKISTANI CULTURE</option>");
@@ -2089,15 +2093,42 @@ if(isset($files)){
         $("#corr_sub2").append(new Option('English',1));
         $("#corr_sub2 option[value='1']").attr("selected","selected");
         $("#corr_sub3").append(new Option('Islamic Education',92));
+        $("#corr_sub3").append(new Option('CIVICS FOR NON MUSLIM',93));
         $("#corr_sub3 option[value='92']").attr("selected","selected");
         $.each(sub6_Hum, function(val, text) {
-            $('#corr_sub4').append( new Option(text,val) );
+        
+             if(gender_ == 1 && val == 21)
+             {
+            
+             }
+             else
+             {
+             $('#corr_sub4').append( new Option(text,val) ); 
+             }
+             
+            
         }); 
         $.each(sub6_Hum, function(val, text) {
+        if(gender_ == 1 && val == 21)
+             {
+            
+             }
+             else
+             {
             $('#corr_sub5').append( new Option(text,val) );
+             }
+            
         }); 
         $.each(sub6_Hum, function(val, text) {
+        if(gender_ == 1 && val == 21)
+             {
+            
+             }
+             else
+             {
             $('#corr_sub6').append( new Option(text,val) );
+             }
+           
         }); 
         // $("#sub6 option[value='" + sub1 + "']").attr("selected","selected");
 
@@ -2508,7 +2539,7 @@ if(isset($files)){
             //$("#father_cnic").mask("****************************",{placeholder:""});
 
             $("#sub3").empty(); 
-            $("#sub3").prepend("<option selected='selected' value='51'> ETHICS </option>");
+            $("#sub3").prepend("<option  value='93'> CIVICS FOR NON MUSLIM </option>");
             $("#sub3").prepend("<option  value='3'>ISLAMIYAT (COMPULSORY)</option>");
         }
     });
