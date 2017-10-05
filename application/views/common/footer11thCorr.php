@@ -199,103 +199,64 @@ if(isset($files)){
         var corr_std_group = $("#corr_std_group option:selected").text();
         var corr_std_group_val = $("#corr_std_group option:selected").val();
         var std_group = $("#std_group option:selected").text();
-
+        
         var check_checkbox = 0;
         var corr_type = 0;
         if ($("#c0").prop('checked')==true){ 
             //    alert('at lease one checked');
             check_checkbox =1;
             corr_type = 1;
-        }if ($("#c1").prop('checked')==true){ 
-            //    alert('at lease one checked');
-            check_checkbox =1;
-            corr_type = 2;
-        }if ($("#c2").prop('checked')==true){ 
-            //    alert('at lease one checked');
-            check_checkbox =1;
-            corr_type = 3;
-        }if ($("#c3").prop('checked')==true){ 
-            //    alert('at lease one checked');
-            check_checkbox =1;
-            corr_type = 4;
-        }if ($("#c4").prop('checked')==true){ 
-            //    alert('at lease one checked');
-            check_checkbox =1;
-            corr_type = 5;
-        }if ($("#c5").prop('checked')==true){ 
-            //    alert('at lease one checked');
-            check_checkbox =1;
-            corr_type = 6;
-        }if ($("#c6").prop('checked')==true){ 
-            //    alert('at lease one checked');
-            check_checkbox =1;
-            corr_type = 7;
-        }if ($("#c7").prop('checked')==true){ 
-            //    alert('at lease one checked');
-            check_checkbox =1;
-            corr_type = 8;
-        }
-
-        if(corr_type == 1 && corr_cand_name=='')
+            if(corr_type == 1 && corr_cand_name=='')
         {
             alertify.error("Please write correct Name!");
             $("#corr_cand_name").focus();
             return false;
         }
-        if(corr_type == 2 && corr_father_name=='')
+        }if ($("#c1").prop('checked')==true){ 
+            //    alert('at lease one checked');
+            check_checkbox =1;
+            corr_type = 2;
+             if(corr_type == 2 && corr_father_name=='')
         {
             alertify.error("Please write correct Father's Name!");
             $("#corr_cand_name").focus();
             return false;
         }
-        if(corr_type == 3 && corr_dob=='')
+        }if ($("#c2").prop('checked')==true){ 
+            //    alert('at lease one checked');
+            check_checkbox =1;
+            corr_type = 3;
+             if(corr_type == 3 && corr_dob=='')
         {
             alertify.error("Please write correct Date of Birth!");
             $("#corr_cand_name").focus();
             return false;
         }
-        if(corr_type == 4 && (corr_bay_form=='' || corr_bay_form=='00000-0000000-0' || corr_bay_form=='11111-1111111-1' || corr_bay_form=='22222-2222222-2' || corr_bay_form=='33333-3333333-3' || corr_bay_form=='44444-4444444-4' || corr_bay_form=='55555-5555555-5' || corr_bay_form=='66666-6666666-6' || corr_bay_form=='77777-7777777-7' || corr_bay_form=='88888-8888888-8' || corr_bay_form=='99999-9999999-9'))
+        }if ($("#c3").prop('checked')==true){ 
+            //    alert('at lease one checked');
+            check_checkbox =1;
+            corr_type = 4;
+             if(corr_type == 4 && (corr_bay_form=='' || corr_bay_form=='00000-0000000-0' || corr_bay_form=='11111-1111111-1' || corr_bay_form=='22222-2222222-2' || corr_bay_form=='33333-3333333-3' || corr_bay_form=='44444-4444444-4' || corr_bay_form=='55555-5555555-5' || corr_bay_form=='66666-6666666-6' || corr_bay_form=='77777-7777777-7' || corr_bay_form=='88888-8888888-8' || corr_bay_form=='99999-9999999-9'))
         {
             alertify.error("Please write correct Bay-Form No.!");
             $("#corr_cand_name").focus();
             return false;
         }
-        if(corr_type == 5 && (corr_father_cnic=='' || corr_father_cnic=='00000-0000000-0' || corr_father_cnic=='11111-1111111-1' || corr_father_cnic=='22222-2222222-2' || corr_father_cnic=='33333-3333333-3' || corr_father_cnic=='44444-4444444-4' || corr_father_cnic=='55555-5555555-5' || corr_father_cnic=='66666-6666666-6' || corr_father_cnic=='77777-7777777-7' || corr_father_cnic=='88888-8888888-8' || corr_father_cnic=='99999-9999999-9'))
+        }if ($("#c4").prop('checked')==true){ 
+            //    alert('at lease one checked');
+            check_checkbox =1;
+            corr_type = 5;
+             if(corr_type == 5 && (corr_father_cnic=='' || corr_father_cnic=='00000-0000000-0' || corr_father_cnic=='11111-1111111-1' || corr_father_cnic=='22222-2222222-2' || corr_father_cnic=='33333-3333333-3' || corr_father_cnic=='44444-4444444-4' || corr_father_cnic=='55555-5555555-5' || corr_father_cnic=='66666-6666666-6' || corr_father_cnic=='77777-7777777-7' || corr_father_cnic=='88888-8888888-8' || corr_father_cnic=='99999-9999999-9'))
         {
             alertify.error("Please write correct Father CNIC!");
             $("#corr_cand_name").focus();
             return false;
         }
-        if(check_checkbox ==0)
-        {
-            alertify.error("Please Choose Correction First!");
-            return false;
-        }
-        var sub1 = $("#sub1 option:selected").text();
-        var sub2 = $("#sub2 option:selected").text();
-        var sub3 = $("#sub3 option:selected").text();
-        var sub4 = $("#sub4 option:selected").text();
-        var sub5 = $("#sub5 option:selected").text();
-        var sub6 = $("#sub6 option:selected").text();
-        var sub7 = $("#sub7 option:selected").text();
-        var corr_sub1 = $("#corr_sub1 option:selected").text();
-        var corr_sub2 = $("#corr_sub2 option:selected").text();
-        var corr_sub3 = $("#corr_sub3 option:selected").text();
-        var corr_sub4 = $("#corr_sub4 option:selected").text();
-        var corr_sub5 = $("#corr_sub5 option:selected").text();
-        var corr_sub6 = $("#corr_sub6 option:selected").text();
-        var corr_sub7 = $("#corr_sub7 option:selected").text();
-        var sub1_match =0;
-        var sub2_match =0;
-        var sub3_match =0;
-        var sub4_match =0;
-        var sub5_match =0;
-        var sub6_match =0;
-        var sub7_match =0;
-        var corr_sub4_val = $("#corr_sub4 option:selected").val();
-        var corr_sub5_val = $("#corr_sub5 option:selected").val();
-        var corr_sub6_val = $("#corr_sub6 option:selected").val();
-        if(corr_type == 6 )
+        }if ($("#c5").prop('checked')==true){ 
+            //    alert('at lease one checked');
+            check_checkbox =1;
+            corr_type = 6;
+             if(corr_type == 6 )
         {
 
             if(corr_std_group_val == 3 && (corr_sub4_val == 0 || corr_sub5_val==0 || corr_sub6_val == 0))
@@ -349,7 +310,63 @@ if(isset($files)){
 
 
         }
+        }if ($("#c6").prop('checked')==true){ 
+            //    alert('at lease one checked');
+            check_checkbox =1;
+            corr_type = 7;
+             
+        }if ($("#c7").prop('checked')==true)
+        { 
+       
+            check_checkbox =1;
+            corr_type = 8;
+             var f = document.getElementById("corr_image");
+            if(f.value == "") 
+            {
+                   alertify.error("Please select correct Image First!");
+                    $("#corr_image").focus();
+                    return false;
+            }
+               // return false;
+        }
 
+        
+       
+       
+       
+       
+        if(check_checkbox ==0)
+        {
+            alertify.error("Please Choose Correction First!");
+            return false;
+        }
+        var sub1 = $("#sub1 option:selected").text();
+        var sub2 = $("#sub2 option:selected").text();
+        var sub3 = $("#sub3 option:selected").text();
+        var sub4 = $("#sub4 option:selected").text();
+        var sub5 = $("#sub5 option:selected").text();
+        var sub6 = $("#sub6 option:selected").text();
+        var sub7 = $("#sub7 option:selected").text();
+        var corr_sub1 = $("#corr_sub1 option:selected").text();
+        var corr_sub2 = $("#corr_sub2 option:selected").text();
+        var corr_sub3 = $("#corr_sub3 option:selected").text();
+        var corr_sub4 = $("#corr_sub4 option:selected").text();
+        var corr_sub5 = $("#corr_sub5 option:selected").text();
+        var corr_sub6 = $("#corr_sub6 option:selected").text();
+        var corr_sub7 = $("#corr_sub7 option:selected").text();
+        var sub1_match =0;
+        var sub2_match =0;
+        var sub3_match =0;
+        var sub4_match =0;
+        var sub5_match =0;
+        var sub6_match =0;
+        var sub7_match =0;
+        var corr_sub4_val = $("#corr_sub4 option:selected").val();
+        var corr_sub5_val = $("#corr_sub5 option:selected").val();
+        var corr_sub6_val = $("#corr_sub6 option:selected").val();
+       
+       
+         
         //do something
 
 
