@@ -65,11 +65,20 @@
                                 </label>
                                 <div class="controls controls-row">
                                     <input class="span3" readonly="readonly"  type="text" id="cand_name" style="text-transform: uppercase;" name="cand_name" placeholder="Candidate Name" maxlength="60"  value="<?php  echo  $data['0']['name']; ?>" <?php if($isReAdm==1) echo "readonly='readonly'";  ?>  >
-
-                                    <!--<label class="control-label span2" for="lblfather_name" >
+                                      <?php
+                                     // DebugBreak();
+                                          if($data['0']['Brd_cd']!=1)
+                                          {
+                                          
+                                          
+                                      ?>
+                                    <label class="control-label span2" for="lblfather_name" >
                                         Correction  Candidate Name :  <input type="checkbox" class="corr_check_box" style="width: 20px;    height: 20px;" id="c0" name="c[]" value="1">
                                     </label> 
-                                    <input class="span3" id="corr_cand_name" name="corr_cand_name" style="text-transform: uppercase; display:none;" type="text" placeholder="Candidate Name" maxlength="60" >  -->
+                                    <input class="span3" id="corr_cand_name" name="corr_cand_name" style="text-transform: uppercase; display:none;" type="text" placeholder="Candidate Name" maxlength="60" >
+                                    <?php
+                                          }
+                                    ?>
                                 </div>
 
                             </div>
@@ -94,10 +103,21 @@
                                     ?>
 
                                     </select>-->
-                                   <!-- <label class="control-label span2" >
+                                    <?php
+                                 
+                                          if($data['0']['Brd_cd']!=1)
+                                          {
+                                          
+                                          
+                                      ?>
+                                  <label class="control-label span2" >
                                         Correction  Father's Name :  <input type="checkbox" class="corr_check_box" id="c1" name="c[]" value="2" style="width: 20px;    height: 20px;"> 
                                     </label> 
-                                    <input class="span3" id="corr_father_name" type="text"  style="text-transform: uppercase; display:none;" name="corr_father_name" placeholder="Father's Name"  maxlength="60">  -->
+                                    <input class="span3" id="corr_father_name" type="text"  style="text-transform: uppercase; display:none;" name="corr_father_name" placeholder="Father's Name"  maxlength="60">
+                                      <?php
+                                          }
+                                    ?>
+                                    
                                 </div>
                             </div>
                             <?php if(isset($data['0']['Intr_Brd']) && (@$data['0']['Intr_Brd'] != 1) )
