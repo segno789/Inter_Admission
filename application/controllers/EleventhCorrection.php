@@ -767,24 +767,33 @@ class EleventhCorrection extends CI_Controller {
             $config['max_size']      = '20';
             // $config['max_width']     = '260';
             // $config['max_height']    = '290';
-            $config['min_width']     = '110';
-            $config['min_height']    = '100';
+            $config['max_width']     = '260';
+            $config['max_height']    = '290';
             $config['overwrite']     = TRUE;
             $config['file_name']     = $formno.'.jpg';
 
             $filepath = $target_path. $config['file_name']  ;    
+            
+           
+            
             $filename =    $config['file_name']  ;    
             $this->load->library('upload', $config);
             $check = getimagesize($_FILES["corr_image"]["tmp_name"]);
             $this->upload->initialize($config);
+            
+            
+            // echo $filepath ;exit();
             //DebugBreak();
             if($check !== false) {
                 $file_size = round($_FILES['corr_image']['size']/1024, 2);
-                if($file_size<=20 && $file_size>=4)
+                
+                
+                if($file_size<=20)
                 {
 
                     if ( !$this->upload->do_upload('corr_image',True))
                     {
+                       // echo $this->upload->error_msg[0]; exit();
                         if($this->upload->error_msg[0] != "")
                         {
                             $error['excep']= $this->upload->error_msg[0];
@@ -1065,7 +1074,7 @@ class EleventhCorrection extends CI_Controller {
                 $pdf->SetXY(4.8, $Y +1.79);
                 $pdf->Cell(1.25,1.4,'',1,0,'C',0);
                 // DebugBreak();
-               // $pdf->Image(CORR_IMAGE_PATH11.$user['Inst_Id'].'/'.$data["PicPath"],4.8, 1.79+ $Y, 1.25, 1.4, "JPG"); 
+                $pdf->Image(CORR_IMAGE_PATH11.$user['Inst_Id'].'/'.$data["PicPath"],4.8, 1.79+ $Y, 1.25, 1.4, "JPG"); 
                 $pdf->SetFont('Arial','',10);
                 $Y = 2.0; 
             }

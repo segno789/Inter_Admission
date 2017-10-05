@@ -42,9 +42,7 @@
                                         <th style="width:11%" class="hidden-phone">
                                             Selected Subjects
                                         </th>
-                                         <th style="width:4%" class="hidden-phone">
-                                            Picture
-                                        </th>
+                                        
                                         <th style="width:18%" class="hidden-phone" >
                                             Download
                                         </th>
@@ -88,8 +86,7 @@
                                     <td>'.$vals["Fname"].'</td>
                                     <td>'.date("d-m-Y", strtotime($vals["Dob"])).'</td>
                                     <td>'.$grp_name.'</td>
-                                    <td>'.$vals["sub1_abr"].','.$vals["sub2_abr"].','.$vals["sub3_abr"].','.$vals["sub4_abr"].','.$vals["sub5_abr"].','.$vals["sub6_abr"].','.$vals["sub7_abr"].','.$vals["sub8_abr"].'</td>
-                                     <td><img id="previewImg" style="width:40px; height: 40px;" src="../'.IMAGE_PATH11.$Inst_Id.'/'.$vals['PicPath'].'?'.rand(10000,1000000).'" alt="Candidate Image"></td>';
+                                    <td>'.$vals["sub1_abr"].','.$vals["sub2_abr"].','.$vals["sub3_abr"].','.$vals["sub4_abr"].','.$vals["sub5_abr"].','.$vals["sub6_abr"].','.$vals["sub7_abr"].','.$vals["sub8_abr"].'</td>';
                                     
                                     echo'<td>
                                    

@@ -17,6 +17,12 @@
                             11th Registration
                         </a>
                     </li>
+                    <li>
+                        <a href="<?php echo base_url(); ?>EleventhCorrection/EditForms" class="<?php if($isselected == '12') {echo 'selected';}?>" >
+                            <div class="fs1" aria-hidden="true" data-icon="&#xe0c4;"></div>
+                            11th Correction
+                        </a>
+                    </li>   
                     <?php } 
                 if($appconfig['isadmP1'] == 1){
                     ?>
@@ -73,8 +79,28 @@
                 </ul>
                 <?php
             }
-            ?>
-            <?php   // 11th admission
+            
+             if($isselected == '12'){
+                ?>
+                <ul >
+                
+                    <li><a href="<?php echo base_url(); ?>EleventhCorrection"   data-original-title="" class="<?php if($isselected == '12') {echo 'heading';}?>">11th Correction </a></li>
+                  <li><a href="<?php echo base_url(); ?>EleventhCorrection/EditForms"   data-original-title="" >Apply for Correction </a></li>
+                    <li>
+                        <a href="<?php echo base_url(); ?>EleventhCorrection/Applied">
+                            Applications
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a onclick="return logout();">Logout</a>
+                    </li>
+                   
+
+                </ul>
+                <?php
+            }
+             // 11th admission
             if($isselected == '14'){
                 ?>
                 <ul >
