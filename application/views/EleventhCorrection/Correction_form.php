@@ -117,7 +117,6 @@
                                       <?php
                                           }
                                     ?>
-                                    
                                 </div>
                             </div>
                             <?php if(isset($data['0']['Intr_Brd']) && (@$data['0']['Intr_Brd'] != 1) )
@@ -127,7 +126,6 @@
                             <label class="control-label span1" >
                                     Date of Birth:(dd-mm-yyyy)
                                 </label>
-
                                 <div class="controls controls-row">
                                     <input class="span3" type="text"  name="dob" placeholder="DOB" value="<?php $source = $data['0']['Dob']; $date = new DateTime($source); echo $date->format('d-m-Y'); ?>" required="required" readonly="readonly"  <?php if($isReAdm==1) echo "readonly='readonly'"; ?> >
 
@@ -137,7 +135,6 @@
                                     <input class="span3" id="corr_dob" name="corr_dob" readonly="readonly" style="display: none;"  type="text" placeholder="dd-mm-yyyy">
                                 </div>
                             </div>
-
                              <?php } ?>
                             <div class="control-group">
                                 <label class="control-label span1" >

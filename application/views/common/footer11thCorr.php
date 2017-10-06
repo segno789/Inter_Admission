@@ -199,7 +199,6 @@ if(isset($files)){
         var corr_std_group = $("#corr_std_group option:selected").text();
         var corr_std_group_val = $("#corr_std_group option:selected").val();
         var std_group = $("#std_group option:selected").text();
-        
         var check_checkbox = 0;
         var corr_type = 0;
         if ($("#c0").prop('checked')==true){ 

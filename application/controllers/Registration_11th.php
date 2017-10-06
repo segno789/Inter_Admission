@@ -85,7 +85,7 @@ class Registration_11th extends CI_Controller {
 
     public function ReAdmission_check()
     {
-   // DebugBreak();
+        // DebugBreak();
         $this->load->model('Registration_11th_model');
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -97,8 +97,12 @@ class Registration_11th extends CI_Controller {
         $userinfo['isselected'] = 6;
         $Inst_Id = $userinfo['Inst_Id'];
         $this->load->view('common/header.php',$userinfo);
-        $User_info_data = array('Inst_Id'=>$Inst_Id,'RollNo'=>$RollNo,'spl_case'=>17);
+        @$RollNo = @$_POST['oldRno'];
+        @$oldYear  = @$_POST['oldYear'];
+        @$oldSess = @$_POST['oldSess'];
+        @$oldBrd_cd= @$_POST['oldBrd_cd'];
 
+        $User_info_data = array('Inst_Id'=>$Inst_Id,'RollNo'=>$RollNo,'spl_case'=>17);
         $data = array('mrollno'=>"$RollNo",'board'=>$oldBrd_cd,'year'=>$oldYear,'session'=>$oldSess);
         $feedingcheck=$this->Registration_11th_model->IsReFeeded($data);
         $feeding_inst_cd =$feedingcheck[0]['coll_cd'];
@@ -109,7 +113,6 @@ class Registration_11th extends CI_Controller {
             redirect('Registration_11th/ReAdmission');
             return;
         }    
-
         else if($oldBrd_cd ==  1)
         {
             $user_info  =  $this->Registration_11th_model->readmission_check($User_info_data);
@@ -319,7 +322,7 @@ class Registration_11th extends CI_Controller {
 
     }
     public function Profile_Update(){
-    
+
         $this->load->model('Registration_11th_model');
         // // DebugBreak();();
         $this->load->library('session');
@@ -389,7 +392,7 @@ class Registration_11th extends CI_Controller {
     {
 
 
-      //DebugBreak();
+        //DebugBreak();
 
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -425,10 +428,10 @@ class Registration_11th extends CI_Controller {
             // $dob     =  $_POST["dob"];
 
             $session =$_POST["oldSess"];
-            
+
             //echo date("Y",strtotime("-1 year"));  //last year "2013"
-          //  echo date("Y"); 
-           //  if($year )
+            //  echo date("Y"); 
+            //  if($year )
             // $oldClass= $_POST["oldClass"];
             $data = array('mrollno'=>"$mrollno",'board'=>$board,'year'=>$year,'session'=>$session);
             $this->load->model('Registration_11th_model');
@@ -447,19 +450,19 @@ class Registration_11th extends CI_Controller {
             }
 
             //             // DebugBreak();();
-             
-        
-         $year_range = range( date("Y") , date("Y",strtotime("-5 year")) );
-           if(!in_array($year,$year_range))
-           {
-                    $this->session->set_flashdata('matric_error', 'THIS SSC YEAR IS NOT ALLOWED.');
-                    redirect('Registration_11th/Students_matricInfo');
-                    return;
-           }
-           
+
+
+            $year_range = range( date("Y") , date("Y",strtotime("-5 year")) );
+            if(!in_array($year,$year_range))
+            {
+                $this->session->set_flashdata('matric_error', 'THIS SSC YEAR IS NOT ALLOWED.');
+                redirect('Registration_11th/Students_matricInfo');
+                return;
+            }
+
             $feedingcheck=$this->Registration_11th_model->IsFeeded($data);
             $feeding_inst_cd =$feedingcheck[0]['coll_cd'];
-            
+
             if($feedingcheck != false)
             {
                 $instName=$this->Registration_11th_model->InstName($feeding_inst_cd);
@@ -500,21 +503,21 @@ class Registration_11th extends CI_Controller {
                     $RegStdData['data'][0]['markOfIden']='';
                     if($RegStdData['data'][0]['SSC_brd_cd'] != $board)
                     {
-                     $RegStdData['data'] = False;
+                        $RegStdData['data'] = False;
                     }
                     else
                     {
-                    $RegStdData['data'][0]['SSC_brd_cd'] = $board;
-                    $spl_cd = $RegStdData['data'][0]['spl_cd'];
-                    $msg = $RegStdData['data'][0]['Mesg'];
-                    $SpacialCase = $RegStdData['data'][0]['SpacialCase'];
-                    $status = $RegStdData['data'][0]['status'];
-                    $cand_gender = $RegStdData['data'][0]['Gender'];
-                    $inst_userinfo_gender = $userinfo['gender'];  
+                        $RegStdData['data'][0]['SSC_brd_cd'] = $board;
+                        $spl_cd = $RegStdData['data'][0]['spl_cd'];
+                        $msg = $RegStdData['data'][0]['Mesg'];
+                        $SpacialCase = $RegStdData['data'][0]['SpacialCase'];
+                        $status = $RegStdData['data'][0]['status'];
+                        $cand_gender = $RegStdData['data'][0]['Gender'];
+                        $inst_userinfo_gender = $userinfo['gender'];  
                     }
-                    
 
-                    
+
+
                 }
 
 
@@ -839,7 +842,7 @@ class Registration_11th extends CI_Controller {
         $this->load->library('upload', $config);
         $check = getimagesize($_FILES["image"]["tmp_name"]);
         $this->upload->initialize($config);
-      
+
         if($check !== false) {
 
             $file_size = round($_FILES['image']['size']/1024, 2);
@@ -889,7 +892,7 @@ class Registration_11th extends CI_Controller {
         {
             $this->convertImage($filepath,$filepath,100,$a['mime']);
         }
-         
+
         //  // DebugBreak();();
 
         /*$path = base_url().'Uploads/2016/Private/GridImageTemplate.jpg';
@@ -2355,7 +2358,7 @@ class Registration_11th extends CI_Controller {
     {
         $RegGrp = $this->uri->segment(3);
         $Spl_case = $this->uri->segment(4);
-        //DebugBreak();
+       // DebugBreak();
         $this->load->model('Registration_11th_model');
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -2400,7 +2403,7 @@ class Registration_11th extends CI_Controller {
         /*====================  Counting Fee  ==============================*/
         $processing_fee = 100;
         $reg_fee           = 1000;
-        $reLreg_fee          = 1000;
+        $reLreg_fee          = 0;
         $TotalRegFee = 0;
         $TotalLatefee = 0;
         $Totalprocessing_fee = 0;
@@ -2425,29 +2428,29 @@ class Registration_11th extends CI_Controller {
         {
             if(date('Y-m-d',strtotime(SINGLE_LAST_DATE))>=date('Y-m-d'))
             {
-            $rule_fee  =  $this->Registration_11th_model->getreulefee(1); 
-            $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
+                $rule_fee  =  $this->Registration_11th_model->getreulefee(1); 
+                $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
             }
             else
             {
-             $rule_fee  =  $this->Registration_11th_model->getreulefee(2); 
-            $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
+                $rule_fee  =  $this->Registration_11th_model->getreulefee(2); 
+                $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
             }
-            
+
 
 
         }
         /*if($is_gov == 1)
         {*/
-            $reg_fee = $rule_fee[0]['Reg_Fee'];
-            $Lreg_fee = $rule_fee[0]['Fine'];
-            $processing_fee = $rule_fee[0]['Reg_Processing_Fee'];
-       /* }
+        $reg_fee = $rule_fee[0]['Reg_Fee'];
+        $Lreg_fee = $rule_fee[0]['Fine'];
+        $processing_fee = $rule_fee[0]['Reg_Processing_Fee'];
+        /* }
         else
         {
-            $reg_fee = $rule_fee[0]['Reg_Fee'];
-            $Lreg_fee = $rule_fee[0]['Fine'];
-            $processing_fee = $rule_fee[0]['Reg_Processing_Fee'];
+        $reg_fee = $rule_fee[0]['Reg_Fee'];
+        $Lreg_fee = $rule_fee[0]['Fine'];
+        $processing_fee = $rule_fee[0]['Reg_Processing_Fee'];
 
         }*/
         //// DebugBreak();();
@@ -2466,7 +2469,8 @@ class Registration_11th extends CI_Controller {
                     $reg_fee = 0;//$rule_fee[0]['Reg_Fee'];
                     if($v['IsReAdm']==1)
                     {
-                        $TotalLatefee = $TotalLatefee + $reLreg_fee;
+                        $Lreg_fee=0;
+                        $TotalLatefee = $TotalLatefee + $Lreg_fee;
                     }
                     else
                     {        $Lreg_fee = $rule_fee[0]['Fine'];
@@ -2493,7 +2497,7 @@ class Registration_11th extends CI_Controller {
 
                     $TotalRegFee = $TotalRegFee + $reg_fee;
                     if($v['IsReAdm']==1)
-                    {    
+                    {   $Lreg_fee = 0; 
                         $TotalLatefee = $TotalLatefee + $reLreg_fee;
                     }
                     else
@@ -2546,9 +2550,9 @@ class Registration_11th extends CI_Controller {
             } // end of Else
             /*if(date('Y-m-d')<=$lastdate)
             {
-                $Lreg_fee = 0;
-                $TotalLatefee=0;
-                $reLreg_fee=0;
+            $Lreg_fee = 0;
+            $TotalLatefee=0;
+            $reLreg_fee=0;
             }  */
             $netTotal = (int)$netTotal +$reg_fee + $Lreg_fee+$processing_fee;
             $netTotal = (int)$netTotal +$reg_fee + $Lreg_fee+$processing_fee;
@@ -2579,7 +2583,7 @@ class Registration_11th extends CI_Controller {
     }
     public function Make_Batch_Formwise()
     {
-        // DebugBreak();
+        //DebugBreak();
         if(!empty($_POST["chk"]))
         {
 
@@ -2604,7 +2608,7 @@ class Registration_11th extends CI_Controller {
         /*====================  Counting Fee  ==============================*/
         $processing_fee = 0;
         $reg_fee           = 1000;
-        $reLreg_fee          = 1000;
+        $reLreg_fee          = 0;
         $TotalRegFee = 0;
         $TotalLatefee = 0;
         $Totalprocessing_fee = 0;
@@ -2671,8 +2675,8 @@ class Registration_11th extends CI_Controller {
                     $TotalRegFee = $TotalRegFee + $reg_fee;
                     $reg_fee = $rule_fee[0]['Reg_Fee'];;
                     if($v['IsReAdm']==1)
-                    {
-                        $TotalLatefee = $TotalLatefee + $reLreg_fee;
+                    {   $Lreg_fee = 0;
+                        $TotalLatefee = $TotalLatefee + $Lreg_fee ;
                     }
                     else
                     {         $Lreg_fee = $rule_fee[0]['Fine'];
@@ -2684,7 +2688,7 @@ class Registration_11th extends CI_Controller {
                 {
                     $TotalRegFee = $TotalRegFee + $reg_fee;
                     if($v['IsReAdm']==1)
-                    {    
+                    {   $Lreg_fee = 0; 
                         $TotalLatefee = $TotalLatefee + $reLreg_fee;
                     }
                     else
@@ -2776,7 +2780,7 @@ class Registration_11th extends CI_Controller {
     public function return_pdf()
     {
 
-         //DebugBreak();
+        //DebugBreak();
 
         $Condition = $this->uri->segment(4);
         /*
@@ -2878,7 +2882,7 @@ class Registration_11th extends CI_Controller {
         // // DebugBreak();();
         foreach ($result as $key=>$data) 
         {
-//            DebugBreak();
+            //            DebugBreak();
             //// DebugBreak();();
             $i++;
             $countofrecords=$countofrecords+1;
@@ -2917,7 +2921,7 @@ class Registration_11th extends CI_Controller {
                 $pdf->SetXY(6.9,0.8);
                 $pdf->Cell(0, 0.25,  'Gender: '. ($data['sex']==1?"MALE":"FEMALE" ), 0.25, "C");
                 //$grp_name = $data["RegGrp"];
-               
+
                 /*$pdf->SetFont('Arial','',10);
                 $pdf->SetXY(2.5,0.8);
                 $pdf->Cell(0, 0.25,  'Group: '.$grp_name, 0.25, "C"); */
@@ -2946,7 +2950,7 @@ class Registration_11th extends CI_Controller {
                 $pdf->Line($col4,$title,$col4,$ln[15]);
                 $pdf->Line($col5,$title,$col5,$ln[15]);
                 $pdf->Line($col6,$title,$col6,$ln[15]);
-                 
+
                 $pdf->SetFont('Arial','B',9);
                 $pdf->Text($lmargin+.03,$title+.3,"Sr#");    //$pdf->Text(3,3,"TEXT TO DISPLAY");
                 $pdf->Text($col1+.2,$title+.3,"Form No.");
@@ -2979,27 +2983,27 @@ class Registration_11th extends CI_Controller {
 
             }
             switch ($data["RegGrp"]) {
-                    case '1':
-                        $grp_name = 'Pre-Medical';
-                        break;
-                    case '2':
-                        $grp_name = 'Pre-Engineering';
-                        break;
-                    case '3':
-                        $grp_name = 'Humanities';
-                        break;
-                    case '4':
-                        $grp_name = 'General Science';
-                        break;
-                    case '5':
-                        $grp_name = 'Commerce';
-                        break;
-                    case '7':
-                        $grp_name = 'Home Economics';
-                        break;
-                    default:
-                        $grp_name = "No Group Selected.";
-                }
+                case '1':
+                    $grp_name = 'Pre-Medical';
+                    break;
+                case '2':
+                    $grp_name = 'Pre-Engineering';
+                    break;
+                case '3':
+                    $grp_name = 'Humanities';
+                    break;
+                case '4':
+                    $grp_name = 'General Science';
+                    break;
+                case '5':
+                    $grp_name = 'Commerce';
+                    break;
+                case '7':
+                    $grp_name = 'Home Economics';
+                    break;
+                default:
+                    $grp_name = "No Group Selected.";
+            }
             //$dob = date("d-m-Y", strtotime($data["Dob"]));
             $adm = date("d-m-Y", strtotime($data["edate"]));
 
@@ -3053,7 +3057,7 @@ class Registration_11th extends CI_Controller {
                 $pdf->Text($col5+.05,$ln[$countofrecords]+0.35,  $data["sub1_abr"].','.$data["sub2_abr"].','.$data["sub3_abr"]);
                 $pdf->SetFont('Arial','',7);    
                 $pdf->Text($col5+.05,$ln[$countofrecords]+0.55,$data["sub4_abr"].','.$data["sub5_abr"].','.$data["sub6_abr"].','.$data["sub7_abr"]); //.','.$data["sub8_abr"]
-                 $pdf->Image(base_url().IMAGE_PATH11.$data["coll_cd"].'/'.$data["PicPath"],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG"); 
+                $pdf->Image(base_url().IMAGE_PATH11.$data["coll_cd"].'/'.$data["PicPath"],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG"); 
                 //$pdf->Image(base_url().IMAGE_PATH11.$data["coll_cd"].'/'.$data["PicPath"],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG");
                 //$pdf->Image(IMAGE_PATH11.$data["Sch_cd"].'/'.$data["PicPath"],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG");    
             }
@@ -4398,12 +4402,12 @@ class Registration_11th extends CI_Controller {
             return;
 
         }
-       /* if(strlen(@$_POST['cand_name'] < 3)  || (strlen($allinputdata['name'] < 3) && $isupdate ==1)  )
+        /* if(strlen(@$_POST['cand_name'] < 3)  || (strlen($allinputdata['name'] < 3) && $isupdate ==1)  )
         {
-            $allinputdata['excep'] = 'Please Enter Your Correct Name';
-            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-            redirect('Registration_11th/'.$viewName);
-            return;
+        $allinputdata['excep'] = 'Please Enter Your Correct Name';
+        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+        redirect('Registration_11th/'.$viewName);
+        return;
 
         }  */
         //(strpos($a, 'are') !== false)
@@ -4417,7 +4421,7 @@ class Registration_11th extends CI_Controller {
         }
 
         else*/
-         if (@$_POST['father_name'] == ''  || ($allinputdata['Fname'] == '' && $isupdate ==1) )
+        if (@$_POST['father_name'] == ''  || ($allinputdata['Fname'] == '' && $isupdate ==1) )
         {
             $allinputdata['excep'] = 'Please Enter Your Father Name';
             $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
@@ -4427,18 +4431,18 @@ class Registration_11th extends CI_Controller {
         }
         /* if (strlen(@$_POST['father_name'] < 3)  || (strlen($allinputdata['Fname'] < 3) && $isupdate ==1) )
         {
-            $allinputdata['excep'] = 'Please Enter Your Father Name';
-            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-            redirect('Registration_11th/'.$viewName);
-            return;
+        $allinputdata['excep'] = 'Please Enter Your Father Name';
+        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+        redirect('Registration_11th/'.$viewName);
+        return;
 
         }  */
-       /* if ((@$_POST['cand_name'] == @$_POST['father_name'] )  || (($allinputdata['name'] == $allinputdata['Fname'] ) && $isupdate ==1))
+        /* if ((@$_POST['cand_name'] == @$_POST['father_name'] )  || (($allinputdata['name'] == $allinputdata['Fname'] ) && $isupdate ==1))
         {
-            $allinputdata['excep'] = 'Please Enter Your Father Name';
-            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-            redirect('Registration_11th/'.$viewName);
-            return;
+        $allinputdata['excep'] = 'Please Enter Your Father Name';
+        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+        redirect('Registration_11th/'.$viewName);
+        return;
 
         }   */
         /*  if ((strpos(@$_POST['father_name'], 'MOHAMMAD') !== false)|| (strpos(@$_POST['father_name'], 'MOHAMAD') !== false) || (strpos(@$_POST['father_name'], 'MUHAMAD') !== false) || (strpos(@$_POST['father_name'], 'MOOHAMMAD') !== false)|| (strpos(@$_POST['father_name'], 'MOOHAMAD') !== false))
