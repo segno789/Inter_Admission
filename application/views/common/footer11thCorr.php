@@ -1,7 +1,13 @@
 
-<div class="footer" style="text-align: center; background:#3187bf; color: wheat; height: 40px; margin-bottom: 5px; padding: 0;">
-    &copy; 2017 BISE Gujranwala, All Rights Reserved.
-</div>
+<footer>
+    <p>
+        &copy; BiseAdmin 2015
+    </p>
+</footer>
+
+
+<!--Add the following script at the bottom of the web page (before </body></html>)-->
+
 
 <script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/bootstrap.js"></script>
@@ -21,54 +27,71 @@ if(isset($files)){
     }
 }
 ?> 
-<script type="text/javascript">
-    function releasemForm(formrno)
-    {
-        window.location.href = '<?=base_url()?>/migration/release_stdForm/'+formrno;
-    }
+<script type="">
 
-    function  check_migration_validation()
-    {
-        var grp_cd = $('#migrateto').val();
-        var status = 0;
+    /*function preventBack(){window.history.forward();}
+    setTimeout("preventBack()", 0);
+    window.onunload=function(){null};      */
 
-        if ($("#migrateto").find('option:selected').val() < 1) 
-        {
-            alertify.error("Please Select Migrate To Inst.") ;
-            // alert('Study Group not selected ');                          
-            $("#migrateto").focus();
-            return status;  
-        }
 
-        status = 1;
-        return status;
-    }
+    /*function showMyImage(fileInput) {
+    debugger;
+    var files = fileInput.files;
+    for (var i = 0; i < files.length; i++) {           
+    var file = files[i];
+    var imageType = "jpg"// /image.*/;     
+    /* if (!file.type.match(imageType)) {
+    continue;
+    }           
+    var img=document.getElementById("corr_image");            
+    img.file = file;    
+    var reader = new FileReader();
+    reader.onload = (function(aImg) { 
+    return function(e) { 
+    aImg.src = e.target.result; 
+    }; 
+    })(img);
+    reader.readAsDataURL(file);
+    }    */
+    /*    }*/
 
     function readURL_corr(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
 
-        var  fileName = input.files[0].name
-        var ext = fileName.substring(fileName.lastIndexOf('.') + 1);
+            reader.onload = function (e) {
+                $('#corr_image').attr('src', e.target.result);
+            }
 
-
-        if(ext.toLowerCase() != "jpg" )
-        {
-            alertify.error("Please uplaod only .JPG Files!"); 
-
-        }
-        else
-        {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-
-                reader.onload = function (e) {
-                    $('#corr_image').attr('src', e.target.result);
-                }
-                reader.readAsDataURL(input.files[0]);
-            } 
+            reader.readAsDataURL(input.files[0]);
         }
     }
+
+    /*$("#corr_image").change(function(){
+    readURL(this);
+    });*/
+    /*function Checkfiles_corr()
+    {
+    var fup = document.getElementById('corr_image');
+    var fileName = fup.value;
+    // alert('File Name is = '+ fileName);
+    var ext = fileName.substring(fileName.lastIndexOf('.') + 1);
+    if(ext == "jpg" )
+    {
+    //$("#corr_previewImg")
+    $('#corr_previewImg').attr('src', );
+    return true;
+    } 
+    else
+    {
+    alert("Upload  .jpg images only");
+    fup.value = null;
+    fup.focus();
+    return false;
+    }
+    }*/
     $(document).ready(function () {
-     $('.mPageloader').hide();
+        $('.mPageloader').hide();
         $('#data-table').dataTable({
             "sPaginationType": "full_numbers",
             "bAutoWidth" : false,
@@ -79,7 +102,7 @@ if(isset($files)){
             "bAutoWidth" : false,
             "cache": false
         });
-
+  
         $("#c0").click(function(){
 
             if($(this).is(":checked")){
@@ -160,10 +183,14 @@ if(isset($files)){
                 $("#corr_previewImg").hide(); 
             }
         });
+        var NationalityVal = $("#hid_nat").val();
+
 
     });
     $("#btnsubmitUpdateEnrol").click(function(){
 
+        // alert('hello');
+        //alert(c1);
         var corr_cand_name = $("#corr_cand_name").val();
         var corr_father_name = $("#corr_father_name").val();
         var corr_dob = $("#corr_dob").val();
@@ -172,105 +199,73 @@ if(isset($files)){
         var corr_std_group = $("#corr_std_group option:selected").text();
         var corr_std_group_val = $("#corr_std_group option:selected").val();
         var std_group = $("#std_group option:selected").text();
-
         var check_checkbox = 0;
         var corr_type = 0;
         if ($("#c0").prop('checked')==true){ 
             //    alert('at lease one checked');
             check_checkbox =1;
             corr_type = 1;
-        }if ($("#c1").prop('checked')==true){ 
-            //    alert('at lease one checked');
-            check_checkbox =1;
-            corr_type = 2;
-        }if ($("#c2").prop('checked')==true){ 
-            //    alert('at lease one checked');
-            check_checkbox =1;
-            corr_type = 3;
-        }if ($("#c3").prop('checked')==true){ 
-            //    alert('at lease one checked');
-            check_checkbox =1;
-            corr_type = 4;
-        }if ($("#c4").prop('checked')==true){ 
-            //    alert('at lease one checked');
-            check_checkbox =1;
-            corr_type = 5;
-        }if ($("#c5").prop('checked')==true){ 
-            //    alert('at lease one checked');
-            check_checkbox =1;
-            corr_type = 6;
-        }if ($("#c6").prop('checked')==true){ 
-            //    alert('at lease one checked');
-            check_checkbox =1;
-            corr_type = 7;
-        }if ($("#c7").prop('checked')==true){ 
-            //    alert('at lease one checked');
-            check_checkbox =1;
-            corr_type = 8;
-        }
-
-        if(corr_type == 1 && corr_cand_name=='')
+            if(corr_type == 1 && corr_cand_name=='')
         {
             alertify.error("Please write correct Name!");
             $("#corr_cand_name").focus();
             return false;
         }
-        if(corr_type == 2 && corr_father_name=='')
+        }if ($("#c1").prop('checked')==true){ 
+            //    alert('at lease one checked');
+            check_checkbox =1;
+            corr_type = 2;
+             if(corr_type == 2 && corr_father_name=='')
         {
             alertify.error("Please write correct Father's Name!");
             $("#corr_cand_name").focus();
             return false;
         }
-        if(corr_type == 3 && corr_dob=='')
+        }if ($("#c2").prop('checked')==true){ 
+            //    alert('at lease one checked');
+            check_checkbox =1;
+            corr_type = 3;
+             if(corr_type == 3 && corr_dob=='')
         {
             alertify.error("Please write correct Date of Birth!");
             $("#corr_cand_name").focus();
             return false;
         }
-        if(corr_type == 4 && corr_bay_form=='')
+        }if ($("#c3").prop('checked')==true){ 
+            //    alert('at lease one checked');
+            check_checkbox =1;
+            corr_type = 4;
+             if(corr_type == 4 && (corr_bay_form=='' || corr_bay_form=='00000-0000000-0' || corr_bay_form=='11111-1111111-1' || corr_bay_form=='22222-2222222-2' || corr_bay_form=='33333-3333333-3' || corr_bay_form=='44444-4444444-4' || corr_bay_form=='55555-5555555-5' || corr_bay_form=='66666-6666666-6' || corr_bay_form=='77777-7777777-7' || corr_bay_form=='88888-8888888-8' || corr_bay_form=='99999-9999999-9'))
         {
             alertify.error("Please write correct Bay-Form No.!");
             $("#corr_cand_name").focus();
             return false;
         }
-        if(corr_type == 5 && corr_father_cnic=='')
+        }if ($("#c4").prop('checked')==true){ 
+            //    alert('at lease one checked');
+            check_checkbox =1;
+            corr_type = 5;
+             if(corr_type == 5 && (corr_father_cnic=='' || corr_father_cnic=='00000-0000000-0' || corr_father_cnic=='11111-1111111-1' || corr_father_cnic=='22222-2222222-2' || corr_father_cnic=='33333-3333333-3' || corr_father_cnic=='44444-4444444-4' || corr_father_cnic=='55555-5555555-5' || corr_father_cnic=='66666-6666666-6' || corr_father_cnic=='77777-7777777-7' || corr_father_cnic=='88888-8888888-8' || corr_father_cnic=='99999-9999999-9'))
         {
             alertify.error("Please write correct Father CNIC!");
             $("#corr_cand_name").focus();
             return false;
         }
-        if(check_checkbox ==0)
+        }if ($("#c5").prop('checked')==true){ 
+            //    alert('at lease one checked');
+            check_checkbox =1;
+            corr_type = 6;
+             if(corr_type == 6 )
         {
-            alertify.error("Please Choose Correction First!");
-            return false;
-        }
-        var sub1 = $("#sub1 option:selected").text();
-        var sub2 = $("#sub2 option:selected").text();
-        var sub3 = $("#sub3 option:selected").text();
-        var sub4 = $("#sub4 option:selected").text();
-        var sub5 = $("#sub5 option:selected").text();
-        var sub6 = $("#sub6 option:selected").text();
-        var sub7 = $("#sub7 option:selected").text();
-        var sub8 = $("#sub8 option:selected").text();
-        var corr_sub1 = $("#corr_sub1 option:selected").text();
-        var corr_sub2 = $("#corr_sub2 option:selected").text();
-        var corr_sub3 = $("#corr_sub3 option:selected").text();
-        var corr_sub4 = $("#corr_sub4 option:selected").text();
-        var corr_sub5 = $("#corr_sub5 option:selected").text();
-        var corr_sub6 = $("#corr_sub6 option:selected").text();
-        var corr_sub7 = $("#corr_sub7 option:selected").text();
-        var corr_sub8 = $("#corr_sub8 option:selected").text();
-        var sub1_match =0;
-        var sub2_match =0;
-        var sub3_match =0;
-        var sub4_match =0;
-        var sub5_match =0;
-        var sub6_match =0;
-        var sub7_match =0;
-        var sub8_match =0;
-        debugger;
-        if(corr_type == 6 )
-        {
+
+            if(corr_std_group_val == 3 && (corr_sub4_val == 0 || corr_sub5_val==0 || corr_sub6_val == 0))
+            {
+                alertify.error("Please Select Subject First!");
+                //$("#corr_cand_name").focus();
+                return false;
+            }
+
+
             //&& corr_std_group_val==0
             if((corr_std_group== std_group))
             {
@@ -302,11 +297,8 @@ if(isset($files)){
                 {
                     sub7_match=1 
                 }
-                if(sub8==corr_sub8)
-                {
-                    sub8_match=1 
-                }
-                if(sub1_match==1 && sub2_match==1 && sub3_match==1 && sub4_match==1 && sub5_match==1 && sub6_match==1 && sub7_match==1 && sub8_match==1  )
+
+                if(sub1_match==1 && sub2_match==1 && sub3_match==1 && sub4_match==1 && sub5_match==1 && sub6_match==1 && sub7_match==1  )
                 {
                     alertify.error("Please select correct Group/Subject First!");
                     $("#corr_cand_name").focus();
@@ -315,20 +307,88 @@ if(isset($files)){
 
             }
 
+
+        }
+        }if ($("#c6").prop('checked')==true){ 
+            //    alert('at lease one checked');
+            check_checkbox =1;
+            corr_type = 7;
+             
+        }if ($("#c7").prop('checked')==true)
+        { 
+       
+            check_checkbox =1;
+            corr_type = 8;
+             var f = document.getElementById("corr_image");
+            if(f.value == "") 
+            {
+                   alertify.error("Please select correct Image First!");
+                    $("#corr_image").focus();
+                    return false;
+            }
+               // return false;
         }
 
+        
+       
+       
+       
+       
+        if(check_checkbox ==0)
+        {
+            alertify.error("Please Choose Correction First!");
+            return false;
+        }
+        var sub1 = $("#sub1 option:selected").text();
+        var sub2 = $("#sub2 option:selected").text();
+        var sub3 = $("#sub3 option:selected").text();
+        var sub4 = $("#sub4 option:selected").text();
+        var sub5 = $("#sub5 option:selected").text();
+        var sub6 = $("#sub6 option:selected").text();
+        var sub7 = $("#sub7 option:selected").text();
+        var corr_sub1 = $("#corr_sub1 option:selected").text();
+        var corr_sub2 = $("#corr_sub2 option:selected").text();
+        var corr_sub3 = $("#corr_sub3 option:selected").text();
+        var corr_sub4 = $("#corr_sub4 option:selected").text();
+        var corr_sub5 = $("#corr_sub5 option:selected").text();
+        var corr_sub6 = $("#corr_sub6 option:selected").text();
+        var corr_sub7 = $("#corr_sub7 option:selected").text();
+        var sub1_match =0;
+        var sub2_match =0;
+        var sub3_match =0;
+        var sub4_match =0;
+        var sub5_match =0;
+        var sub6_match =0;
+        var sub7_match =0;
+        var corr_sub4_val = $("#corr_sub4 option:selected").val();
+        var corr_sub5_val = $("#corr_sub5 option:selected").val();
+        var corr_sub6_val = $("#corr_sub6 option:selected").val();
+       
+       
+         
+        //do something
+
+
+
+
+        //if()
         var formno = $("#lblFormNo").text();
+
+
+
+
         var corr_pic_src = $("#corr_previewImg").attr('src');
         //  alert(corr_pic_src);
         $('#div_confirmation').html('');
         $('#div_confirmation').append(' <h3 class="welcome_note">View Your Correction Application Form</h3><br>  <div class="widget">                    <div class="widget-header" id="lblFormNo">                        <div class="title">   <h3>                      Form No.   <?php                                       echo @$data[0]['formNo'];                                       ?>                       </h3> </div>                    </div>                    <div class="widget-body"><div class="control-group">                                <h4 class="span4">Personal Information :</h4>                                <div class="controls controls-row">                                                                                                    </div>                            </div> '); 
+
 
         var chkBoxArray = [];
         $('.corr_check_box:checked').each(function() {
             chkBoxArray.push($(this).val());
             if($(this).val() == '7')
             {
-                $("#div_confirmation").append(' <div class="control-group"><label class="control-label span2" >                                    Current Picture :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="<?php  if(@$isReAdm==1) {} else{echo base_url().IMAGE_PATH.@$Inst_Id.'/'.@$data[0]['PicPath']; } ?>" alt="Candidate Image">                                                               <label class="control-label span1" >TO</label>                                     <img  name="corr_previewImg" style="width:80px; height: 80px; margin-right: 231px;    float: right;" class="span2" src="'+corr_pic_src+'" alt="Candidate Image">                               </div>                            </div>   ')            }
+                $("#div_confirmation").append(' <div class="control-group"><label class="control-label span2" >                                    Current Picture :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="<?php  echo '../../'.IMAGE_PATH11.@$Inst_Id.'/'.@$data[0]['PicPath']; ?>" alt="Candidate Image">                                                               <label class="control-label span1" >TO</label>                                     <img  name="corr_previewImg" style="width:80px; height: 80px; margin-right: 231px;    float: right;" class="span2" src="'+corr_pic_src+'" alt="Candidate Image">                               </div>                            </div>   ')            }
             if($(this).val() == '1')
             {
                 $("#div_confirmation").append(' <div class="control-group">                                <label class="control-label span2 " >                                    Candidate Name :                                </label>                          <div class="controls controls-row">                                    <input class="span2" readonly="readonly"  type="text" id="cand_name" style="text-transform: uppercase;    font-size: 10px;" name="cand_name" placeholder="Candidate Name" maxlength="60"  value="<?php  echo  @$data['0']['name']; ?>" <?php if(@$isReAdm==1) echo "readonly='readonly'";  ?>  >                                <label class="control-label span1 "> TO </label>     <input class="span2" name="corr_cand_name" style="text-transform: uppercase; " readonly="readonly" type="text" value="'+corr_cand_name+'" >                                </div>                            </div>');
@@ -352,7 +412,7 @@ if(isset($files)){
             }
             if($(this).val() == '6')
             {
-                $('#div_confirmation').append('<div class="control-group">                                <h4 class="span4">Exam Information :</h4>                                <div class="controls controls-row">                                    <input type="hidden" class="span2 hidden" id="isReAdm" name="isReAdm" value="0">                                                                  </div>                            </div>  <div class="control-group">                                <label class="control-label span2" >                                    Current Group :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly"  name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+std_group+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2"  type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_std_group+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                 <div class="control-group">                                <label class="control-label span2" >                                    Subject 1 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub1+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2"  type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub1+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                    <div class="control-group">                                <label class="control-label span2" >                                    Subject 2 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="std_group" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub2+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2"  type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub2+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                   <div class="control-group">                                <label class="control-label span2" >                                    Subject 3 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="std_group" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub3+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2" type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub3+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                  <div class="control-group">                                <label class="control-label span2" >                                    Subject 4 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="std_group" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub4+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2" type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub4+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                   <div class="control-group">                                <label class="control-label span2" >                                    Subject 5 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="std_group" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub5+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2"  type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub5+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                  <div class="control-group">                                <label class="control-label span2" >                                    Subject 6 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="std_group" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub6+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2"  type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub6+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                   <div class="control-group">                                <label class="control-label span2" >                                    Subject 7 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="std_group" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub7+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2"  type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub7+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                          <div class="control-group">                                <label class="control-label span2" >                                    Subject 8 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="sub8" name="sub8" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub8+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2"  type="text"  style="text-transform: uppercase; " name="corr_sub8" value="'+corr_sub8+'" disabled="disabled"  maxlength="60">                                </div>                            </div>             ');
+                $('#div_confirmation').append('<div class="control-group">                                <h4 class="span4">Exam Information :</h4>                                <div class="controls controls-row">                                    <input type="hidden" class="span2 hidden" id="isReAdm" name="isReAdm" value="0">                                                                  </div>                            </div>  <div class="control-group">                                <label class="control-label span2" >                                    Current Group :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly"  name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+std_group+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2"  type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_std_group+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                 <div class="control-group">                                <label class="control-label span2" >                                    Subject 1 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub1+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2"  type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub1+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                    <div class="control-group">                                <label class="control-label span2" >                                    Subject 2 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="std_group" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub2+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2"  type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub2+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                   <div class="control-group">                                <label class="control-label span2" >                                    Subject 3 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="std_group" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub3+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2" type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub3+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                  <div class="control-group">                                <label class="control-label span2" >                                    Subject 4 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="std_group" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub4+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2" type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub4+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                   <div class="control-group">                                <label class="control-label span2" >                                    Subject 5 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="std_group" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub5+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2"  type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub5+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                  <div class="control-group">                                <label class="control-label span2" >                                    Subject 6 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="std_group" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub6+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2"  type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub6+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                   <div class="control-group">                                <label class="control-label span2" >                                    Subject 7 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="std_group" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub7+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2"  type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub7+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                          </div>             ');
             }
 
 
@@ -363,6 +423,9 @@ if(isset($files)){
             $("#corr_form").submit();
         })
         $.fancybox("#div_confirmation");
+        // alert(chkBoxArray);
+        //  $.fancybox("#div_confirmation");
+        // $("#div_confirmation").fancybox();
     })
 
 </script>
@@ -380,6 +443,9 @@ if(isset($files)){
         var dist = "<?php echo @$field_status['dist']; ?>";
         var teh = "<?php echo @$field_status['teh']; ?>";
         var zone = "<?php echo @$field_status['zone']; ?>";
+
+
+
         if(emis == 0)
         {
             if($('#Info_emis').val() < 4)
@@ -453,7 +519,7 @@ if(isset($files)){
 
         }
 
-        window.location.href = '<?=base_url()?>/Registration/Incomplete_inst_info_INSERT/';
+        window.location.href = '<?=base_url()?>Registration/Incomplete_inst_info_INSERT/';
     }
 
     function SpecPermission_INSERT()
@@ -487,9 +553,17 @@ if(isset($files)){
             $('#Proc_Fee').focus();
             return false; 
         }
+        if(spec_fee == 0 || spec_fee == "")
+        {
+            alertify.error("Please Write Special Fee.");
+            $('#Spec_Fee').focus();
+            return false; 
+        }
+
     }
     function BatchRelease_INSERT()
     {
+
         var Batch_Id = $('#batch_real_Id').val();
         var reason  = $('#batch_real_reason').val();;
         var bank_branch  = $('#batch_real_bankbranch').val();;
@@ -531,24 +605,35 @@ if(isset($files)){
             alertify.error("Please Give Bank Challan.");
             $('#batch_real_challanno').focus();
             return false;
+
+
         }
         if(paidAmount == 0)
         {
+
             alertify.error("Please Give Bank Paid Amount.");
             $('#batch_real_PaidAmount').focus();
             return false;
+
+
         }
         if(paidDate == '')
         {
+
             alertify.error("Please Give Bank Paid Amount.");
             $('#batch_real_PaidDate').focus();
             return false;
+
+
         }
+
+
+        //  window.location.href = '<?=base_url()?>Registration/Batchlist_INSERT/';
     }
     function downloadslip(rno,isdownload)
     {
         $('.mPageloader').show();
-        window.location.href = '<?=base_url()?>/RollNoSlip/MatricRollNo/'+rno+'/'+isdownload
+        window.location.href = '<?=base_url()?>RollNoSlip/MatricRollNo/'+rno+'/'+isdownload
 
         if(isdownload == 1)
         {
@@ -558,7 +643,7 @@ if(isset($files)){
     function downloadslip9th(rno,isdownload)
     {
         $('.mPageloader').show();
-        window.location.href = '<?=base_url()?>/RollNoSlip/NinthRollNo/'+rno+'/'+isdownload
+        window.location.href = '<?=base_url()?>RollNoSlip/NinthRollNo/'+rno+'/'+isdownload
         if(isdownload == 1)
         {
             $('.mPageloader').hide();
@@ -567,7 +652,7 @@ if(isset($files)){
     function downloadgroupwise(isdownload)
     {
         $('.mPageloader').show();
-        window.location.href = '<?=base_url()?>/RollNoSlip/MatricRollNoGroupwise/'+$("#std_group").val()+'/'+isdownload
+        window.location.href = '<?=base_url()?>RollNoSlip/MatricRollNoGroupwise/'+$("#std_group").val()+'/'+isdownload
 
         if(isdownload == 1)
         {
@@ -577,7 +662,7 @@ if(isset($files)){
     function downloadgroupwise12(isdownload)
     {
         $('.mPageloader').show();
-        window.location.href = '<?=base_url()?>/RollNoSlip/InterRollNoGroupwise/'+$("#std_group").val()+'/'+isdownload
+        window.location.href = '<?=base_url()?>RollNoSlip/InterRollNoGroupwise/'+$("#std_group").val()+'/'+isdownload
 
         if(isdownload == 1)
         {
@@ -587,7 +672,7 @@ if(isset($files)){
     function downloadgroupwise9th(isdownload)
     {
         $('.mPageloader').show();
-        window.location.href = '<?=base_url()?>/RollNoSlip/NinthRollNoGroupwise/'+$("#std_group").val()+'/'+isdownload
+        window.location.href = '<?=base_url()?>RollNoSlip/NinthRollNoGroupwise/'+$("#std_group").val()+'/'+isdownload
         if(isdownload == 1)
         {
             $('.mPageloader').hide();
@@ -600,28 +685,27 @@ if(isset($files)){
             if (e) {
                 // user clicked "ok"
                 parent.$.fancybox.close();
-
+                // window.location.href ='<?php echo base_url(); ?>Registration/EditForms';
             } else {
                 // user clicked "cancel"
+
             }
         });
     }
 </script>
 
-<script type="text/javascript">
+<script type="">
 
     var isReadm = "<?php  echo @$isReAdm; ?>";
 
     if(isReadm == 0)
     {
-        <?php if($Inst_Id == 111110 || $Inst_Id == 162136 || $Inst_Id == 112024 || $Inst_Id == 161021) {?>
-            $( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate:new Date(2004, 12, 31),minDate:new Date(1983, 0, 1)}).val();    
-            <?php } else{?>
-
-            $( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate:new Date(2004, 7, 1),minDate:new Date(1983, 0, 1)}).val();   
-            <?php }?>
+        $( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate:new Date(2004, 7, 1),minDate:new Date(1983, 0, 1)}).val();    
     }
 
+
+
+    //var date2 = $('.pickupDate').datepicker('getDate', '+1d'); 
     $( "#txt_FeedingDate" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate:"+10D",minDate:-0}).val();
     $( "#corr_dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate:new Date(2004, 7, 1),minDate:new Date(1983, 0, 1)}).val();
     $( "#batch_real_PaidDate" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, startDate:new Date(),maxDate:new Date(),minDate: -60 }).val();
@@ -630,21 +714,21 @@ if(isset($files)){
         val2 : 'text2'
     };
     var sub1_Pak_options = {
-        1 : 'Urdu'
+        2 : 'Urdu'
     }
     var sub1_NonPak_options = 
     {
-        11 : 'Geogrophy Of Pakistan',
-        1 : 'Urdu'
+        6 : 'Pakistan Culture',
+        2 : 'Urdu'
     }
     var sub3_Muslim = 
     {
-        3 :'ISLAMIYAT (COMPULSORY)'
+        92 :'Islamic Education'
     }
     var sub3_Non_Muslim = 
     {
-        51 : 'ETHICS',
-        3  :'ISLAMIYAT (COMPULSORY)'
+        93 : 'CIVICS FOR NON MUSLIM',
+        92  :'Islamic Education'
     }
     var sub5_Hum = 
     {
@@ -652,22 +736,48 @@ if(isset($files)){
     }
     var sub6_Hum = 
     {
-        9 : 'GENERAL SCIENCE'  
+        0: 'SELECT SUBJECT',
+        56: 'History Of Islam',  
+        58: 'History of Modern World',  
+        57 : 'History Of Muslim India',  
+        55 : 'History Of Pakistan',  
+        11: 'Economics',  
+        12 : 'Geography',  
+        14: 'Philosophy',  
+        16 : 'Psychology',  
+        32: 'Punjabi',  
+        37 : 'Urdu Advance',  
+        24: 'Arabic',  
+        27 : 'English Literature',  
+        34: 'Persian',  
+        17: 'Civics',  
+        18: 'Statistics',  
+        19: 'Mathematics',  
+        20 : 'Islamic Studies',  
+        21: 'Outlines Of Home Economics',  
+        23: 'Fine Arts',  
+        42: 'Health And Physical Education',  
+        43: 'Education',  
+        45 : 'Sociology',  
+        8: 'Library Science',  
+        83 : 'Computer Science',  
+        44: 'Geology',  
+        90 : 'Agriculture',  
+        79 : 'Nursing' 
+
     }
     var sub7_Hum = 
     {
         0 : 'NOT SELECTED',
-        18:'ART/ART & MODEL DRAWING',
         37: 'EDUCATION',
         26: 'CIVICS',
-        30: 'CLOTHING & TEXTILES',
         25: 'ECONOMICS',
         14: 'PHYSIOLOGY & HYGIENE',
         24: 'GEOGRAPHY',
         21: 'HISTORY OF PAKISTAN',
         35: 'ENGLISH LITERATURE',
         34: 'URDU LITERATURE',
-        19: 'ISLAMIC STUDIES',
+        19: 'ADVANCED ISLAMIC STUDIES',
         87: 'ENVIRONMENTAL STUDIES',
         33: 'COMMERCIAL GEOGRAPHY',
         22: 'ARABIC',
@@ -677,29 +787,27 @@ if(isset($files)){
         83: 'POULTRY FARMING',
         40: 'HEALTH & PHYSICAL EDUCATION',
         78: 'COMPUTER SCIENCE',
-        15: 'GEOMETRICAL & TECHNICAL DRAWING',
-        43: 'ELECTRICAL WIRING',
-        48: 'WOOD WORK (FURNITURE MAKING)',
-        90: 'COMPUTER HARDWARE',
-        83: 'POULTRY FARMING',
-        89: 'FISH FARMING',
-        91: 'BEAUTICIAN',
-        74: 'WEAVING'
+        15 : 'GEOMETRICAL & TECHNICAL DRAWING',
+        43 : 'ELECTRICAL WIRING',
+        48 : 'WOOD WORK (FURNITURE MAKING)',
+        90 : 'COMPUTER HARDWARE',
+        83 : 'POULTRY FARMING',
+        89 : 'FISH FARMING',
+        91 : 'BEAUTICIAN',
+        74 : 'WEAVING'
     }
     var sub8_Hum = 
     {
         0 : 'NOT SELECTED',
-        18: 'ART/ART & MODEL DRAWING',
         37: 'EDUCATION',
         26: 'CIVICS',
-        30: 'CLOTHING & TEXTILES',
         25: 'ECONOMICS',
         14: 'PHYSIOLOGY & HYGIENE',
         24: 'GEOGRAPHY',
         21: 'HISTORY OF PAKISTAN',
         35: 'ENGLISH LITERATURE',
         34: 'URDU LITERATURE',
-        19: 'ISLAMIC STUDIES',
+        19: 'ADVANCED ISLAMIC STUDIES',
         87: 'ENVIRONMENTAL STUDIES',
         33: 'COMMERCIAL GEOGRAPHY',
         22: 'ARABIC',
@@ -709,57 +817,13 @@ if(isset($files)){
         83: 'POULTRY FARMING',
         40: 'HEALTH & PHYSICAL EDUCATION',
         78: 'COMPUTER SCIENCE',
-        15: 'GEOMETRICAL & TECHNICAL DRAWING',
-        43: 'ELECTRICAL WIRING',
-        48: 'WOOD WORK (FURNITURE MAKING)',
-        90: 'COMPUTER HARDWARE',
-        83: 'POULTRY FARMING',
-        89: 'FISH FARMING',
-        91: 'BEAUTICIAN',
-        74: 'WEAVING'
-    }
-    var sub5_Deaf = 
-    {
-        66: 'ARITHMETIC'
-
-    }
-    var sub6_Deaf = 
-    {
-        0: 'NOT SELECTED',
-        72 : 'TAILORING',
-        67 : 'BAKERY',
-        68 : 'CARPET MAKING',
-        93 : 'COMPUTER SCIENCES',
-        69 : 'DRAWING',
-        70 : 'EMBORIDERY',
-        94 : 'HEALTH & PHYSICAL EDUCATION',
-        73 : 'TYPE WRITING',
-        74 : 'WEAVING'
-    }
-    var sub7_Deaf = 
-    {
-        0: 'NOT SELECTED',
-        72 : 'TAILORING',
-        67 : 'BAKERY',
-        68 : 'CARPET MAKING',
-        93 : 'COMPUTER SCIENCES',
-        69 : 'DRAWING',
-        70 : 'EMBORIDERY',
-        94 : 'HEALTH & PHYSICAL EDUCATION',
-        73 : 'TYPE WRITING',
-        74 : 'WEAVING'
-    }
-    var sub8_Deaf = 
-    {
-        0: 'NOT SELECTED',
-        72 : 'TAILORING',
-        67 : 'BAKERY',
-        68 : 'CARPET MAKING',
-        93 : 'COMPUTER SCIENCES',
-        69 : 'DRAWING',
-        70 : 'EMBORIDERY',
-        94 : 'HEALTH & PHYSICAL EDUCATION',
-        73 : 'TYPE WRITING',
+        15 : 'GEOMETRICAL & TECHNICAL DRAWING',
+        43 : 'ELECTRICAL WIRING',
+        48 : 'WOOD WORK (FURNITURE MAKING)',
+        90 : 'COMPUTER HARDWARE',
+        83 : 'POULTRY FARMING',
+        89 : 'FISH FARMING',
+        91 : 'BEAUTICIAN',
         74 : 'WEAVING'
     }
 
@@ -767,11 +831,11 @@ if(isset($files)){
 
     function downloadslip(rno)
     {
-        window.location.href = '<?=base_url()?>/RollNoSlip/MatricRollNo/'+rno
+        window.location.href = '<?=base_url()?>RollNoSlip/MatricRollNo/'+rno
     }
     function downloadslip_Inter(rno)
     {
-        window.location.href = '<?=base_url()?>/RollNoSlip/InterRollNo/'+rno+'/2'
+        window.location.href = '<?=base_url()?>RollNoSlip/InterRollNo/'+rno+'/2'
     }
     function EditForm(formrno)
     {
@@ -783,38 +847,31 @@ if(isset($files)){
         $('#sub6').empty();
         $('#sub7').empty();
         $('#sub8').empty();
-        window.location.href = '<?=base_url()?>/Registration/NewEnrolment_EditForm/'+formrno
+        window.location.href = '<?=base_url()?>Registration/NewEnrolment_EditForm/'+formrno
     }
-    function releasemForm11th(formrno)
+    function releaseForm(formrno)
     {
 
-        window.location.href = '<?=base_url()?>/migration/release_stdForm11th/'+formrno
+        window.location.href = '<?=base_url()?>migration/release_stdForm/'+formrno
     }
-    function releasemForm11th_byRollNo(formrno)
-    {
 
-        window.location.href = '<?=base_url()?>/migration/release_stdForm11th_byRollNo/'+formrno
-    }
-    function releasemForm_byRollNo(formrno)
-    {
 
-        window.location.href = '<?=base_url()?>/migration/release_stdForm_byRollNo/'+formrno
-    }
+
     function ReturnForm(Batch_ID)
     {
-        window.location.href = '<?=base_url()?>/Registration/return_pdf/'+Batch_ID + '/1'
+        window.location.href = '<?=base_url()?>Registration/return_pdf/'+Batch_ID + '/1'
     }
     function ReturnForm_Final_groupwise(grp_cd){
-        window.location.href = '<?=base_url()?>/Registration/return_pdf/'+grp_cd + '/2'
+        window.location.href = '<?=base_url()?>Registration/return_pdf/'+grp_cd + '/2'
     }
     function ReturnForm_Final_Formnowise(startformno,endformno){
-        window.location.href = '<?=base_url()?>/Registration/return_pdf/'+startformno + '/3' +'/'+endformno +'/';
+        window.location.href = '<?=base_url()?>Registration/return_pdf/'+startformno + '/3' +'/'+endformno +'/';
     }
     function ReturnForm_ProofReading_groupwise(grp_cd){
-        window.location.href =  '<?=base_url()?>/Registration/return_pdf/'+grp_cd + '/4'
+        window.location.href =  '<?=base_url()?>Registration/return_pdf/'+grp_cd + '/4'
     }
     function ReturnForm_ProofReading_Formnowise(startformno,endformno){
-        window.location.href = '<?=base_url()?>/Registration/return_pdf/'+startformno + '/5' +'/'+endformno+'/';
+        window.location.href = '<?=base_url()?>Registration/return_pdf/'+startformno + '/5' +'/'+endformno+'/';
     }
     function Print_RegCards_groupwise(grp_cd){
         window.location.href = '<?=base_url()?>Registration/Reg_Cards_Printing_9th_PDF/'+grp_cd + '/2'
@@ -827,14 +884,15 @@ if(isset($files)){
         window.location.href = '<?=base_url()?>Registration/ChallanForm_Reg9th_Regular/'+Batch_ID
     }
     function Print_Registration_Form_Proofreading_Groupwise(grp_cd){
-        window.location.href =  '<?=base_url()?>/Registration/Print_Registration_Form_Proofreading_Groupwise/'+grp_cd + '/1'
+        window.location.href =  '<?=base_url()?>Registration/Print_Registration_Form_Proofreading_Groupwise/'+grp_cd + '/1'
     }
     function Print_Registration_Form_Proofreading_Formnowise(startformno,endformno){
-        window.location.href =  '<?=base_url()?>/Registration/Print_Registration_Form_Proofreading_Groupwise/'+startformno + '/2' +'/'+endformno+'/';
+        window.location.href =  '<?=base_url()?>Registration/Print_Registration_Form_Proofreading_Groupwise/'+startformno + '/2' +'/'+endformno+'/';
     }
     $('#print_regCards').click( function(){
         var option =  $('input[type=radio][name=opt]:checked').val(); 
-
+        //alert(option);
+        //  return;
         if(option == "1")
         {
             var std_group = $('#std_group').val();
@@ -889,6 +947,8 @@ if(isset($files)){
     })
     $('#get_Proof').click( function(){
         var option =  $('input[type=radio][name=opt]:checked').val(); 
+        // alert(option);
+        // return;
         if(option == "1")
         {
             var std_group = $('#std_group').val();
@@ -915,6 +975,8 @@ if(isset($files)){
     })
     $('#get_Proof_reg').click( function(){
         var option =  $('input[type=radio][name=opt]:checked').val(); 
+        // alert(option);
+        // return;
         if(option == "1")
         {
             var std_group = $('#std_group').val();
@@ -952,6 +1014,10 @@ if(isset($files)){
         var cell = $('#Profile_cell').val();
         var email = $('#Profile_email').val();
 
+
+        // alert(emis);
+
+        // console.log(emis);
         if(emis == ""){
             alertify.error("Please write Your Institute EMIS Code.");
             $('#Profile_emis').focus();
@@ -997,6 +1063,9 @@ if(isset($files)){
             $('#Profile_cell').focus();
             return false;
         }
+
+
+
     }
 
     function valid_delete_form()
@@ -1011,11 +1080,15 @@ if(isset($files)){
     }
     function RevenueForm(Batch_ID)
     {
-        window.location.href = '<?=base_url()?>/Registration/revenue_pdf/'+Batch_ID
+        window.location.href = '<?=base_url()?>Registration/revenue_pdf/'+Batch_ID+'/1'
+    }
+    function downForwarding()
+    {
+        window.location.href = '<?=base_url()?>Registration/revenue_pdf/'+Batch_ID+'/2'
     }
     function ReleaseForm(Batch_ID)
     {
-        window.location.href = '<?=base_url()?>/Registration/BatchRelease/'+Batch_ID
+        window.location.href = '<?=base_url()?>Registration/BatchRelease/'+Batch_ID
 
     }
     function ReleaseForm_UPDATE(Batch_ID,Inst_Cd)
@@ -1049,21 +1122,7 @@ if(isset($files)){
         });
 
     }
-    function Verified11_Update(Batch_ID)
-    {
-        var msg = "Are You Sure You want to update ?"
-        alertify.confirm(msg, function (e) {
 
-            if (e) {
-                // user clicked "ok"
-                window.location.href = '<?=base_url()?>BiseCorrection/correction_update11/'+Batch_ID
-            } else {
-                // user clicked "cancel"
-
-            }
-        });
-
-    }
     function RestoreBatch(Batch_ID)
     {
         window.location.href = '<?=base_url()?>Registration/BatchRelease/'+Batch_ID
@@ -1085,128 +1144,7 @@ if(isset($files)){
 
     }
 
-    function load_Bio_CS_Sub_NewEnrolement(sub1,sub3,sub5,sbu6,sbu7,sub8)
-    {
-        var NationalityVal = $("input[name=nationality]:checked").val();
-        $('#sub1').empty();
 
-        if(NationalityVal == "1")
-        {
-            $.each(sub1_Pak_options, function(val, text) {
-                $('#sub1').append( new Option(text,val) );
-
-                $("#sub1 option[value='" + sub1 + "']").attr("selected","selected");
-            }); 
-
-        }
-        else if (NationalityVal == "2")
-        {
-            var sub1 =  "<?php echo @$data[0]['sub1']; ?>";
-            $.each(sub1_NonPak_options, function(val, text) {
-                $('#sub1').append( new Option(text,val) );
-                $("#sub1 option[value='" + sub1 + "']").attr("selected","selected");
-            }); 
-        }
-
-        // Check Religion and select sub........
-        $("#sub3").empty();
-        var Religion = $("input[name=religion]:checked").val();
-
-        if(Religion == "1")
-        {
-            $.each(sub3_Muslim,function(val,text){
-                $("#sub3").append(new Option(text,val));
-                $("#sub3 option[value='" + sub3 + "']").attr("selected","selected");
-            });
-
-        }
-        else if(Religion == "2")
-        {
-            var sub3 =  "<?php echo @$data[0]['sub3']; ?>";
-
-            $.each(sub3_Non_Muslim,function(val,text){
-                $("#sub3").append(new Option(text,val));
-                $("#sub3 option[value='" + sub3 + "']").attr("selected","selected");
-            });
-        }
-
-        // Subject 5 ,6 ,7 and 8
-        $("#sub5").empty();
-        $("#sub6").empty();
-        $("#sub7").empty();
-        $("#sub8").empty();
-
-        $("#sub5").append(new Option('MATHEMATICS',5));
-        $("#sub5 option[value='" + sub5 + "']").attr("selected","selected");
-        $("#sub6").append(new Option('PHYSICS',6));
-        $("#sub6 option[value='" + sub6 + "']").attr("selected","selected");
-        $("#sub7").append(new Option('CHEMISTRY',7));
-        $("#sub7 option[value='" + sub7 + "']").attr("selected","selected");
-        $("#sub8 option[value='" + sub8 + "']").attr("selected","selected");
-    }
-    function Hum_Deaf_Subjects_NewEnrolement(sub6,sub7,sub8)
-    {
-        var a = ['volvo','random data'];
-        var b = ['random data'];
-        $.each(a,function(i,val){
-            var result=$.inArray(val,b);
-            if(result!=-1)
-                alert(result); 
-        })
-        var Elecgrp ="<?php echo @$grp_cd; ?>";
-        var NationalityVal = $("input[name=nationality]:checked").val();
-        console.log(NationalityVal);
-        $('#sub1').empty();
-        if(NationalityVal == "1")
-        {
-            console.log("Hi Pakistani ");
-            $.each(sub1_Pak_options, function(val, text) {
-                $('#sub1').append( new Option(text,val) );
-                $("#sub1 option[value='" + sub1 + "']").attr("selected","selected");
-            }); 
-
-        }
-        else if (NationalityVal == "2")
-        {
-            console.log("Hi Foreigner Welcom to Pakistan :) ");
-            $.each(sub1_NonPak_options, function(val, text) {
-                $('#sub1').append( new Option(text,val) );
-                $("#sub1 option[value='" + sub1 + "']").attr("selected","selected");
-            }); 
-        }
-
-        // Check Religion and select sub........
-        $("#sub3").empty();
-        var Religion = $("input[name=religion]:checked").val();
-        if(Religion == "1")
-        {
-            console.log("Hi Muslim :)");
-            $.each(sub3_Muslim,function(val,text){
-                $("#sub3").append(new Option(text,val));
-                $("#sub3 option[value='" + sub3 + "']").attr("selected","selected");
-            });
-
-        }
-        else if(Religion == "2")
-        {
-            console.log("Hi Non-Muslim :)");
-            $.each(sub3_Non_Muslim,function(val,text){
-                $("#sub3").append(new Option(text,val));
-                $("#sub3 option[value='" + sub3 + "']").attr("selected","selected");
-            });
-        }
-
-        $("#sub5").empty();
-        $("#sub5 option[value='" + sub5 + "']").attr("selected","selected");
-        $("#sub6").empty();
-        $("#sub6 option[value='" + sub6 + "']").attr("selected","selected");
-        $("#sub7").empty();
-        $("#sub7 option[value='" + sub7 + "']").attr("selected","selected");
-        $("#sub8").empty();
-        $("#sub8 option[value='" + sub8 + "']").attr("selected","selected");
-
-
-    }
     $(document).ready(function() {
 
 
@@ -1230,14 +1168,10 @@ if(isset($files)){
         })
 
         var error = "<?php echo @$error; ?>";
-        var error_manual9th = "<?php  echo @$error_manualentry9th; ?>";
-        if(error_manual9th == "Updated Successfully"){
-            alertify.success(error_manual9th);
-        }
         if(error != ""){
             alertify.error(error);
         }
-
+        //  console.log("Jquery working....");
         var msg = "<?php echo @$msg;?>";
         //alert(msg);
         if(msg == 'success')
@@ -1285,7 +1219,27 @@ if(isset($files)){
             });
         });
         //MarkOfIden
+        /* $('#cand_name').focusout(function() 
+        {
 
+        //   alertify.log('hello funciton call');
+        var  name =  $('#cand_name').val();
+        //(['MOHAMMAD', 'MOHAMAD', 'MHOAMAD', 'MOOHAMMAD']) 
+        if ((name.toUpperCase().indexOf("MOHAMMAD") >= 0) || (name.toUpperCase().indexOf("MOHAMAD") >= 0) || (name.toUpperCase().indexOf("MUHAMAD") >= 0) || (name.toUpperCase().indexOf("MOOHAMMAD") >= 0) || (name.toUpperCase().indexOf("MOOHAMAD") >= 0) || (name.toUpperCase().indexOf("MOHD") >= 0) ) {
+        alertify.error("Incorrect Speccling of MUHAMMAD");
+        $('#cand_name').focus();                                    }
+        })
+        $('#father_name').focusout(function() 
+        {
+        //  debugger;
+        //   alertify.log('hello funciton call');
+        var  name =  $('#father_name').val();
+        //(['MOHAMMAD', 'MOHAMAD', 'MHOAMAD', 'MOOHAMMAD']) 
+        if ((name.toUpperCase().indexOf("MOHAMMAD") >= 0) || (name.toUpperCase().indexOf("MOHAMAD") >= 0) || (name.toUpperCase().indexOf("MUHAMAD") >= 0) || (name.toUpperCase().indexOf("MOOHAMMAD") >= 0) || (name.toUpperCase().indexOf("MOOHAMAD") >= 0) || (name.toUpperCase().indexOf("MOHD") >= 0)  ) {
+        alertify.error("Incorrect Speccling of MUHAMMAD");
+        $('#father_name').focus();
+        }
+        })*/
         $('input[type=radio][name=opt]').change(function() {
             if (this.value == '1') {
                 // alert("Allot Thai Gayo Bhai");
@@ -1295,69 +1249,51 @@ if(isset($files)){
             else if (this.value == '2') {
                 $('#grp_selected').css('display','none');
                 $('#formnowise_selected').css('display','block');
+                // $('.news').css('display','block');
+                //  alert("Transfer Thai Gayo");
             }
         });
 
-        if($("#std_group").val() == "1")
+        if(grp_cd == "1")
         {
-            load_Bio_CS_Sub_NewEnrolement();
-            $("#sub8").append(new Option('BIOLOGY',8));
+
+            load_PreMedical();
+
         }
-        else if($("#std_group").val() == "7"){
+        else if(grp_cd == "2")
+        {
+            load_PreEngg();
 
-            load_Bio_CS_Sub_NewEnrolement();
-            $("#sub8").append(new Option('COMPUTER SCIENCE',78));
         }
-        else if($("#std_group").val() == "8"){
-
-            load_Bio_CS_Sub_NewEnrolement();
-            $("#sub8").append(new Option('ELECTRICAL WIRING (OPT)',43));
-        }
-        else if($("#std_group").val() == "2"){
-
-            $.each(sub7_Hum,function(val,text){
-
-                $("#sub7").append(new Option(text,val));
-                $("#corr_sub7").append(new Option(text,val));
-            });
-            $.each(sub8_Hum,function(val,text){
-
-                $("#sub8").append(new Option(text,val));
-                $("#corr_sub8").append(new Option(text,val));
-            });
-
-            var Elecgrp ="<?php echo @$grp_cd; ?>";
-            var isgovt ="<?php echo @$isgovt; ?>";
-            var sub7_selected ="<?php  echo @$data[0]['sub7']; ?>";
-            var sub8_selected ="<?php echo @$data[0]['sub8']; ?>";
-            var b = ['8'];
-            var isElec = '0';
-            $.each(Elecgrp,function(i,val){
-                var result=$.inArray(val,b);
-
-                if(result!=-1)
-                {
-                    isElec = 1;
-                }
-            })
-
-            if(isgovt == 2)
-            {
-                if(isElec != 1)
-                {
-                    $("#sub7 option[value='43']").remove();
-                    $("#sub8 option[value='43']").remove();
-                }  
-            }
-            $("#sub7").val(sub7_selected);
-            $("#corr_sub7").val(sub7_selected);
-            $("#sub8").val(sub8_selected);
-            $("#corr_sub8").val(sub8_selected);
+        else if (grp_cd == "3")
+        {
+            load_Hum();
 
         }
 
-        var error_New_Enrolement ='<?php   if(@$excep != ""){echo @$excep['excep'];}  ?>';
+        else if(grp_cd == "4")
+        {
+
+            load_GenSci();
+
+
+        }
+        else if(grp_cd == "5")
+        {
+            load_Commerce();
+        }
+        else if(grp_cd == "6")
+        {
+            load_HomeEco();
+        }
+        else if (grp_cd == "0")
+        {
+            remove_subjects();
+        }
+
+        var error_New_Enrolement ='<?php    if(@$excep != ""){echo @$excep['excep'];}  ?>';
         var  error_New_Enrolement_update ='<?php   if(@$data != ""){echo @$data[0]['excep'];}  ?>';
+        console.log(error_New_Enrolement_update);
         if(error_New_Enrolement.length > 1)
         {
             if(error_New_Enrolement == "success" )
@@ -1370,6 +1306,7 @@ if(isset($files)){
                 // alert('ehll');
                 alertify.error(error_New_Enrolement);   
             }
+
         }
         if(error_New_Enrolement_update.length > 1)
         {
@@ -1388,7 +1325,7 @@ if(isset($files)){
 
         //   else if($("#std_group").val() == "2"){
         //       
-        //       Hum_Deaf_Subjects_NewEnrolement('<?= @$sub6?>','<?= @$sub7?>','<?= @$sub8?>');
+        //     
         //        Hum_Deaf_Subjects();
         //            $.each(sub5_Hum,function(val,text){
         //                $("#sub5").append(new Option(text,val));
@@ -1479,15 +1416,15 @@ if(isset($files)){
         });
         // window.location.href = '<?=base_url()?>RollNoSlip/MatricRollNo/'+formrno
     }
-    function Restore_Deleted_Form_BiseAdmin11(formrno)
+    function Correction_form(formrno)
     {
         // var msg = "<img src='<?php echo base_url(); ?>assets/img/note_for_batch.jpg' alt='logo' style='width:800px; height: auto;' />"
-        var msg = "Are You Sure You want to Restore this Form ?"
+        var msg = "Are You Sure You want to Apply for Correction to this Form ?"
         alertify.confirm(msg, function (e) {
 
             if (e) {
                 // user clicked "ok"
-                window.location.href ='<?php echo base_url(); ?>BiseCorrection/Restore_form_UPDATE11/'+formrno;
+                window.location.href ='<?php echo base_url(); ?>EleventhCorrection/Correction_EditForm/'+formrno;
             } else {
                 // user clicked "cancel"
 
@@ -1509,22 +1446,6 @@ if(isset($files)){
 
             }
         });
-        // window.location.href = '<?=base_url()?>/RollNoSlip/MatricRollNo/'+formrno
-    }
-    function Correction_form(formrno)
-    {
-        // var msg = "<img src='<?php echo base_url(); ?>assets/img/note_for_batch.jpg' alt='logo' style='width:800px; height: auto;' />"
-        var msg = "Are You Sure You want to Apply for Correction to this Form ?"
-        alertify.confirm(msg, function (e) {
-
-            if (e) {
-                // user clicked "ok"
-                window.location.href ='<?php echo base_url(); ?>NinthCorrection/Correction_EditForm/'+formrno;
-            } else {
-                // user clicked "cancel"
-
-            }
-        });
         // window.location.href = '<?=base_url()?>RollNoSlip/MatricRollNo/'+formrno
     }
     function download_corr_form(formrno)
@@ -1535,7 +1456,7 @@ if(isset($files)){
 
         //   if (e) {
         // user clicked "ok"
-        window.location.href ='<?php echo base_url(); ?>NinthCorrection/Print_correction_Form_Final/'+formrno;
+        window.location.href ='<?php echo base_url(); ?>EleventhCorrection/Print_correction_Form_Final/'+formrno;
         //    } else {
         // user clicked "cancel"
 
@@ -1551,7 +1472,7 @@ if(isset($files)){
 
         //     if (e) {
         // user clicked "ok"
-        window.location.href ='<?php echo base_url(); ?>NinthCorrection/Print_challan_Form/'+formrno;
+        window.location.href ='<?php echo base_url(); ?>EleventhCorrection/Print_challan_Form/'+formrno;
         //    } else {
         // user clicked "cancel"
 
@@ -1567,7 +1488,7 @@ if(isset($files)){
 
             if (e) {
                 // user clicked "ok"
-                window.location.href ='<?php echo base_url(); ?>NinthCorrection/Print_challan_Form/'+formrno;
+                window.location.href ='<?php echo base_url(); ?>EleventhCorrection/Print_challan_Form/'+formrno;
             } else {
                 // user clicked "cancel"
 
@@ -1583,7 +1504,7 @@ if(isset($files)){
 
         //     if (e) {
         // user clicked "ok"
-        window.location.href ='<?php echo base_url(); ?>NinthCorrection/Corr_App_Delete/'+Appno;
+        window.location.href ='<?php echo base_url(); ?>EleventhCorrection/Corr_App_Delete/'+Appno;
         //    } else {
         // user clicked "cancel"
 
@@ -1600,422 +1521,229 @@ if(isset($files)){
         window.location.href = '<?=base_url()?>RollNoSlip/MatricRollNoGroupwise/'+$("#std_group").val()
     }
 
-    function load_Bio_CS_Sub()
-    {
-        var NationalityVal = $("input[name=nationality]:checked").val();
-        $('#sub1').empty();
-        if(NationalityVal == "1")
+
+
+
+
+    var langascd = ['24','34','32','27','37'];
+    var doubleHistory = ['55','56','57','58'];
+    $("#corr_sub4").change(function(){
+        console.log('Hi i am corr_sub7 dropdown :) ');
+
+        var corr_sub4 = $("#corr_sub4").val();
+        var corr_sub5 = $("#corr_sub5").val();
+        var corr_sub6 = $("#corr_sub6").val();
+
+
+        if((corr_sub5 != 0 || corr_sub6 != 0) && corr_sub4 != 0)
         {
-            $.each(sub1_Pak_options, function(val, text) {
-                $('#sub1').append( new Option(text,val) );
-            }); 
+            if((corr_sub4 == corr_sub5)|| (corr_sub4 == corr_sub6) || (corr_sub5 == corr_sub6))    
+            {
+                alertify.error("Please choose Different corr_subjects" );
+                $("#corr_sub4").val('0');
+                return;    
+            }
 
-        }
-        else if (NationalityVal == "2")
-        {
-            console.log("Hi Foreigner Welcom to Pakistan :) ");
-            $.each(sub1_NonPak_options, function(val, text) {
-                $('#sub1').append( new Option(text,val) );
-            }); 
-        }
-
-        // Check Religion and select sub........
-        $("#sub3").empty();
-        var Religion = $("input[name=religion]:checked").val();
-        //console.log(Religion);
-        console.log(Religion);
-        if(Religion == "1")
-        {
-            console.log("Hi Muslim :)");
-            $.each(sub3_Muslim,function(val,text){
-                $("#sub3").append(new Option(text,val));
-            });
-
-        }
-        else if(Religion == "2")
-        {
-            console.log("Hi Non-Muslim :)");
-            $.each(sub3_Non_Muslim,function(val,text){
-                $("#sub3").append(new Option(text,val));
-            });
-        }
-
-        // Subject 5 ,6 ,7 and 8
-        $("#sub5").empty();
-        $("#sub6").empty();
-        $("#sub7").empty();
-        $("#sub8").empty();
-
-        $("#sub5").append(new Option('MATHEMATICS',5));
-        $("#sub6").append(new Option('PHYSICS',6));
-        $("#sub7").append(new Option('CHEMISTRY',7));
-
-    }
-
-    function Hum_Deaf_Subjects()
-    {
-
-        //alert(isElec);
-        var NationalityVal = $("input[name=nationality]:checked").val();
-        console.log(NationalityVal);
-        $('#sub1').empty();
-        if(NationalityVal == "1")
-        {
-            console.log("Hi Pakistani ");
-            $.each(sub1_Pak_options, function(val, text) {
-                $('#sub1').append( new Option(text,val) );
-            }); 
-
-        }
-        else if (NationalityVal == "2")
-        {
-            console.log("Hi Foreigner Welcom to Pakistan :) ");
-            $.each(sub1_NonPak_options, function(val, text) {
-                $('#sub1').append( new Option(text,val) );
-            }); 
-        }
-
-        // Check Religion and select sub........
-        $("#sub3").empty();
-        var Religion = $("input[name=religion]:checked").val();
-        //console.log(Religion);
-        console.log(Religion);
-        if(Religion == "1")
-        {
-            console.log("Hi Muslim :)");
-            $.each(sub3_Muslim,function(val,text){
-                $("#sub3").empty();
-                $("#sub3").append(new Option(text,val));
-            });
-
-        }
-        else if(Religion == "2")
-        {
-            console.log("Hi Non-Muslim :)");
-            $.each(sub3_Non_Muslim,function(val,text){
-                $("#sub3").append(new Option(text,val));
-                //$("#sub3").prop('selectedIndex', 2);
-            });
-        }
-
-        $("#sub5").empty();
-        $("#sub6").empty();
-        $("#sub7").empty();
-        $("#sub8").empty();
-
-
-
-
-    }
-    function corr_load_Bio_CS_Sub()
-    {
-        debugger;
-        var NationalityVal = $("#hid_nat").val();
-        $('#corr_sub1').empty();
-        if(NationalityVal == "1")
-        {
-            $.each(sub1_Pak_options, function(val, text) {
-                $('#corr_sub1').append( new Option(text,val) );
-            }); 
-
-        }
-        else if (NationalityVal == "2")
-        {
-            console.log("Hi Foreigner Welcom to Pakistan :) ");
-            $.each(sub1_NonPak_options, function(val, text) {
-                $('#corr_sub1').append( new Option(text,val) );
-            }); 
-        }
-
-        // Check Religion and select sub........
-        $("#corr_sub3").empty();
-        var Religion = $("#hid_rel").val();
-        //console.log(Religion);
-        console.log(Religion);
-        if(Religion == "1")
-        {
-            console.log("Hi Muslim :)");
-            $.each(sub3_Muslim,function(val,text){
-                $("#corr_sub3").append(new Option(text,val));
-            });
-
-        }
-        else if(Religion == "2")
-        {
-            console.log("Hi Non-Muslim :)");
-            $.each(sub3_Non_Muslim,function(val,text){
-                $("#corr_sub3").append(new Option(text,val));
-            });
-        }
-
-        // Subject 5 ,6 ,7 and 8
-        $("#corr_sub5").empty();
-        $("#corr_sub6").empty();
-        $("#corr_sub7").empty();
-        $("#corr_sub8").empty();
-
-        $("#corr_sub5").append(new Option('MATHEMATICS',5));
-        $("#corr_sub6").append(new Option('PHYSICS',6));
-        $("#corr_sub7").append(new Option('CHEMISTRY',7));
-
-    }
-
-    function corr_Hum_Deaf_Subjects()
-    {
-
-        //alert(isElec);
-        var NationalityVal = $("#hid_nat").val();
-        console.log(NationalityVal);
-        $('#corr_sub1').empty();
-        if(NationalityVal == "1")
-        {
-            console.log("Hi Pakistani ");
-            $.each(sub1_Pak_options, function(val, text) {
-                $('#corr_sub1').append( new Option(text,val) );
-            }); 
-
-        }
-        else if (NationalityVal == "2")
-        {
-            console.log("Hi Foreigner Welcom to Pakistan :) ");
-            $.each(sub1_NonPak_options, function(val, text) {
-                $('#corr_sub1').append( new Option(text,val) );
-            }); 
-        }
-
-        // Check Religion and select sub........
-        $("#corr_sub3").empty();
-        var Religion = $("#hid_rel").val();
-        //console.log(Religion);
-        console.log(Religion);
-        if(Religion == "1")
-        {
-            console.log("Hi Muslim :)");
-            $.each(sub3_Muslim,function(val,text){
-                $("#corr_sub3").empty();
-                $("#corr_sub3").append(new Option(text,val));
-            });
-
-        }
-        else if(Religion == "2")
-        {
-            console.log("Hi Non-Muslim :)");
-            $.each(sub3_Non_Muslim,function(val,text){
-                $("#corr_sub3").append(new Option(text,val));
-                //$("#sub3").prop('selectedIndex', 2);
-            });
-        }
-
-        $("#corr_sub5").empty();
-        $("#corr_sub6").empty();
-        $("#corr_sub7").empty();
-        $("#corr_sub8").empty();
-
-
-
-
-    }
-    $("#sub6").change(function(){
-        var sub6 = $("#sub6").val();
-        var sub7 = $("#sub7").val();
-        var sub8 = $("#sub8").val();
-        if((sub6 == sub7)|| (sub6 == sub8))
-        {
-            alertify.error("Please choose Different Subjects" );
-            $("#sub6").val('0');
-            return;
-        }
-        console.log('Hi i am sub6 dropdown :) ');
-    })
-
-    $("#sub7").change(function(){
-        console.log('Hi i am sub7 dropdown :) ');
-        var sub6 = $("#sub6").val();
-        var sub7 = $("#sub7").val();
-        var sub8 = $("#sub8").val();
-
-
-
-        if((sub7 == sub8)|| (sub7 == sub6))
-        {
-            alertify.error("Please choose Different Subjects" );
-            $("#sub7").val('0');
-            return;
         }
         var valtext = 0;
-        var vals = 0;
-        var vals2 = 0;
+        var valhistory = 0;
+        var islang = 0;
+
+
         for(var i =0 ; i<langascd.length; i++)
         {
-            if(sub8 == langascd[i])
-            {  
-                vals =1;
+            if(corr_sub4 == langascd[i])
+            {
+                islang=1;
+            }
+            if(corr_sub5 == langascd[i])
+            {
+                valtext = parseInt(valtext) + 1;
+            }
+            if(corr_sub6 == langascd[i])
+            {
+                valtext = parseInt(valtext) + 1;
             }
 
         }
-        for(var i =0 ; i<langascd.length; i++)
+        if(islang==1 && valtext >= 1)
         {
-            if(sub7 == langascd[i])
-            {  
-                vals2 =1;
+            alertify.error("Please choose Different corr_subjects as Double Language is not allowed" );
+            $("#corr_sub4").val('0');  
+            return;
+        }
+        var ishist = 0;
+        for(var i=0; i<doubleHistory.length; i++)
+        {
+            if(corr_sub6 == doubleHistory[i]) 
+            {
+                valhistory =parseInt(valhistory) + 1;
             }
-
+            if(corr_sub5 == doubleHistory[i])
+            {
+                valhistory =parseInt(valhistory) + 1;
+            }
+            if(corr_sub4 == doubleHistory[i])
+            {
+                ishist = 1;
+            }
         }
-        if(vals > 0 && vals2 > 0)
+        if(ishist==1 &&  valhistory >= 1)
         {
-            valtext = 1;
-        }
-        if(valtext>0 )
-        {
-            alertify.error("Please choose Different Subjects as Double Language is not allowed" );
-            $("#sub7").val('0');  
+            alertify.error("Please choose Different corr_subjects as Double History is not allowed" );
+            $("#corr_sub4").val('0');  
             return;
         }
-        if((sub7 == 20 && sub8 == 21) || (sub7 == 21 && sub8 == 20)  || (sub7 == 19 && sub8 == 20) || (sub7 == 19 && sub8 == 21) || (sub7 == 20 && sub8 == 19) || (sub7 == 21 && sub8 == 19)){
-            alertify.error("Please choose Different Subjects as Double History is not allowed" );
-            $("#sub7").val('0');
-            return;
-        }
+        /* if((corr_sub4 == 55 && corr_sub5 == 56) || (corr_sub4 == 55 && corr_sub6 == 57)  || (corr_sub4 == 56 && corr_sub6 == 55) || (corr_sub5 == 19 && corr_sub6 == 21) || (corr_sub5 == 20 && corr_sub6 == 19) || (corr_sub5 == 21 && corr_sub6 == 19)){
+        alertify.error("Please choose Different corr_subjects as Double History is not allowed" );
+        $("#corr_sub5").val('0');
+        return;
+        }*/
     })
+    $("#corr_sub5").change(function(){
+        console.log('Hi i am corr_sub7 dropdown :) ');
+        var corr_sub4 = $("#corr_sub4").val();
+        var corr_sub5 = $("#corr_sub5").val();
+        var corr_sub6 = $("#corr_sub6").val();
 
-    $("#sub8").change(function(){
-        var sub6 = $("#sub6").val();
-        var sub7 = $("#sub7").val();
-        var sub8 = $("#sub8").val();
 
-        if((sub7 == sub8)|| (sub8 == sub6))
+        if( (corr_sub4 != 0 || corr_sub6 != 0) && corr_sub5 != 0)
         {
-            alertify.error("Please choose Different Subjects" );
-            $("#sub8").val('0');
-            //$('sub8').trigger('change');
-            // $("sub8")[0].selectedIndex = 0;
-            return;
+            if((corr_sub5 == corr_sub6)|| (corr_sub5 == corr_sub4) || (corr_sub4 == corr_sub6))
+            {
+                alertify.error("Please choose Different corr_subjects" );
+                $("#corr_sub5").val('0');
+                return;    
+            }
+
         }
         var valtext = 0;
-        var vals = 0;
-        var vals2 = 0;
+        var valhistory = 0;
+        var islang = 0;
         for(var i =0 ; i<langascd.length; i++)
         {
-            if(sub8 == langascd[i])
-            {  
-                vals =1;
+            if(corr_sub4 == langascd[i]) 
+            {
+                valtext =parseInt(valtext) + 1;
+            }
+            if(corr_sub5 == langascd[i]) 
+            {
+                islang=1;
+            }
+
+            if(corr_sub6 == langascd[i])
+            {
+                valtext = parseInt(valtext) + 1;
             }
 
         }
-        for(var i =0 ; i<langascd.length; i++)
+        if(islang == 1 && valtext >= 1)
         {
-            if(sub7 == langascd[i])
-            {  
-                vals2 =1;
+            alertify.error("Please choose Different corr_subjects as Double Language is not allowed" );
+            $("#corr_sub5").val('0');  
+            return;
+        }
+        var ishist = 0;
+        for(var i=0; i<doubleHistory.length; i++)
+        {
+            if(corr_sub4 == doubleHistory[i])
+            {
+                valhistory =parseInt(valhistory) + 1;
             }
-
+            if(corr_sub5 == doubleHistory[i])
+            {
+                ishist = 1;
+            }
+            if(corr_sub6 == doubleHistory[i])
+            {
+                valhistory =parseInt(valhistory) + 1;
+            }
         }
-        if(vals > 0 && vals2 > 0)
+        if(ishist ==1 && valhistory >= 1)
         {
-            valtext = 1;
-        }
-        if(valtext>0)
-        {
-            alertify.error("Please choose Different Subjects as Double Language is not allowed" );
-            $("#sub8").val('0');  
+            alertify.error("Please choose Different corr_subjects as Double History is not allowed" );
+            $("#corr_sub5").val('0');  
             return;
         }
-        if((sub7 == 20 && sub8 == 21) || (sub7 == 21 && sub8 == 20)  || (sub7 == 19 && sub8 == 20) || (sub7 == 19 && sub8 == 21) || (sub7 == 20 && sub8 == 19) || (sub7 == 21 && sub8 == 19)){
-            alertify.error("Please choose Different Subjects as Double History is not allowed" );
-            $("#sub8").val('0');
-            // $('sub8 option:first-child').attr("selected", "selected");
-
-            //$('sub8').trigger('change');
-            // $("sub8")[0].selectedIndex = 0;
-            return;
-        }
-
+        /* if((corr_sub4 == 55 && corr_sub5 == 56) || (corr_sub4 == 55 && corr_sub6 == 57)  || (corr_sub4 == 56 && corr_sub6 == 55) || (corr_sub5 == 19 && corr_sub6 == 21) || (corr_sub5 == 20 && corr_sub6 == 19) || (corr_sub5 == 21 && corr_sub6 == 19)){
+        alertify.error("Please choose Different corr_subjects as Double History is not allowed" );
+        $("#corr_sub5").val('0');
+        return;
+        }*/
     })
     $("#corr_sub6").change(function(){
+
+        console.log('Hi i am corr_sub7 dropdown :) ');
+        var corr_sub4 = $("#corr_sub4").val();
+        var corr_sub5 = $("#corr_sub5").val();
         var corr_sub6 = $("#corr_sub6").val();
-        var corr_sub7 = $("#corr_sub7").val();
-        var corr_sub8 = $("#corr_sub8").val();
-        if((corr_sub6 == corr_sub7)|| (corr_sub6 == corr_sub8))
+
+
+        if((corr_sub4 != 0 || corr_sub5 != 0) && corr_sub6 !=0)
         {
-            alertify.error("Please choose Different Subjects" );
-            $("#corr_sub6").val('0');
-            return;
+            if((corr_sub6 == corr_sub5)|| (corr_sub6 == corr_sub4) ||(corr_sub5 == corr_sub4))   
+            {
+                alertify.error("Please choose Different corr_subjects" );
+                $("#corr_sub6").val('0');
+                return;    
+            }
+
         }
-        console.log('Hi i am sub6 dropdown :) ');
-    })
-
-    $("#corr_sub7").change(function(){
-        console.log('Hi i am sub7 dropdown :) ');
-        var corr_sub6 = $("#corr_sub6").val();
-        var corr_sub7 = $("#corr_sub7").val();
-        var corr_sub8 = $("#corr_sub8").val();
-
-
-        if((corr_sub7 == corr_sub8)|| (corr_sub7 == corr_sub6))
-        {
-            alertify.error("Please choose Different Subjects" );
-            $("#corr_sub7").val('0');
-            return;
-        }
-        var corr_valtext = 0;
+        var valtext = 0;
+        var valhistory = 0;
+        var islang = 0;
         for(var i =0 ; i<langascd.length; i++)
         {
-            if(corr_sub8 == langascd[i])
+
+            if(corr_sub4 == langascd[i]) 
             {
-                corr_valtext =1;
+                valtext =parseInt(valtext) + 1;
             }
-        }
-        if(valtext>0)
-        {
-            alertify.error("Please choose Different Subjects as Double Language is not allowed" );
-            $("#corr_sub7").val('0');  
-            return;
-        }
-        if((corr_sub7 == 20 && corr_sub8 == 21) || (corr_sub7 == 21 && corr_sub8 == 20)  || (corr_sub7 == 19 && corr_sub8 == 20) || (corr_sub7 == 19 && corr_sub8 == 21) || (corr_sub7 == 20 && corr_sub8 == 19) || (corr_sub7 == 21 && corr_sub8 == 19)){
-            alertify.error("Please choose Different Subjects as Double History is not allowed" );
-            $("#corr_sub7").val('0');
-            return;
-        }
-    })
-
-    $("#corr_sub8").change(function(){
-        var corr_sub6 = $("#corr_sub6").val();
-        var corr_sub7 = $("#corr_sub7").val();
-        var corr_sub8 = $("#corr_sub8").val();
-
-        if((corr_sub7 == corr_sub8)|| (corr_sub8 == corr_sub6))
-        {
-            alertify.error("Please choose Different Subjects" );
-            $("#corr_sub8").val('0');
-            //$('sub8').trigger('change');
-            // $("sub8")[0].selectedIndex = 0;
-            return;
-        }
-
-        var corr_valtext = 0;
-        for(var i =0 ; i<langascd.length; i++)
-        {
-            if(corr_sub7 == langascd[i])
+            if(corr_sub5 == langascd[i])
             {
-                valtext =1;
+                valtext = parseInt(valtext) + 1;
             }
+            if(corr_sub6 == langascd[i])
+            {
+                islang = 1;
+            }
+
+
         }
-        if(valtext>0)
+        if(islang==1 && valtext>=1)
         {
-            alertify.error("Please choose Different Subjects as Double Language is not allowed" );
-            $("#corr_sub8").val('0');  
+            alertify.error("Please choose Different corr_subjects as Double Language is not allowed" );
+            $("#corr_sub6").val('0');  
             return;
         }
-        if((corr_sub7 == 20 && corr_sub8 == 21) || (corr_sub7 == 21 && corr_sub8 == 20)  || (corr_sub7 == 19 && corr_sub8 == 20) || (corr_sub7 == 19 && corr_sub8 == 21) || (corr_sub7 == 20 && corr_sub8 == 19) || (corr_sub7 == 21 && corr_sub8 == 19)){
-            alertify.error("Please choose Different Subjects as Double History is not allowed" );
-            $("#corr_sub8").val('0');
-            // $('sub8 option:first-child').attr("selected", "selected");
+        var ishist =0;
+        for(var i=0; i<doubleHistory.length; i++)
+        {
+            if(corr_sub4 == doubleHistory[i]) 
+            {
+                valhistory =parseInt(valhistory) + 1;
+            }
+            if(corr_sub5 == doubleHistory[i])
+            {
+                valhistory = parseInt(valhistory) + 1;
+            }
+            if(corr_sub6 == doubleHistory[i])
+            {
+                ishist = 1;
+            }
 
-            //$('sub8').trigger('change');
-            // $("sub8")[0].selectedIndex = 0;
+        }
+        if( ishist==1 && valhistory >=1)
+        {
+            alertify.error("Please choose Different corr_subjects as Double History is not allowed" );
+            $("#corr_sub6").val('0');  
             return;
         }
-
+        /* if((corr_sub4 == 55 && corr_sub5 == 56) || (corr_sub4 == 55 && corr_sub6 == 57)  || (corr_sub4 == 56 && corr_sub6 == 55) || (corr_sub5 == 19 && corr_sub6 == 21) || (corr_sub5 == 20 && corr_sub6 == 19) || (corr_sub5 == 21 && corr_sub6 == 19)){
+        alertify.error("Please choose Different corr_subjects as Double History is not allowed" );
+        $("#corr_sub5").val('0');
+        return;
+        }*/
     })
     function remove_subjects()
     {
@@ -2035,9 +1763,6 @@ if(isset($files)){
         $("#corr_sub7").empty();
         $("#sub8p2").empty();
     }
-
-
-
     $("#std_group").change(function(){
 
 
@@ -2156,6 +1881,286 @@ if(isset($files)){
 
 
     });
+
+    function load_PreMedical()
+    {
+        $("#corr_sub1").empty();
+        $("#corr_sub2").empty();
+        $("#corr_sub3").empty();
+        $("#corr_sub4").empty();
+        $("#corr_sub5").empty();
+        $("#corr_sub6").empty();
+        $("#corr_sub7").empty();
+        $("#corr_sub7").empty().append('<option selected="selected" value="0">NONE</option>');
+        $("#corr_sub8").empty().append('<option selected="selected" value="0">NONE</option>');
+        var NationalityVal = $("#hid_nat").val();
+        //alert('nat ' + NationalityVal);
+        //debugger;
+        //console.log('matric_corr_sub1.value = ' +matric_corr_sub1.value + '  and Nationaliy = '+ NationalityVal);
+
+        if(NationalityVal==2)
+        {
+            $("#corr_sub1").prepend("<option selected='selected' value='6'>PAKISTANI CULTURE</option>");
+
+            $("#corr_sub1").append(new Option('Urdu',2));    
+        }
+        else{
+            $("#corr_sub1").prepend("<option  value='2'> URDU </option>");
+        }  
+
+        $("#corr_sub1 option[value='2']").attr("selected","selected");
+        $("#corr_sub2").append(new Option('English',1));
+        $("#corr_sub2 option[value='1']").attr("selected","selected");
+         //$("#corr_sub3").prepend("<option  value='93'> CIVICS FOR NON MUSLIM </option>");
+       // $("#corr_sub3").append(new Option('ETHICS',51));
+        $("#corr_sub3").append(new Option('CIVICS FOR NON MUSLIM',93));
+       
+        $("#corr_sub3").append(new Option('Islamic Education',92));
+        $("#corr_sub3 option[value='92']").attr("selected","selected");
+        $("#corr_sub4").append(new Option('Physics',47));
+        $("#corr_sub4 option[value='47']").attr("selected","selected");
+        $("#corr_sub5").append(new Option('Chemistry',48));
+        $("#corr_sub5 option[value='48']").attr("selected","selected");
+        $("#corr_sub6").append(new Option('Biology',46));
+        $("#corr_sub6 option[value='46']").attr("selected","selected");
+    }
+    function load_PreEngg()
+    {
+        $("#corr_sub1").empty();
+        $("#corr_sub2").empty();
+        $("#corr_sub3").empty();
+        $("#corr_sub4").empty();
+        $("#corr_sub5").empty();
+        $("#corr_sub6").empty();
+        $("#corr_sub7").empty();
+        $("#corr_sub7").empty().append('<option selected="selected" value="0">NONE</option>');
+        $("#corr_sub8").empty().append('<option selected="selected" value="0">NONE</option>');
+        var NationalityVal = $("#hid_nat").val();
+        if(NationalityVal==2)
+        {
+            $("#corr_sub1").prepend("<option selected='selected' value='6'>PAKISTANI CULTURE</option>");
+
+            $("#corr_sub1").append(new Option('Urdu',2));    
+        }
+        else{
+            $("#corr_sub1").prepend("<option  value='2'> URDU </option>");
+        } 
+        // $("#corr_sub1").append(new Option('Urdu',2));
+        $("#corr_sub1 option[value='2']").attr("selected","selected");
+        $("#corr_sub2").append(new Option('English',1));
+        $("#corr_sub2 option[value='1']").attr("selected","selected");
+        $("#corr_sub3").append(new Option('Islamic Education',92));
+        $("#corr_sub3 option[value='92']").attr("selected","selected");
+        $("#corr_sub4").append(new Option('Physics',47));
+        $("#corr_sub4 option[value='47']").attr("selected","selected");
+        $("#corr_sub5").append(new Option('Chemistry',48));
+        $("#corr_sub5 option[value='48']").attr("selected","selected");
+        $("#corr_sub6").append(new Option('Mathematics',19));
+        $("#corr_sub6 option[value='19']").attr("selected","selected");
+    }
+    function load_GenSci()
+    {
+        $("#corr_sub1").empty();
+        $("#corr_sub2").empty();
+        $("#corr_sub3").empty();
+        $("#corr_sub4").empty();
+        $("#corr_sub5").empty();
+        $("#corr_sub6").empty();
+        $("#corr_sub7").empty().append('<option selected="selected" value="0">NONE</option>');
+        $("#corr_sub8").empty().append('<option selected="selected" value="0">NONE</option>');
+
+        var NationalityVal = $("#hid_nat").val();
+
+        if(NationalityVal==2)
+        {
+            $("#corr_sub1").prepend("<option selected='selected' value='6'>PAKISTANI CULTURE</option>");
+
+            $("#corr_sub1").append(new Option('Urdu',2));    
+        }
+        else{
+            $("#corr_sub1").prepend("<option  value='2'> URDU </option>");
+        }  
+        // $("#corr_sub1").append(new Option('Urdu',2));
+        $("#corr_sub1 option[value='2']").attr("selected","selected");
+        $("#corr_sub2").append(new Option('English',1));
+        $("#corr_sub2 option[value='1']").attr("selected","selected");
+        $("#corr_sub3").append(new Option('Islamic Education',92));
+        $("#corr_sub3 option[value='92']").attr("selected","selected");
+        $("#corr_sub4").append(new Option('Mathematics',19));
+        $("#corr_sub4 option[value='19']").attr("selected","selected");
+
+        $("#corr_sub5").append(new Option('Physics',47));
+        $("#corr_sub5").append(new Option('Economics',11));
+        $("#corr_sub5").append(new Option('Statistics',18));
+        $("#corr_sub5 option[value='47']").attr("selected","selected");
+
+        $("#corr_sub6").append(new Option('Computer Science',83));
+        $("#corr_sub6").append(new Option('Economics',11));
+        $("#corr_sub6").append(new Option('Statistics',18));
+        $("#corr_sub6 option[value='83']").attr("selected","selected");
+    }
+    function load_Commerce()
+    {
+        $("#corr_sub1").empty();
+        $("#corr_sub2").empty();
+        $("#corr_sub3").empty();
+        $("#corr_sub4").empty();
+        $("#corr_sub5").empty();
+        $("#corr_sub6").empty();
+        $("#corr_sub7").empty();
+        $("#corr_sub8").empty().append('<option selected="selected" value="0">NONE</option>');
+        var NationalityVal = $("#hid_nat").val();
+        if(NationalityVal==2)
+        {
+            $("#corr_sub1").prepend("<option selected='selected' value='6'>PAKISTANI CULTURE</option>");
+
+            $("#corr_sub1").append(new Option('Urdu',2));    
+        }
+        else{
+            $("#corr_sub1").prepend("<option  value='2'> URDU </option>");
+        }   
+        //$("#corr_sub1").append(new Option('Urdu',2));
+        $("#corr_sub1 option[value='2']").attr("selected","selected");
+        $("#corr_sub2").append(new Option('English',1));
+        $("#corr_sub2 option[value='1']").attr("selected","selected");
+        $("#corr_sub3").append(new Option('Islamic Education',92));
+        $("#corr_sub3 option[value='92']").attr("selected","selected");
+
+
+        $("#corr_sub4").append(new Option('Principles Of Accounting',70));
+        $("#corr_sub4 option[value='70']").attr("selected","selected");
+
+        $("#corr_sub5").append(new Option('Principles Of Economics',71));
+        $("#corr_sub5 option[value='71']").attr("selected","selected");
+
+        $("#corr_sub6").append(new Option('Business Math',80));
+        $("#corr_sub6 option[value='80']").attr("selected","selected");
+
+        $("#corr_sub7").show();
+        $("#corr_sub7").append(new Option('Principles Of Commerce',39));
+        $("#corr_sub7 option[value='39']").attr("selected","selected");
+    }
+
+    function load_HomeEco()
+    {
+        $("#corr_sub1").empty();
+        $("#corr_sub2").empty();
+        $("#corr_sub3").empty();
+        $("#corr_sub4").empty();
+        $("#corr_sub5").empty();
+        $("#corr_sub6").empty();
+        $("#corr_sub7").empty();
+        $("#corr_sub8").empty();
+        var NationalityVal = $("#hid_nat").val();
+        if(NationalityVal==2)
+        {
+            $("#corr_sub1").prepend("<option selected='selected' value='6'>PAKISTANI CULTURE</option>");
+
+            $("#corr_sub1").append(new Option('Urdu',2));    
+        }
+        else{
+            $("#corr_sub1").prepend("<option  value='2'> URDU </option>");
+        }   
+        // $("#corr_sub1").append(new Option('Urdu',2));
+        $("#corr_sub1 option[value='2']").attr("selected","selected");
+        $("#corr_sub2").append(new Option('English',1));
+        $("#corr_sub2 option[value='1']").attr("selected","selected");
+        $("#corr_sub3").append(new Option('Islamic Education',92));
+        $("#corr_sub3 option[value='92']").attr("selected","selected");
+
+
+        $("#corr_sub4").append(new Option('CHEMISTRY (Home-Economics Group)',73));
+        $("#corr_sub4 option[value='48']").attr("selected","selected");
+
+        $("#corr_sub5").append(new Option('BIOLOGY (Home-Economics Group)',72));
+        $("#corr_sub5 option[value='46']").attr("selected","selected");
+
+        $("#corr_sub6").append(new Option('Clothing and Textile',75));
+        $("#corr_sub6 option[value='75']").attr("selected","selected");
+
+        $("#corr_sub7").show();
+        $("#corr_sub7").append(new Option('Home Management',76));
+        $("#corr_sub7 option[value='76']").attr("selected","selected");
+    }
+
+    function load_Hum(){
+
+        $("#corr_sub1").empty();
+        $("#corr_sub2").empty();
+        $("#corr_sub3").empty();
+        $("#corr_sub4").empty();
+        $("#corr_sub5").empty();
+        $("#corr_sub6").empty();
+        $("#corr_sub7").empty();
+        $("#corr_sub7").empty().append('<option selected="selected" value="0">NONE</option>');
+        $("#corr_sub8").empty().append('<option selected="selected" value="0">NONE</option>');
+        var NationalityVal = $("#hid_nat").val();
+        var gender_ = $("#hid_sex").val();
+        if(NationalityVal==2)
+        {
+            $("#corr_sub1").prepend("<option selected='selected' value='6'>PAKISTANI CULTURE</option>");
+
+            $("#corr_sub1").append(new Option('Urdu',2));    
+        }
+        else{
+            $("#corr_sub1").prepend("<option  value='2'> URDU </option>");
+        }  
+        // $("#corr_sub1").append(new Option('Urdu',2));
+        $("#corr_sub1 option[value='2']").attr("selected","selected");
+        $("#corr_sub2").append(new Option('English',1));
+        $("#corr_sub2 option[value='1']").attr("selected","selected");
+        $("#corr_sub3").append(new Option('Islamic Education',92));
+        $("#corr_sub3").append(new Option('CIVICS FOR NON MUSLIM',93));
+        $("#corr_sub3 option[value='92']").attr("selected","selected");
+        $.each(sub6_Hum, function(val, text) {
+        
+             if(gender_ == 1 && val == 21)
+             {
+            
+             }
+             else
+             {
+             $('#corr_sub4').append( new Option(text,val) ); 
+             }
+             
+            
+        }); 
+        $.each(sub6_Hum, function(val, text) {
+        if(gender_ == 1 && val == 21)
+             {
+            
+             }
+             else
+             {
+            $('#corr_sub5').append( new Option(text,val) );
+             }
+            
+        }); 
+        $.each(sub6_Hum, function(val, text) {
+        if(gender_ == 1 && val == 21)
+             {
+            
+             }
+             else
+             {
+            $('#corr_sub6').append( new Option(text,val) );
+             }
+           
+        }); 
+        // $("#sub6 option[value='" + sub1 + "']").attr("selected","selected");
+
+    }
+    function remove_subjects()
+    {
+        $("#corr_sub1").empty();
+        $("#corr_sub2").empty();
+        $("#corr_sub3").empty();
+        $("#corr_sub4").empty();
+        $("#corr_sub5").empty();
+        $("#corr_sub6").empty();
+        $("#corr_sub7").empty();
+        $("#corr_sub7").hide();
+    }
     $("#corr_std_group").change(function(){
 
 
@@ -2166,92 +2171,50 @@ if(isset($files)){
         if(grp_cd == "1")
         {
 
+
             // Check Nationality and select appropriate Subject1 against candidate Nationality :)
-            corr_load_Bio_CS_Sub();
-            $("#corr_sub8").append(new Option('BIOLOGY',8));
+            // load_Bio_CS_Sub();
+            //  $("#sub8").append(new Option('Biology',8));
+            load_PreMedical();
 
         }
-        else if(grp_cd == "7")
+        else if(grp_cd == "2")
         {
-            corr_load_Bio_CS_Sub();
-            $("#corr_sub8").append(new Option('COMPUTER SCIENCE',78));
+            load_PreEngg();
+            // load_Bio_CS_Sub();
+            //   $("#sub8").append(new Option('COMPUTER SCIENCE',78));
             //    alert('hello  Sweet Heart ! I love You UMMMMAH :) ') 
         }
-        else if (grp_cd == "8")
+        else if (grp_cd == "3")
         {
-            corr_load_Bio_CS_Sub();
-            $("#corr_sub8").append(new Option('ELECTRICAL WIRING (OPT)',43));
+            load_Hum();
+            //    load_Bio_CS_Sub();
+            //    $("#sub8").append(new Option('ELECTRICAL WIRING (OPT)',43));
             //ELECTRICAL WIRING (OPT)
         }
 
-        else if(grp_cd == "2")
+        else if(grp_cd == "4")
         {
 
-            corr_Hum_Deaf_Subjects();
-            $.each(sub5_Hum,function(val,text){
-                $("#corr_sub5").append(new Option(text,val));
-            });
-            $.each(sub6_Hum,function(val,text){
-                $("#corr_sub6").append(new Option(text,val));
-            });
-
-            $.each(sub7_Hum,function(val,text){
-
-                $("#corr_sub7").append(new Option(text,val));
-            });
-            $.each(sub8_Hum,function(val,text){
-
-                $("#corr_sub8").append(new Option(text,val));
-            });
-            debugger;
-            var Elecgrp ="<?php echo @$grp_cd; ?>";
-            var isgovt ="<?php echo @$isgovt; ?>";
-            var b = ['8'];
-            var isElec = '0';
-            $.each(Elecgrp,function(i,val){
-                var result=$.inArray(val,b);
-
-                if(result!=-1)
-                {
-                    isElec = 1;
-                }
-            })
-
-            if(isgovt == 2)
-            {
-                if(isElec != 1)
-                {
-                    // $("#sub7")
-                    //$("#sub7 option[value='43']").remove();
-                    //$("#sub8 option[value='43']").remove();
-                    $("#corr_sub7 option[value='43']").remove();
-                    $("#corr_sub8 option[value='43']").remove();
-
-                    // $("#sub7").find('option[value=43]').remove();
-                    // alert("removed");
-                }  
-            }
-
-
-            var Gender = $("#hid_sex").val();
-            //console.log(Religion);
-            if(Gender == "2")
-            {
-
-                $("#corr_sub8").append(new Option('ELEMENTS OF HOME ECONOMICS',13));
-                $("#corr_sub7").append(new Option('ELEMENTS OF HOME ECONOMICS',13));
-            }
-            else if(Gender == "1")
-            {
-                // alert('i am removed');
-
-                // dropdownElement.find('sub8[value=13]').remove();
-
-
-            }
+            load_GenSci();
 
 
         }
+        else if(grp_cd == "5")
+        {
+            load_Commerce();
+        }
+        else if(grp_cd == "6")
+        {
+            load_HomeEco();
+        }
+        else if (grp_cd == "0")
+        {
+            remove_subjects();
+        }
+
+
+
         else if(grp_cd == "5")
         {
             corr_Hum_Deaf_Subjects();
@@ -2276,16 +2239,6 @@ if(isset($files)){
 
     });
 
-    var Gender = $("#hid_sex").val();
-    //console.log(Religion);
-    if(Gender == "2")
-    {
-
-        $("#corr_sub8").append(new Option('ELEMENTS OF HOME ECONOMICS',13));
-        $("#corr_sub7").append(new Option('ELEMENTS OF HOME ECONOMICS',13));
-    }
-
-
     //   $("#registration").validate();
     //$("#cand_name").focus();
     /*
@@ -2293,6 +2246,43 @@ if(isset($files)){
     MASKINGS Settings
     ===========================================
     */
+    var grp_cd = $("#std_group").val();
+    if(grp_cd == "1")
+    {
+
+        load_PreMedical();
+
+    }
+    else if(grp_cd == "2")
+    {
+        load_PreEngg();
+
+    }
+    else if (grp_cd == "3")
+    {
+        load_Hum();
+
+    }
+
+    else if(grp_cd == "4")
+    {
+
+        load_GenSci();
+
+
+    }
+    else if(grp_cd == "5")
+    {
+        load_Commerce();
+    }
+    else if(grp_cd == "6")
+    {
+        load_HomeEco();
+    }
+    else if (grp_cd == "0")
+    {
+        remove_subjects();
+    }
     var phone = "<?php echo @$field_status['phone']; ?>";
     var cell = "<?php echo @$field_status['cell']; ?>";
     var emis = "<?php echo @$field_status['emis']; ?>";
@@ -2315,6 +2305,32 @@ if(isset($files)){
 
     // $("#registration").validate();
     //  $("#cand_name").focus();
+
+    function  check_migration_validation(){
+
+        var grp_cd = $('#migrateto').val();
+
+        var status = 0;
+
+
+
+
+        if ($("#migrateto").find('option:selected').val() < 1) 
+        {
+            alertify.error("Please Select Migrate To Inst.") ;
+            // alert('Study Group not selected ');                          
+            $("#migrateto").focus();
+            return status;  
+        }
+
+        status = 1;
+        return status;
+
+
+
+
+    }
+
 
     function  check_NewEnrol_validation(){
         var name =  $('#cand_name').val();
@@ -2372,13 +2388,7 @@ if(isset($files)){
             $('#father_cnic').focus();  
             return status; 
         }
-        else if(FNic == bFormNo  )
-        {
 
-            alertify.error("B-form Number and Father CNIC cannot be same.") 
-            $('#bay_form').focus();   
-            return status; 
-        }
         else if(dob == "" || dob.length == undefined)
         {
             $('#ErrMsg').show(); 
@@ -2546,7 +2556,7 @@ if(isset($files)){
             //$("#father_cnic").mask("****************************",{placeholder:""});
 
             $("#sub3").empty(); 
-            $("#sub3").prepend("<option selected='selected' value='51'> ETHICS </option>");
+            $("#sub3").prepend("<option  value='93'> CIVICS FOR NON MUSLIM </option>");
             $("#sub3").prepend("<option  value='3'>ISLAMIYAT (COMPULSORY)</option>");
         }
     });
@@ -2598,10 +2608,19 @@ if(isset($files)){
         }
 
     })
+    /*     }
+    $( "select option:selected" ).each(function() {
+    str += $( this ).text() + " ";
+    });
+    $( "div" ).text( str );*/
+
+
+
+
 
 </script>
 
-<script type="text/javascript">
+<script type="">
     var msg_cd = "<?php  echo @$msg_status;  ?>";
     if(msg_cd == "0")
     {
@@ -2618,12 +2637,6 @@ if(isset($files)){
     function makebatch_groupwise(){
 
         // user clicked "ok"
-        keycode = 0;
-        $(document).keypress(function (e) {
-            keycode =  event.keyCode
-        });
-        alertify.set({ buttonFocus: "cancel" });
-        // user clicked "ok"
         var option =  $('input[type=radio][name=batch_opt]:checked').val(); 
         if(option == "3")
         {
@@ -2636,8 +2649,8 @@ if(isset($files)){
                 //var msg = "Are You Sure You want to Cancel this Form ? <img src='<?php echo base_url(); ?>assets/img/note_for_batch.jpg' alt='logo' style='width:30px; height: 50px;' />"
                 alertify.confirm(msg, function (e) {
 
-                    if (e && keycode !=32) {
-                        window.location.href = '<?=base_url()?>Registration_11th/Make_Batch_Group_wise/'+$("#std_groups").val()+'/0';
+                    if (e) {
+                        window.location.href = '<?=base_url()?>Registration/Make_Batch_Group_wise/'+$("#std_groups").val()+'/0';
                     } 
 
 
@@ -2649,21 +2662,19 @@ if(isset($files)){
             window.location.href = '<?=base_url()?>Registration/Make_Batch_Group_wise/'+'0/'+option+'/';
         }
         return false;
-    }
 
+
+
+    }
     function makebatch_formnowise(){
-        keycode = 0;
-        $(document).keypress(function (e) {
-            keycode =  event.keyCode
-        });
-        alertify.set({ buttonFocus: "cancel" });
+
         if( $('input[name="chk[]"]:checked').length > 0 )
         {
             var msg = "<img src='<?php echo base_url(); ?>assets/img/note_for_batch.jpg' alt='logo' style='width:800px; height: auto;' />"
 
             alertify.confirm(msg, function (e) {
 
-                if (e && keycode !=32) {
+                if (e) {
                     // user clicked "ok"
                     $( "#frmchk" ).submit();
                 }
@@ -2671,7 +2682,7 @@ if(isset($files)){
                     // user clicked "cancel"
 
                 }
-            }).set('defaultFocus', 'cancel');
+            });
 
         }
         else
@@ -2679,8 +2690,6 @@ if(isset($files)){
             alertify.error("Please Select Forms First!") ;
             return false;
         }
-        return false;
-
     }
     function logout(){
         var msg = "Are you Sure You want to LOGOUT?"
@@ -2738,7 +2747,10 @@ if(isset($files)){
     {
         alertify.success("Updated Successfully");
     }
-
+    else  if (excep_Invalid_formno != "")
+    {
+        alertify.error("Invalid Form No. Please write Valid Form No.");
+    }
     else  if(restore_msg!="")
     {
         alertify.success(restore_msg);
@@ -2767,8 +2779,8 @@ if(isset($files)){
         {
             alertify.error("A Problem occur, Please Try Again later.");
         }
-    } 
 
+    } 
     if(BatchRestore_Op != "")
     {
         if(BatchRelease_Op == "success")
@@ -2790,25 +2802,18 @@ if(isset($files)){
         alertify.error(error_BatchRelease);
     }  
 
-    var Gender = $("input[name=gender]:checked").val();
 
-    if(Gender == "2")
-    {
 
-        $("#sub8").append(new Option('ELEMENTS OF HOME ECONOMICS',13));
-        $("#sub7").append(new Option('ELEMENTS OF HOME ECONOMICS',13));
-    }
 </script>
-<script type="text/javascript">
+<script type="">
     var error = '<?php echo @$error_msg; ?>';
-    if(error > 0)
-    {
+    if(error > 0){
         alertify.error("Currently there is not student against this subject group.!") ;
     }
 
+
+
 </script>
-
-
 
 </body>
 </html>

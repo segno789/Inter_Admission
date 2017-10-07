@@ -19,7 +19,7 @@ if(isset($files)){
 ?> 
 <script type="text/javascript">
     $(document).ready(function () {
-
+           $('.mPageloader').hide();
         $( "#txtDob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate:new Date(2001, 7, 1),minDate:new Date(1970, 0, 1)}).val();
 
         $('#data-table').dataTable({
