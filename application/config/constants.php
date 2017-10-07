@@ -38,7 +38,7 @@ define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 define('BARCODE_PATH', 'assets/pdfs/');
 
 
-define('REGULAR_INSERT_TABLE', 'Admission_online..IAAdm');
+//define('REGULAR_INSERT_TABLE', 'Admission_online..IAAdm');
 define('REGULAR_INSERT_TABLE', 'Admission_online..ISAdm');
 define('DIRPATH12TH','F:\xampp\htdocs\Share Images\\'); 
 define('PRIVATE_IMAGE_PATH', 'uploads/private/');
