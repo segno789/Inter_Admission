@@ -1405,7 +1405,7 @@ class Admission extends CI_Controller {
             $newDate = "13-10-2017";
         }
 
-        if ($data['FormNo'] = "935211"){
+        if ($data['FormNo'] == "935211"){
             $newDate = "13-10-2017";
         }
 
@@ -1882,7 +1882,7 @@ class Admission extends CI_Controller {
             $User_info_data = array('Inst_Id'=>999999, 'date' => SingleDateFee,'isPratical'=>$isper);    
         }
 
-        if ($data['FormNo'] = "935211"){
+        if ($data['FormNo'] == "935211"){
             $User_info_data = array('Inst_Id'=>999999, 'date' => SingleDateFee,'isPratical'=>$isper);    
         }
 
