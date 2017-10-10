@@ -585,7 +585,7 @@ if($rowcount == 0 )
 
         // $forms_id = $User_info_data['forms_id'];
 
-        $where = ' (spl_cd =  17 OR  spl_cd = 70  OR status=4 OR status=5 OR status=2)  ';
+        $where = ' (spl_cd =  17 OR  spl_cd = 70  OR status=4 OR status=5 OR status=2) and IsReAdm is NULL  ';
         $this->db->where('rno', $RollNo);
         //   $query = $this->db->get_where(RE_ADMISSION_TBL,  array('rno' => $RollNo));
         $query = $this->db->where($where);

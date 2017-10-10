@@ -85,7 +85,7 @@ class Registration_11th extends CI_Controller {
 
     public function ReAdmission_check()
     {
-        // DebugBreak();
+        //        DebugBreak();
         $this->load->model('Registration_11th_model');
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -97,10 +97,23 @@ class Registration_11th extends CI_Controller {
         $userinfo['isselected'] = 6;
         $Inst_Id = $userinfo['Inst_Id'];
         $this->load->view('common/header.php',$userinfo);
-        @$RollNo = @$_POST['oldRno'];
-        @$oldYear  = @$_POST['oldYear'];
-        @$oldSess = @$_POST['oldSess'];
-        @$oldBrd_cd= @$_POST['oldBrd_cd'];
+        if($this->session->flashdata('NewEnrolment_error')){
+
+            $error['excep'] = $this->session->flashdata('NewEnrolment_error'); 
+            @$RollNo = @$error['excep']['old_RNo'] ;
+            @$oldYear  = @$error['excep']['old_year'] ;
+            @$oldSess = @$error['excep']['old_sess'] ;
+            $excep = @$error['excep']['excep'];
+            @$oldBrd_cd = 1;   
+        }
+        else{
+            $excep = '';
+            @$RollNo = @$_POST['oldRno'];
+            @$oldYear  = @$_POST['oldYear'];
+            @$oldSess = @$_POST['oldSess'];
+            @$oldBrd_cd= @$_POST['oldBrd_cd'];
+        }
+
 
         $User_info_data = array('Inst_Id'=>$Inst_Id,'RollNo'=>$RollNo,'spl_case'=>17);
         $data = array('mrollno'=>"$RollNo",'board'=>$oldBrd_cd,'year'=>$oldYear,'session'=>$oldSess);
@@ -149,7 +162,7 @@ class Registration_11th extends CI_Controller {
                 $RegStdData['data'][0]=$user_info[0];
                 $RegStdData['data'][0]['CellNo'] = $RegStdData['data'][0]['MobNo'];
                 $RegStdData['data'][0]['oldbr'] = 1;
-                $filledinfo['error'] = "";
+                $RegStdData['data'][0]['error'] = $excep;
                 $this->load->view('common/menu.php',$data);
                 $this->load->view('Registration/11th/ReAdm_Form.php',$RegStdData);   
                 $this->commonfooter(array("files"=>array("jquery.maskedinput.js","validate.NewEnrolment.js"))); 
@@ -169,7 +182,7 @@ class Registration_11th extends CI_Controller {
             $RegStdData['data'][0]['oldbr'] = $oldBrd_cd;
             $RegStdData['data'][0]['sex'] = $Insgender;
 
-            $filledinfo['error'] = "";
+            $RegStdData['data'][0]['excep_halt'] = "this is my error";
             $this->load->view('common/menu.php',$data);
             $this->load->view('Registration/11th/ReAdm_Form.php',$RegStdData);   
             $this->commonfooter(array("files"=>array("jquery.maskedinput.js","validate.NewEnrolment.js"))); 
@@ -182,6 +195,7 @@ class Registration_11th extends CI_Controller {
     }
     public function Incomplete_inst_info_INSERT()
     {
+        // DebugBreak();
         @$_POST['Info_email'];
         @$_POST['info_phone'];
         @$_POST['info_cellNo'];
@@ -648,9 +662,8 @@ class Registration_11th extends CI_Controller {
     }
     public function NewEnrolment_insert()
     {
-
+        // DebugBreak();
         $this->load->model('Registration_11th_model');
-
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
@@ -658,7 +671,6 @@ class Registration_11th extends CI_Controller {
         $Inst_Id = $userinfo['Inst_Id'];
         $this->commonheader($userinfo);
         $error = array();
-
         //  // DebugBreak();();
         if (!isset($Inst_Id))
         {
@@ -854,9 +866,19 @@ class Registration_11th extends CI_Controller {
                     {
                         $error['excep']= $this->upload->error_msg[0];
                         $data['excep'] = $this->upload->error_msg[0];
+
                         $this->session->set_flashdata('NewEnrolment_error',$data);
                         //  echo '<pre>'; print_r($allinputdata['excep']);exit();
-                        redirect('Registration_11th/Get_students_record');
+
+                        if(@$_POST['IsReAdm']==1)
+                        {
+
+                            redirect('Registration_11th/ReAdmission_check/');
+                        }
+                        else
+                        {
+                            redirect('Registration_11th/Get_students_record/');
+                        }
                         return;
 
                     }
@@ -869,7 +891,16 @@ class Registration_11th extends CI_Controller {
                 $data['excep'] = 'The file you are attempting to upload is larger than the permitted size.';
                 $this->session->set_flashdata('NewEnrolment_error',$data);
                 //  echo '<pre>'; print_r($allinputdata['excep']);exit();
-                redirect('Registration_11th/Get_students_record/');
+                if(@$_POST['IsReAdm']==1)
+                {
+
+                    redirect('Registration_11th/ReAdmission_check/');
+                }
+                else
+                {
+                    redirect('Registration_11th/Get_students_record/');
+                }
+
 
             }
         }
@@ -880,7 +911,16 @@ class Registration_11th extends CI_Controller {
             {
                 $data['excep'] = 'Please Upload Your Picture';
                 $this->session->set_flashdata('NewEnrolment_error',$data);
-                redirect('Registration_11th/Get_students_record/');
+                if(@$_POST['IsReAdm']==1)
+                {
+
+                    redirect('Registration_11th/ReAdmission_check/');
+                }
+                else
+                {
+                    redirect('Registration_11th/Get_students_record/');
+                }
+                //  redirect('Registration_11th/Get_students_record/');
                 return;
             }
         } 
@@ -916,8 +956,16 @@ class Registration_11th extends CI_Controller {
         fclose ($fd);  
 
         $encoded_data = base64_encode($contents);*/
+        if(@$_POST['IsReAdm']==1)
+        {
 
-        $this->frmvalidation('Get_students_record',$data,0);
+            $redirect_fun = 'ReAdmission_check';
+        }
+        else
+        {
+            $redirect_fun = 'Get_students_record'; 
+        }
+        $this->frmvalidation($redirect_fun,$data,0);
 
         // // DebugBreak();();
         $type = pathinfo($filepath, PATHINFO_EXTENSION);
@@ -1064,10 +1112,9 @@ class Registration_11th extends CI_Controller {
     }
     public function NewEnrolment_update()
     {
-        // // DebugBreak();();
+        // DebugBreak();
 
         $this->load->model('Registration_11th_model');
-
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
@@ -2358,7 +2405,7 @@ class Registration_11th extends CI_Controller {
     {
         $RegGrp = $this->uri->segment(3);
         $Spl_case = $this->uri->segment(4);
-       // DebugBreak();
+        // DebugBreak();
         $this->load->model('Registration_11th_model');
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();

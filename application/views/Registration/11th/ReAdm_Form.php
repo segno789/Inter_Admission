@@ -596,7 +596,7 @@
                             <div class="form-actions no-margin">
                                 <input type="hidden"   value="<?php  echo $data[0]['FormNo']; ?>"  name="formNo">
                                 
-                                <input type="hidden"   value="<?php  echo $isReAdm; ?>"  name="IsReAdm">
+                                <input type="hidden"   value="<?php  echo $isReAdm; ?>"  name="IsReAdm" id="IsReAdm">
                                 <?php if($data['0']['oldbr'] == 1) {?>
                                 <input type="hidden"   value="<?php  echo $data[0]['oldbr']; ?>"  name="OldBrd">
                                 <input type="hidden"   value="<?php  echo $data[0]['matRno'];  ?>"  name="OldRno">

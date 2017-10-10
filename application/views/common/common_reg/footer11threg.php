@@ -35,11 +35,22 @@ if(isset($files)){
             "cache": false
         });
 //data_table
-        var data_excep = "<?php echo @$excep_halt; ?>";
+        var data_excep = "<?php  echo @$excep_halt; ?>";
         if(data_excep != '')
         {
 
             alertify.error(data_excep);
+            // $('#Info_emis').focus();
+            return false;
+
+
+        }
+        
+          var data_excep_ = "<?php  echo @$data[0]['error'] ?>";
+        if(data_excep_ != '')
+        {
+
+            alertify.error(data_excep_);
             // $('#Info_emis').focus();
             return false;
 
@@ -650,7 +661,7 @@ if(isset($files)){
         $("#sub7").empty().append('<option selected="selected" value="0">NONE</option>');
         $("#sub8").empty().append('<option selected="selected" value="0">NONE</option>');
 
-debugger;
+//;
 //console.log('matric_sub1.value = ' +matric_sub1.value + '  and Nationaliy = '+ NationalityVal);
 
         if(NationalityVal==2 || matric_sub1.value == 11)
@@ -770,7 +781,7 @@ debugger;
         
     }
      function  check_NewEnrol_validation_11th(){
-       // 
+       //debugger;
         var name =  $('#cand_name').val();
         var fName = $('#father_name').val();
         var FNic = $('#father_cnic').val();
@@ -791,6 +802,7 @@ debugger;
         var Inst_Rno = $('#Inst_Rno').val();
         var status = 0;
         var mat_Year = $('#old_ssc_year').val();
+        var IsReAdm = $("#IsReAdm").val();
         
         /*
         $("#sub4").append(new Option('Mathematics',19));
@@ -803,7 +815,7 @@ debugger;
         $("#sub6").append(new Option('Statistics',18));
         else if($("#std_group").find('option:selected').val()==3 &&($.inArray(($("#sub4").val(),gen_sci_sub) && $.inArray(($("#sub5").val(),gen_sci_sub)&& $.inArray(($("#sub6").val(),gen_sci_sub))))))
         */
-          debugger;
+          //debugger;
         
         var gen_sci_sub = ['19','47','11','18','83'];
         /* if(grp_cd==3 &&((jQuery.inArray(sub4,gen_sci_sub)!= '-1') && (jQuery.inArray(sub5,gen_sci_sub)!= '-1') && (jQuery.inArray(sub6,gen_sci_sub)!= '-1')))
@@ -991,7 +1003,16 @@ debugger;
             $('#address').focus(); 
             return status;    
         }
-          else if(dob == "" || dob.length == undefined)
+        else if(image == ""  )
+        {
+            $('#ErrMsg').show(); 
+            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+            $('#ErrMsg').html("<b>Please Select Candidate Image</b>"); 
+            alertify.error("Please Select Candidate Image")
+            $('#address').focus(); 
+            return status;    
+        }
+          else if((dob == "" || dob.length == undefined) && IsReAdm != 1)
         {
             $('#ErrMsg').show(); 
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
@@ -1720,7 +1741,7 @@ debugger;
     }
        $('#print_regCards').click( function()
        {
-       debugger;
+       //debugger;
         var option =  $('input[type=radio][name=opt]:checked').val(); 
          //alert(option);
        //  return;
