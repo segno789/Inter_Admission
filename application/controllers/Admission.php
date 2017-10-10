@@ -1394,7 +1394,7 @@ class Admission extends CI_Controller {
 
         $Updated_AdmFee = $this->GetFeeWithdue($data['AdmFee']);
 
-
+        //DebugBreak();
 
         if((
             $data['oldRno'] == "101383" || $data['oldRno'] == "101410" || $data['oldRno'] == "115287" ||$data['oldRno'] == "118242" ||$data['oldRno'] == "119421" ||$data['oldRno'] == "120911" ||$data['oldRno'] == "128695" ||$data['oldRno'] == "130344" ||$data['oldRno'] == "132729" ||$data['oldRno'] == "147076" || $data['oldRno'] == "159181" || $data['oldRno'] == "201227" || $data['oldRno'] == "221739" || $data['oldRno'] == "222776" || $data['oldRno'] == "223441" || $data['oldRno'] == "224183" || $data['oldRno'] == "224195" || $data['oldRno'] == "224200" || $data['oldRno'] == "224552" || $data['oldRno'] == "224605" || $data['oldRno'] == "224628" || $data['oldRno'] == "224632" || $data['oldRno'] == "224635" ||  $data['oldRno'] == "230217" ||  $data['oldRno'] == "234712" ||  $data['oldRno'] == "234728" || $data['oldRno'] == "234747" ||  $data['oldRno'] == "235146" ||  $data['oldRno'] == "235177"
@@ -1405,11 +1405,13 @@ class Admission extends CI_Controller {
             $newDate = "13-10-2017";
         }
 
+        if ($data['FormNo'] == "935211"){
+            $newDate = "13-10-2017";
+        }
+
         else{
             $newDate = date("d-m-Y", strtotime($this->GetDueDate()));
         }
-
-
 
         $pdf->SetXY(0.2,6.4+$Y);
         $pdf->SetFillColor(0,0,0);
@@ -1879,6 +1881,11 @@ class Admission extends CI_Controller {
         {
             $User_info_data = array('Inst_Id'=>999999, 'date' => SingleDateFee,'isPratical'=>$isper);    
         }
+
+        if ($data['FormNo'] == "935211"){
+            $User_info_data = array('Inst_Id'=>999999, 'date' => SingleDateFee,'isPratical'=>$isper);    
+        }
+
         else{
             $User_info_data = array('Inst_Id'=>999999, 'date' => date('Y-m-d'),'isPratical'=>$isper);
         }
