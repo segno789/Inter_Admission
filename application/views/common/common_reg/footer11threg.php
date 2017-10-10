@@ -56,6 +56,7 @@ if(isset($files)){
 
 
         }
+        $('.mPageloader').hide();
     });
 
 </script>
