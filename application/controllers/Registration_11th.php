@@ -3829,7 +3829,6 @@ class Registration_11th extends CI_Controller {
         $challanMSG=array(1=>"(May be deposited in any HBL Branch)",2=>"(To be sent to the Online Registration Branch Via BISE One Window)", 3=>"(To be retained with HBL)", 4=>"(To be sent to the Board via HBL Branch aloongwith scroll)"  );
         $challanNo = $result[0]['Challan_No']; 
 
-        //  // DebugBreak();();
         if(date('Y-m-d',strtotime(SINGLE_LAST_DATE11))>=date('Y-m-d'))
         {
             $rule_fee   =  $this->Registration_11th_model->getreulefee(1); 
@@ -3871,10 +3870,6 @@ class Registration_11th extends CI_Controller {
         $corcnt = 0;
         for ($j=1;$j<=4;$j++) 
         {
-
-
-
-
             $yy = 0.04;
             if($turn==1){$dyy=0.2;} 
             else {
@@ -4101,7 +4096,7 @@ class Registration_11th extends CI_Controller {
         $challanMSG=array(1=>"(May be deposited in any HBL Branch)",2=>"(To be sent to the Registration Branch Via BISE One Window)", 3=>"(To be retained with HBL)", 4=>"(Along with scroll)"  );
         $challanNo = $result[0]['Challan_No']; 
 
-        //  // DebugBreak();();
+        //DebugBreak();
 
         $User_info_data = array('Inst_Id'=>$user['Inst_Id'],'RegGrp'=>@$RegGrp,'spl_case'=>@$Spl_case);
         $user_info  =  $this->Registration_11th_model->getuser_info($User_info_data); 
@@ -4130,7 +4125,14 @@ class Registration_11th extends CI_Controller {
             }
             else if($user_info['info'][0]['feedingDate'] != null)
             {
-                $lastdate  = date('Y-m-d',strtotime($user_info['info'][0]['feedingDate'])) ;
+                if($user_info['info'][0]['feedingDate'] > date('Y-m-d')){
+                    $lastdate  = date('Y-m-d',strtotime($user_info['info'][0]['feedingDate'])) ;    
+                }
+
+                else{
+                    $lastdate  = date('Y-m-d',strtotime($user_info['rule_fee'][0]['End_Date'])) ;
+                }
+
                 if(date('Y-m-d')<=$lastdate)
                 {
 
@@ -4150,7 +4152,7 @@ class Registration_11th extends CI_Controller {
                 $rule_fee[0]['isfine'] = 1; 
                 $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
             }
-            //  // DebugBreak();();
+            //DebugBreak();
             /* if(ISREADMISSION == 1)
             {
             $rule_fee  =  $this->Registration_11th_model->getreulefee(1);
