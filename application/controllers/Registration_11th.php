@@ -379,7 +379,7 @@ class Registration_11th extends CI_Controller {
 
     }
     public function Students_matricInfo(){
-      DebugBreak();   //Students_matricInfo matric_error
+      //DebugBreak();   //Students_matricInfo matric_error
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
@@ -406,7 +406,7 @@ class Registration_11th extends CI_Controller {
     {
 
 
-        DebugBreak();
+       // DebugBreak();
 
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
