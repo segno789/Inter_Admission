@@ -4155,12 +4155,7 @@ class Registration_11th extends CI_Controller {
                 $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
             }
             
-            else{
-                $isfine = 1;
-                $rule_fee   =  $this->Registration_11th_model->getreulefee(2);
-                $rule_fee[0]['isfine'] = 1; 
-                $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
-            }
+           
         
             if($rule_fee[0]['isfine'] == 1)
             {
