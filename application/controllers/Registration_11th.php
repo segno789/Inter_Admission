@@ -379,7 +379,7 @@ class Registration_11th extends CI_Controller {
 
     }
     public function Students_matricInfo(){
-        //// DebugBreak();();   //Students_matricInfo matric_error
+      DebugBreak();   //Students_matricInfo matric_error
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
@@ -406,7 +406,7 @@ class Registration_11th extends CI_Controller {
     {
 
 
-        //DebugBreak();
+        DebugBreak();
 
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -418,7 +418,7 @@ class Registration_11th extends CI_Controller {
 
         if($this->session->flashdata('NewEnrolment_error'))
         {
-            // // DebugBreak();();
+           
 
 
             $RegStdData['data'][0] = $this->session->flashdata('NewEnrolment_error');
@@ -477,13 +477,13 @@ class Registration_11th extends CI_Controller {
             $feedingcheck=$this->Registration_11th_model->IsFeeded($data);
             $feeding_inst_cd =$feedingcheck[0]['coll_cd'];
 
-            if($feedingcheck != false)
+           /* if($feedingcheck != false)
             {
                 $instName=$this->Registration_11th_model->InstName($feeding_inst_cd);
                 $this->session->set_flashdata('matric_error', 'This Candidate is already registered in '.$feeding_inst_cd.'-'.$instName.'.');
                 redirect('Registration_11th/Students_matricInfo');
                 return; 
-            }    
+            } */   
             if($board == 1)
             {
                 if(!ctype_digit($mrollno))
