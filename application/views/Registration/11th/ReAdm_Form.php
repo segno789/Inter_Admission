@@ -103,14 +103,14 @@
                                         // $med = 2; 
                                         if($spec == 0)
                                         {
-                                            echo  "<option value='0' selected='selected'>None</option>  <option value='1'>Deaf &amp; Dumb</option> <option value='2'>Board Employee</option>";
+                                            echo  "<option value='0' selected='selected'>None</option>  ";
                                         }
                                         else if($spec == 1)
                                         {
-                                            echo  "<option value='0' >None</option>  <option value='1' selected='selected'>Deaf &amp; Dumb</option> <option value='2'>Board Employee</option>";
+                                            echo  "<option value='0' >None</option>  <option value='1' selected='selected'>Deaf &amp; Dumb</option> ";
                                         }
                                         else if($spec == 2){
-                                            echo  "<option value='0' >None</option>  <option value='1' >Deaf &amp; Dumb</option> <option value='2' selected='selected'>Board Employee</option>";                                           
+                                            echo  "<option value='0' selected='selected' >None</option>  <option value='1' >Deaf &amp; Dumb</option> ";                                           
                                         }
                                         ?>
 

@@ -4054,7 +4054,7 @@ class Registration_11th extends CI_Controller {
     }
     public function ChallanForm_Reg11th_Regular()
     {
-//         DebugBreak();
+        DebugBreak();
         $Batch_Id = $this->uri->segment(3);
         $this->load->library('session');
         $this->load->library('NumbertoWord');
@@ -4255,7 +4255,7 @@ class Registration_11th extends CI_Controller {
 
             $pdf->SetXY($w+1.4,$y+$dy+0.15);
             $pdf->SetFont('Arial','B',7);
-            $pdf->Cell(0, $y, 'Registration Session '.sessReg.' ('.corr_bank_chall_class.')', 0.25, "L");
+            $pdf->Cell(0, $y, 'Registration Session '.sessReg.' ('.corr_bank_chall_class11.')', 0.25, "L");
 
             $y += 0.25;
             $pdf->SetFont('Arial','B',10);
