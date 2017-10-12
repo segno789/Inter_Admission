@@ -4147,17 +4147,17 @@ class Registration_11th extends CI_Controller {
                 $rule_fee[0]['isfine'] = 1; 
                 $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
             }
-            //DebugBreak();
-            /* if(ISREADMISSION == 1)
-            {
-            $rule_fee  =  $this->Registration_11th_model->getreulefee(1);
-            $rule_fee[0]['isfine'] = 1; 
-            $isfine = 1;
-            }   */
-            //  $data = array('data'=>$this->Registration_model->revenue_pdf($fetch_data),'inst_Name'=>$user['inst_Name'],'inst_cd'=>$user['Inst_Id'],'barcode'=>$image,"rulefee"=>$rule_fee);
+            
+            else{
+                $isfine = 1;
+                $rule_fee   =  $this->Registration_11th_model->getreulefee(2);
+                $rule_fee[0]['isfine'] = 1; 
+                $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
+            }
+        
             if($rule_fee[0]['isfine'] == 1)
             {
-                //  // DebugBreak();();
+              
                 $count = $result[0]["COUNT"];
                 $data['data']["Total_RegistrationFee"] =  $count*$rule_fee[0]['Reg_Fee'] ;
                 $data['data']["Total_ProcessingFee"] =  $count*$rule_fee[0]['Reg_Processing_Fee'] ;
