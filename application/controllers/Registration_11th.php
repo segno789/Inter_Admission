@@ -3744,7 +3744,7 @@ class Registration_11th extends CI_Controller {
     {
 
 
-        // // DebugBreak();();
+    // DebugBreak();
 
 
 
@@ -4054,7 +4054,7 @@ class Registration_11th extends CI_Controller {
     }
     public function ChallanForm_Reg11th_Regular()
     {
-        // // DebugBreak();();
+//         DebugBreak();
         $Batch_Id = $this->uri->segment(3);
         $this->load->library('session');
         $this->load->library('NumbertoWord');
@@ -4123,15 +4123,10 @@ class Registration_11th extends CI_Controller {
                 $rule_fee[0]['isfine'] = 0; 
                 $lastdate  = date('Y-m-d',strtotime($user_info['rule_fee'][0]['End_Date'])) ;
             }
-            else if($user_info['info'][0]['feedingDate'] != null)
+            else if($user_info['info'][0]['feedingDate'] != null && $user_info['info'][0]['feedingDate'] >=date('Y-m-d'))
             {
-                if($user_info['info'][0]['feedingDate'] > date('Y-m-d')){
-                    $lastdate  = date('Y-m-d',strtotime($user_info['info'][0]['feedingDate'])) ;    
-                }
 
-                else{
-                    $lastdate  = date('Y-m-d',strtotime($user_info['rule_fee'][0]['End_Date'])) ;
-                }
+                    $lastdate  = date('Y-m-d',strtotime($user_info['info'][0]['feedingDate'])) ;    
 
                 if(date('Y-m-d')<=$lastdate)
                 {
@@ -4145,7 +4140,14 @@ class Registration_11th extends CI_Controller {
                     $rule_fee[0]['isfine'] = 1;
                 }
             }
-            else   if(date('Y-m-d',strtotime(DOUBLE_LAST_DATE))>date('Y-m-d'))
+            else   if(date('Y-m-d',strtotime(DOUBLE_LAST_DATE))>=date('Y-m-d'))
+            {
+                $isfine = 1;
+                $rule_fee   =  $this->Registration_11th_model->getreulefee(2);
+                $rule_fee[0]['isfine'] = 1; 
+                $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
+            }
+            else  
             {
                 $isfine = 1;
                 $rule_fee   =  $this->Registration_11th_model->getreulefee(2);

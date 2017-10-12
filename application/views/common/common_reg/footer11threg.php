@@ -985,7 +985,15 @@ if(isset($files)){
             $('#mob_number').focus();   
             return status;  
         }
-
+          else if(mobNo.length() < 12)
+        {
+            $('#ErrMsg').show(); 
+            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+            // $('#ErrMsg').html("<b>Please Enter your Mobile No.</b>"); 
+            alertify.error("Please Enter Correct Mobile No.") 
+            $('#mob_number').focus();   
+            return status;  
+        }
         else if(MarkOfIdent == "" || MarkOfIdent == 0 || MarkOfIdent == undefined)
         {
             $('#ErrMsg').show(); 
