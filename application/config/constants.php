@@ -108,7 +108,7 @@ define('IMAGE_PATH11', 'uplaods/2017/reg/');
 define('IMAGE_PATH211', 'uplaods/2016_backup/');
 define('BARCODE_PATH11', 'uplaods/pdfs/');
 define('SINGLE_LAST_DATE11', '2017-08-14');
-define('DOUBLE_LAST_DATE11', '2017-06-12');
+define('DOUBLE_LAST_DATE11', '2017-10-15');
 define('SINGLE_LAST_DATE', '2017-09-15');
 define('DOUBLE_LAST_DATE', '2017-10-05');
 define('assets', 'assets/img/');

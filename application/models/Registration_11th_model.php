@@ -576,6 +576,46 @@ if($rowcount == 0 )
             return  false;
         }
     }
+     public function user_info_Batch_Id($User_info_data)
+    {
+        // //DebugBreak();
+        $Inst_cd = $User_info_data['Inst_Id'];
+        $RegGrp = $User_info_data['Batch_Id'];
+       // $spl_cd = $User_info_data['spl_case'];
+
+        // $forms_id = $User_info_data['forms_id'];
+        $query = $this->db->get_where('Admission_online..tblinstitutes_all',  array('Inst_cd' => $Inst_cd));
+        $rowcount = $query->num_rows();
+        
+        if($rowcount > 0)
+        {
+               //$this->db->select("*");
+               // $this->db->from(tblreg9th);
+              $where = '(IsDeleted=0 or IsDeleted is null) and Coll_cd ='.$Inst_cd.' and Batch_Id = '.$RegGrp;
+               // $q1 = $this->db->where($where);
+                
+                $q1         = $this->db->get_where(Regtbl,$where);    
+           
+           
+
+            $result_1 ;
+            $nrowcount = $q1->num_rows();
+            if($nrowcount > 0)
+            {
+                $result_1 = $q1->result_array();
+            }
+            else{
+                return false;
+            }
+            $q2         = $this->db->get_where(Feetbl,array('Rule_Fee_ID'=>1));
+            $resultarr = array("info"=>$query->result_array(),"fee"=>$result_1,"rule_fee"=>$q2->result_array());
+            return  $resultarr;
+        }
+        else
+        {
+            return  false;
+        }
+    }
     public function readmission_check($User_info_data)
     {
         //DebugBreak();
@@ -652,7 +692,7 @@ if($rowcount == 0 )
         $processing_fee = $data['proces_fee'];
         $reg_fee = $data['reg_fee'];
         $fine = $data['fine'];
-        $refine = $data['refine'];
+        $refine = $data['fine'];
         $TotalRegFee = $data['TotalRegFee'];
         $TotalLatefee = $data['TotalLatefee'];
         $Totalprocessing_fee = $data['Totalprocessing_fee'];
@@ -670,7 +710,7 @@ if($rowcount == 0 )
             $challan_no = $chalno[0]['Batch_ID'];
             if($challan_no > 0)
             {
-                $this->db->update_batch(Regtbl,$AllUser,'formNo');
+                $this->db->update_batch(Regtbl,$AllUser,'FormNo');
                 return 1;
             }
             else
@@ -720,6 +760,15 @@ if($rowcount == 0 )
         $this->db->update(Regtbl,$data);
         return true;
 
+    }
+      public function UpdateFee_Final($Alldata){
+     
+     $data=array('Amount'=>$Alldata['data']['Amount'],'Total_RegistrationFee'=>$Alldata['data']['Total_RegistrationFee'],'Total_ProcessingFee'=>$Alldata['data']['Total_ProcessingFee'],'Total_LateRegistrationFee'=>$Alldata['data']['Total_LateRegistrationFee'],'cdate'=>date('Y-m-d H:i:s'));
+     $this->db->where('Batch_Id',$Alldata['data']['batch_info'][0]['Batch_ID']);
+     $this->db->update(Batchtbl,$data);
+     //DebugBreak();
+     $this->db->update_batch(Regtbl,$Alldata['Alluser'],'FormNo');
+      return true;
     }
     public function Print_Form_Groupwise($fetch_data)
     {

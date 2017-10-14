@@ -2275,7 +2275,7 @@ if(isset($files)){
         if($(this).val() == 1) {
 
             $("#sub3").empty(); 
-            $("#sub3").prepend('<option selected="selected" value="3"> ISLAMIYAT (COMPULSORY) </option>');
+            $("#sub3").prepend('<option selected="selected" value="92"> ISLAMIYAT (COMPULSORY) </option>');
             //$("#ddlList").prepend('<option selected="selected" value="0"> Select </option>');
         }else{
             //$("#father_cnic").mask("****************************",{placeholder:""});
@@ -2283,7 +2283,7 @@ if(isset($files)){
             $("#sub3").empty(); 
             $("#sub3").prepend("<option selected='selected' value='93'> CIVICS FOR NON MUSLIM </option>");
             $("#sub3").prepend("<option selected='selected' value='51'> ETHICS </option>");
-            $("#sub3").prepend("<option  value='3'> ISLAMIYAT (COMPULSORY) </option>");
+            $("#sub3").prepend("<option  value='92'> ISLAMIYAT (COMPULSORY) </option>");
         }
     });
 
