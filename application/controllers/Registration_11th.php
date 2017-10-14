@@ -379,7 +379,7 @@ class Registration_11th extends CI_Controller {
 
     }
     public function Students_matricInfo(){
-      //DebugBreak();   //Students_matricInfo matric_error
+        // DebugBreak();   //Students_matricInfo matric_error
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
@@ -406,7 +406,7 @@ class Registration_11th extends CI_Controller {
     {
 
 
-       // DebugBreak();
+        // DebugBreak();
 
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -418,7 +418,7 @@ class Registration_11th extends CI_Controller {
 
         if($this->session->flashdata('NewEnrolment_error'))
         {
-           
+
 
 
             $RegStdData['data'][0] = $this->session->flashdata('NewEnrolment_error');
@@ -477,12 +477,12 @@ class Registration_11th extends CI_Controller {
             $feedingcheck=$this->Registration_11th_model->IsFeeded($data);
             $feeding_inst_cd =$feedingcheck[0]['coll_cd'];
 
-           /* if($feedingcheck != false)
+            /* if($feedingcheck != false)
             {
-                $instName=$this->Registration_11th_model->InstName($feeding_inst_cd);
-                $this->session->set_flashdata('matric_error', 'This Candidate is already registered in '.$feeding_inst_cd.'-'.$instName.'.');
-                redirect('Registration_11th/Students_matricInfo');
-                return; 
+            $instName=$this->Registration_11th_model->InstName($feeding_inst_cd);
+            $this->session->set_flashdata('matric_error', 'This Candidate is already registered in '.$feeding_inst_cd.'-'.$instName.'.');
+            redirect('Registration_11th/Students_matricInfo');
+            return; 
             } */   
             if($board == 1)
             {
@@ -3744,7 +3744,7 @@ class Registration_11th extends CI_Controller {
     {
 
 
-    // DebugBreak();
+        // DebugBreak();
 
 
 
@@ -4054,7 +4054,7 @@ class Registration_11th extends CI_Controller {
     }
     public function ChallanForm_Reg11th_Regular()
     {
-        DebugBreak();
+//        DebugBreak();
         $Batch_Id = $this->uri->segment(3);
         $this->load->library('session');
         $this->load->library('NumbertoWord');
@@ -4126,7 +4126,7 @@ class Registration_11th extends CI_Controller {
             else if($user_info['info'][0]['feedingDate'] != null && $user_info['info'][0]['feedingDate'] >=date('Y-m-d'))
             {
 
-                    $lastdate  = date('Y-m-d',strtotime($user_info['info'][0]['feedingDate'])) ;    
+                $lastdate  = date('Y-m-d',strtotime($user_info['info'][0]['feedingDate'])) ;    
 
                 if(date('Y-m-d')<=$lastdate)
                 {
@@ -4148,18 +4148,27 @@ class Registration_11th extends CI_Controller {
                 $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
             }
             else  
-            {
-                $isfine = 1;
+            { 
+
                 $rule_fee   =  $this->Registration_11th_model->getreulefee(2);
+                if(READMISSION_11th ==1)
+                {
+                $rule_fee[0]['isfine'] = 0; 
+                }
+                else
+                {
                 $rule_fee[0]['isfine'] = 1; 
+                }
+                
+                
                 $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
             }
-            
-           
-        
+
+
+
             if($rule_fee[0]['isfine'] == 1)
             {
-              
+
                 $count = $result[0]["COUNT"];
                 $data['data']["Total_RegistrationFee"] =  $count*$rule_fee[0]['Reg_Fee'] ;
                 $data['data']["Total_ProcessingFee"] =  $count*$rule_fee[0]['Reg_Processing_Fee'] ;
@@ -4168,7 +4177,15 @@ class Registration_11th extends CI_Controller {
                 $data['data']['batch_info'][0]['Batch_ID'] = $result[0]['Batch_ID'];
                 $data['rulefee'][0]['Reg_Fee']  =  $rule_fee[0]['Reg_Fee'];
                 $data['rulefee'][0]['Processing_Fee']  =  $rule_fee[0]['Processing_Fee'];
-                $data['rulefee'][0]['Fine']  =  $rule_fee[0]['Fine'];
+                if(READMISSION ==0)
+                {
+                    $data['rulefee'][0]['Fine']  =  0;
+                }
+                else
+                {
+                    $data['rulefee'][0]['Fine']  =  $rule_fee[0]['Fine'];
+                }
+
                 $data['rulefee'][0]['Amount']  =  $rule_fee[0]['Amount'];
                 array('myd'=>$this->Registration_11th_model->UpdateBatchFee($data));
             } 

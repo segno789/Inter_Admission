@@ -200,6 +200,21 @@ if(isset($files)){
         var corr_std_group_val = $("#corr_std_group option:selected").val();
         var std_group = $("#std_group option:selected").text();
         var check_checkbox = 0;
+         var sub1 = $("#sub1 option:selected").text();
+        var sub2 = $("#sub2 option:selected").text();
+        var sub3 = $("#sub3 option:selected").text();
+        var sub4 = $("#sub4 option:selected").text();
+        var sub5 = $("#sub5 option:selected").text();
+        var sub6 = $("#sub6 option:selected").text();
+        var sub7 = $("#sub7 option:selected").text();
+        var corr_sub1 = $("#corr_sub1 option:selected").text();
+        var corr_sub2 = $("#corr_sub2 option:selected").text();
+        var corr_sub3 = $("#corr_sub3 option:selected").text();
+        var corr_sub4 = $("#corr_sub4 option:selected").text();
+        var corr_sub5 = $("#corr_sub5 option:selected").text();
+        var corr_sub6 = $("#corr_sub6 option:selected").text();
+        var corr_sub7 = $("#corr_sub7 option:selected").text();
+        
         var corr_type = 0;
         if ($("#c0").prop('checked')==true){ 
             //    alert('at lease one checked');
@@ -339,20 +354,7 @@ if(isset($files)){
             alertify.error("Please Choose Correction First!");
             return false;
         }
-        var sub1 = $("#sub1 option:selected").text();
-        var sub2 = $("#sub2 option:selected").text();
-        var sub3 = $("#sub3 option:selected").text();
-        var sub4 = $("#sub4 option:selected").text();
-        var sub5 = $("#sub5 option:selected").text();
-        var sub6 = $("#sub6 option:selected").text();
-        var sub7 = $("#sub7 option:selected").text();
-        var corr_sub1 = $("#corr_sub1 option:selected").text();
-        var corr_sub2 = $("#corr_sub2 option:selected").text();
-        var corr_sub3 = $("#corr_sub3 option:selected").text();
-        var corr_sub4 = $("#corr_sub4 option:selected").text();
-        var corr_sub5 = $("#corr_sub5 option:selected").text();
-        var corr_sub6 = $("#corr_sub6 option:selected").text();
-        var corr_sub7 = $("#corr_sub7 option:selected").text();
+       
         var sub1_match =0;
         var sub2_match =0;
         var sub3_match =0;

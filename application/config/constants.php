@@ -114,6 +114,8 @@ define('DOUBLE_LAST_DATE', '2017-10-05');
 define('assets', 'assets/img/');
 define('CORR_IMAGE_PATH11', 'uploads/correction/colleges/');
 define('Correction_Last_Date11','2017-12-30');
+define('READMISSION_11th',1);
+
 //================ RollNumber Slips variables ========================
 define('mClass1','12'); 
 define('mSession','1'); 
