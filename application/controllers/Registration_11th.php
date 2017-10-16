@@ -2516,7 +2516,7 @@ class Registration_11th extends CI_Controller {
             $pdf->Cell( 0.5,0.5,"Group:",0,'L');
             $pdf->SetFont('Arial','B',10);
             $pdf->SetXY(1.7,$y+$dy);
-            $grp_name = $data["RegGrp"];
+            $grp_name = $data["grp_cd"];
             switch ($grp_name) {
                 case '1':
                     $grp_name = 'Pre-Medical';
@@ -3279,7 +3279,7 @@ class Registration_11th extends CI_Controller {
 
 
             }
-            switch ($data["RegGrp"]) {
+            switch ($data["grp_cd"]) {
                 case '1':
                     $grp_name = 'Pre-Medical';
                     break;
@@ -3916,7 +3916,7 @@ class Registration_11th extends CI_Controller {
             $pdf->Cell(8,0.3,'SUBJECT INFORMATION',1,0,'L',1);
 
             //--------------------------- Subject Group
-            $grp_name = $data["RegGrp"];
+            $grp_name = $data["grp_cd"];
             switch ($grp_name) {
                 case '1':
                     $grp_name = 'Pre-Medical';
