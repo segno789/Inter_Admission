@@ -1114,7 +1114,7 @@ class Registration_11th extends CI_Controller {
      public function feeFinalCalculate($User_info_data,$user_info,$isBatchExists)
 
     {
-       // DebugBreak();
+        //DebugBreak();
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
@@ -1126,7 +1126,7 @@ class Registration_11th extends CI_Controller {
             /*====================  Counting Fee  ==============================*/
             $processing_fee = 0;
             $reg_fee           = 1000;
-            $Lreg_fee          = 0;
+            $Lreg_fee          = 500;
             $TotalRegFee = 0;
             $TotalLatefee = 0;
             $Totalprocessing_fee = 0;
@@ -1200,7 +1200,7 @@ class Registration_11th extends CI_Controller {
                         if($v['IsReAdm']==1)
                         {
                             //$Lreg_fee = $rule_fee[0]['readmfine']; 
-                            $Lreg_fee = 0;
+                            $Lreg_fee = 500;
                              
                         }
                         else
@@ -1216,7 +1216,7 @@ class Registration_11th extends CI_Controller {
                         if($v['IsReAdm']==1)
                         {
                             //$Lreg_fee = $rule_fee[0]['readmfine']; 
-                            $Lreg_fee = 0; 
+                            $Lreg_fee = 500; 
                         }
                         else
                         {
@@ -1231,6 +1231,7 @@ class Registration_11th extends CI_Controller {
                     if(($v["Spec"] == 1 || $v["Spec"] ==  2) && $v['IsReAdm'] != 1 )
                     {
                         $reg_fee = 0;
+                        //$Lreg_fee = $rule_fee[0]['Fine'];
                         $TotalLatefee = $TotalLatefee + $Lreg_fee;
                         $Totalprocessing_fee = $Totalprocessing_fee + $processing_fee;
                     }
@@ -1238,6 +1239,7 @@ class Registration_11th extends CI_Controller {
                     else 
                     {
                         $TotalRegFee = $TotalRegFee + $reg_fee;
+                        //$Lreg_fee = $rule_fee[0]['Fine'];
                         $TotalLatefee = $TotalLatefee + $Lreg_fee;
                         $Totalprocessing_fee = $Totalprocessing_fee + $processing_fee;
                     } 
@@ -1247,7 +1249,7 @@ class Registration_11th extends CI_Controller {
                     if($v['IsReAdm']==1)
                     {
                         //$Lreg_fee = $rule_fee[0]['readmfine']; 
-                        $Lreg_fee = 0; 
+                        $Lreg_fee = 500; 
                     }
                     else
                     {
@@ -1268,7 +1270,7 @@ class Registration_11th extends CI_Controller {
 
                 $total_record++;
             }
-            $Lreg_fee = $rule_fee[0]['Fine'];
+           // $Lreg_fee = $rule_fee[0]['Fine'];
             if($Lreg_fee == '')
             {
                 $Lreg_fee = 0;
@@ -2867,7 +2869,7 @@ class Registration_11th extends CI_Controller {
     }
     public function Make_Batch_Formwise()
     {
-        DebugBreak();
+       // DebugBreak();
         if(!empty($_POST["chk"]))
         {
 
@@ -4302,7 +4304,7 @@ class Registration_11th extends CI_Controller {
     }
     public function ChallanForm_Reg11th_Regular()
     {
-      //  DebugBreak();
+       // DebugBreak();
         $Batch_Id = $this->uri->segment(3);
         $this->load->library('session');
         $this->load->library('NumbertoWord');
@@ -4313,6 +4315,9 @@ class Registration_11th extends CI_Controller {
         //$grp_cd = $this->uri->segment(3);
         // $fetch_data = array('Inst_cd'=>$user['Inst_Id'],'formno'=>$formno);
         //  // DebugBreak();();
+        $User_info_data = array('Inst_Id'=>$user['Inst_Id'],'Batch_Id'=>$Batch_Id);
+        $user_info  =  $this->Registration_11th_model->user_info_Batch_Id($User_info_data); 
+        $myinfo =   $this->feeFinalCalculate($User_info_data,$user_info,$Batch_Id);
         $result = $this->Registration_11th_model->Print_challan_Form($fetch_data);
         $this->load->library('PDF_RotateWithOutPage');
 
@@ -4349,9 +4354,7 @@ class Registration_11th extends CI_Controller {
         //$User_info_data = array('Inst_Id'=>$user['Inst_Id'],'RegGrp'=>@$RegGrp,'spl_case'=>@$Spl_case);
         //$user_info  =  $this->Registration_11th_model->getuser_info($User_info_data); 
 
-        $User_info_data = array('Inst_Id'=>$user['Inst_Id'],'Batch_Id'=>$Batch_Id);
-        $user_info  =  $this->Registration_11th_model->user_info_Batch_Id($User_info_data); 
-        $myinfo =   $this->feeFinalCalculate($User_info_data,$user_info,$Batch_Id);
+        
 
      /*   $isfine = 0;
 
