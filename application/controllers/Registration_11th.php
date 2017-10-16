@@ -119,6 +119,7 @@ class Registration_11th extends CI_Controller {
         $data = array('mrollno'=>"$RollNo",'board'=>$oldBrd_cd,'year'=>$oldYear,'session'=>$oldSess);
         $feedingcheck=$this->Registration_11th_model->IsReFeeded($data);
         $feeding_inst_cd =$feedingcheck[0]['coll_cd'];
+//        DebugBreak();
         if($feedingcheck != false)
         {
             $instName=$this->Registration_11th_model->InstName($feeding_inst_cd);
@@ -133,6 +134,12 @@ class Registration_11th extends CI_Controller {
             if($user_info == false)
             {
                 $this->session->set_flashdata('error', 'This Roll No. Result is not cancelled. Please Cancel result from INTER PART-I Branch Before proceeding!');
+                redirect('Registration_11th/ReAdmission');
+                return;
+            }
+            else if($user_info[0]['IsReAdm']==1)
+            {
+               $this->session->set_flashdata('error', 'This Roll Number already availed Re-Admission Chance.');
                 redirect('Registration_11th/ReAdmission');
                 return;
             }
