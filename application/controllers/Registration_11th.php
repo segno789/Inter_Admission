@@ -1235,7 +1235,7 @@ class Registration_11th extends CI_Controller {
 
                     }
 
-                    if(($v["Spec"] == 1 || $v["Spec"] ==  2) && $v['IsReAdm'] != 1 )
+                    if(($v["Spec"] == 1 ) && $v['IsReAdm'] != 1 )
                     {
                         $reg_fee = 0;
                         //$Lreg_fee = $rule_fee[0]['Fine'];
