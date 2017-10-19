@@ -10,6 +10,14 @@
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/alertify.core.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/js/source/jquery.fancybox.css">
 
+    
+    
+    <link rel='stylesheet' id='mailchimpSF_main_css-css' href='<?php echo base_url();?>assets2/css/main.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='predefined-color-css' href='<?php echo base_url();?>assets2/css/blue.css' type='text/css' media='all' />
+
+
+
+
     <script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/js/jquery.maskedinput.js"></script>
@@ -168,21 +176,159 @@
         </div>
     </div>
 </div> 
+<header class="site-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 header-right">
+                <div class="menu-top-menu-container">
+                    <ul id="menu-top-menu" class="small-links">
+                        <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="http://www.bisegrw.com/chairman-message.html">Chairman's Message</a></li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://www.bisegrw.com/board-officers.html">Board Officers</a></li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://www.bisegrw.com/news.html">News Room</a></li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://www.bisegrw.com/complaints.html">Ministers Complaints Cell</a></li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://www.bisegrw.com/Tenders.html">Tenders</a></li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://www.bisegrw.com/contact-us.html">Contact</a></li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://www.bisegrw.com/sitemap.html">Sitemap</a></li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://www.bisegrw.com/notifications.html">Notifications</a></li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://www.bisegrw.com/modelpapers.html">Model Papers</a></li>
+                    </ul>
+                </div>
 
+            </div>
+        </div>
+    </div>
+    <div class="nav-bar-main" role="navigation">
+        <div class="container">
+            <nav class="main-navigation clearfix visible-md visible-lg" role="navigation">
+                <ul id="menu-main-menu-1" class="main-menu sf-menu sf-js-enabled sf-arrows">
+                    <li id="logo" class="menu-item"><a href="http://www.bisegrw.com/" title="BISE Gujranwala" rel="home"><img style="text-align:left;width:150px" src="http://www.bisegrw.com/assets/img/icon.png" alt="Logo BISE GRW"></a></li>
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-20 current_page_item menu-item-49"><a href="http://www.bisegrw.com/">Home</a></li>
+                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-50"><a href="#" class="sf-with-ul">About Us<i class="fa fa-angle-down"></i></a>
+                        <ul class="sub-menu animated fadeInRight" style="display: none;">
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page "><a href="http://www.bisegrw.com/who-we-are.html"><span>WHO WE ARE</span></a></li>
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page "><a href="http://www.bisegrw.com/whatdo.html"><span>WHAT WE DO</span></a></li>
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page "><a href="http://www.bisegrw.com/strategy.html"><span>OUR STRATEGY</span></a></li>
+
+                            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children"><a href="#" class="parent sf-with-ul2 sf-with-ul"><span>MEET OUR TEAM</span><i class="fa fa-angle-right"></i></a>
+                                <ul class="sub-menu animated fadeInRight" style="display: none;">
+                                    <li class="menu-item menu-item-type-post_type menu-item-object-page "><a href="http://www.bisegrw.com/chairman-message.html"><span>MESSAGE</span></a></li>
+                                    <li class="menu-item menu-item-type-post_type menu-item-object-page "><a href="http://www.bisegrw.com/board-officers.html"><span>CORE TEAM</span></a></li>
+                                    <li class="menu-item menu-item-type-post_type menu-item-object-page "><a href="http://www.bisegrw.com/organogram.html"><span>ORGANOGRAM</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children"><a href="#" class="parent sf-with-ul2 sf-with-ul"><span>HOW WE'RE GOVERNED</span><i class="fa fa-angle-right"></i></a>
+                                <ul class="sub-menu animated fadeInRight" style="display: none;">
+                                    <li class="menu-item menu-item-type-post_type menu-item-object-page "><a href="http://www.bisegrw.com/acts.html"><span>ACTS</span></a> </li>
+                                    <li class="menu-item menu-item-type-post_type menu-item-object-page "><a href="http://www.bisegrw.com/rule.html"><span>RULES</span></a></li>
+                                    <li class="menu-item menu-item-type-post_type menu-item-object-page "><a href="http://www.bisegrw.com/regulations.html"><span>REGULATIONS</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page "><a href="http://www.bisegrw.com/jurisdication.html"><span>JURISDICTION</span></a></li>
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page "><a href="http://www.bisegrw.com/projects.html"><span>PROJECTS</span></a></li>
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page "><a href="http://www.bisegrw.com/budget.html"><span>BUDGET</span></a></li>
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page "><a href="http://www.bisegrw.com/future-plan.html"><span>FUTURE PLANS</span></a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children"><a href="#" class="sf-with-ul">Registration<i class="fa fa-angle-down"></i></a>
+                        <ul class="sub-menu animated fadeInRight" style="display: none;">
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page "><a href="http://www.bisegrw.com/regular-students.html"><span>REGULAR STUDENT GUIDELINES</span></a></li>
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page "><a href="http://www.bisegrw.com/migrations.html"><span>MIGRATIONS</span></a></li>
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page "><a href="http://www.bisegrw.com/private-students.html"><span>PRIVATE STUDENTS</span></a></li>
+                            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children"><a href="#" class="parent sf-with-ul2 sf-with-ul"><span>ONLINE REGISTRATION</span><i class="fa fa-angle-right"></i></a>
+                                <ul class="sub-menu animated fadeInRight" style="display: none;">
+                                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://ssc.bisegrw.com" target="_blank"><span>9TH REGISTRATION</span></a> </li>
+                                    <li class="menu-item menu-item-type-post_type menu-item-object-page  elereg"><a><span>11TH REGISTRATION</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children"><a href="#" class="parent sf-with-ul2 sf-with-ul"><span>SUBJECT GROUPS</span><i class="fa fa-angle-right"></i></a>
+                                <ul class="sub-menu animated fadeInRight" style="display: none;">
+                                    <li class="menu-item menu-item-type-post_type menu-item-object-page "><a href="http://www.bisegrw.com/study-scheme.html"><span>SCHEME OF STUDIES</span></a> </li>
+                                    <li class="menu-item menu-item-type-post_type menu-item-object-page "><a href="http://www.bisegrw.com/study-scheme.html"><span>SYLLABUS</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children"><a href="#" class="sf-with-ul">Admissions<i class="fa fa-angle-down"></i></a>
+                        <ul class="sub-menu animated fadeInRight" style="display: none;">
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="#" target="_blank" class="elenthId"><span>INTER-P1 ANNUAL </span></a></li>
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="#" target="_blank" class="twlthId"><span>INTER-P2 ANNUAL </span></a></li>
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="#" target="_blank" class="ninthId"><span>9TH ANNUAL </span></a></li>
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="#" target="_blank" class="tenthId"><span>10TH ANNUAL </span></a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children"><a href="#" class="sf-with-ul">Exam &amp; Results<i class="fa fa-angle-down"></i></a>
+                        <ul class="sub-menu animated fadeInRight" style="display: none;">
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page "><a href="http://www.bisegrw.com/prev-years-result.html"><span>OLD RESULTS</span></a></li>
+
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page "><a href="http://www.bisegrw.com/result-stats.html"><span>RESULT STATISTICS</span></a></li>
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page "><a href="http://www.bisegrw.com/result-gazatte.html"><span>RESULT GAZETTE</span></a></li>
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page "><a href="http://www.bisegrw.com/result-CDPassword.html"><span>RESULT CD's PASSWORD</span></a></li>
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page "><a href="http://www.bisegrw.com/examination-schedule.html"><span>EXAMINATION SCHEDULE</span></a></li>
+
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page "><a href="http://www.bisegrw.com/examination-centers.html"><span>EXAMINATION CENTERS</span></a></li>
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page "><a href="http://www.bisegrw.com/fee-structures.html"><span>DUES/FEES &amp; BANKS</span></a></li>
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page "><a href="http://rechecking.bisegrw.com/" target="_blank"><span>PAPER RECHECKING</span></a></li>
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page "><a href="http://www.bisegrw.com/diploma-and-certification.html"><span>DIPLOMA &amp; CERTIFICATION</span></a></li>  
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page "><a href="http://www.bisegrw.com/guidlines.html"><span>GUIDELINES</span></a></li>
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page "><a href="http://www.bisegrw.com/rules.html"><span>RULES</span></a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children"><a href="#" class="sf-with-ul">Affiliations<i class="fa fa-angle-down"></i></a>
+                        <ul class="sub-menu animated fadeInRight" style="display: none;">
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page "><a href="http://institutes.bisegrw.com/" target="_blank"><span>HOW TO AFFILIATE</span></a></li>
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page "><a href="http://institutes.bisegrw.com/" target="_blank"><span>APPLY FOR AFFILIATION</span></a></li>
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page "><a href="http://www.bisegrw.com/affiliated-institutes.html"><span>AFFILIATED INSTITUTES</span></a></li>
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page "><a href="http://www.bisegrw.com/college-ranking.html"><span>COLLEGE RANKING</span></a></li>
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page "><a href="http://www.bisegrw.com/school-ranking.html"><span>SCHOOL RANKING</span></a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children"><a href="#" class="sf-with-ul">Downloads<i class="fa fa-angle-down"></i></a>
+                        <ul class="sub-menu animated fadeInRight" style="display: none;">
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page "><a href="http://services.bisegrw.com/" target="_blank"><span>ONLINE SERVICES</span></a></li>
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page "><a href="http://www.bisegrw.com/downloads.html"><span>DOWNLOAD FORMS</span></a></li>
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page "><a href="http://challan.bisegrw.com/" target="_blank"><span>ONLINE CHALLAN FORM</span></a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children"><a href="#" class="sf-with-ul">Info Desk<i class="fa fa-angle-down"></i></a>
+                        <ul class="sub-menu animated fadeInRight" style="display: none;">
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page "><a href="http://www.bisegrw.com/authorized-banks.html"><span>AUTHORIZED BANKS</span></a></li>
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page "><a href="http://challan.bisegrw.com/"><span>ONLINE CHALLAN FORM</span></a></li>
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page "><a href="http://www.bisegrw.com/assets/pdf/instructions.pdf" target="_blank"><span>FORMS &amp; GUIDELINES</span></a></li>
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page "><a href="http://www.bisegrw.com/assets/pdf/SchoolChange.pdf" target="_blank"><span>MIGRATIONS &amp; NOCs</span></a></li>
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page "><a href="http://www.bisegrw.com/fee-structures.html"><span>FEE STRUCTURES</span></a></li>
+
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page "><a href="http://www.bisegrw.com/study-scheme.html"><span>SCHEME OF STUDIES</span></a></li>
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page "><a href="http://www.bisegrw.com/grading.html"><span>GRADING CRITERIA</span></a></li>
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page "><a href="http://www.bisegrw.com/examination-centers.html"><span>EXAMINATION CENTERS</span></a></li>
+
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page "><a href="http://www.bisegrw.com/institutional-codes.html"><span>INSTITUTIONAL CODES</span></a></li>
+
+                            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children"><a href="#" class="parent sf-with-ul2 sf-with-ul"><span>REPORTS</span><i class="fa fa-angle-right"></i></a>
+                                <ul class="sub-menu animated fadeInRight" style="display: none;">
+                                    <li class="menu-item menu-item-type-post_type menu-item-object-page "><a href="http://www.bisegrw.com/result-stats.html"><span>ANNUAL</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page "><a href="http://www.bisegrw.com/faq.html"><span>FAQ</span></a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
 <div class="container">
-<div class="row-fluid">
-    <h2 style="background:#003a6a !important; color: wheat; text-align: center;" class="jumbotron">
-        <img src="<?php echo base_url(); ?>assets/img/BISEGRW_Icon.png" class="img-circle" width="125px" height="125px" alt="Logo">
-        Board of Intermediate & Secondary Education, Gujranwala
-        <br>
-        <?php 
-        $sess = '';
-        if(Session == '1')
-            $sess =  'Annual';
-        else if(Session == '2')
-            $sess = 'Supplementary Examination';
-            echo  '<p style="text-align:center;">Online Admission for HSSC Part-II '.$sess.''.',  ' .Year.' </p>';   
-        ?>
-    </h2>
-</div>
-
+<!--<div class="row-fluid">
+<h2 style="background:#003a6a !important; color: wheat; text-align: center;" class="jumbotron">
+<img src="<?php echo base_url(); ?>assets/img/BISEGRW_Icon.png" class="img-circle" width="125px" height="125px" alt="Logo">
+Board of Intermediate & Secondary Education, Gujranwala
+<br>
+<?php 
+$sess = '';
+if(Session == '1')
+    $sess =  'Annual';
+else if(Session == '2')
+    $sess = 'Supplementary Examination';
+    echo  '<p style="text-align:center;">Online Admission for HSSC Part-II '.$sess.''.',  ' .Year.' </p>';   
+?>
+</h2>
+</div>-->
