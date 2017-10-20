@@ -15,7 +15,7 @@
 
         $( "#batch_real_PaidDate" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, startDate:new Date() }).val();
         $( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate: new Date(2002, 7,1),yearRange: '1970:2002'}).val();
-      /*  var spl_cd = "<?php   echo @$spl_cd; ?>";
+       /* var spl_cd = "<?php   echo @$spl_cd; ?>";
         var err ='<?php echo @$error; ?>';
         if(err != ""){
             alertify.error("Dear Student! No data found against your submitted record! Please check you informaiton again.");
@@ -291,8 +291,9 @@
                 alertify.log("Please wait while your form is downloading....")    
                 downloadform12();    
             }
-        });
-        
+
+
+        })
         function downloadform12(){
             //debugger;
             var formno = $("#formid").val();

@@ -338,11 +338,24 @@ class Admission_model extends CI_Model
 
     public function Update_AdmissionFeePvt($data)
     {
-        $data['cdate']= date('Y-m-d H:i:s');
-        $this->db->where('formNo',$data['formNo']);
-        $this->db->update(INSERT_TBL,$data);
-        $this->db->select('regFee,AdmFee,AdmProcessFee,AdmFine,AdmTotalFee');
-        $query = $this->db->get_where(INSERT_TBL, array('formNo'=>$data['formNo'])); 
+        $date = new DateTime(EXAMINATIONDATEINTER_P2);
+        $date->modify("-4 day");
+        $threeDayBeforeExam = $date->format("Y-m-d");
+
+        if(strtotime(date('Y-m-d')) < strtotime($threeDayBeforeExam)){
+            $data['cdate']= date('Y-m-d H:i:s');
+            $this->db->where('formNo',$data['formNo']);
+            $this->db->update(INSERT_TBL,$data);
+            $this->db->select('regFee,AdmFee,AdmProcessFee,AdmFine,AdmTotalFee');
+            $query = $this->db->get_where(INSERT_TBL, array('formNo'=>$data['formNo'])); 
+        }
+
+        else{
+            $data['cdate']= date('Y-m-d H:i:s');
+            $this->db->select('regFee,AdmFee,AdmProcessFee,AdmFine,AdmTotalFee');
+            $query = $this->db->get_where(INSERT_TBL, array('formNo'=>$data['formNo'])); 
+        }
+
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
@@ -820,7 +833,7 @@ class Admission_model extends CI_Model
     public function getcenter($data)
     {
         //DebugBreak();
-        
+
         $zone = $data['zoneCode'];
         $gend = $data['gen'];
         $where = " mYear = ".Year." AND class = 12 AND  sess = ".Session." AND Zone_cd =  $zone  AND  (cent_Gen = $gend OR cent_Gen = 3)";
