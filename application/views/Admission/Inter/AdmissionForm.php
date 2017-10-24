@@ -349,14 +349,14 @@ else if(Session == '2')
     <div class="form-group">
         <div class="row">
             <div class="col-md-offset-2 col-md-4">
-                <label class="control-label" for="cand_name" >
+                <label class="control-label" for="oldsess" >
                     Session :
                 </label>        
                 <input type="text" class="text-uppercase form-control" id="oldsess" name="oldsess" readonly="readonly" value="<?php echo $data['0']['sess'] == 1 ? "Annual" :"Supplementary"; ?>"/> 
             </div>
 
             <div class="col-md-4">
-                <label class="control-label" for="father_name">
+                <label class="control-label" for="oldboard">
                     Board :
                 </label>        
                 <input type="text" class="text-uppercase form-control"  id="oldboard" name="oldboard" readonly="readonly" value="<?php echo $data[0]['brd_name'];?>"/>     
@@ -939,6 +939,8 @@ else if(Session == '2')
             return false;
         } 
     }
+</script>
+<script type="text/javascript">
 
     $(document).ready(function(){
 
