@@ -44,7 +44,7 @@ define('DIRPATH12TH','F:\xampp\htdocs\Share Images\\');
 define('PRIVATE_IMAGE_PATH', 'uploads/private/');
 define('PRIVATE_IMAGE_PATH_FRESH', 'uploads/Fresh');
 define('REGULAR_IMAGE_PATH', 'uploads/regular/');
-define('Session','2');  // 1 for Annual and 2 for Supply
+define('Session','1');  // 1 for Annual and 2 for Supply
 define('Year','2017');  
 
 define ('sessReg','2017-2019');
