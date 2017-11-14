@@ -39,7 +39,7 @@ class Admission extends CI_Controller {
 
         $this->load->view('common/homepagefooter.php');
     }
-
+ 
     function GetSpeciality($spclty)
     {
         if ($spclty == 0 )
@@ -2067,7 +2067,7 @@ class Admission extends CI_Controller {
         else
         {
             //DebugBreak();
-            
+
             $data['AdmFee'] = $finalFee;
             if(@$data['CertificateFee'] == NULL)
             {
@@ -2094,7 +2094,7 @@ class Admission extends CI_Controller {
         else{
             $info = $this->Admission_model->Update_AdmissionFeePvt_Languages($AllStdFee);    
         }
-        
+
         return $info;
     }
     function GetDueDate()
@@ -3543,7 +3543,7 @@ class Admission extends CI_Controller {
                 $info['formno'] = '';
             }
         }
-        
+
         echo  json_encode($info);
     }
 
