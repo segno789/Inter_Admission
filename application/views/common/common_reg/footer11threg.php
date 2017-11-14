@@ -799,11 +799,13 @@ if(isset($files)){
 
         var address = $('#address').val();
         var image = $('#image').val();
+        var previewImg = $('#previewImg').attr('src');
         var MarkOfIdent = $('#MarkOfIden').val();
         var Inst_Rno = $('#Inst_Rno').val();
         var status = 0;
         var mat_Year = $('#old_ssc_year').val();
         var IsReAdm = $("#IsReAdm").val();
+        alert(previewImg);
         
         /*
         $("#sub4").append(new Option('Mathematics',19));
@@ -1012,7 +1014,7 @@ if(isset($files)){
             $('#address').focus(); 
             return status;    
         }
-        else if(image == ""  )
+        else if(image == ""  && previewImg == "" )
         {
             $('#ErrMsg').show(); 
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });

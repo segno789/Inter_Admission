@@ -23,10 +23,14 @@
                                 </label>
                                 <select id="oldYear" name="oldYear" class="form-control">
                                     <?php
-                                    $current_year = Year;
+                                      $current_year = Year;
+                                    if(MATRIC_SUPPLY_RESULT_ANNOUNCED == 0)
+                                    {
+                                   
                                     $prev_year = Year;
 
-                                    if($gender== 1){ ?>
+                                    if($gender== 1){
+                                     ?>
                                         <option value="<?php echo $current_year;  ?>"><?php echo $current_year;  ?></option>
                                         <option value="<?php echo $current_year-1; ?>" ><?php echo $current_year-1; ?></option>  
                                         <option value="<?php echo  $current_year-2; ?>" ><?php echo  $current_year-2; ?></option>  
@@ -42,7 +46,13 @@
                                         <option value="<?php echo $current_year-4; ?>" ><?php echo $current_year-4; ?></option>  
                                         <option value="<?php echo $current_year-5; ?>" ><?php echo $current_year-5; ?></option>   
                                         <?php }    
-                                    ?>
+                                    }
+                                    else
+                                    {
+                                      ?> <option value="<?php echo $current_year;  ?>"><?php echo $current_year;  ?></option>
+                                   <?php } ?>
+                                    
+                                   
                                 </select>
                             </div>
                             <div class="span4"></div>
@@ -55,8 +65,23 @@
                                     SSC Session
                                 </label>
                                 <select id="oldSess" class="control-label" name="oldSess">
+                                <?php 
+                                 if(MATRIC_SUPPLY_RESULT_ANNOUNCED == 0)
+                                 {
+                                 ?>
                                     <option value="1" >Annual</option>
                                     <option value="2">Supplementary</option>
+                                  <?php 
+                                 }
+                                 else
+                                 {
+                                 ?>
+                                   <option value="2">Supplementary</option>
+                                 <?php
+                                     
+                                 
+                                 }
+                                  ?>  
                                 </select>
                             </div>
                             <div class="span2">

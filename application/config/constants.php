@@ -51,6 +51,7 @@ define ('sessReg','2017-2019');
 define('Regtbl','Registration..tblreg11th');
 define('Feetbl','Registration..RuleFee_Reg_Eleventh');
 define('Batchtbl','Registration..tblregbatch11th');
+define('MATRIC_SUPPLY_RESULT_ANNOUNCED',1);
 
 define('lastdate','15-09-2017');
 define('GET_PRIVATE_IMAGE_PATH', 'C:\inetpub\vhosts\bisegrw.com\hssc.bisegrw.com\uplaods\2016\private\\');
@@ -109,10 +110,10 @@ define('IMAGE_PATH211', 'uplaods/2016_backup/');
 define('BARCODE_PATH11', 'uplaods/pdfs/');
 define('SINGLE_LAST_DATE11', '2017-08-14');
 define('DOUBLE_LAST_DATE11', '2017-11-09');
-define('SINGLE_LAST_DATE', '2017-09-15');
-define('DOUBLE_LAST_DATE', '2017-10-05');
+define('SINGLE_LAST_DATE', '2017-08-14');
+define('DOUBLE_LAST_DATE', '2017-11-09');
 define('assets', 'assets/img/');
-define('CORR_IMAGE_PATH11', 'uploads/correction/colleges/');
+define('CORR_IMAGE_PATH11', 'uplaods/2017/correction/');
 define('Correction_Last_Date11','2017-12-30');
 define('READMISSION_11th',1);
 
