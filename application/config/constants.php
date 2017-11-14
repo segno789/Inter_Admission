@@ -44,7 +44,7 @@ define('DIRPATH12TH','F:\xampp\htdocs\Share Images\\');
 define('PRIVATE_IMAGE_PATH', 'uploads/private/');
 define('PRIVATE_IMAGE_PATH_FRESH', 'uploads/Fresh');
 define('REGULAR_IMAGE_PATH', 'uploads/regular/');
-define('Session','2');  // 1 for Annual and 2 for Supply
+define('Session','1');  // 1 for Annual and 2 for Supply
 define('Year','2017');  
 
 define ('sessReg','2017-2019');
@@ -84,7 +84,7 @@ define('corr_bank_chall_class11','11th');
 define('currdate','date("d-m-Y");');
 define('TripleDateFeeinter', '13-10-2017');
 define('RE_ADMISSION_TBL11', 'matric_new..vwIA1P17');
-
+define('EXAMINATIONDATEINTER_P2','2017-10-21');
 define('SingleDateFee', '2017-09-27');
 define('DoubleDateFee', '2017-10-03');
 define('TripleDateFee', '2017-10-06');

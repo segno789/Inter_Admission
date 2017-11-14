@@ -39,7 +39,7 @@ class Admission extends CI_Controller {
 
         $this->load->view('common/homepagefooter.php');
     }
-
+ 
     function GetSpeciality($spclty)
     {
         if ($spclty == 0 )
@@ -82,7 +82,16 @@ class Admission extends CI_Controller {
         $AfterDueDatefee = "0";
         $AdmFee=         "800";  
 
-        $endDate =date('d-m-Y', strtotime($this->GetDueDate())); 
+        $date = new DateTime(EXAMINATIONDATEINTER_P2);
+        $date->modify("-4 day");
+        $threeDayBeforeExam = $date->format("Y-m-d");
+
+        if(strtotime(date('Y-m-d')) < strtotime($threeDayBeforeExam)){
+            $endDate =date('d-m-Y', strtotime($this->GetDueDate())); 
+        }
+        else{
+            $endDate = date('d-m-Y', strtotime($threeDayBeforeExam));
+        }
 
         $lmargin =1.5;
         $rmargin =7.3;
@@ -1396,22 +1405,35 @@ class Admission extends CI_Controller {
 
         //DebugBreak();
 
-        if((
-            $data['oldRno'] == "101383" || $data['oldRno'] == "101410" || $data['oldRno'] == "115287" ||$data['oldRno'] == "118242" ||$data['oldRno'] == "119421" ||$data['oldRno'] == "120911" ||$data['oldRno'] == "128695" ||$data['oldRno'] == "130344" ||$data['oldRno'] == "132729" ||$data['oldRno'] == "147076" || $data['oldRno'] == "159181" || $data['oldRno'] == "201227" || $data['oldRno'] == "221739" || $data['oldRno'] == "222776" || $data['oldRno'] == "223441" || $data['oldRno'] == "224183" || $data['oldRno'] == "224195" || $data['oldRno'] == "224200" || $data['oldRno'] == "224552" || $data['oldRno'] == "224605" || $data['oldRno'] == "224628" || $data['oldRno'] == "224632" || $data['oldRno'] == "224635" ||  $data['oldRno'] == "230217" ||  $data['oldRno'] == "234712" ||  $data['oldRno'] == "234728" || $data['oldRno'] == "234747" ||  $data['oldRno'] == "235146" ||  $data['oldRno'] == "235177"
-            )
-            && strtotime('2017-10-13') >= strtotime(date('Y-m-d'))
-            && $data['YearOfLastAp'] == "2017" && $data['SessOfLastAp'] == "1"
+        /*if((
+        $data['oldRno'] == "101383" || $data['oldRno'] == "101410" || $data['oldRno'] == "115287" ||$data['oldRno'] == "118242" ||$data['oldRno'] == "119421" ||$data['oldRno'] == "120911" ||$data['oldRno'] == "128695" ||$data['oldRno'] == "130344" ||$data['oldRno'] == "132729" ||$data['oldRno'] == "147076" || $data['oldRno'] == "159181" || $data['oldRno'] == "201227" || $data['oldRno'] == "221739" || $data['oldRno'] == "222776" || $data['oldRno'] == "223441" || $data['oldRno'] == "224183" || $data['oldRno'] == "224195" || $data['oldRno'] == "224200" || $data['oldRno'] == "224552" || $data['oldRno'] == "224605" || $data['oldRno'] == "224628" || $data['oldRno'] == "224632" || $data['oldRno'] == "224635" ||  $data['oldRno'] == "230217" ||  $data['oldRno'] == "234712" ||  $data['oldRno'] == "234728" || $data['oldRno'] == "234747" ||  $data['oldRno'] == "235146" ||  $data['oldRno'] == "235177"
+        )
+        && strtotime('2017-10-13') >= strtotime(date('Y-m-d'))
+        && $data['YearOfLastAp'] == "2017" && $data['SessOfLastAp'] == "1"
         ){
-            $newDate = "13-10-2017";
+        $newDate = "13-10-2017";    
+
         }
 
         if ($data['FormNo'] == "935211"){
-            $newDate = "13-10-2017";
+        $newDate = "13-10-2017";
         }
 
-        else{
+        else{*/
+
+        //DebugBreak();
+
+        $date = new DateTime(EXAMINATIONDATEINTER_P2);
+        $date->modify("-4 day");
+        $threeDayBeforeExam = $date->format("Y-m-d");
+
+        if(strtotime(date('Y-m-d')) < strtotime($threeDayBeforeExam)){
             $newDate = date("d-m-Y", strtotime($this->GetDueDate()));
         }
+        else{
+            $newDate = date('d-m-Y', strtotime($threeDayBeforeExam));
+        }
+        //}
 
         $pdf->SetXY(0.2,6.4+$Y);
         $pdf->SetFillColor(0,0,0);
@@ -1833,7 +1855,7 @@ class Admission extends CI_Controller {
     }
     function feecalculate($data)
     {
-        // DebugBreak();
+        //DebugBreak();
 
         $practical_Sub = array(
 
@@ -1872,23 +1894,23 @@ class Admission extends CI_Controller {
 
         //DebugBreak();
 
-        if((
-            $data['oldRno'] == "101383" || $data['oldRno'] == "101410" || $data['oldRno'] == "115287" ||$data['oldRno'] == "118242" ||$data['oldRno'] == "119421" ||$data['oldRno'] == "120911" ||$data['oldRno'] == "128695" ||$data['oldRno'] == "130344" ||$data['oldRno'] == "132729" ||$data['oldRno'] == "147076" || $data['oldRno'] == "159181" || $data['oldRno'] == "201227" || $data['oldRno'] == "221739" || $data['oldRno'] == "222776" || $data['oldRno'] == "223441" || $data['oldRno'] == "224183" || $data['oldRno'] == "224195" || $data['oldRno'] == "224200" || $data['oldRno'] == "224552" || $data['oldRno'] == "224605" || $data['oldRno'] == "224628" || $data['oldRno'] == "224632" || $data['oldRno'] == "224635" ||  $data['oldRno'] == "230217" ||  $data['oldRno'] == "234712" ||  $data['oldRno'] == "234728" || $data['oldRno'] == "234747" ||  $data['oldRno'] == "235146" ||  $data['oldRno'] == "235177"
-            )
-            && strtotime('2017-10-13') >= strtotime(date('Y-m-d'))
-            && $data['YearOfLastAp'] == "2017" && $data['SessOfLastAp'] == "1"
+        /*if((
+        $data['oldRno'] == "101383" || $data['oldRno'] == "101410" || $data['oldRno'] == "115287" ||$data['oldRno'] == "118242" ||$data['oldRno'] == "119421" ||$data['oldRno'] == "120911" ||$data['oldRno'] == "128695" ||$data['oldRno'] == "130344" ||$data['oldRno'] == "132729" ||$data['oldRno'] == "147076" || $data['oldRno'] == "159181" || $data['oldRno'] == "201227" || $data['oldRno'] == "221739" || $data['oldRno'] == "222776" || $data['oldRno'] == "223441" || $data['oldRno'] == "224183" || $data['oldRno'] == "224195" || $data['oldRno'] == "224200" || $data['oldRno'] == "224552" || $data['oldRno'] == "224605" || $data['oldRno'] == "224628" || $data['oldRno'] == "224632" || $data['oldRno'] == "224635" ||  $data['oldRno'] == "230217" ||  $data['oldRno'] == "234712" ||  $data['oldRno'] == "234728" || $data['oldRno'] == "234747" ||  $data['oldRno'] == "235146" ||  $data['oldRno'] == "235177"
+        )
+        && strtotime('2017-10-13') >= strtotime(date('Y-m-d'))
+        && $data['YearOfLastAp'] == "2017" && $data['SessOfLastAp'] == "1"
         )
         {
-            $User_info_data = array('Inst_Id'=>999999, 'date' => SingleDateFee,'isPratical'=>$isper);    
+        $User_info_data = array('Inst_Id'=>999999, 'date' => SingleDateFee,'isPratical'=>$isper);    
         }
 
         if ($data['FormNo'] == "935211"){
-            $User_info_data = array('Inst_Id'=>999999, 'date' => SingleDateFee,'isPratical'=>$isper);    
+        $User_info_data = array('Inst_Id'=>999999, 'date' => SingleDateFee,'isPratical'=>$isper);    
         }
 
-        else{
-            $User_info_data = array('Inst_Id'=>999999, 'date' => date('Y-m-d'),'isPratical'=>$isper);
-        }
+        else{*/
+        $User_info_data = array('Inst_Id'=>999999, 'date' => date('Y-m-d'),'isPratical'=>$isper);
+        //}
 
         $user_info  =  $this->Admission_model->getuser_info($User_info_data); 
         $isfine = 0;
@@ -1915,6 +1937,11 @@ class Admission extends CI_Controller {
         }
         else
         {
+            //DebugBreak();
+            $date = new DateTime(EXAMINATIONDATEINTER_P2);
+            $date->modify("-4 day");
+            $threeDayBeforeExam = $date->format("Y-m-d");
+
             $date = new DateTime(TripleDateFee);
             $singleDate =  $date->format('Y-m-d');                                                                     
             $User_info_data = array('Inst_Id'=>999999, 'date' => $singleDate,'isPratical'=>$isper);
@@ -1933,7 +1960,7 @@ class Admission extends CI_Controller {
             }
 
             $TripleDate = date('Y-m-d',strtotime(TripleDateFee)); 
-            $now = date('Y-m-d'); // or your date as well
+            $now = $threeDayBeforeExam; // or your date as well
             $days = (strtotime($TripleDate) - strtotime($now)) / (60 * 60 * 24);
             $fine = 500;
             $days = abs($days);
@@ -2040,6 +2067,7 @@ class Admission extends CI_Controller {
         else
         {
             //DebugBreak();
+
             $data['AdmFee'] = $finalFee;
             if(@$data['CertificateFee'] == NULL)
             {
@@ -2058,9 +2086,6 @@ class Admission extends CI_Controller {
                 $data['AdmTotalFee'] = $processFee+$Total_fine+$data['regfee']+$data['CertificateFee']+$finalFee;
                 $AllStdFee = array('formNo'=>$data['FormNo'],'AdmFee'=>$finalFee,'AdmFine'=>$Total_fine,'AdmTotalFee'=>$data['AdmTotalFee']);    
             }
-
-
-
         }
 
         if(@$data['grp_cd'] != 9){
@@ -2069,7 +2094,6 @@ class Admission extends CI_Controller {
         else{
             $info = $this->Admission_model->Update_AdmissionFeePvt_Languages($AllStdFee);    
         }
-
 
         return $info;
     }
@@ -3519,6 +3543,7 @@ class Admission extends CI_Controller {
                 $info['formno'] = '';
             }
         }
+
         echo  json_encode($info);
     }
 

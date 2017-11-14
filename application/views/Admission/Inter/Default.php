@@ -1,4 +1,5 @@
 
+
 <div class="form-group">
     <div class="col-md-12">
         <div class="alert alert-info">
@@ -21,53 +22,80 @@
         </div>
     </div>
 </div>
-<div class="form-group">    
-    <div class="row">
-        <div class="col-md-12">
-            <h3 align="center" class="bold">
-                <?php 
-                $sess = '';
-                if(Session == '1')
-                    $sess =  'Annual';
-                else if(Session == '2')
-                    $sess = 'Supplementary';
-                    echo  'Online Admission for HSSC Part-II '.$sess.''.',  ' .Year.'';   
-                ?>
-            </h3>
-        </div>
-    </div>
-</div>
-<form enctype="multipart/form-data" id="options" name="options" method="post" action="" >
-    <div class="form-group">
-        <div class="row">
-            <div class="col-md-offset-4 col-md-6">
-                <label class="radio-inline">
-                    <input type="radio" class="nationality_class"  id="candidate1" value="1" checked="checked" name="candidate">Private Candidate 
-                </label>
-                <label class="radio-inline" id="can3">
-                    <input type="radio" class="nationality_class" id="candidate3" value="2" name="candidate">Regular Candidate
-                </label>
-            </div>
-        </div>
-    </div>
-    <div class="form-group"><div class="row"></div></div>
-    <div class="form-group">    
-        <div class="row">
-            <div class="col-md-offset-3 col-md-6">
-                <input type="button" value="Proceed to Next Step" id="proceedDefault" name="proceedDefault" class="btn btn-primary btn-block">
-            </div>
-        </div>
-    </div>
+
+<?php
+$date = new DateTime(EXAMINATIONDATEINTER_P2);
+$date->modify("-4 day");
+$threeDayBeforeExam = $date->format("Y-m-d");
+
+if(strtotime(date('Y-m-d')) > strtotime($threeDayBeforeExam)){
+
+    ?>
+
     <div class="form-group">    
         <div class="row">
             <div class="col-md-12">
-                <div class="pull-right">
-                    <img src="<?php echo base_url(); ?>assets/img/inqurey.jpg" class="img-responsive" alt="Terms & Conditions">
-                </div>
+                <h3 align="center" class="bold">
+                    <?php 
+                    $sess = '';
+                    if(Session == '1')
+                        $sess =  'Annual';
+                    else if(Session == '2')
+                        $sess = 'Supplementary';
+                        echo  'Online Admission for HSSC Part-II '.$sess.''.',  ' .Year.'';   
+                    ?>
+                </h3>
             </div>
         </div>
     </div>
-</form>
+    <form enctype="multipart/form-data" id="options" name="options" method="post" action="" >
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-offset-4 col-md-6">
+                    <label class="radio-inline">
+                        <input type="radio" class="nationality_class"  id="candidate1" value="1" checked="checked" name="candidate">Private Candidate 
+                    </label>
+                    <label class="radio-inline" id="can3">
+                        <input type="radio" class="nationality_class" id="candidate3" value="2" name="candidate">Regular Candidate
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group"><div class="row"></div></div>
+        <div class="form-group">    
+            <div class="row">
+                <div class="col-md-offset-3 col-md-6">
+                    <input type="button" value="Proceed to Next Step" id="proceedDefault" name="proceedDefault" class="btn btn-primary btn-block">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">    
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="pull-right">
+                        <img src="<?php echo base_url(); ?>assets/img/inqurey.jpg" class="img-responsive" alt="Terms & Conditions">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <?php
+}
+
+else{
+    ?>
+    <div class="form-group">
+        <div class="col-md-12">
+            <div class="alert alert-danger" align="center">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close"></a>
+                <strong> ADMISSION HAS BEEN CLOSED.</strong>
+            </div>
+        </div>
+    </div>
+    <?php
+}
+?>
+
 <hr class="colorgraph">
 <div class="form-group">    
     <div class="row">
