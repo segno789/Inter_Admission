@@ -1066,6 +1066,9 @@ if(isset($files)){
 
     }
     $("#sec_board").change(function(){
+       <?php  if($MATRIC_SUPPLY_RESULT_ANNOUNCED == 1) 
+        {
+        ?>
         if(this.value == 17)
         {
             // alert('hello angrez :) ');
@@ -1079,6 +1082,8 @@ if(isset($files)){
             $("#oldSess").empty().append('<option selected="selected" value="1">ANNUAL</option>');
             $("#oldSess").append('<option  value="2">SUPPLYMENTARY</option>');
         }
+       <?php  } ?>
+        
 
     })
 

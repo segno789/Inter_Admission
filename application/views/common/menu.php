@@ -52,8 +52,8 @@
                         </a>
                     </li>
                     <?php 
-                    
-                           } 
+
+                } 
                 if( $appconfig['isresultP2'] == 1){?>
 
                     <li>
@@ -79,28 +79,28 @@
                 </ul>
                 <?php
             }
-            
-             if($isselected == '12'){
+
+            if($isselected == '12'){
                 ?>
                 <ul >
-                
-                    <li><a href="<?php echo base_url(); ?>EleventhCorrection"   data-original-title="" class="<?php if($isselected == '12') {echo 'heading';}?>">11th Correction </a></li>
-                  <li><a href="<?php echo base_url(); ?>EleventhCorrection/EditForms"   data-original-title="" >Apply for Correction </a></li>
+
+                    <li><a href="<?php echo base_url(); ?>EleventhCorrection/EditForms"   data-original-title="" class="<?php if($isselected == '12') {echo 'heading';}?>">11th Correction </a></li>
+                    <li><a href="<?php echo base_url(); ?>EleventhCorrection/EditForms"   data-original-title="" >Apply for Correction </a></li>
                     <li>
                         <a href="<?php echo base_url(); ?>EleventhCorrection/Applied">
                             Applications
                         </a>
                     </li>
-                    
+
                     <li>
                         <a onclick="return logout();">Logout</a>
                     </li>
-                   
+
 
                 </ul>
                 <?php
             }
-             // 11th admission
+            // 11th admission
             if($isselected == '14'){
                 ?>
                 <ul >
@@ -164,6 +164,8 @@
                 </ul>
                 <?php
             }
+            
+           // DebugBreak();
             // Inter Registration
             if($isselected == '6') { 
                 ?>
@@ -171,13 +173,25 @@
                     <li><a href="<?php echo base_url(); ?>Registration_11th"   data-original-title="" class="<?php if($isselected == '6') {echo 'heading';}?>">Registration</a></li>
 
                     <?php  if($isinterfeeding == 1) {?>
-
-
+                           <?php
+                               if($MATRIC_SUPPLY_RESULT_ANNOUNCED == 1)
+                               {
+                               ?>
+                               
+                     <li>
+                            <a href="<?php echo base_url(); ?>Registration_11th/readmission">
+                                Re Admission 
+                            </a>
+                        </li>
+                        <?php
+                               }
+                           ?>
                         <li>
                             <a href="<?php echo base_url(); ?>Registration_11th/Students_matricInfo">
                                 Old Students 
                             </a>
                         </li>
+
 
                         <li>
                             <a href="<?php echo base_url(); ?>Registration_11th/EditForms">
@@ -266,7 +280,7 @@
                             </a>
                         </li>
                         <?php }
-                      //  DebugBreak() ;
+                    //  DebugBreak() ;
                     if($appconfig['isresultP1'] == 1 ) {?>
                         <li>
                             <a href="<?php echo base_url(); ?>Result/dashboard11th">
@@ -292,20 +306,20 @@
                             Dashboard
                         </a>
                     </li>
-                  <!--  <li>
-                        <a href="<?php echo base_url(); ?>Admission_11th_reg/StudentsData" data-original-title="">
-                            11th Old Students
-                        </a>
+                    <!--  <li>
+                    <a href="<?php echo base_url(); ?>Admission_11th_reg/StudentsData" data-original-title="">
+                    11th Old Students
+                    </a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url(); ?>Admission_11th_reg/EditForms" data-original-title="">
-                            11th Edit Forms
-                        </a>
+                    <a href="<?php echo base_url(); ?>Admission_11th_reg/EditForms" data-original-title="">
+                    11th Edit Forms
+                    </a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url(); ?>Admission_11th_reg/FormPrinting" data-original-title="">
-                            11th Form Printing
-                        </a>
+                    <a href="<?php echo base_url(); ?>Admission_11th_reg/FormPrinting" data-original-title="">
+                    11th Form Printing
+                    </a>
                     </li>-->
                     <li>
                         <a href="#" onclick="return logout();">Logout</a>

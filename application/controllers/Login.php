@@ -23,6 +23,7 @@ class Login extends CI_Controller {
         parent:: __construct();
 
         $this->clear_cache();
+        
     }
     public function index()
     {
@@ -56,8 +57,11 @@ class Login extends CI_Controller {
           
             $logedIn = $this->login_model->auth($_POST['username'],$_POST['password']);
             $isgroup = -1;
+            $spec_per = 0;
+            
             $appConfig = $this->login_model->getappconfig();
-            //DebugBreak();   
+            $MATRIC_SUPPLY_RESULT_ANNOUNCED = 0;
+             // DebugBreak();   
             if($logedIn != false)
             {  
 
@@ -70,7 +74,9 @@ class Login extends CI_Controller {
                     if(date('Y-m-d')<=$lastdate || date('Y-m-d')<=$spec_lastdate)
                     {
 
-                        $appConfig['isadmP1'] = 1;
+                        $spec_per = 1;
+                       $MATRIC_SUPPLY_RESULT_ANNOUNCED = 1 ;
+                       // $appConfig['isadmP1'] = 1;
                     }
 
                 }
@@ -147,10 +153,10 @@ class Login extends CI_Controller {
 
                     }
                     $isfeeding = -1;
-                    $isinterfeeding = 1;
+                    $isinterfeeding = 0;
                     $lastdate = SingleDateFee;
                    
-                    $isfeeding = 1;
+                    $isfeeding = 0;
                     //$isinterfeeding = 1;
                     $lastdate = SingleDateFee;
                      if($logedIn['SpecPermission']==1)
@@ -201,8 +207,7 @@ class Login extends CI_Controller {
                         $appConfig['isreg'] = 1;
                         $isinterfeeding = 1; 
                     }
-
-
+                  
 
                     // DebugBreak();
                     $sess_array = array(
@@ -228,6 +233,10 @@ class Login extends CI_Controller {
                         'isinterfeeding' => $isinterfeeding ,
                         'lastdate' => $lastdate ,  
                         'appconfig' => $appConfig,
+                        'isspec' => $spec_per,
+                        'isSpecial' => $logedIn['SpecPermission'],   
+                        'isSpecial_Fee' => $logedIn['spec_info'] ,
+                        'MATRIC_SUPPLY_RESULT_ANNOUNCED'=>$MATRIC_SUPPLY_RESULT_ANNOUNCED
                     );
                     $this->load->library('session');
                     $this->session->set_userdata('logged_in', $sess_array); 

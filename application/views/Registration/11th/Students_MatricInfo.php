@@ -24,7 +24,7 @@
                                 <select id="oldYear" name="oldYear" class="form-control">
                                     <?php
                                       $current_year = Year;
-                                    if(MATRIC_SUPPLY_RESULT_ANNOUNCED == 0)
+                                    if($MATRIC_SUPPLY_RESULT_ANNOUNCED ==1)
                                     {
                                    
                                     $prev_year = Year;
@@ -66,7 +66,8 @@
                                 </label>
                                 <select id="oldSess" class="control-label" name="oldSess">
                                 <?php 
-                                 if(MATRIC_SUPPLY_RESULT_ANNOUNCED == 0)
+                                
+                                 if($MATRIC_SUPPLY_RESULT_ANNOUNCED ==1)
                                  {
                                  ?>
                                     <option value="1" >Annual</option>

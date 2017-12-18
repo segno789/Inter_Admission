@@ -119,7 +119,7 @@ class Registration_11th extends CI_Controller {
         $data = array('mrollno'=>"$RollNo",'board'=>$oldBrd_cd,'year'=>$oldYear,'session'=>$oldSess);
         $feedingcheck=$this->Registration_11th_model->IsReFeeded($data);
         $feeding_inst_cd =$feedingcheck[0]['coll_cd'];
-//        DebugBreak();
+        //        DebugBreak();
         if($feedingcheck != false)
         {
             $instName=$this->Registration_11th_model->InstName($feeding_inst_cd);
@@ -139,7 +139,7 @@ class Registration_11th extends CI_Controller {
             }
             else if($user_info[0]['IsReAdm']==1)
             {
-               $this->session->set_flashdata('error', 'This Roll Number already availed Re-Admission Chance.');
+                $this->session->set_flashdata('error', 'This Roll Number already availed Re-Admission Chance.');
                 redirect('Registration_11th/ReAdmission');
                 return;
             }
@@ -490,7 +490,8 @@ class Registration_11th extends CI_Controller {
                 $this->session->set_flashdata('matric_error', 'This Candidate is already registered in '.$feeding_inst_cd.'-'.$instName.'.');
                 redirect('Registration_11th/Students_matricInfo');
                 return; 
-            }    
+            }
+
             if($board == 1)
             {
                 if(!ctype_digit($mrollno))
@@ -1117,11 +1118,11 @@ class Registration_11th extends CI_Controller {
         $this->commonfooter(array("files"=>array("jquery.maskedinput.js","validate.NewEnrolment.js"))); 
 
     }
-    
-     public function feeFinalCalculate($User_info_data,$user_info,$isBatchExists)
+
+    public function feeFinalCalculate($User_info_data,$user_info,$isBatchExists)
 
     {
-        //DebugBreak();
+       // DebugBreak();
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
@@ -1147,10 +1148,10 @@ class Registration_11th extends CI_Controller {
                 $rule_fee[0]['Reg_Fee']   =  $userinfo['isSpecial_Fee']['RegFee']; 
                 $rule_fee[0]['Rule_Fee_ID']   = 0; 
                 $lastdate  = date('Y-m-d',strtotime($userinfo['isSpecial_Fee']['FeedingDate'])) ;
-                
+
                 //$lastdate  = date('Y-m-d',strtotime($user_info['info'][0]['feedingDate'])) ;
                 //if(date('Y-m-d')<=$lastdate)
-                
+
             }
             else
             {  
@@ -1165,7 +1166,7 @@ class Registration_11th extends CI_Controller {
                     if(date('Y-m-d')<=$lastdate)
                     {
                         $rule_fee  =  $this->Registration_11th_model->getreulefee(1); 
-                       // $is_gov    =  $user_info['info'][0]['IsGovernment'];   
+                        // $is_gov    =  $user_info['info'][0]['IsGovernment'];   
                     }
                     else
                     {
@@ -1206,9 +1207,9 @@ class Registration_11th extends CI_Controller {
                     {
                         if($v['IsReAdm']==1)
                         {
-                            //$Lreg_fee = $rule_fee[0]['readmfine']; 
-                            $Lreg_fee = 500;
-                             
+                            $Lreg_fee = $rule_fee[0]['readmfine']; 
+                            //$Lreg_fee = 500;
+
                         }
                         else
                         {
@@ -1222,8 +1223,8 @@ class Registration_11th extends CI_Controller {
                     {
                         if($v['IsReAdm']==1)
                         {
-                            //$Lreg_fee = $rule_fee[0]['readmfine']; 
-                            $Lreg_fee = 500; 
+                            $Lreg_fee = $rule_fee[0]['readmfine']; 
+                            //$Lreg_fee = 500; 
                         }
                         else
                         {
@@ -1238,7 +1239,15 @@ class Registration_11th extends CI_Controller {
                     if(($v["Spec"] == 1 ) && $v['IsReAdm'] != 1 )
                     {
                         $reg_fee = 0;
-                        //$Lreg_fee = $rule_fee[0]['Fine'];
+                        if($v['yearOfPass']==2017 && $v['sessOfPass']==2 && date('Y-m-d', strtotime($v["edate"] ))<= $lastdate)
+                        {
+                            $Lreg_fee =0;
+                        }
+                        else
+                        {
+                            $Lreg_fee = $rule_fee[0]['Fine'];
+                        }
+
                         $TotalLatefee = $TotalLatefee + $Lreg_fee;
                         $Totalprocessing_fee = $Totalprocessing_fee + $processing_fee;
                     }
@@ -1246,7 +1255,14 @@ class Registration_11th extends CI_Controller {
                     else 
                     {
                         $TotalRegFee = $TotalRegFee + $reg_fee;
-                        //$Lreg_fee = $rule_fee[0]['Fine'];
+                        if($v['yearOfPass']==2017 && $v['sessOfPass']==2 && date('Y-m-d', strtotime($v["edate"] ))<= $lastdate)
+                        {
+                            $Lreg_fee =0;
+                        }
+                        else
+                        {
+                            $Lreg_fee = $rule_fee[0]['Fine'];
+                        }
                         $TotalLatefee = $TotalLatefee + $Lreg_fee;
                         $Totalprocessing_fee = $Totalprocessing_fee + $processing_fee;
                     } 
@@ -1255,18 +1271,35 @@ class Registration_11th extends CI_Controller {
                 {
                     if($v['IsReAdm']==1)
                     {
-                        //$Lreg_fee = $rule_fee[0]['readmfine']; 
-                        $Lreg_fee = 500; 
+                        if($v['yearOfPass']==2017 && $v['sessOfPass']==2 && date('Y-m-d', strtotime($v["edate"] ))<= $lastdate)
+                        {
+                            $Lreg_fee =0;
+                        }
+                        else
+                        {
+                            $Lreg_fee = $rule_fee[0]['readmfine']; 
+                        }
+
+                        //$Lreg_fee = 500; 
                     }
                     else
                     {
-                        $Lreg_fee = $rule_fee[0]['Fine'];
+                        if($v['yearOfPass']==2017 && $v['sessOfPass']==2 && date('Y-m-d', strtotime($v["edate"] ))<= $lastdate)
+                        {
+                            $Lreg_fee =0;
+                        }
+                        else
+                        {
+                            $Lreg_fee = $rule_fee[0]['Fine'];
+                        }
+
                     }
                     $reg_fee = $rule_fee[0]['Reg_Fee'];
                     $TotalRegFee = $TotalRegFee + $reg_fee;
                     $TotalLatefee = $TotalLatefee + $Lreg_fee;
                     $Totalprocessing_fee = $Totalprocessing_fee + $processing_fee;
                 } // end of Else
+
 
                 $netTotal = (int)$netTotal +$reg_fee + $Lreg_fee+$processing_fee;
                 $AllUser[$total_record]['regFee'] = $reg_fee;
@@ -1277,7 +1310,7 @@ class Registration_11th extends CI_Controller {
 
                 $total_record++;
             }
-           // $Lreg_fee = $rule_fee[0]['Fine'];
+            // $Lreg_fee = $rule_fee[0]['Fine'];
             if($Lreg_fee == '')
             {
                 $Lreg_fee = 0;
@@ -1289,7 +1322,7 @@ class Registration_11th extends CI_Controller {
             if($isBatchExists != 0)    
             {
                 ////DebugBreak();
-               // $count = $result[0]["COUNT"];
+                // $count = $result[0]["COUNT"];
                 $data['data']["Total_RegistrationFee"] = $TotalRegFee;
                 $data['data']["Total_ProcessingFee"] = $Totalprocessing_fee;
                 $data['data']["Total_LateRegistrationFee"] =     $TotalLatefee;
@@ -1300,10 +1333,10 @@ class Registration_11th extends CI_Controller {
                 //$data['rule_fee'][];
 
                 array('myd'=>$this->Registration_11th_model->UpdateFee_Final($data));
-                
-            
-            
-            
+
+
+
+
 
             }
         }
@@ -1351,7 +1384,7 @@ class Registration_11th extends CI_Controller {
 
 
 
-        return $information = array('data'=>$data,'AllUser'=>$AllUser);
+        return $information = array('data'=>$data,'AllUser'=>$AllUser,'lastdate'=>$lastdate);
 
     }
     public function NewEnrolment_update()
@@ -2649,7 +2682,7 @@ class Registration_11th extends CI_Controller {
     {
         $RegGrp = $this->uri->segment(3);
         $Spl_case = $this->uri->segment(4);
-         //DebugBreak();
+        //DebugBreak();
         $this->load->model('Registration_11th_model');
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -2690,9 +2723,9 @@ class Registration_11th extends CI_Controller {
             redirect('Registration_11th/CreateBatch');
             return;
         }
-       // $is_gov            =  $user_info['info'][0]['IsGovernment'];  //getValue("IsGovernment", " Admission_online..tblinstitutes_all", "Inst_cd =".$user->inst_cd);
+        // $is_gov            =  $user_info['info'][0]['IsGovernment'];  //getValue("IsGovernment", " Admission_online..tblinstitutes_all", "Inst_cd =".$user->inst_cd);
         /*====================  Counting Fee  ==============================*/
-       /* $processing_fee = 100;
+        /* $processing_fee = 100;
         $reg_fee           = 1000;
         $reLreg_fee          = 0;
         $TotalRegFee = 0;
@@ -2701,32 +2734,32 @@ class Registration_11th extends CI_Controller {
         $netTotal = 0;      */
         /*====================  Counting Fee  ==============================*/    
         //// DebugBreak();();
-/*        $rule_fee = $user_info['rule_fee'];*/
+        /*        $rule_fee = $user_info['rule_fee'];*/
         //$lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date']));
-      /*  if($user_info['info'][0]['affiliation_date'] != null && date('Y-m-d',strtotime($user_info['info'][0]['feedingDate']))>$lastdate)
+        /*  if($user_info['info'][0]['affiliation_date'] != null && date('Y-m-d',strtotime($user_info['info'][0]['feedingDate']))>$lastdate)
         {
-            $lastdate  = date('Y-m-d',strtotime($user_info['info'][0]['feedingDate'])) ;
-            if(date('Y-m-d')<=$lastdate)
-            {
-                $rule_fee  =  $this->Registration_11th_model->getreulefee(1); 
-            }
-            else
-            {
-                $rule_fee  =  $this->Registration_11th_model->getreulefee(2); 
-            }
+        $lastdate  = date('Y-m-d',strtotime($user_info['info'][0]['feedingDate'])) ;
+        if(date('Y-m-d')<=$lastdate)
+        {
+        $rule_fee  =  $this->Registration_11th_model->getreulefee(1); 
+        }
+        else
+        {
+        $rule_fee  =  $this->Registration_11th_model->getreulefee(2); 
+        }
         }
         else 
         {
-            if(date('Y-m-d',strtotime(SINGLE_LAST_DATE))>=date('Y-m-d'))
-            {
-                $rule_fee  =  $this->Registration_11th_model->getreulefee(1); 
-                $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
-            }
-            else
-            {
-                $rule_fee  =  $this->Registration_11th_model->getreulefee(2); 
-                $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
-            }
+        if(date('Y-m-d',strtotime(SINGLE_LAST_DATE))>=date('Y-m-d'))
+        {
+        $rule_fee  =  $this->Registration_11th_model->getreulefee(1); 
+        $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
+        }
+        else
+        {
+        $rule_fee  =  $this->Registration_11th_model->getreulefee(2); 
+        $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
+        }
 
 
 
@@ -2745,121 +2778,121 @@ class Registration_11th extends CI_Controller {
 
         }*/
         //// DebugBreak();();
-       /* $q1 = $user_info['fee'];
+        /* $q1 = $user_info['fee'];
         $total_std = 0;
         $total_record=0;
         $AllUser = array();
         foreach($q1 as $k=>$v) 
         {
-            $ids[] = $v["FormNo"];
-            $total_std++;
-            if(date('Y-m-d', strtotime($v["edate"] ))<= $lastdate) 
-            {
-                if($v["Spec"] > 0)
-                {
-                    $reg_fee = 0;//$rule_fee[0]['Reg_Fee'];
-                    if($v['IsReAdm']==1)
-                    {
-                        $Lreg_fee=0;
-                        $TotalLatefee = $TotalLatefee + $Lreg_fee;
-                    }
-                    else
-                    {        $Lreg_fee = $rule_fee[0]['Fine'];
-                        $TotalLatefee = $TotalLatefee + $Lreg_fee;
-                    }
-                    $Totalprocessing_fee = $Totalprocessing_fee + $processing_fee;
-                }
-                else 
-                {
-                    if($is_gov == 1)
-                    {
-                        $reg_fee = $rule_fee[0]['Reg_Fee'];
-                        $Lreg_fee = $rule_fee[0]['Fine'];
-                        $processing_fee = $rule_fee[0]['Reg_Processing_Fee'];
-                    }
-                    else
-                    {
-                        $reg_fee = $rule_fee[0]['Reg_Fee'];
-                        $Lreg_fee = $rule_fee[0]['Fine'];
-                        $processing_fee = $rule_fee[0]['Reg_Processing_Fee'];
+        $ids[] = $v["FormNo"];
+        $total_std++;
+        if(date('Y-m-d', strtotime($v["edate"] ))<= $lastdate) 
+        {
+        if($v["Spec"] > 0)
+        {
+        $reg_fee = 0;//$rule_fee[0]['Reg_Fee'];
+        if($v['IsReAdm']==1)
+        {
+        $Lreg_fee=0;
+        $TotalLatefee = $TotalLatefee + $Lreg_fee;
+        }
+        else
+        {        $Lreg_fee = $rule_fee[0]['Fine'];
+        $TotalLatefee = $TotalLatefee + $Lreg_fee;
+        }
+        $Totalprocessing_fee = $Totalprocessing_fee + $processing_fee;
+        }
+        else 
+        {
+        if($is_gov == 1)
+        {
+        $reg_fee = $rule_fee[0]['Reg_Fee'];
+        $Lreg_fee = $rule_fee[0]['Fine'];
+        $processing_fee = $rule_fee[0]['Reg_Processing_Fee'];
+        }
+        else
+        {
+        $reg_fee = $rule_fee[0]['Reg_Fee'];
+        $Lreg_fee = $rule_fee[0]['Fine'];
+        $processing_fee = $rule_fee[0]['Reg_Processing_Fee'];
 
-                    }
-
-
-                    $TotalRegFee = $TotalRegFee + $reg_fee;
-                    if($v['IsReAdm']==1)
-                    {   $Lreg_fee = 0; 
-                        $TotalLatefee = $TotalLatefee + $reLreg_fee;
-                    }
-                    else
-                    {
-                        if($v["yearOfPass"] == Year && $v["sessOfPass"] ==2)
-                        {
-                            if(date('Y-m-d', strtotime($v["edate"] ))<= $lastdate) 
-                            {
-                                $Lreg_fee = $rule_fee[0]['Fine'];
-                            }
-                            else
-                            {
-                                $Lreg_fee = $rule_fee[0]['Fine'];
-                            }
-
-                        }
-                        else
-
-                            $TotalLatefee = $TotalLatefee + $Lreg_fee; 
-                    }
-                    $Totalprocessing_fee = $Totalprocessing_fee + $processing_fee;
-                } 
-            } 
-            else
-            {
-                $reg_fee = $rule_fee[0]['Reg_Fee'];
-                $TotalRegFee = $TotalRegFee + $reg_fee;
-                if($v['IsReAdm']==1)     
-                {     
-                    $TotalLatefee = $TotalLatefee + $reLreg_fee;
-                }
-                else
-                {
-                    if($v["yearOfPass"] == Year && $v["sessOfPass"] ==2)
-                    {
-                        if(date('Y-m-d', strtotime($v["edate"] ))<= $lastdate) 
-                        {
-                            $Lreg_fee = $rule_fee[0]['Fine']; 
-                        }
-                        else
-                        {
-                            $Lreg_fee = $rule_fee[0]['Fine'];  
-                        }
-                    }
+        }
 
 
-                    $TotalLatefee = $TotalLatefee + $Lreg_fee;
-                }
-                $Totalprocessing_fee = $Totalprocessing_fee + $processing_fee;
-            } // end of Else
-            /*if(date('Y-m-d')<=$lastdate)
-            {
-            $Lreg_fee = 0;
-            $TotalLatefee=0;
-            $reLreg_fee=0;
-            }  */
-           /* $netTotal = (int)$netTotal +$reg_fee + $Lreg_fee+$processing_fee;
-            $netTotal = (int)$netTotal +$reg_fee + $Lreg_fee+$processing_fee;
-            $AllUser[$total_record]['regFee'] = $reg_fee;
-            $AllUser[$total_record]['RegFineFee'] = $Lreg_fee;
-            $AllUser[$total_record]['RegProcessFee'] = $processing_fee;
-            $AllUser[$total_record]['RegTotalFee'] = $reg_fee+$Lreg_fee+$processing_fee;
-            //// DebugBreak();();
-            $AllUser[$total_record]['formNo'] = $v["FormNo"];
-            $total_record++;
-            /* if($total_std > 360)
-            {
-            break;
-            }        */
+        $TotalRegFee = $TotalRegFee + $reg_fee;
+        if($v['IsReAdm']==1)
+        {   $Lreg_fee = 0; 
+        $TotalLatefee = $TotalLatefee + $reLreg_fee;
+        }
+        else
+        {
+        if($v["yearOfPass"] == Year && $v["sessOfPass"] ==2)
+        {
+        if(date('Y-m-d', strtotime($v["edate"] ))<= $lastdate) 
+        {
+        $Lreg_fee = $rule_fee[0]['Fine'];
+        }
+        else
+        {
+        $Lreg_fee = $rule_fee[0]['Fine'];
+        }
 
-       /* }   */
+        }
+        else
+
+        $TotalLatefee = $TotalLatefee + $Lreg_fee; 
+        }
+        $Totalprocessing_fee = $Totalprocessing_fee + $processing_fee;
+        } 
+        } 
+        else
+        {
+        $reg_fee = $rule_fee[0]['Reg_Fee'];
+        $TotalRegFee = $TotalRegFee + $reg_fee;
+        if($v['IsReAdm']==1)     
+        {     
+        $TotalLatefee = $TotalLatefee + $reLreg_fee;
+        }
+        else
+        {
+        if($v["yearOfPass"] == Year && $v["sessOfPass"] ==2)
+        {
+        if(date('Y-m-d', strtotime($v["edate"] ))<= $lastdate) 
+        {
+        $Lreg_fee = $rule_fee[0]['Fine']; 
+        }
+        else
+        {
+        $Lreg_fee = $rule_fee[0]['Fine'];  
+        }
+        }
+
+
+        $TotalLatefee = $TotalLatefee + $Lreg_fee;
+        }
+        $Totalprocessing_fee = $Totalprocessing_fee + $processing_fee;
+        } // end of Else
+        /*if(date('Y-m-d')<=$lastdate)
+        {
+        $Lreg_fee = 0;
+        $TotalLatefee=0;
+        $reLreg_fee=0;
+        }  */
+        /* $netTotal = (int)$netTotal +$reg_fee + $Lreg_fee+$processing_fee;
+        $netTotal = (int)$netTotal +$reg_fee + $Lreg_fee+$processing_fee;
+        $AllUser[$total_record]['regFee'] = $reg_fee;
+        $AllUser[$total_record]['RegFineFee'] = $Lreg_fee;
+        $AllUser[$total_record]['RegProcessFee'] = $processing_fee;
+        $AllUser[$total_record]['RegTotalFee'] = $reg_fee+$Lreg_fee+$processing_fee;
+        //// DebugBreak();();
+        $AllUser[$total_record]['formNo'] = $v["FormNo"];
+        $total_record++;
+        /* if($total_std > 360)
+        {
+        break;
+        }        */
+
+        /* }   */
 
         $info =  $this->feeFinalCalculate($User_info_data,$user_info,0);
         $data = $info['data'];
@@ -2876,7 +2909,7 @@ class Registration_11th extends CI_Controller {
     }
     public function Make_Batch_Formwise()
     {
-       // DebugBreak();
+        // DebugBreak();
         if(!empty($_POST["chk"]))
         {
 
@@ -2921,140 +2954,140 @@ class Registration_11th extends CI_Controller {
         /*$rule_fee = $user_info['rule_fee'];
         if($user_info['info'][0]['affiliation_date'] != null)
         {
-            $lastdate  = date('Y-m-d',strtotime($user_info['info'][0]['feedingDate'])) ;
-            if(date('Y-m-d')<=$lastdate)
-            {
-                $rule_fee  =  $this->Registration_11th_model->getreulefee(1); 
-            }
-            else
-            {
-                $rule_fee  =  $this->Registration_11th_model->getreulefee(2); 
-            }
+        $lastdate  = date('Y-m-d',strtotime($user_info['info'][0]['feedingDate'])) ;
+        if(date('Y-m-d')<=$lastdate)
+        {
+        $rule_fee  =  $this->Registration_11th_model->getreulefee(1); 
+        }
+        else
+        {
+        $rule_fee  =  $this->Registration_11th_model->getreulefee(2); 
+        }
         }
         else 
         {
-            $rule_fee  =  $this->Registration_11th_model->getreulefee(1); 
-            $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
+        $rule_fee  =  $this->Registration_11th_model->getreulefee(1); 
+        $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
 
 
         }
         if($is_gov == 1)
         {
-            $reg_fee = $rule_fee[0]['Reg_Fee'];
-            $Lreg_fee = $rule_fee[0]['Fine'];
-            $processing_fee = $rule_fee[0]['Reg_Processing_Fee'];
+        $reg_fee = $rule_fee[0]['Reg_Fee'];
+        $Lreg_fee = $rule_fee[0]['Fine'];
+        $processing_fee = $rule_fee[0]['Reg_Processing_Fee'];
         }
         else
         {
-            $reg_fee = $rule_fee[0]['Reg_Fee'];
-            $Lreg_fee = $rule_fee[0]['Fine'];
-            $processing_fee = $rule_fee[0]['Reg_Processing_Fee'];
+        $reg_fee = $rule_fee[0]['Reg_Fee'];
+        $Lreg_fee = $rule_fee[0]['Fine'];
+        $processing_fee = $rule_fee[0]['Reg_Processing_Fee'];
 
         }         */
         // }
         // if($)
 
         // // DebugBreak();();
-       /* $q1 = $user_info['fee'];
+        /* $q1 = $user_info['fee'];
         $total_std = 0;
         foreach($q1 as $k=>$v) 
         {
-            $ids[] = $v["FormNo"];
-            $total_std++;
-            if(date('Y-m-d', strtotime($v["edate"] ))<= $lastdate) 
-            {
-                if($v["Spec"] == 1 || $v["Spec"] ==  2)
-                {
-                    $TotalRegFee = $TotalRegFee + $reg_fee;
-                    $reg_fee = $rule_fee[0]['Reg_Fee'];;
-                    if($v['IsReAdm']==1)
-                    {   $Lreg_fee = 0;
-                        $TotalLatefee = $TotalLatefee + $Lreg_fee ;
-                    }
-                    else
-                    {         $Lreg_fee = $rule_fee[0]['Fine'];
-                        $TotalLatefee = $TotalLatefee + $Lreg_fee;
-                    }
-                    $Totalprocessing_fee = $Totalprocessing_fee + $processing_fee;
-                }
-                else 
-                {
-                    $TotalRegFee = $TotalRegFee + $reg_fee;
-                    if($v['IsReAdm']==1)
-                    {   $Lreg_fee = 0; 
-                        $TotalLatefee = $TotalLatefee + $reLreg_fee;
-                    }
-                    else
-                    {     
-                        if($v["yearOfPass"] == Year && $v["sessOfPass"] ==2)
-                        {
-                            if(date('Y-m-d', strtotime($v["edate"] ))<= $lastdate) 
-                            {
-                                $Lreg_fee = 3000; 
-                            }
-                            else
-                            {
-                                $Lreg_fee = 3000;  
-                            }
-                        }
-                        else
-                        {
+        $ids[] = $v["FormNo"];
+        $total_std++;
+        if(date('Y-m-d', strtotime($v["edate"] ))<= $lastdate) 
+        {
+        if($v["Spec"] == 1 || $v["Spec"] ==  2)
+        {
+        $TotalRegFee = $TotalRegFee + $reg_fee;
+        $reg_fee = $rule_fee[0]['Reg_Fee'];;
+        if($v['IsReAdm']==1)
+        {   $Lreg_fee = 0;
+        $TotalLatefee = $TotalLatefee + $Lreg_fee ;
+        }
+        else
+        {         $Lreg_fee = $rule_fee[0]['Fine'];
+        $TotalLatefee = $TotalLatefee + $Lreg_fee;
+        }
+        $Totalprocessing_fee = $Totalprocessing_fee + $processing_fee;
+        }
+        else 
+        {
+        $TotalRegFee = $TotalRegFee + $reg_fee;
+        if($v['IsReAdm']==1)
+        {   $Lreg_fee = 0; 
+        $TotalLatefee = $TotalLatefee + $reLreg_fee;
+        }
+        else
+        {     
+        if($v["yearOfPass"] == Year && $v["sessOfPass"] ==2)
+        {
+        if(date('Y-m-d', strtotime($v["edate"] ))<= $lastdate) 
+        {
+        $Lreg_fee = 3000; 
+        }
+        else
+        {
+        $Lreg_fee = 3000;  
+        }
+        }
+        else
+        {
 
-                            $Lreg_fee = $rule_fee[0]['Fine'];
-                        }
+        $Lreg_fee = $rule_fee[0]['Fine'];
+        }
 
-                        $TotalLatefee = $TotalLatefee + $Lreg_fee;
-                    }
-                    $Totalprocessing_fee = $Totalprocessing_fee + $processing_fee;
-                } 
-            } 
-            else
-            {
-                $reg_fee = $rule_fee[0]['Reg_Fee'];
-                $TotalRegFee = $TotalRegFee + $reg_fee;
-                if($v['IsReAdm']==1)
-                {   
-                    $TotalLatefee = $TotalLatefee + $reLreg_fee;
-                }
-                else
-                {     
-                    if($v["yearOfPass"] == Year && $v["sessOfPass"] ==2)
-                    {
-                        if(date('Y-m-d', strtotime($v["edate"] ))<= $lastdate) 
-                        {
-                            $Lreg_fee = 3000; 
-                        }
-                        else
-                        {
-                            $Lreg_fee = 3000;  
-                        }
-                    }
-                    else
-                    {   
-                        $Lreg_fee = $rule_fee[0]['Fine'];
-                    }
+        $TotalLatefee = $TotalLatefee + $Lreg_fee;
+        }
+        $Totalprocessing_fee = $Totalprocessing_fee + $processing_fee;
+        } 
+        } 
+        else
+        {
+        $reg_fee = $rule_fee[0]['Reg_Fee'];
+        $TotalRegFee = $TotalRegFee + $reg_fee;
+        if($v['IsReAdm']==1)
+        {   
+        $TotalLatefee = $TotalLatefee + $reLreg_fee;
+        }
+        else
+        {     
+        if($v["yearOfPass"] == Year && $v["sessOfPass"] ==2)
+        {
+        if(date('Y-m-d', strtotime($v["edate"] ))<= $lastdate) 
+        {
+        $Lreg_fee = 3000; 
+        }
+        else
+        {
+        $Lreg_fee = 3000;  
+        }
+        }
+        else
+        {   
+        $Lreg_fee = $rule_fee[0]['Fine'];
+        }
 
 
-                    $TotalLatefee = $TotalLatefee + $Lreg_fee;
-                }
-                $Totalprocessing_fee = $Totalprocessing_fee + $processing_fee;
-            } // end of Else
+        $TotalLatefee = $TotalLatefee + $Lreg_fee;
+        }
+        $Totalprocessing_fee = $Totalprocessing_fee + $processing_fee;
+        } // end of Else
 
-            if(date('Y-m-d')<=$lastdate)
-            {
-                $Lreg_fee = 0;
-                $TotalLatefee=0;
-                $reLreg_fee=0;
-            }
-            $netTotal = (int)$netTotal +$reg_fee + $Lreg_fee+$processing_fee;
-            if($total_std > 360)
-            {
-                break;
-            }
+        if(date('Y-m-d')<=$lastdate)
+        {
+        $Lreg_fee = 0;
+        $TotalLatefee=0;
+        $reLreg_fee=0;
+        }
+        $netTotal = (int)$netTotal +$reg_fee + $Lreg_fee+$processing_fee;
+        if($total_std > 360)
+        {
+        break;
+        }
 
         }*/
 
-      //  $forms_id   = implode(",",$ids); 
+        //  $forms_id   = implode(",",$ids); 
         /* if(date('Y-m-d')<=$lastdate)
         {
         $Lreg_fee = 0;
@@ -3062,11 +3095,11 @@ class Registration_11th extends CI_Controller {
         $reLreg_fee=0;
         }  */
 
-      //  $tot_fee     = $Totalprocessing_fee+$TotalRegFee+$TotalLatefee;
+        //  $tot_fee     = $Totalprocessing_fee+$TotalRegFee+$TotalLatefee;
         // $challan_No = 0;
-       // $today = date("Y-m-d H:i:s");
-       // $data = array('inst_cd'=>$Inst_Id,'total_fee'=>$tot_fee,'proces_fee'=>$processing_fee,'reg_fee'=>$reg_fee,'fine'=>$Lreg_fee,'refine'=>$reLreg_fee,'TotalRegFee'=>$TotalRegFee,'TotalLatefee'=>$TotalLatefee,'Totalprocessing_fee'=>$Totalprocessing_fee,'forms_id'=>$forms_id,'todaydate'=>$today,'total_std'=>$total_std);
-         $info =  $this->feeFinalCalculate($User_info_data,$user_info,0);
+        // $today = date("Y-m-d H:i:s");
+        // $data = array('inst_cd'=>$Inst_Id,'total_fee'=>$tot_fee,'proces_fee'=>$processing_fee,'reg_fee'=>$reg_fee,'fine'=>$Lreg_fee,'refine'=>$reLreg_fee,'TotalRegFee'=>$TotalRegFee,'TotalLatefee'=>$TotalLatefee,'Totalprocessing_fee'=>$Totalprocessing_fee,'forms_id'=>$forms_id,'todaydate'=>$today,'total_std'=>$total_std);
+        $info =  $this->feeFinalCalculate($User_info_data,$user_info,0);
         $data = $info['data'];
 
         $AllUser = $info['AllUser'];
@@ -3378,7 +3411,7 @@ class Registration_11th extends CI_Controller {
     }
     public function revenue_pdf()
     {
-       // DebugBreak();
+        // DebugBreak();
         $Batch_Id = $this->uri->segment(3);
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -3393,74 +3426,74 @@ class Registration_11th extends CI_Controller {
         //$user_info  =  $this->Registration_11th_model->getuser_info($User_info_data); 
 
 
-      /*
+        /*
         $isfine = 0;
 
 
         if($user['isSpecial']==1 && date('Y-m-d',strtotime($user['isSpecial_Fee']['FeedingDate']))>=date('Y-m-d')  )
         {
-            $rule_fee[0]['Fine']   =  $user['isSpecial_Fee']['SpecialFee']; 
-            $rule_fee[0]['Reg_Processing_Fee']   =  $user['isSpecial_Fee']['ProcessingFee']; 
-            $rule_fee[0]['Reg_Fee']   =  $user['isSpecial_Fee']['RegFee']; 
-            $rule_fee[0]['Rule_Fee_ID']   = 0; 
-            $rule_fee[0]['isfine'] = 1; 
-            $lastdate  = date('Y-m-d',strtotime($user['isSpecial_Fee']['FeedingDate'])) ;
+        $rule_fee[0]['Fine']   =  $user['isSpecial_Fee']['SpecialFee']; 
+        $rule_fee[0]['Reg_Processing_Fee']   =  $user['isSpecial_Fee']['ProcessingFee']; 
+        $rule_fee[0]['Reg_Fee']   =  $user['isSpecial_Fee']['RegFee']; 
+        $rule_fee[0]['Rule_Fee_ID']   = 0; 
+        $rule_fee[0]['isfine'] = 1; 
+        $lastdate  = date('Y-m-d',strtotime($user['isSpecial_Fee']['FeedingDate'])) ;
 
-            $data = array('data'=>$this->Registration_11th_model->revenue_pdf($fetch_data),'inst_Name'=>$user['inst_Name'],'inst_cd'=>$user['Inst_Id'],'barcode'=>$image,"rulefee"=>$rule_fee);
+        $data = array('data'=>$this->Registration_11th_model->revenue_pdf($fetch_data),'inst_Name'=>$user['inst_Name'],'inst_cd'=>$user['Inst_Id'],'barcode'=>$image,"rulefee"=>$rule_fee);
         }
         else
 
         {
-            if(date('Y-m-d',strtotime(SINGLE_LAST_DATE))>=date('Y-m-d'))
-            {
-                $rule_fee[0]['isfine'] = 0; 
-            }
-            else if($user_info['info'][0]['feedingDate'] != null)
-            {
-                $lastdate  = date('Y-m-d',strtotime($user_info['info'][0]['feedingDate'])) ;
-                if(date('Y-m-d')<=$lastdate)
-                {
+        if(date('Y-m-d',strtotime(SINGLE_LAST_DATE))>=date('Y-m-d'))
+        {
+        $rule_fee[0]['isfine'] = 0; 
+        }
+        else if($user_info['info'][0]['feedingDate'] != null)
+        {
+        $lastdate  = date('Y-m-d',strtotime($user_info['info'][0]['feedingDate'])) ;
+        if(date('Y-m-d')<=$lastdate)
+        {
 
-                    $rule_fee  =  $this->Registration_11th_model->getreulefee(1);
-                    $rule_fee[0]['isfine'] = 0; 
-                }
-                else 
-                {
-                    $rule_fee   =  $this->Registration_11th_model->getreulefee(2);
-                    $rule_fee[0]['isfine'] = 1;
-                }
-            }
-            else   if(date('Y-m-d',strtotime(DOUBLE_LAST_DATE))>date('Y-m-d'))
-            {
-                $isfine = 1;
-                $rule_fee   =  $this->Registration_11th_model->getreulefee(2);
-                $rule_fee[0]['isfine'] = 1; 
-                $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
-            }
-            //  // DebugBreak();();
-            /* if(ISREADMISSION == 1)
-            {
-            $rule_fee  =  $this->Registration_model->getreulefee(1);
-            $rule_fee[0]['isfine'] = 1; 
-            $isfine = 1;
-            }   */
-           /*
-            $data = array('data'=>$this->Registration_11th_model->revenue_pdf($fetch_data),'inst_Name'=>$user['inst_Name'],'inst_cd'=>$user['Inst_Id'],'barcode'=>$image,"rulefee"=>$rule_fee);
-            if($rule_fee[0]['isfine'] == 1)
-            {
-                //// DebugBreak();();
-                $count = $data['data']['batch_info'][0]["COUNT"];
-                $data['data']["Total_RegistrationFee"] =  $count*$rule_fee[0]['Reg_Fee'] ;
-                $data['data']["Total_ProcessingFee"] =  $count*$rule_fee[0]['Reg_Processing_Fee'] ;
-                $data['data']["Total_LateRegistrationFee"] =  $count*$rule_fee[0]['Fine'] ;
-                $data['data']["Amount"] = $data['data']["Total_RegistrationFee"]+ $data['data']["Total_ProcessingFee"]+$data['data']["Total_LateRegistrationFee"] ;
+        $rule_fee  =  $this->Registration_11th_model->getreulefee(1);
+        $rule_fee[0]['isfine'] = 0; 
+        }
+        else 
+        {
+        $rule_fee   =  $this->Registration_11th_model->getreulefee(2);
+        $rule_fee[0]['isfine'] = 1;
+        }
+        }
+        else   if(date('Y-m-d',strtotime(DOUBLE_LAST_DATE))>date('Y-m-d'))
+        {
+        $isfine = 1;
+        $rule_fee   =  $this->Registration_11th_model->getreulefee(2);
+        $rule_fee[0]['isfine'] = 1; 
+        $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
+        }
+        //  // DebugBreak();();
+        /* if(ISREADMISSION == 1)
+        {
+        $rule_fee  =  $this->Registration_model->getreulefee(1);
+        $rule_fee[0]['isfine'] = 1; 
+        $isfine = 1;
+        }   */
+        /*
+        $data = array('data'=>$this->Registration_11th_model->revenue_pdf($fetch_data),'inst_Name'=>$user['inst_Name'],'inst_cd'=>$user['Inst_Id'],'barcode'=>$image,"rulefee"=>$rule_fee);
+        if($rule_fee[0]['isfine'] == 1)
+        {
+        //// DebugBreak();();
+        $count = $data['data']['batch_info'][0]["COUNT"];
+        $data['data']["Total_RegistrationFee"] =  $count*$rule_fee[0]['Reg_Fee'] ;
+        $data['data']["Total_ProcessingFee"] =  $count*$rule_fee[0]['Reg_Processing_Fee'] ;
+        $data['data']["Total_LateRegistrationFee"] =  $count*$rule_fee[0]['Fine'] ;
+        $data['data']["Amount"] = $data['data']["Total_RegistrationFee"]+ $data['data']["Total_ProcessingFee"]+$data['data']["Total_LateRegistrationFee"] ;
 
-                array('myd'=>$this->Registration_11th_model->UpdateBatchFee($data));
-            }  */
+        array('myd'=>$this->Registration_11th_model->UpdateBatchFee($data));
+        }  */
 
 
         //} 
-          //  ////DebugBreak();    
+        //  ////DebugBreak();    
         $User_info_data = array('Inst_Id'=>$user['Inst_Id'],'Batch_Id'=>$Batch_Id);
         $user_info  =  $this->Registration_11th_model->user_info_Batch_Id($User_info_data); 
 
@@ -4311,7 +4344,7 @@ class Registration_11th extends CI_Controller {
     }
     public function ChallanForm_Reg11th_Regular()
     {
-       // DebugBreak();
+        // DebugBreak();
         $Batch_Id = $this->uri->segment(3);
         $this->load->library('session');
         $this->load->library('NumbertoWord');
@@ -4356,99 +4389,99 @@ class Registration_11th extends CI_Controller {
         $challanMSG=array(1=>"(May be deposited in any HBL Branch)",2=>"(To be sent to the Registration Branch Via BISE One Window)", 3=>"(To be retained with HBL)", 4=>"(Along with scroll)"  );
         $challanNo = $result[0]['Challan_No']; 
 
-       // DebugBreak();
+        // DebugBreak();
 
         //$User_info_data = array('Inst_Id'=>$user['Inst_Id'],'RegGrp'=>@$RegGrp,'spl_case'=>@$Spl_case);
         //$user_info  =  $this->Registration_11th_model->getuser_info($User_info_data); 
 
-        
 
-     /*   $isfine = 0;
+
+        /*   $isfine = 0;
 
 
         if($user['isSpecial']==1 && date('Y-m-d',strtotime($user['isSpecial_Fee']['FeedingDate']))>=date('Y-m-d')  )
         {
-            $rule_fee[0]['Fine']   =  $user['isSpecial_Fee']['SpecialFee']; 
-            $rule_fee[0]['Reg_Processing_Fee']   =  $user['isSpecial_Fee']['ProcessingFee']; 
-            $rule_fee[0]['Reg_Fee']   =  $user['isSpecial_Fee']['RegFee']; 
-            $rule_fee[0]['Rule_Fee_ID']   = 0; 
-            $rule_fee[0]['isfine'] = 1; 
-            $lastdate  = date('Y-m-d',strtotime($user['isSpecial_Fee']['FeedingDate'])) ;
+        $rule_fee[0]['Fine']   =  $user['isSpecial_Fee']['SpecialFee']; 
+        $rule_fee[0]['Reg_Processing_Fee']   =  $user['isSpecial_Fee']['ProcessingFee']; 
+        $rule_fee[0]['Reg_Fee']   =  $user['isSpecial_Fee']['RegFee']; 
+        $rule_fee[0]['Rule_Fee_ID']   = 0; 
+        $rule_fee[0]['isfine'] = 1; 
+        $lastdate  = date('Y-m-d',strtotime($user['isSpecial_Fee']['FeedingDate'])) ;
         }
         else
 
         {
-            if(date('Y-m-d',strtotime(SINGLE_LAST_DATE))>=date('Y-m-d'))
-            {
-                $rule_fee[0]['isfine'] = 0; 
-                $lastdate  = date('Y-m-d',strtotime($user_info['rule_fee'][0]['End_Date'])) ;
-            }
-            else if($user_info['info'][0]['feedingDate'] != null && $user_info['info'][0]['feedingDate'] >=date('Y-m-d'))
-            {
+        if(date('Y-m-d',strtotime(SINGLE_LAST_DATE))>=date('Y-m-d'))
+        {
+        $rule_fee[0]['isfine'] = 0; 
+        $lastdate  = date('Y-m-d',strtotime($user_info['rule_fee'][0]['End_Date'])) ;
+        }
+        else if($user_info['info'][0]['feedingDate'] != null && $user_info['info'][0]['feedingDate'] >=date('Y-m-d'))
+        {
 
-                $lastdate  = date('Y-m-d',strtotime($user_info['info'][0]['feedingDate'])) ;    
+        $lastdate  = date('Y-m-d',strtotime($user_info['info'][0]['feedingDate'])) ;    
 
-                if(date('Y-m-d')<=$lastdate)
-                {
+        if(date('Y-m-d')<=$lastdate)
+        {
 
-                    $rule_fee  =  $this->Registration_11th_model->getreulefee(1);
-                    $rule_fee[0]['isfine'] = 0; 
-                }
-                else 
-                {
-                    $rule_fee   =  $this->Registration_11th_model->getreulefee(2);
-                    $rule_fee[0]['isfine'] = 1;
-                }
-            }
-            else   if(date('Y-m-d',strtotime(DOUBLE_LAST_DATE))>=date('Y-m-d'))
-            {
-                $isfine = 1;
-                $rule_fee   =  $this->Registration_11th_model->getreulefee(2);
-                $rule_fee[0]['isfine'] = 1; 
-                $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
-            }
-            else  
-            { 
+        $rule_fee  =  $this->Registration_11th_model->getreulefee(1);
+        $rule_fee[0]['isfine'] = 0; 
+        }
+        else 
+        {
+        $rule_fee   =  $this->Registration_11th_model->getreulefee(2);
+        $rule_fee[0]['isfine'] = 1;
+        }
+        }
+        else   if(date('Y-m-d',strtotime(DOUBLE_LAST_DATE))>=date('Y-m-d'))
+        {
+        $isfine = 1;
+        $rule_fee   =  $this->Registration_11th_model->getreulefee(2);
+        $rule_fee[0]['isfine'] = 1; 
+        $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
+        }
+        else  
+        { 
 
-                $rule_fee   =  $this->Registration_11th_model->getreulefee(2);
-                if(READMISSION_11th ==1)
-                {
-                $rule_fee[0]['isfine'] = 0; 
-                }
-                else
-                {
-                $rule_fee[0]['isfine'] = 1; 
-                }
-                
-                
-                $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
-            }
+        $rule_fee   =  $this->Registration_11th_model->getreulefee(2);
+        if(READMISSION_11th ==1)
+        {
+        $rule_fee[0]['isfine'] = 0; 
+        }
+        else
+        {
+        $rule_fee[0]['isfine'] = 1; 
+        }
 
 
+        $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
+        }
 
-            if($rule_fee[0]['isfine'] == 1)
-            {
 
-                $count = $result[0]["COUNT"];
-                $data['data']["Total_RegistrationFee"] =  $count*$rule_fee[0]['Reg_Fee'] ;
-                $data['data']["Total_ProcessingFee"] =  $count*$rule_fee[0]['Reg_Processing_Fee'] ;
-                $data['data']["Total_LateRegistrationFee"] =  $count*$rule_fee[0]['Fine'] ;
-                $data['data']["Amount"] = $data['data']["Total_RegistrationFee"]+ $data['data']["Total_ProcessingFee"]+$data['data']["Total_LateRegistrationFee"] ;
-                $data['data']['batch_info'][0]['Batch_ID'] = $result[0]['Batch_ID'];
-                $data['rulefee'][0]['Reg_Fee']  =  $rule_fee[0]['Reg_Fee'];
-                $data['rulefee'][0]['Processing_Fee']  =  $rule_fee[0]['Processing_Fee'];
-                if(READMISSION ==0)
-                {
-                    $data['rulefee'][0]['Fine']  =  0;
-                }
-                else
-                {
-                    $data['rulefee'][0]['Fine']  =  $rule_fee[0]['Fine'];
-                }
 
-                $data['rulefee'][0]['Amount']  =  $rule_fee[0]['Amount'];
-                array('myd'=>$this->Registration_11th_model->UpdateBatchFee($data));
-            } 
+        if($rule_fee[0]['isfine'] == 1)
+        {
+
+        $count = $result[0]["COUNT"];
+        $data['data']["Total_RegistrationFee"] =  $count*$rule_fee[0]['Reg_Fee'] ;
+        $data['data']["Total_ProcessingFee"] =  $count*$rule_fee[0]['Reg_Processing_Fee'] ;
+        $data['data']["Total_LateRegistrationFee"] =  $count*$rule_fee[0]['Fine'] ;
+        $data['data']["Amount"] = $data['data']["Total_RegistrationFee"]+ $data['data']["Total_ProcessingFee"]+$data['data']["Total_LateRegistrationFee"] ;
+        $data['data']['batch_info'][0]['Batch_ID'] = $result[0]['Batch_ID'];
+        $data['rulefee'][0]['Reg_Fee']  =  $rule_fee[0]['Reg_Fee'];
+        $data['rulefee'][0]['Processing_Fee']  =  $rule_fee[0]['Processing_Fee'];
+        if(READMISSION ==0)
+        {
+        $data['rulefee'][0]['Fine']  =  0;
+        }
+        else
+        {
+        $data['rulefee'][0]['Fine']  =  $rule_fee[0]['Fine'];
+        }
+
+        $data['rulefee'][0]['Amount']  =  $rule_fee[0]['Amount'];
+        array('myd'=>$this->Registration_11th_model->UpdateBatchFee($data));
+        } 
 
 
 
@@ -4482,8 +4515,9 @@ class Registration_11th extends CI_Controller {
         $yy = 0.05;
         $dyy = 0.1;
         $corcnt = 0;
-        $lastdate = $myinfo['data']['rulefee'][0]['End_Date'];
-        $lastdate = date("d-m-Y", strtotime($lastdate));
+        //$lastdate = $myinfo['data']['rulefee'][0]['End_Date'];
+        // $lastdate = date("d-m-Y", strtotime($lastdate));
+        $lastdate = $myinfo['lastdate'];
         for ($j=1;$j<=4;$j++) 
         {
 
