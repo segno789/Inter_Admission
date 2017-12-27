@@ -15,7 +15,7 @@
                         </div>
                     </div>
                     <div class="widget-body">
-                        <form class="form-horizontal no-margin" name="myform" id="myform" action="<?php  echo base_url(); ?>/index.php/Admission_inter/NewEnrolment_update_inter" method="post" enctype="multipart/form-data">
+                        <form class="form-horizontal no-margin" name="myform" id="myform" action="<?php  echo base_url(); ?>/Admission_inter/NewEnrolment_update_inter" method="post" enctype="multipart/form-data">
                             <div class="control-group">
                                 <div class="controls controls-row">
                                     <?php
@@ -801,7 +801,7 @@
                                 alertify.confirm(msg, function (e) {
                                     if (e) {
                                         // user clicked "ok"
-                                        window.location.href ='<?php echo base_url(); ?>index.php/Admission_inter/StudentsData';
+                                        window.location.href ='<?php echo base_url(); ?>Admission_inter/StudentsData';
                                     } else {
                                         // user clicked "cancel"
                                     }

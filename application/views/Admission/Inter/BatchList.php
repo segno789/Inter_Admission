@@ -92,9 +92,9 @@
 
 
                         <!--Note: Batch List Prints Will Be Used For Registration.-->
-                        <a href="<?php echo base_url(); ?>index.php/Admission_Inter/forwarding_pdf/" target="_blank" class="guidlines blink_text" style="font-size: 18px;">Download Forwarding letter.</a>
+                        <a href="<?php echo base_url(); ?>Admission_Inter/forwarding_pdf/" target="_blank" class="guidlines blink_text" style="font-size: 18px;">Download Forwarding letter.</a>
                         <br />
-                        <a href="<?php echo base_url(); ?>index.php/Admission_Inter/financeReoprt/" target="_blank" class="guidlines blink_text" style="font-size: 18px;">Download Finance Forwarding letter.</a>
+                        <a href="<?php echo base_url(); ?>Admission_Inter/financeReoprt/" target="_blank" class="guidlines blink_text" style="font-size: 18px;">Download Finance Forwarding letter.</a>
                         <br />  <br/>
 
                     </div>

@@ -38,14 +38,13 @@ define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 define('BARCODE_PATH', 'assets/pdfs/');
 
 
-//define('REGULAR_INSERT_TABLE', 'Admission_online..IAAdm');
-define('REGULAR_INSERT_TABLE', 'Admission_online..ISAdm');
+define('REGULAR_INSERT_TABLE', 'Admission_online..tblIAdm');
 define('DIRPATH12TH','F:\xampp\htdocs\Share Images\\'); 
 define('PRIVATE_IMAGE_PATH', 'uploads/private/');
 define('PRIVATE_IMAGE_PATH_FRESH', 'uploads/Fresh');
 define('REGULAR_IMAGE_PATH', 'uploads/regular/');
 define('Session','1');  // 1 for Annual and 2 for Supply
-define('Year','2017');  
+define('Year','2018');  
 
 define ('sessReg','2017-2019');
 define('Regtbl','Registration..tblreg11th');
@@ -53,12 +52,9 @@ define('Feetbl','Registration..RuleFee_Reg_Eleventh');
 define('Batchtbl','Registration..tblregbatch11th');
 
 define('lastdate','15-09-2017');
-define('GET_PRIVATE_IMAGE_PATH', 'C:\inetpub\vhosts\bisegrw.com\hssc.bisegrw.com\uplaods\2016\private\\');
+define('GET_PRIVATE_IMAGE_PATH', 'C:/inetpub/vhosts/bisegrw.edu.pk/Share Images/uploads/HSSC/admission/2018/12th/annual/private/');
 define('GET_PRIVATE_IMAGE_PATH_COPY', '');
-//define('DIRPATH11th','D:/xampp/htdocs/Inter_Admission/Uploads/IS2016/regular/2510010001.jpg');
 define('DIRPATH11th','C:\inetpub\vhosts\bisegrw.com\registration.bisegrw.com\uploads\2016\colleges\\'); 
-//define('DIRPATH11th','D:/xampp/htdocs/Inter_Admission/Uploads/IS2016/regular/2510010001.jpg'); 
-
 define('DIRPATHOTHER','C:\inetpub\vhosts\bisegrw.com\registration.bisegrw.com\uploads\other12'); 
 
 
@@ -83,13 +79,13 @@ define('corr_bank_chall_class11','11th');
 define('currdate','date("d-m-Y");');
 define('TripleDateFeeinter', '13-10-2017');
 define('RE_ADMISSION_TBL11', 'matric_new..vwIA1P17');
-define('EXAMINATIONDATEINTER_P2','2017-10-21');
-define('SingleDateFee', '2017-09-27');
-define('DoubleDateFee', '2017-10-03');
-define('TripleDateFee', '2017-10-06');
+define('EXAMINATIONDATEINTER_P2','2018-05-05');
+define('SingleDateFee', '2018-01-27');
+define('DoubleDateFee', '2018-02-15');
+define('TripleDateFee', '2018-03-06');
 define('getinfo','admission_online..sp_Admission_HSSC');
-define('Insert_sp','admission_online..sp_insert_ISAdm');
-define('INSERT_TBL','Admission_online..ISAdm'); 
+define('Insert_sp','admission_online..sp_insert_IAdm');
+define('INSERT_TBL','admission_online..tblIAdm'); 
 define ('class_for_11th_Adm','11th');             
 define('formprint_sp_12th','admission_online..sp_form_data_12th');      
 define('getinfo_languages','admission_online..tblAdmissionDataLang');

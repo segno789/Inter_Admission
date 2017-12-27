@@ -1,5 +1,5 @@
 
-<form class="form-horizontal no-margin" action="<?php  echo base_url(); ?>/index.php/Admission/NewEnrolment_insert_Languages" method="post" enctype="multipart/form-data" name="myform" id="myform">
+<form class="form-horizontal no-margin" action="<?php  echo base_url(); ?>/Admission/NewEnrolment_insert_Languages" method="post" enctype="multipart/form-data" name="myform" id="myform">
 
     <?php
     if(@$data[0]['picpath'] == ''){
@@ -1183,7 +1183,7 @@
         var msg = "Are You Sure You want to Cancel this Form ?"
         alertify.confirm(msg, function (e) {
             if (e) {
-                window.location.href ='<?php echo base_url(); ?>index.php/Admission/index';
+                window.location.href ='<?php echo base_url(); ?>Admission/index';
             } else {
             }
         });

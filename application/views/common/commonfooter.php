@@ -6,6 +6,16 @@
 
 </div>
 
+<script type="text/javascript" async="async" defer="defer" data-cfasync="false" src="https://mylivechat.com/chatinline.aspx?hccid=93646887"></script>
+<script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/jquery.maskedinput.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/jquery-ui.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/alertify.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/source/jquery.fancybox.pack.js"></script>    
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/source/jquery.fancybox.js"></script>    
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.dataTables.js"></script>
+
 <script type="text/javascript">
 
     $(document).ready(function(){
@@ -50,6 +60,111 @@
 
 
         });
+
+        $("#pvtinfo_teh").change(function(){
+            var tehId =  $("#pvtinfo_teh").val();
+
+            gender =  $('#gend').val();
+            if( gender == undefined )
+            {
+                gender = $("#gend").val();
+                $('#pvtinfo_teh').val(0);
+            }
+            if(gender == "" || gender == 0 || gender == undefined  || gender.length == undefined)
+            {
+                alertify.error("Select Gender First");
+                $('#pvtinfo_teh').val(0);
+                $('#gend').focus();
+            }
+
+            else if(tehId == 0){
+                alertify.error("Select Zone First");
+                $('#pvtZone').focus();
+            }
+            else{
+
+                jQuery.ajax({
+
+                    type: "POST",
+                    url: "<?php echo base_url(); ?>" + "Admission/getzone/",
+                    dataType: 'json',
+                    data: {tehCode: tehId,'gend':gender},
+                    beforeSend: function() {  $('.mPageloader').show(); },
+                    complete: function() { $('.mPageloader').hide();},
+                    success: function(json) {
+                        var listitems;
+
+                        $('#pvtZone').empty();
+                        $('#pvtZone').append('<option value="0">SELECT ZONE</option>');
+                        $.each(json, function (key, data) {
+
+                            $.each(data, function (index, data) {
+
+                                listitems +='<option value=' + data.zone_cd + '>' + data.zone_name + '</option>';
+                            })
+                        })
+                        $('#pvtZone').append(listitems)
+                    },
+                    error: function(request, status, error){
+                        alert(request.responseText);
+                    }
+                });
+            }
+
+        })
+
+        $("#pvtZone").change(function(){
+
+            var tehId =  $("#pvtZone").val();
+            var  gender =  $('#gender option:selected').val();
+            if( gender == undefined )
+            {
+                gender = $("#gend").val();
+            }
+            if(gender == "" || gender == 0 || gender == undefined  || gender.length == undefined)
+            {
+                alertify.error("Select Gender First");
+                $('#gend').focus();
+            }
+
+            else if(tehId == 0){
+                alertify.error("Select Zone First");
+                $('#pvtZone').focus();
+            }
+
+            else{
+                jQuery.ajax({
+
+                    type: "POST",
+                    url: "<?php echo base_url(); ?>Admission/getcenter/",
+                    dataType: 'json',
+                    data: {pvtZone: tehId,'gend':gender},
+                    beforeSend: function() {  $('.mPageloader').show(); },
+                    complete: function() { $('.mPageloader').hide();},
+                    success: function(json) {
+                        var listitems='';
+                        $.each(json.center, function (key, data) {
+                            listitems +='<label class="control-label">'+data.CENT_CD + '-' + data.CENT_NAME+'</label><br>';
+                        })
+                        $('#instruction').html('<h3 align="center">Selected Zone Centre List </h3>'+listitems); 
+                        $.fancybox("#instruction");
+                    },
+                    error: function(request, status, error){
+                        alert(request.responseText);
+                    }
+                });
+            }
+        });
+
+        var Insert_server_error= "<?php  echo @$data['Insert_server_error']; ?>";
+        if(Insert_server_error !='')
+        {
+            alertify.error(Insert_server_error);
+        }
+
+
+
+
         var max_file_size             = 20000; //allowed file size. (1 MB = 1048576)
         var allowed_file_types         = ['image/jpeg', 'image/pjpeg']; //allowed file types
         var result_output             = '#output'; //ID of an element for response output
@@ -57,7 +172,8 @@
         var progress_bar_id         = '#progress-wrp'; //ID of an element for response output
         var total_files_allowed     = 1; //Number files allowed to upload
 
-        $(function() {
+        $(function(){
+
             $("input:file").change(function (event){
 
                 event.preventDefault();
@@ -77,6 +193,10 @@
                     //limit number of files allowed
                     if(total_selected_files > total_files_allowed){
                         alertify.error( "You have selected "+total_selected_files+" file(s), " + total_files_allowed +" is maximum!"); //push error text
+                        $('#previewImg').removeAttr('src');
+                        $("#previewImg").attr("src","<?php echo base_url(); ?>assets/img/profile.png");
+                        $("#image").val('');
+                        $("#image").focus();
                         proceed = false; //set proceed flag to false
                     }
                     //iterate files in file input field
@@ -84,6 +204,10 @@
                         if(ifile.value !== ""){ //continue only if file(s) are selected
                             if(allowed_file_types.indexOf(ifile.type) === -1){ //check unsupported file
                                 alertify.error( "<b>"+ ifile.name + "</b> is unsupported file type!"); //push error text
+                                $('#previewImg').removeAttr('src');
+                                $("#previewImg").attr("src","<?php echo base_url(); ?>assets/img/profile.png");
+                                $("#image").val('');
+                                $("#image").focus();
                                 proceed = false; //set proceed flag to false
                             }
 
@@ -95,6 +219,10 @@
                     //if total file size is greater than max file size
                     if(total_files_size > max_file_size && proceed == true){ 
                         alertify.error( "Allowed size is 20 KB, Try smaller file!"); //push error text
+                        $('#previewImg').removeAttr('src');
+                        $("#previewImg").attr("src","<?php echo base_url(); ?>assets/img/profile.png");
+                        $("#image").val('');
+                        $("#image").focus();
                         proceed = false; //set proceed flag to false
                     }
 
@@ -102,8 +230,9 @@
 
                     //if everything looks good, proceed with jQuery Ajax
                     if(proceed){
-                        //submit_btn.val("Please Wait...").prop( "disabled", true); //disable submit button
+
                         var form_data = new FormData( $('form')[0]); //Creates new FormData object
+
                         var post_url = '<?= base_url()?>Admission/uploadpic'; //get action URL of form
 
                         //jQuery Ajax to Post form data
@@ -145,106 +274,15 @@
                 $(result_output).html(""); //reset output 
                 $(error).each(function(i){ //output any error to output element
                     $(result_output).append('<div class="error">'+error[i]+"</div>");
+                    $('#previewImg').removeAttr('src');
+                    $("#previewImg").attr("src","<?php echo base_url(); ?>assets/img/profile.png");
+                    $("#image").val('');
+                    $("#image").focus();
                 });
             });
         });
 
 
-        $("#pvtinfo_teh").change(function(){
-            var tehId =  $("#pvtinfo_teh").val();
-
-            //  debugger;
-            gender =  $('#gender option:selected').val();
-            if( gender == undefined )
-            {
-                gender = $("#gend").val();
-            }
-            if(gender == "" || gender == 0 || gender == undefined  || gender.length == undefined)
-            {
-                alertify.error("Select Gender First");
-            }
-
-            else if(tehId == 0){
-                alertify.error("Select Zone First");
-            }
-            else{
-
-                jQuery.ajax({
-
-                    type: "POST",
-                    url: "<?php echo base_url(); ?>" + "index.php/Admission/getzone/",
-                    dataType: 'json',
-                    data: {tehCode: tehId,'gend':gender},
-                    beforeSend: function() {  $('.mPageloader').show(); },
-                    complete: function() { $('.mPageloader').hide();},
-                    success: function(json) {
-                        var listitems;
-
-                        $('#pvtZone').empty();
-                        $('#pvtZone').append('<option value="0">SELECT ZONE</option>');
-                        $.each(json, function (key, data) {
-
-                            $.each(data, function (index, data) {
-
-                                listitems +='<option value=' + data.zone_cd + '>' + data.zone_name + '</option>';
-                            })
-                        })
-                        $('#pvtZone').append(listitems)
-                    },
-                    error: function(request, status, error){
-                        alert(request.responseText);
-                    }
-                });
-            }
-
-        })
-
-        $("#pvtZone").change(function(){
-
-            var tehId =  $("#pvtZone").val();
-            var  gender =  $('#gender option:selected').val();
-            if( gender == undefined )
-            {
-                gender = $("#gend").val();
-            }
-            if(gender == "" || gender == 0 || gender == undefined  || gender.length == undefined)
-            {
-                alertify.error("Select Gender First");
-            }
-
-            else if(tehId == 0){
-                alertify.error("Select Zone First");
-            }
-
-            else{
-                jQuery.ajax({
-
-                    type: "POST",
-                    url: "<?php echo base_url(); ?>index.php/Admission/getcenter/",
-                    dataType: 'json',
-                    data: {pvtZone: tehId,'gend':gender},
-                    beforeSend: function() {  $('.mPageloader').show(); },
-                    complete: function() { $('.mPageloader').hide();},
-                    success: function(json) {
-                        var listitems='';
-                        $.each(json.center, function (key, data) {
-                            listitems +='<label class="control-label">'+data.CENT_CD + '-' + data.CENT_NAME+'</label><br>';
-                        })
-                        $('#instruction').html('<h3 align="center">Selected Zone Centre List </h3>'+listitems); 
-                        $.fancybox("#instruction");
-                    },
-                    error: function(request, status, error){
-                        alert(request.responseText);
-                    }
-                });
-            }
-        });
-
-        var Insert_server_error= "<?php  echo @$data['Insert_server_error']; ?>";
-        if(Insert_server_error !='')
-        {
-            alertify.error(Insert_server_error);
-        }
     });
 
     function check_NewEnrol_validation_Fresh()
@@ -264,8 +302,12 @@
         var MarkOfIdent = $('#MarkOfIden').val();
         var medium = $('#medium option:selected').val();
         var nationality = $('#nationality option:selected').val();
-        var gend  = $('#gender option:selected').val();
-
+        var gend  = $('#gend').val();
+        var UrbanRural  = $('#UrbanRural').val();
+        var hafiz  = $('#hafiz').val();
+        var religion  = $('#religion').val();
+        var $img = $("#previewImg");
+        var src = $img.attr("src");
 
         var oldClass11thother = $('#Class').val();
 
@@ -283,38 +325,73 @@
 
         var status = 0;
 
-        if(inputimage == ''){
-            alertify.error("Please upload your Image First.")
+        var fuData = document.getElementById('image');
+        var FileUploadPath = fuData.value;
+        if (FileUploadPath == '') {
+            alertify.error("Please upload an image");
+            jQuery('#previewImg').removeAttr('src');
+            $("#previewImg").attr("src","<?php echo base_url(); ?>assets/img/profile.png");
+            $("#image").val('');
             $("#image").focus();
             return status;
         }
+
         else if(name == "" ||  name == undefined){
             alertify.error("Please Enter your  Name")
             $('#cand_name').focus(); 
             return status;
         }
-        else if(fName == "" || fName == undefined){
+
+        else if (name.trim().length < 3 )
+        {
+            alertify.error("Please Enter your correct Name ") 
+            $('#cand_name').focus(); 
+            return status;
+        }
+
+        else if(fName == "" || fName == undefined)
+        {
             alertify.error("Please Enter your Father's Name  ") 
             $('#father_name').focus(); 
             return status;
+        }   
+
+        else if (fName.trim().length < 3 )
+        {
+            alertify.error("Please Enter your correct Father's Name") 
+            $('#father_name').focus(); 
+            return status;
+        }
+
+        else if(bFormNo == ""  ){
+            alertify.error("Please Enter your B FORM NO")
+            $('#bay_form').focus();  
+            return status; 
         }   
 
         else if(FNic == ""  ){
             alertify.error("Please Enter your Father's CNIC") 
             $('#father_cnic').focus();  
             return status; 
-        }
+        }   
+
         else if(FNic == bFormNo  )
         {
-
             alertify.error("B-form Number and Father CNIC cannot be same.") 
             $('#bay_form').focus();   
             return status; 
         }
+
         else if(medium == "" || medium < 1 ){
             alertify.error("Please Select Medium") 
             $('#medium').focus();  
             return status; 
+        }
+
+        else if(MarkOfIdent == "" || MarkOfIdent == 0 || MarkOfIdent == undefined){
+            alertify.error("Please Enter your Mark of Indentification") 
+            $('#MarkOfIden').focus();   
+            return status;  
         }
 
         else if(mobNo == "" || mobNo == 0 || mobNo == undefined){
@@ -330,37 +407,28 @@
             return status;   
         }
 
-        else if (!$('#gender option:selected').val() ) {   
+        else if (gend == 0 || gend == "") {   
             alertify.error("Please Check Gender") 
-            $('#gender').focus();   
+            $('#gend').focus();   
             return status;        
         }
 
-
-        else if ($('#hafiz option:selected').val() == '' ) {   
-            alertify.error("Please Check Hafiz-e-Quran") 
-            $('#hafiz').focus();   
-            return status;        
-        }
-
-        else if (!$('#religion option:selected').val() ) {   
+        else if (religion == "" || religion == 0) {   
             alertify.error("Please Check Religion") 
             $('#religion').focus();   
             return status;        
         }
 
-
-        else if (!$('#UrbanRural option:selected').val() ) {   
-            alertify.error("Please Check Locality ") 
-            $('#UrbanRural').focus();   
+        else if (hafiz == "") {   
+            alertify.error("Please Check Hafiz-e-Quran") 
+            $('#hafiz').focus();   
             return status;        
         }
 
-
-        else if(MarkOfIdent == "" || MarkOfIdent == 0 || MarkOfIdent == undefined){
-            alertify.error("Please Enter your Mark of Indentification") 
-            $('#MarkOfIden').focus();   
-            return status;  
+        else if (UrbanRural == 0 || UrbanRural == "") {   
+            alertify.error("Please Check Locality ") 
+            $('#UrbanRural').focus();   
+            return status;        
         }
 
         else if(address == "" || address == 0 || address.length ==undefined ){
@@ -385,7 +453,7 @@
             $("#pvtZone").focus();
             return status;  
         }
-        else if (grp_cd == 0){
+        else if (grp_cd == 0 || grp_cd == ""){
             alertify.error('Please Select your Study Group '); 
             $("#std_group").focus();
             return status;  
@@ -474,6 +542,12 @@
             alertify.error('Please Select Part II, Subjects 7.  '); 
             $("#sub7p2").focus();
             return status;  
+        }
+
+        else if(!$('#terms').prop('checked')){
+            alertify.error('Please Read the Terms and Conditions'); 
+            $("#terms").focus();
+            return status; 
         }
 
         status = 1;

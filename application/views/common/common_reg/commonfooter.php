@@ -253,7 +253,7 @@
         $("#proceed").click(function(){
             var isreg =  $('input[name=candidate]:checked', '#options').val();
             if(isreg==1){
-                window.location.href='<?php  echo base_url(); ?>index.php/Admission/matric_default';
+                window.location.href='<?php  echo base_url(); ?>Admission/matric_default';
             }
             else{
                 window.location.href='<?php  echo base_url(); ?>login'  
@@ -368,7 +368,7 @@
                 jQuery.ajax({
                     //debugger;
                     type: "POST",
-                    url: "<?php echo base_url(); ?>" + "index.php/Admission/getzone/",
+                    url: "<?php echo base_url(); ?>" + "Admission/getzone/",
                     dataType: 'json',
                     data: {tehCode: tehId},
                     beforeSend: function() {  $('.mPageloader').show(); },
@@ -437,7 +437,7 @@
                 jQuery.ajax({
 
                     type: "POST",
-                    url: "<?php echo base_url(); ?>" + "index.php/Admission/getcenter/",
+                    url: "<?php echo base_url(); ?>" + "Admission/getcenter/",
                     dataType: 'json',
                     data: $("#myform").serialize(),
                     beforeSend: function() {  $('.mPageloader').show(); },
@@ -465,15 +465,15 @@
             // debugger;
             // alert(this.value + "  Transfer Thai Gayo");
             if (this.value == '1') {
-                window.location.href = '<?=base_url()?>/index.php/Admission_matric/CreateBatch/'+'96/1/';
+                window.location.href = '<?=base_url()?>/Admission_matric/CreateBatch/'+'96/1/';
                 // alert("Allot Thai Gayo Bhai");
             }
             else  if (this.value == '2') {
-                window.location.href = '<?=base_url()?>/index.php/Admission_matric/CreateBatch/'+'97/2/';
+                window.location.href = '<?=base_url()?>/Admission_matric/CreateBatch/'+'97/2/';
                 //  alert("Transfer Thai Gayo");
             }
             else  if(this.value == 3){
-                window.location.href = '<?=base_url()?>/index.php/Admission_matric/CreateBatch/'+'98/3';
+                window.location.href = '<?=base_url()?>/Admission_matric/CreateBatch/'+'98/3';
                 //alert("Transfer Thai Gayo");
             }
 
@@ -481,23 +481,23 @@
         $( "#std_groups" ).change(function () {
             if (this.value == '1') {
                 // 1 biology   2 humanities   5 deaf and dumb  7 computer science  8 electrical wiring 
-                window.location.href = '<?=base_url()?>/index.php/Admission_matric/CreateBatch/'+'96/3/1/';
+                window.location.href = '<?=base_url()?>/Admission_matric/CreateBatch/'+'96/3/1/';
                 //  alert("Allot Thai Gayo Bhai");
             }
             else  if (this.value == '2') {
-                window.location.href = '<?=base_url()?>/index.php/Admission_matric/CreateBatch/'+'97/3/2/';
+                window.location.href = '<?=base_url()?>/Admission_matric/CreateBatch/'+'97/3/2/';
                 // alert("Transfer Thai Gayo");
             }
             else  if(this.value == '5'){
-                window.location.href = '<?=base_url()?>/index.php/Admission_matric/CreateBatch/'+'98/3/5/';
+                window.location.href = '<?=base_url()?>/Admission_matric/CreateBatch/'+'98/3/5/';
                 // alert("Transfer Thai Gayo");
             }
             else  if(this.value == '7'){
-                window.location.href = '<?=base_url()?>/index.php/Admission_matric/CreateBatch/'+'98/3/7/';
+                window.location.href = '<?=base_url()?>/Admission_matric/CreateBatch/'+'98/3/7/';
                 //  alert("Transfer Thai Gayo");
             }
             else  if(this.value == '8'){
-                window.location.href = '<?=base_url()?>/index.php/Admission_matric/CreateBatch/'+'98/3/8/';
+                window.location.href = '<?=base_url()?>/Admission_matric/CreateBatch/'+'98/3/8/';
                 //  alert("Transfer Thai Gayo");
             }
 
@@ -520,7 +520,7 @@
                 alertify.confirm(msg, function (e) {
 
                     if (e) {
-                        window.location.href = '<?=base_url()?>/index.php/Admission_matric/Make_Batch_Group_wise/'+$("#std_groups").val()+'/0';
+                        window.location.href = '<?=base_url()?>/Admission_matric/Make_Batch_Group_wise/'+$("#std_groups").val()+'/0';
                     } 
 
 
@@ -529,7 +529,7 @@
         }
         else if(option == "1" || option == "2")
         {
-            window.location.href = '<?=base_url()?>/index.php/Admission_matric/Make_Batch_Group_wise/'+'0/'+option+'/';
+            window.location.href = '<?=base_url()?>/Admission_matric/Make_Batch_Group_wise/'+'0/'+option+'/';
         }
         return false;
 
@@ -566,7 +566,7 @@
         alertify.confirm(msg, function (e) {
             if (e) {
                 // user clicked "ok"
-                window.location.href ='<?php echo base_url(); ?>index.php/login/logout';
+                window.location.href ='<?php echo base_url(); ?>login/logout';
             } 
         });
     }
@@ -581,7 +581,7 @@
         $('#sub6').empty();
         $('#sub7').empty();
         $('#sub8').empty();
-        window.location.href = '<?=base_url()?>/index.php/Admission_matric/NewEnrolment_EditForm_matric/'+formrno
+        window.location.href = '<?=base_url()?>/Admission_matric/NewEnrolment_EditForm_matric/'+formrno
     }
     function DeleteForm(formrno)
     {
@@ -591,25 +591,25 @@
 
             if (e) {
                 // user clicked "ok"
-                window.location.href ='<?php echo base_url(); ?>index.php/Admission_matric/NewEnrolment_Delete/'+formrno;
+                window.location.href ='<?php echo base_url(); ?>Admission_matric/NewEnrolment_Delete/'+formrno;
             } else {
                 // user clicked "cancel"
 
             }
         });
-        // window.location.href = '<?=base_url()?>/index.php/RollNoSlip/MatricRollNo/'+formrno
+        // window.location.href = '<?=base_url()?>/RollNoSlip/MatricRollNo/'+formrno
     }
     function ReturnForm(Batch_ID)
     {
-        window.location.href = '<?=base_url()?>/index.php/Admission_matric/return_pdf/'+Batch_ID + '/1'
+        window.location.href = '<?=base_url()?>/Admission_matric/return_pdf/'+Batch_ID + '/1'
     }
     function RevenueForm(Batch_ID)
     {
-        window.location.href = '<?=base_url()?>/index.php/Admission_matric/revenue_pdf/'+Batch_ID
+        window.location.href = '<?=base_url()?>/Admission_matric/revenue_pdf/'+Batch_ID
     }
     function ReleaseForm(Batch_ID)
     {
-        window.location.href = '<?=base_url()?>/index.php/Admission_matric/BatchRelease/'+Batch_ID
+        window.location.href = '<?=base_url()?>/Admission_matric/BatchRelease/'+Batch_ID
 
     }
     $('#get_report').click( function(){
@@ -777,26 +777,26 @@
         }
 
 
-        window.location.href = '<?=base_url()?>index.php/Admission_matric/Batchlist_INSERT/';
+        window.location.href = '<?=base_url()?>Admission_matric/Batchlist_INSERT/';
     }
     function ReturnForm_Final_groupwise(grp_cd){
-        window.location.href = '<?=base_url()?>/index.php/Admission_matric/return_pdf/'+grp_cd + '/2'
+        window.location.href = '<?=base_url()?>/Admission_matric/return_pdf/'+grp_cd + '/2'
     }
     function ReturnForm_Final_Formnowise(startformno,endformno){
-        window.location.href = '<?=base_url()?>/index.php/Admission_matric/return_pdf/'+startformno + '/3' +'/'+endformno +'/';
+        window.location.href = '<?=base_url()?>/Admission_matric/return_pdf/'+startformno + '/3' +'/'+endformno +'/';
     }
    
     function ReturnForm_ProofReading_groupwise(grp_cd){
-        window.location.href =  '<?=base_url()?>/index.php/Admission_matric/return_pdf/'+grp_cd + '/4'
+        window.location.href =  '<?=base_url()?>/Admission_matric/return_pdf/'+grp_cd + '/4'
     }
     function ReturnForm_ProofReading_Formnowise(startformno,endformno){
-        window.location.href = '<?=base_url()?>/index.php/Admission_matric/return_pdf/'+startformno + '/5' +'/'+endformno+'/';
+        window.location.href = '<?=base_url()?>/Admission_matric/return_pdf/'+startformno + '/5' +'/'+endformno+'/';
     }
     function Print_Registration_Form_Proofreading_Groupwise(grp_cd){
-        window.location.href =  '<?=base_url()?>/index.php/Admission_matric/Print_Admission_matric_Form_Proofreading_Groupwise/'+grp_cd + '/1'
+        window.location.href =  '<?=base_url()?>/Admission_matric/Print_Admission_matric_Form_Proofreading_Groupwise/'+grp_cd + '/1'
     }
     function Print_Registration_Form_Proofreading_Formnowise(startformno,endformno){
-        window.location.href =  '<?=base_url()?>/index.php/Admission_matric/Print_Admission_matric_Form_Proofreading_Groupwise/'+startformno + '/2' +'/'+endformno+'/';
+        window.location.href =  '<?=base_url()?>/Admission_matric/Print_Admission_matric_Form_Proofreading_Groupwise/'+startformno + '/2' +'/'+endformno+'/';
     }
      function  check_NewEnrol_validation(){
          debugger;

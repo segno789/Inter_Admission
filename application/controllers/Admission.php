@@ -39,7 +39,7 @@ class Admission extends CI_Controller {
 
         $this->load->view('common/homepagefooter.php');
     }
- 
+
     function GetSpeciality($spclty)
     {
         if ($spclty == 0 )
@@ -129,8 +129,10 @@ class Admission extends CI_Controller {
         $pdf->Image(BARCODE_PATH.$image,5.7, 10.43 ,2,0.25,"PNG");
 
 
-        $pdf->Image(@$data['pic_path'],6.5, 1.10+$Y, 0.95, 1.0, "JPG");   
-
+        if(!base_url() == "http://localhost:8083/adminbise/")
+        {
+            $pdf->Image(@$data['pic_path'],6.5, 1.10+$Y, 0.95, 1.0, "JPG");   
+        }
         if(Session == 1)
         {
             $ses = "ANNUAL";
@@ -884,6 +886,7 @@ class Admission extends CI_Controller {
     public function checkFormNo_then_download()
     {
         //DebugBreak();
+
         $formno_seg = $this->uri->segment(3);
         if($formno_seg < 900001){
 
@@ -960,16 +963,19 @@ class Admission extends CI_Controller {
         $image =  $this->set_barcode($Barcode);
         $pdf->Image(BARCODE_PATH.$image,2.9, 0.61  ,2.4,0.24,"PNG");
 
-        if($data ['IsNewPic'] == 0)
+        if(!base_url() == "http://localhost:8083/adminbise/")
         {
-            $type = pathinfo(@$data['picpath'], PATHINFO_EXTENSION); 
-            @$image_path_selected = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents(@$data['picpath']));
-            $pdf->Image(@$data['picpath'],6.5, 1.30+$Y, 0.95, 1.0, "JPG");
-        }
+            if($data ['IsNewPic'] == 0)
+            {
+                $type = pathinfo(@$data['picpath'], PATHINFO_EXTENSION); 
+                @$image_path_selected = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents(@$data['picpath']));
+                $pdf->Image(@$data['picpath'],6.5, 1.30+$Y, 0.95, 1.0, "JPG");
+            }
 
-        else  if($data ['IsNewPic'] == 1 && Session == 1)
-        {
-            $pdf->Image(GET_PRIVATE_IMAGE_PATH.'/12th/'.$data['picpath'],6.5, 1.30+$Y, 0.95, 1.0, "JPG");
+            else  if($data ['IsNewPic'] == 1 && Session == 1)
+            {
+                $pdf->Image(GET_PRIVATE_IMAGE_PATH.$data['picpath'],6.5, 1.30+$Y, 0.95, 1.0, "JPG");
+            }
         }
 
         $pdf->Image("assets/img/logo2.png",0.4, 0.2, 0.65, 0.65, "PNG");
@@ -1115,7 +1121,17 @@ class Admission extends CI_Controller {
         $pdf->Cell( 0.5,0.5,"HSSC Info:",0,'L');
         $pdf->SetFont('Arial','B',9);
         $pdf->SetXY(1.5,2.0+$Y);
-        $pdf->Cell(0.5,0.5,$data["oldRno"]." ( $LastSess,  $yearOfLastAp, ".$data['IBrd_Abbr']." )",0,'L');
+
+        //DebugBreak();
+
+        if($data["oldRno"] == "" && $LastSess == "" && $yearOfLastAp == "" && $data['IBrd_Abbr']== ""){
+            $pdf->Cell(0.5,0.5,"Fresh Candidate",0,'L');
+        }
+        else{
+            $pdf->Cell(0.5,0.5,$data["oldRno"]." ( $LastSess,  $yearOfLastAp, ".$data['IBrd_Abbr']." )",0,'L');    
+        }
+
+
 
         $pdf->SetXY(0.5, 2.15+$Y);
         $pdf->SetFont('Arial','',$FontSize);
@@ -1793,17 +1809,19 @@ class Admission extends CI_Controller {
         $pdf->SetXY(1.0,10.65+$Y);
         $pdf->Cell( 0,0,$data['formNo'],0,'L');
 
-        if($data ['IsNewPic'] == 0)
+        if(!base_url() == "http://localhost:8083/adminbise/")
         {
-            $type = pathinfo(@$data['picpath'], PATHINFO_EXTENSION); 
-            @$image_path_selected = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents(@$data['picpath']));
-            $pdf->Image($image_path_selected,6.5, 10.65+$Y, 0.95, 1.0, "JPG");
+            if($data ['IsNewPic'] == 0)
+            {
+                $type = pathinfo(@$data['picpath'], PATHINFO_EXTENSION); 
+                @$image_path_selected = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents(@$data['picpath']));
+                $pdf->Image($image_path_selected,6.5, 10.65+$Y, 0.95, 1.0, "JPG");
+            }
+            else if($data ['IsNewPic'] == 1)
+            {
+                $pdf->Image(GET_PRIVATE_IMAGE_PATH.$data['PicPath'],6.5, 10.65+$Y, 0.95, 1.0, "JPG");
+            }
         }
-        else if($data ['IsNewPic'] == 1)
-        {
-            $pdf->Image(GET_PRIVATE_IMAGE_PATH.'/12th/'.$data['PicPath'],6.5, 10.65+$Y, 0.95, 1.0, "JPG");
-        }
-
         $pdf->SetFont('Arial','',8);
         $pdf->SetXY(0.5,10.75+$Y);
         $pdf->SetTextColor(0,0,0);
@@ -2439,26 +2457,31 @@ class Admission extends CI_Controller {
             $error_msg.='No Any Student Found Against Your Criteria';
         }
 
-        //DebugBreak();
 
-        /* $picpath = DIRPATH12TH.'\\'.@$data[0]['picpath'];
+        $picpath = @$data[0]['picpath'];
         $isexit = is_file($picpath);
-        if(!($isexit) && $error_msg == '' && $iyear >2014)
+
+        //DebugBreak();
+        
+        $ValidYear = Year - 3;
+
+        if(!($isexit) && $error_msg == '' && $iyear > $ValidYear)
         {
-        $error_msg.= 'Your Picture is missing';
-        $this->load->library('session');
-        $mydata = array('data'=>$_POST,'error_msg'=>$error_msg ,'exam_type'=>0);
-        $this->session->set_flashdata('matric_error',$mydata );
-        redirect('Admission/inter_default');
+            $error_msg.= 'Your Picture is missing';
+            $this->load->library('session');
+            $mydata = array('data'=>$_POST,'error_msg'=>$error_msg ,'exam_type'=>0);
+            $this->session->set_flashdata('matric_error',$mydata );
+            redirect('Admission/inter_default');
         }
         else
         {
-        if($iyear >2014)
-        {
-        $type = pathinfo($picpath, PATHINFO_EXTENSION);
-        $data[0]['picpathImg'] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
+            if($iyear > $ValidYear)
+            {
+                $type = pathinfo($picpath, PATHINFO_EXTENSION);
+                $data[0]['picpathImg'] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
+            }
         }
-        }*/
+
 
         $specialcase = $data['0']['Spl_Name'];
         $specialcode = $data['0']['spl_cd'];
@@ -2537,7 +2560,7 @@ class Admission extends CI_Controller {
 
         else if($data[0]['class'] == 11 && $data[0]['regPvt']==1 && ($data[0]['status']==1  || $exam_type ==1 ) &&  $isParctialsub == 1)
         {
-            $error_msg.='You can not appear as a Private Candidate. Please contact your Institute';
+            $error_msg.='You can not appear as a Private Candidate. Please contact to your Institute';
             $this->load->library('session');
             $mydata = array('data'=>$_POST,'error_msg'=>$error_msg,'exam_type'=>0);
             $this->session->set_flashdata('matric_error',$mydata );
@@ -2631,7 +2654,7 @@ class Admission extends CI_Controller {
             }
 
             if(@$data[0]['Inter'] == 1){
-                $error_msg.='<span style="font-size: 16pt; color:red;">You have Already Appeared in '.$sessions.', '.@$data[0]['HSSC_Year'].', against Roll No = '.@$data[0]['HSSC_RNo'].'</span> </br> <span style="font-size: 14pt; color:red;">Please Apply for Admission providing Your Previous Exam Information(Section 1)</span>';
+                $error_msg.='You have Already Appeared in '.$sessions.', '.@$data[0]['HSSC_Year'].', against Roll No = '.@$data[0]['HSSC_RNo'].'</br> Please Apply for Admission providing Your Previous Exam Information(Section 1)';
 
                 $mydata = array('data'=>$_POST,'norec'=>$error_msg);
                 $this->session->set_flashdata('matric_error',$mydata );
@@ -2640,7 +2663,7 @@ class Admission extends CI_Controller {
 
             else if(!$data)
             {
-                $error_msg.='<span style="font-size: 16pt; color:red;">No Any Student Found Against Your Criteria</span>';
+                $error_msg.='No Any Student Found Against Your Criteria';
                 $mydata = array('data'=>$_POST,'norec'=>$error_msg);
                 $this->session->set_flashdata('matric_error',$mydata );
                 redirect('Admission/inter_default');
@@ -2937,8 +2960,8 @@ class Admission extends CI_Controller {
             {
                 if($logedIn[0]['tempath'] != '')
                 {
-                    $oldpath =  GET_PRIVATE_IMAGE_PATH.'\12th\\'.$logedIn[0]['tempath'];
-                    $newpath =  GET_PRIVATE_IMAGE_PATH.'\12th\\'.$val.'.jpg';
+                    $oldpath =  GET_PRIVATE_IMAGE_PATH.$logedIn[0]['tempath'];
+                    $newpath =  GET_PRIVATE_IMAGE_PATH.$val.'.jpg';
                     $err = rename($oldpath,$newpath); 
                 }
                 $info['error'] = 1;
@@ -2951,6 +2974,7 @@ class Admission extends CI_Controller {
             }
         }
         echo  json_encode($info);
+        exit();
     }
 
     public function NewEnrolment_insert_Fresh_11thOtherBoard()
@@ -3234,8 +3258,8 @@ class Admission extends CI_Controller {
             {
                 if($logedIn[0]['tempath'] != '')
                 {
-                    $oldpath =  GET_PRIVATE_IMAGE_PATH.'\12th\\'.$logedIn[0]['tempath'];
-                    $newpath =  GET_PRIVATE_IMAGE_PATH.'\12th\\'.$val.'.jpg';
+                    $oldpath =  GET_PRIVATE_IMAGE_PATH.$logedIn[0]['tempath'];
+                    $newpath =  GET_PRIVATE_IMAGE_PATH.$val.'.jpg';
                     $err = rename($oldpath,$newpath); 
                 }
                 $info['error'] = 1;
@@ -3248,6 +3272,7 @@ class Admission extends CI_Controller {
             }
         }
         echo  json_encode($info);
+        exit();
     }
 
     public function NewEnrolment_insert_Fresh() 
@@ -4130,6 +4155,7 @@ class Admission extends CI_Controller {
 
     public function frmvalidation_Fresh()
     {
+        //DebugBreak();
 
         $allinputdata['excep'] = '';
 
@@ -5185,7 +5211,9 @@ class Admission extends CI_Controller {
         echo json_encode($allinputdata);
     }
 
-    public function uploadpic()  {
+    public function uploadpic() 
+    {
+        //DebugBreak();
 
         ############ Configuration ##############
         $config["generate_image_file"]            = true;
@@ -5194,9 +5222,9 @@ class Admission extends CI_Controller {
         $config["thumbnail_size"]                  = 200; //Thumbnails will be cropped to 200x200 pixels
         $config["image_prefix"]                 = "temp_"; //Normal thumb Prefix
         $config["thumbnail_prefix"]                = "thumb_"; //Normal thumb Prefix
-        $config["destination_folder"]            = GET_PRIVATE_IMAGE_PATH.'12th\\'; //upload directory ends with / (slash)
+        $config["destination_folder"]            = GET_PRIVATE_IMAGE_PATH; //upload directory ends with / (slash)
         $config["thumbnail_destination_folder"]    = ''; //upload directory ends with / (slash)
-        $config["upload_url"]                     = "../uplaods/2016/private/12th/"; 
+        $config["upload_url"]                     = GET_PRIVATE_IMAGE_PATH;//base_url()."/uploads/2017/private/10th/";
         $config["quality"]                         = 90; //jpeg quality
         $config["random_file_name"]                = true; //randomize each file name
 
@@ -5212,21 +5240,26 @@ class Admission extends CI_Controller {
         //create class instance 
         $im = new ImageResize(); 
 
-        try{
+        try
+        {
             $responses = $im->resize($config); //initiate image resize
-
             //output images
             foreach($responses["images"] as $response){
-                echo '<input type="hidden" class="span2 hidden" id="picname" name="picname" value="'.$response.'">
-                <img id="previewImg" style="width:80px; height: 80px; " class="span2" src="'.$config["upload_url"].$response.'"  alt="Candidate Image">';
-            }
 
-        }catch(Exception $e){
+                $config["upload_url"] = $config["upload_url"].$response;
+                $type = pathinfo($config["upload_url"], PATHINFO_EXTENSION);
+                $config["upload_url"] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($config["upload_url"]));
+                echo '<input type="hidden" class="hidden" id="picname" name="picname" value="'.$response.'">
+                <img id="previewImg" style="width:130px; height: 130px;" class="img-responsive" src="'.$config["upload_url"].'" alt="CandidateImage">';
+            }
+        }
+        catch(Exception $e){
             echo '<div class="error">';
             echo $e->getMessage();
             echo '</div>';
         }
     }
+
     public function deleteExtarfiles()
     {
 

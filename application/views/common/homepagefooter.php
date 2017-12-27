@@ -1,8 +1,19 @@
+
 <div id="footer" class="footer">
     &nbsp; &copy; 2017 BISE Gujranwala, All Rights Reserved. 
 </div>
 
 </div>
+
+<script type="text/javascript" async="async" defer="defer" data-cfasync="false" src="https://mylivechat.com/chatinline.aspx?hccid=93646887"></script>
+<script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/jquery.maskedinput.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/jquery-ui.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/alertify.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/source/jquery.fancybox.pack.js"></script>    
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/source/jquery.fancybox.js"></script>    
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.dataTables.js"></script>
 
 <script type="text/javascript">
 
@@ -15,25 +26,25 @@
 
         $( "#batch_real_PaidDate" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, startDate:new Date() }).val();
         $( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate: new Date(2002, 7,1),yearRange: '1970:2002'}).val();
-       /* var spl_cd = "<?php   echo @$spl_cd; ?>";
+        /* var spl_cd = "<?php   echo @$spl_cd; ?>";
         var err ='<?php echo @$error; ?>';
         if(err != ""){
-            alertify.error("Dear Student! No data found against your submitted record! Please check you informaiton again.");
+        alertify.error("Dear Student! No data found against your submitted record! Please check you informaiton again.");
         }
         if(spl_cd != "")
         {
-            if(spl_cd == "chance")
-            {
-                alertify.error("Dear Student! You are not eligible due to NO chance in this exam!");
-            } //exam_type3
-            else if(spl_cd == "exam_type3")
-            {
-                alertify.error("Dear Student! You are not eligible due to FULL FAIL!");
-            } 
-            else
-            {
-                alertify.error("Dear Student! Please  rectify  "+spl_cd+" before proceeding further from MATRIC BRANCH !"); 
-            }   
+        if(spl_cd == "chance")
+        {
+        alertify.error("Dear Student! You are not eligible due to NO chance in this exam!");
+        } //exam_type3
+        else if(spl_cd == "exam_type3")
+        {
+        alertify.error("Dear Student! You are not eligible due to FULL FAIL!");
+        } 
+        else
+        {
+        alertify.error("Dear Student! Please  rectify  "+spl_cd+" before proceeding further from MATRIC BRANCH !"); 
+        }   
 
         } */
         var error_New_Enrolement ='<?php   if(@$excep != ""){echo @$excep['excep'];}  ?>';
@@ -246,10 +257,10 @@
 
             var isreg =  $('input[name=candidate]:checked', '#options').val();
             if(isreg==1){
-                window.location.href='<?php  echo base_url(); ?>index.php/Admission/inter_default';
+                window.location.href='<?php  echo base_url(); ?>Admission/inter_default';
             }
             else{
-                window.location.href='<?php  echo base_url(); ?>index.php/login'  
+                window.location.href='<?php  echo base_url(); ?>login'  
             }
 
         })
@@ -302,7 +313,7 @@
                 return false;
             }
 
-            window.location.href='<?php  echo base_url(); ?>index.php/Admission/checkFormNo_then_download/'+formno;  
+            window.location.href='<?php  echo base_url(); ?>Admission/checkFormNo_then_download/'+formno;  
         }
         function downloadform(){
             //debugger;
