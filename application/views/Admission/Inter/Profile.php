@@ -9,7 +9,7 @@
                         </div>
                     </div>
                     <div class="widget-body">
-                     <form class="form-horizontal no-margin" action="<?php echo base_url(); ?>/index.php/Registration/Profile_Update" method="post" enctype="multipart/form-data">
+                     <form class="form-horizontal no-margin" action="<?php echo base_url(); ?>/Registration/Profile_Update" method="post" enctype="multipart/form-data">
                     <input type="hidden"   name="isGovt" value='<?php echo $isgovt; ?>'>
                     <input type="hidden"  name="isInserted" value='<?php echo $isInserted; ?>' >
                     <?php
@@ -95,7 +95,7 @@
         alertify.confirm(msg, function (e) {
             if (e) {
                 // user clicked "ok"
-                window.location.href ="<?php echo base_url(); ?>index.php/Admission_matric/index/7";
+                window.location.href ="<?php echo base_url(); ?>Admission_matric/index/7";
             } else {
                 // user clicked "cancel"
 

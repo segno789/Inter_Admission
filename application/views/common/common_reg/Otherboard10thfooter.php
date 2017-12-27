@@ -795,7 +795,7 @@
     }
     function ChallanForm_Adm10th_Regular(Batch_ID)
     {
-        window.location.href = '<?=base_url()?>/index.php/Admission_matric/ChallanForm_Adm10th_Regular/'+Batch_ID
+        window.location.href = '<?=base_url()?>/Admission_matric/ChallanForm_Adm10th_Regular/'+Batch_ID
     }
     function ReturnForm_ProofReading_groupwise(grp_cd){
         window.location.href =  '<?=base_url()?>Admission_matric/return_pdf/'+grp_cd + '/4'

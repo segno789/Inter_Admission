@@ -28,7 +28,7 @@ $date = new DateTime(EXAMINATIONDATEINTER_P2);
 $date->modify("-4 day");
 $threeDayBeforeExam = $date->format("Y-m-d");
 
-if(strtotime(date('Y-m-d')) > strtotime($threeDayBeforeExam)){
+if(strtotime(date('Y-m-d')) < strtotime($threeDayBeforeExam)){
 
     ?>
 

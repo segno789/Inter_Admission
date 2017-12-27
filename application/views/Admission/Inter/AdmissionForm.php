@@ -186,7 +186,7 @@ else if(Session == '2')
                 <label class="control-label" for="mob_number">
                     Mobile Number :
                 </label>        
-                <input class="form-control" id="mob_number" name="mob_number" type="text" placeholder="0300-123456789" value="<?php  echo @$data['0']['MobNo']; ?>" required="required">
+                <input class="form-control" id="mob_number" name="mob_number" type="text" placeholder="0300-123456789" value="" required="required">
             </div>
         </div>
     </div>
@@ -846,7 +846,7 @@ else if(Session == '2')
         </div>
     </div>
 
-    <input type="hidden" name="gend" value="<?php echo @$gender; ?>">
+    <input type="hidden" name="gend" id="gend" value="<?php echo @$gender; ?>">
     <input type="hidden" name="oldschm"   id="oldschm" value="<?php echo @$oldschm = @$data['oldschm']?>">
     <input type="hidden" name="oldclass"   id="oldclass" value="<?php  echo @$oldcls = $data[0]['class']?>">
     <input type="hidden" name="exam_type"  id="exam_type"  value="<?php echo @$exam_type = $data[0]['exam_type']; ?>">
@@ -892,7 +892,7 @@ else if(Session == '2')
     <div class="form-group">
         <div class="row">
             <div class="col-md-offset-2 col-md-3">
-                <input type="submit" value="Save Form" id="btnsubmitUpdateEnrol" name="btnsubmitUpdateEnrol" class="btn btn-primary btn-block" onclick="return checks()">
+                <input type="submit" value="Save Form" id="btnsubmitUpdateEnrol" name="btnsubmitUpdateEnrol" class="btn btn-primary btn-block" onclick="return checks_12th_Private()">
             </div>
             <div class="col-md-2">
                 <a href="<?php echo base_url(); ?>assets/img/Instruction.jpg" download="instructions" class="btn btn-info btn-block">Download Instruction</a>
@@ -903,6 +903,15 @@ else if(Session == '2')
         </div>
     </div>
 </form>
+
+<script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script> 
+<script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/jquery.maskedinput.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/jquery-ui.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/alertify.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/source/jquery.fancybox.pack.js"></script>    
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/source/jquery.fancybox.js"></script>    
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.dataTables.js"></script>
 
 <script type="text/javascript">
     function ValidateFileUpload() {
@@ -3194,17 +3203,19 @@ else if(Session == '2')
         });
     });
 
-    function checks()
+    function checks_12th_Private()
     {
-        //$('#btnsubmitUpdateEnrol').prop('disabled', true);
+        $('#btnsubmitUpdateEnrol').attr("disabled", "disabled");
         var status  =  check_NewEnrol_validation();
         if(status == 0)
         {
+            $('#btnsubmitUpdateEnrol').removeAttr("disabled");
             return false;    
         }
         else
         {
-            //debugger;
+            $('#btnsubmitUpdateEnrol').attr("disabled", "disabled");
+
             $.ajax({
                 type: "POST",
                 url: "<?php  echo site_url('Admission/frmvalidation'); ?>",
@@ -3218,7 +3229,7 @@ else if(Session == '2')
                     {
                         $.ajax({
                             type: "POST",
-                            url: "<?php echo base_url(); ?>" + "index.php/Admission/NewEnrolment_insert/",
+                            url: "<?php echo base_url(); ?>" + "Admission/NewEnrolment_insert/",
                             data: $("#myform").serialize() ,
                             datatype : 'html',
 
@@ -3231,17 +3242,20 @@ else if(Session == '2')
                                 var obj = JSON.parse(data) ;
                                 if(obj.error ==  1)
                                 {
-                                    window.location.href ='<?php echo base_url(); ?>index.php/Admission/formdownloaded/'+obj.formno; 
+                                    window.location.href ='<?php echo base_url(); ?>Admission/formdownloaded/'+obj.formno; 
+                                    alertify.success('Your admission has been submitted successfully');
                                 }
                                 else
                                 {
                                     alertify.error(obj.error);
+                                    $('#btnsubmitUpdateEnrol').removeAttr("disabled");
                                     return false; 
                                 }
                             },
                             error: function(request, status, error){
 
                                 alertify.error(request.responseText);
+                                $('#btnsubmitUpdateEnrol').removeAttr("disabled");
                             }
                         });
                         return false
@@ -3249,6 +3263,7 @@ else if(Session == '2')
                     else
                     {
                         alertify.error(obj.excep);
+                        $('#btnsubmitUpdateEnrol').removeAttr("disabled");
                         return false;     
                     }
                 }
@@ -3261,7 +3276,7 @@ else if(Session == '2')
         var msg = "Are You Sure You want to Cancel this Form ?"
         alertify.confirm(msg, function (e) {
             if (e) {
-                window.location.href ='<?php echo base_url(); ?>index.php/Admission/index';
+                window.location.href ='<?php echo base_url(); ?>Admission/index';
             } else {
             }
         });

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Intermediate Admission | BISEGRW</title>
+    <title>Admissions | BISEGRW</title>
     <meta charset="utf-8">
     <link rel="icon" href="<?php echo base_url(); ?>assets/img/headericon.png" type="image/png">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,24 +9,7 @@
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/jquery-ui.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/alertify.core.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/js/source/jquery.fancybox.css">
-
-    <script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/js/jquery.maskedinput.js"></script>
-    <script src="<?php echo base_url(); ?>assets/js/jquery-ui.js"></script>
-    <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/alertify.min.js"></script>
-    <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/source/jquery.fancybox.pack.js"></script>    
-    <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/source/jquery.fancybox.js"></script>    
-    <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.dataTables.js"></script>
-
-    <script type="text/javascript">
-
-        jQuery(document).ready(function() 
-            {
-                $('.mPageloader').hide();
-
-        });
-    </script>
+    
 
     <style>  
         /* progress bar */
@@ -39,7 +22,7 @@
             text-align: left;
             background: #fff;
             width:140px;
-            height: 25px;
+            height: 24px;
             box-shadow: inset 1px 3px 6px rgba(0, 0, 0, 0.12);
         }
         #progress-wrp .progress-bar{
@@ -89,7 +72,7 @@
         }
         /*End Check box styling */
 
-        .footer{width:100%; float:right; background:#003a6a ; height:40px; color: wheat; margin-top: 25px; margin-bottom: 3px; border-radius: 4px; text-align: center;}
+        .footer{width:100%; float:right; background:#003a6a ; height:40px; color: wheat; margin-top: 25px; margin-bottom: 2px; border-radius: 4px; text-align: center;}
 
         .mPageloader, .mpOverlay { position: fixed; width: 100%; height: 100%; background: rgba(0,0,0,.3); top: 0; left: 0; z-index: 99999; overflow: hidden; }
         .CSSspinner2 { width: 22px; height: 20px; position: relative; margin: 0 auto; display: inline-block; vertical-align: middle; }
@@ -128,6 +111,8 @@
 
 
 
+
+
         a.imglink{
             background:         #000;
             display:            inline-block;
@@ -141,10 +126,47 @@
             opacity:            0.5;
         }
 
+
+        .blink_me {
+            -webkit-animation-name: blinker;
+            -webkit-animation-duration: 3s;
+            -webkit-animation-timing-function: linear;
+            -webkit-animation-iteration-count: infinite;
+
+            -moz-animation-name: blinker;
+            -moz-animation-duration: 3s;
+            -moz-animation-timing-function: linear;
+            -moz-animation-iteration-count: infinite;
+
+            animation-name: blinker;
+            animation-duration: 3s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+        }
+
+        @-moz-keyframes blinker {  
+            0% { opacity: 1.0; }
+        50% { opacity: 0.0; }
+        100% { opacity: 1.0; }
+        }
+
+        @-webkit-keyframes blinker {  
+            0% { opacity: 1.0; }
+        50% { opacity: 0.0; }
+        100% { opacity: 1.0; }
+        }
+
+        @keyframes blinker {  
+            0% { opacity: 1.0; }
+        50% { opacity: 0.0; }
+        100% { opacity: 1.0; }
+        }
+
     </style>
 
 
 </head>
+
 <body>
 <div class="mPageloader">
     <div class="CSSspinner2 large">
@@ -167,12 +189,12 @@
             <div class="circle4"></div>
         </div>
     </div>
-</div> 
+</div>
 
 <div class="container">
 <div class="row-fluid">
-    <h2 style="background:#003a6a !important; color: wheat; text-align: center;" class="jumbotron">
-        <img src="<?php echo base_url(); ?>assets/img/BISEGRW_Icon.png" class="img-circle" width="125px" height="125px" alt="Logo">
+    <h3 style="background:#003a6a !important; color: wheat; text-align: center; height: 140px;" class="jumbotron">
+        <img src="<?php echo base_url(); ?>assets/img/BISEGRW_Icon.png" class="rounded float-left" width="50px" height="50px" alt="Logo">
         Board of Intermediate & Secondary Education, Gujranwala
         <br>
         <?php 
@@ -181,7 +203,8 @@
             $sess =  'Annual';
         else if(Session == '2')
             $sess = 'Supplementary Examination';
-            echo  '<p style="text-align:center;">Online Admission for HSSC Part-II '.$sess.''.',  ' .Year.' </p>';   
+            
+        echo  '<p style="text-align:center;">Online Admission for HSSC '.$sess.''.',  ' .Year.' </p>'; 
         ?>
-    </h2>
+    </h3>
 </div>

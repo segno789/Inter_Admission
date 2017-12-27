@@ -767,7 +767,7 @@ header("Pragma: no-cache");
                                 var msg = "Are You Sure You want to Cancel this Form ?"
                                 alertify.confirm(msg, function (e) {
                                     if (e) {
-                                        window.location.href ='<?php echo base_url(); ?>index.php/Admission/index';
+                                        window.location.href ='<?php echo base_url(); ?>Admission/index';
                                     } else {
                                     }
                                 });

@@ -60,7 +60,7 @@
                                 if($appconfig['isadmP2S'] == 1){                                    
                                     ?>
                                     <div class="metro-nav-block nav-block-green">
-                                        <a  href="<?=base_url();?>index.php/Admission_inter" >
+                                        <a  href="<?=base_url();?>Admission_inter" >
                                             <div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>
                                             <div class="brand">
                                                 12th Supply Admission
