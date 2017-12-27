@@ -5,19 +5,19 @@ class Login_model extends CI_Model {
     }
     public function auth($username,$password) 
     {
-      
+
         $remarks = '';
-     
+
         $query = $this->db->get_where('Admission_online..fl_users', array('inst_cd' => $username,'pass' => $password));
         $rowcount = $query->num_rows();
         if($rowcount >0)
         {
             $query_1 = $this->db->get_where('Admission_online..tblInstitutes_all', array('Inst_cd' => $username));
 
-             $specialPermission = $this->db->get_where('Registration..inst_Special_Permission_9th',array('inst_cd'=>$username));
-             if($specialPermission->num_rows()>0)
+            $specialPermission = $this->db->get_where('Registration..inst_Special_Permission_9th',array('inst_cd'=>$username));
+            if($specialPermission->num_rows()>0)
             {
-                
+
                 $isSpecial=1;
                 $isSpecial_Info= $specialPermission->row_array();
             }
@@ -70,7 +70,8 @@ class Login_model extends CI_Model {
     public function getappconfig() 
     {
 
-        $query = $this->db->get_where('online_BAK..tblAppConfig', array('iyear' => Year,'class' => 11));
+        //$query = $this->db->get_where('online_BAK..tblAppConfig', array('iyear' => 2017,'class' => 11));
+        $query = $this->db->get_where('Registration..tblAppConfig_testing', array('iyear' => 2017,'class' => 11));
         $rowcount = $query->num_rows();
         if($rowcount >0)
         {

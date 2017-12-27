@@ -447,7 +447,7 @@ class Admission_11th_reg_model extends CI_Model
         $spl_cd = $myinfo['spl_cd'];
         $grp_selected = $myinfo['grp_selected'];
         $sess = Session;
-        $Year = Year;
+        $Year = Year-1;
         if($grp_selected == FALSE)
         {
             $query = $this->db->query("Registration..sp_get_regInfo_11th_Make_adm $inst_cd,11,$Year,$sess");    
@@ -471,8 +471,8 @@ class Admission_11th_reg_model extends CI_Model
     public function Cancel_adm($myinfo) //sp_get_regInfo_9th_Cancel_adm
     {
         $inst_cd = $myinfo['Inst_cd'];
-       $iyear = Year;
-        $query = $this->db->query("Registration..sp_get_regInfo_11th_Cancel_adm $inst_cd,11,$iyear,1");    
+       $Year = Year-1;
+        $query = $this->db->query("Registration..sp_get_regInfo_11th_Cancel_adm $inst_cd,11,$Year,1");    
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
@@ -563,7 +563,7 @@ class Admission_11th_reg_model extends CI_Model
         $inst_cd = $myinfo['Inst_cd'];
         $spl_cd = $myinfo['spl_cd'];
         $grp_selected = $myinfo['grp_selected'];
-        $year = Year;
+        $year = Year-1;
         $session = Session;
         if($grp_selected == FALSE)
         {

@@ -32,7 +32,7 @@
                             11th Admission
                         </a>
                     </li>
-                    <?php } 
+                    <?php }                                            
                 if($appconfig['isadmP2'] == 1 || $appconfig['isadmP2S'] == 1){
 
                     ?>
@@ -42,7 +42,7 @@
                             12th Admission
                         </a>
                     </li>
-                    <?php }
+                    <?php }                          
                 if( $appconfig['isslipP1'] == 1 || $appconfig['isslipP2'] == 1 || $appconfig['isslipP2S'] == 1){?>
 
                     <li>
@@ -53,7 +53,7 @@
                     </li>
                     <?php 
 
-                } 
+                }   
                 if( $appconfig['isresultP2'] == 1){?>
 
                     <li>
@@ -112,20 +112,20 @@
                     </li>
                     <li>
                         <a href="<?php echo base_url(); ?>Admission_11th_reg/StudentsData_cancelAdm">
-                             Edit Forms
+                            Edit Forms
                         </a>
                     </li>
 
-                   <li>
+                    <li>
                         <a href="<?php echo base_url(); ?>Admission_11th_reg/CreateBatch">
                             Create Batch
                         </a>
                     </li>
-                     <li>
+                    <li>
                         <a href="<?php echo base_url(); ?>Admission_11th_reg/BatchList">
                             Batch List
                         </a>
-                       </li>
+                    </li>
                     <li>
                         <a onclick="return logout();" style="cursor: pointer;">Logout</a>
                     </li>
@@ -164,8 +164,8 @@
                 </ul>
                 <?php
             }
-            
-           // DebugBreak();
+
+            // DebugBreak();
             // Inter Registration
             if($isselected == '6') { 
                 ?>
@@ -173,19 +173,19 @@
                     <li><a href="<?php echo base_url(); ?>Registration_11th"   data-original-title="" class="<?php if($isselected == '6') {echo 'heading';}?>">Registration</a></li>
 
                     <?php  if($isinterfeeding == 1) {?>
-                           <?php
-                               if($MATRIC_SUPPLY_RESULT_ANNOUNCED == 1)
-                               {
-                               ?>
-                               
-                     <li>
-                            <a href="<?php echo base_url(); ?>Registration_11th/readmission">
-                                Re Admission 
-                            </a>
-                        </li>
                         <?php
-                               }
-                           ?>
+                        if($MATRIC_SUPPLY_RESULT_ANNOUNCED == 1)
+                        {
+                            ?>
+
+                            <li>
+                                <a href="<?php echo base_url(); ?>Registration_11th/readmission">
+                                    Re Admission 
+                                </a>
+                            </li>
+                            <?php
+                        }
+                        ?>
                         <li>
                             <a href="<?php echo base_url(); ?>Registration_11th/Students_matricInfo">
                                 Old Students 

@@ -1016,7 +1016,7 @@ class Admission_11th_reg extends CI_Controller {
         $type     = 'code128';
         $black    = '000000'; // color in hex
 
-        $data['iyear'] = Year+1;
+        $data['iyear'] = Year;
         $data['sess'] = Session;
          $temp = $user['Inst_Id'].'@'.$data['iyear'].'@'.Session;
         $Barcode = $temp;
@@ -2710,7 +2710,7 @@ class Admission_11th_reg extends CI_Controller {
         $turn=1;     
         $pdf=new PDF_RotateWithOutPage("P","in","A4");
         $pdf->AliasNbPages();
-        $pdf->SetTitle("Challan Form | Admission 11th Annual ".(Year+1)." Batch Form Fee");
+        $pdf->SetTitle("Challan Form | Admission 11th Annual ".(Year)." Batch Form Fee");
         $pdf->SetMargins(0.5,0.5,0.5);
         $pdf->AddPage();
         $generatingpdf=false;
@@ -2862,7 +2862,7 @@ class Admission_11th_reg extends CI_Controller {
 
             $pdf->SetXY($w+1.4,$y+$dy+0.15);
             $pdf->SetFont('Arial','B',7);
-            $pdf->Cell(0, $y, 'Admission '.corr_bank_chall_class11.' Annual Session '.(Year+1), 0.25, "L");
+            $pdf->Cell(0, $y, 'Admission '.corr_bank_chall_class11.' Annual Session '.(Year), 0.25, "L");
 
             $y += 0.25;
             $pdf->SetFont('Arial','B',10);

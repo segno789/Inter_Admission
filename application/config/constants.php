@@ -77,7 +77,7 @@ define('corr_bank_chall_class11','11th');
 define('currdate','date("d-m-Y");');
 define('TripleDateFeeinter', '13-10-2017');
 define('RE_ADMISSION_TBL11', 'matric_new..vwIA1P17');
-define('EXAMINATIONDATEINTER_P2','2017-10-21');
+define('EXAMINATIONDATEINTER_P2','2018-05-05');
 define('SingleDateFee', '2018-02-13');
 define('DoubleDateFee', '2018-02-27');
 define('TripleDateFee', '2018-03-07');

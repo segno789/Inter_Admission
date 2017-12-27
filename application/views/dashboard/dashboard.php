@@ -32,7 +32,7 @@
                                     </div>
 
                                     <?php } 
-
+                                   
                                 if($appconfig['isadmP1'] == 1) {?>
                                     <div class="metro-nav-block nav-block-blue">
 
