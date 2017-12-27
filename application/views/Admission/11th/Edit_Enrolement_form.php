@@ -23,6 +23,7 @@
                                     <?php 
                                     $picpath =  DIRPATH11th.'/'.$Inst_Id.'/'.$data[0]['PicPath'];
                                     // echo $picpath;
+                                    //DebugBreak();
                                     $type = pathinfo($picpath, PATHINFO_EXTENSION);
                                     $data[0]['PicPath'] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
                                     ?>

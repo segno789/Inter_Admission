@@ -153,13 +153,10 @@
                                                     <th style="width:10%" class="hidden-phone">
                                                         Selected Subjects
                                                     </th>
-                                                    <th style="width:5%" class="hidden-phone">
-                                                        Picture
-                                                    </th>
                                                     <th style="width:6%" class="hidden-phone">
                                                         View Form
                                                     </th>
-                                                    <th  style="width:10%" scope="col" align="center"><input style="width: 24px; height: 24px;" type="checkbox" id="checkAll"><span style="color:red;" class="check">Check All</span></th>
+                                                    <th  style="width:10%" scope="col" align="center"><span style="color:red;" class="check">Check All</span></th>
                                                     <!--<th style="width:10%" class="hidden-phone" >
                                                     Download
                                                     </th>   -->
@@ -214,14 +211,27 @@
                                                         <td>'.$vals["name"].'</td>
                                                         <td>'.$vals["Fname"].'</td>
                                                         <td>'.$grp_name.'</td>
-                                                        <td>'.$vals["sub1_abr"].','.$vals["sub2_abr"].','.$vals["sub3_abr"].','.$vals["sub4_abr"].','.$vals["sub5_abr"].','.$vals["sub6_abr"].','.$vals["sub7_abr"].'</td>
-                                                        <td><img id="previewImg" style="width:40px; height: 40px;" src="'.$vals["PicPath"] .'" alt="Candidate Image"></td>
-                                                        <td> <button type="button" class="btn btn-info" value="'.$formno.'" onclick="NewForm('.$formno.')">View Form</button></td>
-                                                        <td><input style="width: 24px; height: 24px;" type="checkbox" name="chk[]" value="'.$formno.'" /></td> </tr>';
+                                                        <td>'.$vals["sub1_abr"].','.$vals["sub2_abr"].','.$vals["sub3_abr"].','.$vals["sub4_abr"].','.$vals["sub5_abr"].','.$vals["sub6_abr"].','.$vals["sub7_abr"].'</td>';
+                                                       
+                                                            if(isset($vals["spl_cd"]))
+                                                        {
+                                                            // DebugBreak();
+                                                            echo '<td class="alert alert-danger" style="background-color:red">
+                                                            <strong>Admission Can not proceed due to </strong>'.$vals["spl_cd_exp"].' Please contact to Online Registration Branch at B.I.S.E. Gujranwala.'.'
+                                                            </td><td></td> </tr>';
+                                                        }
+                                                        else
+                                                        {
+                                                            echo '<td> <button type="button" class="btn btn-info" value="'.$formno.'" onclick="NewForm('.$formno.')">View Form</button></td>
+                                                            <td><input style="width: 24px; height: 24px;" type="checkbox" name="chk[]" value="'.$formno.'" /></td> </tr>';
+                                                        }
+
                                                         /*<td><img id="previewImg" style="width:40px; height: 40px;" src="/'.IMAGE_PATH.$Inst_Id.'/'.$vals['PicPath'].'" alt="Candidate Image"></td>';*/
                                                         /* echo'<td>
                                                         <button type="button" class="btn btn-info" value="'.$formno.'" onclick="NewForm('.$formno.')">Save Form</button>
-
+                                                        <td><img id="previewImg" style="width:40px; height: 40px;" src="'.$vals["PicPath"] .'" alt="Candidate Image"></td>  
+                                                        <td> <button type="button" class="btn btn-info" value="'.$formno.'" onclick="NewForm('.$formno.')">View Form</button></td>
+                                                        <td><input style="width: 24px; height: 24px;" type="checkbox" name="chk[]" value="'.$formno.'" /></td> </tr>';
                                                         </td>
                                                         </tr>';  */
                                                         endforeach;
@@ -238,8 +248,8 @@
 
                                         <div class="col-lg-12" style="float: right;">
                                         
-                                        <button type="button" class="btn btn-large btn-info" name="make_adm_all" id="make_adm_all" value="1" onclick="return issubmit_all();" >Submit Admissions Of All Students</button>
-                                        <button type="button" class="btn btn-large btn-info" name="make_adm_all" id="make_adm_sel" value="2" onclick="return issubmit_sel();" >Submit Admissions Of Selected Students</button>
+                                        <button type="button" class="btn btn-large btn-info" name="make_adm_all" id="make_adm_all" value="1" onclick="return issubmit_all();" >Save Forms Of All Students</button>
+                                        <button type="button" class="btn btn-large btn-info" name="make_adm_all" id="make_adm_sel" value="2" onclick="return issubmit_sel();" >Save Forms Of Selected Students</button>
                                         </div>
                                     </div>
 

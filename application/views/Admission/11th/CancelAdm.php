@@ -40,9 +40,7 @@
                                                     <th style="width:15%" class="hidden-phone">
                                                         Selected Subjects
                                                     </th>
-                                                    <th style="width:5%" class="hidden-phone">
-                                                        Picture
-                                                    </th>
+                                                   
                                                     <th scope="col" align="center"><a href="javascript:void(0);" style="color:red;" class="check">Check All</a></th>
                                                     <!--<th style="width:10%" class="hidden-phone" >
                                                     Download
@@ -96,13 +94,14 @@
                                                         <td>'.date("d-m-Y", strtotime($vals["Dob"])).'</td>
                                                         <td>'.$grp_name.'</td>
                                                         <td>'.$vals["sub1_abr"].','.$vals["sub2_abr"].','.$vals["sub3_abr"].','.$vals["sub4_abr"].','.$vals["sub5_abr"].','.$vals["sub6_abr"].','.$vals["sub7_abr"].'</td>
-                                                        <td><img id="previewImg" style="width:40px; height: 40px;" src="'.$vals["PicPath"].'" alt="Candidate Image"></td>
+                                                        
                                                         <td><input style="width: 24px; height: 24px;" type="checkbox" name="chk[]" value="'.$formno.'" /></td> </tr>';
                                                         /*<td><img id="previewImg" style="width:40px; height: 40px;" src="/'.IMAGE_PATH.$Inst_Id.'/'.$vals['PicPath'].'" alt="Candidate Image"></td>';*/
                                                         /* echo'<td>
                                                         <button type="button" class="btn btn-info" value="'.$formno.'" onclick="NewForm('.$formno.')">Save Form</button>
 
                                                         </td>
+                                                        <td><img id="previewImg" style="width:40px; height: 40px;" src="'.$vals["PicPath"].'" alt="Candidate Image"></td>
                                                         </tr>';  */
                                                         endforeach;
                                                 }

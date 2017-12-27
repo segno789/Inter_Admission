@@ -107,27 +107,27 @@
                     <li><a href="<?php echo base_url(); ?>Admission_11th_reg"   data-original-title="" >Admission</a></li>
                     <li>
                         <a href="<?php echo base_url(); ?>Admission_11th_reg/StudentsData">
-                            Make Admission
+                            Students Data
                         </a>
                     </li>
                     <li>
                         <a href="<?php echo base_url(); ?>Admission_11th_reg/StudentsData_cancelAdm">
-                            Cancel Admission
+                             Edit Forms
                         </a>
                     </li>
 
-                    <li>
-                        <a href="<?php echo base_url(); ?>Admission_11th_reg/FormPrinting">
-                            Form Printing
+                   <li>
+                        <a href="<?php echo base_url(); ?>Admission_11th_reg/CreateBatch">
+                            Create Batch
                         </a>
                     </li>
-                    <li>
-                        <a href="<?php echo base_url(); ?>Admission_11th_reg/RevenueList">
-                            Revenue List Printing
+                     <li>
+                        <a href="<?php echo base_url(); ?>Admission_11th_reg/BatchList">
+                            Batch List
                         </a>
-                    </li>
+                       </li>
                     <li>
-                        <a href="#" onclick="return logout();">Logout</a>
+                        <a onclick="return logout();" style="cursor: pointer;">Logout</a>
                     </li>
 
                 </ul>

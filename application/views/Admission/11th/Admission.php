@@ -12,7 +12,13 @@
 
                     </div>
                     <div class="widget-body" style="    width: 60%;float: left;">
-                        <h1    style="text-align: center;"><font color="#000000" size="+1" >Note:-Last Date of Online Admission for 11th  without late fee is <b class="blink_text"> <?php echo SingleDateFee ;?></b></font></h1>
+                        <h1    style="text-align: center;"><font color="#000000" size="+1" >Note:-Last Date of Online Admission for 11th  without late fee is <b class="blink_text"> 
+                        <?php 
+                        $date = new DateTime(SingleDateFee);
+                        echo $date->format('d-m-Y');
+                       // echo SingleDateFee 
+                        
+                        ;?></b></font></h1>
                         <h4>Welcome to Board of Intermediate &amp; Secondary Education, GUJRANWALA</br></br> &nbsp; Dashboard</h4>
                         <?php 
 
@@ -36,13 +42,13 @@
                             <a href="<?php echo base_url();?>index.php/Admission_11th_reg/studentsData"><img src="<?php echo base_url();?>assets/img/enrolment.png"><br>Make-Admission</a>
                         </div> 
                         <div class="shortcutHome">
-                            <a href="<?php echo base_url(); ?>index.php/Admission_11th_reg/studentsData_cancelAdm"><img src="<?php echo base_url();?>assets/img/edit_form.png"><br>Cancel Form</a>
+                            <a href="<?php echo base_url(); ?>index.php/Admission_11th_reg/StudentsData_cancelAdm"><img src="<?php echo base_url();?>assets/img/edit_form.png"><br>Edit Forms</a>
                         </div>
                         <div class="shortcutHome">
-                            <a href="<?php echo base_url(); ?>index.php/Admission_11th_reg/FormPrinting"><img src="<?php echo base_url();?>assets/img/reports.png"><br>Form Printing </a>
+                            <a href="<?php echo base_url(); ?>index.php/Admission_11th_reg/CreateBatch"><img src="<?php echo base_url();?>assets/img/reports.png"><br>Create Batch </a>
                         </div> 
                         <div class="shortcutHome">
-                            <a href="<?php echo base_url(); ?>index.php/Admission_11th_reg/RevenueList"><img src="<?php echo base_url();?>assets/img/lists.png"><br>Revenue List Printing</a>
+                            <a href="<?php echo base_url(); ?>index.php/Admission_11th_reg/BatchList"><img src="<?php echo base_url();?>assets/img/lists.png"><br>Batch List</a>
                         </div>
 
                         <div class="shortcutHome">
@@ -113,7 +119,7 @@
                             <!--<a href="http://www.bisegrw.com/download/online/registration/Training_Manual_11th_Registration_Central_Software_Urdu.pdf" target="_blank" class="guidlines blink_text" style="font-size: 18px;">Download 11th Registration Training Manual. </a> <br/>-->
                             <a href="<?=base_url()?>Admission_11th_reg/forwarding_pdf/"  class="guidlines blink_text" style="font-size: 18px;">Download Forwarding letter. </a> <br/>
                             <a href="<?php echo base_url(); ?>Admission_11th_reg/financeReoprt" target="_blank" class="guidlines blink_text" style="font-size: 18px;">Download Finance Forwarding letter. </a> <br/>
-                            <a href="<?=base_url()?>Admission_11th_reg/ChallanForm_Adm11hth_Regular/9"  class="guidlines blink_text" style="font-size: 18px;">Download Challan Form. </a> <br/>
+                           <!-- <a href="<?=base_url()?>Admission_11th_reg/ChallanForm_Adm11hth_Regular/9"  class="guidlines blink_text" style="font-size: 18px;">Download Challan Form. </a> <br/> -->
                             <!--  <a href="<?php //echo base_url(); ?>/assets/img//Image_error.pdf" class="guidlines blink_text" target="_blank" style="font-size: 18px;">Instruction for Error occured due to Image uploading. </a>-->
                             <br /><br />
                             <strong>NOTE:</strong> <br/>

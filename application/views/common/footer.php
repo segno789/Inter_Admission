@@ -34,7 +34,7 @@ if(isset($files)){
 
     var obj1 = [];
     $(document).ready(function () {
-
+           $('.mPageloader').hide();
         //  console.log(obj);
         //   console.log(obj1);
         drawChart3();
@@ -899,7 +899,7 @@ if(isset($files)){
     }
     $(document).ready(function() {
 
-
+                  $('.mPageloader').hide();
         var error_BatchRelease = "<?php  echo @$BatchRelease_excep; ?>";
         var success_BatchRelease = "<?php  echo @$errors['BatchRelease_excep']; ?>";
         var BatchRelease_Op = "<?php  echo @$errors_RB_update; ?>";

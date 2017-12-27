@@ -8,6 +8,7 @@
 
     $(document).ready(function(){
         //$spl_cd
+         $('.mPageloader').hide();
         $('#data-table').dataTable({
             "sPaginationType": "full_numbers",
             "cache": false

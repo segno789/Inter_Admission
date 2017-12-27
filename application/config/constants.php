@@ -57,7 +57,7 @@ define('lastdate','15-09-2017');
 define('GET_PRIVATE_IMAGE_PATH', 'C:\inetpub\vhosts\bisegrw.com\hssc.bisegrw.com\uplaods\2016\private\\');
 define('GET_PRIVATE_IMAGE_PATH_COPY', '');
 //define('DIRPATH11th','D:/xampp/htdocs/Inter_Admission/Uploads/IS2016/regular/2510010001.jpg');
-define('DIRPATH11th','C:\inetpub\vhosts\bisegrw.com\registration.bisegrw.com\uploads\2016\colleges\\'); 
+define('DIRPATH11th','C:\inetpub\vhosts\bisegrw.edu.pk\Share Images\uploads\HSSC\registration\2018-2019'); 
 //define('DIRPATH11th','D:/xampp/htdocs/Inter_Admission/Uploads/IS2016/regular/2510010001.jpg'); 
 
 define('DIRPATHOTHER','C:\inetpub\vhosts\bisegrw.com\registration.bisegrw.com\uploads\other12'); 
@@ -66,9 +66,6 @@ define('DIRPATHOTHER','C:\inetpub\vhosts\bisegrw.com\registration.bisegrw.com\up
 define('Insert_sp_Languages','Admission_online..ISAdm2016_sp_insert_LANGUAGES'); // for insertion Inter supply private
 define('Insert_sp_matric_annual','Admission_online..MA_P1_Reg_Adm2016_sp_insert'); // for insertion matric Annual
 define('formprint_sp','Admission_online..sp_form_data_11th');    // for selection matric supply
-
-
-
 define('formprint_sp_Languages','Admission_online..sp_form_data_11th_Languages');    // for selection matric supply
 define('formprint_sp_matric_annual','Admission_online..sp_form_data');    // for selection matric Annual
 define('formnovalid','600000');
@@ -85,9 +82,9 @@ define('currdate','date("d-m-Y");');
 define('TripleDateFeeinter', '13-10-2017');
 define('RE_ADMISSION_TBL11', 'matric_new..vwIA1P17');
 define('EXAMINATIONDATEINTER_P2','2017-10-21');
-define('SingleDateFee', '2017-11-30');
-define('DoubleDateFee', '2017-10-03');
-define('TripleDateFee', '2017-10-06');
+define('SingleDateFee', '2018-02-13');
+define('DoubleDateFee', '2018-02-27');
+define('TripleDateFee', '2018-03-07');
 define('getinfo','admission_online..sp_Admission_HSSC');
 define('Insert_sp','admission_online..sp_insert_ISAdm');
 define('INSERT_TBL','Admission_online..ISAdm'); 
@@ -95,9 +92,9 @@ define ('class_for_11th_Adm','11th');
 define('formprint_sp_12th','admission_online..sp_form_data_12th');      
 define('getinfo_languages','admission_online..tblAdmissionDataLang');
 define('save_dir','D:/xampp/htdocs/Inter_Admission/Uploads/IS2016/regular/');
-
+define('tblreg11th','Registration..tblReg11th');
 define('corr_bank_chall_class1','12th');
-define('CURRENT_SESS1','2017'); 
+define('CURRENT_SESS1','2018'); 
 
 define('formprint_sp_11th','Registration..sp_form_data_11thAdm');
 define('class_for_9th_Adm','11th');

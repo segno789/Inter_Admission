@@ -16,6 +16,7 @@
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.validate.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/alertify.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.fancybox.pack.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.fancybox.js"></script>   
 <script src="<?php echo base_url(); ?>assets/js/jquery-ui.js"></script>
 
 <?php 
@@ -26,9 +27,10 @@ if(isset($files)){
 }
 ?> 
 <script type="">
-var oTable =  '';
+
+    var oTable =  '';
     $(document).ready(function () {
-       oTable = $('#data-table').dataTable({
+        oTable = $('#data-table').dataTable({
             "sPaginationType": "full_numbers",
             "cache": true
         });
@@ -36,23 +38,23 @@ var oTable =  '';
             "sPaginationType": "full_numbers",
             "cache": true
         });
- $("#checkAll").click(function(){
+        $("#checkAll").click(function(){
 
-     if($(this).is(":checked"))
-     {
-         $('input', oTable.fnGetNodes()).each( function() {
-             $('input', oTable.fnGetNodes()).attr('checked','checked');})
-     }
-     else
-     {
-         $('input', oTable.fnGetNodes()).each( function() {
-             $('input', oTable.fnGetNodes()).removeAttr('checked');})
-     }
+            if($(this).is(":checked"))
+            {
+                $('input', oTable.fnGetNodes()).each( function() {
+                    $('input', oTable.fnGetNodes()).attr('checked','checked');})
+            }
+            else
+            {
+                $('input', oTable.fnGetNodes()).each( function() {
+                    $('input', oTable.fnGetNodes()).removeAttr('checked');})
+            }
 
- })
+        })
     });
 
- $('.mPageloader').hide();
+    $('.mPageloader').hide();
 
 </script>
 <script type="">
@@ -62,6 +64,19 @@ var oTable =  '';
         var pattern = /^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([ \t]*\r\n)?[ \t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([ \t]*\r\n)?[ \t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
         return pattern.test(emailAddress);
     };
+    
+  /*   $(window).load(function(){
+     
+        $("#instruction").fancybox({
+            closeClick  : false, // prevents closing when clicking INSIDE fancybox 
+            openEffect  : 'none',
+            closeEffect : 'none',
+            helpers   : { 
+                overlay : {closeClick: false} // prevents closing when clicking OUTSIDE fancybox 
+            }
+        }).trigger("click");
+ });  */
+    
     function Incomplete_inst_info_INSERT()
     {
 
@@ -219,6 +234,7 @@ var oTable =  '';
 
         //  window.location.href = '<?=base_url()?>/index.php/Registration/Batchlist_INSERT/';
     }
+    
     function downloadslip(rno,isdownload)
     {
         $('.mPageloader').show();
@@ -273,7 +289,7 @@ var oTable =  '';
     //$( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true }).val();
 
     $( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate: new Date(2004, 7,1),yearRange: '1970:2004'}).val();
-    
+
 
     $( "#batch_real_PaidDate" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, startDate:new Date() }).val();
     var myOptions = {
@@ -456,70 +472,70 @@ var oTable =  '';
         window.location.href =  '<?=base_url()?>/index.php/Admission_11th_reg/Print_Admission_Form_Groupwise/'+startformno + '/2' +'/'+endformno+'/';
     }
     $('#get_revenue').click( function()
-    {
-        var option =  $('input[type=radio][name=opt]:checked').val(); 
-        // alert(option);
-        // return;
-        if(option == "1")
         {
-            var std_group = $('#std_group').val();
-            if(std_group == "0"){
-                alertify.error("Please Select a Group First !");
-                return;
-            }
-            Revenue_list_groupwise(std_group);
-        }
-        else if(option =="2")
-        {
-            var startformno = $('#strt_formNo').val();
-            var endformno = $('#ending_formNo').val();
-            if((startformno.length < 10 ||  startformno.length > 10) && (endformno.length < 10 ||  endformno.length > 10))
+            var option =  $('input[type=radio][name=opt]:checked').val(); 
+            // alert(option);
+            // return;
+            if(option == "1")
             {
-                alertify.error("Invalid Form No.");
-                return;
+                var std_group = $('#std_group').val();
+                if(std_group == "0"){
+                    alertify.error("Please Select a Group First !");
+                    return;
+                }
+                Revenue_list_groupwise(std_group);
             }
-            Revenue_list_Formnowise(startformno,endformno);
-        }
-        else{
-            return;
-        }
-    })
-     $('#get_cutlist').click( function()
-    {
-        var option =  $('input[type=radio][name=opt]:checked').val(); 
-        // alert(option);
-        // return;
-        if(option == "1")
-        {
-            var std_group = $('#std_group').val();
-            if(std_group == "0"){
-                alertify.error("Please Select a Group First !");
-                return;
-            }
-            Cut_list_groupwise(std_group);
-        }
-        else if(option =="2")
-        {
-            var startformno = $('#strt_formNo').val();
-            var endformno = $('#ending_formNo').val();
-            if((startformno.length < 10 ||  startformno.length > 10) && (endformno.length < 10 ||  endformno.length > 10))
+            else if(option =="2")
             {
-                alertify.error("Invalid Form No.");
+                var startformno = $('#strt_formNo').val();
+                var endformno = $('#ending_formNo').val();
+                if((startformno.length < 10 ||  startformno.length > 10) && (endformno.length < 10 ||  endformno.length > 10))
+                {
+                    alertify.error("Invalid Form No.");
+                    return;
+                }
+                Revenue_list_Formnowise(startformno,endformno);
+            }
+            else{
                 return;
             }
-            Cut_list_Formnowise(startformno,endformno);
-        }
-        else{
-            return;
-        }
     })
-     function Cut_list_groupwise(grp_cd){
+    $('#get_cutlist').click( function()
+        {
+            var option =  $('input[type=radio][name=opt]:checked').val(); 
+            // alert(option);
+            // return;
+            if(option == "1")
+            {
+                var std_group = $('#std_group').val();
+                if(std_group == "0"){
+                    alertify.error("Please Select a Group First !");
+                    return;
+                }
+                Cut_list_groupwise(std_group);
+            }
+            else if(option =="2")
+            {
+                var startformno = $('#strt_formNo').val();
+                var endformno = $('#ending_formNo').val();
+                if((startformno.length < 10 ||  startformno.length > 10) && (endformno.length < 10 ||  endformno.length > 10))
+                {
+                    alertify.error("Invalid Form No.");
+                    return;
+                }
+                Cut_list_Formnowise(startformno,endformno);
+            }
+            else{
+                return;
+            }
+    })
+    function Cut_list_groupwise(grp_cd){
         window.location.href =  '<?=base_url()?>Admission_11th_reg/return_pdf/'+grp_cd + '/4'
     }
     function Cut_list_Formnowise(startformno,endformno){
         window.location.href = '<?=base_url()?>Admission_11th_reg/return_pdf/'+startformno + '/5' +'/'+endformno+'/';
     }
-      function Revenue_list_groupwise(grp_cd){
+    function Revenue_list_groupwise(grp_cd){
         window.location.href =  '<?=base_url()?>Admission_11th_reg/revenue_pdf/'+grp_cd + '/4'
     }
     function Revenue_list_Formnowise(startformno,endformno){
@@ -858,113 +874,190 @@ var oTable =  '';
 
 
     }
-     function issubmit_sel()
-     {
-     debugger;
-            var msg = "Are You Sure You want to Make Admissions of Selected Students ?"
-            
-             //var option =  $('input[type=radio][name=chk]:checked').val(); 
-        if( $('input[name="chk[]"]:checked').length > 0 )
-        {
-         alertify.confirm(msg, function (e) {
 
-                    if (e) {
-                    $("#isformwise").val("1");
-                    
-                     $("input[name='chk[]:checked']").remove();
-                        $("input:checked", oTable.fnGetNodes()).each(function(){
-                            $('<input type="checkbox"  class="checkedID" name="chk[]" ' + 'value="' +
-                                $(this).val() + '" type="hidden" checked="checked" />')
-                            .css("display", "none")
-                            .appendTo('#form_make_adm');
-                        });
-                    $('#form_make_adm').submit();
-                    
-                    
-                   // $('#form_make_adm').submit();
-                       // window.location.href = '<?=base_url()?>index.php/Admission_9th_reg/NewEnrolment_update/'
-                    } 
+    var valArray = [];
+    var $valuesContainer = $('#CheckedFormno');
+    var $batchformSelectedid = $("#CheckedFormno_createBatch");
+    //var $countContainer = $('.selectCount');
 
+    $(document).on('change',"input:checkbox", function () {
 
-                });
+        var value = $(this).val();
+
+        if(this.checked) {
+            valArray.push(value);    // record the value of the checkbox to valArray
+        } else {
+            valArray.pop(value);    // remove the recorded value of the checkbox
         }
-            else{  
-            alertify.error("Please Select Checkbox First !")
-            }
-        
-       
-        return false;
+        if(valArray.length>0)
+        {
+            $('#create_batch2').removeAttr("disabled").css('left', function(){ return $(this).offset().left; })
+            .animate({"left":"0px"}, "slow");
+            $('#create_batch').attr("disabled","disabled").css('left', function(){ return $(this).offset().left; })
+            .animate({"left":"0px"}, "slow");
 
+        }
+        else
+        {
+            $('#create_batch2').attr("disabled", "disabled").css('left', function(){ return $(this).offset().left; })
+            .animate({"left":"0px"}, "slow");
+            if($("#std_groups").val() > 0)
+            {
+                $('#create_batch').removeAttr("disabled").css('left', function(){ return $(this).offset().left; })
+                .animate({"left":"0px"}, "slow");                                                                  
+            }
+            else
+            {
+                $('#create_batch').attr("disabled","disabled").css('left', function(){ return $(this).offset().left; })
+                .animate({"left":"0px"}, "slow");
+            }
+
+            console.log("none state");
+        }
+
+        if(valArray.length>0)
+        {
+            $('#create_batch2').removeAttr("disabled").css('left', function(){ return $(this).offset().left; })
+            .animate({"left":"0px"}, "slow");
+            $('#create_batch').attr("disabled","disabled").css('left', function(){ return $(this).offset().left; })
+            .animate({"left":"0px"}, "slow");
+
+        }
+        else
+        {
+            $('#create_batch2').attr("disabled", "disabled").css('left', function(){ return $(this).offset().left; })
+            .animate({"left":"0px"}, "slow");
+            if($("#std_groups").val() > 0)
+            {
+                $('#create_batch').removeAttr("disabled").css('left', function(){ return $(this).offset().left; })
+                .animate({"left":"0px"}, "slow");                                                     
+            }
+            else
+            {
+                $('#create_batch').attr("disabled","disabled").css('left', function(){ return $(this).offset().left; })
+                .animate({"left":"0px"}, "slow");
+            }
+
+            //console.log("none state");
+        }
+
+    });
+
+
+    function issubmit_sel()
+    {
+        //debugger;
+        var msg = "Are You Sure You want to Make Admissions of Selected Students ?"
+
+        //var option =  $('input[type=radio][name=chk]:checked').val(); 
+
+        if( valArray.length > 0 )
+        {
+
+            $valuesContainer.val(valArray.join(','));
+            // alert(valArray);
             alertify.confirm(msg, function (e) {
 
                 if (e) {
-                    // user clicked "ok"
-                    window.location.href = '<?=base_url()?>index.php/Admission_11th_reg/NewEnrolment_update/'
-                } else {
-                    // user clicked "cancel"
 
-                }
-            }); 
-       }
-     function issubmit_sel_cancel()
-     {
-     //debugger;
-            var msg = "Are You Sure You want to Cancel Admissions of Selected Students ?"
-            
-             //var option =  $('input[type=radio][name=chk]:checked').val(); 
+                    $("#isformwise").val("1");
+
+                    /*var allPages = otable.fnGetNodes();
+                    $('input[type="checkbox"]', allPages).prop('checked', true); */
+                    /*var protCaseInstArray = [];
+                    $(otable.fnGetNodes()).find("input[name='chk[]']:checked").each(function() { protCaseInstArray.push($(this).val()); }); 
+                    console.log(protCaseInstArray);
+                    */ 
+                    //$('#form_make_adm').submit();
+
+                    // $('#form_make_adm').submit(function(e){
+
+
+                    $('#form_make_adm').submit();
+                    // });
+                    // window.location.href = '<?=base_url()?>index.php/Admission_9th_reg/NewEnrolment_update/'
+                } 
+
+
+            });
+        }
+        else{  
+            alertify.error("Please Select Checkbox First !")
+        }
+
+
+        return false;
+
+        alertify.confirm(msg, function (e) {
+
+            if (e) {
+                // user clicked "ok"
+                window.location.href = '<?=base_url()?>index.php/Admission_11th_reg/NewEnrolment_update/'
+            } else {
+                // user clicked "cancel"
+
+            }
+        }); 
+    }
+    function issubmit_sel_cancel()
+    {
+        //debugger;
+        var msg = "Are You Sure You want to Cancel Admissions of Selected Students ?"
+
+        //var option =  $('input[type=radio][name=chk]:checked').val(); 
         if( $('input[name="chk[]"]:checked').length > 0 )
         {
-         alertify.confirm(msg, function (e) {
+            alertify.confirm(msg, function (e) {
 
-                    if (e) {
+                if (e) {
                     $("#isformwise").val("3");
                     $('#form_make_adm').submit();
-                       // window.location.href = '<?=base_url()?>index.php/Admission_9th_reg/NewEnrolment_update/'
-                    } 
+                    // window.location.href = '<?=base_url()?>index.php/Admission_9th_reg/NewEnrolment_update/'
+                } 
 
 
-                });
+            });
         }
-            else{  
+        else{  
             alertify.error("Please Select Checkbox First !")
-            }
-        
-       
+        }
+
+
         return false;
 
+        alertify.confirm(msg, function (e) {
+
+            if (e) {
+                // user clicked "ok"
+                window.location.href = '<?=base_url()?>index.php/Admission_11th_reg/NewEnrolment_update/'
+            } else {
+                // user clicked "cancel"
+
+            }
+        }); 
+    }
+    function issubmit_all()
+    {
+        if($("#make_adm11th_groups").val() == ""  || $("#make_adm11th_groups").val() == 0)
+        {
+            alertify.error("Please Select Group First!") ;
+        }
+        else{
+            var msg = "Are you Sure You want to make Admissions to All Students of Selected Group ?"
+            //var msg = "Are You Sure You want to Cancel this Form ? <img src='<?php //echo base_url(); ?>assets/img/note_for_batch.jpg' alt='logo' style='width:30px; height: 50px;' />"
             alertify.confirm(msg, function (e) {
 
                 if (e) {
-                    // user clicked "ok"
-                    window.location.href = '<?=base_url()?>index.php/Admission_11th_reg/NewEnrolment_update/'
-                } else {
-                    // user clicked "cancel"
-
-                }
-            }); 
-       }
-       function issubmit_all()
-       {
-        if($("#make_adm11th_groups").val() == ""  || $("#make_adm11th_groups").val() == 0)
-            {
-                alertify.error("Please Select Group First!") ;
-            }
-            else{
-                var msg = "Are you Sure You want to make Admissions to All Students of Selected Group ?"
-                //var msg = "Are You Sure You want to Cancel this Form ? <img src='<?php //echo base_url(); ?>assets/img/note_for_batch.jpg' alt='logo' style='width:30px; height: 50px;' />"
-                alertify.confirm(msg, function (e) {
-
-                    if (e) {
                     $("#isformwise").val("2");
-                       $('#form_make_adm').submit(); 
-                    } 
+                    $('#form_make_adm').submit(); 
+                } 
 
 
-                });
-            
-       }
-       }
-   
+            });
+
+        }
+    }
+
     $(document).ready(function() {
 
 
@@ -1005,9 +1098,9 @@ var oTable =  '';
             alertify.error(error_BatchRelease);
         }  
 
-       /* var error = "<?php // echo @$error; ?>";
+        /* var error = "<?php // echo @$error; ?>";
         if(error != ""){
-            alertify.error(error);
+        alertify.error(error);
         }*/
         //  console.log("Jquery working....");
         var msg = "<?php echo @$msg;?>";
@@ -1092,7 +1185,7 @@ var oTable =  '';
             }
         });
 
-        
+
         var error_New_Enrolement ='<?php   if(@$excep != ""){echo @$excep;}  ?>';
         var  error_New_Enrolement_update ='<?php   if(@$data != ""){echo @$data[0]['excep'];}  ?>';
         if(error_New_Enrolement.length > 1)
@@ -1329,20 +1422,20 @@ var oTable =  '';
         }
         console.log('Hi i am sub6 dropdown :) ');
     })
-var langascd = ['22','23','36','34','35'];
-var hstascd = ['19','20','21'];
+    var langascd = ['22','23','36','34','35'];
+    var hstascd = ['19','20','21'];
     $("#sub7").change(function(){
         console.log('Hi i am sub7 dropdown :) ');
         var sub6 = $("#sub6").val();
         var sub7 = $("#sub7").val();
         var sub8 = $("#sub8").val();
 
-          var a = langascd.indexOf(sub7);
+        var a = langascd.indexOf(sub7);
         var b = langascd.indexOf(sub8);
 
-         var c = hstascd.indexOf(sub7);
+        var c = hstascd.indexOf(sub7);
         var  d = hstascd.indexOf(sub8);
-        
+
         if(a >=0  && b>=0)
         {
             alertify.error("Please choose Different Subjects as Double Language is not allowed" );
@@ -1376,15 +1469,15 @@ var hstascd = ['19','20','21'];
         var sub6 = $("#sub6").val();
         var sub7 = $("#sub7").val();
         var sub8 = $("#sub8").val();
-       
-        
-        
+
+
+
         var a = langascd.indexOf(sub7);
         var b = langascd.indexOf(sub8);
 
-         var c = hstascd.indexOf(sub7);
+        var c = hstascd.indexOf(sub7);
         var  d = hstascd.indexOf(sub8);
-        
+
         if(a >=0  && b>=0)
         {
             alertify.error("Please choose Different Subjects as Double Language is not allowed" );
@@ -1400,9 +1493,9 @@ var hstascd = ['19','20','21'];
             return;  
         }
 
-        
-        
-        
+
+
+
         if((sub7 == sub8)|| (sub8 == sub6))
         {
             alertify.error("Please choose Different Subjects" );
@@ -1420,8 +1513,8 @@ var hstascd = ['19','20','21'];
             // $("sub8")[0].selectedIndex = 0;
             return;
         }
-       
-       // console.log('Hi i am sub8 dropdown :) ');
+
+        // console.log('Hi i am sub8 dropdown :) ');
     })
     function remove_subjects()
     {
@@ -1474,136 +1567,136 @@ var hstascd = ['19','20','21'];
             }
 
 
-        });
-        $("#pvtinfo_teh").change(function(){
+    });
+    $("#pvtinfo_teh").change(function(){
 
-            // alert("hello");
-            var tehId =  $("#pvtinfo_teh").val();
-            var gend = $("input[name=gender]:checked").val();
-            //alert("hello "+tehId);
-             if( gend==undefined)
-            {
-                alertify.error("Select Gender First.");
-                $("#pvtinfo_teh").val(0);
-                return false; 
-            }
-            else if(tehId == 0){
-                alertify.error("Select Tehsil First.");
-                $("#pvtinfo_teh").val(0);
-                return false; 
-                
-            }
-            else{
+        // alert("hello");
+        var tehId =  $("#pvtinfo_teh").val();
+        var gend = $("input[name=gender]:checked").val();
+        //alert("hello "+tehId);
+        if( gend==undefined)
+        {
+            alertify.error("Select Gender First.");
+            $("#pvtinfo_teh").val(0);
+            return false; 
+        }
+        else if(tehId == 0){
+            alertify.error("Select Tehsil First.");
+            $("#pvtinfo_teh").val(0);
+            return false; 
 
-                jQuery.ajax({
-                    ////debugger;
-                    type: "POST",
-                    url: "<?php echo base_url(); ?>" + "Admission_9th_pvt/getzone/",
-                    dataType: 'json',
-                    data: {tehCode: tehId,gend:gend},
-                    beforeSend: function() {  $('.mPageloader').show(); },
-                    complete: function() { $('.mPageloader').hide();},
-                    success: function(json) {
-                        var listitems;
-                        //alert('Hi i am success');
-                        // console.log("I am console");
-                        // console.log(url);
-                        $('#pvtZone').empty();
-                        $('#pvtZone').append('<option value="0">SELECT ZONE</option>');
-                        $.each(json, function (key, data) {
+        }
+        else{
 
-                            //console.log(key)
+            jQuery.ajax({
+                ////debugger;
+                type: "POST",
+                url: "<?php echo base_url(); ?>" + "Admission_9th_pvt/getzone/",
+                dataType: 'json',
+                data: {tehCode: tehId,gend:gend},
+                beforeSend: function() {  $('.mPageloader').show(); },
+                complete: function() { $('.mPageloader').hide();},
+                success: function(json) {
+                    var listitems;
+                    //alert('Hi i am success');
+                    // console.log("I am console");
+                    // console.log(url);
+                    $('#pvtZone').empty();
+                    $('#pvtZone').append('<option value="0">SELECT ZONE</option>');
+                    $.each(json, function (key, data) {
 
-                            $.each(data, function (index, data) {
+                        //console.log(key)
 
-                                // console.log('Zone Name :', data.zone_name , ' Zone Code : ' ,data.zone_cd)
-                                listitems +='<option value=' + data.zone_cd + '>' + data.zone_name + '</option>';
-                                //$('#pvtZone').append('<option value=' + data.zone_cd + '>' + data.zone_name + '</option>');
-                                //console.log('Zone Name :', data.zone_cd)
-                                //console.log('Zone Name :', data)
-                            })
+                        $.each(data, function (index, data) {
+
+                            // console.log('Zone Name :', data.zone_name , ' Zone Code : ' ,data.zone_cd)
+                            listitems +='<option value=' + data.zone_cd + '>' + data.zone_name + '</option>';
+                            //$('#pvtZone').append('<option value=' + data.zone_cd + '>' + data.zone_name + '</option>');
+                            //console.log('Zone Name :', data.zone_cd)
+                            //console.log('Zone Name :', data)
                         })
-                        $('#pvtZone').append(listitems)
-                        /*console.log(data.length);
-                        for (var i = 0; i < data.length; i++) {
+                    })
+                    $('#pvtZone').append(listitems)
+                    /*console.log(data.length);
+                    for (var i = 0; i < data.length; i++) {
 
-                        console.log(" Thesil : "+ data[i].zone_name);
-                        // var checkBox = "<input type='checkbox' data-price='" + data[i].Price + "' name='" + data[i].Name + "' value='" + data[i].ID + "'/>" + data[i].Name + "<br/>";
-                        // $(checkBox).appendTo('#modifiersDiv');
-                        }*/
-                        //if (json)
-                        //{
-                        //var obj = jQuery.parseJSON(json);
-                        //  console.log(json.teh[0].zone_name);
-                        //alert( obj['teh']['Class']);
-                        //   alert(res.Sess);
-                        //   alert(res.Class);
-                        //   //debugger;
-                        //   Show Entered Value
-                        //   jQuery("div#result").show();
-                        //   jQuery("div#value").html(res.username);
-                        //   jQuery("div#value_pwd").html(res.pwd);
-                        //}
+                    console.log(" Thesil : "+ data[i].zone_name);
+                    // var checkBox = "<input type='checkbox' data-price='" + data[i].Price + "' name='" + data[i].Name + "' value='" + data[i].ID + "'/>" + data[i].Name + "<br/>";
+                    // $(checkBox).appendTo('#modifiersDiv');
+                    }*/
+                    //if (json)
+                    //{
+                    //var obj = jQuery.parseJSON(json);
+                    //  console.log(json.teh[0].zone_name);
+                    //alert( obj['teh']['Class']);
+                    //   alert(res.Sess);
+                    //   alert(res.Class);
+                    //   //debugger;
+                    //   Show Entered Value
+                    //   jQuery("div#result").show();
+                    //   jQuery("div#value").html(res.username);
+                    //   jQuery("div#value_pwd").html(res.pwd);
+                    //}
 
-                    },
-                    error: function(request, status, error){
-                        alert(request.responseText);
-                    }
-                });
-            }
+                },
+                error: function(request, status, error){
+                    alert(request.responseText);
+                }
+            });
+        }
 
-        })
-        $("#pvtZone").change(function(){
-                
-            var tehId =  $("#pvtZone").val();
-            
-            var gend = $("input[name=gender]:checked").val();
-            //alert("hello "+tehId);
-             if( gend==undefined)
-            {
-                alertify.error("Select Gender First.");
-                $("#pvtinfo_teh").val(0);
-                $("#pvtZone").val(0);
-                return false; 
-            }
-            
-            else if(tehId == 0){
-                 alertify.error("Select Zone First.");
-                $("#pvtinfo_teh").val(0);
-                $("#pvtZone").val(0);
-                return false; 
-                
-            }
-            else{
-                jQuery.ajax({
+    })
+    $("#pvtZone").change(function(){
 
-                    type: "POST",
-                    url: "<?php echo base_url(); ?>Admission_9th_pvt/getcenter/",
-                    dataType: 'json',
-                    data: {pvtZone:tehId,gend:gend},
-                    beforeSend: function() {  $('.mPageloader').show(); },
-                    complete: function() { $('.mPageloader').hide();},
-                    success: function(json) {
-                        var listitems='';
-                        //$('#instruction').empty();
-                        $.each(json.center, function (key, data) {
+        var tehId =  $("#pvtZone").val();
 
-                            console.log(data);
-                            listitems +='<label style="text-align: left; margin-top: -23px;">'+data.CENT_CD + '-' + data.CENT_NAME+'</label><br>';
-                        })
-                        $('#instruction').html('<h1 style="    margin-bottom: 28px;">Selected Zone Centre List </h1>'+listitems); 
-                        $.fancybox("#instruction");
-                    },
-                    error: function(request, status, error){
-                        alert(request.responseText);
-                    }
-                });
+        var gend = $("input[name=gender]:checked").val();
+        //alert("hello "+tehId);
+        if( gend==undefined)
+        {
+            alertify.error("Select Gender First.");
+            $("#pvtinfo_teh").val(0);
+            $("#pvtZone").val(0);
+            return false; 
+        }
 
-            }
+        else if(tehId == 0){
+            alertify.error("Select Zone First.");
+            $("#pvtinfo_teh").val(0);
+            $("#pvtZone").val(0);
+            return false; 
 
-        })
-        
-        $("#pvtinfo_distr").change(function()
+        }
+        else{
+            jQuery.ajax({
+
+                type: "POST",
+                url: "<?php echo base_url(); ?>Admission_9th_pvt/getcenter/",
+                dataType: 'json',
+                data: {pvtZone:tehId,gend:gend},
+                beforeSend: function() {  $('.mPageloader').show(); },
+                complete: function() { $('.mPageloader').hide();},
+                success: function(json) {
+                    var listitems='';
+                    //$('#instruction').empty();
+                    $.each(json.center, function (key, data) {
+
+                        console.log(data);
+                        listitems +='<label style="text-align: left; margin-top: -23px;">'+data.CENT_CD + '-' + data.CENT_NAME+'</label><br>';
+                    })
+                    $('#instruction').html('<h1 style="    margin-bottom: 28px;">Selected Zone Centre List </h1>'+listitems); 
+                    $.fancybox("#instruction");
+                },
+                error: function(request, status, error){
+                    alert(request.responseText);
+                }
+            });
+
+        }
+
+    })
+
+    $("#pvtinfo_distr").change(function()
         {
             var distId =  $("#pvtinfo_distr").val();
             $('#pvtinfo_tehr').empty();
@@ -1643,181 +1736,181 @@ var hstascd = ['19','20','21'];
             }
 
 
-        });
-         $("#pvtinfo_tehr").change(function(){
+    });
+    $("#pvtinfo_tehr").change(function(){
 
-            // alert("hello");
-            var tehId =  $("#pvtinfo_tehr").val();
-            var gend =  $("#gend").val();
-          //  alert("hello "+tehId);
-             
-            
-            if(gend ==0  || gend == '' || gend == null || gend==undefined)
-            {
-                alertify.error("Select Gender First.");
-                $("#pvtinfo_tehr").val(0);
-                return false; 
-            }
-           else if(tehId == 0){
-               alertify.error("Select Zone First.");
-                return false;
-            }
-            else{
+        // alert("hello");
+        var tehId =  $("#pvtinfo_tehr").val();
+        var gend =  $("#gend").val();
+        //  alert("hello "+tehId);
 
-                jQuery.ajax({
-                    ////debugger;
-                    type: "POST",
-                    url: "<?php echo base_url(); ?>" + "Admission_9th_pvt/getzone/",
-                    dataType: 'json',
-                    data: {tehCode: tehId,gend:gend},
-                    beforeSend: function() {  $('.mPageloader').show(); },
-                    complete: function() { $('.mPageloader').hide();},
-                    success: function(json) {
-                        var listitems;
-                        //alert('Hi i am success');
-                        // console.log("I am console");
-                        // console.log(url);
-                        $('#pvtZoner').empty();
-                        $('#pvtZoner').append('<option value="0">SELECT ZONE</option>');
-                        $.each(json, function (key, data) {
 
-                            //console.log(key)
-
-                            $.each(data, function (index, data) {
-
-                                // console.log('Zone Name :', data.zone_name , ' Zone Code : ' ,data.zone_cd)
-                                listitems +='<option value=' + data.zone_cd + '>' + data.zone_name + '</option>';
-                                //$('#pvtZone').append('<option value=' + data.zone_cd + '>' + data.zone_name + '</option>');
-                                //console.log('Zone Name :', data.zone_cd)
-                                //console.log('Zone Name :', data)
-                            })
-                        })
-                        $('#pvtZoner').append(listitems)
-                        /*console.log(data.length);
-                        for (var i = 0; i < data.length; i++) {
-
-                        console.log(" Thesil : "+ data[i].zone_name);
-                        // var checkBox = "<input type='checkbox' data-price='" + data[i].Price + "' name='" + data[i].Name + "' value='" + data[i].ID + "'/>" + data[i].Name + "<br/>";
-                        // $(checkBox).appendTo('#modifiersDiv');
-                        }*/
-                        //if (json)
-                        //{
-                        //var obj = jQuery.parseJSON(json);
-                        //  console.log(json.teh[0].zone_name);
-                        //alert( obj['teh']['Class']);
-                        //   alert(res.Sess);
-                        //   alert(res.Class);
-                        //   //debugger;
-                        //   Show Entered Value
-                        //   jQuery("div#result").show();
-                        //   jQuery("div#value").html(res.username);
-                        //   jQuery("div#value_pwd").html(res.pwd);
-                        //}
-
-                    },
-                    error: function(request, status, error){
-                        alert(request.responseText);
-                    }
-                });
-            }
-
-        })
-        $("#pvtZoner").change(function(){
-                
-            var tehId =  $("#pvtZoner").val();
-            
-            var gend =  $("#gend").val();
-            //alert("hello "+tehId);
-             
-            
-            if(gend ==0  || gend == '' || gend == null || gend==undefined)
-            {
-                alertify.error("Select Gender First.");
-                $("#pvtZoner").val(0);
-                return false; 
-            }
-           else if(tehId == 0){
-               alertify.error("Select Zone First.");
-                return false;
-            }
-            
-            else{
-                jQuery.ajax({
-
-                    type: "POST",
-                    url: "<?php echo base_url(); ?>Admission_9th_pvt/getcenter/",
-                    dataType: 'json',
-                    data: {pvtZone:tehId,gend:gend},
-                    beforeSend: function() {  $('.mPageloader').show(); },
-                    complete: function() { $('.mPageloader').hide();},
-                    success: function(json) {
-                        var listitems='';
-                        //$('#instruction').empty();
-                        $.each(json.center, function (key, data) {
-
-                            console.log(data);
-                            listitems +='<label style="text-align: left; margin-top: -23px;">'+data.CENT_CD + '-' + data.CENT_NAME+'</label><br>';
-                        })
-                        $('#instruction').html('<h1 style="    margin-bottom: 28px;">Selected Zone Centre List </h1>'+listitems); 
-                        $.fancybox("#instruction");
-                    },
-                    error: function(request, status, error){
-                        alert(request.responseText);
-                    }
-                });
-
-            }
-
-        })
-        
-        function examchecks()
+        if(gend ==0  || gend == '' || gend == null || gend==undefined)
         {
-             var pvtinfo_distr = $("#pvtinfo_distr").val();
-             var pvtinfo_tehr = $("#pvtinfo_tehr").val();
-             var pvtZoner = $("#pvtZoner").val();
-             
-             if(pvtinfo_distr == 0)
-             {
-                alertify.error("Please Select District.");
-                //$("#pvtZoner").val(0);
-                $('#pvtinfo_distr').focus();
-                return false;   
-             }
-             else if(pvtinfo_tehr == 0)
-             {
-                alertify.error("Please Select Tehsil.");
-                  $('#pvtinfo_tehr').focus();
-                return false;   
-             }
-              else if(pvtZoner == 0)
-             {
-                alertify.error("Please Select Zone.");
-                $('#pvtZoner').focus();
-                return false;   
-             }
-            
-             
-             
+            alertify.error("Select Gender First.");
+            $("#pvtinfo_tehr").val(0);
+            return false; 
         }
-        
-        
-        
-     function validateForm() 
-        {
+        else if(tehId == 0){
+            alertify.error("Select Zone First.");
+            return false;
+        }
+        else{
 
-            var x = document.forms["registration"]["matrno"].value;
-            var y = document.forms["registration"]["formid"].value;
-            if (x == null || x == "") {
-                $("#matrno").css('border', '1px solid red');
-                return false;
-            }
-            if (y == null || y == "") {
-                $("#formid").css('border', '1px solid red');
-                return false;
-            }
+            jQuery.ajax({
+                ////debugger;
+                type: "POST",
+                url: "<?php echo base_url(); ?>" + "Admission_9th_pvt/getzone/",
+                dataType: 'json',
+                data: {tehCode: tehId,gend:gend},
+                beforeSend: function() {  $('.mPageloader').show(); },
+                complete: function() { $('.mPageloader').hide();},
+                success: function(json) {
+                    var listitems;
+                    //alert('Hi i am success');
+                    // console.log("I am console");
+                    // console.log(url);
+                    $('#pvtZoner').empty();
+                    $('#pvtZoner').append('<option value="0">SELECT ZONE</option>');
+                    $.each(json, function (key, data) {
+
+                        //console.log(key)
+
+                        $.each(data, function (index, data) {
+
+                            // console.log('Zone Name :', data.zone_name , ' Zone Code : ' ,data.zone_cd)
+                            listitems +='<option value=' + data.zone_cd + '>' + data.zone_name + '</option>';
+                            //$('#pvtZone').append('<option value=' + data.zone_cd + '>' + data.zone_name + '</option>');
+                            //console.log('Zone Name :', data.zone_cd)
+                            //console.log('Zone Name :', data)
+                        })
+                    })
+                    $('#pvtZoner').append(listitems)
+                    /*console.log(data.length);
+                    for (var i = 0; i < data.length; i++) {
+
+                    console.log(" Thesil : "+ data[i].zone_name);
+                    // var checkBox = "<input type='checkbox' data-price='" + data[i].Price + "' name='" + data[i].Name + "' value='" + data[i].ID + "'/>" + data[i].Name + "<br/>";
+                    // $(checkBox).appendTo('#modifiersDiv');
+                    }*/
+                    //if (json)
+                    //{
+                    //var obj = jQuery.parseJSON(json);
+                    //  console.log(json.teh[0].zone_name);
+                    //alert( obj['teh']['Class']);
+                    //   alert(res.Sess);
+                    //   alert(res.Class);
+                    //   //debugger;
+                    //   Show Entered Value
+                    //   jQuery("div#result").show();
+                    //   jQuery("div#value").html(res.username);
+                    //   jQuery("div#value_pwd").html(res.pwd);
+                    //}
+
+                },
+                error: function(request, status, error){
+                    alert(request.responseText);
+                }
+            });
         }
-        
-         $( "#make_adm11th_groups" ).change(function () {
+
+    })
+    $("#pvtZoner").change(function(){
+
+        var tehId =  $("#pvtZoner").val();
+
+        var gend =  $("#gend").val();
+        //alert("hello "+tehId);
+
+
+        if(gend ==0  || gend == '' || gend == null || gend==undefined)
+        {
+            alertify.error("Select Gender First.");
+            $("#pvtZoner").val(0);
+            return false; 
+        }
+        else if(tehId == 0){
+            alertify.error("Select Zone First.");
+            return false;
+        }
+
+        else{
+            jQuery.ajax({
+
+                type: "POST",
+                url: "<?php echo base_url(); ?>Admission_9th_pvt/getcenter/",
+                dataType: 'json',
+                data: {pvtZone:tehId,gend:gend},
+                beforeSend: function() {  $('.mPageloader').show(); },
+                complete: function() { $('.mPageloader').hide();},
+                success: function(json) {
+                    var listitems='';
+                    //$('#instruction').empty();
+                    $.each(json.center, function (key, data) {
+
+                        console.log(data);
+                        listitems +='<label style="text-align: left; margin-top: -23px;">'+data.CENT_CD + '-' + data.CENT_NAME+'</label><br>';
+                    })
+                    $('#instruction').html('<h1 style="    margin-bottom: 28px;">Selected Zone Centre List </h1>'+listitems); 
+                    $.fancybox("#instruction");
+                },
+                error: function(request, status, error){
+                    alert(request.responseText);
+                }
+            });
+
+        }
+
+    })
+
+    function examchecks()
+    {
+        var pvtinfo_distr = $("#pvtinfo_distr").val();
+        var pvtinfo_tehr = $("#pvtinfo_tehr").val();
+        var pvtZoner = $("#pvtZoner").val();
+
+        if(pvtinfo_distr == 0)
+        {
+            alertify.error("Please Select District.");
+            //$("#pvtZoner").val(0);
+            $('#pvtinfo_distr').focus();
+            return false;   
+        }
+        else if(pvtinfo_tehr == 0)
+        {
+            alertify.error("Please Select Tehsil.");
+            $('#pvtinfo_tehr').focus();
+            return false;   
+        }
+        else if(pvtZoner == 0)
+        {
+            alertify.error("Please Select Zone.");
+            $('#pvtZoner').focus();
+            return false;   
+        }
+
+
+
+    }
+
+
+
+    function validateForm() 
+    {
+
+        var x = document.forms["registration"]["matrno"].value;
+        var y = document.forms["registration"]["formid"].value;
+        if (x == null || x == "") {
+            $("#matrno").css('border', '1px solid red');
+            return false;
+        }
+        if (y == null || y == "") {
+            $("#formid").css('border', '1px solid red');
+            return false;
+        }
+    }
+
+    $( "#make_adm11th_groups" ).change(function () {
         if (this.value == '1') {
             // 1 Pre-Medical   2 Pre-Engineering   3 Humanities  4 General Science  5 Commerce  6 Home Economics 
             window.location.href = '<?=base_url()?>Admission_11th_reg/StudentsData/'+'96/3/1/';
@@ -1841,8 +1934,8 @@ var hstascd = ['19','20','21'];
         }
 
     })
-    
-      function NewForm(formrno)
+
+    function NewForm(formrno)
     {
         // //debugger;
         $('#sub1').empty();
@@ -1856,123 +1949,123 @@ var hstascd = ['19','20','21'];
         window.location.href = '<?=base_url()?>Admission_11th_reg/NewEnrolment_EditForm/'+formrno
     }
     $("#std_group").change(function()
-    {
-
-
-        var grp_cd = $("#std_group").val();
-        //alert(grp_cd);
-
-        // If Science with Biology group selected then 
-        if(grp_cd == "1")
         {
 
-            // Check Nationality and select appropriate Subject1 against candidate Nationality :)
-            load_Bio_CS_Sub();
-            $("#sub8").append(new Option('Biology',8));
 
-        }
-        else if(grp_cd == "7")
-        {
-            load_Bio_CS_Sub();
-            $("#sub8").append(new Option('COMPUTER SCIENCE',78));
-            //    alert('hello  Sweet Heart ! I love You UMMMMAH :) ') 
-        }
-        else if (grp_cd == "8")
-        {
-            load_Bio_CS_Sub();
-            $("#sub8").append(new Option('ELECTRICAL WIRING (OPT)',43));
-            //ELECTRICAL WIRING (OPT)
-        }
+            var grp_cd = $("#std_group").val();
+            //alert(grp_cd);
 
-        else if(grp_cd == "2")
-        {
+            // If Science with Biology group selected then 
+            if(grp_cd == "1")
+            {
 
-            Hum_Deaf_Subjects();
-            $.each(sub5_Hum,function(val,text){
-                $("#sub5").append(new Option(text,val));
-            });
-            $.each(sub6_Hum,function(val,text){
-                $("#sub6").append(new Option(text,val));
-            });
+                // Check Nationality and select appropriate Subject1 against candidate Nationality :)
+                load_Bio_CS_Sub();
+                $("#sub8").append(new Option('Biology',8));
 
-            $.each(sub7_Hum,function(val,text){
+            }
+            else if(grp_cd == "7")
+            {
+                load_Bio_CS_Sub();
+                $("#sub8").append(new Option('COMPUTER SCIENCE',78));
+                //    alert('hello  Sweet Heart ! I love You UMMMMAH :) ') 
+            }
+            else if (grp_cd == "8")
+            {
+                load_Bio_CS_Sub();
+                $("#sub8").append(new Option('ELECTRICAL WIRING (OPT)',43));
+                //ELECTRICAL WIRING (OPT)
+            }
 
-                $("#sub7").append(new Option(text,val));
-            });
-            $.each(sub8_Hum,function(val,text){
+            else if(grp_cd == "2")
+            {
 
-                $("#sub8").append(new Option(text,val));
-            });
-            var Elecgrp ="<?php echo @$grp_cd; ?>";
-            var isgovt ="<?php echo @$isgovt; ?>";
-            var b = ['8'];
-            var isElec = '0';
-            $.each(Elecgrp,function(i,val){
-                var result=$.inArray(val,b);
+                Hum_Deaf_Subjects();
+                $.each(sub5_Hum,function(val,text){
+                    $("#sub5").append(new Option(text,val));
+                });
+                $.each(sub6_Hum,function(val,text){
+                    $("#sub6").append(new Option(text,val));
+                });
 
-                if(result!=-1)
+                $.each(sub7_Hum,function(val,text){
+
+                    $("#sub7").append(new Option(text,val));
+                });
+                $.each(sub8_Hum,function(val,text){
+
+                    $("#sub8").append(new Option(text,val));
+                });
+                var Elecgrp ="<?php echo @$grp_cd; ?>";
+                var isgovt ="<?php echo @$isgovt; ?>";
+                var b = ['8'];
+                var isElec = '0';
+                $.each(Elecgrp,function(i,val){
+                    var result=$.inArray(val,b);
+
+                    if(result!=-1)
+                    {
+                        isElec = 1;
+                    }
+                })
+
+                if(isgovt == 2)
                 {
-                    isElec = 1;
+                    if(isElec != 1)
+                    {
+                        // $("#sub7")
+                        //$("#sub7 option[value='43']").remove();
+                        //$("#sub8 option[value='43']").remove();
+                        $("#sub7 option[value='43']").remove();
+                        $("#sub8 option[value='43']").remove();
+
+                        // $("#sub7").find('option[value=43]').remove();
+                        // alert("removed");
+                    }  
                 }
-            })
 
-            if(isgovt == 2)
-            {
-                if(isElec != 1)
+
+                var Gender = $("input[name=gender]:checked").val();
+                // debugger;
+                //console.log(Religion);
+                if(Gender == "2")
                 {
-                    // $("#sub7")
-                    //$("#sub7 option[value='43']").remove();
-                    //$("#sub8 option[value='43']").remove();
-                    $("#sub7 option[value='43']").remove();
-                    $("#sub8 option[value='43']").remove();
 
-                    // $("#sub7").find('option[value=43]').remove();
-                    // alert("removed");
-                }  
+                    $("#sub8").append(new Option('ELEMENTS OF HOME ECONOMICS',13));
+                    $("#sub7").append(new Option('ELEMENTS OF HOME ECONOMICS',13));
+                }
+                else
+
+                {
+                    // alert('i am removed');
+                    if($('#sub8 option[value=13]').length > 0)
+                        dropdownElement.find('sub8[value=13]').remove();
+
+
+                }
+
+
             }
-
-
-            var Gender = $("input[name=gender]:checked").val();
-           // debugger;
-            //console.log(Religion);
-            if(Gender == "2")
+            else if(grp_cd == "5")
             {
-
-                $("#sub8").append(new Option('ELEMENTS OF HOME ECONOMICS',13));
-                $("#sub7").append(new Option('ELEMENTS OF HOME ECONOMICS',13));
+                Hum_Deaf_Subjects();
+                $.each(sub5_Deaf,function(val,text){
+                    $("#sub5").append(new Option(text,val));
+                });
+                $.each(sub6_Deaf,function(val,text){
+                    $("#sub6").append(new Option(text,val));
+                });
+                $.each(sub7_Deaf,function(val,text){
+                    $("#sub7").append(new Option(text,val));
+                });
+                $.each(sub8_Deaf,function(val,text){
+                    $("#sub8").append(new Option(text,val));
+                });
             }
-            else
-            
+            else if (grp_cd == "0")
             {
-                // alert('i am removed');
-                 if($('#sub8 option[value=13]').length > 0)
-                dropdownElement.find('sub8[value=13]').remove();
-
-
+                remove_subjects();
             }
-
-
-        }
-        else if(grp_cd == "5")
-        {
-            Hum_Deaf_Subjects();
-            $.each(sub5_Deaf,function(val,text){
-                $("#sub5").append(new Option(text,val));
-            });
-            $.each(sub6_Deaf,function(val,text){
-                $("#sub6").append(new Option(text,val));
-            });
-            $.each(sub7_Deaf,function(val,text){
-                $("#sub7").append(new Option(text,val));
-            });
-            $.each(sub8_Deaf,function(val,text){
-                $("#sub8").append(new Option(text,val));
-            });
-        }
-        else if (grp_cd == "0")
-        {
-            remove_subjects();
-        }
 
 
     });
@@ -2059,15 +2152,15 @@ var hstascd = ['19','20','21'];
         // //debugger;
         // alert(this.value + "  Transfer Thai Gayo");
         if (this.value == '1') {
-            window.location.href = '<?=base_url()?>/index.php/Registration/CreateBatch/'+'96/1/';
+            window.location.href = '<?=base_url()?>/index.php/Admission_11th_reg/CreateBatch/'+'96/1/';
             // alert("Allot Thai Gayo Bhai");
         }
         else  if (this.value == '2') {
-            window.location.href = '<?=base_url()?>/index.php/Registration/CreateBatch/'+'97/2/';
+            window.location.href = '<?=base_url()?>/index.php/Admission_11th_reg/CreateBatch/'+'97/2/';
             //  alert("Transfer Thai Gayo");
         }
         else  if(this.value == 3){
-            window.location.href = '<?=base_url()?>/index.php/Registration/CreateBatch/'+'98/3';
+            window.location.href = '<?=base_url()?>/index.php/Admission_11th_reg/CreateBatch/'+'98/3';
             //alert("Transfer Thai Gayo");
         }
 
@@ -2076,25 +2169,30 @@ var hstascd = ['19','20','21'];
     $( "#std_groups" ).change(function () {
         if (this.value == '1') {
             // 1 biology   2 humanities   5 deaf and dumb  7 computer science  8 electrical wiring 
-            window.location.href = '<?=base_url()?>/index.php/Registration/CreateBatch/'+'96/3/1/';
+            window.location.href = '<?=base_url()?>/index.php/Admission_11th_reg/CreateBatch/'+'96/3/1/';
             //  alert("Allot Thai Gayo Bhai");
         }
         else  if (this.value == '2') {
-            window.location.href = '<?=base_url()?>/index.php/Registration/CreateBatch/'+'97/3/2/';
+            window.location.href = '<?=base_url()?>/index.php/Admission_11th_reg/CreateBatch/'+'97/3/2/';
+            // alert("Transfer Thai Gayo");
+        }
+         else  if (this.value == '3') {
+            window.location.href = '<?=base_url()?>/index.php/Admission_11th_reg/CreateBatch/'+'98/3/3/';
+            // alert("Transfer Thai Gayo");
+        }
+          else  if (this.value == '4') {
+            window.location.href = '<?=base_url()?>/index.php/Admission_11th_reg/CreateBatch/'+'99/3/4/';
             // alert("Transfer Thai Gayo");
         }
         else  if(this.value == '5'){
-            window.location.href = '<?=base_url()?>/index.php/Registration/CreateBatch/'+'98/3/5/';
+            window.location.href = '<?=base_url()?>/index.php/Admission_11th_reg/CreateBatch/'+'100/3/5/';
             // alert("Transfer Thai Gayo");
         }
-        else  if(this.value == '7'){
-            window.location.href = '<?=base_url()?>/index.php/Registration/CreateBatch/'+'98/3/7/';
+        else  if(this.value == '6'){
+            window.location.href = '<?=base_url()?>/index.php/Admission_11th_reg/CreateBatch/'+'101/3/6/';
             //  alert("Transfer Thai Gayo");
         }
-        else  if(this.value == '8'){
-            window.location.href = '<?=base_url()?>/index.php/Registration/CreateBatch/'+'98/3/8/';
-            //  alert("Transfer Thai Gayo");
-        }
+        
 
     })
     /*     }
@@ -2139,7 +2237,7 @@ var hstascd = ['19','20','21'];
                 alertify.confirm(msg, function (e) {
 
                     if (e) {
-                        window.location.href = '<?=base_url()?>/index.php/Registration/Make_Batch_Group_wise/'+$("#std_groups").val()+'/0';
+                        window.location.href = '<?=base_url()?>/index.php/Admission_11th_reg/Make_Batch_Group_wise/'+$("#std_groups").val()+'/0';
                     } 
 
 
@@ -2148,19 +2246,29 @@ var hstascd = ['19','20','21'];
         }
         else if(option == "1" || option == "2")
         {
-            window.location.href = '<?=base_url()?>/index.php/Registration/Make_Batch_Group_wise/'+'0/'+option+'/';
+            window.location.href = '<?=base_url()?>/index.php/Admission_11th_reg/Make_Batch_Group_wise/'+'0/'+option+'/';
         }
         return false;
 
 
 
     }
-    function makebatch_formnowise(){
+     function Print_Admission_Form_BatchId(grp_cd){
+        window.location.href =  '<?=base_url()?>Admission_11th_reg/Print_Admission_Form_Groupwise/'+grp_cd + '/3'
+    }
+     function ChallanForm_Adm9th_Regular(Batch_ID)
+    {
+        window.location.href = '<?=base_url()?>Admission_11th_reg/ChallanForm_Adm11th_Regular/'+Batch_ID
+    }
+    function Revenue_list_batchwise_11thAdm(grp_cd){
+        window.location.href =  '<?=base_url()?>Admission_11th_reg/revenue_pdf/'+grp_cd + '/9'
+    }
+      function makebatch_formnowise(){
 
-        if( $('input[name="chk[]"]:checked').length > 0 )
+        if(valArray.length > 0 )
         {
-            var msg = "<img src='<?php echo base_url(); ?>assets/img/note_for_batch.jpg' alt='logo' style='width:800px; height: auto;' />"
-
+            var msg = "Are you sure you want to make Batch ?" //var msg = "<img src='<?php echo base_url(); ?>assets/img/note_for_batch.jpg' alt='logo' style='width:800px; height: auto;' />"
+            $batchformSelectedid.val(valArray.join(','));
             alertify.confirm(msg, function (e) {
 
                 if (e) {
