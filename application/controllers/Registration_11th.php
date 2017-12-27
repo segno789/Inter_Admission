@@ -484,13 +484,13 @@ class Registration_11th extends CI_Controller {
             $feedingcheck=$this->Registration_11th_model->IsFeeded($data);
             $feeding_inst_cd =$feedingcheck[0]['coll_cd'];
 
-            /* if($feedingcheck != false)
+            if($feedingcheck != false)
             {
-            $instName=$this->Registration_11th_model->InstName($feeding_inst_cd);
-            $this->session->set_flashdata('matric_error', 'This Candidate is already registered in '.$feeding_inst_cd.'-'.$instName.'.');
-            redirect('Registration_11th/Students_matricInfo');
-            return; 
-            } */   
+                $instName=$this->Registration_11th_model->InstName($feeding_inst_cd);
+                $this->session->set_flashdata('matric_error', 'This Candidate is already registered in '.$feeding_inst_cd.'-'.$instName.'.');
+                redirect('Registration_11th/Students_matricInfo');
+                return; 
+            }    
             if($board == 1)
             {
                 if(!ctype_digit($mrollno))

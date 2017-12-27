@@ -537,7 +537,7 @@ class EleventhCorrection extends CI_Controller {
     } 
     public function NewEnrolment_update()
     {
-       // DebugBreak();
+     //  DebugBreak();
 
         $this->load->model('EleventhCorrection_model');
 
@@ -782,7 +782,7 @@ class EleventhCorrection extends CI_Controller {
             }          // =================== loop Ending
         }   //===============Array isset Ending
         $target_path = CORR_IMAGE_PATH11.$Inst_Id.'/';
-          
+        DebugBreak();  
         // $target_path = '../uploads2/'.$Inst_Id.'/';
         if($isPic ==1)
         {
