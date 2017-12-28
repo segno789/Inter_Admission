@@ -70,10 +70,10 @@
                                     <select id="oldClass" class="form-control" name="oldClass">
                                         <?php
                                         if(Session == 1){
-                                            echo'
-                                            <option value="11" >11th</option>
-                                            <option selected="selected" value="12">12th</option>
-                                            ';
+                                            ?>
+                                            <option value="11" <?php if(@$_POST['oldClass'] == "11") echo 'selected' ?>>11th</option>
+                                            <option value="12" <?php if(@$_POST['oldClass'] == "12") echo 'selected' ?>>12th</option>
+                                            <?php
                                         }
                                         else if(Session == 2){
                                             echo'

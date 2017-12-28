@@ -2420,6 +2420,8 @@ class Admission extends CI_Controller {
             if(isset($_POST["isaloom"])) $isaloom = 1;else $isaloom = 0;
         }
 
+
+
         if(@$board != 1 && @$oldClass == 11){
             $data[0]['SSC_RNO'] = $mrollno;
             $data[0]['RNO']     = $hsscrno;
@@ -2445,13 +2447,23 @@ class Admission extends CI_Controller {
         $data['board']=$board;
         $data['isaloom']= $isaloom;
 
+        $error_msg = '';
+
+        @$checkDuplicateForm = $this->Admission_model->checkDuplicateForm_Model($data);
+
+        if($checkDuplicateForm == true){
+            $error_msg.='You have already submitted online admission as '.$checkDuplicateForm[0]['regpvt'].' against Form No = '.$checkDuplicateForm[0]['formNo'].' ';
+            $this->load->library('session');
+            $mydata = array('data'=>$_POST,'error_msg'=>$error_msg,'exam_type'=>0);
+            $this->session->set_flashdata('matric_error',$mydata );
+            redirect('Admission/inter_default');
+        }
+
         $data = $this->Admission_model->Pre_Inter_data($data);
 
         if($data[0]['sub8'] == '' && $data[0]['class'] == 11){
             $data[0]['sub8'] = 91;    
         }
-
-        $error_msg = '';
 
         if(!$data){
             $error_msg.='No Any Student Found Against Your Criteria';
@@ -2462,7 +2474,7 @@ class Admission extends CI_Controller {
         $isexit = is_file($picpath);
 
         //DebugBreak();
-        
+
         $ValidYear = Year - 3;
 
         if(!($isexit) && $error_msg == '' && $iyear > $ValidYear)
@@ -2738,6 +2750,24 @@ class Admission extends CI_Controller {
             'sub7p2'=>@$_POST['sub7p2'],
 
         );
+
+
+        @$dataForCheckDuplicateForm = array(
+            'cand_name'=>@$_POST['cand_name'],
+            'father_name'=>@$_POST['father_name'],
+            'bay_form'=>@$_POST['bay_form'],
+            'father_cnic'=>@$_POST['father_cnic'],
+            'oldSSC_Board'=>@$_POST['oldSSC_Board']
+        );
+
+        @$checkDuplicateFormotherboard = $this->Admission_model->checkDuplicateFormotherboard_Model($dataForCheckDuplicateForm);
+        if($checkDuplicateFormotherboard == true){
+            $info = '';
+            $info['error'] = 2;
+            $info['msg'] = 'You have already submitted admission against Form No = '.$checkDuplicateFormotherboard[0]['formNo'].' ';
+            echo  json_encode($info);
+            exit();
+        }
 
         $sub1 = 0; $sub2 = 0;$sub3 = 0; $sub4 = 0; $sub5 = 0; $sub6 = 0; $sub7 = 0; $sub8=0; $sub4a=0; $sub5a =0; $sub6a = 0; $sub7a = 0;     
         $sub1ap1 = 0;$sub2ap1 = 0;$sub3ap1 = 0;$sub4ap1 = 0;$sub5ap1 = 0;$sub6ap1 = 0;$sub7ap1 = 0;
@@ -3030,9 +3060,28 @@ class Admission extends CI_Controller {
             'sub4p2'=>@$_POST['sub4p2'],
             'sub5p2'=>@$_POST['sub5p2'],
             'sub6p2'=>@$_POST['sub6p2'],
-            'sub7p2'=>@$_POST['sub7p2'],
-
+            'sub7p2'=>@$_POST['sub7p2']
         );
+
+
+        //DebugBreak();
+
+        @$dataForCheckDuplicateForm = array(
+            'cand_name'=>@$_POST['cand_name'],
+            'father_name'=>@$_POST['father_name'],
+            'bay_form'=>@$_POST['bay_form'],
+            'father_cnic'=>@$_POST['father_cnic'],
+            'oldSSC_Board'=>@$_POST['oldSSC_Board']
+        );
+
+        @$checkDuplicateFormotherboard = $this->Admission_model->checkDuplicateFormotherboard_Model($dataForCheckDuplicateForm);
+        if($checkDuplicateFormotherboard == true){
+            $info = '';
+            $info['error'] = 2;
+            $info['msg'] = 'You have already submitted admission against Form No = '.$checkDuplicateFormotherboard[0]['formNo'].' ';
+            echo  json_encode($info);
+            exit();
+        }
 
         $sub1 = 0; $sub2 = 0;$sub3 = 0; $sub4 = 0; $sub5 = 0; $sub6 = 0; $sub7 = 0; $sub8=0; $sub4a=0; $sub5a =0; $sub6a = 0; $sub7a = 0;     
         $sub1ap1 = 0;$sub2ap1 = 0;$sub3ap1 = 0;$sub4ap1 = 0;$sub5ap1 = 0;$sub6ap1 = 0;$sub7ap1 = 0;
@@ -3278,6 +3327,8 @@ class Admission extends CI_Controller {
     public function NewEnrolment_insert_Fresh() 
     {
 
+        //DebugBreak();
+
         $this->load->model('Admission_model');
 
         $this->load->library('session');
@@ -3328,6 +3379,24 @@ class Admission extends CI_Controller {
             'sub7p2'=>@$_POST['sub7p2'],
 
         );
+
+
+        @$dataForCheckDuplicateForm = array(
+            'cand_name'=>@$_POST['cand_name'],
+            'father_name'=>@$_POST['father_name'],
+            'bay_form'=>@$_POST['bay_form'],
+            'father_cnic'=>@$_POST['father_cnic'],
+            'oldSSC_Board'=>@$_POST['oldboardid']
+        );
+
+        @$checkDuplicateFormotherboard = $this->Admission_model->checkDuplicateFormotherboard_Model($dataForCheckDuplicateForm);
+        if($checkDuplicateFormotherboard == true){
+            $info = '';
+            $info['error'] = 2;
+            $info['msg'] = 'You have already submitted admission against Form No = '.$checkDuplicateFormotherboard[0]['formNo'].' ';
+            echo  json_encode($info);
+            exit();
+        }
 
         $sub1 = 0; $sub2 = 0;$sub3 = 0; $sub4 = 0; $sub5 = 0; $sub6 = 0; $sub7 = 0; $sub8=0; $sub4a=0; $sub5a =0; $sub6a = 0; $sub7a = 0;     
         $sub1ap1 = 0;$sub2ap1 = 0;$sub3ap1 = 0;$sub4ap1 = 0;$sub5ap1 = 0;$sub6ap1 = 0;$sub7ap1 = 0;
@@ -3555,8 +3624,8 @@ class Admission extends CI_Controller {
             {
                 if($logedIn[0]['tempath'] != '')
                 {
-                    $oldpath =  GET_PRIVATE_IMAGE_PATH.'\12th\\'.$logedIn[0]['tempath'];
-                    $newpath =  GET_PRIVATE_IMAGE_PATH.'\12th\\'.$val.'.jpg';
+                    $oldpath =  GET_PRIVATE_IMAGE_PATH.$logedIn[0]['tempath'];
+                    $newpath =  GET_PRIVATE_IMAGE_PATH.$val.'.jpg';
                     $err = rename($oldpath,$newpath); 
                 }
                 $info['error'] = 1;
@@ -3568,8 +3637,8 @@ class Admission extends CI_Controller {
                 $info['formno'] = '';
             }
         }
-
         echo  json_encode($info);
+        exit();
     }
 
     public function NewEnrolment_insert()
@@ -3626,6 +3695,7 @@ class Admission extends CI_Controller {
             'sub7p2'=>@$_POST['sub7p2'],
 
         );
+
 
         $sub1 = 0;        $sub2 = 0;        $sub3 = 0;        $sub4 = 0;        $sub5 = 0;        $sub6 = 0;        $sub7 = 0;  $sub8=0; $sub4a=0; $sub5a =0; $sub6a = 0; $sub7a = 0;     
         $sub1ap1 = 0;        $sub2ap1 = 0;        $sub3ap1 = 0;        $sub4ap1 = 0;        $sub5ap1 = 0;        $sub6ap1 = 0;        $sub7ap1 = 0;     

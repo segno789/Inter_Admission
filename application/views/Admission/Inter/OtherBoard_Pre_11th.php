@@ -9,6 +9,8 @@
             </div>
         </div>
     </div>
+
+    <!-- Start Picture Upload -->
     <div class="form-group">
         <div class="row">
             <div class="col-md-offset-3 col-md-5">
@@ -33,7 +35,8 @@
             </div>
         </div>
     </div>
-
+    <!-- End Picture Upload -->
+    
     <div class="form-group">
         <div class="row">
             <div class="col-md-offset-2 col-md-4">
@@ -395,7 +398,7 @@
         <input type="hidden" name="oldHSSC_Rno" id="oldHSSC_Rno" value="<?php  echo @$data[0]['RNO'];?>"/>
         <input type="hidden" name="oldSSC_Rno" id="oldSSC_Rno" value="<?php  echo @$data[0]['SSC_RNO'];?>"/>
         <input type="hidden" name="Class" id="Class" value="<?php  echo @$data[0]['Class'];?>"/>
-        <input type="hidden" name="oldSSC_Board" id="oldSSC_Board" value="<?php  echo @$data[0]['Board'];?>"/>
+        <input type="hidden" name="oldSSC_Board" id="oldSSC_Board" value="<?php echo @$data[0]['Board'];?>"/>
         <input type="hidden" name="oldHSSC_Year" id="oldHSSC_Year" value="<?php  echo @$data[0]['Year'];?>"/>
     </div>
     <div class="form-group">
@@ -972,6 +975,14 @@
                                 {
                                     window.location.href ='<?php echo base_url(); ?>Admission/formdownloaded/'+obj.formno; 
                                     alertify.success('Your admission has been submitted successfully');
+                                }
+
+                                else if(obj.error ==  2)
+                                {
+                                    $('.mPageloader').hide();
+                                    $('#btnsubmitUpdateEnrol').removeAttr("disabled");
+                                    alertify.error(obj.msg);
+                                    return false; 
                                 }
                                 else
                                 {

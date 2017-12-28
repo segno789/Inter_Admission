@@ -62,6 +62,66 @@ class Admission_model extends CI_Model
         }
     }
 
+    public function checkDuplicateForm_Model($data){
+
+        $data = array(
+            'rno'   => $data['hsscrno'],
+            'class' => $data['hsscclass'],
+            'Iyear' => $data['iYear'],
+            'sess'  =>$data['session'],
+            'brd_cd'=>$data['board'],
+            'matRno'=>$data['sscrno']
+        );
+
+        $rno    = $data['rno'];
+        $class  = $data['class'];
+        $Iyear  = $data['Iyear'];
+        $sess   = $data['sess'];
+        $board  = $data['brd_cd'];
+        $matRno = $data['matRno'];
+
+        $query = $this->db->query("exec admission_online..Admission_CheckDuplicateForm_HSSC 1,$rno,$Iyear,$sess,$board,'','','','' ");
+
+        $rowcount = $query->num_rows();
+        if($rowcount > 0)
+        {
+            return $query->result_array();
+        }
+        else
+        {
+            return  false;
+        }
+    }
+
+    public function checkDuplicateFormotherboard_Model($data){
+
+        $data = array(
+            'cand_name'   => $data['cand_name'],
+            'father_name' => $data['father_name'],
+            'bay_form' => $data['bay_form'],
+            'father_cnic'  =>$data['father_cnic'],
+            'oldSSC_Board' =>  $data['oldSSC_Board']
+        );
+
+        $cand_name    = $data['cand_name'];
+        $father_name  = $data['father_name'];
+        $bay_form  = $data['bay_form'];
+        $father_cnic   = $data['father_cnic'];
+        $board   = $data['oldSSC_Board'];
+
+        $query = $this->db->query("exec admission_online..Admission_CheckDuplicateForm_HSSC 2,0,0,0,$board,'".$cand_name."','".$father_name."','".$bay_form."','".$father_cnic."' ");        
+
+        $rowcount = $query->num_rows();
+        if($rowcount > 0)
+        {
+            return $query->result_array();
+        }
+        else
+        {
+            return  false;
+        }
+    }
+
     public function Pre_Inter_Data($data)
     {
         //DebugBreak();
@@ -580,7 +640,7 @@ class Admission_model extends CI_Model
         {
             $sex =  $data['gender'];
         }
-        $query = $this->db->query(Insert_sp." '$formno',12,2017,1,'$name','$fname','$BForm','$FNIC','$CellNo',$medium,'".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$sub8,1,'".$picpath."',$oldrno,$oldyear,$oldsess,$old_class,$IsHafiz,$Inst_cd,$UrbanRural,$cat11,$cat12,$sub1ap2,$sub2ap2,$sub4ap2,$sub5ap2,$sub6ap2,$sub7ap2,$sub8ap2,$dist_cd,$teh_cd,$zone_cd,$Brd_cd,$AdmProcFee,$AdmFee,$TotalAdmFee,$sub5a,$sub6a,$sub7a,$AdmFine,$IsNewPic,$certFee,'$temppath',$schm,$regfee");
+        $query = $this->db->query(Insert_sp." '$formno',12,2018,1,'$name','$fname','$BForm','$FNIC','$CellNo',$medium,'".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$sub8,1,'".$picpath."',$oldrno,$oldyear,$oldsess,$old_class,$IsHafiz,$Inst_cd,$UrbanRural,$cat11,$cat12,$sub1ap2,$sub2ap2,$sub4ap2,$sub5ap2,$sub6ap2,$sub7ap2,$sub8ap2,$dist_cd,$teh_cd,$zone_cd,$Brd_cd,$AdmProcFee,$AdmFee,$TotalAdmFee,$sub5a,$sub6a,$sub7a,$AdmFine,$IsNewPic,$certFee,'$temppath',$schm,$regfee");
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
