@@ -54,19 +54,31 @@
     </div>
     <!-- End Candidate Name & Father Name Input Fields Responsive -->
     <!--Start BFORM & FNIC Input Fields Responsive -->
+    <?php
+    $bformLen = strlen($data['0']['bformNo']);
+    $fnicLen = strlen($data['0']['FNIC']);
+
+    $bay_form = $data['0']['bformNo'];
+    $bay_form = explode(' ',trim($bay_form));
+    @$bay_form = $bay_form[0][0];
+
+    $FNIC = @$data['0']['FNIC'];
+    $FNIC = explode(' ',trim($FNIC));
+    @$FNIC = $FNIC[0][0];
+    ?>
     <div class="form-group">
         <div class="row">
             <div class="col-md-offset-2 col-md-4">
                 <label class="control-label" for="bay_form" >
                     Bay Form No:
                 </label>        
-                <input class="text-uppercase form-control" type="text" readonly="readonly" id="bay_form" name="bay_form" maxlength="15" placeholder="Bay Form No." value="<?php echo @$data['0']['bformNo'];?>" required="required" >
+                <input class="text-uppercase form-control" type="text" id="bay_form" name="bay_form" maxlength="15" placeholder="Bay Form No." value="<?php echo @$data['0']['bformNo'];?>" <?php if ($bformLen == 15 && $bay_form != '0') { echo "readonly='readonly'"; }  ?> required="required" >
             </div>
             <div class="col-md-4">
                 <label class="control-label" for="father_cnic">
                     Father's CNIC:
                 </label>        
-                <input class="text-uppercase form-control" id="father_cnic" readonly="readonly" name="father_cnic" type="text" placeholder="34101-1111111-1"  value="<?php  echo @$data[0]['FNIC'];?>" required="required" >
+                <input class="text-uppercase form-control" id="father_cnic" name="father_cnic" type="text" placeholder="34101-1111111-1"  value="<?php  echo @$data[0]['FNIC'];?>" <?php if ($fnicLen == 15 && $FNIC != '0')  { echo "readonly='readonly'"; } ?> required="required" >
             </div>
         </div>
     </div>

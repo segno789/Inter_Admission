@@ -13,8 +13,8 @@ class Admission_inter_model extends CI_Model
         //DebugBreak();
 
         $inst_cd = $data['Inst_Id'];
-        $year = Year;
-        $query = $this->db->query(" exec ".getinfo." '', 11, $year, 1, 1, '', $inst_cd");
+        $year = Year -1;
+        $query = $this->db->query(" execute ".getinfo." '', 11, $year, 1, 1, '', $inst_cd");
 
         $rowcount = $query->num_rows();
         if($rowcount > 0)
@@ -154,7 +154,7 @@ class Admission_inter_model extends CI_Model
         $sub1= $data['sub1p2'];
         $sub2 = $data['sub2p2'];
         $sub3 = $data['sub3'];
-        $sub3p2 = $data['sub3p2'];        
+        $sub3p2 = @$data['sub3p2'];        
         $sub4 = $data['sub4p2'];
 
         if(@$grp_cd == 5)
@@ -223,12 +223,12 @@ class Admission_inter_model extends CI_Model
         else $isNewPic = 1;
 
 
-        if($isupdate==1){
+        if($isupdate==1)
+        {
             $oldrno =  $data['oldRno'];
         }
 
-        $query = $this->db->query("admission_online..sp_insert_ISAdm_regular '$formno',12,2017,2,'$name','$fname','$BForm','$FNIC','$CellNo',$medium,'".$CollGrade."',$Inst_Rno,'".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$sub8,1,'".$PicPath."',$oldrno,$oldyear,$oldsess,$IsHafiz,$Inst_cd,$UrbanRural,$cat11,$cat12,$sub1ap2,$sub2ap2,$sub4ap2,$sub5ap2,$sub6ap2,$sub7ap2,$sub8ap2,$Brd_cd,$sub5a,$sub6a,$sub7a,$pvtinfo_dist,$pvtinfo_teh,$pvtZone,$isupdate,$isNewPic,$schm,$IntBrd_cd");
-
+        $query = $this->db->query("admission_online..sp_insert_IAdm_regular '$formno',12,".Year.",".Session.",'$name','$fname','$BForm','$FNIC','$CellNo',$medium,'".$CollGrade."',$Inst_Rno,'".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$sub8,1,'".$PicPath."',$oldrno,$oldyear,$oldsess,$IsHafiz,$Inst_cd,$UrbanRural,$cat11,$cat12,$sub1ap2,$sub2ap2,$sub4ap2,$sub5ap2,$sub6ap2,$sub7ap2,$sub8ap2,$Brd_cd,$sub5a,$sub6a,$sub7a,$pvtinfo_dist,$pvtinfo_teh,$pvtZone,$isupdate,$isNewPic,$schm,$IntBrd_cd");
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
@@ -264,7 +264,7 @@ class Admission_inter_model extends CI_Model
 
     public function EditEnrolement($inst_cd)
     {                  
-        $query = $this->db->query("exec admission_online..sp_get_regInfo_all_inter $inst_cd,12,2017,2");    
+        $query = $this->db->query("exec admission_online..sp_get_regInfo_all_inter $inst_cd,12,".Year.",".Session."");    
 
         $rowcount = $query->num_rows();
         if($rowcount > 0)
@@ -329,10 +329,11 @@ class Admission_inter_model extends CI_Model
     }
     public function GetFormNo($Inst_Id)
     {
-        // //DebugBreak();
+        //DebugBreak();
         $this->db->select('formno');
         $this->db->order_by("formno", "DESC");
         $formno = $this->db->get_where(REGULAR_INSERT_TABLE, array('coll_cd' => $Inst_Id));
+        //$formno = $this->db->query('select formno from admission_online..tblIAdm where coll_cd = '.$Inst_Id.' order by formno desc');
         $rowcount = $formno->num_rows();
 
         if($rowcount == 0 )
@@ -397,9 +398,9 @@ class Admission_inter_model extends CI_Model
             else{
                 return false;
             }
-            
+
             $rule_fee = $User_info_data['rule_fee'];
-            
+
             $q2 = $this->db->get_where('admission_online..RuleFeeAdm',array('Rule_Fee_ID'=>$rule_fee));
             $resultarr = array("info"=>$query->result_array(),"fee"=>$result_1,"rule_fee"=>$q2->result_array());
             return  $resultarr;
@@ -487,7 +488,7 @@ class Admission_inter_model extends CI_Model
     public function getrulefeeSingleFee()
     {
         $query = $this->db->get_where('admission_online..RuleFeeAdm', array('class' => 12,'sess' => Session,'Fee_Type'=>'Single Fee'));
-        
+
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
@@ -687,28 +688,7 @@ class Admission_inter_model extends CI_Model
             return  false;
         }
     }
-    public function bay_form_comp($bayformno)
-    {
-        $query = $this->db->get_where('Admission_online..MSAdm2016',  array('BForm' => $bayformno,'IsDeleted'=>0));
-        $rowcount = $query->num_rows();
-        if ($rowcount > 0){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
-    public function bay_form_fnic_dob_comp($bayformno,$fnic,$dob)
-    {
-        $query = $this->db->get_where('Admission_online..MSAdm2016',  array('BForm' => $bayformno,'FNIC' => $fnic,'Dob' => $dob,'IsDeleted'=>0));
-        $rowcount = $query->num_rows();
-        if ($rowcount > 0){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
+
     public function Update_AdmissionFee($data)
     {
         if(empty($data))
@@ -716,7 +696,7 @@ class Admission_inter_model extends CI_Model
             return  false;
         }
 
-        $val = $this->db->update_batch('admission_online..ISAdm',$data,'formNo');
+        $val = $this->db->update_batch('admission_online..tblIAdm',$data,'formNo');
     }
 }
 ?>

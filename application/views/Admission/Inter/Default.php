@@ -4,7 +4,7 @@
     <div class="col-md-12">
         <div class="alert alert-info">
             <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close"></a>
-            <strong>Last Date of Online Admissions and Submission of Hard Copy for Inter Supply Examination with <br> Single fee </strong>
+            <strong>Last Date of Online Admissions and Submission of Hard Copy for Intermediate Annual Examination with <br> Single fee </strong>
 
             <?php  
             $SingleDateFee = date("d-m-Y", strtotime(SingleDateFee)); 

@@ -90,7 +90,7 @@
 
                                         if(Session == 1){
 
-                                            $yearForLastAp = date('Y');
+                                            $yearForLastAp = date('Y')-1;
 
                                             for($i = $yearForLastAp; $i >= 2000 ; $i--)
                                             {
@@ -391,7 +391,7 @@
 
                                             if(Session == 1){
 
-                                                $yearForLastAp = date('Y')-1;
+                                                $yearForLastAp = date('Y')-2;
 
                                                 for($i = $yearForLastAp; $i >= 2000 ; $i--)
                                                 {
@@ -404,8 +404,8 @@
                                                 <option value="100">Before 2000</option>';
                                             }
                                             else if(Session == 2){
-                                                @$curr_Year = Year - 1;
-                                                @$prev_year = Year - 2;
+                                                @$curr_Year = Year - 2;
+                                                @$prev_year = Year - 3;
 
                                                 echo'
                                                 <option value="'.$curr_Year.'" selected>'.$curr_Year.'</option>
