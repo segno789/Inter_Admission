@@ -634,7 +634,7 @@ if(isset($files)){
             return status;
         }   
 
-        else if((bFormNo == "" || bFormNo == 0 || bFormNo == undefined))
+        else if((bFormNo == "" || bFormNo == 0 || bFormNo == undefined || bFormNo.length < 15))
         {
             $('#ErrMsg').show(); 
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
@@ -643,7 +643,7 @@ if(isset($files)){
             $('#bay_form').focus();  
             return status; 
         }
-        else if(FNic == "" ||  FNic == 0  || FNic.length == undefined )
+        else if(FNic == "" ||  FNic == 0  || FNic.length == undefined || FNic.length < 15)
         {
             $('#ErrMsg').show(); 
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
@@ -668,7 +668,7 @@ if(isset($files)){
             $('#dob').focus(); 
             return status;  
         }       
-        else if(mobNo == "" || mobNo == 0 || mobNo.length == undefined || mobNo == '-')
+        else if(mobNo == "" || mobNo == 0 || mobNo.length == undefined || mobNo == '-'  || mobNo.length < 12)
         {
             $('#ErrMsg').show(); 
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });

@@ -148,11 +148,11 @@ class Admission_11th_pvt extends CI_Controller {
                 }
                 $RegStdData = array('data'=>$this->Admission_11th_Pvt_model->Pre_Matric_data($data),'isReAdm'=>0,'Oldrno'=>0,'Inst_Rno'=>'','excep'=>'','isHafiz'=>'');  
 
-                $RegStdData['data'][0]['SSC_brd_cd'] = $board;
-                $spl_cd = @$RegStdData['data'][0]['spl_cd'];
-                $msg = $RegStdData['data'][0]['Mesg'];
-                $SpacialCase = @$RegStdData['data'][0]['SpacialCase'];
-                $status = @$RegStdData['data'][0]['status'];
+                @$RegStdData['data'][0]['SSC_brd_cd'] = $board;
+                @$spl_cd = @$RegStdData['data'][0]['spl_cd'];
+                @$msg = $RegStdData['data'][0]['Mesg'];
+                @$SpacialCase = @$RegStdData['data'][0]['SpacialCase'];
+                @$status = @$RegStdData['data'][0]['status'];
 
                 if($RegStdData['data'] == -1)
                 {

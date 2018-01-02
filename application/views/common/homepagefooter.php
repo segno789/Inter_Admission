@@ -19,7 +19,7 @@
 
     $(document).ready(function(){
         //$spl_cd
-         $('.mPageloader').hide();
+        $('.mPageloader').hide();
         $('#data-table').dataTable({
             "sPaginationType": "full_numbers",
             "cache": false
@@ -50,6 +50,13 @@
         } */
         var error_New_Enrolement ='<?php   if(@$excep != ""){echo @$excep['excep'];}  ?>';
         var  error_New_Enrolement_update ='<?php   if(@$data != ""){echo @$data[0]['excep'];}  ?>';
+
+        var  error_download ='<?php echo @$error;  ?>';
+        if(error_download.length > 1)
+        {
+            alertify.error(error_download);   
+        }
+
         if(error_New_Enrolement.length > 1)
         {
             if(error_New_Enrolement == "success" )

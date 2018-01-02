@@ -37,7 +37,7 @@ define('FOPEN_WRITE_CREATE_STRICT',				'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 define('BARCODE_PATH', 'assets/pdfs/');
 
-
+define('GET_PRIVATE_IMAGE_PATH_11th', 'C:/inetpub/vhosts/bisegrw.edu.pk/Share Images/uploads/HSSC/admission/2018/11th/annual/private/');
 define('REGULAR_INSERT_TABLE', 'Admission_online..tblIAdm');
 define('DIRPATH12TH','F:\xampp\htdocs\Share Images\\'); 
 define('PRIVATE_IMAGE_PATH', 'uploads/private/');
