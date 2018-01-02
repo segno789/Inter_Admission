@@ -719,6 +719,7 @@
         }
     })
     $('#get_Proof_reg').click( function(){
+        
         var option =  $('input[type=radio][name=opt]:checked').val(); 
 
         if(option == "1")
@@ -819,7 +820,7 @@
     }
     function ChallanForm_Adm10th_Regular(Batch_ID)
     {
-        window.location.href = '<?=base_url()?>/Admission_inter/ChallanForm_Adm10th_Regular/'+Batch_ID
+        window.location.href = '<?=base_url()?>Admission_inter/ChallanForm_Adm10th_Regular/'+Batch_ID
     }
     function ReturnForm_ProofReading_groupwise(grp_cd){
         window.location.href =  '<?=base_url()?>Admission_inter/return_pdf/'+grp_cd + '/4'

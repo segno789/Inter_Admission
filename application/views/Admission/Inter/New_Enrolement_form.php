@@ -709,28 +709,20 @@
 
                                                     beforeSend: function() {  $('.mPageloader').show(); },
                                                     complete: function() { $('.mPageloader').hide();},
-                                                    
-                                                  success: function(data){
 
-                                                      
-                                                    alert(data);
-                                                    alert(JSON.parse(data));
+                                                    success: function(data){
                                                         var obj = JSON.parse(data);
                                                         if(obj.error ==  "1")
                                                         {
-                                                            alert(obj.error);
-                                                            
                                                             window.location.href ='<?php echo base_url(); ?>Admission_inter/EditForms'
                                                             alertify.success("Data Saved Successfully");
                                                             return true;
                                                         } 
-
                                                         else
                                                         {
                                                             alertify.error(obj.error);
                                                             $('#btnsubmitUpdateEnrol').removeAttr("disabled");
                                                             return false; 
-
                                                         }
                                                     },
 

@@ -196,7 +196,7 @@ class Admission_inter_model extends CI_Model
         $sub6ap2 =  $data['sub6ap2'];
         $sub7ap2 =  $data['sub7ap2'];
         $sub8ap2 =  $data['sub8ap2'];
-        $oldrno =  $data['rno'];
+        $oldrno =  @$data['rno'];
         $oldyear =  $data['Iyear'];
         $oldsess =  $data['sess'];
 
@@ -263,7 +263,7 @@ class Admission_inter_model extends CI_Model
     }
 
     public function EditEnrolement($inst_cd)
-    {                  
+    {                        
         $query = $this->db->query("exec admission_online..sp_get_regInfo_all_inter $inst_cd,12,".Year.",".Session."");    
 
         $rowcount = $query->num_rows();
@@ -279,7 +279,7 @@ class Admission_inter_model extends CI_Model
 
     public function EditEnrolement_singleForm($formno, $year)
     {
-        $query = $this->db->query("admission_online..sp_get_regInfo_inter '".$formno."',12,$year,2");    
+        $query = $this->db->query("admission_online..sp_get_regInfo_inter '".$formno."',12,$year,".Session."");    
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {

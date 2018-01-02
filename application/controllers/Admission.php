@@ -549,7 +549,7 @@ class Admission extends CI_Controller {
         $pdf->SetXY(6.3, 7.09+$Y); 
         $pdf->SetFont('Arial','b',$FontSize);
         if(Session == 1){
-            $pdf->Cell( 0,0,$mydata_final['regFee'].'/-',0,'L');    
+            $pdf->Cell( 0,0,@$mydata_final['regFee'].'/-',0,'L');    
         }
 
         else if(Session == 2){
@@ -696,7 +696,7 @@ class Admission extends CI_Controller {
         $pdf->SetFont('Arial','b',$FontSize);
 
         if(Session == 1){
-            $pdf->Cell( 0,0,$mydata_final['regFee'].'/-',0,'L');    
+            $pdf->Cell( 0,0,@$mydata_final['regFee'].'/-',0,'L');    
         }
 
         else if(Session == 2){
@@ -2475,7 +2475,7 @@ class Admission extends CI_Controller {
 
         //DebugBreak();
 
-        $ValidYear = Year - 3;
+        $ValidYear = Year - 2;
 
         if(!($isexit) && $error_msg == '' && $iyear > $ValidYear)
         {

@@ -246,6 +246,11 @@
                         </a>
                     </li>
                     <li>
+                        <a href="<?php echo base_url(); ?>Admission_inter/FormPrinting">
+                            Proof Form Printing
+                        </a>
+                    </li> 
+                    <li>
                         <a href="<?php echo base_url(); ?>Admission_inter/CreateBatch">
                             Create Batch
                         </a>
@@ -255,11 +260,7 @@
                             Batch List
                         </a>
                     </li>
-                    <li>
-                        <a href="<?php echo base_url(); ?>Admission_inter/FormPrinting">
-                            Proof Form Printing
-                        </a>
-                    </li>   
+
                     <li>
                         <a href="#" onclick="return logout();">Logout</a>
                     </li>

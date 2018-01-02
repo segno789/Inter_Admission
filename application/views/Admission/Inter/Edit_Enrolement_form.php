@@ -15,7 +15,7 @@
                         </div>
                     </div>
                     <div class="widget-body">
-                        <form class="form-horizontal no-margin" name="myform" id="myform" action="<?php  echo base_url(); ?>/Admission_inter/NewEnrolment_update_inter" method="post" enctype="multipart/form-data">
+                        <form class="form-horizontal no-margin" name="myform" id="myform" method="post" enctype="multipart/form-data">
                             <div class="control-group">
                                 <div class="controls controls-row">
                                     <?php
@@ -775,7 +775,7 @@
                             </div>
                             <div class="control-group">
                                 <div class="control row controls-row">
-                                    <button type="submit" onclick="return checks()" name="btnsubmitUpdateEnrol" class="btn btn-large btn-info span3 offset3">Save Form</button>
+                                    <button type="submit" onclick="return checks_12th_Regular_EditForm()" name="btnsubmitUpdateEnrol" id="btnsubmitUpdateEnrol" class="btn btn-large btn-info span3 offset3">Save Form</button>
                                     <input type="button" class="btn btn-large btn-danger span3" value="Cancel" id="btnCancel" name="btnCancel" onclick="return CancelAlert();" >
                                 </div>
                             </div>
@@ -784,15 +784,86 @@
                             $(document).ready(function(){
                                 $.fancybox("#instruction");
                             });
-                            function checks(){
+                            function checks_12th_Regular_EditForm(){
+                                $('#btnsubmitUpdateEnrol').attr("disabled", "disabled");
                                 var status  =  check_NewEnrol_validation_regular();
                                 if(status == 0)
                                 {
+                                    $('#btnsubmitUpdateEnrol').removeAttr("disabled");
                                     return false;    
                                 }
                                 else
                                 {
-                                    return true;
+                                    $('#btnsubmitUpdateEnrol').attr("disabled", "disabled");
+
+                                    $.ajax({
+
+                                        type: "POST",
+                                        url: "<?php  echo site_url('Admission_inter/frmvalidation'); ?>",
+                                        data: $("#myform").serialize() ,
+                                        datatype : 'html',
+                                        cache:false,
+
+                                        beforeSend: function() {  $('.mPageloader').show(); },
+                                        complete: function() { $('.mPageloader').hide();},
+
+                                        success: function(data)
+                                        {              
+                                            var obj = JSON.parse (data);
+
+                                            if(obj.excep == 'Success')
+                                            {
+                                                $.ajax({
+
+                                                    type: "POST",
+                                                    url: "<?php echo base_url(); ?>" + "Admission_inter/NewEnrolment_update_inter/",
+                                                    data: $("#myform").serialize() ,
+                                                    datatype : 'html',
+                                                    cache:false,
+
+                                                    beforeSend: function() {  $('.mPageloader').show(); },
+                                                    complete: function() { $('.mPageloader').hide();},
+
+                                                    success: function(data){
+
+                                                        var obj = JSON.parse(data);
+                                                        if(obj.error ==  "1")
+                                                        {
+                                                            window.location.href ='<?php echo base_url(); ?>Admission_inter/EditForms'
+                                                            alertify.success("Data Saved Successfully");
+                                                            return true;
+                                                        } 
+
+                                                        else
+                                                        {
+                                                            alertify.error(obj.error);
+                                                            $('#btnsubmitUpdateEnrol').removeAttr("disabled");
+                                                            return false; 
+
+                                                        }
+                                                    },
+
+                                                    error: function(request, status, error){
+                                                        alertify.error(request.responseText);
+                                                        $('#btnsubmitUpdateEnrol').removeAttr("disabled");
+                                                    }
+                                                });
+
+                                                return false;
+
+                                            }
+                                            else
+                                            {
+                                                alertify.error(obj.excep);
+                                                $('#btnsubmitUpdateEnrol').removeAttr("disabled");
+                                                return false;     
+
+                                            }
+                                        }
+                                    });
+
+                                    return false;   
+
                                 }
                             }
                             function CancelAlert()
