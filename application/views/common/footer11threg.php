@@ -27,7 +27,7 @@ if(isset($files)){
 ?> 
 <script type="">
 
- function checks(){
+    function checks(){
 
         var status  =  check_NewEnrol_validation_11th(); 
 
@@ -46,18 +46,19 @@ if(isset($files)){
                 beforeSend: function() {  $('.mPageloader').show(); },
                 complete: function() { $('.mPageloader').hide();},
                 success: function(data) {
-                    
-                     var obj = JSON.parse(data) ;
-                     if(obj.error ==  1)
-                     {
+                                  //alert(data);
+                    var obj = JSON.parse(data) ;
+                   // alert(obj);
+                    if(obj.error ==  1)
+                    {
                         window.location.href ='<?php echo base_url(); ?>Admission_11th_pvt/formdownloaded/'+obj.formno; 
-                     }
-                     else
-                     {
-                         $('.mPageloader').hide();
+                    }
+                    else
+                    {
+                        $('.mPageloader').hide();
                         alertify.error(obj.error);
-                          return false; 
-                     }
+                        return false; 
+                    }
 
                 },
                 error: function(request, status, error){
@@ -80,7 +81,7 @@ if(isset($files)){
 
     $(function() {
         $("input:file").change(function (event){
-
+                  debugger;
             event.preventDefault();
             var proceed = true; //set proceed flag
             var error = [];    //errors
@@ -98,10 +99,10 @@ if(isset($files)){
                 //limit number of files allowed
                 if(total_selected_files > total_files_allowed){
                     alertify.error( "You have selected "+total_selected_files+" file(s), " + total_files_allowed +" is maximum!"); //push error text
-                     $('#previewImg').removeAttr('src');
-                        $("#previewImg").attr("src","<?php echo base_url(); ?>assets/img/profile.png");
-                        $("#image").val('');
-                        $("#image").focus();
+                    $('#previewImg').removeAttr('src');
+                    $("#previewImg").attr("src","<?php echo base_url(); ?>assets/img/profile.png");
+                    $("#image").val('');
+                    $("#image").focus();
                     proceed = false; //set proceed flag to false
                 }
                 //iterate files in file input field
@@ -110,9 +111,9 @@ if(isset($files)){
                         if(allowed_file_types.indexOf(ifile.type) === -1){ //check unsupported file
                             alertify.error( "<b>"+ ifile.name + "</b> is unsupported file type!"); //push error text
                             $('#previewImg').removeAttr('src');
-                        $("#previewImg").attr("src","<?php echo base_url(); ?>assets/img/profile.png");
-                        $("#image").val('');
-                        $("#image").focus();
+                            $("#previewImg").attr("src","<?php echo base_url(); ?>assets/img/profile.png");
+                            $("#image").val('');
+                            $("#image").focus();
                             proceed = false; //set proceed flag to false
                         }
 
@@ -124,10 +125,10 @@ if(isset($files)){
                 //if total file size is greater than max file size
                 if(total_files_size > max_file_size && proceed == true){ 
                     alertify.error( "Allowed size is 20 KB, Try smaller file!"); //push error text
-                     $('#previewImg').removeAttr('src');
-                        $("#previewImg").attr("src","<?php echo base_url(); ?>assets/img/profile.png");
-                        $("#image").val('');
-                        $("#image").focus();
+                    $('#previewImg').removeAttr('src');
+                    $("#previewImg").attr("src","<?php echo base_url(); ?>assets/img/profile.png");
+                    $("#image").val('');
+                    $("#image").focus();
                     proceed = false; //set proceed flag to false
                 }
 
@@ -185,10 +186,10 @@ if(isset($files)){
 
 
     $(document).ready(function () {
-        
+
         $('.mPageloader').hide();
- $.fancybox("#instruction");
-   
+        $.fancybox("#instruction");
+
         $("#pvtinfo_dist").change(function(){
             var distId =  $("#pvtinfo_dist").val();
             $('#pvtinfo_teh').empty();
@@ -230,69 +231,69 @@ if(isset($files)){
 
         });
         $("#pvtinfo_teh").change(function()
-        {
-            var tehId =  $("#pvtinfo_teh").val();
-            
-            var gender = '';
+            {
+                var tehId =  $("#pvtinfo_teh").val();
 
-            if(isotherboard != 1)
-            {
-                gender = $("#gender1").val();
-            }
-            else
-            {
-                gender =  $("input[name=gender]").val() ;
-                
-                if(gender ==  undefined || gender =='')
+                var gender = '';
+
+                if(isotherboard != 1)
                 {
-                     gender = $("input[name=gender]").val() ;
+                    gender = $("#gender1").val();
                 }
-                
-            }
-            
-             if(gender == "" || gender == 0 || gender == undefined  || gender.length == undefined)
-            {
-                 alertify.error("Select Gender First");
-            }
-          else  if(tehId == 0){
-                alertify.error("Select Tehsil First");
-            }
-            
-            else{
+                else
+                {
+                    gender =  $("input[name=gender]").val() ;
 
-                jQuery.ajax({
-
-                    type: "POST",
-                    url: "<?php echo base_url(); ?>" + "Admission/getzone/",
-                    dataType: 'json',
-                    data: {tehCode: tehId,'gend':gender},
-                    beforeSend: function() {  $('.mPageloader').show(); },
-                    complete: function() { $('.mPageloader').hide();},
-                    success: function(json) {
-                        var listitems;
-
-                        $('#pvtZone').empty();
-                        $('#pvtZone').append('<option value="0">SELECT ZONE</option>');
-                        $.each(json, function (key, data) {
-
-                            $.each(data, function (index, data) {
-
-                                listitems +='<option value=' + data.zone_cd + '>' + data.zone_name + '</option>';
-                            })
-                        })
-                        $('#pvtZone').append(listitems)
-                    },
-                    error: function(request, status, error){
-                        alert(request.responseText);
+                    if(gender ==  undefined || gender =='')
+                    {
+                        gender = $("input[name=gender]").val() ;
                     }
-                });
-            }
+
+                }
+
+                if(gender == "" || gender == 0 || gender == undefined  || gender.length == undefined)
+                {
+                    alertify.error("Select Gender First");
+                }
+                else  if(tehId == 0){
+                    alertify.error("Select Tehsil First");
+                }
+
+                else{
+
+                    jQuery.ajax({
+
+                        type: "POST",
+                        url: "<?php echo base_url(); ?>" + "Admission/getzone/",
+                        dataType: 'json',
+                        data: {tehCode: tehId,'gend':gender},
+                        beforeSend: function() {  $('.mPageloader').show(); },
+                        complete: function() { $('.mPageloader').hide();},
+                        success: function(json) {
+                            var listitems;
+
+                            $('#pvtZone').empty();
+                            $('#pvtZone').append('<option value="0">SELECT ZONE</option>');
+                            $.each(json, function (key, data) {
+
+                                $.each(data, function (index, data) {
+
+                                    listitems +='<option value=' + data.zone_cd + '>' + data.zone_name + '</option>';
+                                })
+                            })
+                            $('#pvtZone').append(listitems)
+                        },
+                        error: function(request, status, error){
+                            alert(request.responseText);
+                        }
+                    });
+                }
 
         })
         $("#pvtZone").change(function(){
 
             var tehId =  $("#pvtZone").val();
-             var gender = '';
+            var gender = '';
 
             if(isotherboard != 1)
             {            
@@ -303,13 +304,13 @@ if(isset($files)){
                 gender =  $("input[name=gender]").val() ;
                 if(gender ==  undefined || gender =='')
                 {
-                     gender = $("#gender").val();
+                    gender = $("#gender").val();
                 }
             }
-            
-             if(gender == "" || gender == 0 || gender == undefined  || gender.length == undefined)
+
+            if(gender == "" || gender == 0 || gender == undefined  || gender.length == undefined)
             {
-                 alertify.error("Select Gender First");
+                alertify.error("Select Gender First");
             }
 
             else if(tehId == 0){
@@ -321,16 +322,16 @@ if(isset($files)){
                     type: "POST",
                     url: "<?php echo base_url(); ?>Admission/getcenter/",
                     dataType: 'json',
-                     data: {pvtZone: tehId,'gend':gender},
+                    data: {pvtZone: tehId,'gend':gender},
                     beforeSend: function() {  $('.mPageloader').show(); },
                     complete: function() { $('.mPageloader').hide();},
                     success: function(json) {
-                       
+
                         var listitems='';
                         $.each(json.center, function (key, data) {
                             listitems +='<label style="text-align: left; margin-top: -23px;">'+data.CENT_CD + '-' + data.CENT_NAME+'</label><br>';
                         })
-                         console.log(listitems)
+                        console.log(listitems)
                         $('#instruction').html('<h1 style="    margin-bottom: 28px;">Selected Zone Centre List </h1>'+listitems); 
                         $.fancybox("#instruction");
                     },
@@ -382,9 +383,12 @@ if(isset($files)){
     }
     else
     {
-        $( "#dob" ).hide();
-        $( "#doblable" ).hide();
-        $( "#moblabel" ).attr("style",'margin-left:426px;');
+        $( "#dob" ).prop('readonly', true);
+        $( "#cand_name" ).prop('readonly', true);
+        $( "#father_name" ).prop('readonly', true); 
+        $( "#doblable" ).prop('readonly', true);
+        
+        //$( "#moblabel" ).attr("style",'margin-left:426px;');
     }
     // $( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true }).val();
     $( "#batch_real_PaidDate" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, 'setDate': new Date() }).val(); //, startDate:new Date()
@@ -421,28 +425,28 @@ if(isset($files)){
         57 : 'History Of Muslim India',  
         55 : 'History Of Pakistan',  
         11: 'Economics',  
-     //   12 : 'Geography',  
+        //   12 : 'Geography',  
         14: 'Philosophy',  
-     //   16 : 'Psychology',  
+        //   16 : 'Psychology',  
         32: 'Punjabi',  
         37 : 'Urdu Advance',  
         24: 'Arabic',  
         27 : 'English Literature',  
         34: 'Persian',  
         17: 'Civics',  
-      //  18: 'Statistics',  
+        //  18: 'Statistics',  
         19: 'Mathematics',  
         20 : 'Islamic Studies',  
-    //    21: 'Outlines Of Home Economics',  
-       // 23: 'Fine Arts',  
-      //  42: 'Health And Physical Education',  
+        //    21: 'Outlines Of Home Economics',  
+        // 23: 'Fine Arts',  
+        //  42: 'Health And Physical Education',  
         43: 'Education',  
         45 : 'Sociology',  
-       // 8: 'Library Science',  
-      //  83 : 'Computer Science',  
+        // 8: 'Library Science',  
+        //  83 : 'Computer Science',  
         44: 'Geology',  
-       // 90 : 'Agriculture',  
-      //  79 : 'Nursing' 
+        // 90 : 'Agriculture',  
+        //  79 : 'Nursing' 
 
     }
     var sub7_Hum = 
@@ -452,20 +456,20 @@ if(isset($files)){
         26: 'CIVICS',
         25: 'ECONOMICS',
         14: 'PHYSIOLOGY & HYGIENE',
-      //  24: 'GEOGRAPHY',
+        //  24: 'GEOGRAPHY',
         21: 'HISTORY OF PAKISTAN',
         35: 'ENGLISH LITERATURE',
         34: 'URDU LITERATURE',
         19: 'ADVANCED ISLAMIC STUDIES',
         87: 'ENVIRONMENTAL STUDIES',
-       // 33: 'COMMERCIAL GEOGRAPHY',
+        // 33: 'COMMERCIAL GEOGRAPHY',
         22: 'ARABIC',
         23: 'PERSIAN',
         36: 'PUNJABI',
         20: 'ISLAMIC HISTORY / MUSLIM HISTORY',
         83: 'POULTRY FARMING',
         40: 'HEALTH & PHYSICAL EDUCATION',
-    //    78: 'COMPUTER SCIENCE',
+        //    78: 'COMPUTER SCIENCE',
         15 : 'GEOMETRICAL & TECHNICAL DRAWING',
         43 : 'ELECTRICAL WIRING',
         48 : 'WOOD WORK (FURNITURE MAKING)',
@@ -542,8 +546,8 @@ if(isset($files)){
     function  check_NewEnrol_validation_11th()
     {
         // 
-       
-       
+
+
         var name =  $('#cand_name').val();
         var fName = $('#father_name').val();
         var picname = $('#picname').val();
@@ -562,21 +566,27 @@ if(isset($files)){
         var grp_cd = $('#std_group').val();
         var brd_cd = $('#brd_cd').val();
         var gender = '';
+        var terms = $("input[name=terms]").val();
+        var medium = $('#medium').val();
+        var nationality = $('#nationality').val();
+        var religion = $('#religion').val();
+        var UrbanRural = $('#UrbanRural').val();
+
         debugger
         if(isotherboard != 1)
         {
-           gender = $("#gender1").val();
+            gender = $("#gender1").val();
         }
         else
         {
             gender =  $("input[name=gender]").val() ;
         }
-        
+
         if(gender == '' || gender ==  undefined)
         {
             gender = $("input[name=gender1]").val();
         }
-        
+
         var address = $('#address').val();
         var image = $('#image').val();
         var MarkOfIdent = $('#MarkOfIden').val();
@@ -614,6 +624,7 @@ if(isset($files)){
             $('#cand_name').focus(); 
             return status;
         }
+
         else if(fName == "" || fName == undefined){
             $('#ErrMsg').show(); 
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
@@ -641,14 +652,14 @@ if(isset($files)){
             $('#father_cnic').focus();  
             return status; 
         }
-          else if(FNic == bFormNo  )
+        else if(FNic == bFormNo  )
         {
 
             alertify.error("B-form Number and Father CNIC cannot be same.") 
             $('#bay_form').focus();   
             return status; 
         }
-         else if((dob == "" || dob.length == undefined) && isotherboard != 1)
+        else if((dob == "" || dob.length == undefined) && isotherboard != 1)
         {
             $('#ErrMsg').show(); 
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
@@ -666,7 +677,13 @@ if(isset($files)){
             $('#mob_number').focus();   
             return status;  
         }
+        else if(medium == "" || medium == 0 || medium == undefined)
+        {
+            alertify.error("Please Select Medium First.");
 
+            $('#medium').focus();   
+            return status;  
+        }
         else if(MarkOfIdent == "" || MarkOfIdent == 0 || MarkOfIdent.length == undefined)
         {
             $('#ErrMsg').show(); 
@@ -676,25 +693,49 @@ if(isset($files)){
             $('#MarkOfIden').focus();   
             return status;  
         }
-         else if(gender == "" || gender == 0 || gender == undefined  || gender.length == undefined)
+        else if(nationality == "" || nationality == 0 || nationality == undefined)
+        {
+            alertify.error("Please Select Nationality First.");
+
+            $('#nationality').val(0); 
+            $('#nationality').focus();   
+            return status;  
+        }
+        else if(gender == "" || gender == 0 || gender == undefined  || gender.length == undefined)
         {
             $('#ErrMsg').show(); 
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
             //$('#ErrMsg').html("<b>Please Enter your Mark of Indentification</b>"); 
-            alertify.error("Please Select Gender") 
-           // $('#MarkOfIden').focus();   
+            alertify.error("Please Select Gender") ;
+             $("#gender1").focus();
+            // $('#MarkOfIden').focus();   
+            return status;  
+        }
+        else if(religion == "" || religion == 0 || religion == undefined)
+        {
+            alertify.error("Please Select Religion First.");
+             $('#religion').val(0);
+            $('#religion').focus();   
+            return status;  
+        }
+        else if(UrbanRural == "" || UrbanRural == 0 || UrbanRural == undefined)
+        {
+            alertify.error("Please Select Locality i.e(Urban/rural) First.");
+
+            $('#UrbanRural').focus();   
+            $('#UrbanRural').val(0);   
             return status;  
         }
         else if(address == "" || address == 0 || address.length ==undefined )
         {
             $('#ErrMsg').show(); 
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-           // $('#ErrMsg').html("<b>Please Enter your Address</b>"); 
+            // $('#ErrMsg').html("<b>Please Enter your Address</b>"); 
             alertify.error("Please Enter your Address")
             $('#address').focus(); 
             return status;    
         }
-           
+
         else if(pvtinfo_dist == "" || pvtinfo_dist == 0  || pvtinfo_dist == undefined){
 
             alertify.error("Please Select First District  ") 
@@ -776,11 +817,17 @@ if(isset($files)){
             $("#sub7").focus();
             return status;  
         }
+        else if(!$('#terms').prop('checked'))
+        {
+            alertify.error('Please Read the Terms and Conditions'); 
+            $("#terms").focus();
+            return status; 
+        }
 
 
-        
 
-      
+
+
         status = 1;
         return status;
 
@@ -960,7 +1007,7 @@ if(isset($files)){
             $("#sub4").val('0');  
             return;
         }
-        
+
     })
     $("#sub5").change(function(){
         console.log('Hi i am sub7 dropdown :) ');
@@ -1027,7 +1074,7 @@ if(isset($files)){
             $("#sub5").val('0');  
             return;
         }
-       
+
     })
     $("#sub6").change(function(){
 
@@ -1097,7 +1144,7 @@ if(isset($files)){
             $("#sub6").val('0');  
             return;
         }
-     
+
     })
 
     var NationalityVal = $("input[name=nationality]:checked").val();

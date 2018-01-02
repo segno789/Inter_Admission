@@ -70,10 +70,10 @@
                                     <select id="oldClass" class="form-control" name="oldClass">
                                         <?php
                                         if(Session == 1){
-                                            echo'
-                                            <option value="11" >11th</option>
-                                            <option selected="selected" value="12">12th</option>
-                                            ';
+                                            ?>
+                                            <option value="11" <?php if(@$_POST['oldClass'] == "11") echo 'selected' ?>>11th</option>
+                                            <option value="12" <?php if(@$_POST['oldClass'] == "12") echo 'selected' ?>>12th</option>
+                                            <?php
                                         }
                                         else if(Session == 2){
                                             echo'
@@ -90,7 +90,7 @@
 
                                         if(Session == 1){
 
-                                            $yearForLastAp = date('Y');
+                                            $yearForLastAp = date('Y')-1;
 
                                             for($i = $yearForLastAp; $i >= 2000 ; $i--)
                                             {
@@ -391,7 +391,7 @@
 
                                             if(Session == 1){
 
-                                                $yearForLastAp = date('Y')-1;
+                                                $yearForLastAp = date('Y')-2;
 
                                                 for($i = $yearForLastAp; $i >= 2000 ; $i--)
                                                 {
@@ -404,8 +404,8 @@
                                                 <option value="100">Before 2000</option>';
                                             }
                                             else if(Session == 2){
-                                                @$curr_Year = Year - 1;
-                                                @$prev_year = Year - 2;
+                                                @$curr_Year = Year - 2;
+                                                @$prev_year = Year - 3;
 
                                                 echo'
                                                 <option value="'.$curr_Year.'" selected>'.$curr_Year.'</option>

@@ -162,7 +162,9 @@
         <div class="row">
             <div class="col-md-offset-3 col-md-6">
                 <input type="button" value="Apply for ADEEB & ALAM Languages Examination" id="proceedbtn_lang" name="proceedbtn_lang" onclick="return proceed11th_lang();" class="btn btn-success btn-block">
+
             </div>
+
         </div>
     </div>
 
@@ -236,8 +238,9 @@
             complete: function() { $('.mPageloader').hide();},
             success: function(data)
             {
+            //alert(data);
                 var obj = JSON.parse(data) ;
-
+                      //  alert(obj.excep);
                 if(obj.excep == 'success')
                 {
                     $('#ReturnStatus').submit();

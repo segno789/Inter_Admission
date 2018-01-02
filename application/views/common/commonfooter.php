@@ -64,7 +64,7 @@
 
         $("#pvtinfo_teh").change(function(){
             var tehId =  $("#pvtinfo_teh").val();
-
+            
             gender =  $('#gend').val();
             if( gender == undefined )
             {
@@ -91,8 +91,8 @@
                     dataType: 'json',
                     data: {tehCode: tehId,'gend':gender},
                     beforeSend: function() {  $('.mPageloader').show(); },
-                    complete: function() { $('.mPageloader').hide();},
-                    success: function(json) {
+                    complete: function() { $('.mPageloader').hide();},   
+                    success: function(json) {         
                         var listitems;
 
                         $('#pvtZone').empty();

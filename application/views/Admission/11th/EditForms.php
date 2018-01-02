@@ -41,7 +41,7 @@
                                          <th style="width:4%" class="hidden-phone">
                                             Picture
                                         </th>
-                                         <th scope="col" align="center"><a href="javascript:void(0);" style="color:red;" class="check">Check All</a></th>
+                                         <th scope="col" align="center"><a href="javascript:void(0);" style="color:red;" class="check">Select Form</a></th>
                                         <th style="width:18%" class="hidden-phone" >
                                             Download
                                         </th>

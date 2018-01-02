@@ -1066,6 +1066,15 @@
                                     window.location.href ='<?php echo base_url(); ?>Admission/formdownloaded/'+obj.formno; 
                                     alertify.success('Your admission has been submitted successfully');
                                 }
+
+                                else if(obj.error ==  2)
+                                {
+                                    $('.mPageloader').hide();
+                                    $('#btnsubmitUpdateEnrol').removeAttr("disabled");
+                                    alertify.error(obj.msg);
+                                    return false; 
+                                }
+
                                 else
                                 {
                                     alertify.error(obj.error);

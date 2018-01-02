@@ -370,7 +370,14 @@ Event Admission for<a id="redgForm" data-original-title="">m</a>
         var address = $('#address').val();
         var image = $('#image').val();
         var MarkOfIdent = $('#MarkOfIden').val();
-        var gend = $("input[name=gender]:checked").val();
+        var gend = $("input[name=gender]").val();
+        var terms = $("input[name=terms]").val();
+        var medium = $('#medium').val();
+        var nationality = $('#nationality').val();
+        var religion = $('#religion').val();
+        var UrbanRural = $('#UrbanRural').val();
+       
+          // debugger;
         var status = 0;
         // alert('sub6 '+sub6p1+ ' and '+ sub6p2);
         if(name == "" ||  name == undefined){
@@ -379,6 +386,7 @@ Event Admission for<a id="redgForm" data-original-title="">m</a>
             $('#cand_name').focus(); 
             return status;
         }
+     
         else if(fName == "" || fName == undefined){
             alertify.error("Please Enter your  Father's Name.");
 
@@ -421,11 +429,11 @@ Event Admission for<a id="redgForm" data-original-title="">m</a>
             $('#mob_number').focus();   
             return status;  
         }
-        else if(gend == "" || gend== undefined)
+         else if(medium == "" || medium == 0 || medium == undefined)
         {
-            alertify.error("Please Select Your Gender.");
-            //$('#ErrMsg').html("<b>Please Select Your Gender.</b>"); 
-            $("input[name=gender]:checked").focus();   
+            alertify.error("Please Select Medium First.");
+
+            $('#medium').focus();   
             return status;  
         }
         else if(MarkOfIdent == "" || MarkOfIdent == 0 || MarkOfIdent == undefined)
@@ -433,6 +441,35 @@ Event Admission for<a id="redgForm" data-original-title="">m</a>
             alertify.error("Please Enter your Mark of Indentification.");
             //$('#ErrMsg').html("<b>Please Enter your Mark of Indentification</b>"); 
             $('#MarkOfIden').focus();   
+            return status;  
+        }
+          else if(nationality == "" || nationality == 0 || nationality == undefined)
+        {
+            alertify.error("Please Select Nationality First.");
+
+            $('#nationality').focus();   
+            return status;  
+        }
+        
+        else if(gend == "" || gend== undefined)
+        {
+            alertify.error("Please Select Your Gender.");
+            //$('#ErrMsg').html("<b>Please Select Your Gender.</b>"); 
+            $("input[name=gender]:checked").focus();   
+            return status;  
+        }
+          else if(religion == "" || religion == 0 || religion == undefined)
+        {
+            alertify.error("Please Select Religion First.");
+
+            $('#religion').focus();   
+            return status;  
+        }
+          else if(UrbanRural == "" || UrbanRural == 0 || UrbanRural == undefined)
+        {
+            alertify.error("Please Select Locality i.e(Urban/rural) First.");
+
+            $('#UrbanRural').focus();   
             return status;  
         }
         else if(address == "" || address == 0 || address.length ==undefined )
@@ -512,7 +549,7 @@ Event Admission for<a id="redgForm" data-original-title="">m</a>
             $("#sub7").focus();
             return status;  
         }
-
+        
         else   if ($("#sub8").find('option:selected').val() < 1) 
         {
             alertify.error("Plesae select 8th Subject.");
@@ -520,7 +557,12 @@ Event Admission for<a id="redgForm" data-original-title="">m</a>
             $("#sub8").focus();
             return status;  
         }
-
+          else if(!$('#terms').prop('checked'))
+       {
+            alertify.error('Please Read the Terms and Conditions'); 
+            $("#terms").focus();
+            return status; 
+        }
         status = 1;
         return status;
 

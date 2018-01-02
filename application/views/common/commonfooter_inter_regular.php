@@ -1116,6 +1116,7 @@
         var mobNo = $('#mob_number').val();
         var bFormNo = $('#bay_form').val();
         var grp_cd = $('#std_group').val();
+        var CollGrade = $('#CollGrade').val();
         var brd_cd = $('#brd_cd').val();
         var fName = $('#father_name').val();
         var FNic = $('#father_cnic').val();
@@ -1182,6 +1183,14 @@
             $('#MarkOfIden').focus();   
             return status;  
         }
+
+        else if(CollGrade == "" || CollGrade == 0 || CollGrade == undefined)
+        {
+            alertify.error("Please Enter College Grade") 
+            $('#CollGrade').focus();   
+            return status;  
+        }
+
         else if(address == "" || address == 0 || address.length ==undefined )
         {
             alertify.error("Please Enter your Address")
@@ -1197,7 +1206,6 @@
         }
 
         else if (teh_cd < 1) {
-
             alertify.error('Please select Tehsil');                          
             $("#pvtinfo_teh").focus();
             return status;  
