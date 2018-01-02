@@ -43,13 +43,13 @@
                 <label class="control-label" for="cand_name" >
                     Candidate Name:
                 </label>        
-                <input class="text-uppercase form-control"  type="text" id="cand_name" name="cand_name" placeholder="Candidate Name" maxlength="60" value="<?php echo @$data['name'] ?>" >
+                <input class="text-uppercase form-control"  type="text" id="cand_name" name="cand_name" placeholder="Candidate Name" maxlength="60" value="<?php echo @$data[0]['name'] ?>"  >
             </div>
             <div class="col-md-4">
                 <label class="control-label" for="father_name">
                     Father's Name :
                 </label>        
-                <input class="text-uppercase form-control" id="father_name" name="father_name"  type="text" placeholder="Father's Name" maxlength="60"  value="<?php echo  @$data['Fname']; ?>" > 
+                <input class="text-uppercase form-control" id="father_name" name="father_name"  type="text" placeholder="Father's Name" maxlength="60"  value="<?php echo  @$data[0]['Fname']; ?>" > 
             </div>
         </div>
     </div>
@@ -62,13 +62,13 @@
                 <label class="control-label" for="bay_form" >
                     Bay Form No:
                 </label>        
-                <input class="text-uppercase form-control" type="text" id="bay_form" name="bay_form"  placeholder="Bay Form No." value="<?php echo @$data['BForm'];?>" required="required" >
+                <input class="text-uppercase form-control" type="text" id="bay_form" name="bay_form"  placeholder="Bay Form No." value="<?php echo @$data[0]['BForm'];?>" required="required" >
             </div>
             <div class="col-md-4">
                 <label class="control-label" for="father_cnic">
                     Father's CNIC:
                 </label>        
-                <input class="text-uppercase form-control" id="father_cnic" name="father_cnic" type="text" placeholder="34101-1111111-1"  value="<?php  echo @$data['FNIC'];?>" required="required" >
+                <input class="text-uppercase form-control" id="father_cnic" name="father_cnic" type="text" placeholder="34101-1111111-1"  value="<?php  echo @$data[0]['FNIC'];?>" required="required" >
             </div>
         </div>
     </div>
@@ -155,7 +155,7 @@
         <div class="row">
             <div class="col-md-offset-2 col-md-4">
                 <label class="control-label" for="MarkOfIden">Mark of Identification :</label>
-                <input class="text-uppercase form-control" type="text" id="MarkOfIden"  name="MarkOfIden" value="<?php echo  @$data['markOfIden']; ?>" required="required" maxlength="60" >
+                <input class="text-uppercase form-control" type="text" id="MarkOfIden"  name="MarkOfIden" value="<?php echo  @$data[0]['markOfIden']; ?>" required="required" maxlength="60" >
             </div>
             <div class="col-md-4">
                 <label class="control-label" for="nationality" >
@@ -681,7 +681,7 @@
              <div class="row">
             <div class="col-md-offset-2 col-md-8">
             <label class="checkbox-inline">
-                    <input type="checkbox" class="checkboxtext" id="terms" name="terms" value="yes">I agree with the <a href="<?php echo base_url(); ?>assets/img/Instructions.jpg" target="_blank">Terms and Conditions </a> of Board of Intermediate & Secondary Education, Gujranwala  
+                    <input type="checkbox" class="checkboxtext" id="terms" name="terms" value="0">I agree with the <a href="<?php echo base_url(); ?>assets/img/Instructions.jpg" target="_blank">Terms and Conditions </a> of Board of Intermediate & Secondary Education, Gujranwala  
                 </label>
             </div>
         </div>

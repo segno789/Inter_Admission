@@ -117,7 +117,7 @@ class Admission_11th_pvt extends CI_Controller {
     }
     public function Get_students_record()
     {
-
+         //DebugBreak();
         $mrollno = $_POST["oldRno"];
 
         $board   =  $_POST["oldBrd_cd"];
@@ -131,14 +131,14 @@ class Admission_11th_pvt extends CI_Controller {
 
         $error['excep'] = '';
 
-        $isfeed =  $this->Admission_11th_Pvt_model->IsFeeded($data);
+        //$isfeed =  $this->Admission_11th_Pvt_model->IsFeeded($data);
 
-        if($isfeed >0)
+       /* if($isfeed >0)
         {
             $error['excep'] = 'You have already send regular admission';
         }
         else
-        {
+        { */
             if($board == 1 && $_POST["oldYear"] != -1)
             {
                 if(!ctype_digit($mrollno))
@@ -149,10 +149,10 @@ class Admission_11th_pvt extends CI_Controller {
                 $RegStdData = array('data'=>$this->Admission_11th_Pvt_model->Pre_Matric_data($data),'isReAdm'=>0,'Oldrno'=>0,'Inst_Rno'=>'','excep'=>'','isHafiz'=>'');  
 
                 $RegStdData['data'][0]['SSC_brd_cd'] = $board;
-                $spl_cd = $RegStdData['data'][0]['spl_cd'];
+                $spl_cd = @$RegStdData['data'][0]['spl_cd'];
                 $msg = $RegStdData['data'][0]['Mesg'];
-                $SpacialCase = $RegStdData['data'][0]['SpacialCase'];
-                $status = $RegStdData['data'][0]['status'];
+                $SpacialCase = @$RegStdData['data'][0]['SpacialCase'];
+                $status = @$RegStdData['data'][0]['status'];
 
                 if($RegStdData['data'] == -1)
                 {
@@ -166,9 +166,13 @@ class Admission_11th_pvt extends CI_Controller {
                 }
                 else if($msg != '')
                 {
-                    if($RegStdData['data'][0]['class'] ==  11 && $RegStdData['data'][0]['status'] != 1)
+                    if(@$RegStdData['data'][0]['class'] ==  11 && @$RegStdData['data'][0]['status'] != 1)
                     {
                         $error['excep'] = $msg;
+                    }
+                    else if($msg!="")
+                    {
+                        $error['excep'] = $msg;                    
                     }
                     else
                     {
@@ -226,7 +230,7 @@ class Admission_11th_pvt extends CI_Controller {
                 }
 
             }  
-        }
+        //}
         if($error['excep'] == '')
         {
             $error['excep'] =  'success'; 
@@ -276,7 +280,7 @@ class Admission_11th_pvt extends CI_Controller {
         $this->load->model('Admission_11th_Pvt_model');
         $this->load->library('session');
         $error = array();
-
+//        DebugBreak();
 
         $sub1ap1 = 0;
         $sub2ap1 = 0;
@@ -404,8 +408,8 @@ class Admission_11th_pvt extends CI_Controller {
         {
             if($key == 'formno')
             {
-                $oldpath =  GET_PRIVATE_IMAGE_PATH.'\11th\\'.$logedIn[0]['tempath'];
-                $newpath =  GET_PRIVATE_IMAGE_PATH.'\11th\\'.$val.'.jpg';
+                $oldpath =  GET_PRIVATE_IMAGE_PATH_11th.$logedIn[0]['tempath'];
+                $newpath =  GET_PRIVATE_IMAGE_PATH_11th.$val.'.jpg';
                 $err = rename($oldpath,$newpath);
                 $info['error'] = 1;
                 $info['formno'] = $val;
@@ -778,7 +782,7 @@ class Admission_11th_pvt extends CI_Controller {
 
 
 
-        $pdf->Image(GET_PRIVATE_IMAGE_PATH.'11th\\'. @$data["PicPath"],6.5, 1.10+$Y, 0.95, 1.0, "JPG");
+        $pdf->Image(GET_PRIVATE_IMAGE_PATH_11th.@$data["PicPath"],6.5, 1.10+$Y, 0.95, 1.0, "JPG");
         $pdf->SetFont('Arial','',10);
 
 
@@ -1293,7 +1297,7 @@ class Admission_11th_pvt extends CI_Controller {
 
         $pdf->SetXY(6.7, 6.70+$Y);
         $pdf->SetFont('Arial','b',$FontSize);
-        $pdf->Cell( 0,0,"Bank Challan No. ".$data['FormNo'],0,'L');
+        $pdf->Cell( 0,0,"Bank Challan No. ".$data['challan_overall_1'],0,'L');
 
 
         $pdf->SetXY($myx,6.85+$Y);
@@ -1410,7 +1414,7 @@ class Admission_11th_pvt extends CI_Controller {
 
         $pdf->SetXY(6.7, .53+$Y);
         $pdf->SetFont('Arial','b',$FontSize);
-        $pdf->Cell( 0,0,"Bank Challan No. ".$data['FormNo'],0,'L');
+        $pdf->Cell( 0,0,"Bank Challan No. ".$data['challan_overall_1'],0,'L');
 
 
 
@@ -1542,7 +1546,8 @@ class Admission_11th_pvt extends CI_Controller {
 
         $pdf->SetXY(6.7, 2.1+$Y);
         $pdf->SetFont('Arial','b',$FontSize);
-        $pdf->Cell( 0,0,"Bank Challan No. ".$data['FormNo'],0,'L');
+      //  DebugBreak();
+        $pdf->Cell( 0,0,"Bank Challan No. ".$data['challan_overall_1'],0,'L');
 
         $pdf->SetXY($myx, 2.3+$Y);
         $pdf->SetFont('Arial','',$FontSize);
@@ -1616,7 +1621,7 @@ class Admission_11th_pvt extends CI_Controller {
 
         $pdf->SetXY(6.7, 3.50+$Y);
         $pdf->SetFont('Arial','b',$FontSize);
-        $pdf->Cell( 0,0,"Bank Challan No. ".$data['FormNo'],0,'L');
+        $pdf->Cell( 0,0,"Bank Challan No. ".$data['challan_overall_1'],0,'L');
 
         $pdf->SetXY($myx, 3.65+$Y);
         $pdf->SetFont('Arial','',$FontSize);
@@ -1852,6 +1857,7 @@ class Admission_11th_pvt extends CI_Controller {
     public function uploadpic()
     {
 
+  //  DebugBreak();
         ############ Configuration ##############
         $config["generate_image_file"]            = true;
         $config["generate_thumbnails"]            = false;
@@ -1859,9 +1865,9 @@ class Admission_11th_pvt extends CI_Controller {
         $config["thumbnail_size"]                  = 200; //Thumbnails will be cropped to 200x200 pixels
         $config["image_prefix"]                 = "temp_"; //Normal thumb Prefix
         $config["thumbnail_prefix"]                = "thumb_"; //Normal thumb Prefix
-        $config["destination_folder"]            = GET_PRIVATE_IMAGE_PATH.'11th\\'; //upload directory ends with / (slash)
+        $config["destination_folder"]            = GET_PRIVATE_IMAGE_PATH_11th; //upload directory ends with / (slash)
         $config["thumbnail_destination_folder"]    = ''; //upload directory ends with / (slash)
-        $config["upload_url"]                     = "../uplaods/2018/private/11th/"; 
+        $config["upload_url"]                     = GET_PRIVATE_IMAGE_PATH_11th; 
         $config["quality"]                         = 90; //jpeg quality
         $config["random_file_name"]                = true; //randomize each file name
 
@@ -1884,8 +1890,13 @@ class Admission_11th_pvt extends CI_Controller {
 
             //output images
             foreach($responses["images"] as $response){
-                echo ' <input type="hidden" class="span2 hidden" id="picname" name="picname" value="'.$response.'">
-                <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="'.$config["upload_url"].$response.'"  alt="Candidate Image">';
+            
+             $config["upload_url"] = $config["upload_url"].$response;
+                $type = pathinfo($config["upload_url"], PATHINFO_EXTENSION);
+                $config["upload_url"] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($config["upload_url"]));
+                echo '<input type="hidden" class="hidden" id="picname" name="picname" value="'.$response.'">
+                <img id="previewImg" style="width:130px; height: 130px;" class="img-responsive" src="'.$config["upload_url"].'" alt="CandidateImage">';
+              
             }
 
         }catch(Exception $e){

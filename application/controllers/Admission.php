@@ -963,19 +963,17 @@ class Admission extends CI_Controller {
         $image =  $this->set_barcode($Barcode);
         $pdf->Image(BARCODE_PATH.$image,2.9, 0.61  ,2.4,0.24,"PNG");
 
-        if(!base_url() == "http://localhost:8083/adminbise/")
-        {
-            if($data ['IsNewPic'] == 0)
-            {
-                $type = pathinfo(@$data['picpath'], PATHINFO_EXTENSION); 
-                @$image_path_selected = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents(@$data['picpath']));
-                $pdf->Image(@$data['picpath'],6.5, 1.30+$Y, 0.95, 1.0, "JPG");
-            }
 
-            else  if($data ['IsNewPic'] == 1 && Session == 1)
-            {
-                $pdf->Image(GET_PRIVATE_IMAGE_PATH.$data['picpath'],6.5, 1.30+$Y, 0.95, 1.0, "JPG");
-            }
+        if($data ['IsNewPic'] == 0)
+        {
+            $type = pathinfo(@$data['picpath'], PATHINFO_EXTENSION); 
+            @$image_path_selected = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents(@$data['picpath']));
+            $pdf->Image(@$data['picpath'],6.5, 1.30+$Y, 0.95, 1.0, "JPG");
+        }
+
+        else  if($data ['IsNewPic'] == 1 && Session == 1)
+        {
+            $pdf->Image(GET_PRIVATE_IMAGE_PATH.$data['picpath'],6.5, 1.30+$Y, 0.95, 1.0, "JPG");
         }
 
         $pdf->Image("assets/img/logo2.png",0.4, 0.2, 0.65, 0.65, "PNG");

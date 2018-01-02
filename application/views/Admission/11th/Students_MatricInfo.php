@@ -238,8 +238,9 @@
             complete: function() { $('.mPageloader').hide();},
             success: function(data)
             {
+            //alert(data);
                 var obj = JSON.parse(data) ;
-
+                      //  alert(obj.excep);
                 if(obj.excep == 'success')
                 {
                     $('#ReturnStatus').submit();
