@@ -51,7 +51,7 @@ class Admission_11th_pvt extends CI_Controller {
             $error = "";
         }
 
-        $this->load->view('common/commonheader11th.php');
+        $this->load->view('common/commonheader.php');
         $mydata = array('error'=>$error);
 
         $this->load->view('Admission/11th/Default.php',$mydata);
@@ -60,7 +60,7 @@ class Admission_11th_pvt extends CI_Controller {
     }
     public function Students_matricInfo(){
         // DebugBreak();   //Students_matricInfo matric_error
-        $this->load->view('common/commonheader11th.php');
+        $this->load->view('common/commonheader.php');
 
         $this->load->view('Admission/11th/Students_MatricInfo.php');
         $this->load->view('common/commonfooter.php');
@@ -102,7 +102,7 @@ class Admission_11th_pvt extends CI_Controller {
             $RegStdData['isHafiz']=0;
             $RegStdData['data'][0]['sub1']=1;
         }
-        $this->load->view('common/commonheader11th.php');
+        $this->load->view('common/commonheader.php');
 
         $this->load->view('Admission/11th/AdmissionForm.php',$RegStdData);
         $this->load->view('common/footer11threg.php');
@@ -331,7 +331,7 @@ class Admission_11th_pvt extends CI_Controller {
         else
         {
             $nationality_hidden =@$_POST['nationality'];
-            $gender = $this->input->post('ogender');
+            $gender = $this->input->post('gender1');
         }
         
         if($nationality_hidden == '')
@@ -340,7 +340,7 @@ class Admission_11th_pvt extends CI_Controller {
         }
         if($gender == '')
         {
-              $gender = $this->input->post('ogender');
+              $gender = $this->input->post('gender1');
         }
         //nationality_hidden
         $addre =  str_replace("'", "", $this->input->post('address'));
@@ -1861,7 +1861,7 @@ class Admission_11th_pvt extends CI_Controller {
         $config["thumbnail_prefix"]                = "thumb_"; //Normal thumb Prefix
         $config["destination_folder"]            = GET_PRIVATE_IMAGE_PATH.'11th\\'; //upload directory ends with / (slash)
         $config["thumbnail_destination_folder"]    = ''; //upload directory ends with / (slash)
-        $config["upload_url"]                     = "../uplaods/2016/private/11th/"; 
+        $config["upload_url"]                     = "../uplaods/2018/private/11th/"; 
         $config["quality"]                         = 90; //jpeg quality
         $config["random_file_name"]                = true; //randomize each file name
 

@@ -1,7 +1,7 @@
 
 
 <div id="footer" class="footer">
-    &nbsp; &copy; 2017 BISE Gujranwala, All Rights Reserved. 
+    &nbsp; &copy; 2018 BISE Gujranwala, All Rights Reserved. 
 </div>
 
 </div>

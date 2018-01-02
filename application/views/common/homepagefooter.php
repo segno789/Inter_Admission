@@ -1,6 +1,6 @@
 
 <div id="footer" class="footer">
-    &nbsp; &copy; 2017 BISE Gujranwala, All Rights Reserved. 
+    &nbsp; &copy; 2018 BISE Gujranwala, All Rights Reserved. 
 </div>
 
 </div>
@@ -50,6 +50,15 @@
         } */
         var error_New_Enrolement ='<?php   if(@$excep != ""){echo @$excep['excep'];}  ?>';
         var  error_New_Enrolement_update ='<?php   if(@$data != ""){echo @$data[0]['excep'];}  ?>';
+        var  error_download ='<?php echo @$error;  ?>';
+        if(error_download.length > 1)
+        {
+           
+                alertify.error(error_download);   
+            
+
+        }
+        
         if(error_New_Enrolement.length > 1)
         {
             if(error_New_Enrolement == "success" )

@@ -98,6 +98,10 @@ if(isset($files)){
                 //limit number of files allowed
                 if(total_selected_files > total_files_allowed){
                     alertify.error( "You have selected "+total_selected_files+" file(s), " + total_files_allowed +" is maximum!"); //push error text
+                     $('#previewImg').removeAttr('src');
+                        $("#previewImg").attr("src","<?php echo base_url(); ?>assets/img/profile.png");
+                        $("#image").val('');
+                        $("#image").focus();
                     proceed = false; //set proceed flag to false
                 }
                 //iterate files in file input field
@@ -105,6 +109,10 @@ if(isset($files)){
                     if(ifile.value !== ""){ //continue only if file(s) are selected
                         if(allowed_file_types.indexOf(ifile.type) === -1){ //check unsupported file
                             alertify.error( "<b>"+ ifile.name + "</b> is unsupported file type!"); //push error text
+                            $('#previewImg').removeAttr('src');
+                        $("#previewImg").attr("src","<?php echo base_url(); ?>assets/img/profile.png");
+                        $("#image").val('');
+                        $("#image").focus();
                             proceed = false; //set proceed flag to false
                         }
 
@@ -116,6 +124,10 @@ if(isset($files)){
                 //if total file size is greater than max file size
                 if(total_files_size > max_file_size && proceed == true){ 
                     alertify.error( "Allowed size is 20 KB, Try smaller file!"); //push error text
+                     $('#previewImg').removeAttr('src');
+                        $("#previewImg").attr("src","<?php echo base_url(); ?>assets/img/profile.png");
+                        $("#image").val('');
+                        $("#image").focus();
                     proceed = false; //set proceed flag to false
                 }
 
@@ -174,6 +186,7 @@ if(isset($files)){
 
     $(document).ready(function () {
         
+        $('.mPageloader').hide();
  $.fancybox("#instruction");
    
         $("#pvtinfo_dist").change(function(){
@@ -224,7 +237,7 @@ if(isset($files)){
 
             if(isotherboard != 1)
             {
-                gender = $("input[name=ogender]:checked").val();
+                gender = $("#gender1").val();
             }
             else
             {
@@ -232,7 +245,7 @@ if(isset($files)){
                 
                 if(gender ==  undefined || gender =='')
                 {
-                     gender = $("input[name=ogender]:checked").val();
+                     gender = $("input[name=gender]").val() ;
                 }
                 
             }
@@ -282,15 +295,15 @@ if(isset($files)){
              var gender = '';
 
             if(isotherboard != 1)
-            {
-                gender = $("input[name=ogender]:checked").val();
+            {            
+                gender = $("#gender1").val();
             }
             else
             {
                 gender =  $("input[name=gender]").val() ;
                 if(gender ==  undefined || gender =='')
                 {
-                     gender = $("input[name=ogender]:checked").val();
+                     gender = $("#gender").val();
                 }
             }
             
@@ -552,7 +565,7 @@ if(isset($files)){
         debugger
         if(isotherboard != 1)
         {
-           gender = $("input[name=ogender]:checked").val();
+           gender = $("#gender1").val();
         }
         else
         {
@@ -561,7 +574,7 @@ if(isset($files)){
         
         if(gender == '' || gender ==  undefined)
         {
-            gender = $("input[name=ogender]:checked").val();
+            gender = $("input[name=gender1]").val();
         }
         
         var address = $('#address').val();
@@ -571,7 +584,7 @@ if(isset($files)){
         var status = 0;
         var mat_Year = $('#old_ssc_year').val();
         debugger;
-        var NationalityVal = $("input[name=nationality]:checked").val();
+        var NationalityVal = $("input[name=nationality]").val();
         if(NationalityVal==2)
         {
             $("#nationality").val(2);
@@ -1103,7 +1116,7 @@ if(isset($files)){
         var Elecgrp ="<?php echo @$grp_cd; ?>";
         //var isGovt ="<?php  echo @$field_status['emis']; ?>";
         //var isElect = "<?php  echo @$field_status['emis']; ?>";
-        var NationalityVal = $("input[name=nationality]:checked").val();
+        var NationalityVal = $("input[name=nationality]").val();
 
 
         console.log(NationalityVal);
@@ -1335,7 +1348,7 @@ if(isset($files)){
     });
 
 
-    var Religion = $("input[name=religion]:checked").val();
+    var Religion = $("input[name=religion]").val();
 
 
 
@@ -1344,7 +1357,7 @@ if(isset($files)){
     {
 
         //alert(isElec);
-        var NationalityVal = $("input[name=nationality]:checked").val();
+        var NationalityVal = $("input[name=nationality]").val();
         console.log(NationalityVal);
         $('#sub1').empty();
         if(NationalityVal == "1")
@@ -1365,7 +1378,7 @@ if(isset($files)){
 
         // Check Religion and select sub........
         $("#sub3").empty();
-        var Religion = $("input[name=religion]:checked").val();
+        var Religion = $("input[name=religion]").val();
         //console.log(Religion);
         console.log(Religion);
         if(Religion == "1")
@@ -1536,7 +1549,7 @@ if(isset($files)){
     }
 
 
-    $('input:radio[name="nationality"]').change(function(){
+    $('input[name="nationality"]').change(function(){
         if($(this).val() == 1) {
             $("#father_cnic").mask("99999-9999999-9",{placeholder:"_"});
             $("#bay_form").mask("99999-9999999-9",{placeholder:"_"});
@@ -1552,7 +1565,7 @@ if(isset($files)){
         }
     });
 
-    $('input:radio[name="religion"]').change(function(){
+    $('input[name="religion"]').change(function(){
         if($(this).val() == 1) {
 
             $("#sub3").empty(); 
@@ -1568,9 +1581,9 @@ if(isset($files)){
         }
     });
 
-    var is_muslim    = $('input:radio[name="religion"]:checked').val();  
-    var is_pakistani = $('input:radio[name="nationality"]:checked').val(); 
-    var gender = $('input:radio[name="gender"]:checked').val(); 
+    var is_muslim    = $('input[name="religion"]').val();  
+    var is_pakistani = $('input[name="nationality"]').val(); 
+    var gender = $('input[name="gender"]').val(); 
     var id           = $('#std_group').val();
 
 </script>
