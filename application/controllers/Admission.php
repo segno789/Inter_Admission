@@ -923,6 +923,7 @@ class Admission extends CI_Controller {
         $data['AdmFine'] = $retfee[0]['AdmFine'];
         $data['AdmFee'] = $retfee[0]['AdmFee'];
         $data['AdmTotalFee'] = $retfee[0]['AdmTotalFee'];
+        $data['AdmProcessFee'] = $retfee[0]['AdmProcessFee'];
 
         $this->load->library('pdf_rotate');
         $pdf = new pdf_rotate('P','in',"A4");
@@ -966,14 +967,14 @@ class Admission extends CI_Controller {
 
         if($data ['IsNewPic'] == 0)
         {
-            $type = pathinfo(@$data['picpath'], PATHINFO_EXTENSION); 
+          /*  $type = pathinfo(@$data['picpath'], PATHINFO_EXTENSION); 
             @$image_path_selected = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents(@$data['picpath']));
-            $pdf->Image(@$data['picpath'],6.5, 1.30+$Y, 0.95, 1.0, "JPG");
+            $pdf->Image(@$data['picpath'],6.5, 1.30+$Y, 0.95, 1.0, "JPG");*/
         }
 
         else  if($data ['IsNewPic'] == 1 && Session == 1)
         {
-            $pdf->Image(GET_PRIVATE_IMAGE_PATH.$data['picpath'],6.5, 1.30+$Y, 0.95, 1.0, "JPG");
+           $pdf->Image(GET_PRIVATE_IMAGE_PATH.$data['picpath'],6.5, 1.30+$Y, 0.95, 1.0, "JPG");
         }
 
         $pdf->Image("assets/img/logo2.png",0.4, 0.2, 0.65, 0.65, "PNG");
@@ -1811,9 +1812,9 @@ class Admission extends CI_Controller {
         {
             if($data ['IsNewPic'] == 0)
             {
-                $type = pathinfo(@$data['picpath'], PATHINFO_EXTENSION); 
+               /* $type = pathinfo(@$data['picpath'], PATHINFO_EXTENSION); 
                 @$image_path_selected = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents(@$data['picpath']));
-                $pdf->Image($image_path_selected,6.5, 10.65+$Y, 0.95, 1.0, "JPG");
+                $pdf->Image($image_path_selected,6.5, 10.65+$Y, 0.95, 1.0, "JPG");    */
             }
             else if($data ['IsNewPic'] == 1)
             {
@@ -2050,36 +2051,74 @@ class Admission extends CI_Controller {
             $data['Spec'] = 0;
         }
 
-        if($data['Spec']> 0 && (strtotime(date('Y-m-d')) <= strtotime(SingleDateFee)) )
+        /*  if($data['Spec']> 0 && (strtotime(date('Y-m-d')) <= strtotime(SingleDateFee)) )
         {
-            $regfee =  1000;
+        $regfee =  1000;
 
-            if($data['cat11'] !=  NULL)
-            {
-                $data['AdmFee'] = $admfee;
-            }
-            else
-            {
-                $data['AdmFee'] = 0;
-            }
-
-
-            if($data['Spec'] >  0)
-            {
-                $regfee = 0; 
-            }
-            if($data['CertificateFee'] == NULL)
-            {
-                $data['CertificateFee'] =0;
-            }
-            if($data['regfee'] == NULL)
-            {
-                $data['regfee'] = 0;
-            }
-
-            $data['AdmTotalFee'] = $processFee+$Total_fine+$data['regfee']+$data['CertificateFee']+$data['AdmFee'];
-            $AllStdFee = array('formNo'=>$data['FormNo'],'AdmFee'=>$data['AdmFee'],'AdmFine'=>$Total_fine,'AdmTotalFee'=> $data['AdmTotalFee']);
+        if($data['cat11'] !=  NULL)
+        {
+        $data['AdmFee'] = $admfee;
         }
+        else
+        {
+        $data['AdmFee'] = 0;
+        }
+
+
+        if($data['Spec'] >  0)
+        {
+        $regfee = 0; 
+        }
+        if($data['CertificateFee'] == NULL)
+        {
+        $data['CertificateFee'] =0;
+        }
+        if($data['regfee'] == NULL)
+        {
+        $data['regfee'] = 0;
+        }
+
+        $data['AdmTotalFee'] = $processFee+$Total_fine+$data['regfee']+$data['CertificateFee']+$data['AdmFee'];
+        $AllStdFee = array('formNo'=>$data['FormNo'],'AdmFee'=>$data['AdmFee'],'AdmFine'=>$Total_fine,'AdmTotalFee'=> $data['AdmTotalFee']);
+        }       */
+
+        //DebugBreak();
+
+        if(($data['Spec'] == 1 || $data['Spec'] == 3)  && (strtotime(date('Y-m-d')) <= strtotime(SingleDateFee)))
+        {
+            $finalFee = 0;
+            $data['regFee'] = 0;
+            $processFee = 0;
+            $Total_fine =0 ;
+            $data['CertificateFee'] = 0;
+            $data['AdmFee'] = $finalFee;
+            $data['AdmTotalFee'] = $processFee+$Total_fine+$data['regFee']+$data['CertificateFee']+$finalFee;
+            $AllStdFee = array('formNo'=>$data['FormNo'],'AdmFee'=>0,'AdmFine'=>0,'AdmTotalFee'=> 0,'AdmProcessFee'=>0);
+        }
+
+
+        else if(($data['Spec'] == 2 && ($data['Iyear'] == Year || $data['YearOfLastAp'] == Year -1))  && (strtotime(date('Y-m-d')) <= strtotime(SingleDateFee)))
+        {
+            if($data['cat11'] == 2 && $data['cat12'] == 1){
+                $finalFee = $admfee;    
+            }
+
+            else if($data['cat11'] == 0 && $data['cat12'] == 1){
+                $finalFee = 0;    
+            }
+
+            else if($data['cat11'] == 1 && $data['cat12'] == 1){
+                $finalFee = 0;    
+            }
+
+            else{
+                $finalFee =  $finalFee;
+            }
+
+            $data['AdmTotalFee'] = $processFee+$Total_fine+$data['regfee']+$data['CertificateFee']+$finalFee;
+            $AllStdFee = array('formNo'=>$data['FormNo'],'AdmFee'=>$finalFee,'AdmFine'=>$Total_fine,'AdmTotalFee'=> $data['AdmTotalFee'],'AdmProcessFee'=>295);
+        }
+
         else
         {
             //DebugBreak();

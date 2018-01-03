@@ -397,6 +397,7 @@ class Admission_model extends CI_Model
 
     public function Update_AdmissionFeePvt($data)
     {
+        //DebugBreak();
         $date = new DateTime(EXAMINATIONDATEINTER_P2);
         $date->modify("-4 day");
         $threeDayBeforeExam = $date->format("Y-m-d");
