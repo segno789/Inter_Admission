@@ -768,6 +768,23 @@ class Admission_model extends CI_Model
             return -1;
         }
     }
+
+    public function chkPrevStatus($Rno,$Year,$Sess,$Board){
+
+        $query = $this->db->query(" select status from admission_online..tbladmissiondataforhssc where rno = $Rno and  Iyear = $Year and sess = $Sess and IntBrd_cd = $Board");
+
+        $rowcount = $query->num_rows();
+        if($rowcount > 0)
+        {
+            return $query->result_array();
+        }
+        else
+        {
+            return false;
+        }
+
+    }
+
     public function Insert_NewEnorlement_Languages($data)
     {    
         //DebugBreak();  

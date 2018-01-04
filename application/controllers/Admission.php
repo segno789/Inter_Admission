@@ -2108,7 +2108,16 @@ class Admission extends CI_Controller {
             }
 
             else if($data['cat11'] == 1 && $data['cat12'] == 1){
-                $finalFee = 0;    
+
+                $chkPrevStatus = $this->Admission_model->chkPrevStatus($data['oldRno'],$data['YearOfLastAp'],$data['SessOfLastAp'],$data['IntBrd_cd']);
+                $prevStatus = $chkPrevStatus[0]['status'];
+
+                if($prevStatus == 1){
+                    $finalFee = 0;        
+                }
+                else{
+                    $finalFee = $admfee;
+                }
             }
 
             else{
@@ -2418,6 +2427,25 @@ class Admission extends CI_Controller {
         }
     }
 
+    public function inter_default(){
+
+        //DebugBreak();
+
+        $this->load->library('session');
+        if($this->session->flashdata('matric_error'))
+        {
+            $spl_cd = array('spl_cd'=>$this->session->flashdata('matric_error'));  
+        }
+        else
+        {
+            $spl_cd = array('spl_cd'=>"");
+        }
+
+        $this->load->view('common/commonheader.php');
+        $this->load->view('Admission/Inter/getinfo.php',$spl_cd);
+        $this->load->view('common/homepagefooter.php');
+    }
+
     public function Pre_Inter_Data() 
     {       
         //DebugBreak();     
@@ -2512,24 +2540,24 @@ class Admission extends CI_Controller {
 
         //DebugBreak();
 
-        $ValidYear = Year - 2;
+        /* $ValidYear = Year - 2;
 
         if(!($isexit) && $error_msg == '' && $iyear > $ValidYear)
         {
-            $error_msg.= 'Your Picture is missing';
-            $this->load->library('session');
-            $mydata = array('data'=>$_POST,'error_msg'=>$error_msg ,'exam_type'=>0);
-            $this->session->set_flashdata('matric_error',$mydata );
-            redirect('Admission/inter_default');
+        $error_msg.= 'Your Picture is missing';
+        $this->load->library('session');
+        $mydata = array('data'=>$_POST,'error_msg'=>$error_msg ,'exam_type'=>0);
+        $this->session->set_flashdata('matric_error',$mydata );
+        redirect('Admission/inter_default');
         }
         else
         {
-            if($iyear > $ValidYear)
-            {
-                $type = pathinfo($picpath, PATHINFO_EXTENSION);
-                $data[0]['picpathImg'] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
-            }
+        if($iyear > $ValidYear)
+        {
+        $type = pathinfo($picpath, PATHINFO_EXTENSION);
+        $data[0]['picpathImg'] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
         }
+        }     */
 
 
         $specialcase = $data['0']['Spl_Name'];
@@ -2585,6 +2613,7 @@ class Admission extends CI_Controller {
         }
         else if(($exam_type == 16) && !isset($CatType))
         {
+            //DebugBreak();
             $this->load->library('session');
             $mydata = array('data'=>$_POST,'error_msg'=>$error_msg,'exam_type'=>$exam_type);
             $this->session->set_flashdata('matric_error',$mydata );
@@ -4214,24 +4243,6 @@ class Admission extends CI_Controller {
         $this->load->view('common/commonfooter.php');
     }
 
-    public function inter_default(){
-
-        //DebugBreak();
-
-        $this->load->library('session');
-        if($this->session->flashdata('matric_error'))
-        {
-            $spl_cd = array('spl_cd'=>$this->session->flashdata('matric_error'));  
-        }
-        else
-        {
-            $spl_cd = array('spl_cd'=>"");
-        }
-
-        $this->load->view('common/commonheader.php');
-        $this->load->view('Admission/Inter/getinfo.php',$spl_cd);
-        $this->load->view('common/homepagefooter.php');
-    }
 
     public function getzone(){
 

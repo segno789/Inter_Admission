@@ -156,17 +156,10 @@ else if(Session == '2')
                     Speciality:
                 </label>        
                 <select id="speciality"  class="form-control  text-uppercase" name="speciality">
-                    <?php 
-                    {
-                        echo 
-                        "<option value='0' selected='selected'>None</option> 
-                        <option value='1'>Deaf &amp; Dumb</option>";
-                        if(Session != 2)
-                        {
-                            echo "<option value='2'>Board Employee</option>";    
-                        }
-                    }
-                    ?>
+                    <option value='0' selected='selected'>None</option> 
+                    <option value='1'>Deaf & Dumb</option>
+                    <option value='2'>Board Employee</option>;
+                    <option value='3'>Disable</option>";
                 </select>
             </div>
         </div>
