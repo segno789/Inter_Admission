@@ -54,7 +54,6 @@ define('MATRIC_SUPPLY_RESULT_ANNOUNCED',1);
 
 define('lastdate','15-09-2017');
 define('GET_PRIVATE_IMAGE_PATH', 'C:/inetpub/vhosts/bisegrw.edu.pk/Share Images/uploads/HSSC/admission/2018/12th/annual/private/');
-define('GET_PRIVATE_IMAGE_PATH_11th', 'C:/inetpub/vhosts/bisegrw.edu.pk/Share Images/uploads/HSSC/admission/2018/11th/annual/private/');
 define('GET_PRIVATE_IMAGE_PATH_COPY', '');
 define('DIRPATH11th','C:\inetpub\vhosts\bisegrw.edu.pk\Share Images\uploads\HSSC\registration\2018-2019'); 
 define('DIRPATHOTHER','C:\inetpub\vhosts\bisegrw.com\registration.bisegrw.com\uploads\other12'); 

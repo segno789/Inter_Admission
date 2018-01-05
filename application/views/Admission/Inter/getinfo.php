@@ -39,7 +39,7 @@
             </div>
             <div id="collapseOne" class="panel-collapse collapse in">
                 <div class="panel-body">
-                    <form enctype="multipart/form-data" id="ReturnStatus" name="ReturnStatus"  method="post" action="<?php echo base_url(); ?>Admission_11th_pvt/NewEnrolmentPVT">
+                    <form enctype="multipart/form-data" id="ReturnStatus" name="ReturnStatus"  method="post" action="<?php echo base_url(); ?>Admission/Pre_Inter_data">
 
                         <div class="form-group">    
                             <div class="row">
