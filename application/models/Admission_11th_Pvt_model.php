@@ -398,11 +398,6 @@ class Admission_11th_Pvt_model extends CI_Model
             return  false;
         }
     }
-
-
-
-
-
     public function GetFormNo($Inst_Id)
     {
         //DebugBreak();
@@ -436,8 +431,6 @@ class Admission_11th_Pvt_model extends CI_Model
         }
 
     }
-
-
     public function getreulefee($ruleID)
     {
         // $ruleID = 1;

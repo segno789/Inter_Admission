@@ -531,6 +531,8 @@ class Admission_11th_reg_model extends CI_Model
         //$query = $this->db->insert('msadmissions2015', $data);//,'Fname' => $father_name,'BForm'=>$bay_form,'FNIC'=>$father_cnic,'Dob'=>$dob,'CellNo'=>$mob_number));
         return true;
     }
+    
+
     public function EditEnrolement_data($formno,$year,$inst_cd)
     {
 
@@ -541,7 +543,7 @@ class Admission_11th_reg_model extends CI_Model
         else{
         $query = $this->db->get_where('Registration..MA_P1_Reg_Adm2016',  array('formNo' => $formno,'class'=>9,'iyear'=>$year,'sess'=>1));     
         } */
-        //$year = $year-1;
+        $year = $year-1;
         $query = $this->db->get_where(tblreg11th,  array('formNo' => $formno,'class'=>11,'iyear'=>$year,'sess'=>Session));     
        // DebugBreak();
         $rowcount = $query->num_rows();
@@ -1028,7 +1030,7 @@ class Admission_11th_reg_model extends CI_Model
         // //DebugBreak();
         $Inst_cd = $fetch_data['Inst_cd'];
         $Batch_Id = $fetch_data['Batch_Id'];
-        $query = $this->db->query("Registration..sp_get_reg_return_formInfo $Inst_cd,$Batch_Id");
+        $query = $this->db->query("Registration..sp_get_reg_return_formInfo_11th_New $Inst_cd,$Batch_Id");
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {

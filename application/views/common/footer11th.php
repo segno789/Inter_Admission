@@ -450,7 +450,7 @@ if(isset($files)){
     }
     function ReturnForm(Batch_ID)
     {
-        window.location.href = '<?=base_url()?>/index.php/Registration/return_pdf/'+Batch_ID + '/1'
+        window.location.href = '<?=base_url()?>/index.php/Admission_11th_reg/return_pdf/'+Batch_ID + '/1'
     }
     function ReturnForm_Final_groupwise(grp_cd){
         window.location.href = '<?=base_url()?>/index.php/Registration/return_pdf/'+grp_cd + '/2'

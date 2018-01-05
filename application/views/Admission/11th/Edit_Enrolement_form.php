@@ -21,7 +21,20 @@
                                       
                                     </label> 
                                     <?php 
+                                   // DebugBreak();
+                                    if($data[0]['oldinst_cd'] != null || $data[0]['oldinst_cd'] !=0)
+                                    {
+                                    // singlebyte strings
+                                        $MigratedInst_cd = substr($data[0]['PicPath'], 0, 6);
+                                        
+                                     $picpath =  DIRPATH11th.'/'.$MigratedInst_cd.'/'.$data[0]['PicPath'];
+                                    }
+                                    else
+                                    {
                                     $picpath =  DIRPATH11th.'/'.$Inst_Id.'/'.$data[0]['PicPath'];
+                                    }
+                                    
+                                    
                                     // echo $picpath;
                                     //DebugBreak();
                                     $type = pathinfo($picpath, PATHINFO_EXTENSION);
@@ -542,7 +555,8 @@
 
 
 
-function checks(){
+function checks()
+{
     
   var status  =  check_NewEnrol_validation();
   if(status == 0)

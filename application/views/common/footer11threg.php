@@ -634,7 +634,7 @@ if(isset($files)){
             return status;
         }   
 
-        else if((bFormNo == "" || bFormNo == 0 || bFormNo == undefined))
+        else if((bFormNo == "" || bFormNo == 0 || bFormNo == undefined || bFormNo.length < 15))
         {
             $('#ErrMsg').show(); 
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
@@ -643,7 +643,7 @@ if(isset($files)){
             $('#bay_form').focus();  
             return status; 
         }
-        else if(FNic == "" ||  FNic == 0  || FNic.length == undefined )
+        else if(FNic == "" ||  FNic == 0  || FNic.length == undefined || FNic.length < 15)
         {
             $('#ErrMsg').show(); 
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
@@ -668,7 +668,7 @@ if(isset($files)){
             $('#dob').focus(); 
             return status;  
         }       
-        else if(mobNo == "" || mobNo == 0 || mobNo.length == undefined || mobNo == '-')
+        else if(mobNo == "" || mobNo == 0 || mobNo.length == undefined || mobNo == '-'  || mobNo.length < 12)
         {
             $('#ErrMsg').show(); 
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
@@ -1147,7 +1147,7 @@ if(isset($files)){
 
     })
 
-    var NationalityVal = $("input[name=nationality]:checked").val();
+    var NationalityVal = $("#nationality").val();
 
     function Hum_Deaf_Subjects_NewEnrolement(sub6,sub7,sub8)
     {
@@ -1163,7 +1163,7 @@ if(isset($files)){
         var Elecgrp ="<?php echo @$grp_cd; ?>";
         //var isGovt ="<?php  echo @$field_status['emis']; ?>";
         //var isElect = "<?php  echo @$field_status['emis']; ?>";
-        var NationalityVal = $("input[name=nationality]").val();
+        var NationalityVal = $("#nationality").val();
 
 
         console.log(NationalityVal);
@@ -1404,7 +1404,7 @@ if(isset($files)){
     {
 
         //alert(isElec);
-        var NationalityVal = $("input[name=nationality]").val();
+        var NationalityVal = $("#nationality").val();
         console.log(NationalityVal);
         $('#sub1').empty();
         if(NationalityVal == "1")
@@ -1596,7 +1596,7 @@ if(isset($files)){
     }
 
 
-    $('input[name="nationality"]').change(function(){
+    $('#nationality').change(function(){
         if($(this).val() == 1) {
             $("#father_cnic").mask("99999-9999999-9",{placeholder:"_"});
             $("#bay_form").mask("99999-9999999-9",{placeholder:"_"});
@@ -1612,7 +1612,7 @@ if(isset($files)){
         }
     });
 
-    $('input[name="religion"]').change(function(){
+    $('religion').change(function(){
         if($(this).val() == 1) {
 
             $("#sub3").empty(); 

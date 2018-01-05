@@ -148,11 +148,11 @@ class Admission_11th_pvt extends CI_Controller {
                 }
                 $RegStdData = array('data'=>$this->Admission_11th_Pvt_model->Pre_Matric_data($data),'isReAdm'=>0,'Oldrno'=>0,'Inst_Rno'=>'','excep'=>'','isHafiz'=>'');  
 
-                $RegStdData['data'][0]['SSC_brd_cd'] = $board;
-                $spl_cd = @$RegStdData['data'][0]['spl_cd'];
-                $msg = $RegStdData['data'][0]['Mesg'];
-                $SpacialCase = @$RegStdData['data'][0]['SpacialCase'];
-                $status = @$RegStdData['data'][0]['status'];
+                @$RegStdData['data'][0]['SSC_brd_cd'] = $board;
+                @$spl_cd = @$RegStdData['data'][0]['spl_cd'];
+                @$msg = $RegStdData['data'][0]['Mesg'];
+                @$SpacialCase = @$RegStdData['data'][0]['SpacialCase'];
+                @$status = @$RegStdData['data'][0]['status'];
 
                 if($RegStdData['data'] == -1)
                 {
@@ -1789,12 +1789,20 @@ class Admission_11th_pvt extends CI_Controller {
             $cert_fee = 550;
         }
          $regfee =  1000;
-        
+       //  DebugBreak();
         if($data['Spec']>0 && (strtotime(date('Y-m-d')) <= strtotime(SingleDateFee)) )
         {
             $regfee = 0; 
             $data['regFee'] = 0;
             $data['AdmFee'] = 0;
+            if($data['Spec']==1 || $data['Spec']==3 )
+            {
+                    $processFee = 0;
+            }
+            else
+            {
+                    $processFee = 295;
+            }
             $data['AdmTotalFee'] = $processFee+$Total_fine+$data['regFee']+$cert_fee;
             $AllStdFee = array('formNo'=>$data['FormNo'],'regFee'=>0,'AdmProcessFee'=>$processFee,'AdmFee'=>$data['AdmFee'],'AdmFine'=>$Total_fine,'AdmTotalFee'=>$data['AdmTotalFee'],'CertFee'=>$cert_fee);
         }

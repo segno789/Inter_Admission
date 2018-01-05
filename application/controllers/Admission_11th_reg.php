@@ -496,6 +496,7 @@ class Admission_11th_reg extends CI_Controller {
     public function NewEnrolment_EditForm()
     {    
 
+   // DebugBreak();
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
@@ -1491,7 +1492,7 @@ class Admission_11th_reg extends CI_Controller {
     public function return_pdf()
     {
 
-        //DebugBreak();
+      //  DebugBreak();
         $Condition = $this->uri->segment(4);
         /*
         $Condition  1 == Batch Id wise printing.
@@ -1542,11 +1543,12 @@ class Admission_11th_reg extends CI_Controller {
             $result = array('data'=>$this->Admission_11th_reg_model->Print_Form_Formnowise($fetch_data),'inst_Name'=>$user['inst_Name']);
 
         }
+      
 
         // DebugBreak();
         if(empty($result['data'])){
             $this->session->set_flashdata('error', $Condition);
-            redirect('Admission_9th_reg/FormPrinting');
+            redirect('Admission_11th_reg/BatchList');
             return;
 
         }
@@ -1730,7 +1732,18 @@ class Admission_11th_reg extends CI_Controller {
             $pdf->Text($col5+.05,$ln[$countofrecords]+0.4,$data["sub5_abr"].','.$data["sub6_abr"].','.$data["sub7_abr"]);
             // DebugBreak();
 
-            $pdf->Image(DIRPATH11th.'/'.$data["coll_cd"].'/'.$data["PicPath"],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG"); 
+            if($data['oldinst_cd'] != null || $data['oldinst_cd'] != 0)
+                                    {
+                                    // singlebyte strings
+                                        $MigratedInst_cd = substr($data['PicPath'], 0, 6);
+                                        
+                                      $pdf->Image(DIRPATH11th.'/'.$MigratedInst_cd.'/'.$data["PicPath"],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG"); 
+                                    }
+                                    else
+                                    {
+                                    $pdf->Image(DIRPATH11th.'/'.$data["coll_cd"].'/'.$data["PicPath"],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG"); 
+                                    }
+          
 
             ++$SR;
 
@@ -1747,6 +1760,7 @@ class Admission_11th_reg extends CI_Controller {
         }
         $pdf->Output($data["coll_cd"].'.pdf', 'I');
     }
+     
     public  function GetDistName($id) 
     {
         $retVal = "";
@@ -2060,7 +2074,18 @@ class Admission_11th_reg extends CI_Controller {
             $pdf->Cell(7.6,0.2,'PERSONAL INFORMATION',1,0,'L',1);
 
             $Y = 0.2;
-            $pdf->Image(DIRPATH11th.'/'.$user['Inst_Id'].'/'.$data["PicPath"],6.0+$x,2.4+$Y , 1.30, 1.30, "JPG");
+               if($data['oldinst_cd'] != null || $data['oldinst_cd'] != 0)
+                                    {
+                                    // singlebyte strings
+                                        $MigratedInst_cd = substr($data['PicPath'], 0, 6);
+                                        
+                                      $pdf->Image(DIRPATH11th.'/'.$MigratedInst_cd.'/'.$data["PicPath"],6.0+$x,2.4+$Y , 1.30, 1.30, "JPG");
+                                    }
+                                    else
+                                    {
+                                    $pdf->Image(DIRPATH11th.'/'.$user['Inst_Id'].'/'.$data["PicPath"],6.0+$x,2.4+$Y , 1.30, 1.30, "JPG");
+                                    }
+           
             //$pdf->Image(DIRPATH11th.'/'.$data["Sch_cd"].'/'.$data["PicPath"],6.0+$x,2.4+$Y , 1.30, 1.30, "JPG");
             //DebugBreak();
             /* if($user['gender']==1)

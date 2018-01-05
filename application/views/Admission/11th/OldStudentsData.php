@@ -216,9 +216,19 @@
                                                             if(isset($vals["spl_cd"]))
                                                         {
                                                             // DebugBreak();
+                                                            if($vals["spl_cd"] == 80)
+                                                            {
                                                             echo '<td class="alert alert-danger" style="background-color:red">
-                                                            <strong>Admission Can not proceed due to </strong>'.$vals["spl_cd_exp"].' Please contact to Online Registration Branch at B.I.S.E. Gujranwala.'.'
+                                                            <strong>Admission Can not proceed due to found ineligiblity in Registration procedure. Only eligibile in Inter part-II examination.</strong> '.'
                                                             </td><td></td> </tr>';
+                                                            }
+                                                            else
+                                                            {
+                                                            echo '<td class="alert alert-danger" style="background-color:red">
+                                                            <strong>Admission Can not proceed due to </strong>'.@$vals["spl_cd_exp"].' Please contact to Online Registration Branch at B.I.S.E. Gujranwala.'.'
+                                                            </td><td></td> </tr>';
+                                                            }
+                                                            
                                                         }
                                                         else
                                                         {
