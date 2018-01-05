@@ -1147,7 +1147,7 @@ if(isset($files)){
 
     })
 
-    var NationalityVal = $("#nationality").val();
+    var NationalityVal = $("input[name=nationality]:checked").val();
 
     function Hum_Deaf_Subjects_NewEnrolement(sub6,sub7,sub8)
     {
@@ -1163,7 +1163,7 @@ if(isset($files)){
         var Elecgrp ="<?php echo @$grp_cd; ?>";
         //var isGovt ="<?php  echo @$field_status['emis']; ?>";
         //var isElect = "<?php  echo @$field_status['emis']; ?>";
-        var NationalityVal = $("#nationality").val();
+        var NationalityVal = $("input[name=nationality]").val();
 
 
         console.log(NationalityVal);
@@ -1404,7 +1404,7 @@ if(isset($files)){
     {
 
         //alert(isElec);
-        var NationalityVal = $("#nationality").val();
+        var NationalityVal = $("input[name=nationality]").val();
         console.log(NationalityVal);
         $('#sub1').empty();
         if(NationalityVal == "1")
@@ -1596,7 +1596,7 @@ if(isset($files)){
     }
 
 
-    $('#nationality').change(function(){
+    $('input[name="nationality"]').change(function(){
         if($(this).val() == 1) {
             $("#father_cnic").mask("99999-9999999-9",{placeholder:"_"});
             $("#bay_form").mask("99999-9999999-9",{placeholder:"_"});
@@ -1612,7 +1612,7 @@ if(isset($files)){
         }
     });
 
-    $('religion').change(function(){
+    $('input[name="religion"]').change(function(){
         if($(this).val() == 1) {
 
             $("#sub3").empty(); 

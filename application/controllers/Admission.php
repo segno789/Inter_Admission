@@ -549,7 +549,7 @@ class Admission extends CI_Controller {
         $pdf->SetXY(6.3, 7.09+$Y); 
         $pdf->SetFont('Arial','b',$FontSize);
         if(Session == 1){
-            $pdf->Cell( 0,0,$mydata_final['regFee'].'/-',0,'L');    
+            $pdf->Cell( 0,0,@$mydata_final['regFee'].'/-',0,'L');    
         }
 
         else if(Session == 2){
@@ -696,7 +696,7 @@ class Admission extends CI_Controller {
         $pdf->SetFont('Arial','b',$FontSize);
 
         if(Session == 1){
-            $pdf->Cell( 0,0,$mydata_final['regFee'].'/-',0,'L');    
+            $pdf->Cell( 0,0,@$mydata_final['regFee'].'/-',0,'L');    
         }
 
         else if(Session == 2){
@@ -923,6 +923,7 @@ class Admission extends CI_Controller {
         $data['AdmFine'] = $retfee[0]['AdmFine'];
         $data['AdmFee'] = $retfee[0]['AdmFee'];
         $data['AdmTotalFee'] = $retfee[0]['AdmTotalFee'];
+        $data['AdmProcessFee'] = $retfee[0]['AdmProcessFee'];
 
         $this->load->library('pdf_rotate');
         $pdf = new pdf_rotate('P','in',"A4");
@@ -963,19 +964,17 @@ class Admission extends CI_Controller {
         $image =  $this->set_barcode($Barcode);
         $pdf->Image(BARCODE_PATH.$image,2.9, 0.61  ,2.4,0.24,"PNG");
 
-        if(!base_url() == "http://localhost:8083/adminbise/")
-        {
-            if($data ['IsNewPic'] == 0)
-            {
-                $type = pathinfo(@$data['picpath'], PATHINFO_EXTENSION); 
-                @$image_path_selected = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents(@$data['picpath']));
-                $pdf->Image(@$data['picpath'],6.5, 1.30+$Y, 0.95, 1.0, "JPG");
-            }
 
-            else  if($data ['IsNewPic'] == 1 && Session == 1)
-            {
-                $pdf->Image(GET_PRIVATE_IMAGE_PATH.$data['picpath'],6.5, 1.30+$Y, 0.95, 1.0, "JPG");
-            }
+        if($data ['IsNewPic'] == 0)
+        {
+            $type = pathinfo(@$data['picpath'], PATHINFO_EXTENSION); 
+            @$image_path_selected = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents(@$data['picpath']));
+            $pdf->Image(@$data['picpath'],6.5, 1.30+$Y, 0.95, 1.0, "JPG");
+        }
+
+        else  if($data ['IsNewPic'] == 1 && Session == 1)
+        {
+            $pdf->Image(GET_PRIVATE_IMAGE_PATH.$data['picpath'],6.5, 1.30+$Y, 0.95, 1.0, "JPG");
         }
 
         $pdf->Image("assets/img/logo2.png",0.4, 0.2, 0.65, 0.65, "PNG");
@@ -2052,36 +2051,83 @@ class Admission extends CI_Controller {
             $data['Spec'] = 0;
         }
 
-        if($data['Spec']> 0 && (strtotime(date('Y-m-d')) <= strtotime(SingleDateFee)) )
+        /*  if($data['Spec']> 0 && (strtotime(date('Y-m-d')) <= strtotime(SingleDateFee)) )
         {
-            $regfee =  1000;
+        $regfee =  1000;
 
-            if($data['cat11'] !=  NULL)
-            {
-                $data['AdmFee'] = $admfee;
-            }
-            else
-            {
-                $data['AdmFee'] = 0;
-            }
-
-
-            if($data['Spec'] >  0)
-            {
-                $regfee = 0; 
-            }
-            if($data['CertificateFee'] == NULL)
-            {
-                $data['CertificateFee'] =0;
-            }
-            if($data['regfee'] == NULL)
-            {
-                $data['regfee'] = 0;
-            }
-
-            $data['AdmTotalFee'] = $processFee+$Total_fine+$data['regfee']+$data['CertificateFee']+$data['AdmFee'];
-            $AllStdFee = array('formNo'=>$data['FormNo'],'AdmFee'=>$data['AdmFee'],'AdmFine'=>$Total_fine,'AdmTotalFee'=> $data['AdmTotalFee']);
+        if($data['cat11'] !=  NULL)
+        {
+        $data['AdmFee'] = $admfee;
         }
+        else
+        {
+        $data['AdmFee'] = 0;
+        }
+
+
+        if($data['Spec'] >  0)
+        {
+        $regfee = 0; 
+        }
+        if($data['CertificateFee'] == NULL)
+        {
+        $data['CertificateFee'] =0;
+        }
+        if($data['regfee'] == NULL)
+        {
+        $data['regfee'] = 0;
+        }
+
+        $data['AdmTotalFee'] = $processFee+$Total_fine+$data['regfee']+$data['CertificateFee']+$data['AdmFee'];
+        $AllStdFee = array('formNo'=>$data['FormNo'],'AdmFee'=>$data['AdmFee'],'AdmFine'=>$Total_fine,'AdmTotalFee'=> $data['AdmTotalFee']);
+        }       */
+
+        //DebugBreak();
+
+        if(($data['Spec'] == 1 || $data['Spec'] == 3)  && (strtotime(date('Y-m-d')) <= strtotime(SingleDateFee)))
+        {
+            $finalFee = 0;
+            $data['regFee'] = 0;
+            $processFee = 0;
+            $Total_fine =0 ;
+            $data['CertificateFee'] = 0;
+            $data['AdmFee'] = $finalFee;
+            $data['AdmTotalFee'] = $processFee+$Total_fine+$data['regFee']+$data['CertificateFee']+$finalFee;
+            $AllStdFee = array('formNo'=>$data['FormNo'],'AdmFee'=>0,'AdmFine'=>0,'AdmTotalFee'=> 0,'AdmProcessFee'=>0);
+        }
+
+
+        else if(($data['Spec'] == 2 && ($data['Iyear'] == Year || $data['YearOfLastAp'] == Year -1))  && (strtotime(date('Y-m-d')) <= strtotime(SingleDateFee)))
+        {
+            if($data['cat11'] == 2 && $data['cat12'] == 1){
+                $finalFee = $admfee;    
+            }
+
+            else if($data['cat11'] == 0 && $data['cat12'] == 1){
+                $finalFee = 0;    
+            }
+
+            else if($data['cat11'] == 1 && $data['cat12'] == 1){
+
+                $chkPrevStatus = $this->Admission_model->chkPrevStatus($data['oldRno'],$data['YearOfLastAp'],$data['SessOfLastAp'],$data['IntBrd_cd']);
+                $prevStatus = $chkPrevStatus[0]['status'];
+
+                if($prevStatus == 1){
+                    $finalFee = 0;        
+                }
+                else{
+                    $finalFee = $admfee;
+                }
+            }
+
+            else{
+                $finalFee =  $finalFee;
+            }
+
+            $data['AdmTotalFee'] = $processFee+$Total_fine+$data['regfee']+$data['CertificateFee']+$finalFee;
+            $AllStdFee = array('formNo'=>$data['FormNo'],'AdmFee'=>$finalFee,'AdmFine'=>$Total_fine,'AdmTotalFee'=> $data['AdmTotalFee'],'AdmProcessFee'=>295);
+        }
+
         else
         {
             //DebugBreak();
@@ -2381,6 +2427,25 @@ class Admission extends CI_Controller {
         }
     }
 
+    public function inter_default(){
+
+        //DebugBreak();
+
+        $this->load->library('session');
+        if($this->session->flashdata('matric_error'))
+        {
+            $spl_cd = array('spl_cd'=>$this->session->flashdata('matric_error'));  
+        }
+        else
+        {
+            $spl_cd = array('spl_cd'=>"");
+        }
+
+        $this->load->view('common/commonheader.php');
+        $this->load->view('Admission/Inter/getinfo.php',$spl_cd);
+        $this->load->view('common/homepagefooter.php');
+    }
+
     public function Pre_Inter_Data() 
     {       
         //DebugBreak();     
@@ -2475,24 +2540,24 @@ class Admission extends CI_Controller {
 
         //DebugBreak();
 
-        $ValidYear = Year - 3;
+        /* $ValidYear = Year - 2;
 
         if(!($isexit) && $error_msg == '' && $iyear > $ValidYear)
         {
-            $error_msg.= 'Your Picture is missing';
-            $this->load->library('session');
-            $mydata = array('data'=>$_POST,'error_msg'=>$error_msg ,'exam_type'=>0);
-            $this->session->set_flashdata('matric_error',$mydata );
-            redirect('Admission/inter_default');
+        $error_msg.= 'Your Picture is missing';
+        $this->load->library('session');
+        $mydata = array('data'=>$_POST,'error_msg'=>$error_msg ,'exam_type'=>0);
+        $this->session->set_flashdata('matric_error',$mydata );
+        redirect('Admission/inter_default');
         }
         else
         {
-            if($iyear > $ValidYear)
-            {
-                $type = pathinfo($picpath, PATHINFO_EXTENSION);
-                $data[0]['picpathImg'] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
-            }
+        if($iyear > $ValidYear)
+        {
+        $type = pathinfo($picpath, PATHINFO_EXTENSION);
+        $data[0]['picpathImg'] = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($picpath));
         }
+        }     */
 
 
         $specialcase = $data['0']['Spl_Name'];
@@ -2548,6 +2613,7 @@ class Admission extends CI_Controller {
         }
         else if(($exam_type == 16) && !isset($CatType))
         {
+            //DebugBreak();
             $this->load->library('session');
             $mydata = array('data'=>$_POST,'error_msg'=>$error_msg,'exam_type'=>$exam_type);
             $this->session->set_flashdata('matric_error',$mydata );
@@ -4177,23 +4243,26 @@ class Admission extends CI_Controller {
         $this->load->view('common/commonfooter.php');
     }
 
-    public function inter_default(){
+    function getEmpCode(){
 
         //DebugBreak();
 
-        $this->load->library('session');
-        if($this->session->flashdata('matric_error'))
-        {
-            $spl_cd = array('spl_cd'=>$this->session->flashdata('matric_error'));  
-        }
-        else
-        {
-            $spl_cd = array('spl_cd'=>"");
+        $employeeName ='';
+        $this->load->model('Admission_model');
+        $employeeName=$this->Admission_model->getEmpCd_Model($_POST['empBrdCd']);
+
+        if($employeeName){
+            $msg['excep'] =  'Success'; 
+            $msg['employeeName'] =  $employeeName;
         }
 
-        $this->load->view('common/commonheader.php');
-        $this->load->view('Admission/Inter/getinfo.php',$spl_cd);
-        $this->load->view('common/homepagefooter.php');
+        else{
+            $msg['excep'] =  'No board employee found against this employee code'; 
+            $msg['employeeName'] =  ''; 
+        }
+
+        echo json_encode($msg);
+        exit();
     }
 
     public function getzone(){

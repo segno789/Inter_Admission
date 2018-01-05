@@ -19,7 +19,7 @@ if(isset($files)){
 ?> 
 <script type="text/javascript">
     $(document).ready(function () {
-           $('.mPageloader').hide();
+        $('.mPageloader').hide();
         $( "#txtDob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate:new Date(2001, 7, 1),minDate:new Date(1970, 0, 1)}).val();
 
         $('#data-table').dataTable({
@@ -30,11 +30,78 @@ if(isset($files)){
             "sPaginationType": "full_numbers",
             "cache": false
         });
+
+        $("#speciality").change(function(){
+
+            $("#empBrdCd").val('');
+            $('#empBrdCd').prop('readonly', false);
+            var speciality = $("#speciality").val();    
+            if(speciality == 2){
+                $("#boardEmployeeDiv").removeClass("hidden");
+                $("#empBrdCd").focus();
+            }
+            else{
+                $("#empBrdCd").val('');
+                $('#empBrdCd').prop('readonly', false);
+                $("#boardEmployeeDiv").addClass("hidden");
+                $("#speciality").focus();
+            }
+        });
+
+        $("#empBrdCd").keypress(function (e) {
+
+            var empBrdCd = $("#empBrdCd").val()    
+            if(empBrdCd.length >= 4 && (e.which != 13)) {
+                alertify.error('You cannot enter more than 4 digits');
+                return false;
+            }
+
+            else if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57) && (e.which != 13)) {
+                alertify.error('Please Use Numaric Only');
+                return false;
+            }
+        });
+
+
+        $("#empBrdCd" ).focusout(function() {
+
+            var empBrdCd = $( "#empBrdCd" ).val();
+            if(empBrdCd != ""){
+
+                $.ajax({
+                    type: "POST",
+                    url: "<?php  echo site_url('Admission/getEmpCode'); ?>",
+                    data: $("#myform").serialize(),
+                    datatype : 'html',
+                    cache:false,
+
+                    beforeSend: function() {  $('.mPageloader').show(); },
+                    complete: function() { $('.mPageloader').hide();},
+
+                    success: function(data)
+                    {                    
+                        var obj = JSON.parse(data);
+                        if(obj.excep == 'Success')
+                        {
+                            $("#empBrdCd").val('');
+                            $( "#empBrdCd" ).val(obj.employeeName[0].Name);
+                            $('#empBrdCd').prop('readonly', true);
+                        }
+                        else
+                        {
+                            alertify.error(obj.excep);
+                            return false;     
+                        }
+                    }
+                });
+            }
+        }); 
+
     });
 
     var obj1 = [];
     $(document).ready(function () {
-           $('.mPageloader').hide();
+        $('.mPageloader').hide();
         //  console.log(obj);
         //   console.log(obj1);
         drawChart3();
@@ -899,7 +966,7 @@ if(isset($files)){
     }
     $(document).ready(function() {
 
-                  $('.mPageloader').hide();
+        $('.mPageloader').hide();
         var error_BatchRelease = "<?php  echo @$BatchRelease_excep; ?>";
         var success_BatchRelease = "<?php  echo @$errors['BatchRelease_excep']; ?>";
         var BatchRelease_Op = "<?php  echo @$errors_RB_update; ?>";

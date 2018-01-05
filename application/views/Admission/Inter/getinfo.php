@@ -71,8 +71,8 @@
                                         <?php
                                         if(Session == 1){
                                             ?>
-                                            <option value="11" <?php if(@$_POST['oldClass'] == "11") echo 'selected' ?>>11th</option>
-                                            <option value="12" <?php if(@$_POST['oldClass'] == "12") echo 'selected' ?>>12th</option>
+                                            <option value="11" <?php if(@$spl_cd['data']['oldClass'] == 11) echo 'selected' ?>>11th</option>
+                                            <option value="12" <?php if(@$spl_cd['data']['oldClass'] == 12) echo 'selected' ?>>12th</option>
                                             <?php
                                         }
                                         else if(Session == 2){
@@ -94,9 +94,8 @@
 
                                             for($i = $yearForLastAp; $i >= 2000 ; $i--)
                                             {
-                                                echo $i;
                                                 ?>
-                                                <option value="<?php echo $i ?>"><?php echo $i;?></option>
+                                                <option value="<?php echo $i ?>" <?php if(@$spl_cd['data']['oldYear'] == $i) echo 'selected' ?> ><?php echo $i;?></option>
                                                 <?php
                                             }
                                             echo'
@@ -122,53 +121,47 @@
                                 <div class="col-md-offset-3 col-md-3">
                                     <label class="control-label" for="oldSess" >Last Appearing Session</label>
                                     <select id="oldSess" class="form-control" name="oldSess">
-                                        <option value="1" >ANNUAL</option>
-                                        <option value="2">SUPPLEMENTARY</option>
+                                        <option value="1" <?php if(@$spl_cd['data']['oldSess'] == "1") echo 'selected'?>>ANNUAL</option>
+                                        <option value="2" <?php if(@$spl_cd['data']['oldSess'] == "2") echo 'selected'?>>SUPPLEMENTARY</option>
                                     </select>
                                 </div>
                                 <div class="col-md-3">
                                     <label class="control-label" for="sec_board" >Last Appearing Board</label>
                                     <select id="sec_board" class="form-control" name="oldBrd_cd">
-                                        <option value="1">BISE, GUJRANWALA</option>
-                                        <?php
-                                        if(Session == 1){
-                                            ?>
-                                            <option value="2">BISE,  LAHORE</option>
-                                            <option value="3">BISE,  RAWALPINDI</option>
-                                            <option value="4">BISE,  MULTAN</option>
-                                            <option value="5">BISE,  FAISALABAD</option>
-                                            <option value="6">BISE,  BAHAWALPUR</option>
-                                            <option value="7">BISE,  SARGODHA</option>
-                                            <option value="8">BISE,  DERA GHAZI KHAN</option>
-                                            <option value="9">FBISE, ISLAMABAD</option>
-                                            <option value="10">BISE, MIRPUR</option>
-                                            <option value="11">BISE, ABBOTTABAD</option>
-                                            <option value="12">BISE, PESHAWAR</option>
-                                            <option value="13">BISE, KARACHI</option>
-                                            <option value="14">BISE, QUETTA</option>
-                                            <option value="15">BISE, MARDAN</option>
-                                            <option value="17">CAMBRIDGE</option>
-                                            <option value="18">AIOU, ISLAMABAD</option>
-                                            <option value="19">BISE, KOHAT</option>
-                                            <option value="20">KARAKURUM</option>
-                                            <option value="21">MALAKAN</option>
-                                            <option value="22">BISE, BANNU</option>
-                                            <option value="23">BISE, D.I.KHAN</option>
-                                            <option value="24">AKUEB, KARACHI</option>
-                                            <option value="25">BISE, HYDERABAD</option>
-                                            <option value="26">BISE, LARKANA</option>
-                                            <option value="27">BISE, MIRPUR(SINDH)</option>
-                                            <option value="28">BISE, SUKKUR</option>
-                                            <option value="29">BISE, SWAT</option>
-                                            <option value="30">SBTE KARACHI</option>
-                                            <option value="31">PBTE, LAHORE</option>
-                                            <option value="32">AFBHE RAWALPINDI</option>
-                                            <option value="33">BIE, KARACHI</option>
-                                            <option value="34">BISE SAHIWAL</option>
-                                            <option value="35">ISLAMIC UNIVERSITY</option>                 
-                                            <?php
-                                        }
-                                        ?>               
+                                        <option value="1" <?php if(@$spl_cd['data']['oldBrd_cd'] == 1) echo 'selected'?>>BISE, GUJRANWALA</option>
+                                        <option value="2" <?php if(@$spl_cd['data']['oldBrd_cd'] == 2) echo 'selected'?>>BISE,  LAHORE</option>
+                                        <option value="3" <?php if(@$spl_cd['data']['oldBrd_cd'] == 3) echo 'selected'?>>BISE,  RAWALPINDI</option>
+                                        <option value="4" <?php if(@$spl_cd['data']['oldBrd_cd'] == 4) echo 'selected'?>>BISE,  MULTAN</option>
+                                        <option value="5" <?php if(@$spl_cd['data']['oldBrd_cd'] == 5) echo 'selected'?>>BISE,  FAISALABAD</option>
+                                        <option value="6" <?php if(@$spl_cd['data']['oldBrd_cd'] == 6) echo 'selected'?>>BISE,  BAHAWALPUR</option>
+                                        <option value="7" <?php if(@$spl_cd['data']['oldBrd_cd'] == 7) echo 'selected'?>>BISE,  SARGODHA</option>
+                                        <option value="8" <?php if(@$spl_cd['data']['oldBrd_cd'] == 8) echo 'selected'?>>BISE,  DERA GHAZI KHAN</option>
+                                        <option value="9" <?php if(@$spl_cd['data']['oldBrd_cd'] == 9) echo 'selected'?>>FBISE, ISLAMABAD</option>
+                                        <option value="10" <?php if(@$spl_cd['data']['oldBrd_cd'] == 10) echo 'selected'?>>BISE, MIRPUR</option>
+                                        <option value="11" <?php if(@$spl_cd['data']['oldBrd_cd'] == 11) echo 'selected'?>>BISE, ABBOTTABAD</option>
+                                        <option value="12" <?php if(@$spl_cd['data']['oldBrd_cd'] == 12) echo 'selected'?>>BISE, PESHAWAR</option>
+                                        <option value="13" <?php if(@$spl_cd['data']['oldBrd_cd'] == 13) echo 'selected'?>>BISE, KARACHI</option>
+                                        <option value="14" <?php if(@$spl_cd['data']['oldBrd_cd'] == 14) echo 'selected'?>>BISE, QUETTA</option>
+                                        <option value="15" <?php if(@$spl_cd['data']['oldBrd_cd'] == 15) echo 'selected'?>>BISE, MARDAN</option>
+                                        <option value="17" <?php if(@$spl_cd['data']['oldBrd_cd'] == 17) echo 'selected'?>>CAMBRIDGE</option>
+                                        <option value="18" <?php if(@$spl_cd['data']['oldBrd_cd'] == 18) echo 'selected'?>>AIOU, ISLAMABAD</option>
+                                        <option value="19" <?php if(@$spl_cd['data']['oldBrd_cd'] == 19) echo 'selected'?>>BISE, KOHAT</option>
+                                        <option value="20" <?php if(@$spl_cd['data']['oldBrd_cd'] == 20) echo 'selected'?>>KARAKURUM</option>
+                                        <option value="21" <?php if(@$spl_cd['data']['oldBrd_cd'] == 21) echo 'selected'?>>MALAKAN</option>
+                                        <option value="22" <?php if(@$spl_cd['data']['oldBrd_cd'] == 22) echo 'selected'?>>BISE, BANNU</option>
+                                        <option value="23" <?php if(@$spl_cd['data']['oldBrd_cd'] == 23) echo 'selected'?>>BISE, D.I.KHAN</option>
+                                        <option value="24" <?php if(@$spl_cd['data']['oldBrd_cd'] == 24) echo 'selected'?>>AKUEB, KARACHI</option>
+                                        <option value="25" <?php if(@$spl_cd['data']['oldBrd_cd'] == 25) echo 'selected'?>>BISE, HYDERABAD</option>
+                                        <option value="26" <?php if(@$spl_cd['data']['oldBrd_cd'] == 26) echo 'selected'?>>BISE, LARKANA</option>
+                                        <option value="27" <?php if(@$spl_cd['data']['oldBrd_cd'] == 27) echo 'selected'?>>BISE, MIRPUR(SINDH)</option>
+                                        <option value="28" <?php if(@$spl_cd['data']['oldBrd_cd'] == 28) echo 'selected'?>>BISE, SUKKUR</option>
+                                        <option value="29" <?php if(@$spl_cd['data']['oldBrd_cd'] == 29) echo 'selected'?>>BISE, SWAT</option>
+                                        <option value="30" <?php if(@$spl_cd['data']['oldBrd_cd'] == 30) echo 'selected'?>>SBTE KARACHI</option>
+                                        <option value="31" <?php if(@$spl_cd['data']['oldBrd_cd'] == 31) echo 'selected'?>>PBTE, LAHORE</option>
+                                        <option value="32" <?php if(@$spl_cd['data']['oldBrd_cd'] == 32) echo 'selected'?>>AFBHE RAWALPINDI</option>
+                                        <option value="33" <?php if(@$spl_cd['data']['oldBrd_cd'] == 33) echo 'selected'?>>BIE, KARACHI</option>
+                                        <option value="34" <?php if(@$spl_cd['data']['oldBrd_cd'] == 34) echo 'selected'?>>BISE SAHIWAL</option>
+                                        <option value="35" <?php if(@$spl_cd['data']['oldBrd_cd'] == 35) echo 'selected'?>>ISLAMIC UNIVERSITY</option>                                
                                     </select>
                                 </div>
                             </div>
@@ -287,48 +280,45 @@
                                 <div class="col-md-offset-3 col-md-6">
                                     <label class="control-label" for="boardAloom" >Last Appearing Board</label>
                                     <select id="boardAloom" class="form-control" name="boardAloom">
-                                        <option value="1">BISE, GUJRANWALA</option>
+                                        <option value="1" <?php if(@$spl_cd['data']['boardAloom'] == 1) echo 'selected'?>>BISE, GUJRANWALA</option>
                                         <?php
                                         if(Session == 1){
                                             ?>
-                                            <option value="2">BISE,  LAHORE</option>
-                                            <option value="3">BISE,  RAWALPINDI</option>
-                                            <option value="4">BISE,  MULTAN</option>
-                                            <option value="5">BISE,  FAISALABAD</option>
-                                            <option value="6">BISE,  BAHAWALPUR</option>
-                                            <option value="7">BISE,  SARGODHA</option>
-                                            <option value="8">BISE,  DERA GHAZI KHAN</option>
-                                            <option value="9">FBISE, ISLAMABAD</option>
-                                            <option value="10">BISE, MIRPUR</option>
-                                            <option value="11">BISE, ABBOTTABAD</option>
-                                            <option value="12">BISE, PESHAWAR</option>
-                                            <option value="13">BISE, KARACHI</option>
-                                            <option value="14">BISE, QUETTA</option>
-                                            <option value="15">BISE, MARDAN</option>
-                                            <option value="16">FBISE, ISLAMABAD</option>
-                                            <option value="17">CAMBRIDGE</option>
-                                            <option value="18">AIOU, ISLAMABAD</option>
-                                            <option value="19">BISE, KOHAT</option>
-                                            <option value="20">KARAKURUM</option>
-                                            <option value="21">MALAKAN</option>
-                                            <option value="22">BISE, BANNU</option>
-                                            <option value="23">BISE, D.I.KHAN</option>
-                                            <option value="24">AKUEB, KARACHI</option>
-                                            <option value="25">BISE, HYDERABAD</option>
-                                            <option value="26">BISE, LARKANA</option>
-                                            <option value="27">BISE, MIRPUR(SINDH)</option>
-                                            <option value="28">BISE, SUKKUR</option>
-                                            <option value="29">BISE, SWAT</option>
-                                            <option value="30">SBTE KARACHI</option>
-                                            <option value="31">PBTE, LAHORE</option>
-                                            <option value="32">AFBHE RAWALPINDI</option>
-                                            <option value="33">BIE, KARACHI</option>
-                                            <option value="34">BISE SAHIWAL</option>
-                                            <option value="35">ISLAMIC UNIVERSITY</option>                 
-                                            <?php
-                                        }
-                                        ?>               
-                                    </select>
+                                            <option value="2" <?php if(@$spl_cd['data']['boardAloom'] == 2) echo 'selected'?>>BISE,  LAHORE</option>
+                                            <option value="3" <?php if(@$spl_cd['data']['boardAloom'] == 3) echo 'selected'?>>BISE,  RAWALPINDI</option>
+                                            <option value="4" <?php if(@$spl_cd['data']['boardAloom'] == 4) echo 'selected'?>>BISE,  MULTAN</option>
+                                            <option value="5" <?php if(@$spl_cd['data']['boardAloom'] == 5) echo 'selected'?>>BISE,  FAISALABAD</option>
+                                            <option value="6" <?php if(@$spl_cd['data']['boardAloom'] == 6) echo 'selected'?>>BISE,  BAHAWALPUR</option>
+                                            <option value="7" <?php if(@$spl_cd['data']['boardAloom'] == 7) echo 'selected'?>>BISE,  SARGODHA</option>
+                                            <option value="8" <?php if(@$spl_cd['data']['boardAloom'] == 8) echo 'selected'?>>BISE,  DERA GHAZI KHAN</option>
+                                            <option value="9" <?php if(@$spl_cd['data']['boardAloom'] == 9) echo 'selected'?>>FBISE, ISLAMABAD</option>
+                                            <option value="10" <?php if(@$spl_cd['data']['boardAloom'] == 10) echo 'selected'?>>BISE, MIRPUR</option>
+                                            <option value="11" <?php if(@$spl_cd['data']['boardAloom'] == 11) echo 'selected'?>>BISE, ABBOTTABAD</option>
+                                            <option value="12" <?php if(@$spl_cd['data']['boardAloom'] == 12) echo 'selected'?>>BISE, PESHAWAR</option>
+                                            <option value="13" <?php if(@$spl_cd['data']['boardAloom'] == 13) echo 'selected'?>>BISE, KARACHI</option>
+                                            <option value="14" <?php if(@$spl_cd['data']['boardAloom'] == 14) echo 'selected'?>>BISE, QUETTA</option>
+                                            <option value="15" <?php if(@$spl_cd['data']['boardAloom'] == 15) echo 'selected'?>>BISE, MARDAN</option>
+                                            <option value="17" <?php if(@$spl_cd['data']['boardAloom'] == 17) echo 'selected'?>>CAMBRIDGE</option>
+                                            <option value="18" <?php if(@$spl_cd['data']['boardAloom'] == 18) echo 'selected'?>>AIOU, ISLAMABAD</option>
+                                            <option value="19" <?php if(@$spl_cd['data']['boardAloom'] == 19) echo 'selected'?>>BISE, KOHAT</option>
+                                            <option value="20" <?php if(@$spl_cd['data']['boardAloom'] == 20) echo 'selected'?>>KARAKURUM</option>
+                                            <option value="21" <?php if(@$spl_cd['data']['boardAloom'] == 21) echo 'selected'?>>MALAKAN</option>
+                                            <option value="22" <?php if(@$spl_cd['data']['boardAloom'] == 22) echo 'selected'?>>BISE, BANNU</option>
+                                            <option value="23" <?php if(@$spl_cd['data']['boardAloom'] == 23) echo 'selected'?>>BISE, D.I.KHAN</option>
+                                            <option value="24" <?php if(@$spl_cd['data']['boardAloom'] == 24) echo 'selected'?>>AKUEB, KARACHI</option>
+                                            <option value="25" <?php if(@$spl_cd['data']['boardAloom'] == 25) echo 'selected'?>>BISE, HYDERABAD</option>
+                                            <option value="26" <?php if(@$spl_cd['data']['boardAloom'] == 26) echo 'selected'?>>BISE, LARKANA</option>
+                                            <option value="27" <?php if(@$spl_cd['data']['boardAloom'] == 27) echo 'selected'?>>BISE, MIRPUR(SINDH)</option>
+                                            <option value="28" <?php if(@$spl_cd['data']['boardAloom'] == 28) echo 'selected'?>>BISE, SUKKUR</option>
+                                            <option value="29" <?php if(@$spl_cd['data']['boardAloom'] == 29) echo 'selected'?>>BISE, SWAT</option>
+                                            <option value="30" <?php if(@$spl_cd['data']['boardAloom'] == 30) echo 'selected'?>>SBTE KARACHI</option>
+                                            <option value="31" <?php if(@$spl_cd['data']['boardAloom'] == 31) echo 'selected'?>>PBTE, LAHORE</option>
+                                            <option value="32" <?php if(@$spl_cd['data']['boardAloom'] == 32) echo 'selected'?>>AFBHE RAWALPINDI</option>
+                                            <option value="33" <?php if(@$spl_cd['data']['boardAloom'] == 33) echo 'selected'?>>BIE, KARACHI</option>
+                                            <option value="34" <?php if(@$spl_cd['data']['boardAloom'] == 34) echo 'selected'?>>BISE SAHIWAL</option>
+                                            <option value="35" <?php if(@$spl_cd['data']['boardAloom'] == 35) echo 'selected'?>>ISLAMIC UNIVERSITY</option>                                
+                                        </select>
+                                        <?php } ?>
                                 </div>
                             </div>
                         </div>
@@ -418,8 +408,8 @@
                                     <div class="col-md-3">
                                         <label class="control-label" for="oldSess">SSC Session</label>
                                         <select id="oldSess" class="form-control" name="oldSess">
-                                            <option value="1" >ANNUAL</option>
-                                            <option value="2">SUPPLEMENTARY</option>
+                                            <option value="1" <?php if(@$spl_cd['data']['oldSess'] == 1) echo 'selected'?>>ANNUAL</option>
+                                            <option value="2" <?php if(@$spl_cd['data']['oldSess'] == 2) echo 'selected'?>>SUPPLEMENTARY</option>
                                         </select>
                                     </div>
                                 </div>
@@ -428,42 +418,42 @@
                             <div class="form-group">    
                                 <div class="row">
                                     <div class="col-md-offset-3 col-md-6">
-                                        <label class="control-label" for="oldBrd_cd">SSC Board</label>
+                                        <label class="control-label" for="sec_board">SSC Board</label>
                                         <select id="sec_board" class="form-control" name="oldBrd_cd">
-                                            <option value="1">BISE, GUJRANWALA</option>
-                                            <option value="2">BISE,  LAHORE</option>
-                                            <option value="3">BISE,  RAWALPINDI</option>
-                                            <option value="4">BISE,  MULTAN</option>
-                                            <option value="5">BISE,  FAISALABAD</option>
-                                            <option value="6">BISE,  BAHAWALPUR</option>
-                                            <option value="7">BISE,  SARGODHA</option>
-                                            <option value="8">BISE,  DERA GHAZI KHAN</option>
-                                            <option value="9">FBISE, ISLAMABAD</option>
-                                            <option value="10">BISE, MIRPUR</option>
-                                            <option value="11">BISE, ABBOTTABAD</option>
-                                            <option value="12">BISE, PESHAWAR</option>
-                                            <option value="13">BISE, KARACHI</option>
-                                            <option value="14">BISE, QUETTA</option>
-                                            <option value="15">BISE, MARDAN</option>
-                                            <option value="17">CAMBRIDGE</option>
-                                            <option value="18">AIOU, ISLAMABAD</option>
-                                            <option value="19">BISE, KOHAT</option>
-                                            <option value="20">KARAKURUM</option>
-                                            <option value="21">MALAKAN</option>
-                                            <option value="22">BISE, BANNU</option>
-                                            <option value="23">BISE, D.I.KHAN</option>
-                                            <option value="24">AKUEB, KARACHI</option>
-                                            <option value="25">BISE, HYDERABAD</option>
-                                            <option value="26">BISE, LARKANA</option>
-                                            <option value="27">BISE, MIRPUR(SINDH)</option>
-                                            <option value="28">BISE, SUKKUR</option>
-                                            <option value="29">BISE, SWAT</option>
-                                            <option value="30">SBTE KARACHI</option>
-                                            <option value="31">PBTE, LAHORE</option>
-                                            <option value="32">AFBHE RAWALPINDI</option>
-                                            <option value="33">BIE, KARACHI</option>
-                                            <option value="34">BISE SAHIWAL</option>
-                                            <option value="35">ISLAMIC UNIVERSITY</option>                                
+                                            <option value="1" <?php if(@$spl_cd['data']['oldBrd_cd'] == 1) echo 'selected'?>>BISE, GUJRANWALA</option>
+                                            <option value="2" <?php if(@$spl_cd['data']['oldBrd_cd'] == 2) echo 'selected'?>>BISE,  LAHORE</option>
+                                            <option value="3" <?php if(@$spl_cd['data']['oldBrd_cd'] == 3) echo 'selected'?>>BISE,  RAWALPINDI</option>
+                                            <option value="4" <?php if(@$spl_cd['data']['oldBrd_cd'] == 4) echo 'selected'?>>BISE,  MULTAN</option>
+                                            <option value="5" <?php if(@$spl_cd['data']['oldBrd_cd'] == 5) echo 'selected'?>>BISE,  FAISALABAD</option>
+                                            <option value="6" <?php if(@$spl_cd['data']['oldBrd_cd'] == 6) echo 'selected'?>>BISE,  BAHAWALPUR</option>
+                                            <option value="7" <?php if(@$spl_cd['data']['oldBrd_cd'] == 7) echo 'selected'?>>BISE,  SARGODHA</option>
+                                            <option value="8" <?php if(@$spl_cd['data']['oldBrd_cd'] == 8) echo 'selected'?>>BISE,  DERA GHAZI KHAN</option>
+                                            <option value="9" <?php if(@$spl_cd['data']['oldBrd_cd'] == 9) echo 'selected'?>>FBISE, ISLAMABAD</option>
+                                            <option value="10" <?php if(@$spl_cd['data']['oldBrd_cd'] == 10) echo 'selected'?>>BISE, MIRPUR</option>
+                                            <option value="11" <?php if(@$spl_cd['data']['oldBrd_cd'] == 11) echo 'selected'?>>BISE, ABBOTTABAD</option>
+                                            <option value="12" <?php if(@$spl_cd['data']['oldBrd_cd'] == 12) echo 'selected'?>>BISE, PESHAWAR</option>
+                                            <option value="13" <?php if(@$spl_cd['data']['oldBrd_cd'] == 13) echo 'selected'?>>BISE, KARACHI</option>
+                                            <option value="14" <?php if(@$spl_cd['data']['oldBrd_cd'] == 14) echo 'selected'?>>BISE, QUETTA</option>
+                                            <option value="15" <?php if(@$spl_cd['data']['oldBrd_cd'] == 15) echo 'selected'?>>BISE, MARDAN</option>
+                                            <option value="17" <?php if(@$spl_cd['data']['oldBrd_cd'] == 17) echo 'selected'?>>CAMBRIDGE</option>
+                                            <option value="18" <?php if(@$spl_cd['data']['oldBrd_cd'] == 18) echo 'selected'?>>AIOU, ISLAMABAD</option>
+                                            <option value="19" <?php if(@$spl_cd['data']['oldBrd_cd'] == 19) echo 'selected'?>>BISE, KOHAT</option>
+                                            <option value="20" <?php if(@$spl_cd['data']['oldBrd_cd'] == 20) echo 'selected'?>>KARAKURUM</option>
+                                            <option value="21" <?php if(@$spl_cd['data']['oldBrd_cd'] == 21) echo 'selected'?>>MALAKAN</option>
+                                            <option value="22" <?php if(@$spl_cd['data']['oldBrd_cd'] == 22) echo 'selected'?>>BISE, BANNU</option>
+                                            <option value="23" <?php if(@$spl_cd['data']['oldBrd_cd'] == 23) echo 'selected'?>>BISE, D.I.KHAN</option>
+                                            <option value="24" <?php if(@$spl_cd['data']['oldBrd_cd'] == 24) echo 'selected'?>>AKUEB, KARACHI</option>
+                                            <option value="25" <?php if(@$spl_cd['data']['oldBrd_cd'] == 25) echo 'selected'?>>BISE, HYDERABAD</option>
+                                            <option value="26" <?php if(@$spl_cd['data']['oldBrd_cd'] == 26) echo 'selected'?>>BISE, LARKANA</option>
+                                            <option value="27" <?php if(@$spl_cd['data']['oldBrd_cd'] == 27) echo 'selected'?>>BISE, MIRPUR(SINDH)</option>
+                                            <option value="28" <?php if(@$spl_cd['data']['oldBrd_cd'] == 28) echo 'selected'?>>BISE, SUKKUR</option>
+                                            <option value="29" <?php if(@$spl_cd['data']['oldBrd_cd'] == 29) echo 'selected'?>>BISE, SWAT</option>
+                                            <option value="30" <?php if(@$spl_cd['data']['oldBrd_cd'] == 30) echo 'selected'?>>SBTE KARACHI</option>
+                                            <option value="31" <?php if(@$spl_cd['data']['oldBrd_cd'] == 31) echo 'selected'?>>PBTE, LAHORE</option>
+                                            <option value="32" <?php if(@$spl_cd['data']['oldBrd_cd'] == 32) echo 'selected'?>>AFBHE RAWALPINDI</option>
+                                            <option value="33" <?php if(@$spl_cd['data']['oldBrd_cd'] == 33) echo 'selected'?>>BIE, KARACHI</option>
+                                            <option value="34" <?php if(@$spl_cd['data']['oldBrd_cd'] == 34) echo 'selected'?>>BISE SAHIWAL</option>
+                                            <option value="35" <?php if(@$spl_cd['data']['oldBrd_cd'] == 35) echo 'selected'?>>ISLAMIC UNIVERSITY</option>                                
                                         </select>
                                     </div>
                                 </div>

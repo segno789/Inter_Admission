@@ -362,7 +362,7 @@ class Admission_model extends CI_Model
         if($rowcount > 0)
         {
 
-            $query2 = $this->db->get_where('admission_Online..RuleFeeAdm', array('class' => 12,'sess' =>Session, 'Start_Date <='=>$date,'End_Date >='=>$date,'isPrSub'=>$isPratical));
+            $query2 = $this->db->get_where(RuleFeeAdm, array('class' => 12,'sess' =>Session, 'Start_Date <='=>$date,'End_Date >='=>$date,'isPrSub'=>$isPratical));
             $resultarr = array("info"=>$query->result_array(),"rule_fee"=>$query2->result_array());
             return  $resultarr;
         }
@@ -397,6 +397,7 @@ class Admission_model extends CI_Model
 
     public function Update_AdmissionFeePvt($data)
     {
+        //DebugBreak();
         $date = new DateTime(EXAMINATIONDATEINTER_P2);
         $date->modify("-4 day");
         $threeDayBeforeExam = $date->format("Y-m-d");
@@ -755,7 +756,7 @@ class Admission_model extends CI_Model
 
         //DebugBreak();
 
-        $query = $this->db->query(Insert_sp." '$formno',12,2018,$sess,'$name','$fname','$BForm','$FNIC','$CellNo',$medium,'".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$sub8,1,'".$picpath."',$oldrno,$oldyear,$oldsess,$old_class,$IsHafiz,$Inst_cd,$UrbanRural,$cat11,$cat12,$sub1ap2,$sub2ap2,$sub4ap2,$sub5ap2,$sub6ap2,$sub7ap2,$sub8ap2,$dist_cd,$teh_cd,$zone_cd,$Brd_cd,$AdmProcFee,$AdmFee,$TotalAdmFee,$sub5a,$sub6a,$sub7a,$AdmFine,$IsNewPic,$certFee,'$temppath',$schm,$regfee");
+        $query = $this->db->query(Insert_sp." '$formno',12,".Year.",$sess,'$name','$fname','$BForm','$FNIC','$CellNo',$medium,'".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$sub8,1,'".$picpath."',$oldrno,$oldyear,$oldsess,$old_class,$IsHafiz,$Inst_cd,$UrbanRural,$cat11,$cat12,$sub1ap2,$sub2ap2,$sub4ap2,$sub5ap2,$sub6ap2,$sub7ap2,$sub8ap2,$dist_cd,$teh_cd,$zone_cd,$Brd_cd,$AdmProcFee,$AdmFee,$TotalAdmFee,$sub5a,$sub6a,$sub7a,$AdmFine,$IsNewPic,$certFee,'$temppath',$schm,$regfee");
 
         $rowcount = $query->num_rows();
         if($rowcount > 0)
@@ -767,6 +768,23 @@ class Admission_model extends CI_Model
             return -1;
         }
     }
+
+    public function chkPrevStatus($Rno,$Year,$Sess,$Board){
+
+        $query = $this->db->query(" select status from admission_online..tbladmissiondataforhssc where rno = $Rno and  Iyear = $Year and sess = $Sess and IntBrd_cd = $Board");
+
+        $rowcount = $query->num_rows();
+        if($rowcount > 0)
+        {
+            return $query->result_array();
+        }
+        else
+        {
+            return false;
+        }
+
+    }
+
     public function Insert_NewEnorlement_Languages($data)
     {    
         //DebugBreak();  
@@ -871,6 +889,22 @@ class Admission_model extends CI_Model
             return  false;
         }
     }
+
+
+    public function getEmpCd_Model($employeeCode){
+
+        $query = $this->db->query("select Name from MiscDb..tblemployee where emp_cd = $employeeCode and isActive = 1 and emp_cd < 3000");
+        $rowcount = $query->num_rows();
+        if($rowcount > 0)
+        {
+            return $query->result_array();
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     public function getzone($data)
     {
         //DebugBreak();
@@ -913,7 +947,7 @@ class Admission_model extends CI_Model
 
     public function getrulefee($isPrSub){
         $date =  date('Y-m-d') ;
-        $query = $this->db->get_where('admission_Online..RuleFeeAdm', array('class' => 12,'sess' =>Session, 'isPrSub' => $isPrSub,'Start_Date <='=>$date,'End_Date >='=>$date));
+        $query = $this->db->get_where(RuleFeeAdm, array('class' => 12,'sess' =>Session, 'isPrSub' => $isPrSub,'Start_Date <='=>$date,'End_Date >='=>$date));
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {

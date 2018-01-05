@@ -20,7 +20,7 @@
 
     $(document).ready(function(){
         $('.mPageloader').hide();
-        
+
         $("#pvtinfo_dist").change(function(){
             var distId =  $("#pvtinfo_dist").val();
             $('#pvtinfo_teh').empty();
@@ -64,7 +64,7 @@
 
         $("#pvtinfo_teh").change(function(){
             var tehId =  $("#pvtinfo_teh").val();
-            
+
             gender =  $('#gend').val();
             if( gender == undefined )
             {
@@ -283,6 +283,71 @@
             });
         });
 
+        $("#speciality").change(function(){
+
+            $("#empBrdCd").val('');
+            $('#empBrdCd').prop('readonly', false);
+            var speciality = $("#speciality").val();    
+            if(speciality == 2){
+                $("#boardEmployeeDiv").removeClass("hidden");
+                $("#empBrdCd").focus();
+            }
+            else{
+                $("#empBrdCd").val('');
+                $('#empBrdCd').prop('readonly', false);
+                $("#boardEmployeeDiv").addClass("hidden");
+                $("#speciality").focus();
+            }
+        });
+
+        $("#empBrdCd").keypress(function (e) {
+
+            var empBrdCd = $("#empBrdCd").val()    
+            if(empBrdCd.length >= 4 && (e.which != 13)) {
+                alertify.error('You cannot enter more than 4 digits');
+                return false;
+            }
+
+            else if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57) && (e.which != 13)) {
+                alertify.error('Please Use Numaric Only');
+                return false;
+            }
+        });
+
+
+        $("#empBrdCd" ).focusout(function() {
+
+            var empBrdCd = $( "#empBrdCd" ).val();
+            if(empBrdCd != ""){
+
+                $.ajax({
+                    type: "POST",
+                    url: "<?php  echo site_url('Admission/getEmpCode'); ?>",
+                    data: $("#myform").serialize(),
+                    datatype : 'html',
+                    cache:false,
+
+                    beforeSend: function() {  $('.mPageloader').show(); },
+                    complete: function() { $('.mPageloader').hide();},
+
+                    success: function(data)
+                    {                    
+                        var obj = JSON.parse(data);
+                        if(obj.excep == 'Success')
+                        {
+                            $("#empBrdCd").val('');
+                            $( "#empBrdCd" ).val(obj.employeeName[0].Name);
+                            $('#empBrdCd').prop('readonly', true);
+                        }
+                        else
+                        {
+                            alertify.error(obj.excep);
+                            return false;     
+                        }
+                    }
+                });
+            }
+        }); 
 
     });
 

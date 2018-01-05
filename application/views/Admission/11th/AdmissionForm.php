@@ -197,11 +197,11 @@
 
                     ?>
                 </select>
-              
+
             </div>
         </div>
     </div>
-     <div class="form-group">
+    <div class="form-group">
         <div class="row">
             <div class="col-md-offset-2 col-md-4">
                 <label class="control-label" for="gender1">
@@ -284,15 +284,15 @@
                     //  {
                     if($brd_cd == 1)
                     {
-                    if($rel == 1 || $rel == 0)
-                    {
-                        echo " 
-                        <option value='1' selected = 'selected'>MUSLIM</option>" ;
-                    }
-                    else if ($rel == 2)
-                    {
-                        echo "  <option value='2' selected = 'selected'>NON MUSLIM</option> ";
-                    }
+                        if($rel == 1 || $rel == 0)
+                        {
+                            echo " 
+                            <option value='1' selected = 'selected'>MUSLIM</option>" ;
+                        }
+                        else if ($rel == 2)
+                        {
+                            echo "  <option value='2' selected = 'selected'>NON MUSLIM</option> ";
+                        }
                     }
                     else
                     {
@@ -441,7 +441,7 @@
             </div>
         </div>
     </div>
-      <div class="form-group">
+    <div class="form-group">
         <div class="row">
             <div class="col-md-offset-2 col-md-4">
                 <label class="control-label" for="pvtinfo_dist" >
@@ -467,7 +467,7 @@
             </div>
         </div>
     </div>
- <div class="form-group">
+    <div class="form-group">
         <div class="row">
             <div class="col-md-offset-2 col-md-8">
                 <label class="control-label" for="pvtZone" >
@@ -479,234 +479,248 @@
             </div>
         </div>
     </div>
-      <div id="instruction" style="display:none; width:700px" style="width: 750px;" class="pull-right" >
+    <div id="instruction" style="display:none; width:700px" style="width: 750px;" class="pull-right" >
         <img src="<?php  echo base_url().'assets/img/Instruction11th.jpg'; ?>" class="img-responsive" alt="Instruction.jpg (152,412 bytes)">
     </div>
 
-     <hr class="colorgraph">
-     <div class="form-group">
+    <hr class="colorgraph">
+    <div class="form-group">
         <div class="row">
             <div class="col-md-offset-5 col-md-5">
                 <h4 class="bold">Group and Subject Information:</h4>
             </div>
         </div>
     </div>
-   
+
     <div class="form-group">
-       <div class="row">
-        <div class="col-md-offset-2 col-md-8">
-        <label class="control-label" for="std_group">
-            Study Group :
-        </label>
-       
-            <select id="std_group" class="form-control text-uppercase"  name="std_group">
-                <?php
+        <div class="row">
+            <div class="col-md-offset-2 col-md-8">
+                <label class="control-label" for="std_group">
+                    Study Group :
+                </label>
 
-                //  DebugBreak();
-                $grp = @$data[0]['RegGrp'];
-                //$subgroups =  split(',',$grp_cdi);
-                echo "<option value='0' >SELECT GROUP</option>";
-                if($isReAdm == 0 )
-                {
-                    echo " 
-                    <option value='3'>Humanities</option>
-                    <option value='5'>Commerce</option>
-                    ";  
-                }
+                <select id="std_group" class="form-control text-uppercase"  name="std_group">
+                    <?php
 
-                $subarray = array(
-                    'ENGLISH' => '1',
-                    'URDU' => '2',
-                    'BANGALI' => '3',
-                    'URDU(ALTERNATIVE EASY COURSE)' => '4',
-                    'BENGALI(ALTERNATE EASY COURSE)' => '5',
-                    'PAKISTANI CULTURE' => '6',
-                    'HISTORY' => '7',
-                    'LIBRARY SCIENCE' => '8',
-                    'ISLAMIC HISTORY & CULTURE' => '9',
-                    'FAZAL ARABIC' => '10',
-                    'ECONOMICS' => '11',
-                    'GEOGRAPHY' => '12',
-                    'MILITARY SCIENCE' => '13',
-                    'PHILOSOPHY' => '14',
-                    'ISLAMIC STUDIES(ISL-ST. GROUP)' => '15',
-                    'PSYCHOLOGY' => '16',
-                    'CIVICS' => '17',
-                    'STATISTICS' => '18',
-                    'MATHEMATICS' => '19',
-                    'ISLAMIC STUDIES' => '20',
-                    'OUTLINES OF HOME ECONOMICS' => '21',
-                    'MUSIC' => '22',
-                    'FINE ARTS' => '23',
-                    'ARABIC' => '24',
-                    'BENGALI' => '25',
-                    'BENGALI(ADVANCE)' => '26',
-                    'ENGLISH ELECTIVE' => '27',
-                    'FRENCH' => '28',
-                    'GERMAN' => '29',
-                    'LATIN' => '30',
-                    'PUNJABI' => '32',
-                    'PASHTO' => '33',
-                    'PERSIAN' => '34',
-                    'SANSKRIT' => '35',
-                    'SINDHI' => '36',
-                    'URDU (ADVANCE)' => '37',
-                    'COMMERCIAL PRACTICE' => '38',
-                    'PRINCIPLES OF COMMERCE' => '39',
-                    'HEALTH & PHYSICAL EDUCATION' => '42',
-                    'EDUCATION' => '43',
-                    'GEOLOGY' => '44',
-                    'SOCIOLOGY' => '45',
-                    'BIOLOGY' => '46',
-                    'PHYSICS' => '47',
-                    'CHEMISTRY' => '48',
-                    'ETHICS FOR NON MUSLIM' => '51',
-                    'ADEEB ARBI' => '52',
-                    'ADEEB URDU' => '53',
-                    'FAZAL URDU' => '54',
-                    'HISTORY OF PAKISTAN' => '55',
-                    'HISTORY OF ISLAM' => '56',
-                    'HISTORY OF INDO-PAK' => '57',
-                    'HISTORY OF MODREN WORLD' => '58',
-                    'APPLIED ART  (H-Eco Group)' => '59',
-                    'FOOD & NUTRITION (H-Eco Group)' => '60',
-                    'CHILD DEVELOPMENT AND FAMILY LIVING (H-Eco Group)' => '61',
-                    'PRINCIPLES OF ACCOUNTING' => '70',
-                    'PRINCIPLES OF ECONOMICS' => '71',
-                    'BIOLOGY (H-Eco Group)' => '72',
-                    'CHEMISTRY (H-Eco Group)' => '73',
-                    'CLOTHING & TEXTILE (H-Eco Group)' => '75',
-                    'HOME MANAGEMNET  (H-Eco Group)' => '76',
-                    'NURSING' => '79',
-                    'BUSINESS MATH' => '80',
-                    'COMPUTER SCIENCE' => '83',
-                    'AGRICULTURE' => '90',
-                    'PAKISTAN STUDIES' => '91',
-                    'ISLAMIC EDUCATION' => '92',
-                    'CIVICS FOR NON MUSLIM' => '93',
-                    'COMMERCIAL GEOGRAPHY' => '94',
-                    'BANKING' => '95',
-                    'TYPING' => '96',
-                    'BUSINESS STATISTICS' => '97',
-                    'COMPUTER STUDIES' => '98',
-                    'BOOK KEEPING & ACCOUNTANCY' => '99'
+                    //  DebugBreak();
+                    $grp = @$data[0]['RegGrp'];
+                    //$subgroups =  split(',',$grp_cdi);
+                    echo "<option value='0' >SELECT GROUP</option>";
+                    if($isReAdm == 0 )
+                    {
+                        echo " 
+                        <option value='3'>Humanities</option>
+                        <option value='5'>Commerce</option>
+                        ";  
+                    }
 
-                );
-                //$result =  array_search(@$data[0]['sub4'],$subarray);
+                    $subarray = array(
+                        'ENGLISH' => '1',
+                        'URDU' => '2',
+                        'BANGALI' => '3',
+                        'URDU(ALTERNATIVE EASY COURSE)' => '4',
+                        'BENGALI(ALTERNATE EASY COURSE)' => '5',
+                        'PAKISTANI CULTURE' => '6',
+                        'HISTORY' => '7',
+                        'LIBRARY SCIENCE' => '8',
+                        'ISLAMIC HISTORY & CULTURE' => '9',
+                        'FAZAL ARABIC' => '10',
+                        'ECONOMICS' => '11',
+                        'GEOGRAPHY' => '12',
+                        'MILITARY SCIENCE' => '13',
+                        'PHILOSOPHY' => '14',
+                        'ISLAMIC STUDIES(ISL-ST. GROUP)' => '15',
+                        'PSYCHOLOGY' => '16',
+                        'CIVICS' => '17',
+                        'STATISTICS' => '18',
+                        'MATHEMATICS' => '19',
+                        'ISLAMIC STUDIES' => '20',
+                        'OUTLINES OF HOME ECONOMICS' => '21',
+                        'MUSIC' => '22',
+                        'FINE ARTS' => '23',
+                        'ARABIC' => '24',
+                        'BENGALI' => '25',
+                        'BENGALI(ADVANCE)' => '26',
+                        'ENGLISH ELECTIVE' => '27',
+                        'FRENCH' => '28',
+                        'GERMAN' => '29',
+                        'LATIN' => '30',
+                        'PUNJABI' => '32',
+                        'PASHTO' => '33',
+                        'PERSIAN' => '34',
+                        'SANSKRIT' => '35',
+                        'SINDHI' => '36',
+                        'URDU (ADVANCE)' => '37',
+                        'COMMERCIAL PRACTICE' => '38',
+                        'PRINCIPLES OF COMMERCE' => '39',
+                        'HEALTH & PHYSICAL EDUCATION' => '42',
+                        'EDUCATION' => '43',
+                        'GEOLOGY' => '44',
+                        'SOCIOLOGY' => '45',
+                        'BIOLOGY' => '46',
+                        'PHYSICS' => '47',
+                        'CHEMISTRY' => '48',
+                        'ETHICS FOR NON MUSLIM' => '51',
+                        'ADEEB ARBI' => '52',
+                        'ADEEB URDU' => '53',
+                        'FAZAL URDU' => '54',
+                        'HISTORY OF PAKISTAN' => '55',
+                        'HISTORY OF ISLAM' => '56',
+                        'HISTORY OF INDO-PAK' => '57',
+                        'HISTORY OF MODREN WORLD' => '58',
+                        'APPLIED ART  (H-Eco Group)' => '59',
+                        'FOOD & NUTRITION (H-Eco Group)' => '60',
+                        'CHILD DEVELOPMENT AND FAMILY LIVING (H-Eco Group)' => '61',
+                        'PRINCIPLES OF ACCOUNTING' => '70',
+                        'PRINCIPLES OF ECONOMICS' => '71',
+                        'BIOLOGY (H-Eco Group)' => '72',
+                        'CHEMISTRY (H-Eco Group)' => '73',
+                        'CLOTHING & TEXTILE (H-Eco Group)' => '75',
+                        'HOME MANAGEMNET  (H-Eco Group)' => '76',
+                        'NURSING' => '79',
+                        'BUSINESS MATH' => '80',
+                        'COMPUTER SCIENCE' => '83',
+                        'AGRICULTURE' => '90',
+                        'PAKISTAN STUDIES' => '91',
+                        'ISLAMIC EDUCATION' => '92',
+                        'CIVICS FOR NON MUSLIM' => '93',
+                        'COMMERCIAL GEOGRAPHY' => '94',
+                        'BANKING' => '95',
+                        'TYPING' => '96',
+                        'BUSINESS STATISTICS' => '97',
+                        'COMPUTER STUDIES' => '98',
+                        'BOOK KEEPING & ACCOUNTANCY' => '99'
+
+                    );
+                    //$result =  array_search(@$data[0]['sub4'],$subarray);
 
 
 
-                ?>
+                    ?>
 
-            </select>                                            
+                </select>                                            
 
+            </div>
         </div>
     </div>
-    </div>
-    
-    <div class="form-group">
-    <div class="row">
-     <div class="col-md-offset-4 col-md-12">
-        <label class="control-label "  >
-            Choose Subjects(Elective Subjects are Enabled Only)   
-        </label> 
 
-    </div>
-    </div>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-offset-4 col-md-12">
+                <label class="control-label "  >
+                    Choose Subjects(Elective Subjects are Enabled Only)   
+                </label> 
+
+            </div>
+        </div>
     </div>
     <div class="form-group">
         <div class="row">
             <div class="col-md-offset-2 col-md-4">
-            <select id="sub1" class="text-uppercase form-control" name="sub1">
-            </select> 
+                <select id="sub1" class="text-uppercase form-control" name="sub1">
+                </select> 
             </div>
-             <div class="col-md-4">
-            <select id="sub2"  name="sub2" class="text-uppercase form-control">
-            </select>
+            <div class="col-md-4">
+                <select id="sub2"  name="sub2" class="text-uppercase form-control">
+                </select>
             </div>
         </div>
     </div>
     <div class="form-group">
-     <div class="row">
+        <div class="row">
             <div class="col-md-offset-2 col-md-4">
-            <select id="sub3" class="text-uppercase form-control" name="sub3">
-            </select> 
+                <select id="sub3" class="text-uppercase form-control" name="sub3">
+                </select> 
             </div>
-             <div class="col-md-4">
-            <select id="sub4"  name="sub4" class="text-uppercase form-control">
-            </select>
-             </div>
+            <div class="col-md-4">
+                <select id="sub4"  name="sub4" class="text-uppercase form-control">
+                </select>
+            </div>
         </div>
     </div>    
     <div class="form-group">
-             <div class="row">
+        <div class="row">
             <div class="col-md-offset-2 col-md-4">
-            <select id="sub5" class="text-uppercase form-control" name="sub5" >
+                <select id="sub5" class="text-uppercase form-control" name="sub5" >
 
-            </select> 
+                </select> 
             </div>
-             <div class="col-md-4">
-            <select id="sub6"  name="sub6" class="text-uppercase form-control" >
+            <div class="col-md-4">
+                <select id="sub6"  name="sub6" class="text-uppercase form-control" >
 
-            </select>
+                </select>
             </div>
         </div>
     </div> 
-       
-    <div class="form-group">
-         <div class="row">
-            <div class="col-md-offset-2 col-md-8">
-            <select id="sub7" class="text-uppercase form-control" name="sub7"  style="display: none;">
 
-            </select> 
-            <!--     <select id="sub8"  name="sub8" class="span3 dropdown">-->
-            <!-- <option value="<?php  if($isReAdm != 1) { echo @$data[0]['sub8'];} else{echo "";}    ?>" selected="selected"><?php  if($isReAdm != 1) {
-                // DebugBreak();
-                echo array_search(@$data[0]['sub8'],$subarray);}  else {echo "";};
-            ?></option>-->
-            
-            
-        </div>
-        </div>
-        </div>
-        <div class="hidden">
-            <input type="hidden"   value=""  name="formNo">
-            <input type="hidden"   value="<?php  echo $isReAdm; ?>"  name="IsReAdm">
-            <input type="hidden"   value="<?php  echo @$data[0]['SSC_RNo']; ?>"  name="OldRno">
-            <input type="hidden"   value="<?php  echo @$data[0]['SSC_Year']; ?>"  name="OldYear">
-            <input type="hidden"   value="<?php  echo @$data[0]['SSC_Sess']; ?>"  name="OldSess">
-            <input type="hidden"   value="<?php  echo @$data[0]['SSC_brd_cd']; ?>"  name="OldBrd">
-            </div>
-             <div class="form-group">
-             <div class="row">
+    <div class="form-group">
+        <div class="row">
             <div class="col-md-offset-2 col-md-8">
-            <label class="checkbox-inline">
+                <select id="sub7" class="text-uppercase form-control" name="sub7"  style="display: none;">
+
+                </select> 
+                <!--     <select id="sub8"  name="sub8" class="span3 dropdown">-->
+                <!-- <option value="<?php  if($isReAdm != 1) { echo @$data[0]['sub8'];} else{echo "";}    ?>" selected="selected"><?php  if($isReAdm != 1) {
+                    // DebugBreak();
+                    echo array_search(@$data[0]['sub8'],$subarray);}  else {echo "";};
+                ?></option>-->
+
+
+            </div>
+        </div>
+    </div>
+    <div class="hidden">
+        <input type="hidden"   value=""  name="formNo">
+        <input type="hidden"   value="<?php  echo $isReAdm; ?>"  name="IsReAdm">
+        <input type="hidden"   value="<?php  echo @$data[0]['SSC_RNo']; ?>"  name="OldRno">
+        <input type="hidden"   value="<?php  echo @$data[0]['SSC_Year']; ?>"  name="OldYear">
+        <input type="hidden"   value="<?php  echo @$data[0]['SSC_Sess']; ?>"  name="OldSess">
+        <input type="hidden"   value="<?php  echo @$data[0]['SSC_brd_cd']; ?>"  name="OldBrd">
+    </div>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-offset-2 col-md-8">
+                <label class="checkbox-inline">
                     <input type="checkbox" class="checkboxtext" id="terms" name="terms" value="0">I agree with the <a href="<?php echo base_url(); ?>assets/img/Instructions.jpg" target="_blank">Terms and Conditions </a> of Board of Intermediate & Secondary Education, Gujranwala  
                 </label>
             </div>
         </div>
     </div>
-      <div class="form-group">
+    <div class="form-group">
         <div class="row">
             <div class="col-md-offset-2 col-md-3">
-            <button type="submit" onclick="return checks()" name="btnsubmitUpdateEnrol" class="btn btn-primary btn-block">
-                Save Form
-            </button>
+                <button type="submit" onclick="return checks()" name="btnsubmitUpdateEnrol" class="btn btn-primary btn-block">
+                    Save Form
+                </button>
             </div>
             <div class="col-md-2">
-             <a href="<?php echo base_url(); ?>assets/img/Instruction.jpg" download="FileName" class="btn btn-info btn-block" >Download Instruction</a>
+                <a href="<?php echo base_url(); ?>assets/img/Instruction.jpg" download="FileName" class="btn btn-info btn-block" >Download Instruction</a>
             </div>
             <div class="col-md-3">
-            <input type="button" class="btn btn-danger btn-block" value="Cancel" id="btnCancel" name="btnCancel" onclick="return CancelAlert();" >
-           
+                <input type="button" class="btn btn-danger btn-block" value="Cancel" id="btnCancel" name="btnCancel" onclick="return CancelAlert();" >
+
+            </div>
         </div>
-    </div>
     </div>
 
 </form>
 
-
+<script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script> 
+<script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/jquery.maskedinput.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/jquery-ui.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/alertify.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/source/jquery.fancybox.pack.js"></script>    
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/source/jquery.fancybox.js"></script>    
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.dataTables.js"></script>
 <script type="text/javascript">
+
+    $(document).ready(function(){
+
+        $('#address').each(function(){
+            $(this).val($(this).val().trim());
+        });
+    });
 
     function CancelAlert()
     {

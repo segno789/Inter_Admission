@@ -1,6 +1,6 @@
 
 <div id="footer" class="footer">
-    &nbsp; &copy; 2018 BISE Gujranwala, All Rights Reserved. 
+    &nbsp; &copy; 2017 BISE Gujranwala, All Rights Reserved. 
 </div>
 
 </div>
@@ -19,7 +19,7 @@
 
     $(document).ready(function(){
         //$spl_cd
-         $('.mPageloader').hide();
+        $('.mPageloader').hide();
         $('#data-table').dataTable({
             "sPaginationType": "full_numbers",
             "cache": false
@@ -50,15 +50,13 @@
         } */
         var error_New_Enrolement ='<?php   if(@$excep != ""){echo @$excep['excep'];}  ?>';
         var  error_New_Enrolement_update ='<?php   if(@$data != ""){echo @$data[0]['excep'];}  ?>';
+
         var  error_download ='<?php echo @$error;  ?>';
         if(error_download.length > 1)
         {
-           
-                alertify.error(error_download);   
-            
-
+            alertify.error(error_download);   
         }
-        
+
         if(error_New_Enrolement.length > 1)
         {
             if(error_New_Enrolement == "success" )
@@ -535,9 +533,75 @@
                 //  alert("Transfer Thai Gayo");
             }
 
-        })
+        });
 
-    })
+
+        $("#speciality").change(function(){
+
+            $("#empBrdCd").val('');
+            $('#empBrdCd').prop('readonly', false);
+            var speciality = $("#speciality").val();    
+            if(speciality == 2){
+                $("#boardEmployeeDiv").removeClass("hidden");
+                $("#empBrdCd").focus();
+            }
+            else{
+                $("#empBrdCd").val('');
+                $('#empBrdCd').prop('readonly', false);
+                $("#boardEmployeeDiv").addClass("hidden");
+                $("#speciality").focus();
+            }
+        });
+
+        $("#empBrdCd").keypress(function (e) {
+
+            var empBrdCd = $("#empBrdCd").val()    
+            if(empBrdCd.length >= 4 && (e.which != 13)) {
+                alertify.error('You cannot enter more than 4 digits');
+                return false;
+            }
+
+            else if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57) && (e.which != 13)) {
+                alertify.error('Please Use Numaric Only');
+                return false;
+            }
+        });
+
+
+        $("#empBrdCd" ).focusout(function() {
+
+            var empBrdCd = $( "#empBrdCd" ).val();
+            if(empBrdCd != ""){
+
+                $.ajax({
+                    type: "POST",
+                    url: "<?php  echo site_url('Admission/getEmpCode'); ?>",
+                    data: $("#myform").serialize(),
+                    datatype : 'html',
+                    cache:false,
+
+                    beforeSend: function() {  $('.mPageloader').show(); },
+                    complete: function() { $('.mPageloader').hide();},
+
+                    success: function(data)
+                    {                    
+                        var obj = JSON.parse(data);
+                        if(obj.excep == 'Success')
+                        {
+                            $("#empBrdCd").val('');
+                            $( "#empBrdCd" ).val(obj.employeeName[0].Name);
+                            $('#empBrdCd').prop('readonly', true);
+                        }
+                        else
+                        {
+                            alertify.error(obj.excep);
+                            return false;     
+                        }
+                    }
+                });
+            }
+        }); 
+    });
     function makebatch_groupwise(){
 
         // user clicked "ok"

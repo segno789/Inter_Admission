@@ -15,7 +15,7 @@
                         </div>
                     </div>
                     <div class="widget-body">
-                        <form class="form-horizontal no-margin" name="myform" id="myform" action="<?php  echo base_url(); ?>/Admission_inter/NewEnrolment_update_inter" method="post" enctype="multipart/form-data">
+                        <form class="form-horizontal no-margin" name="myform" id="myform" method="post" enctype="multipart/form-data">
                             <div class="control-group">
                                 <div class="controls controls-row">
                                     <?php
@@ -98,34 +98,28 @@
                                     <label class="control-label span2" for="speciality">
                                         Speciality:
                                     </label> 
-                                    <select id="speciality"  class="span2" name="speciality">
-                                        <?php 
-                                        $spec = $data['0']['Spec'] ;
-
-                                        if($spec == 0)
-                                        {
-                                            echo  "<option value='0' selected='selected'>None</option><option value='1'>Disabled</option>";
-                                            if(Session == 1){
-                                                echo"<option value='2'>Board Employee</option>";
-                                            }
-                                        }
-                                        else if($spec == 1)
-                                        {
-                                            echo  "<option value='0' >None</option>  <option value='1' selected='selected'>Disabled</option>";
-                                            if(Session == 1){
-                                                echo"<option value='2'>Board Employee</option>";
-                                            }
-                                        }
-                                        else if($spec == 2){
-                                            echo  "<option value='0' >None</option>  <option value='1' >Disabled</option>";                                           
-                                            if(Session == 1){
-                                                echo"<option value='2'>Board Employee</option>";
-                                            }
-                                        }
-                                        ?>
+                                    <select id="speciality"  class="text-uppercase span2" name="speciality">
+                                        <option value='0' selected='selected'>None</option>  
+                                        <option value='1'>Deaf and Dumb</option>
+                                        <option value='2'>Board Employee</option>
+                                        <option value='3'>Disable</option>
                                     </select>
                                 </div>
                             </div>
+
+                            <div class="hidden" id="boardEmployeeDiv">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-offset-2 col-md-8">
+                                            <label class="control-label" for="empBrdCd" >
+                                                Enter Board Employee Code:
+                                            </label>        
+                                            <input class="text-uppercase form-control" type="text" id="empBrdCd" name="empBrdCd" placeholder="Board Employee Code" maxlength="4" value="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="control-group">
                                 <div class="controls controls-row">
                                     <label class="control-label span2" for="MarkOfIden">
@@ -775,7 +769,7 @@
                             </div>
                             <div class="control-group">
                                 <div class="control row controls-row">
-                                    <button type="submit" onclick="return checks()" name="btnsubmitUpdateEnrol" class="btn btn-large btn-info span3 offset3">Save Form</button>
+                                    <button type="submit" onclick="return checks_12th_Regular_EditForm()" name="btnsubmitUpdateEnrol" id="btnsubmitUpdateEnrol" class="btn btn-large btn-info span3 offset3">Save Form</button>
                                     <input type="button" class="btn btn-large btn-danger span3" value="Cancel" id="btnCancel" name="btnCancel" onclick="return CancelAlert();" >
                                 </div>
                             </div>
@@ -784,15 +778,86 @@
                             $(document).ready(function(){
                                 $.fancybox("#instruction");
                             });
-                            function checks(){
+                            function checks_12th_Regular_EditForm(){
+                                $('#btnsubmitUpdateEnrol').attr("disabled", "disabled");
                                 var status  =  check_NewEnrol_validation_regular();
                                 if(status == 0)
                                 {
+                                    $('#btnsubmitUpdateEnrol').removeAttr("disabled");
                                     return false;    
                                 }
                                 else
                                 {
-                                    return true;
+                                    $('#btnsubmitUpdateEnrol').attr("disabled", "disabled");
+
+                                    $.ajax({
+
+                                        type: "POST",
+                                        url: "<?php  echo site_url('Admission_inter/frmvalidation'); ?>",
+                                        data: $("#myform").serialize() ,
+                                        datatype : 'html',
+                                        cache:false,
+
+                                        beforeSend: function() {  $('.mPageloader').show(); },
+                                        complete: function() { $('.mPageloader').hide();},
+
+                                        success: function(data)
+                                        {              
+                                            var obj = JSON.parse (data);
+
+                                            if(obj.excep == 'Success')
+                                            {
+                                                $.ajax({
+
+                                                    type: "POST",
+                                                    url: "<?php echo base_url(); ?>" + "Admission_inter/NewEnrolment_update_inter/",
+                                                    data: $("#myform").serialize() ,
+                                                    datatype : 'html',
+                                                    cache:false,
+
+                                                    beforeSend: function() {  $('.mPageloader').show(); },
+                                                    complete: function() { $('.mPageloader').hide();},
+
+                                                    success: function(data){
+
+                                                        var obj = JSON.parse(data);
+                                                        if(obj.error ==  "1")
+                                                        {
+                                                            window.location.href ='<?php echo base_url(); ?>Admission_inter/EditForms'
+                                                            alertify.success("Data Saved Successfully");
+                                                            return true;
+                                                        } 
+
+                                                        else
+                                                        {
+                                                            alertify.error(obj.error);
+                                                            $('#btnsubmitUpdateEnrol').removeAttr("disabled");
+                                                            return false; 
+
+                                                        }
+                                                    },
+
+                                                    error: function(request, status, error){
+                                                        alertify.error(request.responseText);
+                                                        $('#btnsubmitUpdateEnrol').removeAttr("disabled");
+                                                    }
+                                                });
+
+                                                return false;
+
+                                            }
+                                            else
+                                            {
+                                                alertify.error(obj.excep);
+                                                $('#btnsubmitUpdateEnrol').removeAttr("disabled");
+                                                return false;     
+
+                                            }
+                                        }
+                                    });
+
+                                    return false;   
+
                                 }
                             }
                             function CancelAlert()
