@@ -36,7 +36,7 @@
         </div>
     </div>
     <!-- End Picture Upload -->
-    
+
     <div class="form-group">
         <div class="row">
             <div class="col-md-offset-2 col-md-4">
@@ -91,6 +91,19 @@
                     <option value='2'>Board Employee</option>
                     <option value='3'>Disable</option>
                 </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="hidden" id="boardEmployeeDiv">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-offset-2 col-md-8">
+                    <label class="control-label" for="empBrdCd" >
+                        Enter Board Employee Code:
+                    </label>        
+                    <input class="text-uppercase form-control" type="text" id="empBrdCd" name="empBrdCd" placeholder="Board Employee Code" maxlength="4" value="">
+                </div>
             </div>
         </div>
     </div>

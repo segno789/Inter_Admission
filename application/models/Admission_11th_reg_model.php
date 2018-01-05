@@ -541,7 +541,7 @@ class Admission_11th_reg_model extends CI_Model
         else{
         $query = $this->db->get_where('Registration..MA_P1_Reg_Adm2016',  array('formNo' => $formno,'class'=>9,'iyear'=>$year,'sess'=>1));     
         } */
-        //$year = $year-1;
+        $year = $year-1;
         $query = $this->db->get_where(tblreg11th,  array('formNo' => $formno,'class'=>11,'iyear'=>$year,'sess'=>Session));     
        // DebugBreak();
         $rowcount = $query->num_rows();

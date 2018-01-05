@@ -98,34 +98,28 @@
                                     <label class="control-label span2" for="speciality">
                                         Speciality:
                                     </label> 
-                                    <select id="speciality"  class="span2" name="speciality">
-                                        <?php 
-                                        $spec = $data['0']['Spec'] ;
-
-                                        if($spec == 0)
-                                        {
-                                            echo  "<option value='0' selected='selected'>None</option><option value='1'>Disabled</option>";
-                                            if(Session == 1){
-                                                echo"<option value='2'>Board Employee</option>";
-                                            }
-                                        }
-                                        else if($spec == 1)
-                                        {
-                                            echo  "<option value='0' >None</option>  <option value='1' selected='selected'>Disabled</option>";
-                                            if(Session == 1){
-                                                echo"<option value='2'>Board Employee</option>";
-                                            }
-                                        }
-                                        else if($spec == 2){
-                                            echo  "<option value='0' >None</option>  <option value='1' >Disabled</option>";                                           
-                                            if(Session == 1){
-                                                echo"<option value='2'>Board Employee</option>";
-                                            }
-                                        }
-                                        ?>
+                                    <select id="speciality"  class="text-uppercase span2" name="speciality">
+                                        <option value='0' selected='selected'>None</option>  
+                                        <option value='1'>Deaf and Dumb</option>
+                                        <option value='2'>Board Employee</option>
+                                        <option value='3'>Disable</option>
                                     </select>
                                 </div>
                             </div>
+
+                            <div class="hidden" id="boardEmployeeDiv">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-offset-2 col-md-8">
+                                            <label class="control-label" for="empBrdCd" >
+                                                Enter Board Employee Code:
+                                            </label>        
+                                            <input class="text-uppercase form-control" type="text" id="empBrdCd" name="empBrdCd" placeholder="Board Employee Code" maxlength="4" value="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="control-group">
                                 <div class="controls controls-row">
                                     <label class="control-label span2" for="MarkOfIden">

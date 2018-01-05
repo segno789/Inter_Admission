@@ -889,6 +889,22 @@ class Admission_model extends CI_Model
             return  false;
         }
     }
+
+
+    public function getEmpCd_Model($employeeCode){
+
+        $query = $this->db->query("select Name from MiscDb..tblemployee where emp_cd = $employeeCode and isActive = 1 and emp_cd < 3000");
+        $rowcount = $query->num_rows();
+        if($rowcount > 0)
+        {
+            return $query->result_array();
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     public function getzone($data)
     {
         //DebugBreak();

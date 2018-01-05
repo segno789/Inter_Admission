@@ -4243,6 +4243,27 @@ class Admission extends CI_Controller {
         $this->load->view('common/commonfooter.php');
     }
 
+    function getEmpCode(){
+
+        //DebugBreak();
+
+        $employeeName ='';
+        $this->load->model('Admission_model');
+        $employeeName=$this->Admission_model->getEmpCd_Model($_POST['empBrdCd']);
+
+        if($employeeName){
+            $msg['excep'] =  'Success'; 
+            $msg['employeeName'] =  $employeeName;
+        }
+
+        else{
+            $msg['excep'] =  'No board employee found against this employee code'; 
+            $msg['employeeName'] =  ''; 
+        }
+
+        echo json_encode($msg);
+        exit();
+    }
 
     public function getzone(){
 
