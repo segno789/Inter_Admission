@@ -38,7 +38,7 @@ define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 define('BARCODE_PATH', 'assets/pdfs/');
 
 define('GET_PRIVATE_IMAGE_PATH_11th', 'C:/inetpub/vhosts/bisegrw.edu.pk/Share Images/uploads/HSSC/admission/2018/11th/annual/private/');
-define('REGULAR_INSERT_TABLE', 'Admission_online..tblIAdm');
+define('REGULAR_INSERT_TABLE', 'matric_new..tblIAdm');
 define('DIRPATH12TH','F:\xampp\htdocs\Share Images\\'); 
 define('PRIVATE_IMAGE_PATH', 'uploads/private/');
 define('PRIVATE_IMAGE_PATH_FRESH', 'uploads/Fresh');
@@ -83,7 +83,7 @@ define('DoubleDateFee', '2018-02-27');
 define('TripleDateFee', '2018-03-07');
 define('getinfo','admission_online..sp_Admission_HSSC');
 define('Insert_sp','admission_online..sp_insert_IAdm');
-define('INSERT_TBL','admission_online..tblIAdm'); 
+define('INSERT_TBL','matric_new..tblIAdm'); 
 define ('class_for_11th_Adm','11th');             
 define('formprint_sp_12th','admission_online..sp_form_data_12th');      
 define('getinfo_languages','admission_online..tblAdmissionDataLang');
@@ -91,7 +91,7 @@ define('save_dir','D:/xampp/htdocs/Inter_Admission/Uploads/IS2016/regular/');
 define('tblreg11th','Registration..tblReg11th');
 define('corr_bank_chall_class1','12th');
 define('CURRENT_SESS1','2018'); 
-
+define('RuleFeeAdm','admission_online..RuleFeeAdm'); 
 define('formprint_sp_11th','Registration..sp_form_data_11thAdm');
 define('class_for_9th_Adm','11th');
 

@@ -51,7 +51,7 @@ class Admission_inter_model extends CI_Model
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
-            $query2 = $this->db->get_where('Admission_Online..RuleFeeAdm', array('class' => 12,'sess' => Session, 'Start_Date <='=>$date,'End_Date >='=>$date,'isPrSub'=>0));
+            $query2 = $this->db->get_where(RuleFeeAdm, array('class' => 12,'sess' => Session, 'Start_Date <='=>$date,'End_Date >='=>$date,'isPrSub'=>0));
             $resultarr = array("info"=>$query->result_array(),"rule_fee"=>$query2->result_array());
             return  $resultarr;
         }
@@ -308,7 +308,7 @@ class Admission_inter_model extends CI_Model
     {
         //DebugBreak();
 
-        $query = $this->db->get_where('Admission_online..tblAdmissionDataForHSSC',  array('rno' => $formno,'class'=>11,'iyear'=>$year,'sess'=>1,'IntBrd_cd'=>$IntBrd_cd));     
+        $query = $this->db->get_where(getinfo,  array('rno' => $formno,'class'=>11,'iyear'=>$year,'sess'=>1,'IntBrd_cd'=>$IntBrd_cd));     
 
         $rowcount = $query->num_rows();
         if($rowcount > 0)
@@ -333,7 +333,6 @@ class Admission_inter_model extends CI_Model
         $this->db->select('formno');
         $this->db->order_by("formno", "DESC");
         $formno = $this->db->get_where(REGULAR_INSERT_TABLE, array('coll_cd' => $Inst_Id));
-        //$formno = $this->db->query('select formno from admission_online..tblIAdm where coll_cd = '.$Inst_Id.' order by formno desc');
         $rowcount = $formno->num_rows();
 
         if($rowcount == 0 )
@@ -401,7 +400,7 @@ class Admission_inter_model extends CI_Model
 
             $rule_fee = $User_info_data['rule_fee'];
 
-            $q2 = $this->db->get_where('admission_online..RuleFeeAdm',array('Rule_Fee_ID'=>$rule_fee));
+            $q2 = $this->db->get_where(RuleFeeAdm,array('Rule_Fee_ID'=>$rule_fee));
             $resultarr = array("info"=>$query->result_array(),"fee"=>$result_1,"rule_fee"=>$q2->result_array());
             return  $resultarr;
         }
@@ -446,7 +445,7 @@ class Admission_inter_model extends CI_Model
             {
                 $result_1 = $q1->result_array();
             }
-            $q2 = $this->db->get_where('admission_online..RuleFeeAdm',array('Rule_Fee_ID'=>$User_info_data['rule_fee']));
+            $q2 = $this->db->get_where(RuleFeeAdm,array('Rule_Fee_ID'=>$User_info_data['rule_fee']));
             $resultarr = array("info"=>$query->result_array(),"fee"=>$result_1,"rule_fee"=>$q2->result_array());
             return  $resultarr;
         }
@@ -474,7 +473,7 @@ class Admission_inter_model extends CI_Model
     public function getrulefee()
     {
         $date =  date('Y-m-d') ;
-        $query = $this->db->get_where('admission_online..RuleFeeAdm', array('class' => 12,'sess' => Session, 'Start_Date <='=>$date,'End_Date >='=>$date));
+        $query = $this->db->get_where(RuleFeeAdm, array('class' => 12,'sess' => Session, 'Start_Date <='=>$date,'End_Date >='=>$date));
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
@@ -487,7 +486,7 @@ class Admission_inter_model extends CI_Model
     }
     public function getrulefeeSingleFee()
     {
-        $query = $this->db->get_where('admission_online..RuleFeeAdm', array('class' => 12,'sess' => Session,'Fee_Type'=>'Single Fee'));
+        $query = $this->db->get_where(RuleFeeAdm, array('class' => 12,'sess' => Session,'Fee_Type'=>'Single Fee'));
 
         $rowcount = $query->num_rows();
         if($rowcount > 0)
@@ -696,7 +695,7 @@ class Admission_inter_model extends CI_Model
             return  false;
         }
 
-        $val = $this->db->update_batch('admission_online..tblIAdm',$data,'formNo');
+        $val = $this->db->update_batch(REGULAR_INSERT_TABLE,$data,'formNo');
     }
 }
 ?>
