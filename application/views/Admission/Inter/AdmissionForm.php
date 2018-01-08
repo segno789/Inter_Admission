@@ -2755,6 +2755,9 @@ else if(Session == '2')
         });
         // Sub2 change event
         $("#sub2").change(function (){
+            
+            //debugger;
+            
             var sub1_p1 = $("#sub2").val();
             var grp_cd = $('#std_group').val();
             var pr_group = '<?php echo @$data[0]['grp_cd'] ?>';
@@ -2765,9 +2768,9 @@ else if(Session == '2')
             {
                 $("#sub2p2").val(sub1_p1);    
             }
-            else if(exam_type == 3  && grp_cd == 3){
+            /*else if(exam_type == 3  && grp_cd == 3){
                 $("#sub2p2").val(sub1_p1);    
-            }
+            } */
 
             else if(exam_type != 3  && grp_cd == 3){
                 $("#sub2p2").val(sub1_p1);    
@@ -2801,9 +2804,9 @@ else if(Session == '2')
             {
                 $("#sub4p2").val(id4);
             }
-            else if(exam_type == 3  && grp_cd == 3){
+            /*else if(exam_type == 3  && grp_cd == 3){
                 $("#sub4p2").val(id4);
-            }
+            }*/
 
             else if(exam_type != 3  && grp_cd == 3){
                 $("#sub4p2").val(id4);
@@ -2904,9 +2907,9 @@ else if(Session == '2')
                 var id5p2 =$("#sub5p2").val(id5);
             }
 
-            else if(exam_type == 3 && grp_cd == 3){
+            /*else if(exam_type == 3 && grp_cd == 3){
                 var id5p2 =$("#sub5p2").val(id5);
-            }         
+            }  */       
 
             else if(exam_type != 3  && grp_cd == 3){
                 var id5p2 =$("#sub5p2").val(id5);
@@ -3048,9 +3051,9 @@ else if(Session == '2')
             {
                 var id6p2 =$("#sub6p2").val(id6);
             }
-            else if(exam_type == 3 && grp_cd == 3){
+            /*else if(exam_type == 3 && grp_cd == 3){
                 var id6p2 =$("#sub6p2").val(id6);
-            }
+            } */
 
             else if(exam_type != 3  && grp_cd == 3){
                 var id6p2 =$("#sub6p2").val(id6);

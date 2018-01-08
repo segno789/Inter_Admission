@@ -80,7 +80,7 @@ class Admission_inter_model extends CI_Model
 
     public function get_zone()
     {
-        $query = $this->db->get_where('matric_new..tblZones', array('myear' => '2017','class'=>12,'sess'=>2));
+        $query = $this->db->get_where('matric_new..tblZones', array('myear' => Year,'class'=>12,'sess'=>Session));
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
@@ -308,7 +308,8 @@ class Admission_inter_model extends CI_Model
     {
         //DebugBreak();
 
-        $query = $this->db->get_where(getinfo,  array('rno' => $formno,'class'=>11,'iyear'=>$year,'sess'=>1,'IntBrd_cd'=>$IntBrd_cd));     
+        $query = $this->db->get_where('Admission_online..tblAdmissionDataForHSSC',  array('rno' => $formno,'class'=>11,'iyear'=>$year,'sess'=>1,'IntBrd_cd'=>$IntBrd_cd));     
+
 
         $rowcount = $query->num_rows();
         if($rowcount > 0)

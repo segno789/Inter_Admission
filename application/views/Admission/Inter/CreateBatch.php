@@ -313,9 +313,9 @@
                                             <th style="width:10%" class="hidden-phone">
                                                 Selected Subjects
                                             </th>
-                                            <th style="width:5%" class="hidden-phone">
+                                          <!--  <th style="width:5%" class="hidden-phone">
                                                 Picture
-                                            </th>
+                                            </th> -->
                                             <?php
                                             if($spl_cd ==FALSE || $spl_cd =="3" )
                                             {
@@ -360,9 +360,10 @@
                                                     $grp_name = "No Group Selected.";
                                             }
 
-                                            $image_path_selected = DIRPATH12TH.$vals['picpath']; 
+                                            /*$image_path_selected = DIRPATH12TH.$vals['picpath']; 
                                             $type = pathinfo($image_path_selected, PATHINFO_EXTENSION);
-                                            @$image_path_selected = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($image_path_selected));
+                                            @$image_path_selected = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents($image_path_selected));*/
+                                            
                                             echo '<tr  >
                                             <td>'.$n.'</td>
                                             <td>'.$formno.'</td>
@@ -371,7 +372,7 @@
 
                                             <td>'.$grp_name.'</td>
                                             <td>'.$vals["sub1_abr"].','.$vals["sub2_abr"].','.$vals["sub8_abr"].','.$vals["sub4_abr"].','.$vals["sub5_abr"].','.$vals["sub6_abr"].','.$vals["sub7_abr"].'</td>
-                                            <td><img id="previewImg" style="width:40px; height: 40px;" src="'.$image_path_selected.'" alt="Candidate Image"></td>';
+                                            ';
 
                                             if($spl_cd ==FALSE || $spl_cd =="3" )
                                                 echo'<td>

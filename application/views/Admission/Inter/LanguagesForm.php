@@ -1,5 +1,5 @@
 
-<form class="form-horizontal no-margin" action="<?php  echo base_url(); ?>/Admission/NewEnrolment_insert_Languages" method="post" enctype="multipart/form-data" name="myform" id="myform">
+<form class="form-horizontal no-margin" action="<?php  echo base_url(); ?>Admission/NewEnrolment_insert_Languages" method="post" enctype="multipart/form-data" name="myform" id="myform">
 
     <?php
     if(@$data[0]['picpath'] == ''){
@@ -181,7 +181,6 @@
         </div>
     </div>
 
-    <input type="hidden" name="gend" value="<?php echo $gender; ?>">
 
     <div class="form-group">
         <div class="row">
@@ -338,61 +337,61 @@
                     $chance = $data[0]['chance'];
                     $exam_type = $data[0]['exam_type'];
                     $status = $data[0]['status'];
-                    
-                        if($grp_cd == 1){
-                            echo "<option value='1' selected='selected'>FAZAL ARABIC </option>";      
-                        }
-                        else if ($grp_cd == 2){
-                            echo "<option value='2' selected='selected'>FAZAL URDU</option>";
-                        }
 
-                        else if ($grp_cd == 3){
-                            echo "<option value='3' selected='selected'>FAZAL PUNJABI</option>";   
-                        }
-                        else if($grp_cd == 5){
-                            echo "<option value='5' selected='selected'>ADEEB ARABIC</option>";  
-                        }
-                        else if($grp_cd == 6){
-                            echo "<option value='6'  selected='selected'> ADEEB URDU</option>";             
-                        }
-                    
+                    if($grp_cd == 1){
+                        echo "<option value='1' selected='selected'>FAZAL ARABIC </option>";      
+                    }
+                    else if ($grp_cd == 2){
+                        echo "<option value='2' selected='selected'>FAZAL URDU</option>";
+                    }
 
-                   /* 
-                        if($grp_cd == 1){
-                            echo "<option value='1' selected='selected'>FAZAL ARABIC </option>";      
-                            echo "<option value='2'>FAZAL URDU</option>";
-                            echo "<option value='3'>FAZAL PUNJABI</option>";    
-                            echo "<option value='5'>ADEEB ARABIC</option>";    
-                            echo "<option value='6'> ADEEB URDU</option>";    
-                        }
-                        else if ($grp_cd == 2){
-                            echo "<option value='1' >FAZAL ARABIC </option>";      
-                            echo "<option value='2' selected='selected'>FAZAL URDU</option>";
-                            echo "<option value='3'>FAZAL PUNJABI</option>";    
-                            echo "<option value='5'>ADEEB ARABIC</option>";    
-                            echo "<option value='6'> ADEEB URDU</option>";  
-                        }
-                        else if ($grp_cd == 3){
-                            echo "<option value='1' >FAZAL ARABIC </option>";      
-                            echo "<option value='2' >FAZAL URDU</option>";
-                            echo "<option value='3' selected='selected'>FAZAL PUNJABI</option>";    
-                            echo "<option value='5'>ADEEB ARABIC</option>";    
-                            echo "<option value='6'> ADEEB URDU</option>";  
-                        }
-                        else if($grp_cd == 5){
-                            echo "<option value='1' >FAZAL ARABIC </option>";      
-                            echo "<option value='2' >FAZAL URDU</option>";
-                            echo "<option value='3' >FAZAL PUNJABI</option>";    
-                            echo "<option value='5' selected='selected'>ADEEB ARABIC</option>";    
-                            echo "<option value='6'> ADEEB URDU</option>";  
-                        }
-                        else if($grp_cd == 6){
-                            echo "<option value='1' >FAZAL ARABIC </option>";      
-                            echo "<option value='2' >FAZAL URDU</option>";
-                            echo "<option value='3' >FAZAL PUNJABI</option>";    
-                            echo "<option value='5'>ADEEB ARABIC</option>";    
-                            echo "<option value='6'  selected='selected'> ADEEB URDU</option>";    
-                        }*/
+                    else if ($grp_cd == 3){
+                        echo "<option value='3' selected='selected'>FAZAL PUNJABI</option>";   
+                    }
+                    else if($grp_cd == 5){
+                        echo "<option value='5' selected='selected'>ADEEB ARABIC</option>";  
+                    }
+                    else if($grp_cd == 6){
+                        echo "<option value='6'  selected='selected'> ADEEB URDU</option>";             
+                    }
+
+
+                    /* 
+                    if($grp_cd == 1){
+                    echo "<option value='1' selected='selected'>FAZAL ARABIC </option>";      
+                    echo "<option value='2'>FAZAL URDU</option>";
+                    echo "<option value='3'>FAZAL PUNJABI</option>";    
+                    echo "<option value='5'>ADEEB ARABIC</option>";    
+                    echo "<option value='6'> ADEEB URDU</option>";    
+                    }
+                    else if ($grp_cd == 2){
+                    echo "<option value='1' >FAZAL ARABIC </option>";      
+                    echo "<option value='2' selected='selected'>FAZAL URDU</option>";
+                    echo "<option value='3'>FAZAL PUNJABI</option>";    
+                    echo "<option value='5'>ADEEB ARABIC</option>";    
+                    echo "<option value='6'> ADEEB URDU</option>";  
+                    }
+                    else if ($grp_cd == 3){
+                    echo "<option value='1' >FAZAL ARABIC </option>";      
+                    echo "<option value='2' >FAZAL URDU</option>";
+                    echo "<option value='3' selected='selected'>FAZAL PUNJABI</option>";    
+                    echo "<option value='5'>ADEEB ARABIC</option>";    
+                    echo "<option value='6'> ADEEB URDU</option>";  
+                    }
+                    else if($grp_cd == 5){
+                    echo "<option value='1' >FAZAL ARABIC </option>";      
+                    echo "<option value='2' >FAZAL URDU</option>";
+                    echo "<option value='3' >FAZAL PUNJABI</option>";    
+                    echo "<option value='5' selected='selected'>ADEEB ARABIC</option>";    
+                    echo "<option value='6'> ADEEB URDU</option>";  
+                    }
+                    else if($grp_cd == 6){
+                    echo "<option value='1' >FAZAL ARABIC </option>";      
+                    echo "<option value='2' >FAZAL URDU</option>";
+                    echo "<option value='3' >FAZAL PUNJABI</option>";    
+                    echo "<option value='5'>ADEEB ARABIC</option>";    
+                    echo "<option value='6'  selected='selected'> ADEEB URDU</option>";    
+                    }*/
 
 
                     $subarray = array(
@@ -507,6 +506,7 @@
         </div>
     </div>
 
+    <input type="hidden" name="gend" id="gend" value="<?php echo @$gender; ?>">
     <input type="hidden" name="aloomCat" id="aloomCat"  value="<?php echo @$preDataAloom['aloomCat']; ?>">
     <input type="hidden" name="txtMatRnoAloom" id="txtMatRnoAloom"  value="<?php echo @$preDataAloom['txtMatRnoAloom']; ?>">
     <input type="hidden" name="oldRnoAloom" id="oldRnoAloom"  value="<?php echo @$preDataAloom['oldRnoAloom']; ?>">
@@ -558,6 +558,15 @@
     </div>
 
 </form>
+
+<script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script> 
+<script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/jquery.maskedinput.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/jquery-ui.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/alertify.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/source/jquery.fancybox.pack.js"></script>    
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/source/jquery.fancybox.js"></script>    
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.dataTables.js"></script>
 
 <script type="text/javascript">
     function ValidateFileUpload() {
